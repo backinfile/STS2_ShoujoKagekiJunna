@@ -122,6 +122,7 @@ public partial class ArrowCardPresentation : Control
             {
                 _nativePortrait.Visible = _nativeBorder.Visible = card.Rarity != CardRarity.Ancient;
                 _nativeType.Visible = true;
+                _card.GetNode<Label>("%TypeLabel").Text = card.Type.ToLocString().GetFormattedText();
                 _description.Position = _descriptionPosition;
                 _description.Size = _descriptionSize;
                 _applied = false;
