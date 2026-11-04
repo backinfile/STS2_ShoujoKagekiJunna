@@ -4,9 +4,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.UI;
 using MegaCrit.Sts2.Core.Helpers;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardLibrary;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
@@ -20,13 +18,6 @@ namespace ShoujoKagekiJunna.UI;
 public static class KnowledgePreviewCards
 {
     private static readonly ConditionalWeakTable<NCard, List<(Control Control, Control.MouseFilterEnum Filter)>> MouseFilters = new();
-    internal static string CountText(int count)
-    {
-        var text = new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP_COUNT");
-        text.Add("Count", count);
-        return text.GetFormattedText();
-    }
-
     public static IReadOnlyList<CardModel> Create(CardModel source, bool upgradeAll = false)
     {
         var group = KnowledgeCombat.Group(source);
@@ -78,7 +69,6 @@ public partial class KnowledgeCardStack : Control
     private NCard _source = null!;
     private CardModel? _model;
     private readonly List<NCard> _companions = [];
-    private Button _open = null!;
     private bool _libraryUpgrade;
 
     internal static bool IsSupported(NCard card)
@@ -114,23 +104,7 @@ public partial class KnowledgeCardStack : Control
         else stack.Clear();
     }
 
-    public override void _Ready()
-    {
-        MouseFilter = MouseFilterEnum.Ignore;
-        _open = new Button
-        {
-            Name = "OpenKnowledgeGroup", Position = new(-145, 219), Size = new(290, 39),
-            Flat = true, MouseFilter = MouseFilterEnum.Stop, FocusMode = FocusModeEnum.All
-        };
-        _open.AddThemeFontSizeOverride("font_size", 23);
-        _open.AddThemeColorOverride("font_color", new Color("D0B775"));
-        _open.Pressed += () =>
-        {
-            if (_source.Model == null) return;
-            NGame.Instance!.GetInspectCardScreen().Open([_source.Model], 0, _libraryUpgrade);
-        };
-        AddChild(_open);
-    }
+    public override void _Ready() => MouseFilter = MouseFilterEnum.Ignore;
 
     private void RefreshCards()
     {
@@ -142,7 +116,6 @@ public partial class KnowledgeCardStack : Control
         _model = _source.Model;
         _libraryUpgrade = libraryUpgrade;
         var cards = KnowledgePreviewCards.Create(_model!, libraryUpgrade).ToList();
-        _open.Text = KnowledgePreviewCards.CountText(cards.Count);
         int sourceIndex = cards.FindIndex(card => CardCatalog.DesignId(card) == CardCatalog.DesignId(_model!));
         if (sourceIndex >= 0) cards.RemoveAt(sourceIndex);
         for (int i = cards.Count - 1; i >= 0; i--)
@@ -158,7 +131,6 @@ public partial class KnowledgeCardStack : Control
             companion.Modulate = Colors.White;
             _companions.Add(companion);
         }
-        MoveChild(_open, GetChildCount() - 1);
     }
 
     internal void Clear()

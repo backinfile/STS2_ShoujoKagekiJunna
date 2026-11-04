@@ -82,9 +82,10 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
             case "focus":
                 AccessTools.Method(typeof(NInspectCardScreen), "SetCard").Invoke(inspect, [int.Parse(args[1])]);
                 break;
-            case "click-count":
-                var countButton = Descendants(NGame.Instance!).OfType<Button>().First(button => button.Name == "OpenKnowledgeGroup" && button.IsVisibleInTree());
-                return new(Click(countButton), true, "Clicked group count");
+            case "inspect-reward":
+                var inspectionHolder = Descendants((Node)NOverlayStack.Instance!.Peek()!).OfType<NGridCardHolder>()
+                    .First(node => CardCatalog.DesignId(node.CardModel!) == "A");
+                return new(Click(inspectionHolder.Hitbox, MouseButton.Right), true, "Inspected reward card");
             case "click-card":
                 var grid = Descendants(NGame.Instance!).OfType<NCardLibraryGrid>().Single(node => node.IsVisibleInTree());
                 var holder = Descendants(grid).OfType<NGridCardHolder>().First(node => node.IsVisibleInTree() && node.CardModel is JunnaCard &&
@@ -125,14 +126,14 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         .Select(card => new { path = card.GetPath().ToString(), id = CardCatalog.DesignId(card.Model!),
             upgraded = card.Model!.IsUpgraded, position = card.GlobalPosition.ToString(), scale = card.GetGlobalTransform().Scale.ToString() }).ToArray();
 
-    private static async Task Click(Control control)
+    private static async Task Click(Control control, MouseButton button = MouseButton.Left)
     {
         var viewport = control.GetViewport();
         Vector2 point = control.GetGlobalRect().GetCenter();
         viewport.PushInput(new InputEventMouseMotion { Position = point, GlobalPosition = point }, true);
         await control.ToSignal(control.GetTree(), SceneTree.SignalName.ProcessFrame);
-        viewport.PushInput(new InputEventMouseButton { Position = point, GlobalPosition = point, ButtonIndex = MouseButton.Left, Pressed = true }, true);
-        viewport.PushInput(new InputEventMouseButton { Position = point, GlobalPosition = point, ButtonIndex = MouseButton.Left, Pressed = false }, true);
+        viewport.PushInput(new InputEventMouseButton { Position = point, GlobalPosition = point, ButtonIndex = button, Pressed = true }, true);
+        viewport.PushInput(new InputEventMouseButton { Position = point, GlobalPosition = point, ButtonIndex = button, Pressed = false }, true);
     }
 
     private static void Wheel(NInspectCardScreen inspect, MouseButton button)
@@ -220,7 +221,7 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         var backing = Descendants(holder.CardNode!.GetNode<KnowledgeCardStack>("JunnaKnowledgeStack")).OfType<NCard>().ToArray();
         CheckValue("reward thumbnail has three stacked cards", 1 + backing.Length, 3);
         CheckValue("reward thumbnail exposes both backing edges", backing.All(card => card.Position.Y < 0), true);
-        await Click(holder.CardNode.GetNode<Button>("JunnaKnowledgeStack/OpenKnowledgeGroup"));
+        await Click(holder.Hitbox, MouseButton.Right);
         await Settle();
         var preview = inspect.GetNode<KnowledgeGroupPreview>("JunnaKnowledgePreview");
         var toggle = preview.GetNode<Button>("LayoutToggle");
