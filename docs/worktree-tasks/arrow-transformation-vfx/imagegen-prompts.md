@@ -1,0 +1,21 @@
+# Arrow fold animation frames
+
+Mode: built-in `image_gen.imagegen`, transparent background enabled. The selected PNG is used as an eight-frame flipbook. The generated source is preserved in `arrow-fold-original.png`.
+
+Asset: `ShoujoKagekiJunna/images/vfx/arrow_fold_frames.png`.
+
+Actual output: 1774 × 887 pixels, four columns × two rows, row-major playback. Frame regions use the exact texture size divided by the grid size. Transparent margins isolate adjacent frames. Import uses mipmaps for the small on-screen footprint.
+
+The runtime texture was processed with the project's installed GPT Image 2 Artifact Cleaner at strength 0.25, using LatentR and the Flux2 VAE on CUDA with bfloat16 inference. RGB was cleaned at native resolution and the original alpha channel was restored exactly. The native-size comparison and validation report are in `artifacts/arrow-draw/bow/frame-cleanup/`. The cleaned runtime asset is `ShoujoKagekiJunna/images/vfx/arrow_fold_frames.png`.
+
+## Final prompt
+
+```text
+Use case: stylized-concept. Asset type: actual production 2D VFX ANIMATION SPRITESHEET, exactly 8 sequential frames arranged in a perfectly regular 4 columns by 2 rows grid, reading left-to-right then top-to-bottom. Canvas exactly 2048x1024, every cell exactly 512x512, genuine transparent alpha background. No drawn grid, no labels, no numbers. Primary request: a very restrained arrow-card conversion effect called a paper-slip fold: a few cool gray-blue paper-like wisps fold toward a slim vertical spine and then drift away, creating a brief understated veil over a card as it shrinks into an arrow. NOT an explosion. The effect is matte and muted, with small warm-gray highlights, no luminous white center, no glow, no fire, no feathers, no lens flare, no stars, no magic ring, no ornate ornament. Hand-painted 2D fantasy card-game VFX with irregular tapered edges, a little smoky translucency and clean simple silhouettes. Low particle count: 3 to 6 narrow paper flecks. Each frame is a temporal step of THE SAME effect, same fixed center in each cell, same scale coordinate system. Keep the entire effect inside the middle 60 percent of each cell with clear empty margins. Frame1: two faint short narrow vertical gray-blue ribbons at left and right of center. Frame2: ribbons curl inward with 2 tiny chips. Frame3: slightly broader soft slate-blue folded paper veil gathering inward, muted opaque folds hiding the small central area. Frame4: the folds compress into a slender dense tapered spindle, about 20 percent cell width and 52 percent cell height, with 3 tiny chips at sides. Frame5: spindle starts splitting lengthwise into three tapering scraps and shows transparent gaps. Frame6: the scraps drift slightly outward and upward, thinner and lighter. Frame7: only three small faded drifting paper specks remain. Frame8: two very faint tiny specks, almost empty. No card imagery, no actual arrow, no UI, no background scenes. All eight frames must remain separated in equal 512x512 cells. Keep the animation modest, compact and consistent; suitable for rendering around 80 pixels tall in a tactical card battler.
+```
+
+## Motion and reference
+
+- Native power-card motion informed the initial shrinking transition. The arrowhead grows a faint procedural shaft and fletching, sweeps down-left-up through one contracting turn, aligns with the target while approaching the fixed bow, pauses on the string, then draws backward into its overhead slot.
+- Native exhaust motion erodes the card locally with a small moving particle band. This implementation borrows the restrained footprint and gradual handoff, using folding paper slivers rather than its burn/erosion appearance.
+- The flipbook plays at 0.19–0.43 seconds. The arrowhead fades in at 0.26–0.32 seconds while the card fades out at 0.245–0.32 seconds. The shaft grows at 0.28–0.40 seconds. The orbit runs at 0.32–0.94 seconds, followed by a 0.10-second nocking pause. The arrow pulls through 78% of the draw at 1.04–1.23 seconds, slowly tightens the remaining 22% at 1.23–1.48 seconds, holds at full draw until 1.88 seconds, then fades the shaft by 2.12 seconds. The target guide uses the final spatially fading line or soft fan throughout deployment.

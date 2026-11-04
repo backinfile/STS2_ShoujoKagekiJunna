@@ -44,6 +44,7 @@ public partial class ArrowHud : Control
         _frame = GD.Load<Texture2D>(JunnaMod.ResourceRoot + "images/floating_arrow_c1.svg");
         var groupPath = JunnaMod.ResourceRoot + "images/floating_arrow_group_a.svg";
         _groupFrame = ResourceLoader.Exists(groupPath) ? GD.Load<Texture2D>(groupPath) : _frame;
+        ArrowDeploymentVfx.PreloadTextures();
     }
 
     public override void _Process(double delta)
@@ -105,7 +106,7 @@ public partial class ArrowHud : Control
             // Countdown numerals remain upright as the frame rotates.
             var facingCenter = view.Root.Position + IconSize * .5f;
             view.Frame.Rotation = (aim - facingCenter).Angle() - Mathf.Pi * .5f;
-            UpdateDeployment(arrow, view);
+            UpdateDeployment(arrow, view, aim);
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
             view.Count.Text = arrow.Remaining.ToString();
             view.Count.AddThemeColorOverride("font_color", arrow.Remaining <= 1 ? new Color("FFE3A0") : Colors.White);
@@ -155,10 +156,13 @@ public partial class ArrowHud : Control
         // Draw behind the portrait children. Dead or removed targets have no guide.
         foreach (var (arrow, view) in _views)
         {
-            if (_deployments.ContainsKey(arrow)) continue;
             var targets = TargetPoints(arrow);
             if (targets.Length == 0) continue;
-            var start = view.Root.Position + RotateInFrame(Tip, view.Frame.Rotation);
+            var tip = LocalPoint(view.Frame.GetGlobalTransform() * Tip);
+            var start = _deployments.TryGetValue(arrow, out var deployment)
+                ? deployment.CurrentPosition.Lerp(tip, deployment.ArrowAlpha) : tip;
+            float guideProgress = deployment?.DrawProgress ?? 1;
+            if (guideProgress <= 0) continue;
             if (arrow.TargetsAllEnemies)
             {
                 var left = targets[0] + new Vector2(-55, 25);
@@ -166,16 +170,18 @@ public partial class ArrowHud : Control
                 var midpoint = (left + right) * .5f;
                 left = midpoint + (left - midpoint) * 1.25f;
                 right = midpoint + (right - midpoint) * 1.25f;
-                var fanStart = start.MoveToward(midpoint, 18);
+                left = start.Lerp(left, guideProgress);
+                right = start.Lerp(right, guideProgress);
+                var fanStart = start.MoveToward(midpoint, 18 * guideProgress);
                 DrawSoftFan(fanStart, left, right);
                 DrawSoftGroupGuide(fanStart, left, .2f);
                 DrawSoftGroupGuide(fanStart, right, .2f);
                 foreach (var end in targets)
-                    DrawSoftGroupGuide(fanStart, end, .13f);
+                    DrawSoftGroupGuide(fanStart, start.Lerp(end, guideProgress), .13f);
             }
             else
             {
-                var end = targets[0];
+                var end = start.Lerp(targets[0], guideProgress);
                 DrawFadingGuide(start, end, .08f, 6);
                 DrawFadingGuide(start, end, .42f, 1.3f);
             }
@@ -228,6 +234,8 @@ public partial class ArrowHud : Control
 
     private void DrawSoftFan(Vector2 start, Vector2 left, Vector2 right)
     {
+        // The first frames of a growing fan can be too small to triangulate reliably.
+        if (Mathf.Abs((left - start).Cross(right - start)) < 64) return;
         const int segments = 10;
         ReadOnlySpan<float> across = [0, .22f, .78f, 1];
         ReadOnlySpan<float> edgeAlpha = [0, 1, 1, 0];

@@ -31,6 +31,13 @@ public static class ArrowHudProbe
 {
     public static CmdResult Process(Player player, string[] args)
     {
+        if (args.FirstOrDefault() == "style")
+        {
+            if (!int.TryParse(args.ElementAtOrDefault(1), out int style) || style < 0 || style > 3)
+                return new(false, "Choose a trajectory from 0 to 3");
+            AccessTools.Property(typeof(ArrowDeploymentVfx), "PreviewTrajectory").SetValue(null, style);
+            return new(true, $"Arrow trajectory {style}");
+        }
         if (args.FirstOrDefault() == "info")
         {
             var room = NCombatRoom.Instance!;
