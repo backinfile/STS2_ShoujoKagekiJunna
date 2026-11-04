@@ -13,11 +13,15 @@ namespace ShoujoKagekiJunna.Models;
 public sealed class JunnaFullDraw() : JunnaCard(1, ArrowPile.ArrowType, CardRarity.Basic, TargetType.AnyEnemy, "JB03")
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(25, ValueProp.Move), new DynamicVar("Turns", 3)];
-    protected override CardLocation GetResultLocationForCardPlay() => new(Owner, ArrowPile.PileId, CardPilePosition.Bottom);
-    protected override Task OnPlay(PlayerChoiceContext context, CardPlay play)
+    public override CardType Type => ArrowConversion.IsConverted(this) ? CardType.Attack : ArrowPile.ArrowType;
+    protected override CardLocation GetResultLocationForCardPlay() => CardCatalog.IsArrow(this)
+        ? new(Owner, ArrowPile.PileId, CardPilePosition.Bottom) : base.GetResultLocationForCardPlay();
+    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
-        if (play.IsFirstInSeries) ArrowCombat.Deploy(this, play, DynamicVars["Turns"].IntValue);
-        return Task.CompletedTask;
+        if (!CardCatalog.IsArrow(this)) { await ResolveArrow(context, play); return; }
+        if (!play.IsFirstInSeries) return;
+        ArrowCombat.Deploy(this, play, DynamicVars["Turns"].IntValue);
+        await CardPileCmd.Add(this, ArrowPile.PileId);
     }
     internal async Task ResolveArrow(PlayerChoiceContext context, CardPlay play)
     {

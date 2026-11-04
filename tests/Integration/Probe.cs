@@ -68,6 +68,11 @@ public sealed class JunnaProbeCommand : AbstractConsoleCmd
             return new(true, JsonSerializer.Serialize(icons));
         }
         if (player?.PlayerCombatState == null) return new(false, "Combat required");
+        if (args.FirstOrDefault() == "catalog") return new(CardPoolProbe.Run(player), true, "Card pool checks started");
+        if (args.FirstOrDefault() == "catalog-all") return new(CardCompletionProbe.Run(player, only: args.Length > 1 ? string.Join(" ", args.Skip(1)) : null), true, "All card faces started");
+        if (args.FirstOrDefault() == "catalog-edges") return new(CardCompletionProbe.Run(player, true, args.Length > 1 ? string.Join(" ", args.Skip(1)) : null), true, "Card edge cases started");
+        if (args.FirstOrDefault() == "catalog-events") return new(CardPoolProbe.Run(player, true), true, "Card event checks started");
+        if (args.FirstOrDefault() == "catalog-targeted") return new(CardPoolProbe.Run(player, true, "converted clones"), true, "Converted clone checks started");
         if (args.FirstOrDefault() == "arrows") return ArrowHudProbe.Process(player, args.Skip(1).ToArray());
         if (args.FirstOrDefault() == "duplicates") return new(CheckDuplicateTargets(player), true, "Duplicate target check started");
         if (args.FirstOrDefault() == "invest")

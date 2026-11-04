@@ -24,6 +24,13 @@ public static class DamageCapability
         Cache.Clear();
     }
 
+    public static void Register(Type cardType, Func<CardModel, bool> canDealDamage)
+    {
+        if (!typeof(CardModel).IsAssignableFrom(cardType)) throw new ArgumentException("Expected a card model", nameof(cardType));
+        Adapters[cardType] = canDealDamage;
+        Cache.Clear();
+    }
+
     public static bool CanDealDamage(CardModel card) => Adapters.TryGetValue(card.GetType(), out var adapter)
         ? adapter(card)
         : Cache.GetOrAdd(card.GetType(), type => ScanModel(type, new HashSet<MethodBase>(), new HashSet<Type>()));

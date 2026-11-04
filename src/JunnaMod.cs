@@ -20,9 +20,10 @@ public static class JunnaMod
     {
         Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
         CustomPiles.RegisterCustomPile(ArrowPile.PileId, () => new ArrowPile());
+        Models.CardCatalog.RegisterDamageCapabilities();
         new Harmony(Id).PatchAll(Assembly.GetExecutingAssembly());
         ModHelper.SubscribeForCombatStateHooks(Id, _ => [ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>())]);
-        DescriptionOverrides.CustomizeDescriptionPost += DamageModifiers.Describe;
+        DescriptionOverrides.CustomizeDescriptionPost += ArrowConversion.Describe;
         Log.Info("Junna 0.1.0 initialized; direct card damage: AttackCommand / CreatureCmd; extra hits once per resolution.");
     }
 }

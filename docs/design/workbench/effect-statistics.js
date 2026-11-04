@@ -112,6 +112,7 @@ const JunnaEffectStatistics = (() => {
     'energy.retain':c=>any(c,(s,a)=>/可保留[^。]*能量|保留手牌和能量|能量并可保留/.test(a)),
     'energy.increase':c=>any(c,(s,a)=>/(?:耗能|费用)增加|增加[^。]*(?:耗能|费用)/.test(a)),
     'energy.high-draw':c=>any(c,(s,a)=>highEvent(s)&&/抽(?:取)?[^。]*牌/.test(a)),
+    'energy.zero-draw':c=>any(c,(s,a)=>/抽取(?:\d+|一|两|X)张0费牌/.test(a)),
     'energy.high-gain':c=>any(c,(s,a)=>highEvent(s)&&gainEnergy(a)),
     'energy.highest-cost-gain':c=>/手牌中最高耗能/.test(c.text||'')&&any(c,(s,a)=>gainEnergy(a)),
     'energy.hand-cost-gain':c=>/手牌总耗能/.test(c.text||'')&&any(c,(s,a)=>gainEnergy(a)),

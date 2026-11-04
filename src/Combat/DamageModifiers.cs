@@ -65,6 +65,15 @@ public static class DamageModifiers
             _cards.AddOrUpdate(copied, new Investment { Bonus = investment.Bonus, Hits = investment.Hits });
     }
 
+    public static void TransferBonus(IEnumerable<CardModel> sources, CardModel target)
+    {
+        if (!CanDealDamage(target)) return;
+        decimal bonus = 0;
+        foreach (var card in sources.Distinct().Where(c => c != target))
+            if (_cards.TryGetValue(card, out var state)) { bonus += state.Bonus; state.Bonus = 0; }
+        Add(target, bonus);
+    }
+
     internal static void ClearCombat() => _cards = new();
 
     internal static void Describe(CardModel card, Creature? target, ref string description)

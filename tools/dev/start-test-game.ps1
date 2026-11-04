@@ -1,8 +1,10 @@
-param([int]$Port = 15727, [switch]$UseInstalledMod)
+param([int]$Port = 15727, [switch]$UseInstalledMod,
+    [ValidatePattern('^[a-z0-9-]+$')][string]$Instance = 'dev-game')
 $ErrorActionPreference = 'Stop'
 $junnaRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
-$junnaGame = Join-Path $junnaRoot 'artifacts/dev-game/game'
-$junnaUser = Join-Path $junnaRoot 'artifacts/dev-game/user'
+$junnaArtifacts = Join-Path $junnaRoot "artifacts/$Instance"
+$junnaGame = Join-Path $junnaArtifacts 'game'
+$junnaUser = Join-Path $junnaArtifacts 'user'
 $sourceGame = 'D:/App/Stream/steamapps/common/Slay the Spire 2'
 New-Item -ItemType Directory -Force $junnaGame, $junnaUser | Out-Null
 $settingsPath = Join-Path $junnaUser 'AppData/Roaming/SlayTheSpire2/default/1/settings.save'
@@ -55,8 +57,8 @@ try {
     $env:STS2_MCP_FFMPEG = (Get-Command ffmpeg).Source
     New-Item -ItemType Directory -Force $env:APPDATA, $env:LOCALAPPDATA | Out-Null
     $junnaProcess = Start-Process -FilePath "$junnaGame/SlayTheSpire2.exe" -WorkingDirectory $junnaGame -WindowStyle Hidden -PassThru `
-        -ArgumentList '--force-steam=off','--rendering-method','gl_compatibility','--log-file',"$junnaRoot/artifacts/dev-game/game.log"
-    $junnaProcess.Id | Set-Content -LiteralPath "$junnaRoot/artifacts/dev-game/process-id.txt"
+        -ArgumentList '--force-steam=off','--rendering-method','gl_compatibility','--log-file',"$junnaArtifacts/game.log"
+    $junnaProcess.Id | Set-Content -LiteralPath "$junnaArtifacts/process-id.txt"
     Write-Output "Junna test process=$($junnaProcess.Id) MCP port=$Port"
     Add-Type @'
 using System;
@@ -75,7 +77,7 @@ public static class JunnaWindowProbe {
         $samples += @{elapsed_ms=$i*100;foreground=($foregroundPid -eq $junnaProcess.Id);has_window=($junnaProcess.MainWindowHandle -ne [IntPtr]::Zero);minimized=[JunnaWindowProbe]::IsIconic($junnaProcess.MainWindowHandle)}
         Start-Sleep -Milliseconds 100
     }
-    $samples | ConvertTo-Json | Set-Content -LiteralPath "$junnaRoot/artifacts/dev-game/startup-window.json"
+    $samples | ConvertTo-Json | Set-Content -LiteralPath "$junnaArtifacts/startup-window.json"
     Write-Output "Startup focus samples: $(@($samples | Where-Object foreground).Count) foreground / $($samples.Count) total"
 } finally {
     $env:APPDATA = $oldAppData

@@ -12,6 +12,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="src/**/*.cs" />
+    <EmbeddedResource Include="docs/implementation/card-pool.json" LogicalName="Junna.CardPool" />
     <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.7" />
     <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" Private="false" />
     <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" Private="false" />

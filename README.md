@@ -1,20 +1,23 @@
 # 星见纯那
 
-首批实现：纯那角色、9 张工作台卡牌、箭矢牌堆、卡牌实例伤害加成与额外伤害次数。
+当前实现：纯那角色、115 张工作台有效牌面（含关联牌与生成牌）、19 组知识关系、箭矢牌堆、卡牌实例伤害加成与额外伤害次数。
 
 - 游戏版本：v0.111.0；BaseLib：3.4.7。
 - 初始牌组：5 打击、4 防御、1 满弦射击。
 - 生命暂设 70，起始遗物暂用锚，待专属角色数值与遗物设计确定后替换。
 - 战斗立绘：2026-11-04 精修版 04 待机、02 攻击。
-- 悬浮箭矢：细长菱形、加厚灰边，箭尾侧显示圆形实时倒计时，按充能球尺寸制作；标记位于第二行遗物的位置，上方留一行遗物。单体箭按目标由前到后排列，尖端旋转朝向目标，直线在半空渐隐；群体箭使用 A「三箭束」框体，在玩家前上方展开加宽 25%、中途渐隐的扇面。
+- 强化标记：卡图右上角显示伤害加成数值，每枚小箭头表示额外 1 次伤害；场上悬浮箭矢只显示额外次数标记。转移加成、耐力训练与卡牌显示复用的检查见 `artifacts/card-investment-marks/results.json`。
+- 箭矢卡面：使用工作台选定的 D 型瞄准卡框，中央独立显示初始回合数；边框随稀有度着色，远古牌保留全幅卡图与独立计数徽牌。
+- 箭矢出牌动画：A「弦光回弹」，完整卡牌抬起并绷弦，0.10 秒回弹切换，0.32 秒飞入悬浮位；单体与群体箭共用转场。实机预览位于 `artifacts/arrow-deployment/junna-string-snap.mp4`（前段原速、后段慢放）。
+- 悬浮箭矢：细长菱形、加厚灰边，箭尾侧显示圆形实时倒计时，按充能球尺寸制作；标记位于第二行遗物的位置，上方留一行遗物。单体箭按目标由前到后排列，尖端旋转朝向目标，直线在半空渐隐；群体箭以单枚菱形卡图为主体，三枚小箭头贴近前半段两侧，以随机高度和相位绕转，交替被主体遮挡或叠在主体前方，尖端正前方留空；加宽 25% 的扇面从箭尖前方淡入，近端、远端与侧边均渐隐，引导线柔化。
 
 ## 构建与安装
 
 执行 `./build.ps1`。脚本的 `GameDir`、`Godot` 参数可指定游戏与 MegaDot 编辑器路径。
 产物位于 `dist/ShoujoKagekiJunna/`；将整个目录放到游戏的 `mods/`，同时安装 BaseLib 3.4.7。
 
-卡牌设计与美术来源记录在 `docs/implementation/first-slice-design.json`。
-`tools/assets/prepare-game-assets.py` 从工作台 MCP 导出快照提取素材；工作台内容仍统一通过 MCP 编辑。
+当前卡牌与升级数值记录在 `docs/implementation/card-pool.json`，效果覆盖与验证见 [卡池实现记录](docs/implementation/card-effects.md)。
+`python tools/assets/generate-card-catalog.py <MCP导出快照>` 更新卡牌清单、模型入口、配图与本地化；具体牌效在 C# 中实现。工作台内容仍统一通过 MCP 编辑。
 
 ## 项目目录
 
@@ -39,6 +42,8 @@ Git 保存源码、运行资源、工作台初始数据与当前设计数据。�
 使用独立游戏目录、独立存档和 MCP mod。`tools/dev/start-test-game.ps1` 默认使用端口 15727，开启静默音频、最小化启动保护。
 
 `tests/Integration/` 是单独的测试模组，不进入发布包。它提供 `junna_probe run`、`junna_probe real`、`junna_probe prepare` 和 `junna_probe render` 命令，分别用于机制断言、华恋实际卡牌检查、录像准备与最小化离屏绘制。
+`junna_probe catalog` 与 `junna_probe catalog-events` 验证本轮新增卡牌共用机制；结果分别写入 `artifacts/dev-game/card-pool-results.json` 与 `card-event-results.json`。测试项目可用 `JunnaAssemblyPath` 指向当前编译 DLL。
+`junna_probe catalog-all` 验证 115 张牌的基础／升级版本，`junna_probe catalog-edges` 验证持续触发与组合边界；命令后可接卡牌 ID 或场景前缀进行定向复查。本轮 230 个牌面场景、1490 项断言通过，记录在 `artifacts/card-completion/`。使用 `start-test-game.ps1 -Instance card-completion -Port 15729 -UseInstalledMod` 可启动单独的测试实例。
 `tools/dev/record-first-slice.py` 通过 MCP 操作准备活动、重复练习和满弦射击，检查强化结果及三回合后的 54 点伤害，并录制视频。
 
 C-1 的构建、1/3/6 支排列与倒计时结算检查保存在 `artifacts/floating-arrows/c1/`。悬浮卡图优先读取 `images/floating_arrows/<卡牌 ID>.png`，其余沿用卡牌原图。满弦射击的竖版图使用内置 imagegen 按已选 C-1 整理，提示词位于 `output/imagegen/floating-arrow-c/portrait-prompt.txt`；随后使用 GPT Image 2 Artifact Cleaner 以 0.5 强度清理摩尔纹，原尺寸对比与处理记录位于 `output/artifact-cleanup/2026-11-04/floating-arrow-c1/`。

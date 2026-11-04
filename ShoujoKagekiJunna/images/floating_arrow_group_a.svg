@@ -6,29 +6,12 @@
       <stop offset="0.72" stop-color="#a3a4a0"/>
       <stop offset="1" stop-color="#626968"/>
     </linearGradient>
-    <linearGradient id="shaft" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#8d9392"/>
-      <stop offset="0.5" stop-color="#6e7575"/>
-      <stop offset="1" stop-color="#a4a8a5"/>
-    </linearGradient>
     <linearGradient id="tip" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#565d60"/>
       <stop offset="0.5" stop-color="#888d8d"/>
       <stop offset="1" stop-color="#4e575a"/>
     </linearGradient>
   </defs>
-  <!-- The two supporting arrow shafts sit behind the original portrait kite. -->
-  <path d="M18 161 L42 187 L72 316 L39 316 Z" fill="url(#shaft)" stroke="#b6bab5" stroke-width="3"/>
-  <path d="M222 161 L198 187 L168 316 L201 316 Z" fill="url(#shaft)" stroke="#b6bab5" stroke-width="3"/>
-  <path d="M28 190 L52 313" fill="none" stroke="#d0d1ca" stroke-width="3"/>
-  <path d="M212 190 L188 313" fill="none" stroke="#d0d1ca" stroke-width="3"/>
-  <path d="M27 310 L83 310 L55 372 Z" fill="url(#tip)" stroke="#bbc0ba" stroke-width="3"/>
-  <path d="M157 310 L213 310 L185 372 Z" fill="url(#tip)" stroke="#bbc0ba" stroke-width="3"/>
-  <path d="M44 319 L66 319 L55 355 Z" fill="#8eb6d1"/>
-  <path d="M55 321 L66 319 L55 355 Z" fill="#577c9e"/>
-  <path d="M174 319 L196 319 L185 355 Z" fill="#8eb6d1"/>
-  <path d="M185 321 L196 319 L185 355 Z" fill="#577c9e"/>
-  <!-- Same aperture, scale and rear countdown as the single-target frame. -->
   <path d="M120 2 L238 134 L120 413 L2 134 Z M120 32 L25 138 L120 362 L215 138 Z"
         fill="url(#rim)" fill-rule="evenodd"/>
   <path d="M120 2 L238 134 L120 413 L2 134 Z" fill="none" stroke="#c4c5bf" stroke-width="3"/>

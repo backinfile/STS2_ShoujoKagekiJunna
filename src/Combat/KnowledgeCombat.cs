@@ -1,0 +1,130 @@
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using HarmonyLib;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using ShoujoKagekiJunna.Models;
+
+namespace ShoujoKagekiJunna.Combat;
+
+public static class KnowledgeCombat
+{
+    private static readonly AsyncLocal<int> SingleDepth = new();
+    private static readonly AsyncLocal<HashSet<string>?> Drawing = new();
+    private static readonly ConditionalWeakTable<CardModel, object> Discovered = new();
+    private static readonly ConditionalWeakTable<CardModel, object> Copies = new();
+    public static Task PendingUpgrades { get; private set; } = Task.CompletedTask;
+    private sealed class Scope : IDisposable
+    {
+        public Scope() => SingleDepth.Value++;
+        public void Dispose() => SingleDepth.Value--;
+    }
+    public static IDisposable SingleCard() => new Scope();
+    public static KnowledgeGroup? Group(CardModel card)
+    {
+        string? id = CardCatalog.DesignId(card);
+        return id == null ? null : CardCatalog.Groups.FirstOrDefault(g => g.MainCardId == id || g.GrantedCardIds.Contains(id));
+    }
+    public static async Task DrawPartners(PlayerChoiceContext context, CardModel card)
+    {
+        var group = Group(card);
+        if (group == null) return;
+        var active = Drawing.Value ??= [];
+        string key = card.Owner.NetId + ":" + group.MainCardId;
+        if (!active.Add(key)) return;
+        try
+        {
+            var ids = group.GrantedCardIds.Append(group.MainCardId).Where(id => id != CardCatalog.DesignId(card)).ToHashSet();
+            await CardActions.DrawMatching(context, card.Owner, c => ids.Contains(CardCatalog.DesignId(c) ?? ""), CardPile.MaxCardsInHand);
+        }
+        finally { active.Remove(key); }
+    }
+    private static async Task GrantPartners(CardModel acquired, PileType destination)
+    {
+        var group = Group(acquired);
+        if (group == null) return;
+        using var single = SingleCard();
+        var counts = new Dictionary<string, int>(group.GrantedCardCounts) { [group.MainCardId] = 1 };
+        string id = CardCatalog.DesignId(acquired)!;
+        if (counts.ContainsKey(id)) counts[id]--;
+        foreach (var (partnerId, count) in counts)
+            for (int i = 0; i < count; i++)
+            {
+                var card = destination == PileType.Deck
+                    ? acquired.Owner.RunState.CreateCard(CardCatalog.Model(partnerId), acquired.Owner)
+                    : CardCatalog.Create(partnerId, acquired.Owner);
+                if (destination == PileType.Deck) await CardPileCmd.Add(card, PileType.Deck);
+                else await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner);
+            }
+    }
+
+    [HarmonyPatch]
+    private static class AcquireGroup
+    {
+        private static MethodBase TargetMethod() => AccessTools.Method(typeof(CardPileCmd), nameof(CardPileCmd.Add),
+            [typeof(IEnumerable<CardModel>), typeof(CardPile), typeof(CardPilePosition), typeof(AbstractModel), typeof(bool), typeof(bool)]);
+        private static void Prefix(AbstractModel? clonedBy, out bool __state) => __state = SingleDepth.Value > 0 || clonedBy != null;
+        private static void Postfix(ref Task<IReadOnlyList<CardPileAddResult>> __result, bool __state)
+        { if (!__state) __result = Complete(__result); }
+        private static async Task<IReadOnlyList<CardPileAddResult>> Complete(Task<IReadOnlyList<CardPileAddResult>> task)
+        {
+            var results = await task;
+            foreach (var result in results)
+            {
+                var card = result.cardAdded;
+                if (!result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || Copies.TryGetValue(card, out _)) continue;
+                bool discovered = Discovered.Remove(card);
+                if (result.targetPile == PileType.Deck || discovered) await GrantPartners(card, result.targetPile);
+            }
+            return results;
+        }
+    }
+    [HarmonyPatch(typeof(CardSelectCmd), nameof(CardSelectCmd.FromChooseACardScreen))]
+    private static class DiscoverGroup
+    {
+        private static void Postfix(ref Task<CardModel?> __result) => __result = Complete(__result);
+        private static async Task<CardModel?> Complete(Task<CardModel?> task)
+        {
+            var card = await task;
+            if (card?.Pile == null && card != null && CardCatalog.IsKnowledge(card)) Discovered.GetOrCreateValue(card);
+            return card;
+        }
+    }
+    [HarmonyPatch(typeof(CardModel), nameof(CardModel.CreateClone))]
+    private static class MarkCopies
+    {
+        private static void Postfix(CardModel __result) => Copies.GetOrCreateValue(__result);
+    }
+    [HarmonyPatch(typeof(CardCmd), nameof(CardCmd.Upgrade), [typeof(IEnumerable<CardModel>), typeof(CardPreviewStyle)])]
+    private static class EndlessStudyUpgrade
+    {
+        private static void Prefix(ref IEnumerable<CardModel> cards, out Dictionary<CardModel, int> __state)
+        {
+            cards = cards.ToArray();
+            __state = cards.Where(c => CardCatalog.DesignId(c) == "JK82" && c.Pile != null)
+                .ToDictionary(c => c, c => c.CurrentUpgradeLevel);
+        }
+        private static void Postfix(Dictionary<CardModel, int> __state)
+        {
+            var upgrades = __state.Where(kv => kv.Key.CurrentUpgradeLevel > kv.Value).ToArray();
+            if (upgrades.Length == 0) return;
+            PendingUpgrades = Grant(upgrades);
+            TaskHelper.RunSafely(PendingUpgrades);
+        }
+        private static async Task Grant(KeyValuePair<CardModel, int>[] upgrades)
+        {
+            using var single = SingleCard();
+            foreach (var (card, previous) in upgrades)
+                for (int i = previous; i < card.CurrentUpgradeLevel; i++)
+                {
+                    if (card.Pile?.Type == PileType.Deck)
+                        await CardPileCmd.Add(card.Owner.RunState.CreateCard(CardCatalog.Model("JK82B"), card.Owner), PileType.Deck);
+                    else await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw);
+                }
+        }
+    }
+}

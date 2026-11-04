@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShoujoKagekiJunna.Combat;
 
@@ -18,8 +19,18 @@ namespace ShoujoKagekiJunna.Models;
 public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, TargetType target, string designId)
     : CustomCardModel(cost, type, rarity, target)
 {
-    public string DesignId => designId;
-    public override string CustomPortraitPath => JunnaMod.ResourceRoot + $"images/cards/{designId}.jpg";
+    public virtual string DesignId => designId;
+    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get(DesignId).Portrait;
+    protected override IEnumerable<IHoverTip> ExtraHoverTips
+    {
+        get
+        {
+            var group = KnowledgeCombat.Group(this);
+            if (group != null)
+                foreach (var id in group.GrantedCardIds.Prepend(group.MainCardId).Where(id => id != DesignId))
+                    yield return HoverTipFactory.FromCard(CardCatalog.Model(id));
+        }
+    }
 
     protected async Task ImproveHand(PlayerChoiceContext context, decimal bonus, int hits = 0)
     {

@@ -1,0 +1,173 @@
+"""Generate runtime metadata and portraits from a versioned workbench MCP export.
+
+The export is read-only. Effects are implemented explicitly in CardEffects.cs.
+"""
+import argparse
+import base64
+import json
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+EXISTING = {
+    'JB01': ('JunnaStrike', 'JUNNA_STRIKE'), 'JB02': ('JunnaDefend', 'JUNNA_DEFEND'),
+    'JB03': ('JunnaFullDraw', 'JUNNA_FULL_DRAW'), 'JG09': ('JunnaWarmUp', 'JUNNA_WARM_UP'),
+    'JG03': ('JunnaRepeatedPractice', 'JUNNA_REPEATED_PRACTICE'),
+    'JA16': ('JunnaGuidingStar', 'JUNNA_GUIDING_STAR'),
+    'JA17': ('JunnaBreakEncirclement', 'JUNNA_BREAK_ENCIRCLEMENT'),
+    'JH10': ('JunnaTurningSlash', 'JUNNA_TURNING_SLASH'),
+    'JG23': ('JunnaEnduranceTraining', 'JUNNA_ENDURANCE_TRAINING'),
+}
+
+DISPLAY_TEXT = json.loads((Path(__file__).with_name('card-text-zhs.json')).read_text(encoding='utf-8'))
+
+
+def display_description(card, fallback, card_names):
+    """Apply game-local wording after binding the workbench's unchanged numeric fields."""
+    cid = card['id']
+    text = DISPLAY_TEXT.get(cid, fallback)
+    # These templates use the same native energy icon argument as All for One and Corruption.
+    text = re.sub(r'(\{N\d+:diff\(\)\})点能量', r'\1{energyPrefix:energyIcons(1)}', text)
+    text = re.sub(r'(\d+)点能量', lambda m: '{energyPrefix:energyIcons(' + m[1] + ')}', text)
+    # Both default and curated arrow descriptions receive one concise delay line.
+    text = re.sub(r'^\[blue\][^\n]*\n', '', text)
+    text = re.sub(r'。\s*', '。\n', text).strip()
+    highlighted = {'格挡', '易伤', '虚弱', '知识', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
+    # Only actual named references need emphasis; all replacements run once to avoid nested tags.
+    highlighted.update(card_names)
+    pattern = '|'.join(re.escape(word) for word in sorted(highlighted, key=len, reverse=True))
+    text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
+    if card['type'] == '箭矢':
+        text = '[blue]{Turns:diff()}回合后[/blue]\n' + text
+    return text
+
+
+def bind_numbers(text, prior=None):
+    values = []
+    used = set()
+
+    def replace(match):
+        index = len(values)
+        tail = text[match.end():]
+        if prior:
+            name = prior[index]['name']
+        elif tail.startswith('点伤害加成'):
+            name = 'Bonus'
+        elif tail.startswith('点伤害'):
+            name = 'Damage'
+        elif tail.startswith('点格挡'):
+            name = 'Block'
+        elif tail.startswith('次') and text[:match.start()].endswith('点伤害'):
+            name = 'Repeat'
+        else:
+            name = f'N{index}'
+        if name in used:
+            name = f'N{index}'
+        used.add(name)
+        values.append({'name': name, 'base': int(match.group())})
+        return '{' + name + ':diff()}'
+
+    result = re.sub(r'\d+', replace, text)
+    return result, values
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('snapshot', type=Path)
+    parser.add_argument('--text-only', action='store_true', help='Refresh display localization without rewriting card data, models or portraits.')
+    args = parser.parse_args()
+    bundle = json.loads(args.snapshot.read_text(encoding='utf-8-sig'))
+    cards = [c for c in bundle['data']['cards'] if not c.get('trashedAt') and not c.get('reservedAt')]
+    definitions = []
+    wrappers = []
+    localization = {}
+    card_names = {c['name'] for c in cards}
+    for card in cards:
+        cid = card['id']
+        cls, model_id = EXISTING.get(cid, ('JunnaCard' + cid, 'JUNNA_' + cid))
+        base = card['text'].strip()
+        upgrade = card['upgradedText'].strip()
+        # Native keywords are rendered by CardModel; knowledge remains a local keyword label.
+        for keyword in ('保留', '消耗'):
+            base = base.replace(keyword + '。', '')
+            upgrade = upgrade.replace(keyword + '。', '')
+        base, values = bind_numbers(base)
+        upgrade, upgraded_values = bind_numbers(upgrade, values)
+        assert len(values) == len(upgraded_values), cid
+        for value, improved in zip(values, upgraded_values):
+            value['upgraded'] = improved['base']
+        if cid == 'JA81B':
+            values.append({'name': 'Damage', 'base': 0, 'upgraded': 0})
+            base = base.replace('X', '{Damage:diff()}')
+            upgrade = upgrade.replace('X', '{Damage:diff()}')
+        if card['type'] == '箭矢':
+            values.append({'name': 'Turns', 'base': card['turns'], 'upgraded': card['upgradedTurns']})
+            base = '[blue]{Turns:diff()}回合[/blue]。\n' + base
+            upgrade = '[blue]{Turns:diff()}回合[/blue]。\n' + upgrade
+        # Existing implementations use their established variable names.
+        if cid in ('JA16', 'JA17'):
+            base = re.sub(r'\{N\d+:diff\(\)\}', str(1 if cid == 'JA16' else 2), base)
+            upgrade = re.sub(r'\{N\d+:diff\(\)\}', str(1 if cid == 'JA16' else 2), upgrade)
+        if cid == 'JG09':
+            base = base.replace('{N1:diff()}', '1')
+            upgrade = upgrade.replace('{N1:diff()}', '1')
+        if cid in ('JG03', 'JG23'):
+            for value in values:
+                base = base.replace('{' + value['name'] + ':diff()}', str(value['base']))
+                upgrade = upgrade.replace('{' + value['name'] + ':diff()}', str(value['upgraded']))
+        localization[model_id + '.title'] = card['name']
+        fallback = base if base == upgrade else '{IfUpgraded:show:' + upgrade + '|' + base + '}'
+        localization[model_id + '.description'] = display_description(card, fallback, card_names)
+        if args.text_only:
+            continue
+        art = bundle['assets'][card['art']]
+        mime, data = art.split(',', 1)
+        image_bytes = base64.b64decode(data)
+        # Some exported data URLs carry a stale MIME label; use the actual file signature.
+        extension = '.png' if image_bytes.startswith(b'\x89PNG\r\n\x1a\n') else '.jpg'
+        portrait = ROOT / 'ShoujoKagekiJunna/images/cards' / (cid + extension)
+        portrait.write_bytes(image_bytes)
+        damage = bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) and cid != 'JA82'
+        target = 'AllEnemies' if '所有敌人造成' in card['text'] else 'AnyEnemy' if (
+            (damage and card['type'] != '能力') or cid in ('JF10', 'JA58')) else 'Self'
+        entry = {
+            'id': cid, 'modelId': model_id, 'className': cls, 'name': card['name'],
+            'cost': 0 if card['cost'] == 'X' else card['cost'],
+            'upgradedCost': 0 if card['upgradedCost'] == 'X' else card['upgradedCost'],
+            'costsX': card['cost'] == 'X', 'type': card['type'], 'target': target,
+            'arrowSubtype': card.get('arrowSubtype', '攻击' if damage else '技能'),
+            'rarity': card['rarity'], 'pool': bool(card.get('pool')),
+            'knowledge': '知识' in card.get('keywords', []) or '知识。' in card['text'],
+            'exhaust': '消耗。' in card['text'], 'upgradedExhaust': '消耗。' in card['upgradedText'],
+            'retain': '保留。' in card['text'], 'upgradedRetain': '保留。' in card['upgradedText'],
+            'damageCapable': damage, 'portrait': cid + extension, 'values': values,
+            'text': card['text'], 'upgradedText': card['upgradedText'],
+        }
+        definitions.append(entry)
+        if cid not in EXISTING:
+            wrappers.append(f'[CustomID("{model_id}")]\npublic sealed class {cls}() : CatalogCard("{cid}");\n')
+    ids = {c['id'] for c in cards}
+    groups = [g for g in bundle['data']['partnerGroups'] if g['mainCardId'] in ids]
+    out = {'revision': bundle['revision'], 'cards': definitions, 'groups': groups}
+    if not args.text_only:
+        (ROOT / 'docs/implementation/card-pool.json').write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    header = '// Generated by tools/assets/generate-card-catalog.py from an MCP export.\nusing BaseLib.Utils.Attributes;\n\nnamespace ShoujoKagekiJunna.Models;\n\n'
+    if not args.text_only:
+        (ROOT / 'src/Models/CardCatalog.Generated.cs').write_text(header + '\n'.join(wrappers), encoding='utf-8')
+    for lang in ('eng', 'zhs'):
+        (ROOT / f'ShoujoKagekiJunna/localization/{lang}/cards.json').write_text(json.dumps(localization, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        powers_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/powers.json'
+        powers = json.loads(powers_path.read_text(encoding='utf-8'))
+        for cid in 'JA04 JK10 JA22 JK15 A JK27 JA35 JK32 JK37C JA45 JK64 JK67 JG31 JH19 JH21 JG34 JK75 JH23 JA70 JH24 JK80 JK81 JZ05 JZ06 JH30 JK46'.split():
+            powers[f'JUNNA_{cid}_POWER.title'] = next(c['name'] for c in cards if c['id'] == cid)
+        powers.update({'JUNNA_CATALOG.description': '{Effects}', 'JUNNA_ENERGY_RESERVE.title': '能量保留',
+                       'JUNNA_ENERGY_RESERVE.description': '下回合保留至多{Amount}点剩余能量。'})
+        powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    if args.text_only:
+        print(f'Updated display text for {len(cards)} cards; runtime values, models and portraits unchanged.')
+    else:
+        print(f'Generated {len(cards)} card definitions, {len(wrappers)} new models and {len(groups)} knowledge groups at revision {bundle["revision"]}.')
+
+
+if __name__ == '__main__':
+    main()

@@ -16,15 +16,22 @@ public partial class ArrowHud : Control
     private static readonly Vector2 IconSize = FrameSize * FrameScale;
     private static readonly Vector2 CounterCenter = new Vector2(120, 58) * FrameScale;
     private static readonly Vector2 Tip = new Vector2(120, 409) * FrameScale;
-    private static readonly Vector2 GroupLeftTip = new Vector2(55, 372) * FrameScale;
-    private static readonly Vector2 GroupRightTip = new Vector2(185, 372) * FrameScale;
+    private static readonly Vector2[] SatelliteOutline =
+    [
+        new(-5, -6), new(0, -3), new(5, -6), new(0, 9)
+    ];
+    private static readonly Vector2[] SatelliteInset =
+    [
+        new(-3, -3.5f), new(0, -1.5f), new(3, -3.5f), new(0, 5.5f)
+    ];
     // Matches floating_arrow_c1.svg; the frame overlays this aperture.
     private static readonly Vector2[] PortraitWindow =
     [
         new(120, 30), new(216, 138), new(120, 364), new(24, 138)
     ];
 
-    private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats);
+    private sealed record SatelliteMotion(Node2D Node, float Height, float Radius, float Phase, float WobbleSpeed);
+    private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, SatelliteMotion[] Satellites);
     private readonly Dictionary<ArrowDeployment, ArrowView> _views = [];
     private Texture2D _frame = null!;
     private Texture2D _groupFrame = null!;
@@ -44,6 +51,7 @@ public partial class ArrowHud : Control
         _elapsed += delta;
         foreach (var removed in _views.Keys.Where(a => !ArrowCombat.Deployed.Contains(a)).ToArray())
         {
+            FinishDeployment(removed);
             _views[removed].Root.QueueFree();
             _views.Remove(removed);
         }
@@ -52,10 +60,7 @@ public partial class ArrowHud : Control
         var canvas = GetViewportRect().Size;
         // Use the second relic row, reserving exactly one row above the arrows.
         float rowY = SecondRelicRowY();
-        IReadOnlyList<ArrowDeployment> arrows = ArrowCombat.Deployed
-            .OrderBy(a => a.TargetsAllEnemies ? float.NegativeInfinity
-                : room.GetCreatureNode(a.Play.Target)?.VfxSpawnPosition.X ?? float.PositiveInfinity)
-            .ToArray();
+        IReadOnlyList<ArrowDeployment> arrows = ArrowCombat.DisplayOrder();
         float singleStart = canvas.X * .44f;
         var groupSlots = new Dictionary<Creature, int>();
         foreach (var arrow in arrows.Where(a => a.TargetsAllEnemies))
@@ -100,11 +105,17 @@ public partial class ArrowHud : Control
             // Countdown numerals remain upright as the frame rotates.
             var facingCenter = view.Root.Position + IconSize * .5f;
             view.Frame.Rotation = (aim - facingCenter).Angle() - Mathf.Pi * .5f;
+            UpdateDeployment(arrow, view);
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
             view.Count.Text = arrow.Remaining.ToString();
             view.Count.AddThemeColorOverride("font_color", arrow.Remaining <= 1 ? new Color("FFE3A0") : Colors.White);
-            view.Repeats.Visible = arrow.Play.PlayCount > 1;
-            view.Repeats.Text = $"×{arrow.Play.PlayCount}";
+            view.Repeats.Visible = arrow.PlayCount > 1;
+            view.Repeats.Text = $"×{arrow.PlayCount}";
+            foreach (var satellite in view.Satellites)
+            {
+                satellite.Node.Visible = targets.Length > 0;
+                UpdateSatellite(satellite);
+            }
         }
         QueueRedraw();
     }
@@ -144,6 +155,7 @@ public partial class ArrowHud : Control
         // Draw behind the portrait children. Dead or removed targets have no guide.
         foreach (var (arrow, view) in _views)
         {
+            if (_deployments.ContainsKey(arrow)) continue;
             var targets = TargetPoints(arrow);
             if (targets.Length == 0) continue;
             var start = view.Root.Position + RotateInFrame(Tip, view.Frame.Rotation);
@@ -154,15 +166,12 @@ public partial class ArrowHud : Control
                 var midpoint = (left + right) * .5f;
                 left = midpoint + (left - midpoint) * 1.25f;
                 right = midpoint + (right - midpoint) * 1.25f;
-                var leftStart = view.Root.Position + RotateInFrame(GroupLeftTip, view.Frame.Rotation);
-                var rightStart = view.Root.Position + RotateInFrame(GroupRightTip, view.Frame.Rotation);
-                var fanColor = new Color(.48f, .8f, .95f, .045f);
-                DrawPolygon([leftStart, leftStart.Lerp(left, .7f), rightStart.Lerp(right, .7f), rightStart],
-                    [fanColor, Colors.Transparent, Colors.Transparent, fanColor]);
-                DrawFadingGuide(leftStart, left, .2f);
-                DrawFadingGuide(rightStart, right, .2f);
+                var fanStart = start.MoveToward(midpoint, 18);
+                DrawSoftFan(fanStart, left, right);
+                DrawSoftGroupGuide(fanStart, left, .2f);
+                DrawSoftGroupGuide(fanStart, right, .2f);
                 foreach (var end in targets)
-                    DrawFadingGuide(start, end, .13f);
+                    DrawSoftGroupGuide(fanStart, end, .13f);
             }
             else
             {
@@ -173,7 +182,90 @@ public partial class ArrowHud : Control
         }
     }
 
-    private void DrawFadingGuide(Vector2 start, Vector2 target, float alpha, float width = 1)
+    private static SatelliteMotion[] CreateSatellites(Control frame)
+    {
+        // Cosmetic layout is sampled once per deployment, independently of combat RNG.
+        // Uneven phases keep the arrows staggered as they orbit the front half of the body.
+        var samples = Enumerable.Range(0, 3).Select(_ => Random.Shared.NextSingle()).Order().ToArray();
+        float phaseOffset = Random.Shared.NextSingle() * Mathf.Tau;
+        return samples.Select((sample, index) =>
+        {
+            var node = new Node2D { Name = $"GroupSatellite{index}" };
+            node.AddChild(new Polygon2D
+            {
+                Polygon = SatelliteOutline, Color = new Color("BEC3BF"), Antialiased = true
+            });
+            node.AddChild(new Polygon2D
+            {
+                Polygon = SatelliteInset, Antialiased = true,
+                VertexColors = [new Color("A8C9DC"), new Color("7698AD"), new Color("789DB5"), new Color("60849E")]
+            });
+            frame.AddChild(node);
+            return new SatelliteMotion(node, 44 + Random.Shared.NextSingle() * 11,
+                14 + Random.Shared.NextSingle() * 4,
+                phaseOffset + sample * (Mathf.Tau - 5.1f) + index * 1.7f,
+                .5f + Random.Shared.NextSingle() * .7f);
+        }).ToArray();
+    }
+
+    private void UpdateSatellite(SatelliteMotion satellite)
+    {
+        float time = (float)_elapsed;
+        float phase = time * .65f + satellite.Phase
+            + Mathf.Sin(time * satellite.WobbleSpeed + satellite.Phase) * .12f;
+        float depth = Mathf.Sin(phase);
+        float scale = .96f + depth * .1f;
+        satellite.Node.Position = new(IconWidth * .5f + Mathf.Cos(phase) * satellite.Radius,
+            satellite.Height + Mathf.Sin(time * satellite.WobbleSpeed + satellite.Phase) * 1.1f);
+        satellite.Node.Scale = new(scale * (.78f + .22f * Mathf.Abs(depth)), scale);
+        satellite.Node.Modulate = new Color(1, 1, 1, .8f + depth * .2f);
+        // Behind the portrait on the far side, over it on the near side; tips stay behind the main point.
+        satellite.Node.ZIndex = depth < 0 ? -1 : 1;
+    }
+
+    private static float GroupGuideFade(float progress)
+        => Mathf.SmoothStep(0, .18f, progress) * Mathf.Pow(1 - progress, 1.6f);
+
+    private void DrawSoftFan(Vector2 start, Vector2 left, Vector2 right)
+    {
+        const int segments = 10;
+        ReadOnlySpan<float> across = [0, .22f, .78f, 1];
+        ReadOnlySpan<float> edgeAlpha = [0, 1, 1, 0];
+        for (int i = 0; i < segments; i++)
+        {
+            float near = (float)i / segments;
+            float far = (float)(i + 1) / segments;
+            var nearLeft = start.Lerp(left, near * .7f);
+            var nearRight = start.Lerp(right, near * .7f);
+            var farLeft = start.Lerp(left, far * .7f);
+            var farRight = start.Lerp(right, far * .7f);
+            float nearAlpha = .045f * GroupGuideFade(near);
+            float farAlpha = .045f * GroupGuideFade(far);
+            for (int band = 0; band < across.Length - 1; band++)
+            {
+                var a = nearLeft.Lerp(nearRight, across[band]);
+                var b = nearLeft.Lerp(nearRight, across[band + 1]);
+                var c = farLeft.Lerp(farRight, across[band + 1]);
+                var d = farLeft.Lerp(farRight, across[band]);
+                var ca = new Color(.48f, .8f, .95f, nearAlpha * edgeAlpha[band]);
+                var cb = new Color(.48f, .8f, .95f, nearAlpha * edgeAlpha[band + 1]);
+                var cc = new Color(.48f, .8f, .95f, farAlpha * edgeAlpha[band + 1]);
+                var cd = new Color(.48f, .8f, .95f, farAlpha * edgeAlpha[band]);
+                // Feather both side edges and both ends instead of leaving a hard cone apex.
+                if (i == 0) DrawPolygon([start, c, d], [ca, cc, cd]);
+                else DrawPolygon([a, b, c, d], [ca, cb, cc, cd]);
+            }
+        }
+    }
+
+    private void DrawSoftGroupGuide(Vector2 start, Vector2 target, float alpha)
+    {
+        DrawFadingGuide(start, target, alpha * .18f, 6, true);
+        DrawFadingGuide(start, target, alpha * .28f, 3, true);
+        DrawFadingGuide(start, target, alpha * .54f, 1.5f, true);
+    }
+
+    private void DrawFadingGuide(Vector2 start, Vector2 target, float alpha, float width = 1, bool fadeStart = false)
     {
         const int segments = 16;
         var points = new Vector2[segments + 1];
@@ -182,7 +274,8 @@ public partial class ArrowHud : Control
         {
             float progress = (float)i / segments;
             points[i] = start.Lerp(target, progress * .7f);
-            colors[i] = new Color(.6f, .86f, 1, alpha * Mathf.Pow(1 - progress, 1.6f));
+            float fade = fadeStart ? GroupGuideFade(progress) : Mathf.Pow(1 - progress, 1.6f);
+            colors[i] = new Color(.6f, .86f, 1, alpha * fade);
         }
         DrawPolylineColors(points, colors, width, true);
     }
@@ -215,8 +308,9 @@ public partial class ArrowHud : Control
         root.AddChild(count);
         var repeats = MakeLabel("Repeats", new(IconWidth - 5, 16), new(32, 20), 16);
         root.AddChild(repeats);
+        root.AddChild(CardInvestmentMarks.ForArrow(arrow.Card));
         AddChild(root);
-        return new(root, frame, count, repeats);
+        return new(root, frame, count, repeats, arrow.TargetsAllEnemies ? CreateSatellites(frame) : []);
     }
 
     private static Label MakeLabel(string name, Vector2 position, Vector2 size, int fontSize)

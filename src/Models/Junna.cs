@@ -54,7 +54,11 @@ public sealed class JunnaCardPool : CustomCardPoolModel
     public override Color DeckEntryCardColor => new("65B3E8");
     public override Color EnergyOutlineColor => new("234B75");
     public override string BigEnergyIconPath => JunnaMod.ResourceRoot + "images/energy.png";
-    public override string TextEnergyIconPath => BigEnergyIconPath;
+    public override string TextEnergyIconPath => "res://images/packed/sprite_fonts/defect_energy_icon.png";
+    protected override IEnumerable<CardModel> FilterThroughEpochs(MegaCrit.Sts2.Core.Unlocks.UnlockState unlockState, IEnumerable<CardModel> cards)
+        => base.FilterThroughEpochs(unlockState, cards).Where(c => c is not JunnaCard junna ||
+            (CardCatalog.Get(junna.DesignId).Pool && c.Rarity is MegaCrit.Sts2.Core.Entities.Cards.CardRarity.Common
+                or MegaCrit.Sts2.Core.Entities.Cards.CardRarity.Uncommon or MegaCrit.Sts2.Core.Entities.Cards.CardRarity.Rare));
 }
 
 [CustomID("JUNNA_RELIC_POOL")]
