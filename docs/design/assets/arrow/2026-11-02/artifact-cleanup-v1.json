@@ -1,0 +1,15 @@
+{
+  "tool": "waifu2x-ncnn-vulkan 20250915",
+  "model": "CUNet",
+  "noise": 3,
+  "scale": 1,
+  "tta": false,
+  "tile": 128,
+  "regeneration": false,
+  "card": "../../../../../output/waifu2x/2026-11-02/ui/ui-frame.png",
+  "energy": "../../../../../output/waifu2x/2026-11-02/ui/ui-energy.png",
+  "manifest": "../../../../../output/waifu2x/2026-11-02/deliverables.json",
+  "originals_preserved": true,
+  "alpha_identical": true,
+  "protected_board_regions_identical": true
+}

@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "title": "卡牌引用描述约定",
+  "date": "2026-11-02",
+  "sourceRevision": 1112,
+  "sources": [
+    "D:/Github/spire-codex/extraction/raw/localization/zhs/cards.json",
+    "D:/Github/spire-codex/extraction/raw/src/Core/Models/Cards/CloakAndDagger.cs"
+  ],
+  "nativeExamples": [
+    {
+      "id": "ACCURACY",
+      "title": "精准",
+      "description": "[gold]小刀[/gold]额外造成{AccuracyPower:diff()}点伤害。"
+    },
+    {
+      "id": "CLOAK_AND_DAGGER",
+      "title": "斗篷与匕首",
+      "description": "获得{Block:diff()}点[gold]格挡[/gold]。\n将{Cards:diff()}张[gold]小刀[/gold]添加到你的[gold]手牌[/gold]。"
+    },
+    {
+      "id": "CONQUEROR",
+      "title": "征服者",
+      "description": "[gold]铸造[/gold]{Forge:diff()}。\n[gold]君王之剑[/gold]在本回合对敌人造成双倍伤害。"
+    }
+  ],
+  "conventions": [
+    "直接写完整牌名，不用书名号包裹。",
+    "牌名使用金色，升级版本保留牌名后的+。",
+    "关联提示绑定对应卡牌模型；工作台提供原牌面文字提示及已有知识组预览。",
+    "修改卡名时同步绑定的引用，牌名中的数字独立于升级数值比较。"
+  ],
+  "changedCardIds": [
+    "A",
+    "JK33",
+    "JK33B",
+    "JK43B",
+    "JK47",
+    "JK47B",
+    "JK48",
+    "JK48B"
+  ],
+  "bindingCardIds": [
+    "JK11",
+    "JK11B",
+    "A",
+    "JK32",
+    "JK32C",
+    "JK33",
+    "JK33B",
+    "JK37B",
+    "JK43B",
+    "JK45B",
+    "JK46",
+    "JK47",
+    "JK47B",
+    "JK48",
+    "JK48B",
+    "JK49",
+    "JK49B",
+    "JK50B",
+    "JK66B",
+    "JK67",
+    "JK68",
+    "JK68B",
+    "JK69"
+  ],
+  "appliedRevision": 1113,
+  "historyRecord": "2c4ec9bd-e658-4ea1-b886-84421124b551"
+}

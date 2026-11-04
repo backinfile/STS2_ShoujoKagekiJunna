@@ -1,0 +1,952 @@
+{
+  "batchId": "junna-revise-card-titles-20261102",
+  "label": "将对白式牌名改为独立短名并统一原作画面",
+  "backup": "before-revise-card-titles.json",
+  "matches": [
+    {
+      "id": "JA02",
+      "expectedName": "登上你的船",
+      "name": "布阵",
+      "original": "布陣",
+      "fit": "提前安排出手位置，让所有箭矢省去能量准备，并延后一回合完成。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-228.jpg",
+      "crop": [
+        800,
+        600,
+        650,
+        120
+      ],
+      "time": "02:28",
+      "work": "2021 剧场版 · 狩猎的Revue片段约02:28",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=148",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-228.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK05",
+      "expectedName": "还想听？",
+      "name": "旁征博引",
+      "original": "広く典拠を引く",
+      "fit": "纯那连续引出不同名言，表现抽取知识直到手牌满。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-232.jpg",
+      "crop": [
+        800,
+        600,
+        70,
+        120
+      ],
+      "time": "02:32",
+      "work": "2021 剧场版 · 狩猎的Revue片段约02:32",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=152",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-232.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK10",
+      "expectedName": "热情与光芒",
+      "name": "热情",
+      "original": "情熱",
+      "fit": "持续投入高费行动时，热情为下一次行动补充能量。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-244-final.jpg",
+      "crop": [
+        800,
+        600,
+        560,
+        120
+      ],
+      "time": "02:44",
+      "work": "2021 剧场版 · 狩猎的Revue片段约02:44",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=164",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-244-final.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK10B",
+      "expectedName": "舞台少女的力量",
+      "name": "舞台之力",
+      "original": "舞台の力",
+      "fit": "留在手中的力量在需要时释放，对应保留的大伤害攻击。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-524.jpg",
+      "crop": [
+        800,
+        600,
+        560,
+        120
+      ],
+      "time": "05:24",
+      "work": "2021 剧场版 · 狩猎的Revue片段约05:24",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=324",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-524.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JG03",
+      "expectedName": "永远能站上舞台",
+      "name": "续演",
+      "original": "続演",
+      "fit": "一项演出之后再接一段，使选中的手牌多造成一次伤害。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-828.jpg",
+      "crop": [
+        800,
+        600,
+        900,
+        120
+      ],
+      "time": "08:28",
+      "work": "2021 剧场版 · 狩猎的Revue片段约08:28",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=508",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-828.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JA13",
+      "expectedName": "我的那颗星",
+      "name": "瞄准星扣",
+      "original": "星の留め具を狙う",
+      "fit": "纯那把目标定在舞台少女的星扣上，对应一支专注单体伤害的箭矢。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-810-final.jpg",
+      "crop": [
+        720,
+        540,
+        440,
+        200
+      ],
+      "time": "08:10",
+      "work": "2021 剧场版 · 狩猎的Revue片段约08:10",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=490",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-810-final.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JA16",
+      "expectedName": "引导我吧",
+      "name": "引导箭",
+      "original": "導く矢",
+      "fit": "先出手的一箭为后续箭矢引出进攻路径，使一个箭矢提前完成。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1735-action.jpg",
+      "crop": [
+        880,
+        660,
+        530,
+        120
+      ],
+      "time": "17:35",
+      "work": "TV 第2话 · 配图约17:35",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1055",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1735-action.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "episode": 2
+    },
+    {
+      "id": "JA17",
+      "expectedName": "大家拿上剑",
+      "name": "破围",
+      "original": "包囲を破る",
+      "fit": "纯那在包围她的刀刃间开路，攻击全场并让已布置的箭矢共同前进。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-732-unique.jpg",
+      "crop": [
+        800,
+        600,
+        980,
+        180
+      ],
+      "time": "07:32",
+      "work": "2021 剧场版 · 狩猎的Revue片段约07:32",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=452",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-732-unique.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK11",
+      "expectedName": "想守护的东西",
+      "name": "问句",
+      "original": "問い",
+      "fit": "问句引出答句，先护住当下并把关联知识召回手中。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1048-study.jpg",
+      "crop": [
+        880,
+        660,
+        660,
+        100
+      ],
+      "time": "10:48",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约10:48",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=648",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1048-study.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK11B",
+      "expectedName": "下回的舞台",
+      "name": "答句",
+      "original": "答え",
+      "fit": "答句回应问句，又带出新的提问；两张知识相互召回，构成连续问答。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1112-study.jpg",
+      "crop": [
+        880,
+        660,
+        640,
+        100
+      ],
+      "time": "11:12",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约11:12",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=672",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1112-study.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JG09",
+      "expectedName": "更好的重演",
+      "name": "复盘",
+      "original": "振り返り",
+      "fit": "回看已经经历的演出，稳住自己并改进一项行动。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-2125-new.jpg",
+      "crop": [
+        880,
+        660,
+        710,
+        100
+      ],
+      "time": "21:25",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约21:25",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1285",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-2125-new.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JA22",
+      "expectedName": "并不是结束",
+      "name": "再上弦",
+      "original": "再び弓を引く",
+      "fit": "一次射击结束后重新备箭，以箭矢完成后回到手牌表现下一次准备。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-2102-new.jpg",
+      "crop": [
+        800,
+        600,
+        680,
+        100
+      ],
+      "time": "21:02",
+      "work": "TV 第2话 · 配图约21:02",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1262",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-2102-new.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "episode": 2
+    },
+    {
+      "id": "JK15",
+      "expectedName": "改台词加演出",
+      "name": "再演",
+      "original": "再演",
+      "fit": "演过的知识再次进入抽牌堆，关联的修订稿也能继续使用。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-full-936-final.jpg",
+      "crop": [
+        800,
+        600,
+        760,
+        120
+      ],
+      "time": "09:36",
+      "work": "2021 剧场版 · 全片约09:36",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=576",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-full-936-final.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK15B",
+      "expectedName": "与大家更要好",
+      "name": "修订稿",
+      "original": "改訂稿",
+      "fit": "改写台词前先核对写满批注的笔记。修订稿提供防守，再演把知识重新送回抽牌堆，共同表现排练与修订。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-004-final.jpg",
+      "crop": [
+        880,
+        660,
+        500,
+        120
+      ],
+      "time": "00:04",
+      "work": "TV 第2话 · 配图约00:04",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=4",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-004-final.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "episode": 2
+    },
+    {
+      "id": "JG16",
+      "expectedName": "自己的星",
+      "name": "聚光灯",
+      "original": "スポットライト",
+      "fit": "舞台的光集中照向一个位置，把全部伤害加成汇到选中的一张手牌。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-600.jpg",
+      "crop": [
+        720,
+        540,
+        550,
+        200
+      ],
+      "time": "06:00",
+      "work": "2021 剧场版 · 狩猎的Revue片段约06:00",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=360",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-600.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JT01",
+      "expectedName": "是我的话",
+      "name": "独白",
+      "original": "独白",
+      "fit": "把一项行动化为说出后逐步抵达的话，形成低能量、需要等待的箭矢。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-2022-proof.jpg",
+      "crop": [
+        880,
+        660,
+        430,
+        100
+      ],
+      "time": "20:22",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约20:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1222",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-2022-proof.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JT02",
+      "expectedName": "不断改变",
+      "name": "改编",
+      "original": "翻案",
+      "fit": "同一份内容改换演出方式，箭矢变为需要更多能量的即时行动。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-2132-new.jpg",
+      "crop": [
+        880,
+        660,
+        540,
+        100
+      ],
+      "time": "21:32",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约21:32",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1292",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-2132-new.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JT03",
+      "expectedName": "不前进则后退",
+      "name": "前进",
+      "original": "前進",
+      "fit": "实际出手便推进时间并获得行动力，对应原作不前进则后退的格言。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-1935-proof.jpg",
+      "crop": [
+        880,
+        660,
+        730,
+        100
+      ],
+      "time": "19:35",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约19:35",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1175",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-1935-proof.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "B",
+      "expectedName": "我邂逅了",
+      "name": "心得",
+      "original": "学び",
+      "fit": "埋头学习持续积累，形成心得后抽牌并获得行动力；以笔记中的记录连接两张牌。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-2214-new.jpg",
+      "crop": [
+        800,
+        600,
+        610,
+        120
+      ],
+      "time": "22:14",
+      "work": "TV 第9话 · 配图约22:14",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1334",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-2214-new.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "episode": 9
+    },
+    {
+      "id": "JH01",
+      "expectedName": "黑心商人",
+      "name": "换位",
+      "original": "立ち位置を入れ替える",
+      "fit": "互换两项行动的位置与准备代价，对应交换两张手牌的耗能。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1036-study.jpg",
+      "crop": [
+        880,
+        660,
+        360,
+        100
+      ],
+      "time": "10:36",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约10:36",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=636",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1036-study.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK27",
+      "expectedName": "一起成为Star",
+      "name": "同台",
+      "original": "同じ舞台に立つ",
+      "fit": "一位同伴登台时也引来与她关联的人，表现抽到知识时同时抽取其关联牌。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-545-short.jpg",
+      "crop": [
+        880,
+        660,
+        660,
+        100
+      ],
+      "time": "05:45",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约05:45",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=345",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-545-short.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JG23",
+      "expectedName": "成为Star",
+      "name": "日益精进",
+      "original": "日々精進",
+      "fit": "训练积累达到一个阶段后，动作便能多完成一次，表现伤害加成每达到八点增加一次伤害。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv01-905-short.jpg",
+      "crop": [
+        800,
+        600,
+        530,
+        120
+      ],
+      "time": "09:05",
+      "work": "TV 第1话 · 配图约09:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=545",
+      "artNote": "TV第1话的原作画面裁切，原始截图tv01-905-short.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "episode": 1
+    },
+    {
+      "id": "JH05",
+      "expectedName": "我重生了",
+      "name": "再生产",
+      "original": "再生産",
+      "fit": "完成出手后为下一回合补充行动力，表现舞台少女再次开始的过程。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-516.jpg",
+      "crop": [
+        800,
+        600,
+        500,
+        120
+      ],
+      "time": "05:16",
+      "work": "2021 剧场版 · 狩猎的Revue片段约05:16",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=316",
+      "artNote": "纯那原有武器破碎后的翡翠碎片；原始截图film-hunt-516.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JA35",
+      "expectedName": "时间流逝的速度",
+      "name": "时间流速",
+      "original": "時間の速さ",
+      "fit": "原作关于时间流逝速度的格言，转为每回合推进所有箭矢的持续能力。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-1920-proof.jpg",
+      "crop": [
+        800,
+        600,
+        800,
+        100
+      ],
+      "time": "19:20",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约19:20",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1160",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-1920-proof.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK33",
+      "expectedName": "过去影响当下",
+      "name": "过去",
+      "original": "過去",
+      "fit": "过去改变此刻，未来也影响此刻；两张牌分别为对方增加伤害与伤害次数。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1315-proof.jpg",
+      "crop": [
+        880,
+        660,
+        780,
+        100
+      ],
+      "time": "13:15",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约13:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=795",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1315-proof.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK33B",
+      "expectedName": "永远都不嫌晚",
+      "name": "未来",
+      "original": "未来",
+      "fit": "与过去取自同一条尼采格言，形成相互影响、相互增强的一对知识。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-900.jpg",
+      "crop": [
+        800,
+        600,
+        700,
+        120
+      ],
+      "time": "09:00",
+      "work": "2021 剧场版 · 狩猎的Revue片段约09:00",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=540",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-900.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK37",
+      "expectedName": "讨伐你的剑",
+      "name": "压轴台词",
+      "original": "最後を飾る台詞",
+      "fit": "准备许久后说出的压轴台词，造成高额的延迟伤害；提词加快它，台本提供接下来的行动。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-748.jpg",
+      "crop": [
+        800,
+        600,
+        650,
+        120
+      ],
+      "time": "07:48",
+      "work": "2021 剧场版 · 狩猎的Revue片段约07:48",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=468",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-748.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK37B",
+      "expectedName": "驾船",
+      "name": "提词",
+      "original": "プロンプト",
+      "fit": "为尚未说出的台词补上提示，使压轴台词提前完成。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-2031-proof.jpg",
+      "crop": [
+        880,
+        660,
+        440,
+        100
+      ],
+      "time": "20:31",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约20:31",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1231",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-2031-proof.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK37C",
+      "expectedName": "星星的知识",
+      "name": "台本",
+      "original": "台本",
+      "fit": "演出按台本继续向下展开，出手后找到下一项低费行动。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-full-900.jpg",
+      "crop": [
+        480,
+        360,
+        720,
+        370
+      ],
+      "time": "09:00",
+      "work": "2021 剧场版 · 全片约09:00",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=540",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-full-900.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK43",
+      "expectedName": "追不上的距离",
+      "name": "背影",
+      "original": "後ろ姿",
+      "fit": "纯那面向练习室继续准备自己的表演，以需要不断追赶的背影连接同组追赶：反复追赶使高耗能的攻击更容易打出。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv07-800-scene.jpg",
+      "crop": [
+        800,
+        600,
+        550,
+        120
+      ],
+      "time": "08:00",
+      "work": "TV 第7话 · 配图约08:00",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=480",
+      "artNote": "TV第7话的原作画面裁切，原始截图tv07-800-scene.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "episode": 7
+    },
+    {
+      "id": "JK43B",
+      "expectedName": "不可能就此死心",
+      "name": "追赶",
+      "original": "追いかける",
+      "fit": "每次追赶都缩短与背影的距离，对应降低关联牌在本场战斗中的耗能。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-436.jpg",
+      "crop": [
+        800,
+        600,
+        580,
+        120
+      ],
+      "time": "04:36",
+      "work": "2021 剧场版 · 狩猎的Revue片段约04:36",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=276",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-436.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK45",
+      "expectedName": "利维坦",
+      "name": "布景迷宫",
+      "original": "舞台装置の迷路",
+      "fit": "纯那利用层叠布景布置射击位置，场上的布景迷宫为死角创造条件。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1848-action.jpg",
+      "crop": [
+        880,
+        660,
+        410,
+        100
+      ],
+      "time": "18:48",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约18:48",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1128",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1848-action.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK45B",
+      "expectedName": "暴风雨",
+      "name": "死角",
+      "original": "死角",
+      "fit": "对手进入布景迷宫后暴露出射击死角，形成免费的虚弱与易伤。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1850-new.jpg",
+      "crop": [
+        880,
+        660,
+        410,
+        100
+      ],
+      "time": "18:50",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约18:50",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1130",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1850-new.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK46",
+      "expectedName": "一次机会",
+      "name": "邀约",
+      "original": "招待",
+      "fit": "纯那与华恋在练习室交流，邀约引出下一次登台；每回合把同组登台加入手牌。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1024-study.jpg",
+      "crop": [
+        640,
+        480,
+        1050,
+        160
+      ],
+      "time": "10:24",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约10:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=624",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1024-study.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK46B",
+      "expectedName": "不会放过这机会",
+      "name": "登台",
+      "original": "登場",
+      "fit": "接到邀约后保留出场准备，等待合适时刻完成一次有力的演出。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-2100-action.jpg",
+      "crop": [
+        880,
+        660,
+        660,
+        100
+      ],
+      "time": "21:00",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约21:00",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1260",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-2100-action.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK48",
+      "expectedName": "复仇",
+      "name": "渴望",
+      "original": "渇望",
+      "fit": "对下一舞台的渴望打破眼前安宁；向前出手会减少留守的格挡。",
+      "namingKind": "动作或物件短名",
+      "proof": "film-hunt-744.jpg",
+      "crop": [
+        800,
+        600,
+        480,
+        120
+      ],
+      "time": "07:44",
+      "work": "2021 剧场版 · 狩猎的Revue片段约07:44",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=464",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-744.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK48B",
+      "expectedName": "黄金国",
+      "name": "安宁",
+      "original": "安らぎ",
+      "fit": "停留于安宁会消磨向前的渴望；守护当下会减少关联牌的伤害。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-2136-new.jpg",
+      "crop": [
+        760,
+        570,
+        620,
+        180
+      ],
+      "time": "21:36",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约21:36",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1296",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-2136-new.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK50",
+      "expectedName": "下一回",
+      "name": "下一幕",
+      "original": "次の幕",
+      "fit": "新的舞台尚在前方，揭幕能把手里的下一幕直接展开。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-2145-new.jpg",
+      "crop": [
+        880,
+        660,
+        710,
+        100
+      ],
+      "time": "21:45",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约21:45",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1305",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-2145-new.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK50B",
+      "expectedName": "一起来创造吧",
+      "name": "揭幕",
+      "original": "幕を開ける",
+      "fit": "亲手揭开下一幕，以动作引出已经准备在手中的舞台。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-2305-proof.jpg",
+      "crop": [
+        720,
+        540,
+        450,
+        100
+      ],
+      "time": "23:05",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约23:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1385",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-2305-proof.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK52",
+      "expectedName": "献出我的全部",
+      "name": "赠言",
+      "original": "贈る言葉",
+      "fit": "把一项知识交给关联者，使它在之后多回应一次，表现赠言留下的力量。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv09-2202-new.jpg",
+      "crop": [
+        880,
+        660,
+        730,
+        100
+      ],
+      "time": "22:02",
+      "episode": 9,
+      "work": "TV 第9话 · 配图约22:02",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1322",
+      "artNote": "TV第9话的原作画面裁切，原始截图tv09-2202-new.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "JK53",
+      "expectedName": "一无所知",
+      "name": "求知",
+      "original": "知を求める",
+      "fit": "从已知的一项内容追寻它的关联知识，补全尚不了解的部分。",
+      "namingKind": "动作或物件短名",
+      "proof": "tv02-1322-proof.jpg",
+      "crop": [
+        880,
+        660,
+        810,
+        100
+      ],
+      "time": "13:22",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约13:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=802",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-1322-proof.jpg。",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。"
+    },
+    {
+      "id": "A",
+      "name": "埋头学习",
+      "expectedName": "埋头学习",
+      "fit": "纯那埋头对照书本与笔记学习，每回合将积累转化为一张心得。",
+      "proof": "tv03-1015-study.jpg",
+      "crop": [
+        880,
+        660,
+        450,
+        100
+      ],
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "namingKind": "动作或物件短名",
+      "time": "10:15",
+      "episode": 3,
+      "work": "TV 第3话 · 配图约10:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=615",
+      "artNote": "TV第3话的原作画面裁切，原始截图tv03-1015-study.jpg。"
+    },
+    {
+      "id": "JK34D",
+      "name": "石动双叶",
+      "expectedName": "石动双叶",
+      "fit": "石动双叶，取TV片头中短发、紫色眼睛的对应角色。下一张知识牌减费，对应她为同伴提供支持。",
+      "proof": "tv02-0222-op.jpg",
+      "crop": [
+        520,
+        390,
+        490,
+        120
+      ],
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "namingKind": "动作或物件短名",
+      "time": "02:22",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约02:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=142",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-0222-op.jpg。"
+    },
+    {
+      "id": "JK34F",
+      "name": "露崎真昼",
+      "expectedName": "露崎真昼",
+      "fit": "露崎真昼，取TV片头中位于纯那与奈奈之间的对应角色。她对同伴的照顾对应手中有其他知识时获得更多格挡。",
+      "proof": "tv02-0226-op.jpg",
+      "crop": [
+        600,
+        450,
+        620,
+        180
+      ],
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "namingKind": "动作或物件短名",
+      "time": "02:26",
+      "episode": 2,
+      "work": "TV 第2话 · 配图约02:26",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=146",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-0226-op.jpg。"
+    },
+    {
+      "id": "JB01",
+      "name": "打击",
+      "expectedName": "打击",
+      "fit": "纯那拉弓指向对手，以直接出手的动作作为基础打击的卡图。",
+      "proof": "tv02-2135-unique.jpg",
+      "crop": [
+        800,
+        600,
+        600,
+        140
+      ],
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "namingKind": "动作或物件短名",
+      "time": "21:35",
+      "work": "TV 第2话 · 配图约21:35",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1295",
+      "artNote": "TV第2话的原作画面裁切，原始截图tv02-2135-unique.jpg。",
+      "episode": 2
+    },
+    {
+      "id": "JB02",
+      "name": "防御",
+      "expectedName": "防御",
+      "fit": "纯那用弓身应对近身交锋，以稳住武器和身体的姿态作为基础防御的卡图。",
+      "proof": "film-hunt-138-unique.jpg",
+      "crop": [
+        800,
+        600,
+        560,
+        160
+      ],
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "namingKind": "动作或物件短名",
+      "time": "01:38",
+      "work": "2021 剧场版 · 狩猎的Revue片段约01:38",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=98",
+      "artNote": "剧场版原画裁切，来源为观众上传片段；原始截图film-hunt-138-unique.jpg。"
+    }
+  ]
+}

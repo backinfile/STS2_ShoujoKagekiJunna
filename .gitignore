@@ -1,0 +1,44 @@
+# Godot and .NET build output
+/.godot/
+**/bin/
+**/obj/
+/dist/
+*.user
+*.suo
+
+# Local tools, experiments, recordings and generated artwork
+/.tools/
+/artifacts/
+/output/
+
+# Dependencies and language caches
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Workbench credentials, generated page, previews and historical snapshots
+/docs/design/workbench/local-save.config.json
+/docs/design/workbench/local-save.runtime.json
+/docs/design/workbench/previews/
+/docs/design/纯那Mod设计工作台.html
+/docs/design/assets/**/before-*.json
+
+# Machine settings, credentials and temporary files
+/.codex/
+/.vs/
+/.vscode/
+/.idea/
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini

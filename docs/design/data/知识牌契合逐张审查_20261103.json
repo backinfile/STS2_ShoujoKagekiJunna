@@ -1,0 +1,1087 @@
+{
+  "reviewedAt": "2026-11-03T07:30:21.671Z",
+  "reviewStartRevision": 1438,
+  "commitRevision": 1579,
+  "currentRevision": 1607,
+  "scope": {
+    "reviewed": 62,
+    "active": 39,
+    "reserve": 19,
+    "trashedDuringReview": 4,
+    "currentKnowledge": 48,
+    "activeKnowledge": 34,
+    "reserveKnowledge": 14
+  },
+  "changes": {
+    "cards": 49,
+    "renamed": 35,
+    "newArt": 30,
+    "reassignedArt": 4,
+    "fitEntries": 47
+  },
+  "checks": {
+    "mechanicsAndStatusesPreserved": true,
+    "cardNamesAndFitEntriesSynced": true,
+    "newArt960x720AndDistinct": true,
+    "staleEffectReferences": 0,
+    "fitPoolCardJumpVerified": true,
+    "playerBackgroundShownInWorkbench": true,
+    "literaryBackgroundOnly": true,
+    "otherCardFieldsPreservedDuringTipCleanup": true
+  },
+  "sources": [
+    {
+      "subject": "攀登险丘／缓步起行",
+      "url": "https://www.folger.edu/explore/shakespeares-works/henry-viii/read/1/1/"
+    },
+    {
+      "subject": "亨利八世作者归属",
+      "url": "https://www.folger.edu/explore/shakespeares-works/henry-viii/appendix-on-authorship/"
+    },
+    {
+      "subject": "默然忍受／挺身反抗",
+      "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/"
+    },
+    {
+      "subject": "流星",
+      "url": "https://science.nasa.gov/solar-system/meteors-meteorites/"
+    },
+    {
+      "subject": "明けの明星",
+      "url": "https://www.sendai-astro.jp/observation/blog/qa/2024/04/"
+    },
+    {
+      "subject": "StarLight戏曲脚本作者",
+      "url": "https://revuestarlight.com/news/682/"
+    },
+    {
+      "subject": "人物资料",
+      "url": "https://revuestarlight.com/animation/character/"
+    }
+  ],
+  "cards": [
+    {
+      "id": "JK10",
+      "name": "热情与光芒",
+      "status": "卡池",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "TV 第2话 · 约21:28",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1288",
+      "art": "original-scene-jk10-energy-star-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK10B",
+      "name": "舞台之力",
+      "status": "卡池",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "TV 第2话 · 约21:28（引文）；2021 剧场版 · 狩猎的Revue片段约05:24（配图）",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1288",
+      "art": "original-scene-jk10b-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK11",
+      "name": "提问",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "提问与解答互相引出，围绕提出问题、理解回答的学习过程成组。画面为纯那追问华恋选拔会的事。",
+      "source": "TV 第2话 · 约10:48",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=648",
+      "art": "original-scene-jk11-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK11B",
+      "name": "解答",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "回答使问题得到回应，也能引出下一次提问。改用双方对话的完整身姿，避免只放大眼睛。",
+      "source": "TV 第2话 · 约10:26",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=626",
+      "art": "original-scene-jk11b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK15",
+      "name": "反复研习",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "反复研习同一知识，把用过的内容重新放回后续学习中；修订稿记录每次修改。",
+      "source": "TV 第3话 · 约09:56",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=596",
+      "art": "original-scene-jk15-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK15B",
+      "name": "修订稿",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以手稿与废稿表现修订；图中为剧场版编剧写作场景的纸页。",
+      "source": "2021 剧场版 · 全片约09:02",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+      "art": "original-scene-jk15b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "A",
+      "name": "埋头学习",
+      "status": "卡池",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "TV 第3话 · 配图约10:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=615",
+      "art": "original-scene-a-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "B",
+      "name": "心得",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "埋头学习留下心得，心得又为下一次学习提供收获。画面实际为带书签与个人标记的《StarLight》剧本封面，以阅读留下的个人标记表现心得。",
+      "source": "TV 第9话 · 配图约22:14",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1334",
+      "art": "original-scene-b-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK32",
+      "name": "烁星",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以原作口上中的三种星之名构成具体词义知识；烁星为闪耀群星的文学说法，流星与明星分别补充对应的天文含义。",
+      "source": "TV 第2话 · 16:46 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1006",
+      "art": "official-tv-jk32-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK32B",
+      "name": "流星",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "原作“流れ星”与流星天文知识相连，原有光迹画面辅助说明。天文依据：NASA Meteors and Meteorites，https://science.nasa.gov/solar-system/meteors-meteorites/。",
+      "source": "TV 第2话 · 16:46 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1006",
+      "art": "official-tv-jk32b-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK32C",
+      "name": "明星",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "名称取自纯那登场口上中的“明け星”。改用完整持弓身姿，保留口上的具体内容。 词义依据：仙台市天文台天文Q&A，https://www.sendai-astro.jp/observation/blog/qa/2024/04/。",
+      "source": "TV 第2话 · 16:46（口上）；约17:15（配图）",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1006",
+      "art": "original-scene-jk68c-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK33",
+      "name": "过去",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "naming"
+      ],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。 原文栏清理拟译标注。",
+      "source": "TV 第9话 · 约19:40",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1180",
+      "art": "original-scene-jk33-20261102",
+      "knowledgeBackground": "《少女☆歌剧》TV第9话。纯那引用尼采，谈过去与未来对当下的影响。"
+    },
+    {
+      "id": "JK33B",
+      "name": "未来",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "art",
+        "naming"
+      ],
+      "reason": "保留纯那谈过去与未来影响当下的引文内容。改用她在对话中举手阐述的完整身姿。",
+      "source": "TV 第9话 · 约19:40（引文）；约19:12（配图）",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1180",
+      "art": "original-scene-jk33b-knowledge-fit-20261103",
+      "knowledgeBackground": "《少女☆歌剧》TV第9话。纯那引用尼采，谈过去与未来对当下的影响。"
+    },
+    {
+      "id": "JK34",
+      "name": "StarLight",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "剧目资料与人物档案共同构成舞台研究材料。卡名直接使用作品内的剧目名称，知识背景补充作者与故事内容。条件仍读取本场使用过的任意不同知识牌种类。",
+      "source": "TV 第9话 · 21:45 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1305",
+      "art": "official-tv-jk34-20261102",
+      "knowledgeBackground": "《少女☆歌剧》中的剧中剧，脚本：中村彼方。两位少女登塔摘星，故事原本以离别告终。"
+    },
+    {
+      "id": "JK34B",
+      "name": "神乐光档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第2话 · 约03:10",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=190",
+      "art": "original-scene-jk34b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK34C",
+      "name": "天堂真矢档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第2话 · 约14:20",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=860",
+      "art": "original-scene-jk43-fit-refinement-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK34D",
+      "name": "石动双叶档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第2话 · 配图约02:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=142",
+      "art": "original-scene-jk34d-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK34E",
+      "name": "星见纯那档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第2话 · 约10:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=624",
+      "art": "original-scene-jk46-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK34F",
+      "name": "露崎真昼档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第2话 · 配图约02:26",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=146",
+      "art": "original-scene-jk34f-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK34G",
+      "name": "克洛迪娜档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第2话 · 02:29 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=149",
+      "art": "official-tv-jk34g-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK34H",
+      "name": "大场奈奈档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第9话 · 22:25 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1345",
+      "art": "official-tv-jk34h-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK34I",
+      "name": "花柳香子档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第2话 · 约02:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=144",
+      "art": "original-scene-jk34i-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK34J",
+      "name": "爱城华恋档案",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以角色经历、专长和舞台资料作为具体知识内容，与剧目资料《StarLight》成组。人物照片用于识别资料对象。",
+      "source": "TV 第2话 · 02:33 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=153",
+      "art": "official-tv-jk34j-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK37",
+      "name": "熟读成诵",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "熟读需要积累，逐句诵读推进熟练程度，台本提供继续诵读的材料。配图为纯那熟练引用话语、举手阐述的完整身姿。",
+      "source": "TV 第9话 · 约19:41",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1181",
+      "art": "original-scene-jk37-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK37B",
+      "name": "逐句诵读",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "按句反复阅读，逐步熟悉台本文字，使熟读成诵更早完成。配图只取打开的书页。",
+      "source": "TV 第3话 · 约10:16",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=616",
+      "art": "original-scene-jk37b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK37C",
+      "name": "台本",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "naming"
+      ],
+      "reason": "台本提供熟读与逐句诵读的文字材料，支持后续低费行动。卡图为剧场版编剧写作场景中的手稿与执笔双手。",
+      "source": "2021 剧场版 · 全片约09:00",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=540",
+      "art": "original-scene-jk37c-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK43",
+      "name": "攀登险丘",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "取自《亨利八世》“To climb steep hills / Requires slow pace at first.”。TV第3话寄语板引用此句；缓步起行逐次减轻攀登的负担。配图用台阶表现逐步上行。",
+      "source": "莎士比亚、弗莱彻《亨利八世》1.1；TV 第3话约10:12（引句）；剧场版约09:32（配图）",
+      "url": "https://www.folger.edu/explore/shakespeares-works/henry-viii/read/1/1/",
+      "art": "original-scene-jk43-knowledge-fit-20261103",
+      "knowledgeBackground": "莎士比亚《亨利八世》第一幕第一场：攀登险丘，须先缓步。"
+    },
+    {
+      "id": "JK43B",
+      "name": "缓步起行",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "同一引句的后半句。每次缓步起行都降低攀登险丘的耗能，表现循序渐进。配图为原作寄语板上的手写引用。",
+      "source": "莎士比亚、弗莱彻《亨利八世》1.1；TV 第3话约10:12（配图）",
+      "url": "https://www.folger.edu/explore/shakespeares-works/henry-viii/read/1/1/",
+      "art": "original-scene-jk43b-knowledge-fit-20261103",
+      "knowledgeBackground": "莎士比亚《亨利八世》第一幕第一场：攀登险丘，须先缓步。"
+    },
+    {
+      "id": "JK44",
+      "name": "新知",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "新知与疑问一同进入牌组，表现学习新内容时遇见尚未理解之处。配图突出新的参考书与书签。",
+      "source": "TV 第2话 · 约00:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+      "art": "original-scene-jk44-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK44B",
+      "name": "疑问",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "疑问需要单独花费时间处理，处理后暂时消耗。改用纯那在课堂上思索的画面。",
+      "source": "TV 第2话 · 约10:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=605",
+      "art": "original-scene-jk67-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK45",
+      "name": "审题",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "先读清要求，再找到破题的切入点。配图为桌面的文字资料与笔，表现审读材料。",
+      "source": "TV 第2话 · 约14:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=864",
+      "art": "original-scene-jk45-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK45B",
+      "name": "破题",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "审题后抓住关键，破题时减少继续推进的阻力。配图为纯那面对资料板思考。",
+      "source": "TV 第7话 · 约08:01",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=481",
+      "art": "original-scene-jk45b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK46",
+      "name": "持续阅读",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "持续阅读每回合留下新的读书笔记。配图为纯那的书桌、打开的书与成排资料。",
+      "source": "TV 第3话 · 约10:06",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+      "art": "original-scene-jk46-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK46B",
+      "name": "读书笔记",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "design",
+        "extraHoverTips"
+      ],
+      "reason": "阅读的收获被写下并保留；配图突出带有标签、书签的笔记与参考材料。",
+      "source": "TV 第3话 · 约10:16",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=616",
+      "art": "original-scene-jk46b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK47",
+      "name": "默然忍受",
+      "status": "备用",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "《哈姆雷特》第三幕第一场 · 生存还是毁灭独白",
+      "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/",
+      "art": "original-scene-jk47-audit-fit-20261103",
+      "knowledgeBackground": "莎士比亚《哈姆雷特》第三幕第一场。哈姆雷特在独白中权衡忍受苦难与挺身反抗。"
+    },
+    {
+      "id": "JK47B",
+      "name": "挺身反抗",
+      "status": "备用",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "《哈姆雷特》第三幕第一场 · 生存还是毁灭独白",
+      "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/",
+      "art": "original-scene-jk47b-audit-fit-20261103",
+      "knowledgeBackground": "莎士比亚《哈姆雷特》第三幕第一场。拿起武器反抗苦难，是同一段独白中的另一种选择。"
+    },
+    {
+      "id": "JK48",
+      "name": "泛读",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "泛读扩展接触范围，精读加深理解；两者分配同一份学习时间。配图突出成排不同书籍。",
+      "source": "TV 第2话 · 约14:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=864",
+      "art": "original-scene-jk48-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK48B",
+      "name": "精读",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "与泛读成组，集中投入同一段文字。配图突出纯那随身携带的打开的书页。",
+      "source": "TV 第1话 · 约07:02",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=422",
+      "art": "original-scene-jk48b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK49",
+      "name": "研读",
+      "status": "卡池",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "TV 第3话 · 约10:06",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+      "art": "original-scene-jk49-energy-star-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK49B",
+      "name": "思考",
+      "status": "卡池",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "TV 第3话 · 约10:00",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=600",
+      "art": "original-scene-jk56-audit-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK50",
+      "name": "论点",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "论点与论据组成论述关系；论据使关联的论点得以展开。配图为纯那在交谈中陈述自己的看法。",
+      "source": "TV 第7话 · 约08:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=502",
+      "art": "original-scene-jk50-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK50B",
+      "name": "论据",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "以整理好的资料支撑主张。卡图突出展示板上的图稿与资料页。",
+      "source": "TV 第9话 · 约19:52",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1192",
+      "art": "original-scene-jk50b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK66B",
+      "name": "招架",
+      "status": "已删除",
+      "decision": "保留删除",
+      "changedFields": [],
+      "reason": "审查期间已删除，保留用户的删除状态。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约06:04",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=364",
+      "art": "original-scene-jk66b-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK67",
+      "name": "反复推敲",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "知识内容是推敲与修改表达的方法。每日写作练习与反复修改，使所有已布置的言叶与箭矢逐渐有力；同组定稿作为写作成果独立使用。伤害加成继续以日常锻炼为依据。卡图为剧场版写作场景中的废稿与纸团。",
+      "source": "2021 剧场版 · 全片约09:02",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+      "art": "original-scene-jk67-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK67B",
+      "name": "定稿",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "design",
+        "notes",
+        "extraHoverTips"
+      ],
+      "reason": "定稿是反复推敲后的写作成果，保持同组关系与独立箭矢效果。配图突出写有字句的手稿页。",
+      "source": "2021 剧场版 · 全片约09:02",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+      "art": "original-scene-jk67b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK68",
+      "name": "融会贯通",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "design",
+        "notes",
+        "extraHoverTips"
+      ],
+      "reason": "摘录保留原文，批注记下自己的理解；两者齐备，才有融会贯通的额外收益。配图为文字与图示并列的资料板。",
+      "source": "TV 第7话 · 约08:01",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=481",
+      "art": "original-scene-jk68-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK68B",
+      "name": "摘录",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "design",
+        "notes",
+        "extraHoverTips"
+      ],
+      "reason": "从原文摘取关键内容，为融会贯通提供材料。配图突出原作寄语板中的手写字句。",
+      "source": "TV 第3话 · 约10:12",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=612",
+      "art": "original-scene-jk68b-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK68C",
+      "name": "批注",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "text",
+        "upgradedText",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "批注为摘录提供线索，并与摘录一起促成融会贯通。配图突出标记资料的便签、书签与文字页。",
+      "source": "TV 第2话 · 约00:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+      "art": "original-scene-jk68c-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK69",
+      "name": "化为己用",
+      "status": "已删除",
+      "decision": "保留删除",
+      "changedFields": [],
+      "reason": "审查期间已删除，保留用户的删除状态。",
+      "source": "TV 第9话 · 约20:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1222",
+      "art": "original-scene-jk69-fit-refinement-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK69B",
+      "name": "引文",
+      "status": "卡池",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "TV 第9话 · 约19:51",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1191",
+      "art": "original-scene-jk69b-fit-refinement-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK69C",
+      "name": "自己的言叶",
+      "status": "已删除",
+      "decision": "保留删除",
+      "changedFields": [],
+      "reason": "审查期间已删除，保留用户的删除状态。",
+      "source": "TV 第9话 · 约20:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1222",
+      "art": "original-scene-jk69c-own-words-centered-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK05",
+      "name": "旁征博引",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "旁征博引直接表现引用不同知识，保留空中引文字句的原有配图。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:32",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=152",
+      "art": "original-scene-jk05-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK27",
+      "name": "关联阅读",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "抽到知识时带出同组相关内容，直接表现关联阅读。配图突出书架上的不同资料。",
+      "source": "2021 剧场版 · 全片约08:02",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=482",
+      "art": "original-scene-jk27-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK52",
+      "name": "释义",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "消化一段知识，再展开相关内容；与释义、理解相连。配图为手持笔记本的讨论场景。",
+      "source": "TV 第9话 · 约22:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1335",
+      "art": "original-scene-jk52-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK53",
+      "name": "求知",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "保留求知这一明确学习主题，替换无关的卧室休息画面。配图为层叠的参考资料。",
+      "source": "TV 第3话 · 约10:16",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=616",
+      "art": "original-scene-jk53-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JA53",
+      "name": "课前预习",
+      "status": "卡池",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。",
+      "source": "TV 第2话 · 约00:04",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=4",
+      "art": "original-scene-ja53-fit-refinement-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK56",
+      "name": "星火相传",
+      "status": "备用",
+      "decision": "保留",
+      "changedFields": [],
+      "reason": "主效果为能量，沿用星星契合；知识作为触发条件。",
+      "source": "TV 第9话 · 约20:40",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1240",
+      "art": "original-scene-jk56-energy-star-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK57",
+      "name": "阶段小结",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "每积累三次知识使用便获得阶段收获。配图突出纸页、笔与书桌，表现整理要点。",
+      "source": "TV 第2话 · 约14:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=864",
+      "art": "original-scene-jk57-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK62",
+      "name": "温习",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "把使用过的知识重新放回手中。配图为翻开的参考书与学习资料，替换无关的家庭谈话。",
+      "source": "TV 第3话 · 约10:01",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=601",
+      "art": "original-scene-jk62-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK63",
+      "name": "举一反三",
+      "status": "已删除",
+      "decision": "保留删除",
+      "changedFields": [],
+      "reason": "审查期间已删除，保留用户的删除状态。",
+      "source": "TV 第9话 · 配图约20:16",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1216",
+      "art": "original-scene-jk63-20261102",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JK64",
+      "name": "理清思路",
+      "status": "备用",
+      "decision": "已修订",
+      "changedFields": [
+        "name",
+        "art",
+        "naming",
+        "extraHoverTips"
+      ],
+      "reason": "使用知识后理清思路，加快后续言叶与箭矢的推进。配图为纯那扶镜思考的完整面部。",
+      "source": "TV 第7话 · 约08:11",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=491",
+      "art": "original-scene-jk64-knowledge-fit-20261103",
+      "knowledgeBackground": null
+    },
+    {
+      "id": "JZ02",
+      "name": "通读全篇",
+      "status": "卡池",
+      "decision": "已修订",
+      "changedFields": [
+        "naming"
+      ],
+      "reason": "卡名与配图已直接呈现学习行为、知识载体或有具体出处的内容，保留当前契合。 原文栏清理拟译标注。",
+      "source": "TV 第2话 · 配图约14:26",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=866",
+      "art": "original-scene-jz02-20261102",
+      "knowledgeBackground": null
+    }
+  ],
+  "exportRevision": 1607,
+  "preview": "docs/design/workbench/previews/knowledge-fit-final-20261103.jpg",
+  "supplementalCommitRevision": 1587,
+  "literaryTips": {
+    "revision": 1607,
+    "removed": 51,
+    "retained": [
+      {
+        "id": "JK33",
+        "name": "过去"
+      },
+      {
+        "id": "JK33B",
+        "name": "未来"
+      },
+      {
+        "id": "JK34",
+        "name": "StarLight"
+      },
+      {
+        "id": "JK43",
+        "name": "攀登险丘"
+      },
+      {
+        "id": "JK43B",
+        "name": "缓步起行"
+      },
+      {
+        "id": "JK47",
+        "name": "默然忍受"
+      },
+      {
+        "id": "JK47B",
+        "name": "挺身反抗"
+      }
+    ],
+    "rule": "仅有明确文学出处的牌提供额外知识背景提示。"
+  }
+}

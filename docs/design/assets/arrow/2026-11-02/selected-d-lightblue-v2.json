@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-02",
+  "tool": "built-in image_gen",
+  "selectedVariant": "D",
+  "userColorDirection": "纯那的浅蓝／青蓝",
+  "source": "arrow-frame-d-sight-v1.png",
+  "output": "arrow-frame-d-sight-lightblue-v2.png",
+  "preserved": [
+    "D 的窗口轮廓与两侧瞄准刻口",
+    "铭牌上方的独立回合数字",
+    "普通稀有度银灰飘带、卡图边框及类型铭牌",
+    "原有深色效果区与文字布局"
+  ],
+  "colorChanges": [
+    "卡身外框：浅蓝主色、青蓝阴影",
+    "费用图标：同色系浅蓝／青蓝"
+  ],
+  "prompt": "Use case: precise-object-edit.\nAsset type: selected Arrow D card-frame concept, recolored for Junna.\nInput image 1 is the EXACT chosen D concept sheet to edit. The user has selected D and requested a light-blue / cyan-blue palette for Junna. Preserve the entire layout and design faithfully.\nMake a COLOR-ONLY edit to the existing OCHRE-GOLD parts of this sheet:\n1. Recolor the slender outer card body / outer frame on the left card from ochre-gold to a gentle light blue, approximately #85CAD7 to #70B9D1 on the painted main surfaces, deep cyan-blue #32758D for bevel shadows and creases, pale icy-blue #B0DFEB for narrow highlights. Preserve the existing brushed paint texture, broad native hand-painted bevel planes, surface wear and shadows.\n2. Recolor the faceted upper-left energy badge to the SAME light-blue/cyan-blue family, preserving every facet, the current silhouette, existing numeral \"1\", and its dark text outline. It should look like blue-painted native game UI, not a translucent blue jewel or a glossy crystal.\n3. In the enlarged right detail, recolor any thin visible gold slivers of the OUTER CARD BODY at the left and right sides to that same cyan-blue palette, so the enlarged detail matches the main card.\n\nEverything else remains EXACTLY the same:\n- D portrait window silhouette, rounded upper shoulders, TWO small triangular inward alignment teeth at the midpoint of the left and right borders, angled lower edges.\n- NEUTRAL SILVER-GREY common-rarity portrait border, title ribbon and one-piece timer/type plaque. Keep those materials silver-grey; the new light-blue color belongs to the outer card body and energy badge.\n- The pointed arched counter housing, cream \"2\" directly ABOVE \"箭矢\", and the fixed type-label baseline. No loop symbol.\n- Unchanged title \"JA13\", upper variant letter \"D\", rules text \"造成16点伤害。\", all numerals, exact lettering, font weight and placement.\n- Unchanged teal archer illustration, subdued warm dark grey-brown rules panel, background, shadows, card proportions, canvas dimensions, size and locations of both left full card and right enlarged crop.\n- Existing native flat hand-painted Slay the Spire 2 UI finish.\n\nDo not redesign any shapes, add labels, change the artwork, tint the rules panel blue, recolor the grey rarity layers, add gradients across the whole sheet, introduce more ornament or add any new objects.\nOutput the same D sheet with ONLY its old gold outer body / energy badge changed to Junna light blue and cyan-blue."
+}
+

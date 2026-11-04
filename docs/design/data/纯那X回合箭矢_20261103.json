@@ -1,0 +1,150 @@
+{
+  "id": "junna-x-turn-arrow-20261103-v1",
+  "date": "2026-11-03",
+  "sourceRevision": 1326,
+  "appliedRevision": 1327,
+  "historyRecord": "a18d4e7a-a121-481f-97cf-9e9cfcf1c16b",
+  "card": {
+    "uid": "x_turn_arrow_JA64",
+    "id": "JA64",
+    "name": "蓄射",
+    "type": "箭矢",
+    "arrowSubtype": "攻击",
+    "system": "stage",
+    "rarity": "罕见",
+    "pool": true,
+    "cost": "X",
+    "upgradedCost": "X",
+    "turns": "X",
+    "upgradedTurns": "X",
+    "target": "敌人",
+    "text": "造成16点伤害X次。",
+    "upgradedText": "造成20点伤害X次。",
+    "keywords": [],
+    "termIds": [
+      "KW_STAGE",
+      "EF02",
+      "NV26",
+      "NV57",
+      "RL05"
+    ],
+    "effectIds": [
+      "EF02"
+    ],
+    "ruleIds": [
+      "RL05"
+    ],
+    "breakthroughIds": [],
+    "partnerCardIds": [],
+    "archetypeIds": [
+      "SYS_stage",
+      "RT_ACCEL",
+      "RT_REPEAT",
+      "RT_HIGH"
+    ],
+    "art": "official-tv-ja16-20261102",
+    "character": "星见纯那",
+    "role": "机制中坚牌",
+    "direction": "加速完成",
+    "draftStatus": "X费探索候选",
+    "draftBatch": "junna-x-turn-arrow-20261103-v1",
+    "naming": {
+      "original": "",
+      "kind": "动作短名",
+      "work": "TV · 纯那的舞台画面（已登记素材）",
+      "url": "",
+      "adaptation": "以蓄力后射出的动作命名，投入决定准备时间和射击段数；配图保留纯那在舞台上集中表达的神情。"
+    },
+    "design": {
+      "classification": "机制中坚牌",
+      "route": "加速完成",
+      "systems": [
+        "stage"
+      ],
+      "port": "输出",
+      "routeRoles": {
+        "full_pool_RT_ACCEL": {
+          "role": "load",
+          "cross": false,
+          "ports": []
+        },
+        "full_pool_RT_REPEAT": {
+          "role": "load",
+          "cross": true,
+          "ports": []
+        },
+        "full_pool_RT_HIGH": {
+          "role": "trigger",
+          "cross": true,
+          "ports": [
+            "output"
+          ]
+        }
+      },
+      "roleReason": "能量投入越多，等待越长、基础段数越多；加速可提前兑现投入，重放及额外触发读取原有段数。",
+      "rules": "本次打出按本体X费流程记录实际支付，牌效X读取ResolveEnergyXValue的结果；把同一个已解析X同时保存为布置的初始回合数和基础伤害次数。加速只改变剩余回合数，伤害次数仍读取该次打出保存的X；额外触发、重放和在场复制沿用这一份记录，按各自原规则执行，不重新读取能量或再付费。X为0时初始计数为0，正常立即完成，基础伤害次数为0；伤害加成与额外伤害次数沿既有通用规则处理。化学X等修正同时影响回合数和段数，高费条件仍读取实际支付。",
+      "upgrade": "每段伤害16→20；费用、初始回合数和伤害次数均保持X。",
+      "xCost": {
+        "payment": "EnergyCost.CapturedXValue",
+        "effect": "CardModel.ResolveEnergyXValue()",
+        "capture": "rootCardPlay",
+        "initialTurns": "resolvedX",
+        "damageCount": "resolvedX",
+        "countdown": "independentRemainingTurns",
+        "highCostReading": "actualEnergySpent"
+      },
+      "examples": [
+        {
+          "x": 0,
+          "initialTurns": 0,
+          "baseHits": 0,
+          "damage": 0,
+          "upgradedDamage": 0
+        },
+        {
+          "x": 1,
+          "initialTurns": 1,
+          "baseHits": 1,
+          "damage": 16,
+          "upgradedDamage": 20
+        },
+        {
+          "x": 2,
+          "initialTurns": 2,
+          "baseHits": 2,
+          "damage": 32,
+          "upgradedDamage": 40
+        },
+        {
+          "x": 3,
+          "initialTurns": 3,
+          "baseHits": 3,
+          "damage": 48,
+          "upgradedDamage": 60
+        },
+        {
+          "x": 6,
+          "initialTurns": 6,
+          "baseHits": 6,
+          "damage": 96,
+          "upgradedDamage": 120
+        }
+      ],
+      "textComplexity": "低",
+      "reference": "用户要求增加以X作为回合数的箭矢牌。"
+    },
+    "notes": "结算约定：本次打出按本体X费流程记录实际支付，牌效X读取ResolveEnergyXValue的结果；把同一个已解析X同时保存为布置的初始回合数和基础伤害次数。加速只改变剩余回合数，伤害次数仍读取该次打出保存的X；额外触发、重放和在场复制沿用这一份记录，按各自原规则执行，不重新读取能量或再付费。X为0时初始计数为0，正常立即完成，基础伤害次数为0；伤害加成与额外伤害次数沿既有通用规则处理。化学X等修正同时影响回合数和段数，高费条件仍读取实际支付。"
+  },
+  "checks": {
+    "xTurnsNormalized": true,
+    "defaultRewardPool": true,
+    "explicitAllPreserved": true,
+    "resetRewardPool": true,
+    "existingCardsPreserved": true,
+    "undoRoundTrip": true
+  },
+  "readRepair": {
+    "revision": 1336,
+    "historyRecord": "401afe64-cf55-4a05-bb62-ff4928d38a7a"
+  }
+}

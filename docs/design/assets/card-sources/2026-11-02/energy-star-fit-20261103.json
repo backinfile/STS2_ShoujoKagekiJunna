@@ -1,0 +1,349 @@
+{
+  "at": "2026-11-03T06:14:56.407Z",
+  "revision": 1392,
+  "historyRecord": "9b9d891b-01f9-413d-8ec0-a22b71668b42",
+  "energyCards": 19,
+  "relatedCards": 22,
+  "renamedCards": 15,
+  "newAssets": 13,
+  "changedEntries": 56,
+  "records": [
+    {
+      "id": "JK10",
+      "oldName": "热情与光芒",
+      "name": "热情与光芒",
+      "art": "original-scene-jk10-energy-star-20261103"
+    },
+    {
+      "id": "JT03",
+      "oldName": "前进",
+      "name": "前进",
+      "art": "original-scene-jt03-20261102"
+    },
+    {
+      "id": "B",
+      "oldName": "心得",
+      "name": "心得",
+      "art": "original-scene-b-20261102"
+    },
+    {
+      "id": "JH05",
+      "oldName": "再生产",
+      "name": "再生产",
+      "art": "original-scene-jh05-20261102"
+    },
+    {
+      "id": "JA57",
+      "oldName": "跃步",
+      "name": "星光跃动",
+      "art": "original-scene-ja57-20261102"
+    },
+    {
+      "id": "JK56",
+      "oldName": "劳逸结合",
+      "name": "星火相传",
+      "art": "original-scene-jk56-energy-star-20261103"
+    },
+    {
+      "id": "JX02",
+      "oldName": "拆解招式",
+      "name": "群星呼应",
+      "art": "original-scene-jx02-energy-star-20261103"
+    },
+    {
+      "id": "JX07",
+      "oldName": "候场",
+      "name": "星光庇护",
+      "art": "original-scene-jx07-energy-star-20261103"
+    },
+    {
+      "id": "JH10",
+      "oldName": "回身斩",
+      "name": "回身斩",
+      "art": "original-scene-jh10-pool-review-20261103"
+    },
+    {
+      "id": "JH11",
+      "oldName": "吐纳",
+      "name": "微光",
+      "art": "original-scene-jh11-energy-star-20261103"
+    },
+    {
+      "id": "JH13",
+      "oldName": "乘势连击",
+      "name": "连星",
+      "art": "original-scene-jh13-20261102"
+    },
+    {
+      "id": "JH17",
+      "oldName": "养精蓄锐",
+      "name": "星幕",
+      "art": "original-scene-jh17-energy-star-20261103"
+    },
+    {
+      "id": "JF06",
+      "oldName": "暂歇",
+      "name": "留住星光",
+      "art": "original-scene-jf06-energy-star-20261103"
+    },
+    {
+      "id": "JZ02",
+      "oldName": "通读全篇",
+      "name": "通读全篇",
+      "art": "original-scene-jz02-20261102"
+    },
+    {
+      "id": "JH18",
+      "oldName": "小憩",
+      "name": "聚星",
+      "art": "original-scene-jh18-energy-star-20261103"
+    },
+    {
+      "id": "JH19",
+      "oldName": "稍息",
+      "name": "余辉",
+      "art": "original-scene-jh19-energy-star-20261103"
+    },
+    {
+      "id": "JH20",
+      "oldName": "补水",
+      "name": "掌中星",
+      "art": "original-scene-jh20-energy-star-20261103"
+    },
+    {
+      "id": "JH21",
+      "oldName": "规律作息",
+      "name": "长明",
+      "art": "original-scene-jh21-energy-star-20261103"
+    },
+    {
+      "id": "JH22",
+      "oldName": "蓄势一击",
+      "name": "星光迸发",
+      "art": "original-scene-jh22-energy-star-20261103"
+    },
+    {
+      "id": "JK10B",
+      "oldName": "舞台之力",
+      "name": "舞台之力",
+      "art": "original-scene-jk10b-20261102"
+    },
+    {
+      "id": "JK49",
+      "oldName": "交锋",
+      "name": "研读",
+      "art": "original-scene-jk49-energy-star-20261103"
+    },
+    {
+      "id": "JK49B",
+      "oldName": "并肩",
+      "name": "思考",
+      "art": "original-scene-jk56-audit-fit-20261103"
+    }
+  ],
+  "checks": {
+    "mechanicsPreserved": true,
+    "linkedFitPoolSynced": true,
+    "cardArtDistinct": true,
+    "assetReadbackVerified": true,
+    "learningFitRetained": true,
+    "versionCheckedAtomicCommit": true
+  },
+  "artSources": [
+    {
+      "id": "JK10",
+      "name": "热情与光芒",
+      "file": "tv02-energy-passion-2127-20261103.png",
+      "rect": [
+        580,
+        20,
+        960,
+        720
+      ],
+      "source": "TV 第2话 · 约21:28",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1288",
+      "art": "original-scene-jk10-energy-star-20261103",
+      "outputFile": "original-scene-jk10-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JK56",
+      "name": "星火相传",
+      "file": "tv09-2038-proof.jpg",
+      "rect": [
+        500,
+        20,
+        960,
+        720
+      ],
+      "source": "TV 第9话 · 约20:40",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1240",
+      "art": "original-scene-jk56-energy-star-20261103",
+      "outputFile": "original-scene-jk56-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JX02",
+      "name": "群星呼应",
+      "file": "tv02-1904-action.jpg",
+      "rect": [
+        620,
+        150,
+        800,
+        600
+      ],
+      "source": "TV 第2话 · 约19:06",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1146",
+      "art": "original-scene-jx02-energy-star-20261103",
+      "outputFile": "original-scene-jx02-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JX07",
+      "name": "星光庇护",
+      "file": "film-hunt-520.jpg",
+      "rect": [
+        610,
+        260,
+        640,
+        480
+      ],
+      "source": "2021 剧场版 · 狩猎的Revue片段约05:22",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=322",
+      "art": "original-scene-jx07-energy-star-20261103",
+      "outputFile": "original-scene-jx07-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JH11",
+      "name": "微光",
+      "file": "tv02-1705-action.jpg",
+      "rect": [
+        300,
+        20,
+        1000,
+        750
+      ],
+      "source": "TV 第2话 · 约17:07",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1027",
+      "art": "original-scene-jh11-energy-star-20261103",
+      "outputFile": "original-scene-jh11-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JH17",
+      "name": "星幕",
+      "file": "film-hunt-552.jpg",
+      "rect": [
+        340,
+        140,
+        800,
+        600
+      ],
+      "source": "2021 剧场版 · 狩猎的Revue片段约05:54",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=354",
+      "art": "original-scene-jh17-energy-star-20261103",
+      "outputFile": "original-scene-jh17-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JF06",
+      "name": "留住星光",
+      "file": "tv09-2045-proof.jpg",
+      "rect": [
+        180,
+        60,
+        480,
+        360
+      ],
+      "source": "TV 第9话 · 约20:46",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1246",
+      "art": "original-scene-jf06-energy-star-20261103",
+      "outputFile": "original-scene-jf06-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JH18",
+      "name": "聚星",
+      "file": "tv03-955-study.jpg",
+      "rect": [
+        185,
+        130,
+        560,
+        420
+      ],
+      "source": "TV 第3话 · 约09:56",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=596",
+      "art": "original-scene-jh18-energy-star-20261103",
+      "outputFile": "original-scene-jh18-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JH19",
+      "name": "余辉",
+      "file": "film-hunt-616.jpg",
+      "rect": [
+        180,
+        170,
+        800,
+        600
+      ],
+      "source": "2021 剧场版 · 狩猎的Revue片段约06:18",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=378",
+      "art": "original-scene-jh19-energy-star-20261103",
+      "outputFile": "original-scene-jh19-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JH20",
+      "name": "掌中星",
+      "file": "film-hunt-640.jpg",
+      "rect": [
+        120,
+        170,
+        800,
+        600
+      ],
+      "source": "2021 剧场版 · 狩猎的Revue片段约06:42",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=402",
+      "art": "original-scene-jh20-energy-star-20261103",
+      "outputFile": "original-scene-jh20-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JH21",
+      "name": "长明",
+      "file": "film-hunt-544.jpg",
+      "rect": [
+        560,
+        170,
+        768,
+        576
+      ],
+      "source": "2021 剧场版 · 狩猎的Revue片段约05:45",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=345",
+      "art": "original-scene-jh21-energy-star-20261103",
+      "outputFile": "original-scene-jh21-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JH22",
+      "name": "星光迸发",
+      "file": "film-hunt-624.jpg",
+      "rect": [
+        700,
+        170,
+        768,
+        576
+      ],
+      "source": "2021 剧场版 · 狩猎的Revue片段约06:26",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=386",
+      "art": "original-scene-jh22-energy-star-20261103",
+      "outputFile": "original-scene-jh22-energy-star-20261103.jpg"
+    },
+    {
+      "id": "JK49",
+      "name": "研读",
+      "file": "tv03-1005-study.jpg",
+      "rect": [
+        460,
+        300,
+        512,
+        384
+      ],
+      "source": "TV 第3话 · 约10:06",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+      "art": "original-scene-jk49-energy-star-20261103",
+      "outputFile": "original-scene-jk49-energy-star-20261103.jpg"
+    }
+  ]
+}

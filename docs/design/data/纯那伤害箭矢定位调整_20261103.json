@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-attack-arrow-roles-20261103-v1",
+  "date": "2026-11-03",
+  "title": "普通与罕见伤害箭矢用途调整",
+  "sourceRevision": 1207,
+  "appliedRevision": 1208,
+  "historyRecord": "c4807ffb-1bf2-44b2-b2bf-9d28dba1d6c5",
+  "styleSnapshot": [
+    {
+      "uid": "db849030-f187-4f2e-b7c8-a67bb788f869",
+      "id": "STYLE_001",
+      "name": "限制抽牌，不限制加费",
+      "content": "抽牌效果尽量不做。要做的话应该有限制，比如作为箭矢牌出现，比如有消耗不可持续打。"
+    },
+    {
+      "uid": "junna_style_arrow_wording",
+      "id": "STYLE_002",
+      "name": "箭矢范围表述",
+      "content": "“所有箭矢”默认指自己的全部箭矢；联机牌跨玩家时明确写出“所有玩家的箭矢”。"
+    },
+    {
+      "uid": "junna_style_single_player",
+      "id": "STYLE_003",
+      "name": "单人卡牌",
+      "content": "本轮先设计单人构筑中的卡牌，暂不设计多玩家专用牌。"
+    },
+    {
+      "uid": "junna_style_kotoba",
+      "id": "STYLE_004",
+      "name": "知识牌设计",
+      "content": "知识牌和知识关联牌共用“知识”关键词。泛指这类牌的效果统一写“知识牌”；引用自身关联牌的效果使用完整牌名。"
+    },
+    {
+      "uid": "4e54c303-a9bb-47ee-bdf2-2345204f8cb8",
+      "id": "STYLE_005",
+      "name": "不要写其他职业中已经有的流派牌",
+      "content": "比如战士有消耗流派，就不要写消耗的收益牌。但是普通消耗关键字还是可以有（因为消耗牌时所有职业都有的）。比如不要写弃置卡牌的触发和收益。不要直接用力量做流派等。"
+    },
+    {
+      "uid": "junna_style_concise_rules",
+      "id": "STYLE_006",
+      "name": "牌面与结算约定",
+      "content": "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。"
+    },
+    {
+      "uid": "fbb25eb6-4ad6-4273-8ec3-c11c2b6004b8",
+      "id": "STYLE_007",
+      "name": "箭矢牌的设计倾向",
+      "content": "一般来讲箭矢牌是倾向于快速完成的，越早完成越触发效果。但允许少数几张牌是在场期间生效。"
+    },
+    {
+      "uid": "5cc93fd0-d28f-41c4-b12a-6bbf6c8d6f86",
+      "id": "STYLE_008",
+      "name": "伤害加成体系的设计倾向",
+      "content": "这个小体系只负责输出端口。体系本身的卡牌不算多，但是其他体系可能会有大量的效果触发（获得伤害加成）"
+    },
+    {
+      "uid": "junna_style_personal_scope",
+      "id": "STYLE_PLAYER_SCOPE",
+      "name": "默认作用范围",
+      "content": "本职业卡牌的卡牌、牌堆、能力及触发收益默认归玩家自己；专门联机牌按牌面明确指定其他玩家或全部玩家。伤害仍按牌面指定的敌人目标结算。"
+    },
+    {
+      "uid": "junna_style_card_reference",
+      "id": "STYLE_CARD_REFERENCE",
+      "name": "卡牌名称引用",
+      "content": "引用具体卡牌时直接写完整牌名，以金色显示。升级版本在牌名后加“+”；关联提示按对应卡牌模型提供。"
+    },
+    {
+      "uid": "junna_style_fit_arrow",
+      "id": "STYLE_FIT_ARROW",
+      "name": "箭矢契合：箭、言叶、星",
+      "content": "箭矢体系可采用物理的箭、言叶、星等多种契合。围绕各牌的名称、效果与原作内容选取合适的意象；物理箭可表现瞄准、发射与命中，言叶可表现话语的传递与抵达，星可表现追寻目标与接近理想。卡图保留清楚的主体、动作或相关物件。"
+    },
+    {
+      "uid": "junna_style_fit_damage_bonus",
+      "id": "STYLE_FIT_DAMAGE_BONUS",
+      "name": "伤害加成契合：日常锻炼",
+      "content": "伤害加成体系的通用契合是纯那的日常锻炼。卡名与卡图围绕体能训练、基本功、反复练习和训练成果展开；增加加成对应训练积累，转移对应专项训练，倍率与额外伤害次数对应发力、熟练度和耐力。"
+    },
+    {
+      "uid": "junna_style_fit_knowledge",
+      "id": "STYLE_FIT_KNOWLEDGE",
+      "name": "知识契合与组内关联",
+      "content": "知识牌围绕纯那学到、引用、理解和运用的具体内容选材，例如引文、剧目、舞台技法及从经验形成的认识。同组牌要有具体的共同来源，或内容与例证、问题与答案、原因与结论等联系，效果也要表现这种联系。温习、背诵、记录等学习动作主要用于知识支援牌。"
+    },
+    {
+      "uid": "junna_style_fit_basic_art",
+      "id": "STYLE_FIT_BASIC_ART",
+      "name": "基础打击与防御的卡图",
+      "content": "打击突出明确的攻击动作、武器方向或命中；防御突出抵挡来击、武器相接或保护姿态。参考基础职业与Karen的表达，裁切时保留可识别的纯那、武器和完整动作。"
+    },
+    {
+      "uid": "junna_style_fit_sources",
+      "id": "STYLE_FIT_SOURCES",
+      "name": "卡名、卡图与体系契合",
+      "content": "卡名优先取原作原词，允许简短的动作或物件名，以7字以内为主。各牌保留有区分的契合与卡图，同组牌共同表现具体关系。配图优先TV与剧场版；普通牌以纯那或相关物件为主体，人物知识牌使用对应角色。跨体系牌以主体系契合为主，再用效果与来源说明次体系的联系。"
+    },
+    {
+      "uid": "junna_style_fit_energy",
+      "id": "STYLE_FIT_ENERGY",
+      "name": "获得能量契合：恢复精力（候选）",
+      "content": "获得能量暂以“恢复精力”作为统一契合方向，优先使用休息、饮食补给、调整呼吸和重振状态的原作内容。即时能量侧重当下调整，下一回合获得能量侧重休整后的恢复，持续获得能量侧重规律作息与保持状态。跨体系牌仍以主体系的具体内容为主。"
+    },
+    {
+      "uid": "78d9a930-0c12-490d-afb8-644dfe826cef",
+      "id": "STYLE_009",
+      "name": "关于易伤和虚弱",
+      "content": "允许写易伤和虚弱牌，但是本职业没有偏向性，因此需要对称来写。1张虚弱+1张易伤牌，或者1张牌上同时有易伤和虚弱效果。  一共大概2对或者2张即可"
+    }
+  ],
+  "changes": [
+    {
+      "id": "JA13",
+      "name": "直斩",
+      "role": "单张重击",
+      "scenario": "用一张手牌投入2费，快速形成较高的单次伤害；适合额外伤害次数和单张加速。",
+      "basis": "普通2费1回合单段无附效，按现有模型取26／36。相较零费补位与低费多段，强调单张手牌的单次伤害。",
+      "before": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 2,
+        "upgradedTurns": 2,
+        "text": "造成22点伤害。",
+        "upgradedText": "造成30点伤害。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "造成26点伤害。",
+        "upgradedText": "造成36点伤害。"
+      }
+    },
+    {
+      "id": "JA38",
+      "name": "引弦",
+      "role": "零费补位",
+      "scenario": "把能量留给防御、能力和其他载荷，同时补充一个箭矢布置；适合批量加速与完成收益。",
+      "basis": "0费箭矢单独估值，采用2回合、8／12单段伤害。裸伤较低，零能量部署本身可供批量加速和完成收益使用。",
+      "before": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "造成16点伤害。",
+        "upgradedText": "造成22点伤害。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 0,
+        "upgradedCost": 0,
+        "turns": 2,
+        "upgradedTurns": 2,
+        "text": "造成8点伤害。",
+        "upgradedText": "造成12点伤害。"
+      }
+    },
+    {
+      "id": "JA41",
+      "name": "点射",
+      "role": "低费多段",
+      "scenario": "用1费快速兑现三段伤害，适合把伤害加成投到低费载荷；已有3点加成时总伤为21／27。",
+      "basis": "普通1费1回合单段预算16／22；三段取12／18总伤，为逐段成长留出4／4。每1点伤害加成增加3点总伤害。",
+      "before": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "造成7点伤害3次。",
+        "upgradedText": "造成10点伤害3次。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "造成4点伤害3次。",
+        "upgradedText": "造成6点伤害3次。"
+      }
+    },
+    {
+      "id": "JA51",
+      "name": "集中连射",
+      "role": "高费爆发",
+      "scenario": "把集中获得的能量投入一张高伤载荷；只需加速一个布置即可兑现完整三段，并触发高费配合。",
+      "basis": "3费在原1—2费模型适用区间之外，单独取36／48三段总伤。用更高能量和一张手牌换短等待、单次加速与重放的集中收益。",
+      "before": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 3,
+        "upgradedTurns": 3,
+        "text": "造成10点伤害3次。",
+        "upgradedText": "造成14点伤害3次。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 3,
+        "upgradedCost": 3,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "造成12点伤害3次。",
+        "upgradedText": "造成16点伤害3次。"
+      }
+    },
+    {
+      "id": "JK67B",
+      "name": "定点射击",
+      "role": "低费培养",
+      "scenario": "2费射术要领加1费定点射击可同回合启动。保留3回合等待，供持续成长和在场额外触发使用。",
+      "basis": "1费3回合，三段基础总伤24／30；同组2费能力可与本牌合计3费启动。已获得6点伤害加成时总伤42／48，强调低费成长目标。",
+      "before": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": false,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 3,
+        "upgradedTurns": 3,
+        "text": "知识。造成8点伤害3次。",
+        "upgradedText": "知识。造成10点伤害3次。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": false,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 3,
+        "upgradedTurns": 3,
+        "text": "知识。造成8点伤害3次。",
+        "upgradedText": "知识。造成10点伤害3次。"
+      }
+    }
+  ],
+  "retainedRoles": [
+    {
+      "id": "JK45",
+      "name": "布景迷宫",
+      "role": "在场期间让死角减费，承担组内削弱窗口。"
+    },
+    {
+      "id": "JK46B",
+      "name": "登台",
+      "role": "由邀约持续供给并自带保留，供长期战斗调度。"
+    },
+    {
+      "id": "JK68",
+      "name": "满弦放箭",
+      "role": "打出两张指定组件后获得额外伤害次数，承担组内解锁收益。"
+    },
+    {
+      "id": "JK69C",
+      "name": "自己的言叶",
+      "role": "由引文变化而来的一次性双段载荷。"
+    },
+    {
+      "id": "JX05",
+      "name": "课堂演练",
+      "role": "按兑现回合的知识出牌次数积累伤害加成，承担知识与箭矢的连接。"
+    }
+  ],
+  "checks": {
+    "changedCards": 5,
+    "allOtherCardsUnchanged": true,
+    "namesAndArtworkPreserved": true,
+    "partnerGroupsPreserved": true,
+    "startingDeckPreserved": true,
+    "reserveAndTrashPreserved": true,
+    "normalizedWithWorkbench": true,
+    "targetedAuditRowsUpdated": 5
+  },
+  "scenarios": [
+    {
+      "energy": 0,
+      "card": "JA38",
+      "benefit": "仍可布置8／12伤害的箭矢，把能量留给其他牌。"
+    },
+    {
+      "energy": 1,
+      "damageBonus": 3,
+      "card": "JA41",
+      "damage": [
+        21,
+        27
+      ],
+      "benefit": "1回合后兑现三段成长。"
+    },
+    {
+      "energy": 2,
+      "card": "JA13",
+      "damage": [
+        26,
+        36
+      ],
+      "benefit": "一张牌的单次高伤；适合额外伤害次数。"
+    },
+    {
+      "energy": 3,
+      "card": "JA51",
+      "damage": [
+        36,
+        48
+      ],
+      "benefit": "一张牌承接更多能量，只需推进一个布置。"
+    },
+    {
+      "energy": 3,
+      "cards": [
+        "JK67",
+        "JK67B"
+      ],
+      "benefit": "2费能力与1费载荷同回合启动，按原时序持续培养。"
+    }
+  ]
+}

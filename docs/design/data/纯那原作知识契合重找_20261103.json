@@ -1,0 +1,148 @@
+{
+  "revision": 2017,
+  "verifiedRevision": 2019,
+  "record": "4b1f2c6e-7c29-4111-8f5f-fdb6a1607b53",
+  "cards": [
+    {
+      "id": "JK10",
+      "name": "观摩",
+      "type": "能力",
+      "art": "original-scene-jk10-observation-note-frame-20261103",
+      "naming": {
+        "original": "",
+        "work": "TV第2话约09:42：纯那观摩表演并记录",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=582",
+        "adaptation": "卡名采用学习行为的常用名称。纯那观看同学表演、持笔记录，知识主体是从实际演出中观察和学习；关联的杀阵是将所学用于舞台攻防。高费牌触发抽牌与返能，表现观摩完整行动后获得新的理解和继续行动的余力。 配图：tv02-940-short.jpg；裁切850,230,720,540。画面来源：https://www.bilibili.com/bangumi/play/ep232368?t=582",
+        "kind": "原作学习行为概括",
+        "chineseOriginal": ""
+      },
+      "extraHoverTips": []
+    },
+    {
+      "id": "JK10B",
+      "name": "杀阵",
+      "type": "攻击",
+      "art": "original-scene-jk10b-literary-group-recast-20261103",
+      "naming": {
+        "original": "殺陣",
+        "work": "TV第2话的观摩学习与约18:34的舞台攻防",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1114",
+        "adaptation": "杀阵是舞台上经过编排的武器攻防，作为观摩组的实践内容。配图同时保留纯那持弓格挡与华恋来剑的交锋，伤害和格挡均由实际动作承担；知识联系由主牌的观摩学习建立。卡名为技艺术语，原文栏记录术语，未标作人物对白。 配图：tv02-1832-action.jpg；裁切755,410,480,360。画面来源：https://www.bilibili.com/bangumi/play/ep232368?t=1114",
+        "kind": "舞台技艺术语",
+        "chineseOriginal": "杀阵"
+      },
+      "extraHoverTips": []
+    },
+    {
+      "id": "JK32",
+      "name": "操船",
+      "type": "能力",
+      "art": "original-scene-jk32-junna-learning-refit-20261103",
+      "naming": {
+        "original": "操船",
+        "work": "《遥远的黄金国》纯那饰演萨尔瓦多的公演：约1:30:27的学习清单",
+        "url": "https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=5427",
+        "adaptation": "名称取同段学习清单的日文原词操船，中文版为驾船。关联牌星象与天候补充航海需要掌握的知识，共同支撑操船判断；持续抽牌和互相减费表现这些知识可彼此运用。画面为纯那饰演的萨尔瓦多在风浪中指挥。学习清单属于剧中亚历杭德罗的台词，角色经历与纯那本人的经历分开记录。 配图：game-10725.jpg；裁切520,50,720,540。画面来源：https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=6446",
+        "chineseOriginal": "驾船",
+        "kind": "原作日文用语"
+      },
+      "extraHoverTips": []
+    },
+    {
+      "id": "JK32B",
+      "name": "星象",
+      "type": "箭矢",
+      "art": "original-scene-jk32b-junna-learning-refit-20261103",
+      "naming": {
+        "original": "星々の知識",
+        "work": "《遥远的黄金国》公演约1:30:27：天气和星星的知识；剧场版狩猎片段约02:35（配图）",
+        "url": "https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=5427",
+        "adaptation": "星象采用同段星星的知识的常用主题短名，作为操船所需的一项知识。箭矢配图使用纯那在剧场版中放出的实体星字，保留文字向前飞来的方向感，同时承载知识、星和言叶箭矢；所示画面记录为文字攻击，不冒称天文图谱。 配图：film-hunt-232.jpg；裁切310,210,640,480。画面来源：https://www.bilibili.com/video/BV1u3411v7i7/?t=155",
+        "chineseOriginal": "星星的知识",
+        "kind": "原作知识内容短名"
+      },
+      "extraHoverTips": []
+    },
+    {
+      "id": "JK32C",
+      "name": "天候",
+      "type": "技能",
+      "art": "original-scene-jk32c-junna-learning-refit-20261103",
+      "naming": {
+        "original": "天気",
+        "work": "《遥远的黄金国》公演约1:30:27：天气和星星的知识；约1:47:47的海上风浪（配图）",
+        "url": "https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=5427",
+        "adaptation": "天候采用同段天气知识的常用短名，解释操船时需要认识的环境。海上风浪直接呈现所学对象，格挡表现通过判断天候应对航程风险；与操船、星象互相减费，使航海知识之间的联系落实在组内运用。 配图：game-10745.jpg；裁切850,80,680,510。画面来源：https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=6467",
+        "kind": "原作知识内容短名",
+        "chineseOriginal": "天气"
+      },
+      "extraHoverTips": []
+    },
+    {
+      "id": "JK37",
+      "name": "言叶",
+      "type": "箭矢",
+      "art": "original-scene-jk37-literary-group-recast-20261103",
+      "naming": {
+        "original": "言葉",
+        "work": "2021剧场版狩猎片段约03:03的言叶之力与约03:08的巨大箭矢",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=183",
+        "adaptation": "卡名取纯那原作台词中的言葉，沿用言叶作为箭矢的契合。主牌教科书提供读书积累，引述推进这些语言的运用；最终实体化为大型箭矢。配图保留用户指定的奈奈劈开巨箭场面，呈现巨大的箭头和断面。 配图：film-giant-arrow-0307-20261103.jpg；裁切70,100,960,720。画面来源：https://www.bilibili.com/video/BV1u3411v7i7/?t=188",
+        "kind": "原作台词用词",
+        "chineseOriginal": "话语"
+      },
+      "extraHoverTips": []
+    },
+    {
+      "id": "JK37B",
+      "name": "引述",
+      "type": "攻击",
+      "art": "original-scene-jk32-literary-group-recast-20261103",
+      "naming": {
+        "original": "",
+        "work": "2021剧场版狩猎片段约02:18：纯那引用读过的话语并将文字用于攻击",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=138",
+        "adaptation": "卡名采用引用既有文字的常用行为名称。配图为纯那引用话语时飞出的绿色实体文字，文字本身承担进攻，将每次引述的少量伤害与言叶箭矢的加速连在一起。 配图：film-hunt-216.jpg；裁切1090,130,720,540。画面来源：https://www.bilibili.com/video/BV1u3411v7i7/?t=138",
+        "kind": "原作行动概括",
+        "chineseOriginal": ""
+      },
+      "extraHoverTips": []
+    },
+    {
+      "id": "JK37C",
+      "name": "教科书",
+      "type": "能力",
+      "art": "original-scene-jk49-energy-star-20261103",
+      "naming": {
+        "original": "教科書",
+        "work": "2024-08-08角色读书访谈；斋藤孝《理想的国语教科书》；TV第3话约10:06的教材书桌（配图）",
+        "url": "https://hon-hikidashi.jp/event/42802/",
+        "adaptation": "卡名取角色访谈中的教科书。纯那明确提到小学时读过斋藤孝《理想的国语教科书》，由此感受到语言的力量，以这条直接联系组织读书、引述和言叶箭矢。配图采用原作中教材与摊开书页的书桌；画中教材为《脚本の基礎技術》等原作物件，访谈所述读物与画中书籍分别记录。 配图：tv03-1005-study.jpg；裁切460,300,512,384。画面来源：https://www.bilibili.com/bangumi/play/ep232369?t=606",
+        "kind": "角色访谈用词",
+        "chineseOriginal": "教科书"
+      },
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "斋藤孝《理想的国语教科书》。纯那小学时的读物，让她感受到语言的力量。"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "mechanicsPreserved": true,
+    "knowledgeGroupsPreserved": true,
+    "cardReferencesSynced": true,
+    "rejectedFitsTrashed": true,
+    "fitPoolBindingsSynced": true,
+    "sourceTipsCorrected": true,
+    "artUniqueAndReadable": true
+  },
+  "sources": {
+    "interview": "https://hon-hikidashi.jp/event/42802/",
+    "game": "https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=5427",
+    "tv": "https://www.bilibili.com/bangumi/play/ep232368?t=582",
+    "movie": "https://www.bilibili.com/video/BV1u3411v7i7/"
+  }
+}

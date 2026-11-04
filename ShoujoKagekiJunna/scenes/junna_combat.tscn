@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/portrait.png" id="1"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/aim.png" id="2"]
+[sub_resource type="Animation" id="Idle"]
+resource_name = "Idle"
+length = 2.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0,1.4,2.8), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [ExtResource("1"),ExtResource("1"),ExtResource("1")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:position")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0,1.4,2.8), "transitions": PackedFloat32Array(1,1,1), "update": 0, "values": [Vector2(0, -153),Vector2(0, -155),Vector2(0, -153)]}
+[sub_resource type="Animation" id="Attack"]
+resource_name = "Attack"
+length = 0.5
+loop_mode = 0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0,0.15,0.42), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [ExtResource("2"),ExtResource("2"),ExtResource("1")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:position")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0,0.15,0.42), "transitions": PackedFloat32Array(1,1,1), "update": 0, "values": [Vector2(0, -153),Vector2(14, -153),Vector2(0, -153)]}
+[sub_resource type="Animation" id="Cast"]
+resource_name = "Cast"
+length = 0.45
+loop_mode = 0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0,0.38), "transitions": PackedFloat32Array(1,1), "update": 1, "values": [ExtResource("1"),ExtResource("1")]}
+[sub_resource type="Animation" id="Hit"]
+resource_name = "Hit"
+length = 0.3
+loop_mode = 0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0,0.22), "transitions": PackedFloat32Array(1,1), "update": 1, "values": [ExtResource("1"),ExtResource("1")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:position")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0,0.22), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [Vector2(-8, -153),Vector2(0, -153)]}
+[sub_resource type="Animation" id="Dead"]
+resource_name = "Dead"
+length = 1.5
+loop_mode = 0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [ExtResource("1")]}
+[sub_resource type="Animation" id="Relaxed"]
+resource_name = "Relaxed"
+length = 1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [ExtResource("1")]}
+[sub_resource type="AnimationLibrary" id="library"]
+_data = {"Idle": SubResource("Idle"),"Attack": SubResource("Attack"),"Cast": SubResource("Cast"),"Hit": SubResource("Hit"),"Dead": SubResource("Dead"),"Relaxed": SubResource("Relaxed")}
+[node name="JunnaCombat" type="Node2D"]
+[node name="Visuals" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -153)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1")
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+offset_left = -90.0
+offset_top = -300.0
+offset_right = 95.0
+offset_bottom = 0.0
+mouse_filter = 2
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+libraries = {"": SubResource("library")}

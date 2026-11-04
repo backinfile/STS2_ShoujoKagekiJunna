@@ -1,0 +1,169 @@
+{
+  "batchId": "official-naming-20261102-starlight-ensemble",
+  "label": "配入官方原词与截图 · StarLight与九位舞台少女10张",
+  "backup": "before-starlight-ensemble.json",
+  "matches": [
+    {
+      "id": "JK34",
+      "name": "StarLight",
+      "original": "スタァライト",
+      "episode": 9,
+      "time": "21:45",
+      "proof": "tv09-2145-new.jpg",
+      "artProof": "tv02-0256-op.jpg",
+      "crop": [
+        960,
+        720,
+        500,
+        20
+      ],
+      "artNote": "TV 第2话 02:57，片头舞台冠冕截图裁切。",
+      "sourceNote": "采用正版字幕中剧名的原有拼写StarLight。",
+      "fit": "九位舞台少女各自登场后，完整剧目迎来终幕；九种知识的使用条件对应九人齐备。"
+    },
+    {
+      "id": "JK34B",
+      "name": "神乐光",
+      "original": "神楽ひかり",
+      "episode": 2,
+      "time": "03:11",
+      "proof": "tv02-0310-op.jpg",
+      "crop": [
+        960,
+        720,
+        550,
+        20
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "取回弃牌堆知识，对应离开、重返和重新连接；作为九人剧目中的回收节点。"
+    },
+    {
+      "id": "JK34C",
+      "name": "天堂真矢",
+      "original": "天堂真矢",
+      "episode": 2,
+      "time": "02:45",
+      "proof": "tv02-0244-op.jpg",
+      "crop": [
+        760,
+        570,
+        990,
+        20
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "作为众人追赶的技艺标杆，给所有手牌留下伤害加成，表现向更高水准共同靠近。"
+    },
+    {
+      "id": "JK34D",
+      "name": "石动双叶",
+      "original": "石動双葉",
+      "episode": 2,
+      "time": "02:27",
+      "proof": "tv02-0226-op.jpg",
+      "crop": [
+        600,
+        450,
+        1120,
+        0
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "替同伴减轻行动负担，对应下一张知识牌减费。"
+    },
+    {
+      "id": "JK34E",
+      "name": "星见纯那",
+      "original": "星見純那",
+      "episode": 2,
+      "time": "03:03",
+      "proof": "tv02-0302-op.jpg",
+      "crop": [
+        840,
+        630,
+        900,
+        10
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "以阅读、判断和精确知识选择下一段内容，直接对应检索知识牌。"
+    },
+    {
+      "id": "JK34F",
+      "name": "露崎真昼",
+      "original": "露崎まひる",
+      "episode": 2,
+      "time": "02:23",
+      "proof": "tv02-0222-op.jpg",
+      "crop": [
+        800,
+        600,
+        420,
+        30
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "与同伴在一起时更能发挥照顾和守护的力量，手中有其他知识牌便获得额外格挡。"
+    },
+    {
+      "id": "JK34G",
+      "name": "西条克洛迪娜",
+      "original": "西條クロディーヌ",
+      "episode": 2,
+      "time": "02:29",
+      "proof": "tv02-0228-op.jpg",
+      "crop": [
+        800,
+        600,
+        390,
+        20
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "舞台上的竞争与磨练累积为表现力，使用过的知识种类越多，面向全场的攻击越强。"
+    },
+    {
+      "id": "JK34H",
+      "name": "大场奈奈",
+      "original": "大場なな",
+      "episode": 9,
+      "time": "22:25",
+      "proof": "tv09-2225-new.jpg",
+      "crop": [
+        840,
+        630,
+        900,
+        20
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "为珍视的同伴重复守护；手中仍有知识时重复格挡，呼应她与重演、守护的关系。"
+    },
+    {
+      "id": "JK34I",
+      "name": "花柳香子",
+      "original": "花柳香子",
+      "episode": 2,
+      "time": "02:23",
+      "proof": "tv02-0222-op.jpg",
+      "crop": [
+        720,
+        540,
+        1020,
+        0
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "其他知识先行铺垫后，高费表演得以轻盈登场，保留她借助同伴支持和自身技艺登台的关系。"
+    },
+    {
+      "id": "JK34J",
+      "name": "爱城华恋",
+      "original": "愛城華恋",
+      "episode": 2,
+      "time": "02:33",
+      "proof": "tv02-0232-op.jpg",
+      "crop": [
+        960,
+        720,
+        550,
+        20
+      ],
+      "sourceNote": "中文姓名采用Bilibili正版番剧页声优表，日文姓名采用官方角色表。",
+      "fit": "主动推动所有仍在等待的表达抵达舞台，立即完成全部箭矢。"
+    }
+  ]
+}

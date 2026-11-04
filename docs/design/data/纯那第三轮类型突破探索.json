@@ -1,0 +1,827 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-type-breakthrough-20261102-v1",
+  "date": "2026-11-02",
+  "title": "纯那第三轮类型突破探索",
+  "sourceRevision": 189,
+  "sources": [
+    "D:/Github/STS2_Card_Reserch/docs/体系分析流程.md",
+    "D:/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
+    "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md"
+  ],
+  "criterion": "逐张说明原有类型规则、改变后的权限或生命周期、保留的代价及与既有职业流派的区别。",
+  "style": {
+    "uid": "4e54c303-a9bb-47ee-bdf2-2345204f8cb8",
+    "id": "STYLE_005",
+    "name": "不要写其他职业中已经有的流派牌",
+    "content": "比如战士有消耗流派，就不要写消耗的收益牌。但是普通消耗关键字还是可以有（因为消耗牌时所有职业都有的）。比如不要写弃置卡牌的触发和收益。不要直接用力量做流派等。"
+  },
+  "summary": {
+    "typeBreakthroughs": 8,
+    "userCards": 2,
+    "upgradedCards": 9,
+    "active": 31,
+    "pool": 25,
+    "grants": 6,
+    "total": 77
+  },
+  "cards": [
+    {
+      "uid": "draft_card_JT01",
+      "id": "JT01",
+      "name": "JT01",
+      "system": "stage",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "选择一张手牌，将其变为回合数等于其耗能的箭矢牌， 其下次打出耗能变为0。消耗。",
+      "upgradedText": "选择一张手牌，将其变为回合数等于其耗能的箭矢牌， 其下次打出耗能变为0。消耗。",
+      "keywords": [],
+      "termIds": [
+        "TB01",
+        "OB07",
+        "CD01",
+        "EF25",
+        "RL12",
+        "RL22",
+        "RL23",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [
+        "TB01"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "类型转换",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-type-breakthrough-20261102-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "非箭矢牌按各自类型结算。",
+        "exception": "把一张手牌转为箭矢，以转换前的耗能确定初始回合数，并使其下次打出免费。",
+        "investment": "本牌费用与消耗；选定牌需要等待，免费只用于下次打出。",
+        "rules": "先记录目标当前耗能，再设定初始回合数与下次免费。保留原有牌面、升级、知识关系及有效修改；原生类型作为转换后的内部子类型。转换只修改实际牌，本场结束按既有规则还原。",
+        "comparison": "围绕纯那的箭矢类型改变结算时点；不采用技能免费并消耗的腐化规则。",
+        "port": "输出／防御／运转",
+        "dependencies": [
+          "JA02",
+          "JA04",
+          "JA22"
+        ],
+        "roleReason": "把手牌的能量费用换成对应等待时间。"
+      },
+      "notes": "按当前牌面复核。\n原有限制：非箭矢牌按各自类型结算。\n规则变化：把一张手牌转为箭矢，以转换前的耗能确定初始回合数，并使其下次打出免费。\n保留的投入：本牌费用与消耗；选定牌需要等待，免费只用于下次打出。\n复核：先记录目标当前耗能，再设定初始回合数与下次免费。保留原有牌面、升级、知识关系及有效修改；原生类型作为转换后的内部子类型。转换只修改实际牌，本场结束按既有规则还原。"
+    },
+    {
+      "uid": "draft_card_JT02",
+      "id": "JT02",
+      "name": "JT02",
+      "system": "stage",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "选择你手牌中的一张箭矢牌，变为耗能增加1点的非箭矢牌。消耗。",
+      "upgradedText": "选择你手牌中的一张箭矢牌，变为耗能增加1点的非箭矢牌。消耗。",
+      "keywords": [],
+      "termIds": [
+        "TB01",
+        "OB07",
+        "CD01",
+        "EF25",
+        "RL12",
+        "RL22",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [
+        "TB01"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "类型转换",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-type-breakthrough-20261102-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "箭矢通常需要布置并等待完成。",
+        "exception": "把手牌箭矢转为其代码预设的非箭矢类型，同时增加1点耗能。",
+        "investment": "本牌费用、消耗以及目标增加的1点耗能。",
+        "rules": "转换结果读取内部arrowSubtype；原生箭矢在源码中固定配置，伤害载荷为攻击、持续规则为能力、其余为技能。转化产生的箭矢保留原类型作为内部子类型。保留载荷、知识关系及有效修改；场内等待中的箭矢保持原布置。",
+        "comparison": "改写箭矢与技能之间的类型边界，保留费用代价；不设置、重置或取回在场倒计时。",
+        "port": "输出／防御／运转",
+        "dependencies": [
+          "JA13",
+          "JA15"
+        ],
+        "roleReason": "以增加费用换取退出箭矢等待规则。"
+      },
+      "notes": "按当前牌面复核。\n原有限制：箭矢通常需要布置并等待完成。\n规则变化：把手牌箭矢转为其代码预设的非箭矢类型，同时增加1点耗能。\n保留的投入：本牌费用、消耗以及目标增加的1点耗能。\n复核：转换结果读取内部arrowSubtype；原生箭矢在源码中固定配置，伤害载荷为攻击、持续规则为能力、其余为技能。转化产生的箭矢保留原类型作为内部子类型。保留载荷、知识关系及有效修改；场内等待中的箭矢保持原布置。"
+    },
+    {
+      "uid": "draft_card_JT03",
+      "id": "JT03",
+      "name": "JT03",
+      "system": "stage",
+      "type": "箭矢",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 2,
+      "turns": 2,
+      "upgradedTurns": 3,
+      "target": "自己",
+      "text": "在场期间打出攻击牌后，获得1点能量并加速1回合。",
+      "upgradedText": "在场期间打出攻击牌后，获得1点能量并加速1回合。",
+      "keywords": [],
+      "termIds": [
+        "TB02",
+        "OB07",
+        "CD01",
+        "OB17",
+        "RL16",
+        "KW_STAGE",
+        "TR09",
+        "EF09",
+        "EF29"
+      ],
+      "breakthroughIds": [
+        "TB02"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "布置生效",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-type-breakthrough-20261102-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "普通箭矢通常在完成时才执行载荷。",
+        "exception": "此牌在等待期间响应攻击出牌，给予能量并加速自身。",
+        "investment": "2费布置，升级后1费；初始回合数为3，返能会消耗自己的剩余等待时间。",
+        "rules": "每个实际攻击出牌事件先获得1点能量，再使此布置加速1回合。归0按正常完成处理并结束本布置的监听；完成和额外触发沿用既有事件口径。",
+        "comparison": "箭矢自己的剩余时间限定返能窗口。",
+        "port": "运转",
+        "dependencies": [
+          "JA16",
+          "JA04"
+        ],
+        "roleReason": "在等待期间生效，并让收益主动消耗自身持续时间。"
+      },
+      "notes": "按当前牌面复核。\n原有限制：普通箭矢通常在完成时才执行载荷。\n规则变化：此牌在等待期间响应攻击出牌，给予能量并加速自身。\n保留的投入：2费布置，升级后1费；初始回合数为3，返能会消耗自己的剩余等待时间。\n复核：每个实际攻击出牌事件先获得1点能量，再使此布置加速1回合。归0按正常完成处理并结束本布置的监听；完成和额外触发沿用既有事件口径。",
+      "arrowSubtype": "能力"
+    },
+    {
+      "uid": "draft_card_JT04",
+      "id": "JT04",
+      "name": "JT04",
+      "system": "partner",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "选择你手牌中的一张知识能力牌。本场战斗中，该牌打出后进入弃牌堆，耗能增加1。消耗。",
+      "upgradedText": "选择你手牌中的一张知识能力牌。本场战斗中，该牌打出后进入弃牌堆，耗能增加1。消耗。",
+      "keywords": [],
+      "termIds": [
+        "TB03",
+        "OB07",
+        "CD01",
+        "OB17",
+        "RL09",
+        "RL11",
+        "RL16",
+        "RL23",
+        "KW_EXHAUST",
+        "KW_PARTNER"
+      ],
+      "breakthroughIds": [
+        "TB03"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "能力循环",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-type-breakthrough-20261102-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "能力牌安装后退出普通卡牌循环，通常无法再次抽到同一个实际对象。",
+        "exception": "知识能力牌安装规则后重新进入牌组循环，后续每次使用增加费用。",
+        "investment": "目标需要重新到手并正常支付不断提高的费用；本牌一次性使用。",
+        "rules": "知识能力牌按知识关键词与能力类型共同筛选。每次实际打出正常安装一次效果，随后把同一个卡牌对象放入弃牌堆，再将其本场费用增加1；已有安装实例保留。消耗仅为本牌自身去向，不以消耗或弃牌事件产生收益。",
+        "comparison": "区别于创造性AI和信号增强的生成或追加打出，本候选让同一个知识能力牌以递增费用重新参与循环。",
+        "port": "运转",
+        "dependencies": [
+          "JK04",
+          "JK10",
+          "JK15",
+          "A"
+        ],
+        "roleReason": "能力牌安装后退出普通卡牌循环，通常无法再次抽到同一个实际对象。 → 知识能力牌安装规则后重新进入牌组循环，后续每次使用增加费用。"
+      },
+      "notes": "第三轮探索；卡名待定。\n原有限制：能力牌安装后退出普通卡牌循环，通常无法再次抽到同一个实际对象。\n规则变化：知识能力牌安装规则后重新进入牌组循环，后续每次使用增加费用。\n保留的投入：目标需要重新到手并正常支付不断提高的费用；本牌一次性使用。\n复核：知识能力牌按知识关键词与能力类型共同筛选。每次实际打出正常安装一次效果，随后把同一个卡牌对象放入弃牌堆，再将其本场费用增加1；已有安装实例保留。消耗仅为本牌自身去向，不以消耗或弃牌事件产生收益。\n职业对照：区别于创造性AI和信号增强的生成或追加打出，本候选让同一个知识能力牌以递增费用重新参与循环。"
+    },
+    {
+      "uid": "draft_card_JT05",
+      "id": "JT05",
+      "name": "JT05",
+      "system": "partner",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "选择你手牌中的一张知识技能牌。本场战斗中，将其变为能力牌，耗能增加2，效果改为在你的回合开始时触发。消耗。",
+      "upgradedText": "选择你手牌中的一张知识技能牌。本场战斗中，将其变为能力牌，耗能增加2，效果改为在你的回合开始时触发。消耗。",
+      "keywords": [],
+      "termIds": [
+        "TB04",
+        "OB07",
+        "CD01",
+        "EF25",
+        "OB17",
+        "RL12",
+        "RL16",
+        "RL17",
+        "KW_EXHAUST",
+        "KW_PARTNER"
+      ],
+      "breakthroughIds": [
+        "TB04"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "技能持续化",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-type-breakthrough-20261102-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "知识技能牌每次都要抽到并打出，才能获得一次牌面效果。",
+        "exception": "把同一个实际知识技能改成需要安装的能力，原载荷在回合开始执行。",
+        "investment": "支付本牌及目标额外增加的2点安装费用；安装当回合不立即执行原载荷。",
+        "rules": "保留知识关系、升级及载荷中的数字；目标仍需从手牌正常打出后才安装。回合开始按原指令执行并重新选择目标。消耗、保留等使用去向字段只处理能力卡牌本体，原载荷中的功能指令按回合执行。转换不进行永久发放，战斗结束还原模型。",
+        "comparison": "以玩家实际持有的知识技能作为确定载荷进行类型转换，区别于随机能力来源与首张牌追加执行。",
+        "port": "防御／运转",
+        "dependencies": [
+          "JK04B",
+          "JK11",
+          "JK15B",
+          "B"
+        ],
+        "roleReason": "知识技能牌每次都要抽到并打出，才能获得一次牌面效果。 → 把同一个实际知识技能改成需要安装的能力，原载荷在回合开始执行。"
+      },
+      "notes": "第三轮探索；卡名待定。\n原有限制：知识技能牌每次都要抽到并打出，才能获得一次牌面效果。\n规则变化：把同一个实际知识技能改成需要安装的能力，原载荷在回合开始执行。\n保留的投入：支付本牌及目标额外增加的2点安装费用；安装当回合不立即执行原载荷。\n复核：保留知识关系、升级及载荷中的数字；目标仍需从手牌正常打出后才安装。回合开始按原指令执行并重新选择目标。消耗、保留等使用去向字段只处理能力卡牌本体，原载荷中的功能指令按回合执行。转换不进行永久发放，战斗结束还原模型。\n职业对照：以玩家实际持有的知识技能作为确定载荷进行类型转换，区别于随机能力来源与首张牌追加执行。"
+    },
+    {
+      "uid": "draft_card_JT06",
+      "id": "JT06",
+      "name": "JT06",
+      "system": "growth",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "需要选择攻击牌的效果，也可以选择箭矢牌。",
+      "upgradedText": "需要选择攻击牌的效果，也可以选择箭矢牌。",
+      "keywords": [],
+      "termIds": [
+        "TB05",
+        "OB07",
+        "CD01",
+        "EF52",
+        "RL22",
+        "KW_BONUS"
+      ],
+      "breakthroughIds": [
+        "TB05"
+      ],
+      "archetypeIds": [
+        "SYS_growth",
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "类型选取",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-type-breakthrough-20261102-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "伤害加成已经覆盖攻击牌与伤害箭矢；其他攻击牌选择器仍按卡牌类型筛选。",
+        "exception": "扩展选择攻击牌的操作，使其可选择箭矢，并保持箭矢自己的结算规则。",
+        "investment": "2费安装；仍需要增伤、加段或转移来源，以及实际箭矢载体与等待。",
+        "rules": "伤害加成操作按基础范围选择对象，JG09与JG16已可选择伤害箭矢。其他明确选择攻击牌的操作沿用本候选扩展；箭矢保留自身类型、目标范围及原有结算时点。",
+        "comparison": "不是已删除JA21的箭矢全局攻击身份。这里只为纯那现有单牌投资操作开放箭矢对象。",
+        "port": "输出／运转",
+        "dependencies": [
+          "JG03",
+          "JG09",
+          "JG16",
+          "JA13"
+        ],
+        "roleReason": "攻击牌选择器不接受独立类型的箭矢，单牌伤害加成、加段与转移无法选择箭矢。 → 扩展选择攻击牌的操作，使其可选择箭矢，并保持箭矢自己的结算规则。"
+      },
+      "notes": "第三轮探索；卡名待定。\n原有限制：伤害加成已经覆盖攻击牌与伤害箭矢；其他攻击牌选择器仍按卡牌类型筛选。\n规则变化：扩展选择攻击牌的操作，使其可选择箭矢，并保持箭矢自己的结算规则。\n保留的投入：2费安装；仍需要增伤、加段或转移来源，以及实际箭矢载体与等待。\n复核：伤害加成操作按基础范围选择对象，JG09与JG16已可选择伤害箭矢。其他明确选择攻击牌的操作沿用本候选扩展；箭矢保留自身类型、目标范围及原有结算时点。\n职业对照：不是已删除JA21的箭矢全局攻击身份。这里只为纯那现有单牌投资操作开放箭矢对象。"
+    },
+    {
+      "uid": "draft_card_JT07",
+      "id": "JT07",
+      "name": "JT07",
+      "system": "stage",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "将手牌中的一张攻击牌放在目标敌人的一个箭矢上。该箭矢完成时，免费打出这张攻击牌。消耗。",
+      "upgradedText": "将手牌中的一张攻击牌放在目标敌人的一个箭矢上。该箭矢完成时，免费打出这张攻击牌。消耗。",
+      "keywords": [],
+      "termIds": [
+        "TB06",
+        "OB07",
+        "CD01",
+        "RL07",
+        "RL11",
+        "RL28",
+        "EF49",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [
+        "TB06"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "搭载打出",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-type-breakthrough-20261102-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "攻击牌通常需从手牌立即支付并打出，已有箭矢只能结算自身的载荷。",
+        "exception": "让一个实际攻击牌由已有箭矢承载，在其正常完成后支付等待代价并免费打出。",
+        "investment": "本牌费用、攻击牌暂时离手，以及已布置且目标匹配的箭矢；只有正常完成才执行攻击。",
+        "rules": "攻击牌以独立实际对象挂载，保留类型、知识标记与有效修改。源箭矢正常牌效及其重放批次结束后，按挂载顺序打出攻击，仍记录攻击和知识出牌事件。额外触发不释放挂载牌。复制源箭矢保持原挂载对象的唯一归属。目标失效时将挂载攻击退回手牌。",
+        "comparison": "区别于攻击追加执行：没有制造副本，真实攻击牌借用纯那已有箭矢的完成时间进入一次出牌。",
+        "port": "输出／运转",
+        "dependencies": [
+          "JA13",
+          "JA17",
+          "JK10B",
+          "JG03"
+        ],
+        "roleReason": "攻击牌通常需从手牌立即支付并打出，已有箭矢只能结算自身的载荷。 → 让一个实际攻击牌由已有箭矢承载，在其正常完成后支付等待代价并免费打出。"
+      },
+      "notes": "第三轮探索；卡名待定。\n原有限制：攻击牌通常需从手牌立即支付并打出，已有箭矢只能结算自身的载荷。\n规则变化：让一个实际攻击牌由已有箭矢承载，在其正常完成后支付等待代价并免费打出。\n保留的投入：本牌费用、攻击牌暂时离手，以及已布置且目标匹配的箭矢；只有正常完成才执行攻击。\n复核：攻击牌以独立实际对象挂载，保留类型、知识标记与有效修改。源箭矢正常牌效及其重放批次结束后，按挂载顺序打出攻击，仍记录攻击和知识出牌事件。额外触发不释放挂载牌。复制源箭矢保持原挂载对象的唯一归属。目标失效时将挂载攻击退回手牌。\n职业对照：区别于攻击追加执行：没有制造副本，真实攻击牌借用纯那已有箭矢的完成时间进入一次出牌。"
+    },
+    {
+      "uid": "draft_card_JT08",
+      "id": "JT08",
+      "name": "JT08",
+      "system": "stage",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "免费打出手牌中的一张能力牌，其效果仅在一个箭矢布置期间生效。该箭矢完成后，将能力牌放回手牌。消耗。",
+      "upgradedText": "免费打出手牌中的一张能力牌，其效果仅在一个箭矢布置期间生效。该箭矢完成后，将能力牌放回手牌。消耗。",
+      "keywords": [],
+      "termIds": [
+        "TB07",
+        "OB07",
+        "CD01",
+        "OB17",
+        "RL16",
+        "EF49",
+        "RL11",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [
+        "TB07"
+      ],
+      "archetypeIds": [
+        "SYS_stage",
+        "SYS_partner"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "能力期限",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-type-breakthrough-20261102-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "能力牌通常支付一次安装费用后持续整场，普通箭矢无法决定其有效期限。",
+        "exception": "借助一个现存箭矢暂时安装能力，以有限持续时间换取免费安装与到期回手。",
+        "investment": "本牌费用、实际能力牌及尚在等待中的箭矢；箭矢完成后需要重新支付才能正式安装能力。",
+        "rules": "选择一个已有箭矢及手牌能力，正常记录一次能力出牌并建立一个有来源标识的能力实例。整批完成指令与挂载攻击处理后，仅移除这次借用的能力实例，并取回对应实际牌。已经获得的格挡、能量和生成牌保留。源箭矢提前离场时同样结束借用。",
+        "comparison": "以纯那实际箭矢决定能力持续时间，不采用能力牌追加打出或随机生成能力的既有路线。",
+        "port": "输出／防御／运转",
+        "dependencies": [
+          "JK04",
+          "JK10",
+          "JK15",
+          "A"
+        ],
+        "roleReason": "能力牌通常支付一次安装费用后持续整场，普通箭矢无法决定其有效期限。 → 借助一个现存箭矢暂时安装能力，以有限持续时间换取免费安装与到期回手。"
+      },
+      "notes": "第三轮探索；卡名待定。\n原有限制：能力牌通常支付一次安装费用后持续整场，普通箭矢无法决定其有效期限。\n规则变化：借助一个现存箭矢暂时安装能力，以有限持续时间换取免费安装与到期回手。\n保留的投入：本牌费用、实际能力牌及尚在等待中的箭矢；箭矢完成后需要重新支付才能正式安装能力。\n复核：选择一个已有箭矢及手牌能力，正常记录一次能力出牌并建立一个有来源标识的能力实例。整批完成指令与挂载攻击处理后，仅移除这次借用的能力实例，并取回对应实际牌。已经获得的格挡、能量和生成牌保留。源箭矢提前离场时同样结束借用。\n职业对照：以纯那实际箭矢决定能力持续时间，不采用能力牌追加打出或随机生成能力的既有路线。"
+    },
+    {
+      "uid": "user_card_A_20261102",
+      "id": "A",
+      "name": "A",
+      "system": "partner",
+      "type": "能力",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。在你的回合结束时，将1张《B》放入抽牌堆。",
+      "upgradedText": "知识。在你的回合结束时，将1张《B》放入抽牌堆。",
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "TR03",
+        "EF22"
+      ],
+      "breakthroughIds": [],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [
+        "B"
+      ],
+      "art": "defaultPortrait",
+      "role": "机制基础牌",
+      "direction": "知识牌持续来源",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "用户指定名称。"
+      },
+      "notes": "用户指定。获得A时附带两张B。回合结束时生成一张基础版本的临时B，随机放入抽牌堆；本次临时生成沿用战斗生成规则。升级只把费用从2降为1。",
+      "draftStatus": "用户指定",
+      "draftBatch": "junna-type-breakthrough-20261102-v1"
+    },
+    {
+      "uid": "user_card_B_20261102",
+      "id": "B",
+      "name": "B",
+      "system": "partner",
+      "type": "技能",
+      "rarity": "附带",
+      "pool": false,
+      "cost": 0,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。抽1张牌。获得1点能量。消耗。",
+      "upgradedText": "知识。抽1张牌。获得1点能量。消耗。",
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "EF06",
+        "EF09",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [
+        "A"
+      ],
+      "art": "defaultPortrait",
+      "role": "知识牌",
+      "direction": "知识牌持续来源",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "用户指定名称。"
+      },
+      "notes": "用户指定。A附带两张同名B。B的升级效果尚待指定，当前沿用基础效果。用户明确指定本牌为具有抽牌效果的技能牌。",
+      "draftStatus": "用户指定",
+      "draftBatch": "junna-type-breakthrough-20261102-v1"
+    }
+  ],
+  "partnerGroups": [
+    {
+      "uid": "user_group_A_20261102",
+      "id": "GROUP_A",
+      "title": "A",
+      "mainCardId": "A",
+      "grantedCardIds": [
+        "B"
+      ],
+      "grantedCardCounts": {
+        "B": 2
+      }
+    }
+  ],
+  "terms": [
+    {
+      "uid": "term_TB01",
+      "id": "TB01",
+      "name": "类型转换",
+      "kind": "突破",
+      "definition": "改变实际卡牌的类型与结算方式，保留牌名、知识关系及有效修改。",
+      "template": "",
+      "systems": [],
+      "unit": "",
+      "notes": "第三轮类型突破探索。",
+      "sources": [
+        "纯那第三轮类型突破探索"
+      ]
+    },
+    {
+      "uid": "term_TB02",
+      "id": "TB02",
+      "name": "布置生效",
+      "kind": "突破",
+      "definition": "箭矢在等待期间提供持续规则，完成或离场时结束该规则。",
+      "template": "",
+      "systems": [],
+      "unit": "",
+      "notes": "第三轮类型突破探索。",
+      "sources": [
+        "纯那第三轮类型突破探索"
+      ]
+    },
+    {
+      "uid": "term_TB03",
+      "id": "TB03",
+      "name": "能力循环",
+      "kind": "突破",
+      "definition": "知识能力牌安装效果后仍可重新进入牌组循环，每次使用提高后续费用。",
+      "template": "",
+      "systems": [],
+      "unit": "",
+      "notes": "第三轮类型突破探索。",
+      "sources": [
+        "纯那第三轮类型突破探索"
+      ]
+    },
+    {
+      "uid": "term_TB04",
+      "id": "TB04",
+      "name": "技能持续化",
+      "kind": "突破",
+      "definition": "把选定知识技能牌的单次效果转为能力牌的回合开始效果。",
+      "template": "",
+      "systems": [],
+      "unit": "",
+      "notes": "第三轮类型突破探索。",
+      "sources": [
+        "纯那第三轮类型突破探索"
+      ]
+    },
+    {
+      "uid": "term_TB05",
+      "id": "TB05",
+      "name": "类型选取",
+      "kind": "突破",
+      "definition": "扩展指定选择器可选的类型，实际卡牌仍保留自身类型。",
+      "template": "",
+      "systems": [],
+      "unit": "",
+      "notes": "第三轮类型突破探索。",
+      "sources": [
+        "纯那第三轮类型突破探索"
+      ]
+    },
+    {
+      "uid": "term_TB06",
+      "id": "TB06",
+      "name": "搭载打出",
+      "kind": "突破",
+      "definition": "把实际攻击牌交由已有箭矢承载，在其正常完成后打出。",
+      "template": "",
+      "systems": [],
+      "unit": "",
+      "notes": "第三轮类型突破探索。",
+      "sources": [
+        "纯那第三轮类型突破探索"
+      ]
+    },
+    {
+      "uid": "term_TB07",
+      "id": "TB07",
+      "name": "能力期限",
+      "kind": "突破",
+      "definition": "以一个实际箭矢的布置时间限定借用能力的持续时间。",
+      "template": "",
+      "systems": [],
+      "unit": "",
+      "notes": "第三轮类型突破探索。",
+      "sources": [
+        "纯那第三轮类型突破探索"
+      ]
+    }
+  ],
+  "upgradeUpdates": [
+    {
+      "collection": "cards",
+      "id": "JA02",
+      "values": {
+        "upgradedText": "所有箭矢牌耗能变为0， 并且会延迟一回合完成。"
+      }
+    },
+    {
+      "collection": "cards",
+      "id": "JA22",
+      "values": {
+        "upgradedText": "箭矢完成时放回手牌。"
+      }
+    },
+    {
+      "collection": "cards",
+      "id": "JK05",
+      "values": {
+        "upgradedText": "抽取知识牌直到手牌满。消耗。"
+      }
+    },
+    {
+      "collection": "cards",
+      "id": "JK10",
+      "values": {
+        "upgradedText": "知识。打出耗能不低于2的卡牌后，获得1点能量。"
+      }
+    },
+    {
+      "collection": "cards",
+      "id": "JA04",
+      "values": {
+        "text": "你打出的下一张箭矢牌立即加速到完成。",
+        "upgradedText": "你打出的下2张箭矢牌立即加速到完成。"
+      }
+    },
+    {
+      "collection": "cards",
+      "id": "JK11",
+      "values": {
+        "upgradedText": "知识。获得11点格挡。无论何处，将JK11B放入手牌。"
+      }
+    },
+    {
+      "collection": "cards",
+      "id": "JK11B",
+      "values": {
+        "upgradedText": "知识。获得11点格挡。无论何处，将JK11放入手牌。"
+      }
+    },
+    {
+      "collection": "cards",
+      "id": "JG16",
+      "values": {
+        "upgradedText": "保留。选择一张攻击牌，将伤害加成转移到该牌上。消耗。"
+      }
+    },
+    {
+      "collection": "cards",
+      "id": "JK15B",
+      "values": {
+        "upgradedCost": 0
+      }
+    }
+  ],
+  "recommendations": [
+    "JT01",
+    "JT03",
+    "JT06",
+    "JT07"
+  ],
+  "rejected": [
+    {
+      "direction": "消耗手牌以返能、免费打出或加速",
+      "reason": "会把消耗动作接成新的收益路线，依照用户的职业流派约定收起。"
+    },
+    {
+      "direction": "技能打出造成固定伤害、格挡触发输出、力量成长",
+      "reason": "避开已有职业的技能密度、格挡与力量路线。"
+    },
+    {
+      "direction": "箭矢全局视为攻击牌",
+      "reason": "保留已删除JA21；JT06只探索选择器范围，实际类型与出牌事件保持独立。"
+    },
+    {
+      "direction": "仅按类型连续出牌获得数值、技能额外打出、随机生成能力",
+      "reason": "前者仍是触发收益；后两者已有爆发、信号增强和创造性AI等参照。"
+    }
+  ],
+  "review": {
+    "scope": "本轮只补充类型突破候选和用户指定A、B，不补完整卡池。",
+    "upgrades": "旧牌依当前基础效果同步升级分支。JK11与JK11B沿用当前双向召回；JK15B升级费用同步0。",
+    "pending": [
+      "费用与等待数值为探索初稿。",
+      "B的升级沿用基础效果，待用户指定。",
+      "JT05与JT08涉及能力实例的类型和期限变更，实际实现时需要按来源实例处理。"
+    ]
+  }
+}

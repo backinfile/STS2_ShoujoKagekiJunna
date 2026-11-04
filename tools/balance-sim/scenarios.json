@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "player": {"hp": 80, "energy": 3, "draw": 5, "handLimit": 10, "maxTurns": 24},
+  "policies": {
+    "balanced": {"label": "均衡", "discount": 0.84, "defenseWeight": 1.65, "beam": 5},
+    "defensive": {"label": "防守", "discount": 0.76, "defenseWeight": 2.1, "beam": 5},
+    "aggressive": {"label": "进攻", "discount": 0.92, "defenseWeight": 1.15, "beam": 5}
+  },
+  "candidates": [
+    {"id": "b1u2", "base": 1, "upgraded": 2},
+    {"id": "b2u3", "base": 2, "upgraded": 3},
+    {"id": "b3u4", "base": 3, "upgraded": 4},
+    {"id": "b4u6", "base": 4, "upgraded": 6},
+    {"id": "b6u8", "base": 6, "upgraded": 8},
+    {"id": "b3u5", "base": 3, "upgraded": 5},
+    {"id": "b5u7", "base": 5, "upgraded": 7}
+  ],
+  "contexts": [
+    {"id": "none", "label": "无加速", "group": "calibration"},
+    {"id": "starter", "label": "仅起始加速", "group": "calibration"},
+    {"id": "normal", "label": "单体加速", "group": "calibration"},
+    {"id": "batch", "label": "群体加速", "group": "calibration"},
+    {"id": "instant", "label": "速射压力测试", "group": "stress"}
+  ],
+  "encounters": [
+    {"id": "worm", "label": "毛绒伏地虫", "kind": "native", "group": "calibration", "enemies": [
+      {"name": "毛绒伏地虫", "hp": [55,57], "moves": [{"damage":4},{"strength":7},{"damage":4}]}
+    ]},
+    {"id": "nibbit", "label": "小啃兽·单体", "kind": "native", "group": "calibration", "enemies": [
+      {"name": "小啃兽", "hp": [42,46], "moves": [{"damage":12},{"damage":6,"block":5},{"strength":2}]}
+    ]},
+    {"id": "nibbits", "label": "小啃兽·前后两只", "kind": "native", "group": "calibration", "enemies": [
+      {"name": "前排小啃兽", "hp": [42,46], "moves": [{"damage":6,"block":5},{"strength":2},{"damage":12}]},
+      {"name": "后排小啃兽", "hp": [42,46], "moves": [{"strength":2},{"damage":12},{"damage":6,"block":5}]}
+    ]},
+    {"id": "gremlins", "label": "三只卑鄙地精·组合测试", "kind": "constructed_native_enemies", "group": "calibration", "enemies": [
+      {"name": "卑鄙地精1", "hp": [10,14], "opener": [{}], "moves": [{"damage":9}]},
+      {"name": "卑鄙地精2", "hp": [10,14], "opener": [{}], "moves": [{"damage":9}]},
+      {"name": "卑鄙地精3", "hp": [10,14], "opener": [{}], "moves": [{"damage":9}]}
+    ]},
+    {"id": "long", "label": "长战靶·自设", "kind": "synthetic_control", "group": "calibration", "enemies": [
+      {"name": "长战靶", "hp": [160,180], "moves": [{"damage":10},{"damage":12},{}]}
+    ]},
+    {"id": "sculptor", "label": "虔诚雕刻师·增长压力", "kind": "native", "group": "stress", "enemies": [
+      {"name": "虔诚雕刻师", "hp": [162,162], "opener": [{"ritual":9}], "moves": [{"damage":12}]}
+    ]}
+  ],
+  "sourceRoot": "D:/Github/spire-codex/extraction/raw/src/Core/Models",
+  "sourceFiles": [
+    "Cards/Slice.cs", "Cards/TwinStrike.cs", "Cards/DefendIronclad.cs", "Cards/StrikeIronclad.cs", "Cards/Leap.cs", "Cards/Backflip.cs",
+    "Monsters/FuzzyWurmCrawler.cs", "Monsters/Nibbit.cs", "Encounters/NibbitsNormal.cs", "Monsters/SneakyGremlin.cs", "Monsters/DevotedSculptor.cs", "Powers/RitualPower.cs"
+  ]
+}

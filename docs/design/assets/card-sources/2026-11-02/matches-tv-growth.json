@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "date": "2026-11-02",
+  "batchId": "official-naming-20261102-tv-growth",
+  "label": "配入官方原词与截图 · 再次登台与成长2张",
+  "backup": "before-tv-growth.json",
+  "subtitleSource": "Bilibili 正版第二话中文字幕，完整字幕证据保存在 proof 对应文件",
+  "matches": [
+    {
+      "id": "JA22",
+      "name": "并不是结束",
+      "original": "でも、これで終わりじゃないもんね。",
+      "episode": 2,
+      "time": "23:16",
+      "proof": "tv02-2316-proof.jpg",
+      "artProof": "tv02-2316-proof.jpg",
+      "crop": [
+        820,
+        615,
+        240,
+        150
+      ],
+      "fit": "纯那在落败后确认还会继续登台。箭矢完成后回到手牌，让一次结算成为下一次登场的起点。",
+      "japaneseReference": "https://keibun.hatenadiary.jp/",
+      "japaneseNote": " 日文对照参照台词转录；中文已核对正版字幕。",
+      "fullQuote": "但这并不是结束"
+    },
+    {
+      "id": "JG23",
+      "name": "成为Star",
+      "original": "なりたいの、スタァに。",
+      "episode": 2,
+      "time": "14:28",
+      "proof": "tv02-1428-proof.jpg",
+      "artProof": "tv02-1322-proof.jpg",
+      "artTime": "13:22",
+      "crop": [
+        1000,
+        750,
+        500,
+        25
+      ],
+      "fit": "纯那在谈到与天才的差距后说出自己的愿望。持续磨练积累的伤害加成逐步换来更多攻击次数，表现以长期积累接近主角的位置。保留正版字幕中的英文 Star。",
+      "japaneseReference": "https://terry-rice.hatenablog.com/",
+      "japaneseNote": " 日文对照参照台词转录；中文已核对正版字幕。",
+      "fullQuote": "我想成为Star啊"
+    }
+  ]
+}

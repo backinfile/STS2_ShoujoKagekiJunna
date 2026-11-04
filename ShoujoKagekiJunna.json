@@ -1,0 +1,12 @@
+{
+  "id": "ShoujoKagekiJunna",
+  "name": "星见纯那",
+  "author": "Shoujo Kageki Mod",
+  "description": "星见纯那角色与卡牌。",
+  "version": "0.1.0",
+  "has_dll": true,
+  "has_pck": true,
+  "affects_gameplay": true,
+  "min_game_version": "v0.111.0",
+  "dependencies": [{"id":"BaseLib","min_version":"v3.4.7"}]
+}

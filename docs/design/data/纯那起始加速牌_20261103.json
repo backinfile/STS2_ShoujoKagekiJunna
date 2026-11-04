@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "title": "起始加速牌催箭",
+  "date": "2026-11-03",
+  "sourceRevision": 1142,
+  "appliedRevision": 1143,
+  "historyRecord": "263a990c-d0d0-43f4-8937-356f45379eea",
+  "card": {
+    "uid": "starter_accelerator_JB05",
+    "id": "JB05",
+    "name": "催箭",
+    "type": "技能",
+    "system": "stage",
+    "rarity": "基础",
+    "pool": false,
+    "cost": 0,
+    "upgradedCost": 0,
+    "turns": null,
+    "upgradedTurns": null,
+    "target": "敌人",
+    "text": "目标的所有箭矢加速1回合。",
+    "upgradedText": "目标的所有箭矢加速2回合。",
+    "keywords": [],
+    "termIds": [
+      "EF29",
+      "CD25"
+    ],
+    "archetypeIds": [
+      "SYS_stage",
+      "RT_ACCEL"
+    ],
+    "breakthroughIds": [],
+    "partnerCardIds": [],
+    "art": "original-scene-jb04-20261102",
+    "character": "星见纯那",
+    "role": "起始牌",
+    "direction": "加速完成",
+    "draftStatus": "起始牌修订",
+    "draftBatch": "junna-starter-accelerator-20261103-v1",
+    "naming": {
+      "original": "",
+      "work": "TV 第1话 · 配图约19:00",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1140",
+      "kind": "动作或物件短名",
+      "adaptation": "拟定动作名“催箭”，表现使已瞄准目标的箭矢提前抵达。配图沿用备用牌JB04的原作持弓抬臂画面。"
+    },
+    "design": {
+      "classification": "起始牌",
+      "route": "加速完成",
+      "triggerRole": "扳机触发",
+      "systems": [
+        "stage"
+      ],
+      "systemRoles": {
+        "stage": {
+          "role": "扳机触发",
+          "port": "运转"
+        }
+      },
+      "routeRoles": {
+        "full_pool_RT_ACCEL": {
+          "role": "trigger",
+          "cross": false,
+          "ports": [
+            "operation"
+          ]
+        }
+      },
+      "port": "运转",
+      "roleReason": "起始牌组1张，与弓击共同展示布置与主动加速。",
+      "investment": "支付1张手牌；0能量，对选定敌人的己方箭矢生效。",
+      "rules": "选择1名存活敌人，快照自己箭矢牌堆中以该敌人为目标的所有有效布置，分别加速1回合，升级后加速2回合。当前剩余回合数最低减至0，归0后按正常完成、重放与去向规则结算。没有对应箭矢时可正常打出，效果为空；其他玩家的箭矢保持原计数。本牌打出后正常进入弃牌堆。",
+      "upgrade": "加速1→2回合；费用保持0，目标与范围保持。",
+      "reference": "按用户要求补充敌人目标加速基础牌。",
+      "textComplexity": "低"
+    },
+    "notes": "起始牌组：1张。\n结算约定：选择1名存活敌人，快照自己箭矢牌堆中以该敌人为目标的所有有效布置，分别加速1回合，升级后加速2回合。当前剩余回合数最低减至0，归0后按正常完成、重放与去向规则结算。没有对应箭矢时可正常打出，效果为空；其他玩家的箭矢保持原计数。本牌打出后正常进入弃牌堆。"
+  },
+  "startingDeck": [
+    {
+      "cardId": "JB01",
+      "count": 4
+    },
+    {
+      "cardId": "JB02",
+      "count": 4
+    },
+    {
+      "cardId": "JB03",
+      "count": 1
+    },
+    {
+      "cardId": "JB05",
+      "count": 1
+    }
+  ],
+  "checks": {
+    "totalCards": 10,
+    "newCards": 1,
+    "preservedBowDamage": [
+      25,
+      32
+    ],
+    "preservedBowCost": 1,
+    "preservedBowTurns": 3,
+    "allOtherCardsUnchanged": true
+  }
+}

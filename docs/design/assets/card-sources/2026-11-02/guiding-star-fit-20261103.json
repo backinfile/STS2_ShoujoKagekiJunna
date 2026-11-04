@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-03T06:31:50.510Z",
+  "revision": 1420,
+  "historyRecord": "2754b125-9c1b-459e-a160-c0445049b76d",
+  "id": "JA16",
+  "oldName": "引导箭",
+  "name": "引路星",
+  "art": "original-scene-ja16-guiding-star-20261103",
+  "source": "2021 剧场版 · 狩猎的Revue片段约01:33",
+  "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=93",
+  "captureFile": "film-hunt-132.jpg",
+  "rect": [
+    930,
+    110,
+    800,
+    600
+  ],
+  "checks": {
+    "mechanicsPreserved": true,
+    "fitPoolSynced": true,
+    "versionCheckedAtomicCommit": true
+  }
+}

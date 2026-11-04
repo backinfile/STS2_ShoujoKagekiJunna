@@ -1,0 +1,605 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-arrow-wait-sim-20261103-v1",
+  "date": "2026-11-03",
+  "sourceRevision": 1289,
+  "totalBattles": 784384,
+  "recommendation": {
+    "id": "junna-arrow-wait-sim-20261103-v1",
+    "byCost": {
+      "0": {
+        "base": 6,
+        "upgraded": 9,
+        "waitBase": 2,
+        "waitUpgraded": 3
+      },
+      "1": {
+        "base": 10,
+        "upgraded": 14,
+        "waitBase": 3,
+        "waitUpgraded": 5
+      },
+      "2": {
+        "base": 20,
+        "upgraded": 28,
+        "waitBase": 5,
+        "waitUpgraded": 7
+      }
+    },
+    "scope": "普通、非消耗、单体单段纯伤；费用0—2，等待0—3回合。",
+    "rationale": "按费用区分等待的机会成本；0费采用偏保守初值，较高费用保留更多等待补偿。"
+  },
+  "fixedComparison": [
+    {
+      "id": "b1u2",
+      "base": 1,
+      "upgraded": 2,
+      "baseResult": {
+        "loss": 0.7808159722222214,
+        "turns": 0.38559027777777777
+      },
+      "upgradedResult": {
+        "loss": 1.086284722222222,
+        "turns": 0.38819444444444445
+      }
+    },
+    {
+      "id": "b2u3",
+      "base": 2,
+      "upgraded": 3,
+      "baseResult": {
+        "loss": 0.5232638888888879,
+        "turns": 0.20043402777777777
+      },
+      "upgradedResult": {
+        "loss": 0.6856770833333328,
+        "turns": 0.278125
+      }
+    },
+    {
+      "id": "b3u4",
+      "base": 3,
+      "upgraded": 4,
+      "baseResult": {
+        "loss": 0.027170138888887863,
+        "turns": 0.046875
+      },
+      "upgradedResult": {
+        "loss": 0.35399305555555527,
+        "turns": 0.1785590277777778
+      }
+    },
+    {
+      "id": "b4u6",
+      "base": 4,
+      "upgraded": 6,
+      "baseResult": {
+        "loss": -0.40711805555555625,
+        "turns": -0.10338541666666667
+      },
+      "upgradedResult": {
+        "loss": -0.28871527777777795,
+        "turns": 0.0036458333333333343
+      }
+    },
+    {
+      "id": "b6u8",
+      "base": 6,
+      "upgraded": 8,
+      "baseResult": {
+        "loss": -1.0955729166666672,
+        "turns": -0.3167534722222222
+      },
+      "upgradedResult": {
+        "loss": -0.7703125000000006,
+        "turns": -0.13862847222222222
+      }
+    }
+  ],
+  "mixedComparison": [
+    {
+      "environment": "standard",
+      "curve": "fixed6u8",
+      "battles": 11520,
+      "deltaLoss": -0.9076388888888889,
+      "ci95": [
+        -1.1671564442484068,
+        -0.6481213335293707
+      ],
+      "deltaTurns": -0.21475694444444443,
+      "winRate": 1
+    },
+    {
+      "environment": "standard",
+      "curve": "fixed3u4",
+      "battles": 11520,
+      "deltaLoss": 0.2009548611111111,
+      "ci95": [
+        -0.032565457947434984,
+        0.4344751801696572
+      ],
+      "deltaTurns": 0.1375,
+      "winRate": 1
+    },
+    {
+      "environment": "standard",
+      "curve": "byCost",
+      "battles": 11520,
+      "deltaLoss": 0.24895833333333334,
+      "ci95": [
+        0.03206777707068953,
+        0.46584888959597714
+      ],
+      "deltaTurns": 0.13003472222222223,
+      "winRate": 1
+    },
+    {
+      "environment": "energy4",
+      "curve": "fixed6u8",
+      "battles": 11520,
+      "deltaLoss": -0.12083333333333333,
+      "ci95": [
+        -0.3316463855955575,
+        0.0899797189288907
+      ],
+      "deltaTurns": -0.04201388888888889,
+      "winRate": 1
+    },
+    {
+      "environment": "energy4",
+      "curve": "fixed3u4",
+      "battles": 11520,
+      "deltaLoss": 0.6,
+      "ci95": [
+        0.4004752800914249,
+        0.7995247199085751
+      ],
+      "deltaTurns": 0.24097222222222223,
+      "winRate": 1
+    },
+    {
+      "environment": "energy4",
+      "curve": "byCost",
+      "battles": 11520,
+      "deltaLoss": 0.6005208333333333,
+      "ci95": [
+        0.40490233391849156,
+        0.7961393327481752
+      ],
+      "deltaTurns": 0.234375,
+      "winRate": 1
+    },
+    {
+      "environment": "draw7",
+      "curve": "fixed6u8",
+      "battles": 11520,
+      "deltaLoss": -0.9605034722222222,
+      "ci95": [
+        -1.163059419376561,
+        -0.7579475250678834
+      ],
+      "deltaTurns": -0.07552083333333333,
+      "winRate": 1
+    },
+    {
+      "environment": "draw7",
+      "curve": "fixed3u4",
+      "battles": 11520,
+      "deltaLoss": 0.01657986111111111,
+      "ci95": [
+        -0.15397161259055303,
+        0.18713133481277516
+      ],
+      "deltaTurns": 0.22864583333333333,
+      "winRate": 1
+    },
+    {
+      "environment": "draw7",
+      "curve": "byCost",
+      "battles": 11520,
+      "deltaLoss": 0.04210069444444445,
+      "ci95": [
+        -0.12260058928285958,
+        0.20680197817174847
+      ],
+      "deltaTurns": 0.22265625,
+      "winRate": 1
+    },
+    {
+      "environment": "upgradedShell",
+      "curve": "fixed6u8",
+      "battles": 11520,
+      "deltaLoss": -0.33602430555555557,
+      "ci95": [
+        -0.5162927735760828,
+        -0.15575583753502834
+      ],
+      "deltaTurns": -0.11024305555555555,
+      "winRate": 1
+    },
+    {
+      "environment": "upgradedShell",
+      "curve": "fixed3u4",
+      "battles": 11520,
+      "deltaLoss": 0.03029513888888889,
+      "ci95": [
+        -0.12873060824506127,
+        0.18932088602283903
+      ],
+      "deltaTurns": 0.13142361111111112,
+      "winRate": 1
+    },
+    {
+      "environment": "upgradedShell",
+      "curve": "byCost",
+      "battles": 11520,
+      "deltaLoss": 0.11857638888888888,
+      "ci95": [
+        -0.030456466599290466,
+        0.2676092443770683
+      ],
+      "deltaTurns": 0.13619791666666667,
+      "winRate": 1
+    }
+  ],
+  "pressureComparison": [
+    {
+      "curve": "fixed6u8",
+      "winRate": 0.6271701388888888,
+      "referenceWinRate": 0.2825520833333333
+    },
+    {
+      "curve": "fixed3u4",
+      "winRate": 0.3927951388888889,
+      "referenceWinRate": 0.2825520833333333
+    },
+    {
+      "curve": "byCost",
+      "winRate": 0.4019097222222222,
+      "referenceWinRate": 0.2825520833333333
+    }
+  ],
+  "checks": {
+    "ruleCases": 9,
+    "zeroTurnEquivalence": true,
+    "instanceConservation": true,
+    "noFutureDrawLeak": true,
+    "terminalKillPreference": true
+  },
+  "runs": [
+    {
+      "name": "正式比较",
+      "battles": 294912,
+      "path": "output/balance-sim/2026-11-03/main-final/results.json"
+    },
+    {
+      "name": "出牌策略与速射",
+      "battles": 165888,
+      "path": "output/balance-sim/2026-11-03/policies/results.json"
+    },
+    {
+      "name": "1、2费细化",
+      "battles": 28672,
+      "path": "output/balance-sim/2026-11-03/refinement/results.json"
+    },
+    {
+      "name": "新种子混合费用验证",
+      "battles": 294912,
+      "path": "output/balance-sim/2026-11-03/mixed-validation.json"
+    }
+  ],
+  "setup": {
+    "player": {
+      "hp": 80,
+      "energy": 3,
+      "draw": 5,
+      "handLimit": 10,
+      "maxTurns": 24
+    },
+    "deckSize": 17,
+    "probeCounts": [
+      2,
+      5
+    ],
+    "mainSeeds": 64,
+    "validationSeeds": 64,
+    "baseDeckFixed": true,
+    "onlyProbeUpgraded": true,
+    "policy": "当前手牌两步搜索；抽牌前只估计抽牌收益，揭示后重新决策。",
+    "rules": [
+      "能量正常支付，回合开始刷新。",
+      "箭矢按自己的回合开始递减，结算前离开正常抽弃牌循环。",
+      "单体加速、同目标加速、群体加速、速射按当前工作台快照处理。",
+      "箭矢锁定目标，目标死亡后该伤害落空；记录溢出伤害。",
+      "保留牌占用真实手牌，抽牌上限为10。"
+    ],
+    "metric": "同费用即时攻击为参照，承伤差与击杀回合差分别比较。压力场景单列。",
+    "scope": [
+      "伤害",
+      "格挡",
+      "抽牌",
+      "保留",
+      "消耗工具",
+      "箭矢等待",
+      "加速",
+      "速射"
+    ],
+    "extensions": [
+      "知识组获得与连锁",
+      "伤害加成成长",
+      "额外触发与重放",
+      "遗物、药水及多人结算"
+    ]
+  },
+  "encounters": [
+    {
+      "id": "worm",
+      "label": "毛绒伏地虫",
+      "kind": "native",
+      "group": "calibration",
+      "enemies": [
+        {
+          "name": "毛绒伏地虫",
+          "hp": [
+            55,
+            57
+          ],
+          "moves": [
+            {
+              "damage": 4
+            },
+            {
+              "strength": 7
+            },
+            {
+              "damage": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nibbit",
+      "label": "小啃兽·单体",
+      "kind": "native",
+      "group": "calibration",
+      "enemies": [
+        {
+          "name": "小啃兽",
+          "hp": [
+            42,
+            46
+          ],
+          "moves": [
+            {
+              "damage": 12
+            },
+            {
+              "damage": 6,
+              "block": 5
+            },
+            {
+              "strength": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nibbits",
+      "label": "小啃兽·前后两只",
+      "kind": "native",
+      "group": "calibration",
+      "enemies": [
+        {
+          "name": "前排小啃兽",
+          "hp": [
+            42,
+            46
+          ],
+          "moves": [
+            {
+              "damage": 6,
+              "block": 5
+            },
+            {
+              "strength": 2
+            },
+            {
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "name": "后排小啃兽",
+          "hp": [
+            42,
+            46
+          ],
+          "moves": [
+            {
+              "strength": 2
+            },
+            {
+              "damage": 12
+            },
+            {
+              "damage": 6,
+              "block": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gremlins",
+      "label": "三只卑鄙地精·组合测试",
+      "kind": "constructed_native_enemies",
+      "group": "calibration",
+      "enemies": [
+        {
+          "name": "卑鄙地精1",
+          "hp": [
+            10,
+            14
+          ],
+          "opener": [
+            {}
+          ],
+          "moves": [
+            {
+              "damage": 9
+            }
+          ]
+        },
+        {
+          "name": "卑鄙地精2",
+          "hp": [
+            10,
+            14
+          ],
+          "opener": [
+            {}
+          ],
+          "moves": [
+            {
+              "damage": 9
+            }
+          ]
+        },
+        {
+          "name": "卑鄙地精3",
+          "hp": [
+            10,
+            14
+          ],
+          "opener": [
+            {}
+          ],
+          "moves": [
+            {
+              "damage": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long",
+      "label": "长战靶·自设",
+      "kind": "synthetic_control",
+      "group": "calibration",
+      "enemies": [
+        {
+          "name": "长战靶",
+          "hp": [
+            160,
+            180
+          ],
+          "moves": [
+            {
+              "damage": 10
+            },
+            {
+              "damage": 12
+            },
+            {}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sculptor",
+      "label": "虔诚雕刻师·增长压力",
+      "kind": "native",
+      "group": "stress",
+      "enemies": [
+        {
+          "name": "虔诚雕刻师",
+          "hp": [
+            162,
+            162
+          ],
+          "opener": [
+            {
+              "ritual": 9
+            }
+          ],
+          "moves": [
+            {
+              "damage": 12
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Slice.cs",
+      "sha256": "70c77e9b035557547d313400a38b3369a6a5389406ddf5c635ed7eacf0ad4bc9"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\TwinStrike.cs",
+      "sha256": "87131a9fa3797d8bc26be299aafc745ab698082346b98cbf6ac91d2697f63b29"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\DefendIronclad.cs",
+      "sha256": "f2707481e0be1a5e856cab0dc788fb520e80fe3dff9c0a0f53869b857b8c7740"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\StrikeIronclad.cs",
+      "sha256": "b9514c7880abc575abc7a6e572273e1cb64a4a092192f83af7d4e3b6c211c388"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Leap.cs",
+      "sha256": "debd1d5bf376315b796e09c1d6bf6ea3bccca72a5b107cd6dfb5318b3330b412"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Backflip.cs",
+      "sha256": "af5ff7bc9381a70cbc39af78a55f5ca845855bafb90e62292365fc086ee10f10"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\FuzzyWurmCrawler.cs",
+      "sha256": "1b985c2625c86375a377bb8f124e339cba9af66ce4c6b7d0d5f4548662ce8bb8"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\Nibbit.cs",
+      "sha256": "5f027dafe55d5be0d4001188ff010cbb087b3c0c9f5b069cd03713b33ea02912"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Encounters\\NibbitsNormal.cs",
+      "sha256": "a5b84e1df56a5e85785ab654b899777db8baee453481de4faf140f7420f2edd9"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\SneakyGremlin.cs",
+      "sha256": "ad35c5bfcd96bad7cedd5e616340ea399653705fd88c205bacfc4cb817215725"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\DevotedSculptor.cs",
+      "sha256": "3a3149c0c5ab743d7d2c18b9d302c61d94b5d3bf4ebdb0851dd446689b3c5217"
+    },
+    {
+      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Powers\\RitualPower.cs",
+      "sha256": "68fb6b795725dfc7c771dcce7b93d6d12b04871289d9d1cf2b5767a8b8a397c4"
+    }
+  ],
+  "programs": [
+    {
+      "file": "tools/balance-sim/engine.cjs",
+      "sha256": "95fdc488c17cab7723449b299b14b48d0a7093186c3dec19d55abeb17e67d29d"
+    },
+    {
+      "file": "tools/balance-sim/run.cjs",
+      "sha256": "af58576b885cf1d25c04c51b82d41a0814ddf3b2bf78ad007a498619cbcb1902"
+    },
+    {
+      "file": "tools/balance-sim/validate.cjs",
+      "sha256": "da78939e118e09409f04d39a6157a11df8bc476af14f8f5434533503846646f7"
+    },
+    {
+      "file": "tools/balance-sim/scenarios.json",
+      "sha256": "94ccb552a2f15d8f8d21f6e8fac0d388d838c94607f77905ea12850471cfcdf1"
+    }
+  ]
+}

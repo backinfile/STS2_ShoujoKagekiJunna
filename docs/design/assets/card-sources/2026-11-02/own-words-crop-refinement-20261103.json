@@ -1,0 +1,15 @@
+{
+  "batchId": "junna-own-words-arrow-crop-20261103-v2",
+  "revision": 1206,
+  "id": "JK69C",
+  "proof": "tv09-2022-proof.jpg",
+  "crop": [
+    1000,
+    750,
+    380,
+    20
+  ],
+  "previousArt": "original-scene-jk69c-fit-refinement-20261103",
+  "art": "original-scene-jk69c-own-words-centered-20261103",
+  "onlyArtChanged": true
+}

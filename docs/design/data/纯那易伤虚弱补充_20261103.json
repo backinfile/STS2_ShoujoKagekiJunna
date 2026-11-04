@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-symmetric-debuff-20261103-v1",
+  "title": "易伤与虚弱补充",
+  "date": "2026-11-03",
+  "sourceRevision": 1202,
+  "appliedRevision": 1203,
+  "historyRecord": "844574ce-d8d2-4930-a523-869cfe6221c4",
+  "styleSnapshot": [
+    {
+      "uid": "db849030-f187-4f2e-b7c8-a67bb788f869",
+      "id": "STYLE_001",
+      "name": "限制抽牌，不限制加费",
+      "content": "抽牌效果尽量不做。要做的话应该有限制，比如作为箭矢牌出现，比如有消耗不可持续打。"
+    },
+    {
+      "uid": "junna_style_arrow_wording",
+      "id": "STYLE_002",
+      "name": "箭矢范围表述",
+      "content": "“所有箭矢”默认指自己的全部箭矢；联机牌跨玩家时明确写出“所有玩家的箭矢”。"
+    },
+    {
+      "uid": "junna_style_single_player",
+      "id": "STYLE_003",
+      "name": "单人卡牌",
+      "content": "本轮先设计单人构筑中的卡牌，暂不设计多玩家专用牌。"
+    },
+    {
+      "uid": "junna_style_kotoba",
+      "id": "STYLE_004",
+      "name": "知识牌设计",
+      "content": "知识牌和知识关联牌共用“知识”关键词。泛指这类牌的效果统一写“知识牌”；引用自身关联牌的效果使用完整牌名。"
+    },
+    {
+      "uid": "4e54c303-a9bb-47ee-bdf2-2345204f8cb8",
+      "id": "STYLE_005",
+      "name": "不要写其他职业中已经有的流派牌",
+      "content": "比如战士有消耗流派，就不要写消耗的收益牌。但是普通消耗关键字还是可以有（因为消耗牌时所有职业都有的）。比如不要写弃置卡牌的触发和收益。不要直接用力量做流派等。"
+    },
+    {
+      "uid": "junna_style_concise_rules",
+      "id": "STYLE_006",
+      "name": "牌面与结算约定",
+      "content": "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。"
+    },
+    {
+      "uid": "fbb25eb6-4ad6-4273-8ec3-c11c2b6004b8",
+      "id": "STYLE_007",
+      "name": "箭矢牌的设计倾向",
+      "content": "一般来讲箭矢牌是倾向于快速完成的，越早完成越触发效果。但允许少数几张牌是在场期间生效。"
+    },
+    {
+      "uid": "5cc93fd0-d28f-41c4-b12a-6bbf6c8d6f86",
+      "id": "STYLE_008",
+      "name": "伤害加成体系的设计倾向",
+      "content": "这个小体系只负责输出端口。体系本身的卡牌不算多，但是其他体系可能会有大量的效果触发（获得伤害加成）"
+    },
+    {
+      "uid": "junna_style_personal_scope",
+      "id": "STYLE_PLAYER_SCOPE",
+      "name": "默认作用范围",
+      "content": "本职业卡牌的卡牌、牌堆、能力及触发收益默认归玩家自己；专门联机牌按牌面明确指定其他玩家或全部玩家。伤害仍按牌面指定的敌人目标结算。"
+    },
+    {
+      "uid": "junna_style_card_reference",
+      "id": "STYLE_CARD_REFERENCE",
+      "name": "卡牌名称引用",
+      "content": "引用具体卡牌时直接写完整牌名，以金色显示。升级版本在牌名后加“+”；关联提示按对应卡牌模型提供。"
+    },
+    {
+      "uid": "junna_style_fit_arrow",
+      "id": "STYLE_FIT_ARROW",
+      "name": "箭矢契合：箭、言叶、星",
+      "content": "箭矢体系可采用物理的箭、言叶、星等多种契合。围绕各牌的名称、效果与原作内容选取合适的意象；物理箭可表现瞄准、发射与命中，言叶可表现话语的传递与抵达，星可表现追寻目标与接近理想。卡图保留清楚的主体、动作或相关物件。"
+    },
+    {
+      "uid": "junna_style_fit_damage_bonus",
+      "id": "STYLE_FIT_DAMAGE_BONUS",
+      "name": "伤害加成契合：日常锻炼",
+      "content": "伤害加成体系的通用契合是纯那的日常锻炼。卡名与卡图围绕体能训练、基本功、反复练习和训练成果展开；增加加成对应训练积累，转移对应专项训练，倍率与额外伤害次数对应发力、熟练度和耐力。"
+    },
+    {
+      "uid": "junna_style_fit_knowledge",
+      "id": "STYLE_FIT_KNOWLEDGE",
+      "name": "知识契合与组内关联",
+      "content": "知识牌围绕纯那学到、引用、理解和运用的具体内容选材，例如引文、剧目、舞台技法及从经验形成的认识。同组牌要有具体的共同来源，或内容与例证、问题与答案、原因与结论等联系，效果也要表现这种联系。温习、背诵、记录等学习动作主要用于知识支援牌。"
+    },
+    {
+      "uid": "junna_style_fit_basic_art",
+      "id": "STYLE_FIT_BASIC_ART",
+      "name": "基础打击与防御的卡图",
+      "content": "打击突出明确的攻击动作、武器方向或命中；防御突出抵挡来击、武器相接或保护姿态。参考基础职业与Karen的表达，裁切时保留可识别的纯那、武器和完整动作。"
+    },
+    {
+      "uid": "junna_style_fit_sources",
+      "id": "STYLE_FIT_SOURCES",
+      "name": "卡名、卡图与体系契合",
+      "content": "卡名优先取原作原词，允许简短的动作或物件名，以7字以内为主。各牌保留有区分的契合与卡图，同组牌共同表现具体关系。配图优先TV与剧场版；普通牌以纯那或相关物件为主体，人物知识牌使用对应角色。跨体系牌以主体系契合为主，再用效果与来源说明次体系的联系。"
+    },
+    {
+      "uid": "junna_style_fit_energy",
+      "id": "STYLE_FIT_ENERGY",
+      "name": "获得能量契合：恢复精力（候选）",
+      "content": "获得能量暂以“恢复精力”作为统一契合方向，优先使用休息、饮食补给、调整呼吸和重振状态的原作内容。即时能量侧重当下调整，下一回合获得能量侧重休整后的恢复，持续获得能量侧重规律作息与保持状态。跨体系牌仍以主体系的具体内容为主。"
+    },
+    {
+      "uid": "78d9a930-0c12-490d-afb8-644dfe826cef",
+      "id": "STYLE_009",
+      "name": "关于易伤和虚弱",
+      "content": "允许写易伤和虚弱牌，但是本职业没有偏向性，因此需要对称来写。1张虚弱+1张易伤牌，或者1张牌上同时有易伤和虚弱效果。  一共大概2对或者2张即可"
+    }
+  ],
+  "newCards": [
+    {
+      "uid": "symmetric_debuff_JA58",
+      "id": "JA58",
+      "name": "牵制箭",
+      "type": "箭矢",
+      "arrowSubtype": "技能",
+      "system": "stage",
+      "rarity": "普通",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 1,
+      "upgradedTurns": 1,
+      "target": "敌人",
+      "text": "给予3层易伤和虚弱。",
+      "upgradedText": "给予4层易伤和虚弱。",
+      "keywords": [],
+      "termIds": [
+        "KW_STAGE",
+        "EF28",
+        "EF11",
+        "ST_VULNERABLE",
+        "ST_WEAK"
+      ],
+      "archetypeIds": [
+        "SYS_stage",
+        "RT_ACCEL"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "effectIds": [
+        "EF28",
+        "EF11"
+      ],
+      "ruleIds": [],
+      "art": "original-scene-jb03-star-aim-20261103",
+      "character": "星见纯那",
+      "role": "机制基础牌",
+      "direction": "加速完成",
+      "draftStatus": "补充候选",
+      "draftBatch": "junna-symmetric-debuff-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "TV 第2话 · 18:31 · 持弓瞄准",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1111",
+        "adaptation": "根据持弓瞄准的动作拟名“牵制箭”。射击迫使对手防守，同时暴露破绽，对应等量的虚弱与易伤。卡图使用已有的纯那持弓瞄准裁切，原始截图tv02-basic-1831-20261103.png。"
+      },
+      "design": {
+        "classification": "机制基础牌",
+        "route": "加速完成",
+        "triggerRole": "载体",
+        "systems": [
+          "stage"
+        ],
+        "systemRoles": {
+          "stage": {
+            "role": "载体",
+            "port": "输出／防御"
+          }
+        },
+        "routeRoles": {
+          "full_pool_RT_ACCEL": {
+            "role": "load",
+            "cross": false,
+            "ports": [
+              "output",
+              "defense"
+            ]
+          }
+        },
+        "port": "输出／防御",
+        "roleReason": "普通奖励中的独立削弱入口，以1回合等待换取较长的易伤与虚弱覆盖；可由加速提前完成。",
+        "investment": "1点能量、1张手牌、1回合等待。",
+        "rules": "支付1点能量，选择一名敌人并建立1回合箭矢。完成时按记录目标依次给予易伤和虚弱，基础各3层、升级各4层；各次状态施加沿用本体抵挡、叠加和持续时间规则。重放与额外触发沿用箭矢的既有结算，完成后正常进入弃牌堆。内部子类型为技能；本牌只施加状态，自身没有伤害效果。",
+        "upgrade": "易伤与虚弱同时由3层提高至4层；费用和回合数保持1。",
+        "reference": "STYLE_009：易伤与虚弱对称设计，卡池约两张。与现有死角共同提供两张同时给予两种状态的牌。",
+        "textComplexity": "低"
+      },
+      "notes": "结算约定：支付1点能量，选择一名敌人并建立1回合箭矢。完成时按记录目标依次给予易伤和虚弱，基础各3层、升级各4层；各次状态施加沿用本体抵挡、叠加和持续时间规则。重放与额外触发沿用箭矢的既有结算，完成后正常进入弃牌堆。内部子类型为技能；本牌只施加状态，自身没有伤害效果。"
+    }
+  ],
+  "activeStatusCards": [
+    {
+      "id": "JK45B",
+      "name": "死角",
+      "text": "知识。布景迷宫在场时，此牌耗能为0。给予1层虚弱和易伤。",
+      "upgradedText": "知识。布景迷宫在场时，此牌耗能为0。给予2层虚弱和易伤。"
+    },
+    {
+      "id": "JA58",
+      "name": "牵制箭",
+      "text": "给予3层易伤和虚弱。",
+      "upgradedText": "给予4层易伤和虚弱。"
+    }
+  ],
+  "checks": {
+    "existingCardsUnchanged": true,
+    "reserveAndTrashUnchanged": true,
+    "startingDeckUnchanged": true,
+    "normalizedWithWorkbench": true,
+    "symmetricBaseAndUpgrade": true,
+    "activeDualStatusCards": 2
+  }
+}

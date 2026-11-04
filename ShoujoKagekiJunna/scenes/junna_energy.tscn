@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/energy.png" id="1"]
+[node name="JunnaEnergy" type="Control"]
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+[node name="Layers" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+mouse_filter = 2
+[node name="Star" type="TextureRect" parent="Layers"]
+offset_right = 128.0
+offset_bottom = 128.0
+mouse_filter = 2
+texture = ExtResource("1")
+expand_mode = 1
+stretch_mode = 5

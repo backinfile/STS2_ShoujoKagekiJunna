@@ -1,0 +1,154 @@
+{
+  "revision": 1171,
+  "cards": [
+    {
+      "uid": "complete_pool_JB03",
+      "id": "JB03",
+      "name": "逐星",
+      "type": "箭矢",
+      "system": "stage",
+      "rarity": "基础",
+      "pool": false,
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 3,
+      "upgradedTurns": 3,
+      "arrowSubtype": "攻击",
+      "target": "敌人",
+      "text": "造成25点伤害。",
+      "upgradedText": "造成32点伤害。",
+      "keywords": [],
+      "termIds": [
+        "KW_STAGE",
+        "EF28",
+        "EF01"
+      ],
+      "archetypeIds": [
+        "SYS_stage",
+        "RT_ACCEL"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "original-scene-jb03-star-aim-20261103",
+      "character": "星见纯那",
+      "role": "起始牌",
+      "direction": "箭矢",
+      "draftStatus": "完整卡池初稿",
+      "draftBatch": "junna-complete-pool-draft-20261102-v1",
+      "naming": {
+        "original": "",
+        "work": "TV 第2话 · 持弓瞄准",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368",
+        "kind": "主题短名",
+        "adaptation": "按“自己的星”主题拟定的短名。“逐星”表示确定想要抵达的目标，再经历等待，完成时的命中对应抵达。卡图取纯那持弓瞄准、目光朝向前方的原作画面，保留可识别的脸部与拉弓姿态；截图tv02-basic-1831-20261103.png。"
+      },
+      "design": {
+        "classification": "起始牌",
+        "route": "箭矢",
+        "triggerRole": "载体",
+        "systems": [
+          "stage"
+        ],
+        "systemRoles": {
+          "stage": {
+            "role": "载体",
+            "port": "输出"
+          }
+        },
+        "port": "输出",
+        "roleReason": "起始牌组1张，以等待后命中的箭矢表现追寻自己的星，与更近一步共同展示布置和加速。",
+        "rules": "支付1点能量，选择1名敌人并布置一个3回合箭矢。剩余回合数因自然推进或加速归0时，基础/升级分别对记录的目标造成25/32点伤害，再按箭矢正常规则处理去向。",
+        "independence": "有独立基础效果；相关构筑提高收益。",
+        "risk": "费用与数值在实战阶段复核。",
+        "upgrade": "伤害25→32；费用保持1，初始回合数保持3。",
+        "textComplexity": "低",
+        "reference": "箭矢契合：自己的星。初始牌组为4张打击、4张防御、1张逐星和1张更近一步。",
+        "routeRoles": {
+          "full_pool_RT_ACCEL": {
+            "role": "load",
+            "cross": false,
+            "ports": []
+          }
+        }
+      },
+      "notes": "起始牌组：1张。\n结算约定：支付1点能量，选择1名敌人并布置一个3回合箭矢。剩余回合数因自然推进或加速归0时，基础/升级分别对记录的目标造成25/32点伤害，再按箭矢正常规则处理去向。"
+    },
+    {
+      "uid": "starter_accelerator_JB05",
+      "id": "JB05",
+      "name": "更近一步",
+      "type": "技能",
+      "system": "stage",
+      "rarity": "基础",
+      "pool": false,
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "保留。目标的所有箭矢加速1回合。",
+      "upgradedText": "保留。\n目标的所有箭矢加速1回合。",
+      "keywords": [],
+      "termIds": [
+        "EF29",
+        "CD25"
+      ],
+      "archetypeIds": [
+        "SYS_stage",
+        "RT_ACCEL"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "original-scene-jb05-star-20261103",
+      "character": "星见纯那",
+      "role": "起始牌",
+      "direction": "加速完成",
+      "draftStatus": "起始牌修订",
+      "draftBatch": "junna-starter-accelerator-20261103-v1",
+      "naming": {
+        "original": "",
+        "work": "TV 第2话 · 约18:34",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1114",
+        "kind": "动作短名",
+        "adaptation": "按“自己的星”主题拟定的短名。主动朝着自己的星前进，使指向同一目标的箭矢少等待1回合，表示离抵达更近一步。升级获得保留，表示把向前的决心留到合适的时机。配图取纯那持弓迈步向前的动作。 卡图：原作画面裁切，截图tv02-basic-1833-20261103.png。"
+      },
+      "design": {
+        "classification": "起始牌",
+        "route": "加速完成",
+        "triggerRole": "扳机触发",
+        "systems": [
+          "stage"
+        ],
+        "systemRoles": {
+          "stage": {
+            "role": "扳机触发",
+            "port": "运转"
+          }
+        },
+        "routeRoles": {
+          "full_pool_RT_ACCEL": {
+            "role": "trigger",
+            "cross": false,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "port": "运转",
+        "roleReason": "起始牌组1张，以主动加速表现朝自己的星更近一步，与逐星共同展示布置和加速。",
+        "investment": "支付1张手牌、0点能量，对选定敌人的己方箭矢生效。",
+        "rules": "选择1名存活敌人，将自己箭矢牌堆中以该敌人为目标的所有有效箭矢分别加速1回合。升级后获得保留，加速量仍为1回合。剩余回合数最低减至0，归0后按箭矢正常规则完成结算。没有对应箭矢时可正常打出，效果为空。本牌使用后正常进入弃牌堆。",
+        "upgrade": "获得保留；费用保持0，加速量保持1回合，目标与范围保持。",
+        "reference": "箭矢契合：自己的星。升级采用当前牌面的保留效果。",
+        "textComplexity": "低"
+      },
+      "notes": "起始牌组：1张。\n结算约定：选择1名存活敌人，将自己箭矢牌堆中以该敌人为目标的所有有效箭矢分别加速1回合。升级后获得保留，加速量仍为1回合。剩余回合数最低减至0，归0后按箭矢正常规则完成结算。没有对应箭矢时可正常打出，效果为空。本牌使用后正常进入弃牌堆。"
+    }
+  ],
+  "arrowStyle": {
+    "uid": "junna_style_fit_arrow",
+    "id": "STYLE_FIT_ARROW",
+    "name": "箭矢契合：自己的星",
+    "content": "箭矢体系的通用契合是“自己的星”。围绕寻找目标、瞄准、追逐和最终抵达选取原作内容，对应箭矢的布置、等待与完成。"
+  }
+}

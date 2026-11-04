@@ -1,0 +1,16 @@
+{
+  "JUNNA.title": "星见纯那",
+  "JUNNA.titleObject": "星见纯那",
+  "JUNNA.description": "圣翔音乐学园第99期生。",
+  "JUNNA.pronounSubject": "她",
+  "JUNNA.pronounObject": "她",
+  "JUNNA.pronounPossessive": "她的",
+  "JUNNA.possessiveAdjective": "她的",
+  "JUNNA.cardsModifierTitle": "星见纯那卡牌",
+  "JUNNA.cardsModifierDescription": "星见纯那卡牌会出现在奖励与商店中。",
+  "JUNNA.banter.alive.endTurnPing": "准备好了。",
+  "JUNNA.banter.dead.endTurnPing": "……",
+  "JUNNA.eventDeathPrevention": "我还要继续。",
+  "JUNNA.goldMonologue": "……",
+  "JUNNA.aromaPrinciple": "……"
+}

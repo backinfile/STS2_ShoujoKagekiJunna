@@ -1,0 +1,26 @@
+{
+  "batchId": "official-naming-20261102-embark",
+  "label": "配入官方原词与截图 · 登船与等待",
+  "backup": "before-embark.json",
+  "matches": [
+    {
+      "id": "JA02",
+      "name": "登上你的船",
+      "original": "君の船に乗せてもらう……",
+      "work": "少女歌剧 Revue Starlight 遥远的黄金国 · 纯那／奈奈公演 · 1:30:27 · 游戏内中日双语",
+      "url": "https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=5427",
+      "time": "1:30:27",
+      "proof": "game-9025.jpg",
+      "crop": [
+        720,
+        540,
+        620,
+        40
+      ],
+      "sourceNote": "名称逐字取自官方中文版游戏画面；日文对照来自同一画面的日文文本。",
+      "fit": "亚历杭德罗要求登船，在远航途中学习并抵达自己的目标。此处采用共同登船的意象：一次投入开放全部箭矢的零费出发条件，抵达则多等待一回合；费用从逐张支付转为先行投入，航程成为新的代价。",
+      "artNote": "游戏实录 1:30:27 官方游戏画面裁切。",
+      "fullQuote": "让我登上你的船吧……"
+    }
+  ]
+}

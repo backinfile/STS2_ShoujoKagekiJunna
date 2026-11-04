@@ -1,0 +1,15 @@
+{
+  "name": "junna-design-workbench",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local MCP service for the Junna card design workbench",
+  "scripts": {
+    "build": "node build.cjs",
+    "start": "node mcp-server.cjs",
+    "mcp": "node mcp-server.cjs",
+    "test:mcp": "node --test mcp-store.test.cjs mcp-server.test.cjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2"
+  }
+}

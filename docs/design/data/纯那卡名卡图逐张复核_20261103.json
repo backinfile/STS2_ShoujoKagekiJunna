@@ -1,0 +1,1163 @@
+{
+  "revision": 1326,
+  "count": 124,
+  "cards": [
+    {
+      "id": "JA02",
+      "name": "布阵",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "已修正",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA02"
+    },
+    {
+      "id": "JA04",
+      "name": "速射",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA04"
+    },
+    {
+      "id": "JK05",
+      "name": "旁征博引",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK05"
+    },
+    {
+      "id": "JK10",
+      "name": "热情与光芒",
+      "theme": "舞台与伙伴",
+      "nameReview": "已修正",
+      "artReview": "待换图",
+      "findings": {
+        "art": "眼睛和嘴部占比过大，适合换成更完整的说话或登台镜头。"
+      },
+      "fitEntry": "FIT_CARD_JK10"
+    },
+    {
+      "id": "JK10B",
+      "name": "舞台之力",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK10B"
+    },
+    {
+      "id": "JG03",
+      "name": "重复练习",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "与复唱使用同一张乐谱，建议换成身体或台词的重复训练。"
+      },
+      "fitEntry": "FIT_CARD_JG03"
+    },
+    {
+      "id": "JA13",
+      "name": "直斩",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA13"
+    },
+    {
+      "id": "JA15",
+      "name": "闪耀的梦",
+      "theme": "星与理想",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA15"
+    },
+    {
+      "id": "JA16",
+      "name": "引导箭",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "主体被长颈鹿腿部占据，箭矢与纯那都偏小。"
+      },
+      "fitEntry": "FIT_CARD_JA16"
+    },
+    {
+      "id": "JA17",
+      "name": "破围",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA17"
+    },
+    {
+      "id": "JK11",
+      "name": "问句",
+      "theme": "舞台与伙伴",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "问句过于概括，后续可采用同一段原作对话中的具体问题。"
+      },
+      "fitEntry": "FIT_CARD_JK11"
+    },
+    {
+      "id": "JK11B",
+      "name": "答句",
+      "theme": "舞台与伙伴",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "答句过于概括，需和问句一起确定具体对话内容。"
+      },
+      "fitEntry": "FIT_CARD_JK11B"
+    },
+    {
+      "id": "JG09",
+      "name": "准备活动",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JG09"
+    },
+    {
+      "id": "JA22",
+      "name": "再上弦",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA22"
+    },
+    {
+      "id": "JK15",
+      "name": "再演",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "闭眼特写与再演的辨识联系偏弱。"
+      },
+      "fitEntry": "FIT_CARD_JK15"
+    },
+    {
+      "id": "JK15B",
+      "name": "修订稿",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "与课前预习的桌面取景接近，修订内容尚未直接入画。"
+      },
+      "fitEntry": "FIT_CARD_JK15B"
+    },
+    {
+      "id": "JG16",
+      "name": "训练计划",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JG16"
+    },
+    {
+      "id": "JT01",
+      "name": "独白",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JT01"
+    },
+    {
+      "id": "JT02",
+      "name": "改编",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JT02"
+    },
+    {
+      "id": "JT03",
+      "name": "前进",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JT03"
+    },
+    {
+      "id": "A",
+      "name": "埋头学习",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_A"
+    },
+    {
+      "id": "B",
+      "name": "心得",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_B"
+    },
+    {
+      "id": "JH01",
+      "name": "换位",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH01"
+    },
+    {
+      "id": "JK27",
+      "name": "同台",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK27"
+    },
+    {
+      "id": "JG23",
+      "name": "耐力训练",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JG23"
+    },
+    {
+      "id": "JH05",
+      "name": "再生产",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH05"
+    },
+    {
+      "id": "JA35",
+      "name": "时间流速",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA35"
+    },
+    {
+      "id": "JK32",
+      "name": "烁星",
+      "theme": "星与理想",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK32"
+    },
+    {
+      "id": "JK32B",
+      "name": "流星",
+      "theme": "星与理想",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK32B"
+    },
+    {
+      "id": "JK32C",
+      "name": "明星",
+      "theme": "星与理想",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK32C"
+    },
+    {
+      "id": "JK33",
+      "name": "过去",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK33"
+    },
+    {
+      "id": "JK33B",
+      "name": "未来",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK33B"
+    },
+    {
+      "id": "JK37",
+      "name": "压轴台词",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK37"
+    },
+    {
+      "id": "JK37B",
+      "name": "提词",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK37B"
+    },
+    {
+      "id": "JK37C",
+      "name": "台本",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK37C"
+    },
+    {
+      "id": "JK43",
+      "name": "追不上的距离",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK43"
+    },
+    {
+      "id": "JK43B",
+      "name": "不肯死心",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK43B"
+    },
+    {
+      "id": "JK44",
+      "name": "白刃战",
+      "theme": "舞台技法",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "近身技法明确，仍需为怯场与本牌补齐共同文本出处。"
+      },
+      "fitEntry": "FIT_CARD_JK44"
+    },
+    {
+      "id": "JK44B",
+      "name": "怯场",
+      "theme": "舞台技法",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "需要和白刃战共同确定具体剧目或技法中的关系。"
+      },
+      "fitEntry": "FIT_CARD_JK44B"
+    },
+    {
+      "id": "JK45",
+      "name": "布景迷宫",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK45"
+    },
+    {
+      "id": "JK45B",
+      "name": "死角",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK45B"
+    },
+    {
+      "id": "JK46",
+      "name": "邀约",
+      "theme": "舞台与伙伴",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "邀约与登台的联系成立，知识内容仍可进一步具体化。"
+      },
+      "fitEntry": "FIT_CARD_JK46"
+    },
+    {
+      "id": "JK46B",
+      "name": "登台",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK46B"
+    },
+    {
+      "id": "JK47",
+      "name": "默然忍受",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK47"
+    },
+    {
+      "id": "JK47B",
+      "name": "挺身反抗",
+      "theme": "引文与剧目",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK47B"
+    },
+    {
+      "id": "JK48",
+      "name": "渴望",
+      "theme": "舞台与伙伴",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "与安宁的关系仍偏抽象，可继续寻找同一段原作文本。"
+      },
+      "fitEntry": "FIT_CARD_JK48"
+    },
+    {
+      "id": "JK48B",
+      "name": "安宁",
+      "theme": "舞台与伙伴",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "与渴望的关系仍偏抽象，可继续寻找同一段原作文本。"
+      },
+      "fitEntry": "FIT_CARD_JK48B"
+    },
+    {
+      "id": "JK49",
+      "name": "交锋",
+      "theme": "舞台与伙伴",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "与并肩的关系可继续落实到具体经验或剧目内容。"
+      },
+      "fitEntry": "FIT_CARD_JK49"
+    },
+    {
+      "id": "JK49B",
+      "name": "并肩",
+      "theme": "舞台与伙伴",
+      "nameReview": "待具体化",
+      "artReview": "保留",
+      "findings": {
+        "name": "与交锋的关系可继续落实到具体经验或剧目内容。"
+      },
+      "fitEntry": "FIT_CARD_JK49B"
+    },
+    {
+      "id": "JK50",
+      "name": "下一幕",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK50"
+    },
+    {
+      "id": "JK50B",
+      "name": "揭幕",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK50B"
+    },
+    {
+      "id": "JA38",
+      "name": "引弦",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "已修正",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA38"
+    },
+    {
+      "id": "JA41",
+      "name": "点射",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA41"
+    },
+    {
+      "id": "JA42",
+      "name": "压制射击",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA42"
+    },
+    {
+      "id": "JA43",
+      "name": "列阵",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA43"
+    },
+    {
+      "id": "JA51",
+      "name": "集中连射",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA51"
+    },
+    {
+      "id": "JA53",
+      "name": "课前预习",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA53"
+    },
+    {
+      "id": "JA56",
+      "name": "校准弹道",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA56"
+    },
+    {
+      "id": "JA57",
+      "name": "跃步",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA57"
+    },
+    {
+      "id": "JK56",
+      "name": "劳逸结合",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK56"
+    },
+    {
+      "id": "JK57",
+      "name": "课间休息",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK57"
+    },
+    {
+      "id": "JK58",
+      "name": "结伴",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK58"
+    },
+    {
+      "id": "JK60",
+      "name": "牢记",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK60"
+    },
+    {
+      "id": "JK61",
+      "name": "旧照",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK61"
+    },
+    {
+      "id": "JK62",
+      "name": "温习",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK62"
+    },
+    {
+      "id": "JK63",
+      "name": "举一反三",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK63"
+    },
+    {
+      "id": "JK64",
+      "name": "扶镜",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "与小憩使用同一镜头，需换成独立的扶镜动作。"
+      },
+      "fitEntry": "FIT_CARD_JK64"
+    },
+    {
+      "id": "JK65",
+      "name": "对照阅读",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK65"
+    },
+    {
+      "id": "JK66B",
+      "name": "招架",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK66B"
+    },
+    {
+      "id": "JK67",
+      "name": "射术要领",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK67"
+    },
+    {
+      "id": "JK67B",
+      "name": "定点射击",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK67B"
+    },
+    {
+      "id": "JK68",
+      "name": "满弦放箭",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK68"
+    },
+    {
+      "id": "JK68B",
+      "name": "搭箭",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK68B"
+    },
+    {
+      "id": "JK68C",
+      "name": "持弓",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK68C"
+    },
+    {
+      "id": "JK69",
+      "name": "化为己用",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK69"
+    },
+    {
+      "id": "JK69B",
+      "name": "引文",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK69B"
+    },
+    {
+      "id": "JK69C",
+      "name": "自己的言叶",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK69C"
+    },
+    {
+      "id": "JG27",
+      "name": "腹肌训练",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JG27"
+    },
+    {
+      "id": "JG28",
+      "name": "发力练习",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "与腹肌训练的动作与构图接近，需换成另一项发力练习。"
+      },
+      "fitEntry": "FIT_CARD_JG28"
+    },
+    {
+      "id": "JG29",
+      "name": "节奏训练",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JG29"
+    },
+    {
+      "id": "JG30",
+      "name": "合练",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JG30"
+    },
+    {
+      "id": "JX01",
+      "name": "基本功",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX01"
+    },
+    {
+      "id": "JX02",
+      "name": "拆解招式",
+      "theme": "舞台技法",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX02"
+    },
+    {
+      "id": "JX03",
+      "name": "联想",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX03"
+    },
+    {
+      "id": "JX04",
+      "name": "留影",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX04"
+    },
+    {
+      "id": "JX05",
+      "name": "课堂演练",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "与耐力训练的伸臂镜头重复，需换成另一项课堂演练。"
+      },
+      "fitEntry": "FIT_CARD_JX05"
+    },
+    {
+      "id": "JX06",
+      "name": "录像复盘",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX06"
+    },
+    {
+      "id": "JX07",
+      "name": "候场",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX07"
+    },
+    {
+      "id": "JX08",
+      "name": "蓄力",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX08"
+    },
+    {
+      "id": "JX09",
+      "name": "论证",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX09"
+    },
+    {
+      "id": "JX10",
+      "name": "背诵",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JX10"
+    },
+    {
+      "id": "JH10",
+      "name": "回身斩",
+      "theme": "物理箭矢",
+      "nameReview": "已修正",
+      "artReview": "已修正",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH10"
+    },
+    {
+      "id": "JH11",
+      "name": "吐纳",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH11"
+    },
+    {
+      "id": "JH12",
+      "name": "追加排练",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH12"
+    },
+    {
+      "id": "JH13",
+      "name": "乘势连击",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH13"
+    },
+    {
+      "id": "JH14",
+      "name": "援手",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH14"
+    },
+    {
+      "id": "JH15",
+      "name": "筹备",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH15"
+    },
+    {
+      "id": "JH16",
+      "name": "复唱",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH16"
+    },
+    {
+      "id": "JH17",
+      "name": "养精蓄锐",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH17"
+    },
+    {
+      "id": "JF06",
+      "name": "暂歇",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JF06"
+    },
+    {
+      "id": "JF07",
+      "name": "剧评",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JF07"
+    },
+    {
+      "id": "JF09",
+      "name": "乌冬面",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JF09"
+    },
+    {
+      "id": "JF10",
+      "name": "重整",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "已修正",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JF10"
+    },
+    {
+      "id": "JB01",
+      "name": "打击",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JB01"
+    },
+    {
+      "id": "JB02",
+      "name": "防御",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JB02"
+    },
+    {
+      "id": "JB03",
+      "name": "逐星",
+      "theme": "星与理想",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JB03"
+    },
+    {
+      "id": "JB05",
+      "name": "更近一步",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JB05"
+    },
+    {
+      "id": "JZ01",
+      "name": "万箭待发",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JZ01"
+    },
+    {
+      "id": "JZ02",
+      "name": "通读全篇",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JZ02"
+    },
+    {
+      "id": "JA58",
+      "name": "牵制箭",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA58"
+    },
+    {
+      "id": "JG31",
+      "name": "连贯练习",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JG31"
+    },
+    {
+      "id": "JH18",
+      "name": "小憩",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH18"
+    },
+    {
+      "id": "JH19",
+      "name": "稍息",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "已修正",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH19",
+      "artSource": "tv02-1332-proof.jpg"
+    },
+    {
+      "id": "JH20",
+      "name": "补水",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH20"
+    },
+    {
+      "id": "JH21",
+      "name": "规律作息",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH21"
+    },
+    {
+      "id": "JH22",
+      "name": "蓄势一击",
+      "theme": "恢复精力",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JH22"
+    },
+    {
+      "id": "JA59",
+      "name": "急射",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA59"
+    },
+    {
+      "id": "JA60",
+      "name": "齐发",
+      "theme": "物理箭矢",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA60"
+    },
+    {
+      "id": "JG32",
+      "name": "加练",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "与连贯练习使用同一个台步镜头，后续可换成另一项加练。"
+      },
+      "fitEntry": "FIT_CARD_JG32"
+    },
+    {
+      "id": "JK71",
+      "name": "回想",
+      "theme": "学习与记录",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK71"
+    },
+    {
+      "id": "JA61",
+      "name": "叠奏",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JA61"
+    },
+    {
+      "id": "JA62",
+      "name": "复述",
+      "theme": "言叶",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "与自己的言叶使用同一段说话特写，后续可换成另一处表达。"
+      },
+      "fitEntry": "FIT_CARD_JA62"
+    },
+    {
+      "id": "JA63",
+      "name": "就位",
+      "theme": "舞台与伙伴",
+      "nameReview": "保留",
+      "artReview": "待换图",
+      "findings": {
+        "art": "与并肩的同框姿态相近，后续可换成另一处就位动作。"
+      },
+      "fitEntry": "FIT_CARD_JA63"
+    },
+    {
+      "id": "JK72",
+      "name": "复排",
+      "theme": "日常锻炼",
+      "nameReview": "保留",
+      "artReview": "保留",
+      "findings": {},
+      "fitEntry": "FIT_CARD_JK72"
+    }
+  ]
+}

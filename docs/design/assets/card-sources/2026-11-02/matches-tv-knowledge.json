@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "date": "2026-11-02",
+  "batchId": "official-naming-20261102-tv-knowledge",
+  "label": "配入官方原词与截图 · 第九话知识组4张",
+  "backup": "before-tv-knowledge.json",
+  "subtitleSource": "Bilibili 正版第九话中文字幕，完整字幕证据保存在 proof 对应文件",
+  "matches": [
+    {
+      "id": "JK33",
+      "name": "过去影响当下",
+      "original": "過去が現在に影響を与えるように、未来も現在に影響を与える。",
+      "episode": 9,
+      "time": "19:40",
+      "proof": "tv09-1940-proof.jpg",
+      "artProof": "tv09-1940-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        460,
+        25
+      ],
+      "fit": "这句尼采引用与同段的艾略特引用组成成长主题：已有经历与期待的未来共同作用于现在。两张牌分别增强对方的伤害和次数，把相互作用落实为机制。",
+      "japaneseReference": "https://moegirl.uk/星见纯那",
+      "japaneseNote": " 日文对照采用资料转录；中文已核对正版字幕。",
+      "fullQuote": "正如过去影响当下 未来也影响当下"
+    },
+    {
+      "id": "JK33B",
+      "name": "永远都不嫌晚",
+      "original": "なりたかった自分になるのに、遅すぎることはない。",
+      "episode": 9,
+      "time": "19:45",
+      "proof": "tv09-1945-proof.jpg",
+      "artProof": "tv09-1945-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        580,
+        20
+      ],
+      "fit": "与同段的尼采引用配成相互强化组。想成为的自己推动当下继续磨练，再让此前的积累发挥新的作用；卡图保留字幕出现时的演出道具场景。",
+      "japaneseReference": "https://moegirl.uk/星见纯那",
+      "japaneseNote": " 日文对照参照资料转录，修正明显助词笔误；原声逐字校对待补；中文已核对正版字幕。",
+      "fullQuote": "做你想做的自己 永远都不嫌晚"
+    },
+    {
+      "id": "JK47",
+      "name": "忘记自我",
+      "original": "如何に優れた人間でも、時には我を忘れることもある。",
+      "episode": 9,
+      "time": "19:11",
+      "proof": "tv09-1911-proof.jpg",
+      "artProof": "tv09-1911-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        450,
+        0
+      ],
+      "fit": "纯那对奈奈的宽解对应格挡。与同段关于害怕失败的引用配组，把当下的选择表现为先接纳和保护自己；打出后消耗同组进攻牌。",
+      "japaneseReference": "https://moegirl.uk/星见纯那",
+      "japaneseNote": " 日文对照采用资料转录；中文已核对正版字幕。",
+      "fullQuote": "再优秀的人也有忘记自我的时候"
+    },
+    {
+      "id": "JK47B",
+      "name": "害怕失败",
+      "original": "人生で一番の失敗は失敗をするのではないかと恐れることである。",
+      "episode": 9,
+      "time": "19:51",
+      "proof": "tv09-1951-proof.jpg",
+      "artProof": "tv09-1951-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        400,
+        20
+      ],
+      "fit": "同一场劝勉中的哈伯德引用鼓励继续挑战，对应选择进攻并消耗同组防守牌。两句在原作中共同安慰奈奈，机制进一步把它们转为当回合的攻守取舍。",
+      "japaneseReference": "https://moegirl.uk/星见纯那",
+      "japaneseNote": " 日文对照采用资料转录；中文已核对正版字幕。",
+      "fullQuote": "人生最大的失败是害怕失败"
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "date": "2026-11-02",
+  "subtitleSource": "Bilibili 正版番剧，登录后 1080P 中文字幕；逐帧核对并保留截图",
+  "matches": [
+    {
+      "id": "JA04",
+      "name": "从今天起",
+      "original": "見上げる私は今日限り",
+      "episode": 2,
+      "time": "16:51",
+      "proof": "tv02-1651-proof.jpg",
+      "artProof": "tv02-1651-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        460,
+        0
+      ],
+      "fit": "从仰望转为主动行动，对应下一张箭矢立即完成。",
+      "fullQuote": "从今天起 我不再做只懂仰望的自己"
+    },
+    {
+      "id": "JG16",
+      "name": "自己的星",
+      "original": "掴んでみせます 自分星",
+      "episode": 2,
+      "time": "16:57",
+      "proof": "tv02-1657-proof.jpg",
+      "artProof": "tv02-1655-proof.jpg",
+      "artTime": "16:55",
+      "crop": [
+        1000,
+        750,
+        630,
+        0
+      ],
+      "fit": "把磨练积累集中到自己选定的一张牌，对应抓住自己的星。",
+      "fullQuote": "我定会抓住 自己的星"
+    },
+    {
+      "id": "JA35",
+      "name": "时间流逝的速度",
+      "original": "時間はそれぞれの人間によってそれぞれの速さで過ぎる",
+      "episode": 9,
+      "time": "19:20",
+      "proof": "tv09-1920-proof.jpg",
+      "artProof": "tv09-1920-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        650,
+        0
+      ],
+      "fit": "改变箭矢时间流逝的速度，每回合开始时统一加速。",
+      "japaneseReference": "https://moegirl.uk/星见纯那",
+      "fullQuote": "人不同 时间流逝的速度也会不同"
+    },
+    {
+      "id": "JT03",
+      "name": "不前进则后退",
+      "original": "前進しない者は後退していく",
+      "episode": 9,
+      "time": "19:35",
+      "proof": "tv09-1935-proof.jpg",
+      "artProof": "tv09-1935-proof.jpg",
+      "crop": [
+        880,
+        660,
+        650,
+        100
+      ],
+      "fit": "持续打出攻击才能获得能量并推进箭矢，行动本身带来前进。",
+      "japaneseReference": "https://moegirl.uk/星见纯那"
+    },
+    {
+      "id": "JT01",
+      "name": "是我的话",
+      "original": "私の言葉よ",
+      "episode": 9,
+      "time": "20:22",
+      "proof": "tv09-2022-proof.jpg",
+      "artProof": "tv09-2022-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        380,
+        0
+      ],
+      "fit": "把已有手牌转换为自己发出的箭矢，承接由引用转为自己的表达。"
+    },
+    {
+      "id": "JK05",
+      "name": "还想听？",
+      "original": "もっと！？",
+      "episode": 9,
+      "time": "19:30",
+      "proof": "tv09-1930-proof.jpg",
+      "artProof": "tv09-1930-proof.jpg",
+      "crop": [
+        880,
+        660,
+        650,
+        100
+      ],
+      "fit": "奈奈想继续听，纯那接连引用名言；对应连续抽取知识直到手牌满。",
+      "japaneseReference": "https://foiegras-yokotyo.hatenadiary.com/entry/2020/10/18/074836"
+    },
+    {
+      "id": "JK32",
+      "name": "烁星",
+      "original": "綺羅星",
+      "episode": 2,
+      "time": "16:46",
+      "proof": "tv02-1646-proof.jpg",
+      "artProof": "tv02-1655-proof.jpg",
+      "artTime": "16:55",
+      "crop": [
+        1000,
+        750,
+        630,
+        0
+      ],
+      "fit": "登场口上并列的三种星构成同一知识组；烁星的持续闪耀对应每回合增加伤害。"
+    },
+    {
+      "id": "JK32B",
+      "name": "流星",
+      "original": "流れ星",
+      "episode": 2,
+      "time": "16:46",
+      "proof": "tv02-1646-proof.jpg",
+      "artProof": "tv02-1657-proof.jpg",
+      "artTime": "16:57",
+      "crop": [
+        1000,
+        750,
+        460,
+        0
+      ],
+      "fit": "同一口上的三种星互相引出；流星的飞行与落点对应延迟完成的伤害箭矢。"
+    },
+    {
+      "id": "JK32C",
+      "name": "明星",
+      "original": "明け星",
+      "episode": 2,
+      "time": "16:46",
+      "proof": "tv02-1646-proof.jpg",
+      "artProof": "tv02-1651-proof.jpg",
+      "artTime": "16:51",
+      "crop": [
+        1000,
+        750,
+        460,
+        0
+      ],
+      "fit": "同一口上的三种星互相引出；黎明之星承接防守后的新一轮，回到烁星。"
+    }
+  ]
+}

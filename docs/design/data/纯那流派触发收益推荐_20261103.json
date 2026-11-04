@@ -1,0 +1,448 @@
+{
+  "id": "junna-major-flow-role-recommendations-20261103",
+  "date": "2026-11-03",
+  "sourceRevision": 1418,
+  "recommendations": {
+    "id": "junna-major-flow-role-recommendations-20261103",
+    "date": "2026-11-03",
+    "kind": "设计建议",
+    "counting": {
+      "budget": "按箭矢、知识、能量/高费三个流派及伤害加成小体系分别计算；各自按当前牌面规模分配。",
+      "roles": "触发、收益、兼具、工具互斥；推荐数采用最大余数分配，总和等于当前基数。",
+      "sides": "触发侧＝触发＋兼具；收益侧＝收益＋兼具，两侧分别统计。",
+      "position": "配比始终读取全部职责，职责筛选保留原有明细筛选功能。",
+      "scope": "推荐用于卡池范围，遵循仅奖励入口筛选；备用与垃圾桶保留原有职责统计。",
+      "classification": "箭矢流派仅打出箭矢牌计为触发；加速、额外触发、复制、转型与调度按工具或收益作用归类。知识牌按获取、入手、打出及组内联系判断；能量/高费按能量生成、保留、费用调整、高费支付与投入兑现判断。每个流派内按实际牌面去重，跨流派分别计数。"
+    },
+    "sources": [
+      {
+        "path": "D:/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
+        "line": 453,
+        "basis": "大体系通常12—20张；稳定来源3—6张、核心收益2—5张；职业第一体系可更多。小体系触发素材2—4张、副轴收益1—3张。"
+      },
+      {
+        "path": "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+        "line": 105,
+        "basis": "来源、收益、突破和中坚分别承担卡位；小体系可以缺独立端口，跨体系连接重复参与各自体系。"
+      },
+      {
+        "path": "D:/Github/STS2_Card_Reserch/docs/卡牌分析流程.md",
+        "line": 57,
+        "basis": "触发牌和收益牌分别包含触发＋收益；跨体系在各体系分别计数。"
+      },
+      {
+        "path": "D:/Github/STS2_Card_Reserch/docs/mods/ironclad_systems_zh.md",
+        "line": 75,
+        "basis": "消耗触发10、收益12；自损触发9、收益4；格挡触发15、收益5。依机制选择比例。"
+      },
+      {
+        "path": "D:/Github/STS2_ShoujoKagekiJunna/docs/design/data/纯那职业卡池设计记录.json",
+        "line": 7,
+        "basis": "主体系为箭矢，次主体系为知识，伤害加成为输出小体系。"
+      }
+    ],
+    "routes": [
+      {
+        "id": "SYS_stage",
+        "weights": {
+          "load": 0,
+          "trigger": 65,
+          "payoff": 15,
+          "both": 10,
+          "tool": 10
+        },
+        "rationale": "打出箭矢牌提供触发，普通箭矢自身承担基础输出与资源；加速等依赖已有箭矢的效果按工具或收益作用归类，少量事件收益和兼具牌连接持续成长及运转。含兼具时触发侧与收益侧约3∶1。"
+      },
+      {
+        "id": "SYS_partner",
+        "weights": {
+          "load": 0,
+          "trigger": 45,
+          "payoff": 20,
+          "both": 25,
+          "tool": 10
+        },
+        "rationale": "知识牌与补给牌提供稳定触发，组内联系和知识事件共同承担收益；保留较多兼具牌，让组合自身参与运转。含兼具时两侧约1.5∶1。"
+      },
+      {
+        "id": "SYS_energy",
+        "weights": {
+          "load": 0,
+          "trigger": 60,
+          "payoff": 15,
+          "both": 10,
+          "tool": 15
+        },
+        "rationale": "高费牌、能量生成和保留提供触发，投入能量与高费条件牌提供收益，费用调整承担工具卡位。含兼具时触发侧与收益侧约3∶1。"
+      },
+      {
+        "id": "SYS_growth",
+        "weights": {
+          "load": 0,
+          "trigger": 50,
+          "payoff": 35,
+          "both": 5,
+          "tool": 10
+        },
+        "rationale": "伤害加成是输出小体系，来源允许由跨流派牌提供，收益侧包括专门倍率、伤害次数以及高利用率输出牌。含兼具时两侧约1.4∶1。"
+      }
+    ]
+  },
+  "activeFaces": [
+    {
+      "id": "SYS_stage",
+      "name": "箭矢",
+      "size": 38,
+      "current": {
+        "load": 0,
+        "trigger": 17,
+        "payoff": 5,
+        "both": 3,
+        "tool": 13
+      },
+      "target": {
+        "load": 0,
+        "trigger": 24,
+        "payoff": 6,
+        "both": 4,
+        "tool": 4
+      },
+      "currentSides": {
+        "trigger": 20,
+        "payoff": 8
+      },
+      "targetSides": {
+        "trigger": 28,
+        "payoff": 10
+      },
+      "pending": 0,
+      "share": {
+        "load": 0,
+        "trigger": 0.631578947368421,
+        "payoff": 0.15789473684210525,
+        "both": 0.10526315789473684,
+        "tool": 0.10526315789473684
+      },
+      "difference": {
+        "trigger": 8,
+        "payoff": 2
+      },
+      "nominalSides": {
+        "trigger": 75,
+        "payoff": 25
+      },
+      "rationale": "打出箭矢牌提供触发，普通箭矢自身承担基础输出与资源；加速等依赖已有箭矢的效果按工具或收益作用归类，少量事件收益和兼具牌连接持续成长及运转。含兼具时触发侧与收益侧约3∶1。"
+    },
+    {
+      "id": "SYS_partner",
+      "name": "知识",
+      "size": 51,
+      "current": {
+        "load": 0,
+        "trigger": 29,
+        "payoff": 5,
+        "both": 17,
+        "tool": 0
+      },
+      "target": {
+        "load": 0,
+        "trigger": 23,
+        "payoff": 10,
+        "both": 13,
+        "tool": 5
+      },
+      "currentSides": {
+        "trigger": 46,
+        "payoff": 22
+      },
+      "targetSides": {
+        "trigger": 36,
+        "payoff": 23
+      },
+      "pending": 0,
+      "share": {
+        "load": 0,
+        "trigger": 0.45098039215686275,
+        "payoff": 0.19607843137254902,
+        "both": 0.2549019607843137,
+        "tool": 0.09803921568627451
+      },
+      "difference": {
+        "trigger": -10,
+        "payoff": 1
+      },
+      "nominalSides": {
+        "trigger": 70,
+        "payoff": 45
+      },
+      "rationale": "知识牌与补给牌提供稳定触发，组内联系和知识事件共同承担收益；保留较多兼具牌，让组合自身参与运转。含兼具时两侧约1.5∶1。"
+    },
+    {
+      "id": "SYS_energy",
+      "name": "能量/高费",
+      "size": 62,
+      "current": {
+        "load": 0,
+        "trigger": 51,
+        "payoff": 1,
+        "both": 4,
+        "tool": 6
+      },
+      "target": {
+        "load": 0,
+        "trigger": 37,
+        "payoff": 10,
+        "both": 6,
+        "tool": 9
+      },
+      "currentSides": {
+        "trigger": 55,
+        "payoff": 5
+      },
+      "targetSides": {
+        "trigger": 43,
+        "payoff": 16
+      },
+      "pending": 0,
+      "share": {
+        "load": 0,
+        "trigger": 0.5967741935483871,
+        "payoff": 0.16129032258064516,
+        "both": 0.0967741935483871,
+        "tool": 0.14516129032258066
+      },
+      "difference": {
+        "trigger": -12,
+        "payoff": 11
+      },
+      "nominalSides": {
+        "trigger": 70,
+        "payoff": 25
+      },
+      "rationale": "高费牌、能量生成和保留提供触发，投入能量与高费条件牌提供收益，费用调整承担工具卡位。含兼具时触发侧与收益侧约3∶1。"
+    },
+    {
+      "id": "SYS_growth",
+      "name": "伤害加成",
+      "size": 19,
+      "current": {
+        "load": 0,
+        "trigger": 11,
+        "payoff": 7,
+        "both": 0,
+        "tool": 1
+      },
+      "target": {
+        "load": 0,
+        "trigger": 9,
+        "payoff": 7,
+        "both": 1,
+        "tool": 2
+      },
+      "currentSides": {
+        "trigger": 11,
+        "payoff": 7
+      },
+      "targetSides": {
+        "trigger": 10,
+        "payoff": 8
+      },
+      "pending": 0,
+      "share": {
+        "load": 0,
+        "trigger": 0.47368421052631576,
+        "payoff": 0.3684210526315789,
+        "both": 0.05263157894736842,
+        "tool": 0.10526315789473684
+      },
+      "difference": {
+        "trigger": -1,
+        "payoff": 1
+      },
+      "nominalSides": {
+        "trigger": 55,
+        "payoff": 40
+      },
+      "rationale": "伤害加成是输出小体系，来源允许由跨流派牌提供，收益侧包括专门倍率、伤害次数以及高利用率输出牌。含兼具时两侧约1.4∶1。"
+    }
+  ],
+  "rewardEntries": [
+    {
+      "id": "SYS_stage",
+      "name": "箭矢",
+      "size": 30,
+      "current": {
+        "load": 0,
+        "trigger": 13,
+        "payoff": 4,
+        "both": 2,
+        "tool": 11
+      },
+      "target": {
+        "load": 0,
+        "trigger": 20,
+        "payoff": 4,
+        "both": 3,
+        "tool": 3
+      },
+      "currentSides": {
+        "trigger": 15,
+        "payoff": 6
+      },
+      "targetSides": {
+        "trigger": 23,
+        "payoff": 7
+      },
+      "pending": 0,
+      "share": {
+        "load": 0,
+        "trigger": 0.6666666666666666,
+        "payoff": 0.13333333333333333,
+        "both": 0.1,
+        "tool": 0.1
+      },
+      "difference": {
+        "trigger": 8,
+        "payoff": 1
+      },
+      "nominalSides": {
+        "trigger": 75,
+        "payoff": 25
+      },
+      "rationale": "打出箭矢牌提供触发，普通箭矢自身承担基础输出与资源；加速等依赖已有箭矢的效果按工具或收益作用归类，少量事件收益和兼具牌连接持续成长及运转。含兼具时触发侧与收益侧约3∶1。"
+    },
+    {
+      "id": "SYS_partner",
+      "name": "知识",
+      "size": 27,
+      "current": {
+        "load": 0,
+        "trigger": 13,
+        "payoff": 5,
+        "both": 9,
+        "tool": 0
+      },
+      "target": {
+        "load": 0,
+        "trigger": 12,
+        "payoff": 5,
+        "both": 7,
+        "tool": 3
+      },
+      "currentSides": {
+        "trigger": 22,
+        "payoff": 14
+      },
+      "targetSides": {
+        "trigger": 19,
+        "payoff": 12
+      },
+      "pending": 0,
+      "share": {
+        "load": 0,
+        "trigger": 0.4444444444444444,
+        "payoff": 0.18518518518518517,
+        "both": 0.25925925925925924,
+        "tool": 0.1111111111111111
+      },
+      "difference": {
+        "trigger": -3,
+        "payoff": -2
+      },
+      "nominalSides": {
+        "trigger": 70,
+        "payoff": 45
+      },
+      "rationale": "知识牌与补给牌提供稳定触发，组内联系和知识事件共同承担收益；保留较多兼具牌，让组合自身参与运转。含兼具时两侧约1.5∶1。"
+    },
+    {
+      "id": "SYS_energy",
+      "name": "能量/高费",
+      "size": 49,
+      "current": {
+        "load": 0,
+        "trigger": 42,
+        "payoff": 1,
+        "both": 4,
+        "tool": 2
+      },
+      "target": {
+        "load": 0,
+        "trigger": 30,
+        "payoff": 7,
+        "both": 5,
+        "tool": 7
+      },
+      "currentSides": {
+        "trigger": 46,
+        "payoff": 5
+      },
+      "targetSides": {
+        "trigger": 35,
+        "payoff": 12
+      },
+      "pending": 0,
+      "share": {
+        "load": 0,
+        "trigger": 0.6122448979591837,
+        "payoff": 0.14285714285714285,
+        "both": 0.10204081632653061,
+        "tool": 0.14285714285714285
+      },
+      "difference": {
+        "trigger": -11,
+        "payoff": 7
+      },
+      "nominalSides": {
+        "trigger": 70,
+        "payoff": 25
+      },
+      "rationale": "高费牌、能量生成和保留提供触发，投入能量与高费条件牌提供收益，费用调整承担工具卡位。含兼具时触发侧与收益侧约3∶1。"
+    },
+    {
+      "id": "SYS_growth",
+      "name": "伤害加成",
+      "size": 17,
+      "current": {
+        "load": 0,
+        "trigger": 10,
+        "payoff": 6,
+        "both": 0,
+        "tool": 1
+      },
+      "target": {
+        "load": 0,
+        "trigger": 8,
+        "payoff": 6,
+        "both": 1,
+        "tool": 2
+      },
+      "currentSides": {
+        "trigger": 10,
+        "payoff": 6
+      },
+      "targetSides": {
+        "trigger": 9,
+        "payoff": 7
+      },
+      "pending": 0,
+      "share": {
+        "load": 0,
+        "trigger": 0.47058823529411764,
+        "payoff": 0.35294117647058826,
+        "both": 0.058823529411764705,
+        "tool": 0.11764705882352941
+      },
+      "difference": {
+        "trigger": -1,
+        "payoff": 1
+      },
+      "nominalSides": {
+        "trigger": 55,
+        "payoff": 40
+      },
+      "rationale": "伤害加成是输出小体系，来源允许由跨流派牌提供，收益侧包括专门倍率、伤害次数以及高利用率输出牌。含兼具时两侧约1.4∶1。"
+    }
+  ],
+  "checks": "数量分列、多/少语义、独立比例、兼具计数、能量职责、页签顺序与筛选检查通过"
+}

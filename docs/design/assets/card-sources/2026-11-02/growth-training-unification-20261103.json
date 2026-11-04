@@ -1,0 +1,174 @@
+{
+  "batchId": "junna-growth-daily-training-20261103",
+  "label": "将伤害加成8张专属牌统一为日常训练契合",
+  "backup": "before-growth-training-unification-20261103.json",
+  "matches": [
+    {
+      "id": "JG03",
+      "name": "重复练习",
+      "expectedName": "续演",
+      "original": "反復練習",
+      "proof": "tv02-train-642-20261103.png",
+      "crop": [
+        640,
+        480,
+        1160,
+        330
+      ],
+      "time": "06:42",
+      "fit": "同一段基本功再练一次，使选中的牌多造成一次伤害。配图取课堂带练的乐谱，表现按段反复练习。",
+      "namingKind": "日常训练题材拟名",
+      "sourceNote": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。",
+      "artNote": "日常练习或准备场景裁切，原始截图tv02-train-642-20261103.png。",
+      "episode": 2,
+      "work": "TV 第2话 · 约06:42",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=402"
+    },
+    {
+      "id": "JG09",
+      "name": "准备活动",
+      "expectedName": "复盘",
+      "original": "準備運動",
+      "proof": "tv02-train-024-20261103.png",
+      "crop": [
+        800,
+        600,
+        830,
+        110
+      ],
+      "time": "00:24",
+      "fit": "以运动服与课前活动的日常状态表现开始训练前的准备，先稳住身体，再为一项动作积累少量成果。",
+      "namingKind": "日常训练题材拟名",
+      "sourceNote": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。",
+      "artNote": "日常练习或准备场景裁切，原始截图tv02-train-024-20261103.png。",
+      "episode": 2,
+      "work": "TV 第2话 · 约00:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=24"
+    },
+    {
+      "id": "JG16",
+      "name": "训练计划",
+      "expectedName": "聚光灯",
+      "original": "練習計画",
+      "proof": "film-train-942-20261103.png",
+      "crop": [
+        800,
+        600,
+        1100,
+        120
+      ],
+      "time": "09:42",
+      "fit": "把已有的训练积累集中到一项安排，对应将所有伤害加成转移到选中的一张牌。配图用纯那在房间书桌前的日常准备场景。",
+      "namingKind": "日常训练题材拟名",
+      "sourceNote": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。",
+      "artNote": "日常练习或准备场景裁切，原始截图film-train-942-20261103.png。",
+      "work": "2021 剧场版 · 全片约09:42",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=582"
+    },
+    {
+      "id": "JG23",
+      "name": "耐力训练",
+      "expectedName": "日益精进",
+      "original": "持久力の訓練",
+      "proof": "tv02-train-622-20261103.png",
+      "crop": [
+        720,
+        540,
+        520,
+        110
+      ],
+      "time": "06:22",
+      "fit": "持续保持训练姿势，积累到一定程度便能再完成一次动作，对应每拥有8点伤害加成增加一次伤害。",
+      "namingKind": "日常训练题材拟名",
+      "sourceNote": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。",
+      "artNote": "日常练习或准备场景裁切，原始截图tv02-train-622-20261103.png。",
+      "episode": 2,
+      "work": "TV 第2话 · 约06:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=382"
+    },
+    {
+      "id": "JG27",
+      "name": "腹肌训练",
+      "expectedName": "腹肌训练",
+      "original": "腹筋の稽古",
+      "proof": "tv02-615-short.jpg",
+      "crop": [
+        800,
+        600,
+        180,
+        175
+      ],
+      "time": "06:15",
+      "fit": "通过日常腹肌训练积累身体力量，直接为选中的一张牌增加伤害加成。",
+      "namingKind": "日常训练题材拟名",
+      "sourceNote": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。",
+      "artNote": "日常练习或准备场景裁切，原始截图tv02-615-short.jpg。",
+      "episode": 2,
+      "work": "TV 第2话 · 约06:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=375"
+    },
+    {
+      "id": "JG28",
+      "name": "发力练习",
+      "expectedName": "低身连击",
+      "original": "力の入れ方の練習",
+      "proof": "tv02-train-614-20261103.png",
+      "crop": [
+        640,
+        480,
+        390,
+        355
+      ],
+      "time": "06:14",
+      "fit": "反复完成动作并保持正确发力，让同一份训练成果发挥更充分的作用，对应四段伤害和伤害加成按2倍生效。配图取纯那在体能课保持抬腿与伸臂的训练动作。",
+      "namingKind": "日常训练题材拟名",
+      "sourceNote": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。",
+      "artNote": "日常练习或准备场景裁切，原始截图tv02-train-614-20261103.png。",
+      "episode": 2,
+      "work": "TV 第2话 · 约06:14",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=374"
+    },
+    {
+      "id": "JG29",
+      "name": "节奏训练",
+      "expectedName": "抢占先手",
+      "original": "リズムの練習",
+      "proof": "tv02-train-630-20261103.png",
+      "crop": [
+        800,
+        600,
+        700,
+        130
+      ],
+      "time": "06:30",
+      "fit": "把发力放在每轮动作的起拍，充分发挥第一下的训练成果，对应每回合首次结算伤害时加成按3倍生效。配图取日常课堂的钢琴伴奏与按键。",
+      "namingKind": "日常训练题材拟名",
+      "sourceNote": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。",
+      "artNote": "日常练习或准备场景裁切，原始截图tv02-train-630-20261103.png。",
+      "episode": 2,
+      "work": "TV 第2话 · 约06:30",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=390"
+    },
+    {
+      "id": "JG30",
+      "name": "合练",
+      "expectedName": "大局观",
+      "original": "合同練習",
+      "proof": "tv02-train-638b-20261103.png",
+      "crop": [
+        880,
+        660,
+        900,
+        110
+      ],
+      "time": "06:38",
+      "fit": "在共同练习中把单项训练的成果用于整段动作与全场表现，对应一张牌的伤害加成扩展到所有敌人。配图取纯那参加集体声乐练习的日常课堂。",
+      "namingKind": "日常训练题材拟名",
+      "sourceNote": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。",
+      "artNote": "日常练习或准备场景裁切，原始截图tv02-train-638b-20261103.png。",
+      "episode": 2,
+      "work": "TV 第2话 · 约06:38",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=398"
+    }
+  ]
+}

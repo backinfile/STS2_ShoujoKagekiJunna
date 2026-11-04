@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/portrait_icon.tres" id="1"]
+[node name="JunnaIcon" type="TextureRect"]
+offset_right = 72.0
+offset_bottom = 72.0
+clip_contents = true
+mouse_filter = 2
+texture = ExtResource("1")
+expand_mode = 1
+stretch_mode = 5

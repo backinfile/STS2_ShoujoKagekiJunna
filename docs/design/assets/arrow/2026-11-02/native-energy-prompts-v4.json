@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-02",
+  "tool": "built-in image_gen",
+  "selectedVariant": "D",
+  "userFeedback": "参考游戏本体及 Karen 的能量图标",
+  "sourceCard": "arrow-frame-d-lightblue-matte-energy-v3.png",
+  "outputs": {
+    "sprite": "junna-energy-native-v4.png",
+    "cardPreview": "arrow-frame-d-lightblue-native-energy-v4.png"
+  },
+  "references": {
+    "nativeBlue": "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/assets/energy-gems/2026-10-31/references/energy_defect.png",
+    "nativeFiveTypes": "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/assets/energy-gems/2026-10-31/references/native-five-analysis.png",
+    "karenActualSprite": "D:/Github/STS2-MOD-INFO/assets/game-ui/karen-energy.png",
+    "karenInGame": "D:/Github/STS2-MOD-INFO/docs/screenshots/game-reference.png"
+  },
+  "revision": "以 Karen 的九边形手绘纹理为结构，参考本体蓝色能量的明暗，恢复宽阔亮色旋纹中心和彩色折边。",
+  "retained": [
+    "D 牌框造型",
+    "浅蓝／青蓝卡身",
+    "银灰色类型铭牌及卡图边框",
+    "回合数在类型铭牌上方"
+  ],
+  "prompts": [
+    {
+      "step": "transparent-sprite",
+      "prompt": "Use case: precise-object-edit.\nAsset type: transparent Junna energy-cost UI sprite, adapting the actual Slay the Spire 2 / Karen material language.\nImage 1 is the ACTUAL Karen nine-sided energy sprite and is the EXACT EDIT TARGET. Image 2 is the ACTUAL native game's blue Defect card-energy sprite, a secondary COLOR AND PAINT reference.\n\nRecolor Image 1 from red/orange to Junna LIGHT BLUE / CYAN BLUE, preserving the original sprite's geometry, brushwork, broad shading forms, opaque colorful body and central broad luminous painted swirling core.\nUse the same almost-square nine-sided outer silhouette, SAME orientation, SAME nine broad bevel sectors, SAME asymmetrical brush strokes, inner opening and overall proportions of the actual Karen sprite. Keep the center wide and visually dominant, about two thirds of the overall width, like Image 1.\nTranslate the warm Karen reds into middle/deeper cyan-blue for the outer beveled ring. Translate the warm orange center into clear bright light-blue, using Image 2's native painted swirl material and value relationship. Suggested tones: outer dark outline #214F71, mid-blue ring #347FA6 to #4F9FBE, soft lighter upper-edge brush strokes #82CBDD, broad sky/light-blue core #85CCEA with just a few sweeping lighter blue paint arcs #B0E1F0. Keep a broad calm middle where the cost numeral will be placed later.\nPreserve a SINGLE CONTINUOUS shape: dark blue perimeter, thick painted angled blue rim, and broad lively swirling light-blue painted energy center. Paint the center with large irregular curved strokes like the actual references, not microscopic grit or rings.\nKeep Image 1's low-detail HAND-PAINTED 2D game-UI finish. The native Defect reference is low-resolution but authoritative for the luminous blue core and broad paint strokes. Let the source Karen geometry and native paint dominate over any modern polished gem aesthetics.\nOutput EXACTLY ONE isolated empty energy sprite, front-facing, no number, no text, no extra objects, no card, no presentation board. Center it tightly within a square canvas, with a small transparent margin. Preserve real alpha transparency outside the sprite.\nAvoid inventing a metallic coin, silver outline, flat badge face, shiny glass crystal, translucent shards, white specular glints, sparkles, bloom, lens flare, photographic material, new arrow emblem, ornamental inset or tiny facets. This is a faithful cool-blue recoloring of the actual Karen sprite, with the actual native blue energy palette."
+    },
+    {
+      "step": "card-preview-with-comparison",
+      "prompt": "Use case: compositing.\nAsset type: revised selected Junna Arrow D card with native/Karen energy comparison.\nImage 1 is the selected D light-blue full card sheet to edit.\nImage 2 is the NEW Junna energy sprite. This is the EXACT INSERT to place on the card, not a loose style reference. Its broad hand-painted nine-sided beveled outer border and wide luminous sky-blue swirling center are authoritative.\nImage 3 is the ACTUAL native Defect energy sprite, to show as a small source comparison on the right.\nImage 4 is the ACTUAL Karen red energy sprite, to show as a small source comparison on the right.\n\nLEFT HALF:\nRetain the complete D card from Image 1 in the SAME position, size and 598:844 proportions.\nREPLACE THE ENTIRE UPPER-LEFT OLD ENERGY BADGE with Image 2, cleanly scaled to the exact old footprint. Preserve Image 2's nine-sided silhouette, broad blue painted bevels and WIDE light-blue energy swirl, visible around the digit. It is one cohesive glowing painted energy mass with colored edges, as in the native sprites.\nPlace the SAME existing cream cost numeral \"1\" with its original dark outline and same original size/location on top of this replacement sprite. Use a calm light sky-blue center to keep the digit readable.\nThe old badge's thin coin rim / opaque flat center must be fully replaced. The replacement must visibly match the large exact Image 2 sprite displayed on the right, with its broad textured blue border and lively wide swirled center.\nPreserve all other parts of the complete card exactly: D's silver portrait border with left/right inward sight teeth, grey ribbon and lettering \"JA13\", light-blue outer card frame, teal archer artwork, dark warm-grey rules panel, \"造成16点伤害。\", arched timer \"2\" DIRECTLY ABOVE \"箭矢\", the fixed label baseline and the cream letter \"D\" above the card.\nNo other change to the D card.\n\nRIGHT HALF:\nReplace the old enlarged portrait/type crop with a SIMPLE ENERGY REFERENCE ARRANGEMENT on the same quiet near-black green-grey background.\nAt upper right show ONE large, empty, front-facing NEW Junna energy sprite, an exact enlarged display of Image 2, roughly 360-400 pixels across. Center a short label above it: \"纯那\".\nBelow it, show TWO smaller equally sized unnumbered source sprites side by side, each about 180-210 pixels wide:\nleft: EXACT native blue clipped-square sprite from Image 3, label \"本体\".\nright: EXACT Karen red nine-sided sprite from Image 4, label \"Karen\".\nPreserve their actual source geometry, painted material and colors. They are existing source sprites, not new designs. Do not make the native square sprite nine-sided; do not make Karen blue.\nKeep the right-side arrangement airy, no boxes, lines, arrows, dimension labels, captions, heading or explanatory text.\nOnly concise labels \"纯那\", \"本体\", \"Karen\". No \"energy\", \"new\", variant notes or watermark.\n\nKeep the same landscape canvas dimensions as Image 1 (approximately 1536x1024). Exactly ONE full card on the left and THREE unnumbered sprite close-ups on the right. The actual texture and structure of the provided sprites should dominate; do not turn them into metal medallions, flat badges, crystals, white specular jewelry, mechanical housings or glass gems."
+    }
+  ]
+}
+

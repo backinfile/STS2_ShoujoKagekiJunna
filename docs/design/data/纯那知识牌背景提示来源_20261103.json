@@ -1,0 +1,21 @@
+{
+  "revision": 1295,
+  "scope": {
+    "active": 41,
+    "reserved": 10
+  },
+  "sources": {
+    "hamlet": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/",
+    "characterReading": "https://hon-hikidashi.jp/event/42802/",
+    "tv": "https://revuestarlight.com/animation/tv/",
+    "story": "https://revuestarlight.com/animation/story/",
+    "localDialogue": "docs/design/assets/card-sources/2026-11-02/matches-tv-knowledge.json"
+  },
+  "checks": {
+    "allKnowledgeCardsCovered": true,
+    "existingExtraTipsPreserved": true,
+    "cardMechanicsPreserved": true,
+    "maxDescriptionLength": 45,
+    "readbackVerified": true
+  }
+}

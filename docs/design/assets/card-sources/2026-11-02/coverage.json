@@ -1,0 +1,502 @@
+{
+  "scopeRevision": 1004,
+  "currentRevision": 1027,
+  "scopeCount": 63,
+  "matched": [
+    {
+      "id": "JA13",
+      "name": "我的那颗星",
+      "episode": 2,
+      "time": "21:08",
+      "proof": "tv02-2107-new.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JA16",
+      "name": "引导我吧",
+      "time": "1:47:26",
+      "proof": "game-10725.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JA17",
+      "name": "大家拿上剑",
+      "time": "1:49:26",
+      "proof": "game-10925.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JH01",
+      "name": "黑心商人",
+      "time": "1:50:06",
+      "proof": "game-11005.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK37",
+      "name": "讨伐你的剑",
+      "time": "1:30:27",
+      "proof": "game-9025.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK37B",
+      "name": "驾船",
+      "time": "1:30:27",
+      "proof": "game-9025.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK37C",
+      "name": "星星的知识",
+      "time": "1:30:27",
+      "proof": "game-9025.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK44",
+      "name": "准备白刃战",
+      "time": "1:49:26",
+      "proof": "game-10925.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK44B",
+      "name": "不擅长战斗",
+      "time": "1:49:46",
+      "proof": "game-10945.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK45",
+      "name": "利维坦",
+      "time": "1:47:26",
+      "proof": "game-10725.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK45B",
+      "name": "暴风雨",
+      "time": "1:47:26",
+      "proof": "game-10725.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK48",
+      "name": "复仇",
+      "time": "1:31:06",
+      "proof": "game-9105.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK48B",
+      "name": "黄金国",
+      "time": "1:47:26",
+      "proof": "game-10725.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK49",
+      "name": "不可饶恕",
+      "time": "1:25:06",
+      "proof": "game-8505.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK49B",
+      "name": "我爱你",
+      "time": "1:25:06",
+      "proof": "game-8505.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JK52",
+      "name": "献出我的全部",
+      "time": "1:54:07",
+      "proof": "game-11405.jpg",
+      "manifest": "matches-el-dorado.json"
+    },
+    {
+      "id": "JA02",
+      "name": "登上你的船",
+      "time": "1:30:27",
+      "proof": "game-9025.jpg",
+      "manifest": "matches-embark.json"
+    },
+    {
+      "id": "JK34",
+      "name": "StarLight",
+      "episode": 9,
+      "time": "21:45",
+      "proof": "tv09-2145-new.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34B",
+      "name": "神乐光",
+      "episode": 2,
+      "time": "03:11",
+      "proof": "tv02-0310-op.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34C",
+      "name": "天堂真矢",
+      "episode": 2,
+      "time": "02:45",
+      "proof": "tv02-0244-op.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34D",
+      "name": "石动双叶",
+      "episode": 2,
+      "time": "02:27",
+      "proof": "tv02-0226-op.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34E",
+      "name": "星见纯那",
+      "episode": 2,
+      "time": "03:03",
+      "proof": "tv02-0302-op.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34F",
+      "name": "露崎真昼",
+      "episode": 2,
+      "time": "02:23",
+      "proof": "tv02-0222-op.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34G",
+      "name": "西条克洛迪娜",
+      "episode": 2,
+      "time": "02:29",
+      "proof": "tv02-0228-op.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34H",
+      "name": "大场奈奈",
+      "episode": 9,
+      "time": "22:25",
+      "proof": "tv09-2225-new.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34I",
+      "name": "花柳香子",
+      "episode": 2,
+      "time": "02:23",
+      "proof": "tv02-0222-op.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK34J",
+      "name": "爱城华恋",
+      "episode": 2,
+      "time": "02:33",
+      "proof": "tv02-0232-op.jpg",
+      "manifest": "matches-starlight-ensemble.json"
+    },
+    {
+      "id": "JK15",
+      "name": "改台词加演出",
+      "episode": 9,
+      "time": "20:50",
+      "proof": "tv09-2050-proof.jpg",
+      "manifest": "matches-tv-dialogue.json"
+    },
+    {
+      "id": "JK15B",
+      "name": "与大家更要好",
+      "episode": 9,
+      "time": "20:45",
+      "proof": "tv09-2045-proof.jpg",
+      "manifest": "matches-tv-dialogue.json"
+    },
+    {
+      "id": "JK53",
+      "name": "一无所知",
+      "episode": 9,
+      "time": "20:35",
+      "proof": "tv09-2035-proof.jpg",
+      "manifest": "matches-tv-dialogue.json"
+    },
+    {
+      "id": "JA22",
+      "name": "并不是结束",
+      "episode": 2,
+      "time": "23:16",
+      "proof": "tv02-2316-proof.jpg",
+      "manifest": "matches-tv-growth.json"
+    },
+    {
+      "id": "JG23",
+      "name": "成为Star",
+      "episode": 2,
+      "time": "14:28",
+      "proof": "tv02-1428-proof.jpg",
+      "manifest": "matches-tv-growth.json"
+    },
+    {
+      "id": "JK33",
+      "name": "过去影响当下",
+      "episode": 9,
+      "time": "19:40",
+      "proof": "tv09-1940-proof.jpg",
+      "manifest": "matches-tv-knowledge.json"
+    },
+    {
+      "id": "JK33B",
+      "name": "永远都不嫌晚",
+      "episode": 9,
+      "time": "19:45",
+      "proof": "tv09-1945-proof.jpg",
+      "manifest": "matches-tv-knowledge.json"
+    },
+    {
+      "id": "JK47",
+      "name": "忘记自我",
+      "episode": 9,
+      "time": "19:11",
+      "proof": "tv09-1911-proof.jpg",
+      "manifest": "matches-tv-knowledge.json"
+    },
+    {
+      "id": "JK47B",
+      "name": "害怕失败",
+      "episode": 9,
+      "time": "19:51",
+      "proof": "tv09-1951-proof.jpg",
+      "manifest": "matches-tv-knowledge.json"
+    },
+    {
+      "id": "JG09",
+      "name": "更好的重演",
+      "episode": 9,
+      "time": "21:25",
+      "proof": "tv09-2125-new.jpg",
+      "manifest": "matches-tv-next-stage.json"
+    },
+    {
+      "id": "JT02",
+      "name": "不断改变",
+      "episode": 9,
+      "time": "21:32",
+      "proof": "tv09-2132-new.jpg",
+      "manifest": "matches-tv-next-stage.json"
+    },
+    {
+      "id": "JK50",
+      "name": "下一回",
+      "episode": 9,
+      "time": "21:45",
+      "proof": "tv09-2145-new.jpg",
+      "manifest": "matches-tv-next-stage.json"
+    },
+    {
+      "id": "JK50B",
+      "name": "一起来创造吧",
+      "episode": 9,
+      "time": "21:40",
+      "proof": "tv09-2140-new.jpg",
+      "manifest": "matches-tv-next-stage.json"
+    },
+    {
+      "id": "JK11",
+      "name": "想守护的东西",
+      "episode": 9,
+      "time": "22:19",
+      "proof": "tv09-2219-new.jpg",
+      "manifest": "matches-tv-next-stage.json"
+    },
+    {
+      "id": "JK11B",
+      "name": "下回的舞台",
+      "episode": 9,
+      "time": "22:25",
+      "proof": "tv09-2225-new.jpg",
+      "manifest": "matches-tv-next-stage.json"
+    },
+    {
+      "id": "A",
+      "name": "埋头学习",
+      "episode": 2,
+      "time": "19:08",
+      "proof": "tv02-1910-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "B",
+      "name": "我邂逅了",
+      "episode": 2,
+      "time": "19:20",
+      "proof": "tv02-1919-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JH05",
+      "name": "我重生了",
+      "episode": 2,
+      "time": "19:23",
+      "proof": "tv02-1922-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JA15",
+      "name": "闪耀的梦",
+      "episode": 2,
+      "time": "19:10",
+      "proof": "tv02-1909-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JG03",
+      "name": "永远能站上舞台",
+      "episode": 2,
+      "time": "21:24",
+      "proof": "tv02-2123-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JK10",
+      "name": "热情与光芒",
+      "episode": 2,
+      "time": "21:27",
+      "proof": "tv02-2126-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JK10B",
+      "name": "舞台少女的力量",
+      "episode": 2,
+      "time": "21:32",
+      "proof": "tv02-2131-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JK27",
+      "name": "一起成为Star",
+      "episode": 2,
+      "time": "21:45",
+      "proof": "tv02-2144-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JK43",
+      "name": "追不上的距离",
+      "episode": 2,
+      "time": "14:20",
+      "proof": "tv02-1419-verified.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JK43B",
+      "name": "不可能就此死心",
+      "episode": 2,
+      "time": "14:23",
+      "proof": "tv02-1422-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JK46",
+      "name": "一次机会",
+      "episode": 2,
+      "time": "21:21",
+      "proof": "tv02-2120-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JK46B",
+      "name": "不会放过这机会",
+      "episode": 2,
+      "time": "21:03",
+      "proof": "tv02-2102-new.jpg",
+      "manifest": "matches-tv-resolution.json"
+    },
+    {
+      "id": "JA04",
+      "name": "从今天起",
+      "episode": 2,
+      "time": "16:51",
+      "proof": "tv02-1651-proof.jpg",
+      "manifest": "matches.json"
+    },
+    {
+      "id": "JG16",
+      "name": "自己的星",
+      "episode": 2,
+      "time": "16:57",
+      "proof": "tv02-1657-proof.jpg",
+      "manifest": "matches.json"
+    },
+    {
+      "id": "JA35",
+      "name": "时间流逝的速度",
+      "episode": 9,
+      "time": "19:20",
+      "proof": "tv09-1920-proof.jpg",
+      "manifest": "matches.json"
+    },
+    {
+      "id": "JT03",
+      "name": "不前进则后退",
+      "episode": 9,
+      "time": "19:35",
+      "proof": "tv09-1935-proof.jpg",
+      "manifest": "matches.json"
+    },
+    {
+      "id": "JT01",
+      "name": "是我的话",
+      "episode": 9,
+      "time": "20:22",
+      "proof": "tv09-2022-proof.jpg",
+      "manifest": "matches.json"
+    },
+    {
+      "id": "JK05",
+      "name": "还想听？",
+      "episode": 9,
+      "time": "19:30",
+      "proof": "tv09-1930-proof.jpg",
+      "manifest": "matches.json"
+    },
+    {
+      "id": "JK32",
+      "name": "烁星",
+      "episode": 2,
+      "time": "16:46",
+      "proof": "tv02-1646-proof.jpg",
+      "manifest": "matches.json"
+    },
+    {
+      "id": "JK32B",
+      "name": "流星",
+      "episode": 2,
+      "time": "16:46",
+      "proof": "tv02-1646-proof.jpg",
+      "manifest": "matches.json"
+    },
+    {
+      "id": "JK32C",
+      "name": "明星",
+      "episode": 2,
+      "time": "16:46",
+      "proof": "tv02-1646-proof.jpg",
+      "manifest": "matches.json"
+    }
+  ],
+  "pending": [],
+  "validation": {
+    "names": 63,
+    "art": 63,
+    "mechanicsPreserved": true,
+    "errors": []
+  }
+}

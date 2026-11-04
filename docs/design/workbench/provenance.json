@@ -1,0 +1,47 @@
+{
+  "source": "D:\\Godot\\Proj\\STS2_ShoujoKagekiAijoNana\\docs\\design\\data\\奈奈Mod制作台_本地编辑.json",
+  "sourceRevision": 76,
+  "sha256": "d848c42fe01adf0f3f838a91df440ba6dca0a67003416d54f38508fa63d97e21",
+  "mappings": {
+    "舞台装置": "言葉",
+    "伙伴": "知识"
+  },
+  "retained": [
+    "机制规则",
+    "通用词条",
+    "编辑功能"
+  ],
+  "empty": [
+    "卡池",
+    "知识关联组",
+    "初始牌组",
+    "风格约定",
+    "编辑历史"
+  ],
+  "excludedTerms": [
+    "ST_NG08",
+    "ST_NM01",
+    "ST_NM02",
+    "ST_NM09",
+    "ST_NP04A",
+    "ST_NP08A",
+    "ST_NS09",
+    "ST_NS11",
+    "ST_NG02",
+    "ST_NM14A",
+    "ST_NP01A",
+    "ST_NP02A",
+    "ST_NP03A",
+    "ST_NP05A",
+    "ST_NP06A",
+    "ST_NP07A",
+    "ST_NS02",
+    "ST_NS05",
+    "ST_NS07",
+    "ST_NG05",
+    "ST_NS03",
+    "ST_INSTANT",
+    "ST_FINISH",
+    "ST_FIRST_STAR"
+  ]
+}

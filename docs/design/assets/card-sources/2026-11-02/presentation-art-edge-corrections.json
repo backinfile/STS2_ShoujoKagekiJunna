@@ -1,0 +1,90 @@
+{
+  "batchId": "junna-card-art-clear-edges-20261103",
+  "label": "裁去卡图边缘残留字幕",
+  "matches": [
+    {
+      "id": "JK66B",
+      "expectedName": "招架",
+      "name": "招架",
+      "proof": "film-hunt-604.jpg",
+      "crop": [
+        640,
+        480,
+        460,
+        270
+      ]
+    },
+    {
+      "id": "JG28",
+      "expectedName": "低身连击",
+      "name": "低身连击",
+      "proof": "film-hunt-552.jpg",
+      "crop": [
+        640,
+        480,
+        330,
+        270
+      ]
+    },
+    {
+      "id": "JG16",
+      "expectedName": "聚光灯",
+      "name": "聚光灯",
+      "proof": "film-hunt-600.jpg",
+      "crop": [
+        640,
+        480,
+        540,
+        270
+      ]
+    },
+    {
+      "id": "JH10",
+      "expectedName": "翻身斩",
+      "name": "翻身斩",
+      "proof": "film-hunt-612.jpg",
+      "crop": [
+        640,
+        480,
+        450,
+        270
+      ]
+    },
+    {
+      "id": "JF06",
+      "expectedName": "后手",
+      "name": "后手",
+      "proof": "film-hunt-640.jpg",
+      "crop": [
+        640,
+        480,
+        400,
+        270
+      ]
+    },
+    {
+      "id": "JK69",
+      "expectedName": "拾刃",
+      "name": "拾刃",
+      "proof": "film-hunt-648.jpg",
+      "crop": [
+        640,
+        480,
+        500,
+        270
+      ]
+    },
+    {
+      "id": "JK52",
+      "expectedName": "赠言",
+      "name": "赠言",
+      "proof": "tv09-2202-new.jpg",
+      "crop": [
+        800,
+        600,
+        700,
+        130
+      ]
+    }
+  ]
+}

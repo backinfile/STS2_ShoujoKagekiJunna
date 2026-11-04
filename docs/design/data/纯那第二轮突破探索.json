@@ -1,0 +1,1141 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-breakthrough-exploration-20261101-v1",
+  "date": "2026-11-01",
+  "title": "纯那第二轮规则突破探索",
+  "criterion": "逐项对照原规则与明确例外，考察费用支付、打出区域、类型、去向、关联、容量、存量用途和持续时间。",
+  "summary": {
+    "newBreakthroughs": 15,
+    "newGrants": 1,
+    "breakthroughs": 27,
+    "demoPool": 7,
+    "grants": 5,
+    "active": 39,
+    "trash": 28
+  },
+  "demoIds": [
+    "JA13",
+    "JA15",
+    "JA16",
+    "JA17",
+    "JK11",
+    "JK13",
+    "JG09"
+  ],
+  "archivedIds": [
+    "JA03",
+    "JA06",
+    "JA07",
+    "JA08",
+    "JA09",
+    "JA10",
+    "JA12",
+    "JK02",
+    "JK02B",
+    "JK03",
+    "JK03B",
+    "JK06",
+    "JK07",
+    "JK08",
+    "JK09",
+    "JG02",
+    "JG06",
+    "JG07",
+    "JG08",
+    "JA14",
+    "JA18",
+    "JK12",
+    "JK12B",
+    "JK14",
+    "JG10",
+    "JG11",
+    "JG12"
+  ],
+  "cards": [
+    {
+      "uid": "draft_card_JA19",
+      "id": "JA19",
+      "name": "JA19",
+      "system": "stage",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "text": "你可以查看抽牌堆顶牌，并直接打出牌堆顶的箭矢牌。",
+      "upgradedText": "你可以查看抽牌堆顶牌，并直接打出牌堆顶的箭矢牌。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "打出位置",
+      "keywords": [],
+      "termIds": [
+        "SB05",
+        "OB10",
+        "EF51",
+        "RL07",
+        "KW_STAGE"
+      ],
+      "breakthroughIds": [
+        "SB05"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "箭矢需要先进入手牌，才可主动打出。",
+        "exception": "允许查看牌堆顶，并从牌堆顶直接打出箭矢。",
+        "investment": "正常支付费用、选择目标和建立倒计时；顶牌不是箭矢时需要其他动作移走它。",
+        "rules": "这是玩家主动打出，计一次出牌；不会先移入手牌，不触发进入手牌事件。",
+        "roleReason": "箭矢需要先进入手牌，才可主动打出。 → 允许查看牌堆顶，并从牌堆顶直接打出箭矢。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：箭矢需要先进入手牌，才可主动打出。\n规则变化：允许查看牌堆顶，并从牌堆顶直接打出箭矢。\n保留的投入：正常支付费用、选择目标和建立倒计时；顶牌不是箭矢时需要其他动作移走它。\n复核：这是玩家主动打出，计一次出牌；不会先移入手牌，不触发进入手牌事件。"
+    },
+    {
+      "uid": "draft_card_JA20",
+      "id": "JA20",
+      "name": "JA20",
+      "system": "stage",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "text": "你的箭矢牌不消耗能量，改为失去其耗能3倍的生命值。",
+      "upgradedText": "你的箭矢牌不消耗能量，改为失去其耗能3倍的生命值。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "支付方式",
+      "keywords": [],
+      "termIds": [
+        "SB13",
+        "EF49",
+        "EF68",
+        "KW_STAGE"
+      ],
+      "breakthroughIds": [
+        "SB13"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "正常布置箭矢占用当回合能量。",
+        "exception": "用实际生命值替代箭矢的能量支付。",
+        "investment": "每次布置实际失去生命，倒计时与目标维持原规则。",
+        "rules": "按其他费用修正生效后的耗能计算，替换支付方式并不把耗能字段设为0。X费按本次选定X计算。",
+        "roleReason": "正常布置箭矢占用当回合能量。 → 用实际生命值替代箭矢的能量支付。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：正常布置箭矢占用当回合能量。\n规则变化：用实际生命值替代箭矢的能量支付。\n保留的投入：每次布置实际失去生命，倒计时与目标维持原规则。\n复核：按其他费用修正生效后的耗能计算，替换支付方式并不把耗能字段设为0。X费按本次选定X计算。"
+    },
+    {
+      "uid": "draft_card_JA21",
+      "id": "JA21",
+      "name": "JA21",
+      "system": "stage",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "text": "箭矢牌也视为攻击牌。",
+      "upgradedText": "箭矢牌也视为攻击牌。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "类型边界",
+      "keywords": [],
+      "termIds": [
+        "SB15",
+        "RL07",
+        "RL22",
+        "KW_STAGE"
+      ],
+      "breakthroughIds": [
+        "SB15"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "箭矢独立于攻击类型，攻击筛选与攻击牌增伤通常不覆盖箭矢。",
+        "exception": "在保留箭矢身份的同时赋予攻击身份。",
+        "investment": "仍需正常布置和等待；不含伤害指令的箭矢不会凭空造成伤害。",
+        "rules": "攻击打出事件只在布置时发生一次，完成和重放都不算再次打出。攻击来源的类型筛选可以选择箭矢。",
+        "roleReason": "箭矢独立于攻击类型，攻击筛选与攻击牌增伤通常不覆盖箭矢。 → 在保留箭矢身份的同时赋予攻击身份。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：箭矢独立于攻击类型，攻击筛选与攻击牌增伤通常不覆盖箭矢。\n规则变化：在保留箭矢身份的同时赋予攻击身份。\n保留的投入：仍需正常布置和等待；不含伤害指令的箭矢不会凭空造成伤害。\n复核：攻击打出事件只在布置时发生一次，完成和重放都不算再次打出。攻击来源的类型筛选可以选择箭矢。"
+    },
+    {
+      "uid": "draft_card_JA22",
+      "id": "JA22",
+      "name": "JA22",
+      "system": "stage",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "text": "箭矢完成后放回手牌。",
+      "upgradedText": "箭矢完成后放回手牌。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "完成去向",
+      "keywords": [],
+      "termIds": [
+        "SB16",
+        "RL09",
+        "KW_STAGE",
+        "EF18"
+      ],
+      "breakthroughIds": [
+        "SB16"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "正常完成的箭矢通常进入弃牌堆。",
+        "exception": "把正常完成后的弃牌去向替换为手牌。",
+        "investment": "2费安装，升级后1费；再次打出仍需支付并重新布置。",
+        "rules": "整批正常完成后处理一次去向，消耗牌按消耗处理。改为回手的牌没有实际进入弃牌堆，沿用正常完成与移动事件。",
+        "roleReason": "把正常完成后的弃牌去向替换为手牌。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "机制细节备注：只有正常被弃置的卡牌才会被放回手牌。"
+    },
+    {
+      "uid": "draft_card_JA23",
+      "id": "JA23",
+      "name": "JA23",
+      "system": "stage",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "text": "你可以从消耗牌堆打出箭矢牌。每次这样打出时，失去3点生命值。",
+      "upgradedText": "你可以从消耗牌堆打出箭矢牌。每次这样打出时，失去3点生命值。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "消耗再用",
+      "keywords": [],
+      "termIds": [
+        "SB17",
+        "OB12",
+        "EF51",
+        "EF68",
+        "RL11",
+        "KW_STAGE"
+      ],
+      "breakthroughIds": [
+        "SB17"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "已消耗的箭矢离开普通可打出区域。",
+        "exception": "开放从消耗牌堆主动打出的权限。",
+        "investment": "正常能量费用外，每次另失去3点生命值，并重新等待。",
+        "rules": "只选择已在消耗牌堆中的实际牌。新布置不保留旧计数；这3点生命值不随耗能归0而免除。",
+        "roleReason": "已消耗的箭矢离开普通可打出区域。 → 开放从消耗牌堆主动打出的权限。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：已消耗的箭矢离开普通可打出区域。\n规则变化：开放从消耗牌堆主动打出的权限。\n保留的投入：正常能量费用外，每次另失去3点生命值，并重新等待。\n复核：只选择已在消耗牌堆中的实际牌。新布置不保留旧计数；这3点生命值不随耗能归0而免除。"
+    },
+    {
+      "uid": "draft_card_JA24",
+      "id": "JA24",
+      "name": "JA24",
+      "system": "stage",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "text": "你可以花费1点能量，使一个箭矢加速1回合。",
+      "upgradedText": "你可以花费1点能量，使一个箭矢加速1回合。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "主动操作",
+      "keywords": [],
+      "termIds": [
+        "SB18",
+        "EF29",
+        "RL35",
+        "KW_STAGE"
+      ],
+      "breakthroughIds": [
+        "SB18"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "主动加速需要通过手中的牌效或已存在的事件触发器执行。",
+        "exception": "增加一个可主动支付能量的加速操作。",
+        "investment": "每次操作真实花费1点能量；还需要有效的等待中箭矢。",
+        "rules": "操作本身不是打出卡牌，按真实推进量结算加速事件。这与每次打出或每回合自动推进的触发牌分开。",
+        "roleReason": "主动加速需要通过手中的牌效或已存在的事件触发器执行。 → 增加一个可主动支付能量的加速操作。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：主动加速需要通过手中的牌效或已存在的事件触发器执行。\n规则变化：增加一个可主动支付能量的加速操作。\n保留的投入：每次操作真实花费1点能量；还需要有效的等待中箭矢。\n复核：操作本身不是打出卡牌，按真实推进量结算加速事件。这与每次打出或每回合自动推进的触发牌分开。"
+    },
+    {
+      "uid": "draft_card_JK15",
+      "id": "JK15",
+      "name": "JK15",
+      "system": "partner",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "text": "知识。打出知识牌时，将其一张复制放入抽牌堆。",
+      "upgradedText": "知识。打出知识牌时，将其一张复制放入抽牌堆。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "打出复制",
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "RB17",
+        "RL17",
+        "KW_PARTNER",
+        "EF21",
+        "RL12"
+      ],
+      "breakthroughIds": [
+        "RB17"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [
+        "JK15B"
+      ],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "打出的知识牌按原去向处理，后续使用依赖现有牌组。",
+        "exception": "打出知识牌时，将其一张复制牌放入抽牌堆。",
+        "investment": "仍支付打出费用；复制牌需要重新抵达手牌。",
+        "rules": "按实际打出事件复制该知识牌的有效修改；复制牌进入抽牌堆，按其正常费用与规则使用。",
+        "roleReason": "打出知识牌时，为后续牌组增加一张复制牌。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：打出的知识牌按原去向处理，后续使用依赖现有牌组。\n规则变化：打出知识牌时，将其一张复制牌放入抽牌堆。\n保留的投入：仍支付打出费用；复制牌需要重新抵达手牌。\n复核：按实际打出事件复制该知识牌的有效修改；复制牌进入抽牌堆，按其正常费用与规则使用。"
+    },
+    {
+      "uid": "draft_card_JK15B",
+      "id": "JK15B",
+      "name": "JK15B",
+      "system": "partner",
+      "type": "技能",
+      "rarity": "附带",
+      "pool": false,
+      "cost": 1,
+      "upgradedCost": 1,
+      "text": "知识。获得8点格挡。消耗。",
+      "upgradedText": "知识。获得14点格挡。消耗。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "知识牌",
+      "direction": "知识牌防御演示",
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF05",
+        "KW_EXHAUST",
+        "KW_PARTNER"
+      ],
+      "breakthroughIds": [],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [
+        "JK15"
+      ],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "机制演示",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "notes": "与JK15同组的知识牌。获得8点格挡，升级后获得14点格挡。使用后消耗。"
+    },
+    {
+      "uid": "draft_card_JK16",
+      "id": "JK16",
+      "name": "JK16",
+      "system": "partner",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "text": "你可以将手牌中的知识牌变为同组的其他知识牌，持续整场战斗。",
+      "upgradedText": "你可以将手牌中的知识牌变为同组的其他知识牌，持续整场战斗。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "组内形态",
+      "keywords": [],
+      "termIds": [
+        "RB10",
+        "EF25",
+        "RL12",
+        "RL17",
+        "KW_PARTNER"
+      ],
+      "breakthroughIds": [
+        "RB10"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "同组知识牌的实际对象、用途和持有比例固定。",
+        "exception": "开放同组知识牌之间的主动转化。",
+        "investment": "原牌用途被让出，转化后的牌支付对应牌面的正常费用。",
+        "rules": "转化不生成额外对象，也不发放永久牌。按知识牌牌面、类型与初始倒计时使用；原有效修改按变形继承规则处理，战斗结束还原永久模型。",
+        "roleReason": "同组知识牌的实际对象、用途和持有比例固定。 → 开放同组知识牌之间的主动转化。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：同组知识牌的实际对象、用途和持有比例固定。\n规则变化：开放同组知识牌之间的主动转化。\n保留的投入：原牌用途被让出，转化后的牌支付对应牌面的正常费用。\n复核：转化不生成额外对象，也不发放永久牌。按知识牌牌面、类型与初始倒计时使用；原有效修改按变形继承规则处理，战斗结束还原永久模型。"
+    },
+    {
+      "uid": "draft_card_JK17",
+      "id": "JK17",
+      "name": "JK17",
+      "system": "partner",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 3,
+      "upgradedCost": 2,
+      "text": "你对知识牌施加的升级、费用变化和伤害加成，改为作用于其整组牌。",
+      "upgradedText": "你对知识牌施加的升级、费用变化和伤害加成，改为作用于其整组牌。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "整组修改",
+      "keywords": [],
+      "termIds": [
+        "RB18",
+        "EF52",
+        "RL29",
+        "KW_PARTNER",
+        "KW_BONUS"
+      ],
+      "breakthroughIds": [
+        "RB18"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "同组知识牌分别升级、分别承受费用与伤害加成修改。",
+        "exception": "把之后的单牌修改扩展为整组修改。",
+        "investment": "仍需取得整组、支付安装费用并提供修改来源；修改时长沿用原效果。",
+        "rules": "先合并实际目标并去重，再各施加一次。组内扩展不递归触发自身，也不追溯安装之前的修改。",
+        "roleReason": "同组知识牌分别升级、分别承受费用与伤害加成修改。 → 把之后的单牌修改扩展为整组修改。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：同组知识牌分别升级、分别承受费用与伤害加成修改。\n规则变化：把之后的单牌修改扩展为整组修改。\n保留的投入：仍需取得整组、支付安装费用并提供修改来源；修改时长沿用原效果。\n复核：先合并实际目标并去重，再各施加一次。组内扩展不递归触发自身，也不追溯安装之前的修改。"
+    },
+    {
+      "uid": "draft_card_JK18",
+      "id": "JK18",
+      "name": "JK18",
+      "system": "partner",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "text": "选择你手牌中的一张知识牌和另一张牌。本场战斗中，后者也视为同组的知识牌。消耗。",
+      "upgradedText": "选择你手牌中的一张知识牌和另一张牌。本场战斗中，后者也视为同组的知识牌。消耗。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "关联范围",
+      "keywords": [],
+      "termIds": [
+        "RB19",
+        "EF69",
+        "RL17",
+        "RL18",
+        "KW_PARTNER",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [
+        "RB19"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "知识牌的来源由固定关联模型决定，其他实际牌无法被指定为本组工具。",
+        "exception": "把任意所选实际手牌临时加入指定知识关联。",
+        "investment": "知识牌与候选工具需要同时在手；本牌消耗，临时关联随战斗结束清理。",
+        "rules": "不重复永久获取流程。所选实际牌获得知识关键词与该组关系；普通生成的同名牌不继承，实际复制依照有效修改继承。原模型身份保留。",
+        "roleReason": "知识牌的来源由固定关联模型决定，其他实际牌无法被指定为本组工具。 → 把任意所选实际手牌临时加入指定知识关联。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：知识牌的来源由固定关联模型决定，其他实际牌无法被指定为本组工具。\n规则变化：把任意所选实际手牌临时加入指定知识关联。\n保留的投入：知识牌与候选工具需要同时在手；本牌消耗，临时关联随战斗结束清理。\n复核：不重复永久获取流程。所选实际牌获得知识关键词与该组关系；普通生成的同名牌不继承，实际复制依照有效修改继承。原模型身份保留。"
+    },
+    {
+      "uid": "draft_card_JK19",
+      "id": "JK19",
+      "name": "JK19",
+      "system": "partner",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "text": "知识牌不计入手牌上限。",
+      "upgradedText": "知识牌不计入手牌上限。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "手牌容量",
+      "keywords": [],
+      "termIds": [
+        "RB20",
+        "RL19",
+        "NV45",
+        "KW_PARTNER"
+      ],
+      "breakthroughIds": [
+        "RB20"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "每张在手的知识牌都占用一份手牌容量。",
+        "exception": "从手牌上限的占用统计中排除知识牌。",
+        "investment": "知识牌仍需抵达、持有并正常支付，其他手牌继续占用容量。",
+        "rules": "只改变接牌时的容量判断；按手牌张数计算的效果仍读取实际张数。",
+        "roleReason": "每张在手的知识牌都占用一份手牌容量。 → 从手牌上限的占用统计中排除知识牌。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：每张在手的知识牌都占用一份手牌容量。\n规则变化：从手牌上限的占用统计中排除知识牌。\n保留的投入：知识牌仍需抵达、持有并正常支付，其他手牌继续占用容量。\n复核：只改变接牌时的容量判断；按手牌张数计算的效果仍读取实际张数。"
+    },
+    {
+      "uid": "draft_card_JG13",
+      "id": "JG13",
+      "name": "JG13",
+      "system": "growth",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 3,
+      "upgradedCost": 2,
+      "text": "选择你手牌中一张来自永久牌组的牌。将其伤害加成永久加入基础伤害，并清空伤害加成。消耗。",
+      "upgradedText": "选择你手牌中一张来自永久牌组的牌。将其伤害加成永久加入基础伤害，并清空伤害加成。消耗。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "永久转化",
+      "keywords": [],
+      "termIds": [
+        "GB15",
+        "EF59",
+        "RL23",
+        "RL33",
+        "KW_BONUS",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [
+        "GB15"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "伤害加成仅在本场战斗有效，且与基础伤害分开记录。",
+        "exception": "把已有存量转入永久基础伤害，结束该份临时存量。",
+        "investment": "先积累伤害加成，支付转换费用并消耗本牌；原存量随转换清空。",
+        "rules": "只选择可映射回永久牌组的实际牌。临时生成物不具备永久落点；转换不产生新的获得伤害加成事件。永久增长属于高幅度备选，需单独比较成品卡位。",
+        "roleReason": "伤害加成仅在本场战斗有效，且与基础伤害分开记录。 → 把已有存量转入永久基础伤害，结束该份临时存量。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：伤害加成仅在本场战斗有效，且与基础伤害分开记录。\n规则变化：把已有存量转入永久基础伤害，结束该份临时存量。\n保留的投入：先积累伤害加成，支付转换费用并消耗本牌；原存量随转换清空。\n复核：只选择可映射回永久牌组的实际牌。临时生成物不具备永久落点；转换不产生新的获得伤害加成事件。永久增长属于高幅度备选，需单独比较成品卡位。"
+    },
+    {
+      "uid": "draft_card_JG14",
+      "id": "JG14",
+      "name": "JG14",
+      "system": "growth",
+      "type": "能力",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "text": "你的牌结算伤害时，伤害加成改为使目标失去等量生命值。",
+      "upgradedText": "你的牌结算伤害时，伤害加成改为使目标失去等量生命值。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "伤害性质",
+      "keywords": [],
+      "termIds": [
+        "GB16",
+        "EF68",
+        "RL22",
+        "RL33",
+        "KW_BONUS"
+      ],
+      "breakthroughIds": [
+        "GB16"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "伤害加成与其他伤害分量一起经过目标的伤害处理。",
+        "exception": "将伤害加成分量从普通伤害中取出，改为独立生命流失。",
+        "investment": "仍需实际获得加成并打出攻击，原基础伤害继续按普通伤害结算。",
+        "rules": "每段分别处理，原伤害中移除被转换的分量；目标的伤害增减只作用于普通伤害部分。生命流失不触发造成伤害事件，也不再次获得加成。",
+        "roleReason": "伤害加成与其他伤害分量一起经过目标的伤害处理。 → 将伤害加成分量从普通伤害中取出，改为独立生命流失。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：伤害加成与其他伤害分量一起经过目标的伤害处理。\n规则变化：将伤害加成分量从普通伤害中取出，改为独立生命流失。\n保留的投入：仍需实际获得加成并打出攻击，原基础伤害继续按普通伤害结算。\n复核：每段分别处理，原伤害中移除被转换的分量；目标的伤害增减只作用于普通伤害部分。生命流失不触发造成伤害事件，也不再次获得加成。"
+    },
+    {
+      "uid": "draft_card_JG15",
+      "id": "JG15",
+      "name": "JG15",
+      "system": "growth",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "text": "选择你手牌中的一张牌。移除其全部伤害加成，每移除3点，其耗能在本场战斗中减少1。消耗。",
+      "upgradedText": "选择你手牌中的一张牌。移除其全部伤害加成，每移除3点，其耗能在本场战斗中减少1。消耗。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "资源用途",
+      "keywords": [],
+      "termIds": [
+        "GB17",
+        "RL23",
+        "RL33",
+        "KW_BONUS",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [
+        "GB17"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "伤害加成只能保留在载体上用于后续伤害，无法支付载体的使用成本。",
+        "exception": "花掉伤害加成存量，换取同一实际牌的本场费用降低。",
+        "investment": "让出已有输出投资，按实际移除量换算；本牌消耗。",
+        "rules": "每3点向下取整，费用最低0，固定耗能牌作为当前验证范围。消耗存量不是负数的新获得事件。",
+        "roleReason": "伤害加成只能保留在载体上用于后续伤害，无法支付载体的使用成本。 → 花掉伤害加成存量，换取同一实际牌的本场费用降低。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "第二轮探索；卡名待定。\n原有限制：伤害加成只能保留在载体上用于后续伤害，无法支付载体的使用成本。\n规则变化：花掉伤害加成存量，换取同一实际牌的本场费用降低。\n保留的投入：让出已有输出投资，按实际移除量换算；本牌消耗。\n复核：每3点向下取整，费用最低0，固定耗能牌作为当前验证范围。消耗存量不是负数的新获得事件。"
+    },
+    {
+      "uid": "draft_card_JG16",
+      "id": "JG16",
+      "name": "JG16",
+      "system": "growth",
+      "type": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 0,
+      "text": "选择一张牌，将所有伤害加成转移到该牌上。消耗。",
+      "upgradedText": "保留。选择一张牌，将所有伤害加成转移到该牌上。消耗。",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "role": "突破限制牌",
+      "direction": "存量转移",
+      "keywords": [],
+      "termIds": [
+        "GB18",
+        "RL33",
+        "KW_BONUS",
+        "KW_EXHAUST"
+      ],
+      "breakthroughIds": [
+        "GB18"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "draftStatus": "探索候选",
+      "draftBatch": "junna-breakthrough-exploration-20261101-v1",
+      "design": {
+        "classification": "规则突破",
+        "oldRule": "伤害加成原本保存在各个实际牌上。",
+        "exception": "把已有伤害加成集中转移到选定攻击牌或能造成伤害的箭矢牌。",
+        "investment": "1费，升级后0费并获得保留；本牌消耗，转移总量保持不变。",
+        "rules": "转移目标按新的伤害加成范围选择。来源按本场战斗中的实际牌读取并清空被转出的存量；目标原有加成保留。转移属于存量移动，不产生新获得事件。",
+        "roleReason": "把已有伤害加成集中到选定实际载体。",
+        "criterion": "明确改写既有规则；按原资源与原动作反复触发的牌另作常规牌。"
+      },
+      "notes": "按当前牌面复核。\n原有限制：伤害加成原本保存在各个实际牌上。\n规则变化：把已有伤害加成集中转移到选定攻击牌或能造成伤害的箭矢牌。\n保留的投入：1费，升级后0费并获得保留；本牌消耗，转移总量保持不变。\n复核：转移目标按新的伤害加成范围选择。来源按本场战斗中的实际牌读取并清空被转出的存量；目标原有加成保留。转移属于存量移动，不产生新获得事件。"
+    }
+  ],
+  "partnerGroups": [
+    {
+      "uid": "draft_group_JK15",
+      "id": "GROUP_JK15",
+      "title": "JK15",
+      "mainCardId": "JK15",
+      "grantedCardIds": [
+        "JK15B"
+      ],
+      "grantedCardCounts": {
+        "JK15B": 1
+      }
+    }
+  ],
+  "terms": [
+    {
+      "uid": "term_SB15",
+      "id": "SB15",
+      "name": "类型边界",
+      "kind": "突破",
+      "definition": "箭矢原本是独立类型；明确赋予攻击身份，改变类型筛选的适用范围。",
+      "template": "",
+      "systems": [
+        "stage"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_SB16",
+      "id": "SB16",
+      "name": "完成去向",
+      "kind": "突破",
+      "definition": "把箭矢正常完成后进入弃牌堆的去向改为手牌；消耗仍按消耗处理，再次打出重新支付并布置。",
+      "template": "箭矢完成后，若其将进入弃牌堆，改为放回手牌。",
+      "systems": [
+        "stage"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_SB17",
+      "id": "SB17",
+      "name": "消耗再用",
+      "kind": "突破",
+      "definition": "允许从消耗牌堆直接打出已消耗箭矢，另外支付实际生命值。",
+      "template": "",
+      "systems": [
+        "stage"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_SB18",
+      "id": "SB18",
+      "name": "主动操作",
+      "kind": "突破",
+      "definition": "建立不依赖手牌工具的付费加速操作；每次操作消耗真实能量。",
+      "template": "",
+      "systems": [
+        "stage"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_RB17",
+      "id": "RB17",
+      "name": "打出复制",
+      "kind": "突破",
+      "definition": "打出知识牌时，为抽牌堆增加一张该牌的复制牌。",
+      "template": "",
+      "systems": [
+        "partner"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_RB18",
+      "id": "RB18",
+      "name": "整组修改",
+      "kind": "突破",
+      "definition": "将作用于一张知识牌的修改改为整组施加，保留原修改的持续时间。",
+      "template": "",
+      "systems": [
+        "partner"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_RB19",
+      "id": "RB19",
+      "name": "关联范围",
+      "kind": "突破",
+      "definition": "将任意实际手牌临时加入所选知识牌所在的牌组，扩展固定组别。",
+      "template": "",
+      "systems": [
+        "partner"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_RB20",
+      "id": "RB20",
+      "name": "手牌容量",
+      "kind": "突破",
+      "definition": "知识牌不占用手牌上限；涉及牌数的其他读取仍按实际张数。",
+      "template": "",
+      "systems": [
+        "partner"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_GB15",
+      "id": "GB15",
+      "name": "永久转化",
+      "kind": "突破",
+      "definition": "把本场伤害加成转入永久基础伤害，随后清空该份伤害加成。",
+      "template": "",
+      "systems": [
+        "growth"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_GB16",
+      "id": "GB16",
+      "name": "伤害性质",
+      "kind": "突破",
+      "definition": "把伤害加成分量从普通伤害改为生命流失，原伤害中移除相同分量。",
+      "template": "",
+      "systems": [
+        "growth"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_GB17",
+      "id": "GB17",
+      "name": "资源用途",
+      "kind": "突破",
+      "definition": "消耗已有伤害加成换取实际攻击牌在本场战斗中的费用降低。",
+      "template": "",
+      "systems": [
+        "growth"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    },
+    {
+      "uid": "term_GB18",
+      "id": "GB18",
+      "name": "存量转移",
+      "kind": "突破",
+      "definition": "把实际卡牌上已有的伤害加成集中到选定载体；目标可为攻击牌或能造成伤害的箭矢牌，总量守恒。",
+      "template": "",
+      "systems": [
+        "growth"
+      ],
+      "notes": "第二轮规则突破探索。",
+      "sources": [
+        "纯那第二轮突破探索"
+      ],
+      "unit": ""
+    }
+  ],
+  "rejected": [
+    {
+      "direction": "每回合额外触发、每次加速获得格挡、完成返能",
+      "reason": "分别属于周期触发与事件收益，不再作为突破扩充。"
+    },
+    {
+      "direction": "知识到手升级、打出知识牌减费、增加普通复制份数",
+      "reason": "沿用已有来源与动作，只作为常规工具或收益。"
+    },
+    {
+      "direction": "伤害加成增量翻倍、单牌换算倍率提高",
+      "reason": "主要提升投资效率或单牌收益，不继续占用突破候选。"
+    },
+    {
+      "direction": "取回等待中的箭矢并保留进度、设置或重置当前计数、暂停自然计时、通用改目标",
+      "reason": "沿用此前已收起的方向，本轮继续留在候选之外。"
+    },
+    {
+      "direction": "全场箭矢完成后自动循环留场",
+      "reason": "沿用此前已收起的方向；本轮的置顶与消耗堆打出都要求原物离场后重新支付和布置。"
+    },
+    {
+      "direction": "把伤害加成扩成独立的格挡成长体系",
+      "reason": "继续让伤害加成承担输出小体系定位，本轮只探索其存量、寿命和结算方式。"
+    },
+    {
+      "direction": "知识永久递归发放、永久重配所有关联组",
+      "reason": "本轮关联范围与形态变化均限定在本场战斗，保留既定永久获取结构。"
+    }
+  ],
+  "recommendations": {
+    "stage": [
+      "JA19",
+      "JA21",
+      "JA24"
+    ],
+    "partner": [
+      "JK15",
+      "JK18",
+      "JK19"
+    ],
+    "growth": [
+      "JG13",
+      "JG15",
+      "JG16"
+    ]
+  },
+  "review": {
+    "scope": "仅探索候选，不填完整卡池。卡名继续待定，升级暂以费用变化为主。",
+    "costs": "生命支付与消耗堆打出保留实际代价；资源转换清空原存量；转移遵守总量守恒。",
+    "mutualEffects": "类型扩展、整组修改与全体增伤先求实际目标并集再执行一次；转移、转换与继承不计为新获得事件。",
+    "deferred": "费用、永久增长幅度与多张突破叠加的实战强度待单独比较。"
+  }
+}

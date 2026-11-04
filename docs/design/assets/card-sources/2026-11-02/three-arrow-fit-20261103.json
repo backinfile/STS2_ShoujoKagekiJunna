@@ -1,0 +1,104 @@
+{
+  "at": "2026-11-03T06:27:35.677Z",
+  "revision": 1419,
+  "historyRecord": "5fe04180-aa69-40e7-a5b0-8564c6e100b7",
+  "records": [
+    {
+      "id": "JA13",
+      "oldName": "直斩",
+      "name": "劲射",
+      "art": "original-scene-ja13-archery-fit-20261103",
+      "source": "TV 第2话 · 约18:30"
+    },
+    {
+      "id": "JA16",
+      "oldName": "引导箭",
+      "name": "引导箭",
+      "art": "original-scene-ja16-archery-fit-20261103",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:10"
+    },
+    {
+      "id": "JA38",
+      "oldName": "引弦",
+      "name": "引弦",
+      "art": "original-scene-ja38-archery-fit-20261103",
+      "source": "TV 第2话 · 约18:54"
+    },
+    {
+      "id": "JX02",
+      "oldName": "群星呼应",
+      "name": "群星呼应",
+      "art": "original-scene-jx02-star-lights-20261103",
+      "source": "2021 剧场版 · 狩猎的Revue片段约05:38"
+    }
+  ],
+  "checks": {
+    "mechanicsPreserved": true,
+    "versionCheckedAtomicCommit": true,
+    "independentSourceFrames": true,
+    "assetReadbackVerified": true,
+    "fitPoolSynced": true
+  },
+  "sources": [
+    {
+      "id": "JA13",
+      "name": "劲射",
+      "art": "original-scene-ja13-archery-fit-20261103",
+      "file": "tv02-1828-action.jpg",
+      "rect": [
+        760,
+        100,
+        880,
+        660
+      ],
+      "source": "TV 第2话 · 约18:30",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1110",
+      "outputFile": "original-scene-ja13-archery-fit-20261103.jpg"
+    },
+    {
+      "id": "JA16",
+      "name": "引导箭",
+      "art": "original-scene-ja16-archery-fit-20261103",
+      "file": "film-hunt-208.jpg",
+      "rect": [
+        570,
+        25,
+        960,
+        720
+      ],
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:10",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=130",
+      "outputFile": "original-scene-ja16-archery-fit-20261103.jpg"
+    },
+    {
+      "id": "JA38",
+      "name": "引弦",
+      "art": "original-scene-ja38-archery-fit-20261103",
+      "file": "tv02-1852-action.jpg",
+      "rect": [
+        270,
+        120,
+        800,
+        600
+      ],
+      "source": "TV 第2话 · 约18:54",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1134",
+      "outputFile": "original-scene-ja38-archery-fit-20261103.jpg"
+    },
+    {
+      "id": "JX02",
+      "name": "群星呼应",
+      "art": "original-scene-jx02-star-lights-20261103",
+      "file": "film-hunt-536.jpg",
+      "rect": [
+        450,
+        40,
+        960,
+        720
+      ],
+      "source": "2021 剧场版 · 狩猎的Revue片段约05:38",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=338",
+      "outputFile": "original-scene-jx02-star-lights-20261103.jpg"
+    }
+  ]
+}

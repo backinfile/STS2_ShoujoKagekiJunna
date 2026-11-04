@@ -1,0 +1,2660 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-first-card-draft-20261101-v1",
+  "date": "2026-11-01",
+  "title": "纯那体系突破候选与基本关系牌",
+  "cards": [
+    {
+      "uid": "draft_card_JA01",
+      "id": "JA01",
+      "name": "JA01",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "所有箭矢获得重放1。",
+      "upgradedText": "所有箭矢牌获得重放1。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF43",
+        "SB04",
+        "KW_REPLAY"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [
+        "SB04"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "重放与额外触发",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n突破的限制：整类箭矢的正常完成结算增加完整牌效，改变全局结算次数规则。\n端口：输出／防御／运转\n保留的投入：仍支付布置费用、等待倒计时，并维持原目标。\n复核：重放与额外触发均不增加完成对象数；同批追加只计算一次。\n结构参照：回响形态的额外执行结构；原候选再演。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／防御／运转",
+        "investment": "仍支付布置费用、等待倒计时，并维持原目标。",
+        "risk": "重放与额外触发均不增加完成对象数；同批追加只计算一次。",
+        "reference": "回响形态的额外执行结构；原候选再演。",
+        "classification": "规则突破",
+        "roleReason": "整类箭矢的正常完成结算增加完整牌效，改变全局结算次数规则。",
+        "limit": "整类箭矢的正常完成结算增加完整牌效，改变全局结算次数规则。"
+      }
+    },
+    {
+      "uid": "draft_card_JA02",
+      "id": "JA02",
+      "name": "JA02",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 3,
+      "upgradedCost": 2,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "所有箭矢牌耗能变为0， 并且会延迟一回合完成。",
+      "upgradedText": "所有箭矢牌耗能变为0， 并且会延迟一回合完成。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF66",
+        "SB13"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [
+        "SB13"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "布置与加速",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "按当前牌面复核。\n原有限制：箭矢的布置通常需要正常支付能量。\n规则变化：箭矢牌耗能变为0，以额外等待1回合作为代价。\n保留的投入：先安装此能力，之后的箭矢额外等待1回合。\n复核：原牌本身的消耗按各自牌面处理；本能力只改费用与等待。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "运转",
+        "investment": "先安装此能力，之后的箭矢额外等待1回合。",
+        "risk": "与即时完成、抽牌箭矢组合时，用实际卡牌的消耗承担代价；额外触发未到期对象不提前消耗。",
+        "reference": "纯那箭矢的费用与等待交换。",
+        "classification": "规则突破",
+        "roleReason": "用额外等待替代箭矢的能量费用。",
+        "limit": "用额外等待替代箭矢的能量费用。",
+        "oldRule": "箭矢的布置通常需要正常支付能量。",
+        "exception": "箭矢牌耗能变为0，以额外等待1回合作为代价。",
+        "rules": "原牌本身的消耗按各自牌面处理；本能力只改费用与等待。"
+      }
+    },
+    {
+      "uid": "draft_card_JA03",
+      "id": "JA03",
+      "name": "JA03",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "每当你打出一张箭矢牌时，其他箭矢加速1回合。",
+      "upgradedText": "每当你打出一张箭矢牌时，其他箭矢加速1回合。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "TR12",
+        "EF29"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "布置与加速",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：打出箭矢时调用既有加速动作，是持续加速触发器。\n端口：输出／防御／运转\n保留的投入：需要先有场面，再打出新箭矢。\n复核：场内复制与额外触发不算打出；新布置的自身不响应这次推进。\n结构参照：用户已确认的布置推动既有场面结构。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／防御／运转",
+        "investment": "需要先有场面，再打出新箭矢。",
+        "risk": "场内复制与额外触发不算打出；新布置的自身不响应这次推进。",
+        "reference": "用户已确认的布置推动既有场面结构。",
+        "classification": "高频触发",
+        "roleReason": "打出箭矢时调用既有加速动作，是持续加速触发器。"
+      }
+    },
+    {
+      "uid": "draft_card_JA04",
+      "id": "JA04",
+      "name": "JA04",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "你打出的下1张箭矢牌立即加速到完成。",
+      "upgradedText": "你打出的下2张箭矢牌立即加速到完成。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF32",
+        "SB01",
+        "SB11"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [
+        "SB01",
+        "SB11"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "布置与加速",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "按当前牌面复核。\n原有限制：新打出的箭矢通常需要等待。\n规则变化：下一张箭矢立即加速到完成，升级后为下2张。\n保留的投入：本牌费用及对应张数的箭矢牌；箭矢正常支付自身费用。\n复核：按实际布置依次使用次数；升级增加到2张，沿用同样的立即完成流程。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／防御／运转",
+        "investment": "本牌费用及对应张数的箭矢牌；箭矢正常支付自身费用。",
+        "risk": "按剩余回合数作一次完整加速；不改写基础初始回合数。",
+        "reference": "限定张数的即时完成。",
+        "classification": "规则突破",
+        "roleReason": "为限定张数的箭矢跳过等待。",
+        "limit": "为限定张数的箭矢跳过等待。",
+        "oldRule": "新打出的箭矢通常需要等待。",
+        "exception": "下一张箭矢立即加速到完成，升级后为下2张。",
+        "rules": "按实际布置依次使用次数；升级增加到2张，沿用同样的立即完成流程。"
+      }
+    },
+    {
+      "uid": "draft_card_JA06",
+      "id": "JA06",
+      "name": "JA06",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "在你的回合结束时，额外触发一个箭矢。",
+      "upgradedText": "在你的回合结束时，额外触发一个箭矢。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "TR03",
+        "EF33"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "重放与额外触发",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：每回合提供一次既有额外触发动作，是周期触发器。\n端口：输出／防御／运转\n保留的投入：安装能力并保有有效箭矢；原倒计时继续推进。\n复核：额外触发不产生完成事件；选择失败时跳过。\n结构参照：周期工具；原候选再生赞美曲。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／防御／运转",
+        "investment": "安装能力并保有有效箭矢；原倒计时继续推进。",
+        "risk": "额外触发不产生完成事件；选择失败时跳过。",
+        "reference": "周期工具；原候选再生赞美曲。",
+        "classification": "周期触发",
+        "roleReason": "每回合提供一次既有额外触发动作，是周期触发器。"
+      }
+    },
+    {
+      "uid": "draft_card_JA07",
+      "id": "JA07",
+      "name": "JA07",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "每当箭矢完成时，获得1点能量。",
+      "upgradedText": "每当箭矢完成时，获得1点能量。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "TR28",
+        "EF09",
+        "EF10"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "等待过程提供收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：将箭矢完成事件兑换为能量，是事件收益牌。\n端口：运转\n保留的投入：先布置并完成实际箭矢，按当前牌面取得当回合能量收益。\n复核：按实际完成对象计数；免费布置、立即完成与抽牌组合需要复核当回合自供能循环。\n结构参照：完成资源转换为下一轮运转。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "运转",
+        "investment": "先布置并完成实际箭矢，按当前牌面取得当回合能量收益。",
+        "risk": "按实际完成对象计数；免费布置、立即完成与抽牌组合需要复核当回合自供能循环。",
+        "reference": "完成资源转换为下一轮运转。",
+        "classification": "事件收益",
+        "roleReason": "将箭矢完成事件兑换为能量，是事件收益牌。"
+      }
+    },
+    {
+      "uid": "draft_card_JA08",
+      "id": "JA08",
+      "name": "JA08",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "在你的回合开始时，将一张随机箭矢牌加入你的手牌。",
+      "upgradedText": "在你的回合开始时，将一张随机箭矢牌加入你的手牌。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "TR02",
+        "EF22"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制基础牌",
+      "direction": "布置与加速",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：每轮提供一张随机箭矢，是持续来源牌。\n端口：运转\n保留的投入：每回合只在既定时点产生新来源，仍需支付并等待。\n复核：随机池只含普通、罕见、稀有入池箭矢；副本为未升级版本。\n结构参照：创造性AI式持续来源；原候选Circle of the Revue。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "运转",
+        "investment": "每回合只在既定时点产生新来源，仍需支付并等待。",
+        "risk": "随机池只含普通、罕见、稀有入池箭矢；副本为未升级版本。",
+        "reference": "创造性AI式持续来源；原候选Circle of the Revue。",
+        "classification": "持续来源",
+        "roleReason": "每轮提供一张随机箭矢，是持续来源牌。"
+      }
+    },
+    {
+      "uid": "draft_card_JA09",
+      "id": "JA09",
+      "name": "JA09",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "箭矢",
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": 1,
+      "upgradedTurns": 1,
+      "target": "敌人或玩家",
+      "text": "复制目标的一个箭矢。",
+      "upgradedText": "复制目标的一个箭矢。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF21",
+        "KW_STAGE"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制中坚牌",
+      "direction": "重放与额外触发",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：使用既有复制动作增加一个布置，是复制工具。\n端口：输出／防御／运转\n保留的投入：本牌的费用、等待与目标范围。\n复核：复制时选择仍有效且当前计数大于0的对象；新对象不记为打出，当前回合不自动计数。\n结构参照：场内复制已有投资。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／防御／运转",
+        "investment": "本牌的费用、等待与目标范围。",
+        "risk": "复制时选择仍有效且当前计数大于0的对象；新对象不记为打出，当前回合不自动计数。",
+        "reference": "场内复制已有投资。",
+        "classification": "复制工具",
+        "roleReason": "使用既有复制动作增加一个布置，是复制工具。"
+      },
+      "arrowSubtype": "技能"
+    },
+    {
+      "uid": "draft_card_JA10",
+      "id": "JA10",
+      "name": "JA10",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "技能",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "本回合，下一个完成的箭矢额外触发2次。消耗。",
+      "upgradedText": "本回合，下一个完成的箭矢额外触发2次。消耗。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF65",
+        "EF27",
+        "KW_EXHAUST"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制中坚牌",
+      "direction": "重放与额外触发",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：为下次完成追加两次既有牌效，是一次性爆发收益。\n端口：输出／防御／运转\n保留的投入：把指定载荷安排在本回合下一次完成的位置。\n复核：同回合来源的追加次数相加；追加执行不再次消耗或复制本规则。\n结构参照：一次性额外执行窗口；原候选终幕。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／防御／运转",
+        "investment": "把指定载荷安排在本回合下一次完成的位置。",
+        "risk": "同回合来源的追加次数相加；追加执行不再次消耗或复制本规则。",
+        "reference": "一次性额外执行窗口；原候选终幕。",
+        "classification": "爆发收益",
+        "roleReason": "为下次完成追加两次既有牌效，是一次性爆发收益。"
+      }
+    },
+    {
+      "uid": "draft_card_JA11",
+      "id": "JA11",
+      "name": "JA11",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "你的箭矢牌获得保留。",
+      "upgradedText": "你的箭矢牌获得保留。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "KW_RETAIN",
+        "EF26",
+        "SB14"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [
+        "SB14"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "布置与加速",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n突破的限制：使整类箭矢跨回合保留，改变未打出牌在回合结束时离手的规则。\n端口：运转\n保留的投入：占用手牌空间，费用与等待保持原样。\n复核：保留只作用于手牌中的卡牌，不延长场内箭矢的倒计时。\n结构参照：幻影之刃式类型保留。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "运转",
+        "investment": "占用手牌空间，费用与等待保持原样。",
+        "risk": "保留只作用于手牌中的卡牌，不延长场内箭矢的倒计时。",
+        "reference": "幻影之刃式类型保留。",
+        "classification": "规则突破",
+        "roleReason": "使整类箭矢跨回合保留，改变未打出牌在回合结束时离手的规则。",
+        "limit": "使整类箭矢跨回合保留，改变未打出牌在回合结束时离手的规则。"
+      }
+    },
+    {
+      "uid": "draft_card_JA12",
+      "id": "JA12",
+      "name": "JA12",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "每当一个箭矢加速1回合时，获得2点格挡。",
+      "upgradedText": "每当一个箭矢加速1回合时，获得2点格挡。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "TR26",
+        "EF05"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "等待过程提供收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：按实际加速量提供格挡，是加速事件的防御收益牌。\n端口：防御\n保留的投入：需要场面与真实的计数减少。\n复核：自然计数、主动加速与立即完成都按实际减少量计；复制计数与重复牌效不凭空产生推进。\n结构参照：来源事件覆盖防御端；原候选闪耀所在。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "防御",
+        "investment": "需要场面与真实的计数减少。",
+        "risk": "自然计数、主动加速与立即完成都按实际减少量计；复制计数与重复牌效不凭空产生推进。",
+        "reference": "来源事件覆盖防御端；原候选闪耀所在。",
+        "classification": "事件收益",
+        "roleReason": "按实际加速量提供格挡，是加速事件的防御收益牌。"
+      }
+    },
+    {
+      "uid": "draft_card_JK01",
+      "id": "JK01",
+      "name": "JK01",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 3,
+      "upgradedCost": 2,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。在你的回合开始时，不论何处，将一张《JK01B》放入你的手牌，其本回合耗能变为0。",
+      "upgradedText": "知识。在你的回合开始时，不论何处，将一张《JK01B》放入你的手牌，其本回合耗能变为0。",
+      "pool": true,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "EF18",
+        "EF48",
+        "RB01",
+        "RB04"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [
+        "RB01",
+        "RB04"
+      ],
+      "partnerCardIds": [
+        "JK01B"
+      ],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "固定工具反复抵达",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n突破的限制：每轮从任意位置调用固定实际工具并设为0费，改变调用区域与支付约束。\n端口：输出／运转\n保留的投入：3费安装；固定一张实际工具，不制造新副本。\n复核：工具为攻击类型；不从场内撤回等待中的箭矢。\n结构参照：持续定向工具；原候选星祭之夜。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／运转",
+        "investment": "3费安装；固定一张实际工具，不制造新副本。",
+        "risk": "工具为攻击类型；不从场内撤回等待中的箭矢。",
+        "reference": "持续定向工具；原候选星祭之夜。",
+        "classification": "规则突破",
+        "roleReason": "每轮从任意位置调用固定实际工具并设为0费，改变调用区域与支付约束。",
+        "limit": "每轮从任意位置调用固定实际工具并设为0费，改变调用区域与支付约束。"
+      }
+    },
+    {
+      "uid": "draft_card_JK01B",
+      "id": "JK01B",
+      "name": "JK01B",
+      "system": "partner",
+      "rarity": "附带",
+      "type": "攻击",
+      "cost": 2,
+      "upgradedCost": 2,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "知识。造成12点伤害。目标敌人的一个箭矢加速1回合。",
+      "upgradedText": "知识。造成16点伤害。目标敌人的一个箭矢加速1回合。",
+      "pool": false,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF01",
+        "EF29",
+        "KW_PARTNER"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK01"
+      ],
+      "art": "defaultPortrait",
+      "role": "知识牌",
+      "direction": "",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出／运转",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出／运转",
+        "investment": "",
+        "risk": "",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JK02",
+      "id": "JK02",
+      "name": "JK02",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。每当《JK02B》进入你的手牌时，将其升级，其本回合耗能减少1。",
+      "upgradedText": "知识。每当《JK02B》进入你的手牌时，将其升级，其本回合耗能减少1。",
+      "pool": true,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "EF24",
+        "EF47"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK02B"
+      ],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "指定工具扩大收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：指定工具进入手牌后得到升级与减费，是抵达收益牌。\n端口：输出／运转\n保留的投入：需要真实进入手牌；工具仍有剩余费用。\n复核：升级作用于实际卡；永久获得主牌仍按基础规则发放未升级《JK02B》。\n结构参照：抵达收益；原候选舞台准备。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／运转",
+        "investment": "需要真实进入手牌；工具仍有剩余费用。",
+        "risk": "升级作用于实际卡；永久获得主牌仍按基础规则发放未升级《JK02B》。",
+        "reference": "抵达收益；原候选舞台准备。",
+        "classification": "抵达收益",
+        "roleReason": "指定工具进入手牌后得到升级与减费，是抵达收益牌。"
+      }
+    },
+    {
+      "uid": "draft_card_JK02B",
+      "id": "JK02B",
+      "name": "JK02B",
+      "system": "partner",
+      "rarity": "附带",
+      "type": "攻击",
+      "cost": 2,
+      "upgradedCost": 2,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "知识。造成16点伤害。",
+      "upgradedText": "知识。造成22点伤害。",
+      "pool": false,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF01",
+        "KW_PARTNER"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK02"
+      ],
+      "art": "defaultPortrait",
+      "role": "知识牌",
+      "direction": "",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "",
+        "risk": "",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JK03",
+      "id": "JK03",
+      "name": "JK03",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。你的《JK03B》获得重放1。",
+      "upgradedText": "知识。你的《JK03B》获得重放1。",
+      "pool": true,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "EF43",
+        "KW_REPLAY"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK03B"
+      ],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "指定工具扩大收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：只增加指定《JK03B》的执行收益，是固定工具强化牌。\n端口：防御／运转\n保留的投入：取得、布置并等待自己的关联箭矢。\n复核：重放属于同一布置的同批牌效，整批只处理一次去向。\n结构参照：固定工具追加执行；原候选那一天。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "防御／运转",
+        "investment": "取得、布置并等待自己的关联箭矢。",
+        "risk": "重放属于同一布置的同批牌效，整批只处理一次去向。",
+        "reference": "固定工具追加执行；原候选那一天。",
+        "classification": "固定工具强化",
+        "roleReason": "只增加指定《JK03B》的执行收益，是固定工具强化牌。"
+      }
+    },
+    {
+      "uid": "draft_card_JK03B",
+      "id": "JK03B",
+      "name": "JK03B",
+      "system": "partner",
+      "rarity": "附带",
+      "type": "箭矢",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 1,
+      "upgradedTurns": 1,
+      "target": "自己",
+      "text": "知识。获得6点格挡。抽1张牌。",
+      "upgradedText": "知识。获得9点格挡。抽1张牌。",
+      "pool": false,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF05",
+        "EF06",
+        "KW_STAGE",
+        "KW_PARTNER"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK03"
+      ],
+      "art": "defaultPortrait",
+      "role": "知识牌",
+      "direction": "",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：防御／运转",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "防御／运转",
+        "investment": "",
+        "risk": "",
+        "reference": ""
+      },
+      "arrowSubtype": "技能"
+    },
+    {
+      "uid": "draft_card_JK04",
+      "id": "JK04",
+      "name": "JK04",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。每当你打出《JK04B》时，你的格挡在下个回合开始时不会消失。",
+      "upgradedText": "知识。每当你打出《JK04B》时，你的格挡在下个回合开始时不会消失。",
+      "pool": true,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "EF61",
+        "RB12"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [
+        "RB12"
+      ],
+      "partnerCardIds": [
+        "JK04B"
+      ],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "指定工具扩大收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n突破的限制：通过指定工具保留已有格挡，改变下个回合开始时格挡清空的规则。\n端口：防御\n保留的投入：安装此能力，并在需要保留格挡的回合实际打出工具。\n复核：只保留下一个回合开始的格挡；不是永久壁垒。\n结构参照：固定知识动作赋予格挡保留；原候选香蕉蛋糕。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "防御",
+        "investment": "安装此能力，并在需要保留格挡的回合实际打出工具。",
+        "risk": "只保留下一个回合开始的格挡；不是永久壁垒。",
+        "reference": "固定知识动作赋予格挡保留；原候选香蕉蛋糕。",
+        "classification": "规则突破",
+        "roleReason": "通过指定工具保留已有格挡，改变下个回合开始时格挡清空的规则。",
+        "limit": "通过指定工具保留已有格挡，改变下个回合开始时格挡清空的规则。"
+      }
+    },
+    {
+      "uid": "draft_card_JK04B",
+      "id": "JK04B",
+      "name": "JK04B",
+      "system": "partner",
+      "rarity": "附带",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。获得8点格挡。保留。",
+      "upgradedText": "知识。获得11点格挡。保留。",
+      "pool": false,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF05",
+        "KW_RETAIN",
+        "KW_PARTNER"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK04"
+      ],
+      "art": "defaultPortrait",
+      "role": "知识牌",
+      "direction": "",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：防御",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "防御",
+        "investment": "",
+        "risk": "",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JK05",
+      "id": "JK05",
+      "name": "JK05",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "技能",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "抽取知识牌直到手牌满。消耗。",
+      "upgradedText": "抽取知识牌直到手牌满。消耗。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF27",
+        "RB07",
+        "KW_EXHAUST",
+        "EF06",
+        "EF13",
+        "RL19",
+        "KW_PARTNER"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [
+        "RB07"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "知识牌互相调度",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "按当前牌面复核。\n原有限制：知识牌的到手速度受普通抽牌限制。\n规则变化：从抽牌堆定向抽取知识牌，直到手牌达到上限。\n保留的投入：本牌费用与消耗；需要抽牌堆中实际存在知识牌。\n复核：沿用定向抽取规则，抽牌堆没有知识牌时停止，按实际抽取发布抽牌事件。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "运转",
+        "investment": "本牌费用与消耗；需要抽牌堆中实际存在知识牌。",
+        "risk": "不移动场内等待中的箭矢，也不选择执行中的牌；满手按现有规则处理。",
+        "reference": "有限次数的知识牌集中补给。",
+        "classification": "规则突破",
+        "roleReason": "定向补满知识牌手牌。",
+        "limit": "定向补满知识牌手牌。",
+        "oldRule": "知识牌的到手速度受普通抽牌限制。",
+        "exception": "从抽牌堆定向抽取知识牌，直到手牌达到上限。",
+        "rules": "沿用定向抽取规则，抽牌堆没有知识牌时停止，按实际抽取发布抽牌事件。"
+      }
+    },
+    {
+      "uid": "draft_card_JK06",
+      "id": "JK06",
+      "name": "JK06",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "每当你打出一张知识牌时，同组的其他知识牌本回合耗能减少1。",
+      "upgradedText": "每当你打出一张知识牌时，同组的其他知识牌本回合耗能减少1。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF47"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "知识牌互相调度",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：打出知识牌后为同组其他知识牌减费，是打出事件的费用收益。\n端口：运转\n保留的投入：先支付并打出知识牌，减费只服务它的关联模型。\n复核：费用下限为0；不改永久费用，不让其他无关知识组减费。\n结构参照：知识牌行动为知识牌支付一部分成本。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "运转",
+        "investment": "先支付并打出知识牌，减费只服务它的关联模型。",
+        "risk": "费用下限为0；不改永久费用，不让其他无关知识组减费。",
+        "reference": "知识牌行动为知识牌支付一部分成本。",
+        "classification": "事件收益",
+        "roleReason": "打出知识牌后为同组其他知识牌减费，是打出事件的费用收益。"
+      }
+    },
+    {
+      "uid": "draft_card_JK07",
+      "id": "JK07",
+      "name": "JK07",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "每当你打出一张知识牌时，将你弃牌堆中一张同组的其他知识牌放入手牌。",
+      "upgradedText": "每当你打出一张知识牌时，将你弃牌堆中一张同组的其他知识牌放入手牌。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF15"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "知识牌互相调度",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：打出知识牌时调用既有弃牌堆回手动作，是回收触发器。\n端口：运转\n保留的投入：先打出工具；知识牌仍需支付，不召回已安装的能力。\n复核：只查弃牌堆中的实际同组知识牌；执行中的知识牌不参与。\n结构参照：把固定关系接成双向调度，保留每次行动费用。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "运转",
+        "investment": "先打出工具；知识牌仍需支付，不召回已安装的能力。",
+        "risk": "只查弃牌堆中的实际同组知识牌；执行中的知识牌不参与。",
+        "reference": "把固定关系接成双向调度，保留每次行动费用。",
+        "classification": "高频触发",
+        "roleReason": "打出知识牌时调用既有弃牌堆回手动作，是回收触发器。"
+      }
+    },
+    {
+      "uid": "draft_card_JK08",
+      "id": "JK08",
+      "name": "JK08",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "在你的回合开始时，每有2张知识牌在你的手牌中，获得1点能量。",
+      "upgradedText": "在你的回合开始时，每有2张知识牌在你的手牌中，获得1点能量。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "TR02",
+        "EF09"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "知识牌反复抵达",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：按回合开始时在手工具数量提供能量，是手牌数量收益。\n端口：运转\n保留的投入：在回合开始保有实际工具；计数按张、向下取整。\n复核：在常规抽牌后的既定能力时点读取手牌；本回合稍后回手不追溯补能量。\n结构参照：从组件抵达与保留中取得下一轮能量。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "运转",
+        "investment": "在回合开始保有实际工具；计数按张、向下取整。",
+        "risk": "在常规抽牌后的既定能力时点读取手牌；本回合稍后回手不追溯补能量。",
+        "reference": "从组件抵达与保留中取得下一轮能量。",
+        "classification": "手牌收益",
+        "roleReason": "按回合开始时在手工具数量提供能量，是手牌数量收益。"
+      }
+    },
+    {
+      "uid": "draft_card_JK09",
+      "id": "JK09",
+      "name": "JK09",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "选择你手牌中的一张知识牌。将2张它的复制品加入你的手牌。消耗。",
+      "upgradedText": "选择你手牌中的一张知识牌。将2张它的复制品加入你的手牌。消耗。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF21",
+        "EF27",
+        "KW_EXHAUST"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制中坚牌",
+      "direction": "知识牌扩大收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：使用既有实际卡牌复制动作增加两个工具，是复制工具。\n端口：输出／防御／运转\n保留的投入：原工具必须在手，复制品仍需支付。\n复核：复制实际牌的有效修改；不触发永久知识发放，满手照常处理。\n结构参照：有限副本扩大同回合行动；实际复制与生成分别结算。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／防御／运转",
+        "investment": "原工具必须在手，复制品仍需支付。",
+        "risk": "复制实际牌的有效修改；不触发永久知识发放，满手照常处理。",
+        "reference": "有限副本扩大同回合行动；实际复制与生成分别结算。",
+        "classification": "复制工具",
+        "roleReason": "使用既有实际卡牌复制动作增加两个工具，是复制工具。"
+      }
+    },
+    {
+      "uid": "draft_card_JK10",
+      "id": "JK10",
+      "name": "JK10",
+      "system": "partner",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。每回合第1次打出耗能不低于2的卡牌时，获得1点能量。",
+      "upgradedText": "知识。每回合前两次打出耗能不低于2的卡牌时，获得1点能量。",
+      "pool": true,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "TR08",
+        "CD14",
+        "EF09"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK10B"
+      ],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "指定工具扩大收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "按当前牌面复核。\n原有限制：高费牌打出后通常不返还能量。\n规则变化：每回合第1次打出耗能不低于2的卡牌返还1点能量，升级后为前两次。\n保留的投入：2费安装，升级后1费；需要实际打出符合费用条件的牌。\n复核：每回合独立计算合格出牌次数；只有达到费用条件的实际打出占用次数。基础响应第1次，升级响应前2次。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／运转",
+        "investment": "2费安装，升级后1费；需要实际打出符合费用条件的牌。",
+        "risk": "整次打出完成后回手；未击杀即停止免费接续。",
+        "reference": "高费牌构筑支持。",
+        "classification": "事件收益",
+        "roleReason": "高费牌出牌事件的能量收益。",
+        "limit": "",
+        "oldRule": "高费牌打出后通常不返还能量。",
+        "exception": "每回合第1次打出耗能不低于2的卡牌返还1点能量，升级后为前两次。",
+        "rules": "每回合独立计算合格出牌次数；只有达到费用条件的实际打出占用次数。基础响应第1次，升级响应前2次。",
+        "triggerLimit": {
+          "base": 1,
+          "upgraded": 2,
+          "costThreshold": 2,
+          "reset": "每回合"
+        }
+      }
+    },
+    {
+      "uid": "draft_card_JK10B",
+      "id": "JK10B",
+      "name": "JK10B",
+      "system": "partner",
+      "rarity": "附带",
+      "type": "攻击",
+      "cost": 2,
+      "upgradedCost": 2,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "知识。造成18点伤害。保留。",
+      "upgradedText": "知识。造成24点伤害。保留。",
+      "pool": false,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF01",
+        "KW_RETAIN",
+        "KW_PARTNER"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK10"
+      ],
+      "art": "defaultPortrait",
+      "role": "知识牌",
+      "direction": "",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "",
+        "risk": "",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JG01",
+      "id": "JG01",
+      "name": "JG01",
+      "system": "growth",
+      "rarity": "稀有",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "将你手牌中一张牌在本场战斗中获得的伤害加成变为3倍。消耗。",
+      "upgradedText": "将你手牌中一张牌在本场战斗中获得的伤害加成变为3倍。消耗。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF41",
+        "EF27",
+        "GB11",
+        "KW_EXHAUST",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [
+        "GB11"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "集中投资单张攻击",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n突破的限制：直接乘算已有伤害加成存量，使成熟投资具备乘法增长方式。\n端口：输出\n保留的投入：先把实际攻击养大，再使用一次性倍率。\n复核：只设置已存伤害加成；不把倍率结果当作新获得事件。\n结构参照：触媒式已有存量倍率；原候选再生产。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出",
+        "investment": "先把实际攻击养大，再使用一次性倍率。",
+        "risk": "只设置已存伤害加成；不把倍率结果当作新获得事件。",
+        "reference": "触媒式已有存量倍率；原候选再生产。",
+        "classification": "规则突破",
+        "roleReason": "直接乘算已有伤害加成存量，使成熟投资具备乘法增长方式。",
+        "limit": "直接乘算已有伤害加成存量，使成熟投资具备乘法增长方式。"
+      }
+    },
+    {
+      "uid": "draft_card_JG02",
+      "id": "JG02",
+      "name": "JG02",
+      "system": "growth",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "本场战斗中，你的牌每次获得的伤害加成变为2倍。",
+      "upgradedText": "本场战斗中，你的牌每次获得的伤害加成变为2倍。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF45",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "集中投资单张攻击",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：把后续每次获得的加成按固定倍率放大，是投入效率收益。\n端口：输出\n保留的投入：还需抓增伤来源与实际攻击载体。\n复核：固定额外量先相加，再应用倍率；存量设置、复制继承不再翻倍。\n结构参照：投资效率倍率；原候选情热。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出",
+        "investment": "还需抓增伤来源与实际攻击载体。",
+        "risk": "固定额外量先相加，再应用倍率；存量设置、复制继承不再翻倍。",
+        "reference": "投资效率倍率；原候选情热。",
+        "classification": "增量收益",
+        "roleReason": "把后续每次获得的加成按固定倍率放大，是投入效率收益。"
+      }
+    },
+    {
+      "uid": "draft_card_JG03",
+      "id": "JG03",
+      "name": "JG03",
+      "system": "growth",
+      "rarity": "稀有",
+      "type": "技能",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "选择一张牌，使其增加一段攻击伤害。  消耗。",
+      "upgradedText": "选择一张牌，使其增加一段攻击伤害。消耗。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF27",
+        "GB13",
+        "KW_EXHAUST",
+        "EF42"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [
+        "GB13"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "改变伤害加成的兑现方式",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "默认限制选择攻击牌和攻击子类型的箭矢牌。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出",
+        "investment": "1费；本牌消耗。",
+        "risk": "设置存量、继承或复制不增加次数；仅增加该牌伤害指令的次数。",
+        "reference": "攻击牌的单次加段。",
+        "classification": "规则突破",
+        "roleReason": "直接改变所选牌的伤害段数。",
+        "limit": "直接增加攻击牌的伤害段数。",
+        "oldRule": "实际卡牌原有的伤害段数固定。",
+        "exception": "为所选牌增加一段攻击伤害。",
+        "rules": "默认选择攻击牌或攻击子类型的箭矢牌。只修改实际牌已有的伤害段；基础与升级均沿用用户当前牌面。",
+        "targetScope": {
+          "cardTypes": [
+            "攻击"
+          ],
+          "arrowSubtypes": [
+            "攻击"
+          ]
+        }
+      }
+    },
+    {
+      "uid": "draft_card_JG04",
+      "id": "JG04",
+      "name": "JG04",
+      "system": "growth",
+      "rarity": "稀有",
+      "type": "技能",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "选择你手牌中的一张攻击牌，将其复制品加入手牌。本场战斗中，新生成的同名牌继承它的伤害加成。消耗。",
+      "upgradedText": "选择你手牌中的一张攻击牌，将其复制品加入手牌。本场战斗中，新生成的同名牌继承它的伤害加成。消耗。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF21",
+        "EF46",
+        "EF27",
+        "GB03",
+        "GB07",
+        "KW_EXHAUST",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [
+        "GB03",
+        "GB07"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "扩大投资与继承范围",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n突破的限制：为之后生成的同名牌建立继承规则，改变新对象从原始加成开始的规则。\n端口：输出\n保留的投入：模板先有投资，新对象仍需抵达和支付。\n复核：生成时读取模板当时的加成；实际复制已继承的部分不重复叠加。\n结构参照：模板继承；原候选Star Diamond。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出",
+        "investment": "模板先有投资，新对象仍需抵达和支付。",
+        "risk": "生成时读取模板当时的加成；实际复制已继承的部分不重复叠加。",
+        "reference": "模板继承；原候选Star Diamond。",
+        "classification": "规则突破",
+        "roleReason": "为之后生成的同名牌建立继承规则，改变新对象从原始加成开始的规则。",
+        "limit": "为之后生成的同名牌建立继承规则，改变新对象从原始加成开始的规则。"
+      }
+    },
+    {
+      "uid": "draft_card_JG05",
+      "id": "JG05",
+      "name": "JG05",
+      "system": "growth",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 3,
+      "upgradedCost": 2,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "你改变伤害加成的效果，改为作用于本场战斗中的所有牌。",
+      "upgradedText": "你改变伤害加成的效果，改为作用于本场战斗中的所有牌。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF52",
+        "GB01",
+        "GB02",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [
+        "GB01",
+        "GB02"
+      ],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "突破限制牌",
+      "direction": "扩大投资与继承范围",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n突破的限制：将每个伤害加成效果的作用对象统一扩展至本场全部攻击牌。\n端口：输出\n保留的投入：先安装高费能力，再提供正常增伤来源。\n复核：目标集合去重；附加目标不递归传播。箭矢仍按独立类型筛选。\n结构参照：共享投资范围；原候选星之对话。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出",
+        "investment": "先安装高费能力，再提供正常增伤来源。",
+        "risk": "目标集合去重；附加目标不递归传播。箭矢仍按独立类型筛选。",
+        "reference": "共享投资范围；原候选星之对话。",
+        "classification": "规则突破",
+        "roleReason": "将每个伤害加成效果的作用对象统一扩展至本场全部攻击牌。",
+        "limit": "将每个伤害加成效果的作用对象统一扩展至本场全部攻击牌。"
+      }
+    },
+    {
+      "uid": "draft_card_JG06",
+      "id": "JG06",
+      "name": "JG06",
+      "system": "growth",
+      "rarity": "稀有",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "造成6点伤害。计算伤害时，此牌在本场战斗中获得的伤害加成变为3倍。",
+      "upgradedText": "造成9点伤害。计算伤害时，此牌在本场战斗中获得的伤害加成变为3倍。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF01",
+        "EF70",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "改变伤害加成的兑现方式",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：只提高本牌对伤害加成的伤害换算，是输出收益载体。\n端口：输出\n保留的投入：该实际攻击需要先获得投资并实际打出。\n复核：只放大存储加成的贡献，不改基础伤害、力量或存量。\n结构参照：重刃式按特定资源提高伤害贡献；原候选合刃。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出",
+        "investment": "该实际攻击需要先获得投资并实际打出。",
+        "risk": "只放大存储加成的贡献，不改基础伤害、力量或存量。",
+        "reference": "重刃式按特定资源提高伤害贡献；原候选合刃。",
+        "classification": "伤害兑现",
+        "roleReason": "只提高本牌对伤害加成的伤害换算，是输出收益载体。"
+      }
+    },
+    {
+      "uid": "draft_card_JG07",
+      "id": "JG07",
+      "name": "JG07",
+      "system": "growth",
+      "rarity": "稀有",
+      "type": "攻击",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "造成10点伤害。其他敌人失去等同于此牌在本场战斗中获得的伤害加成的生命值。",
+      "upgradedText": "造成10点伤害。其他敌人失去等同于此牌在本场战斗中获得的伤害加成的生命值。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF01",
+        "EF68",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制中坚牌",
+      "direction": "改变伤害加成的兑现方式",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：将已有伤害加成兑现为其他敌人的生命流失，是群体输出牌。\n端口：输出\n保留的投入：成熟的实际攻击、打出费用与其他存活敌人。\n复核：独立生命流失不是伤害段，不吃力量或易伤，也不被伤害次数增加复制。\n结构参照：存量开启其他敌人的独立出口；原候选散刃。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出",
+        "investment": "成熟的实际攻击、打出费用与其他存活敌人。",
+        "risk": "独立生命流失不是伤害段，不吃力量或易伤，也不被伤害次数增加复制。",
+        "reference": "存量开启其他敌人的独立出口；原候选散刃。",
+        "classification": "群体收益",
+        "roleReason": "将已有伤害加成兑现为其他敌人的生命流失，是群体输出牌。"
+      }
+    },
+    {
+      "uid": "draft_card_JG08",
+      "id": "JG08",
+      "name": "JG08",
+      "system": "growth",
+      "rarity": "稀有",
+      "type": "能力",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "在你的回合开始时，选择你任意牌区的一张牌，使其在本场战斗中获得3点伤害加成。",
+      "upgradedText": "在你的回合开始时，选择你任意牌区的一张牌，使其在本场战斗中获得3点伤害加成。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "TR02",
+        "EF39",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制基础牌",
+      "direction": "集中投资单张攻击",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：选择符合伤害加成适用范围的实际牌，本场战斗中的有效修改按实际实例记录。\n端口：输出\n保留的投入：一次性安装成本与后续战斗回合。\n复核：选择实际存在的攻击实例；不修改永久牌组，也不把箭矢作为攻击。\n结构参照：跨牌区周期投资；原候选Top Star。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出",
+        "investment": "一次性安装成本与后续战斗回合。",
+        "risk": "选择符合伤害加成适用范围的实际牌，本场战斗中的有效修改按实际实例记录。",
+        "reference": "跨牌区周期投资；原候选Top Star。",
+        "classification": "持续来源",
+        "roleReason": "每轮选取一张实际攻击提供加成，是可选牌区的持续来源。"
+      }
+    },
+    {
+      "uid": "draft_card_JA13",
+      "id": "JA13",
+      "name": "JA13",
+      "system": "stage",
+      "rarity": "普通",
+      "type": "箭矢",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 2,
+      "upgradedTurns": 2,
+      "target": "敌人",
+      "text": "造成16点伤害。",
+      "upgradedText": "造成19点伤害。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF01",
+        "KW_STAGE"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制基础牌",
+      "direction": "重放与额外触发",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出\n保留的投入：支付1能量并等待2回合。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "支付1能量并等待2回合。",
+        "risk": "",
+        "reference": ""
+      },
+      "arrowSubtype": "攻击"
+    },
+    {
+      "uid": "draft_card_JA14",
+      "id": "JA14",
+      "name": "JA14",
+      "system": "stage",
+      "rarity": "普通",
+      "type": "箭矢",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 1,
+      "upgradedTurns": 1,
+      "target": "自己",
+      "text": "获得8点格挡。",
+      "upgradedText": "获得11点格挡。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF05",
+        "KW_STAGE"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制基础牌",
+      "direction": "等待过程提供收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：防御\n复核：格挡在完成时给予记录目标玩家。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "防御",
+        "investment": "",
+        "risk": "格挡在完成时给予记录目标玩家。",
+        "reference": ""
+      },
+      "arrowSubtype": "技能"
+    },
+    {
+      "uid": "draft_card_JA15",
+      "id": "JA15",
+      "name": "JA15",
+      "system": "stage",
+      "rarity": "普通",
+      "type": "箭矢",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 1,
+      "upgradedTurns": 1,
+      "target": "自己",
+      "text": "抽2张牌。",
+      "upgradedText": "抽3张牌。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF06",
+        "KW_STAGE"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制基础牌",
+      "direction": "布置与加速",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：运转\n复核：本轮唯一入池非稀有抽牌来源；抽牌在正常完成或明确额外触发时发生。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "运转",
+        "investment": "",
+        "risk": "本轮唯一入池非稀有抽牌来源；抽牌在正常完成或明确额外触发时发生。",
+        "reference": ""
+      },
+      "arrowSubtype": "技能"
+    },
+    {
+      "uid": "draft_card_JA16",
+      "id": "JA16",
+      "name": "JA16",
+      "system": "stage",
+      "rarity": "普通",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人或玩家",
+      "text": "获得6点格挡。目标上一个箭矢加速1回合。",
+      "upgradedText": "获得9点格挡。目标上一个箭矢加速1回合。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF05",
+        "EF29"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制引导牌",
+      "direction": "布置与加速",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "按当前牌面复核。\n保留的投入：正常付费，同时获得格挡并推进所选目标上的箭矢。\n复核：格挡给予自己；箭矢按选定目标筛选，升级沿用同一范围。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "防御／运转",
+        "investment": "正常付费，同时获得格挡并推进所选目标上的箭矢。",
+        "risk": "",
+        "reference": "",
+        "rules": "格挡给予自己；箭矢按选定目标筛选，升级沿用同一范围。"
+      }
+    },
+    {
+      "uid": "draft_card_JA17",
+      "id": "JA17",
+      "name": "JA17",
+      "system": "stage",
+      "rarity": "罕见",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "所有敌人",
+      "text": "对所有敌人造成12点伤害。所有箭矢加速一回合。",
+      "upgradedText": "对所有敌人造成12点伤害。所有箭矢加速一回合。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF03",
+        "EF29"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制中坚牌",
+      "direction": "重放与额外触发",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "按当前牌面复核。\n保留的投入：2费，升级后1费；已有箭矢可以承接加速。\n复核：伤害覆盖所有存活敌人，随后所有箭矢加速1回合。升级沿用全体范围与加速效果。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出／防御／运转",
+        "investment": "2费，升级后1费；已有箭矢可以承接加速。",
+        "risk": "额外触发只选择与该敌人对应的有效箭矢；原倒计时保持。",
+        "reference": "",
+        "rules": "伤害覆盖所有存活敌人，随后所有箭矢加速1回合。升级沿用全体范围与加速效果。"
+      }
+    },
+    {
+      "uid": "draft_card_JA18",
+      "id": "JA18",
+      "name": "JA18",
+      "system": "stage",
+      "rarity": "罕见",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "造成6点伤害。每有一个箭矢，多造成2点伤害。",
+      "upgradedText": "造成9点伤害。每有一个箭矢，多造成2点伤害。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF01",
+        "EF40"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制引导牌",
+      "direction": "等待过程提供收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出\n复核：在执行该指令时读取共享场面数量；基础伤害仍可单独使用。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "",
+        "risk": "在执行该指令时读取共享场面数量；基础伤害仍可单独使用。",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JK11",
+      "id": "JK11",
+      "name": "JK11",
+      "system": "partner",
+      "rarity": "普通",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。获得9点格挡。无论何处，将JK11B放入手牌。",
+      "upgradedText": "知识。获得11点格挡。无论何处，将JK11B放入手牌。",
+      "pool": true,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF05",
+        "KW_PARTNER",
+        "EF18"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK11B"
+      ],
+      "art": "defaultPortrait",
+      "role": "机制引导牌",
+      "direction": "知识牌互相调度",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "按当前牌面复核。\n保留的投入：正常支付费用并召回对应实际牌。\n复核：按牌名召回一张实际对象；没有可取回对象时，其余牌效照常。目标已在手时保持原位，执行中的牌沿用既有选择规则。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "防御／运转",
+        "investment": "正常支付费用并召回对应实际牌。",
+        "risk": "没有可取回对象时仍获得基础格挡。",
+        "reference": "",
+        "rules": "按牌名召回一张实际对象；没有可取回对象时，其余牌效照常。目标已在手时保持原位，执行中的牌沿用既有选择规则。"
+      }
+    },
+    {
+      "uid": "draft_card_JK11B",
+      "id": "JK11B",
+      "name": "JK11B",
+      "system": "partner",
+      "rarity": "附带",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "知识。造成12点伤害。无论何处，将JK11放入手牌。",
+      "upgradedText": "知识。造成16点伤害。无论何处，将JK11放入手牌。",
+      "pool": false,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF01",
+        "KW_PARTNER",
+        "EF18"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK11"
+      ],
+      "art": "defaultPortrait",
+      "role": "知识牌",
+      "direction": "",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "按当前牌面复核。\n保留的投入：正常支付费用并召回对应实际牌。\n复核：按牌名召回一张实际对象；没有可取回对象时，其余牌效照常。目标已在手时保持原位，执行中的牌沿用既有选择规则。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "正常支付费用并召回对应实际牌。",
+        "risk": "",
+        "reference": "",
+        "rules": "按牌名召回一张实际对象；没有可取回对象时，其余牌效照常。目标已在手时保持原位，执行中的牌沿用既有选择规则。"
+      }
+    },
+    {
+      "uid": "draft_card_JK12",
+      "id": "JK12",
+      "name": "JK12",
+      "system": "partner",
+      "rarity": "普通",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "知识。造成7点伤害。使你手牌中的一张《JK12B》在本场战斗中获得2点伤害加成。",
+      "upgradedText": "知识。造成10点伤害。使你手牌中的一张《JK12B》在本场战斗中获得2点伤害加成。",
+      "pool": true,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF01",
+        "EF39",
+        "KW_BONUS",
+        "KW_PARTNER"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK12B"
+      ],
+      "art": "defaultPortrait",
+      "role": "机制引导牌",
+      "direction": "指定工具扩大收益",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出\n复核：没有《JK12B》同手时仍有基础伤害；投资只改实际选择对象。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "",
+        "risk": "没有《JK12B》同手时仍有基础伤害；投资只改实际选择对象。",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JK12B",
+      "id": "JK12B",
+      "name": "JK12B",
+      "system": "partner",
+      "rarity": "附带",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "知识。造成3点伤害3次。保留。",
+      "upgradedText": "知识。造成4点伤害3次。保留。",
+      "pool": false,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "EF02",
+        "KW_RETAIN",
+        "KW_PARTNER"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK12"
+      ],
+      "art": "defaultPortrait",
+      "role": "知识牌",
+      "direction": "",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "",
+        "risk": "",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JK13",
+      "id": "JK13",
+      "name": "JK13",
+      "system": "partner",
+      "rarity": "罕见",
+      "type": "能力",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "每当你打出一张知识牌时，获得3点格挡。",
+      "upgradedText": "每当你打出一张知识牌时，获得4点格挡。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "TR14",
+        "EF05"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制核心牌",
+      "direction": "知识牌互相调度",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：防御\n复核：按“知识”关键词判断知识牌，包括同名临时生成与复制的牌。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "防御",
+        "investment": "",
+        "risk": "按“知识”关键词判断知识牌，包括同名临时生成与复制的牌。",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JK14",
+      "id": "JK14",
+      "name": "JK14",
+      "system": "partner",
+      "rarity": "罕见",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "获得6点格挡。将你弃牌堆中的一张知识牌放到抽牌堆顶部。",
+      "upgradedText": "获得9点格挡。将你弃牌堆中的一张知识牌放到抽牌堆顶部。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF05",
+        "EF20"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制中坚牌",
+      "direction": "知识牌反复抵达",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：防御／运转\n复核：调整后续普通抽牌的抵达；本动作不算抽牌，也不直接把牌送入手牌。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "防御／运转",
+        "investment": "",
+        "risk": "调整后续普通抽牌的抵达；本动作不算抽牌，也不直接把牌送入手牌。",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JG09",
+      "id": "JG09",
+      "name": "JG09",
+      "system": "growth",
+      "rarity": "普通",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "获得7点格挡。选择手牌中的一张牌获得2点伤害加成。",
+      "upgradedText": "获得7点格挡。手牌中所有牌获得2点伤害加成。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF05",
+        "EF39",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制引导牌",
+      "direction": "集中投资单张攻击",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：防御／输出\n复核：普通攻防兼投资，不按突破牌计数。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "防御／输出",
+        "investment": "",
+        "risk": "普通攻防兼投资，不按突破牌计数。",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JG10",
+      "id": "JG10",
+      "name": "JG10",
+      "system": "growth",
+      "rarity": "普通",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "造成6点伤害。此牌在本场战斗中获得2点伤害加成。",
+      "upgradedText": "造成9点伤害。此牌在本场战斗中获得2点伤害加成。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF01",
+        "EF39",
+        "KW_BONUS"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制基础牌",
+      "direction": "集中投资单张攻击",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出\n复核：按文字顺序先造成伤害、再获得加成；新加成供后续使用。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "",
+        "risk": "按文字顺序先造成伤害、再获得加成；新加成供后续使用。",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JG11",
+      "id": "JG11",
+      "name": "JG11",
+      "system": "growth",
+      "rarity": "罕见",
+      "type": "箭矢",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 1,
+      "upgradedTurns": 1,
+      "target": "自己",
+      "text": "使你手牌中的所有牌在本场战斗中获得2点伤害加成。",
+      "upgradedText": "使你手牌中的所有牌在本场战斗中获得3点伤害加成。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF39",
+        "EF51",
+        "KW_BONUS",
+        "KW_STAGE"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制基础牌",
+      "direction": "扩大投资与继承范围",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出\n复核：箭矢完成时读取记录玩家手牌中的攻击牌和能造成伤害的箭矢牌；每个实际对象只处理一次。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "",
+        "risk": "箭矢完成时读取记录玩家手牌中的攻击牌和能造成伤害的箭矢牌；每个实际对象只处理一次。",
+        "reference": ""
+      },
+      "arrowSubtype": "技能"
+    },
+    {
+      "uid": "draft_card_JG12",
+      "id": "JG12",
+      "name": "JG12",
+      "system": "growth",
+      "rarity": "罕见",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "造成3点伤害3次。",
+      "upgradedText": "造成4点伤害3次。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF02"
+      ],
+      "archetypeIds": [
+        "SYS_growth"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制引导牌",
+      "direction": "改变伤害加成的兑现方式",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n端口：输出\n复核：每段分别承接已有伤害加成；单独抓取仍提供基础多段输出。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "limit": "",
+        "port": "输出",
+        "investment": "",
+        "risk": "每段分别承接已有伤害加成；单独抓取仍提供基础多段输出。",
+        "reference": ""
+      }
+    },
+    {
+      "uid": "draft_card_JA05",
+      "id": "JA05",
+      "name": "JA05",
+      "system": "stage",
+      "rarity": "稀有",
+      "type": "技能",
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "箭矢立即加速到完成。消耗。",
+      "upgradedText": "箭矢立即加速到完成。消耗。",
+      "pool": true,
+      "keywords": [],
+      "termIds": [
+        "EF32",
+        "EF51",
+        "EF27",
+        "KW_EXHAUST"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "defaultPortrait",
+      "role": "机制中坚牌",
+      "direction": "布置与加速",
+      "naming": {
+        "original": "",
+        "work": "",
+        "url": "",
+        "adaptation": "名称待定；当前显示设计编号。"
+      },
+      "notes": "本轮初稿；卡名待定。\n定位复核：对当前场面批量使用既有立即完成动作，是一次性兑现工具。\n端口：输出／防御／运转\n保留的投入：提前布置的场面与本牌费用。\n复核：处理执行前的有效对象快照；过程中新建的箭矢不加入这批。\n结构参照：整批兑现准备资源的突破模式。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／防御／运转",
+        "investment": "提前布置的场面与本牌费用。",
+        "risk": "处理执行前的有效对象快照；过程中新建的箭矢不加入这批。",
+        "reference": "整批兑现准备资源的突破模式。",
+        "classification": "集中兑现",
+        "roleReason": "对当前场面批量使用既有立即完成动作，是一次性兑现工具。"
+      },
+      "trashedAt": "2026-11-01T11:05:45.965Z"
+    }
+  ],
+  "partnerGroups": [
+    {
+      "uid": "draft_group_JK01",
+      "id": "GROUP_JK01",
+      "title": "JK01",
+      "mainCardId": "JK01",
+      "grantedCardIds": [
+        "JK01B"
+      ],
+      "grantedCardCounts": {
+        "JK01B": 1
+      }
+    },
+    {
+      "uid": "draft_group_JK02",
+      "id": "GROUP_JK02",
+      "title": "JK02",
+      "mainCardId": "JK02",
+      "grantedCardIds": [
+        "JK02B"
+      ],
+      "grantedCardCounts": {
+        "JK02B": 1
+      }
+    },
+    {
+      "uid": "draft_group_JK03",
+      "id": "GROUP_JK03",
+      "title": "JK03",
+      "mainCardId": "JK03",
+      "grantedCardIds": [
+        "JK03B"
+      ],
+      "grantedCardCounts": {
+        "JK03B": 1
+      }
+    },
+    {
+      "uid": "draft_group_JK04",
+      "id": "GROUP_JK04",
+      "title": "JK04",
+      "mainCardId": "JK04",
+      "grantedCardIds": [
+        "JK04B"
+      ],
+      "grantedCardCounts": {
+        "JK04B": 1
+      }
+    },
+    {
+      "uid": "draft_group_JK10",
+      "id": "GROUP_JK10",
+      "title": "JK10",
+      "mainCardId": "JK10",
+      "grantedCardIds": [
+        "JK10B"
+      ],
+      "grantedCardCounts": {
+        "JK10B": 1
+      }
+    },
+    {
+      "uid": "draft_group_JK11",
+      "id": "GROUP_JK11",
+      "title": "JK11",
+      "mainCardId": "JK11",
+      "grantedCardIds": [
+        "JK11B"
+      ],
+      "grantedCardCounts": {
+        "JK11B": 1
+      }
+    },
+    {
+      "uid": "draft_group_JK12",
+      "id": "GROUP_JK12",
+      "title": "JK12",
+      "mainCardId": "JK12",
+      "grantedCardIds": [
+        "JK12B"
+      ],
+      "grantedCardCounts": {
+        "JK12B": 1
+      }
+    }
+  ],
+  "terms": [
+    {
+      "id": "SB14",
+      "name": "手牌保留",
+      "definition": "原限制：箭矢来源在抽到的回合未必适合布置。为指定类型赋予保留，等待支付与布置时机。",
+      "template": "你的箭矢牌获得保留。",
+      "systems": [
+        "stage"
+      ],
+      "uid": "term_SB14",
+      "kind": "突破",
+      "notes": "",
+      "sources": [
+        "纯那首轮牌稿"
+      ],
+      "unit": ""
+    }
+  ],
+  "recommendations": {
+    "stage": [
+      "JA01",
+      "JA02",
+      "JA04",
+      "JA11"
+    ],
+    "partner": [
+      "JK01",
+      "JK04",
+      "JK05",
+      "JK10"
+    ],
+    "growth": [
+      "JG01",
+      "JG03",
+      "JG04",
+      "JG05"
+    ]
+  },
+  "review": {
+    "classification": "先写出原有规则与该牌造成的例外，再判断突破。周期来源、高频触发、事件收益、普通复制与单牌伤害换算按实际功能分类。",
+    "loops": [
+      "JA02免费同时给予消耗，按既有整批完成后消耗规则处理。",
+      "JA07按用户当前牌面即时返能，作为事件收益牌；免费布置与立即完成组合的循环留待专项复核。",
+      "JK07只接回弃牌堆中的知识牌，知识牌仍需支付。",
+      "JK10只在击杀后接续，数量受敌人限制。",
+      "JG05目标集合去重；倍率设置与继承不触发JG03的真实新增事件。"
+    ],
+    "tradeoffs": [
+      "JA01与JA10分别为长期重复与一次性集中爆发候选，定稿时比较卡位。",
+      "JA03加快离场，JA12与JA18奖励等待中的场面；构筑需要决定何时兑现。",
+      "JK01降低固定工具的使用成本，JK07改善可重复知识牌的抵达；两者服务不同结构。",
+      "JG01消耗已有成熟投资，JG02提高未来投入效率，JG06只改变兑现贡献。"
+    ],
+    "deferred": [
+      "费用与升级数值为纸面初稿，尚未进行实战调平。",
+      "本轮入池非稀有抽牌箭矢只有JA15，完整卡池阶段再校准抽牌数量。",
+      "复核后保留12张规则突破候选；其余18张改为基础、核心或中坚牌。",
+      "单卡原作名称与出处待单独核对。"
+    ]
+  }
+}

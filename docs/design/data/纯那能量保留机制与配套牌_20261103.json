@@ -1,0 +1,612 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-energy-retention-20261103-v1",
+  "date": "2026-11-03",
+  "title": "能量保留机制与配套牌",
+  "sourceRevision": 1219,
+  "appliedRevision": 1220,
+  "historyRecord": "e4a56f72-be7c-474d-9b9e-de8fad33d71b",
+  "requestedCard": "JH18",
+  "mechanism": {
+    "uid": "cc78314c-efa7-4837-8cf7-0fbea118885e",
+    "id": "U_ME_001",
+    "name": "高费机制",
+    "level": "",
+    "definition": "无具体关键字，只是卡池中卡牌的分布倾向：2+费的卡牌占比较一般职业更多。有更多的高费牌，加费效果，利用能量的效果。高费会导致手牌数少，抉择不足，所以可以添加少量的保留手牌机制。 可将有限的剩余能量保留到下回合，集中支付高费牌。",
+    "rules": [
+      "可保留X点能量到下回合：为本次结转增加X点额度；同次结转的各个额度相加。单次牌效提供的额度持续到下个自己的回合开始完成交接。",
+      "在下次能量刷新前读取最终剩余能量E与本次总额度C，实际保留R=min(E,C)，最低为0。下回合在原有基础能量之外保留R点，各种下回合获得能量的预约效果仍按各自原时点结算。",
+      "获得X点能量并可保留到下回合：先按原规则获得能量，再按本次实际增加量G提供等量保留额度。能量合并使用，以交接时的剩余量为限。",
+      "能力牌写每回合可保留X点时，每份有效能力在各回合提供X点额度；每次结转只计算该来源一次。重复安装的有效来源按原叠加规则增加额度。",
+      "本回合开始时记录实际上回合保留量R，供相关牌读取。记录在本回合固定；之后支付能量不会回溯降低该记录，下个自己的回合开始以新值更新。",
+      "本体或其他来源已经保留的能量合并结转，同一份剩余能量只带入一次。完全保留能量的规则生效时，实际保留量按最终剩余能量读取。",
+      "保留额度、待交接量与基础能量分别记录；本次交接后清除一次性额度，战斗结束清除本场结转记录。默认只处理玩家自己的能量。"
+    ],
+    "templates": [
+      "可保留X点能量到下回合。",
+      "获得X点能量并可保留到下回合。",
+      "每回合可保留X点能量到下回合。",
+      "上回合每保留1点能量，额外造成1次伤害。"
+    ],
+    "notes": "",
+    "system": ""
+  },
+  "rules": {
+    "version": 1,
+    "effectTermId": "EF_RETAIN_ENERGY",
+    "amountTermId": "NV_CARRIED_ENERGY",
+    "capacityDuration": "untilNextOwnerEnergyRefresh",
+    "stacking": "additiveCapacity",
+    "owner": "self",
+    "capacityField": "energyRetentionCapacity",
+    "carriedAmountField": "energyCarriedFromPreviousTurn",
+    "resolve": "min(max(remainingEnergy,0),max(totalCapacity,0))",
+    "gainAndRetain": "Add capacity equal to the actual energy gained by this effect.",
+    "refresh": "Preserve the resolved amount in addition to the normal starting energy. Consume one-time capacity after the handoff.",
+    "unlimitedRetention": "Preserve the actual remaining energy once; merge overlapping sources without duplicating energy.",
+    "payoffRecord": "Record the actual amount carried into this turn; keep the record fixed until the next owner turn.",
+    "lifetime": "combat",
+    "integrationReference": [
+      "D:/Github/spire-codex/extraction/raw/src/Core/Entities/Players/PlayerCombatState.cs",
+      "D:/Github/spire-codex/extraction/raw/src/Core/Models/Relics/IceCream.cs"
+    ],
+    "implementationStatus": "设计结算约定"
+  },
+  "terms": [
+    {
+      "uid": "term_EF_RETAIN_ENERGY",
+      "id": "EF_RETAIN_ENERGY",
+      "kind": "效果",
+      "name": "保留能量到下回合",
+      "definition": "为本次跨回合结转提供额度，最多保留指定数量的剩余能量，下回合在基础能量之外使用。同次结转的额度相加，按实际剩余量结算。",
+      "template": "可保留X点能量到下回合。",
+      "systems": [
+        "utility"
+      ],
+      "unit": "点",
+      "notes": "这是能量结转效果，独立于手牌保留关键词。",
+      "sources": [
+        "用户指定",
+        "本轮高费机制说明"
+      ]
+    },
+    {
+      "uid": "term_NV_CARRIED_ENERGY",
+      "id": "NV_CARRIED_ENERGY",
+      "kind": "数值",
+      "name": "上回合实际保留的能量",
+      "definition": "本回合开始时，记录实际从上回合结转的能量数量。该记录在本回合固定，正常花费能量不减少记录；下回合按新结转量更新。",
+      "template": "上回合每保留1点能量，{效果}。",
+      "systems": [
+        "utility"
+      ],
+      "unit": "点",
+      "notes": "",
+      "sources": [
+        "本轮高费机制说明"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "uid": "energy_retention_JH18",
+      "id": "JH18",
+      "name": "小憩",
+      "type": "技能",
+      "system": "utility",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 0,
+      "upgradedCost": 0,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "获得2点能量并可保留到下回合。",
+      "upgradedText": "获得3点能量并可保留到下回合。",
+      "keywords": [],
+      "termIds": [
+        "EF09",
+        "EF_RETAIN_ENERGY"
+      ],
+      "effectIds": [
+        "EF09",
+        "EF_RETAIN_ENERGY"
+      ],
+      "ruleIds": [],
+      "breakthroughIds": [],
+      "archetypeIds": [
+        "RT_HIGH"
+      ],
+      "partnerCardIds": [],
+      "art": "energy-retention-jh18-20261103",
+      "character": "星见纯那",
+      "role": "机制引导牌",
+      "direction": "高费配合",
+      "draftStatus": "用户新增",
+      "draftBatch": "junna-energy-retention-20261103-v1-cards",
+      "naming": {
+        "original": "",
+        "kind": "动作或日常生活短名",
+        "work": "TV 第2话 · 约13:11",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=791",
+        "adaptation": "按原作动作或日常场景拟定短名。纯那在保健室卧床休整，表现短暂休息后恢复并留住精力。 原始截图：tv02-1309-final.jpg。"
+      },
+      "design": {
+        "classification": "机制引导牌",
+        "route": "高费配合",
+        "triggerRole": "扳机触发",
+        "systems": [],
+        "systemRoles": {},
+        "routeRoles": {
+          "full_pool_RT_HIGH": {
+            "role": "trigger",
+            "cross": false,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "port": "运转",
+        "roleReason": "即时恢复能量，可当回合使用，也可留待下回合集中支付高费牌。",
+        "rules": "基础与升级均为0费技能，分别获得2／3点能量，并按本次实际获得量增加等量的一次性保留额度。剩余量、叠加与跨回合交接沿energyRetentionRules处理。",
+        "upgrade": "获得能量2→3，对应保留额度随本次实际获得量提高；费用保持0。",
+        "energyRetentionRule": "energyRetentionRules",
+        "energyRetention": {
+          "source": "actualEnergyGained",
+          "duration": "nextOwnerTurn"
+        },
+        "textComplexity": "低",
+        "reference": "用户指定：0费，获得2／3能量并可保留到下回合。"
+      },
+      "notes": "定位：即时恢复能量，可当回合使用，也可留待下回合集中支付高费牌。\n结算约定：基础与升级均为0费技能，分别获得2／3点能量，并按本次实际获得量增加等量的一次性保留额度。剩余量、叠加与跨回合交接沿energyRetentionRules处理。"
+    },
+    {
+      "uid": "energy_retention_JH19",
+      "id": "JH19",
+      "name": "稍息",
+      "type": "技能",
+      "system": "utility",
+      "rarity": "普通",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "获得7点格挡。可保留2点能量到下回合。",
+      "upgradedText": "获得10点格挡。可保留2点能量到下回合。",
+      "keywords": [],
+      "termIds": [
+        "EF05",
+        "EF_RETAIN_ENERGY"
+      ],
+      "effectIds": [
+        "EF05",
+        "EF_RETAIN_ENERGY"
+      ],
+      "ruleIds": [],
+      "breakthroughIds": [],
+      "archetypeIds": [
+        "RT_HIGH"
+      ],
+      "partnerCardIds": [],
+      "art": "energy-retention-jh19-20261103",
+      "character": "星见纯那",
+      "role": "机制基础牌",
+      "direction": "高费配合",
+      "draftStatus": "机制补充候选",
+      "draftBatch": "junna-energy-retention-20261103-v1-cards",
+      "naming": {
+        "original": "",
+        "kind": "动作或日常生活短名",
+        "work": "TV 第2话 · 约13:36",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=816",
+        "adaptation": "按原作动作或日常场景拟定短名。纯那坐在床边闭目调整状态，以稳住身体和保留余力对应格挡与留能。 原始截图：tv02-1335-new.jpg。"
+      },
+      "design": {
+        "classification": "机制基础牌",
+        "route": "高费配合",
+        "triggerRole": "扳机触发",
+        "systems": [],
+        "systemRoles": {},
+        "routeRoles": {
+          "full_pool_RT_HIGH": {
+            "role": "trigger",
+            "cross": false,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "port": "防御／运转",
+        "roleReason": "在准备下回合高费行动时补充防御，保护最多2点剩余能量。",
+        "rules": "支付1点能量，获得7／10点格挡，并提供2点本次结转额度。本牌不额外产生能量，保留以本次交接的实际剩余量为限。",
+        "upgrade": "格挡7→10；费用保持1，保留额度保持2。",
+        "energyRetentionRule": "energyRetentionRules",
+        "energyRetention": {
+          "capacity": 2,
+          "upgradedCapacity": 2,
+          "duration": "nextOwnerTurn"
+        },
+        "textComplexity": "低",
+        "reference": "围绕高费机制的能量跨回合分配补充用途。"
+      },
+      "notes": "定位：在准备下回合高费行动时补充防御，保护最多2点剩余能量。\n结算约定：支付1点能量，获得7／10点格挡，并提供2点本次结转额度。本牌不额外产生能量，保留以本次交接的实际剩余量为限。"
+    },
+    {
+      "uid": "energy_retention_JH20",
+      "id": "JH20",
+      "name": "补水",
+      "type": "箭矢",
+      "arrowSubtype": "技能",
+      "system": "utility",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 1,
+      "upgradedTurns": 1,
+      "target": "自己",
+      "text": "获得3点能量并可保留到下回合。",
+      "upgradedText": "获得4点能量并可保留到下回合。",
+      "keywords": [],
+      "termIds": [
+        "KW_STAGE",
+        "EF28",
+        "EF09",
+        "EF_RETAIN_ENERGY"
+      ],
+      "effectIds": [
+        "EF28",
+        "EF09",
+        "EF_RETAIN_ENERGY"
+      ],
+      "ruleIds": [],
+      "breakthroughIds": [],
+      "archetypeIds": [
+        "RT_HIGH",
+        "SYS_stage",
+        "RT_REPEAT"
+      ],
+      "partnerCardIds": [],
+      "art": "energy-retention-jh20-20261103",
+      "character": "星见纯那",
+      "role": "机制中坚牌",
+      "direction": "高费配合",
+      "draftStatus": "机制补充候选",
+      "draftBatch": "junna-energy-retention-20261103-v1-cards",
+      "naming": {
+        "original": "",
+        "kind": "动作或日常生活短名",
+        "work": "TV 第3话 · 约09:49",
+        "url": "https://www.bilibili.com/bangumi/play/ep232369?t=589",
+        "adaptation": "按原作动作或日常场景拟定短名。保留纯那、递来的杯子和补水动作，表现完成补给后恢复行动力。原图画面标注为TV第3话，按画面记录出处。 原始截图：film-train-948-20261103.png。"
+      },
+      "design": {
+        "classification": "机制中坚牌",
+        "route": "高费配合",
+        "triggerRole": "扳机触发",
+        "systems": [
+          "stage"
+        ],
+        "systemRoles": {
+          "stage": {
+            "role": "载体",
+            "port": "运转"
+          }
+        },
+        "routeRoles": {
+          "full_pool_RT_HIGH": {
+            "role": "trigger",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          },
+          "full_pool_RT_REPEAT": {
+            "role": "load",
+            "cross": true,
+            "ports": []
+          }
+        },
+        "port": "运转",
+        "roleReason": "通过等待或加速准备大回合，额外触发与重放可重复恢复能量和提供留能额度。",
+        "rules": "支付1点能量建立1回合、以自己为目标的技能子类型箭矢。每次实际执行牌效时分别获得3／4点能量，并按本次实际获得量提供等量结转额度。额度属于本次牌效兑现后的下次能量交接，不在布置时提前提供；重放与额外触发分别执行，正常完成后沿既有去向处理。",
+        "upgrade": "获得能量3→4，对应额度按实际获得量提高；费用保持1，回合数保持1。",
+        "energyRetentionRule": "energyRetentionRules",
+        "energyRetention": {
+          "source": "actualEnergyGained",
+          "duration": "nextOwnerTurn",
+          "grantTiming": "arrowEffectExecution"
+        },
+        "textComplexity": "低",
+        "reference": "围绕高费机制的能量跨回合分配补充用途。"
+      },
+      "notes": "定位：通过等待或加速准备大回合，额外触发与重放可重复恢复能量和提供留能额度。\n结算约定：支付1点能量建立1回合、以自己为目标的技能子类型箭矢。每次实际执行牌效时分别获得3／4点能量，并按本次实际获得量提供等量结转额度。额度属于本次牌效兑现后的下次能量交接，不在布置时提前提供；重放与额外触发分别执行，正常完成后沿既有去向处理。"
+    },
+    {
+      "uid": "energy_retention_JH21",
+      "id": "JH21",
+      "name": "规律作息",
+      "type": "能力",
+      "system": "utility",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "每回合可保留2点能量到下回合。",
+      "upgradedText": "每回合可保留2点能量到下回合。",
+      "keywords": [],
+      "termIds": [
+        "EF_RETAIN_ENERGY"
+      ],
+      "effectIds": [
+        "EF_RETAIN_ENERGY"
+      ],
+      "ruleIds": [],
+      "breakthroughIds": [],
+      "archetypeIds": [
+        "RT_HIGH"
+      ],
+      "partnerCardIds": [],
+      "art": "energy-retention-jh21-20261103",
+      "character": "星见纯那",
+      "role": "机制核心牌",
+      "direction": "高费配合",
+      "draftStatus": "机制补充候选",
+      "draftBatch": "junna-energy-retention-20261103-v1-cards",
+      "naming": {
+        "original": "",
+        "kind": "动作或日常生活短名",
+        "work": "TV 第2话 · 约00:27",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=27",
+        "adaptation": "按原作动作或日常场景拟定短名。纯那在清晨保持日常活动，表现规律安排让精力能够延续到下一回合。 原始截图：tv02-0025-new.jpg。"
+      },
+      "design": {
+        "classification": "机制核心牌",
+        "route": "高费配合",
+        "triggerRole": "扳机触发",
+        "systems": [],
+        "systemRoles": {},
+        "routeRoles": {
+          "full_pool_RT_HIGH": {
+            "role": "trigger",
+            "cross": false,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "port": "运转",
+        "roleReason": "为多回合调配提供稳定的留能额度，反复安排高费牌与防御的支付顺序。",
+        "rules": "安装后，每份有效来源在每次自己的能量交接中提供2点额度，安装当回合即可生效。同一来源在单次交接中只计算一次；与单次牌效额度及其他有效来源相加。本能力保留实际余量，额度本身不增加基础能量。",
+        "upgrade": "安装费用2→1；每回合额度保持2。",
+        "energyRetentionRule": "energyRetentionRules",
+        "energyRetention": {
+          "capacity": 2,
+          "upgradedCapacity": 2,
+          "duration": "whilePowerActive",
+          "grantsPerHandoff": 1
+        },
+        "textComplexity": "低",
+        "reference": "围绕高费机制的能量跨回合分配补充用途。"
+      },
+      "notes": "定位：为多回合调配提供稳定的留能额度，反复安排高费牌与防御的支付顺序。\n结算约定：安装后，每份有效来源在每次自己的能量交接中提供2点额度，安装当回合即可生效。同一来源在单次交接中只计算一次；与单次牌效额度及其他有效来源相加。本能力保留实际余量，额度本身不增加基础能量。"
+    },
+    {
+      "uid": "energy_retention_JH22",
+      "id": "JH22",
+      "name": "蓄势一击",
+      "type": "攻击",
+      "system": "utility",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": 2,
+      "upgradedCost": 2,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "造成12点伤害。上回合每保留1点能量，额外造成1次伤害。",
+      "upgradedText": "造成16点伤害。上回合每保留1点能量，额外造成1次伤害。",
+      "keywords": [],
+      "termIds": [
+        "EF02",
+        "EF42",
+        "NV_CARRIED_ENERGY"
+      ],
+      "effectIds": [
+        "EF02",
+        "EF42"
+      ],
+      "ruleIds": [],
+      "breakthroughIds": [],
+      "archetypeIds": [
+        "RT_HIGH"
+      ],
+      "partnerCardIds": [],
+      "art": "energy-retention-jh22-20261103",
+      "character": "星见纯那",
+      "role": "机制核心牌",
+      "direction": "高费配合",
+      "draftStatus": "机制补充候选",
+      "draftBatch": "junna-energy-retention-20261103-v1-cards",
+      "naming": {
+        "original": "",
+        "kind": "动作或日常生活短名",
+        "work": "TV 第2话 · 约18:15",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1095",
+        "adaptation": "按原作动作或日常场景拟定短名。纯那集中目光准备进攻，以蓄势后的出手表现上一回合留能带来的伤害收益。 原始截图：tv02-1814-unique.jpg。"
+      },
+      "design": {
+        "classification": "机制核心牌",
+        "route": "高费配合",
+        "triggerRole": "扳机收益",
+        "systems": [],
+        "systemRoles": {},
+        "routeRoles": {
+          "full_pool_RT_HIGH": {
+            "role": "payoff",
+            "cross": false,
+            "ports": [
+              "output"
+            ]
+          }
+        },
+        "port": "输出",
+        "roleReason": "把上回合实际保留的能量转成伤害次数；本回合先支付其他牌后，仍可使用已经记录的蓄势收益。",
+        "rules": "支付2点能量，对一名敌人造成12／16点伤害。读取本回合开始时实际从上回合保留的数量R，本次基础伤害次数为1+R，再叠加其他既有次数修正。记录不随本回合正常支付而减少；保留额度、尚未交接的预约能量与本回合主动获得的能量不计入R。伤害加成逐次结算。",
+        "upgrade": "每次伤害12→16；费用保持2，上回合实际保留量的读取与次数公式保持。",
+        "energyRetentionRule": "energyRetentionRules",
+        "energyRetentionPayoff": {
+          "field": "energyCarriedFromPreviousTurn",
+          "baseHits": 1,
+          "hitsPerEnergy": 1
+        },
+        "textComplexity": "低",
+        "reference": "围绕高费机制的能量跨回合分配补充用途。"
+      },
+      "notes": "定位：把上回合实际保留的能量转成伤害次数；本回合先支付其他牌后，仍可使用已经记录的蓄势收益。\n结算约定：支付2点能量，对一名敌人造成12／16点伤害。读取本回合开始时实际从上回合保留的数量R，本次基础伤害次数为1+R，再叠加其他既有次数修正。记录不随本回合正常支付而减少；保留额度、尚未交接的预约能量与本回合主动获得的能量不计入R。伤害加成逐次结算。"
+    }
+  ],
+  "sources": [
+    {
+      "id": "JH18",
+      "source": "tv02-1309-final.jpg",
+      "crop": {
+        "left": 440,
+        "top": 80,
+        "width": 900,
+        "height": 675
+      },
+      "episode": 2,
+      "time": "13:11",
+      "fit": "纯那在保健室卧床休整，表现短暂休息后恢复并留住精力。",
+      "asset": "energy-retention-jh18-20261103",
+      "file": "docs/design/assets/card-sources/2026-11-03-energy-retention/JH18.jpg",
+      "work": "TV 第2话 · 约13:11",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=791"
+    },
+    {
+      "id": "JH19",
+      "source": "tv02-1335-new.jpg",
+      "crop": {
+        "left": 240,
+        "top": 80,
+        "width": 960,
+        "height": 720
+      },
+      "episode": 2,
+      "time": "13:36",
+      "fit": "纯那坐在床边闭目调整状态，以稳住身体和保留余力对应格挡与留能。",
+      "asset": "energy-retention-jh19-20261103",
+      "file": "docs/design/assets/card-sources/2026-11-03-energy-retention/JH19.jpg",
+      "work": "TV 第2话 · 约13:36",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=816"
+    },
+    {
+      "id": "JH20",
+      "source": "film-train-948-20261103.png",
+      "crop": {
+        "left": 200,
+        "top": 100,
+        "width": 960,
+        "height": 720
+      },
+      "episode": 3,
+      "time": "09:49",
+      "fit": "保留纯那、递来的杯子和补水动作，表现完成补给后恢复行动力。原图画面标注为TV第3话，按画面记录出处。",
+      "asset": "energy-retention-jh20-20261103",
+      "file": "docs/design/assets/card-sources/2026-11-03-energy-retention/JH20.jpg",
+      "work": "TV 第3话 · 约09:49",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=589"
+    },
+    {
+      "id": "JH21",
+      "source": "tv02-0025-new.jpg",
+      "crop": {
+        "left": 950,
+        "top": 200,
+        "width": 800,
+        "height": 600
+      },
+      "episode": 2,
+      "time": "00:27",
+      "fit": "纯那在清晨保持日常活动，表现规律安排让精力能够延续到下一回合。",
+      "asset": "energy-retention-jh21-20261103",
+      "file": "docs/design/assets/card-sources/2026-11-03-energy-retention/JH21.jpg",
+      "work": "TV 第2话 · 约00:27",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=27"
+    },
+    {
+      "id": "JH22",
+      "source": "tv02-1814-unique.jpg",
+      "crop": {
+        "left": 860,
+        "top": 100,
+        "width": 800,
+        "height": 600
+      },
+      "episode": 2,
+      "time": "18:15",
+      "fit": "纯那集中目光准备进攻，以蓄势后的出手表现上一回合留能带来的伤害收益。",
+      "asset": "energy-retention-jh22-20261103",
+      "file": "docs/design/assets/card-sources/2026-11-03-energy-retention/JH22.jpg",
+      "work": "TV 第2话 · 约18:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1095"
+    }
+  ],
+  "examples": [
+    {
+      "remaining": 0,
+      "capacity": 3,
+      "expected": 0
+    },
+    {
+      "remaining": 1,
+      "capacity": 3,
+      "expected": 1
+    },
+    {
+      "remaining": 4,
+      "capacity": 3,
+      "expected": 3
+    },
+    {
+      "remaining": 4,
+      "capacity": 3,
+      "expected": 3
+    },
+    {
+      "remaining": 4,
+      "capacity": 2,
+      "unrestricted": true,
+      "expected": 4
+    }
+  ],
+  "checks": {
+    "newCards": 5,
+    "existingCardsPreserved": true,
+    "reserveAndTrashPreserved": true,
+    "upgradesMatched": true,
+    "carryExamplesPassed": true,
+    "normalizedWithWorkbench": true
+  },
+  "implementation": "工作台设计数据与结算约定",
+  "existingCardFollowUp": {
+    "sourceRevision": 1236,
+    "appliedRevision": 1237,
+    "historyRecord": "f0a2c6ae-f6fb-4997-88ad-3705ed1283a5",
+    "cardId": "JX07",
+    "fields": [
+      "termIds",
+      "effectIds",
+      "design",
+      "notes"
+    ],
+    "textPreserved": true,
+    "upgradedTextPreserved": true
+  }
+}

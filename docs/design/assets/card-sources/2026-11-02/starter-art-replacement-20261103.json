@@ -1,0 +1,46 @@
+{
+  "batchId": "junna-starter-art-and-arrow-motifs-20261103-v2",
+  "revision": 1172,
+  "matches": [
+    {
+      "id": "JB03",
+      "name": "逐星",
+      "proof": "tv09-star-reaching-20261103.png",
+      "crop": [
+        880,
+        660,
+        500,
+        120
+      ],
+      "key": "original-scene-jb03-star-reach-20261103",
+      "work": "TV 第9话 · 约20:08",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1208",
+      "fit": "“逐星”沿用追寻自己的星的意象。卡图取纯那在星空下伸手、仰望前方的原作画面，让人物、星空和追寻的动作共同表现目标感。按箭矢卡框裁切，保留眼神与抬起的手；截图tv09-star-reaching-20261103.png。"
+    },
+    {
+      "id": "JB05",
+      "name": "更近一步",
+      "proof": "film-arrow-256-20261103.png",
+      "crop": [
+        960,
+        720,
+        520,
+        60
+      ],
+      "key": "original-scene-jb05-arrow-flight-20261103",
+      "work": "2021 剧场版 · 狩猎的Revue片段约02:57",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=177",
+      "fit": "“更近一步”用物理箭矢的前进表现主动加速。卡图取飞行中的箭，保留箭头、箭杆与箭羽的完整轮廓，让向目标推进的动作对应少等待1回合。升级保留沿用当前效果；截图film-arrow-256-20261103.png。"
+    }
+  ],
+  "style": {
+    "id": "STYLE_FIT_ARROW",
+    "name": "箭矢契合：箭、言叶、星",
+    "content": "箭矢体系可采用物理的箭、言叶、星等多种契合。围绕各牌的名称、效果与原作内容选取合适的意象；物理箭可表现瞄准、发射与命中，言叶可表现话语的传递与抵达，星可表现追寻目标与接近理想。卡图保留清楚的主体、动作或相关物件。"
+  },
+  "checks": {
+    "namesPreserved": true,
+    "effectsAndNumbersPreserved": true,
+    "otherCardsPreserved": true
+  }
+}

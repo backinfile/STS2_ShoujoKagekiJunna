@@ -1,0 +1,310 @@
+{
+  "reviewedAt": "2026-11-03T13:27:43.412Z",
+  "commitRevisions": [
+    1823,
+    1824
+  ],
+  "currentRevision": 1824,
+  "scope": "知识攻击牌与备箭；已删除卡牌的契合关联释放",
+  "cards": [
+    {
+      "id": "JK44",
+      "name": "论证",
+      "art": "original-scene-jb05-arrow-flight-20261103",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:57",
+      "fit": "将学到的内容组织为有依据的判断，以引言最终化为箭矢飞出的原作场面表现知识被用于攻击。关联疑问呈现论证中仍需澄清的问题。名称沿用已删除牌JX09释放的论证契合；配图重新分配自已删除牌JB05，保留箭头、箭杆和箭羽的完整轮廓。原始截图：film-arrow-256-20261103.png。"
+    },
+    {
+      "id": "JK49",
+      "name": "折不断的笔",
+      "art": "original-scene-jk49-unbroken-pen-attack-20261103",
+      "source": "2021 剧场版 ·《ペン：力：刀》（歌词）／狩猎的Revue纯那持刀进攻镜头（配图）",
+      "fit": "卡名取同段歌词的连续原词，以笔承载思考与表达，再以纯那主动持刀推进的原作动作表现表达的力量。攻击后回到思考，整理后再次展开表达，保持同一张牌的往复变化。歌词与配图分别记录，配图保留纯那前压的身体、握刀的双手与指向对手的刀刃。原始截图：film-knowledge-pen-action-0731-20261103.jpg；裁切：675,310,535,401。"
+    },
+    {
+      "id": "JA53",
+      "name": "备箭",
+      "art": "original-scene-ja56-20261102",
+      "source": "TV 第2话 · 配图约19:22",
+      "fit": "卡图取纯那握稳低位弓身的静态手部与装备，弦尚未拉开，画面没有飞出的箭。整理装备的准备动作对应格挡与抽取箭矢。配图重新分配自已删除牌JA56，沿用已登记的TV第2话握弓细节。"
+    }
+  ],
+  "releasedFits": [
+    {
+      "uid": "fit_card_complete_pool_JA42",
+      "name": "压制射击",
+      "released": [
+        "JA42"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JA51",
+      "name": "集中连射",
+      "released": [
+        "JA51"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JA56",
+      "name": "校准弹道",
+      "released": [
+        "JA56"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK58",
+      "name": "结伴",
+      "released": [
+        "JK58"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK60",
+      "name": "牢记",
+      "released": [
+        "JK60"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK61",
+      "name": "旧照",
+      "released": [
+        "JK61"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK62",
+      "name": "温习",
+      "released": [
+        "JK62"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK63",
+      "name": "举一反三",
+      "released": [
+        "JK63"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK65",
+      "name": "对照阅读",
+      "released": [
+        "JK65"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK66B",
+      "name": "招架",
+      "released": [
+        "JK66B"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK68",
+      "name": "融会贯通",
+      "released": [
+        "JK68"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK68B",
+      "name": "摘录",
+      "released": [
+        "JK68B"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK68C",
+      "name": "批注",
+      "released": [
+        "JK68C"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK69",
+      "name": "化为己用",
+      "released": [
+        "JK69"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JK69C",
+      "name": "自己的言叶",
+      "released": [
+        "JK69C"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JG29",
+      "name": "节奏训练",
+      "released": [
+        "JG29"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JX03",
+      "name": "联想",
+      "released": [
+        "JX03"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JX04",
+      "name": "留影",
+      "released": [
+        "JX04"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JX05",
+      "name": "课堂演练",
+      "released": [
+        "JX05"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JX06",
+      "name": "录像复盘",
+      "released": [
+        "JX06"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JX08",
+      "name": "蓄力",
+      "released": [
+        "JX08"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JX09",
+      "name": "论证",
+      "released": [
+        "JX09"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JX10",
+      "name": "背诵",
+      "released": [
+        "JX10"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JH12",
+      "name": "追加排练",
+      "released": [
+        "JH12"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JH16",
+      "name": "复唱",
+      "released": [
+        "JH16"
+      ]
+    },
+    {
+      "uid": "fit_card_complete_pool_JF09",
+      "name": "乌冬面",
+      "released": [
+        "JF09"
+      ]
+    },
+    {
+      "uid": "fit_card_starter_accelerator_JB05",
+      "name": "更近一步",
+      "released": [
+        "JB05"
+      ]
+    },
+    {
+      "uid": "fit_card_energy_retention_JH18",
+      "name": "聚星",
+      "released": [
+        "JH18"
+      ]
+    },
+    {
+      "uid": "fit_card_x_cost_exploration_JA60",
+      "name": "齐发",
+      "released": [
+        "JA60"
+      ]
+    },
+    {
+      "uid": "fit_card_x_cost_exploration_JG32",
+      "name": "加练",
+      "released": [
+        "JG32"
+      ]
+    },
+    {
+      "uid": "fit_card_x_cost_exploration_JK71",
+      "name": "回想",
+      "released": [
+        "JK71"
+      ]
+    },
+    {
+      "uid": "fit_card_x_cost_exploration_JA62",
+      "name": "复述",
+      "released": [
+        "JA62"
+      ]
+    },
+    {
+      "uid": "fit_card_x_cost_exploration_JA63",
+      "name": "就位",
+      "released": [
+        "JA63"
+      ]
+    },
+    {
+      "uid": "fit_card_x_cost_exploration_JK72",
+      "name": "复排",
+      "released": [
+        "JK72"
+      ]
+    },
+    {
+      "uid": "junna-pool-gap-fill-20261103_FIT_JA68",
+      "name": "快步开弓",
+      "released": [
+        "JA68"
+      ]
+    },
+    {
+      "uid": "junna-pool-gap-fill-20261103_FIT_JA69",
+      "name": "侧移引弦",
+      "released": [
+        "JA69"
+      ]
+    },
+    {
+      "uid": "junna-pool-gap-fill-20261103_FIT_JF11",
+      "name": "迎击架势",
+      "released": [
+        "JF11"
+      ]
+    },
+    {
+      "uid": "junna-pool-gap-fill-20261103_FIT_JF12",
+      "name": "散射",
+      "released": [
+        "JF12"
+      ]
+    }
+  ],
+  "checks": {
+    "mechanicsAndCostsPreserved": true,
+    "groupMembersAndCountsPreserved": true,
+    "extraHoverTipsPreserved": true,
+    "transformationReferencesSynced": true,
+    "fitNamesAndArtSynced": true,
+    "retiredCardAssignmentsReleased": true,
+    "selectedArtDistinct": true,
+    "nativeCardFrameVisuallyChecked": true
+  }
+}

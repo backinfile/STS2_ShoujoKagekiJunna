@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-play-growth-20261103-v1",
+  "title": "连贯练习",
+  "date": "2026-11-03",
+  "sourceRevision": 1208,
+  "appliedRevision": 1209,
+  "historyRecord": "76aa5dd0-b284-4921-b2db-887452bd0489",
+  "card": {
+    "uid": "play_growth_JG31",
+    "id": "JG31",
+    "name": "连贯练习",
+    "type": "技能",
+    "system": "growth",
+    "rarity": "罕见",
+    "pool": true,
+    "cost": 0,
+    "upgradedCost": 0,
+    "turns": null,
+    "upgradedTurns": null,
+    "target": "自己",
+    "text": "本回合内，打出卡牌后，使其获得2点伤害加成。",
+    "upgradedText": "本回合内，打出卡牌后，使其获得3点伤害加成。",
+    "keywords": [],
+    "termIds": [
+      "TR08",
+      "EF39",
+      "KW_BONUS",
+      "RL03"
+    ],
+    "archetypeIds": [
+      "SYS_growth"
+    ],
+    "breakthroughIds": [],
+    "partnerCardIds": [],
+    "effectIds": [
+      "EF39"
+    ],
+    "ruleIds": [],
+    "art": "official-tv-jg23-20261102",
+    "character": "星见纯那",
+    "role": "机制基础牌",
+    "direction": "伤害加成",
+    "draftStatus": "用户新增",
+    "draftBatch": "junna-play-growth-20261103-v1",
+    "naming": {
+      "original": "",
+      "kind": "日常训练题材拟名",
+      "work": "TV 第2话 · 日常运动服场景",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368",
+      "adaptation": "按日常训练过程拟名“连贯练习”，以连续完成动作后的进步对应刚打出的牌获得伤害加成。卡图使用已登记的纯那日常运动服画面。"
+    },
+    "design": {
+      "classification": "机制基础牌",
+      "route": "伤害加成",
+      "triggerRole": "扳机触发",
+      "systems": [
+        "growth"
+      ],
+      "systemRoles": {
+        "growth": {
+          "role": "扳机触发",
+          "port": "输出"
+        }
+      },
+      "routeRoles": {
+        "archetype_SYS_growth": {
+          "role": "trigger",
+          "cross": false,
+          "ports": [
+            "output"
+          ]
+        }
+      },
+      "port": "输出",
+      "roleReason": "把本回合连续出牌转化为各张实际伤害牌的成长，等待中的箭矢可以承接本次增量。",
+      "investment": "0点能量、1张手牌；需要本回合继续打出伤害牌。",
+      "rules": "打出本牌时，为自己建立一个持续至本回合结束清理时点的临时监听。之后每次自己的实际卡牌打出事件完成，读取刚打出的实际牌实例，按damageModifierRules检查其伤害能力，符合者获得2点伤害加成，升级为3点。普通攻击先完成本次牌效，再增加该实际牌的存量；已布置且尚未完成的伤害箭矢读取新增后的当前存量。伤害技能、伤害能力及其持续来源沿既有伤害资格与快照规则处理。每个实际打出事件触发一次，单纯重复伤害、重放箭矢牌效或额外触发沿用原事件身份。重复打出同一张实际牌可以再次获得；同回合多次建立本监听时分别叠加。回合结束只清除监听，已获得的伤害加成持续本场战斗，按现有战后清理规则移除。",
+      "upgrade": "每次获得的伤害加成2→3；基础与升级均为0费，监听均持续本回合。",
+      "damageModifierRule": "damageModifierRules",
+      "targetScope": {
+        "policy": "damageBonus",
+        "requiresDamageCapability": true,
+        "source": "playedCardInstance"
+      },
+      "triggerScope": {
+        "event": "afterCardPlayed",
+        "owner": "self",
+        "duration": "turn",
+        "target": "playedCardInstance",
+        "damageBonusDuration": "combat"
+      },
+      "textComplexity": "低",
+      "reference": "按用户指定的0费、本回合出牌后为该牌赋予2／3伤害加成。"
+    },
+    "notes": "结算约定：打出本牌时，为自己建立一个持续至本回合结束清理时点的临时监听。之后每次自己的实际卡牌打出事件完成，读取刚打出的实际牌实例，按damageModifierRules检查其伤害能力，符合者获得2点伤害加成，升级为3点。普通攻击先完成本次牌效，再增加该实际牌的存量；已布置且尚未完成的伤害箭矢读取新增后的当前存量。伤害技能、伤害能力及其持续来源沿既有伤害资格与快照规则处理。每个实际打出事件触发一次，单纯重复伤害、重放箭矢牌效或额外触发沿用原事件身份。重复打出同一张实际牌可以再次获得；同回合多次建立本监听时分别叠加。回合结束只清除监听，已获得的伤害加成持续本场战斗，按现有战后清理规则移除。"
+  },
+  "checks": {
+    "onlyOneAddition": true,
+    "existingDataPreserved": true,
+    "normalizedWithWorkbench": true,
+    "cost": [
+      0,
+      0
+    ],
+    "triggerDuration": "turn",
+    "damageBonusDuration": "combat"
+  }
+}

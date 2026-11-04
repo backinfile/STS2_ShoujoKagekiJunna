@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "title": "纯那起始牌设计",
+  "date": "2026-11-02",
+  "sourceRevision": 1751,
+  "sources": [
+    "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_five_classes_card_analysis_summary_zh.md",
+    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md",
+    "D:/Github/STS2_ShoujoKagekiAijoKaren/src/Core/Models/Characters/Karen.cs",
+    "D:/Github/STS2_ShoujoKagekiAijoKaren/src/Core/Models/Cards/basic/KarenShineStrike.cs",
+    "D:/Github/STS2_ShoujoKagekiAijoKaren/src/Core/Models/Cards/basic/KarenFall.cs",
+    "D:/Github/spire-codex/extraction/raw/src/Core/Models/Relics/ArchaicTooth.cs"
+  ],
+  "nativeVerification": {
+    "assembly": "D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll",
+    "characterSources": ".tools/starter-audit/",
+    "deckSizes": {
+      "Ironclad": 10,
+      "Silent": 12,
+      "Defect": 10,
+      "Necrobinder": 10,
+      "Regent": 10
+    }
+  },
+  "references": [
+    {
+      "character": "铁甲战士",
+      "model": "Ironclad",
+      "deckSize": 10,
+      "strikes": 5,
+      "defends": 4,
+      "specials": [
+        {
+          "name": "痛击",
+          "count": 1,
+          "cost": 2,
+          "text": "造成8点伤害。给予2层易伤。",
+          "upgrade": "造成10点伤害。给予3层易伤。"
+        }
+      ],
+      "lesson": "一张特色牌也可展示核心前置与输出配合。"
+    },
+    {
+      "character": "静默猎手",
+      "model": "Silent",
+      "deckSize": 12,
+      "strikes": 5,
+      "defends": 5,
+      "specials": [
+        {
+          "name": "中和",
+          "count": 1,
+          "cost": 0,
+          "text": "造成3点伤害。给予1层虚弱。",
+          "upgrade": "造成4点伤害。给予2层虚弱。"
+        },
+        {
+          "name": "生存者",
+          "count": 1,
+          "cost": 1,
+          "text": "获得8点格挡。丢弃1张牌。",
+          "upgrade": "获得11点格挡。丢弃1张牌。"
+        }
+      ],
+      "lesson": "特色防御牌与轻量机制入口共同维持前期循环。"
+    },
+    {
+      "character": "故障机器人",
+      "model": "Defect",
+      "deckSize": 10,
+      "strikes": 4,
+      "defends": 4,
+      "specials": [
+        {
+          "name": "电击",
+          "count": 1,
+          "cost": 1,
+          "upgradedCost": 0,
+          "text": "生成1个闪电充能球。"
+        },
+        {
+          "name": "双重释放",
+          "count": 1,
+          "cost": 1,
+          "upgradedCost": 0,
+          "text": "激发你最右侧的充能球两次。"
+        }
+      ],
+      "lesson": "对象生成与对象操作在起始阶段配齐。"
+    },
+    {
+      "character": "亡灵契约师",
+      "model": "Necrobinder",
+      "deckSize": 10,
+      "strikes": 4,
+      "defends": 4,
+      "specials": [
+        {
+          "name": "护卫",
+          "count": 1,
+          "cost": 1,
+          "text": "召唤5。",
+          "upgrade": "召唤7。"
+        },
+        {
+          "name": "出击",
+          "count": 1,
+          "cost": 1,
+          "text": "奥斯提造成6点伤害。这张牌额外造成等量于奥斯提当前生命值的伤害。",
+          "upgrade": "奥斯提造成9点伤害。这张牌额外造成等量于奥斯提当前生命值的伤害。"
+        }
+      ],
+      "lesson": "专属对象的供给与兑现各占一个起始卡位。"
+    },
+    {
+      "character": "储君",
+      "model": "Regent",
+      "deckSize": 10,
+      "strikes": 4,
+      "defends": 4,
+      "specials": [
+        {
+          "name": "崇拜",
+          "count": 1,
+          "cost": 1,
+          "text": "获得2星。",
+          "upgrade": "获得3星。"
+        },
+        {
+          "name": "陨星",
+          "count": 1,
+          "cost": 0,
+          "text": "造成8点伤害。给予1层虚弱。给予1层易伤。",
+          "upgrade": "造成12点伤害。给予1层虚弱。给予1层易伤。"
+        }
+      ],
+      "lesson": "第二资源入口与早期战斗功能可以分别承担。"
+    },
+    {
+      "character": "Karen",
+      "model": "Karen",
+      "deckSize": 10,
+      "strikes": 4,
+      "defends": 4,
+      "specials": [
+        {
+          "name": "闪耀打击",
+          "count": 1,
+          "cost": 1,
+          "upgradedCost": 0,
+          "text": "造成9点伤害。",
+          "mechanic": "闪耀9。"
+        },
+        {
+          "name": "坠落",
+          "count": 1,
+          "cost": 1,
+          "text": "获得8点格挡。将1张牌放入约定牌堆。",
+          "upgrade": "获得8点格挡。将2张牌放入约定牌堆。"
+        }
+      ],
+      "lesson": "两个特色卡位分别呈现主、次机制，防御动作同时承担机制操作。"
+    }
+  ],
+  "sourceCorrection": "Karen坠落的升级以当前源码为准：放入约定牌堆数量由1增加到2，格挡保持8。",
+  "startingDeck": [
+    {
+      "cardId": "JB01",
+      "count": 5
+    },
+    {
+      "cardId": "JB02",
+      "count": 4
+    },
+    {
+      "cardId": "JB03",
+      "count": 1
+    }
+  ],
+  "totalCards": 10,
+  "basicModels": 3,
+  "knowledgeGroup": null,
+  "changedCards": [
+    "JB01",
+    "JB03",
+    "JZ03"
+  ],
+  "cards": [
+    {
+      "id": "JB01",
+      "name": "打击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "type": "攻击",
+      "turns": null,
+      "upgradedTurns": null,
+      "text": "造成6点伤害。",
+      "upgradedText": "造成9点伤害。",
+      "count": 5
+    },
+    {
+      "id": "JB02",
+      "name": "防御",
+      "cost": 1,
+      "upgradedCost": 1,
+      "type": "技能",
+      "turns": null,
+      "upgradedTurns": null,
+      "text": "获得5点格挡。",
+      "upgradedText": "获得8点格挡。",
+      "count": 4
+    },
+    {
+      "id": "JB03",
+      "name": "逐星",
+      "cost": 1,
+      "upgradedCost": 1,
+      "type": "箭矢",
+      "turns": 3,
+      "upgradedTurns": 3,
+      "text": "造成25点伤害。",
+      "upgradedText": "造成32点伤害。",
+      "count": 1
+    }
+  ],
+  "decisions": [
+    "按用户要求采用5张打击、4张防御和1张逐星。",
+    "逐星保持1费、3回合，基础/升级造成25/32点伤害。",
+    "逐星对应的远古替换牌为0费、2回合，基础/升级造成25/32点伤害。",
+    "远古替换保留原牌升级状态与附魔；更近一步（JB05）保持现有垃圾桶状态。",
+    "远古稀有度共2张：逐星（远古）与通读全篇；万箭待发移入备用。"
+  ],
+  "paperReview": {
+    "structure": "5/4/1结构，共10张、3种基础牌。",
+    "arrow": "逐星：1费、3回合，造成25/32点伤害；对应远古牌：0费、2回合，造成25/32点伤害。",
+    "scope": "核对新增牌、升级、目标范围、牌组数量、引用及既有牌面保留。",
+    "model": "普通基准10×1+6×3=28，基础牌按90%估算约25伤害；升级保留32伤害。"
+  },
+  "appliedRevision": 1751,
+  "historyRecord": "eda97c28-77f8-428c-83a0-58f47e1a5a93",
+  "reserveCards": [
+    "JB04"
+  ],
+  "updatedAt": "2026-11-03",
+  "ancientReplacement": {
+    "starterCardId": "JB03",
+    "id": "JZ03",
+    "name": "逐星（远古）",
+    "cost": 0,
+    "upgradedCost": 0,
+    "type": "箭矢",
+    "turns": 2,
+    "upgradedTurns": 2,
+    "text": "造成25点伤害。",
+    "upgradedText": "造成32点伤害。",
+    "sourceRelic": "ArchaicTooth"
+  },
+  "ancientRarity": {
+    "total": 2,
+    "cardIds": [
+      "JZ02",
+      "JZ03"
+    ],
+    "starterUpgradeCardId": "JZ03",
+    "reservedCardIds": [
+      "JZ01"
+    ]
+  }
+}

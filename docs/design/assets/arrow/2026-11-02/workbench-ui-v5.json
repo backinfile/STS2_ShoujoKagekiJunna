@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-02",
+  "tool": "built-in image_gen",
+  "mode": "transparent production sprite refinement and workbench integration",
+  "frame": {
+    "input": "arrow-portrait-workbench-v1.png",
+    "approvedFinish": "arrow-frame-d-common-clean-v5.png",
+    "output": "arrow-portrait-workbench-clean-v5.png",
+    "canvas": [
+      1456,
+      1080
+    ],
+    "prompt": "Use case: precise-object-edit.\nAsset type: production transparent portrait-frame sprite for the existing Junna Arrow D workbench renderer.\n\nImage 1 is the EXACT production sprite to edit. Its canvas, placement, outline, aperture and integrated counter/type housing are the geometry authority. Preserve those, so the existing UI artwork clipping path and live text keep fitting.\nImage 2 is the approved cleaned common-rarity V5 complete card. Use its restrained grey painted finish and clean low-frequency surfaces as the FINISH reference only.\nImage 3 is the actual native common type plaque, a secondary COLOR/BEVEL reference. Its grey face is approximately RGB(159,159,158).\n\nChange only the MATERIAL FINISH of the sprite in Image 1:\n- Use neutral common-rarity grey faces consistent with images 2/3, simple broad matte native hand-painted bevels, clear but restrained grey edge shadows and a few broad brush strokes.\n- Main medium-grey face approximately #9F9F9E, light bevel approximately #B8B8B5, dark bevel approximately #626361, narrow deepest contact edge approximately #424440.\n- Remove the tiny AI moire / periodic ripple / woven interference / noisy hatch texture and excessive little scratches.\n- Clean isolated colored fringe specks at the transparent outline. Keep clean antialiased grey edges.\n- Keep a continuous lightly painted grey face, not photographic metal, glossy chrome or a flat blank silhouette.\n\nSTRICT GEOMETRY AND TRANSPARENCY:\nPreserve Image 1's original 1456x1080 canvas and its exact proportions/placement. No cropping, scaling, recentering or re-layout.\nPreserve its top arched/chamfered rim, upper shoulders, both long side rims, the two inward-pointing sight teeth at the same height, lower sloping rims, pointed-arch countdown crown and rectangular type-label lower face.\nPreserve the interior opening as REAL ALPHA TRANSPARENCY, and the outside as REAL ALPHA TRANSPARENCY. Keep the same transparent holes and overall silhouette.\nBoth the arched countdown and the type-label face stay EMPTY, with clean grey paint for live UI text. No \"2\", no \"箭矢\", no letters/numerals, no icon, no engraving.\nThe output is exactly ONE isolated grey D portrait frame with the connected empty plaque. No title ribbon, energy icon, blue outer card body, artwork, rules panel, sample card, background, labels or added elements.\nThis is a surgical texture cleanup and neutral-grey finish update of the existing transparent production sprite; the layout remains the geometry from Image 1."
+  },
+  "energy": {
+    "output": "junna-energy-workbench-v4.png",
+    "source": "approved V4 native-style energy sprite"
+  },
+  "integration": {
+    "assetId": "portrait-stage-junna",
+    "build": "node docs/design/workbench/build.cjs",
+    "paletteSource": "native common/uncommon/rare plaque textures, linear RGB fit from common luminance",
+    "paletteMatrices": {
+      "uncommon": "0.354834 0.696847 0.135333 0 -0.278428  0.350061 0.687474 0.133513 0 0.115498  0.34903 0.685449 0.13312 0 0.141191  0 0 0 1 0",
+      "rare": "0.196896 0.386678 0.075096 0 0.5868  0.401855 0.789189 0.153267 0 -0.072809  0.403124 0.791682 0.153751 0 -0.439005  0 0 0 1 0"
+    },
+    "dynamicLayers": [
+      "card title",
+      "energy cost",
+      "Arrow countdown",
+      "card type label"
+    ],
+    "rarityLayers": [
+      "native title ribbon",
+      "D portrait border",
+      "connected countdown/type plaque"
+    ],
+    "classLayers": [
+      "light-blue outer body",
+      "blue energy icon"
+    ]
+  }
+}
+

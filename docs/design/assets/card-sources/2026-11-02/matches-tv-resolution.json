@@ -1,0 +1,216 @@
+{
+  "batchId": "official-naming-20261102-tv-resolution",
+  "label": "配入官方原词与截图 · 梦想与再次登台12张",
+  "backup": "before-tv-resolution.json",
+  "matches": [
+    {
+      "id": "A",
+      "name": "埋头学习",
+      "original": "ずっと勉強ばかりしてきた私",
+      "episode": 2,
+      "time": "19:08",
+      "proof": "tv02-1910-new.jpg",
+      "artProof": "tv02-1910-new.jpg",
+      "crop": [
+        960,
+        720,
+        520,
+        30
+      ],
+      "fit": "持续学习在每个回合留下新的知识，关联的邂逅牌把积累转为抽牌与行动力。",
+      "japaneseNote": " 日文依据台词转录：https://suiso-suisou.hatenablog.com/entry/2019/01/11/172406 。",
+      "fullQuote": "一直埋头学习的我"
+    },
+    {
+      "id": "B",
+      "name": "我邂逅了",
+      "original": "出会ってしまった、巡り合ってしまった。",
+      "episode": 2,
+      "time": "19:20",
+      "proof": "tv02-1919-new.jpg",
+      "artProof": "tv02-1922-new.jpg",
+      "artTime": "19:23",
+      "crop": [
+        960,
+        720,
+        640,
+        30
+      ],
+      "fit": "学习带来的新邂逅使视野打开，获得新的牌与继续行动的能量。",
+      "japaneseNote": " 日文依据台词转录：https://suiso-suisou.hatenablog.com/entry/2019/01/11/172406 。",
+      "fullQuote": "我遇到了 我邂逅了"
+    },
+    {
+      "id": "JH05",
+      "name": "我重生了",
+      "original": "あの日、私は生まれ変わったの。",
+      "episode": 2,
+      "time": "19:23",
+      "proof": "tv02-1922-new.jpg",
+      "crop": [
+        960,
+        720,
+        640,
+        30
+      ],
+      "fit": "踏上舞台后的行动孕育下一次行动，把本回合的进攻转为下回合能量。",
+      "japaneseNote": " 日文依据台词转录：https://suiso-suisou.hatenablog.com/entry/2019/01/11/172406 。",
+      "fullQuote": "自那天起 我重生了"
+    },
+    {
+      "id": "JA15",
+      "name": "闪耀的梦",
+      "original": "初めて見つけたキラめく夢",
+      "episode": 2,
+      "time": "19:10",
+      "proof": "tv02-1909-new.jpg",
+      "crop": [
+        1120,
+        840,
+        400,
+        0
+      ],
+      "fit": "对舞台的理解经过时间抵达，完成时以抽牌打开新的可能。",
+      "japaneseNote": " 日文依据台词转录：https://suiso-suisou.hatenablog.com/entry/2019/01/11/172406 。",
+      "fullQuote": "第一次找到的 闪耀的梦"
+    },
+    {
+      "id": "JG03",
+      "name": "永远能站上舞台",
+      "original": "私たちは何度だって舞台に立てる。",
+      "episode": 2,
+      "time": "21:24",
+      "proof": "tv02-2123-new.jpg",
+      "crop": [
+        960,
+        720,
+        650,
+        20
+      ],
+      "fit": "同一个招式再次登台，对应选中的牌额外造成一次伤害。",
+      "japaneseNote": " 日文依据第2话台词转录：https://keibun.hatenadiary.jp/ 。",
+      "fullQuote": "只要我们想 我们永远能站上舞台"
+    },
+    {
+      "id": "JK10",
+      "name": "热情与光芒",
+      "original": "情熱とキラめき",
+      "episode": 2,
+      "time": "21:27",
+      "proof": "tv02-2126-new.jpg",
+      "artProof": "tv02-2131-new.jpg",
+      "artTime": "21:32",
+      "crop": [
+        960,
+        720,
+        650,
+        20
+      ],
+      "fit": "投入高费行动，热情再化为能量，支持关联的舞台少女力量继续发挥。",
+      "japaneseNote": " 日文对照按该段台词记载；语尾以原声为准。"
+    },
+    {
+      "id": "JK10B",
+      "name": "舞台少女的力量",
+      "original": "それが舞台少女の力",
+      "episode": 2,
+      "time": "21:32",
+      "proof": "tv02-2131-new.jpg",
+      "crop": [
+        960,
+        720,
+        650,
+        20
+      ],
+      "fit": "保留的高费攻击承接热情与光芒，在需要时释放力量并触发关联能力的能量返还。",
+      "japaneseNote": " 日文对照保留核心原句，原声语尾待校。",
+      "fullQuote": "这就是舞台少女的力量"
+    },
+    {
+      "id": "JK27",
+      "name": "一起成为Star",
+      "original": "一緒にスタァに",
+      "episode": 2,
+      "time": "21:45",
+      "proof": "tv02-2144-new.jpg",
+      "crop": [
+        960,
+        720,
+        430,
+        15
+      ],
+      "fit": "同组的知识一起抵达手牌，呼应共同登上舞台、一起成为Star的愿望。",
+      "japaneseNote": " 日文对照取该段原句；中文保留字幕中的Star。"
+    },
+    {
+      "id": "JK43",
+      "name": "追不上的距离",
+      "original": "どんなに努力しても追いつけない距離。",
+      "episode": 2,
+      "time": "14:20",
+      "proof": "tv02-1419-verified.jpg",
+      "crop": [
+        960,
+        720,
+        560,
+        20
+      ],
+      "fit": "很高的初始费用表现她感到难以跨越的距离，关联的坚持牌逐次降低门槛。",
+      "japaneseNote": " 日文依据台词转录：https://nato.hateblo.jp/entry/2020/02/18/210000 。",
+      "fullQuote": "怎么努力 也追不上的距离"
+    },
+    {
+      "id": "JK43B",
+      "name": "不可能就此死心",
+      "original": "だからって諦められるわけないじゃない。",
+      "episode": 2,
+      "time": "14:23",
+      "proof": "tv02-1422-new.jpg",
+      "artProof": "tv02-1428-proof.jpg",
+      "artTime": "14:28",
+      "crop": [
+        960,
+        720,
+        650,
+        15
+      ],
+      "fit": "每次坚持都提供少量保护，并永久缩短关联高费牌的距离，最终让它能够打出。",
+      "japaneseNote": " 日文依据台词转录：https://nato.hateblo.jp/entry/2020/02/18/210000 。",
+      "fullQuote": "但 我也不可能就此死心啊"
+    },
+    {
+      "id": "JK46",
+      "name": "一次机会",
+      "original": "一度で終わりじゃない。",
+      "episode": 2,
+      "time": "21:21",
+      "proof": "tv02-2120-new.jpg",
+      "crop": [
+        960,
+        720,
+        650,
+        20
+      ],
+      "fit": "每回合继续提供关联箭矢，令舞台机会不断出现。",
+      "japaneseNote": " 日文依据第2话台词转录：https://keibun.hatenadiary.jp/ 。",
+      "fullQuote": "我们不会因一次机会就结束"
+    },
+    {
+      "id": "JK46B",
+      "name": "不会放过这机会",
+      "original": "私はこのチャンスを逃さない。",
+      "episode": 2,
+      "time": "21:03",
+      "proof": "tv02-2102-new.jpg",
+      "crop": [
+        960,
+        720,
+        650,
+        20
+      ],
+      "fit": "将新的机会保留在手中，随后投入一发有分量的箭矢。与持续供给的能力构成机会与把握的关联。",
+      "japaneseNote": " 日文依据第2话台词转录：https://keibun.hatenadiary.jp/ 。",
+      "fullQuote": "我不会放过这机会"
+    }
+  ]
+}

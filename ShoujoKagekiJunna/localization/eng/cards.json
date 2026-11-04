@@ -1,0 +1,20 @@
+{
+  "JUNNA_REPEATED_PRACTICE.title": "重复练习",
+  "JUNNA_REPEATED_PRACTICE.description": "选择一张手牌，使其额外造成1次伤害。",
+  "JUNNA_GUIDING_STAR.title": "引路星",
+  "JUNNA_GUIDING_STAR.description": "造成{Damage:diff()}点伤害。\n下回合获得{energyPrefix:energyIcons(1)}。",
+  "JUNNA_BREAK_ENCIRCLEMENT.title": "破围",
+  "JUNNA_BREAK_ENCIRCLEMENT.description": "对所有敌人造成{Damage:diff()}点伤害。\n下回合获得{energyPrefix:energyIcons(2)}。",
+  "JUNNA_WARM_UP.title": "准备活动",
+  "JUNNA_WARM_UP.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n选择1张手牌获得{Bonus:diff()}点[gold]伤害加成[/gold]。",
+  "JUNNA_ENDURANCE_TRAINING.title": "耐力训练",
+  "JUNNA_ENDURANCE_TRAINING.description": "卡牌每拥有6点[gold]伤害加成[/gold]，便额外造成1次伤害。",
+  "JUNNA_TURNING_SLASH.title": "回身斩",
+  "JUNNA_TURNING_SLASH.description": "造成{Damage:diff()}点伤害{Repeat}次。",
+  "JUNNA_STRIKE.title": "打击",
+  "JUNNA_STRIKE.description": "造成{Damage:diff()}点伤害。",
+  "JUNNA_DEFEND.title": "防御",
+  "JUNNA_DEFEND.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+  "JUNNA_FULL_DRAW.title": "满弦射击",
+  "JUNNA_FULL_DRAW.description": "[blue]{Turns}回合[/blue]。\n造成{Damage:diff()}点伤害。"
+}

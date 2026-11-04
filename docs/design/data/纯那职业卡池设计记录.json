@@ -1,0 +1,988 @@
+{
+  "title": "纯那职业卡池设计记录",
+  "date": "2026-11-02",
+  "stage": "完整卡池初版",
+  "status": "完整卡池初稿已同步工作台；触发、收益、跨流派、起始与体系外内容齐备",
+  "requirements": [
+    "主体系为箭矢，次主体系为知识，伤害加成为输出小体系。",
+    "尽量多设计各体系内部的突破限制候选，基础触发与收益只先写少量。",
+    "既有机制定义、独立卡牌类型与多人共享规则沿用，卡牌明确写出的突破另算。",
+    "抽牌效果尽量少做，需要时优先作为箭矢牌出现。",
+    "卡名使用原作完整词语或忠实翻译并保留出处；本轮以编号标识，卡名待定。",
+    "本阶段完成整池设计，可尽量多生成，数量不受预定卡牌数量限制。",
+    "卡牌文本中的“所有玩家的箭矢”统一写为“所有箭矢”。",
+    "本轮先设计单人构筑中的卡牌，暂不设计多玩家专用牌。",
+    "知识牌和知识关联牌共用“知识”关键词。泛指这类牌的效果统一写“知识牌”；引用自身关联牌的效果保留《牌名》。",
+    "不要写其他职业中已经有的流派牌。比如战士有消耗流派，就不要写消耗的收益牌。但是普通消耗关键字还是可以有（因为消耗牌时所有职业都有的）。比如不要写弃置卡牌的触发和收益。不要直接用力量做流派等。",
+    "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。",
+    "突破限制牌重点是修改游戏规则（游戏底层机制，或者新增的机制）本身。可能是带来高数值，也可能是改变正常的打法，都有可能。"
+  ],
+  "sources": [
+    "D:/Github/STS2_Card_Reserch/docs/体系分析流程.md",
+    "D:/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
+    "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+    "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/references/奈奈三个体系的结构与突破研究.md",
+    "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/奈奈突破限制牌修改整理.md",
+    "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/奈奈突破限制牌候选_独立类型版.md",
+    "D:/Github/STS2_ShoujoKagekiJunna/docs/design/data/纯那Mod设计工作台_本地编辑.json",
+    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md",
+    "D:/Github/STS2_Card_Reserch/docs/mods/karen_mod_character_cards_zh.md"
+  ],
+  "systems": {
+    "stage": {
+      "name": "箭矢"
+    },
+    "partner": {
+      "name": "知识"
+    },
+    "growth": {
+      "name": "伤害加成"
+    }
+  },
+  "review": {
+    "method": "依次按体系设计、规则审稿、原版参照、平衡与整合角色进行纸面复核。",
+    "deferred": [
+      "实战数值与稀有卡位定稿",
+      "完整卡池的抽牌数量与费用曲线",
+      "原作牌名与出处",
+      "最终突破候选取舍"
+    ],
+    "excluded": [
+      "等待中箭矢取回并保留进度",
+      "设置或重置当前倒计时",
+      "暂停自然时钟",
+      "全场到期后循环重置",
+      "按回合上限掩盖已知循环"
+    ]
+  },
+  "batches": [
+    {
+      "id": "junna-first-card-draft-20261101-v1",
+      "breakthroughs": 30,
+      "basics": 14,
+      "grants": 7,
+      "total": 51,
+      "source": "纯那首轮卡牌候选.json",
+      "recommendations": {
+        "stage": [
+          "JA01",
+          "JA03",
+          "JA12"
+        ],
+        "partner": [
+          "JK01",
+          "JK04",
+          "JK07"
+        ],
+        "growth": [
+          "JG02",
+          "JG03",
+          "JG05"
+        ]
+      },
+      "review": {
+        "classification": "突破牌仅标记持续性、结算次数、费用、来源、保留或端口边界的改变；普通攻防加速与增伤牌保留基础或引导定位。",
+        "loops": [
+          "JA02免费同时给予消耗，按既有整批完成后消耗规则处理。",
+          "JA07收益推迟到下个回合，避免完成立即自供能。",
+          "JK07只接回弃牌堆中的知识牌，知识牌仍需支付。",
+          "JK10只在击杀后接续，数量受敌人限制。",
+          "JG05目标集合去重；倍率设置与继承不触发JG03的真实新增事件。"
+        ],
+        "tradeoffs": [
+          "JA01与JA10分别为长期重复与一次性集中爆发候选，定稿时比较卡位。",
+          "JA03加快离场，JA12与JA18奖励等待中的场面；构筑需要决定何时兑现。",
+          "JK01降低固定工具的使用成本，JK07改善可重复知识牌的抵达；两者服务不同结构。",
+          "JG01消耗已有成熟投资，JG02提高未来投入效率，JG06只改变兑现贡献。"
+        ],
+        "deferred": [
+          "费用与升级数值为纸面初稿，尚未进行实战调平。",
+          "本轮入池非稀有抽牌箭矢只有JA15，完整卡池阶段再校准抽牌数量。",
+          "30张突破为备选库，成品卡池只选少量搭配。",
+          "单卡原作名称与出处待单独核对。"
+        ]
+      }
+    },
+    {
+      "id": "junna-breakthrough-exploration-20261101-v1",
+      "newBreakthroughs": 15,
+      "newGrants": 1,
+      "breakthroughs": 27,
+      "demoPool": 7,
+      "grants": 5,
+      "active": 39,
+      "trash": 28,
+      "source": "纯那第二轮突破探索.json",
+      "recommendations": {
+        "stage": [
+          "JA19",
+          "JA21",
+          "JA24"
+        ],
+        "partner": [
+          "JK15",
+          "JK18",
+          "JK19"
+        ],
+        "growth": [
+          "JG13",
+          "JG15",
+          "JG16"
+        ]
+      }
+    },
+    {
+      "id": "junna-type-breakthrough-20261102-v1",
+      "typeBreakthroughs": 8,
+      "userCards": 2,
+      "upgradedCards": 9,
+      "active": 31,
+      "pool": 25,
+      "grants": 6,
+      "total": 77,
+      "source": "纯那第三轮类型突破探索.json",
+      "recommendations": [
+        "JT01",
+        "JT03",
+        "JT06",
+        "JT07"
+      ]
+    },
+    {
+      "id": "junna-damage-scope-and-polish-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 410,
+      "changedCards": [
+        "JA02",
+        "JA04",
+        "JA09",
+        "JK03B",
+        "JK05",
+        "JK10",
+        "JG01",
+        "JG02",
+        "JG03",
+        "JG05",
+        "JG08",
+        "JA13",
+        "JA14",
+        "JA15",
+        "JA16",
+        "JA17",
+        "JK11",
+        "JK11B",
+        "JG09",
+        "JG11",
+        "JA22",
+        "JK15",
+        "JG13",
+        "JG14",
+        "JG15",
+        "JG16",
+        "JT01",
+        "JT02",
+        "JT03",
+        "JT06"
+      ],
+      "damageBonusTargets": "攻击牌和能造成伤害的箭矢牌",
+      "hiddenArrowSubtypes": {
+        "JA09": "技能",
+        "JK03B": "技能",
+        "JA13": "攻击",
+        "JA14": "技能",
+        "JA15": "技能",
+        "JG11": "技能",
+        "JT03": "能力"
+      },
+      "notes": "按当前基础效果同步升级与实际词条；保留用户费用、回合数、删除状态、知识组及风格约定。"
+    },
+    {
+      "id": "junna-concise-text-and-acquisition-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 416,
+      "notes": "保留用户简洁牌文；选牌限制和箭矢子类型写入内部配置；奖励与发现带关联牌，单张生成与复制按牌面数量处理。"
+    },
+    {
+      "id": "junna-fourth-breakthrough-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 432,
+      "newBreakthroughs": 8,
+      "newTerms": 6,
+      "active": 30,
+      "pool": 26,
+      "grants": 4,
+      "trash": 55,
+      "total": 85,
+      "source": "纯那第四轮突破探索.json",
+      "recommendations": [
+        "JA26",
+        "JK20",
+        "JK21",
+        "JG17"
+      ]
+    },
+    {
+      "id": "junna-sync-user-edits-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 453,
+      "changedCards": [
+        "JG03",
+        "JG16",
+        "JK15",
+        "JT01",
+        "JT02",
+        "JK10",
+        "B"
+      ],
+      "notes": "基础牌面、费用、知识组与垃圾桶状态保持原值；JT01基础与升级均将目标耗能变为1。"
+    },
+    {
+      "id": "junna-fifth-breakthrough-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 453,
+      "newBreakthroughs": 12,
+      "newGrants": 3,
+      "newCards": 15,
+      "perMechanism": {
+        "stage": 3,
+        "partner": 3,
+        "growth": 3,
+        "highCost": 3
+      },
+      "active": 37,
+      "pool": 30,
+      "grants": 7,
+      "trash": 63,
+      "total": 100,
+      "source": "纯那第五轮突破探索.json",
+      "lessons": [
+        {
+          "status": "记录事实",
+          "evidence": [
+            "JA03",
+            "JA06",
+            "JA07",
+            "JA08",
+            "JA09",
+            "JA10",
+            "JA12",
+            "JK02",
+            "JK02B",
+            "JK03",
+            "JK03B",
+            "JK06",
+            "JK07",
+            "JK08",
+            "JK09",
+            "JG02",
+            "JG06",
+            "JG07",
+            "JG08",
+            "JA14",
+            "JA18",
+            "JK12",
+            "JK12B",
+            "JK14",
+            "JG10",
+            "JG11",
+            "JG12"
+          ],
+          "conclusion": "27张由精简常规牌的批量操作收起，主要反映数量与卡位取舍，分开记录。"
+        },
+        {
+          "status": "用户明确约定",
+          "evidence": [
+            "STYLE_001",
+            "STYLE_005",
+            "STYLE_006"
+          ],
+          "conclusion": "抽牌受限；避开其他职业已有流派；牌面简洁，结算放内部。"
+        },
+        {
+          "status": "根据删留推断",
+          "evidence": [
+            "JA25",
+            "JA26",
+            "JA27",
+            "JA28",
+            "JG17"
+          ],
+          "conclusion": "改写规则本身还需要具体玩法价值；仅扩大范围、移动时点或建立欠费承伤账本的候选均已撤下。"
+        },
+        {
+          "status": "根据删留推断",
+          "evidence": [
+            "JK16",
+            "JK17",
+            "JK18",
+            "JK19",
+            "JK20",
+            "JK21",
+            "JK22",
+            "JK11",
+            "A"
+          ],
+          "conclusion": "知识优先探索具名牌之间的实际配合，减少整组管理规则。保留JK11与A的具名引用作为设计锚点。"
+        },
+        {
+          "status": "根据删留推断",
+          "evidence": [
+            "JG01",
+            "JG04",
+            "JG05",
+            "JG13",
+            "JG14",
+            "JG15",
+            "JG03",
+            "JG16"
+          ],
+          "conclusion": "伤害加成优先探索具体载体的结构与已有存量调度，减少倍率、全局传播与永久转化。"
+        },
+        {
+          "status": "本轮执行准则",
+          "evidence": [
+            "JA29",
+            "JA30",
+            "JA31",
+            "JK23",
+            "JK24",
+            "JK25",
+            "JG18",
+            "JG19",
+            "JG20",
+            "JH01",
+            "JH02",
+            "JH03"
+          ],
+          "conclusion": "每张写出规则变化、保留的代价与最接近旧案的区别；三张关联示例牌另列，升级先只减费。"
+        }
+      ]
+    },
+    {
+      "id": "junna-sixth-rule-breakthrough-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 473,
+      "newBreakthroughs": 12,
+      "newCards": 12,
+      "perMechanism": {
+        "stage": 3,
+        "partner": 3,
+        "growth": 3,
+        "highCost": 3
+      },
+      "active": 35,
+      "pool": 31,
+      "grants": 4,
+      "trash": 77,
+      "total": 112,
+      "source": "纯那第六轮规则突破探索.json",
+      "criterionCorrection": {
+        "source": "用户明确纠正",
+        "userText": "突破限制牌重点是修改游戏规则（游戏底层机制，或者新增的机制）本身。可能是带来高数值，也可能是改变正常的打法，都有可能。",
+        "supersedes": "第五轮复盘中根据删留推导的设计必要条件。",
+        "withdrawnInferences": [
+          "具名配合应优先于通用规则",
+          "单牌字段调度应优先于全局规则",
+          "低门槛和立即用途是突破牌的必要条件",
+          "高数值主要属于普通收益而不属于突破"
+        ],
+        "method": "先说明原规则和规则改动；数值、打法、强度、费用与复杂度分别评价。删除记录保留取舍事实，原因以用户说明为准。"
+      }
+    },
+    {
+      "id": "junna-seventh-rule-breakthrough-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 567,
+      "newBreakthroughs": 12,
+      "syncedCards": 4,
+      "syncedTerms": 1,
+      "perMechanism": {
+        "stage": 3,
+        "partner": 3,
+        "growth": 3,
+        "highCost": 3
+      },
+      "active": 38,
+      "pool": 34,
+      "grants": 4,
+      "trash": 86,
+      "total": 124,
+      "source": "纯那第七轮规则突破探索.json",
+      "synced": [
+        {
+          "collection": "cards",
+          "id": "JK27"
+        },
+        {
+          "collection": "terms",
+          "id": "CB05"
+        },
+        {
+          "collection": "cards",
+          "id": "JG23"
+        },
+        {
+          "collection": "cards",
+          "id": "JG03"
+        },
+        {
+          "collection": "cards",
+          "id": "JH05"
+        }
+      ],
+      "synchronizedRevision": 579
+    },
+    {
+      "id": "junna-fabled-knowledge-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 613,
+      "newGroups": 12,
+      "referenceGroups": 11,
+      "userGroups": 1,
+      "newCards": 42,
+      "active": 69,
+      "trash": 97,
+      "total": 166,
+      "normalizedRelatedRarities": [
+        "JK01B",
+        "JK02B",
+        "JK03B",
+        "JK04B",
+        "JK10B",
+        "JK11B",
+        "JK12B",
+        "JK15B",
+        "B",
+        "JK23B",
+        "JK24B",
+        "JK25B"
+      ],
+      "source": "纯那奇闻结构知识牌探索.json"
+    },
+    {
+      "id": "junna-knowledge-structure-gaps-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 871,
+      "newGroups": 8,
+      "newCards": 18,
+      "source": "纯那知识结构补充_20261102.json"
+    },
+    {
+      "id": "junna-complete-pool-draft-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 1004,
+      "newCards": 82,
+      "newRewardEntries": 69,
+      "newKnowledgeGroups": 5,
+      "newBasicFaces": 4,
+      "newAncientFaces": 2,
+      "activeFaces": 133,
+      "rewardEntries": 103,
+      "poolEntries": 105,
+      "ancientEntries": 2,
+      "reserve": 12,
+      "trash": 123,
+      "total": 268,
+      "byRarity": {
+        "稀有": 23,
+        "罕见": 54,
+        "普通": 26
+      },
+      "byCost": {
+        "0": 4,
+        "1": 44,
+        "2": 43,
+        "3": 9,
+        "4": 1,
+        "5": 1,
+        "X": 1
+      },
+      "byType": {
+        "能力": 25,
+        "技能": 36,
+        "箭矢": 19,
+        "攻击": 23
+      },
+      "source": "纯那完整卡池初稿_20261102.json"
+    },
+    {
+      "id": "junna-starter-deck-20261102-v2",
+      "label": "设计纯那起始牌 · 参照五职业与Karen",
+      "date": "2026-11-02",
+      "cards": [
+        "JB03",
+        "JB04"
+      ],
+      "report": "纯那起始牌设计_20261102.json"
+    },
+    {
+      "id": "junna-starter-541-and-card-references-20261102-v3",
+      "label": "初始牌改为5/4/1并统一本体牌名引用",
+      "date": "2026-11-02",
+      "cards": [
+        "JB03",
+        "JB04"
+      ],
+      "report": "纯那起始牌设计_20261102.json"
+    },
+    {
+      "id": "junna-symmetric-debuff-20261103-v1",
+      "label": "补充易伤与虚弱 · 牵制箭",
+      "date": "2026-11-03",
+      "cards": [
+        "JA58"
+      ],
+      "report": "纯那易伤虚弱补充_20261103.json"
+    },
+    {
+      "id": "junna-attack-arrow-roles-20261103-v1",
+      "label": "区分普通与罕见伤害箭矢的用途",
+      "date": "2026-11-03",
+      "cards": [
+        "JA13",
+        "JA38",
+        "JA41",
+        "JA51",
+        "JK67B"
+      ],
+      "report": "纯那伤害箭矢定位调整_20261103.json"
+    },
+    {
+      "id": "junna-play-growth-20261103-v1",
+      "label": "新增0费出牌成长技能 · 连贯练习",
+      "date": "2026-11-03",
+      "cards": [
+        "JG31"
+      ],
+      "report": "纯那出牌成长技能_20261103.json"
+    },
+    {
+      "id": "junna-study-native-wording-20261103-v1",
+      "label": "埋头学习描述对照本体修正",
+      "date": "2026-11-03",
+      "cards": [
+        "A"
+      ],
+      "report": "纯那埋头学习描述修订_20261103.json"
+    },
+    {
+      "id": "junna-energy-retention-20261103-v1",
+      "label": "加入能量保留说明与5张高费配套牌",
+      "date": "2026-11-03",
+      "cards": [
+        "JH18",
+        "JH19",
+        "JH20",
+        "JH21",
+        "JH22"
+      ],
+      "report": "纯那能量保留机制与配套牌_20261103.json"
+    },
+    {
+      "id": "junna-arrow-countdown-distribution-20261103-v1",
+      "label": "调整普通与罕见箭矢等待分布",
+      "date": "2026-11-03",
+      "cards": [
+        "JA13",
+        "JA41",
+        "JA51",
+        "JK46B",
+        "JK68",
+        "JX05",
+        "JA58",
+        "JH20"
+      ],
+      "report": "纯那箭矢等待分布调整_20261103.json"
+    },
+    {
+      "id": "junna-blue-gold-x-cost-20261103-v1",
+      "label": "新增8张蓝色与金色X费候选",
+      "date": "2026-11-03",
+      "cards": [
+        "JA59",
+        "JA60",
+        "JG32",
+        "JK71",
+        "JA61",
+        "JA62",
+        "JA63",
+        "JK72"
+      ],
+      "report": "纯那蓝金X费探索_20261103.json"
+    },
+    {
+      "id": "junna-x-turn-arrow-20261103-v1",
+      "label": "新增X回合箭矢：蓄射",
+      "date": "2026-11-03",
+      "cards": [
+        "JA64"
+      ],
+      "report": "纯那X回合箭矢_20261103.json"
+    }
+  ],
+  "classificationReview": {
+    "date": "2026-11-01",
+    "criterion": "先写出原有规则与该牌造成的例外，再判断突破。周期来源、高频触发、事件收益、普通复制与单牌伤害换算按实际功能分类。",
+    "summary": {
+      "reviewed": 30,
+      "retained": 12,
+      "reclassified": 18,
+      "activeCards": 50,
+      "trash": 1
+    },
+    "retained": [
+      {
+        "id": "JA01",
+        "reason": "整类箭矢的正常完成结算增加完整牌效，改变全局结算次数规则。"
+      },
+      {
+        "id": "JA02",
+        "reason": "将整类箭矢的能量支付改为消耗实际卡牌，改变布置的费用约束。"
+      },
+      {
+        "id": "JA04",
+        "reason": "在一个完整回合内，使之后打出的箭矢跳过等待窗口。"
+      },
+      {
+        "id": "JA11",
+        "reason": "使整类箭矢跨回合保留，改变未打出牌在回合结束时离手的规则。"
+      },
+      {
+        "id": "JK01",
+        "reason": "每轮从任意位置调用固定实际工具并设为0费，改变调用区域与支付约束。"
+      },
+      {
+        "id": "JK04",
+        "reason": "通过打出《JK04B》保留已有格挡，改变下个回合开始时格挡清空的规则。"
+      },
+      {
+        "id": "JK05",
+        "reason": "一次召回多个牌区的全部知识牌，并包含消耗牌堆。"
+      },
+      {
+        "id": "JK10",
+        "reason": "击杀后将实际工具回手并设为0费，开启有条件的免费连续使用。"
+      },
+      {
+        "id": "JG01",
+        "reason": "直接乘算已有伤害加成存量，使成熟投资具备乘法增长方式。"
+      },
+      {
+        "id": "JG03",
+        "reason": "让后续伤害加成同时扩展伤害次数，改变载体固定的结算段数。"
+      },
+      {
+        "id": "JG04",
+        "reason": "为之后生成的同名牌建立继承规则，改变新对象从原始加成开始的规则。"
+      },
+      {
+        "id": "JG05",
+        "reason": "将每个伤害加成效果的作用对象统一扩展至本场全部攻击牌。"
+      }
+    ],
+    "reclassified": [
+      {
+        "id": "JA03",
+        "role": "机制核心牌",
+        "classification": "高频触发",
+        "reason": "打出箭矢时调用既有加速动作，是持续加速触发器。"
+      },
+      {
+        "id": "JA05",
+        "role": "机制中坚牌",
+        "classification": "集中兑现",
+        "reason": "对当前场面批量使用既有立即完成动作，是一次性兑现工具。"
+      },
+      {
+        "id": "JA06",
+        "role": "机制核心牌",
+        "classification": "周期触发",
+        "reason": "每回合提供一次既有额外触发动作，是周期触发器。"
+      },
+      {
+        "id": "JA07",
+        "role": "机制核心牌",
+        "classification": "事件收益",
+        "reason": "将箭矢完成事件兑换为能量，是事件收益牌。"
+      },
+      {
+        "id": "JA08",
+        "role": "机制基础牌",
+        "classification": "持续来源",
+        "reason": "每轮提供一张随机箭矢，是持续来源牌。"
+      },
+      {
+        "id": "JA09",
+        "role": "机制中坚牌",
+        "classification": "复制工具",
+        "reason": "使用既有复制动作增加一个布置，是复制工具。"
+      },
+      {
+        "id": "JA10",
+        "role": "机制中坚牌",
+        "classification": "爆发收益",
+        "reason": "为下次完成追加两次既有牌效，是一次性爆发收益。"
+      },
+      {
+        "id": "JA12",
+        "role": "机制核心牌",
+        "classification": "事件收益",
+        "reason": "按实际加速量提供格挡，是加速事件的防御收益牌。"
+      },
+      {
+        "id": "JK02",
+        "role": "机制核心牌",
+        "classification": "抵达收益",
+        "reason": "指定工具进入手牌后得到升级与减费，是抵达收益牌。"
+      },
+      {
+        "id": "JK03",
+        "role": "机制核心牌",
+        "classification": "知识牌强化",
+        "reason": "增加《JK03B》的执行收益，是指定牌强化。"
+      },
+      {
+        "id": "JK06",
+        "role": "机制核心牌",
+        "classification": "事件收益",
+        "reason": "打出知识牌后为同组其他知识牌减费，是打出事件的费用收益。"
+      },
+      {
+        "id": "JK07",
+        "role": "机制核心牌",
+        "classification": "高频触发",
+        "reason": "打出知识牌时调用既有弃牌堆回手动作，是回收触发器。"
+      },
+      {
+        "id": "JK08",
+        "role": "机制核心牌",
+        "classification": "手牌收益",
+        "reason": "按回合开始时在手工具数量提供能量，是手牌数量收益。"
+      },
+      {
+        "id": "JK09",
+        "role": "机制中坚牌",
+        "classification": "复制工具",
+        "reason": "使用既有实际卡牌复制动作增加两个工具，是复制工具。"
+      },
+      {
+        "id": "JG02",
+        "role": "机制核心牌",
+        "classification": "增量收益",
+        "reason": "把后续每次获得的加成按固定倍率放大，是投入效率收益。"
+      },
+      {
+        "id": "JG06",
+        "role": "机制核心牌",
+        "classification": "伤害兑现",
+        "reason": "只提高本牌对伤害加成的伤害换算，是输出收益载体。"
+      },
+      {
+        "id": "JG07",
+        "role": "机制中坚牌",
+        "classification": "群体收益",
+        "reason": "将已有伤害加成兑现为其他敌人的生命流失，是群体输出牌。"
+      },
+      {
+        "id": "JG08",
+        "role": "机制基础牌",
+        "classification": "持续来源",
+        "reason": "每轮选取一张实际攻击提供加成，是可选牌区的持续来源。"
+      }
+    ],
+    "recovered": [
+      {
+        "id": "JA05",
+        "trashedAt": "2026-11-01T11:05:45.965Z"
+      }
+    ]
+  },
+  "recommendations": {
+    "stage": [
+      "JA35",
+      "JA36",
+      "JA37"
+    ],
+    "partner": [
+      "JK29",
+      "JK30",
+      "JK31"
+    ],
+    "growth": [
+      "JG24",
+      "JG25",
+      "JG26"
+    ],
+    "highCost": [
+      "JH07",
+      "JH08",
+      "JH09"
+    ]
+  },
+  "current": {
+    "active": 133,
+    "pool": 105,
+    "regularRewards": 103,
+    "reserve": 12,
+    "trash": 123,
+    "total": 268,
+    "source": "纯那Mod设计工作台_本地编辑.json",
+    "revision": 1010
+  },
+  "criterionCorrection": {
+    "source": "用户明确纠正",
+    "userText": "突破限制牌重点是修改游戏规则（游戏底层机制，或者新增的机制）本身。可能是带来高数值，也可能是改变正常的打法，都有可能。",
+    "supersedes": "第五轮复盘中根据删留推导的设计必要条件。",
+    "withdrawnInferences": [
+      "具名配合应优先于通用规则",
+      "单牌字段调度应优先于全局规则",
+      "低门槛和立即用途是突破牌的必要条件",
+      "高数值主要属于普通收益而不属于突破"
+    ],
+    "method": "先说明原规则和规则改动；数值、打法、强度、费用与复杂度分别评价。删除记录保留取舍事实，原因以用户说明为准。"
+  },
+  "ruleChanges": [
+    {
+      "id": "junna-personal-arrow-scope-20261102-v1",
+      "date": "2026-11-02",
+      "sourceRevision": 663,
+      "source": "纯那箭矢个人范围约定.json",
+      "scope": "独立牌堆；普通职业牌默认自己；联机牌明确跨玩家范围。"
+    }
+  ],
+  "fullPoolDraft": {
+    "source": "纯那完整卡池初稿_20261102.json",
+    "summary": {
+      "newCards": 82,
+      "newRewardEntries": 69,
+      "newKnowledgeGroups": 5,
+      "newBasicFaces": 4,
+      "newAncientFaces": 2,
+      "activeFaces": 133,
+      "rewardEntries": 103,
+      "poolEntries": 105,
+      "ancientEntries": 2,
+      "reserve": 12,
+      "trash": 123,
+      "total": 268,
+      "byRarity": {
+        "稀有": 23,
+        "罕见": 54,
+        "普通": 26
+      },
+      "byCost": {
+        "0": 4,
+        "1": 44,
+        "2": 43,
+        "3": 9,
+        "4": 1,
+        "5": 1,
+        "X": 1
+      },
+      "byType": {
+        "能力": 25,
+        "技能": 36,
+        "箭矢": 19,
+        "攻击": 23
+      }
+    },
+    "startingDeck": [
+      {
+        "cardId": "JB01",
+        "count": 4
+      },
+      {
+        "cardId": "JB02",
+        "count": 4
+      },
+      {
+        "cardId": "JB03",
+        "count": 1
+      },
+      {
+        "cardId": "JB04",
+        "count": 1
+      }
+    ],
+    "verification": "本轮只进行新增数据、升级、引用、关联、旧编辑保留及工作台导入显示的必要校验；未运行完整游戏测试。",
+    "synchronizedRevision": 1010
+  },
+  "starterDeckDesign": {
+    "report": "纯那起始牌设计_20261102.json",
+    "revision": 1751,
+    "totalCards": 10,
+    "basicModels": 3,
+    "composition": [
+      {
+        "cardId": "JB01",
+        "count": 5
+      },
+      {
+        "cardId": "JB02",
+        "count": 4
+      },
+      {
+        "cardId": "JB03",
+        "count": 1
+      }
+    ],
+    "reserveCards": [
+      "JB04"
+    ],
+    "ancientReplacement": {
+      "starterCardId": "JB03",
+      "ancientCardId": "JZ03",
+      "cost": 0,
+      "turns": 2,
+      "text": "造成25点伤害。",
+      "upgradedText": "造成32点伤害。"
+    },
+    "ancientRarity": {
+      "total": 2,
+      "cardIds": [
+        "JZ02",
+        "JZ03"
+      ],
+      "starterUpgradeCardId": "JZ03",
+      "reservedCardIds": [
+        "JZ01"
+      ]
+    }
+  },
+  "routeRoleRecommendations": {
+    "date": "2026-11-03",
+    "report": "纯那流派触发收益推荐_20261103.json",
+    "sourceRevision": 1418,
+    "mode": "按箭矢、知识、能量/高费流派及伤害加成小体系分别统计",
+    "weights": {
+      "SYS_stage": {
+        "load": 0,
+        "trigger": 65,
+        "payoff": 15,
+        "both": 10,
+        "tool": 10
+      },
+      "SYS_partner": {
+        "load": 0,
+        "trigger": 45,
+        "payoff": 20,
+        "both": 25,
+        "tool": 10
+      },
+      "SYS_energy": {
+        "load": 0,
+        "trigger": 60,
+        "payoff": 15,
+        "both": 10,
+        "tool": 15
+      },
+      "SYS_growth": {
+        "load": 0,
+        "trigger": 50,
+        "payoff": 35,
+        "both": 5,
+        "tool": 10
+      }
+    }
+  }
+}

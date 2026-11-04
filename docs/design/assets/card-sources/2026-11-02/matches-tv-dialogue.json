@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "date": "2026-11-02",
+  "batchId": "official-naming-20261102-tv-dialogue",
+  "label": "配入官方原词与截图 · 重演与理解3张",
+  "backup": "before-tv-dialogue.json",
+  "subtitleSource": "Bilibili 正版第九话中文字幕，完整字幕证据保存在 proof 对应文件",
+  "matches": [
+    {
+      "id": "JK15",
+      "name": "改台词加演出",
+      "original": "再演のたびに少しずつセリフをいじったり、演出を加えたりした。",
+      "episode": 9,
+      "time": "20:50",
+      "proof": "tv09-2050-proof.jpg",
+      "artProof": "tv09-2050-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        460,
+        20
+      ],
+      "fit": "奈奈向纯那说明重演中的修改。知识牌打出后留下复制，使同一段内容重新进入后续演出；与她随后解释的重演愿望组成一组。这里取重复进入舞台的关系，数值仍按现有效果。",
+      "japaneseNote": " 日文对照参照台词转录 https://deji-chan.com/post-318 ，原声逐字校对待补；中文已核对正版字幕。",
+      "fullQuote": "我每次重演 都在一点点地改台词 加演出"
+    },
+    {
+      "id": "JK15B",
+      "name": "与大家更要好",
+      "original": "あの一年がもっと楽しく、もっと仲良くなれるようにって。",
+      "episode": 9,
+      "time": "20:45",
+      "proof": "tv09-2045-proof.jpg",
+      "artProof": "tv09-1901-proof.jpg",
+      "artTime": "19:01",
+      "crop": [
+        1000,
+        750,
+        500,
+        20
+      ],
+      "fit": "这是同一段对话中重演的目的，与修改台词和演出的原句相连。零费格挡表现想维系共同度过的时光；卡图选用奈奈向纯那诉说守护愿望的双人画面。",
+      "japaneseNote": " 日文对照参照台词转录 https://deji-chan.com/post-318 ，原声逐字校对待补；中文已核对正版字幕。",
+      "fullQuote": "为了能将那一年变得更快乐 与大家更要好"
+    },
+    {
+      "id": "JK53",
+      "name": "一无所知",
+      "original": "ずるいわ。私はななのこと、何にも知らないのに……。",
+      "episode": 9,
+      "time": "20:35",
+      "proof": "tv09-2035-proof.jpg",
+      "artProof": "tv09-2035-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        300,
+        0
+      ],
+      "fit": "纯那希望进一步了解与自己相连的人。选中一张已知的知识牌，再抽取它的关联牌，直接对应从已有联系进入对方尚未说出的内容。",
+      "japaneseNote": " 日文对照参照台词转录 https://deji-chan.com/post-318 ，原声逐字校对待补；中文已核对正版字幕。",
+      "fullQuote": "不公平 我对奈奈就一无所知"
+    }
+  ]
+}

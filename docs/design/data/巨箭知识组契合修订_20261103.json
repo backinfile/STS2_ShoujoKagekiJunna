@@ -1,0 +1,57 @@
+{
+  "at": "2026-11-03T10:36:38.239Z",
+  "revision": 1799,
+  "commitRevision": 1799,
+  "group": {
+    "id": "GROUP_JK37",
+    "title": "名人名言",
+    "main": "JK37C",
+    "cards": [
+      {
+        "id": "JK37",
+        "name": "话语就是我的力量",
+        "type": "箭矢",
+        "pool": false,
+        "count": 1,
+        "text": "知识。造成60点伤害。",
+        "upgradedText": "知识。造成80点伤害。",
+        "source": "2021 剧场版 · 狩猎的Revue片段约03:03（对白）／03:08（配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=183",
+        "art": "original-scene-jk37-giant-arrow-original-line-20261103"
+      },
+      {
+        "id": "JK37B",
+        "name": "指引我前行",
+        "type": "攻击",
+        "pool": false,
+        "count": 1,
+        "text": "知识。造成4点伤害。话语就是我的力量加速1回合。",
+        "upgradedText": "知识。造成4点伤害。话语就是我的力量加速2回合。",
+        "source": "2021 剧场版 · 狩猎的Revue片段约02:49（歌词与配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=169",
+        "art": "original-scene-jk37b-original-lyric-guide-20261103"
+      },
+      {
+        "id": "JK37C",
+        "name": "名人名言",
+        "type": "能力",
+        "pool": true,
+        "count": 1,
+        "text": "知识。打出攻击牌或箭矢牌后，抽1张0费牌。",
+        "upgradedText": "知识。打出攻击牌或箭矢牌后，抽2张0费牌。",
+        "source": "2021 剧场版 · 狩猎的Revue片段约02:49（对白）；TV 第9话约19:41（配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=169",
+        "art": "original-scene-jk37-knowledge-fit-20261103"
+      }
+    ]
+  },
+  "checks": {
+    "costDamageAndTurnCountsPreserved": true,
+    "allCardsAndCopiesPreserved": true,
+    "rewardEntryMovedToNewMain": true,
+    "cardReferencesStillTargetSameUid": true,
+    "fitPoolSynchronized": true,
+    "extraHoverTipsPreserved": true,
+    "originalLyricsAndDialogueIdentified": true
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-arrow-countdown-distribution-20261103-v1",
+  "date": "2026-11-03",
+  "sourceRevision": 1254,
+  "appliedRevision": 1255,
+  "historyRecord": "ead03be8-c124-4d0a-8812-7273c069b60a",
+  "changes": [
+    {
+      "id": "JA13",
+      "name": "直斩",
+      "before": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "造成26点伤害。",
+        "upgradedText": "造成36点伤害。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 2,
+        "upgradedTurns": 2,
+        "text": "造成32点伤害。",
+        "upgradedText": "造成44点伤害。"
+      },
+      "basis": "2费2回合单段采用32／44伤害；较旧版增加1回合等待，以6／8伤害补偿。"
+    },
+    {
+      "id": "JA41",
+      "name": "点射",
+      "before": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "造成4点伤害3次。",
+        "upgradedText": "造成6点伤害3次。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 2,
+        "upgradedTurns": 2,
+        "text": "造成6点伤害3次。",
+        "upgradedText": "造成8点伤害3次。"
+      },
+      "basis": "1费2回合采用18／24三段总伤；较旧版总伤增加6／6，每点伤害加成仍增加3点总伤害。"
+    },
+    {
+      "id": "JA51",
+      "name": "集中连射",
+      "before": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 3,
+        "upgradedCost": 3,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "造成12点伤害3次。",
+        "upgradedText": "造成16点伤害3次。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 3,
+        "upgradedCost": 3,
+        "turns": 3,
+        "upgradedTurns": 3,
+        "text": "造成16点伤害3次。",
+        "upgradedText": "造成22点伤害3次。"
+      },
+      "basis": "3费3回合采用48／66三段总伤；较旧版增加2回合等待，总伤增加12／18，保留高费与逐段成长用途。"
+    },
+    {
+      "id": "JK46B",
+      "name": "登台",
+      "before": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": false,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "知识。保留。造成26点伤害。",
+        "upgradedText": "知识。保留。造成36点伤害。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": false,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 2,
+        "upgradedTurns": 2,
+        "text": "知识。保留。造成30点伤害。",
+        "upgradedText": "知识。保留。造成40点伤害。"
+      },
+      "basis": "2费2回合采用30／40伤害；较旧版增加4／4，并保留保留关键词及能力持续供给。"
+    },
+    {
+      "id": "JK68",
+      "name": "满弦放箭",
+      "before": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "知识。造成14点伤害。本场战斗打出过搭箭和持弓后，额外造成2次伤害。",
+        "upgradedText": "知识。造成18点伤害。本场战斗打出过搭箭和持弓后，额外造成2次伤害。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 3,
+        "upgradedTurns": 3,
+        "text": "知识。造成16点伤害。本场战斗打出过搭箭和持弓后，额外造成2次伤害。",
+        "upgradedText": "知识。造成22点伤害。本场战斗打出过搭箭和持弓后，额外造成2次伤害。"
+      },
+      "basis": "2费3回合采用16／22单段，解锁后为48／66总伤；组内两种组件的使用条件保持。"
+    },
+    {
+      "id": "JX05",
+      "name": "课堂演练",
+      "before": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "本回合每打出过1张知识牌，此牌获得1点伤害加成。造成6点伤害3次。",
+        "upgradedText": "本回合每打出过1张知识牌，此牌获得1点伤害加成。造成8点伤害3次。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": 2,
+        "upgradedTurns": 2,
+        "text": "本回合每打出过1张知识牌，此牌获得1点伤害加成。造成8点伤害3次。",
+        "upgradedText": "本回合每打出过1张知识牌，此牌获得1点伤害加成。造成10点伤害3次。"
+      },
+      "basis": "2费2回合采用24／30三段基础总伤；知识加成按实际执行回合读取，保留通过主动加速配合知识出牌的玩法。"
+    },
+    {
+      "id": "JA58",
+      "name": "牵制箭",
+      "before": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "给予3层易伤和虚弱。",
+        "upgradedText": "给予4层易伤和虚弱。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 2,
+        "upgradedTurns": 2,
+        "text": "给予3层易伤和虚弱。",
+        "upgradedText": "给予4层易伤和虚弱。"
+      },
+      "basis": "1费2回合，易伤与虚弱保持各3／4层；两种状态的对称设计与原有结算保持。"
+    },
+    {
+      "id": "JH20",
+      "name": "补水",
+      "before": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 1,
+        "upgradedTurns": 1,
+        "text": "获得3点能量并可保留到下回合。",
+        "upgradedText": "获得4点能量并可保留到下回合。"
+      },
+      "after": {
+        "type": "箭矢",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": 2,
+        "upgradedTurns": 2,
+        "text": "获得3点能量并可保留到下回合。",
+        "upgradedText": "获得4点能量并可保留到下回合。"
+      },
+      "basis": "1费2回合，获得3／4能量并提供等量保留额度；能量数量与保留规则保持。"
+    }
+  ],
+  "before": {
+    "普通": {
+      "count": 5,
+      "turns": {
+        "1": 4,
+        "2": 1
+      }
+    },
+    "罕见": {
+      "count": 12,
+      "turns": {
+        "1": 8,
+        "2": 2,
+        "3": 2
+      }
+    }
+  },
+  "after": {
+    "普通": {
+      "count": 5,
+      "turns": {
+        "1": 1,
+        "2": 4
+      }
+    },
+    "罕见": {
+      "count": 12,
+      "turns": {
+        "1": 3,
+        "2": 5,
+        "3": 4
+      }
+    }
+  },
+  "supportMetadata": [
+    "JK46",
+    "JK68B"
+  ],
+  "keptOneTurn": [
+    {
+      "id": "JA15",
+      "name": "闪耀的梦"
+    },
+    {
+      "id": "JK61",
+      "name": "旧照"
+    },
+    {
+      "id": "JK69C",
+      "name": "自己的言叶"
+    },
+    {
+      "id": "JH11",
+      "name": "吐纳"
+    }
+  ],
+  "checks": {
+    "costsNamesArtAndRelationsPreserved": true,
+    "otherCardsPreserved": true,
+    "conciseFacesPreserved": true,
+    "normalizedWithWorkbench": true,
+    "undoRoundTrip": true,
+    "rowsUpdated": 6,
+    "dependencySnapshotsUpdated": 5
+  }
+}

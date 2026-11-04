@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-02",
+  "tool": "built-in image_gen",
+  "asset": "arrow-frame-type-comparison-v1.png",
+  "purpose": "将箭矢 A–D 与攻击、技能、能力、舞台装置并排比较",
+  "layout": {
+    "top": [
+      "攻击",
+      "技能",
+      "能力",
+      "舞台装置"
+    ],
+    "bottom": [
+      "箭矢 A",
+      "箭矢 B",
+      "箭矢 C",
+      "箭矢 D"
+    ]
+  },
+  "prompts": [
+    {
+      "step": "comparison-board",
+      "prompt": "Use case: compositing.\nAsset type: side-by-side comparison of card TYPE frames for Slay the Spire 2, using the provided previously approved native reference and four existing Arrow concepts.\nCreate ONE high-resolution comparison board. This is a precise comparison of EXISTING silhouettes. Preserve each type frame's geometry and native visual weight. Do not invent new candidate designs.\nINPUTS:\nImage 1 is the REAL native game screenshot. It contains, from left to right: Stage Device, Attack, Skill, Power. Use these four shapes and their native proportions as authoritative. The Stage Device is the approved round/arched top with rounded flat lower aperture and a one-piece arched counter/type plaque; it has no loop symbol.\nImage 2 is Arrow A concept sheet. Use ONLY the complete card on the LEFT, not the right-side enlarged detail. A has angled upper shoulders, long sloped bottom flanks meeting in a low point, and an ogival pointed crown for the 2.\nImage 3 is Arrow B concept sheet. Use ONLY the complete card on the LEFT. B has rounded shoulders and a soft U-shaped/bow-curved bottom, with a semicircular crown for the 2.\nImage 4 is Arrow C concept sheet. Use ONLY the complete card on the LEFT. C has clipped top shoulders, two little stair-step feather cuts on each lower flank, and a flat-topped chamfered counter crown.\nImage 5 is Arrow D concept sheet. Use ONLY the complete card on the LEFT. D has rounded-hexagonal shoulders, a shallow inward triangular alignment tooth on each side, angled lower flanks, and a pointed crown for the 2.\n\nBOARD:\nLandscape, around 3072x2048 for readable details.\nExactly EIGHT COMPLETE UPRIGHT CARDS in a tidy 2-ROW by 4-COLUMN grid.\nTop row LEFT TO RIGHT: Attack, Skill, Power, Stage Device.\nBottom row LEFT TO RIGHT: Arrow A, Arrow B, Arrow C, Arrow D.\nAll eight outer card bodies MUST have the SAME 598:844 aspect ratio and the SAME displayed dimensions. Titles, energy badges, type label baselines and rules positions align within every card. Equal gaps and dark near-black green-grey background. Cards fill most of the sheet without crowding. No close-up panels.\nPlace only these concise labels above the cards:\nTop row: \"攻击\", \"技能\", \"能力\", \"舞台装置\".\nBottom row: \"箭矢 A\", \"箭矢 B\", \"箭矢 C\", \"箭矢 D\".\nNo other explanations or board heading.\n\nSTANDARDIZATION:\nUse the exact same teal silhouette archer illustration from Image 2 inside all eight windows. Keep the SAME scene scale and focal positioning across cards; crop it to each window's silhouette. Do not replace or simplify the window contours in order to fit the artwork.\nUse the SAME slender ochre-gold outer card body, curved native silver-grey title ribbon with folded tails, small faceted gold energy badge, warm dark charcoal-brown paper rules background and cream native text across all cards.\nALL portrait edges, title ribbons and type plaques use COMMON-RARITY NEUTRAL SILVER-GREY. In particular turn Image 1's cyan Power border and ribbon into the SAME grey material as the other seven; cyan in the reference indicates rarity, not a different material standard.\nPreserve flat hand-painted 2D native UI finish, simple broad bevel planes, subtle texture, modest shadows and wear. No 3D chrome, new ornament, extra rings, equipment casing, different body palettes or new arrow decorations.\n\nCONTENT:\nEvery card title ribbon reads exactly \"JA13\".\nEvery energy badge contains \"1\".\nEvery rules panel reads \"造成16点伤害。\".\nWithin each card, type plaques read respectively: \"攻击\", \"技能\", \"能力\", \"舞台装置\", \"箭矢\", \"箭矢\", \"箭矢\", \"箭矢\".\nAttack, Skill and Power have ONLY their native small rectangular type tab and NO turn numeral, no arch or crown added to those three.\nStage Device and Arrow A/B/C/D MUST each retain the cream \"2\" centered directly ABOVE its own type label in its respective one-piece counter/type plaque, as shown in its reference.\nThe type-label horizontal center and vertical baseline are fixed consistently across all EIGHT cards. Preserve the differences between the FIVE counter-housing silhouettes instead of making them identical.\nKeep the native Attack's straight bottom V, Skill's rectangle, Power's broad U/round bottom and Stage Device's fuller arched/rounded-flat shape faithful to Image 1, and all four Arrow geometries faithful to Images 2-5. Make their differing lower portrait contours easy to compare.\nNo watermark, no additional sample cards, no state icons, no arrows pointing between designs, no desktop UI."
+    },
+    {
+      "step": "restore-original-C-straight-sides",
+      "prompt": "Use case: precise-object-edit.\nImage 1 is the EXISTING 8-card comparison board to edit.\nImage 2 is the authoritative original Arrow C concept; use ONLY the complete left card as a geometry reference.\nMake ONE extremely targeted correction on Image 1: the card labeled \"箭矢 C\" (BOTTOM ROW, THIRD COLUMN) incorrectly acquired inward triangular sight teeth at the midpoint of BOTH side borders. Remove exactly those TWO triangular side protrusions from that one card. Restore its sides to continuous straight vertical silver-grey strips, matching the C original in Image 2. Fill the tiny cleared illustration areas with the matching teal background.\nKeep C's TWO stair-step feather cuts on EACH LOWER shoulder exactly as they already are. Keep C's flat-topped counter housing and \"2\"/\"箭矢\" plaque.\nCRUCIAL INVARIANTS:\nDo not modify the neighboring D card at all; D retains its two inward triangular SIDE sight teeth.\nDo not change any other card, window outline, artwork, text, numeral, body, background, spacing, colors, material, grid, labels or proportions on the board.\nExactly the same 2x4 full-card board, same canvas dimensions and positions. All type/count labels and titles stay crisp and unchanged.\nThe only edit is removing those two incorrect mid-side teeth on C and restoring straight C side strips, according to Image 2."
+    }
+  ]
+}
+

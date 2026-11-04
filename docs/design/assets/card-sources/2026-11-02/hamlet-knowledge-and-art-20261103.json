@@ -1,0 +1,106 @@
+{
+  "batchId": "junna-hamlet-knowledge-and-art-20261103-v1",
+  "revision": 1286,
+  "sources": {
+    "interview": "https://hon-hikidashi.jp/event/42802/",
+    "hamlet": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/"
+  },
+  "matches": [
+    {
+      "id": "JK47",
+      "expectedName": "守势",
+      "name": "默然忍受",
+      "naming": {
+        "original": "to suffer / The slings and arrows of outrageous fortune",
+        "chineseOriginal": "默然承受命运的投石与飞箭",
+        "kind": "戏剧引文意译",
+        "work": "《哈姆雷特》第三幕第一场 · 生存还是毁灭独白",
+        "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/",
+        "adaptation": "同组取自《哈姆雷特》第三幕第一场同一段独白中的两种选择。纯那在2024年书店联动角色访谈中提到读过《哈姆雷特》，本组据此选取剧本文本作为知识内容。角色访谈：https://hon-hikidashi.jp/event/42802/。本牌取承受命运打击的一侧，以格挡表现承受与自持；消耗挺身反抗，落实原句中忍受或反抗的抉择。配图沿用剧场版狩猎的Revue片段约05:49纯那伏低身体、刀刃护在身前的画面，原始截图film-hunt-548.jpg。"
+      }
+    },
+    {
+      "id": "JK47B",
+      "expectedName": "攻势",
+      "name": "挺身反抗",
+      "naming": {
+        "original": "to take arms against a sea of troubles",
+        "chineseOriginal": "拿起武器，反抗苦难之海",
+        "kind": "戏剧引文意译",
+        "work": "《哈姆雷特》第三幕第一场 · 生存还是毁灭独白",
+        "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/",
+        "adaptation": "同组取自《哈姆雷特》第三幕第一场同一段独白中的两种选择。纯那在2024年书店联动角色访谈中提到读过《哈姆雷特》，本组据此选取剧本文本作为知识内容。角色访谈：https://hon-hikidashi.jp/event/42802/。本牌取拿起武器对抗苦难的一侧，以造成伤害表现主动反抗；消耗默然忍受，与原句中的另一种回答形成互斥。配图沿用剧场版狩猎的Revue片段约05:29纯那持刀迎战的画面，原始截图film-hunt-528.jpg。"
+      }
+    },
+    {
+      "id": "JG31",
+      "expectedName": "连贯练习",
+      "proof": "film-full-915.jpg",
+      "crop": [
+        800,
+        600,
+        550,
+        60
+      ],
+      "naming": {
+        "work": "2021 剧场版 · 约09:17",
+        "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+        "adaptation": "以排练中连贯完成台步和台词的过程表现日常锻炼：每次完成一项行动，便让相同内容在后续练习中更熟练，对应打出的牌获得伤害加成。卡图改用纯那在排练台上迈步的全身画面，保留身体动作与台阶。原始截图film-full-915.jpg。"
+      }
+    },
+    {
+      "id": "JT01",
+      "expectedName": "独白",
+      "proof": "film-full-940-final.jpg",
+      "crop": [
+        920,
+        690,
+        520,
+        35
+      ],
+      "naming": {
+        "work": "2021 剧场版 · 约09:42",
+        "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=582",
+        "adaptation": "把准备表达的一项内容化为独白，成为说出后逐步抵达的箭矢。卡图改用纯那在排练中独自念出台词的侧面近景，区别于自己的言叶所用的夜间谈话；裁切保留完整眼镜、嘴部与上半身。原始截图film-full-940-final.jpg。"
+      }
+    },
+    {
+      "id": "JK65",
+      "expectedName": "对照阅读",
+      "proof": "tv02-1426-verified.jpg",
+      "crop": [
+        840,
+        630,
+        585,
+        115
+      ],
+      "naming": {
+        "work": "TV 第2话 · 约14:26",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=866",
+        "adaptation": "对照相关资料，把新读到的要领与已有认识一起用于练习。新知识进入手牌且关联牌也在手中时，对照所得用于反复演练，使新知识获得伤害加成。卡图改用纯那桌上并置的书籍、纸质资料和摊开的书页，突出不同资料之间的对照；与通读全篇的单本书特写区分。原始截图tv02-1426-verified.jpg。"
+      }
+    },
+    {
+      "id": "JK48",
+      "expectedName": "渴望",
+      "proof": "film-fit-glasses-0741-20261103.png",
+      "crop": [
+        840,
+        630,
+        650,
+        140
+      ],
+      "naming": {
+        "work": "2021 剧场版 · 狩猎的Revue片段约07:42",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=462",
+        "adaptation": "对下一舞台的渴望打破眼前安宁；向前出手会减少留守的格挡。卡图改用纯那继续迎战时的完整侧脸，保留眼神、眼镜和开口说话的表情，移开原图过重的后脑与颈部取景。原始截图film-fit-glasses-0741-20261103.png。"
+      }
+    }
+  ],
+  "checks": {
+    "mechanicsPreserved": true,
+    "onlyCardNameReferencesChanged": true,
+    "otherCollectionsPreserved": true,
+    "readbackVerified": true
+  }
+}

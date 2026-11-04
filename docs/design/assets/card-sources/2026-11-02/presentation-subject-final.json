@@ -1,0 +1,80 @@
+{
+  "batchId": "junna-card-subject-final-20261103",
+  "label": "完成动作短名与纯那主体裁切",
+  "matches": [
+    {
+      "id": "JA17",
+      "expectedName": "破围",
+      "name": "破围",
+      "proof": "film-hunt-732-unique.jpg",
+      "crop": [
+        720,
+        540,
+        600,
+        180
+      ]
+    },
+    {
+      "id": "JK05",
+      "expectedName": "旁征博引",
+      "name": "旁征博引",
+      "proof": "film-hunt-232.jpg",
+      "crop": [
+        800,
+        600,
+        100,
+        180
+      ]
+    },
+    {
+      "id": "JK10",
+      "expectedName": "热情",
+      "name": "热情",
+      "proof": "film-hunt-244-final.jpg",
+      "crop": [
+        800,
+        600,
+        560,
+        180
+      ]
+    },
+    {
+      "id": "JA13",
+      "expectedName": "瞄准星扣",
+      "name": "直斩",
+      "proof": "film-hunt-736-unique.jpg",
+      "crop": [
+        800,
+        600,
+        500,
+        130
+      ],
+      "original": "まっすぐ斬り込む",
+      "fit": "纯那持刀向前直斩，以向前出手的动作对应一击伤害。",
+      "namingKind": "动作或物件短名",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "work": "2021 剧场版 · 狩猎的Revue片段约07:36",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=456",
+      "artNote": "纯那向前持刀出手，原始截图film-hunt-736-unique.jpg。"
+    },
+    {
+      "id": "JF08",
+      "expectedName": "攻击破绽",
+      "name": "破刃",
+      "proof": "film-hunt-810-final.jpg",
+      "crop": [
+        800,
+        600,
+        450,
+        150
+      ],
+      "original": "刃を砕く",
+      "fit": "纯那继续出手后，围住舞台的巨大刀刃崩裂，以破开阻挡对应移除格挡并造成伤害。",
+      "namingKind": "动作或物件短名",
+      "sourceNote": "根据原作动作、物件或场面拟定短名，日文为对应译名。",
+      "work": "2021 剧场版 · 狩猎的Revue片段约08:10",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=490",
+      "artNote": "刀刃崩裂的原作物件画面，原始截图film-hunt-810-final.jpg。"
+    }
+  ]
+}

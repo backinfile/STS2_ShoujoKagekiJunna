@@ -1,0 +1,237 @@
+{
+  "batchId": "junna-themed-fit-pool-20261103-v1",
+  "revision": 1290,
+  "themes": [
+    "物理箭矢",
+    "言叶",
+    "星与理想",
+    "引文与剧目",
+    "舞台技法",
+    "日常锻炼",
+    "恢复精力",
+    "学习与记录",
+    "舞台与伙伴"
+  ],
+  "implemented": 116,
+  "candidates": 12,
+  "generated": [
+    {
+      "key": "original-scene-ja02-pool-review-20261103",
+      "proof": "film-hunt-150-final.jpg",
+      "crop": [
+        920,
+        690,
+        500,
+        50
+      ]
+    },
+    {
+      "key": "original-scene-ja38-pool-review-20261103",
+      "proof": "film-hunt-208.jpg",
+      "crop": [
+        800,
+        600,
+        270,
+        130
+      ]
+    },
+    {
+      "key": "original-scene-jh10-pool-review-20261103",
+      "proof": "film-pool-slash-0607-20261103.png",
+      "crop": [
+        880,
+        660,
+        820,
+        100
+      ]
+    },
+    {
+      "key": "original-scene-jf10-pool-review-20261103",
+      "proof": "film-hunt-832.jpg",
+      "crop": [
+        960,
+        720,
+        600,
+        40
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-01-20261103",
+      "proof": "tv09-1945-proof.jpg",
+      "crop": [
+        1040,
+        780,
+        420,
+        0
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-02-20261103",
+      "proof": "tv09-1951-proof.jpg",
+      "crop": [
+        960,
+        720,
+        450,
+        30
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-03-20261103",
+      "proof": "tv09-1911-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        420,
+        20
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-04-20261103",
+      "proof": "tv09-2035-proof.jpg",
+      "crop": [
+        1000,
+        750,
+        500,
+        20
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-05-20261103",
+      "proof": "tv09-2125-new.jpg",
+      "crop": [
+        920,
+        690,
+        600,
+        40
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-06-20261103",
+      "proof": "tv09-2219-new.jpg",
+      "crop": [
+        1040,
+        780,
+        420,
+        0
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-07-20261103",
+      "proof": "tv09-2225-new.jpg",
+      "crop": [
+        1040,
+        780,
+        420,
+        0
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-08-20261103",
+      "proof": "film-hunt-614-unique.jpg",
+      "crop": [
+        840,
+        630,
+        780,
+        100
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-09-20261103",
+      "proof": "film-hunt-810-final.jpg",
+      "crop": [
+        800,
+        600,
+        470,
+        160
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-10-20261103",
+      "proof": "film-hunt-840.jpg",
+      "crop": [
+        960,
+        720,
+        500,
+        40
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-11-20261103",
+      "proof": "tv03-fit-reading-1011-20261103.png",
+      "crop": [
+        640,
+        480,
+        1080,
+        300
+      ]
+    },
+    {
+      "key": "fit-pool-candidate-12-20261103",
+      "proof": "film-hunt-124.jpg",
+      "crop": [
+        960,
+        720,
+        480,
+        40
+      ]
+    }
+  ],
+  "revisions": [
+    {
+      "id": "JA02",
+      "proof": "film-hunt-150-final.jpg",
+      "crop": [
+        920,
+        690,
+        500,
+        50
+      ],
+      "work": "2021 剧场版 · 狩猎的Revue片段约01:51",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=111",
+      "fit": "先布置好舞台空间，让全部箭矢以更少的即时投入进入阵地，代价是延后完成。卡图改用狩猎的Revue中层叠的荧光舞台线框，直接表现布置与空间。原始截图film-hunt-150-final.jpg。"
+    },
+    {
+      "id": "JA38",
+      "proof": "film-hunt-208.jpg",
+      "crop": [
+        800,
+        600,
+        270,
+        130
+      ],
+      "fit": "取持弓的手、绷紧的弓弦与箭身作为明确主体，以拉弦后的等待表现箭矢的准备过程。裁切集中到弓弦与手部，避开旧图过重的黑色留白与角落文字。原始截图film-hunt-208.jpg。"
+    },
+    {
+      "id": "JH10",
+      "proof": "film-pool-slash-0607-20261103.png",
+      "crop": [
+        880,
+        660,
+        820,
+        100
+      ],
+      "work": "2021 剧场版 · 狩猎的Revue片段约06:08",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=368",
+      "fit": "纯那转身持刀接续交锋，以身体转动与朝前的手臂表现出手。较重的攻击后，下一回合恢复继续行动的精力。卡图改用转身交锋的较完整近景，保留肩臂与刀柄方向。原始截图film-pool-slash-0607-20261103.png。"
+    },
+    {
+      "id": "JF10",
+      "proof": "film-hunt-832.jpg",
+      "crop": [
+        960,
+        720,
+        600,
+        40
+      ],
+      "work": "2021 剧场版 · 狩猎的Revue片段约08:33",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=513",
+      "fit": "从交锋造成的失衡中重新站稳，移除自己的易伤与虚弱，并反制对手。卡图改为纯那走向舞台出口的背影，突出完整人物、向前的通道和重新行动。原始截图film-hunt-832.jpg。"
+    }
+  ],
+  "checks": {
+    "allActiveCardsReviewed": true,
+    "mechanicsPreserved": true,
+    "otherCollectionsPreserved": true,
+    "readbackVerified": true
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-study-native-wording-20261103-v1",
+  "title": "埋头学习描述修订",
+  "date": "2026-11-03",
+  "sourceRevision": 1214,
+  "appliedRevision": 1215,
+  "historyRecord": "7b8201b7-1c13-484f-aaec-d3271e4be086",
+  "cardId": "A",
+  "name": "埋头学习",
+  "before": {
+    "text": "知识。在你的回合结束时，将1张心得放入抽牌堆。",
+    "upgradedText": "知识。在你的回合结束时，将1张心得放入抽牌堆。"
+  },
+  "after": {
+    "text": "知识。在你的回合结束时，将1张心得加入你的抽牌堆。",
+    "upgradedText": "知识。在你的回合结束时，将1张心得加入你的抽牌堆。"
+  },
+  "sources": {
+    "localization": "D:/Github/spire-codex/extraction/raw/localization/zhs/cards.json",
+    "implementation": [
+      "D:/Github/spire-codex/extraction/raw/src/Core/Models/Powers/SentryModePower.cs",
+      "D:/Github/spire-codex/extraction/raw/src/Core/Models/Cards/Reave.cs"
+    ]
+  },
+  "nativeExamples": [
+    {
+      "id": "SENTRY_MODE",
+      "title": "哨卫模式",
+      "description": "在你的回合开始时，将{SentryModePower:diff()}张[gold]扫荡凝视[/gold]加入你的[gold]手牌[/gold]。"
+    },
+    {
+      "id": "REAVE",
+      "title": "剥夺",
+      "description": "造成{Damage:diff()}点伤害。\n将一张[gold]{IfUpgraded:show:灵魂+|灵魂}[/gold]加入你的[gold]抽牌堆[/gold]。"
+    },
+    {
+      "id": "GRAVE_WARDEN",
+      "title": "守墓人",
+      "description": "获得{Block:diff()}点[gold]格挡[/gold]。\n将一张[gold]灵魂[/gold]放入你的[gold]抽牌堆[/gold]中。"
+    }
+  ],
+  "decision": "参考哨卫模式的回合生成句式、剥夺的加入抽牌堆句式，保留回合结束时点与1张数量。",
+  "checks": {
+    "onlyFieldsChanged": [
+      "text",
+      "upgradedText"
+    ],
+    "costsPreserved": [
+      2,
+      1
+    ],
+    "effectPreserved": true,
+    "associationAndNameBindingPreserved": true
+  }
+}

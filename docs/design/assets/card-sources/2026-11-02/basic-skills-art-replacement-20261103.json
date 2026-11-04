@@ -1,0 +1,21 @@
+{
+  "batchId": "junna-basic-skills-unique-ballet-art-20261103-v1",
+  "revision": 1236,
+  "id": "JX01",
+  "name": "基本功",
+  "proof": "tv01-basic-skills-0455-20261103.png",
+  "crop": [
+    680,
+    510,
+    470,
+    120
+  ],
+  "previousArt": "original-scene-jx01-fit-refinement-20261103",
+  "art": "original-scene-jx01-ballet-basics-20261103",
+  "checks": {
+    "otherCardsPreserved": true,
+    "nameAndMechanicsPreserved": true,
+    "uniqueSource": true,
+    "readbackVerified": true
+  }
+}

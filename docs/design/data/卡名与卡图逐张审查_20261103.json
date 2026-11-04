@@ -1,0 +1,1331 @@
+{
+  "reviewedAt": "2026-11-03T09:36:29.754Z",
+  "initialRevision": 1619,
+  "commitRevisions": [
+    1767,
+    1779,
+    1796,
+    1797
+  ],
+  "currentRevision": 1797,
+  "scope": {
+    "reviewed": 122,
+    "current": 116,
+    "active": 83,
+    "reserve": 33
+  },
+  "changes": {
+    "cards": 39,
+    "renamed": 16,
+    "newAssets": 36,
+    "fitEntries": 39
+  },
+  "checks": {
+    "mechanicsAndStatusesPreserved": true,
+    "extraHoverTipsPreserved": true,
+    "literaryBackgroundsOnly": true,
+    "cardNamesAndFitEntriesSynced": true,
+    "newImages960x720AndDistinct": true,
+    "ancientVariantSynchronized": true
+  },
+  "hybridReview": {
+    "cards": [
+      {
+        "id": "JK32B",
+        "name": "流星",
+        "text": "知识。造成12点伤害。明星和烁星的耗能变为0。",
+        "reserve": false
+      },
+      {
+        "id": "JK34E",
+        "name": "星见纯那档案",
+        "text": "知识。从抽牌堆中选择1张知识牌放入手牌。",
+        "reserve": true
+      },
+      {
+        "id": "JK34H",
+        "name": "大场奈奈档案",
+        "text": "知识。获得10点格挡。手牌中有知识牌时，重复一次。",
+        "reserve": true
+      },
+      {
+        "id": "JK37",
+        "name": "熟读成诵",
+        "text": "知识。造成60点伤害。",
+        "reserve": false
+      },
+      {
+        "id": "JK45",
+        "name": "审题",
+        "text": "知识。造成10点伤害3次。",
+        "reserve": false
+      },
+      {
+        "id": "JK46B",
+        "name": "读书笔记",
+        "text": "知识。保留。造成30点伤害。",
+        "reserve": false
+      },
+      {
+        "id": "JK67B",
+        "name": "定稿",
+        "text": "知识。造成8点伤害3次。",
+        "reserve": false
+      },
+      {
+        "id": "JK73",
+        "name": "例证",
+        "text": "知识。造成13点伤害。",
+        "reserve": false
+      }
+    ],
+    "direction": "知识内容经提炼成为言叶，经过酝酿与组织，最后像箭矢一样抵达；射学知识作为物理分支。",
+    "recommendations": [
+      {
+        "ids": [
+          "JK37",
+          "JK67B",
+          "JK32B"
+        ],
+        "decision": "保留主线，画面突出诵读、写作成果与飞行轨迹。"
+      },
+      {
+        "ids": [
+          "JK45",
+          "JK46B",
+          "JK73"
+        ],
+        "decision": "可分别向推演、摘录、引证发展，画面从静态载体进一步转向文字被运用和传达。"
+      },
+      {
+        "ids": [
+          "JK34E",
+          "JK34H"
+        ],
+        "decision": "人物档案更适合普通知识定位；保留备用与当前机制，后续重做时单独评估。"
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "JA02",
+      "name": "布阵",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约01:51",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=111",
+      "art": "original-scene-ja02-pool-review-20261103"
+    },
+    {
+      "id": "JA04",
+      "name": "速射",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 18:31",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1111",
+      "art": "original-scene-ja04-20261102"
+    },
+    {
+      "id": "JK05",
+      "name": "旁征博引",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:32",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=152",
+      "art": "original-scene-jk05-20261102"
+    },
+    {
+      "id": "JK10",
+      "name": "热情与光芒",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约21:28",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1288",
+      "art": "original-scene-jk10-energy-star-20261103"
+    },
+    {
+      "id": "JK10B",
+      "name": "舞台之力",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约21:28（引文）；2021 剧场版 · 狩猎的Revue片段约05:24（配图）",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1288",
+      "art": "original-scene-jk10b-20261102"
+    },
+    {
+      "id": "JG03",
+      "name": "重复练习",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约06:42",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=402",
+      "art": "original-scene-jg03-20261102"
+    },
+    {
+      "id": "JA13",
+      "name": "伏击箭",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "同名与画面一起改为从掩体后出击的伏击箭。",
+      "source": "TV 第2话 · 约18:44",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1124",
+      "art": "original-scene-ja45-full-name-art-review-20261103"
+    },
+    {
+      "id": "JA15",
+      "name": "闪耀的梦",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "分别记录台词出处与配图时点。",
+      "source": "TV 第2话 · 台词约19:10／配图约14:28",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1150",
+      "art": "original-scene-ja15-full-name-art-review-20261103"
+    },
+    {
+      "id": "JA16",
+      "name": "引路星",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "当前牌效已经改为下回合获得能量，清除仍在描述箭矢加速的旧契合。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约01:33",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=93",
+      "art": "original-scene-ja16-guiding-star-20261103"
+    },
+    {
+      "id": "JA17",
+      "name": "破围",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约07:32",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=452",
+      "art": "original-scene-ja17-20261102"
+    },
+    {
+      "id": "JK11",
+      "name": "提问",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约10:48",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=648",
+      "art": "original-scene-jk11-20261102"
+    },
+    {
+      "id": "JK11B",
+      "name": "解答",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约10:26",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=626",
+      "art": "original-scene-jk11b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JG09",
+      "name": "准备活动",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "户外人物肖像缺少训练动作，改为能识别的训练用具。",
+      "source": "TV 第2话 · 约06:13",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=373",
+      "art": "original-scene-jg09-full-name-art-review-20261103"
+    },
+    {
+      "id": "JA22",
+      "name": "再上弦",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约21:02",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1262",
+      "art": "original-scene-ja22-20261102"
+    },
+    {
+      "id": "JK15",
+      "name": "反复研习",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约09:56",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=596",
+      "art": "original-scene-jk15-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK15B",
+      "name": "废稿",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "图中是纸团与废弃稿页，废稿比修订稿更贴合画面。",
+      "source": "2021 剧场版 · 全片约09:02",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+      "art": "original-scene-jk15b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JG16",
+      "name": "训练计划",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "旧图是人物很小的卧室远景，改为日程表主体。",
+      "source": "TV 第2话 · 约00:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+      "art": "original-scene-jg16-full-name-art-review-20261103"
+    },
+    {
+      "id": "JT01",
+      "name": "独白",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 约09:42",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=582",
+      "art": "original-scene-jt01-concrete-fit-20261103"
+    },
+    {
+      "id": "JT02",
+      "name": "改编",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 配图约21:32",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1292",
+      "art": "original-scene-jt02-20261102"
+    },
+    {
+      "id": "JT03",
+      "name": "追击",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "原名与配图都是交谈中的前进隐喻，改为追击，并以飞行中的实体箭矢为主体。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:58",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=178",
+      "art": "original-scene-jt03-full-name-art-review-20261103"
+    },
+    {
+      "id": "A",
+      "name": "埋头学习",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 配图约10:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=615",
+      "art": "original-scene-a-20261102"
+    },
+    {
+      "id": "B",
+      "name": "心得",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 配图约22:14",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1334",
+      "art": "original-scene-b-20261102"
+    },
+    {
+      "id": "JH01",
+      "name": "换位",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "旧图是后脑与裁断的脸，改为两人的完整站位。",
+      "source": "TV 第2话 · 约16:47",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1007",
+      "art": "original-scene-jh01-full-name-art-review-20261103"
+    },
+    {
+      "id": "JK27",
+      "name": "关联阅读",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "去掉左侧被切断的人物后脑，让图书成为主体。",
+      "source": "2021 剧场版 · 约08:01",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=481",
+      "art": "original-scene-jk27-full-name-art-review-20261103"
+    },
+    {
+      "id": "JG23",
+      "name": "耐力训练",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约06:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=382",
+      "art": "original-scene-jg23-20261102"
+    },
+    {
+      "id": "JH05",
+      "name": "再生产",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "旧图是难以辨认的暗色碎片，改用原作再生产装置。",
+      "source": "TV 第1话 · 约20:52",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1252",
+      "art": "original-scene-jh05-full-name-art-review-20261103"
+    },
+    {
+      "id": "JA35",
+      "name": "娓娓道来",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "时间流速过于抽象，改用直接表现言叶持续流动的短名。",
+      "source": "TV 第9话 · 约19:21",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1161",
+      "art": "original-scene-ja35-20261102"
+    },
+    {
+      "id": "JK32",
+      "name": "烁星",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 16:46 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1006",
+      "art": "official-tv-jk32-20261102"
+    },
+    {
+      "id": "JK32B",
+      "name": "流星",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 16:46 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1006",
+      "art": "official-tv-jk32b-20261102"
+    },
+    {
+      "id": "JK32C",
+      "name": "明星",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 16:46（口上）；约17:15（配图）",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1006",
+      "art": "original-scene-jk68c-20261102"
+    },
+    {
+      "id": "JK33",
+      "name": "过去",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 约19:40",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1180",
+      "art": "original-scene-jk33-20261102"
+    },
+    {
+      "id": "JK33B",
+      "name": "未来",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 约19:40（引文）；约19:12（配图）",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1180",
+      "art": "original-scene-jk33b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK34",
+      "name": "StarLight",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 21:45 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1305",
+      "art": "official-tv-jk34-20261102"
+    },
+    {
+      "id": "JK34B",
+      "name": "神乐光档案",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "旧图误用了花柳香子，换成神乐光本人。",
+      "source": "TV 第2话 · 约05:26",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=326",
+      "art": "original-scene-jk34b-full-name-art-review-20261103"
+    },
+    {
+      "id": "JK34C",
+      "name": "天堂真矢档案",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约14:20",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=860",
+      "art": "original-scene-jk43-fit-refinement-20261103"
+    },
+    {
+      "id": "JK34D",
+      "name": "石动双叶档案",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约02:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=142",
+      "art": "original-scene-jk34d-20261102"
+    },
+    {
+      "id": "JK34E",
+      "name": "星见纯那档案",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约10:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=624",
+      "art": "original-scene-jk46-20261102"
+    },
+    {
+      "id": "JK34F",
+      "name": "露崎真昼档案",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约02:26",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=146",
+      "art": "original-scene-jk34f-20261102"
+    },
+    {
+      "id": "JK34G",
+      "name": "克洛迪娜档案",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 02:29 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=149",
+      "art": "official-tv-jk34g-20261102"
+    },
+    {
+      "id": "JK34H",
+      "name": "大场奈奈档案",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "调整构图去掉右上角水印，保留完整面部。",
+      "source": "TV 第9话 · 约22:20",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1340",
+      "art": "original-scene-jk34h-full-name-art-review-20261103"
+    },
+    {
+      "id": "JK34I",
+      "name": "花柳香子档案",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "重新分配原神乐光档案中实际为香子的画面，补全脸部和武器。",
+      "source": "TV 第2话 · OP约03:10",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=190",
+      "art": "original-scene-jk34b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK34J",
+      "name": "爱城华恋档案",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 02:33 · Bilibili 正版中文字幕",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=153",
+      "art": "official-tv-jk34j-20261102"
+    },
+    {
+      "id": "JK37",
+      "name": "熟读成诵",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 约19:41",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1181",
+      "art": "original-scene-jk37-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK37B",
+      "name": "逐句诵读",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约10:16",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=616",
+      "art": "original-scene-jk37b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK37C",
+      "name": "台本",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 全片约09:00",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=540",
+      "art": "original-scene-jk37c-20261102"
+    },
+    {
+      "id": "JK43",
+      "name": "攀登险丘",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "莎士比亚、弗莱彻《亨利八世》1.1；TV 第3话约10:12（引句）；剧场版约09:32（配图）",
+      "url": "https://www.folger.edu/explore/shakespeares-works/henry-viii/read/1/1/",
+      "art": "original-scene-jk43-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK43B",
+      "name": "缓步起行",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "莎士比亚、弗莱彻《亨利八世》1.1；TV 第3话约10:12（配图）",
+      "url": "https://www.folger.edu/explore/shakespeares-works/henry-viii/read/1/1/",
+      "art": "original-scene-jk43b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK44",
+      "name": "新知",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约00:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+      "art": "original-scene-jk44-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK44B",
+      "name": "疑问",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约10:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=605",
+      "art": "original-scene-jk67-20261102"
+    },
+    {
+      "id": "JK45",
+      "name": "审题",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约14:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=864",
+      "art": "original-scene-jk45-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK45B",
+      "name": "破题",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第7话 · 约08:01",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=481",
+      "art": "original-scene-jk45b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK46",
+      "name": "持续阅读",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约10:06",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+      "art": "original-scene-jk46-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK46B",
+      "name": "读书笔记",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约10:16",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=616",
+      "art": "original-scene-jk46b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK47",
+      "name": "默然忍受",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "《哈姆雷特》第三幕第一场 · 生存还是毁灭独白",
+      "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/",
+      "art": "original-scene-jk47-audit-fit-20261103"
+    },
+    {
+      "id": "JK47B",
+      "name": "挺身反抗",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "《哈姆雷特》第三幕第一场 · 生存还是毁灭独白",
+      "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/1/",
+      "art": "original-scene-jk47b-audit-fit-20261103"
+    },
+    {
+      "id": "JK48",
+      "name": "泛读",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约14:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=864",
+      "art": "original-scene-jk48-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK48B",
+      "name": "精读",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第1话 · 约07:02",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=422",
+      "art": "original-scene-jk48b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK49",
+      "name": "研读",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约10:06",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+      "art": "original-scene-jk49-energy-star-20261103"
+    },
+    {
+      "id": "JK49B",
+      "name": "思考",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约10:00",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=600",
+      "art": "original-scene-jk56-audit-fit-20261103"
+    },
+    {
+      "id": "JK50",
+      "name": "论点",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第7话 · 约08:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=502",
+      "art": "original-scene-jk50-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK50B",
+      "name": "论据",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 约19:52",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1192",
+      "art": "original-scene-jk50b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK52",
+      "name": "释义",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 约22:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1335",
+      "art": "original-scene-jk52-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK53",
+      "name": "求知",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "向下调整裁切，去掉右上角水印。",
+      "source": "TV 第3话 · 约10:16",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=616",
+      "art": "original-scene-jk53-full-name-art-review-20261103"
+    },
+    {
+      "id": "JA38",
+      "name": "引弦",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约18:54",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1134",
+      "art": "original-scene-ja38-archery-fit-20261103"
+    },
+    {
+      "id": "JA41",
+      "name": "点射",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约19:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1164",
+      "art": "original-scene-ja41-20261102"
+    },
+    {
+      "id": "JA43",
+      "name": "列阵",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约19:04",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1144",
+      "art": "original-scene-ja43-20261102"
+    },
+    {
+      "id": "JA45",
+      "name": "射后隐蔽",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "利用舞台布景遮住持弓人物，区分隐蔽与伏击的用图。",
+      "source": "TV 第2话 · 约18:12",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1092",
+      "art": "original-scene-ja45-hidden-archer-native-20261103"
+    },
+    {
+      "id": "JA52",
+      "name": "调整节奏",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约21:11",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1271",
+      "art": "original-scene-ja52-20261102"
+    },
+    {
+      "id": "JA53",
+      "name": "备箭",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "将备箭与连珠箭分别呈现为持箭准备和飞行中的连续箭矢。",
+      "source": "TV 第2话 · 约18:30",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1110",
+      "art": "original-scene-ja53-full-name-art-review-supplement-20261103"
+    },
+    {
+      "id": "JA54",
+      "name": "追加一箭",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "旧图只剩眼部，改为能够辨认人物与出手动作的画面。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:26",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=146",
+      "art": "original-scene-ja54-full-name-art-review-20261103"
+    },
+    {
+      "id": "JA55",
+      "name": "掩护射击",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "原图只有局部眼睛，换成弓与对手之间的完整攻防关系。",
+      "source": "TV 第1话 · 约19:40",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1180",
+      "art": "original-scene-ja55-full-name-art-review-20261103"
+    },
+    {
+      "id": "JA57",
+      "name": "星光跃动",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约21:38",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1298",
+      "art": "original-scene-ja57-20261102"
+    },
+    {
+      "id": "JK56",
+      "name": "星火相传",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 约20:40",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1240",
+      "art": "original-scene-jk56-energy-star-20261103"
+    },
+    {
+      "id": "JK57",
+      "name": "阶段小结",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约14:24",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=864",
+      "art": "original-scene-jk57-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK62",
+      "name": "温习",
+      "status": "已删除",
+      "decision": "保留用户删除状态",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约10:01",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=601",
+      "art": "original-scene-jk62-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK64",
+      "name": "理清思路",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第7话 · 约08:11",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=491",
+      "art": "original-scene-jk64-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK67",
+      "name": "反复推敲",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 全片约09:02",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+      "art": "original-scene-jk67-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK67B",
+      "name": "定稿",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 全片约09:02",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+      "art": "original-scene-jk67b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK68",
+      "name": "融会贯通",
+      "status": "已删除",
+      "decision": "保留用户删除状态",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第7话 · 约08:01",
+      "url": "https://www.bilibili.com/bangumi/play/ep232373?t=481",
+      "art": "original-scene-jk68-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK68B",
+      "name": "摘录",
+      "status": "已删除",
+      "decision": "保留用户删除状态",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约10:12",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=612",
+      "art": "original-scene-jk68b-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK68C",
+      "name": "批注",
+      "status": "已删除",
+      "decision": "保留用户删除状态",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约00:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+      "art": "original-scene-jk68c-knowledge-fit-20261103"
+    },
+    {
+      "id": "JK69B",
+      "name": "引文",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "替换重复的参考书，清除化为己用与自己的言叶的过期变化描述。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:34",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=154",
+      "art": "original-scene-jk69b-full-name-art-review-20261103"
+    },
+    {
+      "id": "JG27",
+      "name": "腹肌训练",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约06:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=375",
+      "art": "original-scene-jg27-20261102"
+    },
+    {
+      "id": "JG28",
+      "name": "指法练习",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "原图与腹肌训练重复，改为另一种日常基本功练习；同步去掉伤害加成按两倍生效的过期说明。",
+      "source": "TV 第2话 · 约06:31",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=391",
+      "art": "original-scene-jg28-full-name-art-review-20261103"
+    },
+    {
+      "id": "JG30",
+      "name": "合练",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约06:38",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=398",
+      "art": "original-scene-jg30-20261102"
+    },
+    {
+      "id": "JX01",
+      "name": "基本功",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第1话 · 约04:56",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=296",
+      "art": "original-scene-jx01-ballet-basics-20261103"
+    },
+    {
+      "id": "JX02",
+      "name": "群星呼应",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "金色落剑缺少星形主体，改用清楚的星光倒影群。",
+      "source": "TV 第9话 · 约22:11",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1331",
+      "art": "original-scene-jx02-full-name-art-review-20261103"
+    },
+    {
+      "id": "JX07",
+      "name": "星光庇护",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "按用户指出的问题，替换缺少防护感的人物近景；以层叠的星形前景突出星光庇护。",
+      "source": "TV 第1话 · 约19:27",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1167",
+      "art": "original-scene-jx07-full-name-art-review-20261103"
+    },
+    {
+      "id": "JH10",
+      "name": "回身斩",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "旧图过亮且只有面部，换成可见刀刃的交锋动作。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约06:05",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=365",
+      "art": "original-scene-jh10-full-name-art-review-20261103"
+    },
+    {
+      "id": "JH11",
+      "name": "微光",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约17:07",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1027",
+      "art": "original-scene-jh11-energy-star-20261103"
+    },
+    {
+      "id": "JH13",
+      "name": "连星",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "人物笑脸未呈现连星，重新分配既有星点光迹配图。",
+      "source": "TV 第2话 · 配图约19:10",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1150",
+      "art": "official-tv-ja15-20261102"
+    },
+    {
+      "id": "JH14",
+      "name": "借星",
+      "status": "备用",
+      "decision": "已修订",
+      "reason": "援手的拥抱图与能量主题联系弱，统一为借来的星光。",
+      "source": "TV 第2话 · OP约02:52",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+      "art": "original-scene-jh14-full-name-art-review-20261103"
+    },
+    {
+      "id": "JH15",
+      "name": "筹备",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约09:42",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=582",
+      "art": "original-scene-jh15-fit-refinement-20261103"
+    },
+    {
+      "id": "JH17",
+      "name": "星幕",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "原图为强光中的刀剑，换成清楚的星形幕布。",
+      "source": "TV 第2话 · 约00:57",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=57",
+      "art": "original-scene-jh17-full-name-art-review-20261103"
+    },
+    {
+      "id": "JF06",
+      "name": "留住星光",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第9话 · 约20:46",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1246",
+      "art": "original-scene-jf06-energy-star-20261103"
+    },
+    {
+      "id": "JF07",
+      "name": "剧评",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约13:28",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=808",
+      "art": "original-scene-jf07-20261102"
+    },
+    {
+      "id": "JF10",
+      "name": "重整",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约08:33",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=513",
+      "art": "original-scene-jf10-pool-review-20261103"
+    },
+    {
+      "id": "JB01",
+      "name": "打击",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 18:29",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1109",
+      "art": "original-scene-jb01-20261102"
+    },
+    {
+      "id": "JB02",
+      "name": "防御",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 20:38",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1238",
+      "art": "original-scene-jb02-20261102"
+    },
+    {
+      "id": "JB03",
+      "name": "满弦射击",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "实卡裁切以人物、弓身与箭杆为主体，基础和远古版本保持一致。",
+      "source": "TV 第1话 · 约19:32",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1172",
+      "art": "original-scene-ja13-full-name-art-review-20261103"
+    },
+    {
+      "id": "JB04",
+      "name": "试探射击",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第1话 · 配图约19:00",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1140",
+      "art": "original-scene-jb04-20261102"
+    },
+    {
+      "id": "JB05",
+      "name": "更近一步",
+      "status": "已删除",
+      "decision": "保留用户删除状态",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:57",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=177",
+      "art": "original-scene-jb05-arrow-flight-20261103"
+    },
+    {
+      "id": "JZ01",
+      "name": "万箭待发",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约19:37",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1177",
+      "art": "original-scene-jz01-20261102"
+    },
+    {
+      "id": "JZ02",
+      "name": "通读全篇",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 配图约14:26",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=866",
+      "art": "original-scene-jz02-20261102"
+    },
+    {
+      "id": "JA58",
+      "name": "牵制箭",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 18:31 · 持弓瞄准",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1111",
+      "art": "original-scene-jb03-star-aim-20261103"
+    },
+    {
+      "id": "JG31",
+      "name": "连贯练习",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 约09:17",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+      "art": "original-scene-jg31-concrete-fit-20261103"
+    },
+    {
+      "id": "JH18",
+      "name": "聚星",
+      "status": "已删除",
+      "decision": "保留用户删除状态",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第3话 · 约09:56",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=596",
+      "art": "original-scene-jh18-energy-star-20261103"
+    },
+    {
+      "id": "JH19",
+      "name": "余辉",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "修正旧契合中保留能量到下回合的过期描述，并换成星形光芒。",
+      "source": "TV 第2话 · 约18:51",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1131",
+      "art": "original-scene-jh19-full-name-art-review-20261103"
+    },
+    {
+      "id": "JH20",
+      "name": "掌中星",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "旧图是刀柄，改为伸向星空的手和人物。",
+      "source": "TV 第9话 · 约20:09",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1209",
+      "art": "original-scene-jh20-full-name-art-review-20261103"
+    },
+    {
+      "id": "JH21",
+      "name": "长明",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "原图是落剑的金色强光，且描述滞后于当前回合结束获格挡的效果。",
+      "source": "TV 第1话 · 约19:32",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1172",
+      "art": "original-scene-jh21-full-name-art-review-20261103"
+    },
+    {
+      "id": "JH22",
+      "name": "星光迸发",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约06:26",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=386",
+      "art": "original-scene-jh22-energy-star-20261103"
+    },
+    {
+      "id": "JA59",
+      "name": "急射",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约18:34",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1114",
+      "art": "original-scene-jb05-star-20261103"
+    },
+    {
+      "id": "JA61",
+      "name": "叠奏",
+      "status": "备用",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约02:28",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=148",
+      "art": "original-scene-ja02-20261102"
+    },
+    {
+      "id": "JA64",
+      "name": "星雨",
+      "status": "卡池",
+      "decision": "保留",
+      "reason": "已检查名称、主体、画面裁切与题材；保留现有设计。",
+      "source": "TV 第2话 · 约19:43",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1183",
+      "art": "original-scene-ja64-star-rain-20261103"
+    },
+    {
+      "id": "JA65",
+      "name": "接续一箭",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "补全编号占位名字和默认立绘。",
+      "source": "TV 第2话 · 约18:17",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1097",
+      "art": "original-scene-ja65-full-name-art-review-20261103"
+    },
+    {
+      "id": "JG33",
+      "name": "再练一组",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "补全编号占位名字和默认立绘，伤害加成沿用日常锻炼主题。",
+      "source": "TV 第2话 · 约06:27",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=387",
+      "art": "original-scene-jg33-full-name-art-review-20261103"
+    },
+    {
+      "id": "JA66",
+      "name": "拾遗",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "补全编号占位名字和默认立绘；回收对象保持任意牌。",
+      "source": "2021 剧场版 · 狩猎的Revue片段约05:05",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=305",
+      "art": "original-scene-ja66-full-name-art-review-20261103"
+    },
+    {
+      "id": "JG34",
+      "name": "合唱练习",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "新增能力牌的编号与默认立绘补全为集体训练主题。",
+      "source": "TV 第2话 · 约06:39",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=399",
+      "art": "original-scene-jg34-full-name-art-review-supplement-20261103"
+    },
+    {
+      "id": "JK73",
+      "name": "例证",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "新增知识箭矢以具体例证为知识内容。",
+      "source": "TV 第2话 · 约00:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+      "art": "original-scene-jk73-full-name-art-review-supplement-20261103"
+    },
+    {
+      "id": "JK73B",
+      "name": "举例",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "新增同组牌的编号和默认立绘补全，与例证建立名称关系。",
+      "source": "TV 第2话 · 约10:06",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=606",
+      "art": "original-scene-jk73b-full-name-art-review-supplement-20261103"
+    },
+    {
+      "id": "JA67",
+      "name": "连珠箭",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "新增循环箭矢以接续放箭的物理攻击命名。",
+      "source": "TV 第1话 · 约19:30",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1170",
+      "art": "original-scene-ja67-full-name-art-review-supplement-20261103"
+    },
+    {
+      "id": "JZ03",
+      "name": "满弦射击（远古）",
+      "status": "卡池",
+      "decision": "已修订",
+      "reason": "实卡裁切以人物、弓身与箭杆为主体，基础和远古版本保持一致。",
+      "source": "TV 第1话 · 约19:32",
+      "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1172",
+      "art": "original-scene-ja13-full-name-art-review-20261103"
+    }
+  ]
+}

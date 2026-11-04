@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "locale": "zh-CN",
+  "tipId": "junna_knowledge_background",
+  "cards": {
+    "JK33": {
+      "name": "过去",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "《少女☆歌剧》TV第9话。纯那引用尼采，谈过去与未来对当下的影响。"
+        }
+      ]
+    },
+    "JK33B": {
+      "name": "未来",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "《少女☆歌剧》TV第9话。纯那引用尼采，谈过去与未来对当下的影响。"
+        }
+      ]
+    },
+    "JK34": {
+      "name": "StarLight",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "《少女☆歌剧》中的剧中剧，脚本：中村彼方。两位少女登塔摘星，故事原本以离别告终。"
+        }
+      ]
+    },
+    "JK37C": {
+      "name": "教科书",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "斋藤孝《理想的国语教科书》。纯那小学时的读物，让她感受到语言的力量。"
+        }
+      ]
+    },
+    "JK43": {
+      "name": "攀登险丘",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "莎士比亚、约翰·弗莱彻《亨利八世》第一幕第一场：攀登险丘，须先缓步。"
+        }
+      ]
+    },
+    "JK43B": {
+      "name": "缓步起行",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "莎士比亚、约翰·弗莱彻《亨利八世》第一幕第一场：攀登险丘，须先缓步。"
+        }
+      ]
+    },
+    "JK47": {
+      "name": "默然忍受",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "莎士比亚《哈姆雷特》第三幕第一场。哈姆雷特在独白中权衡忍受苦难与挺身反抗。"
+        }
+      ]
+    },
+    "JK47B": {
+      "name": "挺身反抗",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "莎士比亚《哈姆雷特》第三幕第一场。拿起武器反抗苦难，是同一段独白中的另一种选择。"
+        }
+      ]
+    }
+  }
+}

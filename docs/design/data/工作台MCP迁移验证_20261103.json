@@ -1,0 +1,22 @@
+{
+  "verifiedAt": "2026-11-03T05:41:50.658Z",
+  "serverType": "junna-workbench-mcp",
+  "url": "http://127.0.0.1:17842",
+  "revision": 1362,
+  "counts": {
+    "mechanisms": 4,
+    "terms": 402,
+    "cards": 285,
+    "partnerGroups": 37,
+    "archetypes": 8,
+    "styles": 17,
+    "fitPool": 136
+  },
+  "knowledgeBackgrounds": 51,
+  "distinctRestArt": true,
+  "legacyWholeFilePut": 410,
+  "contentEdits": "MCP with required per-entity expectedVersion",
+  "targetedTests": 9,
+  "stdioTools": 10,
+  "knowledgeExport": "D:\\Github\\STS2_ShoujoKagekiJunna\\docs\\design\\data\\纯那知识牌背景提示_20261103.json"
+}

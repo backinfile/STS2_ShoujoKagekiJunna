@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "date": "2026-11-02",
+  "batchId": "official-naming-20261102-next-stage",
+  "label": "配入官方原词与截图 · 改变与下一次舞台6张",
+  "backup": "before-tv-next-stage.json",
+  "matches": [
+    {
+      "id": "JG09",
+      "name": "更好的重演",
+      "original": "もっといいものに、もっといい再演に。",
+      "episode": 9,
+      "time": "21:25",
+      "proof": "tv09-2125-new.jpg",
+      "artProof": "tv09-2125-new.jpg",
+      "crop": [
+        1000,
+        750,
+        600,
+        15
+      ],
+      "fit": "纯那接纳此前的演出，同时要求把下一次做得更好。格挡承接当下，给具体卡牌留下伤害加成，表现改进留下的积累。",
+      "japaneseNote": " 日文对照据 https://deji-chan.com/post-318 的台词转录。",
+      "fullQuote": "为了创造更好的东西 更好的重演"
+    },
+    {
+      "id": "JT02",
+      "name": "不断改变",
+      "original": "舞台も舞台少女も変わってゆくもの。",
+      "episode": 9,
+      "time": "21:32",
+      "proof": "tv09-2132-new.jpg",
+      "artProof": "tv09-2132-new.jpg",
+      "crop": [
+        1040,
+        780,
+        350,
+        10
+      ],
+      "fit": "纯那肯定舞台能够改变。把箭矢变成即时打出的非箭矢牌，让同一份内容改用新的表现方式；增加的费用保留改变方式的代价。",
+      "japaneseNote": " 日文对照据 https://deji-chan.com/post-318 的台词转录。",
+      "fullQuote": "舞台和舞台少女都是不断改变的"
+    },
+    {
+      "id": "JK50",
+      "name": "下一回",
+      "original": "私たちで、次のスタァライト。",
+      "episode": 9,
+      "time": "21:45",
+      "proof": "tv09-2145-new.jpg",
+      "artProof": "tv09-2145-new.jpg",
+      "crop": [
+        1000,
+        750,
+        400,
+        10
+      ],
+      "fit": "与上一句邀请组成完整的行动关系：共同创造的下一次舞台是高费输出牌，关联牌以较低费用直接带它登场。保留正版字幕中的 StarLight 拼写。",
+      "japaneseNote": " 日文对照据 https://deji-chan.com/post-318 的台词转录。",
+      "fullQuote": "我们一起创造 下一回的StarLight"
+    },
+    {
+      "id": "JK50B",
+      "name": "一起来创造吧",
+      "original": "だから、一緒に作ろう、なな。",
+      "episode": 9,
+      "time": "21:40",
+      "proof": "tv09-2140-new.jpg",
+      "artProof": "tv09-2140-new.jpg",
+      "crop": [
+        900,
+        675,
+        750,
+        50
+      ],
+      "fit": "纯那向奈奈发出邀请，紧接着说出共同创造下一次舞台。打出这张邀请便直接打出手中的关联牌，保留两句原话的先后关系。",
+      "japaneseNote": " 日文对照据 https://deji-chan.com/post-318 的台词转录。",
+      "fullQuote": "所以 一起来创造吧 奈奈"
+    },
+    {
+      "id": "JK11",
+      "name": "想守护的东西",
+      "original": "あなたが大切にしてきた時間、守ろうとしてくれたもの。",
+      "episode": 9,
+      "time": "22:19",
+      "proof": "tv09-2219-new.jpg",
+      "artProof": "tv09-2219-new.jpg",
+      "crop": [
+        1040,
+        780,
+        430,
+        10
+      ],
+      "fit": "纯那将奈奈珍视的经历留在身边，与下一句把它们带往下一次舞台相连。格挡表现守护，召回另一张牌使过去的积累重新进入行动。",
+      "japaneseNote": " 日文对照据 https://keibun.hatenadiary.jp/entry/2019/05/09/141343 的台词转录。",
+      "fullQuote": "你一直珍视的时间 想守护的东西"
+    },
+    {
+      "id": "JK11B",
+      "name": "下回的舞台",
+      "original": "全部持って行ってあげて、次の舞台に。",
+      "episode": 9,
+      "time": "22:25",
+      "proof": "tv09-2225-new.jpg",
+      "artProof": "tv09-2225-new.jpg",
+      "crop": [
+        1000,
+        750,
+        600,
+        10
+      ],
+      "fit": "下一次舞台主动承接此前珍视的经历。攻击后召回守护牌，与关联牌形成守护、出发、再承接的循环。",
+      "japaneseNote": " 日文对照据 https://keibun.hatenadiary.jp/entry/2019/05/09/141343 的台词转录；中文省略号按截图保留。",
+      "fullQuote": "全都一起带去…下回的舞台吧"
+    }
+  ]
+}

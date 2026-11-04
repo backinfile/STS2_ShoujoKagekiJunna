@@ -1,0 +1,15 @@
+{
+ "batchId":"junna-presentation-priority-20261102",
+ "label":"修正对白式卡名与非纯那主体卡图 · 首批8张",
+ "backup":"before-presentation-priority.json",
+ "matches":[
+  {"id":"JK49","expectedName":"不可饶恕","name":"交锋","original":"対峙","episode":2,"time":"20:40","proof":"tv02-2038-new.jpg","crop":[960,720,650,45],"fit":"舞台上的纯那与华恋交锋，造成伤害后转为并肩；同一段关系在对手和同伴之间转换。"},
+  {"id":"JK49B","expectedName":"我爱你","name":"并肩","original":"肩を並べる","episode":2,"time":"16:51","proof":"tv02-1650-action.jpg","crop":[1000,750,450,45],"fit":"纯那与华恋并肩立于舞台，获得格挡后再转为交锋；两张牌共同表现舞台少女既是对手又是同伴。"},
+  {"id":"JK44","expectedName":"准备白刃战","name":"白刃战","original":"白兵戦","episode":1,"time":"19:39","proof":"tv01-1938-detail.jpg","crop":[1000,750,680,60],"fit":"纯那以弓身在近距离与小光交手，直接对应攻击；同组的怯场表现临阵时妨碍发挥的心理负担。"},
+  {"id":"JK44B","expectedName":"不擅长战斗","name":"怯场","original":"舞台への不安","work":"2021 剧场版 · 狩猎的 Revue · 片段04:01","url":"https://www.bilibili.com/video/BV1u3411v7i7/?t=241","proof":"film-hunt-400.jpg","crop":[1000,750,400,35],"fit":"纯那在狩猎的Revue中动摇，作为知识组中的负担牌，以消耗离手表现克服怯场。","artNote":"剧场版原画；片段由观众上传，未采用其字幕为官方译文。"},
+  {"id":"JK47","expectedName":"忘记自我","name":"守势","original":"守りの構え","work":"2021 剧场版 · 狩猎的 Revue · 片段03:21","url":"https://www.bilibili.com/video/BV1u3411v7i7/?t=201","proof":"film-hunt-320.jpg","crop":[720,540,700,210],"fit":"收起进攻、护住当下；采用守势时消耗同组攻势，表现同一时刻的姿态取舍。","artNote":"剧场版原画，纯那受压后伏低身体；观众上传片段。"},
+  {"id":"JK47B","expectedName":"害怕失败","name":"攻势","original":"攻めの構え","work":"2021 剧场版 · 狩猎的 Revue · 片段05:21","url":"https://www.bilibili.com/video/BV1u3411v7i7/?t=321","proof":"film-hunt-520.jpg","crop":[960,720,500,60],"fit":"重新向对手出手；采用攻势时消耗同组守势，与守势构成互斥的战斗姿态。","artNote":"剧场版原画，纯那在重振后持弓迎战；观众上传片段。"},
+  {"id":"JA04","expectedName":"从今天起","name":"速射","original":"速射","episode":2,"time":"18:29","proof":"tv02-1828-action.jpg","crop":[1000,750,650,45],"fit":"以立即放箭表现下一张箭矢立刻完成。"},
+  {"id":"JK32C","expectedName":"明星","name":"明星","original":"明け星","namingKind":"原词裁剪","episode":2,"time":"16:46","chineseOriginal":"烁星 明星 流星","proof":"film-hunt-040.jpg","crop":[1000,750,150,40],"fit":"与烁星、流星组成原作唱名中的星名组，三张牌轮流使下一张免费。","artNote":"卡图取2021剧场版狩猎的Revue片段00:41的纯那近景；星名原词取TV第2话。"}
+ ]
+}

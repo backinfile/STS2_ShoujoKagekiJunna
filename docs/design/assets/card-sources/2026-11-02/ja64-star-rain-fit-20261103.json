@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-03T05:52:10.163Z",
+  "revision": 1368,
+  "historyRecord": "5810ebb7-8ba0-4028-8c3d-f88e9cd30d51",
+  "card": "JA64",
+  "before": {
+    "name": "蓄射",
+    "art": "official-tv-ja16-20261102"
+  },
+  "after": {
+    "name": "星雨",
+    "art": "original-scene-ja64-star-rain-20261103"
+  },
+  "source": "TV 第2话 · 约19:43",
+  "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1183",
+  "captureFile": "tv02-star-rain-1943-20261103.png",
+  "artFile": "D:\\Github\\STS2_ShoujoKagekiJunna\\docs\\design\\assets\\card-sources\\2026-11-02\\original-scene-ja64-star-rain-20261103.png",
+  "checks": {
+    "mechanicsPreserved": true,
+    "independentAsset": true,
+    "mcpVersionChecked": true,
+    "fitPoolLinked": true,
+    "assetReadbackVerified": true
+  }
+}

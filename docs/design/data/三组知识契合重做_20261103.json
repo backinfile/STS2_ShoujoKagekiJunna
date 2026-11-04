@@ -1,0 +1,530 @@
+{
+  "reviewedAt": "2026-11-03T14:17:33.802Z",
+  "revision": 2006,
+  "groups": [
+    {
+      "uid": "draft_group_JK10",
+      "id": "GROUP_JK10",
+      "title": "知彼知己／百战不殆",
+      "mainCardId": "JK10",
+      "grantedCardIds": [
+        "JK10B"
+      ],
+      "grantedCardCounts": {
+        "JK10B": 1
+      }
+    },
+    {
+      "uid": "fabled_group_JK32",
+      "id": "GROUP_JK32",
+      "title": "如是说",
+      "mainCardId": "JK32",
+      "grantedCardIds": [
+        "JK32B",
+        "JK32C"
+      ],
+      "grantedCardCounts": {
+        "JK32B": 1,
+        "JK32C": 1
+      }
+    },
+    {
+      "uid": "fabled_group_JK37",
+      "id": "GROUP_JK37",
+      "title": "劝学",
+      "mainCardId": "JK37C",
+      "grantedCardIds": [
+        "JK37",
+        "JK37B"
+      ],
+      "grantedCardCounts": {
+        "JK37": 1,
+        "JK37B": 1
+      }
+    }
+  ],
+  "cards": [
+    {
+      "id": "JK10",
+      "name": "知彼知己",
+      "text": "知识。每回合第1次打出耗能不低于2的卡牌时，抽1张牌并获得1点能量。",
+      "upgradedText": "知识。每回合前两次打出耗能不低于2的卡牌时，抽1张牌并获得1点能量。",
+      "art": "original-scene-jk10-literary-group-recast-20261103",
+      "naming": {
+        "original": "知彼知己",
+        "work": "孙武《孙子兵法·谋攻》；TV第7话约08:01（配图）",
+        "url": "https://zh.wikisource.org/zh-hans/%E5%AD%99%E5%AD%90%E5%85%B5%E6%B3%95",
+        "adaptation": "本组取同一句兵法，先有知彼知己的研判，再有百战不殆的攻守。较大投入后的抽牌与能量收益表现判断清楚后继续行动的余力。配图为纯那录制自我介绍的原作画面，以自我观察、资料和星饰承载知识与能量；典籍原句作为本次契合引用，未标为原作对白。 配图：tv07-800-scene.jpg；裁切620,70,900,675。画面来源：https://www.bilibili.com/bangumi/play/ep232373?t=481",
+        "kind": "典籍原句",
+        "chineseOriginal": "知彼知己"
+      },
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "孙武《孙子兵法·谋攻》：了解对手，也了解自己。"
+        }
+      ]
+    },
+    {
+      "id": "JK10B",
+      "name": "百战不殆",
+      "text": "知识。保留。造成10点伤害。获得10点格挡。",
+      "upgradedText": "知识。保留。造成12点伤害。获得12点格挡。",
+      "art": "original-scene-jk10b-literary-group-recast-20261103",
+      "naming": {
+        "original": "百战不殆",
+        "work": "孙武《孙子兵法·谋攻》；TV第2话约18:34（配图）",
+        "url": "https://zh.wikisource.org/zh-hans/%E5%AD%99%E5%AD%90%E5%85%B5%E6%B3%95",
+        "adaptation": "同一句中的结果，指向了解双方后的稳健应战。造成伤害并获得格挡同时体现进攻与自保；保留使行动等待合适时机。配图保留纯那与华恋交手时的双方身姿、来剑和弓身，以实际交战表现攻守兼备。 配图：tv02-1832-action.jpg；裁切755,410,480,360。画面来源：https://www.bilibili.com/bangumi/play/ep232368?t=1114",
+        "kind": "典籍原句",
+        "chineseOriginal": "百战不殆"
+      },
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "孙武《孙子兵法·谋攻》：知彼知己，百战不殆。"
+        }
+      ]
+    },
+    {
+      "uid": "fabled_knowledge_JK32",
+      "id": "JK32",
+      "name": "如是说",
+      "type": "能力",
+      "system": "partner",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 3,
+      "upgradedCost": 3,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。回合开始时，抽1张牌。\n翱翔和站立的耗能变为0。",
+      "upgradedText": "知识。回合开始时，抽2张牌。\n翱翔和站立的耗能变为0。",
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "KW_STAGE",
+        "EF06",
+        "EF66",
+        "TR02",
+        "FK01"
+      ],
+      "archetypeIds": [
+        "SYS_stage",
+        "SYS_partner",
+        "SYS_energy"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK32B",
+        "JK32C"
+      ],
+      "art": "original-scene-jk32-literary-group-recast-20261103",
+      "character": "星见纯那",
+      "role": "知识组核心牌",
+      "direction": "循环减费",
+      "draftStatus": "结构探索候选",
+      "draftBatch": "junna-fabled-knowledge-20261102-v1",
+      "naming": {
+        "original": "Thus Spake Zarathustra",
+        "work": "尼采《查拉图斯特拉如是说》第三部〈重力之灵〉；剧场版狩猎片段约02:18（引句与配图）",
+        "url": "https://www.gutenberg.org/files/1998/1998-h/1998-h.htm",
+        "adaptation": "卡名取尼采《查拉图斯特拉如是说》的书名末三字。关联牌翱翔与站立补充同段教导的目标和基础，互相减费表现理解与实践之间的联系。主牌持续抽牌体现继续学习。配图取原作引用这段话时浮现的绿色文字，裁掉对手；原始截图film-hunt-216.jpg，裁切1090,130,720,540。引文核对Thomas Common英译本第55章The Spirit of Gravity。",
+        "chineseOriginal": "查拉图斯特拉如是说",
+        "kind": "典籍书名节选"
+      },
+      "design": {
+        "classification": "知识组结构探索",
+        "structure": "循环减费",
+        "reference": "圣者麦迪文／圣杖埃提耶什／圣地卡拉赞",
+        "rules": "按当前版本支付费用并建立能力；各份能力按当前牌面的时点、条件及次数分别结算。 安装能力时按牌面为具名牌设置0费；回合开始时执行持续抽牌。每张同组牌仍独立打出与升级，费用修改沿本场有效费用层处理。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+        "port": "运转",
+        "roleReason": "持续抽牌并使具名知识牌变为0费。",
+        "damageModifierRule": "damageModifierRules",
+        "cardReferenceUids": [
+          "fabled_knowledge_JK32B",
+          "fabled_knowledge_JK32C"
+        ],
+        "routeRoles": {
+          "archetype_SYS_stage": {
+            "role": "tool",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          },
+          "archetype_SYS_partner": {
+            "role": "both",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          },
+          "archetype_SYS_energy": {
+            "role": "trigger",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "systems": [
+          "stage",
+          "partner",
+          "energy"
+        ],
+        "route": "知识",
+        "systemRoles": {
+          "stage": {
+            "role": "工具",
+            "port": "运转"
+          },
+          "partner": {
+            "role": "兼具",
+            "port": "运转"
+          },
+          "energy": {
+            "role": "触发",
+            "port": "运转"
+          }
+        },
+        "triggerRole": "兼具",
+        "upgrade": "升级牌效按当前升级牌面：知识。回合开始时，抽2张牌。翱翔和站立的耗能变为0。",
+        "investment": "按当前版本支付3能量。"
+      },
+      "notes": "定位：持续抽牌并使具名知识牌变为0费。\n结算约定：按当前版本支付费用并建立能力；各份能力按当前牌面的时点、条件及次数分别结算。 安装能力时按牌面为具名牌设置0费；回合开始时执行持续抽牌。每张同组牌仍独立打出与升级，费用修改沿本场有效费用层处理。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。回合开始时，抽2张牌。翱翔和站立的耗能变为0。",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "尼采《查拉图斯特拉如是说》，以查拉图斯特拉的教导展开。"
+        }
+      ]
+    },
+    {
+      "uid": "fabled_knowledge_JK32B",
+      "id": "JK32B",
+      "name": "翱翔",
+      "type": "箭矢",
+      "system": "partner",
+      "rarity": "稀有",
+      "pool": false,
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": 1,
+      "upgradedTurns": 1,
+      "arrowSubtype": "攻击",
+      "target": "敌人",
+      "text": "知识。造成12点伤害。站立和如是说的耗能变为0。",
+      "upgradedText": "知识。造成16点伤害。站立和如是说的耗能变为0。",
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "KW_STAGE",
+        "EF01",
+        "EF28",
+        "EF66",
+        "NV26",
+        "FK01"
+      ],
+      "archetypeIds": [
+        "SYS_stage",
+        "SYS_partner",
+        "SYS_energy"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK32"
+      ],
+      "art": "original-scene-jk32b-literary-group-recast-20261103",
+      "character": "星见纯那",
+      "role": "知识牌",
+      "direction": "循环减费",
+      "draftStatus": "结构探索候选",
+      "draftBatch": "junna-fabled-knowledge-20261102-v1",
+      "naming": {
+        "original": "one day to fly",
+        "work": "尼采《查拉图斯特拉如是说》第三部〈重力之灵〉；剧场版约02:18（引句）；TV第1话约19:46（配图）",
+        "url": "https://www.gutenberg.org/files/1998/1998-h/1998-h.htm",
+        "adaptation": "卡名取原作中文字幕翱翔在天际中的连续原词，指向同组学习的目标。以纯那跃至高处持弓的动作承载飞翔与箭矢的联系；完成后的互相减费让学习目标又能引出新的理解。配图为TV第1话约19:46，原始截图tv01-1944-detail.jpg，裁切1110,160,680,510。原文栏摘自所据英译本。",
+        "chineseOriginal": "翱翔",
+        "kind": "原作中文字幕节选（典籍引文）"
+      },
+      "design": {
+        "classification": "知识组结构探索",
+        "structure": "循环减费",
+        "reference": "圣者麦迪文／圣杖埃提耶什／圣地卡拉赞",
+        "rules": "按当前版本支付费用并记录牌面目标，以当前版本初始回合数建立布置；计数归0后依序执行当前牌面，完整结算后处理一次去向。 箭矢完成时先造成当前版本伤害，再对具名知识牌执行牌面写明的0费修改；费用修改与箭矢布置分别记录。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+        "port": "输出／运转",
+        "roleReason": "箭矢触发；知识兼具；能量/高费工具，提供输出、运转。",
+        "routeRoles": {
+          "archetype_SYS_stage": {
+            "role": "trigger",
+            "cross": true,
+            "ports": [
+              "output",
+              "operation"
+            ]
+          },
+          "archetype_SYS_partner": {
+            "role": "both",
+            "cross": true,
+            "ports": [
+              "output",
+              "operation"
+            ]
+          },
+          "archetype_SYS_energy": {
+            "role": "tool",
+            "cross": true,
+            "ports": [
+              "output",
+              "operation"
+            ]
+          }
+        },
+        "systems": [
+          "stage",
+          "partner",
+          "energy"
+        ],
+        "route": "知识",
+        "systemRoles": {
+          "stage": {
+            "role": "触发",
+            "port": "输出／运转"
+          },
+          "partner": {
+            "role": "兼具",
+            "port": "输出／运转"
+          },
+          "energy": {
+            "role": "工具",
+            "port": "输出／运转"
+          }
+        },
+        "triggerRole": "兼具",
+        "upgrade": "升级牌效按当前升级牌面：知识。造成16点伤害。站立和如是说的耗能变为0。",
+        "investment": "按当前版本支付1能量，布置初始计数为1。",
+        "cardReferenceUids": [
+          "fabled_knowledge_JK32",
+          "fabled_knowledge_JK32C"
+        ]
+      },
+      "notes": "定位：箭矢触发；知识兼具；能量/高费工具，提供输出、运转。\n结算约定：按当前版本支付费用并记录牌面目标，以当前版本初始回合数建立布置；计数归0后依序执行当前牌面，完整结算后处理一次去向。 箭矢完成时先造成当前版本伤害，再对具名知识牌执行牌面写明的0费修改；费用修改与箭矢布置分别记录。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。造成16点伤害。站立和如是说的耗能变为0。",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "尼采《查拉图斯特拉如是说》：飞翔之前，先学会站立与奔跑。"
+        }
+      ]
+    },
+    {
+      "uid": "fabled_knowledge_JK32C",
+      "id": "JK32C",
+      "name": "站立",
+      "type": "技能",
+      "system": "partner",
+      "rarity": "稀有",
+      "pool": false,
+      "cost": 2,
+      "upgradedCost": 2,
+      "turns": null,
+      "upgradedTurns": null,
+      "arrowSubtype": "技能",
+      "target": "自己",
+      "text": "知识。获得8点格挡。如是说和翱翔的耗能变为0。",
+      "upgradedText": "知识。获得12点格挡。如是说和翱翔的耗能变为0。",
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "KW_STAGE",
+        "EF05",
+        "EF66",
+        "FK01"
+      ],
+      "archetypeIds": [
+        "SYS_stage",
+        "SYS_partner",
+        "SYS_energy"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK32"
+      ],
+      "art": "original-scene-jk32c-literary-group-recast-20261103",
+      "character": "星见纯那",
+      "role": "知识牌",
+      "direction": "循环减费",
+      "draftStatus": "结构探索候选",
+      "draftBatch": "junna-fabled-knowledge-20261102-v1",
+      "naming": {
+        "original": "standing",
+        "work": "尼采《查拉图斯特拉如是说》第三部〈重力之灵〉；剧场版约02:18（引句）；TV第2话约00:24（配图）",
+        "url": "https://www.gutenberg.org/files/1998/1998-h/1998-h.htm",
+        "adaptation": "卡名直接译自所据英译本的standing，以站立作为学习飞翔前的基础，对应原作站起来奔跑这段引用。获得格挡体现立稳自身，再继续实践；互相减费承接组内关系。配图为纯那晨练前站立的运动服姿态，TV第2话约00:24；原始截图tv02-review-warmup-0023-20261103.jpg，裁切800,80,900,675。",
+        "kind": "典籍引文短译",
+        "chineseOriginal": "站立"
+      },
+      "design": {
+        "classification": "知识组结构探索",
+        "structure": "循环减费",
+        "reference": "圣者麦迪文／圣杖埃提耶什／圣地卡拉赞",
+        "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 先获得当前版本格挡，再对具名知识牌执行牌面写明的0费修改；此牌按技能即时结算。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+        "port": "防御／运转",
+        "roleReason": "箭矢工具；知识兼具；能量/高费触发，提供防御、运转。",
+        "cardReferenceUids": [
+          "fabled_knowledge_JK32",
+          "fabled_knowledge_JK32B"
+        ],
+        "routeRoles": {
+          "archetype_SYS_stage": {
+            "role": "tool",
+            "cross": true,
+            "ports": [
+              "defense",
+              "operation"
+            ]
+          },
+          "archetype_SYS_partner": {
+            "role": "both",
+            "cross": true,
+            "ports": [
+              "defense",
+              "operation"
+            ]
+          },
+          "archetype_SYS_energy": {
+            "role": "trigger",
+            "cross": true,
+            "ports": [
+              "defense",
+              "operation"
+            ]
+          }
+        },
+        "systems": [
+          "stage",
+          "partner",
+          "energy"
+        ],
+        "route": "知识",
+        "systemRoles": {
+          "stage": {
+            "role": "工具",
+            "port": "防御／运转"
+          },
+          "partner": {
+            "role": "兼具",
+            "port": "防御／运转"
+          },
+          "energy": {
+            "role": "触发",
+            "port": "防御／运转"
+          }
+        },
+        "triggerRole": "兼具",
+        "upgrade": "升级牌效按当前升级牌面：知识。获得12点格挡。如是说和翱翔的耗能变为0。",
+        "investment": "按当前版本支付2能量。"
+      },
+      "notes": "定位：箭矢工具；知识兼具；能量/高费触发，提供防御、运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 先获得当前版本格挡，再对具名知识牌执行牌面写明的0费修改；此牌按技能即时结算。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。获得12点格挡。如是说和翱翔的耗能变为0。",
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "尼采《查拉图斯特拉如是说》：先学会站立与奔跑，再学习飞翔。"
+        }
+      ]
+    },
+    {
+      "id": "JK37",
+      "name": "金石可镂",
+      "text": "知识。造成60点伤害。",
+      "upgradedText": "知识。造成80点伤害。",
+      "art": "original-scene-jk37-literary-group-recast-20261103",
+      "naming": {
+        "original": "金石可镂",
+        "work": "荀子《劝学》；2021剧场版狩猎片段约03:08（配图）",
+        "url": "https://zh.wikisource.org/zh-hans/%E5%8A%9D%E5%AD%A6",
+        "adaptation": "本组以劝学为篇名核心，锲而不舍补充方法，金石可镂呈现坚持后的力量。长时间准备后的高伤害由同组反复推进，体现积累终有所成。配图继续采用用户指定的奈奈劈开巨箭场面，重新选取相邻原作帧，保留巨大金属箭头与切开的断面；典籍文字为本次契合引用。 配图：film-giant-arrow-0307-20261103.jpg；裁切70,100,960,720。画面来源：https://www.bilibili.com/video/BV1u3411v7i7/?t=188",
+        "kind": "典籍原句",
+        "chineseOriginal": "金石可镂"
+      },
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "荀子《劝学》：锲而不舍，金石可镂。"
+        }
+      ]
+    },
+    {
+      "id": "JK37B",
+      "name": "锲而不舍",
+      "text": "知识。造成4点伤害。金石可镂加速1回合。",
+      "upgradedText": "知识。造成4点伤害。金石可镂加速2回合。",
+      "art": "original-scene-ja53-full-name-art-review-supplement-20261103",
+      "naming": {
+        "original": "锲而不舍",
+        "work": "荀子《劝学》；TV第2话约18:30（配图）",
+        "url": "https://zh.wikisource.org/zh-hans/%E5%8A%9D%E5%AD%A6",
+        "adaptation": "补充劝学中持之以恒的方法。每次造成少量伤害并加速金石可镂，连续实践使最终成果更早到来。配图把原备箭已释放的张弓卡图调到攻击牌，突出箭头、绷紧的弦与持弓用力的手。 配图：tv02-1828-action.jpg；沿用已释放的张弓细节裁图。画面来源：https://www.bilibili.com/bangumi/play/ep232368?t=1110",
+        "kind": "典籍原句",
+        "chineseOriginal": "锲而不舍"
+      },
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "荀子《劝学》：持续雕刻，金石也能刻开。"
+        }
+      ]
+    },
+    {
+      "id": "JK37C",
+      "name": "劝学",
+      "text": "知识。打出攻击牌或箭矢牌后，抽1张0费牌。",
+      "upgradedText": "知识。打出攻击牌或箭矢牌后，抽2张0费牌。",
+      "art": "original-scene-jk49-energy-star-20261103",
+      "naming": {
+        "original": "劝学",
+        "work": "荀子《劝学》；TV第3话约10:06（配图）",
+        "url": "https://zh.wikisource.org/zh-hans/%E5%8A%9D%E5%AD%A6",
+        "adaptation": "主牌直接使用篇名，关联牌以同篇原句说明坚持的方法与成果。每次主动出牌带来新的低费牌，表现学习继续展开。配图采用已释放的教材与书桌画面，以摊开的书页、参考书和学习资料承载阅读；所示教材为原作物件，并未标作《荀子》的具体版本。 配图：tv03-1005-study.jpg；沿用已释放的教材与书桌裁图。画面来源：https://www.bilibili.com/bangumi/play/ep232369?t=606",
+        "kind": "典籍篇名",
+        "chineseOriginal": "劝学"
+      },
+      "extraHoverTips": [
+        {
+          "id": "junna_knowledge_background",
+          "title": "知识背景",
+          "description": "荀子《劝学》，论述学习、积累与坚持。"
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "mechanicsAndCostsPreserved": true,
+    "groupsAndCountsPreserved": true,
+    "referencesSynced": true,
+    "selectedArtDistinct": true,
+    "fitAssignmentsSynced": true,
+    "otherBackgroundTipsPreserved": true,
+    "literaryBackgroundsExported": true,
+    "shortNamesAndReferencesVerified": true,
+    "nativeCardFramesChecked": true
+  },
+  "shortNameRevision": 2008,
+  "metadataRevision": 2009,
+  "preview": "docs/design/workbench/previews/three-knowledge-groups-final-20261103.png"
+}

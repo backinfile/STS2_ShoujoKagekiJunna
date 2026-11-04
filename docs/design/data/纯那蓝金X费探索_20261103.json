@@ -1,0 +1,1137 @@
+{
+  "schemaVersion": 1,
+  "id": "junna-blue-gold-x-cost-20261103-v1",
+  "date": "2026-11-03",
+  "sourceRevision": 1317,
+  "appliedRevision": 1318,
+  "historyRecord": "83f11137-724c-4e42-9dab-617e41b8b39f",
+  "cards": [
+    {
+      "uid": "x_cost_exploration_JA59",
+      "id": "JA59",
+      "name": "急射",
+      "type": "箭矢",
+      "arrowSubtype": "攻击",
+      "system": "stage",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": "X",
+      "upgradedCost": "X",
+      "turns": 4,
+      "upgradedTurns": 3,
+      "target": "敌人",
+      "text": "初始回合数减少X。造成24点伤害。",
+      "upgradedText": "初始回合数减少X。造成24点伤害。",
+      "keywords": [],
+      "termIds": [
+        "NV57",
+        "KW_STAGE",
+        "EF01",
+        "NV26",
+        "RL05"
+      ],
+      "effectIds": [
+        "EF01"
+      ],
+      "ruleIds": [
+        "RL05"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "archetypeIds": [
+        "SYS_stage",
+        "RT_ACCEL",
+        "RT_HIGH"
+      ],
+      "art": "original-scene-jb05-star-20261103",
+      "character": "星见纯那",
+      "role": "机制中坚牌",
+      "direction": "加速完成",
+      "draftStatus": "X费探索候选",
+      "draftBatch": "junna-blue-gold-x-cost-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "TV 第2话 · 约18:34",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1114",
+        "adaptation": "按原作动作拟定短名。纯那持弓快速迈步，投入更多能量缩短从准备到命中的时间。 沿用已登记原作裁图：original-scene-jb05-star-20261103。"
+      },
+      "design": {
+        "classification": "机制中坚牌",
+        "route": "加速完成",
+        "systems": [
+          "stage"
+        ],
+        "port": "输出",
+        "routeRoles": {
+          "full_pool_RT_ACCEL": {
+            "role": "load",
+            "cross": true,
+            "ports": []
+          },
+          "full_pool_RT_HIGH": {
+            "role": "trigger",
+            "cross": true,
+            "ports": []
+          }
+        },
+        "roleReason": "能量购买兑现速度，伤害数值保持；低能量也能先布置长等待载荷。",
+        "rules": "本次打出按本体规则支付X费，牌效使用ResolveEnergyXValue的结果并记录；化学X等修正按本体钩子处理，高费条件读取实际支付，分别保存两者。箭矢布置及延后执行沿用本次记录，不在完成或额外触发时重新读取当前能量或再次支付。\n在本次布置初始化阶段读取本次已记录的X，将本牌4／3回合初始值减少X，下限0；这一句只执行于建立布置，不在重放或额外触发时再次减少计数。计数为0时按既有即时完成规则处理，初始修正不记为主动加速量。完成时造成24点伤害，伤害加成及额外伤害次数沿现有规则。",
+        "upgrade": "牌面初始回合数4→3；伤害保持24，减少量仍为X。",
+        "xCost": {
+          "payment": "EnergyCost.CapturedXValue",
+          "effect": "CardModel.ResolveEnergyXValue()",
+          "capture": "rootCardPlay",
+          "highCostReading": "actualEnergySpent",
+          "arrow": "freezeResolvedXInDeployment"
+        },
+        "examples": [
+          {
+            "base": {
+              "x": 0,
+              "wait": 4,
+              "damage": 24
+            },
+            "upgraded": {
+              "x": 0,
+              "wait": 3,
+              "damage": 24
+            }
+          },
+          {
+            "base": {
+              "x": 1,
+              "wait": 3,
+              "damage": 24
+            },
+            "upgraded": {
+              "x": 1,
+              "wait": 2,
+              "damage": 24
+            }
+          },
+          {
+            "base": {
+              "x": 3,
+              "wait": 1,
+              "damage": 24
+            },
+            "upgraded": {
+              "x": 3,
+              "wait": 0,
+              "damage": 24
+            }
+          },
+          {
+            "base": {
+              "x": 6,
+              "wait": 0,
+              "damage": 24
+            },
+            "upgraded": {
+              "x": 6,
+              "wait": 0,
+              "damage": 24
+            }
+          }
+        ],
+        "textComplexity": "中",
+        "reference": "用户要求新增蓝卡、金卡X费候选；采用本体X费规则，效果围绕箭矢、知识和伤害加成。"
+      },
+      "notes": "定位：能量购买兑现速度，伤害数值保持；低能量也能先布置长等待载荷。\n结算约定：在本次布置初始化阶段读取本次已记录的X，将本牌4／3回合初始值减少X，下限0；这一句只执行于建立布置，不在重放或额外触发时再次减少计数。计数为0时按既有即时完成规则处理，初始修正不记为主动加速量。完成时造成24点伤害，伤害加成及额外伤害次数沿现有规则。"
+    },
+    {
+      "uid": "x_cost_exploration_JA60",
+      "id": "JA60",
+      "name": "齐发",
+      "type": "技能",
+      "system": "stage",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": "X",
+      "upgradedCost": "X",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "所有箭矢加速X回合。消耗。",
+      "upgradedText": "所有箭矢加速X+1回合。消耗。",
+      "keywords": [
+        "消耗"
+      ],
+      "termIds": [
+        "NV57",
+        "EF29",
+        "KW_ACCEL",
+        "KW_EXHAUST"
+      ],
+      "effectIds": [
+        "EF29"
+      ],
+      "ruleIds": [],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "archetypeIds": [
+        "SYS_stage",
+        "RT_ACCEL",
+        "RT_HIGH"
+      ],
+      "art": "original-scene-jx01-20261102",
+      "character": "星见纯那",
+      "role": "机制中坚牌",
+      "direction": "加速完成",
+      "draftStatus": "X费探索候选",
+      "draftBatch": "junna-blue-gold-x-cost-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "TV 第2话 · 约18:42",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1122",
+        "adaptation": "按原作动作、物件或场面拟定短名。纯那持弓在舞台中安排出手，让已经准备的箭矢一起推进。 沿用已登记原作裁图：original-scene-jx01-20261102。"
+      },
+      "design": {
+        "classification": "机制中坚牌",
+        "route": "加速完成",
+        "systems": [
+          "stage"
+        ],
+        "port": "输出／防御／运转",
+        "routeRoles": {
+          "full_pool_RT_ACCEL": {
+            "role": "trigger",
+            "cross": false,
+            "ports": []
+          },
+          "full_pool_RT_HIGH": {
+            "role": "tool",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "roleReason": "把剩余能量投入当前场面，集中兑现不同回合数的箭矢；与列阵的循环使用升级形成不同取舍。",
+        "rules": "本次打出按本体规则支付X费，牌效使用ResolveEnergyXValue的结果并记录；化学X等修正按本体钩子处理，高费条件读取实际支付，分别保存两者。箭矢布置及延后执行沿用本次记录，不在完成或额外触发时重新读取当前能量或再次支付。\n执行时快照自己的有效箭矢布置，分别加速X／X+1回合，逐个按真实减少量发布推进事件。超过剩余回合的请求不增加推进量；已完成或离场的旧对象跳过，处理中产生的新布置不加入本次集合。两版均消耗。",
+        "upgrade": "群体加速量X→X+1；消耗保持。",
+        "xCost": {
+          "payment": "EnergyCost.CapturedXValue",
+          "effect": "CardModel.ResolveEnergyXValue()",
+          "capture": "rootCardPlay",
+          "highCostReading": "actualEnergySpent",
+          "arrow": "freezeResolvedXInDeployment"
+        },
+        "examples": [
+          {
+            "base": {
+              "x": 0,
+              "amount": 0
+            },
+            "upgraded": {
+              "x": 0,
+              "amount": 1
+            }
+          },
+          {
+            "base": {
+              "x": 1,
+              "amount": 1
+            },
+            "upgraded": {
+              "x": 1,
+              "amount": 2
+            }
+          },
+          {
+            "base": {
+              "x": 3,
+              "amount": 3
+            },
+            "upgraded": {
+              "x": 3,
+              "amount": 4
+            }
+          },
+          {
+            "base": {
+              "x": 6,
+              "amount": 6
+            },
+            "upgraded": {
+              "x": 6,
+              "amount": 7
+            }
+          }
+        ],
+        "textComplexity": "低",
+        "reference": "用户要求新增蓝卡、金卡X费候选；采用本体X费规则，效果围绕箭矢、知识和伤害加成。"
+      },
+      "notes": "定位：把剩余能量投入当前场面，集中兑现不同回合数的箭矢；与列阵的循环使用升级形成不同取舍。\n结算约定：执行时快照自己的有效箭矢布置，分别加速X／X+1回合，逐个按真实减少量发布推进事件。超过剩余回合的请求不增加推进量；已完成或离场的旧对象跳过，处理中产生的新布置不加入本次集合。两版均消耗。"
+    },
+    {
+      "uid": "x_cost_exploration_JG32",
+      "id": "JG32",
+      "name": "加练",
+      "type": "技能",
+      "system": "growth",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": "X",
+      "upgradedCost": "X",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "选择1张牌，使其获得3X点伤害加成。",
+      "upgradedText": "选择1张牌，使其获得4X点伤害加成。",
+      "keywords": [],
+      "termIds": [
+        "NV57",
+        "EF39",
+        "KW_BONUS",
+        "RL23"
+      ],
+      "effectIds": [
+        "EF39"
+      ],
+      "ruleIds": [
+        "RL23"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "archetypeIds": [
+        "SYS_growth",
+        "RT_HIGH"
+      ],
+      "art": "original-scene-jh16-20261102",
+      "character": "星见纯那",
+      "role": "机制核心牌",
+      "direction": "伤害加成",
+      "draftStatus": "X费探索候选",
+      "draftBatch": "junna-blue-gold-x-cost-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "2021 剧场版 · 约09:17",
+        "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+        "adaptation": "按原作动作、物件或场面拟定短名。纯那在课堂舞台上反复练习步伐，把集中投入体现为一张牌的长期进步。 沿用已登记原作裁图：original-scene-jh16-20261102。"
+      },
+      "design": {
+        "classification": "机制核心牌",
+        "route": "伤害加成",
+        "systems": [
+          "growth"
+        ],
+        "port": "输出",
+        "routeRoles": {
+          "full_pool_RT_HIGH": {
+            "role": "tool",
+            "cross": true,
+            "ports": [
+              "output"
+            ]
+          }
+        },
+        "roleReason": "把一次剩余能量集中投资到一张输出牌，适合多段、持续伤害及之后反复使用的载荷。",
+        "rules": "本次打出按本体规则支付X费，牌效使用ResolveEnergyXValue的结果并记录；化学X等修正按本体钩子处理，高费条件读取实际支付，分别保存两者。箭矢布置及延后执行沿用本次记录，不在完成或额外触发时重新读取当前能量或再次支付。\n从自己的手牌选择一张符合damageModifierRules的实际牌，按已记录X赋予3X／4X点伤害加成，持续本场战斗。攻击、伤害技能、伤害能力及伤害箭矢采用统一伤害资格；纯格挡或纯资源牌沿既有选择规则跳过。新增存量与持续伤害来源的快照沿当前伤害修正规则处理。",
+        "upgrade": "每点X提供的伤害加成3→4；范围、持续时间和费用保持。",
+        "xCost": {
+          "payment": "EnergyCost.CapturedXValue",
+          "effect": "CardModel.ResolveEnergyXValue()",
+          "capture": "rootCardPlay",
+          "highCostReading": "actualEnergySpent",
+          "arrow": "freezeResolvedXInDeployment"
+        },
+        "examples": [
+          {
+            "base": {
+              "x": 0,
+              "damageBonus": 0
+            },
+            "upgraded": {
+              "x": 0,
+              "damageBonus": 0
+            }
+          },
+          {
+            "base": {
+              "x": 1,
+              "damageBonus": 3
+            },
+            "upgraded": {
+              "x": 1,
+              "damageBonus": 4
+            }
+          },
+          {
+            "base": {
+              "x": 3,
+              "damageBonus": 9
+            },
+            "upgraded": {
+              "x": 3,
+              "damageBonus": 12
+            }
+          },
+          {
+            "base": {
+              "x": 6,
+              "damageBonus": 18
+            },
+            "upgraded": {
+              "x": 6,
+              "damageBonus": 24
+            }
+          }
+        ],
+        "textComplexity": "低",
+        "reference": "用户要求新增蓝卡、金卡X费候选；采用本体X费规则，效果围绕箭矢、知识和伤害加成。"
+      },
+      "notes": "定位：把一次剩余能量集中投资到一张输出牌，适合多段、持续伤害及之后反复使用的载荷。\n结算约定：从自己的手牌选择一张符合damageModifierRules的实际牌，按已记录X赋予3X／4X点伤害加成，持续本场战斗。攻击、伤害技能、伤害能力及伤害箭矢采用统一伤害资格；纯格挡或纯资源牌沿既有选择规则跳过。新增存量与持续伤害来源的快照沿当前伤害修正规则处理。"
+    },
+    {
+      "uid": "x_cost_exploration_JK71",
+      "id": "JK71",
+      "name": "回想",
+      "type": "技能",
+      "system": "partner",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": "X",
+      "upgradedCost": "X",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "将弃牌堆中的X张知识牌放入手牌。消耗。",
+      "upgradedText": "将弃牌堆中的X+1张知识牌放入手牌。消耗。",
+      "keywords": [
+        "消耗"
+      ],
+      "termIds": [
+        "NV57",
+        "EF15",
+        "KW_PARTNER",
+        "KW_EXHAUST"
+      ],
+      "effectIds": [
+        "EF15"
+      ],
+      "ruleIds": [],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "archetypeIds": [
+        "SYS_partner",
+        "RT_LINK",
+        "RT_KNOWLEDGE",
+        "RT_HIGH"
+      ],
+      "art": "official-tv-jk05-20261102",
+      "character": "星见纯那",
+      "role": "机制中坚牌",
+      "direction": "关联调度",
+      "draftStatus": "X费探索候选",
+      "draftBatch": "junna-blue-gold-x-cost-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "原作 · 与华恋的夜间对话（已登记画面）",
+        "url": "",
+        "adaptation": "按原作动作、物件或场面拟定短名。以回想两人交谈中留下的认识，对应把已经用过的知识重新带回手中。 沿用已登记原作裁图：official-tv-jk05-20261102。"
+      },
+      "design": {
+        "classification": "机制中坚牌",
+        "route": "关联调度",
+        "systems": [
+          "partner"
+        ],
+        "port": "运转",
+        "routeRoles": {
+          "full_pool_RT_LINK": {
+            "role": "trigger",
+            "cross": false,
+            "ports": [
+              "operation"
+            ]
+          },
+          "full_pool_RT_KNOWLEDGE": {
+            "role": "tool",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          },
+          "full_pool_RT_HIGH": {
+            "role": "tool",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "roleReason": "按剩余能量一次回收多项知识，支持零费知识和资源组件重新展开。",
+        "rules": "本次打出按本体规则支付X费，牌效使用ResolveEnergyXValue的结果并记录；化学X等修正按本体钩子处理，高费条件读取实际支付，分别保存两者。箭矢布置及延后执行沿用本次记录，不在完成或额外触发时重新读取当前能量或再次支付。\n执行时从自己的弃牌堆选择至多X／X+1张实际知识牌加入手牌；同组各牌统一按知识关键词判断，互不优先。移牌沿满手规则处理，不是抽牌、获得或生成，不附带知识组发放，不触发弃置行为。两版均消耗。",
+        "upgrade": "回收数量X→X+1；来源、目标和消耗保持。",
+        "xCost": {
+          "payment": "EnergyCost.CapturedXValue",
+          "effect": "CardModel.ResolveEnergyXValue()",
+          "capture": "rootCardPlay",
+          "highCostReading": "actualEnergySpent",
+          "arrow": "freezeResolvedXInDeployment"
+        },
+        "examples": [
+          {
+            "base": {
+              "x": 0,
+              "amount": 0
+            },
+            "upgraded": {
+              "x": 0,
+              "amount": 1
+            }
+          },
+          {
+            "base": {
+              "x": 1,
+              "amount": 1
+            },
+            "upgraded": {
+              "x": 1,
+              "amount": 2
+            }
+          },
+          {
+            "base": {
+              "x": 3,
+              "amount": 3
+            },
+            "upgraded": {
+              "x": 3,
+              "amount": 4
+            }
+          },
+          {
+            "base": {
+              "x": 6,
+              "amount": 6
+            },
+            "upgraded": {
+              "x": 6,
+              "amount": 7
+            }
+          }
+        ],
+        "textComplexity": "低",
+        "reference": "用户要求新增蓝卡、金卡X费候选；采用本体X费规则，效果围绕箭矢、知识和伤害加成。"
+      },
+      "notes": "定位：按剩余能量一次回收多项知识，支持零费知识和资源组件重新展开。\n结算约定：执行时从自己的弃牌堆选择至多X／X+1张实际知识牌加入手牌；同组各牌统一按知识关键词判断，互不优先。移牌沿满手规则处理，不是抽牌、获得或生成，不附带知识组发放，不触发弃置行为。两版均消耗。"
+    },
+    {
+      "uid": "x_cost_exploration_JA61",
+      "id": "JA61",
+      "name": "叠奏",
+      "type": "技能",
+      "system": "stage",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": "X",
+      "upgradedCost": "X",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "所有箭矢获得重放X。消耗。",
+      "upgradedText": "所有箭矢获得重放X+1。消耗。",
+      "keywords": [
+        "消耗"
+      ],
+      "termIds": [
+        "NV57",
+        "EF43",
+        "KW_REPLAY",
+        "RL34",
+        "KW_EXHAUST"
+      ],
+      "effectIds": [
+        "EF43"
+      ],
+      "ruleIds": [
+        "RL34"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "archetypeIds": [
+        "SYS_stage",
+        "RT_REPEAT",
+        "RT_HIGH"
+      ],
+      "art": "original-scene-ja02-20261102",
+      "character": "星见纯那",
+      "role": "机制核心牌",
+      "direction": "重放触发",
+      "draftStatus": "X费探索候选",
+      "draftBatch": "junna-blue-gold-x-cost-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "2021 剧场版 · 狩猎的Revue片段约02:28",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=148",
+        "adaptation": "按原作动作、物件或场面拟定短名。纯那站在舞台聚光中准备表达，将已准备的表现叠加为同一批箭矢的多次结算。 沿用已登记原作裁图：original-scene-ja02-20261102。"
+      },
+      "design": {
+        "classification": "机制核心牌",
+        "route": "重放触发",
+        "systems": [
+          "stage"
+        ],
+        "port": "输出／防御／运转",
+        "routeRoles": {
+          "full_pool_RT_REPEAT": {
+            "role": "trigger",
+            "cross": false,
+            "ports": []
+          },
+          "full_pool_RT_HIGH": {
+            "role": "payoff",
+            "cross": true,
+            "ports": [
+              "output",
+              "defense",
+              "operation"
+            ]
+          }
+        },
+        "roleReason": "把已经铺好的整批箭矢作为能量投入对象，提升这一批完成时的结算次数。",
+        "rules": "本次打出按本体规则支付X费，牌效使用ResolveEnergyXValue的结果并记录；化学X等修正按本体钩子处理，高费条件读取实际支付，分别保存两者。箭矢布置及延后执行沿用本次记录，不在完成或额外触发时重新读取当前能量或再次支付。\n快照自己的有效箭矢布置，对每个布置当前记录的重放次数增加X／X+1。计数和目标保持，完成时按更新后的重放次数结算。增加量属于这些当前布置，完成后随本次布置结束；实体牌下次重新打出不继承本次增加量。复制及额外触发读取有效布置当时的重放记录，按现有整批结算规则执行。两版均消耗。",
+        "upgrade": "赋予的重放次数X→X+1；对象范围与消耗保持。",
+        "xCost": {
+          "payment": "EnergyCost.CapturedXValue",
+          "effect": "CardModel.ResolveEnergyXValue()",
+          "capture": "rootCardPlay",
+          "highCostReading": "actualEnergySpent",
+          "arrow": "freezeResolvedXInDeployment"
+        },
+        "examples": [
+          {
+            "base": {
+              "x": 0,
+              "amount": 0
+            },
+            "upgraded": {
+              "x": 0,
+              "amount": 1
+            }
+          },
+          {
+            "base": {
+              "x": 1,
+              "amount": 1
+            },
+            "upgraded": {
+              "x": 1,
+              "amount": 2
+            }
+          },
+          {
+            "base": {
+              "x": 3,
+              "amount": 3
+            },
+            "upgraded": {
+              "x": 3,
+              "amount": 4
+            }
+          },
+          {
+            "base": {
+              "x": 6,
+              "amount": 6
+            },
+            "upgraded": {
+              "x": 6,
+              "amount": 7
+            }
+          }
+        ],
+        "textComplexity": "低",
+        "reference": "用户要求新增蓝卡、金卡X费候选；采用本体X费规则，效果围绕箭矢、知识和伤害加成。"
+      },
+      "notes": "定位：把已经铺好的整批箭矢作为能量投入对象，提升这一批完成时的结算次数。\n结算约定：快照自己的有效箭矢布置，对每个布置当前记录的重放次数增加X／X+1。计数和目标保持，完成时按更新后的重放次数结算。增加量属于这些当前布置，完成后随本次布置结束；实体牌下次重新打出不继承本次增加量。复制及额外触发读取有效布置当时的重放记录，按现有整批结算规则执行。两版均消耗。"
+    },
+    {
+      "uid": "x_cost_exploration_JA62",
+      "id": "JA62",
+      "name": "复述",
+      "type": "技能",
+      "system": "stage",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": "X",
+      "upgradedCost": "X",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "额外触发目标的一个箭矢X次。消耗。",
+      "upgradedText": "额外触发目标的一个箭矢X+1次。消耗。",
+      "keywords": [
+        "消耗"
+      ],
+      "termIds": [
+        "NV57",
+        "EF33",
+        "KW_EXTRA",
+        "RL08",
+        "KW_EXHAUST"
+      ],
+      "effectIds": [
+        "EF33"
+      ],
+      "ruleIds": [
+        "RL08"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "archetypeIds": [
+        "SYS_stage",
+        "RT_REPEAT",
+        "RT_HIGH"
+      ],
+      "art": "original-scene-jt01-20261102",
+      "character": "星见纯那",
+      "role": "机制核心牌",
+      "direction": "重放触发",
+      "draftStatus": "X费探索候选",
+      "draftBatch": "junna-blue-gold-x-cost-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "TV 第9话 · 约20:22",
+        "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1222",
+        "adaptation": "按原作动作、物件或场面拟定短名。纯那再次说出自己的认识，以言叶的再次表达对应同一箭矢的额外触发。 沿用已登记原作裁图：original-scene-jt01-20261102。"
+      },
+      "design": {
+        "classification": "机制核心牌",
+        "route": "重放触发",
+        "systems": [
+          "stage"
+        ],
+        "port": "输出／防御／运转",
+        "routeRoles": {
+          "full_pool_RT_REPEAT": {
+            "role": "trigger",
+            "cross": false,
+            "ports": []
+          },
+          "full_pool_RT_HIGH": {
+            "role": "payoff",
+            "cross": true,
+            "ports": [
+              "output",
+              "defense",
+              "operation"
+            ]
+          }
+        },
+        "roleReason": "选择一个已经准备好的载荷立即多次兑现，保留它之后正常完成的机会。",
+        "rules": "本次打出按本体规则支付X费，牌效使用ResolveEnergyXValue的结果并记录；化学X等修正按本体钩子处理，高费条件读取实际支付，分别保存两者。箭矢布置及延后执行沿用本次记录，不在完成或额外触发时重新读取当前能量或再次支付。\n选择自己箭矢牌堆中的一个有效布置，记录其instanceId，依次提出X／X+1次额外触发。每次检查该布置仍有效，并沿现有额外触发与重放规则执行；该动作本身保留布置及其剩余计数。若牌效自身令其完成或离场，后续对旧实例的请求跳过。额外触发不建立再次打出或正常完成事件，不重新支付目标箭矢的能量；各份执行响应其对应的效果触发。两版均消耗。",
+        "upgrade": "额外触发次数X→X+1；选择范围与消耗保持。",
+        "xCost": {
+          "payment": "EnergyCost.CapturedXValue",
+          "effect": "CardModel.ResolveEnergyXValue()",
+          "capture": "rootCardPlay",
+          "highCostReading": "actualEnergySpent",
+          "arrow": "freezeResolvedXInDeployment"
+        },
+        "examples": [
+          {
+            "base": {
+              "x": 0,
+              "amount": 0
+            },
+            "upgraded": {
+              "x": 0,
+              "amount": 1
+            }
+          },
+          {
+            "base": {
+              "x": 1,
+              "amount": 1
+            },
+            "upgraded": {
+              "x": 1,
+              "amount": 2
+            }
+          },
+          {
+            "base": {
+              "x": 3,
+              "amount": 3
+            },
+            "upgraded": {
+              "x": 3,
+              "amount": 4
+            }
+          },
+          {
+            "base": {
+              "x": 6,
+              "amount": 6
+            },
+            "upgraded": {
+              "x": 6,
+              "amount": 7
+            }
+          }
+        ],
+        "textComplexity": "低",
+        "reference": "用户要求新增蓝卡、金卡X费候选；采用本体X费规则，效果围绕箭矢、知识和伤害加成。"
+      },
+      "notes": "定位：选择一个已经准备好的载荷立即多次兑现，保留它之后正常完成的机会。\n结算约定：选择自己箭矢牌堆中的一个有效布置，记录其instanceId，依次提出X／X+1次额外触发。每次检查该布置仍有效，并沿现有额外触发与重放规则执行；该动作本身保留布置及其剩余计数。若牌效自身令其完成或离场，后续对旧实例的请求跳过。额外触发不建立再次打出或正常完成事件，不重新支付目标箭矢的能量；各份执行响应其对应的效果触发。两版均消耗。"
+    },
+    {
+      "uid": "x_cost_exploration_JA63",
+      "id": "JA63",
+      "name": "就位",
+      "type": "技能",
+      "system": "stage",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": "X",
+      "upgradedCost": "X",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "本回合，接下来打出的X张箭矢牌耗能为0。消耗。",
+      "upgradedText": "本回合，接下来打出的X+1张箭矢牌耗能为0。消耗。",
+      "keywords": [
+        "消耗"
+      ],
+      "termIds": [
+        "NV57",
+        "EF48",
+        "EF49",
+        "RL15",
+        "KW_EXHAUST"
+      ],
+      "effectIds": [
+        "EF48",
+        "EF49"
+      ],
+      "ruleIds": [
+        "RL15"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "archetypeIds": [
+        "SYS_stage",
+        "RT_HIGH"
+      ],
+      "art": "official-tv-ja04-20261102",
+      "character": "星见纯那",
+      "role": "机制核心牌",
+      "direction": "高费配合",
+      "draftStatus": "X费探索候选",
+      "draftBatch": "junna-blue-gold-x-cost-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "原作 · 华恋与纯那登台动作（已登记画面）",
+        "url": "",
+        "adaptation": "按原作动作、物件或场面拟定短名。两人背靠背准备登场，以提前就位对应后续箭矢的集中展开。 沿用已登记原作裁图：official-tv-ja04-20261102。"
+      },
+      "design": {
+        "classification": "机制核心牌",
+        "route": "高费配合",
+        "systems": [
+          "stage"
+        ],
+        "port": "运转",
+        "routeRoles": {
+          "full_pool_RT_HIGH": {
+            "role": "trigger",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "roleReason": "先用剩余能量预约有限次数的箭矢展开，让手中的高费载荷集中登场。",
+        "rules": "本次打出按本体规则支付X费，牌效使用ResolveEnergyXValue的结果并记录；化学X等修正按本体钩子处理，高费条件读取实际支付，分别保存两者。箭矢布置及延后执行沿用本次记录，不在完成或额外触发时重新读取当前能量或再次支付。\n为自己建立持续本回合的X／X+1次箭矢免付能量准备。之后实际打出一张箭矢时消耗一次准备，并免除本次能量支付；原本0费的箭矢也消耗一次准备。手牌费用、次数预览与实际支付按同一准备来源同步，回合结束清理未用次数。本效果保持卡牌类型、目标与独立倒计时；X费箭矢保留X费性质，其X沿本体免费出牌流程读取，不继承本牌所支付的X。重放或额外执行牌效不再次消耗准备。两版均消耗。",
+        "upgrade": "准备次数X→X+1；时限、类型范围与消耗保持。",
+        "xCost": {
+          "payment": "EnergyCost.CapturedXValue",
+          "effect": "CardModel.ResolveEnergyXValue()",
+          "capture": "rootCardPlay",
+          "highCostReading": "actualEnergySpent",
+          "arrow": "freezeResolvedXInDeployment"
+        },
+        "examples": [
+          {
+            "base": {
+              "x": 0,
+              "amount": 0
+            },
+            "upgraded": {
+              "x": 0,
+              "amount": 1
+            }
+          },
+          {
+            "base": {
+              "x": 1,
+              "amount": 1
+            },
+            "upgraded": {
+              "x": 1,
+              "amount": 2
+            }
+          },
+          {
+            "base": {
+              "x": 3,
+              "amount": 3
+            },
+            "upgraded": {
+              "x": 3,
+              "amount": 4
+            }
+          },
+          {
+            "base": {
+              "x": 6,
+              "amount": 6
+            },
+            "upgraded": {
+              "x": 6,
+              "amount": 7
+            }
+          }
+        ],
+        "textComplexity": "低",
+        "reference": "用户要求新增蓝卡、金卡X费候选；采用本体X费规则，效果围绕箭矢、知识和伤害加成。"
+      },
+      "notes": "定位：先用剩余能量预约有限次数的箭矢展开，让手中的高费载荷集中登场。\n结算约定：为自己建立持续本回合的X／X+1次箭矢免付能量准备。之后实际打出一张箭矢时消耗一次准备，并免除本次能量支付；原本0费的箭矢也消耗一次准备。手牌费用、次数预览与实际支付按同一准备来源同步，回合结束清理未用次数。本效果保持卡牌类型、目标与独立倒计时；X费箭矢保留X费性质，其X沿本体免费出牌流程读取，不继承本牌所支付的X。重放或额外执行牌效不再次消耗准备。两版均消耗。"
+    },
+    {
+      "uid": "x_cost_exploration_JK72",
+      "id": "JK72",
+      "name": "复排",
+      "type": "技能",
+      "system": "partner",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": "X",
+      "upgradedCost": "X",
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "复制手牌中的所有知识牌X次。消耗。",
+      "upgradedText": "复制手牌中的所有知识牌X+1次。消耗。",
+      "keywords": [
+        "消耗"
+      ],
+      "termIds": [
+        "NV57",
+        "EF21",
+        "KW_COPY",
+        "KW_PARTNER",
+        "RL12",
+        "KW_EXHAUST"
+      ],
+      "effectIds": [
+        "EF21"
+      ],
+      "ruleIds": [
+        "RL12"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "archetypeIds": [
+        "SYS_partner",
+        "RT_KNOWLEDGE",
+        "RT_LINK",
+        "RT_HIGH"
+      ],
+      "art": "original-scene-jx05-20261102",
+      "character": "星见纯那",
+      "role": "机制核心牌",
+      "direction": "知识运转",
+      "draftStatus": "X费探索候选",
+      "draftBatch": "junna-blue-gold-x-cost-20261103-v1",
+      "naming": {
+        "original": "",
+        "kind": "动作或物件短名",
+        "work": "2021 剧场版 · 约09:32",
+        "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=572",
+        "adaptation": "按原作动作、物件或场面拟定短名。课堂上纯那持本观察排练，将已经掌握的一组行动再次用于新的演出。 沿用已登记原作裁图：original-scene-jx05-20261102。"
+      },
+      "design": {
+        "classification": "机制核心牌",
+        "route": "知识运转",
+        "systems": [
+          "partner"
+        ],
+        "port": "运转",
+        "routeRoles": {
+          "full_pool_RT_KNOWLEDGE": {
+            "role": "trigger",
+            "cross": false,
+            "ports": [
+              "operation"
+            ]
+          },
+          "full_pool_RT_LINK": {
+            "role": "tool",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          },
+          "full_pool_RT_HIGH": {
+            "role": "payoff",
+            "cross": true,
+            "ports": [
+              "operation"
+            ]
+          }
+        },
+        "roleReason": "把已经凑齐的多张知识牌整批复制，允许同一组或不同组的组件继续展开。",
+        "rules": "本次打出按本体规则支付X费，牌效使用ResolveEnergyXValue的结果并记录；化学X等修正按本体钩子处理，高费条件读取实际支付，分别保存两者。箭矢布置及延后执行沿用本次记录，不在完成或额外触发时重新读取当前能量或再次支付。\n本牌开始执行时快照自己手牌中的实际知识牌，按知识关键词统一判断，不区分奖励入口与关联牌。每轮为快照中每张牌各创建一张实际复制品，共执行X／X+1轮；本次新生成的复制品不加入原快照。复制继承源实际牌的升级及有效卡牌修改，时限沿原复制规则处理；加入手牌沿满手规则，不额外发放知识组。手中有两张同名知识时，各自都是独立复制源。两版均消耗。",
+        "upgrade": "复制轮数X→X+1；快照范围、继承方式与消耗保持。",
+        "xCost": {
+          "payment": "EnergyCost.CapturedXValue",
+          "effect": "CardModel.ResolveEnergyXValue()",
+          "capture": "rootCardPlay",
+          "highCostReading": "actualEnergySpent",
+          "arrow": "freezeResolvedXInDeployment"
+        },
+        "examples": [
+          {
+            "base": {
+              "x": 0,
+              "amount": 0
+            },
+            "upgraded": {
+              "x": 0,
+              "amount": 1
+            }
+          },
+          {
+            "base": {
+              "x": 1,
+              "amount": 1
+            },
+            "upgraded": {
+              "x": 1,
+              "amount": 2
+            }
+          },
+          {
+            "base": {
+              "x": 3,
+              "amount": 3
+            },
+            "upgraded": {
+              "x": 3,
+              "amount": 4
+            }
+          },
+          {
+            "base": {
+              "x": 6,
+              "amount": 6
+            },
+            "upgraded": {
+              "x": 6,
+              "amount": 7
+            }
+          }
+        ],
+        "textComplexity": "低",
+        "reference": "用户要求新增蓝卡、金卡X费候选；采用本体X费规则，效果围绕箭矢、知识和伤害加成。"
+      },
+      "notes": "定位：把已经凑齐的多张知识牌整批复制，允许同一组或不同组的组件继续展开。\n结算约定：本牌开始执行时快照自己手牌中的实际知识牌，按知识关键词统一判断，不区分奖励入口与关联牌。每轮为快照中每张牌各创建一张实际复制品，共执行X／X+1轮；本次新生成的复制品不加入原快照。复制继承源实际牌的升级及有效卡牌修改，时限沿原复制规则处理；加入手牌沿满手规则，不额外发放知识组。手中有两张同名知识时，各自都是独立复制源。两版均消耗。"
+    }
+  ],
+  "xRule": {
+    "payment": "EnergyCost.CapturedXValue",
+    "effect": "CardModel.ResolveEnergyXValue()",
+    "capture": "rootCardPlay",
+    "highCostReading": "actualEnergySpent",
+    "arrow": "freezeResolvedXInDeployment"
+  },
+  "sources": [
+    {
+      "id": "JA59",
+      "asset": "original-scene-jb05-star-20261103",
+      "work": "TV 第2话 · 约18:34",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1114",
+      "fit": "纯那持弓快速迈步，投入更多能量缩短从准备到命中的时间。"
+    },
+    {
+      "id": "JA60",
+      "asset": "original-scene-jx01-20261102",
+      "work": "TV 第2话 · 约18:42",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1122",
+      "fit": "纯那持弓在舞台中安排出手，让已经准备的箭矢一起推进。"
+    },
+    {
+      "id": "JG32",
+      "asset": "original-scene-jh16-20261102",
+      "work": "2021 剧场版 · 约09:17",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+      "fit": "纯那在课堂舞台上反复练习步伐，把集中投入体现为一张牌的长期进步。"
+    },
+    {
+      "id": "JK71",
+      "asset": "official-tv-jk05-20261102",
+      "work": "原作 · 与华恋的夜间对话（已登记画面）",
+      "url": "",
+      "fit": "以回想两人交谈中留下的认识，对应把已经用过的知识重新带回手中。"
+    },
+    {
+      "id": "JA61",
+      "asset": "original-scene-ja02-20261102",
+      "work": "2021 剧场版 · 狩猎的Revue片段约02:28",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=148",
+      "fit": "纯那站在舞台聚光中准备表达，将已准备的表现叠加为同一批箭矢的多次结算。"
+    },
+    {
+      "id": "JA62",
+      "asset": "original-scene-jt01-20261102",
+      "work": "TV 第9话 · 约20:22",
+      "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1222",
+      "fit": "纯那再次说出自己的认识，以言叶的再次表达对应同一箭矢的额外触发。"
+    },
+    {
+      "id": "JA63",
+      "asset": "official-tv-ja04-20261102",
+      "work": "原作 · 华恋与纯那登台动作（已登记画面）",
+      "url": "",
+      "fit": "两人背靠背准备登场，以提前就位对应后续箭矢的集中展开。"
+    },
+    {
+      "id": "JK72",
+      "asset": "original-scene-jx05-20261102",
+      "work": "2021 剧场版 · 约09:32",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=572",
+      "fit": "课堂上纯那持本观察排练，将已经掌握的一组行动再次用于新的演出。"
+    }
+  ],
+  "checks": {
+    "newCards": 8,
+    "uncommon": 4,
+    "rare": 4,
+    "existingDataPreserved": true,
+    "reserveAndTrashPreserved": true,
+    "normalizedWithWorkbench": true,
+    "undoRoundTrip": true,
+    "xExamples": [
+      0,
+      1,
+      3,
+      6
+    ]
+  },
+  "implementation": "设计工作台候选；X费效果与各自内部结算约定",
+  "artRefinement": {
+    "revision": 1319,
+    "historyRecord": "37a2acbe-2caf-40bc-92a2-b33d5becb554"
+  }
+}

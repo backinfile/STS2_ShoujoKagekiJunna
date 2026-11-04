@@ -1,0 +1,17 @@
+{
+  "batchId": "junna-shaoxi-distinct-rest-art-20261103-v1",
+  "revision": 1320,
+  "proof": "tv02-1332-proof.jpg",
+  "crop": {
+    "width": 1000,
+    "height": 750,
+    "left": 570,
+    "top": 25
+  },
+  "checks": {
+    "breathingCardPreserved": true,
+    "mechanicsAndHoverTipsPreserved": true,
+    "fitPoolUpdated": true,
+    "readbackVerified": true
+  }
+}

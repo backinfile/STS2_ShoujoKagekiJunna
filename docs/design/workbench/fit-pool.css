@@ -1,0 +1,27 @@
+.body-layout.is-fit-pool{grid-template-columns:206px minmax(0,1fr)}
+.body-layout.is-fit-pool.has-fit-selection{grid-template-columns:206px minmax(0,1fr) 366px}
+.fit-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:30px 24px;align-items:start}
+.fit-topic-heading{grid-column:1/-1;font-size:18px;font-weight:500;margin:18px 0 -12px;line-height:1.6}
+.fit-topic-heading:first-child{margin-top:0}
+.fit-topic-heading span{font-size:11px;font-weight:400;color:var(--muted);margin-left:8px}
+.fit-entry{min-width:0;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.fit-entry.selected{border-bottom-color:var(--gold)}
+.fit-open{display:block;width:100%;text-align:left;padding:0;border-radius:3px}
+.fit-open:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
+.fit-image{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;background:var(--surface);border-radius:3px}
+.fit-heading{display:flex;gap:14px;align-items:baseline;justify-content:space-between;padding:12px 0 5px}
+.fit-name{font-size:16px;font-weight:500;line-height:1.5;overflow-wrap:anywhere}
+.fit-status{font-size:10px;white-space:nowrap;color:var(--muted)}
+.fit-status.is-used{color:var(--gold)}
+.fit-open:hover .fit-name{color:var(--gold)}
+.fit-theme{display:block;color:var(--muted);font-size:11px;line-height:1.7}
+.fit-text{font-size:13px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;margin:10px 0}
+.fit-original{font-size:12px;line-height:1.8;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0}
+.fit-source{display:inline-block;font-size:11px;line-height:1.8;color:var(--gold);text-decoration:none;overflow-wrap:anywhere}
+a.fit-source:hover{text-decoration:underline;text-underline-offset:3px}
+.fit-card-links{display:flex;flex-wrap:wrap;gap:9px 16px;margin-top:12px}
+.fit-card-links .text-button{line-height:1.8}
+.fit-inspector-image{display:block;width:100%;height:auto;max-height:300px;object-fit:contain;border-radius:3px}
+.is-fit-pool .preview:empty{display:none}
+@media(max-width:1100px){.body-layout.is-fit-pool.has-fit-selection{grid-template-columns:180px minmax(0,1fr) 310px}}
+@media(max-width:800px){.body-layout.is-fit-pool,.body-layout.is-fit-pool.has-fit-selection{grid-template-columns:160px minmax(0,1fr)}.is-fit-pool.has-fit-selection .inspector{grid-column:2;max-height:60vh;border-top:1px solid var(--line)}.fit-gallery{grid-template-columns:1fr}}

@@ -1,0 +1,198 @@
+{
+  "workbenchRevision": 2262,
+  "cards": [
+    {
+      "uid": "draft_card_JG03",
+      "id": "JG03",
+      "name": "重复练习",
+      "cost": 1,
+      "upgradedCost": 1,
+      "text": "选择一张手牌，使其额外造成1次伤害。 \n消耗。",
+      "upgradedText": "保留。选择一张手牌，使其额外造成1次伤害。 \n消耗。",
+      "turns": null,
+      "upgradedTurns": null,
+      "art": "original-scene-jg03-20261102"
+    },
+    {
+      "uid": "draft_card_JA16",
+      "id": "JA16",
+      "name": "引路星",
+      "cost": 1,
+      "upgradedCost": 1,
+      "text": "造成9点伤害。下回合获得1点能量。",
+      "upgradedText": "造成12点伤害。下回合获得1点能量。",
+      "turns": null,
+      "upgradedTurns": null,
+      "art": "original-scene-ja16-all-card-review-20261104"
+    },
+    {
+      "uid": "draft_card_JA17",
+      "id": "JA17",
+      "name": "破围",
+      "cost": 2,
+      "upgradedCost": 2,
+      "text": "对所有敌人造成8点伤害。下回合获得2点能量。",
+      "upgradedText": "对所有敌人造成12点伤害。下回合获得2点能量。",
+      "turns": null,
+      "upgradedTurns": null,
+      "art": "original-scene-ja17-20261102"
+    },
+    {
+      "uid": "draft_card_JG09",
+      "id": "JG09",
+      "name": "准备活动",
+      "cost": 1,
+      "upgradedCost": 1,
+      "text": "获得7点格挡。选择1张手牌获得2点伤害加成。",
+      "upgradedText": "获得9点格挡。选择1张手牌获得3点伤害加成。",
+      "turns": null,
+      "upgradedTurns": null,
+      "art": "original-scene-jg09-full-name-art-review-20261103"
+    },
+    {
+      "uid": "draft_card_JG23",
+      "id": "JG23",
+      "name": "耐力训练",
+      "cost": 3,
+      "upgradedCost": 2,
+      "text": "卡牌每拥有6点伤害加成，便额外造成1次伤害。",
+      "upgradedText": "卡牌每拥有6点伤害加成，便额外造成1次伤害。",
+      "turns": null,
+      "upgradedTurns": null,
+      "art": "original-scene-jg23-20261102"
+    },
+    {
+      "uid": "complete_pool_JH10",
+      "id": "JH10",
+      "name": "回身斩",
+      "cost": 3,
+      "upgradedCost": 3,
+      "text": "造成9点伤害3次。",
+      "upgradedText": "造成12点伤害3次。",
+      "turns": null,
+      "upgradedTurns": null,
+      "art": "original-scene-jh10-full-name-art-review-20261103"
+    },
+    {
+      "uid": "complete_pool_JB01",
+      "id": "JB01",
+      "name": "打击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "text": "造成6点伤害。",
+      "upgradedText": "造成9点伤害。",
+      "turns": null,
+      "upgradedTurns": null,
+      "art": "original-scene-jb01-20261102"
+    },
+    {
+      "uid": "complete_pool_JB02",
+      "id": "JB02",
+      "name": "防御",
+      "cost": 1,
+      "upgradedCost": 1,
+      "text": "获得5点格挡。",
+      "upgradedText": "获得8点格挡。",
+      "turns": null,
+      "upgradedTurns": null,
+      "art": "original-scene-jb02-20261102"
+    },
+    {
+      "uid": "complete_pool_JB03",
+      "id": "JB03",
+      "name": "满弦射击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "text": "造成25点伤害。",
+      "upgradedText": "造成32点伤害。",
+      "turns": 3,
+      "upgradedTurns": 3,
+      "art": "original-scene-ja13-full-name-art-review-20261103"
+    }
+  ],
+  "startingDeck": [
+    {
+      "cardId": "JB01",
+      "count": 5
+    },
+    {
+      "cardId": "JB02",
+      "count": 4
+    },
+    {
+      "cardId": "JB03",
+      "count": 1
+    }
+  ],
+  "damageModifierRules": {
+    "version": 2,
+    "storage": "eligibleCardInstances",
+    "selection": "damageCapabilityAndCardTextScope",
+    "damageBonusField": "damageBonus",
+    "extraHitsField": "extraDamageHits",
+    "defaults": {
+      "damageBonus": 0,
+      "extraDamageHits": 0
+    },
+    "duration": "combat",
+    "grant": "只为具有伤害能力的实际牌赋予伤害加成或额外伤害次数，并按卡面限定牌区、关键词、牌名、数量和玩家范围。批量效果逐张检查资格，通过后登记增量及获得事件；复合效果分别处理复制、加速等其他操作。",
+    "eligibility": "按当前牌模型及其自身建立的伤害效果判断，覆盖直接、条件、延迟、持续及反击伤害。条件伤害按模型具有伤害分支判断；实际条件与时点仍在执行时处理。",
+    "capabilityResolver": {
+      "predicate": "CanDealDamage(card)",
+      "typeIndependent": true,
+      "qualifyingSources": [
+        "directDamage",
+        "conditionalDamage",
+        "delayedDamage",
+        "persistentDamage",
+        "retaliationDamage"
+      ],
+      "resolution": "使用同一伤害来源描述供选牌与结算共用。本体及mod的模型语义适配器解析自身伤害指令及其建立的效果来源；模型与效果调用关系作为自动发现入口，DynamicVars和类型只作线索。自定义效果通过适配接口声明来源及伤害能力。",
+      "unknown": "解析结果为未知时，由来源适配器补齐资格；只有确认具有伤害能力的对象进入赋予目标集合。",
+      "inheritance": "已有修正在类型或形态转换时沿原继承规则保留，新增赋予重新检查当前模型的伤害能力。",
+      "mixedEffects": "仅提供伤害修正的选牌器筛选能造成伤害的牌。复合效果先按原卡面选取或复制对象，再对伤害修正部分逐张判断资格。",
+      "display": "卡面沿用“所有手牌”“选择一张牌”等简洁描述，资格判断写入内部规则。"
+    },
+    "sourcePriority": [
+      "explicitDamageSource",
+      "currentDamageProducingEffect",
+      "currentCardExecution",
+      "adapterProvidedSource"
+    ],
+    "provenance": {
+      "fields": [
+        "ownerId",
+        "sourceCardInstanceId",
+        "effectInstanceId",
+        "applicationId",
+        "damageBatchId",
+        "parentBatchId",
+        "damageBonusSnapshot",
+        "extraHitsSnapshot",
+        "countHandled"
+      ],
+      "binding": "建立能力、状态或其他持续伤害效果时，记录本次实际施加及来源牌的两种修正快照。多层Apply调用归入同一applicationId，实际重复施加分别登记。",
+      "callbacks": "优先读取PlayerChoiceContext.ModelStack与LastInvolvedModel。本体Hook及充能球结算会PushModel/PopModel，沿栈中正在产出伤害的模型追溯已登记来源；使用相同回调的后续mod模型直接沿用。独立异步调度通过来源上下文接口保留身份。反击及嵌套效果采用正在产出新伤害的效果作为来源。",
+      "stacking": "保持原Power的叠加方式，另存各次实际施加的修正快照。效果产生一个合并伤害批次时，各份快照的伤害加成与额外次数分别求和，各计一次；去重依据applicationId。",
+      "stackingLifetime": "叠加层数变化沿原效果结算，修正附着于该效果的存续；效果被完全移除时清除其来源记录。效果复制时同时复制来源修正；每个复制效果使用新的实例编号。",
+      "laterChanges": "已建立持续效果使用施加时的快照；之后对原牌的强化作用于之后建立的效果。等待中的箭矢仍是原实际牌，伤害时读取该牌当前修正。",
+      "generatedCards": "生成或实际打出其他牌时，以该实际牌作为新的伤害来源，卡牌复制和生成的修正继承沿原规则。力量、易伤等只参与原有计算；提供这些状态的牌与当前伤害来源分别记录。"
+    },
+    "damage": "对敌人产生一次伤害时，在原计算流程中的卡牌伤害加成位置加入对应存量；持续效果也在这一层读取继承值。基础伤害、力量、易伤与伤害属性分别沿原规则处理。",
+    "extraHits": "每条原伤害指令保留原条件、时点、目标规则和基础次数，额外次数在该伤害批次开始时加一次。追加部分逐次走完整伤害流程，只执行该伤害指令；格挡、抽牌、能量支付与其他牌效照常结算。",
+    "batchGuard": "AttackCommand的基础多段与新增次数在同一个根批次计算；CreatureCmd.Damage直伤建立独立根批次。countHandled标记该批次已处理次数，多层重载与追加命中沿用该标记。反击等新的真实伤害另建批次。",
+    "damageKinds": "卡牌的生命支付、自伤及直接生命流失沿各自原有结算；修正默认作用于来源对敌人的伤害。已明确转换为生命流失的伤害加成分量，沿已有转换规则单独结算。",
+    "engineIntegration": {
+      "attack": "AttackCommand.FromCard保留CardModel来源；AttackCommand.Execute内的Hook.ModifyAttackHitCount处理常规攻击批次的次数。",
+      "directDamage": "拦截CreatureCmd.Damage的最终集合目标重载，覆盖直接调用、群体伤害及Unpowered伤害；同一伤害只在规范化入口处理一次。",
+      "power": "PowerCmd.Apply与ModifyAmount提供施加时cardSource；另以效果实例及applicationId保留来源，后续PowerModel回调恢复上下文。",
+      "modelContext": "PlayerChoiceContext.ModelStack与LastInvolvedModel提供本体当前模型上下文；Hook执行模型回调时维护该栈。伤害来源为空时，优先按当前产生伤害的效果实例查询其来源记录。",
+      "orbs": "OrbCmd.Channel没有cardSource参数，在充能时从模型上下文捕获来源牌及强化快照，绑定新OrbModel实例；OrbCmd.Passive和Evoke期间按栈顶充能球恢复自身来源。激发旧充能球沿该球原有来源处理。",
+      "summons": "OstyCmd.Summon提供AbstractModel来源，可记录创建关系；AttackCommand.FromOsty明确传入CardModel时，以当前攻击牌为伤害来源。其他召唤物的自主伤害绑定其实际产出伤害的效果来源。",
+      "adapters": "提供BindDamageSource、CaptureDamageModifierSnapshot、BeginDamageBatch和MarkResourceLoss等兼容接口，供自定义结算、调度器和效果容器登记来源与批次。接口名为实现约定。",
+      "coverage": "使用本体伤害、状态与模型回调入口的本体牌和mod牌走通用追踪；绕过这些入口的自定义实现经来源适配接口接入。",
+      "unresolved": "来源缺失的伤害沿原规则执行，并记录来源诊断；适配器补齐来源后应用对应修正。",
+      "status": "本次落地为工作台的机制、选牌与结算设计约定；游戏运行时兼容层待在Junna游戏项目中实现与验证。"
+    }
+  }
+}
