@@ -6,7 +6,7 @@ const target=(hp=100,damage=7)=>({enemies:[{name:'靶',hp:[hp,hp],moves:[{damage
 function hand(entries,encounter=target()) {
   const s=E.initialState(cards(entries),encounter,13);s.draw=[];s.hand=s.cards.map(card=>card.id);s.energy=3;return s;
 }
-test('2回合箭矢实际经过两次敌方行动，期间实体不参加洗牌',()=>{
+test('2回合星矢实际经过两次敌方行动，期间实体不参加洗牌',()=>{
   const s=hand([{name:'箭',kind:'arrow',cost:1,turns:2,damage:18,probe:true}]);
   E.play(s,{id:0,target:0});assert.deepEqual(s.discard,[]);
   E.enemyTurn(s);s.turn=2;E.playerStart(s);
@@ -21,7 +21,7 @@ test('加速支付费用，实际减少量不超过余下回合，消耗工具�
   assert.equal(s.energy,0);assert.equal(s.stats.acceleration,1);assert.equal(s.enemies[0].hp,82);
   assert.deepEqual(s.exhausted,[1]);assert.deepEqual(s.discard,[0]);
 });
-test('锁定目标死亡后不把箭矢伤害转移给其他敌人',()=>{
+test('锁定目标死亡后不把星矢伤害转移给其他敌人',()=>{
   const encounter={enemies:[{hp:[5,5],moves:[{}]},{hp:[20,20],moves:[{}]}]};
   const s=hand([{name:'箭',kind:'arrow',turns:1,damage:12,probe:true},{name:'击杀',kind:'attack',damage:5}],encounter);
   E.play(s,{id:0,target:0});E.play(s,{id:1,target:0});E.enemyTurn(s);s.turn=2;E.playerStart(s);
@@ -42,7 +42,7 @@ test('保留牌跨回合占用真实手牌，抽牌技能结算时自身尚未�
   E.play(s,{id:1});assert.equal(s.stats.cardsDrawn,0);E.enemyTurn(s);
   assert.deepEqual(s.hand,[0]);s.turn=2;E.playerStart(s);assert.deepEqual(s.hand,[0,1]);
 });
-test('0回合箭矢与同伤害即时攻击具有相同战斗结果',()=>{
+test('0回合星矢与同伤害即时攻击具有相同战斗结果',()=>{
   const pool=E.loadPool(),encounter=E.config.encounters.find(e=>e.id==='worm');
   for(const upgraded of [false,true])for(const cost of [0,1,2])for(const seed of [11,22,33]) {
     const options={cost,wait:0,bonus:0,context:'normal',density:2,upgraded};

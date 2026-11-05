@@ -28,7 +28,7 @@ test('image corners remain finite and malformed coordinates use the center',()=>
 });
 
 test('workbench normalization preserves focus and rejects invalid MCP coordinates',()=>{
-  const data={cards:[{uid:'arrow',id:'A',name:'箭',type:'箭矢',text:'造成1点伤害。',cost:1,turns:2,arrowFocus:{x:.9,y:.18}}]};
+  const data={cards:[{uid:'arrow',id:'A',name:'箭',type:'星矢',text:'造成1点伤害。',cost:1,turns:2,arrowFocus:{x:.9,y:.18}}]};
   const normalize=require('./workbench-domain.js').create({seed:{data},uid:()=>assert.fail('Unexpected ID'),JunnaFitPool:{normalizeEntry:e=>e}});
   assert.deepEqual(normalize(data).cards[0].arrowFocus,{x:.9,y:.18});
   for(const value of [null,{x:'0.9',y:.18},{x:1.1,y:.18},{x:.5}]){
