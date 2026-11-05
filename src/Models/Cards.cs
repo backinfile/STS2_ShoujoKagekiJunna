@@ -69,7 +69,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
     protected async Task ImproveHand(PlayerChoiceContext context, decimal bonus, int hits = 0)
     {
         if (!Owner.PlayerCombatState!.Hand.Cards.Any(c => c != this && DamageModifiers.CanDealDamage(c))) return;
-        var prefs = new CardSelectorPrefs(new LocString("gameplay_ui", "JUNNA.SELECT_DAMAGE_CARD"), 1);
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
         var selected = await CardSelectCmd.FromHand(context, Owner, prefs, c => c != this && DamageModifiers.CanDealDamage(c), this);
         foreach (var card in selected) DamageModifiers.Add(card, bonus, hits);
     }

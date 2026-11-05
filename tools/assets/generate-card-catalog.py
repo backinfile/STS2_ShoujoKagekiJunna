@@ -19,6 +19,28 @@ EXISTING = {
     'JG23': ('JunnaEnduranceTraining', 'JUNNA_ENDURANCE_TRAINING'),
 }
 
+SELECTION_PROMPTS = {
+    "JG03": "选择1张手牌。",
+    "JG09": "选择1张手牌。",
+    "JG16": "选择1张手牌。",
+    "JG36": "选择1张手牌。",
+    "JT02": "选择1张箭矢。",
+    "JH01": "选择2张手牌。",
+    "JK11": "选择1张驳论。",
+    "JK11B": "选择1张立论。",
+    "JK50B": "选择1张雄辩。",
+    "JK53": "选择1张知识牌。",
+    "JG27": "选择1张牌。",
+    "JA65": "选择1张箭矢。",
+    "JA66": "选择至多{Cards}张牌。",
+    "JK73B": "选择1张反证。",
+    "JK78": "选择至多{Cards}张牌。",
+    "JK78D": "选择至多{Cards}张牌。",
+    "JK78E": "选择至多{Cards}张牌。",
+    "JK37C": "选择1张箭矢。",
+    "JK64": "选择1张箭矢。"
+}
+
 def display_description(card, text, card_names, values, upgraded=False):
     """Format the workbench wording without substituting independently curated rules."""
     numbers = {value['name']: value['upgraded' if upgraded else 'base'] for value in values}
@@ -158,6 +180,8 @@ def main():
                 base = base.replace('{' + value['name'] + ':diff()}', str(value['base']))
                 upgrade = upgrade.replace('{' + value['name'] + ':diff()}', str(value['upgraded']))
         localization[model_id + '.title'] = card['name']
+        if cid in SELECTION_PROMPTS:
+            localization[model_id + '.selectionScreenPrompt'] = SELECTION_PROMPTS[cid]
         normal = display_description(card, base, card_names, values)
         improved = display_description(card, upgrade, card_names, values, upgraded=True)
         localization[model_id + '.description'] = normal if normal == improved else '{IfUpgraded:show:' + improved + '|' + normal + '}'
@@ -210,6 +234,13 @@ def main():
         (ROOT / 'src/Models/CardCatalog.Generated.cs').write_text(header + '\n'.join(wrappers), encoding='utf-8')
     for lang in ('eng', 'zhs'):
         (ROOT / f'ShoujoKagekiJunna/localization/{lang}/cards.json').write_text(json.dumps(localization, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        keywords_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/card_keywords.json'
+        keywords = json.loads(keywords_path.read_text(encoding='utf-8'))
+        knowledge = next(item for item in bundle['data']['mechanisms'] if item['id'] == 'ME_PARTNER')
+        if lang == 'zhs':
+            keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.title'] = knowledge['name']
+            keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.description'] = knowledge['definition']
+        keywords_path.write_text(json.dumps(keywords, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         powers_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/powers.json'
         powers = json.loads(powers_path.read_text(encoding='utf-8'))
         for cid in 'JA04 JK10 JA22 JK15 A JK27 JA35 JK32 JK37C JA45 JK64 JK67 JG31 JH19 JH21 JG34 JK75 JH23 JA70 JH24 JK80 JK81 JZ05 JZ06 JH30 JK46'.split():

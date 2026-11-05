@@ -1,0 +1,394 @@
+{
+  "workspaceId": "junna-mod-workbench-20261101-v1",
+  "baseRevision": 2597,
+  "changes": [
+    {
+      "collection": "cards",
+      "uid": "junna-pool-gap-fill-20261103_JK78",
+      "id": "JK78",
+      "before": {
+        "uid": "junna-pool-gap-fill-20261103_JK78",
+        "id": "JK78",
+        "name": "专项加练",
+        "type": "技能",
+        "system": "growth",
+        "rarity": "稀有",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "text": "选择抽牌堆或弃牌堆至多3张牌，使它们获得6点伤害加成。",
+        "upgradedText": "选择抽牌堆或弃牌堆至多3张牌，使它们获得8点伤害加成。",
+        "keywords": [],
+        "termIds": [
+          "KW_BONUS",
+          "EF39"
+        ],
+        "archetypeIds": [
+          "SYS_growth"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [],
+        "art": "original-scene-jk78-all-card-review-20261104",
+        "character": "星见纯那",
+        "role": "机制中坚牌",
+        "direction": "伤害加成",
+        "draftStatus": "补位候选",
+        "draftBatch": "junna-pool-gap-fill-20261103",
+        "design": {
+          "classification": "机制中坚牌",
+          "textComplexity": "低",
+          "reference": "体系驱动卡池设计流程：低稀有入口、核心收益、中坚连接与端口补洞。",
+          "route": "伤害加成",
+          "systems": [
+            "growth"
+          ],
+          "routeRoles": {
+            "archetype_SYS_growth": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "systemRoles": {
+            "growth": {
+              "role": "触发",
+              "port": "输出"
+            }
+          },
+          "triggerRole": "触发",
+          "port": "输出",
+          "roleReason": "伤害加成触发，提供输出。",
+          "rules": "从牌面允许的抽牌堆或弃牌堆范围选择至多规定数量的伤害能力合格实际牌，赋予当前版本规定的本场伤害加成。选牌及强化保持实际牌所在牌区，不移动、生成或消耗这些牌。 伤害加成与额外伤害次数沿damageModifierRules处理。",
+          "upgrade": "升级牌效按当前升级牌面：选择抽牌堆或者弃牌堆至多3张牌，使它们获得10点伤害加成。",
+          "investment": "按当前版本支付1能量。"
+        },
+        "extraHoverTips": [],
+        "notes": "定位：伤害加成触发，提供输出。\n结算约定：从牌面允许的抽牌堆或弃牌堆范围选择至多规定数量的伤害能力合格实际牌，赋予当前版本规定的本场伤害加成。选牌及强化保持实际牌所在牌区，不移动、生成或消耗这些牌。 伤害加成与额外伤害次数沿damageModifierRules处理。\n升级：升级牌效按当前升级牌面：选择抽牌堆或者弃牌堆至多3张牌，使它们获得10点伤害加成。",
+        "naming": {
+          "original": "",
+          "kind": "常用概念或动作名称",
+          "work": "TV第2话约00:27的晨练",
+          "url": "https://www.bilibili.com/bangumi/play/ep232368?t=27",
+          "adaptation": "从已经练过和即将练到的项目中选择专项加练，以日常训练直接承接当前的选牌伤害加成效果。 配图：tv02-0025-new.jpg；裁切870,90,960,720。",
+          "chineseOriginal": ""
+        }
+      },
+      "updates": {
+        "design": {
+          "classification": "机制中坚牌",
+          "textComplexity": "低",
+          "reference": "体系驱动卡池设计流程：低稀有入口、核心收益、中坚连接与端口补洞。",
+          "route": "伤害加成",
+          "systems": [
+            "growth"
+          ],
+          "routeRoles": {
+            "archetype_SYS_growth": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "systemRoles": {
+            "growth": {
+              "role": "触发",
+              "port": "输出"
+            }
+          },
+          "triggerRole": "触发",
+          "port": "输出",
+          "roleReason": "伤害加成触发，提供输出。",
+          "rules": "先选择抽牌堆或弃牌堆，再从该牌堆选择至多3张具有伤害能力的实际牌，使它们获得牌面规定的本场伤害加成。允许选择0张；保持实际牌区和顺序。",
+          "upgrade": "伤害加成由6点提高为8点。",
+          "investment": "按当前版本支付1能量。"
+        },
+        "notes": "先选择抽牌堆或弃牌堆，再选择至多3张牌；强化保持实际牌区和顺序。",
+        "choiceCardIds": [
+          "JK78D",
+          "JK78E"
+        ]
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-card-gap-fill-20261104_JA76",
+      "id": "JA76",
+      "before": {
+        "uid": "junna-card-gap-fill-20261104_JA76",
+        "id": "JA76",
+        "name": "横扫",
+        "type": "攻击",
+        "rarity": "罕见",
+        "system": "stage",
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "所有敌人",
+        "text": "对所有敌人造成6点伤害。分别打出一张造成等量伤害的飞矢。",
+        "upgradedText": "对所有敌人造成9点伤害。分别打出一张造成等量伤害的飞矢。",
+        "pool": true,
+        "keywords": [],
+        "termIds": [
+          "EF03",
+          "EF29",
+          "KW_STAGE"
+        ],
+        "archetypeIds": [
+          "SYS_stage"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [],
+        "character": "星见纯那",
+        "art": "original-scene-jk44-20261102",
+        "role": "机制中坚牌",
+        "direction": "即时群攻，兼顾箭矢加速；无需预先布置也能造成群体伤害。",
+        "draftStatus": "补位候选",
+        "draftBatch": "junna-card-gap-fill-20261104",
+        "naming": {
+          "original": "",
+          "kind": "常用动作或概念",
+          "work": "TV 第1话 · 配图约19:39",
+          "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1179",
+          "adaptation": "弓身旋转扫过周围，以横扫动作表现即时群攻，并接续已布置的箭矢。 配图：沿用已登记原作裁图 original-scene-jk44-20261102；纯那旋身挥动弓身的画面。"
+        },
+        "design": {
+          "classification": "机制中坚牌",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "tool",
+              "cross": false,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "工具",
+              "port": "输出"
+            }
+          },
+          "triggerRole": "工具",
+          "port": "输出",
+          "roleReason": "即时群攻，兼顾箭矢加速；无需预先布置也能造成群体伤害。",
+          "rules": "先对所有存活敌人造成一段伤害，再选择自己的一个布置的箭矢加速1回合。没有合法箭矢时保留群伤部分；加速沿统一完成队列处理。",
+          "upgrade": "升级牌效按当前升级牌面：对所有敌人造成10点伤害。一个箭矢加速1回合。",
+          "investment": "按当前版本支付1能量。",
+          "reference": "旋风斩、超能光束：即时群伤端口；本牌把罕见层加速接到低费即时攻击。",
+          "referenceCards": [
+            "WHIRLWIND",
+            "HYPERBEAM"
+          ],
+          "referenceFiles": [
+            "<card-research>/docs/mods/sts2_character_cards_zh.md",
+            "<game-reference>/extraction/raw/localization/zhs/cards.json"
+          ],
+          "textComplexity": "低"
+        },
+        "notes": "定位：即时群攻，兼顾箭矢加速；无需预先布置也能造成群体伤害。\n结算约定：先对所有存活敌人造成一段伤害，再选择自己的一个布置的箭矢加速1回合。没有合法箭矢时保留群伤部分；加速沿统一完成队列处理。\n升级：对所有敌人造成10点伤害。一个箭矢加速1回合。",
+        "extraHoverTips": []
+      },
+      "updates": {
+        "design": {
+          "classification": "机制中坚牌",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "tool",
+              "cross": false,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "工具",
+              "port": "输出"
+            }
+          },
+          "triggerRole": "工具",
+          "port": "输出",
+          "roleReason": "即时群攻，兼顾箭矢加速；无需预先布置也能造成群体伤害。",
+          "rules": "对所有敌人结算一次伤害指令，按每名敌人的本次伤害结果合计分别生成一张基础飞矢，并指定对应目标。基础版与升级版横扫都生成基础飞矢，等待2回合。飞矢独立记录伤害，不另行复制来源的伤害加成与额外次数。",
+          "upgrade": "伤害由6点提高为9点，生成的飞矢保持基础版。",
+          "investment": "按当前版本支付1能量。",
+          "reference": "旋风斩、超能光束：即时群伤端口；本牌把罕见层加速接到低费即时攻击。",
+          "referenceCards": [
+            "WHIRLWIND",
+            "HYPERBEAM"
+          ],
+          "referenceFiles": [
+            "<card-research>/docs/mods/sts2_character_cards_zh.md",
+            "<game-reference>/extraction/raw/localization/zhs/cards.json"
+          ],
+          "textComplexity": "低"
+        },
+        "notes": "横扫与横扫+均按各敌人的伤害结果生成基础飞矢，等待2回合。"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna_selection_option_JK78D",
+      "id": "JK78D",
+      "before": null,
+      "after": {
+        "uid": "junna_selection_option_JK78D",
+        "id": "JK78D",
+        "name": "抽牌堆",
+        "type": "技能",
+        "system": "growth",
+        "rarity": "普通",
+        "pool": false,
+        "cost": 0,
+        "upgradedCost": 0,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "text": "选择抽牌堆中至多3张牌，使它们获得6点伤害加成。",
+        "upgradedText": "选择抽牌堆中至多3张牌，使它们获得8点伤害加成。",
+        "keywords": [],
+        "termIds": [
+          "KW_BONUS",
+          "EF39"
+        ],
+        "archetypeIds": [
+          "SYS_growth"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [],
+        "art": "original-scene-jx05-fit-refinement-20261103",
+        "character": "星见纯那",
+        "role": "选项牌",
+        "direction": "伤害加成",
+        "choiceOnly": true,
+        "sourceCardId": "JK78",
+        "design": {
+          "rules": "专项加练的抽牌堆选项。只强化本牌堆中至多3张具有伤害能力的实际牌，保持牌区与顺序；允许选择0张。选项牌只用于选择界面。",
+          "upgrade": "伤害加成由6点提高为8点。"
+        },
+        "naming": {
+          "original": "",
+          "work": "TV 第2话 · 约06:22",
+          "url": "https://www.bilibili.com/bangumi/play/ep232368?t=382",
+          "adaptation": "以纯那体能课上的伸臂练习表现专项训练。从抽牌堆选择实际牌进行加练，获得牌面规定的伤害加成。配图来源：TV第2话约06:22，原始截图tv02-train-622-20261103.png。",
+          "kind": "牌堆名称"
+        },
+        "notes": "专项加练的牌堆选项，不进入奖励、商店或初始牌组。"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna_selection_option_JK78E",
+      "id": "JK78E",
+      "before": null,
+      "after": {
+        "uid": "junna_selection_option_JK78E",
+        "id": "JK78E",
+        "name": "弃牌堆",
+        "type": "技能",
+        "system": "growth",
+        "rarity": "普通",
+        "pool": false,
+        "cost": 0,
+        "upgradedCost": 0,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "text": "选择弃牌堆中至多3张牌，使它们获得6点伤害加成。",
+        "upgradedText": "选择弃牌堆中至多3张牌，使它们获得8点伤害加成。",
+        "keywords": [],
+        "termIds": [
+          "KW_BONUS",
+          "EF39"
+        ],
+        "archetypeIds": [
+          "SYS_growth"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [],
+        "art": "original-scene-jh16-20261102",
+        "character": "星见纯那",
+        "role": "选项牌",
+        "direction": "伤害加成",
+        "choiceOnly": true,
+        "sourceCardId": "JK78",
+        "design": {
+          "rules": "专项加练的弃牌堆选项。只强化本牌堆中至多3张具有伤害能力的实际牌，保持牌区与顺序；允许选择0张。选项牌只用于选择界面。",
+          "upgrade": "伤害加成由6点提高为8点。"
+        },
+        "naming": {
+          "original": "",
+          "kind": "牌堆名称",
+          "work": "2021 剧场版 · 约09:17",
+          "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+          "adaptation": "以纯那在排练台上练习台步的画面表现专项加练。从弃牌堆选择实际牌继续训练，获得牌面规定的伤害加成。配图来源：2021剧场版约09:17，沿用已登记原作素材original-scene-jh16-20261102。"
+        },
+        "notes": "专项加练的牌堆选项，不进入奖励、商店或初始牌组。"
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JX05",
+      "id": "FIT_CARD_JX05",
+      "before": {
+        "uid": "fit_card_complete_pool_JX05",
+        "id": "FIT_CARD_JX05",
+        "name": "课堂演练",
+        "theme": "日常锻炼",
+        "text": "纯那在体能课上反复完成伸臂动作。",
+        "original": "",
+        "source": "TV 第2话 · 约06:22",
+        "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=382",
+        "art": "original-scene-jx05-fit-refinement-20261103",
+        "cardIds": [],
+        "notes": "与耐力训练的伸臂镜头重复，需换成另一项课堂演练。\n将本回合使用的知识落实到课堂中的反复演练，每项知识积累为这张牌的伤害加成，再由多次伤害体现练习成果。卡图选纯那本人在课堂上伸臂保持动作的画面。 原始截图：tv02-train-622-20261103.png。"
+      },
+      "updates": {
+        "cardIds": [
+          "JK78D"
+        ],
+        "notes": "专项加练的抽牌堆选项。沿用原作训练素材与原始出处。"
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_x_cost_exploration_JG32",
+      "id": "FIT_CARD_JG32",
+      "before": {
+        "uid": "fit_card_x_cost_exploration_JG32",
+        "id": "FIT_CARD_JG32",
+        "name": "加练",
+        "theme": "日常锻炼",
+        "text": "纯那在课堂排练台上继续练习台步。",
+        "original": "",
+        "art": "original-scene-jh16-20261102",
+        "source": "2021 剧场版 · 约09:17",
+        "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+        "cardIds": [],
+        "notes": "与连贯练习使用同一个台步镜头，后续可换成另一项加练。\n按原作动作、物件或场面拟定短名。纯那在课堂舞台上反复练习步伐，把集中投入体现为一张牌的长期进步。 沿用已登记原作裁图：original-scene-jh16-20261102。"
+      },
+      "updates": {
+        "cardIds": [
+          "JK78E"
+        ],
+        "notes": "专项加练的弃牌堆选项。沿用原作训练素材与原始出处。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "durationSeconds": 21.133333333333333,
+  "fps": 15,
+  "width": 1280,
+  "height": 720,
+  "audio": true,
+  "audioSource": "engine_mix",
+  "video": "selection-demo.mp4",
+  "sha256": "5c981771ca6ca4735e0d7613788e34a69f7329480b79e5d1d7643909f91ce4f7",
+  "baseDamageBonus": 6,
+  "upgradedDamageBonus": 8,
+  "initialDrawPileCount": 4,
+  "initialDiscardPileCount": 4,
+  "recordedFlow": [
+    "基础专项加练选择抽牌堆及2张牌",
+    "升级专项加练选择弃牌堆及3张牌",
+    "结束回合后打击造成12点伤害"
+  ],
+  "actualDamage": 12,
+  "pass": true
+}

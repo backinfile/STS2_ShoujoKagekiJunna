@@ -7,6 +7,7 @@
     <Compile Include="ArrowHudProbe.cs" />
     <Compile Include="CardPoolProbe.cs" />
     <Compile Include="CardCompletionProbe.cs" />
+    <Compile Include="CardBranchesProbe.cs" />
     <Compile Include="KnowledgeUiProbe.cs" />
     <Compile Include="CardTextProbe.cs" />
     <Compile Include="KeywordProbe.cs" />

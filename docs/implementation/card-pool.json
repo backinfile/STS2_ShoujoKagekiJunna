@@ -1,5 +1,5 @@
 {
-  "revision": 2592,
+  "revision": 2602,
   "cards": [
     {
       "id": "JA04",
@@ -2434,6 +2434,11 @@
           "name": "Block",
           "base": 4,
           "upgraded": 7
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
         }
       ],
       "text": "获得4点格挡。下一张非能力牌重放1次。",
@@ -3581,8 +3586,8 @@
           "upgraded": 2
         }
       ],
-      "text": "每回合第1次造成攻击伤害时，打出一张造成等量伤害的飞矢。",
-      "upgradedText": "每回合前2次造成攻击伤害时，打出一张造成等量伤害的飞矢。"
+      "text": "每回合第1次造成攻击伤害时，打出一张造成等量伤害的流星。",
+      "upgradedText": "每回合前2次造成攻击伤害时，打出一张造成等量伤害的流星。"
     },
     {
       "id": "JZ06",
@@ -3635,8 +3640,8 @@
           "upgraded": 9
         }
       ],
-      "text": "对所有敌人造成6点伤害。分别打出一张造成等量伤害的飞矢。",
-      "upgradedText": "对所有敌人造成9点伤害。分别打出一张造成等量伤害的飞矢。"
+      "text": "对所有敌人造成6点伤害。分别打出一张造成等量伤害的流星。",
+      "upgradedText": "对所有敌人造成9点伤害。分别打出一张造成等量伤害的流星。"
     },
     {
       "id": "JA77",
@@ -3772,14 +3777,14 @@
           "upgraded": 12
         }
       ],
-      "text": "造成9点伤害。打出一张造成等量伤害的飞矢。",
-      "upgradedText": "造成12点伤害。打出一张造成等量伤害的飞矢。"
+      "text": "造成9点伤害。打出一张造成等量伤害的流星。",
+      "upgradedText": "造成12点伤害。打出一张造成等量伤害的流星。"
     },
     {
       "id": "JA81B",
       "modelId": "JUNNA_JA81B",
       "className": "JunnaCardJA81B",
-      "name": "飞矢",
+      "name": "流星",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
@@ -3865,8 +3870,8 @@
           "upgraded": 16
         }
       ],
-      "text": "打出X张造成12点伤害的飞矢。",
-      "upgradedText": "打出X张造成16点伤害的飞矢。"
+      "text": "打出X张造成12点伤害的流星。",
+      "upgradedText": "打出X张造成16点伤害的流星。"
     },
     {
       "id": "JH31",
@@ -3902,6 +3907,76 @@
       ],
       "text": "抽取2张0费牌。",
       "upgradedText": "抽取3张0费牌。"
+    },
+    {
+      "id": "JK78D",
+      "modelId": "JUNNA_JK78D",
+      "className": "JunnaCardJK78D",
+      "name": "抽牌堆",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "damageCapable": false,
+      "portrait": "JK78D.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 3,
+          "upgraded": 3
+        },
+        {
+          "name": "Bonus",
+          "base": 6,
+          "upgraded": 8
+        }
+      ],
+      "text": "选择抽牌堆中至多3张牌，使它们获得6点伤害加成。",
+      "upgradedText": "选择抽牌堆中至多3张牌，使它们获得8点伤害加成。"
+    },
+    {
+      "id": "JK78E",
+      "modelId": "JUNNA_JK78E",
+      "className": "JunnaCardJK78E",
+      "name": "弃牌堆",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "damageCapable": false,
+      "portrait": "JK78E.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 3,
+          "upgraded": 3
+        },
+        {
+          "name": "Bonus",
+          "base": 6,
+          "upgraded": 8
+        }
+      ],
+      "text": "选择弃牌堆中至多3张牌，使它们获得6点伤害加成。",
+      "upgradedText": "选择弃牌堆中至多3张牌，使它们获得8点伤害加成。"
     }
   ],
   "groups": [
@@ -4138,5 +4213,5 @@
       }
     }
   ],
-  "arrowArtRevision": 2582
+  "arrowArtRevision": 2594
 }

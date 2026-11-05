@@ -18,3 +18,17 @@ test('stale before content is rejected even with a newly supplied version',async
 test('undo requires both current versions and matching historical endpoints',async t=>{const {store}=fixture(t),a=store.get({collection:'cards',id:'A'});const result=await store.commit(input([patch(a,{name:'已编辑'})]));const now=store.get({collection:'cards',id:'A'});await store.commit(input([],{restore:{recordId:result.record.id,side:'before',expectedVersions:{['cards/'+a.uid]:now.version}}}));const restored=store.get({collection:'cards',id:'A'});assert.equal(restored.entity.name,a.entity.name);assert.notEqual(restored.version,a.version);await store.commit(input([patch(restored,{notes:'后来修改'})]));const latest=store.get({collection:'cards',id:'A'});await assert.rejects(store.commit(input([],{restore:{recordId:result.record.id,side:'after',expectedVersions:{['cards/'+a.uid]:latest.version}}})),{code:'VERSION_CONFLICT'});});
 test('creation and deletion keep tombstone versions; domain data stays intact',async t=>{const {store}=fixture(t),a=store.get({collection:'cards',id:'A'});await store.commit(input([patch(a,{notes:'保留特殊内容'})]));const now=store.get({collection:'cards',id:'A'});assert.equal(now.entity.turns,'X');assert.equal(now.entity.upgradedTurns,'X');assert.deepEqual(now.entity.extraHoverTips,a.entity.extraHoverTips);assert.equal(store.query({collection:'fitPool'}).entries[0].entity.text,'原文');await store.commit(input([{collection:'cards',uid:a.uid,before:now.entity,after:null,expectedVersion:now.version}]));const missing=store.get({collection:'cards',uid:a.uid});assert.match(missing.version,/^2:missing$/);assert.equal(store.state().versions['cards/'+a.uid],missing.version);await assert.rejects(store.commit(input([{collection:'cards',uid:a.uid,before:null,after:a.entity,expectedVersion:'0:missing'}])),{code:'VERSION_CONFLICT'});});
 module.exports={fixture,input,patch};
+
+test('temporary star-arrow snapshot restores arrow type without losing countdown or identity',async t=>{
+  for(const turns of [2,'X']){
+    const {store,file,seed}=fixture(t),old=JSON.parse(fs.readFileSync(file,'utf8'));
+    Object.assign(old.data.cards[0],{type:'\u661f\u77e2',turns,upgradedTurns:turns==='X'?'X':1,arrowSubtype:'攻击'});
+    fs.writeFileSync(file,JSON.stringify(old));
+    const before=store.get({collection:'cards',id:'A'});assert.equal(before.entity.type,'箭矢');
+    await store.commit(input([patch(before,{notes:'回切后正常编辑'})]));
+    const card=new WorkbenchStore({file,seed,workspaceId}).get({collection:'cards',id:'A'}).entity;
+    assert.equal(card.uid,'card-a');assert.equal(card.id,'A');assert.equal(card.type,'箭矢');
+    assert.equal(card.turns,turns);assert.equal(card.upgradedTurns,turns==='X'?'X':1);assert.equal(card.arrowSubtype,'攻击');
+    assert.deepEqual(card.extraHoverTips,before.entity.extraHoverTips);
+  }
+});

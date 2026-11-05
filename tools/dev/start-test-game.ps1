@@ -9,7 +9,11 @@ $sourceGame = 'D:/App/Stream/steamapps/common/Slay the Spire 2'
 New-Item -ItemType Directory -Force $junnaGame, $junnaUser | Out-Null
 $settingsPath = Join-Path $junnaUser 'AppData/Roaming/SlayTheSpire2/default/1/settings.save'
 New-Item -ItemType Directory -Force (Split-Path $settingsPath -Parent) | Out-Null
-$settings = if (Test-Path -LiteralPath $settingsPath) { Get-Content -Raw -LiteralPath $settingsPath | ConvertFrom-Json -AsHashtable } else { @{ schema_version=8 } }
+$settings = @{ schema_version=8 }
+if (Test-Path -LiteralPath $settingsPath) {
+    $savedSettings = Get-Content -Raw -LiteralPath $settingsPath -Encoding utf8 | ConvertFrom-Json
+    foreach ($property in $savedSettings.PSObject.Properties) { $settings[$property.Name] = $property.Value }
+}
 $settings.mod_settings = @{mods_enabled=$true;mod_list=@()}
 $settings.fullscreen = $false
 $settings.seen_ea_disclaimer = $true
