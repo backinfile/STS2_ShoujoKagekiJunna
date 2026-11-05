@@ -1,6 +1,6 @@
 {
   "JUNNA.SELECT_DAMAGE_CARD": "选择一张牌",
-  "JUNNA.CARD_TYPE.ARROW": "星矢",
+  "JUNNA.CARD_TYPE.ARROW": "箭矢",
   "JUNNA.INVESTMENT": "伤害强化",
   "JUNNA.INVESTMENT_BONUS": "造成伤害增加{Amount}点。",
   "JUNNA.INVESTMENT_HITS": "额外造成{Amount}次伤害。",

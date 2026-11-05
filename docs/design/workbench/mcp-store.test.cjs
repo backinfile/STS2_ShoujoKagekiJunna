@@ -7,7 +7,7 @@ const path=require('node:path');
 const {randomUUID}=require('node:crypto');
 const {WorkbenchStore}=require('./mcp-store.cjs');
 const {workspaceId}=require('./mcp-config.cjs');
-function fixture(t){const dir=fs.mkdtempSync(path.join(os.tmpdir(),'junna-mcp-')),file=path.join(dir,'workbench.json'),seed={schemaVersion:1,workspaceId,revision:1,history:[],assets:{},data:{title:'测试',meta:{},cards:[{uid:'card-a',id:'A',name:'甲',text:'测试',cost:1,type:'星矢',turns:'X',upgradedTurns:'X',extraHoverTips:[{id:'background',description:'背景'}]},{uid:'card-b',id:'B',name:'乙',text:'另一张',cost:1,type:'技能'}],terms:[],mechanisms:[],archetypes:[],partnerGroups:[],styles:[{uid:'style-a',id:'S',name:'风格',content:'约定'}],fitPool:[{uid:'fit-a',id:'F',name:'契合',theme:'星',text:'原文',cardIds:['A']}]}};fs.writeFileSync(file,JSON.stringify(seed));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));return {store:new WorkbenchStore({file,seed,workspaceId}),file,seed};}
+function fixture(t){const dir=fs.mkdtempSync(path.join(os.tmpdir(),'junna-mcp-')),file=path.join(dir,'workbench.json'),seed={schemaVersion:1,workspaceId,revision:1,history:[],assets:{},data:{title:'测试',meta:{},cards:[{uid:'card-a',id:'A',name:'甲',text:'测试',cost:1,type:'箭矢',turns:'X',upgradedTurns:'X',extraHoverTips:[{id:'background',description:'背景'}]},{uid:'card-b',id:'B',name:'乙',text:'另一张',cost:1,type:'技能'}],terms:[],mechanisms:[],archetypes:[],partnerGroups:[],styles:[{uid:'style-a',id:'S',name:'风格',content:'约定'}],fitPool:[{uid:'fit-a',id:'F',name:'契合',theme:'星',text:'原文',cardIds:['A']}]}};fs.writeFileSync(file,JSON.stringify(seed));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));return {store:new WorkbenchStore({file,seed,workspaceId}),file,seed};}
 function input(changes,extra={}){return {requestId:randomUUID(),clientId:'test-client',label:'测试编辑',changes,...extra};}
 const patch=(e,updates)=>({collection:'cards',uid:e.uid,expectedVersion:e.version,updates});
 test('two clients editing one entry: stale version preserves the first edit',async t=>{const {store}=fixture(t),a=store.get({collection:'cards',id:'A'}),b=store.get({collection:'cards',id:'A'});await store.commit(input([patch(a,{name:'客户端甲'})]));await assert.rejects(store.commit(input([patch(b,{name:'客户端乙'})])),e=>e.code==='VERSION_CONFLICT'&&e.details.conflicts[0].current.name==='客户端甲');assert.equal(store.get({collection:'cards',id:'A'}).entity.name,'客户端甲');});
@@ -19,18 +19,16 @@ test('undo requires both current versions and matching historical endpoints',asy
 test('creation and deletion keep tombstone versions; domain data stays intact',async t=>{const {store}=fixture(t),a=store.get({collection:'cards',id:'A'});await store.commit(input([patch(a,{notes:'保留特殊内容'})]));const now=store.get({collection:'cards',id:'A'});assert.equal(now.entity.turns,'X');assert.equal(now.entity.upgradedTurns,'X');assert.deepEqual(now.entity.extraHoverTips,a.entity.extraHoverTips);assert.equal(store.query({collection:'fitPool'}).entries[0].entity.text,'原文');await store.commit(input([{collection:'cards',uid:a.uid,before:now.entity,after:null,expectedVersion:now.version}]));const missing=store.get({collection:'cards',uid:a.uid});assert.match(missing.version,/^2:missing$/);assert.equal(store.state().versions['cards/'+a.uid],missing.version);await assert.rejects(store.commit(input([{collection:'cards',uid:a.uid,before:null,after:a.entity,expectedVersion:'0:missing'}])),{code:'VERSION_CONFLICT'});});
 module.exports={fixture,input,patch};
 
-test('legacy star-arrow cards keep their identity and fixed or X countdown when saving',async t=>{
+test('temporary star-arrow snapshot restores arrow type without losing countdown or identity',async t=>{
   for(const turns of [2,'X']){
-    const {store,file,seed}=fixture(t);
-    const old=JSON.parse(fs.readFileSync(file,'utf8'));
-    Object.assign(old.data.cards[0],{type:'\u7bad\u77e2',turns,upgradedTurns:turns==='X'?'X':1,arrowSubtype:'攻击'});
+    const {store,file,seed}=fixture(t),old=JSON.parse(fs.readFileSync(file,'utf8'));
+    Object.assign(old.data.cards[0],{type:'\u661f\u77e2',turns,upgradedTurns:turns==='X'?'X':1,arrowSubtype:'攻击'});
     fs.writeFileSync(file,JSON.stringify(old));
-    const before=store.get({collection:'cards',id:'A'});
-    assert.equal(before.entity.type,'星矢');assert.equal(before.entity.turns,turns);
-    await store.commit(input([patch(before,{notes:'术语更新后正常编辑'})]));
-    const restarted=new WorkbenchStore({file,seed,workspaceId}),card=restarted.get({collection:'cards',id:'A'}).entity;
-    assert.equal(card.uid,'card-a');assert.equal(card.id,'A');assert.equal(card.type,'星矢');
-    assert.equal(card.arrowSubtype,'攻击');assert.equal(card.turns,turns);assert.equal(card.upgradedTurns,turns==='X'?'X':1);
+    const before=store.get({collection:'cards',id:'A'});assert.equal(before.entity.type,'箭矢');
+    await store.commit(input([patch(before,{notes:'回切后正常编辑'})]));
+    const card=new WorkbenchStore({file,seed,workspaceId}).get({collection:'cards',id:'A'}).entity;
+    assert.equal(card.uid,'card-a');assert.equal(card.id,'A');assert.equal(card.type,'箭矢');
+    assert.equal(card.turns,turns);assert.equal(card.upgradedTurns,turns==='X'?'X':1);assert.equal(card.arrowSubtype,'攻击');
     assert.deepEqual(card.extraHoverTips,before.entity.extraHoverTips);
   }
 });

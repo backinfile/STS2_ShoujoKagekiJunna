@@ -53,7 +53,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             if (background != null)
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND"), background)
                     { Id = "junna_knowledge_background_" + DesignId };
-            if (CardCatalog.IsArrow(this) || text.Contains("星矢"))
+            if (CardCatalog.IsArrow(this) || text.Contains("箭矢"))
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Arrow);
             if (text.Contains("伤害加成") || DamageModifiers.CaptureDamageModifierSnapshot(this).DamageBonus > 0)
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.DamageBonus);

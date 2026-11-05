@@ -1,6 +1,6 @@
 {
   "JUNNA.SELECT_DAMAGE_CARD": "选择一张牌",
-  "JUNNA.CARD_TYPE.ARROW": "Star Arrow",
+  "JUNNA.CARD_TYPE.ARROW": "箭矢",
   "JUNNA.INVESTMENT": "Damage Boosts",
   "JUNNA.INVESTMENT_BONUS": "Damage dealt increases by {Amount}.",
   "JUNNA.INVESTMENT_HITS": "Extra damage instances: {Amount}.",

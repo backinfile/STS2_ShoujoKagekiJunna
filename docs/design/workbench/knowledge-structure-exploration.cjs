@@ -22,13 +22,13 @@ function add(id, type, cost, text, upgradedText = text, options = {}) {
   assert(group && !before.cards.some(c => c.id === id) && !cards.some(c => c.id === id), id);
   const allText = text + upgradedText, termIds = ['KW_PARTNER', group.ruleId, ...(options.termIds || [])], keywords = ['知识'];
   for (const [word, term] of [['保留', 'KW_RETAIN'], ['消耗', 'KW_EXHAUST'], ['虚无', 'KW_ETHEREAL'], ['不能被打出', 'KW_UNPLAYABLE'], ['重放', 'KW_REPLAY']]) if (allText.includes(word)) {termIds.push(term);if (word !== '消耗' || /(^|。)消耗。/.test(text) || /(^|。)消耗。/.test(upgradedText)) keywords.push(word);}
-  if (type === '星矢') termIds.push('KW_STAGE');
+  if (type === '箭矢') termIds.push('KW_STAGE');
   if (allText.includes('伤害加成')) termIds.push('KW_BONUS');
   const root = id === group.root;
   cards.push({uid: 'knowledge_structure_' + id, id, name: id, type, system: 'partner', rarity: group.rarity, pool: root, cost, upgradedCost: options.upgradedCost ?? cost,
-    turns: type === '星矢' ? options.turns ?? 1 : null, upgradedTurns: type === '星矢' ? options.upgradedTurns ?? options.turns ?? 1 : null,
-    ...(type === '星矢' ? {arrowSubtype: options.arrowSubtype || (text.includes('造成') ? '攻击' : '技能')} : {}),
-    target: options.target || (type === '攻击' || type === '星矢' && text.includes('造成') ? '敌人' : '自己'),
+    turns: type === '箭矢' ? options.turns ?? 1 : null, upgradedTurns: type === '箭矢' ? options.upgradedTurns ?? options.turns ?? 1 : null,
+    ...(type === '箭矢' ? {arrowSubtype: options.arrowSubtype || (text.includes('造成') ? '攻击' : '技能')} : {}),
+    target: options.target || (type === '攻击' || type === '箭矢' && text.includes('造成') ? '敌人' : '自己'),
     text: '知识。' + text, upgradedText: '知识。' + upgradedText, keywords: [...new Set(keywords)], termIds: [...new Set(termIds)], archetypeIds: ['SYS_partner'], breakthroughIds: group.breakthrough ? [group.ruleId] : [], partnerCardIds: [],
     art: 'defaultPortrait', character: '星见纯那', role: root ? group.breakthrough ? '突破限制牌' : '知识组核心牌' : '知识牌', direction: group.structure, draftStatus: '结构探索候选', draftBatch: batchId,
     naming: {original: '', work: '', url: '', adaptation: '卡名待定，当前使用设计编号。'},
@@ -46,17 +46,17 @@ add('JK44', '攻击', 1, '造成24点伤害。', '造成32点伤害。', {termId
 add('JK44B', '技能', 0, '保留。不能被打出。', '虚无。不能被打出。', {port: '负担', roleReason: '承担牌组占位、抽牌与手牌负担；升级后可自行离场。'});
 end();
 
-begin('JK45', 'FK14', '共存代价', '罕见', 'JK45伤害结算前检查自己手牌中是否有JK45B，有则额外造成1次相同伤害；该额外次数与伤害加成、其他次数修正按已有规则处理。手牌中每张JK45B分别使自己星矢牌的当前耗能增加1，移出手牌即停止该来源修正，最低费用按原规则处理。JK45B可正常支付1点能量打出并消耗，升级为0费；它没有其他即时收益。持有它可以保留JK45的第二次伤害，处理它可以停止加费；基础和升级的共存条件相同。');
-add('JK45', '星矢', 1, '造成14点伤害。《JK45B》在手牌中时，额外造成1次伤害。', '造成18点伤害。《JK45B》在手牌中时，额外造成1次伤害。', {turns: 1, termIds: ['EF01', 'EF42'], port: '输出'});
-add('JK45B', '技能', 1, '保留。在手牌中时，星矢牌耗能增加1。消耗。', undefined, {upgradedCost: 0, port: '负担', roleReason: '持续负担也是同组星矢额外伤害的条件。'});
+begin('JK45', 'FK14', '共存代价', '罕见', 'JK45伤害结算前检查自己手牌中是否有JK45B，有则额外造成1次相同伤害；该额外次数与伤害加成、其他次数修正按已有规则处理。手牌中每张JK45B分别使自己箭矢牌的当前耗能增加1，移出手牌即停止该来源修正，最低费用按原规则处理。JK45B可正常支付1点能量打出并消耗，升级为0费；它没有其他即时收益。持有它可以保留JK45的第二次伤害，处理它可以停止加费；基础和升级的共存条件相同。');
+add('JK45', '箭矢', 1, '造成14点伤害。《JK45B》在手牌中时，额外造成1次伤害。', '造成18点伤害。《JK45B》在手牌中时，额外造成1次伤害。', {turns: 1, termIds: ['EF01', 'EF42'], port: '输出'});
+add('JK45B', '技能', 1, '保留。在手牌中时，箭矢牌耗能增加1。消耗。', undefined, {upgradedCost: 0, port: '负担', roleReason: '持续负担也是同组箭矢额外伤害的条件。'});
 end();
 
-begin('JK46', 'FK15', '累积负担', '罕见', '每份已生效JK46在自己的回合开始时，先使自己的所有星矢加速2回合，再向弃牌堆生成1张基础版本临时JK46B。该生成不附带另一组牌。每张在手牌中的JK46B，使此时新打出的己方星矢的初始回合数增加1；同名来源相加，已布置的星矢不回溯改数。JK46B可以正常支付1费打出并消耗，升级后0费，基础与升级均保留；新生成版本仍为基础牌。JK46升级只降低安装费用，负担频率与加速量保持。');
-add('JK46', '能力', 2, '回合开始时，所有星矢加速2回合，并将1张《JK46B》放入弃牌堆。', undefined, {upgradedCost: 1, termIds: ['TR02', 'EF29', 'EF22'], port: '运转'});
-add('JK46B', '技能', 1, '保留。在手牌中时，打出的星矢牌回合数增加1。消耗。', undefined, {upgradedCost: 0, port: '负担'});
+begin('JK46', 'FK15', '累积负担', '罕见', '每份已生效JK46在自己的回合开始时，先使自己的所有箭矢加速2回合，再向弃牌堆生成1张基础版本临时JK46B。该生成不附带另一组牌。每张在手牌中的JK46B，使此时新打出的己方箭矢的初始回合数增加1；同名来源相加，已布置的箭矢不回溯改数。JK46B可以正常支付1费打出并消耗，升级后0费，基础与升级均保留；新生成版本仍为基础牌。JK46升级只降低安装费用，负担频率与加速量保持。');
+add('JK46', '能力', 2, '回合开始时，所有箭矢加速2回合，并将1张《JK46B》放入弃牌堆。', undefined, {upgradedCost: 1, termIds: ['TR02', 'EF29', 'EF22'], port: '运转'});
+add('JK46B', '技能', 1, '保留。在手牌中时，打出的箭矢牌回合数增加1。消耗。', undefined, {upgradedCost: 0, port: '负担'});
 end();
 
-begin('JK47', 'FK16', '共用次数', '稀有', '每位玩家在本场战斗中为所有同名JK47B、JK47C共用一个实际打出次数池，初始3次；重复获得、生成、复制不会重置或追加初始值。JK47增加该池剩余次数，基础2、升级3。打出B或C在支付和入队前检查并预留1次，不能支付则不允许打出；主动取消退还预留。免费实际打出也消耗次数，牌效重放与额外执行不再次占用。次数为0时两种牌都不能被打出；JT01转换后的星矢在布置时占次数，完成时不再次占用。两种牌的升级只分别提高伤害与格挡，固定共享初始值保持3。', true);
+begin('JK47', 'FK16', '共用次数', '稀有', '每位玩家在本场战斗中为所有同名JK47B、JK47C共用一个实际打出次数池，初始3次；重复获得、生成、复制不会重置或追加初始值。JK47增加该池剩余次数，基础2、升级3。打出B或C在支付和入队前检查并预留1次，不能支付则不允许打出；主动取消退还预留。免费实际打出也消耗次数，牌效重放与额外执行不再次占用。次数为0时两种牌都不能被打出；JT01转换后的箭矢在布置时占次数，完成时不再次占用。两种牌的升级只分别提高伤害与格挡，固定共享初始值保持3。', true);
 add('JK47', '技能', 0, '《JK47B》《JK47C》本场战斗合计可多打出2次。消耗。', '《JK47B》《JK47C》本场战斗合计可多打出3次。消耗。', {port: '运转'});
 add('JK47B', '攻击', 0, '造成12点伤害。本场战斗与《JK47C》合计只能打出3次。', '造成16点伤害。本场战斗与《JK47C》合计只能打出3次。', {termIds: ['EF01'], port: '输出'});
 add('JK47C', '技能', 0, '获得10点格挡。本场战斗与《JK47B》合计只能打出3次。', '获得14点格挡。本场战斗与《JK47B》合计只能打出3次。', {termIds: ['EF05'], port: '防御'});
@@ -77,22 +77,22 @@ add('JK50', '攻击', 4, '可消耗手牌中的《JK50B》，改为支付其耗�
 add('JK50B', '技能', 2, '保留。不能被打出。', undefined, {upgradedCost: 1, port: '运转', roleReason: '作为同组卡牌的付费媒介，升级会降低代理支付量。'});
 end();
 
-begin('JK51', 'FK20', '去向代付', '稀有', 'JK51本身为1费1回合的格挡星矢，正常完成整批后将被消耗。每份已生效JK51B仅在自己JK51实际将进入消耗牌堆时提供一次替代：可以消耗该能力的实际来源卡并移除对应能力实例，令本次JK51沿原普通去向进入弃牌堆；不让多个B对同一次去向连锁替代。来源B进入自己的消耗牌堆。替代后若另有有效JA22，按其现行约定处理本来会正常弃置的JK51。星矢的额外触发与重放只重复格挡，不新增整批去向；没有实际消耗去向时不支付B。JK51C从消耗牌堆取回1张实际JK51B并自己消耗，不能选择已经在手或仍生效的能力；取回的B需要再次正常打出。B升级只把安装费用降为0，C升级只增加保留，均不改变去向替代次数。', true);
-add('JK51', '星矢', 1, '获得20点格挡。消耗。', '获得28点格挡。消耗。', {turns: 1, termIds: ['EF05'], port: '防御'});
-add('JK51B', '能力', 1, '《JK51》将被消耗时，可改为消耗此牌。', undefined, {upgradedCost: 0, port: '运转', roleReason: '把指定星矢的消耗去向转移给当前能力来源。'});
+begin('JK51', 'FK20', '去向代付', '稀有', 'JK51本身为1费1回合的格挡箭矢，正常完成整批后将被消耗。每份已生效JK51B仅在自己JK51实际将进入消耗牌堆时提供一次替代：可以消耗该能力的实际来源卡并移除对应能力实例，令本次JK51沿原普通去向进入弃牌堆；不让多个B对同一次去向连锁替代。来源B进入自己的消耗牌堆。替代后若另有有效JA22，按其现行约定处理本来会正常弃置的JK51。箭矢的额外触发与重放只重复格挡，不新增整批去向；没有实际消耗去向时不支付B。JK51C从消耗牌堆取回1张实际JK51B并自己消耗，不能选择已经在手或仍生效的能力；取回的B需要再次正常打出。B升级只把安装费用降为0，C升级只增加保留，均不改变去向替代次数。', true);
+add('JK51', '箭矢', 1, '获得20点格挡。消耗。', '获得28点格挡。消耗。', {turns: 1, termIds: ['EF05'], port: '防御'});
+add('JK51B', '能力', 1, '《JK51》将被消耗时，可改为消耗此牌。', undefined, {upgradedCost: 0, port: '运转', roleReason: '把指定箭矢的消耗去向转移给当前能力来源。'});
 add('JK51C', '技能', 0, '将消耗牌堆中的1张《JK51B》放入手牌。消耗。', '保留。将消耗牌堆中的1张《JK51B》放入手牌。消耗。', {termIds: ['EF16'], port: '运转'});
 end();
 
 assert.equal(groups.length, 8); assert.equal(cards.length, 18);
 const data = structuredClone(before); data.cards.push(...cards); data.terms.push(...terms); data.partnerGroups.push(...groups);
 const app = fs.readFileSync(path.join(here, 'app.js'), 'utf8');
-const context = {seed: {data}, clone: structuredClone, uid: () => {throw Error('缺少稳定编号');}, COLLECTIONS: ['mechanisms', 'terms', 'cards', 'partnerGroups', 'archetypes', 'styles'], TYPES: ['攻击', '技能', '能力', '星矢'], RARITIES: ['基础', '普通', '罕见', '稀有', '远古']};
+const context = {seed: {data}, clone: structuredClone, uid: () => {throw Error('缺少稳定编号');}, COLLECTIONS: ['mechanisms', 'terms', 'cards', 'partnerGroups', 'archetypes', 'styles'], TYPES: ['攻击', '技能', '能力', '箭矢'], RARITIES: ['基础', '普通', '罕见', '稀有', '远古']};
 vm.createContext(context); vm.runInContext(app.slice(app.indexOf('  function normalizeData('), app.indexOf('  function patchesBetween(')), context);
 const normalized = JSON.parse(JSON.stringify(context.normalizeData(data)));
 for (const old of before.cards) assert.deepEqual(normalized.cards.find(c => c.id === old.id), old, '保留旧牌 ' + old.id);
 for (const key of ['meta', 'styles', 'mechanisms', 'archetypes', 'title']) assert.deepEqual(normalized[key], before[key]);
 for (const g of groups) for (const id of g.grantedCardIds) {const c = normalized.cards.find(c => c.id === id); assert.equal(c.pool, false); assert.equal(c.rarity, g.mainCardId && normalized.cards.find(c => c.id === g.mainCardId).rarity);}
-for (const c of cards) {assert(c.text.startsWith('知识。') && c.upgradedText.startsWith('知识。'));assert(!c.text.includes('所有玩家'));if (c.type === '星矢') assert(['攻击', '技能', '能力'].includes(c.arrowSubtype));}
+for (const c of cards) {assert(c.text.startsWith('知识。') && c.upgradedText.startsWith('知识。'));assert(!c.text.includes('所有玩家'));if (c.type === '箭矢') assert(['攻击', '技能', '能力'].includes(c.arrowSubtype));}
 const batches = [
   {id: batchId + '-terms', label: '知识结构补充规则', collection: 'terms', ids: terms.map(t => t.id), entries: terms},
   {id: batchId + '-cards', label: '新增八组知识结构牌面', collection: 'cards', ids: cards.map(c => c.id), entries: cards},

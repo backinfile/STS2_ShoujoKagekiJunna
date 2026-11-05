@@ -47,7 +47,7 @@ public sealed class CardDefinition
     };
     private static CardType ToType(string value) => value switch
     {
-        "星矢" => ArrowPile.ArrowType, "攻击" => CardType.Attack, "能力" => CardType.Power, _ => CardType.Skill
+        "箭矢" => ArrowPile.ArrowType, "攻击" => CardType.Attack, "能力" => CardType.Power, _ => CardType.Skill
     };
 }
 

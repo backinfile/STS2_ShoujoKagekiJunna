@@ -23,7 +23,7 @@
 node docs/design/workbench/deploy/build-package.cjs artifacts/cloud/snapshot.json artifacts/cloud/package artifacts/cloud/connection.json
 ```
 
-`JUNNA_DEPLOY_SOURCE` 可指定已审阅的工作台源码目录。整个前端和后端使用这同一目录中的类型校验与展示代码。2026-11-05 的部署包含“星矢”类型兼容，以及旧浏览器筛选值的兼容。运行脚本只读取服务器持久化数据；构建时的快照用于生成页面内置内容，页面连接成功后读取主台当前版本。
+`JUNNA_DEPLOY_SOURCE` 可指定已审阅的工作台源码目录。整个前端和后端使用这同一目录中的类型校验与展示代码。部署以“箭矢”为规范名称，并兼容曾导出的“星矢”类型及旧浏览器筛选值。运行脚本只读取服务器持久化数据；构建时的快照用于生成页面内置内容，页面连接成功后读取主台当前版本。
 
 部署包包含私有 `relay.config.json` 和编辑页，应通过 SSH 上传到程序发布目录。在该目录运行 `npm ci --omit=dev --ignore-scripts --no-audit --no-fund`，保留已有 `state.json` 和 `backend.json`。将 `public/assets/` 合入共享资产目录，设置 `www-data` 对数据、共享资产、`/var/www/junna` 和其 `releases/` 目录的写权限；程序目录由 `root` 持有，私有配置限制为服务组可读。安装本目录的 systemd 单元并在协作切换窗口更新程序链接、重启服务。首次初始化的数据应来自主台 MCP 导出。
 
