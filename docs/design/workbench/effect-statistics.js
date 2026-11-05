@@ -14,6 +14,7 @@ const JunnaEffectStatistics = (() => {
     return event&&/每当|每次|每回合|打出|完成|进入手牌|在手牌中|抽到|受到|回合开始|回合结束/.test(event[1])?event[2]:text;
   }
   const any=(card,test)=>clauses(card).some(clause=>test(clause,action(clause)));
+  const handArrowPlay=card=>any(card,(s,a)=>/将[^。]*手牌[^。]*作为5回合的箭矢打出/.test(a));
   const gainEnergy=text=>/获得[^，,。]*(?:点)?能量(?=$|[，,。]|并|且|可)/.test(text);
   const bonusGain=text=>/获得[^，,。]*伤害加成/.test(text);
   const discount=text=>/(?:耗能|费用)(?:减少|降低|减|[-−])|(?:耗能|费用)变为0|(?:耗能|费用)为0/.test(text);
@@ -39,6 +40,9 @@ const JunnaEffectStatistics = (() => {
   const matchers={
     'role.both':(c,ctx)=>ctx.role(c)==='both',
     'arrow.play':arrow,
+    'arrow.hand-as-five-turn-play':handArrowPlay,
+    'arrow.enemy-accelerate':c=>any(c,(s,a)=>/所有目标为敌人的箭矢(?:获得[^。]*然后)?加速(?:\d+|[xXN])回合/.test(a)),
+    'arrow.self-accelerate':c=>any(c,(s,a)=>/所有目标为自己的箭矢加速(?:\d+|[xXN])回合/.test(a)),
     'arrow.x-play':(c,ctx)=>x(c)&&any(c,(s,a)=>/^打出X张/.test(s)&&ctx.target(a,'箭矢',c)),
     'arrow.play-energy':c=>any(c,(s,a)=>/打出[^。]*箭矢牌(?:时|后)/.test(s)&&gainEnergy(a)),
     'arrow.play-draw':c=>any(c,(s,a)=>/打出[^。]*箭矢牌(?:时|后)/.test(s)&&/抽(?:取)?[^。]*牌/.test(a)),
@@ -130,7 +134,7 @@ const JunnaEffectStatistics = (() => {
     'energy.reduce':c=>any(c,(s,a)=>/(?:耗能|费用)(?:减少|降低|减|[-−])/.test(a)),
     'energy.zero':c=>any(c,(s,a)=>/(?:耗能|费用)(?:变为0|为0)|不消耗能量/.test(a)),
     'energy.exchange':c=>/交换[^。]*(?:耗能|费用)/.test(c.text||''),
-    'energy.auto-play':(c,ctx)=>any(c,(s,a)=>/免费打出|打出手牌中的/.test(a)&&(ctx.referenced(s,high)||/耗能不低于2|高费/.test(s))),
+    'energy.auto-play':(c,ctx)=>handArrowPlay(c)||any(c,(s,a)=>/免费打出|打出手牌中的/.test(a)&&(ctx.referenced(s,high)||/耗能不低于2|高费/.test(s))),
     'energy.retain-hand':c=>high(c)&&((c.keywords||[]).includes('保留')||/(?:^|。)保留(?:。|$)/.test(c.text||''))||/保留(?:所有|全部)?手牌|保留(?:所有|全部)?(?:耗能|费用)?不低于[2-9](?:费)?的牌/.test(c.text||''),
     'energy.tutor':(c,ctx)=>any(c,(s,a)=>/抽取|(?:加入|放入|放回)[^。]*手牌/.test(a)&&(/高费|耗能不低于2/.test(s)||ctx.referenced(s,high))),
     'bonus.gain':c=>any(c,(s,a)=>bonusGain(a)),
@@ -150,6 +154,6 @@ const JunnaEffectStatistics = (() => {
       return {...item,role,known:Boolean(matcher),members:matcher?cards.filter(card=>matcher(card,ctx)):[]};
     }));
   }
-  return {entries,matcherIds:Object.keys(matchers)};
+  return {entries,handArrowPlay,matcherIds:Object.keys(matchers)};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=JunnaEffectStatistics;

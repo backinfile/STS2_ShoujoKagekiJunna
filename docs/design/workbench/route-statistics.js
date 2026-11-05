@@ -15,8 +15,8 @@ const JunnaRouteStatistics = (() => {
     const text=String(card.text||'').replace(/^知识[。．]?/,''),knowledge=(card.keywords||[]).includes('知识')||/^知识[。．]/.test(card.text||'');
     let trigger=false,payoff=false;
     if(route.id==='SYS_stage') {
-      // 打出箭矢才提供触发；加速、复制、转型和调度依赖已有对象。
-      trigger=card.type==='箭矢';
+      // 箭矢牌与将手牌作为箭矢打出的效果提供触发。
+      trigger=card.type==='箭矢'||effectStatistics.handArrowPlay(card);
       payoff=/箭矢[^。]*(?:完成时|完成后|额外触发时|额外触发后)|打出[^。]*箭矢牌(?:时|后)|(?:每当|每次)[^。]*箭矢[^。]*加速[^。]*(?:时|后)|箭矢数量|每有[^。]*箭矢|(?:在场|布置)期间|有布置中?的箭矢时/.test(text);
     } else if(route.id==='SYS_partner') {
       trigger=knowledge||/(?:抽取|复制|加入|放入|取回)[^。]*知识牌/.test(text);
@@ -27,9 +27,9 @@ const JunnaRouteStatistics = (() => {
     } else if(route.id==='SYS_energy') {
       const xCost=String(card.cost).toUpperCase()==='X';
       trigger=xCost||typeof card.cost==='number'&&card.cost>=2||/(?:获得|保留)[^。]*能量|耗能增加|费用增加/.test(text);
-      payoff=xCost||/(?:每有|每拥有|每消耗|每支付|剩余)[^。]*能量|(?:等同|等量)[^。]*耗能|每[^。]*耗能不低于|(?:第\d+次|每次)[^。]*耗能不低于/.test(text);
+      payoff=effectStatistics.handArrowPlay(card)||xCost||/(?:每有|每拥有|每消耗|每支付|剩余)[^。]*能量|(?:等同|等量)[^。]*耗能|每[^。]*耗能不低于|(?:第\d+次|每次)[^。]*耗能不低于/.test(text);
     }
-    const role=trigger&&payoff?'both':trigger?'trigger':payoff?'payoff':'tool',portText=String(card.design?.port||'');
+    const role=trigger&&payoff?'both':trigger?'trigger':'payoff',portText=String(card.design?.port||'');
     const inferredPorts=[];
     if(/输出/.test(portText)||/造成.*伤害|伤害加成|伤害次数/.test(text))inferredPorts.push('output');
     if(/防御/.test(portText)||/格挡|虚弱|回血|生命值/.test(text))inferredPorts.push('defense');
@@ -40,23 +40,49 @@ const JunnaRouteStatistics = (() => {
     const base = defaults.routes.find(entry=>entry.uid===route.uid)?.members[card.uid];
     const override = card.design?.routeRoles?.[route.uid];
     const value = {...inferProfile(card,route),...base,...override};
+    if(value.role==='tool')value.role='payoff';
     if(route.id==='SYS_stage') {
       const payoff=value.role==='payoff'||value.role==='both';
-      if(card.type==='箭矢')value.role=payoff?'both':'trigger';
-      else if(value.role==='trigger'||value.role==='both')value.role=payoff?'payoff':'tool';
+      if(card.type==='箭矢'||effectStatistics.handArrowPlay(card))value.role=payoff?'both':'trigger';
     }
-    return {role:Object.hasOwn(roles,value.role)?value.role:'unclassified',cross:Boolean(value.cross),ports:[...new Set((Array.isArray(value.ports)?value.ports:[]).filter(port=>Object.hasOwn(ports,port)))]};
+    return {role:Object.hasOwn(roles,value.role)?value.role:'unclassified',cross:(card.archetypeIds||[]).length>1,ports:[...new Set((Array.isArray(value.ports)?value.ports:[]).filter(port=>Object.hasOwn(ports,port)))]};
   }
-  function matchesPosition(card,routes,defaults,position='all',routeId='all') {
-    if(position!=='cross'&&!Object.hasOwn(roles,position))return true;
-    return routes.some(route=>card.archetypeIds.includes(route.id)&&(routeId==='all'||route.id===routeId)&&(position==='cross'?profile(card,route,defaults).cross:profile(card,route,defaults).role===position));
+  const positions={trigger:'触发',payoff:'收益',cross:'跨流派',breakthrough:'突破限制'};
+  function normalizePositions(value){
+    const input=Array.isArray(value)?value:typeof value==='string'?value.split(','):[];
+    return [...new Set(input.flatMap(tag=>tag==='both'?['trigger','payoff']:tag==='tool'?['payoff']:[tag]).filter(tag=>Object.hasOwn(positions,tag)))];
+  }
+  function isBreakthrough(card){
+    if(typeof card.design?.breakthrough==='boolean')return card.design.breakthrough;
+    return card.role==='突破限制牌'||['规则突破','规则改写','突破限制','突破限制牌'].includes(card.design?.classification)||(card.breakthroughIds||[]).length>0;
+  }
+  function positionTags(card,routes,defaults,routeId='all'){
+    const selected=routes.filter(route=>(card.archetypeIds||[]).includes(route.id)&&(routeId==='all'||route.id===routeId));
+    const values=selected.map(route=>profile(card,route,defaults)),tags=[];
+    if(values.some(p=>p.role==='trigger'||p.role==='both'))tags.push('trigger');
+    if(values.some(p=>p.role==='payoff'||p.role==='both'))tags.push('payoff');
+    if(values.some(p=>p.cross))tags.push('cross');
+    if(isBreakthrough(card))tags.push('breakthrough');
+    return tags;
+  }
+  function matchesPosition(card,routes,defaults,position=[],routeId='all',excluded=[]){
+    const tags=positionTags(card,routes,defaults,routeId);
+    return normalizePositions(position).every(tag=>tags.includes(tag))&&!normalizePositions(excluded).some(tag=>tags.includes(tag));
+  }
+  function togglePositionFilter(included,excluded,mode,tag,checked){
+    const next={included:normalizePositions(included),excluded:normalizePositions(excluded)};
+    if(!Object.hasOwn(positions,tag))return next;
+    const key=mode==='exclude'?'excluded':'included',other=key==='included'?'excluded':'included';
+    next[key]=next[key].filter(value=>value!==tag);
+    if(checked){next[key].push(tag);next[other]=next[other].filter(value=>value!==tag)}
+    return next;
   }
   function compute(data,defaults,options={}) {
     const scope = ['cards','reserve','trash'].includes(options.scope)?options.scope:'cards';
     const scopedCards = data.cards.filter(card=>cardScope(card)===scope&&(!options.onlyRewards||isReward(card)));
     const order = new Map(defaults.routes.map((route,index)=>[route.uid,index]));
     const routes = data.archetypes.slice().sort((a,b)=>(order.get(a.uid)??999)-(order.get(b.uid)??999)||a.id.localeCompare(b.id,undefined,{numeric:true})).map(route=>{
-      const members = scopedCards.filter(card=>card.archetypeIds.includes(route.id)&&matchesPosition(card,[route],defaults,options.position));
+      const members = scopedCards.filter(card=>card.archetypeIds.includes(route.id)&&matchesPosition(card,[route],defaults,options.position,'all',options.excludedPositions));
       const buckets = Object.fromEntries(Object.keys(roles).map(role=>[role,[]]));
       const cross = [], payoffPorts = Object.fromEntries(Object.keys(ports).map(port=>[port,[]])), unassignedPorts = [];
       for(const card of members) {
@@ -72,8 +98,7 @@ const JunnaRouteStatistics = (() => {
       result.effects=effectStatistics.entries(result,data,defaults,profile);
       return result;
     });
-    const memberUids=new Set(routes.flatMap(route=>route.members.map(card=>card.uid)));
-    const cards=options.position==='cross'||Object.hasOwn(roles,options.position)?scopedCards.filter(card=>memberUids.has(card.uid)):scopedCards;
+    const cards=scopedCards.filter(card=>matchesPosition(card,data.archetypes,defaults,options.position,'all',options.excludedPositions));
     const active = data.cards.filter(card=>cardScope(card)==='cards');
     const comparable = active.filter(card=>card.pool||card.rarity==='基础');
     const standard = defaults.standard.map(row=>({...row,current:comparable.filter(card=>card.rarity===row.rarity).length}));
@@ -84,7 +109,9 @@ const JunnaRouteStatistics = (() => {
     if(key==='all')return route.members;
     if(key==='rewards')return route.rewards;
     if(key==='cross')return route.cross;
-    if(key.startsWith('roleRarity:')){const [,role,rarity]=key.split(':');return (route.buckets[role]||[]).filter(card=>card.rarity===rarity);}
+    if(key==='breakthrough')return route.members.filter(isBreakthrough);
+    if(key==='trigger'||key==='payoff')return [...route.buckets[key],...route.buckets.both];
+    if(key.startsWith('roleRarity:')){const [,role,rarity]=key.split(':');return membersFor(route,role).filter(card=>card.rarity===rarity);}
     if(key.startsWith('rarity:'))return route.rarity[key.slice(7)]||[];
     if(key.startsWith('port:'))return route.payoffPorts[key.slice(5)]||[];
     if(key.startsWith('cost:'))return route.cost[key.slice(5)]||[];
@@ -94,7 +121,8 @@ const JunnaRouteStatistics = (() => {
   function recommend(route,defaults) {
     const plan=defaults.recommendations?.routes.find(entry=>entry.id===route.id);if(!plan)return null;
     const keys=['load','trigger','payoff','both','tool'],size=route.members.length;
-    const weights=keys.map(role=>Number(plan.weights[role]||0)),total=weights.reduce((sum,value)=>sum+value,0);
+    const migratedWeights={...plan.weights,payoff:Number(plan.weights.payoff||0)+Number(plan.weights.tool||0),tool:0};
+    const weights=keys.map(role=>Number(migratedWeights[role]||0)),total=weights.reduce((sum,value)=>sum+value,0);
     if(total<=0||weights.some(value=>!Number.isFinite(value)||value<0))return null;
     const quotas=weights.map(value=>size*value/total),target=Object.fromEntries(keys.map((role,index)=>[role,Math.floor(quotas[index])]));
     const order=keys.map((role,index)=>({role,index,remainder:quotas[index]-target[role]})).sort((a,b)=>b.remainder-a.remainder||a.index-b.index);
@@ -105,11 +133,11 @@ const JunnaRouteStatistics = (() => {
     return {size,current,target,currentSides,targetSides,pending:route.buckets.unclassified.length,
       share:Object.fromEntries(keys.map(role=>[role,size?target[role]/size:0])),
       difference:{trigger:targetSides.trigger-currentSides.trigger,payoff:targetSides.payoff-currentSides.payoff},
-      nominalSides:sides(plan.weights),rationale:plan.rationale};
+      nominalSides:sides(migratedWeights),rationale:plan.rationale};
   }
   function roleRatio(trigger,payoff) {
     if(!trigger&&!payoff)return '—';let a=trigger,b=payoff;while(b){const rest=a%b;a=b;b=rest;}return trigger/a+'∶'+payoff/a;
   }
-  return {roles,ports,rarities,cardScope,isReward,inferProfile,profile,matchesPosition,compute,membersFor,recommend,roleRatio};
+  return {roles,positions,normalizePositions,positionTags,isBreakthrough,togglePositionFilter,ports,rarities,cardScope,isReward,inferProfile,profile,matchesPosition,compute,membersFor,recommend,roleRatio};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=JunnaRouteStatistics;

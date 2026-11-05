@@ -1,0 +1,261 @@
+{
+  "passed": true,
+  "newCards": 24,
+  "newKnowledgeGroups": 2,
+  "migratedCards": 100,
+  "checks": [
+    "normalized domain references",
+    "existing card faces preserved",
+    "fixed five turns",
+    "no 2-to-1 fee upgrades",
+    "acceleration rarity",
+    "unique batch faces",
+    "effect counts and role recommendations"
+  ],
+  "savedRevision": 2603,
+  "fullRereadMatched": true,
+  "requestId": "b93d6871-410a-482c-987f-bd7f1f11ee72",
+  "focusedTests": {
+    "passed": 16,
+    "failed": 0,
+    "command": "node --test docs/design/workbench/arrow-effect-exploration.test.cjs docs/design/workbench/route-position-tags.test.cjs"
+  },
+  "deploymentApproval": "用户明确回复：授权部署到 vipcloud",
+  "initialPhase": {
+    "revision": 2603,
+    "changes": 136,
+    "newCards": 24,
+    "newKnowledgeGroups": 2,
+    "migratedCards": 100,
+    "protectedExistingCardFaces": 346,
+    "effectCounts": {
+      "arrow.hand-as-five-turn-play": 11,
+      "arrow.enemy-accelerate": 8,
+      "arrow.self-accelerate": 7
+    },
+    "fullRereadMatched": true
+  },
+  "accelerationRevision": 2611,
+  "latestStarterRevision": {
+    "verified": true,
+    "revision": 2612,
+    "requestId": "11415104-76dc-4088-901b-6acdf2012637",
+    "cards": [
+      {
+        "id": "JA84",
+        "name": "张弓",
+        "rarity": "普通",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "获得8点格挡。将1张手牌作为5回合的箭矢打出。",
+        "upgradedText": "获得12点格挡。将1张手牌作为5回合的箭矢打出。"
+      },
+      {
+        "id": "JH26",
+        "name": "余星",
+        "rarity": "基础",
+        "pool": false,
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "获得3点格挡。可保留1点能量到下回合。",
+        "upgradedText": "获得6点格挡。可保留2点能量到下回合。"
+      }
+    ],
+    "startingDeck": [
+      {
+        "cardId": "JB01",
+        "count": 4
+      },
+      {
+        "cardId": "JB02",
+        "count": 4
+      },
+      {
+        "cardId": "JB03",
+        "count": 1
+      },
+      {
+        "cardId": "JH26",
+        "count": 1
+      }
+    ],
+    "totalCards": 10
+  },
+  "filterRuntime": {
+    "deployed": true,
+    "revision": 2640,
+    "httpStatus": 200,
+    "editorHttpStatus": 200,
+    "newConnectionPreserved": true,
+    "mcpConnected": true,
+    "positionCheckboxes": 8,
+    "archetypeButtons": 5,
+    "keywordButtons": 10,
+    "topSortOptions": 7,
+    "sortDirectionButton": true,
+    "remainingEnemyAccelerationCards": 1,
+    "preservedLaterManualEdits": [
+      {
+        "id": "JA89",
+        "scope": "reserve"
+      }
+    ],
+    "activeEnemyAccelerationCards": 0,
+    "zhanggong": "普通，8格挡",
+    "yuxing": "基础，3格挡",
+    "startingDeck": [
+      {
+        "cardId": "JB01",
+        "count": 4
+      },
+      {
+        "cardId": "JB02",
+        "count": 4
+      },
+      {
+        "cardId": "JB03",
+        "count": 1
+      },
+      {
+        "cardId": "JH26",
+        "count": 1
+      }
+    ],
+    "totalStarterCards": 10,
+    "focusedTests": 11,
+    "visualVerification": "Computer Use ended because the Windows browser URL could not be verified"
+  },
+  "editorRuntime": {
+    "deployed": true,
+    "revision": 2771,
+    "publicHttpStatus": 200,
+    "editorHttpStatus": 200,
+    "newConnectionPreserved": true,
+    "mcpConnected": true,
+    "cardArchetypes": "multiple checkboxes",
+    "positions": [
+      "触发",
+      "收益",
+      "跨流派",
+      "突破限制"
+    ],
+    "positionEditor": "independent per selected archetype",
+    "crossPosition": "derived from multiple archetypes",
+    "removedEditorFields": [
+      "卡位",
+      "完整词条绑定",
+      "重复主体系",
+      "编号",
+      "固定角色",
+      "卡牌结构数据",
+      "收益端口"
+    ],
+    "hiddenDataPreserved": true,
+    "sortAndFilterButtonsPreserved": true,
+    "focusedTests": 16,
+    "visualVerification": "Computer Use ended because the Windows browser URL could not be verified",
+    "startingDeck": [
+      {
+        "cardId": "JB01",
+        "count": 4
+      },
+      {
+        "cardId": "JB02",
+        "count": 4
+      },
+      {
+        "cardId": "JB03",
+        "count": 1
+      },
+      {
+        "cardId": "JH26",
+        "count": 1
+      }
+    ]
+  },
+  "runtimeObservedRevision": 2771,
+  "mechanicalDesignChecks": {
+    "positions": [],
+    "filterButtons": [],
+    "editor": []
+  },
+  "integration": {
+    "targetBranch": "main",
+    "synchronizedMain": "162ea37670f58aa6e0369f326f8a39941e0e61ea",
+    "mergeAndCleanupApproval": "用户：合并并提交，清理下临时文件",
+    "scope": "仅本任务工作树、任务分支、本地忽略的辅助脚本与快照；保留线上模板回滚备份及其他任务。"
+  },
+  "gameTests": "未运行完整游戏测试；本次仅运行工作台定向测试与发布页面/MCP核对。",
+  "webMcpDiagnostic": {
+    "editorHttpStatus": 200,
+    "origin": "https://junna.17181718.xyz",
+    "timeoutMs": 60000,
+    "requests": [
+      {
+        "method": "initialize",
+        "httpStatus": 200,
+        "elapsedMs": 1404,
+        "contentLength": null
+      },
+      {
+        "method": "tools/call",
+        "httpStatus": 200,
+        "elapsedMs": 2741,
+        "contentLength": null
+      },
+      {
+        "method": "tools/call",
+        "httpStatus": 200,
+        "elapsedMs": 7749,
+        "contentLength": null
+      },
+      {
+        "method": "tools/call",
+        "httpStatus": 200,
+        "elapsedMs": 5189,
+        "contentLength": null
+      },
+      {
+        "method": "tools/call",
+        "httpStatus": 200,
+        "elapsedMs": 2219,
+        "contentLength": null
+      },
+      {
+        "method": "tools/call",
+        "httpStatus": 200,
+        "elapsedMs": 5692,
+        "contentLength": null
+      },
+      {
+        "method": "tools/call",
+        "httpStatus": 200,
+        "elapsedMs": 2358,
+        "contentLength": null
+      }
+    ],
+    "states": [
+      {
+        "ready": true,
+        "pending": 0,
+        "error": null
+      }
+    ],
+    "snapshot": {
+      "revision": 2781,
+      "cards": 370,
+      "assets": 457
+    },
+    "connected": true,
+    "elapsedMs": 83558,
+    "csp": "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'",
+    "userConfirmed": "现在好了"
+  },
+  "documentReview": {
+    "trackedDocumentsScanned": 156,
+    "credentialMatches": 0,
+    "newTaskDocumentsUseRelativePaths": true,
+    "legacyDataSnapshots": "保留现有离线数据快照；本次修改保持最小范围。"
+  }
+}
