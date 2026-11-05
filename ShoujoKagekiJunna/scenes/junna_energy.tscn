@@ -33,20 +33,20 @@ offset_bottom = 128.0
 mouse_filter = 2
 
 [node name="Layer2" type="TextureRect" parent="Layers/RotationLayers"]
-modulate = Color(1, 1, 1, 0.16)
+modulate = Color(1, 1, 1, 1)
 offset_right = 128.0
 offset_bottom = 128.0
-pivot_offset = Vector2(62.5, 63)
+pivot_offset = Vector2(62.5, 61.5)
 mouse_filter = 2
 texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Layer3" type="TextureRect" parent="Layers/RotationLayers"]
-modulate = Color(1, 1, 1, 0.08)
+modulate = Color(1, 1, 1, 0.12)
 offset_right = 128.0
 offset_bottom = 128.0
-pivot_offset = Vector2(62.5, 63)
+pivot_offset = Vector2(62.5, 61.5)
 mouse_filter = 2
 texture = ExtResource("3")
 expand_mode = 1
@@ -73,9 +73,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 14.5
-offset_top = -30.0
+offset_top = -31.5
 offset_right = -17.5
-offset_bottom = 28.0
+offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
