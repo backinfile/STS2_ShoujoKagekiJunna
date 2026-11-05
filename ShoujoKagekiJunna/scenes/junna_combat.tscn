@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 [ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/portrait.png" id="1"]
 [ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/aim.png" id="2"]
 [sub_resource type="Animation" id="Idle"]
@@ -23,12 +23,26 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("Visuals:texture")
 tracks/0/interp = 1
 tracks/0/enabled = true
-tracks/0/keys = {"times": PackedFloat32Array(0,0.15,0.42), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [ExtResource("2"),ExtResource("2"),ExtResource("1")]}
+tracks/0/keys = {"times": PackedFloat32Array(0,0.15,0.42), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [ExtResource("1"),ExtResource("1"),ExtResource("1")]}
 tracks/1/type = "value"
 tracks/1/path = NodePath("Visuals:position")
 tracks/1/interp = 1
 tracks/1/enabled = true
 tracks/1/keys = {"times": PackedFloat32Array(0,0.15,0.42), "transitions": PackedFloat32Array(1,1,1), "update": 0, "values": [Vector2(0, -153),Vector2(14, -153),Vector2(0, -153)]}
+[sub_resource type="Animation" id="ArrowAttack"]
+resource_name = "ArrowAttack"
+length = 1.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [ExtResource("2")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:position")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [Vector2(0, -153)]}
 [sub_resource type="Animation" id="Cast"]
 resource_name = "Cast"
 length = 0.45
@@ -71,7 +85,7 @@ tracks/0/interp = 1
 tracks/0/enabled = true
 tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [ExtResource("1")]}
 [sub_resource type="AnimationLibrary" id="library"]
-_data = {"Idle": SubResource("Idle"),"Attack": SubResource("Attack"),"Cast": SubResource("Cast"),"Hit": SubResource("Hit"),"Dead": SubResource("Dead"),"Relaxed": SubResource("Relaxed")}
+_data = {"Idle": SubResource("Idle"),"Attack": SubResource("Attack"),"ArrowAttack": SubResource("ArrowAttack"),"Cast": SubResource("Cast"),"Hit": SubResource("Hit"),"Dead": SubResource("Dead"),"Relaxed": SubResource("Relaxed")}
 [node name="JunnaCombat" type="Node2D"]
 [node name="Visuals" type="Sprite2D" parent="."]
 unique_name_in_owner = true

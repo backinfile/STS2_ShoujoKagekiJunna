@@ -11,6 +11,8 @@
     <Compile Include="CardTextProbe.cs" />
     <Compile Include="KeywordProbe.cs" />
     <Compile Include="ArrowFollowupProbe.cs" />
+    <Compile Include="ArrowAttackPoseProbe.cs" />
+    <Compile Include="ArrowPivotProbe.cs" />
     <Compile Include="InvestmentMarksProbe.cs" />
     <Compile Include="StarterRelicProbe.cs" />
     <Reference Include="ShoujoKagekiJunna" HintPath="$(JunnaAssemblyPath)" />

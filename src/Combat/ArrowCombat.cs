@@ -120,6 +120,7 @@ public static partial class ArrowCombat
         context.PushModel(arrow.Card);
         try
         {
+            using var attack = ArrowAttackAnimation.Begin(arrow.Card.Owner);
             if (hud != null) await hud.ReleaseArrow(arrow);
             for (int replay = 0; replay < arrow.PlayCount; replay++)
                 await arrow.Resolve(context);

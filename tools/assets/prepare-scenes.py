@@ -1,7 +1,7 @@
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-scene = ['[gd_scene load_steps=10 format=3]']
+scene = ['[gd_scene load_steps=11 format=3]']
 for i, name in enumerate(['portrait', 'aim'], 1):
     scene.append(f'[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/{name}.png" id="{i}"]')
 
@@ -21,13 +21,14 @@ def animation(name, texture_ids, times, duration, positions=None, loop=False):
                       '), "update": 0, "values": [' + ','.join(f'Vector2({x}, {y})' for x,y in positions) + ']}'])
 
 animation('Idle', [1,1,1], [0,1.4,2.8], 2.8, [(0,-153),(0,-155),(0,-153)], True)
-animation('Attack', [2,2,1], [0,.15,.42], .5, [(0,-153),(14,-153),(0,-153)])
+animation('Attack', [1,1,1], [0,.15,.42], .5, [(0,-153),(14,-153),(0,-153)])
+animation('ArrowAttack', [2], [0], 1, [(0,-153)], True)
 animation('Cast', [1,1], [0,.38], .45)
 animation('Hit', [1,1], [0,.22], .3, [(-8,-153),(0,-153)])
 animation('Dead', [1], [0], 1.5)
 animation('Relaxed', [1], [0], 1, loop=True)
 scene.extend(['[sub_resource type="AnimationLibrary" id="library"]',
-              '_data = {' + ','.join(f'"{n}": SubResource("{n}")' for n in ['Idle','Attack','Cast','Hit','Dead','Relaxed']) + '}',
+              '_data = {' + ','.join(f'"{n}": SubResource("{n}")' for n in ['Idle','Attack','ArrowAttack','Cast','Hit','Dead','Relaxed']) + '}',
               '[node name="JunnaCombat" type="Node2D"]',
               '[node name="Visuals" type="Sprite2D" parent="."]', 'unique_name_in_owner = true',
               'position = Vector2(0, -153)', 'scale = Vector2(0.2, 0.2)', 'texture = ExtResource("1")',

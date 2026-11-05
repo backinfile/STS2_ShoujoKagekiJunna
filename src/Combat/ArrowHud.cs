@@ -15,6 +15,8 @@ public partial class ArrowHud : Control
     private const float SlotSpacing = 108;
     private static readonly Vector2 FrameSize = new(240, 416);
     private static readonly Vector2 IconSize = FrameSize * FrameScale;
+    // Pivot around the portrait body, above the kite's long lower point.
+    private static readonly Vector2 BodyCenter = new Vector2(120, 138) * FrameScale;
     private static readonly Vector2 CounterCenter = new Vector2(120, 58) * FrameScale;
     private static readonly Vector2 Tip = new Vector2(120, 409) * FrameScale;
     private static readonly Vector2[] SatelliteOutline =
@@ -88,7 +90,7 @@ public partial class ArrowHud : Control
             // Aim the lower point directly at the target, including the current floating offset.
             // Countdown numerals remain upright as the frame rotates.
             view.Motion.Advance(center + Vector2.Down * bob, aim, (float)delta);
-            view.Root.Position = view.Motion.Center - IconSize * .5f;
+            view.Root.Position = view.Motion.Center - BodyCenter;
             view.Frame.Rotation = view.Motion.Angle;
             UpdateDeployment(arrow, view, aim);
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
@@ -116,7 +118,7 @@ public partial class ArrowHud : Control
     }
 
     private Vector2 LocalPoint(Vector2 global) => GetGlobalTransform().AffineInverse() * global;
-    private static Vector2 RotateInFrame(Vector2 point, float angle) => (point - IconSize * .5f).Rotated(angle) + IconSize * .5f;
+    private static Vector2 RotateInFrame(Vector2 point, float angle) => (point - BodyCenter).Rotated(angle) + BodyCenter;
 
     private Vector2[] TargetPoints(ArrowDeployment arrow)
     {
@@ -268,7 +270,7 @@ public partial class ArrowHud : Control
     private ArrowView CreateArrow(ArrowDeployment arrow)
     {
         var root = new Control { Name = "FloatingArrow", Size = IconSize, MouseFilter = MouseFilterEnum.Ignore };
-        var frame = new Control { Name = "TiltedFrame", Size = IconSize, PivotOffset = IconSize * .5f, MouseFilter = MouseFilterEnum.Stop };
+        var frame = new Control { Name = "TiltedFrame", Size = IconSize, PivotOffset = BodyCenter, MouseFilter = MouseFilterEnum.Stop };
         root.AddChild(frame);
         var portrait = arrow.Card.Portrait;
         var textureSize = portrait.GetSize();
