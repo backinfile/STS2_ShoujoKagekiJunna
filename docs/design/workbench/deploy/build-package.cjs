@@ -1,0 +1,16 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),{execFileSync}=require('node:child_process');
+const [snapshotFile,destination,connectionFile]=process.argv.slice(2);
+if(!snapshotFile||!destination||!connectionFile)throw Error('Usage: node build-package.cjs <MCP-export.json> <destination> <connection-config.json>');
+const source=process.env.JUNNA_DEPLOY_SOURCE||path.resolve(__dirname,'..'),out=path.resolve(destination);
+const snapshot=path.resolve(snapshotFile),configFile=path.resolve(connectionFile);
+const config=JSON.parse(fs.readFileSync(configFile,'utf8').replace(/^\uFEFF/,''));
+if(new URL(config.origin).protocol!=='https:'||!/^[a-f0-9]{64}$/.test(config.secret))throw Error('Cloud connection configuration is invalid');
+fs.mkdirSync(out,{recursive:true});
+for(const name of ['mcp-daemon.cjs','mcp-config.cjs','mcp-store.cjs','mcp-tools.cjs','workbench-domain.js','fit-pool-view.js','package.json','package-lock.json'])fs.copyFileSync(path.join(source,name),path.join(out,name));
+for(const name of ['relay.cjs','run-server.cjs','publish-readonly.cjs'])fs.copyFileSync(path.join(__dirname,name),path.join(out,name));
+execFileSync(process.execPath,[path.join(source,'build-readonly.cjs'),snapshot,path.join(out,'public')],{stdio:'inherit'});
+execFileSync(process.execPath,[path.join(__dirname,'build-editor.cjs'),snapshot,path.join(out,'public'),out,configFile],{stdio:'inherit',env:{...process.env,JUNNA_DEPLOY_SOURCE:source}});
+fs.copyFileSync(path.join(out,'public/index.html'),path.join(out,'public-template.html'));
+fs.writeFileSync(path.join(out,'relay.config.json'),JSON.stringify({origin:config.origin,secret:config.secret,prefix:config.prefix||'/edit/'+config.secret,relayPort:config.serverPort||54828,backendConfig:'/var/lib/junna-workbench/backend.json'},null,2)+'\n');
+console.log(JSON.stringify({destination:out,files:fs.readdirSync(out).length}));
