@@ -13436,5 +13436,18 @@
     "knowledgeGroupFieldsEqual": true,
     "equal": false
   },
-  "stage": "逐牌结算、箭矢类型、文字、关键词及合法操作演示均已验证"
+  "stage": "逐牌结算、箭矢类型、文字、关键词及合法操作演示均已验证",
+  "synchronizedMain": "d7cbbb8d4c63db73c2d72b1dc5107a7d83e49b45",
+  "packaging": {
+    "pass": true,
+    "files": 375,
+    "textures": 177,
+    "scenes": 6,
+    "selectionPortraits": [
+      "JK78D",
+      "JK78E"
+    ],
+    "checks": "PCK exact file list and resource loading"
+  },
+  "unchangedCardCodeAndDataFrom": "d47bc1a34af84ae1dacc591055358457d9f4778f"
 }
