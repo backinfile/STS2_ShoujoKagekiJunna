@@ -5,6 +5,8 @@ namespace ShoujoKagekiJunna.Combat;
 /// <summary>Critically damped layout motion; retargeting keeps the current velocity.</summary>
 internal sealed class ArrowLayoutMotion
 {
+    internal const float SpeedMultiplier = 1.25f;
+
     public Vector2 Center { get; private set; }
     public float Angle { get; private set; }
     private Vector2 _velocity;
@@ -23,7 +25,7 @@ internal sealed class ArrowLayoutMotion
         if (!_initialized) Reset(destination, (aim - destination).Angle() - Mathf.Pi * .5f);
         if (delta <= 0) return;
         // Exact damped-spring integration stays stable across frame rates and frame hitches.
-        const float positionOmega = 14;
+        const float positionOmega = 14 * SpeedMultiplier;
         var offset = Center - destination;
         var momentum = _velocity + positionOmega * offset;
         float decay = Mathf.Exp(-positionOmega * delta);
@@ -34,7 +36,7 @@ internal sealed class ArrowLayoutMotion
         float error = -Mathf.AngleDifference(Angle, desiredAngle);
         // Small corrections settle sooner; large turns carry more weight. At rest, angular
         // speed rises from zero, peaks, then decays. No elastic bounce or full-circle wrap.
-        float omega = Mathf.Lerp(18, 10, Mathf.Clamp(Mathf.Abs(error) / Mathf.Pi, 0, 1));
+        float omega = Mathf.Lerp(18, 10, Mathf.Clamp(Mathf.Abs(error) / Mathf.Pi, 0, 1)) * SpeedMultiplier;
         float angularMomentum = _angularVelocity + omega * error;
         float angularDecay = Mathf.Exp(-omega * delta);
         Angle += (error + angularMomentum * delta) * angularDecay - error;

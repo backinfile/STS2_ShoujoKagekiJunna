@@ -88,8 +88,9 @@ public partial class ArrowDeploymentVfx : Control
     private float TightenTime => DrawTime + .18f;
     private float DrawEndTime => DrawTime + .40f;
     private float HoldEndTime => DrawEndTime + .40f;
-    public double Duration => HoldEndTime + .24f;
-    internal double InputReleaseTime => DrawTime;
+    private float TimelineDuration => HoldEndTime + .24f;
+    public double Duration => TimelineDuration / ArrowLayoutMotion.SpeedMultiplier;
+    internal double InputReleaseTime => DrawTime / ArrowLayoutMotion.SpeedMultiplier;
     private const float ShaftLength = 160;
     private const float BowGripOffset = 36;
     private const float BraceHeight = 10;
@@ -209,9 +210,9 @@ public partial class ArrowDeploymentVfx : Control
     internal void SetProgress(float progress)
     {
         float previousTime = _time;
-        _time = progress * (float)Duration;
+        _time = progress * TimelineDuration;
         // The reload event has a short lead-in before its first string movement.
-        float drawCueTime = DrawTime - .21f;
+        float drawCueTime = DrawTime - .21f * ArrowLayoutMotion.SpeedMultiplier;
         if (previousTime < drawCueTime && _time >= drawCueTime) SfxCmd.Play(DrawSfx, .28f);
         if (previousTime < DrawEndTime && _time >= DrawEndTime) SfxCmd.Play(FullDrawSfx, .22f);
         if (_cardNode != null && GodotObject.IsInstanceValid(_cardNode))
@@ -248,8 +249,8 @@ public partial class ArrowDeploymentVfx : Control
     public override void _Process(double delta)
     {
         if (!_running) return;
-        SetProgress(Math.Min(1, (_time + (float)delta) / (float)Duration));
-        if (_time < Duration) return;
+        SetProgress(Math.Min(1, (_time + (float)delta * ArrowLayoutMotion.SpeedMultiplier) / TimelineDuration));
+        if (_time < TimelineDuration) return;
         _running = false;
         var completed = _completed;
         _completed = null;
@@ -323,10 +324,10 @@ public partial class ArrowDeploymentVfx : Control
     {
         float angle = AimDirection.Angle() - Mathf.Pi * .5f;
         float shaft = Mathf.SmoothStep(ArrowTime, CardGoneTime + .025f, _time);
-        float shaftAlpha = shaft * (1 - Mathf.SmoothStep(HoldEndTime, (float)Duration, _time));
+        float shaftAlpha = shaft * (1 - Mathf.SmoothStep(HoldEndTime, TimelineDuration, _time));
         float tail = Mathf.Lerp(38, ShaftLength, shaft);
         float bowAlpha = Mathf.SmoothStep(.18f, .32f, _time)
-            * (1 - Mathf.SmoothStep(HoldEndTime, (float)Duration, _time));
+            * (1 - Mathf.SmoothStep(HoldEndTime, TimelineDuration, _time));
         if (bowAlpha > 0)
         {
             DrawSetTransform(BowPosition, angle);

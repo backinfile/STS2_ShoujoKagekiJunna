@@ -97,7 +97,7 @@ public partial class ArrowHud
 public partial class ArrowReleaseVfx : Node2D
 {
     private const float Hold = .14f, Flight = .3f, Duration = .7f;
-    internal const float ImpactTime = Hold + Flight;
+    internal const float ImpactTime = (Hold + Flight) / ArrowLayoutMotion.SpeedMultiplier;
     private Control _arrow = null!;
     private Vector2 _rest;
     private Vector2[] _targets = [];
@@ -114,7 +114,7 @@ public partial class ArrowReleaseVfx : Node2D
 
     public override void _Process(double delta)
     {
-        _time += (float)delta;
+        _time += (float)delta * ArrowLayoutMotion.SpeedMultiplier;
         if (_time >= Duration) { QueueFree(); return; }
         float flight = Mathf.Clamp((_time - Hold) / Flight, 0, 1);
         var aim = _targets.Length == 0 ? new Vector2(0, -110) : _targets.Aggregate(Vector2.Zero, (sum, p) => sum + p) / _targets.Length;
