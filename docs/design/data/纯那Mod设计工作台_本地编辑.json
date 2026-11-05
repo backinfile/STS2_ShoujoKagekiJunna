@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "workspaceId": "junna-mod-workbench-20261101-v1",
-  "revision": 2593,
+  "revision": 2597,
   "data": {
     "title": "纯那 Mod 设计工作台",
     "mechanisms": [
@@ -47,7 +47,7 @@
         "id": "ME_PARTNER",
         "name": "知识",
         "level": "次主机制",
-        "definition": "获得此牌时，同时获得关联的知识牌。",
+        "definition": "获得此牌时，同时获得关联的其他知识牌。",
         "rules": [
           "每组知识牌保留一个常规奖励入口，组内所有牌共用“知识”关键词。",
           "同组牌一并获得；可配置不同种类和数量。",
@@ -4843,7 +4843,7 @@
         "kind": "关键词",
         "name": "知识",
         "template": "知识。",
-        "definition": "获得此牌时，同时获得关联的知识牌。",
+        "definition": "获得此牌时，同时获得关联的其他知识牌。",
         "systems": [],
         "notes": "",
         "unit": "",
@@ -28815,8 +28815,8 @@
         "turns": null,
         "upgradedTurns": null,
         "target": "自己",
-        "text": "获得4点格挡。下一张非能力牌消耗能量再打出一次。",
-        "upgradedText": "获得7点格挡。下一张非能力牌消耗能量再打出一次。",
+        "text": "获得4点格挡。下一张非能力牌重放1次。",
+        "upgradedText": "获得7点格挡。下一张非能力牌重放1次。",
         "keywords": [],
         "termIds": [
           "EF05",
@@ -28844,7 +28844,7 @@
           "kind": "常用星象名词与主题借用",
           "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
           "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
-          "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手需要再次支付费用。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+          "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手通过原版临时重放结算。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
           "chineseOriginal": ""
         },
         "design": {
@@ -28870,14 +28870,14 @@
           },
           "port": "防御／运转",
           "roleReason": "能量/高费收益，提供防御／运转。",
-          "rules": "获得格挡后记录下一张实际打出的非能力牌。正常支付并打出后，若当前能量足以再支付该牌当前费用，则额外支付一次费用并再次打出；没有足够能量时结束该准备。费用与牌效按各次实际版本处理。",
-          "upgrade": "升级牌效按当前升级牌面：获得7点格挡。打出下一张非能力牌后，再次支付费用，将其再打出一次。",
+          "rules": "获得格挡后，使下一张打出的非能力牌在本次打出时临时增加1次原版重放。通过原版打出次数钩子增加次数，并在计入次数后消耗本次准备；原牌正常支付一次费用，后续卡牌保持各自正常打出次数。",
+          "upgrade": "升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌在本次打出时临时增加1次重放。",
           "textComplexity": "低",
-          "reference": "再次支付费用，使同一张非能力牌再次出手。",
+          "reference": "原版临时重放钩子，仅作用于下一张非能力牌。",
           "route": "能量/高费",
           "investment": "按当前版本支付1能量。"
         },
-        "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后记录下一张实际打出的非能力牌。正常支付并打出后，若当前能量足以再支付该牌当前费用，则额外支付一次费用并再次打出；没有足够能量时结束该准备。费用与牌效按各次实际版本处理。\n升级：升级牌效按当前升级牌面：获得7点格挡。打出下一张非能力牌后，再次支付费用，将其再打出一次。",
+        "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后，使下一张打出的非能力牌在本次打出时临时增加1次原版重放。通过原版打出次数钩子增加次数，并在计入次数后消耗本次准备；原牌正常支付一次费用，后续卡牌保持各自正常打出次数。\n升级：升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌在本次打出时临时增加1次重放。",
         "descriptionEnergyDisplay": "text"
       },
       {
@@ -39036,7 +39036,7 @@
         "uid": "junna_style_concise_rules",
         "id": "STYLE_006",
         "name": "牌面与结算约定",
-        "content": "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。\n按卡牌数量增加伤害或格挡时，明确写“伤害增加X”或“格挡增加X”。\n逐张计数使用“一张”，例如“每有一张知识牌，伤害增加1。”\n牌面中的能量使用职业能量图标：数值1～3使用对应数量的图标，其余数值使用“数字＋图标”；费用增减、保留能量及剩余能量条件中的数量使用“数字＋图标”，直接标明数值。",
+        "content": "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。\n按卡牌数量增加伤害或格挡时，明确写“伤害增加X”或“格挡增加X”。\n逐张计数使用“一张”，例如“每有一张知识牌，伤害增加1。”\n牌面中的能量使用职业能量图标：数值1～3使用对应数量的图标，其余数值使用“数字＋图标”；费用增减、保留能量及剩余能量条件中的数量使用“数字＋图标”，直接标明数值。\n“保留X能量到下回合”及获得能量并保留到下回合的效果，统一使用“数字＋一个职业能量图标”；1能量也写明数字1，基础版与升级版同步。",
         "category": "牌面表述"
       },
       {
@@ -907825,6 +907825,483 @@
         }
       ],
       "reference": null
+    },
+    {
+      "id": "99da5fbc-16ba-48a1-a189-6bab33889453",
+      "seq": 2594,
+      "at": "2026-11-05T07:27:01.661Z",
+      "label": "更新知识关键词：关联的其他知识牌",
+      "kind": "keyword-description",
+      "clientId": "codex-pursuit-preview-20261105",
+      "patches": [
+        {
+          "collection": "mechanisms",
+          "uid": "mechanism_partner",
+          "before": {
+            "uid": "mechanism_partner",
+            "id": "ME_PARTNER",
+            "name": "知识",
+            "level": "次主机制",
+            "definition": "获得此牌时，同时获得关联的知识牌。",
+            "rules": [
+              "每组知识牌保留一个常规奖励入口，组内所有牌共用“知识”关键词。",
+              "同组牌一并获得；可配置不同种类和数量。",
+              "获取关联牌按组配置处理，本次附带发放只执行一次。",
+              "泛指知识牌的触发与收益覆盖组内所有牌及其同名临时生成与复制的牌；指定牌名的效果按牌名限定。",
+              "同组知识牌各自计算牌组占位、升级、费用与伤害加成；牌面明确扩展到整组时按效果处理。",
+              "卡牌奖励，战斗内发现效果等，都会同时获取关联的牌（与主牌有相同的去处，比如都进入手牌，都进入牌组等）。",
+              "ui：ui参考《LOR》游戏中展示关联牌的ui，一组知识牌并列成扇形同时展示出来。知识关联牌不进入卡池，但是仍使用职业卡牌框，稀有度与主牌相同。",
+              "战斗中生成或复制单张知识牌时，只处理牌面指定的对象与数量；升级与重放沿用各自动作。"
+            ],
+            "templates": [
+              "知识。",
+              "每当你打出一张知识牌时，{效果}。",
+              "每当你打出{牌名}时，{效果}。"
+            ],
+            "notes": "同组关系显示在卡面之外；通用效果使用“知识牌”，引用自身关联牌的效果使用《牌名》。",
+            "system": "partner"
+          },
+          "after": {
+            "uid": "mechanism_partner",
+            "id": "ME_PARTNER",
+            "name": "知识",
+            "level": "次主机制",
+            "definition": "获得此牌时，同时获得关联的其他知识牌。",
+            "rules": [
+              "每组知识牌保留一个常规奖励入口，组内所有牌共用“知识”关键词。",
+              "同组牌一并获得；可配置不同种类和数量。",
+              "获取关联牌按组配置处理，本次附带发放只执行一次。",
+              "泛指知识牌的触发与收益覆盖组内所有牌及其同名临时生成与复制的牌；指定牌名的效果按牌名限定。",
+              "同组知识牌各自计算牌组占位、升级、费用与伤害加成；牌面明确扩展到整组时按效果处理。",
+              "卡牌奖励，战斗内发现效果等，都会同时获取关联的牌（与主牌有相同的去处，比如都进入手牌，都进入牌组等）。",
+              "ui：ui参考《LOR》游戏中展示关联牌的ui，一组知识牌并列成扇形同时展示出来。知识关联牌不进入卡池，但是仍使用职业卡牌框，稀有度与主牌相同。",
+              "战斗中生成或复制单张知识牌时，只处理牌面指定的对象与数量；升级与重放沿用各自动作。"
+            ],
+            "templates": [
+              "知识。",
+              "每当你打出一张知识牌时，{效果}。",
+              "每当你打出{牌名}时，{效果}。"
+            ],
+            "notes": "同组关系显示在卡面之外；通用效果使用“知识牌”，引用自身关联牌的效果使用《牌名》。",
+            "system": "partner"
+          },
+          "beforeIndex": 1,
+          "afterIndex": 1,
+          "afterVersion": "1:820b27cc863f32e2941177d3e444b8ee70cf3cd92ff680d25b5780befa11108f"
+        },
+        {
+          "collection": "terms",
+          "uid": "term_KW_PARTNER",
+          "before": {
+            "uid": "term_KW_PARTNER",
+            "id": "KW_PARTNER",
+            "kind": "关键词",
+            "name": "知识",
+            "template": "知识。",
+            "definition": "获得此牌时，同时获得关联的知识牌。",
+            "systems": [],
+            "notes": "",
+            "unit": "",
+            "sources": []
+          },
+          "after": {
+            "uid": "term_KW_PARTNER",
+            "id": "KW_PARTNER",
+            "kind": "关键词",
+            "name": "知识",
+            "template": "知识。",
+            "definition": "获得此牌时，同时获得关联的其他知识牌。",
+            "systems": [],
+            "notes": "",
+            "unit": "",
+            "sources": []
+          },
+          "beforeIndex": 298,
+          "afterIndex": 298,
+          "afterVersion": "1:a14fd4c647d2902258589bdb21048aaa03970c65e3266955f2757dfc9ee5deea"
+        }
+      ],
+      "reference": null
+    },
+    {
+      "id": "53d37953-1bda-45dc-a174-1f39ab5b6435",
+      "seq": 2595,
+      "at": "2026-11-05T07:57:53.395Z",
+      "label": "保留能量到下回合统一数字加图标，1也写数字",
+      "kind": "wording-rule",
+      "clientId": "codex-pursuit-preview-20261105",
+      "patches": [
+        {
+          "collection": "styles",
+          "uid": "junna_style_concise_rules",
+          "before": {
+            "uid": "junna_style_concise_rules",
+            "id": "STYLE_006",
+            "name": "牌面与结算约定",
+            "content": "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。\n按卡牌数量增加伤害或格挡时，明确写“伤害增加X”或“格挡增加X”。\n逐张计数使用“一张”，例如“每有一张知识牌，伤害增加1。”\n牌面中的能量使用职业能量图标：数值1～3使用对应数量的图标，其余数值使用“数字＋图标”；费用增减、保留能量及剩余能量条件中的数量使用“数字＋图标”，直接标明数值。",
+            "category": "牌面表述"
+          },
+          "after": {
+            "uid": "junna_style_concise_rules",
+            "id": "STYLE_006",
+            "name": "牌面与结算约定",
+            "content": "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。\n按卡牌数量增加伤害或格挡时，明确写“伤害增加X”或“格挡增加X”。\n逐张计数使用“一张”，例如“每有一张知识牌，伤害增加1。”\n牌面中的能量使用职业能量图标：数值1～3使用对应数量的图标，其余数值使用“数字＋图标”；费用增减、保留能量及剩余能量条件中的数量使用“数字＋图标”，直接标明数值。\n“保留X能量到下回合”及获得能量并保留到下回合的效果，统一使用“数字＋一个职业能量图标”；1能量也写明数字1，基础版与升级版同步。",
+            "category": "牌面表述"
+          },
+          "beforeIndex": 5,
+          "afterIndex": 5,
+          "afterVersion": "7:c04f3b28d6cf729762fb8f0510499bad30d6029e65d1f37b004fbfe3cae95634"
+        }
+      ],
+      "reference": null
+    },
+    {
+      "id": "9cae7e1d-2416-4c98-a459-a3a0900c9a8a",
+      "seq": 2596,
+      "at": "2026-11-05T08:05:04.557Z",
+      "label": "双星：下一张牌打出后创建临时复制并打出",
+      "kind": "resolution-rule",
+      "clientId": "codex-pursuit-preview-20261105",
+      "patches": [
+        {
+          "collection": "cards",
+          "uid": "energy_retention_JH19",
+          "before": {
+            "uid": "energy_retention_JH19",
+            "id": "JH19",
+            "name": "双星",
+            "type": "技能",
+            "system": "energy",
+            "rarity": "罕见",
+            "pool": true,
+            "cost": 1,
+            "upgradedCost": 1,
+            "turns": null,
+            "upgradedTurns": null,
+            "target": "自己",
+            "text": "获得4点格挡。下一张非能力牌消耗能量再打出一次。",
+            "upgradedText": "获得7点格挡。下一张非能力牌消耗能量再打出一次。",
+            "keywords": [],
+            "termIds": [
+              "EF05",
+              "EF43",
+              "TR08"
+            ],
+            "effectIds": [
+              "EF05",
+              "EF_RETAIN_ENERGY"
+            ],
+            "ruleIds": [],
+            "breakthroughIds": [],
+            "archetypeIds": [
+              "SYS_energy"
+            ],
+            "partnerCardIds": [],
+            "art": "original-scene-jh19-two-op-stars-20261104",
+            "character": "星见纯那",
+            "role": "机制基础牌",
+            "direction": "能量/高费",
+            "draftStatus": "机制补充候选",
+            "draftBatch": "junna-energy-retention-20261103-v1-cards",
+            "naming": {
+              "original": "",
+              "kind": "常用星象名词与主题借用",
+              "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+              "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+              "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手需要再次支付费用。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+              "chineseOriginal": ""
+            },
+            "design": {
+              "classification": "机制基础牌",
+              "triggerRole": "收益",
+              "systems": [
+                "energy"
+              ],
+              "systemRoles": {
+                "energy": {
+                  "role": "收益",
+                  "port": "运转"
+                }
+              },
+              "routeRoles": {
+                "archetype_SYS_energy": {
+                  "role": "payoff",
+                  "cross": false,
+                  "ports": [
+                    "operation"
+                  ]
+                }
+              },
+              "port": "防御／运转",
+              "roleReason": "能量/高费收益，提供防御／运转。",
+              "rules": "获得格挡后记录下一张实际打出的非能力牌。正常支付并打出后，若当前能量足以再支付该牌当前费用，则额外支付一次费用并再次打出；没有足够能量时结束该准备。费用与牌效按各次实际版本处理。",
+              "upgrade": "升级牌效按当前升级牌面：获得7点格挡。打出下一张非能力牌后，再次支付费用，将其再打出一次。",
+              "textComplexity": "低",
+              "reference": "再次支付费用，使同一张非能力牌再次出手。",
+              "route": "能量/高费",
+              "investment": "按当前版本支付1能量。"
+            },
+            "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后记录下一张实际打出的非能力牌。正常支付并打出后，若当前能量足以再支付该牌当前费用，则额外支付一次费用并再次打出；没有足够能量时结束该准备。费用与牌效按各次实际版本处理。\n升级：升级牌效按当前升级牌面：获得7点格挡。打出下一张非能力牌后，再次支付费用，将其再打出一次。",
+            "descriptionEnergyDisplay": "text"
+          },
+          "after": {
+            "uid": "energy_retention_JH19",
+            "id": "JH19",
+            "name": "双星",
+            "type": "技能",
+            "system": "energy",
+            "rarity": "罕见",
+            "pool": true,
+            "cost": 1,
+            "upgradedCost": 1,
+            "turns": null,
+            "upgradedTurns": null,
+            "target": "自己",
+            "text": "获得4点格挡。下一张非能力牌消耗能量再打出一次。",
+            "upgradedText": "获得7点格挡。下一张非能力牌消耗能量再打出一次。",
+            "keywords": [],
+            "termIds": [
+              "EF05",
+              "EF43",
+              "TR08"
+            ],
+            "effectIds": [
+              "EF05",
+              "EF_RETAIN_ENERGY"
+            ],
+            "ruleIds": [],
+            "breakthroughIds": [],
+            "archetypeIds": [
+              "SYS_energy"
+            ],
+            "partnerCardIds": [],
+            "art": "original-scene-jh19-two-op-stars-20261104",
+            "character": "星见纯那",
+            "role": "机制基础牌",
+            "direction": "能量/高费",
+            "draftStatus": "机制补充候选",
+            "draftBatch": "junna-energy-retention-20261103-v1-cards",
+            "naming": {
+              "original": "",
+              "kind": "常用星象名词与主题借用",
+              "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+              "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+              "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手需要再次支付费用。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+              "chineseOriginal": ""
+            },
+            "design": {
+              "classification": "机制基础牌",
+              "triggerRole": "收益",
+              "systems": [
+                "energy"
+              ],
+              "systemRoles": {
+                "energy": {
+                  "role": "收益",
+                  "port": "运转"
+                }
+              },
+              "routeRoles": {
+                "archetype_SYS_energy": {
+                  "role": "payoff",
+                  "cross": false,
+                  "ports": [
+                    "operation"
+                  ]
+                }
+              },
+              "port": "防御／运转",
+              "roleReason": "能量/高费收益，提供防御／运转。",
+              "rules": "获得格挡后记录下一张实际打出的非能力牌。该牌完成打出后，创建这张牌的临时复制；若当前能量足以再次支付该牌的当前费用，则支付费用并打出复制牌。先消耗本次准备，再打出临时复制；复制使用原目标，原目标失效时按正常合法目标规则处理。原牌按自身正常去向结算。",
+              "upgrade": "升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌完成打出后，创建其临时复制，再次支付费用并打出复制牌。",
+              "textComplexity": "低",
+              "reference": "再次支付费用，使同一张非能力牌再次出手。",
+              "route": "能量/高费",
+              "investment": "按当前版本支付1能量。"
+            },
+            "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后记录下一张实际打出的非能力牌。该牌完成打出后，创建这张牌的临时复制；若当前能量足以再次支付该牌的当前费用，则支付费用并打出复制牌。先消耗本次准备，再打出临时复制；复制使用原目标，原目标失效时按正常合法目标规则处理。原牌按自身正常去向结算。\n升级：升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌完成打出后，创建其临时复制，再次支付费用并打出复制牌。",
+            "descriptionEnergyDisplay": "text"
+          },
+          "beforeIndex": 272,
+          "afterIndex": 272,
+          "afterVersion": "77:f486e549cde9c997c3295d4d1d2981a11cd2e64120327cd092af4d1ff7989d35"
+        }
+      ],
+      "reference": null
+    },
+    {
+      "id": "c5e90e2b-5e8b-475c-a1d0-5518ef68e06c",
+      "seq": 2597,
+      "at": "2026-11-05T08:33:21.168Z",
+      "label": "双星改为下一张非能力牌临时增加1次原版重放",
+      "kind": "card-resolution",
+      "clientId": "codex-pursuit-preview-20261105",
+      "patches": [
+        {
+          "collection": "cards",
+          "uid": "energy_retention_JH19",
+          "before": {
+            "uid": "energy_retention_JH19",
+            "id": "JH19",
+            "name": "双星",
+            "type": "技能",
+            "system": "energy",
+            "rarity": "罕见",
+            "pool": true,
+            "cost": 1,
+            "upgradedCost": 1,
+            "turns": null,
+            "upgradedTurns": null,
+            "target": "自己",
+            "text": "获得4点格挡。下一张非能力牌消耗能量再打出一次。",
+            "upgradedText": "获得7点格挡。下一张非能力牌消耗能量再打出一次。",
+            "keywords": [],
+            "termIds": [
+              "EF05",
+              "EF43",
+              "TR08"
+            ],
+            "effectIds": [
+              "EF05",
+              "EF_RETAIN_ENERGY"
+            ],
+            "ruleIds": [],
+            "breakthroughIds": [],
+            "archetypeIds": [
+              "SYS_energy"
+            ],
+            "partnerCardIds": [],
+            "art": "original-scene-jh19-two-op-stars-20261104",
+            "character": "星见纯那",
+            "role": "机制基础牌",
+            "direction": "能量/高费",
+            "draftStatus": "机制补充候选",
+            "draftBatch": "junna-energy-retention-20261103-v1-cards",
+            "naming": {
+              "original": "",
+              "kind": "常用星象名词与主题借用",
+              "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+              "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+              "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手需要再次支付费用。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+              "chineseOriginal": ""
+            },
+            "design": {
+              "classification": "机制基础牌",
+              "triggerRole": "收益",
+              "systems": [
+                "energy"
+              ],
+              "systemRoles": {
+                "energy": {
+                  "role": "收益",
+                  "port": "运转"
+                }
+              },
+              "routeRoles": {
+                "archetype_SYS_energy": {
+                  "role": "payoff",
+                  "cross": false,
+                  "ports": [
+                    "operation"
+                  ]
+                }
+              },
+              "port": "防御／运转",
+              "roleReason": "能量/高费收益，提供防御／运转。",
+              "rules": "获得格挡后记录下一张实际打出的非能力牌。该牌完成打出后，创建这张牌的临时复制；若当前能量足以再次支付该牌的当前费用，则支付费用并打出复制牌。先消耗本次准备，再打出临时复制；复制使用原目标，原目标失效时按正常合法目标规则处理。原牌按自身正常去向结算。",
+              "upgrade": "升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌完成打出后，创建其临时复制，再次支付费用并打出复制牌。",
+              "textComplexity": "低",
+              "reference": "再次支付费用，使同一张非能力牌再次出手。",
+              "route": "能量/高费",
+              "investment": "按当前版本支付1能量。"
+            },
+            "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后记录下一张实际打出的非能力牌。该牌完成打出后，创建这张牌的临时复制；若当前能量足以再次支付该牌的当前费用，则支付费用并打出复制牌。先消耗本次准备，再打出临时复制；复制使用原目标，原目标失效时按正常合法目标规则处理。原牌按自身正常去向结算。\n升级：升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌完成打出后，创建其临时复制，再次支付费用并打出复制牌。",
+            "descriptionEnergyDisplay": "text"
+          },
+          "after": {
+            "uid": "energy_retention_JH19",
+            "id": "JH19",
+            "name": "双星",
+            "type": "技能",
+            "system": "energy",
+            "rarity": "罕见",
+            "pool": true,
+            "cost": 1,
+            "upgradedCost": 1,
+            "turns": null,
+            "upgradedTurns": null,
+            "target": "自己",
+            "text": "获得4点格挡。下一张非能力牌重放1次。",
+            "upgradedText": "获得7点格挡。下一张非能力牌重放1次。",
+            "keywords": [],
+            "termIds": [
+              "EF05",
+              "EF43",
+              "TR08"
+            ],
+            "effectIds": [
+              "EF05",
+              "EF_RETAIN_ENERGY"
+            ],
+            "ruleIds": [],
+            "breakthroughIds": [],
+            "archetypeIds": [
+              "SYS_energy"
+            ],
+            "partnerCardIds": [],
+            "art": "original-scene-jh19-two-op-stars-20261104",
+            "character": "星见纯那",
+            "role": "机制基础牌",
+            "direction": "能量/高费",
+            "draftStatus": "机制补充候选",
+            "draftBatch": "junna-energy-retention-20261103-v1-cards",
+            "naming": {
+              "original": "",
+              "kind": "常用星象名词与主题借用",
+              "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+              "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+              "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手通过原版临时重放结算。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+              "chineseOriginal": ""
+            },
+            "design": {
+              "classification": "机制基础牌",
+              "triggerRole": "收益",
+              "systems": [
+                "energy"
+              ],
+              "systemRoles": {
+                "energy": {
+                  "role": "收益",
+                  "port": "运转"
+                }
+              },
+              "routeRoles": {
+                "archetype_SYS_energy": {
+                  "role": "payoff",
+                  "cross": false,
+                  "ports": [
+                    "operation"
+                  ]
+                }
+              },
+              "port": "防御／运转",
+              "roleReason": "能量/高费收益，提供防御／运转。",
+              "rules": "获得格挡后，使下一张打出的非能力牌在本次打出时临时增加1次原版重放。通过原版打出次数钩子增加次数，并在计入次数后消耗本次准备；原牌正常支付一次费用，后续卡牌保持各自正常打出次数。",
+              "upgrade": "升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌在本次打出时临时增加1次重放。",
+              "textComplexity": "低",
+              "reference": "原版临时重放钩子，仅作用于下一张非能力牌。",
+              "route": "能量/高费",
+              "investment": "按当前版本支付1能量。"
+            },
+            "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后，使下一张打出的非能力牌在本次打出时临时增加1次原版重放。通过原版打出次数钩子增加次数，并在计入次数后消耗本次准备；原牌正常支付一次费用，后续卡牌保持各自正常打出次数。\n升级：升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌在本次打出时临时增加1次重放。",
+            "descriptionEnergyDisplay": "text"
+          },
+          "beforeIndex": 272,
+          "afterIndex": 272,
+          "afterVersion": "78:d322302aadb842a7f40ccda332b331a1c94d503d75034b95183b77d2eaffdfbe"
+        }
+      ],
+      "reference": null
     }
   ],
   "assets": {
@@ -908559,7 +909036,7 @@
     "cards/complete_pool_JZ02": 6,
     "cards/symmetric_debuff_JA58": 10,
     "cards/energy_retention_JH18": 4,
-    "cards/energy_retention_JH19": 76,
+    "cards/energy_retention_JH19": 78,
     "cards/energy_retention_JH20": 8,
     "cards/energy_retention_JH21": 10,
     "cards/energy_retention_JH22": 38,
@@ -908818,7 +909295,7 @@
     "fitPool/fit_junna_learning_refit_20261103_JK37C": 3,
     "terms/term_OB17": 1,
     "terms/term_CB02": 1,
-    "styles/junna_style_concise_rules": 6,
+    "styles/junna_style_concise_rules": 7,
     "styles/junna_style_fit_damage_bonus": 2,
     "styles/junna_style_fit_basic_art": 2,
     "styles/junna_style_knowledge_background": 2,
@@ -908916,7 +909393,9 @@
     "fitPool/fit_relic_junna_burning_gem": 4,
     "powers/power_energy_next_turn_power": 1,
     "powers/power_vulnerable_power": 1,
-    "powers/power_weak_power": 1
+    "powers/power_weak_power": 1,
+    "mechanisms/mechanism_partner": 1,
+    "terms/term_KW_PARTNER": 1
   },
   "mcpRequests": {
     "24164242-ff96-4f09-8b6d-f7601810ede6": {
@@ -1397868,6 +1398347,528 @@
           "powers/power_energy_next_turn_power": "1:missing",
           "powers/power_vulnerable_power": "1:missing",
           "powers/power_weak_power": "1:missing"
+        },
+        "assetIds": []
+      }
+    },
+    "99da5fbc-16ba-48a1-a189-6bab33889453": {
+      "hash": "425afb02c2594aeef2bc5641cc2d97e391b4ef3d180c756828c2e1e608494a9b",
+      "result": {
+        "saved": true,
+        "revision": 2594,
+        "record": {
+          "id": "99da5fbc-16ba-48a1-a189-6bab33889453",
+          "seq": 2594,
+          "at": "2026-11-05T07:27:01.661Z",
+          "label": "更新知识关键词：关联的其他知识牌",
+          "kind": "keyword-description",
+          "clientId": "codex-pursuit-preview-20261105",
+          "patches": [
+            {
+              "collection": "mechanisms",
+              "uid": "mechanism_partner",
+              "before": {
+                "uid": "mechanism_partner",
+                "id": "ME_PARTNER",
+                "name": "知识",
+                "level": "次主机制",
+                "definition": "获得此牌时，同时获得关联的知识牌。",
+                "rules": [
+                  "每组知识牌保留一个常规奖励入口，组内所有牌共用“知识”关键词。",
+                  "同组牌一并获得；可配置不同种类和数量。",
+                  "获取关联牌按组配置处理，本次附带发放只执行一次。",
+                  "泛指知识牌的触发与收益覆盖组内所有牌及其同名临时生成与复制的牌；指定牌名的效果按牌名限定。",
+                  "同组知识牌各自计算牌组占位、升级、费用与伤害加成；牌面明确扩展到整组时按效果处理。",
+                  "卡牌奖励，战斗内发现效果等，都会同时获取关联的牌（与主牌有相同的去处，比如都进入手牌，都进入牌组等）。",
+                  "ui：ui参考《LOR》游戏中展示关联牌的ui，一组知识牌并列成扇形同时展示出来。知识关联牌不进入卡池，但是仍使用职业卡牌框，稀有度与主牌相同。",
+                  "战斗中生成或复制单张知识牌时，只处理牌面指定的对象与数量；升级与重放沿用各自动作。"
+                ],
+                "templates": [
+                  "知识。",
+                  "每当你打出一张知识牌时，{效果}。",
+                  "每当你打出{牌名}时，{效果}。"
+                ],
+                "notes": "同组关系显示在卡面之外；通用效果使用“知识牌”，引用自身关联牌的效果使用《牌名》。",
+                "system": "partner"
+              },
+              "after": {
+                "uid": "mechanism_partner",
+                "id": "ME_PARTNER",
+                "name": "知识",
+                "level": "次主机制",
+                "definition": "获得此牌时，同时获得关联的其他知识牌。",
+                "rules": [
+                  "每组知识牌保留一个常规奖励入口，组内所有牌共用“知识”关键词。",
+                  "同组牌一并获得；可配置不同种类和数量。",
+                  "获取关联牌按组配置处理，本次附带发放只执行一次。",
+                  "泛指知识牌的触发与收益覆盖组内所有牌及其同名临时生成与复制的牌；指定牌名的效果按牌名限定。",
+                  "同组知识牌各自计算牌组占位、升级、费用与伤害加成；牌面明确扩展到整组时按效果处理。",
+                  "卡牌奖励，战斗内发现效果等，都会同时获取关联的牌（与主牌有相同的去处，比如都进入手牌，都进入牌组等）。",
+                  "ui：ui参考《LOR》游戏中展示关联牌的ui，一组知识牌并列成扇形同时展示出来。知识关联牌不进入卡池，但是仍使用职业卡牌框，稀有度与主牌相同。",
+                  "战斗中生成或复制单张知识牌时，只处理牌面指定的对象与数量；升级与重放沿用各自动作。"
+                ],
+                "templates": [
+                  "知识。",
+                  "每当你打出一张知识牌时，{效果}。",
+                  "每当你打出{牌名}时，{效果}。"
+                ],
+                "notes": "同组关系显示在卡面之外；通用效果使用“知识牌”，引用自身关联牌的效果使用《牌名》。",
+                "system": "partner"
+              },
+              "beforeIndex": 1,
+              "afterIndex": 1,
+              "afterVersion": "1:820b27cc863f32e2941177d3e444b8ee70cf3cd92ff680d25b5780befa11108f"
+            },
+            {
+              "collection": "terms",
+              "uid": "term_KW_PARTNER",
+              "before": {
+                "uid": "term_KW_PARTNER",
+                "id": "KW_PARTNER",
+                "kind": "关键词",
+                "name": "知识",
+                "template": "知识。",
+                "definition": "获得此牌时，同时获得关联的知识牌。",
+                "systems": [],
+                "notes": "",
+                "unit": "",
+                "sources": []
+              },
+              "after": {
+                "uid": "term_KW_PARTNER",
+                "id": "KW_PARTNER",
+                "kind": "关键词",
+                "name": "知识",
+                "template": "知识。",
+                "definition": "获得此牌时，同时获得关联的其他知识牌。",
+                "systems": [],
+                "notes": "",
+                "unit": "",
+                "sources": []
+              },
+              "beforeIndex": 298,
+              "afterIndex": 298,
+              "afterVersion": "1:a14fd4c647d2902258589bdb21048aaa03970c65e3266955f2757dfc9ee5deea"
+            }
+          ],
+          "reference": null
+        },
+        "versions": {
+          "mechanisms/mechanism_partner": "1:820b27cc863f32e2941177d3e444b8ee70cf3cd92ff680d25b5780befa11108f",
+          "terms/term_KW_PARTNER": "1:a14fd4c647d2902258589bdb21048aaa03970c65e3266955f2757dfc9ee5deea"
+        },
+        "assetIds": []
+      }
+    },
+    "53d37953-1bda-45dc-a174-1f39ab5b6435": {
+      "hash": "2aed971573266c901033dcfb773bb313279985c130e91adbaec623874f52eafe",
+      "result": {
+        "saved": true,
+        "revision": 2595,
+        "record": {
+          "id": "53d37953-1bda-45dc-a174-1f39ab5b6435",
+          "seq": 2595,
+          "at": "2026-11-05T07:57:53.395Z",
+          "label": "保留能量到下回合统一数字加图标，1也写数字",
+          "kind": "wording-rule",
+          "clientId": "codex-pursuit-preview-20261105",
+          "patches": [
+            {
+              "collection": "styles",
+              "uid": "junna_style_concise_rules",
+              "before": {
+                "uid": "junna_style_concise_rules",
+                "id": "STYLE_006",
+                "name": "牌面与结算约定",
+                "content": "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。\n按卡牌数量增加伤害或格挡时，明确写“伤害增加X”或“格挡增加X”。\n逐张计数使用“一张”，例如“每有一张知识牌，伤害增加1。”\n牌面中的能量使用职业能量图标：数值1～3使用对应数量的图标，其余数值使用“数字＋图标”；费用增减、保留能量及剩余能量条件中的数量使用“数字＋图标”，直接标明数值。",
+                "category": "牌面表述"
+              },
+              "after": {
+                "uid": "junna_style_concise_rules",
+                "id": "STYLE_006",
+                "name": "牌面与结算约定",
+                "content": "牌面保持简洁。程序实现与结算约定写入内部规则，不展开到牌面；保留用户已修改的简洁描述。\n按卡牌数量增加伤害或格挡时，明确写“伤害增加X”或“格挡增加X”。\n逐张计数使用“一张”，例如“每有一张知识牌，伤害增加1。”\n牌面中的能量使用职业能量图标：数值1～3使用对应数量的图标，其余数值使用“数字＋图标”；费用增减、保留能量及剩余能量条件中的数量使用“数字＋图标”，直接标明数值。\n“保留X能量到下回合”及获得能量并保留到下回合的效果，统一使用“数字＋一个职业能量图标”；1能量也写明数字1，基础版与升级版同步。",
+                "category": "牌面表述"
+              },
+              "beforeIndex": 5,
+              "afterIndex": 5,
+              "afterVersion": "7:c04f3b28d6cf729762fb8f0510499bad30d6029e65d1f37b004fbfe3cae95634"
+            }
+          ],
+          "reference": null
+        },
+        "versions": {
+          "styles/junna_style_concise_rules": "7:c04f3b28d6cf729762fb8f0510499bad30d6029e65d1f37b004fbfe3cae95634"
+        },
+        "assetIds": []
+      }
+    },
+    "9cae7e1d-2416-4c98-a459-a3a0900c9a8a": {
+      "hash": "12fa2a10d595913ea972431e1f57faa49c6721cffd1b5244df20dfcec41b0510",
+      "result": {
+        "saved": true,
+        "revision": 2596,
+        "record": {
+          "id": "9cae7e1d-2416-4c98-a459-a3a0900c9a8a",
+          "seq": 2596,
+          "at": "2026-11-05T08:05:04.557Z",
+          "label": "双星：下一张牌打出后创建临时复制并打出",
+          "kind": "resolution-rule",
+          "clientId": "codex-pursuit-preview-20261105",
+          "patches": [
+            {
+              "collection": "cards",
+              "uid": "energy_retention_JH19",
+              "before": {
+                "uid": "energy_retention_JH19",
+                "id": "JH19",
+                "name": "双星",
+                "type": "技能",
+                "system": "energy",
+                "rarity": "罕见",
+                "pool": true,
+                "cost": 1,
+                "upgradedCost": 1,
+                "turns": null,
+                "upgradedTurns": null,
+                "target": "自己",
+                "text": "获得4点格挡。下一张非能力牌消耗能量再打出一次。",
+                "upgradedText": "获得7点格挡。下一张非能力牌消耗能量再打出一次。",
+                "keywords": [],
+                "termIds": [
+                  "EF05",
+                  "EF43",
+                  "TR08"
+                ],
+                "effectIds": [
+                  "EF05",
+                  "EF_RETAIN_ENERGY"
+                ],
+                "ruleIds": [],
+                "breakthroughIds": [],
+                "archetypeIds": [
+                  "SYS_energy"
+                ],
+                "partnerCardIds": [],
+                "art": "original-scene-jh19-two-op-stars-20261104",
+                "character": "星见纯那",
+                "role": "机制基础牌",
+                "direction": "能量/高费",
+                "draftStatus": "机制补充候选",
+                "draftBatch": "junna-energy-retention-20261103-v1-cards",
+                "naming": {
+                  "original": "",
+                  "kind": "常用星象名词与主题借用",
+                  "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+                  "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+                  "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手需要再次支付费用。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+                  "chineseOriginal": ""
+                },
+                "design": {
+                  "classification": "机制基础牌",
+                  "triggerRole": "收益",
+                  "systems": [
+                    "energy"
+                  ],
+                  "systemRoles": {
+                    "energy": {
+                      "role": "收益",
+                      "port": "运转"
+                    }
+                  },
+                  "routeRoles": {
+                    "archetype_SYS_energy": {
+                      "role": "payoff",
+                      "cross": false,
+                      "ports": [
+                        "operation"
+                      ]
+                    }
+                  },
+                  "port": "防御／运转",
+                  "roleReason": "能量/高费收益，提供防御／运转。",
+                  "rules": "获得格挡后记录下一张实际打出的非能力牌。正常支付并打出后，若当前能量足以再支付该牌当前费用，则额外支付一次费用并再次打出；没有足够能量时结束该准备。费用与牌效按各次实际版本处理。",
+                  "upgrade": "升级牌效按当前升级牌面：获得7点格挡。打出下一张非能力牌后，再次支付费用，将其再打出一次。",
+                  "textComplexity": "低",
+                  "reference": "再次支付费用，使同一张非能力牌再次出手。",
+                  "route": "能量/高费",
+                  "investment": "按当前版本支付1能量。"
+                },
+                "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后记录下一张实际打出的非能力牌。正常支付并打出后，若当前能量足以再支付该牌当前费用，则额外支付一次费用并再次打出；没有足够能量时结束该准备。费用与牌效按各次实际版本处理。\n升级：升级牌效按当前升级牌面：获得7点格挡。打出下一张非能力牌后，再次支付费用，将其再打出一次。",
+                "descriptionEnergyDisplay": "text"
+              },
+              "after": {
+                "uid": "energy_retention_JH19",
+                "id": "JH19",
+                "name": "双星",
+                "type": "技能",
+                "system": "energy",
+                "rarity": "罕见",
+                "pool": true,
+                "cost": 1,
+                "upgradedCost": 1,
+                "turns": null,
+                "upgradedTurns": null,
+                "target": "自己",
+                "text": "获得4点格挡。下一张非能力牌消耗能量再打出一次。",
+                "upgradedText": "获得7点格挡。下一张非能力牌消耗能量再打出一次。",
+                "keywords": [],
+                "termIds": [
+                  "EF05",
+                  "EF43",
+                  "TR08"
+                ],
+                "effectIds": [
+                  "EF05",
+                  "EF_RETAIN_ENERGY"
+                ],
+                "ruleIds": [],
+                "breakthroughIds": [],
+                "archetypeIds": [
+                  "SYS_energy"
+                ],
+                "partnerCardIds": [],
+                "art": "original-scene-jh19-two-op-stars-20261104",
+                "character": "星见纯那",
+                "role": "机制基础牌",
+                "direction": "能量/高费",
+                "draftStatus": "机制补充候选",
+                "draftBatch": "junna-energy-retention-20261103-v1-cards",
+                "naming": {
+                  "original": "",
+                  "kind": "常用星象名词与主题借用",
+                  "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+                  "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+                  "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手需要再次支付费用。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+                  "chineseOriginal": ""
+                },
+                "design": {
+                  "classification": "机制基础牌",
+                  "triggerRole": "收益",
+                  "systems": [
+                    "energy"
+                  ],
+                  "systemRoles": {
+                    "energy": {
+                      "role": "收益",
+                      "port": "运转"
+                    }
+                  },
+                  "routeRoles": {
+                    "archetype_SYS_energy": {
+                      "role": "payoff",
+                      "cross": false,
+                      "ports": [
+                        "operation"
+                      ]
+                    }
+                  },
+                  "port": "防御／运转",
+                  "roleReason": "能量/高费收益，提供防御／运转。",
+                  "rules": "获得格挡后记录下一张实际打出的非能力牌。该牌完成打出后，创建这张牌的临时复制；若当前能量足以再次支付该牌的当前费用，则支付费用并打出复制牌。先消耗本次准备，再打出临时复制；复制使用原目标，原目标失效时按正常合法目标规则处理。原牌按自身正常去向结算。",
+                  "upgrade": "升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌完成打出后，创建其临时复制，再次支付费用并打出复制牌。",
+                  "textComplexity": "低",
+                  "reference": "再次支付费用，使同一张非能力牌再次出手。",
+                  "route": "能量/高费",
+                  "investment": "按当前版本支付1能量。"
+                },
+                "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后记录下一张实际打出的非能力牌。该牌完成打出后，创建这张牌的临时复制；若当前能量足以再次支付该牌的当前费用，则支付费用并打出复制牌。先消耗本次准备，再打出临时复制；复制使用原目标，原目标失效时按正常合法目标规则处理。原牌按自身正常去向结算。\n升级：升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌完成打出后，创建其临时复制，再次支付费用并打出复制牌。",
+                "descriptionEnergyDisplay": "text"
+              },
+              "beforeIndex": 272,
+              "afterIndex": 272,
+              "afterVersion": "77:f486e549cde9c997c3295d4d1d2981a11cd2e64120327cd092af4d1ff7989d35"
+            }
+          ],
+          "reference": null
+        },
+        "versions": {
+          "cards/energy_retention_JH19": "77:f486e549cde9c997c3295d4d1d2981a11cd2e64120327cd092af4d1ff7989d35"
+        },
+        "assetIds": []
+      }
+    },
+    "c5e90e2b-5e8b-475c-a1d0-5518ef68e06c": {
+      "hash": "e87042735e27437fc158347bdb14582936f1890fd9d6af6eddbd302bf0e3656a",
+      "result": {
+        "saved": true,
+        "revision": 2597,
+        "record": {
+          "id": "c5e90e2b-5e8b-475c-a1d0-5518ef68e06c",
+          "seq": 2597,
+          "at": "2026-11-05T08:33:21.168Z",
+          "label": "双星改为下一张非能力牌临时增加1次原版重放",
+          "kind": "card-resolution",
+          "clientId": "codex-pursuit-preview-20261105",
+          "patches": [
+            {
+              "collection": "cards",
+              "uid": "energy_retention_JH19",
+              "before": {
+                "uid": "energy_retention_JH19",
+                "id": "JH19",
+                "name": "双星",
+                "type": "技能",
+                "system": "energy",
+                "rarity": "罕见",
+                "pool": true,
+                "cost": 1,
+                "upgradedCost": 1,
+                "turns": null,
+                "upgradedTurns": null,
+                "target": "自己",
+                "text": "获得4点格挡。下一张非能力牌消耗能量再打出一次。",
+                "upgradedText": "获得7点格挡。下一张非能力牌消耗能量再打出一次。",
+                "keywords": [],
+                "termIds": [
+                  "EF05",
+                  "EF43",
+                  "TR08"
+                ],
+                "effectIds": [
+                  "EF05",
+                  "EF_RETAIN_ENERGY"
+                ],
+                "ruleIds": [],
+                "breakthroughIds": [],
+                "archetypeIds": [
+                  "SYS_energy"
+                ],
+                "partnerCardIds": [],
+                "art": "original-scene-jh19-two-op-stars-20261104",
+                "character": "星见纯那",
+                "role": "机制基础牌",
+                "direction": "能量/高费",
+                "draftStatus": "机制补充候选",
+                "draftBatch": "junna-energy-retention-20261103-v1-cards",
+                "naming": {
+                  "original": "",
+                  "kind": "常用星象名词与主题借用",
+                  "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+                  "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+                  "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手需要再次支付费用。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+                  "chineseOriginal": ""
+                },
+                "design": {
+                  "classification": "机制基础牌",
+                  "triggerRole": "收益",
+                  "systems": [
+                    "energy"
+                  ],
+                  "systemRoles": {
+                    "energy": {
+                      "role": "收益",
+                      "port": "运转"
+                    }
+                  },
+                  "routeRoles": {
+                    "archetype_SYS_energy": {
+                      "role": "payoff",
+                      "cross": false,
+                      "ports": [
+                        "operation"
+                      ]
+                    }
+                  },
+                  "port": "防御／运转",
+                  "roleReason": "能量/高费收益，提供防御／运转。",
+                  "rules": "获得格挡后记录下一张实际打出的非能力牌。该牌完成打出后，创建这张牌的临时复制；若当前能量足以再次支付该牌的当前费用，则支付费用并打出复制牌。先消耗本次准备，再打出临时复制；复制使用原目标，原目标失效时按正常合法目标规则处理。原牌按自身正常去向结算。",
+                  "upgrade": "升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌完成打出后，创建其临时复制，再次支付费用并打出复制牌。",
+                  "textComplexity": "低",
+                  "reference": "再次支付费用，使同一张非能力牌再次出手。",
+                  "route": "能量/高费",
+                  "investment": "按当前版本支付1能量。"
+                },
+                "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后记录下一张实际打出的非能力牌。该牌完成打出后，创建这张牌的临时复制；若当前能量足以再次支付该牌的当前费用，则支付费用并打出复制牌。先消耗本次准备，再打出临时复制；复制使用原目标，原目标失效时按正常合法目标规则处理。原牌按自身正常去向结算。\n升级：升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌完成打出后，创建其临时复制，再次支付费用并打出复制牌。",
+                "descriptionEnergyDisplay": "text"
+              },
+              "after": {
+                "uid": "energy_retention_JH19",
+                "id": "JH19",
+                "name": "双星",
+                "type": "技能",
+                "system": "energy",
+                "rarity": "罕见",
+                "pool": true,
+                "cost": 1,
+                "upgradedCost": 1,
+                "turns": null,
+                "upgradedTurns": null,
+                "target": "自己",
+                "text": "获得4点格挡。下一张非能力牌重放1次。",
+                "upgradedText": "获得7点格挡。下一张非能力牌重放1次。",
+                "keywords": [],
+                "termIds": [
+                  "EF05",
+                  "EF43",
+                  "TR08"
+                ],
+                "effectIds": [
+                  "EF05",
+                  "EF_RETAIN_ENERGY"
+                ],
+                "ruleIds": [],
+                "breakthroughIds": [],
+                "archetypeIds": [
+                  "SYS_energy"
+                ],
+                "partnerCardIds": [],
+                "art": "original-scene-jh19-two-op-stars-20261104",
+                "character": "星见纯那",
+                "role": "机制基础牌",
+                "direction": "能量/高费",
+                "draftStatus": "机制补充候选",
+                "draftBatch": "junna-energy-retention-20261103-v1-cards",
+                "naming": {
+                  "original": "",
+                  "kind": "常用星象名词与主题借用",
+                  "work": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+                  "url": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+                  "adaptation": "以相邻的两颗青蓝色四角星图案表现同一张非能力牌的两次出手；第二次出手通过原版临时重放结算。名称采用常用名词双星，配图取片头的图形星星，以两颗星为主体。原始截图tv02-0250-op.jpg，播放器约02:52；裁切520,568,160,120。",
+                  "chineseOriginal": ""
+                },
+                "design": {
+                  "classification": "机制基础牌",
+                  "triggerRole": "收益",
+                  "systems": [
+                    "energy"
+                  ],
+                  "systemRoles": {
+                    "energy": {
+                      "role": "收益",
+                      "port": "运转"
+                    }
+                  },
+                  "routeRoles": {
+                    "archetype_SYS_energy": {
+                      "role": "payoff",
+                      "cross": false,
+                      "ports": [
+                        "operation"
+                      ]
+                    }
+                  },
+                  "port": "防御／运转",
+                  "roleReason": "能量/高费收益，提供防御／运转。",
+                  "rules": "获得格挡后，使下一张打出的非能力牌在本次打出时临时增加1次原版重放。通过原版打出次数钩子增加次数，并在计入次数后消耗本次准备；原牌正常支付一次费用，后续卡牌保持各自正常打出次数。",
+                  "upgrade": "升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌在本次打出时临时增加1次重放。",
+                  "textComplexity": "低",
+                  "reference": "原版临时重放钩子，仅作用于下一张非能力牌。",
+                  "route": "能量/高费",
+                  "investment": "按当前版本支付1能量。"
+                },
+                "notes": "定位：能量/高费收益，提供防御／运转。\n结算约定：获得格挡后，使下一张打出的非能力牌在本次打出时临时增加1次原版重放。通过原版打出次数钩子增加次数，并在计入次数后消耗本次准备；原牌正常支付一次费用，后续卡牌保持各自正常打出次数。\n升级：升级牌效按当前升级牌面：获得7点格挡。下一张非能力牌在本次打出时临时增加1次重放。",
+                "descriptionEnergyDisplay": "text"
+              },
+              "beforeIndex": 272,
+              "afterIndex": 272,
+              "afterVersion": "78:d322302aadb842a7f40ccda332b331a1c94d503d75034b95183b77d2eaffdfbe"
+            }
+          ],
+          "reference": null
+        },
+        "versions": {
+          "cards/energy_retention_JH19": "78:d322302aadb842a7f40ccda332b331a1c94d503d75034b95183b77d2eaffdfbe"
         },
         "assetIds": []
       }
