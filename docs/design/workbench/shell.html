@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>纯那 Mod 设计工作台</title><!--STYLE--></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><title>纯那 Mod 设计工作台</title><!--STYLE--></head>
 <body>
 <svg class="card-render-defs" aria-hidden="true" width="0" height="0"><defs>
   <filter id="junna-frame-tint" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".55 0 0 0 .14  0 .85 0 0 .28  0 0 .8 0 .34  0 0 0 1 0"/></filter>
@@ -18,12 +18,14 @@
   <div class="body-layout" id="body-layout">
     <aside class="sidebar" id="sidebar" aria-label="分类与筛选"></aside>
     <main class="workspace" id="workspace">
-      <div class="page-header"><div><h1 id="page-title">机制</h1><span class="result-count" id="result-count"></span></div><div class="page-actions" id="page-actions"></div></div>
+      <div class="page-header"><div><h1 id="page-title">机制</h1><span class="result-count" id="result-count"></span></div><div class="mobile-controls"><button class="button" id="mobile-filters-button" type="button" aria-haspopup="dialog" aria-controls="mobile-filters-dialog" aria-expanded="false">筛选</button><button class="button" id="mobile-inspector-button" type="button" aria-haspopup="dialog" aria-controls="mobile-inspector-dialog" aria-expanded="false" disabled>详情</button></div><div class="page-actions" id="page-actions"></div></div>
       <div class="work-area" id="work-area" role="tabpanel" aria-labelledby="tab-mechanisms"></div>
     </main>
     <aside class="inspector" id="inspector" aria-label="编辑栏"><div class="inspector-header"><h2 id="inspector-title">编辑</h2><button class="icon-btn" id="close-inspector" aria-label="清除选择" hidden>×</button></div><div class="preview" id="preview"></div><form id="editor-form" autocomplete="off"></form><div class="inspector-footer" id="inspector-footer" hidden><button class="button" id="duplicate-entity">复制</button><button class="button" id="reserve-entity" hidden>移入备用</button><button class="button danger" id="delete-entity">删除</button><button class="button primary" id="restore-entity" hidden>恢复</button><div class="inspector-group-actions" id="card-group-actions" hidden><button class="button" id="set-group-main">设置为主牌</button><button class="button" id="reserve-group">备用一组</button><button class="button danger" id="delete-group">删除一组</button></div></div></aside>
   </div>
 </div>
+<dialog id="mobile-filters-dialog" class="mobile-panel-dialog" aria-labelledby="mobile-filters-title"><div class="dialog-head"><h2 id="mobile-filters-title">筛选</h2><button class="icon-btn" id="mobile-close-filters" type="button" aria-label="关闭筛选">×</button></div></dialog>
+<dialog id="mobile-inspector-dialog" class="mobile-panel-dialog" aria-label="详情"><button class="icon-btn mobile-panel-close" id="mobile-close-inspector" type="button" aria-label="关闭详情">×</button></dialog>
 <dialog id="history-dialog" class="large-dialog"><div class="dialog-head"><h2>编辑记录 <span id="history-total"></span></h2><button class="icon-btn" data-close-dialog="history-dialog" aria-label="关闭编辑记录">×</button></div><div class="history-tools"><input type="search" id="history-search" placeholder="搜索记录" aria-label="搜索记录"><select id="history-kind" aria-label="记录类型"><option value="all">全部内容</option><option value="cards">卡牌</option><option value="terms">词条</option><option value="mechanisms">机制</option><option value="archetypes">流派</option><option value="styles">风格约定</option><option value="fitPool">契合</option></select></div><div id="history-body" class="dialog-body"></div></dialog>
 <dialog id="manage-dialog"><div class="dialog-head"><h2 id="manage-title">流派</h2><button class="icon-btn" data-close-dialog="manage-dialog" aria-label="关闭流派管理">×</button></div><div id="manage-body" class="dialog-body"></div></dialog>
 <dialog id="knowledge-dialog" class="knowledge-dialog" aria-labelledby="knowledge-title"><div class="dialog-head"><h2 id="knowledge-title">知识牌组 <span id="knowledge-total"></span></h2><div class="knowledge-actions"><select id="knowledge-group-switch" aria-label="知识牌组" hidden></select><button type="button" class="button" id="knowledge-upgrade" aria-pressed="false">基础牌面</button><button type="button" class="button" id="knowledge-edit">编辑</button><button type="button" class="icon-btn" data-close-dialog="knowledge-dialog" aria-label="关闭知识牌组">×</button></div></div><div class="knowledge-fan" id="knowledge-fan" role="group" aria-label="同组知识牌"></div></dialog>
