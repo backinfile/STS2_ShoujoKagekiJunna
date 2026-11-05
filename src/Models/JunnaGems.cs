@@ -35,7 +35,7 @@ public abstract class JunnaGem(int energy, string icon) : CustomRelicModel
 
 [CustomID("JUNNA_GREEN_GEM")]
 [Pool(typeof(JunnaRelicPool))]
-public sealed class JunnaGreenGem() : JunnaGem(1, "wish_note")
+public sealed class JunnaGreenGem() : JunnaGem(1, "green_gem")
 {
     public override RelicModel GetUpgradeReplacement() => ModelDb.Relic<JunnaBurningGem>();
 }

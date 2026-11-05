@@ -1,8 +1,8 @@
 {
-  "JUNNA_GREEN_GEM.title": "便签",
+  "JUNNA_GREEN_GEM.title": "绿色宝石",
   "JUNNA_GREEN_GEM.description": "在每场战斗开始时，获得{Energy:energyIcons()}，可保留至下回合。",
   "JUNNA_GREEN_GEM.flavor": "",
-  "JUNNA_BURNING_GEM.title": "燃烧的宝石",
+  "JUNNA_BURNING_GEM.title": "燃烧宝石",
   "JUNNA_BURNING_GEM.description": "在每场战斗开始时，获得{Energy:energyIcons()}，可保留至下回合。",
   "JUNNA_BURNING_GEM.flavor": ""
 }
