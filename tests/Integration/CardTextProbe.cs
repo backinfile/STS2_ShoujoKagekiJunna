@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Models;
+using ShoujoKagekiJunna.Combat;
 
 namespace JunnaIntegration;
 
@@ -35,6 +36,7 @@ public sealed class CardTextProbe : AbstractConsoleCmd
         using var snapshot = JsonDocument.Parse(File.ReadAllText(path));
         var source = snapshot.RootElement.GetProperty("data").GetProperty("cards").EnumerateArray()
             .Where(card => !card.TryGetProperty("trashedAt", out _) && !card.TryGetProperty("reservedAt", out _)).ToArray();
+        var selectionIds = "JG03 JG09 JG16 JT02 JH01 JK11 JK11B JK50B JK53 JG27 JA65 JA66 JK73B JK78 JG36 JK37C JK64 JK78D JK78E".Split(' ').ToHashSet();
         var rows = new List<object>();
         void Check(string id, string field, object actual, object expected) => rows.Add(new { id, field, actual, expected, pass = Equals(actual, expected) });
         foreach (var item in source)
@@ -48,6 +50,11 @@ public sealed class CardTextProbe : AbstractConsoleCmd
                 var card = (CardModel)CardCatalog.Model(id).MutableClone();
                 if (upgraded) { card.UpgradeInternal(); card.FinalizeUpgradeInternal(); }
                 if (id == "JA81B") ((CatalogCard)card).SetGeneratedDamage(7);
+                if (selectionIds.Contains(id))
+                {
+                    string prompt = CardChoices.Prompt(card, 3).GetFormattedText();
+                    Check(face, "selection prompt resolves", prompt.Contains("??") && !prompt.Contains("ERROR") && !prompt.Contains('{'), true);
+                }
                 string text = item.GetProperty(upgraded ? "upgradedText" : "text").GetString()!;
                 string expected = id == "JA81B" ? text.Replace("X", "7") : text;
                 Check(face, "description", Normalize(card.GetDescriptionForPile(PileType.None)), Normalize(expected));
