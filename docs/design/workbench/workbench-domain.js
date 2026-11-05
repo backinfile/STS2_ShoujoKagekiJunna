@@ -65,6 +65,7 @@
         if(!c.arrowFocus||!['x','y'].every(axis=>typeof c.arrowFocus[axis]==='number'&&Number.isFinite(c.arrowFocus[axis])&&c.arrowFocus[axis]>=0&&c.arrowFocus[axis]<=1))throw Error('箭头聚焦坐标须为0到1：'+c.id);
         c.arrowFocus={x:c.arrowFocus.x,y:c.arrowFocus.y};
       }
+      if(c.type==='\u661f\u77e2')c.type='箭矢';
       if(c.type==='言葉')c.type='箭矢';
       c.name=String(c.name||'未命名');c.text=String(c.text??'');c.upgradedText=String(c.upgradedText??c.text);c.type=TYPES.includes(c.type)?c.type:'技能';c.cost=String(c.cost).toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.cost)||0));c.upgradedCost=String(c.upgradedCost??c.cost).toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.upgradedCost??c.cost)||0));c.turns=c.type==='箭矢'?(String(c.turns).trim().toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.turns)||0))):null;c.upgradedTurns=c.type==='箭矢'?(String(c.upgradedTurns??c.turns).trim().toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.upgradedTurns??c.turns)||0))):null;
       if(c.type==='箭矢'){const subtype=c.arrowSubtype??seed.data.cards.find(entry=>entry.id===c.id)?.arrowSubtype??'技能';if(!['攻击','技能','能力'].includes(subtype))throw Error('箭矢子类型无效：'+c.id);c.arrowSubtype=subtype;}

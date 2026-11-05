@@ -32,7 +32,7 @@
   const knowledgeFaces=new Map();let knowledgeWheelAt=-Infinity;
   try{Object.assign(ui,JSON.parse(localStorage.getItem(uiKey)||'{}'));}catch(_){}
   if(ui.selected?.collection==='cards'&&ui.selected.cardSlot)knowledgeFaces.set(ui.selected.cardOrigin||ui.selected.uid,ui.selected.cardSlot);
-  if(ui.type==='言葉')ui.type='箭矢';
+  if(ui.type==='言葉'||ui.type==='\u661f\u77e2')ui.type='箭矢';
   function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,3200);}
   function assetURL(id){const source=state.assets?.[id]||builtAssets[id]||builtAssets.defaultPortrait;if(blobURLs.has(source))return blobURLs.get(source);const comma=source.indexOf(','),type=source.slice(5,source.indexOf(';')),binary=atob(source.slice(comma+1)),bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);const url=URL.createObjectURL(new Blob([bytes],{type}));blobURLs.set(source,url);return url;}
   function field(label,key,value,extra=''){return '<label class="field"><span class="field-label">'+escape(label)+'</span><input data-field="'+escape(key)+'" value="'+escape(value)+'" '+extra+'></label>';}
