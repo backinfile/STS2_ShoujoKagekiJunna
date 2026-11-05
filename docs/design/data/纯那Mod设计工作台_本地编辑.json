@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "workspaceId": "junna-mod-workbench-20261101-v1",
-  "revision": 2592,
+  "revision": 2593,
   "data": {
     "title": "纯那 Mod 设计工作台",
     "mechanisms": [
@@ -38989,93 +38989,6 @@
           "implementation": "src/Combat/EnergyReserve.cs",
           "model": "EnergyReserve",
           "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
-          "iconSize": [
-            256,
-            256
-          ]
-        },
-        {
-          "uid": "power_energy_next_turn_power",
-          "id": "ENERGY_NEXT_TURN_POWER",
-          "name": "下回合能量",
-          "origin": "base",
-          "type": "增益",
-          "system": "energy",
-          "duration": "下一回合",
-          "text": "下回合开始时，获得X点能量。",
-          "upgradedText": "下回合开始时，获得X点能量。",
-          "cardIds": [
-            "JA16",
-            "JA17"
-          ],
-          "iconDesign": "沿用本体黄色闪电图标，保持下回合能量的既有辨识。",
-          "source": "TV第2话约20:22；《少女☆歌剧 Re LIVE》圣翔音乐学园·星见纯那（1060001）原作卡图（配图）",
-          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1222",
-          "art": "power-icon-energy-next-turn-native-v3-20261105",
-          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/ENERGY_NEXT_TURN.png",
-          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/ENERGY_NEXT_TURN.png",
-          "implementation": "src/Models/Cards.cs",
-          "model": "EnergyNextTurnPower",
-          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
-          "nativeIconPath": "res://images/powers/energy_next_turn_power.png",
-          "iconSize": [
-            256,
-            256
-          ]
-        },
-        {
-          "uid": "power_vulnerable_power",
-          "id": "VULNERABLE_POWER",
-          "name": "易伤",
-          "origin": "base",
-          "type": "减益",
-          "system": "utility",
-          "duration": "按层数",
-          "text": "受到的攻击伤害增加50%。",
-          "upgradedText": "受到的攻击伤害增加50%。",
-          "cardIds": [
-            "JF10",
-            "JA58"
-          ],
-          "iconDesign": "沿用本体红色裂心图标，保持易伤的既有辨识。",
-          "source": "2021 剧场版 · 狩猎的Revue片段约08:33；TV 第2话 · 18:31 · 持弓瞄准",
-          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=513",
-          "art": "power-icon-vulnerable-native-v3-20261105",
-          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/VULNERABLE.png",
-          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/VULNERABLE.png",
-          "implementation": "src/Combat/CardEffects.cs",
-          "model": "VulnerablePower",
-          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
-          "nativeIconPath": "res://images/powers/vulnerable_power.png",
-          "iconSize": [
-            256,
-            256
-          ]
-        },
-        {
-          "uid": "power_weak_power",
-          "id": "WEAK_POWER",
-          "name": "虚弱",
-          "origin": "base",
-          "type": "减益",
-          "system": "utility",
-          "duration": "按层数",
-          "text": "攻击造成的伤害降低25%。",
-          "upgradedText": "攻击造成的伤害降低25%。",
-          "cardIds": [
-            "JF10",
-            "JA58"
-          ],
-          "iconDesign": "沿用本体浅绿色断剑图标，保持虚弱的既有辨识。",
-          "source": "2021 剧场版 · 狩猎的Revue片段约08:33；TV 第2话 · 18:31 · 持弓瞄准",
-          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=513",
-          "art": "power-icon-weak-native-v3-20261105",
-          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/WEAK.png",
-          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/WEAK.png",
-          "implementation": "src/Combat/CardEffects.cs",
-          "model": "WeakPower",
-          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
-          "nativeIconPath": "res://images/powers/weak_power.png",
           "iconSize": [
             256,
             256
@@ -907790,6 +907703,128 @@
         }
       ],
       "reference": null
+    },
+    {
+      "id": "974960fe-6732-4ad4-9499-fd586d00c96a",
+      "seq": 2593,
+      "at": "2026-11-05T03:12:16.370Z",
+      "label": "按本体Power风格同步28枚纯那图标",
+      "kind": "设计",
+      "clientId": "codex-power-workbench",
+      "patches": [
+        {
+          "collection": "powers",
+          "uid": "power_energy_next_turn_power",
+          "before": {
+            "uid": "power_energy_next_turn_power",
+            "id": "ENERGY_NEXT_TURN_POWER",
+            "name": "下回合能量",
+            "origin": "base",
+            "type": "增益",
+            "system": "energy",
+            "duration": "下一回合",
+            "text": "下回合开始时，获得X点能量。",
+            "upgradedText": "下回合开始时，获得X点能量。",
+            "cardIds": [
+              "JA16",
+              "JA17"
+            ],
+            "iconDesign": "沿用本体黄色闪电图标，保持下回合能量的既有辨识。",
+            "source": "TV第2话约20:22；《少女☆歌剧 Re LIVE》圣翔音乐学园·星见纯那（1060001）原作卡图（配图）",
+            "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1222",
+            "art": "power-icon-energy-next-turn-native-v3-20261105",
+            "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/ENERGY_NEXT_TURN.png",
+            "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/ENERGY_NEXT_TURN.png",
+            "implementation": "src/Models/Cards.cs",
+            "model": "EnergyNextTurnPower",
+            "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+            "nativeIconPath": "res://images/powers/energy_next_turn_power.png",
+            "iconSize": [
+              256,
+              256
+            ]
+          },
+          "after": null,
+          "beforeIndex": 28,
+          "afterIndex": -1,
+          "afterVersion": "1:missing"
+        },
+        {
+          "collection": "powers",
+          "uid": "power_vulnerable_power",
+          "before": {
+            "uid": "power_vulnerable_power",
+            "id": "VULNERABLE_POWER",
+            "name": "易伤",
+            "origin": "base",
+            "type": "减益",
+            "system": "utility",
+            "duration": "按层数",
+            "text": "受到的攻击伤害增加50%。",
+            "upgradedText": "受到的攻击伤害增加50%。",
+            "cardIds": [
+              "JF10",
+              "JA58"
+            ],
+            "iconDesign": "沿用本体红色裂心图标，保持易伤的既有辨识。",
+            "source": "2021 剧场版 · 狩猎的Revue片段约08:33；TV 第2话 · 18:31 · 持弓瞄准",
+            "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=513",
+            "art": "power-icon-vulnerable-native-v3-20261105",
+            "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/VULNERABLE.png",
+            "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/VULNERABLE.png",
+            "implementation": "src/Combat/CardEffects.cs",
+            "model": "VulnerablePower",
+            "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+            "nativeIconPath": "res://images/powers/vulnerable_power.png",
+            "iconSize": [
+              256,
+              256
+            ]
+          },
+          "after": null,
+          "beforeIndex": 29,
+          "afterIndex": -1,
+          "afterVersion": "1:missing"
+        },
+        {
+          "collection": "powers",
+          "uid": "power_weak_power",
+          "before": {
+            "uid": "power_weak_power",
+            "id": "WEAK_POWER",
+            "name": "虚弱",
+            "origin": "base",
+            "type": "减益",
+            "system": "utility",
+            "duration": "按层数",
+            "text": "攻击造成的伤害降低25%。",
+            "upgradedText": "攻击造成的伤害降低25%。",
+            "cardIds": [
+              "JF10",
+              "JA58"
+            ],
+            "iconDesign": "沿用本体浅绿色断剑图标，保持虚弱的既有辨识。",
+            "source": "2021 剧场版 · 狩猎的Revue片段约08:33；TV 第2话 · 18:31 · 持弓瞄准",
+            "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=513",
+            "art": "power-icon-weak-native-v3-20261105",
+            "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/WEAK.png",
+            "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/WEAK.png",
+            "implementation": "src/Combat/CardEffects.cs",
+            "model": "WeakPower",
+            "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+            "nativeIconPath": "res://images/powers/weak_power.png",
+            "iconSize": [
+              256,
+              256
+            ]
+          },
+          "after": null,
+          "beforeIndex": 30,
+          "afterIndex": -1,
+          "afterVersion": "1:missing"
+        }
+      ],
+      "reference": null
     }
   ],
   "assets": {
@@ -908878,7 +908913,10 @@
     "fitPool/fit_card_knowledge_structure_JK47B": 1,
     "cards/junna-zero-cost-payoff-20261104_JH31": 6,
     "fitPool/fit_relic_junna_green_gem": 4,
-    "fitPool/fit_relic_junna_burning_gem": 4
+    "fitPool/fit_relic_junna_burning_gem": 4,
+    "powers/power_energy_next_turn_power": 1,
+    "powers/power_vulnerable_power": 1,
+    "powers/power_weak_power": 1
   },
   "mcpRequests": {
     "24164242-ff96-4f09-8b6d-f7601810ede6": {
@@ -1397695,6 +1397733,141 @@
         },
         "versions": {
           "cards/draft_card_JK15": "29:f1caaaeaa123bc13e636a31b6697caa20388ab995ebab1b340021573849394b0"
+        },
+        "assetIds": []
+      }
+    },
+    "974960fe-6732-4ad4-9499-fd586d00c96a": {
+      "hash": "7f0235e6ead8a9aeae255dcff73dbc5208a7bf7870ced2b78c6a5be963eb9df9",
+      "result": {
+        "saved": true,
+        "revision": 2593,
+        "record": {
+          "id": "974960fe-6732-4ad4-9499-fd586d00c96a",
+          "seq": 2593,
+          "at": "2026-11-05T03:12:16.370Z",
+          "label": "按本体Power风格同步28枚纯那图标",
+          "kind": "设计",
+          "clientId": "codex-power-workbench",
+          "patches": [
+            {
+              "collection": "powers",
+              "uid": "power_energy_next_turn_power",
+              "before": {
+                "uid": "power_energy_next_turn_power",
+                "id": "ENERGY_NEXT_TURN_POWER",
+                "name": "下回合能量",
+                "origin": "base",
+                "type": "增益",
+                "system": "energy",
+                "duration": "下一回合",
+                "text": "下回合开始时，获得X点能量。",
+                "upgradedText": "下回合开始时，获得X点能量。",
+                "cardIds": [
+                  "JA16",
+                  "JA17"
+                ],
+                "iconDesign": "沿用本体黄色闪电图标，保持下回合能量的既有辨识。",
+                "source": "TV第2话约20:22；《少女☆歌剧 Re LIVE》圣翔音乐学园·星见纯那（1060001）原作卡图（配图）",
+                "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1222",
+                "art": "power-icon-energy-next-turn-native-v3-20261105",
+                "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/ENERGY_NEXT_TURN.png",
+                "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/ENERGY_NEXT_TURN.png",
+                "implementation": "src/Models/Cards.cs",
+                "model": "EnergyNextTurnPower",
+                "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+                "nativeIconPath": "res://images/powers/energy_next_turn_power.png",
+                "iconSize": [
+                  256,
+                  256
+                ]
+              },
+              "after": null,
+              "beforeIndex": 28,
+              "afterIndex": -1,
+              "afterVersion": "1:missing"
+            },
+            {
+              "collection": "powers",
+              "uid": "power_vulnerable_power",
+              "before": {
+                "uid": "power_vulnerable_power",
+                "id": "VULNERABLE_POWER",
+                "name": "易伤",
+                "origin": "base",
+                "type": "减益",
+                "system": "utility",
+                "duration": "按层数",
+                "text": "受到的攻击伤害增加50%。",
+                "upgradedText": "受到的攻击伤害增加50%。",
+                "cardIds": [
+                  "JF10",
+                  "JA58"
+                ],
+                "iconDesign": "沿用本体红色裂心图标，保持易伤的既有辨识。",
+                "source": "2021 剧场版 · 狩猎的Revue片段约08:33；TV 第2话 · 18:31 · 持弓瞄准",
+                "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=513",
+                "art": "power-icon-vulnerable-native-v3-20261105",
+                "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/VULNERABLE.png",
+                "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/VULNERABLE.png",
+                "implementation": "src/Combat/CardEffects.cs",
+                "model": "VulnerablePower",
+                "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+                "nativeIconPath": "res://images/powers/vulnerable_power.png",
+                "iconSize": [
+                  256,
+                  256
+                ]
+              },
+              "after": null,
+              "beforeIndex": 29,
+              "afterIndex": -1,
+              "afterVersion": "1:missing"
+            },
+            {
+              "collection": "powers",
+              "uid": "power_weak_power",
+              "before": {
+                "uid": "power_weak_power",
+                "id": "WEAK_POWER",
+                "name": "虚弱",
+                "origin": "base",
+                "type": "减益",
+                "system": "utility",
+                "duration": "按层数",
+                "text": "攻击造成的伤害降低25%。",
+                "upgradedText": "攻击造成的伤害降低25%。",
+                "cardIds": [
+                  "JF10",
+                  "JA58"
+                ],
+                "iconDesign": "沿用本体浅绿色断剑图标，保持虚弱的既有辨识。",
+                "source": "2021 剧场版 · 狩猎的Revue片段约08:33；TV 第2话 · 18:31 · 持弓瞄准",
+                "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=513",
+                "art": "power-icon-weak-native-v3-20261105",
+                "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/WEAK.png",
+                "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/WEAK.png",
+                "implementation": "src/Combat/CardEffects.cs",
+                "model": "WeakPower",
+                "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+                "nativeIconPath": "res://images/powers/weak_power.png",
+                "iconSize": [
+                  256,
+                  256
+                ]
+              },
+              "after": null,
+              "beforeIndex": 30,
+              "afterIndex": -1,
+              "afterVersion": "1:missing"
+            }
+          ],
+          "reference": null
+        },
+        "versions": {
+          "powers/power_energy_next_turn_power": "1:missing",
+          "powers/power_vulnerable_power": "1:missing",
+          "powers/power_weak_power": "1:missing"
         },
         "assetIds": []
       }

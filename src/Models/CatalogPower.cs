@@ -42,7 +42,7 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/energy.png";
+    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     public override LocString Description
     {

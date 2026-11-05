@@ -15,7 +15,7 @@ public sealed class EnergyReserve : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/energy.png";
+    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/powers/ENERGY_RESERVE.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     private bool _consumed;
     private static readonly AsyncLocal<bool> SettingEnergy = new();

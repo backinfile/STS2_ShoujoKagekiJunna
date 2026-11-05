@@ -39,25 +39,26 @@ function effect(card,upgraded=false){
   const powers=catalogIds.map(cid=>make(cid,'JUNNA_'+cid+'_POWER',[cid],{implementation:'src/Models/CatalogPower.cs',model:'JunnaPower'+cid}));
   powers.push(make('JG23','JUNNA_ENDURANCE_POWER',['JG23'],{implementation:'src/Models/JunnaEndurancePower.cs',model:'JunnaEndurancePower'}));
   powers.push(make('ENERGY_RESERVE','JUNNA_ENERGY_RESERVE',['JX07','JH20','JH26','JA80'],{system:'energy',duration:'下一回合',text:'下回合保留至多X点剩余能量。',upgradedText:'下回合保留至多X点剩余能量。',implementation:'src/Combat/EnergyReserve.cs',model:'EnergyReserve'}));
-  powers.push(make('ENERGY_NEXT_TURN','ENERGY_NEXT_TURN_POWER',['JA16','JA17'],{origin:'base',system:'energy',duration:'下一回合',text:'下回合开始时，获得X点能量。',upgradedText:'下回合开始时，获得X点能量。',implementation:'src/Models/Cards.cs',model:'EnergyNextTurnPower'}));
-  powers.push(make('VULNERABLE','VULNERABLE_POWER',['JF10','JA58'],{origin:'base',type:'减益',system:'utility',duration:'按层数',text:'受到的攻击伤害增加50%。',upgradedText:'受到的攻击伤害增加50%。',implementation:'src/Combat/CardEffects.cs',model:'VulnerablePower'}));
-  powers.push(make('WEAK','WEAK_POWER',['JF10','JA58'],{origin:'base',type:'减益',system:'utility',duration:'按层数',text:'攻击造成的伤害降低25%。',upgradedText:'攻击造成的伤害降低25%。',implementation:'src/Combat/CardEffects.cs',model:'WeakPower'}));
-  assert.equal(powers.length,31);assert.equal(new Set(powers.map(p=>p.id)).size,31);
+  assert.equal(powers.length,28);assert.equal(new Set(powers.map(p=>p.id)).size,28);
   const assets=Object.fromEntries(powers.map(power=>[power.art,'data:image/png;base64,'+fs.readFileSync(path.join(root,power.iconPath)).toString('base64')]));
   const current=unpack(await callTool('workbench_get_entity',{collection:'root',uid:'meta'}));
   const before=current.entity,after=structuredClone(before),existing=new Map((before.powers||[]).map(p=>[p.id,p]));
   if(manifest.styleReference&&before.powers?.length){
-    after.powers=before.powers.map(old=>{const design=powers.find(p=>p.id===old.id);if(!design)return old;const next={...old};for(const key of ['art','iconDesign','iconPath','originalIconPath','vectorPath','iconStyle','nativeIconPath','iconSize']){if(design[key]===null)delete next[key];else next[key]=design[key];}return next;});
+    after.powers=before.powers.filter(old=>old.origin!=='base').map(old=>{const design=powers.find(p=>p.id===old.id);if(!design)return old;const next={...old};for(const key of ['art','iconDesign','iconPath','originalIconPath','vectorPath','iconStyle','nativeIconPath','iconSize']){if(design[key]===null)delete next[key];else next[key]=design[key];}return next;});
   }else after.powers=powers.map(power=>{const old=existing.get(power.id);return {...power,...old,...(old?.art?.startsWith('power-icon-')&&old.art!==power.art?{art:power.art,iconDesign:power.iconDesign}:{} )};});
-  for(const old of before.powers||[])if(!after.powers.some(p=>p.id===old.id))after.powers.push(old);
+  for(const old of before.powers||[])if(old.origin!=='base'&&!after.powers.some(p=>p.id===old.id))after.powers.push(old);
   const entries=await Promise.all(after.powers.map(async design=>{
     const currentPower=unpack(await callTool('workbench_get_entity',{collection:'powers',uid:design.uid}));
     const next=currentPower.entity?{...currentPower.entity}:design;
     if(currentPower.entity)for(const key of ['art','iconDesign','iconPath','originalIconPath','vectorPath','iconStyle','nativeIconPath','iconSize']){if(Object.hasOwn(design,key))next[key]=design[key];else delete next[key];}
     return {collection:'powers',uid:design.uid,expectedVersion:currentPower.version,before:currentPower.entity,after:next};
   }));
+  for(const old of before.powers||[])if(old.origin==='base'){
+    const currentPower=unpack(await callTool('workbench_get_entity',{collection:'powers',uid:old.uid}));
+    entries.push({collection:'powers',uid:old.uid,expectedVersion:currentPower.version,before:currentPower.entity,after:null});
+  }
   const changes=entries.filter(entry=>JSON.stringify(entry.before)!==JSON.stringify(entry.after));
-  const result=unpack(await callTool('workbench_commit',{requestId:crypto.randomUUID(),clientId:'codex-power-workbench',label:manifest.styleReference?'按本体Power风格修正31枚图标':'新增Power目录与31枚契合图标',kind:'设计',changes,assets}));
+  const result=unpack(await callTool('workbench_commit',{requestId:crypto.randomUUID(),clientId:'codex-power-workbench',label:manifest.styleReference?'按本体Power风格同步28枚纯那图标':'同步纯那Power目录与28枚契合图标',kind:'设计',changes,assets}));
   const audit={revision:result.revision,powers:powers.length,custom:powers.filter(p=>p.origin==='junna').length,builtin:powers.filter(p=>p.origin==='base').length,
     sourceCards:[...new Set(powers.flatMap(p=>p.cardIds))],sourceScope:{activeCards:cards.length,rewardCards:cards.filter(c=>c.pool).length,includesKnowledgePartners:true,includesTemporaryEffects:true},
     powerIds:powers.map(p=>p.id),cleanup:cleanupPath};
