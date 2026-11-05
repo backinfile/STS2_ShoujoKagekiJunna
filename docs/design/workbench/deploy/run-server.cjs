@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');
+const config=JSON.parse(fs.readFileSync(path.join(__dirname,'relay.config.json'),'utf8'));
+const backend=JSON.parse(fs.readFileSync(config.backendConfig,'utf8'));
+const stateFile='/var/lib/junna-workbench/state.json';
+const seed={data:JSON.parse(fs.readFileSync(stateFile,'utf8')).data};
+const {server}=require('./mcp-daemon.cjs').createDaemon({file:stateFile,seed,token:backend.token,port:backend.port,pageFile:path.join(__dirname,'editor.html')});
+server.listen(backend.port,'127.0.0.1',()=>console.log('Junna MCP ready'));
+require('./relay.cjs');
+require('./publish-readonly.cjs').start();
