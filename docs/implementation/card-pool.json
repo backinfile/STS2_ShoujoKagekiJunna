@@ -3764,7 +3764,7 @@
       "retain": false,
       "upgradedRetain": false,
       "damageCapable": true,
-      "portrait": "JA81.jpg",
+      "portrait": "JA81.png",
       "values": [
         {
           "name": "Damage",
@@ -3857,7 +3857,7 @@
       "retain": false,
       "upgradedRetain": false,
       "damageCapable": false,
-      "portrait": "JA82.jpg",
+      "portrait": "JA82.png",
       "values": [
         {
           "name": "Damage",
@@ -4138,5 +4138,5 @@
       }
     }
   ],
-  "arrowArtRevision": 2577
+  "arrowArtRevision": 2582
 }

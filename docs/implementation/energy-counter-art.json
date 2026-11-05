@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-05",
+  "selected_concept": 3,
+  "theme": "弓形环框：绿玉边框与细金色弓形外圈，顶部无点缀",
+  "archive": "output\\imagegen\\junna-energy-2026-11-05\\bow-frame-v3",
+  "generation": {
+    "tool": "built-in image_gen",
+    "strategy": "reuse user-approved whole concept 3 and two previously generated flow sprites",
+    "source_generation_calls": 3,
+    "prompts": "output\\imagegen\\junna-energy-2026-11-05\\bow-frame-v3\\prompts.json",
+    "fixed_artwork": "partition approved image into center, jade border and gold border; reconstruct approved art exactly",
+    "originals_preserved": true
+  },
+  "cleanup": {
+    "tool": "GPT Image 2 Artifact Cleaner",
+    "strength": 0.25,
+    "local_only": true,
+    "original_size_preserved": true,
+    "strategy": "reuse restored source textures at original dimensions without applying a second restoration pass",
+    "report": "output\\imagegen\\junna-energy-2026-11-05\\bow-frame-v3\\layers.json"
+  },
+  "assets": [
+    {
+      "index": 1,
+      "name": "固定数字底图",
+      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_1.png",
+      "sha256": "99d4c4a95ad435a364f7110cbad21b0fc5e533e176025d84f142a6b794447e84",
+      "opacity": 1
+    },
+    {
+      "index": 2,
+      "name": "低速内部光纹",
+      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_2.png",
+      "sha256": "f3c380fd305c3b2fca14d1b84e12b5e239476b8e7b39a47bbb741b28bf995b06",
+      "opacity": 0.16
+    },
+    {
+      "index": 3,
+      "name": "快速内部光纹",
+      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_3.png",
+      "sha256": "4f2fb24bf2816cbf3b716a175313403d1853c06bb84c87ab355d2b7507774501",
+      "opacity": 0.08
+    },
+    {
+      "index": 4,
+      "name": "固定绿色边框",
+      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_4.png",
+      "sha256": "299d676e60e65a23ad9bbc9d69244575d7aef93fd4d243a1270558bf3d1231e2",
+      "opacity": 1
+    },
+    {
+      "index": 5,
+      "name": "固定金色弓框",
+      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_5.png",
+      "sha256": "abc6aa90e376eeda7f73083b4016c7ba42d2c8156025a35a717ee679603f9cb9",
+      "opacity": 1
+    },
+    {
+      "name": "energy_icon.png",
+      "file": "ShoujoKagekiJunna\\images\\energy_counter\\energy_icon.png",
+      "sha256": "eb596c48551415cdd2b4dcfca09a9046425b377bb61ab7f72884c0394b71cf35"
+    },
+    {
+      "name": "energy_icon_small.png",
+      "file": "ShoujoKagekiJunna\\images\\energy_counter\\energy_icon_small.png",
+      "sha256": "0340444eb51a0e407330a3d17604b4677edcd0baedd7286a0a95baf56f2b418c"
+    }
+  ],
+  "scene": {
+    "file": "ShoujoKagekiJunna/scenes/junna_energy.tscn",
+    "logical_size": [
+      128,
+      128
+    ],
+    "texture_size": [
+      256,
+      256
+    ],
+    "native_reference": "res://scenes/combat/energy_counters/silent_energy_counter.tscn",
+    "fixed_layers": [
+      1,
+      4,
+      5
+    ],
+    "rotating_layers": [
+      2,
+      3
+    ],
+    "rotation_center": [
+      62.5,
+      63
+    ],
+    "degrees_per_second": [
+      30,
+      60
+    ],
+    "zero_energy_degrees_per_second": [
+      5,
+      10
+    ],
+    "label": "native MegaLabel created by BaseLib; centered in numeric field"
+  },
+  "bindings": {
+    "file": "src/Models/Junna.cs",
+    "energy_outline": "#173C2F",
+    "card_pool_and_relic_pool_icons": "energy_counter/energy_icon.png and energy_icon_small.png"
+  },
+  "validation": {
+    "result": "passed",
+    "build": "Release build and PCK import/pack completed, 0 warnings, 0 errors",
+    "checks": [
+      "fixed-layer reconstruction is byte-exact at 1024 and 256 pixels",
+      "24 rotation phases per flow texture at both 1024 and 256 pixels stay inside numeric field",
+      "production scene rendered with native font at 128px and 85px; 0/3, 3/3 and 12/3 fit",
+      "actual game: starter-card plays drain energy 3, 2, 1, 0; ending turn refreshes to 3",
+      "actual game: zero-energy border dims, numeral turns red, fixed jade/gold borders stay stationary",
+      "actual game: combat counter and card-cost icons use the selected bow frame",
+      "deployed DLL/PCK hashes match dist; game log has no script errors or exceptions"
+    ],
+    "states": "out\\tmp\\energy-bow-frame-20261105\\energy-state-checks.json",
+    "screenshot": "out\\tmp\\energy-bow-frame-20261105\\04-refreshed.png",
+    "state_preview": "out\\tmp\\energy-bow-frame-20261105\\energy-state-preview.png",
+    "recording": "out\\tmp\\energy-bow-frame-20261105\\sts2-20261105-043307-6e0cfea64f0f4801822c7ecfcef09230.mp4",
+    "review_recording": "out\\tmp\\energy-bow-frame-20261105\\gameplay-review.mp4",
+    "closeup_recording": "out\\tmp\\energy-bow-frame-20261105\\energy-counter-closeup.mp4",
+    "preview": "output\\imagegen\\junna-energy-2026-11-05\\bow-frame-v3\\delivery-preview.png"
+  }
+}

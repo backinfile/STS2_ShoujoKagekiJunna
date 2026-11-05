@@ -14,7 +14,7 @@ public sealed class Junna : PlaceholderCharacterModel
     public override CharacterGender Gender => CharacterGender.Feminine;
     public override int StartingHp => 70;
     public override Color NameColor => new("74BDEB");
-    public override Color EnergyLabelOutlineColor => new("234B75");
+    public override Color EnergyLabelOutlineColor => new("173C2F");
     public override Color DialogueColor => new("74BDEB");
     public override Color MapDrawingColor => new("74BDEB");
     public override Color RemoteTargetingLineColor => new("74BDEB");
@@ -50,9 +50,9 @@ public sealed class JunnaCardPool : CustomCardPoolModel
     public override bool IsColorless => false;
     public override Color ShaderColor => new("65B3E8");
     public override Color DeckEntryCardColor => new("65B3E8");
-    public override Color EnergyOutlineColor => new("234B75");
-    public override string BigEnergyIconPath => JunnaMod.ResourceRoot + "images/energy.png";
-    public override string TextEnergyIconPath => "res://images/packed/sprite_fonts/defect_energy_icon.png";
+    public override Color EnergyOutlineColor => new("173C2F");
+    public override string BigEnergyIconPath => JunnaMod.ResourceRoot + "images/energy_counter/energy_icon.png";
+    public override string TextEnergyIconPath => JunnaMod.ResourceRoot + "images/energy_counter/energy_icon_small.png";
     protected override IEnumerable<CardModel> FilterThroughEpochs(MegaCrit.Sts2.Core.Unlocks.UnlockState unlockState, IEnumerable<CardModel> cards)
         => base.FilterThroughEpochs(unlockState, cards).Where(c => c is not JunnaCard junna ||
             (CardCatalog.Get(junna.DesignId).Pool && c.Rarity is MegaCrit.Sts2.Core.Entities.Cards.CardRarity.Common
@@ -62,6 +62,6 @@ public sealed class JunnaCardPool : CustomCardPoolModel
 [CustomID("JUNNA_RELIC_POOL")]
 public sealed class JunnaRelicPool : CustomRelicPoolModel
 {
-    public override string BigEnergyIconPath => JunnaMod.ResourceRoot + "images/energy.png";
-    public override string TextEnergyIconPath => "res://images/packed/sprite_fonts/defect_energy_icon.png";
+    public override string BigEnergyIconPath => JunnaMod.ResourceRoot + "images/energy_counter/energy_icon.png";
+    public override string TextEnergyIconPath => JunnaMod.ResourceRoot + "images/energy_counter/energy_icon_small.png";
 }
