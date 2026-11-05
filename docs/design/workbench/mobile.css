@@ -49,6 +49,7 @@
   .global-actions .button,
   .global-actions .icon-btn,
   .page-actions .button,
+  .knowledge-actions .button,
   .mobile-controls .button {
     min-height: 44px;
     font-size: 13px;
@@ -233,6 +234,7 @@
   .mobile-panel-dialog input,
   .mobile-panel-dialog select,
   .mobile-panel-dialog textarea,
+  .knowledge-actions select,
   .history-tools input,
   .history-tools select {
     font-size: 16px;
@@ -240,6 +242,7 @@
 
   .mobile-panel-dialog input:not([type="checkbox"]),
   .mobile-panel-dialog select,
+  .knowledge-actions select,
   .history-tools input,
   .history-tools select {
     min-height: 44px;
@@ -294,12 +297,24 @@
   }
 
   .knowledge-fan {
-    padding-inline: 24px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    min-height: 0;
+    padding: 20px 24px;
     scroll-snap-type: x proximity;
   }
 
-  .knowledge-card {
+  .knowledge-card,
+  .knowledge-card.is-focused,
+  .knowledge-card:hover {
+    flex-basis: clamp(144px, min(50vw, 43dvh), 220px);
+    transform: none;
     scroll-snap-align: center;
+  }
+
+  .knowledge-card + .knowledge-card {
+    margin-left: 0;
   }
 
   .menu-items button {
