@@ -1,0 +1,478 @@
+{
+  "size": [
+    256,
+    256
+  ],
+  "style": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+  "styleReference": "artifacts/power-icon-native-style/native-reference.png",
+  "referencePack": "SlayTheSpire2.pck",
+  "customIcons": 28,
+  "nativeIcons": 3,
+  "icons": [
+    {
+      "key": "JA04",
+      "name": "速射",
+      "fit": "饱满的青绿箭头与两道短尾迹，表现下一箭迅速完成。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA04.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA04.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA04.png",
+      "assetId": "power-icon-ja04-native-v3-20261105"
+    },
+    {
+      "key": "JK10",
+      "name": "观摩",
+      "fit": "眼镜与摊开的记录本组成单一剪影，表现观摩与记录。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK10.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK10.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK10.png",
+      "assetId": "power-icon-jk10-native-v3-20261105"
+    },
+    {
+      "key": "JA22",
+      "name": "再上弦",
+      "fit": "金色弓身与粗实蓝色回转箭头，表现射击完成后重新上弦。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA22.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA22.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA22.png",
+      "assetId": "power-icon-ja22-native-v3-20261105"
+    },
+    {
+      "key": "JK15",
+      "name": "反复研习",
+      "fit": "一册研习笔记配粗实回转箭头，表现重复学习同一内容。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK15.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK15.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK15.png",
+      "assetId": "power-icon-jk15-native-v3-20261105"
+    },
+    {
+      "key": "A",
+      "name": "埋头学习",
+      "fit": "摊开的书本与高耸的书写笔尖，表现持续阅读并形成心得。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/A.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/A.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/A.png",
+      "assetId": "power-icon-a-native-v3-20261105"
+    },
+    {
+      "key": "JK27",
+      "name": "关联阅读",
+      "fit": "两册相邻的资料书由金色环相连，强调关联查阅。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK27.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK27.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK27.png",
+      "assetId": "power-icon-jk27-native-v3-20261105"
+    },
+    {
+      "key": "JA35",
+      "name": "娓娓道来",
+      "fit": "饱满的话语气泡和接续的字句，表现娓娓道来与言叶推进。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA35.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA35.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA35.png",
+      "assetId": "power-icon-ja35-native-v3-20261105"
+    },
+    {
+      "key": "JK32",
+      "name": "掌舵",
+      "fit": "金色船舵使用黑描边、宽轮缘和六根粗辐条，突出航海物件。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK32.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK32.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK32.png",
+      "assetId": "power-icon-jk32-native-v3-20261105"
+    },
+    {
+      "key": "JK37C",
+      "name": "字斟句酌",
+      "fit": "书页上的字句由金色放大镜圈选，强调仔细选择和推敲表达。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK37C.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK37C.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK37C.png",
+      "assetId": "power-icon-jk37c-native-v3-20261105"
+    },
+    {
+      "key": "JA45",
+      "name": "搭箭",
+      "fit": "弓弦上扣住粗实箭杆，保留上弦准备的识别轮廓。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA45.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA45.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA45.png",
+      "assetId": "power-icon-ja45-native-v3-20261105"
+    },
+    {
+      "key": "JK64",
+      "name": "理清思路",
+      "fit": "纯那的眼镜与上方理顺的连线，线头顺畅向前。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK64.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK64.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK64.png",
+      "assetId": "power-icon-jk64-native-v3-20261105"
+    },
+    {
+      "key": "JK67",
+      "name": "反复推敲",
+      "fit": "斜置的书写笔尖在修改稿上重写，突出反复打磨表达。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK67.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK67.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK67.png",
+      "assetId": "power-icon-jk67-native-v3-20261105"
+    },
+    {
+      "key": "JG31",
+      "name": "连贯练习",
+      "fit": "两枚前后相接的彩色台步足迹，表现连贯完成动作的练习。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JG31.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG31.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG31.png",
+      "assetId": "power-icon-jg31-native-v3-20261105"
+    },
+    {
+      "key": "JH19",
+      "name": "双星",
+      "fit": "两颗饱满青蓝四角星，以相邻的双星直接表现两次出手。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH19.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH19.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH19.png",
+      "assetId": "power-icon-jh19-native-v3-20261105"
+    },
+    {
+      "key": "JH21",
+      "name": "长明",
+      "fit": "单颗持续明亮的金星被一道护光承托，余光形成防护。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH21.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH21.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH21.png",
+      "assetId": "power-icon-jh21-native-v3-20261105"
+    },
+    {
+      "key": "JG34",
+      "name": "合唱练习",
+      "fit": "三枚粗实音符组成合唱的声音轮廓，表现持续发声与节拍练习。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JG34.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG34.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG34.png",
+      "assetId": "power-icon-jg34-native-v3-20261105"
+    },
+    {
+      "key": "JK75",
+      "name": "学以致用",
+      "fit": "练习琴键中突出一处亮起的重点，表现把知识落实为熟练动作。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK75.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK75.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK75.png",
+      "assetId": "power-icon-jk75-native-v3-20261105"
+    },
+    {
+      "key": "JH23",
+      "name": "星芒护持",
+      "fit": "三颗星在弧形护光上聚集，表现较大能量投入后的守备。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH23.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH23.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH23.png",
+      "assetId": "power-icon-jh23-native-v3-20261105"
+    },
+    {
+      "key": "JA70",
+      "name": "掩护射击",
+      "fit": "粗实斜箭掠过蓝色盾面，以射击维持防护。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA70.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA70.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA70.png",
+      "assetId": "power-icon-ja70-native-v3-20261105"
+    },
+    {
+      "key": "JH24",
+      "name": "星光结界",
+      "fit": "五颗星以连线围出保护区域，中央亮星持续供能。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH24.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH24.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH24.png",
+      "assetId": "power-icon-jh24-native-v3-20261105"
+    },
+    {
+      "key": "JK80",
+      "name": "要点",
+      "fit": "黄色要点笔记与醒目的红色重点标记，表现整理信息后的准备。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK80.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK80.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK80.png",
+      "assetId": "power-icon-jk80-native-v3-20261105"
+    },
+    {
+      "key": "JK81",
+      "name": "书签",
+      "fit": "一本青绿封皮书夹着显眼的红色书签，留下继续阅读的位置。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK81.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK81.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK81.png",
+      "assetId": "power-icon-jk81-native-v3-20261105"
+    },
+    {
+      "key": "JZ05",
+      "name": "即兴",
+      "fit": "一次亮起的出手标记旁接出新箭，表现即兴续接的攻击。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JZ05.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JZ05.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JZ05.png",
+      "assetId": "power-icon-jz05-native-v3-20261105"
+    },
+    {
+      "key": "JZ06",
+      "name": "晨星",
+      "fit": "一颗青白晨星升在弧形地平线上，标记回合开始的星光汇聚。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JZ06.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JZ06.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JZ06.png",
+      "assetId": "power-icon-jz06-native-v3-20261105"
+    },
+    {
+      "key": "JH30",
+      "name": "星芒",
+      "fit": "金色中心星向四方射出清晰光芒，对应能量流动引发伤害。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH30.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH30.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH30.png",
+      "assetId": "power-icon-jh30-native-v3-20261105"
+    },
+    {
+      "key": "JK46",
+      "name": "持续阅读",
+      "fit": "翻起的新书页和连续露出的页边，表现阅读推进并形成笔锋。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK46.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK46.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK46.png",
+      "assetId": "power-icon-jk46-native-v3-20261105"
+    },
+    {
+      "key": "JG23",
+      "name": "耐力训练",
+      "fit": "运动鞋与向前的弧形跑迹，直接采用纯那晨跑的日常训练契合。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/JG23.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG23.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG23.png",
+      "assetId": "power-icon-jg23-native-v3-20261105"
+    },
+    {
+      "key": "ENERGY_RESERVE",
+      "name": "能量保留",
+      "fit": "掌心托住星光，围拢的手指强调将剩余行动力量留到下回合。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": null,
+      "svg": "docs/design/assets/powers/2026-11-05/native-v3/svg/ENERGY_RESERVE.svg",
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/ENERGY_RESERVE.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/ENERGY_RESERVE.png",
+      "assetId": "power-icon-energy-reserve-native-v3-20261105"
+    },
+    {
+      "key": "ENERGY_NEXT_TURN",
+      "name": "下回合能量",
+      "fit": "沿用本体黄色闪电图标，保持下回合能量的既有辨识。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": "res://images/powers/energy_next_turn_power.png",
+      "svg": null,
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/ENERGY_NEXT_TURN.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/ENERGY_NEXT_TURN.png",
+      "assetId": "power-icon-energy-next-turn-native-v3-20261105"
+    },
+    {
+      "key": "VULNERABLE",
+      "name": "易伤",
+      "fit": "沿用本体红色裂心图标，保持易伤的既有辨识。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": "res://images/powers/vulnerable_power.png",
+      "svg": null,
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/VULNERABLE.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/VULNERABLE.png",
+      "assetId": "power-icon-vulnerable-native-v3-20261105"
+    },
+    {
+      "key": "WEAK",
+      "name": "虚弱",
+      "fit": "沿用本体浅绿色断剑图标，保持虚弱的既有辨识。",
+      "version": 3,
+      "size": [
+        256,
+        256
+      ],
+      "nativeSource": "res://images/powers/weak_power.png",
+      "svg": null,
+      "original": "docs/design/assets/powers/2026-11-05/native-v3/originals/WEAK.png",
+      "icon": "docs/design/assets/powers/2026-11-05/native-v3/icons/WEAK.png",
+      "assetId": "power-icon-weak-native-v3-20261105"
+    }
+  ]
+}

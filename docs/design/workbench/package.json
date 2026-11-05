@@ -7,7 +7,7 @@
     "build": "node build.cjs",
     "start": "node mcp-server.cjs",
     "mcp": "node mcp-server.cjs",
-    "test:mcp": "node --test mcp-store.test.cjs mcp-server.test.cjs"
+    "test:mcp": "node --test mcp-store.test.cjs mcp-server.test.cjs mcp-web-client.test.cjs mcp-entry-versions.test.cjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.2"
