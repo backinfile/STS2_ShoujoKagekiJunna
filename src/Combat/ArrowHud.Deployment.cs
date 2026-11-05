@@ -69,6 +69,7 @@ public partial class ArrowHud
 
     public override void _ExitTree()
     {
+        ClearHoverPreview();
         foreach (var arrow in _deployments.Keys.ToArray()) FinishDeployment(arrow);
     }
 }

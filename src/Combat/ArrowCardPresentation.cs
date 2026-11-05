@@ -52,8 +52,9 @@ public partial class ArrowCardPresentation : Control
     private RichTextLabel _description = null!;
     private Vector2 _descriptionPosition, _descriptionSize;
     private Polygon2D _portrait = null!, _ancientBadge = null!;
-    private TextureRect _border = null!;
+    private TextureRect _backdrop = null!, _border = null!;
     private Label _turns = null!, _type = null!;
+    private Tween? _turnTween;
     private bool _applied;
     private ShaderMaterial _rarityMaterial = null!;
 
@@ -79,6 +80,10 @@ public partial class ArrowCardPresentation : Control
         _description = _card.GetNode<RichTextLabel>("%DescriptionLabel");
         _descriptionPosition = _description.Position;
         _descriptionSize = _description.Size;
+        _backdrop = new TextureRect { Name = "ArrowPortraitBackdrop", Position = _nativePortrait.Position,
+            Size = _nativePortrait.Size, ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+            StretchMode = TextureRect.StretchModeEnum.Scale, MouseFilter = MouseFilterEnum.Ignore };
+        AddChild(_backdrop);
         _portrait = new Polygon2D { Name = "ArrowPortrait", Position = WindowPosition,
             Polygon = Aperture.Select(p => p * WindowSize / SpriteSize).ToArray(), Antialiased = true };
         AddChild(_portrait);
@@ -133,6 +138,10 @@ public partial class ArrowCardPresentation : Control
         bool ancient = card.Rarity == CardRarity.Ancient;
         bool revealed = _card.Visibility == ModelVisibility.Visible;
         _nativePortrait.Visible = _nativeBorder.Visible = _nativeType.Visible = false;
+        // Fill the native rectangular portrait opening behind the narrower arrow silhouette.
+        _backdrop.Visible = !ancient;
+        _backdrop.Texture = new AtlasTexture { Atlas = card.Frame, Region = new Rect2(50, 464, 494, 315) };
+        _backdrop.Material = card.FrameMaterial;
         _portrait.Visible = !ancient && revealed;
         _border.Visible = !ancient;
         _ancientBadge.Visible = ancient;
@@ -148,12 +157,28 @@ public partial class ArrowCardPresentation : Control
         }
         _rarityMaterial.SetShaderParameter("rarity", card.Rarity == CardRarity.Rare ? 2 : card.Rarity == CardRarity.Uncommon ? 1 : 0);
         _type.Text = card.Type.ToLocString().GetFormattedText();
+        RefreshTurns(previewMode);
+    }
+
+    public override void _Process(double delta)
+    {
+        if (_applied && IsVisibleInTree() && ArrowCombat.Find(_card.Model!) != null)
+            RefreshTurns(CardPreviewMode.Normal);
+    }
+
+    private void RefreshTurns(CardPreviewMode previewMode)
+    {
+        var card = _card.Model!;
         var turnValue = CardCatalog.Get(((JunnaCard)card).DesignId).Values.First(v => v.Name == "Turns");
-        int turns = card.DynamicVars["Turns"].IntValue;
-        if (previewMode == CardPreviewMode.Upgrade && !card.IsUpgraded)
+        var deployment = ArrowCombat.Find(card);
+        int turns = deployment?.Remaining ?? card.DynamicVars["Turns"].IntValue;
+        if (deployment == null && previewMode == CardPreviewMode.Upgrade && !card.IsUpgraded)
             turns += turnValue.Upgraded - turnValue.Base;
-        _turns.Visible = revealed;
-        _turns.Text = turns.ToString();
+        _turns.Visible = _card.Visibility == ModelVisibility.Visible;
+        string remaining = turns.ToString();
+        if (deployment != null && _turns.Text.Length > 0 && _turns.Text != remaining)
+            ArrowFeedback.PulseCounter(_turns, ref _turnTween);
+        _turns.Text = remaining;
         int original = turnValue.Base;
         _turns.AddThemeColorOverride("font_color", turns != original ? new Color("7FFF00") : new Color("FFF6E2"));
     }

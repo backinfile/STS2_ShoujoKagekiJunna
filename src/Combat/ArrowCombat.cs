@@ -4,6 +4,7 @@ using BaseLib.Utils.Attributes;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -29,8 +30,21 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     Func<PlayerChoiceContext, CardPlay, Task> resolve)
 {
     public CardModel Card { get; } = card;
-    public CardPlay Play { get; } = play;
+    public CardPlay Play { get; private set; } = play;
     public bool TargetsAllEnemies => Card.TargetType == TargetType.AllEnemies;
+    public bool TargetsAllPlayers => Card.TargetType == TargetType.AllAllies;
+    public bool TargetsGroup => TargetsAllEnemies || TargetsAllPlayers;
+    public Creature? Target => Play.Target ?? (Card.TargetType is TargetType.Self or TargetType.AnyPlayer ? Card.Owner.Creature : null);
+    public int TargetCategory => TargetsAllPlayers ? 0 : TargetsAllEnemies ? 2 : Target?.IsEnemy == true ? 3 : 1;
+    public long Sequence { get; internal init; }
+    public IEnumerable<Creature> Targets => TargetsAllPlayers ? Card.CombatState?.PlayerCreatures ?? []
+        : TargetsAllEnemies ? Card.CombatState?.GetOpponentsOf(Card.Owner.Creature) ?? []
+        : Target is { } target ? [target] : [];
+    internal void Retarget(Creature target) => Play = new CardPlay
+    {
+        Card = Play.Card, Player = Play.Player, Target = target, ResultPile = Play.ResultPile,
+        Resources = Play.Resources, IsAutoPlay = Play.IsAutoPlay, PlayIndex = Play.PlayIndex, PlayCount = Play.PlayCount
+    };
     public int Remaining { get; internal set; } = remaining;
     public int DeployedRound { get; } = round;
     public int AttacksWhileWaiting { get; internal set; }
@@ -43,13 +57,17 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     internal bool Resolving;
 }
 
-public static class ArrowCombat
+public static partial class ArrowCombat
 {
     private static readonly List<ArrowDeployment> Arrows = [];
     private static readonly Dictionary<ulong, int> LastTick = [];
+    private static long _sequence;
     public static IReadOnlyList<ArrowDeployment> Deployed => Arrows;
-    public static ArrowDeployment[] DisplayOrder() => Arrows.OrderBy(a => a.TargetsAllEnemies ? float.NegativeInfinity
-        : NCombatRoom.Instance?.GetCreatureNode(a.Play.Target)?.VfxSpawnPosition.X ?? float.PositiveInfinity).ToArray();
+    public static ArrowDeployment[] DisplayOrder() => Arrows.OrderBy(a => a.TargetCategory)
+        .ThenBy(a => !a.TargetsGroup && a.Target is { } target
+            ? NCombatRoom.Instance?.GetCreatureNode(target)?.VfxSpawnPosition.X
+                ?? Array.IndexOf(a.Card.CombatState?.Creatures.ToArray() ?? [], target) : 0)
+        .ThenBy(a => a.Sequence).ToArray();
     public static ArrowDeployment? Find(CardModel card) => Arrows.FirstOrDefault(a => a.Card == card);
     public static void Cancel(CardModel card) => Arrows.RemoveAll(a => a.Card == card);
 
@@ -64,7 +82,7 @@ public static class ArrowCombat
         else
         {
             Cancel(card);
-            Arrows.Add(new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve));
+            Arrows.Add(new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve) { Sequence = _sequence++ });
         }
         var room = NCombatRoom.Instance;
         if (room != null && room.GetNodeOrNull<ArrowHud>("JunnaArrows") == null)
@@ -92,18 +110,24 @@ public static class ArrowCombat
     {
         if (arrow.Resolving || !Arrows.Contains(arrow)) return;
         if (arrow.Card.Pile?.Type != ArrowPile.PileId) { Arrows.Remove(arrow); return; }
+        int previousRemaining = arrow.Remaining;
         arrow.Remaining = Math.Max(0, arrow.Remaining - Math.Max(0, turns));
+        var hud = NCombatRoom.Instance?.GetNodeOrNull<ArrowHud>("JunnaArrows");
+        if (arrow.Remaining != previousRemaining) hud?.CountdownChanged(arrow);
         if (arrow.Remaining > 0) return;
+        if (AwaitingReturn(arrow)) return;
         arrow.Resolving = true;
         context.PushModel(arrow.Card);
         try
         {
+            if (hud != null) await hud.ReleaseArrow(arrow);
             for (int replay = 0; replay < arrow.PlayCount; replay++)
                 await arrow.Resolve(context);
             // A resolving arrow may have deployed itself again. Keep that new deployment intact.
             Arrows.Remove(arrow);
             if (Find(arrow.Card) != null) return;
             if (arrow.Card.Pile?.Type != ArrowPile.PileId) return;
+            using var pileExit = new ArrowPileExit(hud?.PileExitPosition(arrow.Card));
             if (arrow.Card.Keywords.Contains(CardKeyword.Exhaust)) await CardCmd.Exhaust(context, arrow.Card);
             else if (CatalogPower.Has(arrow.Card.Owner, "JA22")) await CardPileCmd.Add(arrow.Card, PileType.Hand);
             else await CardPileCmd.Add(arrow.Card, PileType.Discard);
@@ -116,7 +140,7 @@ public static class ArrowCombat
         if (play.IsLastInSeries && Find(play.Card) is { Remaining: 0 } ready) await Accelerate(context, ready, 0);
     }
 
-    internal static void Clear() { Arrows.Clear(); LastTick.Clear(); }
+    internal static void Clear() { Arrows.Clear(); LastTick.Clear(); DeathOrders.Clear(); _sequence = 0; }
 }
 
 [CustomID("JUNNA_COMBAT_HOOKS")]
@@ -131,6 +155,13 @@ public sealed class JunnaCombatHooks : SingletonModel
         return Task.CompletedTask;
     }
     public override Task AfterPlayerTurnStartLate(PlayerChoiceContext context, Player player) => ArrowCombat.Advance(context, player);
+    public override Task BeforeDeath(Creature creature)
+    {
+        ArrowCombat.RememberDeathOrder(creature);
+        return Task.CompletedTask;
+    }
+    public override Task AfterDeath(PlayerChoiceContext context, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+        => ArrowCombat.AfterTargetDeath(creature, wasRemovalPrevented);
     public override Task BeforeCardPlayed(CardPlay play)
     {
         if (play.IsFirstInSeries && (play.Card.Type == CardType.Attack || CardCatalog.IsArrow(play.Card)))

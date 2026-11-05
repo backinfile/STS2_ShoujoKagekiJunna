@@ -32,7 +32,14 @@ public partial class ArrowHud : Control
     ];
 
     private sealed record SatelliteMotion(Node2D Node, float Height, float Radius, float Phase, float WobbleSpeed);
-    private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, SatelliteMotion[] Satellites);
+    private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, SatelliteMotion[] Satellites,
+        CpuParticles2D Flash)
+    {
+        internal Tween? CountTween;
+        internal bool Releasing;
+        internal Vector2? Center;
+        internal Vector2? ExitPosition;
+    }
     private readonly Dictionary<ArrowDeployment, ArrowView> _views = [];
     private Texture2D _frame = null!;
     private Texture2D _groupFrame = null!;
@@ -54,7 +61,7 @@ public partial class ArrowHud : Control
         foreach (var removed in _views.Keys.Where(a => !ArrowCombat.Deployed.Contains(a)).ToArray())
         {
             FinishDeployment(removed);
-            _views[removed].Root.QueueFree();
+            if (!_views[removed].Releasing) _views[removed].Root.QueueFree();
             _views.Remove(removed);
         }
         var room = NCombatRoom.Instance;
@@ -62,21 +69,8 @@ public partial class ArrowHud : Control
         var canvas = GetViewportRect().Size;
         // Use the second relic row, reserving exactly one row above the arrows.
         float rowY = SecondRelicRowY();
-        IReadOnlyList<ArrowDeployment> arrows = ArrowCombat.DisplayOrder();
-        float singleStart = canvas.X * .44f;
-        var groupSlots = new Dictionary<Creature, int>();
-        foreach (var arrow in arrows.Where(a => a.TargetsAllEnemies))
-        {
-            var owner = arrow.Card.Owner.Creature;
-            int slot = groupSlots.GetValueOrDefault(owner);
-            groupSlots[owner] = slot + 1;
-            float x = GroupStart(owner, canvas) + Math.Min(slot, 2) * SlotSpacing;
-            singleStart = Math.Max(singleStart, x + SlotSpacing);
-        }
-        singleStart = Math.Min(singleStart, canvas.X * .72f);
-        int columns = Math.Max(1, (int)((canvas.X * .9f - singleStart) / SlotSpacing) + 1);
-        groupSlots.Clear();
-        int singleIndex = 0;
+        IReadOnlyList<ArrowDeployment> arrows = ArrowCombat.DisplayOrder().Where(a => !a.Resolving).ToArray();
+        UpdateLayout(arrows, canvas, rowY);
         for (int index = 0; index < arrows.Count; index++)
         {
             var arrow = arrows[index];
@@ -85,20 +79,11 @@ public partial class ArrowHud : Control
                 view = CreateArrow(arrow);
                 _views.Add(arrow, view);
             }
-            Vector2 center;
-            if (arrow.TargetsAllEnemies)
-            {
-                var owner = arrow.Card.Owner.Creature;
-                int slot = groupSlots.GetValueOrDefault(owner);
-                groupSlots[owner] = slot + 1;
-                center = new(GroupStart(owner, canvas) + slot % 3 * SlotSpacing, rowY + slot / 3 * 140);
-            }
-            else
-            {
-                center = new(singleStart + singleIndex % columns * SlotSpacing, rowY + singleIndex / columns * 140);
-                singleIndex++;
-            }
-            float bob = Mathf.Sin((float)_elapsed * 1.8f + index * .8f) * 2;
+            if (view.Releasing) continue;
+            var goal = _slots[arrow];
+            var center = view.Center?.Lerp(goal, 1 - Mathf.Exp(-16 * (float)delta)) ?? goal;
+            view.Center = center;
+            float bob = Mathf.Sin((float)_elapsed * 1.8f + arrow.Sequence * .8f) * 2;
             view.Root.Position = center + Vector2.Down * bob - IconSize * .5f;
             var targets = TargetPoints(arrow);
             var aim = targets.Length == 0 ? center + new Vector2(400, 400)
@@ -109,7 +94,7 @@ public partial class ArrowHud : Control
             view.Frame.Rotation = (aim - facingCenter).Angle() - Mathf.Pi * .5f;
             UpdateDeployment(arrow, view, aim);
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
-            view.Count.Text = arrow.Remaining.ToString();
+            UpdateCountdown(arrow, view);
             view.Count.AddThemeColorOverride("font_color", arrow.Remaining <= 1 ? new Color("FFE3A0") : Colors.White);
             view.Repeats.Visible = arrow.PlayCount > 1;
             view.Repeats.Text = $"×{arrow.PlayCount}";
@@ -119,6 +104,7 @@ public partial class ArrowHud : Control
                 UpdateSatellite(satellite);
             }
         }
+        UpdateHoverPreview(room);
         QueueRedraw();
     }
 
@@ -131,13 +117,6 @@ public partial class ArrowHud : Control
         return LocalPoint(first.GetGlobalRect().GetCenter() + inventory.GetGlobalTransform().Y * rowStep).Y;
     }
 
-    private float GroupStart(Creature owner, Vector2 canvas)
-    {
-        var node = NCombatRoom.Instance?.GetCreatureNode(owner);
-        float playerX = node == null ? canvas.X * .25f : LocalPoint(node.VfxSpawnPosition).X;
-        return Mathf.Clamp(playerX + 180, canvas.X * .25f, canvas.X * .43f);
-    }
-
     private Vector2 LocalPoint(Vector2 global) => GetGlobalTransform().AffineInverse() * global;
     private static Vector2 RotateInFrame(Vector2 point, float angle) => (point - IconSize * .5f).Rotated(angle) + IconSize * .5f;
 
@@ -145,10 +124,8 @@ public partial class ArrowHud : Control
     {
         var room = NCombatRoom.Instance;
         if (room == null || arrow.Card.CombatState == null) return [];
-        IEnumerable<Creature> targets = arrow.TargetsAllEnemies
-            ? arrow.Card.CombatState!.GetOpponentsOf(arrow.Card.Owner.Creature)
-            : arrow.Play.Target is { } target ? [target] : [];
-        return targets.Where(t => t.IsAlive).Select(room.GetCreatureNode).Where(n => n != null)
+        return arrow.Targets.Where(t => t.IsAlive || ArrowCombat.AwaitingReturn(arrow))
+            .Select(room.GetCreatureNode).Where(n => n != null)
             .Select(n => LocalPoint(n!.VfxSpawnPosition)).OrderBy(p => p.X).ToArray();
     }
 
@@ -157,6 +134,7 @@ public partial class ArrowHud : Control
         // Draw behind the portrait children. Dead or removed targets have no guide.
         foreach (var (arrow, view) in _views)
         {
+            if (view.Releasing) continue;
             var targets = TargetPoints(arrow);
             if (targets.Length == 0) continue;
             var tip = LocalPoint(view.Frame.GetGlobalTransform() * Tip);
@@ -164,7 +142,7 @@ public partial class ArrowHud : Control
                 ? deployment.CurrentPosition.Lerp(tip, deployment.ArrowAlpha) : tip;
             float guideProgress = deployment?.DrawProgress ?? 1;
             if (guideProgress <= 0) continue;
-            if (arrow.TargetsAllEnemies)
+            if (arrow.TargetsGroup)
             {
                 var left = targets[0] + new Vector2(-55, 25);
                 var right = targets[^1] + new Vector2(55, 25);
@@ -292,7 +270,7 @@ public partial class ArrowHud : Control
     private ArrowView CreateArrow(ArrowDeployment arrow)
     {
         var root = new Control { Name = "FloatingArrow", Size = IconSize, MouseFilter = MouseFilterEnum.Ignore };
-        var frame = new Control { Name = "TiltedFrame", Size = IconSize, PivotOffset = IconSize * .5f, MouseFilter = MouseFilterEnum.Ignore };
+        var frame = new Control { Name = "TiltedFrame", Size = IconSize, PivotOffset = IconSize * .5f, MouseFilter = MouseFilterEnum.Stop };
         root.AddChild(frame);
         var portrait = arrow.Card.Portrait;
         var textureSize = portrait.GetSize();
@@ -313,7 +291,7 @@ public partial class ArrowHud : Control
         {
             Name = "ArrowFrame", ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
             StretchMode = TextureRect.StretchModeEnum.Scale,
-            Texture = arrow.TargetsAllEnemies ? _groupFrame : _frame,
+            Texture = arrow.TargetsGroup ? _groupFrame : _frame,
             Size = IconSize, MouseFilter = MouseFilterEnum.Ignore
         });
         var count = MakeLabel("Countdown", Vector2.Zero, new(20, 20), 14);
@@ -321,8 +299,11 @@ public partial class ArrowHud : Control
         var repeats = MakeLabel("Repeats", new(IconWidth - 5, 16), new(32, 20), 16);
         root.AddChild(repeats);
         root.AddChild(CardInvestmentMarks.ForArrow(arrow.Card));
+        var flash = ArrowFeedback.CreateFlash(arrow.TargetsGroup ? _groupFrame : _frame, IconWidth);
+        flash.Position = IconSize * .5f;
+        frame.AddChild(flash);
         AddChild(root);
-        return new(root, frame, count, repeats, arrow.TargetsAllEnemies ? CreateSatellites(frame) : []);
+        return new(root, frame, count, repeats, arrow.TargetsGroup ? CreateSatellites(frame) : [], flash);
     }
 
     private static Label MakeLabel(string name, Vector2 position, Vector2 size, int fontSize)
