@@ -65,10 +65,10 @@ app = app.replace(/  try\{oldDraftKey=sessionStorage[^\n]+\n/, '');
 app = app.replace(/  async function connectLocalService\(\)\{[\s\S]*?\n  \}/, '  async function connectLocalService(){return false;}');
 app = app.replace(/  function saveHTML\(\)\{[^\n]+\n/, '  function saveHTML(){}\n');
 const guard = read('readonly-view.js');
-const sources = ['arrow-focus.js','energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','card-model-view.js','fit-pool-view.js','card-hover-tips.js','workbench-domain.js'].map(read);
+const sources = ['arrow-focus.js','energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','card-model-view.js','fit-pool-view.js','relic-view.js','power-view.js','card-hover-tips.js','workbench-domain.js'].map(read);
 const script = [guard, ...sources, app].join('\n');
 new vm.Script(script);
-const css = ['workbench.css','card-model.css','fit-pool.css','card-hover-tips.css','readonly.css'].map(read).join('\n').replaceAll('__REGULAR_FONT__', assets['game-regular']).replaceAll('__BOLD_FONT__', assets['game-bold']);
+const css = ['workbench.css','card-model.css','fit-pool.css','relic.css','power.css','card-hover-tips.css','readonly.css'].map(read).join('\n').replaceAll('__REGULAR_FONT__', assets['game-regular']).replaceAll('__BOLD_FONT__', assets['game-bold']);
 const inlineData = (id, data) => '<script id="' + id + '" type="application/json">' + safe(data) + '</script>';
 const optionalData = name => {const file=path.join(design,'data',name);return fs.existsSync(file)?json(file):null;};
 let html = read('shell.html')

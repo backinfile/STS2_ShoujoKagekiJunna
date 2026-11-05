@@ -1,0 +1,52 @@
+{
+  "active": {
+    "id": "01-glasses",
+    "name": "扶镜看货",
+    "file": "ShoujoKagekiJunna/images/merchant_glasses.png",
+    "sha256": "6855a464ec8fccaac510b396226673411814c22ba4024a8718ab7f79208c3e94"
+  },
+  "alternates": [
+    {"id": "02-thinking", "name": "托腮思考", "file": "output/imagegen/junna-merchant-2026-11-05/clean/02-thinking.png"},
+    {"id": "03-pouch", "name": "拿钱袋", "file": "output/imagegen/junna-merchant-2026-11-05/clean/03-pouch.png"}
+  ],
+  "dimensions": [1024, 1536],
+  "archive": "output/imagegen/junna-merchant-2026-11-05",
+  "original": "output/imagegen/junna-merchant-2026-11-05/raw/01-glasses.png",
+  "generation": {"tool": "built-in image_gen", "prompts": "output/imagegen/junna-merchant-2026-11-05/prompts.json"},
+  "cleanup": {
+    "tool": "GPT Image 2 Artifact Cleaner",
+    "strength": 0.5,
+    "local_only": true,
+    "original_dimensions_preserved": true,
+    "alpha_noise_cleanup": {"method": "largest 8-connected component", "threshold": 16, "edge_dilation": 2},
+    "report": "output/imagegen/junna-merchant-2026-11-05/candidates.json"
+  },
+  "scene": {
+    "file": "ShoujoKagekiJunna/scenes/junna_merchant.tscn",
+    "root": "Node2D",
+    "visual_node": "Visuals",
+    "scale": 0.2937709,
+    "sprite_offset": [26.5, -759],
+    "position": [0, 15.176864],
+    "source_ground_anchor": [485.5, 1527],
+    "native_reference": "res://scenes/merchant/characters/silent_merchant.tscn",
+    "native_animation": "relaxed_loop",
+    "target_height": 445.944225,
+    "static_sprite_adapter": "src/UI/JunnaMerchantPresentation.cs"
+  },
+  "validation": {
+    "result": "passed",
+    "date": "2026-11-05",
+    "checks": [
+      "Release build completed with zero warnings and zero errors",
+      "Packaged merchant scene loaded through BaseLib in the actual game",
+      "Static sprite skips native Spine initialization and animation calls for JunnaMerchant only",
+      "Feet, height, glasses, hand pose and bowstring inspected in the native merchant room",
+      "Native inventory opens and proceeding returns to the map",
+      "Final game log contains no script errors or exceptions"
+    ],
+    "preview": "output/imagegen/junna-merchant-2026-11-05/01-glasses-in-room.png",
+    "screenshot": "out/tmp/merchant-art-20261105/05-merchant-final.png",
+    "recording": "out/tmp/merchant-art-20261105/sts2-20261105-025707-8784712800b74f42b9d5dfd371255219.mp4"
+  }
+}

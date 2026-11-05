@@ -3,7 +3,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const {Server}=require('@modelcontextprotocol/sdk/server/index.js');
 const {ListToolsRequestSchema,CallToolRequestSchema}=require('@modelcontextprotocol/sdk/types.js');
-const {COLLECTIONS}=require('./workbench-domain.js');
+const {ENTITY_COLLECTIONS:COLLECTIONS,entityList}=require('./workbench-domain.js');
 const {WorkbenchError}=require('./mcp-store.cjs');
 const string={type:'string'},boolean={type:'boolean'},integer={type:'integer'};
 const object=(properties,required=[])=>({type:'object',properties,required,additionalProperties:false});
@@ -23,7 +23,7 @@ const definitions=[
 ].map(([name,description,inputSchema,readOnlyHint])=>({name,description,inputSchema,annotations:{readOnlyHint,destructiveHint:false,idempotentHint:true,openWorldHint:false}}));
 function createToolHandlers(store,{url}){
   return {
-    workbench_status:async()=>{const b=store.read();return {connected:true,serverType:'junna-workbench-mcp',url,workspaceId:b.workspaceId,revision:b.revision,counts:Object.fromEntries(COLLECTIONS.map(k=>[k,b.data[k].length]))};},
+    workbench_status:async()=>{const b=store.read();return {connected:true,serverType:'junna-workbench-mcp',url,workspaceId:b.workspaceId,revision:b.revision,counts:Object.fromEntries(COLLECTIONS.map(k=>[k,entityList(b.data,k).length]))};},
     workbench_query:async args=>store.query(args),
     workbench_get_entity:async args=>store.get(args),
     workbench_get_state:async args=>store.state(args),

@@ -1,0 +1,538 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "tool_root": "D:\\Godot\\Proj\\STS2_ShoujoKagekiAijoKaren\\output\\imagegen\\starlight-nine\\texture-review\\artifact-cleaner",
+  "vae_root": "D:\\Godot\\Proj\\STS2_ShoujoKagekiAijoKaren\\output\\imagegen\\starlight-nine\\texture-review\\flux2-vae",
+  "originals_preserved": true,
+  "assets": [
+    {
+      "key": "A",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/A.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/A.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "078ceab82e40967a1434bb5f4dee1496e21310bac6ed8829731904c96b48335e",
+      "sha256": "b12270cd4f17b12e3962b6b2958a9132ee548ead41d0d840fd554513149a70d3",
+      "seconds": 0.75
+    },
+    {
+      "key": "ENERGY_NEXT_TURN",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/ENERGY_NEXT_TURN.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/ENERGY_NEXT_TURN.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0,
+      "interior_blend": 0,
+      "mode": "native-reuse",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "b2ed4cc7fa4bfaddf55666e3993febf247b10a39763c2bdf31d3ac9421547046",
+      "sha256": "dcf9c34748284cedfce054c44380f3caaeb6a41332d8e494f497e7fef8688160",
+      "seconds": 0.015
+    },
+    {
+      "key": "ENERGY_RESERVE",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/ENERGY_RESERVE.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/ENERGY_RESERVE.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "30cd7bd8fc6cb563bcb2cf871890898028c7a95172ef8d5e89e6e1fbbcdc10ac",
+      "sha256": "0717027b80d52723fbf789b1ea817ebb74365ec228bf8dc3a5db90aa1fdd3921",
+      "seconds": 0.078
+    },
+    {
+      "key": "JA04",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA04.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA04.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "58ab25fd49ae3c2b683ed365ac347e337fd854d1a495f1588c3736d64ddcb9e0",
+      "sha256": "a695e1ec0b2bef37410fb87fe37017b94c942a2bccc4df797fd0bfd4251ea422",
+      "seconds": 0.079
+    },
+    {
+      "key": "JA22",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA22.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA22.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "635ca897231cf97e4b32222c46d5d58359a13d11b88118ba72fc6c6b4764067f",
+      "sha256": "4d4b90cdc0d423c7a3226692daa25d18b15022c22934e7386aca87e09c55f20b",
+      "seconds": 0.062
+    },
+    {
+      "key": "JA35",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA35.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA35.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "4f38ce86b2cb9f92068e914fd886803a7eea03987e2ba40807dc97b8a0cd2854",
+      "sha256": "8364b5c2bee7ae3da69cbba300d863c3b11b24007d5ee0749843b91e633ee0c5",
+      "seconds": 0.078
+    },
+    {
+      "key": "JA45",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA45.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA45.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "d4eb3d33cb0d5739cca8d018836db751a2a28d7b1e37e67d5260edd27f85d735",
+      "sha256": "2edc6b75a04283eef287912a25d555bd8fc29983d49b0ccae0b59857e41392f4",
+      "seconds": 0.063
+    },
+    {
+      "key": "JA70",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA70.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA70.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "02732b86c281cb188c38bfb07451ae45223abf0894d551904b4d917a2d0f8331",
+      "sha256": "9f73e52ac2450790cd28143a372fb66454ebb5fe6daa46dc27e61d50cf95563a",
+      "seconds": 0.078
+    },
+    {
+      "key": "JG23",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG23.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG23.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "53422df483df00ff566240eeb98ab27a32d0aef102e0c58980303b24438823e5",
+      "sha256": "e37f24fcfbad5d9b4bc8af3e816bc9734f21efecb832de81a8bc4c822d4a61a3",
+      "seconds": 0.078
+    },
+    {
+      "key": "JG31",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG31.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG31.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "da5abb2230fa09e09c9fe4589bdc39a3f68ef48e6ec3c443c9ae4f241df5dd51",
+      "sha256": "419ef5dcbbdf1b56d401b7329c7919f8bc484a7e7b1f045a1bf88d77ab623ac5",
+      "seconds": 0.062
+    },
+    {
+      "key": "JG34",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG34.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG34.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "0ab6069e4ff01ed21332c316c96ae22e327c82641ab0abb78f21d23f5647cc8b",
+      "sha256": "ea470644a09f13a9902a3f46154cad0dc416ed87bb62be09fce714f053a7889a",
+      "seconds": 0.079
+    },
+    {
+      "key": "JH19",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH19.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH19.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "44c21733ecb8cd1b4e6d2e5cc2a03a630b50716cce5dfeca1bf5357f5f81af7a",
+      "sha256": "5dc7a255213d0e6dc5eca771fc600f2475d0eaee12661256196f55104cb85258",
+      "seconds": 0.062
+    },
+    {
+      "key": "JH21",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH21.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH21.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "13eb3d485bad5b1cde308098725eb775ff8e8245b529bdd8f4e5ef789ecddc08",
+      "sha256": "891cfac338cdee6aa34c2661ca3bbe47440ddc625fa1cb496922fd5b16828994",
+      "seconds": 0.078
+    },
+    {
+      "key": "JH23",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH23.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH23.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "dc59813e0ef257e968022b4046755d538fb91d473fffc8f1ede0a6a66cea2e13",
+      "sha256": "b773867dbf4a83ac25cd336c33aeb66181e5db6dd48b65db4951403f3dd21cf8",
+      "seconds": 0.063
+    },
+    {
+      "key": "JH24",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH24.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH24.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "899a8425dc4eb137255392094a38c985da0f81a57365b1628c8375f959f37c96",
+      "sha256": "c0fd8c639eeebc60c4d6368bc04a42a1cb7f32d04f56e24d979fc9a2bea8896c",
+      "seconds": 0.063
+    },
+    {
+      "key": "JH30",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH30.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH30.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "ccb9bc3ab31828c028b83f6ad56ba1216aa0f3cdb63fe4361840d9fe5fa263db",
+      "sha256": "71af8f0bcd7409cf6a5abaccef208b3848feeec836bce60449cf542e3c581b88",
+      "seconds": 0.078
+    },
+    {
+      "key": "JK10",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK10.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK10.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "f0fee2d9677c5244fbc6a9bba4607e76fbebb3fddf99201a1ef11feaf4fc6552",
+      "sha256": "ed464ebd8b17bdc366e8776cd2ab6e2cc9c00dcdd4928fb6984a745095797fea",
+      "seconds": 0.062
+    },
+    {
+      "key": "JK15",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK15.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK15.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "80df2f34b0227abf54cc611c92324b7f61c2ca4195ce31221e6da48a97b13d01",
+      "sha256": "05f88d405eabfe9750bbef617228b9948e4c64f239175c59fa01dd93ebcff65d",
+      "seconds": 0.079
+    },
+    {
+      "key": "JK27",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK27.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK27.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "0f9575a7e6156cfe1a503571d09a7e8c60db3bf98c3864976bde17e40ecd8c93",
+      "sha256": "09f07421823dfbce8b022ee48f8eac8e8284479284bab304784e0e6f6aa212c5",
+      "seconds": 0.078
+    },
+    {
+      "key": "JK32",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK32.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK32.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "cf6f3a5776139dc957f5af207b6c1ecdadc0dbe9716ea665019f1c26259d0733",
+      "sha256": "31186c438c04d14f0eab73dcf5902b7002a16b92b2b263af38cbb36841490a63",
+      "seconds": 0.062
+    },
+    {
+      "key": "JK37C",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK37C.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK37C.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "82a549c01764f20bb38ac5d6ed3d910e851beaea1cfe8cc5d41b1b68681a2236",
+      "sha256": "5f16cbf43a747f153e61f3de4ab2ef55874b237daa8c2c419eb9d4a1ef82c217",
+      "seconds": 0.078
+    },
+    {
+      "key": "JK46",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK46.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK46.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "36d3f9345970d18e3ff249f9c3f5424d1468036a157122a74aa90db860070f78",
+      "sha256": "f664547d5370b830ba4b9165a52364c43445bf0d3a04ce0802d24806c4a33d41",
+      "seconds": 0.063
+    },
+    {
+      "key": "JK64",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK64.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK64.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "05b84a8bbb3f9a6252bc2b1427970cdf1d9835662ecb5eb693f4370ddc2f8f0a",
+      "sha256": "5368436c2ad65123a7e84083d563b608759350b3639739c3a48071c3a6340810",
+      "seconds": 0.078
+    },
+    {
+      "key": "JK67",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK67.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK67.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "78e694821dde894319dd3ff8a8200f687a929e63b1d83e8e1b132e79ca86fd34",
+      "sha256": "b4c2f8dbf135163869b4b8ef149c426f72a45a47909bcba452ec21d73546f5f5",
+      "seconds": 0.062
+    },
+    {
+      "key": "JK75",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK75.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK75.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "1dc4b8aee5d741da98d662776651602dd5369f459ef536014e79d3920ef0a694",
+      "sha256": "8b887d7159d1d943a897b2f0b2ee7ef7f2171f1759efe0cb8273b9f1eb617fb7",
+      "seconds": 0.079
+    },
+    {
+      "key": "JK80",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK80.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK80.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "e6126f69d9b4747e00bd82e0d209b1d8aecef975ad0d3253de77453b2c0f4dc1",
+      "sha256": "a152420f6ef93315e8cbe16046fb6dac02efdfa0bb66749bf5745b299f8454c1",
+      "seconds": 0.062
+    },
+    {
+      "key": "JK81",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK81.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK81.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "7fc2b4330f8372d95720c590d36e8f7f425696cbec3b47e9d583eccf318c43f7",
+      "sha256": "06adebf4c2f39409334f7fc9cbd01cb5818c0c71f6546f1c63ccf9323e21ae30",
+      "seconds": 0.078
+    },
+    {
+      "key": "JZ05",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JZ05.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JZ05.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "20d73543a35a67a076c421ae2d7f92d42d998c893a8836db956489190f947b2d",
+      "sha256": "3d4cd5446e1c0bc2356a98e4caf0beb43e5d5974ee1771f3ff6fc2ee6864170a",
+      "seconds": 0.063
+    },
+    {
+      "key": "JZ06",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/JZ06.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/JZ06.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "mode": "artifact-cleaner",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "cb2b073fe1fe4a6699ca3479f06e44749ad5c918f7c30fe5a00be9f1f3f37cc9",
+      "sha256": "bc8f8271d6975517f70cc34e43a104d6ef46bef75f787a5bce4b8245a2284870",
+      "seconds": 0.078
+    },
+    {
+      "key": "VULNERABLE",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/VULNERABLE.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/VULNERABLE.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0,
+      "interior_blend": 0,
+      "mode": "native-reuse",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "6e80124f8d460cba452d7af9d34f6a6c35907414f70ce492c8fb4cbf07cdd666",
+      "sha256": "219dd412da8bed65118cd3d627a9b7d4d5f8f6302450edff9e095c7ca51998a4",
+      "seconds": 0.015
+    },
+    {
+      "key": "WEAK",
+      "source": "docs/design/assets/powers/2026-11-05/native-v3/originals/WEAK.png",
+      "file": "docs/design/assets/powers/2026-11-05/native-v3/icons/WEAK.png",
+      "size": [
+        256,
+        256
+      ],
+      "strength": 0,
+      "interior_blend": 0,
+      "mode": "native-reuse",
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "e7c7ef5b50c5045a86f330ea3e797b2c06460b7cd17cb614b1fa4e024de20843",
+      "sha256": "585b4850a44c72acbcec2255cadf8d3ccbc8c33109b9e074b6b77d9056840060",
+      "seconds": 0.0
+    }
+  ]
+}

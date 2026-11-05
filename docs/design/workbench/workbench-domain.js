@@ -1,6 +1,15 @@
 (function(root){
   'use strict';
   const COLLECTIONS=['mechanisms','terms','cards','partnerGroups','archetypes','styles','fitPool'];
+  const META_COLLECTIONS=['powers','relics'];
+  const ENTITY_COLLECTIONS=[...COLLECTIONS,...META_COLLECTIONS];
+  function entityList(data,collection,create=false){
+    if(!META_COLLECTIONS.includes(collection))return data[collection]||[];
+    if(create){data.meta=data.meta||{};data.meta[collection]=data.meta[collection]||[];}
+    return data.meta?.[collection]||[];
+  }
+  function rootEntity(data,key){if(key!=='meta')return data[key];const meta={...data.meta};for(const collection of META_COLLECTIONS)delete meta[collection];return meta;}
+  function assignRoot(data,key,value){const next=JSON.parse(JSON.stringify(value));if(key==='meta')for(const collection of META_COLLECTIONS)if(!Object.hasOwn(next,collection)&&Object.hasOwn(data.meta||{},collection))next[collection]=data.meta[collection];data[key]=next;}
   const TYPES=['攻击','技能','能力','箭矢'],RARITIES=['基础','普通','罕见','稀有','远古'];
   function groupCardCount(group,cardId){return Math.max(1,Math.floor(Number(cardId===group.mainCardId?group.mainCardCount:group.grantedCardCounts?.[cardId])||1));}
   function setGroupMain(data,groupUid,cardUid){
@@ -45,6 +54,7 @@
     const d=clone(raw);if(!d||typeof d!=='object')throw Error('缺少制作台数据');
     for(const key of COLLECTIONS){if(!Array.isArray(d[key]))d[key]=[];const seen=new Set(),seenUid=new Set();for(const e of d[key]){if(!e||typeof e!=='object')throw Error('条目格式有误');e.uid=String(e.uid||uid());e.id=String(e.id||uid());if(seen.has(e.id))throw Error('编号重复：'+e.id);if(seenUid.has(e.uid))throw Error('内部编号重复：'+e.id);seen.add(e.id);seenUid.add(e.uid);}}
     d.title=String(d.title||'纯那 Mod 设计工作台');d.meta=d.meta&&typeof d.meta==='object'?d.meta:{};
+    for(const collection of META_COLLECTIONS){const list=entityList(d,collection),ids=new Set(),uids=new Set();if(!Array.isArray(list))throw Error('条目格式有误：'+collection);for(const entry of list){if(!entry||typeof entry!=='object'||!entry.uid||!entry.id)throw Error('条目缺少编号：'+collection);if(ids.has(entry.id)||uids.has(entry.uid))throw Error('条目编号重复：'+entry.id);ids.add(entry.id);uids.add(entry.uid);}}
     const cardIds=new Set(d.cards.map(c=>c.id)),termIds=new Set(d.terms.map(t=>t.id)),archetypeIds=new Set(d.archetypes.map(a=>a.id)),knowledgeTerm=d.terms.find(t=>t.kind==='关键词'&&t.name==='知识'),oldWordIds=new Set(d.terms.filter(t=>t.kind==='关键词'&&t.name==='言葉').map(t=>t.id));
     d.partnerGroups=d.partnerGroups.filter(g=>cardIds.has(g.mainCardId)).map(g=>({...g,grantedCardIds:[...new Set(Array.isArray(g.grantedCardIds)?g.grantedCardIds:[g.grantedCardId].filter(Boolean))].filter(id=>cardIds.has(id)&&id!==g.mainCardId)})).filter(g=>g.grantedCardIds.length);
     const mains=new Set(d.partnerGroups.map(g=>g.mainCardId)),grants=new Set(d.partnerGroups.flatMap(g=>g.grantedCardIds));
@@ -77,7 +87,7 @@
 
     return normalizeData;
   }
-  const api={COLLECTIONS,create,cardGroup,moveCards,groupCardCount,setGroupMain};
+  const api={COLLECTIONS,ENTITY_COLLECTIONS,entityList,rootEntity,assignRoot,create,cardGroup,moveCards,groupCardCount,setGroupMain};
   if(typeof module==='object'&&module.exports)module.exports=api;
   else root.JunnaWorkbenchDomain=api;
 })(typeof globalThis==='object'?globalThis:this);

@@ -1,0 +1,507 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "tool_root": "D:\\Godot\\Proj\\STS2_ShoujoKagekiAijoKaren\\output\\imagegen\\starlight-nine\\texture-review\\artifact-cleaner",
+  "vae_root": "D:\\Godot\\Proj\\STS2_ShoujoKagekiAijoKaren\\output\\imagegen\\starlight-nine\\texture-review\\flux2-vae",
+  "originals_preserved": true,
+  "assets": [
+    {
+      "key": "A",
+      "source": "docs/design/assets/powers/2026-11-05/originals/A.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/A.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "53d75056552af3b6253ec19cd417a7070a7dd81829f5822d2ba6b97754478a9f",
+      "sha256": "a5911440aee30377dd75af28de2e5ca4fbc4285ca0fb5fef63ab320b986072c5",
+      "seconds": 0.766
+    },
+    {
+      "key": "ENERGY_NEXT_TURN",
+      "source": "docs/design/assets/powers/2026-11-05/originals/ENERGY_NEXT_TURN.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/ENERGY_NEXT_TURN.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "94776b7dbf0900b37751d630720f7dd814cb63090d7b53108d4be65027e2b3bc",
+      "sha256": "f9628a34113f78dc604ea799576a86df7e490a2954dcfac1096b8d5b84c90d37",
+      "seconds": 0.047
+    },
+    {
+      "key": "ENERGY_RESERVE",
+      "source": "docs/design/assets/powers/2026-11-05/originals/ENERGY_RESERVE.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/ENERGY_RESERVE.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "789f434b0267414f0d9fb750b81cf59530d86057ecd1a6b88475a7663ed72962",
+      "sha256": "954d0c6ec91e2ac496c489bd5007667e4df2979578a4b9d740ef51b3ff1985ea",
+      "seconds": 0.031
+    },
+    {
+      "key": "JA04",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JA04.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JA04.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "c35ac5e8c5747e595221894388a67b7a5ac748551be21b55e7a62d7ed42c1364",
+      "sha256": "cfa6ab9fe83716d95b782b19d0c2a15401cdd55bf8d74d72f708d86155eecefb",
+      "seconds": 0.031
+    },
+    {
+      "key": "JA22",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JA22.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JA22.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "8730bb8b550b25f6d89dc92be152ec3b47ba7bdb6f264e9e6c69afffca3af3ff",
+      "sha256": "ba31d166b44ae5f542f32f9ef9dd4118337b971db4a8f41f803fc2fd0dea9ea4",
+      "seconds": 0.031
+    },
+    {
+      "key": "JA35",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JA35.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JA35.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "e14749eb125d1242c1eb5cb873003113816469dcbfdf6d00b5667df402816aa6",
+      "sha256": "01a2b2af380441315665a5fe3d923af6b1157f696a9f352b7ab6cccf71f8be9f",
+      "seconds": 0.031
+    },
+    {
+      "key": "JA45",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JA45.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JA45.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "63273073ba7e45408ba585ce4b2b165d2ad162816dafd7411ce641bb7c4fa018",
+      "sha256": "b17cb5adb69b1917ccb5396cb0edd60f18c2953e46eff2184337b8bd65badaad",
+      "seconds": 0.032
+    },
+    {
+      "key": "JA70",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JA70.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JA70.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "9e3a3a8721640680ed829d11ac821aad110271fbf756177367b528a26f3edeb2",
+      "sha256": "02da7499a5573b66d98038eb39af7a1c65983f65909787b99667faca60e40f1f",
+      "seconds": 0.046
+    },
+    {
+      "key": "JG23",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JG23.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JG23.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "80a51b576a64595f7f948e13ad02b0c3cc1441a56032c7e0fc5fa37165cc2b3a",
+      "sha256": "8e648726d5470d1dac0de47f86b6289619434793651fb71451dec6ab18ba1aa2",
+      "seconds": 0.032
+    },
+    {
+      "key": "JG31",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JG31.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JG31.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "8886f889bcb6cc111c935c481a2f7197a1a8ee28c64d09dc49d01cdc4a9f0d62",
+      "sha256": "1e8106f4cc323832b5f293797f0637e23d8b8a1a5ccda09425bf61a08c27b482",
+      "seconds": 0.031
+    },
+    {
+      "key": "JG34",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JG34.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JG34.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "9f5a70cc17818a3f562e1fc24430851cf46a5b90e90e93d9422a9a83fc5652f6",
+      "sha256": "673dd200f2955b2f7a3bbe60129941a3a989dd32f64e35ffe7e7ea73160f5f54",
+      "seconds": 0.031
+    },
+    {
+      "key": "JH19",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JH19.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JH19.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "588d00d3af324bd23d1b186ab2927c01f5379bd43a2cde9a3c5dcab5dcc6543e",
+      "sha256": "0ed1fe86f0119a4cc3ef6769729a2067fd8516ddfba10bd53caa1fa39d92d1ea",
+      "seconds": 0.031
+    },
+    {
+      "key": "JH21",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JH21.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JH21.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "0b7b99a5fab4e21bb6e50a5274821d52b30ee6a50817cf496ea6732ff97053ef",
+      "sha256": "8e6502029c143534b7389c2c7d7791407e556e97a0ad8d33818b7beaac7ed8fb",
+      "seconds": 0.032
+    },
+    {
+      "key": "JH30",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JH30.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JH30.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "69803ae8ace24ef606fe1fc5031a3fade6efe5c90cf1219d0576d5cb9fe7426e",
+      "sha256": "8c5c30b12eda028ff7486d797ee37cab2ecb148a305f56c5b8a3e52ab7280189",
+      "seconds": 0.031
+    },
+    {
+      "key": "JK10",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK10.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK10.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "fecbfcc3bb95307a389d37cd46b3047860192985fdb787e7977df4066c13170b",
+      "sha256": "720b5bd4ef646fa92e8a04edbac8b289cf981ce0829c266f555d66a55fc94e02",
+      "seconds": 0.031
+    },
+    {
+      "key": "JK15",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK15.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK15.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "f672aa8ed1260ec39b6227c14cc4158c4b07f0a28763ba08fb9bf9051a866195",
+      "sha256": "db45fecceedbb137e48cb5b53a28bb4a22564bc64e33b09a7e484de5e804b1f1",
+      "seconds": 0.032
+    },
+    {
+      "key": "JK27",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK27.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK27.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "31563f4f01a25c85823e86a9675673420b41beb418f20ad688365bb16a7f1a8a",
+      "sha256": "0f7b2fbfc5a18476106f796f2d66bffa25fd5d44ff5f2ae8d3e8feb9e682bcdf",
+      "seconds": 0.031
+    },
+    {
+      "key": "JK32",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK32.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK32.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "ff9e493d90e3b0d54283fa3f3010e0ebff6dfafbbf119ed1127f8829de0f3e2a",
+      "sha256": "a2ecea4178bd8e8d7a6f758cea7d41ee4ff6ca61e334e88a62edc5ff19f550e1",
+      "seconds": 0.031
+    },
+    {
+      "key": "JK46",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK46.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK46.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "b6353e0c8fcbc6055f94bffc5f2fd2760c27ec93550eabc43b621e179209d146",
+      "sha256": "faf23b3031d6b8ca94a58a088c6416c85ec3367f5b850b9cb9b13ffa64279ffb",
+      "seconds": 0.031
+    },
+    {
+      "key": "JK64",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK64.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK64.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "90367f3d86c01329fa926da06a6255b72c518da1327c62fa486ad581e1a45e6b",
+      "sha256": "1a897d17f99f6cc7766a3fc63d521ba1c83ff13bc01416564cc877b37f5d0a6a",
+      "seconds": 0.047
+    },
+    {
+      "key": "JK67",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK67.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK67.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "3eda4530b9402f5919e1014c15785078b67d236a5de86b0e5ab57298670226c2",
+      "sha256": "134e86a7445e34271a8148d53d2aa94ebb3af3f30695aed8a750b59b01e9e9f8",
+      "seconds": 0.031
+    },
+    {
+      "key": "JK75",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK75.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK75.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "781ed3d2fe74dd566408aaa1c21c61dd75ebadd8f5e2fced9f87a83cd284d817",
+      "sha256": "30e0c3667f1540dfbc42eaf83adf6b3464dc81733549d8828323dfd80c5c9e01",
+      "seconds": 0.032
+    },
+    {
+      "key": "JK80",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK80.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK80.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "144733f76100d8617b04d77f9f80c32500f175498e873019489686d104eaeb23",
+      "sha256": "6032388cb575598f9ec1179e3f6be3f2bfcc11341893be8df5bd5089ad0ecb32",
+      "seconds": 0.031
+    },
+    {
+      "key": "JK81",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK81.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK81.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "db47d987906cebf63a8d02dd8bb70f17f2a059b1369d9abc60bb430745321e43",
+      "sha256": "9cb8103a11cc729858cb71a1b9e8beec0235fc38da0edddc815525d0375108e3",
+      "seconds": 0.031
+    },
+    {
+      "key": "JZ05",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JZ05.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JZ05.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "4cb7429fe6677c0a884c2db14dc65461990d23d290ad46fc8b885f540d2e0886",
+      "sha256": "c6f7dbf8cb056c27bb15d554bb83f0f0732657caef7e9144c441e607a369f9e3",
+      "seconds": 0.047
+    },
+    {
+      "key": "JZ06",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JZ06.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JZ06.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "a3e3be6779f8398539f31f11550d0223f22224ccb960e50603cf893395039296",
+      "sha256": "41bde8ba1e62400549b475c32b7eef0839f1e7f1e5fe6a39ffe9e5d7f28f90de",
+      "seconds": 0.031
+    },
+    {
+      "key": "VULNERABLE",
+      "source": "docs/design/assets/powers/2026-11-05/originals/VULNERABLE.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/VULNERABLE.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "a504aab99d69943d4df863583608f2941f3f9055ffe6f8b5cc4096ce731375a9",
+      "sha256": "e3909ef09f70c8ebf52227859962edff8644b89b86c84dfee4e4ef0e40535f2a",
+      "seconds": 0.031
+    },
+    {
+      "key": "WEAK",
+      "source": "docs/design/assets/powers/2026-11-05/originals/WEAK.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/WEAK.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "4671f40d9a61c6e8bffde339fb3522a32861b70cac52e1370d675e5b7a52403b",
+      "sha256": "ff75425a656815d6f02807bd77726bbfe58a76bc10c15826587e85cace4db3cc",
+      "seconds": 0.032
+    },
+    {
+      "key": "JH23",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JH23.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JH23.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "cc83a52c1bd6bd4ae2564388f208b515f1c854e08a6fe35e09343982cd1a7c68",
+      "sha256": "632daf94350eccd8f25674292c903970112ff12c1fe529f6099c72e102b11935",
+      "seconds": 0.547
+    },
+    {
+      "key": "JH24",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JH24.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JH24.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "540f6abfd06d6b965ff5338cacf58c872586fc88fc496be8d0c1d526158f3ea1",
+      "sha256": "e40b8eed050f6a5380f0b141d37f009e84992a8b78549f0dd6ee29bfb8421a0b",
+      "seconds": 0.015
+    },
+    {
+      "key": "JK37C",
+      "source": "docs/design/assets/powers/2026-11-05/originals/JK37C.png",
+      "file": "docs/design/assets/powers/2026-11-05/icons/JK37C.png",
+      "size": [
+        128,
+        128
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "43032c468a20774637168c7fc96459bbc5c4348c94721e9b1fbadb4ce7fd61d4",
+      "sha256": "be4e66182c5b81a6d3ffd0cf5c5ec1c0dcfed753e1cf626a09acea9c98c35e00",
+      "seconds": 0.531
+    }
+  ]
+}
