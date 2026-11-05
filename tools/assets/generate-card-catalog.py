@@ -71,12 +71,49 @@ def bind_numbers(text, prior=None):
     return result, values
 
 
+def arrow_portraits_only(bundle):
+    """Sync arrow art and focal points while preserving all runtime game rules."""
+    catalog_path = ROOT / 'docs/implementation/card-pool.json'
+    catalog = json.loads(catalog_path.read_text(encoding='utf-8'))
+    source = {c['id']: c for c in bundle['data']['cards']
+              if c['type'] == '箭矢' and not c.get('trashedAt') and not c.get('reservedAt')}
+    count = 0
+    for entry in catalog['cards']:
+        card = source.get(entry['id'])
+        if card is None:
+            continue
+        focus = card.get('arrowFocus')
+        if focus is not None:
+            if not all(isinstance(focus.get(axis), (int, float)) and 0 <= focus[axis] <= 1 for axis in ('x', 'y')):
+                raise ValueError('Invalid arrowFocus: ' + card['id'])
+            entry['arrowFocus'] = {axis: focus[axis] for axis in ('x', 'y')}
+        else:
+            entry.pop('arrowFocus', None)
+        image_bytes = base64.b64decode(bundle['assets'][card['art']].split(',', 1)[1])
+        extension = '.png' if image_bytes.startswith(b'\x89PNG\r\n\x1a\n') else '.jpg'
+        entry['portrait'] = card['id'] + extension
+        portrait = ROOT / 'ShoujoKagekiJunna/images/cards' / entry['portrait']
+        if not portrait.exists() or portrait.read_bytes() != image_bytes:
+            portrait.write_bytes(image_bytes)
+        count += 1
+    missing = source.keys() - {c['id'] for c in catalog['cards']}
+    if missing:
+        raise ValueError('Arrow cards missing from runtime catalog: ' + ', '.join(sorted(missing)))
+    catalog['arrowArtRevision'] = bundle['revision']
+    catalog_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    print(f'Updated {count} arrow portraits and focal points; runtime card rules preserved.')
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('snapshot', type=Path)
     parser.add_argument('--text-only', action='store_true', help='Refresh display localization without rewriting card data, models or portraits.')
+    parser.add_argument('--arrow-portraits-only', action='store_true', help='Refresh arrow portraits and focal points without changing runtime card rules or localization.')
     args = parser.parse_args()
     bundle = json.loads(args.snapshot.read_text(encoding='utf-8-sig'))
+    if args.arrow_portraits_only:
+        arrow_portraits_only(bundle)
+        return
     cards = [c for c in bundle['data']['cards'] if not c.get('trashedAt') and not c.get('reservedAt')]
     definitions = []
     wrappers = []
@@ -143,6 +180,8 @@ def main():
             'damageCapable': damage, 'portrait': cid + extension, 'values': values,
             'text': card['text'], 'upgradedText': card['upgradedText'],
         }
+        if 'arrowFocus' in card:
+            entry['arrowFocus'] = card['arrowFocus']
         definitions.append(entry)
         if cid not in EXISTING:
             wrappers.append(f'[CustomID("{model_id}")]\npublic sealed class {cls}() : CatalogCard("{cid}");\n')

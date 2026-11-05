@@ -22,6 +22,7 @@ const state = {
 };
 fs.mkdirSync(path.join(out, 'assets'), {recursive: true});
 const assets = {...json(path.join(here, 'assets.json')), ...original.assets};
+assets['floating-arrow-frame'] = 'data:image/svg+xml;base64,' + fs.readFileSync(path.join(design, '../..', 'ShoujoKagekiJunna/images/floating_arrow_c1.svg')).toString('base64');
 for (const [id, file] of Object.entries({
   'energy-junna': 'junna-energy-workbench-v4.png',
   'portrait-stage-junna': 'arrow-portrait-workbench-clean-v5.png'
@@ -64,7 +65,7 @@ app = app.replace(/  try\{oldDraftKey=sessionStorage[^\n]+\n/, '');
 app = app.replace(/  async function connectLocalService\(\)\{[\s\S]*?\n  \}/, '  async function connectLocalService(){return false;}');
 app = app.replace(/  function saveHTML\(\)\{[^\n]+\n/, '  function saveHTML(){}\n');
 const guard = read('readonly-view.js');
-const sources = ['energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','card-model-view.js','fit-pool-view.js','card-hover-tips.js','workbench-domain.js'].map(read);
+const sources = ['arrow-focus.js','energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','card-model-view.js','fit-pool-view.js','card-hover-tips.js','workbench-domain.js'].map(read);
 const script = [guard, ...sources, app].join('\n');
 new vm.Script(script);
 const css = ['workbench.css','card-model.css','fit-pool.css','card-hover-tips.css','readonly.css'].map(read).join('\n').replaceAll('__REGULAR_FONT__', assets['game-regular']).replaceAll('__BOLD_FONT__', assets['game-bold']);

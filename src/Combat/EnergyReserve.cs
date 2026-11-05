@@ -19,9 +19,11 @@ public sealed class EnergyReserve : CustomPowerModel
     public override string CustomBigIconPath => CustomPackedIconPath;
     private bool _consumed;
     private static readonly AsyncLocal<bool> SettingEnergy = new();
-    public static async Task Add(PlayerChoiceContext context, CardModel card, int amount)
+    public static Task Add(PlayerChoiceContext context, CardModel card, int amount)
+        => Add(context, card.Owner, amount, card);
+    public static async Task Add(PlayerChoiceContext context, Player player, int amount, CardModel? cardSource = null)
     {
-        if (amount > 0) await PowerCmd.Apply<EnergyReserve>(context, card.Owner.Creature, amount, card.Owner.Creature, card);
+        if (amount > 0) await PowerCmd.Apply<EnergyReserve>(context, player.Creature, amount, player.Creature, cardSource);
     }
     public override Task AfterEnergyReset(Player player) => player == Owner.Player && _consumed ? PowerCmd.Remove(this) : Task.CompletedTask;
 

@@ -1,6 +1,20 @@
 .model-guide{max-width:1040px;font-size:14px;line-height:1.85;color:var(--ink)}
 .model-intro{max-width:52em;margin:0 0 26px;color:var(--muted)}
 .model-guide strong{color:var(--gold);font-weight:600}
+.model-vanilla-grid{padding-left:0;padding-right:0}
+.model-vanilla-card .native-portrait,.model-vanilla-card .native-arrow-portrait{visibility:hidden}
+.model-vanilla-card .card-button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.model-version{display:flex;gap:6px}
+.model-version [aria-pressed=true]{border-color:var(--gold);color:var(--gold)}
+@media(max-width:800px){
+  .is-models .inspector:has(.model-vanilla-card){display:grid;grid-template-columns:116px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .is-models .inspector:has(.model-vanilla-card) .inspector-header{grid-column:1/-1}
+  .is-models .inspector:has(.model-vanilla-card) .preview{grid-column:1;grid-row:2;padding:6px 10px;max-height:none;align-self:start}
+  .is-models .inspector:has(.model-vanilla-card) .preview .game-card{width:96px}
+  .is-models .inspector:has(.model-vanilla-card) #editor-form{grid-column:2;grid-row:2;padding:0 14px 12px}
+  .is-models .inspector:has(.model-vanilla-card) .model-example{display:block}
+  .is-models .inspector:has(.model-vanilla-card) .model-example h3{margin:18px 0 10px}
+}
 .model-section{padding:24px 0;border-top:1px solid var(--line)}
 .model-section h2{font-size:17px;line-height:1.5;font-weight:500;margin:0 0 16px}
 .model-section p{max-width:52em;margin:14px 0 0}

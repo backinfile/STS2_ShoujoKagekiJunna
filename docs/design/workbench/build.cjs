@@ -8,6 +8,7 @@ const safe = value => JSON.stringify(value).replace(/</g, '\\u003c').replace(/\u
 const snapshotArg = process.argv.indexOf('--snapshot');
 const state = readJSON(snapshotArg<0?path.join(here, 'seed.json'):path.resolve(process.argv[snapshotArg+1]));
 const assets = readJSON(path.join(here, 'assets.json'));
+assets['floating-arrow-frame'] = 'data:image/svg+xml;base64,' + fs.readFileSync(path.join(design, '../..', 'ShoujoKagekiJunna/images/floating_arrow_c1.svg')).toString('base64');
 for (const [id, file] of Object.entries({
   'energy-junna': 'junna-energy-workbench-v4.png',
   'portrait-stage-junna': 'arrow-portrait-workbench-clean-v5.png'
@@ -22,7 +23,7 @@ const html = fs.readFileSync(path.join(here, 'shell.html'), 'utf8')
   .replace('<!--ASSETS-->', () => '<script id="workbench-assets" type="application/json">' + safe(assets) + '</script>')
   .replace('<!--DATA-->', () => '<script id="workbench-data" type="application/json">' + safe(state) + '</script>')
   .replace('<!--ROUTE_DATA-->', () => '<script id="workbench-route-data" type="application/json">' + safe(readJSON(path.join(here, 'route-statistics-defaults.json'))) + '</script>')
-  .replace('<!--APP-->', () => '<script id="workbench-battle-sim" type="application/json">' + safe(fs.existsSync(path.join(design, 'data/纯那箭矢等待补偿战斗模拟_20261103.json'))?readJSON(path.join(design, 'data/纯那箭矢等待补偿战斗模拟_20261103.json')):null) + '</script><script id="workbench-card-audit" type="application/json">' + safe(readJSON(path.join(design, 'data/纯那全卡牌数值校验_20261103.json'))) + '</script><script>' + ['energy-wording.js', 'card-reference-wording.js', 'effect-statistics.js', 'route-statistics.js', 'route-statistics-view.js', 'pool-reference.js', 'card-model-view.js', 'fit-pool-view.js', 'card-hover-tips.js', 'workbench-domain.js', 'mcp-web-client.js', 'app.js'].map(file => fs.readFileSync(path.join(here, file), 'utf8')).join('\n') + '</script>');
+  .replace('<!--APP-->', () => '<script id="workbench-battle-sim" type="application/json">' + safe(fs.existsSync(path.join(design, 'data/纯那箭矢等待补偿战斗模拟_20261103.json'))?readJSON(path.join(design, 'data/纯那箭矢等待补偿战斗模拟_20261103.json')):null) + '</script><script id="workbench-card-audit" type="application/json">' + safe(readJSON(path.join(design, 'data/纯那全卡牌数值校验_20261103.json'))) + '</script><script>' + ['arrow-focus.js','energy-wording.js', 'card-reference-wording.js', 'effect-statistics.js', 'route-statistics.js', 'route-statistics-view.js', 'pool-reference.js', 'card-model-view.js', 'fit-pool-view.js', 'card-hover-tips.js', 'workbench-domain.js', 'mcp-web-client.js', 'app.js'].map(file => fs.readFileSync(path.join(here, file), 'utf8')).join('\n') + '</script>');
 fs.mkdirSync(path.join(design, 'data'), {recursive: true});
 const localFile = path.join(design, 'data', fileName);
 if (!fs.existsSync(localFile)) fs.writeFileSync(localFile, JSON.stringify(state, null, 2) + '\n', {flag: 'wx'});

@@ -9,6 +9,7 @@ namespace ShoujoKagekiJunna.Models;
 
 public sealed record CardNumber(string Name, int Base, int Upgraded);
 public sealed record KnowledgeGroup(string MainCardId, string[] GrantedCardIds, Dictionary<string, int> GrantedCardCounts);
+public sealed record ArrowArtFocus(float X = .5f, float Y = .5f);
 
 public sealed class CardDefinition
 {
@@ -31,6 +32,7 @@ public sealed class CardDefinition
     public bool UpgradedRetain { get; init; }
     public bool DamageCapable { get; init; }
     public string Portrait { get; init; } = "";
+    public ArrowArtFocus? ArrowFocus { get; init; }
     public string Text { get; init; } = "";
     public string UpgradedText { get; init; } = "";
     public CardNumber[] Values { get; init; } = [];

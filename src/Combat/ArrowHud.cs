@@ -2,6 +2,7 @@ using Godot;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -293,12 +294,15 @@ public partial class ArrowHud : Control
         var root = new Control { Name = "FloatingArrow", Size = IconSize, MouseFilter = MouseFilterEnum.Ignore };
         var frame = new Control { Name = "TiltedFrame", Size = IconSize, PivotOffset = IconSize * .5f, MouseFilter = MouseFilterEnum.Ignore };
         root.AddChild(frame);
-        var portraitPath = JunnaMod.ResourceRoot + $"images/floating_arrows/{arrow.Card.Id.Entry}.png";
-        bool hasArrowPortrait = ResourceLoader.Exists(portraitPath);
-        var portrait = hasArrowPortrait ? GD.Load<Texture2D>(portraitPath) : arrow.Card.Portrait;
+        var portrait = arrow.Card.Portrait;
         var textureSize = portrait.GetSize();
-        float coverScale = Math.Max(FrameSize.X / textureSize.X, FrameSize.Y / textureSize.Y);
-        var cropOffset = (textureSize - FrameSize / coverScale) * .5f;
+        var designId = CardCatalog.DesignId(arrow.Card);
+        var focus = designId is null ? null : CardCatalog.Get(designId).ArrowFocus;
+        var focusPoint = new Vector2(focus?.X ?? .5f, focus?.Y ?? .5f).Clamp(.01f, .99f);
+        var margin = new Vector2(Math.Min(focusPoint.X, 1 - focusPoint.X), Math.Min(focusPoint.Y, 1 - focusPoint.Y));
+        float coverScale = Math.Max(FrameSize.X / (textureSize.X * 2 * margin.X), FrameSize.Y / (textureSize.Y * 2 * margin.Y));
+        var cropSize = FrameSize / coverScale;
+        var cropOffset = textureSize * focusPoint - cropSize * .5f;
         frame.AddChild(new Polygon2D
         {
             Name = "Portrait", Polygon = PortraitWindow.Select(p => p * FrameScale).ToArray(),
