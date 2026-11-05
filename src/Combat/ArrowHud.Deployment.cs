@@ -37,13 +37,13 @@ public partial class ArrowHud
     private void UpdateDeployment(ArrowDeployment arrow, ArrowView view, Vector2 aim)
     {
         if (!_deployments.TryGetValue(arrow, out var effect)) return;
-        var destination = view.Root.Position + IconSize * .5f;
+        var destination = view.Root.Position + BodyCenter;
         effect.UpdateAim(destination, aim);
         view.Root.Visible = effect.ArrowVisible;
         float scale = Mathf.Lerp(1.12f, 1, effect.DrawProgress);
         view.Root.Scale = Vector2.One * scale;
         view.Root.Modulate = new Color(1, 1, 1, effect.ArrowAlpha);
-        view.Root.Position = effect.CurrentPosition - IconSize * scale * .5f;
+        view.Root.Position = effect.CurrentPosition - BodyCenter * scale;
         view.Frame.Rotation = effect.ArrowDirection.Angle() - Mathf.Pi * .5f;
     }
 
@@ -58,9 +58,9 @@ public partial class ArrowHud
         if (_views.TryGetValue(arrow, out var view))
         {
             // Hand the deployment's final pose to layout motion without a visual snap.
-            view.Motion.Reset(view.Root.Position + IconSize * view.Root.Scale * .5f, view.Frame.Rotation);
+            view.Motion.Reset(view.Root.Position + BodyCenter * view.Root.Scale, view.Frame.Rotation);
             view.Root.Scale = Vector2.One;
-            view.Root.Position = view.Motion.Center - IconSize * .5f;
+            view.Root.Position = view.Motion.Center - BodyCenter;
             view.Root.Modulate = Colors.White;
             view.Root.Visible = true;
         }

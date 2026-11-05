@@ -57,7 +57,7 @@ public partial class ArrowHud
         {
             view = CreateArrow(arrow);
             _views.Add(arrow, view);
-            view.Root.Position = new Vector2(GetViewportRect().Size.X * .44f, SecondRelicRowY()) - IconSize * .5f;
+            view.Root.Position = new Vector2(GetViewportRect().Size.X * .44f, SecondRelicRowY()) - BodyCenter;
             view.Count.Position = CounterCenter - view.Count.Size * .5f;
         }
         if (view.Releasing) return Task.CompletedTask;
@@ -70,7 +70,7 @@ public partial class ArrowHud
         view.Flash.Restart();
         view.Flash.Emitting = true;
         view.Root.Scale = Vector2.One;
-        var origin = view.Root.Position + IconSize * .5f;
+        var origin = view.Root.Position + BodyCenter;
         var targets = TargetPoints(arrow);
         if (targets.Length == 0 && arrow.Card.TargetType == TargetType.Self &&
             NCombatRoom.Instance?.GetCreatureNode(arrow.Card.Owner.Creature) is { } owner)
@@ -78,11 +78,11 @@ public partial class ArrowHud
         view.ExitPosition = GetGlobalTransform() * (targets.Length == 0 ? origin + Vector2.Up * 110
             : targets.Aggregate(Vector2.Zero, (sum, point) => sum + point) / targets.Length);
         view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
-        view.Root.PivotOffset = IconSize * .5f;
+        view.Root.PivotOffset = BodyCenter;
         var effect = new ArrowReleaseVfx { Name = "ArrowRelease", Position = origin, ZIndex = 6 };
         AddChild(effect);
         view.Root.Reparent(effect);
-        view.Root.Position = -IconSize * .5f;
+        view.Root.Position = -BodyCenter;
         effect.Initialize(view.Root, targets.Select(point => point - origin).ToArray(), (direction, delta) =>
         {
             view.Motion.Advance(origin, origin + direction, delta);

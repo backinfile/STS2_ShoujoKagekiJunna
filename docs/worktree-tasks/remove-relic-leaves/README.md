@@ -1,4 +1,4 @@
-﻿# 去掉遗物图左下角叶子
+# 去掉遗物图左下角叶子
 
 ## Original user input
 
@@ -9,6 +9,8 @@
 > 宝石的下面的棱角有点尖了
 
 > 修改后放实际游戏中我看看效果
+
+> 确认合并
 
 ## Brief task plan
 
@@ -29,5 +31,7 @@
 - 实机视频为 `out/tmp/gem-relic-preview/gem-relics-gameplay.mp4`，1280×720、30 fps、13.93 秒，394 个采集帧、24 个补帧、0 个丢弃帧，含游戏内部音轨。已向用户展示视频及 `out/tmp/gem-relic-preview/relics-detail.png` 遗物栏近景。
 - 原始实机截图为 `out/tmp/gem-relic-preview/01-both-gems.png` 和 `02-both-gems-next-turn.png`。渲染验证记录为 `artifacts/remove-relic-leaves/bevel-validation.json`，录像记录为 `out/tmp/gem-relic-preview/recording.json`。
 - 启动预载出现已有的 Godot `Invalid Task ID` 日志，进入战斗后的正常出牌与录像完成。验证范围为本次遗物图稿、轮廓、构建和实机显示。
-- 已审阅 18 份 Git 跟踪的文本说明文档及本任务文档，检查敏感信息、本地绝对路径和中文编码。`git diff --check` 通过。
-- 原目录的能量图、能量场景与实现记录修改保存在原目录，合并前按最新状态核对。任务结果已完成，等待用户确认合并到 `main`，随后单独确认清理。
+- 已审阅 Git 跟踪的文本说明文档及本任务文档，检查敏感信息、本地绝对路径和中文编码。`git diff --check` 通过。
+- 实机录像完成后同步本地 `main` 至 `30b9db7`，四张 SVG 与录像中的版本内容一致，同步后重新构建、导入与打包通过。原目录初始的 9 项能量相关修改已随本地 `main` 更新提交，原目录当前干净。任务结果已完成，用户已确认合并到 `main`，工作树与任务分支清理待单独确认。
+
+- 本次实机视频、截图和验证记录已按相对路径保留到主目录的 `out/tmp/gem-relic-preview/` 与 `artifacts/remove-relic-leaves/`，共 43 个文件逐项哈希一致。

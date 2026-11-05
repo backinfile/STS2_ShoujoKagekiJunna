@@ -115,12 +115,12 @@ public partial class EnergyStatusBar : Control
         .GetStringSize(label.Text, fontSize: label.GetThemeFontSize("font_size")).X;
 }
 
-/// <summary>A drawn clockwise arrow stays crisp without relying on font glyph coverage.</summary>
+/// <summary>A drawn counterclockwise arrow stays crisp without relying on font glyph coverage.</summary>
 public partial class RetentionArrow : Control
 {
     public override void _Draw()
     {
-        DrawSetTransform(Vector2.Zero, 0, Size / 32);
+        DrawSetTransform(new Vector2(Size.X, 0), 0, new Vector2(-Size.X, Size.Y) / 32);
         var center = new Vector2(16, 16);
         float end = Mathf.DegToRad(315);
         var radial = Vector2.FromAngle(end);

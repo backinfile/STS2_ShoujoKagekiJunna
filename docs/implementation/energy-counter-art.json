@@ -1,69 +1,85 @@
 {
   "date": "2026-11-05",
-  "selected_concept": 3,
-  "theme": "弓形环框：绿玉边框与细金色弓形外圈，顶部无点缀",
-  "archive": "output\\imagegen\\junna-energy-2026-11-05\\bow-frame-v3",
+  "selected_concept": 1,
+  "theme": "弓环：绿色切面边框、明亮玉绿光流与金色弓形下沿",
+  "archive": "output/imagegen/junna-energy-2026-11-05/bow-energy-v5",
   "generation": {
     "tool": "built-in image_gen",
-    "strategy": "reuse user-approved whole concept 3 and two previously generated flow sprites",
-    "source_generation_calls": 3,
-    "prompts": "output\\imagegen\\junna-energy-2026-11-05\\bow-frame-v3\\prompts.json",
-    "fixed_artwork": "partition approved image into center, jade border and gold border; reconstruct approved art exactly",
+    "new_card_icon_generation_calls": 1,
+    "card_prompt": "output/imagegen/junna-energy-2026-11-05/bow-energy-v5/card-prompt.json",
+    "counter_source": "output\\imagegen\\junna-energy-2026-11-05\\native-concepts-v4\\clean\\01.png",
+    "card_original": "output/imagegen/junna-energy-2026-11-05/bow-energy-v5/raw/card-energy.png",
+    "card_cleaned": "output/imagegen/junna-energy-2026-11-05/bow-energy-v5/clean/card-energy.png",
     "originals_preserved": true
   },
   "cleanup": {
     "tool": "GPT Image 2 Artifact Cleaner",
     "strength": 0.25,
     "local_only": true,
-    "original_size_preserved": true,
-    "strategy": "reuse restored source textures at original dimensions without applying a second restoration pass",
-    "report": "output\\imagegen\\junna-energy-2026-11-05\\bow-frame-v3\\layers.json"
+    "device": "cuda",
+    "original_size": [
+      1254,
+      1254
+    ],
+    "alpha_preserved": true
   },
+  "processing_report": "output/imagegen/junna-energy-2026-11-05/bow-energy-v5/processing.json",
   "assets": [
     {
-      "index": 1,
-      "name": "固定数字底图",
-      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_1.png",
-      "sha256": "99d4c4a95ad435a364f7110cbad21b0fc5e533e176025d84f142a6b794447e84",
-      "opacity": 1
+      "file": "ShoujoKagekiJunna/images/energy_counter/energy_icon.png",
+      "size": [
+        74,
+        74
+      ],
+      "sha256": "13927ff0667bab2e8f80d2f185117f383d338e8f4f3ebce2c1d937bdfdb9894e"
     },
     {
-      "index": 2,
-      "name": "低速内部光纹",
-      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_2.png",
-      "sha256": "f3c380fd305c3b2fca14d1b84e12b5e239476b8e7b39a47bbb741b28bf995b06",
-      "opacity": 0.16
+      "file": "ShoujoKagekiJunna/images/energy_counter/energy_icon_small.png",
+      "size": [
+        24,
+        24
+      ],
+      "sha256": "af921322e57bc64f473256f91ff1f574136c89d8b99d9a0951bda720872d71ae"
     },
     {
-      "index": 3,
-      "name": "快速内部光纹",
-      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_3.png",
-      "sha256": "4f2fb24bf2816cbf3b716a175313403d1853c06bb84c87ab355d2b7507774501",
-      "opacity": 0.08
+      "file": "ShoujoKagekiJunna/images/energy_counter/layer_1.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "e3c85efdd7b833df7a8bcf53660679e393114ff388d68fbcb26e415faaca6133"
     },
     {
-      "index": 4,
-      "name": "固定绿色边框",
-      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_4.png",
-      "sha256": "299d676e60e65a23ad9bbc9d69244575d7aef93fd4d243a1270558bf3d1231e2",
-      "opacity": 1
+      "file": "ShoujoKagekiJunna/images/energy_counter/layer_2.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "e9fa7ecd500f1bf8e341692aec23ae859d063c38786045287b78f395d551f653"
     },
     {
-      "index": 5,
-      "name": "固定金色弓框",
-      "file": "ShoujoKagekiJunna\\images\\energy_counter\\layer_5.png",
-      "sha256": "abc6aa90e376eeda7f73083b4016c7ba42d2c8156025a35a717ee679603f9cb9",
-      "opacity": 1
+      "file": "ShoujoKagekiJunna/images/energy_counter/layer_3.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "4b9ca51c51028a3e0386ace31493088e24b71f4672360274552e50fa2e302f91"
     },
     {
-      "name": "energy_icon.png",
-      "file": "ShoujoKagekiJunna\\images\\energy_counter\\energy_icon.png",
-      "sha256": "eb596c48551415cdd2b4dcfca09a9046425b377bb61ab7f72884c0394b71cf35"
+      "file": "ShoujoKagekiJunna/images/energy_counter/layer_4.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "acaaa0365c559ae6d85bd163d1f9cb2e53a0a33555c595b7178ed10a5ba8eac9"
     },
     {
-      "name": "energy_icon_small.png",
-      "file": "ShoujoKagekiJunna\\images\\energy_counter\\energy_icon_small.png",
-      "sha256": "0340444eb51a0e407330a3d17604b4677edcd0baedd7286a0a95baf56f2b418c"
+      "file": "ShoujoKagekiJunna/images/energy_counter/layer_5.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "10145026492b10811d82dc83b517f8b15c997724a301942951de789c7d518a29"
     }
   ],
   "scene": {
@@ -76,7 +92,6 @@
       256,
       256
     ],
-    "native_reference": "res://scenes/combat/energy_counters/silent_energy_counter.tscn",
     "fixed_layers": [
       1,
       4,
@@ -88,7 +103,7 @@
     ],
     "rotation_center": [
       62.5,
-      63
+      61.5
     ],
     "degrees_per_second": [
       30,
@@ -98,31 +113,157 @@
       5,
       10
     ],
-    "label": "native MegaLabel created by BaseLib; centered in numeric field"
+    "opacities": [
+      1,
+      1,
+      0.12,
+      1,
+      1
+    ]
   },
   "bindings": {
     "file": "src/Models/Junna.cs",
-    "energy_outline": "#173C2F",
-    "card_pool_and_relic_pool_icons": "energy_counter/energy_icon.png and energy_icon_small.png"
+    "card_corner": "energy_counter/energy_icon.png",
+    "inline_glyph": "energy_counter/energy_icon_small.png",
+    "card_pool_and_relic_pool_share_existing_paths": true,
+    "energy_outline": "#173C2F"
   },
   "validation": {
     "result": "passed",
-    "build": "Release build and PCK import/pack completed, 0 warnings, 0 errors",
+    "build": "Release build, Godot import and PCK packing completed with 0 warnings and 0 errors",
     "checks": [
-      "fixed-layer reconstruction is byte-exact at 1024 and 256 pixels",
-      "24 rotation phases per flow texture at both 1024 and 256 pixels stay inside numeric field",
-      "production scene rendered with native font at 128px and 85px; 0/3, 3/3 and 12/3 fit",
-      "actual game: starter-card plays drain energy 3, 2, 1, 0; ending turn refreshes to 3",
-      "actual game: zero-energy border dims, numeral turns red, fixed jade/gold borders stay stationary",
-      "actual game: combat counter and card-cost icons use the selected bow frame",
-      "deployed DLL/PCK hashes match dist; game log has no script errors or exceptions"
+      "generated card icon restored at original 1254x1254 dimensions with original alpha",
+      "local before/after rim and gold-curve crops reviewed at original pixel scale",
+      "74px card badge with a 64px artwork extent and native-sized 24px inline glyph imported through existing resource bindings",
+      "selected counter fixed layers reconstruct approved source and rotating textures stay inside its numeric field",
+      "normal card, arrow card, X cost, one inline energy glyph and two inline energy glyphs inspected in game",
+      "installed test DLL/PCK match the build output",
+      "inline glyph and native five-class sprites compared at original dimensions; one/two inline glyphs checked on normal and arrow cards",
+      "upper-left cost badge reduced by 11.4 percent inside native display box; 0, 1 and X inspected in actual cards"
     ],
-    "states": "out\\tmp\\energy-bow-frame-20261105\\energy-state-checks.json",
-    "screenshot": "out\\tmp\\energy-bow-frame-20261105\\04-refreshed.png",
-    "state_preview": "out\\tmp\\energy-bow-frame-20261105\\energy-state-preview.png",
-    "recording": "out\\tmp\\energy-bow-frame-20261105\\sts2-20261105-043307-6e0cfea64f0f4801822c7ecfcef09230.mp4",
-    "review_recording": "out\\tmp\\energy-bow-frame-20261105\\gameplay-review.mp4",
-    "closeup_recording": "out\\tmp\\energy-bow-frame-20261105\\energy-counter-closeup.mp4",
-    "preview": "output\\imagegen\\junna-energy-2026-11-05\\bow-frame-v3\\delivery-preview.png"
+    "cards": [
+      {
+        "card": "JUNNA_JH20",
+        "cost": "0",
+        "description": "获得[energy_icon_small.png]并可保留到下回合。",
+        "screenshot": "02-skill-energy.png"
+      },
+      {
+        "card": "JUNNA_JA57",
+        "cost": "0",
+        "description": "抽2张牌。 获得[energy_icon_small.png][energy_icon_small.png]。",
+        "screenshot": "03-arrow-energy.png"
+      },
+      {
+        "card": "JUNNA_JA59",
+        "cost": "X",
+        "description": "打出时回合数减少X。 造成12点伤害2次。",
+        "screenshot": "04-x-cost.png"
+      }
+    ],
+    "video": "out/tmp/card-cost-corner-20261105/sts2-20261105-060630-d842f690834c4585943f65e08fb1d221.mp4",
+    "video_duration_seconds": 12.666666666666666,
+    "video_capture_fps": 14.456191605428566,
+    "full_scene": "out/tmp/card-cost-corner-20261105/05-full-scene.png",
+    "card_preview": "out/tmp/card-cost-corner-20261105/corner-before-after.png",
+    "previous_card_validation": {
+      "video": "out/tmp/bow-energy-card-20261105/sts2-20261105-053746-d42636b40f804cb5b975740d1fca3e16.mp4",
+      "cards": [
+        {
+          "card": "JUNNA_JH20",
+          "cost": "0",
+          "description": "获得[energy_icon_small.png]并可保留到下回合。",
+          "screenshot": "02-skill-energy.png"
+        },
+        {
+          "card": "JUNNA_JA57",
+          "cost": "0",
+          "description": "抽2张牌。 获得[energy_icon_small.png][energy_icon_small.png]。",
+          "screenshot": "03-arrow-energy.png"
+        },
+        {
+          "card": "JUNNA_JA59",
+          "cost": "X",
+          "description": "打出时回合数减少X。 造成12点伤害2次。",
+          "screenshot": "04-x-cost.png"
+        }
+      ]
+    },
+    "size_comparison": "out/tmp/card-energy-size-20261105/size-comparison.png",
+    "previous_inline_size_validation": {
+      "video": "out/tmp/card-energy-size-20261105/sts2-20261105-055458-331a1a2c1f5247699e91d15a32baee06.mp4",
+      "cards": [
+        {
+          "card": "JUNNA_JH20",
+          "cost": "0",
+          "description": "获得[energy_icon_small.png]并可保留到下回合。",
+          "screenshot": "02-skill-energy.png"
+        },
+        {
+          "card": "JUNNA_JA57",
+          "cost": "0",
+          "description": "抽2张牌。 获得[energy_icon_small.png][energy_icon_small.png]。",
+          "screenshot": "03-arrow-energy.png"
+        }
+      ]
+    }
+  },
+  "card_icon_size_correction": {
+    "date": "2026-11-05",
+    "native_sources": "out/tmp/card-energy-size-20261105/native-icon-inspection.json",
+    "measurements": "out/tmp/card-energy-size-20261105/size-measurements.json",
+    "report": "out/tmp/card-energy-size-20261105/resize-report.json",
+    "native_card_display_box": [
+      64,
+      64
+    ],
+    "card_visible_area_fraction": 0.700424,
+    "native_card_median_visible_area_fraction": 0.699963,
+    "inline_before": [
+      32,
+      32
+    ],
+    "inline_after": [
+      24,
+      24
+    ],
+    "inline_visible_bbox": [
+      2,
+      1,
+      22,
+      22
+    ],
+    "inline_visible_size": [
+      20,
+      21
+    ],
+    "source": "output/imagegen/junna-energy-2026-11-05/bow-energy-v5/clean/card-energy.png"
+  },
+  "cost_corner_size_correction": {
+    "date": "2026-11-05",
+    "scope": "card upper-left energy cost badge",
+    "canvas": [
+      74,
+      74
+    ],
+    "artwork_extent": [
+      64,
+      64
+    ],
+    "native_display_box": [
+      64,
+      64
+    ],
+    "visible_height_reduction": 0.11437837837837828,
+    "placement": "centered in the native cost icon display box",
+    "report": "out/tmp/card-cost-corner-20261105/resize-report.json",
+    "comparison": "out/tmp/card-cost-corner-20261105/corner-before-after.png"
+  },
+  "retention_indicator": {
+    "source": "src/UI/EnergyStatusBar.cs",
+    "direction": "counterclockwise",
+    "validation": "Release build, resource import and packing passed; retained amount 1 checked in minimized silent game",
+    "comparison": "out/tmp/retention-arrow-20261105/before-after.png",
+    "video": "out/tmp/retention-arrow-20261105/sts2-20261105-061854-a5c2284589724cb68a742155ef4fe5cc.mp4"
   }
 }
