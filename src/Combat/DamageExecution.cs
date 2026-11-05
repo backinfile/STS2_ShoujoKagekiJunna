@@ -108,7 +108,7 @@ public static class DamageExecution
         if (ResourceLoss.Value) snapshot = default;
         var batch = BatchContext.Value;
         bool countHandled = batch is { Claimed: false, CountHandled: true } && ReferenceEquals(batch.Source, source);
-        if (batch != null) batch.Claimed = true;
+        if (batch != null && ReferenceEquals(batch.Source, source)) batch.Claimed = true;
         bool hasOpponent = snapshot.Owner != null && list?.Any(t => t.IsAlive && t.Side != snapshot.Owner.Creature.Side) == true;
         int extra = !countHandled && hasOpponent && source is CardModel card
             ? ClaimExtraHits(card, cardPlay, snapshot) : 0;
@@ -122,20 +122,59 @@ public static class DamageExecution
             DamagePatches.Bypass.Value = true;
             try
             {
-                results.AddRange(await CreatureCmd.Damage(context, hitTargets, amount, props, dealer, cardSource, cardPlay));
+                results.AddRange(await GameApi.Damage(context, hitTargets, amount, props, dealer, cardSource, cardPlay));
             }
             finally { DamagePatches.Bypass.Value = false; }
         }
         return results;
     }
 
+    internal delegate Task<IEnumerable<DamageResult>> AttackHitHooksDamage(
+        PlayerChoiceContext context, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource,
+#if STS2_BETA
+        CardPlay? cardPlay,
+#endif
+        AttackCommand attack, int hitIndex, decimal hitCount);
+    internal static AttackHitHooksDamage? AttackHitHooks;
+
+    public static async Task<IEnumerable<DamageResult>> FromAttackHitHooks(
+        PlayerChoiceContext context, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource,
+#if STS2_BETA
+        CardPlay? cardPlay,
+#endif
+        AttackCommand attack, int hitIndex, decimal hitCount)
+    {
+        using var batch = BeginDamageBatch(attack.ModelSource, countHandled: true);
+        try { return await AttackHitHooks!(context, targets, amount, props, dealer, cardSource,
+#if STS2_BETA
+            cardPlay,
+#endif
+            attack, hitIndex, hitCount); }
+        finally
+        {
+            if (AttackProgressByCommand.TryGetValue(attack, out var progress)) progress.CompletedHits++;
+        }
+    }
+
     /// <summary>Only the canonical damage call inside AttackCommand uses this gate. Nested effects create new batches.</summary>
     public static async Task<IEnumerable<DamageResult>> FromAttack(
         PlayerChoiceContext context, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
-        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay, AttackCommand attack)
+        Creature? dealer, CardModel? cardSource,
+#if STS2_BETA
+        CardPlay? cardPlay,
+#endif
+        AttackCommand attack)
     {
         using var batch = BeginDamageBatch(attack.ModelSource, countHandled: true);
-        try { return await CreatureCmd.Damage(context, targets, amount, props, dealer, cardSource, cardPlay); }
+        try { return await GameApi.Damage(context, targets, amount, props, dealer, cardSource,
+#if STS2_BETA
+            cardPlay
+#else
+            null
+#endif
+        ); }
         finally
         {
             if (AttackProgressByCommand.TryGetValue(attack, out var progress)) progress.CompletedHits++;

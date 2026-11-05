@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><TargetFramework>net9.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <JunnaAssemblyPath Condition="'$(JunnaAssemblyPath)' == ''">../../dist/ShoujoKagekiJunna/ShoujoKagekiJunna.dll</JunnaAssemblyPath>
+    <JunnaAssemblyPath Condition="'$(JunnaAssemblyPath)' == ''">../../dist/ShoujoKagekiJunna/lib/ShoujoKagekiJunna.Beta.dll</JunnaAssemblyPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Probe.cs" />
@@ -15,6 +15,7 @@
     <Compile Include="ArrowAttackPoseProbe.cs" />
     <Compile Include="ArrowPivotProbe.cs" />
     <Compile Include="InvestmentMarksProbe.cs" />
+    <Compile Include="BonusBorderProbe.cs" />
     <Compile Include="StarterRelicProbe.cs" />
     <Reference Include="ShoujoKagekiJunna" HintPath="$(JunnaAssemblyPath)" />
     <Reference Include="sts2" HintPath="D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll" />

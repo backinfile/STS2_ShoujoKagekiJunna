@@ -19,7 +19,7 @@ namespace JunnaIntegration;
 public sealed class CardBranchesCommand : AbstractConsoleCmd
 {
     public override string CmdName => "junna_branches";
-    public override string Args => "core | selection | conditions [card-id]";
+    public override string Args => "core | selection | conditions | relationships | triggers | targets | retarget | prepare [card-id]";
     public override string Description => "Run the enumerated per-card resolution branches in the isolated test save.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args)
@@ -67,7 +67,7 @@ public static class CardBranchesProbe
         foreach(var enemy in enemies)
         {foreach(var power in enemy.Powers.ToArray())await PowerCmd.Remove(power);await CreatureCmd.SetMaxHp(enemy,1000000);await CreatureCmd.SetCurrentHp(enemy,1000000);await CreatureCmd.LoseBlock(context,enemy,enemy.Block,null);}
         var cards=new List<(string Id,bool Up,CardModel Card)>();
-        var plan=CardCatalog.Cards.Where(d=>d.Type=="箭矢").SelectMany(d=>new[]{false,true}.Select(up=>new{d.Id,Upgraded=up,Branch="已布置箭矢：目标死亡后的单体转移、群体跟随和自己目标"})).ToArray();
+        var plan=CardCatalog.Cards.Where(d=>d.Type is "星矢" or "箭矢").SelectMany(d=>new[]{false,true}.Select(up=>new{d.Id,Upgraded=up,Branch="已布置星矢：目标死亡后的单体转移、群体跟随和自己目标"})).ToArray();
         File.WriteAllText(Path.Combine(directory,"card-branches-retarget-plan.json"),JsonSerializer.Serialize(plan,Json));
         double speed=Godot.Engine.TimeScale;Godot.Engine.TimeScale=20;
         try
@@ -96,7 +96,7 @@ public static class CardBranchesProbe
                         item.Card.TargetType==TargetType.AllEnemies?arrow.Targets.All(c=>c.IsAlive)&&arrow.Targets.Contains(survivor):arrow.Target==player.Creature;
                     checks.Add(new("target follows its type",pass,true,pass));
                 }
-                rows.Add(new(item.Id,item.Up,"已布置箭矢：目标死亡后的单体转移、群体跟随和自己目标",checks.All(c=>c.Pass),checks.ToArray(),null));
+                rows.Add(new(item.Id,item.Up,"已布置星矢：目标死亡后的单体转移、群体跟随和自己目标",checks.All(c=>c.Pass),checks.ToArray(),null));
             }
         }
         finally{Godot.Engine.TimeScale=speed;}
@@ -368,7 +368,7 @@ public static class CardBranchesProbe
                     });
                     if(id=="JH22")
                     foreach(int shield in new[]{0,99})
-                    Add(id,up,$"伤害结果转加成：目标格挡{shield}、限定布置的伤害箭矢",async()=>
+                    Add(id,up,$"伤害结果转加成：目标格挡{shield}、限定布置的伤害星矢",async()=>
                     {
                         var deployed=await Card("JB03");await Play(deployed);
                         var utility=await Card("JA15");await Play(utility);
@@ -543,7 +543,7 @@ public static class CardBranchesProbe
 
             if (part == "conditions")
             {
-                if (definition.Type == "箭矢")
+                if (definition.Type is "星矢" or "箭矢")
                 Add(id, up, "自然倒计时：布置当回合不计、同回合只计一次", async () =>
                 {
                     var c = await Card(id, up: up);
@@ -608,7 +608,7 @@ public static class CardBranchesProbe
                 });
                 if (id is "JA73" or "JX02")
                 foreach (int count in new[] { 0, 1, 3 })
-                Add(id, up, $"布置箭矢数量：{count}", async () =>
+                Add(id, up, $"布置星矢数量：{count}", async () =>
                 {
                     for (int i = 0; i < count; i++) await Play(await Card("JB03"));
                     var c = await Card(id, up: up); int energy = player.PlayerCombatState!.Energy; await Play(c);

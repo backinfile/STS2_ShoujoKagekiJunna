@@ -1,0 +1,638 @@
+﻿{
+    "assertions":  98,
+    "build":  {
+                  "configuration":  "Release",
+                  "resourceImport":  "passed",
+                  "errors":  0,
+                  "warnings":  0,
+                  "resourcePack":  "passed"
+              },
+    "environment":  {
+                        "silentTest":  true,
+                        "minimizedStartupGuard":  true,
+                        "unlock":  "all",
+                        "mcpPort":  15737
+                    },
+    "suites":  {
+                   "bonus":  {
+                                 "value":  [
+                                               {
+                                                   "name":  "unmodified card has no frame effect",
+                                                   "actual":  false,
+                                                   "expected":  false,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "zero grant does not mark card as invested",
+                                                   "actual":  false,
+                                                   "expected":  false,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 1 retains received-bonus history",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 1 follows body draw order",
+                                                   "actual":  0,
+                                                   "expected":  0,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 1 particles follow card transforms",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 1 rail begins on left",
+                                                   "actual":  -122,
+                                                   "expected":  -122,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 2 retains received-bonus history",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 2 follows body draw order",
+                                                   "actual":  0,
+                                                   "expected":  0,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 2 particles follow card transforms",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 2 rail begins on left",
+                                                   "actual":  -122,
+                                                   "expected":  -122,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 3 retains received-bonus history",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 3 follows body draw order",
+                                                   "actual":  0,
+                                                   "expected":  0,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 3 particles follow card transforms",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 3 rail begins on left",
+                                                   "actual":  -122,
+                                                   "expected":  -122,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 4 retains received-bonus history",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 4 follows body draw order",
+                                                   "actual":  0,
+                                                   "expected":  0,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 4 particles follow card transforms",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 4 rail begins on left",
+                                                   "actual":  -122,
+                                                   "expected":  -122,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 5 retains received-bonus history",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 5 follows body draw order",
+                                                   "actual":  0,
+                                                   "expected":  0,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 5 particles follow card transforms",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 5 rail begins on left",
+                                                   "actual":  -122,
+                                                   "expected":  -122,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 6 retains received-bonus history",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 6 follows body draw order",
+                                                   "actual":  0,
+                                                   "expected":  0,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 6 particles follow card transforms",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 6 rail begins on left",
+                                                   "actual":  -122,
+                                                   "expected":  -122,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 7 retains received-bonus history",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 7 follows body draw order",
+                                                   "actual":  0,
+                                                   "expected":  0,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "state 7 particles follow card transforms",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "transferred source has zero current bonus",
+                                                   "actual":  0,
+                                                   "expected":  0,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "transferred source hides numeric rail",
+                                                   "actual":  false,
+                                                   "expected":  false,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "clone inherits received-bonus history after transfer",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "new generated card has independent history",
+                                                   "actual":  false,
+                                                   "expected":  false,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "unrevealed card hides frame effect",
+                                                   "actual":  false,
+                                                   "expected":  false,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "revealed card restores frame effect",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "reused card node clears old frame effect",
+                                                   "actual":  false,
+                                                   "expected":  false,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "combat boundary clears received-bonus history",
+                                                   "actual":  false,
+                                                   "expected":  false,
+                                                   "pass":  true
+                                               },
+                                               {
+                                                   "name":  "combat boundary removes all frame effects",
+                                                   "actual":  true,
+                                                   "expected":  true,
+                                                   "pass":  true
+                                               }
+                                           ],
+                                 "Count":  38
+                             },
+                   "acquisition":  {
+                                       "value":  [
+                                                     {
+                                                         "name":  "reward hover hides companion card previews",
+                                                         "actual":  0,
+                                                         "expected":  0,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward right click awaits confirmation",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward right click opens tiled group",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward provides confirm and cancel",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward preview grants no cards",
+                                                         "actual":  10,
+                                                         "expected":  10,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward tiles include repeated copies",
+                                                         "actual":  3,
+                                                         "expected":  3,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward cancel returns to original choices",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward cancel grants no cards",
+                                                         "actual":  10,
+                                                         "expected":  10,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward wheel shows next physical card",
+                                                         "actual":  "B",
+                                                         "expected":  "B",
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward wheel retains original offer",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward wheel does not open inspection",
+                                                         "actual":  false,
+                                                         "expected":  false,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward wheel reaches duplicate copy",
+                                                         "actual":  2,
+                                                         "expected":  2,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward wheel wraps to original",
+                                                         "actual":  "A",
+                                                         "expected":  "A",
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward wheel up cycles backward",
+                                                         "actual":  "B",
+                                                         "expected":  "B",
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward left click acquires directly",
+                                                         "actual":  false,
+                                                         "expected":  false,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward left click selects original offered model",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward repeated confirm stays closed",
+                                                         "actual":  false,
+                                                         "expected":  false,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "reward direct grant includes entire group once",
+                                                         "actual":  3,
+                                                         "expected":  3,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover hover hides companion card previews",
+                                                         "actual":  0,
+                                                         "expected":  0,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover right click awaits confirmation",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover right click opens tiled group",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover provides confirm and cancel",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover preview grants no cards",
+                                                         "actual":  13,
+                                                         "expected":  13,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover tiles include repeated copies",
+                                                         "actual":  3,
+                                                         "expected":  3,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover cancel returns to original choices",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover cancel grants no cards",
+                                                         "actual":  13,
+                                                         "expected":  13,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover wheel shows next physical card",
+                                                         "actual":  "B",
+                                                         "expected":  "B",
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover wheel retains original offer",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover wheel does not open inspection",
+                                                         "actual":  false,
+                                                         "expected":  false,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover wheel reaches duplicate copy",
+                                                         "actual":  2,
+                                                         "expected":  2,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover wheel wraps to original",
+                                                         "actual":  "A",
+                                                         "expected":  "A",
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover wheel up cycles backward",
+                                                         "actual":  "B",
+                                                         "expected":  "B",
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover left click acquires directly",
+                                                         "actual":  false,
+                                                         "expected":  false,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover left click selects original offered model",
+                                                         "actual":  true,
+                                                         "expected":  true,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover repeated confirm stays closed",
+                                                         "actual":  false,
+                                                         "expected":  false,
+                                                         "pass":  true
+                                                     },
+                                                     {
+                                                         "name":  "discover direct grant includes entire group once",
+                                                         "actual":  3,
+                                                         "expected":  3,
+                                                         "pass":  true
+                                                     }
+                                                 ],
+                                       "Count":  36
+                                   },
+                   "occlusion":  [
+                                     {
+                                         "name":  "badge region is fully covered by front portrait",
+                                         "actual":  true,
+                                         "expected":  true,
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "front sibling card occludes bonus and hit badges",
+                                         "actual":  0,
+                                         "expected":  0,
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "hovered front card occludes bonus and hit badges",
+                                         "actual":  0,
+                                         "expected":  0,
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "hovered invested card shows its own badges",
+                                         "actual":  true,
+                                         "expected":  true,
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "uncovered bonus and hit badges remain visible",
+                                         "actual":  true,
+                                         "expected":  true,
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "damage bonus value is retained",
+                                         "actual":  "+6",
+                                         "expected":  "+6",
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "boosted card has one concise extra tip",
+                                         "actual":  1,
+                                         "expected":  1,
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "combined tip describes both current values",
+                                         "actual":  "造成伤害增加6点。\n额外造成2次伤害。",
+                                         "expected":  "造成伤害增加6点。\n额外造成2次伤害。",
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "unmodified card has no investment tip",
+                                         "actual":  0,
+                                         "expected":  0,
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "bonus-only tip",
+                                         "actual":  "造成伤害增加2.5点。",
+                                         "expected":  "造成伤害增加2.5点。",
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "hits-only tip",
+                                         "actual":  "额外造成2次伤害。",
+                                         "expected":  "额外造成2次伤害。",
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "foreign card uses the same investment tip",
+                                         "actual":  "造成伤害增加3点。\n额外造成1次伤害。",
+                                         "expected":  "造成伤害增加3点。\n额外造成1次伤害。",
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "tip follows later investments",
+                                         "actual":  "造成伤害增加8点。\n额外造成3次伤害。",
+                                         "expected":  "造成伤害增加8点。\n额外造成3次伤害。",
+                                         "pass":  true
+                                     },
+                                     {
+                                         "name":  "clone carries its investment explanation",
+                                         "actual":  "造成伤害增加8点。\n额外造成3次伤害。",
+                                         "expected":  "造成伤害增加8点。\n额外造成3次伤害。",
+                                         "pass":  true
+                                     }
+                                 ],
+                   "stackWheel":  {
+                                      "value":  [
+                                                    {
+                                                        "name":  "library wheel reaches companion",
+                                                        "actual":  1,
+                                                        "expected":  1,
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "library keeps original model",
+                                                        "actual":  true,
+                                                        "expected":  true,
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "front companion is drawn at full size",
+                                                        "actual":  {
+
+                                                                   },
+                                                        "expected":  {
+
+                                                                     },
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "original visual is hidden while companion is front",
+                                                        "actual":  false,
+                                                        "expected":  false,
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "leaving restores original front",
+                                                        "actual":  0,
+                                                        "expected":  0,
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "leaving restores original body",
+                                                        "actual":  true,
+                                                        "expected":  true,
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "library wheel up wraps to last copy",
+                                                        "actual":  2,
+                                                        "expected":  2,
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "reassign removes temporary source preview",
+                                                        "actual":  true,
+                                                        "expected":  true,
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "reassigned card body remains visible",
+                                                        "actual":  true,
+                                                        "expected":  true,
+                                                        "pass":  true
+                                                    },
+                                                    {
+                                                        "name":  "reassigned ordinary card hides stack",
+                                                        "actual":  false,
+                                                        "expected":  false,
+                                                        "pass":  true
+                                                    }
+                                                ],
+                                      "Count":  10
+                                  }
+               },
+    "videos":  [
+                   {
+                       "durationSeconds":  23.0333,
+                       "path":  "out/tmp/card-bonus-border/video/sts2-20261105-084019-e7590e836b024f73b57d3bd5604b8724.mp4"
+                   },
+                   {
+                       "durationSeconds":  11.9,
+                       "path":  "out/tmp/card-bonus-border/video/sts2-20261105-084127-fefa5c5d225246199588d33ce0eebd42.mp4"
+                   }
+               ],
+    "videoValidation":  "H.264 + AAC, full decode passed"
+}

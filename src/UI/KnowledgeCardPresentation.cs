@@ -26,7 +26,8 @@ internal static class KnowledgeOfferHoverTipsPatch
         for (Node? parent = __instance.GetParent(); parent != null; parent = parent.GetParent())
             if (parent is NCardLibraryGrid or NCardRewardSelectionScreen or NChooseACardSelectionScreen)
             {
-                NHoverTipSet.CreateAndShow(__instance, card.HoverTips.Where(tip => tip is not CardHoverTip))
+                var preview = __instance.CardNode?.GetNodeOrNull<KnowledgeCardStack>("JunnaKnowledgeStack")?.PreviewModel ?? card;
+                NHoverTipSet.CreateAndShow(__instance, preview.HoverTips.Where(tip => tip is not CardHoverTip))
                     ?.SetAlignmentForCardHolder(__instance);
                 return false;
             }
@@ -90,6 +91,10 @@ public partial class KnowledgeCardStack : Control
     private CardModel? _model;
     private readonly List<NCard> _companions = [];
     private bool _libraryUpgrade;
+    private int _previewIndex;
+    private NCard? _sourcePreview;
+    private bool _bodyWasVisible;
+    internal CardModel? PreviewModel => _previewIndex == 0 ? _model : _companions[_previewIndex - 1].Model;
 
     internal static bool IsSupported(NCard card)
     {
@@ -149,12 +154,94 @@ public partial class KnowledgeCardStack : Control
             companion.RotationDegrees = 0;
             companion.Scale = Vector2.One * (1 - Math.Min(.12f, .03f * (i + 1)));
             companion.Modulate = Colors.White;
-            _companions.Add(companion);
+            _companions.Insert(0, companion);
+        }
+    }
+
+    private Control? Holder()
+    {
+        for (Node? parent = _source.GetParent(); parent != null; parent = parent.GetParent())
+            if (parent is NCardHolder or NMerchantCard) return (Control)parent;
+        return null;
+    }
+
+    private bool IsHovered(Control holder)
+    {
+        for (Node? node = GetViewport().GuiGetHoveredControl(); node != null; node = node.GetParent())
+            if (node == holder) return true;
+        return false;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (_previewIndex != 0 && (Holder() is not { } holder || !IsHovered(holder))) ResetPreview();
+    }
+
+    public override void _Input(InputEvent input)
+    {
+        if (!IsVisibleInTree() || input is not InputEventMouseButton { Pressed: true } mouse
+            || _companions.Count == 0 || Holder() is not { } holder || !IsHovered(holder)) return;
+        if (mouse.ButtonIndex is not (MouseButton.WheelUp or MouseButton.WheelDown))
+        {
+            if (mouse.ButtonIndex is MouseButton.Left or MouseButton.Right) ResetPreview();
+            return;
+        }
+        if (_previewIndex == 0)
+        {
+            _bodyWasVisible = _source.Body.Visible;
+            _sourcePreview = NCard.Create((CardModel)_model!.MutableClone())!;
+            AddChild(_sourcePreview);
+            _sourcePreview.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
+            KnowledgePreviewCards.IgnoreMouse(_sourcePreview);
+        }
+        int count = _companions.Count + 1;
+        _previewIndex = (_previewIndex + (mouse.ButtonIndex == MouseButton.WheelDown ? 1 : count - 1)) % count;
+        if (_previewIndex == 0) ResetPreview();
+        else
+        {
+            _source.Body.Visible = false;
+            float step = Math.Min(24, 72f / (count - 1));
+            for (int depth = count - 1; depth >= 0; depth--)
+            {
+                int index = (_previewIndex + depth) % count;
+                var card = index == 0 ? _sourcePreview! : _companions[index - 1];
+                card.Position = new(depth * step, -depth * step * .6f);
+                card.Scale = Vector2.One * (1 - Math.Min(.12f, .03f * depth));
+                card.ZIndex = depth == 0 ? 1 : 0;
+                MoveChild(card, GetChildCount() - 1);
+            }
+        }
+        NHoverTipSet.Remove(holder);
+        var tips = NHoverTipSet.CreateAndShow(holder, PreviewModel!.HoverTips.Where(tip => tip is not CardHoverTip));
+        if (holder is NCardHolder cardHolder) tips?.SetAlignmentForCardHolder(cardHolder);
+        else tips?.SetAlignment(holder, HoverTip.GetHoverTipAlignment(holder));
+        GetViewport().SetInputAsHandled();
+    }
+
+    private void ResetPreview()
+    {
+        if (_sourcePreview != null)
+        {
+            _source.Body.Visible = _bodyWasVisible;
+            RemoveChild(_sourcePreview);
+            _sourcePreview.QueueFreeSafely();
+            _sourcePreview = null;
+        }
+        _previewIndex = 0;
+        float step = Math.Min(24, 72f / Math.Max(1, _companions.Count));
+        for (int i = _companions.Count - 1; i >= 0; i--)
+        {
+            var card = _companions[i];
+            card.Position = new((i + 1) * step, -(i + 1) * step * .6f);
+            card.Scale = Vector2.One * (1 - Math.Min(.12f, .03f * (i + 1)));
+            card.ZIndex = 0;
+            MoveChild(card, GetChildCount() - 1);
         }
     }
 
     internal void Clear()
     {
+        ResetPreview();
         foreach (var companion in _companions)
         {
             RemoveChild(companion);

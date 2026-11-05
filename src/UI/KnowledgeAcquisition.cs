@@ -15,9 +15,7 @@ internal static class KnowledgeAcquisition
 
     private static IEnumerable<MethodBase> TargetMethods()
     {
-        yield return AccessTools.Method(typeof(NCardRewardSelectionScreen), "SelectCard");
         yield return AccessTools.Method(typeof(NCardRewardSelectionScreen), "InspectCard");
-        yield return AccessTools.Method(typeof(NChooseACardSelectionScreen), "SelectHolder");
         yield return AccessTools.Method(typeof(NChooseACardSelectionScreen), "OpenPreviewScreen");
     }
 

@@ -37,7 +37,7 @@ public partial class ArrowHud
         {
             ClearHoverPreview();
             _hoverPreview = new Control { Name = "JunnaArrowHoverPreview", MouseFilter = MouseFilterEnum.Ignore };
-            NGame.Instance!.HoverTipsContainer!.AddChild(_hoverPreview);
+            AddChild(_hoverPreview);
             foreach (var arrow in arrows)
             {
                 // Keep physical copies and their combat modifications, even when their card IDs match.
@@ -66,7 +66,7 @@ public partial class ArrowHud
         var rect = anchor.GetGlobalRect();
         // Put cards opposite the creature's native text tips; keep the entire grid on screen.
         float x = rect.GetCenter().X > canvas.X * .5f ? rect.End.X + gap : rect.Position.X - size.X - gap;
-        _hoverPreview.Position = new Vector2(x, rect.Position.Y).Clamp(Vector2.One * margin, canvas - size - Vector2.One * margin);
+        _hoverPreview.GlobalPosition = new Vector2(x, rect.Position.Y).Clamp(Vector2.One * margin, canvas - size - Vector2.One * margin);
         _hoverPreview.Size = size;
         for (int index = 0; index < _previewCards.Count; index++)
         {

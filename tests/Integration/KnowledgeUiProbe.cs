@@ -44,6 +44,8 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
             case "collection-check": return new(CheckCollection(), true, "Collection checks completed");
             case "layout-check": return new(CheckLayouts(), true, "Layout checks completed");
             case "hover-check": return new(CheckHoverUi(), true, "Hover checks completed");
+            case "stack-wheel-check": return new(CheckStackWheel(), true, "Stack wheel checks started");
+            case "wheel-demo": return new(RecordWheelDemo(player!), true, "Knowledge recording started");
             case "acquisition-check": return new(CheckAcquisition(player!, args.Contains("slow")), true, "Acquisition checks completed");
             case "layout": return new(Click(inspect.GetNode<Control>("JunnaKnowledgePreview/LayoutToggle")), true, "Changed knowledge layout");
             case "many":
@@ -252,13 +254,13 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
             await Settle();
             CheckValue(name + " hover hides companion card previews", Descendants(NGame.Instance!).OfType<NCard>().Count(node => node.IsVisibleInTree() && node.GetPath().ToString().Contains("HoverTips")), 0);
             int before = player.Deck.Cards.Count;
-            await Click(holder.Hitbox);
+            await Click(holder.Hitbox, MouseButton.Right);
             await Settle();
             var preview = inspect.GetNodeOrNull<KnowledgeGroupPreview>("JunnaKnowledgePreview");
             var confirm = preview?.GetNodeOrNull<NButton>("Confirm");
             var cancel = preview?.GetNodeOrNull<NButton>("Cancel");
-            CheckValue(name + " left click awaits confirmation", !selection.IsCompleted, true);
-            CheckValue(name + " left click opens tiled group", inspect.Visible && preview?.GetNode<ScrollContainer>("Cards").IsVisibleInTree() == true, true);
+            CheckValue(name + " right click awaits confirmation", !selection.IsCompleted, true);
+            CheckValue(name + " right click opens tiled group", inspect.Visible && preview?.GetNode<ScrollContainer>("Cards").IsVisibleInTree() == true, true);
             CheckValue(name + " provides confirm and cancel", confirm?.IsVisibleInTree() == true && cancel?.IsVisibleInTree() == true, true);
             CheckValue(name + " preview grants no cards", player.Deck.Cards.Count, before);
             if (confirm?.IsVisibleInTree() == true && cancel?.IsVisibleInTree() == true)
@@ -268,19 +270,32 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
                 await Settle();
                 CheckValue(name + " cancel returns to original choices", !inspect.Visible && screen.IsVisibleInTree() && !selection.IsCompleted, true);
                 CheckValue(name + " cancel grants no cards", player.Deck.Cards.Count, before);
-                await Click(holder.Hitbox, MouseButton.Right);
-                await Settle();
-                CheckValue(name + " right click opens tiled confirmation", confirm.IsVisibleInTree() && preview.GetNode<ScrollContainer>("Cards").IsVisibleInTree() && !selection.IsCompleted, true);
-                NGame.Instance.GetViewport().GetTexture().GetImage().SavePng(System.IO.Path.Combine(directory, name + "-confirmation.png"));
-                await Click(confirm);
+                var stack = holder.CardNode!.GetNode<KnowledgeCardStack>("JunnaKnowledgeStack");
+                CardModel? Front() => (CardModel?)AccessTools.Property(typeof(KnowledgeCardStack), "PreviewModel").GetValue(stack);
+                async Task Scroll(MouseButton button)
+                {
+                    await Click(holder.Hitbox, button);
+                    await Settle();
+                }
+                await Scroll(MouseButton.WheelDown);
+                CheckValue(name + " wheel shows next physical card", CardCatalog.DesignId(Front()!)!, "B");
+                CheckValue(name + " wheel retains original offer", holder.CardModel == cards[0], true);
+                CheckValue(name + " wheel does not open inspection", inspect.Visible, false);
+                await Scroll(MouseButton.WheelDown);
+                CheckValue(name + " wheel reaches duplicate copy", (int)AccessTools.Field(typeof(KnowledgeCardStack), "_previewIndex").GetValue(stack)!, 2);
+                await Scroll(MouseButton.WheelDown);
+                CheckValue(name + " wheel wraps to original", CardCatalog.DesignId(Front()!)!, "A");
+                await Scroll(MouseButton.WheelUp);
+                CheckValue(name + " wheel up cycles backward", CardCatalog.DesignId(Front()!)!, "B");
+                await Click(holder.Hitbox);
                 await selection.WaitAsync(TimeSpan.FromSeconds(2));
                 await Settle();
-                CheckValue(name + " confirm closes preview", inspect.Visible, false);
-                CheckValue(name + " confirms original offered model", discover ? ((Task<IEnumerable<CardModel>>)selection).Result.Single() == cards[0] : ((Task<int?>)selection).Result == 0, true);
+                CheckValue(name + " left click acquires directly", inspect.Visible, false);
+                CheckValue(name + " left click selects original offered model", discover ? ((Task<IEnumerable<CardModel>>)selection).Result.Single() == cards[0] : ((Task<int?>)selection).Result == 0, true);
                 confirm.EmitSignal(NClickableControl.SignalName.Released, confirm);
                 CheckValue(name + " repeated confirm stays closed", confirm.IsVisibleInTree(), false);
                 await CardPileCmd.Add(cards[0], PileType.Deck);
-                CheckValue(name + " confirmed grant includes entire group once", player.Deck.Cards.Count - before, 3);
+                CheckValue(name + " direct grant includes entire group once", player.Deck.Cards.Count - before, 3);
             }
             inspect.Close();
             if (GodotObject.IsInstanceValid(screen) && screen.IsInsideTree() && NOverlayStack.Instance!.Peek() == screen) NOverlayStack.Instance.Remove((IOverlayScreen)screen);
@@ -290,6 +305,75 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         if (rows.Any(row => !(bool)row.GetType().GetProperty("pass")!.GetValue(row)!)) throw new InvalidOperationException("Knowledge acquisition check failed");
     }
 
+    private async Task CheckStackWheel()
+    {
+        var rows = new List<object>();
+        void Verify(string name, object actual, object expected) => rows.Add(new { name, actual, expected, pass = Equals(actual, expected) });
+        Process(null, ["library"]);
+        await Task.Delay(600);
+        Process(null, ["filter"]);
+        await Task.Delay(600);
+        var grid = Descendants(NGame.Instance!).OfType<NCardLibraryGrid>().Single(g => g.IsVisibleInTree());
+        var holder = Descendants(grid).OfType<NGridCardHolder>().First(h => h.IsVisibleInTree() && CardCatalog.DesignId(h.CardModel!) == "A");
+        var model = holder.CardModel!;
+        var stack = holder.CardNode!.GetNode<KnowledgeCardStack>("JunnaKnowledgeStack");
+        int Index() => (int)AccessTools.Field(typeof(KnowledgeCardStack), "_previewIndex").GetValue(stack)!;
+        await Click(holder.Hitbox, MouseButton.WheelDown);
+        await Task.Delay(250);
+        Verify("library wheel reaches companion", Index(), 1);
+        Verify("library keeps original model", holder.CardModel == model, true);
+        var preview = Descendants(stack).OfType<NCard>().Single(c => c.ZIndex == 1);
+        Verify("front companion is drawn at full size", preview.Scale, Vector2.One);
+        Verify("original visual is hidden while companion is front", holder.CardNode.Body.Visible, false);
+        grid.GetViewport().PushInput(new InputEventMouseMotion { Position = Vector2.Zero, GlobalPosition = Vector2.Zero }, true);
+        await Task.Delay(250);
+        Verify("leaving restores original front", Index(), 0);
+        Verify("leaving restores original body", holder.CardNode.Body.Visible, true);
+        await Click(holder.Hitbox, MouseButton.WheelUp);
+        await Task.Delay(200);
+        Verify("library wheel up wraps to last copy", Index(), 2);
+        holder.ReassignToCard((CardModel)CardCatalog.Model("JB01").MutableClone(), PileType.None, null, ModelVisibility.Visible);
+        Verify("reassign removes temporary source preview", AccessTools.Field(typeof(KnowledgeCardStack), "_sourcePreview").GetValue(stack) == null, true);
+        Verify("reassigned card body remains visible", holder.CardNode.Body.Visible, true);
+        Verify("reassigned ordinary card hides stack", stack.Visible, false);
+        Process(null, ["close-library"]);
+        string directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "../../..", "out/tmp/card-bonus-border"));
+        System.IO.Directory.CreateDirectory(directory);
+        System.IO.File.WriteAllText(System.IO.Path.Combine(directory, "stack-wheel-results.json"), JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
+        if (rows.Any(row => !(bool)row.GetType().GetProperty("pass")!.GetValue(row)!)) throw new InvalidOperationException("Stack wheel check failed");
+    }
+
+    private async Task RecordWheelDemo(Player player)
+    {
+        var cards = new[] { "A", "JK32", "JB01" }.Select(id => player.RunState.CreateCard(CardCatalog.Model(id), player)).ToArray();
+        var reward = NCardRewardSelectionScreen.ShowScreen(cards.Select(c => new CardCreationResult(c)).ToArray(), [])!;
+        var selection = reward.OptionSelected();
+        await Task.Delay(900);
+        var holder = Descendants(reward).OfType<NGridCardHolder>().First(h => h.CardModel == cards[0]);
+        string directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "../../..", "out/tmp/card-bonus-border/video"));
+        using var client = new System.Net.Http.HttpClient();
+        async Task Post(string path, object body)
+        {
+            using var response = await client.PostAsync("http://127.0.0.1:15737/api/v1/" + path,
+                new System.Net.Http.StringContent(JsonSerializer.Serialize(body), System.Text.Encoding.UTF8, "application/json"));
+            response.EnsureSuccessStatusCode();
+        }
+        await Post("recording/start", new { output_dir = directory, fps = 30, width = 1280, height = 720, audio = true, max_duration_seconds = 40 });
+        try
+        {
+            Vector2 point = holder.Hitbox.GetGlobalRect().GetCenter();
+            reward.GetViewport().PushInput(new InputEventMouseMotion { Position = point, GlobalPosition = point }, true);
+            await Task.Delay(1700);
+            await Click(holder.Hitbox, MouseButton.WheelDown); await Task.Delay(1700);
+            await Click(holder.Hitbox, MouseButton.WheelDown); await Task.Delay(1700);
+            await Click(holder.Hitbox, MouseButton.WheelUp); await Task.Delay(1700);
+            await Click(holder.Hitbox, MouseButton.Right); await Task.Delay(2200);
+            var inspect = NGame.Instance!.GetInspectCardScreen();
+            await Click(inspect.GetNode<Control>("JunnaKnowledgePreview/Cancel")); await Task.Delay(1300);
+            await Click(holder.Hitbox); await selection.WaitAsync(TimeSpan.FromSeconds(3)); await Task.Delay(1400);
+        }
+        finally { await Post("recording/stop", new { }); }
+    }
     private static void Wheel(NInspectCardScreen inspect, MouseButton button)
     {
         Vector2 point = inspect.GetNode<NCard>("Card").GlobalPosition;

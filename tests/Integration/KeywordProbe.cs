@@ -60,7 +60,7 @@ public sealed class KeywordProbe : AbstractConsoleCmd
             string[] titles = tips.Select(tip => tip.Title ?? "").ToArray();
             void HasTip(string title) => CheckValue(id, title + " appears once", titles.Count(value => value == title), 1);
             CheckValue(id, "arrow keyword matches actual type", HasArrowKeyword(card), CardCatalog.IsArrow(card));
-            if (CardCatalog.IsArrow(card) || text.Contains("箭矢")) HasTip("箭矢");
+            if (CardCatalog.IsArrow(card) || text.Contains("星矢")) HasTip("星矢");
             if (text.Contains("伤害加成")) HasTip("伤害加成");
             if (text.Contains("易伤")) HasTip("易伤");
             if (text.Contains("虚弱")) HasTip("虚弱");
@@ -84,7 +84,7 @@ public sealed class KeywordProbe : AbstractConsoleCmd
             ArrowConversion.Convert(card);
             CheckValue(id, "converted card removes arrow keyword", HasArrowKeyword(card), false);
             CheckValue(id, "converted clone removes arrow keyword", HasArrowKeyword((CardModel)card.MutableClone()), false);
-            CheckValue(id, "converted attack has no arrow tip when not referenced", card.HoverTips.OfType<HoverTip>().Any(tip => tip.Title == "箭矢"), false);
+            CheckValue(id, "converted attack has no arrow tip when not referenced", card.HoverTips.OfType<HoverTip>().Any(tip => tip.Title == "星矢"), false);
         }
         CheckValue("combat", "damage bonus case has combat state", player.PlayerCombatState != null, true);
         if (player.PlayerCombatState != null)

@@ -50,7 +50,7 @@ public partial class ArrowHud : Control
     public override void _Ready()
     {
         MouseFilter = MouseFilterEnum.Ignore;
-        ZIndex = 3;
+        ZIndex = 0;
         _frame = GD.Load<Texture2D>(JunnaMod.ResourceRoot + "images/floating_arrow_c1.svg");
         var groupPath = JunnaMod.ResourceRoot + "images/floating_arrow_group_a.svg";
         _groupFrame = ResourceLoader.Exists(groupPath) ? GD.Load<Texture2D>(groupPath) : _frame;
@@ -114,7 +114,10 @@ public partial class ArrowHud : Control
         var first = inventory?.RelicNodes.FirstOrDefault();
         if (first == null) return 184;
         float rowStep = first.Size.Y + inventory!.GetThemeConstant("v_separation", "FlowContainer");
-        return LocalPoint(first.GetGlobalRect().GetCenter() + inventory.GetGlobalTransform().Y * rowStep).Y;
+        var reference = inventory.GetTransform();
+        reference.Origin = inventory.GetDefaultPosition();
+        var stableTransform = inventory.GetParent<CanvasItem>().GetGlobalTransform() * reference;
+        return LocalPoint(stableTransform * (first.Position + first.Size * .5f + Vector2.Down * rowStep)).Y;
     }
 
     private Vector2 LocalPoint(Vector2 global) => GetGlobalTransform().AffineInverse() * global;
@@ -205,7 +208,7 @@ public partial class ArrowHud : Control
         satellite.Node.Scale = new(scale * (.78f + .22f * Mathf.Abs(depth)), scale);
         satellite.Node.Modulate = new Color(1, 1, 1, .8f + depth * .2f);
         // Behind the portrait on the far side, over it on the near side; tips stay behind the main point.
-        satellite.Node.ZIndex = depth < 0 ? -1 : 1;
+        satellite.Node.ShowBehindParent = depth < 0;
     }
 
     private static float GroupGuideFade(float progress)
@@ -294,6 +297,9 @@ public partial class ArrowHud : Control
             Texture = arrow.TargetsGroup ? _groupFrame : _frame,
             Size = IconSize, MouseFilter = MouseFilterEnum.Ignore
         });
+        frame.AddChild(CardBonusVfx.ForArrow(arrow.Card,
+            new Vector2[] { new(120, 14), new(228, 138), new(120, 401), new(12, 138) }
+                .Select(p => p * FrameScale).ToArray()));
         var count = MakeLabel("Countdown", Vector2.Zero, new(20, 20), 14);
         root.AddChild(count);
         var repeats = MakeLabel("Repeats", new(IconWidth - 5, 16), new(32, 20), 16);

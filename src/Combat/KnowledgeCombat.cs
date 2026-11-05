@@ -82,7 +82,11 @@ public static class KnowledgeCombat
     private static class AcquireGroup
     {
         private static MethodBase TargetMethod() => AccessTools.Method(typeof(CardPileCmd), nameof(CardPileCmd.Add),
-            [typeof(IEnumerable<CardModel>), typeof(CardPile), typeof(CardPilePosition), typeof(AbstractModel), typeof(bool), typeof(bool)]);
+            [typeof(IEnumerable<CardModel>), typeof(CardPile), typeof(CardPilePosition), typeof(AbstractModel), typeof(bool)
+#if STS2_BETA
+             , typeof(bool)
+#endif
+            ]);
         private static void Prefix(AbstractModel? clonedBy, out bool __state) => __state = SingleDepth.Value > 0 || clonedBy != null;
         private static void Postfix(ref Task<IReadOnlyList<CardPileAddResult>> __result, bool __state)
         { if (!__state) __result = Complete(__result); }
@@ -94,7 +98,7 @@ public static class KnowledgeCombat
                 var card = result.cardAdded;
                 if (!result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || Copies.TryGetValue(card, out _)) continue;
                 bool discovered = Discovered.Remove(card);
-                if (result.targetPile == PileType.Deck || discovered) await GrantPartners(card, result.targetPile);
+                if (card.Pile!.Type == PileType.Deck || discovered) await GrantPartners(card, card.Pile!.Type);
             }
             return results;
         }

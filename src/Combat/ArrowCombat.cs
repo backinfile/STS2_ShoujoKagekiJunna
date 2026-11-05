@@ -42,7 +42,10 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
         : Target is { } target ? [target] : [];
     internal void Retarget(Creature target) => Play = new CardPlay
     {
-        Card = Play.Card, Player = Play.Player, Target = target, ResultPile = Play.ResultPile,
+        Card = Play.Card, Target = target, ResultPile = Play.ResultPile,
+#if STS2_BETA
+        Player = Play.Card.Owner,
+#endif
         Resources = Play.Resources, IsAutoPlay = Play.IsAutoPlay, PlayIndex = Play.PlayIndex, PlayCount = Play.PlayCount
     };
     public int Remaining { get; internal set; } = remaining;
@@ -131,9 +134,9 @@ public static partial class ArrowCombat
             using var pileExit = new ArrowPileExit(hud?.PileExitPosition(arrow.Card));
             if (arrow.Card.Keywords.Contains(CardKeyword.Exhaust))
             {
-                var result = await CardCmd.Exhaust(context, arrow.Card, skipVisuals: true);
+                await CardCmd.Exhaust(context, arrow.Card, skipVisuals: true);
                 // Silent transfers skip the native completion event used by the pile counter.
-                if (result is { success: true }) PileType.Exhaust.GetPile(arrow.Card.Owner).InvokeCardAddFinished();
+                if (arrow.Card.Pile?.Type == PileType.Exhaust) PileType.Exhaust.GetPile(arrow.Card.Owner).InvokeCardAddFinished();
             }
             else if (CatalogPower.Has(arrow.Card.Owner, "JA22")) await CardPileCmd.Add(arrow.Card, PileType.Hand);
             else await CardPileCmd.Add(arrow.Card, PileType.Discard);
@@ -171,7 +174,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override Task BeforeCardPlayed(CardPlay play)
     {
         if (play.IsFirstInSeries && (play.Card.Type == CardType.Attack || CardCatalog.IsArrow(play.Card)))
-            foreach (var arrow in ArrowCombat.Deployed.Where(a => a.Card.Owner == play.Player && a.Card != play.Card && !a.Resolving))
+            foreach (var arrow in ArrowCombat.Deployed.Where(a => a.Card.Owner == play.Card.Owner && a.Card != play.Card && !a.Resolving))
                 arrow.AttacksWhileWaiting++;
         return Task.CompletedTask;
     }

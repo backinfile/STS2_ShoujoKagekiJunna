@@ -1,6 +1,9 @@
 <Project Sdk="Godot.NET.Sdk/4.5.1">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <GodotProjectDir>$(MSBuildProjectDirectory)/</GodotProjectDir>
+    <Sts2Api Condition="'$(Sts2Api)' == ''">beta</Sts2Api>
+    <DefineConstants Condition="'$(Sts2Api)' == 'beta'">$(DefineConstants);STS2_BETA</DefineConstants>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -14,7 +17,8 @@
     <Compile Include="src/**/*.cs" />
     <EmbeddedResource Include="docs/implementation/card-pool.json" LogicalName="Junna.CardPool" />
     <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.7" />
-    <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" Private="false" />
+    <PackageReference Include="BSchneppe.Sts2.ReferenceAssemblies" Version="0.107.1" PrivateAssets="All" Condition="'$(Sts2ReferenceMode)' == 'package'" />
+    <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" Private="false" Condition="'$(Sts2ReferenceMode)' != 'package'" />
     <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" Private="false" />
   </ItemGroup>
 </Project>

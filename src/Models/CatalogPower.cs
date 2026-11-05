@@ -34,7 +34,10 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
         }
         public CardPlay Play => new()
         {
-            Card = Card, Player = Card.Owner, Target = null, ResultPile = PileType.None,
+            Card = Card, Target = null, ResultPile = PileType.None,
+#if STS2_BETA
+            Player = Card.Owner,
+#endif
             Resources = InstalledBy.Resources, IsAutoPlay = true, PlayIndex = 0, PlayCount = 1
         };
     }
@@ -111,7 +114,7 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay play)
     {
-        if (play.Player != Owner.Player) return;
+        if (play.Card.Owner != Owner.Player) return;
         // Native Replay repeats the effect; paid replays enter a new series and count as another play.
         if (!play.IsFirstInSeries) return;
         bool immediateConsumed = false;
@@ -127,13 +130,13 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
                     if (ArrowCombat.Find(play.Card) is { } immediate) await ArrowCombat.Accelerate(context, immediate, int.MaxValue);
                     break;
                 case "JK10" when play.Resources.EnergyValue >= grant.N(1) && grant.Take(grant.N(0)):
-                    await CardPileCmd.Draw(context, grant.N(2), play.Player);
-                    await PlayerCmd.GainEnergy(grant.N(3), play.Player); break;
+                    await CardPileCmd.Draw(context, grant.N(2), play.Card.Owner);
+                    await PlayerCmd.GainEnergy(grant.N(3), play.Card.Owner); break;
                 case "JK15" when CardCatalog.IsKnowledge(play.Card) && grant.Take(grant.N(0)):
                     using (KnowledgeCombat.SingleCard())
                     {
-                        var clone = play.Card.CreateCloneForPlayer(play.Player);
-                        await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, play.Player);
+                        var clone = play.Card.CreateCloneForPlayer(play.Card.Owner);
+                        await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, play.Card.Owner);
                     }
                     break;
                 case "JK37C" when play.Resources.EnergyValue == 0:
@@ -145,8 +148,8 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
                     await AccelerateChoice(grant, context, 1, grant.N(0)); break;
                 case "JG31": DamageModifiers.Add(play.Card, grant.V("Bonus")); break;
                 case "JK75" when CardCatalog.IsKnowledge(play.Card):
-                    var eligible = play.Player.PlayerCombatState!.Hand.Cards.Where(DamageModifiers.CanDealDamage).ToArray();
-                    if (eligible.Length > 0) DamageModifiers.Add(play.Player.RunState.Rng.CombatCardSelection.NextItem(eligible)!, grant.V("Bonus"));
+                    var eligible = play.Card.Owner.PlayerCombatState!.Hand.Cards.Where(DamageModifiers.CanDealDamage).ToArray();
+                    if (eligible.Length > 0) DamageModifiers.Add(play.Card.Owner.RunState.Rng.CombatCardSelection.NextItem(eligible)!, grant.V("Bonus"));
                     break;
                 case "JH23" when play.Resources.EnergyValue >= grant.N(1) && grant.Take(grant.N(0)):
                     await Block(grant, grant.V("Block")); break;
@@ -221,7 +224,7 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
             if (targets.Length == 0) return;
             var target = Owner.Player!.RunState.Rng.CombatTargets.NextItem(targets);
             using (DamageExecution.BeginCardResolution(grant.Card))
-                await CreatureCmd.Damage(context, target!, amount, ValueProp.Move, Owner, grant.Card, grant.Play);
+                await GameApi.Damage(context, [target!], amount, ValueProp.Move, Owner, grant.Card, grant.Play);
         }
     }
 }

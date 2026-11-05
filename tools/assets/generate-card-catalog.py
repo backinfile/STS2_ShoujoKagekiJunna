@@ -24,21 +24,21 @@ SELECTION_PROMPTS = {
     "JG09": "选择1张手牌。",
     "JG16": "选择1张手牌。",
     "JG36": "选择1张手牌。",
-    "JT02": "选择1张箭矢。",
+    "JT02": "选择1张星矢。",
     "JH01": "选择2张手牌。",
     "JK11": "选择1张驳论。",
     "JK11B": "选择1张立论。",
     "JK50B": "选择1张雄辩。",
     "JK53": "选择1张知识牌。",
     "JG27": "选择1张牌。",
-    "JA65": "选择1张箭矢。",
+    "JA65": "选择1张星矢。",
     "JA66": "选择至多{Cards}张牌。",
     "JK73B": "选择1张反证。",
     "JK78": "选择至多{Cards}张牌。",
     "JK78D": "选择至多{Cards}张牌。",
     "JK78E": "选择至多{Cards}张牌。",
-    "JK37C": "选择1张箭矢。",
-    "JK64": "选择1张箭矢。"
+    "JK37C": "选择1张星矢。",
+    "JK64": "选择1张星矢。"
 }
 
 def display_description(card, text, card_names, values, upgraded=False):
@@ -65,8 +65,6 @@ def display_description(card, text, card_names, values, upgraded=False):
     highlighted.update(name + '+' for name in card_names)
     pattern = '|'.join(re.escape(word) for word in sorted(highlighted, key=len, reverse=True))
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
-    if card['type'] == '箭矢':
-        text = '[blue]{Turns:diff()}回合后[/blue]\n' + text
     return text
 
 
@@ -170,8 +168,6 @@ def main():
             upgrade = upgrade.replace('X', '{Damage:diff()}')
         if card['type'] == '箭矢':
             values.append({'name': 'Turns', 'base': card['turns'], 'upgraded': card['upgradedTurns']})
-            base = '[blue]{Turns:diff()}回合[/blue]。\n' + base
-            upgrade = '[blue]{Turns:diff()}回合[/blue]。\n' + upgrade
         # Existing implementations use their established variable names.
         if cid in ('JA16', 'JA17'):
             base = re.sub(r'\{N\d+:diff\(\)\}', str(1 if cid == 'JA16' else 2), base)
@@ -241,8 +237,9 @@ def main():
         keywords_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/card_keywords.json'
         keywords = json.loads(keywords_path.read_text(encoding='utf-8'))
         knowledge = next(item for item in bundle['data']['mechanisms'] if item['id'] == 'ME_PARTNER')
-        keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.title'] = knowledge['name']
-        keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.description'] = knowledge['definition']
+        if lang == 'zhs':
+            keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.title'] = knowledge['name']
+            keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.description'] = knowledge['definition']
         keywords_path.write_text(json.dumps(keywords, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         powers_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/powers.json'
         powers = json.loads(powers_path.read_text(encoding='utf-8'))

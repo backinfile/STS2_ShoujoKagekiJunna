@@ -16,7 +16,7 @@ public partial class ArrowHud
         var arrow = ArrowCombat.Find(card);
         if (arrow == null) return false;
         FinishDeployment(arrow);
-        var effect = new ArrowDeploymentVfx { Name = "ArrowPaperFold", ZIndex = 5 };
+        var effect = new ArrowDeploymentVfx { Name = "ArrowPaperFold", ZIndex = 0 };
         AddChild(effect);
         effect.Initialize(cardNode);
         _deployments.Add(arrow, effect);

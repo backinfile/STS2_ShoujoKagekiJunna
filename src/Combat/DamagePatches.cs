@@ -29,15 +29,29 @@ internal static class DamagePatches
     internal static readonly AsyncLocal<bool> Bypass = new();
     internal static MethodInfo CanonicalDamage => AccessTools.Method(typeof(CreatureCmd), nameof(CreatureCmd.Damage),
         [typeof(PlayerChoiceContext), typeof(IEnumerable<Creature>), typeof(decimal), typeof(ValueProp),
-         typeof(Creature), typeof(CardModel), typeof(CardPlay)]);
+         typeof(Creature), typeof(CardModel)
+#if STS2_BETA
+         , typeof(CardPlay)
+#endif
+        ]);
     static MethodBase TargetMethod() => CanonicalDamage;
 
     [HarmonyPrefix]
     static bool Prefix(PlayerChoiceContext choiceContext, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
-        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay, ref Task<IEnumerable<DamageResult>> __result)
+        Creature? dealer, CardModel? cardSource,
+#if STS2_BETA
+        CardPlay? cardPlay,
+#endif
+        ref Task<IEnumerable<DamageResult>> __result)
     {
         if (Bypass.Value) { Bypass.Value = false; return true; }
-        __result = DamageExecution.Resolve(choiceContext, targets, amount, props, dealer, cardSource, cardPlay);
+        __result = DamageExecution.Resolve(choiceContext, targets, amount, props, dealer, cardSource,
+#if STS2_BETA
+            cardPlay
+#else
+            null
+#endif
+        );
         return false;
     }
 }
@@ -68,7 +82,7 @@ internal static class AttackHitCountPatch
         if (source is not CardModel card || __result <= 0 || snapshot.Owner == null ||
             attackCommand.TargetSide == snapshot.Owner.Creature.Side) return;
         DamageExecution.PrepareAttack(attackCommand, __result);
-        __result += DamageExecution.ClaimExtraHits(card, attackCommand.CardPlay, snapshot);
+        __result += DamageExecution.ClaimExtraHits(card, GameApi.AttackCardPlay(attackCommand), snapshot);
     }
 }
 
@@ -80,6 +94,7 @@ internal static class AttackBatchPatch
             .GetCustomAttribute<AsyncStateMachineAttribute>()!.StateMachineType, "MoveNext");
 
     [HarmonyTranspiler]
+    [HarmonyPriority(int.MinValue)]
     static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, MethodBase __originalMethod)
     {
         var commandField = __originalMethod.DeclaringType!.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
@@ -87,7 +102,18 @@ internal static class AttackBatchPatch
         int replacements = 0;
         foreach (var instruction in instructions)
         {
-            bool isDamage = instruction.Calls(DamagePatches.CanonicalDamage);
+            var method = instruction.operand as MethodInfo;
+            bool externalHitHook = method?.DeclaringType?.FullName == "STS2RitsuLib.Combat.AttackHits.AttackHitHook"
+                && method.Name == "DamageWithAttackHitHooks";
+            bool isDamage = instruction.Calls(DamagePatches.CanonicalDamage) || externalHitHook;
+            if (externalHitHook)
+            {
+                DamageExecution.AttackHitHooks = method!.CreateDelegate<DamageExecution.AttackHitHooksDamage>();
+                yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(DamageExecution), nameof(DamageExecution.FromAttackHitHooks)))
+                    .WithLabels(instruction.labels);
+                replacements++;
+                continue;
+            }
             bool isCallback = instruction.Calls(AccessTools.Method(typeof(Func<Task>), nameof(Func<Task>.Invoke)));
             if (isDamage || isCallback)
             {

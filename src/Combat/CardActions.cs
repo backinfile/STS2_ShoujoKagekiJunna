@@ -119,7 +119,11 @@ public static class CardActions
         var player = card.Owner;
         var sync = RunManager.Instance.PlayerChoiceSynchronizer;
         uint choiceId = sync.ReserveChoiceId(player);
+#if STS2_BETA
         await context.SignalPlayerChoiceBegun(player, PlayerChoiceOptions.None);
+#else
+        await context.SignalPlayerChoiceBegun(PlayerChoiceOptions.None);
+#endif
         try
         {
             int selected;

@@ -140,8 +140,11 @@ public static class CardCompletionProbe
                 if (id == "JK81B") expectedBlock += helpers.Count * N("N1");
                 if (id == "JK50B") expectedDamage = 40;
                 Check("printed cost", card.EnergyCost.GetWithModifiers(CostModifiers.None), up ? definition.UpgradedCost : definition.Cost);
+                Check("expected star-arrow type", CardCatalog.IsArrow(card), definition.Type is "星矢" or "箭矢");
                 Check("paid play", await Play(card), true);
-                if (definition.Type == "箭矢" && ArrowCombat.Find(card) is { } waiting)
+                if ((definition.Type is "星矢" or "箭矢") && Math.Max(0, N("Turns") - (id == "JA59" ? 3 : 0)) > 0)
+                    Check("waiting deployment exists", ArrowCombat.Find(card) != null, true);
+                if ((definition.Type is "星矢" or "箭矢") && ArrowCombat.Find(card) is { } waiting)
                 {
                     Check("initial countdown", waiting.Remaining, Math.Max(0, N("Turns") - (id == "JA59" ? 3 : 0)));
                     Check("damage waits for completion", hp - target.CurrentHp, 0);
