@@ -21,6 +21,7 @@
   let diskHandle=null,diskFingerprint=null,diskGranted=false,diskConflict=false,diskError=null,diskWriting=false,diskDirty=false,diskSuspended=false,diskQueue=Promise.resolve();
   const blobURLs=new Map();
   let ui={tab:'mechanisms',fitTheme:'all',fitStatus:'all',powerSystem:'all',powerOrigin:'all',modelSection:'quick',modelRarity:'普通',modelExhaust:false,overviewScope:'cards',overviewAll:false,overviewBy:['rarity','system'],flowScope:'cards',flowRoute:'all',flowOnlyRewards:false,flowDrill:null,routePosition:'all',search:'',kind:'all',type:'all',rarity:'all',pool:'all',cost:'all',archetype:'all',term:'all',breakthrough:'all',sort:'id',descending:false,upgraded:false,selected:null,mechanismFilter:'all',...(seed.ui||{})};
+  const mobileLayout=JunnaMobileLayout.create({dom:$,closeInspector:closeEditor,fitCards});
   const flowView=createJunnaRouteStatisticsView({data:()=>state.data,ui:()=>ui,defaults:flowDefaults,dom:$,escape,formatCardText:energyText,table:overviewTable,cardScope:card=>cardTab(card),flush:flushEdit,render:renderAll,transact});
   const modelView=createJunnaCardModelView({data:()=>state.data,ui:()=>ui,dom:$,escape,render:renderAll,cardHTML,fitCards});
   const fitPoolView=JunnaFitPool.create({data:()=>state.data,ui:()=>ui,dom:$,escape,assetURL,field,area,checkedPicker,render:renderAll,flush:flushEdit});
@@ -274,6 +275,7 @@
     if(source.naturalWidth)for(const [key,value]of Object.entries(JunnaArrowFocus.layout(source.naturalWidth,source.naturalHeight,focus)))image.setAttribute(key,value);
   }
   function renderInspector(){
+    mobileLayout.update();
     if(ui.tab==='powers'&&ui.selected?.collection!=='root'){powerView.inspector();return;}
     if(ui.tab==='relics'&&ui.selected?.collection!=='root'){relicView.inspector();return;}
     if(ui.tab==='models'){modelView.inspector();return;}

@@ -36,7 +36,7 @@
         node.replaceWith(value);
       }
     }
-    observer.observe(document.getElementById('app'),{childList:true,subtree:true});
+    observer.observe(document.body,{childList:true,subtree:true});
   }
   const observer=new MutationObserver(present);
   present();
