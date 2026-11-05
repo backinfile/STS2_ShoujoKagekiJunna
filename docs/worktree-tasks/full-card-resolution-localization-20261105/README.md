@@ -15,7 +15,7 @@
 
 ## Result and changes
 
-实现与验证完成，最终使用云端r2602及“箭矢”术语，等待合入main确认。
+实现与验证完成，最终使用云端r2602及“箭矢”术语；用户确认后已快进合入main，清理待确认。
 
 - 新增专项加练的抽牌堆、弃牌堆选项模型与原作卡图；先选择牌堆，再选择0～3张合格实际牌，保持牌区、顺序和基础/升级的6/8点伤害加成。
 - 补齐19张牌的独立选择提示，沿用同类简洁文字；知识短提示读取工作台定义，保留能量使用数字和单个图标。
@@ -113,3 +113,13 @@ main当前另有未提交的两份cards.json与card-pool.json，与本任务生�
 - 卡牌运行源码、117张r2602数据及本地化与d47bc1a一致；10260项断言结果继续有效。
 - Beta、Stable及loader重新构建，均为0警告、0错误。新增打包器验证通过：375个文件、177张纹理及6个场景完整加载；包含JK78D/E选项牌图片。
 - 原先3份生成文件的重叠修改已由main提交解决；本轮检查原目录干净，历史JSON采用main已提交的r2597离线基线。此阶段未移动main、未写入云端、未清理全卡工作树。全卡分支合入仍待单独确认。
+
+## 已确认合入
+
+> 合入 main
+
+- 按用户对7558fa8的明确确认，将main从d7cbbb8快进至7558fa8；主分支与已验证工作树提交树一致，包含实现提交d47bc1a。原目录整合前后均干净。
+- 完整mod目录（含lib）、测试探针、原始逐项结果、文字/关键词结果及原文件备份已归档到`artifacts/task-deliverables/full-card-resolution-localization-20261105/7558fa8/`；文件清单与SHA-256见其中的`manifest.json`。清单和录像同时保存在本任务文档目录。
+- 本次仅增加整合记录，游戏代码与10260项断言结果保持；云端保持r2602，没有新的工作台写入。
+
+清理范围待用户单独确认：本任务工作树`../worktrees/STS2_ShoujoKagekiJunna/full-card-resolution-localization-20261105`、分支`task/full-card-resolution-localization-20261105`、备份分支`backup/full-card-resolution-localization-20261105-before-consolidation`及本次打包验证临时目录。main代码、报告、录像、归档产物与云端数据保留。
