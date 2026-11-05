@@ -65,4 +65,4 @@ using (DamageExecution.MarkResourceLoss())
 
 集成测试使用游戏真实伤害命令和可变卡牌：本体 TwinStrike、DeadlyPoison；纯那上挑、引路星与耐力训练；独立测试程序集中的无 `DamageVar` 技能。检查非伤害效果次数、力量/易伤顺序、原生状态独立伤害、复制隔离、自伤和无绑定效果。华恋 v0.1.6 的实际 `KAREN_STRIKE` 联用结果独立记录。完整卡池的持续伤害快照、各牌两版结算与事件边界见 [卡池实现记录](card-effects.md)。
 
-录像检查真实选牌交互、04/02 立绘切换、箭矢牌区和 3→2→1 倒计时。结果保存在 `artifacts/dev-game/`。
+录像检查真实选牌交互、04/02 立绘切换、星矢牌区和 3→2→1 倒计时。结果保存在 `artifacts/dev-game/`。

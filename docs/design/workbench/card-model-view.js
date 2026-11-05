@@ -39,7 +39,7 @@ function createJunnaCardModelView({data,ui,dom,escape,render,cardHTML,fitCards})
   function quick(){
     const starter=data().cards.find(card=>card.id==='JB03');
     const models=waitModel(),costs=Object.keys(models),{examples}=modelExamples();
-    return '<p class="model-intro">先看费用与等待，再分配稀有度和消耗预算。表中数值均为<strong>基础／升级</strong>。</p>'+table('普通 · 非消耗 · 纯伤箭矢',['等待',...costs.map(cost=>cost+'费伤害')],[0,1,2,3].map(turns=>[
+    return '<p class="model-intro">先看费用与等待，再分配稀有度和消耗预算。表中数值均为<strong>基础／升级</strong>。</p>'+table('普通 · 非消耗 · 纯伤星矢',['等待',...costs.map(cost=>cost+'费伤害')],[0,1,2,3].map(turns=>[
       turns?turns+'回合':'0回合（立即）',...costs.map(cost=>pair(estimate(cost,turns)))
     ]))+table('等待补偿',['费用','0→1回合','1→2回合','2→3回合'],costs.map(cost=>[cost+'费',...[1,2,3].map(turns=>{const before=estimate(cost,turns-1),after=estimate(cost,turns);return '＋'+pair(after.map((value,i)=>value-before[i]));})]))+prose('起算公式','<p>建议伤害＝即时基准＋所处回合档位的累计等待补偿。</p><p>普通、非消耗、单体单段；0—'+costs.at(-1)+'费，等待0—3回合，按自然完成估值。</p>')+table('1费 · 2回合 · 分档建议',['稀有度','非消耗','消耗'],Object.entries(examples).map(([rarity,value])=>[rarity,pair(value.normal),pair(value.exhaust)]))+prose('起始牌 · '+(starter?.name||'弓击'),starter?'<div class="model-starter"><button type="button" class="text-button" data-open-card="'+escape(starter.uid)+'">'+escape(starter.name)+' ↗</button><span>'+escape(starter.cost)+'费 · '+escape(starter.turns)+'回合</span><span>'+escape(starter.text)+'</span><span>升级：'+escape(starter.upgradedText)+'</span></div>'+(estimate(starter.cost,starter.turns)?'<p>普通同费用、同回合数基准：'+pair(estimate(starter.cost,starter.turns))+'伤害。</p>':''):'<p>当前卡池暂无JB03。</p>')+startingDeck();
   }
@@ -54,7 +54,7 @@ function createJunnaCardModelView({data,ui,dom,escape,render,cardHTML,fitCards})
       +table('混合费用牌组 · 新种子验证',['环境','等待模型','承伤差','回合差'],simulation.mixedComparison.map(row=>[envs[row.environment]||row.environment,curves[row.curve]||row.curve,signed(row.deltaLoss),signed(row.deltaTurns)]))
       +table('虔诚雕刻师 · 模型内增长压力',['等待模型','胜率','即时对照胜率'],simulation.pressureComparison.map(row=>[curves[row.curve],(row.winRate*100).toFixed(1)+'%',(row.referenceWinRate*100).toFixed(1)+'%']))
       +table('运行记录',['比较','战斗数'],simulation.runs.map(run=>[run.name,run.battles.toLocaleString('zh-CN')]))
-      +prose('战斗条件',list(['80生命、3能量、每回合抽5张，手牌上限10。','17张牌；受测牌2张或5张，密集组替换3张打击。','基础牌组固定，仅升级受测牌。4能量、抽7张、其余卡牌升级另列验证。','正式比较每个条件'+simulation.setup.mainSeeds+'个配对种子，混合验证使用'+simulation.setup.validationSeeds+'个新种子。','出牌策略只读取当前手牌和敌人意图，搜索两步出牌；抽牌后重新决策。','箭矢布置期间退出抽弃循环，锁定目标死亡后伤害落空，加速正常支付费用。']))
+      +prose('战斗条件',list(['80生命、3能量、每回合抽5张，手牌上限10。','17张牌；受测牌2张或5张，密集组替换3张打击。','基础牌组固定，仅升级受测牌。4能量、抽7张、其余卡牌升级另列验证。','正式比较每个条件'+simulation.setup.mainSeeds+'个配对种子，混合验证使用'+simulation.setup.validationSeeds+'个新种子。','出牌策略只读取当前手牌和敌人意图，搜索两步出牌；抽牌后重新决策。','星矢布置期间退出抽弃循环，锁定目标死亡后伤害落空，加速正常支付费用。']))
       +table('敌方场景',['场景','类型'],simulation.encounters.map(enemy=>[enemy.label,{native:'本体动作与数值',constructed_native_enemies:'本体敌人组合',synthetic_control:'自设控制场景'}[enemy.kind]]))
       +prose('模拟范围',list(['本轮：'+simulation.setup.scope.join('、')+'。','后续：'+simulation.setup.extensions.join('、')+'。']));
   }
@@ -66,21 +66,21 @@ function createJunnaCardModelView({data,ui,dom,escape,render,cardHTML,fitCards})
   }
   function exhaust(){
     const {ordinary,examples}=modelExamples();
-    return '<p class="model-intro">消耗补偿的是后续使用机会。箭矢等待越久，同一场战斗里再次抽到并完成的机会通常越少。</p>'+table('纯伤箭矢 · 消耗补偿',['实际平均等待','基础伤害增加','升级伤害增加'],[
+    return '<p class="model-intro">消耗补偿的是后续使用机会。星矢等待越久，同一场战斗里再次抽到并完成的机会通常越少。</p>'+table('纯伤星矢 · 消耗补偿',['实际平均等待','基础伤害增加','升级伤害增加'],[
       ['经常当回合完成','＋6','＋8'],['约1回合','＋5','＋7'],['约2回合','＋4','＋6'],['约3回合','＋2','＋3']
-    ])+prose('按实际使用方式调整',list(['经常立即完成的箭矢，使用“当回合完成”档，即使卡面写着3回合。','等待期间可以反复额外触发的箭矢，减少消耗补偿。','消耗在整批完成后处理；本次重放与布置期间的额外触发仍会执行。','精简牌库与消耗联动本身也有收益，应从消耗补偿中扣除。']))+prose('一次计算','<p>普通、1费、2回合：'+pair(ordinary)+'伤害。加入消耗，增加4／6，得到<strong>'+pair(examples['普通'].exhaust)+'伤害</strong>。</p>')+prose('升级移除消耗','<p>本体「深谋远虑」和「彩虹」的升级只移除消耗。选择这条升级路线时，把恢复循环使用的收益计入升级预算，裸数值保持或小幅增加。</p>')+prose('其他效果',list(['循环抽牌与返能牌：消耗会限制后续展开，需要单独计算。','永久强化牌：主要收益在第一次使用，消耗还会精简牌库。','格挡牌：结合预计再次使用的次数，以及兑现回合的防御需求。']));
+    ])+prose('按实际使用方式调整',list(['经常立即完成的星矢，使用“当回合完成”档，即使卡面写着3回合。','等待期间可以反复额外触发的星矢，减少消耗补偿。','消耗在整批完成后处理；本次重放与布置期间的额外触发仍会执行。','精简牌库与消耗联动本身也有收益，应从消耗补偿中扣除。']))+prose('一次计算','<p>普通、1费、2回合：'+pair(ordinary)+'伤害。加入消耗，增加4／6，得到<strong>'+pair(examples['普通'].exhaust)+'伤害</strong>。</p>')+prose('升级移除消耗','<p>本体「深谋远虑」和「彩虹」的升级只移除消耗。选择这条升级路线时，把恢复循环使用的收益计入升级预算，裸数值保持或小幅增加。</p>')+prose('其他效果',list(['循环抽牌与返能牌：消耗会限制后续展开，需要单独计算。','永久强化牌：主要收益在第一次使用，消耗还会精简牌库。','格挡牌：结合预计再次使用的次数，以及兑现回合的防御需求。']));
   }
   function effects(){
     return '<p class="model-intro">先确定纯数值预算，再计算附加效果与配合收益。</p>'+table('调整方向',['效果','怎样计入模型'],[
       ['多段伤害','降低裸伤，为每段都能获得的伤害加成留出预算。'],['抽牌','参考即时抽牌，并计入延迟补偿与完成时的手牌空间。'],['格挡','计入兑现回合的防御需求；可控加速提高兑现的可靠性。'],['获得能量','计算支付后的净收益，以及能否继续启动其他牌。'],['重放／额外触发','整份牌效都会受益；伤害、抽牌、返能分别计入。'],['知识','连同关联牌的获得方式、牌张负担和减费一起估值。'],['10回合等特殊载荷','按实际完成手段单独估值。']
     ])+prose('多段示例','<p>获得3点伤害加成时，单段增加3伤害，三段合计增加9伤害。多段牌的裸伤预算因此更低。</p>')+table('抽牌与格挡 · 起始参考',['效果','条件','基础／升级'],[
-      ['抽牌箭矢','罕见，1费，1回合','抽4／5张'],['纯格挡箭矢','普通，1费，1回合','12／16格挡']
-    ])+prose('返能参照','<p>本体「唤起」为普通、1费，下回合召唤2／3并获得2／3能量。返能箭矢要同时考虑布置费用、等待、加速成本和重复触发次数。</p>');
+      ['抽牌星矢','罕见，1费，1回合','抽4／5张'],['纯格挡星矢','普通，1费，1回合','12／16格挡']
+    ])+prose('返能参照','<p>本体「唤起」为普通、1费，下回合召唤2／3并获得2／3能量。返能星矢要同时考虑布置费用、等待、加速成本和重复触发次数。</p>');
   }
   function native(){
-    return '<p class="model-intro">本体数值来自本机安装版本 <strong>v0.111.0</strong>。箭矢建议值来自对这些卡牌的纸面估算。</p>'+table('伤害与蓄力',['卡牌','稀有度／费用','基础／升级效果'],[
+    return '<p class="model-intro">本体数值来自本机安装版本 <strong>v0.111.0</strong>。星矢建议值来自对这些卡牌的纸面估算。</p>'+table('伤害与蓄力',['卡牌','稀有度／费用','基础／升级效果'],[
       ['切割','普通 · 0费','立即造成6／9伤害'],['双重打击','普通 · 1费','立即造成5×2／7×2伤害'],['重锤','罕见 · 3费','立即造成32／42伤害'],['炸弹','罕见 · 2费','第三次己方回合结束，全体40／50伤害'],['漆黑','罕见 · 1费','生成黑暗球，触发全部黑暗球被动一次／两次']
-    ])+prose('等待时点','<div class="model-table-scroll" tabindex="0" role="region" aria-label="等待时点"><table class="model-table"><thead><tr><th scope="col">牌</th><th scope="col">第1回合</th><th scope="col">第2回合</th><th scope="col">第3回合</th></tr></thead><tbody><tr><th scope="row">2回合箭矢</th><td>打出，计数2</td><td>开始时减至1</td><td><strong>开始时结算</strong></td></tr><tr><th scope="row">炸弹</th><td>打出，结束减至2</td><td>结束减至1</td><td><strong>结束时结算</strong></td></tr></tbody></table></div><p>两者都经过两次敌方行动，箭矢更早兑现。</p>')+prose('黑暗球的积累','<p>无集中时，基础「漆黑」生成的球从6累积到12，当回合结束到18，再过一次回合结束到24。兑现需要激发。</p>')+table('稀有度与消耗',['卡牌','稀有度／费用','基础／升级效果'],[
+    ])+prose('等待时点','<div class="model-table-scroll" tabindex="0" role="region" aria-label="等待时点"><table class="model-table"><thead><tr><th scope="col">牌</th><th scope="col">第1回合</th><th scope="col">第2回合</th><th scope="col">第3回合</th></tr></thead><tbody><tr><th scope="row">2回合星矢</th><td>打出，计数2</td><td>开始时减至1</td><td><strong>开始时结算</strong></td></tr><tr><th scope="row">炸弹</th><td>打出，结束减至2</td><td>结束减至1</td><td><strong>结束时结算</strong></td></tr></tbody></table></div><p>两者都经过两次敌方行动，星矢更早兑现。</p>')+prose('黑暗球的积累','<p>无集中时，基础「漆黑」生成的球从6累积到12，当回合结束到18，再过一次回合结束到24。兑现需要激发。</p>')+table('稀有度与消耗',['卡牌','稀有度／费用','基础／升级效果'],[
       ['快速检索','罕见 · 1费','抽3／4张'],['战略大师','稀有 · 0费 · 消耗','抽3／4张'],['深谋远虑','罕见 · 0费 · 消耗','抽2张，1张手牌放回牌堆顶；升级移除消耗'],['飞跃','普通 · 1费','9／12格挡'],['岿然不动','稀有 · 2费 · 消耗','30／40格挡'],['狂宴','稀有 · 1费 · 消耗','10／12伤害；斩杀增加3／4最大生命'],['唤起','普通 · 1费','下回合召唤2／3，获得2／3能量']
     ])+prose('怎样使用这些参照',list(['快速检索与战略大师体现了稀有度和消耗共同提供的1费差距。','深谋远虑说明，恢复循环使用可以占满一次升级。','炸弹提供延迟补偿的量级；范围伤害、加速与重复触发分别计价。']));
   }
@@ -90,10 +90,10 @@ function createJunnaCardModelView({data,ui,dom,escape,render,cardHTML,fitCards})
     const snapshot=c=>c?Object.fromEntries(keys.map(key=>[key,c[key]??null])):null;
     const links=id=>current.partnerGroups.filter(g=>g.mainCardId===id||g.grantedCardIds.includes(id)).map(g=>({main:g.mainCardId,members:[g.mainCardId,...g.grantedCardIds].map(key=>{const c=current.cards.find(c=>c.id===key);return {id:key,count:JunnaWorkbenchDomain.groupCardCount(g,key),scope:!c?'missing':c.trashedAt?'trash':c.reservedAt?'reserve':'active'};})}));
     const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),metadata=c=>({rules:c.design?.rules||'',notes:c.notes||'',keywords:c.keywords||[]});
-    const entries=current.cards.filter(c=>!c.trashedAt).map(c=>{const row=byId.get(c.id),usesWaitModel=c.type==='箭矢'&&c.arrowSubtype==='攻击'&&models[c.cost]&&c.turns<=3,modelFresh=!modelId||!usesWaitModel||row?.waitModelId===modelId,fresh=modelFresh&&row&&row.status!=='已删除'&&same(snapshot(c),row.snapshot)&&same(links(c.id),row.groupSnapshot)&&same(metadata(c),row.metadata)&&(row.dependencies||[]).every(d=>same(snapshot(current.cards.find(c=>c.id===d.id)),d.snapshot));return {card:c,row,status:fresh?row.status:'待复核'};});
+    const entries=current.cards.filter(c=>!c.trashedAt).map(c=>{const row=byId.get(c.id),usesWaitModel=c.type==='星矢'&&c.arrowSubtype==='攻击'&&models[c.cost]&&c.turns<=3,modelFresh=!modelId||!usesWaitModel||row?.waitModelId===modelId,fresh=modelFresh&&row&&row.status!=='已删除'&&same(snapshot(c),row.snapshot)&&same(links(c.id),row.groupSnapshot)&&same(metadata(c),row.metadata)&&(row.dependencies||[]).every(d=>same(snapshot(current.cards.find(c=>c.id===d.id)),d.snapshot));return {card:c,row,status:fresh?row.status:'待复核'};});
     const rank={'待复核':0,'需处理':1,'建议调整':2,'已校正':3,'保留初值':4};entries.sort((a,b)=>rank[a.status]-rank[b.status]||(a.row?.priority||3)-(b.row?.priority||3)||a.card.id.localeCompare(b.card.id));
     const counts=[['在用',entries.filter(e=>!e.card.reservedAt).length],['备用',entries.filter(e=>e.card.reservedAt).length],...Object.keys(rank).map(status=>[status,entries.filter(e=>e.status===status).length])].filter(([,n])=>n);
-    const face=(c,upgraded)=>escape(upgraded?c.upgradedCost:c.cost)+'费'+(c.type==='箭矢'?' · '+escape(upgraded?c.upgradedTurns:c.turns)+'回合':'')+'<br>'+escape(upgraded?c.upgradedText:c.text);
+    const face=(c,upgraded)=>escape(upgraded?c.upgradedCost:c.cost)+'费'+(c.type==='星矢'?' · '+escape(upgraded?c.upgradedTurns:c.turns)+'回合':'')+'<br>'+escape(upgraded?c.upgradedText:c.text);
     const rows=entries.map(({card:c,row,status})=>{let content=row&&row.status!=='已删除'?'<p>'+escape(row.basis)+'</p>'+(row.recommendation?'<p>'+escape(row.recommendation)+'</p>':''):'';if(status==='待复核'&&content)content='<details class="form-details"><summary>上次结论</summary>'+content+'</details>';return '<tr data-audit-card="'+escape(c.id)+'" data-audit-status="'+escape(status)+'"><th scope="row"><button type="button" class="text-button" data-open-card="'+escape(c.uid)+'">'+escape(c.name)+' ↗</button><span class="model-card-id">'+escape(c.rarity)+' · '+escape(c.id)+(c.reservedAt?' · 备用':'')+'</span></th><td>'+face(c,false)+'<br><span class="model-secondary">升级：'+face(c,true)+'</span></td><td><strong>'+escape(status)+'</strong>'+content+'</td></tr>';});
     const deleted=current.cards.filter(c=>c.trashedAt);
     return '<p class="model-intro">'+counts.map(([name,n])=>escape(name)+' '+n).join(' · ')+'</p><section class="model-section"><h2>全卡数值校验 · '+escape(audit?.date||'')+'</h2><div class="model-table-scroll" tabindex="0" role="region" aria-label="全卡数值校验"><table class="model-table model-card-table"><thead><tr><th scope="col">卡牌</th><th scope="col">当前牌面</th><th scope="col">结论与建议</th></tr></thead><tbody>'+rows.join('')+'</tbody></table></div></section><details class="form-details"><summary>已删除 · '+deleted.length+'</summary>'+deleted.map(c=>'<button type="button" class="text-button" data-open-card="'+escape(c.uid)+'">'+escape(c.id)+' · '+escape(c.name)+'</button>').join('、')+'</details>';

@@ -5,7 +5,7 @@
  * FORM: Local gallery extension; the inspector opens for the selected reference. */
 (function(root){
   'use strict';
-  const order=['物理箭矢','言叶','星星','引文与剧目','舞台技法','日常锻炼','日常生活','学习与记录','舞台与伙伴'];
+  const order=['物理星矢','言叶','星星','引文与剧目','舞台技法','日常锻炼','日常生活','学习与记录','舞台与伙伴'];
   const sourceURL=value=>/^https?:\/\//i.test(String(value||'').trim())?String(value).trim():'';
   const linkedCards=(entry,cards)=>(entry.cardIds||[]).map(id=>cards.find(card=>card.id===id)).filter(card=>card&&!card.trashedAt&&!card.reservedAt);
   function normalizeEntry(entry){

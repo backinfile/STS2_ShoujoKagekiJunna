@@ -32,7 +32,7 @@ public sealed class CardTextProbe : AbstractConsoleCmd
     public override CmdResult Process(Player? player, string[] args)
     {
         string directory = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "../../..", "out/tmp/card-text-audit"));
-        string path = args.FirstOrDefault() ?? Path.Combine(directory, "workbench-r2591.json");
+        string path = args.FirstOrDefault() ?? Path.Combine(directory, "workbench-cloud.json");
         using var snapshot = JsonDocument.Parse(File.ReadAllText(path));
         var source = snapshot.RootElement.GetProperty("data").GetProperty("cards").EnumerateArray()
             .Where(card => !card.TryGetProperty("trashedAt", out _) && !card.TryGetProperty("reservedAt", out _)).ToArray();
@@ -53,7 +53,7 @@ public sealed class CardTextProbe : AbstractConsoleCmd
                 if (selectionIds.Contains(id))
                 {
                     string prompt = CardChoices.Prompt(card, 3).GetFormattedText();
-                    Check(face, "selection prompt resolves", prompt.Contains("??") && !prompt.Contains("ERROR") && !prompt.Contains('{'), true);
+                    Check(face, "selection prompt resolves", prompt.Contains("选择") && !prompt.Contains("ERROR") && !prompt.Contains('{'), true);
                 }
                 string text = item.GetProperty(upgraded ? "upgradedText" : "text").GetString()!;
                 string expected = id == "JA81B" ? text.Replace("X", "7") : text;
