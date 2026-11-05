@@ -1,6 +1,10 @@
 [gd_scene load_steps=2 format=3]
-[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/rest.png" id="1"]
-[node name="JunnaRest" type="Sprite2D"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/merchant_glasses.png" id="1"]
+
+[node name="JunnaMerchant" type="Node2D"]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+position = Vector2(0, 15.176864)
 texture = ExtResource("1")
-scale = Vector2(0.17, 0.17)
-offset = Vector2(0, -768)
+scale = Vector2(0.2937709, 0.2937709)
+offset = Vector2(26.5, -759)
