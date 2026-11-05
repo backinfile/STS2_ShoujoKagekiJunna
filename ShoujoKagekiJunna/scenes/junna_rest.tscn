@@ -1,6 +1,48 @@
 [gd_scene load_steps=2 format=3]
-[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/rest.png" id="1"]
-[node name="JunnaRest" type="Sprite2D"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/rest_reading.png" id="1"]
+
+[node name="JunnaRest" type="Node2D"]
+
+[node name="ControlRoot" type="Control" parent="."]
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Visuals" type="Sprite2D" parent="ControlRoot"]
 texture = ExtResource("1")
-scale = Vector2(0.17, 0.17)
-offset = Vector2(0, -768)
+scale = Vector2(0.46, 0.46)
+offset = Vector2(152, -196)
+
+[node name="Hitbox" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -170.0
+offset_top = -390.0
+offset_right = 245.0
+offset_bottom = 210.0
+
+[node name="SelectionReticle" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -170.0
+offset_top = -390.0
+offset_right = 245.0
+offset_bottom = 210.0
+mouse_filter = 2
+
+[node name="ThoughtBubbleLeft" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -150.0
+offset_top = -350.0
+offset_right = -150.0
+offset_bottom = -350.0
+mouse_filter = 2
+
+[node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 235.0
+offset_top = -350.0
+offset_right = 235.0
+offset_bottom = -350.0
+mouse_filter = 2

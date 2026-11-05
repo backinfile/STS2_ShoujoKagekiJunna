@@ -1,0 +1,70 @@
+{
+  "active": {
+    "id": "01-bench-reading",
+    "name": "树干坐姿·读书",
+    "file": "ShoujoKagekiJunna/images/rest_reading.png",
+    "sha256": "df7f60595d35d5f4a8932fe31ac658ef3e1e98ec1d778700873f220a2c4a0d86"
+  },
+  "alternate": {
+    "id": "02-bench-rest",
+    "name": "树干坐姿·静坐",
+    "file": "ShoujoKagekiJunna/images/rest_sitting.png",
+    "sha256": "038483d39e9bce48077052d79b31410906ccb63c21bbef7a18860af2507e12e7"
+  },
+  "dimensions": [
+    1254,
+    1254
+  ],
+  "archive": "output/imagegen/junna-rest-2026-11-05/bench-v2",
+  "originals": [
+    "output/imagegen/junna-rest-2026-11-05/bench-v2/raw/01-bench-reading.png",
+    "output/imagegen/junna-rest-2026-11-05/bench-v2/raw/02-bench-rest.png"
+  ],
+  "generation": {
+    "tool": "built-in image_gen",
+    "prompts": "output/imagegen/junna-rest-2026-11-05/bench-v2/prompts.json"
+  },
+  "cleanup": {
+    "tool": "GPT Image 2 Artifact Cleaner",
+    "strength": 0.5,
+    "local_only": true,
+    "original_dimensions_preserved": true,
+    "alpha_noise_cleanup": {
+      "method": "largest 8-connected component",
+      "threshold": 16,
+      "edge_dilation": 2
+    },
+    "report": "output/imagegen/junna-rest-2026-11-05/bench-v2/candidates.json"
+  },
+  "scene": {
+    "file": "ShoujoKagekiJunna/scenes/junna_rest.tscn",
+    "root": "Node2D",
+    "visual_parent": "ControlRoot",
+    "local_scale": 0.46,
+    "game_container_scale": 0.5,
+    "effective_scale": 0.23,
+    "image_hip_anchor": [
+      475,
+      823
+    ],
+    "sprite_offset": [
+      152,
+      -196
+    ],
+    "reference": "res://scenes/rest_site/overgrowth_rest_site.tscn"
+  },
+  "validation": {
+    "result": "passed",
+    "checks": [
+      "both preserved PNGs load at 1254x1254 with alpha",
+      "effective game scale 0.23",
+      "hip anchor under native 0.5 container",
+      "required ControlRoot, hitbox, reticle and thought anchors",
+      "mirrored placement preserves hip anchor",
+      "rendered production scene using its saved texture and transforms",
+      "loaded the packaged scene in the actual game and used the native rest option successfully"
+    ],
+    "preview": "output/imagegen/junna-rest-2026-11-05/bench-v2/adopted-reading-in-room.png",
+    "in_game_screenshot": "out/tmp/conversation-assets-20261105/14-rest-head-only.png"
+  }
+}

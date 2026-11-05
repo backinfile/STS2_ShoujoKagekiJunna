@@ -1,0 +1,31 @@
+{
+  "asset": "ShoujoKagekiJunna/images/portrait_icon.png",
+  "outline": "ShoujoKagekiJunna/images/portrait_icon_outline.png",
+  "source": "output/imagegen/junna-redesign-2026-11-04/references/junna-costume.png",
+  "archive": "output/imagegen/junna-ui-portraits-2026-11-04/head-with-neck",
+  "extraction": "Head, visible neck, glasses, bells and ponytail retained; shoulders, collar and cape removed with a local alpha mask along the upper collar edge.",
+  "cleanup": {
+    "tool": "GPT Image 2 Artifact Cleaner",
+    "strength": 0.25,
+    "local_only": true,
+    "original": "output/imagegen/junna-ui-portraits-2026-11-04/head-with-neck/raw.png",
+    "clean": "output/imagegen/junna-ui-portraits-2026-11-04/head-with-neck/clean.png",
+    "report": "output/imagegen/junna-ui-portraits-2026-11-04/head-with-neck/manifest.json"
+  },
+  "dimensions": [85, 85],
+  "sha256": "72d95f7636af56b2d2c39382ecd8477e6263970277432dd844c3757149e1d434",
+  "outline_sha256": "80fc0f0f154f1c6fa3f240003667ba9d3d8771e1d70e81caf3b27254b16f9f2f",
+  "validation": {
+    "date": "2026-11-05",
+    "result": "passed",
+    "checks": [
+      "85x85 RGBA texture and outline exported after local cleanup",
+      "visible neck restored from the official source; shoulders remain outside the alpha mask",
+      "glasses, face contour, neck, hair and transparent edges inspected before and after cleanup",
+      "rebuilt package loaded in the actual game; restored neck visible in the top-bar portrait"
+    ],
+    "comparison": "output/imagegen/junna-ui-portraits-2026-11-04/head-with-neck/comparison.png",
+    "screenshot": "out/tmp/portrait-neck-20261105/02-in-game-neck-restored.png",
+    "recording": "out/tmp/portrait-neck-20261105/sts2-20261105-021019-4a03d0b1062542568c2496ae0e45d89b.mp4"
+  }
+}
