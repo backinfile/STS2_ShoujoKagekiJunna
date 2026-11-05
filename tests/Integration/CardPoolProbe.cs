@@ -25,7 +25,7 @@ public static class CardPoolProbe
     }
     public static async Task Run(Player player, bool events = false, string? only = null)
     {
-        string report = "D:/Github/STS2_ShoujoKagekiJunna/artifacts/dev-game/" + (only != null ? "card-targeted-results.json" : events ? "card-event-results.json" : "card-pool-results.json");
+        string report = Path.Combine(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..")), (only != null ? "card-targeted-results.json" : events ? "card-event-results.json" : "card-pool-results.json"));
         var rows = new List<object>();
         var context = new ThrowingPlayerChoiceContext();
         var state = player.Creature.CombatState!;
@@ -51,6 +51,7 @@ public static class CardPoolProbe
             }
             await CreatureCmd.LoseBlock(context, player.Creature, player.Creature.Block, null);
             player.PlayerCombatState!.Energy = 99;
+            player.PlayerCombatState.IncrementTurnNumber();
         }
         async Task<CardModel> Card(string id, PileType pile = PileType.Hand, bool upgraded = false)
         {
@@ -71,7 +72,7 @@ public static class CardPoolProbe
         {
         await Scenario("catalog", async () =>
         {
-            Check("active card definitions", CardCatalog.Cards.Count, 115);
+            Check("active card definitions", CardCatalog.Cards.Count, 117);
             var descriptions = new List<object>();
             foreach (var definition in CardCatalog.Cards)
             {
@@ -85,8 +86,8 @@ public static class CardPoolProbe
                 _ = card.HoverTips.ToArray();
                 descriptions.Add(new { definition.Id, definition.Name, normal, upgraded, capable });
             }
-            File.WriteAllText("D:/Github/STS2_ShoujoKagekiJunna/artifacts/dev-game/card-descriptions.json", JsonSerializer.Serialize(descriptions));
-            Check("base and upgraded descriptions rendered", descriptions.Count, 115);
+            File.WriteAllText(Path.Combine(Path.GetDirectoryName(report)!, "card-descriptions.json"), JsonSerializer.Serialize(descriptions));
+            Check("base and upgraded descriptions rendered", descriptions.Count, 117);
             await Task.CompletedTask;
         });
         await Scenario("arrow immediate and extra damage", async () =>
@@ -137,7 +138,7 @@ public static class CardPoolProbe
             player.PlayerCombatState!.Energy = 6;
             var attack = await Card("JK50"); var argument = await Card("JK50B");
             int hp = target.CurrentHp; await Play(argument);
-            Check("effect plays selected card for its real cost", player.PlayerCombatState.Energy, 0);
+            Check("argument pays only its own cost", player.PlayerCombatState.Energy, 4);
             Check("selected card resolves", hp - target.CurrentHp, 40);
         });
         await Scenario("next non-power play", async () =>
@@ -147,7 +148,7 @@ public static class CardPoolProbe
             Check("next non-power rule skips power", CatalogPower.Has(player, "JH19"), true);
             int hp = target.CurrentHp; await Play(await Card("JB01"));
             Check("next card resolves twice", hp - target.CurrentHp, 12);
-            Check("next card pays twice", player.PlayerCombatState.Energy, 6);
+            Check("next card pays once", player.PlayerCombatState.Energy, 7);
             Check("next non-power rule consumed", CatalogPower.Has(player, "JH19"), false);
         });
         await Scenario("knowledge bundles and upgrades", async () =>

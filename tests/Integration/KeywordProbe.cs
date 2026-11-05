@@ -45,7 +45,7 @@ public sealed class KeywordProbe : AbstractConsoleCmd
         foreach (var (keyword, expected) in new[]
         {
             (JunnaKeywords.Arrow, "打出后布置，等待数个回合后触发其卡牌效果。"),
-            (JunnaKeywords.Knowledge, "获得此牌时，同时获得关联的知识牌。"),
+            (JunnaKeywords.Knowledge, "获得此牌时，同时获得关联的其他知识牌。"),
             (JunnaKeywords.DamageBonus, "本场战斗中额外获得的伤害数值。")
         })
             CheckValue("workbench mechanism", keyword.ToString(), ((HoverTip)HoverTipFactory.FromKeyword(keyword)).Description, expected);

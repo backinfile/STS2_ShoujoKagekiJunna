@@ -97,6 +97,18 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
         }
     }
 
+    public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount) =>
+        DesignId == "JH19" && card.Owner.Creature == Owner && card.Type != CardType.Power
+            ? playCount + _grants.Count : playCount;
+
+    public override Task AfterModifyingCardPlayCount(CardModel card)
+    {
+        if (DesignId != "JH19" || card.Owner.Creature != Owner || card.Type == CardType.Power)
+            return Task.CompletedTask;
+        _grants.Clear();
+        return PowerCmd.Remove(this);
+    }
+
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay play)
     {
         if (play.Player != Owner.Player) return;
@@ -132,10 +144,6 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
                 case "JK64" when CardCatalog.IsKnowledge(play.Card):
                     await AccelerateChoice(grant, context, 1, grant.N(0)); break;
                 case "JG31": DamageModifiers.Add(play.Card, grant.V("Bonus")); break;
-                case "JH19" when play.Card.Type != CardType.Power:
-                    _grants.Remove(grant); // Consume before the nested play can raise this hook again.
-                    await CardActions.PaidPlay(context, play.Card, play.Target, restartArrow: false);
-                    break;
                 case "JK75" when CardCatalog.IsKnowledge(play.Card):
                     var eligible = play.Player.PlayerCombatState!.Hand.Cards.Where(DamageModifiers.CanDealDamage).ToArray();
                     if (eligible.Length > 0) DamageModifiers.Add(play.Player.RunState.Rng.CombatCardSelection.NextItem(eligible)!, grant.V("Bonus"));

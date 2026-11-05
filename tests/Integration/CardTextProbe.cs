@@ -19,7 +19,7 @@ public sealed class CardTextProbe : AbstractConsoleCmd
 
     private static string Normalize(string text)
     {
-        text = Regex.Replace(text, @"\[img[^\]]*\][^\[]*energy_icon\.png\[/img\]", "@energy@");
+        text = Regex.Replace(text, @"\[img[^\]]*\][^\[]*energy_icon(?:_small)?\.png\[/img\]", "@energy@");
         text = Regex.Replace(text, @"\[[^\]]*\]", "");
         text = Regex.Replace(text, @"(?<=\d)(?:@energy@)+", "");
         text = Regex.Replace(text, @"(?:@energy@)+", match => (match.Length / "@energy@".Length).ToString());

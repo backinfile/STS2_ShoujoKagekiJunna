@@ -107,7 +107,8 @@ public static class CardCompletionProbe
                 }
                 if (id is "JA65" or "JA53" or "JK37B") { selected = await Card("JA38", PileType.Draw); helpers.Add(selected); }
                 if (id == "JA66") { selected = await Card("JB01", PileType.Discard); helpers.Add(selected); helpers.Add(await Card("JB02", PileType.Discard)); }
-                if (id == "JK78") { selected = await Card("JB01", PileType.Draw); helpers.Add(selected); helpers.Add(await Card("JB01", PileType.Discard)); }
+                if (id is "JK78" or "JK78D") { selected = await Card("JB01", PileType.Draw); helpers.Add(selected); helpers.Add(await Card("JB01", PileType.Discard)); }
+                if (id == "JK78E") { selected = await Card("JB01", PileType.Discard); helpers.Add(selected); }
                 if (id == "JH31") for (int i = 0; i < 4; i++) helpers.Add(await Card("JA38", PileType.Draw));
                 if (id is "JA15" or "JF07" or "JK82B" or "JA57" or "B")
                     for (int i = 0; i < 5; i++) helpers.Add(await Card("JB01", PileType.Draw));
@@ -155,7 +156,7 @@ public static class CardCompletionProbe
                 switch (id)
                 {
                     case "JG03": Check("selected extra hit", DamageModifiers.CaptureDamageModifierSnapshot(selected!).ExtraHits, 1); break;
-                    case "JG09": case "JG27": case "JG36": case "JK78": case "JA75":
+                    case "JG09": case "JG27": case "JG36": case "JK78": case "JK78D": case "JK78E": case "JA75":
                         Check("selected bonus", DamageModifiers.CaptureDamageModifierSnapshot(selected!).DamageBonus, (decimal)N("Bonus")); break;
                     case "JG16": Check("transfer total", DamageModifiers.CaptureDamageModifierSnapshot(selected!).DamageBonus, 7m); break;
                     case "JT02": Check("converted type", selected!.Type, CardType.Attack); Check("converted cost", CardActions.Cost(selected!), 1); break;
@@ -180,7 +181,7 @@ public static class CardCompletionProbe
                     case "JA81": case "JA76": case "JA82":
                         var flying = ArrowCombat.Deployed.Where(a => CardCatalog.DesignId(a.Card) == "JA81B").ToArray();
                         Check("flying count", flying.Length, id == "JA82" ? 3 : id == "JA76" ? state.GetOpponentsOf(player.Creature).Count() : 1);
-                        Check("flying upgrade", flying.All(a => a.Card.IsUpgraded == up && a.Remaining == (up ? 1 : 2)), true);
+                        Check("flying upgrade", flying.All(a => a.Card.IsUpgraded == (id != "JA76" && up) && a.Remaining == (id != "JA76" && up ? 1 : 2)), true);
                         Check("flying damage", flying.All(a => a.Card.DynamicVars.Damage.IntValue == baseDamage), true); break;
                     case "JA43": case "JK45B": Check("accelerated countdown", ArrowCombat.Find(deployed!)!.Remaining, 2); break;
                     case "JA71": Check("all arrows completed", ArrowCombat.Deployed.Count, 0); break;
@@ -216,7 +217,7 @@ public static class CardCompletionProbe
                     descriptions.Add(new { definition.Id, definition.Name, normal, preview, upgraded });
                 }
                 File.WriteAllText(Path.Combine(Path.GetDirectoryName(report)!, "card-descriptions.json"), JsonSerializer.Serialize(descriptions));
-                Check("base, upgrade preview and upgraded descriptions", descriptions.Count, 115);
+                Check("base, upgrade preview and upgraded descriptions", descriptions.Count, 117);
                 await Task.CompletedTask;
             });
             foreach (bool up in new[] { false, true })
@@ -362,7 +363,7 @@ public static class CardCompletionProbe
                 Check("two events from multihit attack", ArrowCombat.Deployed.Count, 2);
                 Check("both tokens upgraded", ArrowCombat.Deployed.All(a => a.Remaining == 1 && a.Card.IsUpgraded), true);
             });
-            await Scenario("paid replay and native replay event counts", async () =>
+            await Scenario("temporary replay and native replay event counts", async () =>
             {
                 await Play(await Card("JH23", up: true)); var attack = await Card("JK50"); attack.BaseReplayCount = 1;
                 await Play(attack); Check("native replay counts one play", player.Creature.Block, 9);
@@ -449,8 +450,8 @@ public static class CardCompletionProbe
                     case "JH19":
                         player.PlayerCombatState.Energy = 2; int replayHp = target.CurrentHp;
                         await Play(await Card("JB01"));
-                        Check("paid duplicate damage", replayHp - target.CurrentHp, 12);
-                        Check("paid twice", player.PlayerCombatState.Energy, 0);
+                        Check("native replay damage", replayHp - target.CurrentHp, 12);
+                        Check("paid once for native replay", player.PlayerCombatState.Energy, 1);
                         Check("readiness consumed", CatalogPower.Has(player, id), false); break;
                     case "JH21":
                         player.PlayerCombatState.Energy = 0; await End(); Check("empty energy gives no block", player.Creature.Block, 0);

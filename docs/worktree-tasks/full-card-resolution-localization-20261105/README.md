@@ -1,0 +1,45 @@
+﻿# 全卡结算与本地化
+
+## Original user input
+
+> $worktree-task 你来为每一张卡列举出其所有结算情况，然后逐个进行测试。另外需要补足每张牌缺少的本地化文字，补充时要求参考同类文本的描述，尽量简洁，不加多余解释描述。比如专项加练这种需要选择抽牌堆或者弃牌堆的，你需要创建2张牌来补齐这个环节，其卡图和文本按照工作台要求进行补充。
+
+## Brief task plan
+
+- 起始分支：`main`；起始提交：`e4aae718fb0ec202b6213c893b21ab29c0aeeba3`。
+- 工作树：`../worktrees/STS2_ShoujoKagekiJunna/full-card-resolution-localization-20261105`；任务分支：`task/full-card-resolution-localization-20261105`。
+- 原目录存在未提交的工作台数据修改，保留原内容；工作台通过 MCP 读取和编辑。
+- 建立每张实装卡的基础、升级与条件分支清单；核对工作台当前设计、运行逻辑、本地化、选牌环节与素材。
+- 补齐简洁的本地化和选择牌；使用独立游戏与存档逐项验证并保存结果，准备环境后录制合法操作示例。
+- 汇总一份任务提交，完成本地同步后请求合并确认；合并后另行请求清理确认。
+
+## Result and changes
+
+独立版本实现与逐牌验证已完成，正在汇总提交后同步兼容分支。
+
+- 新增专项加练的抽牌堆、弃牌堆选项模型、卡图和工作台记录；先选一个牌堆，再选0～3张合格实际牌，保持牌区和顺序。
+- 19张选择牌补齐独立选择提示；知识短提示读取工作台机制定义；保留能量采用数字和单个能量图标。
+- 双星沿最新r2597规则使用原版临时重放，一次付费；横扫与横扫+均创建基础飞矢，等待2回合。
+- 117张牌的234个正常牌面及1185个条件场景已逐项通过；全部文字与关键词通过。明细见[逐牌清单](card-cases.md)及[验证结果](verification.json)。
+- 已完成21.2秒合法选牌与强化攻击录像，实际打击造成12点伤害；最终演示将在兼容同步后重录并保存于本目录。
+- 测试探针修正了回合历史隔离、职业小能量图标归一化和房间准备时序。演示准备使用正常移牌、生成流程，并逐张同步牌堆计数。
+- 原目录的既有工作台、AGENTS、打包脚本和打包测试修改保留，所有任务修改在隔离工作树完成。
+- 待完成：同步d637ada，完成双版本构建及受影响项复核，重录最终演示；随后请求合并确认。
+
+## Follow-up input
+
+> 本会话使用端口 15743，工作树 ../worktrees/STS2_ShoujoKagekiJunna/pursuit-upgrade-preview-analysis-20261105，游戏 artifacts/upgrade-preview/game，探针与录像 out/tmp/pursuit-upgrade-preview/。尚未提交，完成必要验证后给提交号。正在改 DamagePatches/DamageExecution（修复 RitsuLib AttackHitHook 冲突）、正式版/测试版 API 适配与双实现 loader/build.ps1、ArrowHud 层级/定位、CatalogPower 的 JH19 与 CardActions（保持非能力牌及再次支付费用，改临时复制再打出）。CardEffects.cs 尚无改动，可由你处理。工作台 r2596，知识描述 r2594、留能数字图标规则 r2595、双星内部结算规则 r2596。请从 MCP 取最新。新版 dist 主 DLL 将是 loader，测试引用应指向 dist/ShoujoKagekiJunna/lib/ShoujoKagekiJunna.Beta.dll 或 .Stable.dll。Steam 的能量保留失效来自初始化 PatchAll 被 RitsuLib 的 per-hit 调用改写冲突打断；单模组正常。
+
+> 用户刚再次修改双星规则，这会直接影响你接下来的 JH19 实测：现在改为下一张非能力牌打出时临时增加 1 次原版重放（ModifyCardPlayCount / AfterModifyingCardPlayCount），不再走临时复制与额外付费。工作台已同步最新牌面和内部规则为 r2597，基础文本“获得4点格挡。下一张非能力牌重放1次。”，升级为7格挡。请按最新规则测试。我会移除本会话刚写的临时复制路径，并给满弦射击补 IsFirstInSeries 防止原版重放重复布置计数。
+
+已按最新跟进覆盖旧双星测试预期；使用独立工作台 MCP 17843 和独立游戏端口 15747。15737 在本任务重启空档被卡框特效会话使用，发现后已协调并迁移。
+
+> 横扫+创建的飞矢不应该是升级过的
+
+据此修正横扫两个版本均生成基础飞矢，保留各目标本次伤害记录与2回合等待；连射、即兴、箭雨按各自当前规则处理。
+
+> 重复的 JunnaFullDraw 首次结算判断已去掉。Beta Steam 同模组顺序已实测能量保留、双星一次付费和箭矢一次布置两次结算通过；设置页箭矢 y=188 全程稳定，录像完成。正式版实机发现 NInspectCardScreen 没有 _Input、CardPileCmd.Add 少一个 bool，正在收尾这两处及旧版模型 ID 发现，提交后马上发 hash。未动 CardEffects/JA76。
+
+> 任务实现提交已生成：7a3eff33b85e24a5c7a99146859f1e44cafc9a4d（task/pursuit-upgrade-preview-analysis-20261105）。你可同步此提交：JH19 为原版 12 行钩子，JunnaFullDraw 仅一条首次结算判断；没有 CardEffects/JA76 修改。正式/测试版 API、common loader、Ritsu 攻击钩子顺序/包装均已实机通过能量4→4、原版21伤/2回调、真实Karen16伤、双星12伤一次付费及后续6伤。旧版还需 loader 的 StableModelTypesPatch 防止类型扫描内联漏掉分离程序集。构建后安装整个 dist/ShoujoKagekiJunna，保留 lib/；集成测试默认引用 lib/Beta DLL。15743/15744 现已停止我的测试实例。main 后来新增 55f4e09/37435de，我已无冲突同步进任务分支，正在作整合构建检查，原main尚待用户合入确认。
+
+> 整合收尾完成：实现提交仍为 7a3eff33b85e24a5c7a99146859f1e44cafc9a4d；任务分支最新 d637ada 已包含 main 的 55f4e09/37435de，双方修改自动合并。两版重新构建（含 BonusVfx）及集成测试编译均零警告/错误；最新知识牌右键预览的取消/确认在两版都实机通过。我的两个实例已关闭，当前仅等待用户批准合入原 main。

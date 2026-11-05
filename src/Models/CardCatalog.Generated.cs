@@ -320,3 +320,9 @@ public sealed class JunnaCardJA82() : CatalogCard("JA82");
 
 [CustomID("JUNNA_JH31")]
 public sealed class JunnaCardJH31() : CatalogCard("JH31");
+
+[CustomID("JUNNA_JK78D")]
+public sealed class JunnaCardJK78D() : CatalogCard("JK78D");
+
+[CustomID("JUNNA_JK78E")]
+public sealed class JunnaCardJK78E() : CatalogCard("JK78E");
