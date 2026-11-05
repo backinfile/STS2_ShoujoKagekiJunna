@@ -1,9 +1,9 @@
 {
   "cards": 117,
   "normalFaces": 234,
-  "branchCases": 1185,
-  "perCardCases": 1419,
-  "assertions": 8561,
+  "branchCases": 1425,
+  "perCardCases": 1659,
+  "assertions": 9773,
   "suites": [
     {
       "suite": "core",
@@ -33,6 +33,12 @@
       "suite": "triggers",
       "cases": 62,
       "checks": 104,
+      "pass": true
+    },
+    {
+      "suite": "knowledge",
+      "cases": 240,
+      "checks": 1212,
       "pass": true
     },
     {
@@ -8440,6 +8446,1926 @@
       "branch": "叠加施加：独立数值与次数",
       "pass": true,
       "checks": 1
+    },
+    {
+      "id": "JK10",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK10",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK10",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK10",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK10",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK10",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK10B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK10B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK10B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK10B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK10B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK10B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK11",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK11",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK11",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK11",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK11",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK11",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK11B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK11B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK11B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK11B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK11B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK11B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK15",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK15",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK15",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK15",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK15",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK15",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK15B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK15B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK15B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK15B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK15B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK15B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "A",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "A",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "A",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "A",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "A",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "A",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK32",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK32",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK32",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK32",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK32",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK32",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK32B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK32B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK32B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK32B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK32B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK32B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK32C",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK32C",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK32C",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK32C",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK32C",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK32C",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK33",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK33",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK33",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK33",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK33",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK33",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK33B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK33B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK33B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK33B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK33B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK33B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK37",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK37",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK37",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK37",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK37",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK37",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK37B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK37B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK37B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK37B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK37B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK37B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK37C",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK37C",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK37C",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK37C",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 8
+    },
+    {
+      "id": "JK37C",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK37C",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK43",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK43",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK43",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK43",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK43",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK43",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK43B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK43B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK43B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK43B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK43B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK43B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK44",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK44",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK44",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK44",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK44",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK44",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK44B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK44B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK44B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK44B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK44B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK44B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK45",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK45",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK45",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK45",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK45",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK45",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK45B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK45B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK45B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK45B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK45B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK45B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK46",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK46",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK46",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK46",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK46",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK46",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK46B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK46B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK46B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK46B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK46B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK46B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK48",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK48",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK48",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK48",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK48",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK48",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK48B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK48B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK48B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK48B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK48B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK48B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK49",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK49",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK49",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK49",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK49",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK49",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK49B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK49B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK49B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK49B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK49B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK49B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK50",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK50",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK50",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK50",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK50",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK50",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK50B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK50B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK50B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK50B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK50B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK50B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK67",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK67",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK67",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK67",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK67",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK67",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK67B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK67B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK67B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK67B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK67B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK67B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK73",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK73",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK73",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK73",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK73",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK73",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK73B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK73B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK73B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK73B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK73B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK73B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK74",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK74",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK74",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK74",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK74",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK74",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK74B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK74B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK74B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK74B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK74B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK74B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK81",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK81",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK81",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK81",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK81",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK81",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK81B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK81B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK81B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK81B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK81B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK81B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK82",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK82",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK82",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK82",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK82",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK82",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK82B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK82B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK82B",
+      "upgraded": false,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JK82B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "发现入口：整组数量、源牌升级与关联牌基础版",
+      "pass": true,
+      "checks": 7
+    },
+    {
+      "id": "JK82B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "单张生成：只生成指定对象与版本",
+      "pass": true,
+      "checks": 3
+    },
+    {
+      "id": "JK82B",
+      "upgraded": true,
+      "suite": "knowledge",
+      "branch": "关联抽取：全部关联实际牌、同名及弃牌堆隔离",
+      "pass": true,
+      "checks": 5
     },
     {
       "id": "JK10B",

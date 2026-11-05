@@ -19,7 +19,7 @@ namespace JunnaIntegration;
 public sealed class CardBranchesCommand : AbstractConsoleCmd
 {
     public override string CmdName => "junna_branches";
-    public override string Args => "core | selection | conditions | relationships | triggers | targets | retarget | prepare [card-id]";
+    public override string Args => "core | selection | conditions | relationships | triggers | targets | knowledge | retarget | prepare [card-id]";
     public override string Description => "Run the enumerated per-card resolution branches in the isolated test save.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args)
@@ -540,6 +540,48 @@ public static class CardBranchesProbe
                         Check("other target unaffected",enemies.Skip(1).All(e=>e.GetPower<WeakPower>()==null&&e.GetPower<VulnerablePower>()==null),true);
                     }
                 });
+
+                if (part == "knowledge")
+                {
+                    var group=CardCatalog.Groups.FirstOrDefault(g=>g.MainCardId==id||g.GrantedCardIds.Contains(id));
+                    if(group!=null)
+                    {
+                        Add(id,up,"发现入口：整组数量、源牌升级与关联牌基础版",async()=>
+                        {
+                            var entry=CardCatalog.Create(id,player);
+                            if(up){entry.UpgradeInternal();entry.FinalizeUpgradeInternal();}
+                            var picked=await CardSelectCmd.FromChooseACardScreen(context,[entry],player);
+                            Check("same discovery instance",ReferenceEquals(picked,entry),true);
+                            await CardPileCmd.AddGeneratedCardToCombat(picked!,PileType.Hand,player);
+                            var expected=group.GrantedCardIds.ToDictionary(key=>key,key=>group.GrantedCardCounts.GetValueOrDefault(key,1));expected[group.MainCardId]=1;
+                            Check("group total",player.PlayerCombatState!.Hand.Cards.Count,expected.Values.Sum());
+                            foreach(var pair in expected)Check("member "+pair.Key,player.PlayerCombatState.Hand.Cards.Count(c=>CardCatalog.DesignId(c)==pair.Key),pair.Value);
+                            Check("source upgrade retained",entry.IsUpgraded,up);
+                            Check("related cards base",player.PlayerCombatState.Hand.Cards.Where(c=>c!=entry).All(c=>!c.IsUpgraded),true);
+                            Check("owner retained",player.PlayerCombatState.Hand.Cards.All(c=>c.Owner==player),true);
+                        });
+                        Add(id,up,"单张生成：只生成指定对象与版本",async()=>
+                        {
+                            await CardActions.Generate(player,id,1,PileType.Hand,up);
+                            Check("only one generated",player.PlayerCombatState!.Hand.Cards.Count,1);
+                            var generated=player.PlayerCombatState.Hand.Cards.Single();Check("selected member",CardCatalog.DesignId(generated),id);Check("generated version",generated.IsUpgraded,up);
+                        });
+                        Add(id,up,"关联抽取：全部关联实际牌、同名及弃牌堆隔离",async()=>
+                        {
+                            var entry=await Card(id,up:up);
+                            var partners=new List<CardModel>();
+                            foreach(var partnerId in group.GrantedCardIds.Prepend(group.MainCardId).Where(key=>key!=id))
+                                for(int i=0;i<(partnerId==group.MainCardId?1:group.GrantedCardCounts.GetValueOrDefault(partnerId,1));i++)partners.Add(await Card(partnerId,PileType.Draw));
+                            var same=await Card(id,PileType.Draw);var unrelated=await Card("JB01",PileType.Draw);
+                            var discarded=await Card(CardCatalog.DesignId(partners[0])!,PileType.Discard);
+                            await KnowledgeCombat.DrawPartners(context,entry);
+                            Check("linked actual instances drawn",partners.All(c=>c.Pile!.Type==PileType.Hand),true);
+                            Check("exact hand count",player.PlayerCombatState!.Hand.Cards.Count,partners.Count+1);
+                            Check("same named source stays",same.Pile!.Type,PileType.Draw);
+                            Check("unrelated stays",unrelated.Pile!.Type,PileType.Draw);Check("discard not searched",discarded.Pile!.Type,PileType.Discard);
+                        });
+                    }
+                }
 
             if (part == "conditions")
             {

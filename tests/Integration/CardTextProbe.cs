@@ -59,6 +59,25 @@ public sealed class CardTextProbe : AbstractConsoleCmd
                     Check(face, "turns", card.DynamicVars["Turns"].IntValue, item.GetProperty(upgraded ? "upgradedTurns" : "turns").GetInt32());
             }
         }
+        var ids = source.Select(item => item.GetProperty("id").GetString()!).ToHashSet();
+        var groups = snapshot.RootElement.GetProperty("data").GetProperty("partnerGroups").EnumerateArray()
+            .Where(group => ids.Contains(group.GetProperty("mainCardId").GetString()!)).ToArray();
+        Check("knowledge groups", "count", CardCatalog.Groups.Count, groups.Length);
+        foreach (var item in groups)
+        {
+            string main = item.GetProperty("mainCardId").GetString()!;
+            var actual = CardCatalog.Groups.FirstOrDefault(group => group.MainCardId == main);
+            Check(main, "knowledge group exists", actual != null, true);
+            if (actual == null) continue;
+            var granted = item.GetProperty("grantedCardIds").EnumerateArray().Select(value => value.GetString()!).ToArray();
+            Check(main, "knowledge member order", string.Join("|", actual.GrantedCardIds), string.Join("|", granted));
+            Check(main, "main quantity", 1, item.TryGetProperty("mainCardCount", out var mainCount) ? mainCount.GetInt32() : 1);
+            foreach (var id in granted)
+            {
+                int expected = item.TryGetProperty("grantedCardCounts", out var counts) && counts.TryGetProperty(id, out var count) ? count.GetInt32() : 1;
+                Check(id, "knowledge quantity", actual.GrantedCardCounts.GetValueOrDefault(id, 1), expected);
+            }
+        }
         Directory.CreateDirectory(directory);
         File.WriteAllText(Path.Combine(directory, "rendered-results.json"), JsonSerializer.Serialize(new
         {
