@@ -15,9 +15,9 @@ const JunnaRouteStatistics = (() => {
     const text=String(card.text||'').replace(/^知识[。．]?/,''),knowledge=(card.keywords||[]).includes('知识')||/^知识[。．]/.test(card.text||'');
     let trigger=false,payoff=false;
     if(route.id==='SYS_stage') {
-      // 打出星矢才提供触发；加速、复制、转型和调度依赖已有对象。
-      trigger=card.type==='星矢';
-      payoff=/星矢[^。]*(?:完成时|完成后|额外触发时|额外触发后)|打出[^。]*星矢牌(?:时|后)|(?:每当|每次)[^。]*星矢[^。]*加速[^。]*(?:时|后)|星矢数量|每有[^。]*星矢|(?:在场|布置)期间|有布置中?的星矢时/.test(text);
+      // 打出箭矢才提供触发；加速、复制、转型和调度依赖已有对象。
+      trigger=card.type==='箭矢';
+      payoff=/箭矢[^。]*(?:完成时|完成后|额外触发时|额外触发后)|打出[^。]*箭矢牌(?:时|后)|(?:每当|每次)[^。]*箭矢[^。]*加速[^。]*(?:时|后)|箭矢数量|每有[^。]*箭矢|(?:在场|布置)期间|有布置中?的箭矢时/.test(text);
     } else if(route.id==='SYS_partner') {
       trigger=knowledge||/(?:抽取|复制|加入|放入|取回)[^。]*知识牌/.test(text);
       payoff=/(?:打出|抽到)[^。]*知识牌[^。]*(?:后|时)|每[^。]*知识牌|知识牌[^。]*(?:进入手牌|时|后)|本场战斗打出过|若[^。]*关联/.test(text);
@@ -42,7 +42,7 @@ const JunnaRouteStatistics = (() => {
     const value = {...inferProfile(card,route),...base,...override};
     if(route.id==='SYS_stage') {
       const payoff=value.role==='payoff'||value.role==='both';
-      if(card.type==='星矢')value.role=payoff?'both':'trigger';
+      if(card.type==='箭矢')value.role=payoff?'both':'trigger';
       else if(value.role==='trigger'||value.role==='both')value.role=payoff?'payoff':'tool';
     }
     return {role:Object.hasOwn(roles,value.role)?value.role:'unclassified',cross:Boolean(value.cross),ports:[...new Set((Array.isArray(value.ports)?value.ports:[]).filter(port=>Object.hasOwn(ports,port)))]};

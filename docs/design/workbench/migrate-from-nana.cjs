@@ -10,7 +10,7 @@ const read = file => fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '');
 const snapshotFile = path.join(source, 'data/奈奈Mod制作台_本地编辑.json');
 const snapshotText = read(snapshotFile);
 const snapshot = JSON.parse(snapshotText);
-const replaceText = value => value.replaceAll('舞台装置', '星矢').replaceAll('装置', '星矢').replaceAll('伙伴', '知识').replaceAll('奈奈', '纯那');
+const replaceText = value => value.replaceAll('舞台装置', '箭矢').replaceAll('装置', '箭矢').replaceAll('伙伴', '知识').replaceAll('奈奈', '纯那');
 const adapt = value => typeof value === 'string' ? replaceText(value) : Array.isArray(value) ? value.map(adapt) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([key, item]) => [key, adapt(item)])) : value;
 const data = adapt(snapshot.data);
 const sourceCards = snapshot.data.cards;
@@ -34,7 +34,7 @@ for (const term of data.terms) {
 }
 const stage = data.mechanisms.find(item => item.system === 'stage');
 stage.rules = stage.rules.map(rule => rule.includes('通用重放与耗能修改')
-  ? '星矢牌的通用重放与耗能修改对所有玩家有效。布置时汇总有效的重放增加量，多名纯那各提供重放1时合计重放2，归0时总共执行3次；通用耗能修改按牌面指定的范围处理。'
+  ? '箭矢牌的通用重放与耗能修改对所有玩家有效。布置时汇总有效的重放增加量，多名纯那各提供重放1时合计重放2，归0时总共执行3次；通用耗能修改按牌面指定的范围处理。'
   : rule);
 const knowledge = data.mechanisms.find(item => item.system === 'partner');
 knowledge.rules = knowledge.rules.filter(rule => !rule.includes('倾向于') && !rule.includes('RE:CREATE'));
@@ -44,7 +44,7 @@ data.meta.startingDeck = [];
 data.meta.namingRequirements = {general: '使用原作完整词语或忠实中文翻译，保留出处。'};
 data.meta.rewardRules = Object.fromEntries(Object.entries(data.meta.rewardRules).map(([key, value]) => [key, value.replace(/[，、]\d+种/g, '')]));
 data.meta.ruleConventions = data.meta.ruleConventions.filter(rule => !mentionsCard(rule));
-data.meta.systemNames = {stage: '星矢', partner: '知识', growth: '伤害加成', utility: '体系外'};
+data.meta.systemNames = {stage: '箭矢', partner: '知识', growth: '伤害加成', utility: '体系外'};
 data.meta.sourceDate = '2026-11-01';
 delete data.meta.legacyRevisions;
 const state = {schemaVersion: 1, workspaceId: 'junna-mod-workbench-20261101-v1', revision: 0, data, history: [], undoStack: [], redoStack: [], assets: {}, seedBatches: [], appliedSeedBatches: [], ui: {tab: 'mechanisms', selected: null, mechanismFilter: 'all'}};
@@ -79,5 +79,5 @@ const assets = JSON.parse(assetMatch[1]);
 const placeholder = '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="460" viewBox="0 0 500 460"><rect width="500" height="460" fill="#1a2934"/><g fill="none" stroke="#466778" stroke-width="2"><path d="M86 345 181 117 312 179 413 73M181 117 268 337 411 375M312 179 268 337"/></g><g fill="#83c8d5"><circle cx="86" cy="345" r="4"/><circle cx="181" cy="117" r="5"/><circle cx="312" cy="179" r="4"/><circle cx="413" cy="73" r="4"/><circle cx="268" cy="337" r="4"/><circle cx="411" cy="375" r="3"/><path d="m250 173 5 18 18 5-18 5-5 18-5-18-18-5 18-5Z"/></g></svg>';
 assets.defaultPortrait = 'data:image/svg+xml;base64,' + Buffer.from(placeholder).toString('base64');
 fs.writeFileSync(path.join(here, 'assets.json'), JSON.stringify(assets));
-fs.writeFileSync(path.join(here, 'provenance.json'), JSON.stringify({source: snapshotFile, sourceRevision: snapshot.revision, sha256: crypto.createHash('sha256').update(snapshotText).digest('hex'), mappings: {'舞台装置': '星矢', '伙伴': '知识'}, retained: ['机制规则', '通用词条', '编辑功能'], empty: ['卡池', '知识关联组', '初始牌组', '风格约定', '编辑历史'], excludedTerms: snapshot.data.terms.filter(term => !data.terms.some(retained => retained.id === term.id)).map(term => term.id)}, null, 2) + '\n');
+fs.writeFileSync(path.join(here, 'provenance.json'), JSON.stringify({source: snapshotFile, sourceRevision: snapshot.revision, sha256: crypto.createHash('sha256').update(snapshotText).digest('hex'), mappings: {'舞台装置': '箭矢', '伙伴': '知识'}, retained: ['机制规则', '通用词条', '编辑功能'], empty: ['卡池', '知识关联组', '初始牌组', '风格约定', '编辑历史'], excludedTerms: snapshot.data.terms.filter(term => !data.terms.some(retained => retained.id === term.id)).map(term => term.id)}, null, 2) + '\n');
 console.log(JSON.stringify({mechanisms: data.mechanisms.length, terms: data.terms.length, cards: data.cards.length, assets: Object.keys(assets).length}));

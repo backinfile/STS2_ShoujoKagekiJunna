@@ -140,7 +140,7 @@ public static class CardCompletionProbe
                 if (id == "JK50B") expectedDamage = 40;
                 Check("printed cost", card.EnergyCost.GetWithModifiers(CostModifiers.None), up ? definition.UpgradedCost : definition.Cost);
                 Check("paid play", await Play(card), true);
-                if (definition.Type == "星矢" && ArrowCombat.Find(card) is { } waiting)
+                if (definition.Type == "箭矢" && ArrowCombat.Find(card) is { } waiting)
                 {
                     Check("initial countdown", waiting.Remaining, Math.Max(0, N("Turns") - (id == "JA59" ? 3 : 0)));
                     Check("damage waits for completion", hp - target.CurrentHp, 0);

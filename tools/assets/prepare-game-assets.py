@@ -58,7 +58,7 @@ characters = {
     'JUNNA.banter.dead.endTurnPing': '……', 'JUNNA.eventDeathPrevention': '我还要继续。',
     'JUNNA.goldMonologue': '……', 'JUNNA.aromaPrinciple': '……',
 }
-ui = {'JUNNA.SELECT_DAMAGE_CARD': '选择一张牌', 'JUNNA.CARD_TYPE.ARROW': '星矢'}
+ui = {'JUNNA.SELECT_DAMAGE_CARD': '选择一张牌', 'JUNNA.CARD_TYPE.ARROW': '箭矢'}
 powers = {'JUNNA_ENDURANCE_POWER.title': '耐力训练',
           'JUNNA_ENDURANCE_POWER.description': '卡牌每拥有6点伤害加成，便额外造成{Amount}次伤害。'}
 for language in ('zhs', 'eng'):

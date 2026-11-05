@@ -11,7 +11,7 @@ function hash(seed, a, b = 0) {
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
 const baseline = (cost, up) => cost === 0 ? (up ? 9 : 6) : cost * (up ? 14 : 10);
 const compactCard = card => ({
-  name: card.name, kind: card.type === '星矢' ? 'arrow' : 'attack', cost: Number(card.cost),
+  name: card.name, kind: card.type === '箭矢' ? 'arrow' : 'attack', cost: Number(card.cost),
   damage: 0, hits: 1, block: 0, turns: 0, draw: 0, advance: 0, retain: false, exhaust: false
 });
 function loadPool(file = path.resolve(__dirname, '../../docs/design/data/纯那Mod设计工作台_本地编辑.json')) {
@@ -28,8 +28,8 @@ function loadPool(file = path.resolve(__dirname, '../../docs/design/data/纯那M
     if (damage) { card.damage = Number(damage[1]); card.hits = Number(damage[2] || 1); }
     const block = /获得(\d+)点格挡/.exec(text);
     if (block) card.block = Number(block[1]);
-    if (id === 'JB05') { card.kind = 'advance'; card.advance = 1; card.scope = /所有星矢/.test(text) ? 'target' : 'one'; }
-    if (id === 'JA16') { card.kind = 'attackAdvance'; card.advance = 1; card.scope = /所有星矢/.test(text) ? 'target' : 'one'; }
+    if (id === 'JB05') { card.kind = 'advance'; card.advance = 1; card.scope = /所有箭矢/.test(text) ? 'target' : 'one'; }
+    if (id === 'JA16') { card.kind = 'attackAdvance'; card.advance = 1; card.scope = /所有箭矢/.test(text) ? 'target' : 'one'; }
     if (id === 'JA43') { card.kind = 'advance'; card.advance = 2; card.scope = 'all'; }
     if (id === 'JA04') { card.kind = 'instant'; card.credits = up ? 2 : 1; }
     return {...card, modelId: id};

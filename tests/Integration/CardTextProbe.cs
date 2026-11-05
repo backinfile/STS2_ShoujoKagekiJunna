@@ -55,7 +55,7 @@ public sealed class CardTextProbe : AbstractConsoleCmd
                 Check(face, "cost", card.EnergyCost.CostsX ? "X" : card.EnergyCost.GetWithModifiers(CostModifiers.None).ToString(), cost);
                 Check(face, "exhaust", card.Keywords.Contains(CardKeyword.Exhaust), text.Contains("消耗。"));
                 Check(face, "retain", card.Keywords.Contains(CardKeyword.Retain), text.Contains("保留。"));
-                if (item.GetProperty("type").GetString() == "星矢")
+                if (item.GetProperty("type").GetString() == "箭矢")
                     Check(face, "turns", card.DynamicVars["Turns"].IntValue, item.GetProperty(upgraded ? "upgradedTurns" : "turns").GetInt32());
             }
         }

@@ -28,8 +28,8 @@
           "upgraded": 2
         }
       ],
-      "text": "你打出的下1张星矢牌立即加速到完成。",
-      "upgradedText": "你打出的下2张星矢牌立即加速到完成。"
+      "text": "你打出的下1张箭矢牌立即加速到完成。",
+      "upgradedText": "你打出的下2张箭矢牌立即加速到完成。"
     },
     {
       "id": "JK05",
@@ -173,7 +173,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "普通",
@@ -395,8 +395,8 @@
       "damageCapable": false,
       "portrait": "JA22.jpg",
       "values": [],
-      "text": "星矢完成后放回手牌。",
-      "upgradedText": "星矢完成后放回手牌。"
+      "text": "箭矢完成后放回手牌。",
+      "upgradedText": "箭矢完成后放回手牌。"
     },
     {
       "id": "JK15",
@@ -514,8 +514,8 @@
           "upgraded": 1
         }
       ],
-      "text": "选择一张星矢牌，变为耗能增加1点的非星矢牌。消耗。",
-      "upgradedText": "选择一张星矢牌，变为耗能增加1点的非星矢牌。消耗。"
+      "text": "选择一张箭矢牌，变为耗能增加1点的非箭矢牌。消耗。",
+      "upgradedText": "选择一张箭矢牌，变为耗能增加1点的非箭矢牌。消耗。"
     },
     {
       "id": "JT03",
@@ -525,7 +525,7 @@
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "稀有",
@@ -559,8 +559,8 @@
           "upgraded": 3
         }
       ],
-      "text": "造成5点伤害2次。布置期间每打出过一张攻击牌或星矢牌，额外造成1次伤害。",
-      "upgradedText": "造成7点伤害2次。布置期间每打出过一张攻击牌或星矢牌，额外造成1次伤害。",
+      "text": "造成5点伤害2次。布置期间每打出过一张攻击牌或箭矢牌，额外造成1次伤害。",
+      "upgradedText": "造成7点伤害2次。布置期间每打出过一张攻击牌或箭矢牌，额外造成1次伤害。",
       "arrowFocus": {
         "x": 0.17,
         "y": 0.43
@@ -741,8 +741,8 @@
           "upgraded": 2
         }
       ],
-      "text": "回合开始时，所有星矢加速1回合。",
-      "upgradedText": "回合开始时，所有星矢加速2回合。"
+      "text": "回合开始时，所有箭矢加速1回合。",
+      "upgradedText": "回合开始时，所有箭矢加速2回合。"
     },
     {
       "id": "JK32",
@@ -787,7 +787,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "稀有",
@@ -936,7 +936,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "稀有",
@@ -999,8 +999,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。造成4点伤害。抽1张星矢牌。",
-      "upgradedText": "知识。造成6点伤害。抽1张星矢牌。"
+      "text": "知识。造成4点伤害。抽1张箭矢牌。",
+      "upgradedText": "知识。造成6点伤害。抽1张箭矢牌。"
     },
     {
       "id": "JK37C",
@@ -1034,8 +1034,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。打出0费牌后，一个星矢加速1回合。",
-      "upgradedText": "知识。打出0费牌后，一个星矢加速1回合。"
+      "text": "知识。打出0费牌后，一个箭矢加速1回合。",
+      "upgradedText": "知识。打出0费牌后，一个箭矢加速1回合。"
     },
     {
       "id": "JK43",
@@ -1164,7 +1164,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
@@ -1237,8 +1237,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。笔伐布置期间，此牌耗能为0。所有星矢获得2点伤害加成并加速1回合。",
-      "upgradedText": "知识。笔伐布置期间，此牌耗能为0。所有星矢获得3点伤害加成并加速1回合。"
+      "text": "知识。笔伐布置期间，此牌耗能为0。所有箭矢获得2点伤害加成并加速1回合。",
+      "upgradedText": "知识。笔伐布置期间，此牌耗能为0。所有箭矢获得3点伤害加成并加速1回合。"
     },
     {
       "id": "JK46",
@@ -1278,7 +1278,7 @@
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
@@ -1525,7 +1525,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "普通",
@@ -1564,7 +1564,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "普通",
@@ -1632,8 +1632,8 @@
           "upgraded": 1
         }
       ],
-      "text": "获得9点格挡。所有星矢加速1回合。",
-      "upgradedText": "获得12点格挡。所有星矢加速1回合。"
+      "text": "获得9点格挡。所有箭矢加速1回合。",
+      "upgradedText": "获得12点格挡。所有箭矢加速1回合。"
     },
     {
       "id": "JA45",
@@ -1667,8 +1667,8 @@
           "upgraded": 1
         }
       ],
-      "text": "每回合前2次打出打出星矢牌时，其加速1回合。",
-      "upgradedText": "每回合前3次打出打出星矢牌时，其加速1回合。"
+      "text": "每回合前2次打出打出箭矢牌时，其加速1回合。",
+      "upgradedText": "每回合前3次打出打出箭矢牌时，其加速1回合。"
     },
     {
       "id": "JA53",
@@ -1702,8 +1702,8 @@
           "upgraded": 1
         }
       ],
-      "text": "获得8点格挡。抽取1张星矢牌。",
-      "upgradedText": "获得11点格挡。抽取1张星矢牌。"
+      "text": "获得8点格挡。抽取1张箭矢牌。",
+      "upgradedText": "获得11点格挡。抽取1张箭矢牌。"
     },
     {
       "id": "JA57",
@@ -1713,7 +1713,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "罕见",
@@ -1776,8 +1776,8 @@
           "upgraded": 1
         }
       ],
-      "text": "本回合，打出知识牌后，一个星矢加速1回合。消耗。",
-      "upgradedText": "本回合，打出知识牌后，一个星矢加速1回合。"
+      "text": "本回合，打出知识牌后，一个箭矢加速1回合。消耗。",
+      "upgradedText": "本回合，打出知识牌后，一个箭矢加速1回合。"
     },
     {
       "id": "JK67",
@@ -1806,8 +1806,8 @@
           "upgraded": 3
         }
       ],
-      "text": "知识。回合结束时，所有星矢获得2点伤害加成。",
-      "upgradedText": "知识。回合结束时，所有星矢获得3点伤害加成。"
+      "text": "知识。回合结束时，所有箭矢获得2点伤害加成。",
+      "upgradedText": "知识。回合结束时，所有箭矢获得3点伤害加成。"
     },
     {
       "id": "JK67B",
@@ -1817,7 +1817,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
@@ -1950,8 +1950,8 @@
           "upgraded": 3
         }
       ],
-      "text": "获得6点格挡。所有星矢获得2点伤害加成。",
-      "upgradedText": "获得6点格挡。所有星矢获得3点伤害加成。"
+      "text": "获得6点格挡。所有箭矢获得2点伤害加成。",
+      "upgradedText": "获得6点格挡。所有箭矢获得3点伤害加成。"
     },
     {
       "id": "JX02",
@@ -1980,8 +1980,8 @@
           "upgraded": 16
         }
       ],
-      "text": "造成12点伤害。获得等量于布置中星矢数量的能量。",
-      "upgradedText": "造成16点伤害。获得等量于布置中星矢数量的能量。"
+      "text": "造成12点伤害。获得等量于布置中箭矢数量的能量。",
+      "upgradedText": "造成16点伤害。获得等量于布置中箭矢数量的能量。"
     },
     {
       "id": "JX07",
@@ -2061,7 +2061,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "普通",
@@ -2145,7 +2145,7 @@
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "罕见",
@@ -2309,7 +2309,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "基础",
@@ -2348,7 +2348,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "技能",
       "rarity": "普通",
@@ -2526,8 +2526,8 @@
           "upgraded": 12
         }
       ],
-      "text": "造成10点伤害。布置的星矢获得等同于造成伤害点数的伤害加成。",
-      "upgradedText": "造成12点伤害。布置的星矢获得等同于造成伤害点数的伤害加成。"
+      "text": "造成10点伤害。布置的箭矢获得等同于造成伤害点数的伤害加成。",
+      "upgradedText": "造成12点伤害。布置的箭矢获得等同于造成伤害点数的伤害加成。"
     },
     {
       "id": "JA59",
@@ -2537,7 +2537,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": true,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
@@ -2581,7 +2581,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
@@ -2625,7 +2625,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "罕见",
@@ -2649,8 +2649,8 @@
           "upgraded": 1
         }
       ],
-      "text": "从抽牌堆选择1张星矢牌打出。",
-      "upgradedText": "从抽牌堆选择1张星矢牌打出。",
+      "text": "从抽牌堆选择1张箭矢牌打出。",
+      "upgradedText": "从抽牌堆选择1张箭矢牌打出。",
       "arrowFocus": {
         "x": 0.42,
         "y": 0.8
@@ -2695,11 +2695,11 @@
       "id": "JA66",
       "modelId": "JUNNA_JA66",
       "className": "JunnaCardJA66",
-      "name": "回收星矢",
+      "name": "回收箭矢",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "罕见",
@@ -2768,7 +2768,7 @@
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
@@ -2836,7 +2836,7 @@
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
@@ -2875,7 +2875,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "远古",
@@ -3073,8 +3073,8 @@
           "upgraded": 3
         }
       ],
-      "text": "打出星矢牌时，获得2点格挡。",
-      "upgradedText": "打出星矢牌时，获得3点格挡。"
+      "text": "打出箭矢牌时，获得2点格挡。",
+      "upgradedText": "打出箭矢牌时，获得3点格挡。"
     },
     {
       "id": "JA71",
@@ -3103,8 +3103,8 @@
           "upgraded": 20
         }
       ],
-      "text": "获得15点格挡。所有星矢立即加速到完成。消耗。",
-      "upgradedText": "获得20点格挡。所有星矢立即加速到完成。消耗。"
+      "text": "获得15点格挡。所有箭矢立即加速到完成。消耗。",
+      "upgradedText": "获得20点格挡。所有箭矢立即加速到完成。消耗。"
     },
     {
       "id": "JH24",
@@ -3184,7 +3184,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AllEnemies",
       "arrowSubtype": "攻击",
       "rarity": "普通",
@@ -3247,8 +3247,8 @@
           "upgraded": 6
         }
       ],
-      "text": "造成9点伤害。有布置的星矢时，获得4点格挡。",
-      "upgradedText": "造成12点伤害。有布置的星矢时，获得6点格挡。"
+      "text": "造成9点伤害。有布置的箭矢时，获得4点格挡。",
+      "upgradedText": "造成12点伤害。有布置的箭矢时，获得6点格挡。"
     },
     {
       "id": "JK80",
@@ -3463,7 +3463,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "普通",
@@ -3646,7 +3646,7 @@
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AllEnemies",
       "arrowSubtype": "技能",
       "rarity": "稀有",
@@ -3690,7 +3690,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "罕见",
@@ -3783,7 +3783,7 @@
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
-      "type": "星矢",
+      "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",

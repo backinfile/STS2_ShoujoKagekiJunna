@@ -37,7 +37,7 @@ def display_description(card, text, card_names, values, upgraded=False):
     # Arrow countdowns are rendered on their existing plaque.
     text = re.sub(r'^\[blue\][^\n]*\n', '', text)
     text = re.sub(r'。\s*', '。\n', text).strip()
-    highlighted = {'格挡', '易伤', '虚弱', '知识', '星矢', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
+    highlighted = {'格挡', '易伤', '虚弱', '知识', '箭矢', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
     # Only actual named references need emphasis; all replacements run once to avoid nested tags.
     highlighted.update(card_names)
     highlighted.update(name + '+' for name in card_names)
@@ -80,7 +80,7 @@ def arrow_portraits_only(bundle):
     catalog_path = ROOT / 'docs/implementation/card-pool.json'
     catalog = json.loads(catalog_path.read_text(encoding='utf-8'))
     source = {c['id']: c for c in bundle['data']['cards']
-              if c['type'] == '星矢' and not c.get('trashedAt') and not c.get('reservedAt')}
+              if c['type'] == '箭矢' and not c.get('trashedAt') and not c.get('reservedAt')}
     count = 0
     for entry in catalog['cards']:
         card = source.get(entry['id'])
@@ -144,7 +144,7 @@ def main():
             values.append({'name': 'Damage', 'base': 0, 'upgraded': 0})
             base = base.replace('X', '{Damage:diff()}')
             upgrade = upgrade.replace('X', '{Damage:diff()}')
-        if card['type'] == '星矢':
+        if card['type'] == '箭矢':
             values.append({'name': 'Turns', 'base': card['turns'], 'upgraded': card['upgradedTurns']})
         # Existing implementations use their established variable names.
         if cid in ('JA16', 'JA17'):

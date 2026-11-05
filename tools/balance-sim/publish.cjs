@@ -33,9 +33,9 @@ const report={
   ],
   setup:{player:E.config.player,deckSize:17,probeCounts:[2,5],mainSeeds:main.samplesPerCell,validationSeeds:mixed.samples,
     baseDeckFixed:true,onlyProbeUpgraded:true,policy:'当前手牌两步搜索；抽牌前只估计抽牌收益，揭示后重新决策。',
-    rules:['能量正常支付，回合开始刷新。','星矢按自己的回合开始递减，结算前离开正常抽弃牌循环。','单体加速、同目标加速、群体加速、速射按当前工作台快照处理。','星矢锁定目标，目标死亡后该伤害落空；记录溢出伤害。','保留牌占用真实手牌，抽牌上限为10。'],
+    rules:['能量正常支付，回合开始刷新。','箭矢按自己的回合开始递减，结算前离开正常抽弃牌循环。','单体加速、同目标加速、群体加速、速射按当前工作台快照处理。','箭矢锁定目标，目标死亡后该伤害落空；记录溢出伤害。','保留牌占用真实手牌，抽牌上限为10。'],
     metric:'同费用即时攻击为参照，承伤差与击杀回合差分别比较。压力场景单列。',
-    scope:['伤害','格挡','抽牌','保留','消耗工具','星矢等待','加速','速射'],
+    scope:['伤害','格挡','抽牌','保留','消耗工具','箭矢等待','加速','速射'],
     extensions:['知识组获得与连锁','伤害加成成长','额外触发与重放','遗物、药水及多人结算']
   },
   encounters:E.config.encounters,sources:main.sources,

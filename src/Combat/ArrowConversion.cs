@@ -26,7 +26,7 @@ public static class ArrowConversion
     internal static void Describe(CardModel card, Creature? target, ref string description)
     {
         // Printed turns have their own plaque; converted cards omit that plaque as well.
-        if (card is JunnaCard junna && CardCatalog.Get(junna.DesignId).Type == "星矢")
+        if (card is JunnaCard junna && CardCatalog.Get(junna.DesignId).Type == "箭矢")
             description = Regex.Replace(description, @"(?m)^\[blue\][^\r\n]*回合(?:后)?\[/blue\]。?\r?\n", "");
     }
     [HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
