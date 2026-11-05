@@ -5,6 +5,11 @@ $runtimePath = Join-Path $taskDirectory 'local-save.runtime.json'
 $configPath = Join-Path $taskDirectory 'local-save.config.json'
 if (Test-Path -LiteralPath $configPath) {
     $configuration = Get-Content -LiteralPath $configPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ($configuration.remoteURL) {
+        & $nodePath (Join-Path $taskDirectory 'mcp-server.cjs') --start
+        if ($LASTEXITCODE -ne 0) { throw '远端 MCP 连接配置无效' }
+        return
+    }
     try {
         $response = Invoke-RestMethod -Uri "http://127.0.0.1:$($configuration.port)/health" -Headers @{ Authorization = "Bearer $($configuration.token)" } -TimeoutSec 2
     } catch { $response = $null }
