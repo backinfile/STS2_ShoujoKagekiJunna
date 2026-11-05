@@ -94,13 +94,13 @@ public partial class CardInvestmentMarks : Control
             : Math.Max(40, 10 + 24 * _hits) * Unit;
         float gap = _bonus != 0 && _hits > 0 ? 2 * Unit : 0;
         float width = _badgeWidth + gap + _hitsWidth;
-        _bonusX = -width;
-        _hitsX = Compact ? 0 : -_hitsWidth;
+        _bonusX = 0;
+        _hitsX = Compact ? -_hitsWidth : _badgeWidth + gap;
         // Keep the rail inside the portrait even when both values have many digits.
         float scale = Compact ? 1 : Math.Min(1, 244 / Math.Max(1, width));
         Scale = Vector2.One * scale;
         // Fit along the arrow frame's lower edge while clearing the turn-number label.
-        Position = Compact ? new(-8, 77) : new(122, (_arrowFrame ? -16 : -1) - 32 * scale);
+        Position = Compact ? new(-8, 77) : new(-122, (_arrowFrame ? -16 : -1) - 32 * scale);
         _bonusLabel.Position = new(_bonusX, 0);
         _bonusLabel.Size = new(_badgeWidth, 32 * Unit);
         _hitCountLabel.Position = new(_hitsX + 28 * Unit, 0);
@@ -150,5 +150,9 @@ public partial class CardInvestmentMarks : Control
 [HarmonyPatch(typeof(NCard), nameof(NCard.UpdateVisuals))]
 internal static class CardInvestmentMarksPatch
 {
-    private static void Postfix(NCard __instance) => CardInvestmentMarks.Attach(__instance);
+    private static void Postfix(NCard __instance)
+    {
+        CardInvestmentMarks.Attach(__instance);
+        CardBonusVfx.Attach(__instance);
+    }
 }

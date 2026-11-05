@@ -297,6 +297,9 @@ public partial class ArrowHud : Control
             Texture = arrow.TargetsGroup ? _groupFrame : _frame,
             Size = IconSize, MouseFilter = MouseFilterEnum.Ignore
         });
+        frame.AddChild(CardBonusVfx.ForArrow(arrow.Card,
+            new Vector2[] { new(120, 14), new(228, 138), new(120, 401), new(12, 138) }
+                .Select(p => p * FrameScale).ToArray()));
         var count = MakeLabel("Countdown", Vector2.Zero, new(20, 20), 14);
         root.AddChild(count);
         var repeats = MakeLabel("Repeats", new(IconWidth - 5, 16), new(32, 20), 16);

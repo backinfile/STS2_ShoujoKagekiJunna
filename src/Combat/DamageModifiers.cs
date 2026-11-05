@@ -22,6 +22,7 @@ public static class DamageModifiers
     {
         public decimal Bonus;
         public int Hits;
+        public bool HasReceivedBonus;
     }
 
     private static ConditionalWeakTable<CardModel, Investment> _cards = new();
@@ -35,6 +36,7 @@ public static class DamageModifiers
         var state = _cards.GetOrCreateValue(card);
         state.Bonus += damageBonus;
         state.Hits = checked(state.Hits + extraHits);
+        state.HasReceivedBonus |= damageBonus > 0 || extraHits > 0;
         card.Owner.PlayerCombatState.RecalculateCardValues();
         return true;
     }
@@ -43,6 +45,9 @@ public static class DamageModifiers
         _cards.TryGetValue(card, out var state)
             ? new(state.Bonus, state.Hits, card.Owner)
             : new(0, 0, card.IsMutable ? card.Owner : null);
+
+    internal static bool HasReceivedBonus(CardModel card) =>
+        _cards.TryGetValue(card, out var state) && state.HasReceivedBonus;
 
     internal static (AbstractModel? Source, DamageModifierSnapshot Snapshot) Resolve(PlayerChoiceContext? context, CardModel? explicitCard)
     {
@@ -85,7 +90,7 @@ public static class DamageModifiers
     internal static void Copy(AbstractModel original, AbstractModel clone)
     {
         if (original is CardModel card && clone is CardModel copied && _cards.TryGetValue(card, out var investment))
-            _cards.AddOrUpdate(copied, new Investment { Bonus = investment.Bonus, Hits = investment.Hits });
+            _cards.AddOrUpdate(copied, new Investment { Bonus = investment.Bonus, Hits = investment.Hits, HasReceivedBonus = investment.HasReceivedBonus });
     }
 
     public static void TransferBonus(IEnumerable<CardModel> sources, CardModel target)

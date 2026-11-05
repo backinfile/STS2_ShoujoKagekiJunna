@@ -44,7 +44,7 @@ public sealed class InvestmentMarksProbe : AbstractConsoleCmd
         NGame.Instance!.AddChild(stage);
         stage.AddChild(new ColorRect { Color = new Color("152028"), Size = stage.GetViewportRect().Size, MouseFilter = Control.MouseFilterEnum.Ignore });
         var backHolder = new Control { Position = new(440, 360) };
-        var frontHolder = new Control { Position = new(560, 360) };
+        var frontHolder = new Control { Position = new(320, 360) };
         stage.AddChild(backHolder); stage.AddChild(frontHolder);
         var model = CardCatalog.Create("JB01", player);
         DamageModifiers.Add(model, 6, 2);
@@ -59,8 +59,9 @@ public sealed class InvestmentMarksProbe : AbstractConsoleCmd
         var label = marks.GetNode<Label>("DamageBonus");
         var screen = stage.GetViewport().GetFinalTransform();
         var begin = screen * label.GetGlobalTransformWithCanvas() * Vector2.Zero;
-        var end = screen * label.GetGlobalTransformWithCanvas() * label.Size;
-        int left = (int)begin.X + 2, right = (int)((screen * marks.GetGlobalTransformWithCanvas()).Origin.X - 2);
+        var hitLabel = marks.GetNode<Label>("ExtraHitCount");
+        var end = screen * hitLabel.GetGlobalTransformWithCanvas() * (hitLabel.Size + new Vector2(6, 0));
+        int left = (int)begin.X + 2, right = (int)end.X - 2;
         int top = (int)begin.Y + 2, bottom = (int)end.Y - 2;
         var frontTransform = screen * front.GetGlobalTransformWithCanvas();
         File.WriteAllText(Path.Combine(directory, "geometry.json"), JsonSerializer.Serialize(new { left, right, top, bottom, canvas = stage.GetViewportRect().Size.ToString(), front = frontTransform.ToString(), begin = begin.ToString(), end = end.ToString() }));
