@@ -2,8 +2,9 @@
   "cards": 117,
   "normalFaces": 234,
   "branchCases": 1425,
+  "additionalRegressionFaces": 10,
   "perCardCases": 1659,
-  "assertions": 9773,
+  "assertions": 10260,
   "suites": [
     {
       "suite": "core",
@@ -43,8 +44,8 @@
     },
     {
       "suite": "targets",
-      "cases": 86,
-      "checks": 268,
+      "cases": 92,
+      "checks": 302,
       "pass": true
     },
     {
@@ -54,27 +55,9 @@
       "pass": true
     },
     {
-      "suite": "targets-JA82",
-      "cases": 2,
-      "checks": 10,
-      "pass": true
-    },
-    {
-      "suite": "targets-JF10",
-      "cases": 2,
-      "checks": 12,
-      "pass": true
-    },
-    {
-      "suite": "targets-JA58",
-      "cases": 2,
-      "checks": 12,
-      "pass": true
-    },
-    {
       "suite": "normal",
       "cases": 234,
-      "checks": 1410,
+      "checks": 1696,
       "pass": true
     },
     {
@@ -104,7 +87,7 @@
     },
     {
       "suite": "rendered-text",
-      "checks": 1105,
+      "checks": 1222,
       "pass": true
     },
     {
@@ -116,8 +99,21 @@
       "suite": "native-choice-and-damage",
       "checks": 1,
       "pass": true
+    },
+    {
+      "suite": "final-display-regression",
+      "cases": 10,
+      "checks": 84,
+      "additional": true,
+      "pass": true
     }
   ],
+  "workbench": {
+    "ownAtomicRevision": 2598,
+    "finalSnapshotRevision": 2602,
+    "delta": "workbench-changes.json",
+    "receipt": "workbench-commit.json"
+  },
   "results": [
     {
       "id": "JA04",
@@ -10752,6 +10748,22 @@
       "checks": 3
     },
     {
+      "id": "JF10",
+      "upgraded": false,
+      "suite": "targets",
+      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
+      "pass": true,
+      "checks": 6
+    },
+    {
+      "id": "JF10",
+      "upgraded": true,
+      "suite": "targets",
+      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
+      "pass": true,
+      "checks": 6
+    },
+    {
       "id": "JB01",
       "upgraded": false,
       "suite": "targets",
@@ -10782,6 +10794,22 @@
       "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
       "pass": true,
       "checks": 3
+    },
+    {
+      "id": "JA58",
+      "upgraded": false,
+      "suite": "targets",
+      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
+      "pass": true,
+      "checks": 6
+    },
+    {
+      "id": "JA58",
+      "upgraded": true,
+      "suite": "targets",
+      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
+      "pass": true,
+      "checks": 6
     },
     {
       "id": "JH22",
@@ -11056,6 +11084,22 @@
       "checks": 3
     },
     {
+      "id": "JA82",
+      "upgraded": false,
+      "suite": "targets",
+      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
+      "pass": true,
+      "checks": 5
+    },
+    {
+      "id": "JA82",
+      "upgraded": true,
+      "suite": "targets",
+      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
+      "pass": true,
+      "checks": 5
+    },
+    {
       "id": "JA15",
       "upgraded": false,
       "suite": "retarget",
@@ -11470,54 +11514,6 @@
       "branch": "已布置箭矢：目标死亡后的单体转移、群体跟随和自己目标",
       "pass": true,
       "checks": 2
-    },
-    {
-      "id": "JA82",
-      "upgraded": false,
-      "suite": "targets-JA82",
-      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
-      "pass": true,
-      "checks": 5
-    },
-    {
-      "id": "JA82",
-      "upgraded": true,
-      "suite": "targets-JA82",
-      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
-      "pass": true,
-      "checks": 5
-    },
-    {
-      "id": "JF10",
-      "upgraded": false,
-      "suite": "targets-JF10",
-      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
-      "pass": true,
-      "checks": 6
-    },
-    {
-      "id": "JF10",
-      "upgraded": true,
-      "suite": "targets-JF10",
-      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
-      "pass": true,
-      "checks": 6
-    },
-    {
-      "id": "JA58",
-      "upgraded": false,
-      "suite": "targets-JA58",
-      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
-      "pass": true,
-      "checks": 6
-    },
-    {
-      "id": "JA58",
-      "upgraded": true,
-      "suite": "targets-JA58",
-      "branch": "多敌人：单体隔离、群体逐目标、格挡与派生目标",
-      "pass": true,
-      "checks": 6
     },
     {
       "id": "JA04",
@@ -11525,7 +11521,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA04",
@@ -11533,7 +11529,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK05",
@@ -11541,7 +11537,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK05",
@@ -11549,7 +11545,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK10",
@@ -11557,7 +11553,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK10",
@@ -11565,7 +11561,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK10B",
@@ -11573,7 +11569,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK10B",
@@ -11581,7 +11577,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG03",
@@ -11589,7 +11585,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JG03",
@@ -11597,7 +11593,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA15",
@@ -11605,7 +11601,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JA15",
@@ -11613,7 +11609,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JA16",
@@ -11621,7 +11617,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA16",
@@ -11629,7 +11625,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA17",
@@ -11637,7 +11633,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA17",
@@ -11645,7 +11641,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK11",
@@ -11653,7 +11649,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK11",
@@ -11661,7 +11657,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK11B",
@@ -11669,7 +11665,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK11B",
@@ -11677,7 +11673,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JG09",
@@ -11685,7 +11681,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JG09",
@@ -11693,7 +11689,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA22",
@@ -11701,7 +11697,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA22",
@@ -11709,7 +11705,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK15",
@@ -11717,7 +11713,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK15",
@@ -11725,7 +11721,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK15B",
@@ -11733,7 +11729,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK15B",
@@ -11741,7 +11737,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG16",
@@ -11749,7 +11745,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JG16",
@@ -11757,7 +11753,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JT02",
@@ -11765,7 +11761,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 8
     },
     {
       "id": "JT02",
@@ -11773,7 +11769,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 8
     },
     {
       "id": "JT03",
@@ -11781,7 +11777,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JT03",
@@ -11789,7 +11785,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "A",
@@ -11797,7 +11793,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "A",
@@ -11805,7 +11801,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "B",
@@ -11813,7 +11809,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "B",
@@ -11821,7 +11817,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JH01",
@@ -11829,7 +11825,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 8
     },
     {
       "id": "JH01",
@@ -11837,7 +11833,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 8
     },
     {
       "id": "JK27",
@@ -11845,7 +11841,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK27",
@@ -11853,7 +11849,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG23",
@@ -11861,7 +11857,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG23",
@@ -11869,7 +11865,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA35",
@@ -11877,7 +11873,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA35",
@@ -11885,7 +11881,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK32",
@@ -11893,7 +11889,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK32",
@@ -11901,7 +11897,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK32B",
@@ -11909,7 +11905,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JK32B",
@@ -11917,7 +11913,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JK32C",
@@ -11925,7 +11921,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK32C",
@@ -11933,7 +11929,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK33",
@@ -11941,7 +11937,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK33",
@@ -11949,7 +11945,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK33B",
@@ -11957,7 +11953,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK33B",
@@ -11965,7 +11961,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK37",
@@ -11973,7 +11969,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK37",
@@ -11981,7 +11977,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK37B",
@@ -11989,7 +11985,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK37B",
@@ -11997,7 +11993,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK37C",
@@ -12005,7 +12001,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK37C",
@@ -12013,7 +12009,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK43",
@@ -12021,7 +12017,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK43",
@@ -12029,7 +12025,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK43B",
@@ -12037,7 +12033,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK43B",
@@ -12045,7 +12041,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK44",
@@ -12053,7 +12049,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK44",
@@ -12061,7 +12057,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK44B",
@@ -12069,7 +12065,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK44B",
@@ -12077,7 +12073,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK45",
@@ -12085,7 +12081,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK45",
@@ -12093,7 +12089,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK45B",
@@ -12101,7 +12097,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK45B",
@@ -12109,7 +12105,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK46",
@@ -12117,7 +12113,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK46",
@@ -12125,7 +12121,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK46B",
@@ -12133,7 +12129,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK46B",
@@ -12141,7 +12137,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK48",
@@ -12149,7 +12145,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK48",
@@ -12157,7 +12153,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK48B",
@@ -12165,7 +12161,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK48B",
@@ -12173,7 +12169,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK49",
@@ -12181,7 +12177,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 8
     },
     {
       "id": "JK49",
@@ -12189,7 +12185,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 8
     },
     {
       "id": "JK49B",
@@ -12197,7 +12193,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 8
     },
     {
       "id": "JK49B",
@@ -12205,7 +12201,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 8
     },
     {
       "id": "JK50",
@@ -12213,7 +12209,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK50",
@@ -12221,7 +12217,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK50B",
@@ -12229,7 +12225,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK50B",
@@ -12237,7 +12233,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK53",
@@ -12245,7 +12241,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK53",
@@ -12253,7 +12249,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA38",
@@ -12261,7 +12257,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA38",
@@ -12269,7 +12265,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA41",
@@ -12277,7 +12273,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA41",
@@ -12285,7 +12281,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA43",
@@ -12293,7 +12289,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA43",
@@ -12301,7 +12297,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA45",
@@ -12309,7 +12305,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA45",
@@ -12317,7 +12313,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA53",
@@ -12325,7 +12321,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA53",
@@ -12333,7 +12329,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA57",
@@ -12341,7 +12337,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JA57",
@@ -12349,7 +12345,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JK64",
@@ -12357,7 +12353,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK64",
@@ -12365,7 +12361,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK67",
@@ -12373,7 +12369,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK67",
@@ -12381,7 +12377,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK67B",
@@ -12389,7 +12385,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK67B",
@@ -12397,7 +12393,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK69B",
@@ -12405,7 +12401,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK69B",
@@ -12413,7 +12409,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG27",
@@ -12421,7 +12417,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JG27",
@@ -12429,7 +12425,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JX01",
@@ -12437,7 +12433,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JX01",
@@ -12445,7 +12441,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JX02",
@@ -12453,7 +12449,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JX02",
@@ -12461,7 +12457,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JX07",
@@ -12469,7 +12465,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JX07",
@@ -12477,7 +12473,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JH10",
@@ -12485,7 +12481,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH10",
@@ -12493,7 +12489,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH11",
@@ -12501,7 +12497,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JH11",
@@ -12509,7 +12505,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JH13",
@@ -12517,7 +12513,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH13",
@@ -12525,7 +12521,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH17",
@@ -12533,7 +12529,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JH17",
@@ -12541,7 +12537,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JF07",
@@ -12549,7 +12545,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JF07",
@@ -12557,7 +12553,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JF10",
@@ -12565,7 +12561,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 9
     },
     {
       "id": "JF10",
@@ -12573,7 +12569,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 9
     },
     {
       "id": "JB01",
@@ -12581,7 +12577,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JB01",
@@ -12589,7 +12585,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JB02",
@@ -12597,7 +12593,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JB02",
@@ -12605,7 +12601,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JB03",
@@ -12613,7 +12609,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JB03",
@@ -12621,7 +12617,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA58",
@@ -12629,7 +12625,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 9
+      "checks": 11
     },
     {
       "id": "JA58",
@@ -12637,7 +12633,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 9
+      "checks": 11
     },
     {
       "id": "JG31",
@@ -12645,7 +12641,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG31",
@@ -12653,7 +12649,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH19",
@@ -12661,7 +12657,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH19",
@@ -12669,7 +12665,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH20",
@@ -12677,7 +12673,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JH20",
@@ -12685,7 +12681,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JH21",
@@ -12693,7 +12689,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH21",
@@ -12701,7 +12697,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH22",
@@ -12709,7 +12705,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JH22",
@@ -12717,7 +12713,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA59",
@@ -12725,7 +12721,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA59",
@@ -12733,7 +12729,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA64",
@@ -12741,7 +12737,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA64",
@@ -12749,7 +12745,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA65",
@@ -12757,7 +12753,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 9
+      "checks": 11
     },
     {
       "id": "JA65",
@@ -12765,7 +12761,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 9
+      "checks": 11
     },
     {
       "id": "JG33",
@@ -12773,7 +12769,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG33",
@@ -12781,7 +12777,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA66",
@@ -12789,7 +12785,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JA66",
@@ -12797,7 +12793,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JG34",
@@ -12805,7 +12801,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG34",
@@ -12813,7 +12809,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK73",
@@ -12821,7 +12817,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK73",
@@ -12829,7 +12825,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK73B",
@@ -12837,7 +12833,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK73B",
@@ -12845,7 +12841,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA67",
@@ -12853,7 +12849,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA67",
@@ -12861,7 +12857,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JZ03",
@@ -12869,7 +12865,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JZ03",
@@ -12877,7 +12873,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JK74",
@@ -12885,7 +12881,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK74",
@@ -12893,7 +12889,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK74B",
@@ -12901,7 +12897,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK74B",
@@ -12909,7 +12905,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK75",
@@ -12917,7 +12913,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK75",
@@ -12925,7 +12921,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH23",
@@ -12933,7 +12929,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH23",
@@ -12941,7 +12937,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA70",
@@ -12949,7 +12945,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA70",
@@ -12957,7 +12953,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA71",
@@ -12965,7 +12961,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA71",
@@ -12973,7 +12969,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JH24",
@@ -12981,7 +12977,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH24",
@@ -12989,7 +12985,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK78",
@@ -12997,7 +12993,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK78",
@@ -13005,7 +13001,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA72",
@@ -13013,7 +13009,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA72",
@@ -13021,7 +13017,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA73",
@@ -13029,7 +13025,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA73",
@@ -13037,7 +13033,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK80",
@@ -13045,7 +13041,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK80",
@@ -13053,7 +13049,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH26",
@@ -13061,7 +13057,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH26",
@@ -13069,7 +13065,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH27",
@@ -13077,7 +13073,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JH27",
@@ -13085,7 +13081,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JG36",
@@ -13093,7 +13089,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JG36",
@@ -13101,7 +13097,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK81",
@@ -13109,7 +13105,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK81",
@@ -13117,7 +13113,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK81B",
@@ -13125,7 +13121,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JK81B",
@@ -13133,7 +13129,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA75",
@@ -13141,7 +13137,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JA75",
@@ -13149,7 +13145,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JK82",
@@ -13157,7 +13153,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK82",
@@ -13165,7 +13161,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK82B",
@@ -13173,7 +13169,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK82B",
@@ -13181,7 +13177,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JZ05",
@@ -13189,7 +13185,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JZ05",
@@ -13197,7 +13193,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JZ06",
@@ -13205,7 +13201,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JZ06",
@@ -13213,7 +13209,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 5
+      "checks": 6
     },
     {
       "id": "JA76",
@@ -13221,7 +13217,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 9
     },
     {
       "id": "JA76",
@@ -13229,7 +13225,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 9
     },
     {
       "id": "JA77",
@@ -13237,7 +13233,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA77",
@@ -13245,7 +13241,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA80",
@@ -13253,7 +13249,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JA80",
@@ -13261,7 +13257,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 10
     },
     {
       "id": "JH29",
@@ -13269,7 +13265,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JH29",
@@ -13277,7 +13273,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JA81",
@@ -13285,7 +13281,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 9
     },
     {
       "id": "JA81",
@@ -13293,7 +13289,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 8
+      "checks": 9
     },
     {
       "id": "JA81B",
@@ -13301,7 +13297,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 7
+      "checks": 9
     },
     {
       "id": "JA81B",
@@ -13309,55 +13305,55 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
+      "checks": 9
+    },
+    {
+      "id": "JH30",
+      "upgraded": false,
+      "suite": "normal",
+      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
+      "pass": true,
+      "checks": 6
+    },
+    {
+      "id": "JH30",
+      "upgraded": true,
+      "suite": "normal",
+      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
+      "pass": true,
+      "checks": 6
+    },
+    {
+      "id": "JA82",
+      "upgraded": false,
+      "suite": "normal",
+      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
+      "pass": true,
+      "checks": 9
+    },
+    {
+      "id": "JA82",
+      "upgraded": true,
+      "suite": "normal",
+      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
+      "pass": true,
+      "checks": 9
+    },
+    {
+      "id": "JH31",
+      "upgraded": false,
+      "suite": "normal",
+      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
+      "pass": true,
       "checks": 7
     },
     {
-      "id": "JH30",
-      "upgraded": false,
-      "suite": "normal",
-      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
-      "pass": true,
-      "checks": 5
-    },
-    {
-      "id": "JH30",
-      "upgraded": true,
-      "suite": "normal",
-      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
-      "pass": true,
-      "checks": 5
-    },
-    {
-      "id": "JA82",
-      "upgraded": false,
-      "suite": "normal",
-      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
-      "pass": true,
-      "checks": 8
-    },
-    {
-      "id": "JA82",
-      "upgraded": true,
-      "suite": "normal",
-      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
-      "pass": true,
-      "checks": 8
-    },
-    {
-      "id": "JH31",
-      "upgraded": false,
-      "suite": "normal",
-      "branch": "正常支付、牌面效果、延迟完成和最终牌区",
-      "pass": true,
-      "checks": 6
-    },
-    {
       "id": "JH31",
       "upgraded": true,
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK78D",
@@ -13365,7 +13361,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK78D",
@@ -13373,7 +13369,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK78E",
@@ -13381,7 +13377,7 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     },
     {
       "id": "JK78E",
@@ -13389,8 +13385,56 @@
       "suite": "normal",
       "branch": "正常支付、牌面效果、延迟完成和最终牌区",
       "pass": true,
-      "checks": 6
+      "checks": 7
     }
   ],
-  "stage": "独立版本验证完成，待同步兼容提交后复核与重录最终演示"
+  "revision": 2602,
+  "gameImplementation": "Beta",
+  "gameVersion": "0.111.0",
+  "runtimeFieldsComparison": {
+    "gameplayFieldsEqual": true,
+    "normalFaceTestRevision": 2599,
+    "finalRevision": 2602,
+    "comparedCards": 117,
+    "comparedKnowledgeGroups": 19,
+    "changedCardFields": [
+      {
+        "id": "JZ05",
+        "fields": [
+          "text",
+          "upgradedText"
+        ]
+      },
+      {
+        "id": "JA76",
+        "fields": [
+          "text",
+          "upgradedText"
+        ]
+      },
+      {
+        "id": "JA81",
+        "fields": [
+          "text",
+          "upgradedText"
+        ]
+      },
+      {
+        "id": "JA81B",
+        "fields": [
+          "name"
+        ]
+      },
+      {
+        "id": "JA82",
+        "fields": [
+          "text",
+          "upgradedText"
+        ]
+      }
+    ],
+    "knowledgeGroupFieldsEqual": true,
+    "equal": false
+  },
+  "stage": "逐牌结算、箭矢类型、文字、关键词及合法操作演示均已验证"
 }
