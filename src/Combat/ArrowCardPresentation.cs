@@ -169,17 +169,17 @@ public partial class ArrowCardPresentation : Control
     private void RefreshTurns(CardPreviewMode previewMode)
     {
         var card = _card.Model!;
-        var turnValue = CardCatalog.Get(((JunnaCard)card).DesignId).Values.First(v => v.Name == "Turns");
+        var turnValue = card is JunnaCard junna ? CardCatalog.Get(junna.DesignId).Values.FirstOrDefault(v => v.Name == "Turns") : null;
         var deployment = ArrowCombat.Find(card);
-        int turns = deployment?.Remaining ?? card.DynamicVars["Turns"].IntValue;
-        if (deployment == null && previewMode == CardPreviewMode.Upgrade && !card.IsUpgraded)
+        int turns = deployment?.Remaining ?? HandArrow.Turns(card);
+        if (!HandArrow.IsArrow(card) && turnValue != null && deployment == null && previewMode == CardPreviewMode.Upgrade && !card.IsUpgraded)
             turns += turnValue.Upgraded - turnValue.Base;
         _turns.Visible = _card.Visibility == ModelVisibility.Visible;
         string remaining = turns.ToString();
         if (deployment != null && _turns.Text.Length > 0 && _turns.Text != remaining)
             ArrowFeedback.PulseCounter(_turns, ref _turnTween);
         _turns.Text = remaining;
-        int original = turnValue.Base;
+        int original = HandArrow.IsArrow(card) ? 5 : turnValue?.Base ?? turns;
         _turns.AddThemeColorOverride("font_color", turns != original ? new Color("7FFF00") : new Color("FFF6E2"));
     }
 }

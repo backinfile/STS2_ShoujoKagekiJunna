@@ -29,5 +29,10 @@
   "JUNNA_JK46_POWER.title": "持续阅读",
   "JUNNA_CATALOG.description": "{Effects}",
   "JUNNA_ENERGY_RESERVE.title": "能量保留",
-  "JUNNA_ENERGY_RESERVE.description": "下回合保留至多{Amount}点剩余能量。"
+  "JUNNA_ENERGY_RESERVE.description": "下回合保留至多{Amount}点剩余能量。",
+  "JUNNA_JA87_POWER.title": "布阵",
+  "JUNNA_JA96_POWER.title": "稳住阵脚",
+  "JUNNA_JH31_POWER.title": "筹备",
+  "JUNNA_NEXT_CARD_BONUS.title": "练习成果",
+  "JUNNA_NEXT_CARD_BONUS.description": "你打出的下一张牌获得{Amount}点伤害加成。"
 }

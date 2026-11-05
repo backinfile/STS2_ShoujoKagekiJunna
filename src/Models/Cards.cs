@@ -103,7 +103,7 @@ public sealed class JunnaWarmUp() : JunnaCard(1, CardType.Skill, CardRarity.Comm
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-        await ImproveHand(context, DynamicVars["Bonus"].BaseValue);
+        await PowerCmd.Apply<JunnaNextCardBonus>(context, Owner.Creature, DynamicVars["Bonus"].BaseValue, Owner.Creature, this);
     }
     protected override void OnUpgrade() { DynamicVars.Block.UpgradeValueBy(2); DynamicVars["Bonus"].UpgradeValueBy(1); }
 }
@@ -150,12 +150,4 @@ public sealed class JunnaTurningSlash() : JunnaCard(3, CardType.Attack, CardRari
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).Targeting(play.Target!)
             .WithHitCount(DynamicVars.Repeat.IntValue).WithHitFx(VfxCmd.slashPath).Execute(context);
     protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3);
-}
-
-[CustomID("JUNNA_ENDURANCE_TRAINING")]
-public sealed class JunnaEnduranceTraining() : JunnaCard(3, CardType.Power, CardRarity.Rare, TargetType.Self, "JG23")
-{
-    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play) =>
-        await PowerCmd.Apply<JunnaEndurancePower>(context, Owner.Creature, 1, Owner.Creature, this);
-    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }

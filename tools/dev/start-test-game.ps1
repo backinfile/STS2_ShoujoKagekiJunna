@@ -51,7 +51,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 [audio]
 driver/enable_input=false
-'@ | Set-Content -LiteralPath "$junnaGame/override.cfg" -Encoding utf8
+'@ | ForEach-Object { [System.IO.File]::WriteAllText("$junnaGame/override.cfg", $_, (New-Object System.Text.UTF8Encoding($false))) }
 $oldAppData = $env:APPDATA
 $oldLocalAppData = $env:LOCALAPPDATA
 $oldFfmpeg = $env:STS2_MCP_FFMPEG

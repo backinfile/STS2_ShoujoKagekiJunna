@@ -22,13 +22,7 @@ public sealed class Junna : PlaceholderCharacterModel
     public override CardPoolModel CardPool => ModelDb.CardPool<JunnaCardPool>();
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<JunnaRelicPool>();
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<SilentPotionPool>();
-    public override IEnumerable<CardModel> StartingDeck =>
-    [
-        ModelDb.Card<JunnaStrike>(), ModelDb.Card<JunnaStrike>(), ModelDb.Card<JunnaStrike>(),
-        ModelDb.Card<JunnaStrike>(), ModelDb.Card<JunnaStrike>(),
-        ModelDb.Card<JunnaDefend>(), ModelDb.Card<JunnaDefend>(), ModelDb.Card<JunnaDefend>(), ModelDb.Card<JunnaDefend>(),
-        ModelDb.Card<JunnaFullDraw>()
-    ];
+    public override IEnumerable<CardModel> StartingDeck => CardCatalog.StartingDeck;
     public override IReadOnlyList<RelicModel> StartingRelics => [ModelDb.Relic<JunnaGreenGem>()];
     public override string CustomVisualPath => JunnaMod.ResourceRoot + "scenes/junna_combat.tscn";
     public override string CustomCharacterSelectBg => JunnaMod.ResourceRoot + "scenes/junna_select.tscn";

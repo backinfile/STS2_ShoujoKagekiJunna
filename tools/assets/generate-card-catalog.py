@@ -23,8 +23,12 @@ SELECTION_PROMPTS = {
     "JG03": "选择1张手牌。",
     "JG09": "选择1张手牌。",
     "JG16": "选择1张手牌。",
-    "JG36": "选择1张手牌。",
-    "JT02": "选择1张箭矢。",
+    "JT02": "选择1张非能力手牌。",
+    "JA84": "选择1张手牌。",
+    "JA87": "选择至多1张手牌。",
+    "JA88": "选择任意张手牌。",
+    "JK84": "选择{Cards}张手牌。",
+    "JG37": "选择1张手牌。",
     "JH01": "选择2张手牌。",
     "JK11": "选择1张驳论。",
     "JK11B": "选择1张立论。",
@@ -75,7 +79,7 @@ def bind_numbers(text, prior=None):
     def replace(match):
         index = len(values)
         tail = text[match.end():]
-        if prior:
+        if prior and index < len(prior):
             name = prior[index]['name']
         elif tail.startswith('点伤害加成'):
             name = 'Bonus'
@@ -159,9 +163,11 @@ def main():
             upgrade = upgrade.replace(keyword + '。', '')
         base, values = bind_numbers(base)
         upgrade, upgraded_values = bind_numbers(upgrade, values)
-        assert len(values) == len(upgraded_values), cid
-        for value, improved in zip(values, upgraded_values):
-            value['upgraded'] = improved['base']
+        # Upgrades can replace a fixed count with "all" (e.g. 论据).
+        if len(upgraded_values) > len(values):
+            raise ValueError('Upgrade introduces unmatched numbers: ' + cid)
+        for index, value in enumerate(values):
+            value['upgraded'] = upgraded_values[index]['base'] if index < len(upgraded_values) else value['base']
         if cid == 'JA81B':
             values.append({'name': 'Damage', 'base': 0, 'upgraded': 0})
             base = base.replace('X', '{Damage:diff()}')
@@ -198,8 +204,11 @@ def main():
             portrait_name = cid + extension
             (ROOT / 'ShoujoKagekiJunna/images/cards' / portrait_name).write_bytes(image_bytes)
         damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid == 'JH30') and cid != 'JA82'
-        target = 'AllEnemies' if '所有敌人造成' in card['text'] else 'AnyEnemy' if (
-            (damage and card['type'] != '能力') or cid in ('JF10', 'JA58')) else 'Self'
+        target = {'自己': 'Self', '敌人': 'AnyEnemy', '所有敌人': 'AllEnemies',
+                  '无': 'None', '无需目标': 'None', '所有玩家': 'AllAllies',
+                  '玩家': 'AnyPlayer', '队友': 'AnyAlly'}.get(card.get('target'))
+        if target is None:
+            raise ValueError('Unknown target: ' + cid + '/' + str(card.get('target')))
         entry = {
             'id': cid, 'modelId': model_id, 'className': cls, 'name': card['name'],
             'cost': 0 if card['cost'] == 'X' else card['cost'],
@@ -221,8 +230,12 @@ def main():
         if cid not in EXISTING:
             wrappers.append(f'[CustomID("{model_id}")]\npublic sealed class {cls}() : CatalogCard("{cid}");\n')
     ids = {c['id'] for c in cards}
-    groups = [g for g in bundle['data']['partnerGroups'] if g['mainCardId'] in ids]
-    out = {'revision': bundle['revision'], 'cards': definitions, 'groups': groups}
+    groups = [g for g in bundle['data']['partnerGroups'] if g['mainCardId'] in ids and not g.get('trashedAt') and not g.get('reservedAt')]
+    for group in groups:
+        if any(cid not in ids for cid in group['grantedCardIds']):
+            raise ValueError('Inactive knowledge group member: ' + group['id'])
+    out = {'revision': bundle['revision'], 'cards': definitions, 'groups': groups,
+           'startingDeck': bundle['data']['meta']['startingDeck']}
     if args.rules_only:
         out['arrowArtRevision'] = existing.get('arrowArtRevision', existing['revision'])
     else:
@@ -243,11 +256,26 @@ def main():
         keywords_path.write_text(json.dumps(keywords, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         powers_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/powers.json'
         powers = json.loads(powers_path.read_text(encoding='utf-8'))
-        for cid in 'JA04 JK10 JA22 JK15 A JK27 JA35 JK32 JK37C JA45 JK64 JK67 JG31 JH19 JH21 JG34 JK75 JH23 JA70 JH24 JK80 JK81 JZ05 JZ06 JH30 JK46'.split():
+        power_ids = {c['id'] for c in cards if c['type'] == '能力' and c['id'] != 'JG23'} | ({'JH19', 'JH24', 'JK80', 'JG31'} & ids)
+        for cid in sorted(power_ids):
             powers[f'JUNNA_{cid}_POWER.title'] = next(c['name'] for c in cards if c['id'] == cid)
         powers.update({'JUNNA_CATALOG.description': '{Effects}', 'JUNNA_ENERGY_RESERVE.title': '能量保留',
-                       'JUNNA_ENERGY_RESERVE.description': '下回合保留至多{Amount}点剩余能量。'})
+                       'JUNNA_ENERGY_RESERVE.description': '下回合保留至多{Amount}点剩余能量。',
+                       'JUNNA_NEXT_CARD_BONUS.title': '练习成果',
+                       'JUNNA_NEXT_CARD_BONUS.description': '你打出的下一张牌获得{Amount}点伤害加成。'})
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        ui_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/gameplay_ui.json'
+        ui = json.loads(ui_path.read_text(encoding='utf-8'))
+        ui = {k: v for k, v in ui.items() if not k.startswith('JUNNA.KNOWLEDGE_BACKGROUND.')}
+        for card in cards:
+            tips = [t for t in card.get('extraHoverTips', []) if t.get('id') == 'junna_knowledge_background']
+            if tips:
+                ui['JUNNA.KNOWLEDGE_BACKGROUND.' + card['id']] = '\n'.join(t['description'] if 'description' in t else t.get('body', '') for t in tips)
+        ui_path.write_text(json.dumps(ui, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    if not args.text_only and not args.rules_only:
+        (ROOT / 'src/Models/CatalogPowers.Generated.cs').write_text(header + '\n'.join(
+            f'[CustomID("JUNNA_{cid}_POWER")]\npublic sealed class JunnaPower{cid}() : CatalogPower("{cid}");\n'
+            for cid in sorted(power_ids)), encoding='utf-8')
     if args.text_only:
         print(f'Updated display text for {len(cards)} cards; runtime values, models and portraits unchanged.')
     elif args.rules_only:

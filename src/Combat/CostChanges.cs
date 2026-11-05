@@ -11,6 +11,8 @@ public static class CostChanges
 {
     private sealed class FormerX { public int Captured; }
     private static readonly ConditionalWeakTable<CardModel, FormerX> FixedX = new();
+    internal static void CaptureFreePayment(CardModel card)
+    { if (FixedX.TryGetValue(card, out var state)) state.Captured = 0; }
     public static void SetFixed(CardModel card, int amount)
     {
         if (card.EnergyCost.CostsX)

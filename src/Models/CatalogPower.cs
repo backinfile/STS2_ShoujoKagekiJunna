@@ -42,10 +42,12 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
         };
     }
     private List<Grant> _grants = [];
+    internal int ReplayGrants => _grants.Count;
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}.png";
+    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}." +
+        (DesignId is "JA87" or "JA96" or "JH31" ? "svg" : "png");
     public override string CustomBigIconPath => CustomPackedIconPath;
     public override LocString Description
     {
@@ -100,18 +102,6 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
         }
     }
 
-    public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount) =>
-        DesignId == "JH19" && card.Owner.Creature == Owner && card.Type != CardType.Power
-            ? playCount + _grants.Count : playCount;
-
-    public override Task AfterModifyingCardPlayCount(CardModel card)
-    {
-        if (DesignId != "JH19" || card.Owner.Creature != Owner || card.Type == CardType.Power)
-            return Task.CompletedTask;
-        _grants.Clear();
-        return PowerCmd.Remove(this);
-    }
-
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay play)
     {
         if (play.Card.Owner != Owner.Player) return;
@@ -129,10 +119,10 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
                     if (grant.Used >= grant.N(0)) _grants.Remove(grant);
                     if (ArrowCombat.Find(play.Card) is { } immediate) await ArrowCombat.Accelerate(context, immediate, int.MaxValue);
                     break;
-                case "JK10" when play.Resources.EnergyValue >= grant.N(1) && grant.Take(grant.N(0)):
-                    await CardPileCmd.Draw(context, grant.N(2), play.Card.Owner);
-                    await PlayerCmd.GainEnergy(grant.N(3), play.Card.Owner); break;
-                case "JK15" when CardCatalog.IsKnowledge(play.Card) && grant.Take(grant.N(0)):
+                case "JK10" when play.Resources.EnergyValue >= grant.N(0) && grant.Take(1):
+                    await CardPileCmd.Draw(context, grant.N(1), play.Card.Owner);
+                    await PlayerCmd.GainEnergy(grant.N(2), play.Card.Owner); break;
+                case "JK15" when CardCatalog.IsKnowledge(play.Card) && grant.Take(1):
                     using (KnowledgeCombat.SingleCard())
                     {
                         var clone = play.Card.CreateCloneForPlayer(play.Card.Owner);
@@ -157,6 +147,8 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
                 case "JK80" when CardCatalog.IsKnowledge(play.Card):
                     _grants.Remove(grant);
                     await Block(grant, grant.N(1)); break;
+                case "JH31" when play.Resources.EnergyValue >= grant.N(0):
+                    await CardActions.DrawMatching(context, play.Card.Owner, c => CardActions.HasNumericCost(c) && CardActions.Cost(c) == 0, grant.N(1)); break;
             }
         }
         if (_grants.Count == 0) await PowerCmd.Remove(this);
@@ -168,12 +160,14 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
             await KnowledgeCombat.DrawPartners(context, card);
     }
 
-    public override Task BeforeFlush(PlayerChoiceContext context, Player player)
+    public override async Task BeforeFlush(PlayerChoiceContext context, Player player)
     {
         if (DesignId == "JK81" && player == Owner.Player)
             foreach (var card in player.PlayerCombatState!.Hand.Cards)
                 if (_grants.Any(g => CardActions.Cost(card) >= g.N(0))) card.GiveSingleTurnRetain();
-        return Task.CompletedTask;
+        if (DesignId == "JA87" && player == Owner.Player)
+            foreach (var grant in _grants.ToArray())
+                await HandArrow.Select(context, grant.Card, grant.N(0), optional: true);
     }
 
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext context, CombatSide side, IEnumerable<Creature> participants)
@@ -185,7 +179,8 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
             {
                 case "A": await CardActions.Generate(Owner.Player!, "B", grant.N(0), PileType.Draw); break;
                 case "JK67":
-                    foreach (var card in CardActions.All(Owner.Player!).Where(CardCatalog.IsArrow)) DamageModifiers.Add(card, grant.V("Bonus"));
+                    foreach (var card in ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card).Distinct().ToArray())
+                        DamageModifiers.Add(card, grant.V("Bonus"));
                     break;
                 case "JH21" when Owner.Player!.PlayerCombatState!.Energy > 0: await Block(grant, grant.V("Block")); break;
             }
@@ -193,7 +188,7 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
     }
     public override async Task AfterSideTurnEnd(PlayerChoiceContext context, CombatSide side, IEnumerable<Creature> participants)
     {
-        if (side == CombatSide.Player && participants.Contains(Owner) && DesignId is "JK64" or "JG31")
+        if (side == CombatSide.Player && participants.Contains(Owner) && DesignId is "JK64" or "JG31" or "JH19")
             await PowerCmd.Remove(this);
     }
 
@@ -205,6 +200,13 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
         foreach (var grant in _grants.ToArray())
             if (ordinal > 0 && ordinal <= grant.N(0))
                 await CardActions.Fly(context, Owner.Player!, result.TotalDamage, target, grant.Card.IsUpgraded);
+    }
+
+    public override async Task AfterDamageReceived(PlayerChoiceContext context, Creature target, DamageResult result,
+        ValueProp props, Creature? dealer, CardModel? cardSource)
+    {
+        if (DesignId != "JA96" || target != Owner || result.UnblockedDamage <= 0 || !props.IsPoweredAttack()) return;
+        foreach (var grant in _grants.ToArray()) await ArrowCombat.AccelerateAll(context, Owner.Player!, grant.N(0));
     }
 
     public override Task AfterEnergySpent(CardModel card, int amount) => card.Owner == Owner.Player && amount > 0 && DesignId == "JH30"

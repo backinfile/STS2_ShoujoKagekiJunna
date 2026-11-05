@@ -24,7 +24,7 @@ internal static class ArrowFramePatch
         .Select(name => AccessTools.PropertyGetter(typeof(CardModel), name));
     static bool Prefix(CardModel __instance, MethodBase __originalMethod, ref string __result)
     {
-        if (__instance.Type != ArrowPile.ArrowType) return true;
+        if (!Models.CardCatalog.IsArrow(__instance)) return true;
         __result = __originalMethod.Name switch
         {
             "get_FramePath" => "res://images/atlases/ui_atlas.sprites/card/card_frame_skill_s.tres",

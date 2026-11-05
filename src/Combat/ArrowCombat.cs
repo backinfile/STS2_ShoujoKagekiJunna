@@ -52,9 +52,11 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     public int DeployedRound { get; } = round;
     public int AttacksWhileWaiting { get; internal set; }
     public int PlayCount { get; internal set; } = play.PlayCount;
-    internal async Task Resolve(PlayerChoiceContext context)
+    private readonly int[] _xValues = PaidReplay.Capture(card);
+    internal async Task Resolve(PlayerChoiceContext context, int index)
     {
         using var resolution = DamageExecution.BeginCardResolution(Card);
+        if (Card.EnergyCost.CostsX && index < _xValues.Length) Card.EnergyCost.CapturedXValue = _xValues[index];
         await resolve(context, Play);
     }
     internal bool Resolving;
@@ -72,7 +74,11 @@ public static partial class ArrowCombat
                 ?? Array.IndexOf(a.Card.CombatState?.Creatures.ToArray() ?? [], target) : 0)
         .ThenBy(a => a.Sequence).ToArray();
     public static ArrowDeployment? Find(CardModel card) => Arrows.FirstOrDefault(a => a.Card == card);
-    public static void Cancel(CardModel card) => Arrows.RemoveAll(a => a.Card == card);
+    public static void Cancel(CardModel card)
+    {
+        Arrows.RemoveAll(a => a.Card == card);
+        HandArrow.Restore(card);
+    }
 
     public static void Deploy(JunnaFullDraw card, CardPlay play, int turns)
         => Deploy(card, play, turns, card.ResolveArrow);
@@ -84,7 +90,7 @@ public static partial class ArrowCombat
             existing.PlayCount += play.PlayCount;
         else
         {
-            Cancel(card);
+            Arrows.RemoveAll(a => a.Card == card);
             Arrows.Add(new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve) { Sequence = _sequence++ });
         }
         var room = NCombatRoom.Instance;
@@ -109,6 +115,13 @@ public static partial class ArrowCombat
             await Accelerate(context, arrow, turns);
     }
 
+    public static async Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns)
+    {
+        foreach (var arrow in DisplayOrder().Where(a => a.Card.Owner == player && !a.TargetsGroup &&
+                     (a.Target == player.Creature || a.Target == null)))
+            await Accelerate(context, arrow, turns);
+    }
+
     public static async Task Accelerate(PlayerChoiceContext context, ArrowDeployment arrow, int turns)
     {
         if (arrow.Resolving || !Arrows.Contains(arrow)) return;
@@ -126,14 +139,16 @@ public static partial class ArrowCombat
             using var attack = ArrowAttackAnimation.Begin(arrow.Card.Owner);
             if (hud != null) await hud.ReleaseArrow(arrow);
             for (int replay = 0; replay < arrow.PlayCount; replay++)
-                await arrow.Resolve(context);
+                await arrow.Resolve(context, replay);
             // A resolving arrow may have deployed itself again. Keep that new deployment intact.
             Arrows.Remove(arrow);
             if (Find(arrow.Card) != null) return;
+            if (await HandArrow.Finish(context, arrow.Card)) return;
             if (arrow.Card.Pile?.Type != ArrowPile.PileId) return;
             using var pileExit = new ArrowPileExit(hud?.PileExitPosition(arrow.Card));
-            if (arrow.Card.Keywords.Contains(CardKeyword.Exhaust))
+            if (arrow.Card.ExhaustOnNextPlay || arrow.Card.Keywords.Contains(CardKeyword.Exhaust))
             {
+                arrow.Card.ExhaustOnNextPlay = false;
                 await CardCmd.Exhaust(context, arrow.Card, skipVisuals: true);
                 // Silent transfers skip the native completion event used by the pile counter.
                 if (arrow.Card.Pile?.Type == PileType.Exhaust) PileType.Exhaust.GetPile(arrow.Card.Owner).InvokeCardAddFinished();
@@ -149,7 +164,7 @@ public static partial class ArrowCombat
         if (play.IsLastInSeries && Find(play.Card) is { Remaining: 0 } ready) await Accelerate(context, ready, 0);
     }
 
-    internal static void Clear() { Arrows.Clear(); LastTick.Clear(); DeathOrders.Clear(); _sequence = 0; }
+    internal static void Clear() { Arrows.Clear(); HandArrow.Clear(); LastTick.Clear(); DeathOrders.Clear(); _sequence = 0; }
 }
 
 [CustomID("JUNNA_COMBAT_HOOKS")]
@@ -173,7 +188,7 @@ public sealed class JunnaCombatHooks : SingletonModel
         => ArrowCombat.AfterTargetDeath(creature, wasRemovalPrevented);
     public override Task BeforeCardPlayed(CardPlay play)
     {
-        if (play.IsFirstInSeries && (play.Card.Type == CardType.Attack || CardCatalog.IsArrow(play.Card)))
+        if (play.IsFirstInSeries && CardCatalog.IsArrow(play.Card))
             foreach (var arrow in ArrowCombat.Deployed.Where(a => a.Card.Owner == play.Card.Owner && a.Card != play.Card && !a.Resolving))
                 arrow.AttacksWhileWaiting++;
         return Task.CompletedTask;

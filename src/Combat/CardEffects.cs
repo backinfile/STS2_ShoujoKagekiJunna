@@ -46,7 +46,7 @@ public static class CardEffects
             case "JA04": case "JK10": case "JA22": case "JK15": case "A": case "JK27":
             case "JA35": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":
             case "JG31": case "JH21": case "JG34": case "JK75": case "JH23": case "JA70":
-            case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46":
+            case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31":
                 await CatalogPower.Install(card, context, play);
                 if (card.DesignId == "JK32") SetNamedFree(player, "JK32B", "JK32C");
                 break;
@@ -69,8 +69,8 @@ public static class CardEffects
                     DamageModifiers.TransferBonus(All(), target);
                 break;
             case "JT02":
-                foreach (var selected in await Choose(hand.Cards.Where(CardCatalog.IsArrow)))
-                    ArrowConversion.Convert(selected);
+                foreach (var selected in await Choose(hand.Cards.Where(c => HandArrow.OriginalType(c) != CardType.Power)))
+                    HandArrow.Adapt(selected);
                 break;
             case "JT03":
                 await Attack(hits: V("Repeat", 2) + (ArrowCombat.Find(card)?.AttacksWhileWaiting ?? 0)); break;
@@ -94,15 +94,13 @@ public static class CardEffects
             case "JK33B":
                 await Attack(); await Improve(CardActions.Named(player, "JK33"), 0, N(1)); break;
             case "JK37": case "JK43": case "JK44": case "JK45": case "JK46B": case "JK50":
-            case "JA38": case "JA41": case "JK67B": case "JK69B": case "JA59": case "JA64":
+            case "JA38": case "JA41": case "JK67B": case "JK69B": case "JA59": case "JA64": case "JK75B":
             case "JZ03": case "JA72": case "JA77": case "JA81B":
                 await Attack(); break;
             case "JK37B":
                 await Attack(); await CardActions.DrawMatching(context, player, CardCatalog.IsArrow, N(1)); break;
             case "JK43B":
-                await CardActions.DrawMatching(context, player, c => CardCatalog.DesignId(c) == "JK43", 1);
-                foreach (var c in CardActions.Named(player, "JK43"))
-                { c.EnergyCost.AddThisCombat(-N(0)); c.InvokeEnergyCostChanged(); }
+                await Improve(await CardActions.DrawMatching(context, player, c => CardCatalog.DesignId(c) == "JK43", 1), V("Bonus"));
                 break;
             case "JK44B": break; // Intentionally blank knowledge burden; its native Exhaust keyword still resolves.
             case "JK45B":
@@ -112,11 +110,12 @@ public static class CardEffects
             case "JK48B":
                 await Block(V("Block") + All().Count(CardCatalog.IsKnowledge)); break;
             case "JK49":
-                await Attack(); CardForms.AfterPlay(card, "JK49B"); break;
+                await Attack(); break;
             case "JK49B":
-                await Block(); CardForms.AfterPlay(card, "JK49"); break;
+                await Block(); break;
             case "JK50B":
-                foreach (var selected in await Choose(hand.Cards.Where(c => CardCatalog.DesignId(c) == "JK50")))
+                var eloquence = hand.Cards.Where(c => CardCatalog.DesignId(c) == "JK50").ToArray();
+                foreach (var selected in card.IsUpgraded ? eloquence : await Choose(eloquence))
                     await CardActions.FreePlay(context, selected);
                 break;
             case "JK53":
@@ -130,7 +129,7 @@ public static class CardEffects
             case "JA57":
                 await Draw(N(0)); await Energy(N(1)); break;
             case "JG27":
-                await ImproveSelected(CardActions.Available(player), V("Bonus")); break;
+                await ImproveSelected(hand.Cards, V("Bonus")); break;
             case "JX01":
                 await Block(); await Improve(Arrows(), V("Bonus")); break;
             case "JX02":
@@ -140,12 +139,14 @@ public static class CardEffects
             case "JH11": case "JH17":
                 await Block(); await Energy(N(1)); break;
             case "JH13":
-                await Attack(hits: 1 + player.PlayerCombatState.Energy / N(1)); break;
+                await Attack(hits: V("Repeat") + player.PlayerCombatState.Energy / N(2) * N(3)); break;
             case "JF10": case "JA58":
-                if (play.Target?.IsAlive == true)
+                var debuffTargets = card.DesignId == "JA58" ? player.Creature.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray()
+                    : play.Target?.IsAlive == true ? new[] { play.Target } : [];
+                foreach (var enemy in debuffTargets)
                 {
-                    await PowerCmd.Apply<VulnerablePower>(context, play.Target, N(0), player.Creature, card);
-                    await PowerCmd.Apply<WeakPower>(context, play.Target, N(0), player.Creature, card);
+                    await PowerCmd.Apply<VulnerablePower>(context, enemy, N(0), player.Creature, card);
+                    await PowerCmd.Apply<WeakPower>(context, enemy, N(0), player.Creature, card);
                 }
                 if (card.DesignId == "JF10")
                 {
@@ -194,7 +195,7 @@ public static class CardEffects
             case "JH27":
                 await Block(); break;
             case "JG36":
-                await Attack(); await ImproveSelected(hand.Cards, V("Bonus")); break;
+                await Attack(); await PowerCmd.Apply<JunnaNextCardBonus>(context, player.Creature, V("Bonus"), player.Creature, card); break;
             case "JK81B":
                 await Block(V("Block") + hand.Cards.Count(c => c != card) * N(1)); break;
             case "JA75":
@@ -215,8 +216,18 @@ public static class CardEffects
                 int x = card.ResolveEnergyXValue();
                 for (int i = 0; i < x; i++) await CardActions.Fly(context, player, V("Damage"), upgraded: card.IsUpgraded);
                 break;
-            case "JH31":
-                await CardActions.DrawMatching(context, player, c => CardActions.HasNumericCost(c) && CardActions.Cost(c) == 0, N(0)); break;
+            case "JA84":
+                await Block(); await HandArrow.Select(context, card, N(1)); break;
+            case "JA88":
+                await Block(); await HandArrow.Select(context, card, CardPile.MaxCardsInHand, optional: true); break;
+            case "JK84":
+                await HandArrow.Select(context, card, N(0)); break;
+            case "JG37":
+                await Draw(N(0)); await HandArrow.Select(context, card, N(1)); break;
+            case "JA94":
+                await Block(); await ArrowCombat.AccelerateSelf(context, player, N(1)); break;
+            case "JK84B":
+                await Attack(); await ArrowCombat.AccelerateAll(context, player, N(1)); break;
             default: throw new InvalidOperationException($"Missing card effect: {card.DesignId}");
         }
     }
@@ -231,7 +242,7 @@ public static class CardEffects
     {
         if (hits <= 0 || (card.TargetType == TargetType.AnyEnemy && play.Target?.IsAlive != true)) return [];
         var attack = DamageCmd.Attack(damage).FromCard(card, play).WithHitCount(hits).WithHitFx(VfxCmd.slashPath);
-        if (card.TargetType == TargetType.AllEnemies) attack.TargetingAllOpponents(card.Owner.Creature.CombatState!);
+        if (card.TargetType == TargetType.AllEnemies || card.DesignId == "JG34") attack.TargetingAllOpponents(card.Owner.Creature.CombatState!);
         else attack.Targeting(play.Target!);
         await attack.Execute(context);
         return attack.Results.SelectMany(r => r).ToArray();

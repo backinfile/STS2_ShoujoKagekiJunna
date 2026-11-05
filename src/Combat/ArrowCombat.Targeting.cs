@@ -64,6 +64,7 @@ public static partial class ArrowCombat
             {
                 using var pileExit = new ArrowPileExit(NCombatRoom.Instance?.GetNodeOrNull<ArrowHud>("JunnaArrows")?.PileExitPosition(arrow.Card));
                 Arrows.Remove(arrow);
+                HandArrow.Restore(arrow.Card);
                 if (arrow.Card.Pile?.Type == ArrowPile.PileId) await CardPileCmd.Add(arrow.Card, PileType.Discard);
             }
         }
