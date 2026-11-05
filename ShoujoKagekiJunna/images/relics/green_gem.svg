@@ -4,6 +4,7 @@
       <stop stop-color="#dfffcb" stop-opacity=".8"/><stop offset=".5" stop-color="#70efa6" stop-opacity=".12"/><stop offset="1" stop-color="#70efa6" stop-opacity="0"/>
     </radialGradient>
   </defs>
+  <g transform="translate(-22.1 -10.2) scale(1.4)">
   <path d="M48 14 72 13 90 26 99 48 94 70 79 88 64 93 50 92 36 82 24 61 28 37Z" fill="#154d3b" stroke="#19392e" stroke-width="4" stroke-linejoin="round"/>
   <path d="M48 14 51 34 28 37Z" fill="#9bd895"/>
   <path d="m48 14 24-1-6 18-15 3Z" fill="#c1e9a6"/>
@@ -27,4 +28,5 @@
   <path d="m51 34 7 17 8-20-6 17ZM37 52l21-1-15 14 11-12Z" fill="#e1f9c7" opacity=".8"/>
   <path d="m57 43 3 6 7 2-7 2-2 7-2-7-6-2 6-2Z" fill="#f2ffda"/>
   <path d="m32 34 16-16 20-1" fill="none" stroke="#d4f1bb" stroke-width="2" stroke-linecap="round"/>
+  </g>
 </svg>

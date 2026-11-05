@@ -55,8 +55,13 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         EnergyCost.SetCustomBaseCost(IsUpgraded ? Definition.UpgradedCost : Definition.Cost);
         Owner.PlayerCombatState?.RecalculateCardValues();
     }
+#if STS2_BETA
     protected override CardLocation GetResultLocationForCardPlay() => CardCatalog.IsArrow(this)
         ? new(Owner, ArrowPile.PileId, CardPilePosition.Bottom) : base.GetResultLocationForCardPlay();
+#else
+    protected override PileType GetResultPileTypeForCardPlay() => CardCatalog.IsArrow(this)
+        ? ArrowPile.PileId : base.GetResultPileTypeForCardPlay();
+#endif
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         if (CardCatalog.IsArrow(this))

@@ -44,7 +44,7 @@ public partial class CardInvestmentMarks : Control
     {
         MouseFilter = MouseFilterEnum.Ignore;
         // Normal cards share their body's draw order, so foreground cards cover the badges.
-        ZIndex = Compact ? 2 : 0;
+        ZIndex = 0;
         _bonusLabel = new Label
         {
             Name = "DamageBonus", MouseFilter = MouseFilterEnum.Ignore,

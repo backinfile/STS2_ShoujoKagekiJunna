@@ -79,7 +79,7 @@ public partial class ArrowHud
             : targets.Aggregate(Vector2.Zero, (sum, point) => sum + point) / targets.Length);
         view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
         view.Root.PivotOffset = BodyCenter;
-        var effect = new ArrowReleaseVfx { Name = "ArrowRelease", Position = origin, ZIndex = 6 };
+        var effect = new ArrowReleaseVfx { Name = "ArrowRelease", Position = origin, ZIndex = 0 };
         AddChild(effect);
         view.Root.Reparent(effect);
         view.Root.Position = -BodyCenter;

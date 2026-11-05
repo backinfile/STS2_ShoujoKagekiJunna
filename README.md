@@ -2,7 +2,7 @@
 
 当前实现：纯那角色、115 张工作台有效牌面（含关联牌与生成牌）、19 组知识关系、箭矢牌堆、卡牌实例伤害加成与额外伤害次数。
 
-- 游戏版本：v0.111.0；BaseLib：3.4.7。
+- 游戏版本：正式版 v0.107.1 与测试版 v0.111.0；BaseLib：3.4.7。
 - 初始牌组：5 打击、4 防御、1 满弦射击。
 - 生命暂设 70。起始遗物为绿色宝石：战斗开始时获得 1 点能量，可保留至下回合；升级为燃烧宝石后获得 3 点。通过奥罗巴斯之触替换升级。
 - 战斗立绘：2026-11-04 精修版 04 待机、02 攻击。
@@ -14,7 +14,7 @@
 ## 构建与安装
 
 执行 `./build.ps1`。脚本的 `GameDir`、`Godot` 参数可指定游戏与 MegaDot 编辑器路径。
-产物位于 `dist/ShoujoKagekiJunna/`；将整个目录放到游戏的 `mods/`，同时安装 BaseLib 3.4.7。
+产物位于 `dist/ShoujoKagekiJunna/`；将整个目录（包含 `lib/`）放到游戏的 `mods/`，同时安装 BaseLib 3.4.7。入口 DLL 按游戏版本选择 `lib/ShoujoKagekiJunna.Stable.dll` 或 `lib/ShoujoKagekiJunna.Beta.dll`；构建脚本使用正式版 0.107.1 引用包与 `GameDir` 中的测试版程序集分别编译。
 
 当前卡牌与升级数值记录在 `docs/implementation/card-pool.json`，效果覆盖与验证见 [卡池实现记录](docs/implementation/card-effects.md)。
 `python tools/assets/generate-card-catalog.py <MCP导出快照>` 更新卡牌清单、模型入口、配图与本地化；具体牌效在 C# 中实现。工作台内容仍统一通过 MCP 编辑。
@@ -48,6 +48,8 @@ Git 保存源码、运行资源、工作台初始数据与当前设计数据。�
 
 C-1 的构建、1/3/6 支排列与倒计时结算检查保存在 `artifacts/floating-arrows/c1/`。悬浮卡图优先读取 `images/floating_arrows/<卡牌 ID>.png`，其余沿用卡牌原图。满弦射击的竖版图使用内置 imagegen 按已选 C-1 整理，提示词位于 `output/imagegen/floating-arrow-c/portrait-prompt.txt`；随后使用 GPT Image 2 Artifact Cleaner 以 0.5 强度清理摩尔纹，原尺寸对比与处理记录位于 `output/artifact-cleanup/2026-11-04/floating-arrow-c1/`。
 
-高空横列版本的实机截图与倒计时检查保存在 `artifacts/overhead-arrows/`。当前源码恢复 240∶416 的细长菱形比例，加厚灰色边框；1920×1080 游戏画布上箭矢框体约为 42×73，在 1280×720 窗口中约为 28×49。群体扇面引导线在目标距离的 70% 内渐隐。群体箭显示按卡牌的 `AllEnemies` 目标类型识别，并由独立测试模组的群体箭检查。此修订直接编译到测试环境并读取源码 SVG 预览，尚未重新打包 `dist/`。
+高空横列版本的实机截图与倒计时检查保存在 `artifacts/overhead-arrows/`。当前源码恢复 240∶416 的细长菱形比例，加厚灰色边框；1920×1080 游戏画布上箭矢框体约为 42×73，在 1280×720 窗口中约为 28×49。群体扇面引导线在目标距离的 70% 内渐隐。群体箭显示按卡牌的 `AllEnemies` 目标类型识别，并由独立测试模组的群体箭检查。本轮已重新打包 `dist/` 并验证正式版与测试版。
 
 机制接入与适配边界见 `docs/implementation/runtime-compatibility.md`。
+
+本轮预览着色排查、知识按钮与文字、箭矢层级、宝石尺寸、能量保留和双星重放的修改及定向验证见 [任务记录](docs/worktree-tasks/pursuit-upgrade-preview-analysis-20261105/README.md)。

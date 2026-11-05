@@ -10,7 +10,7 @@ OUT = ROOT / 'ShoujoKagekiJunna'
 CARDS = {
     'JB01': ('JUNNA_STRIKE', '造成{Damage:diff()}点伤害。'),
     'JB02': ('JUNNA_DEFEND', '获得{Block:diff()}点[gold]格挡[/gold]。'),
-    'JB03': ('JUNNA_FULL_DRAW', '[blue]{Turns}回合[/blue]。NL造成{Damage:diff()}点伤害。'),
+    'JB03': ('JUNNA_FULL_DRAW', '造成{Damage:diff()}点伤害。'),
     'JG09': ('JUNNA_WARM_UP', '获得{Block:diff()}点[gold]格挡[/gold]。NL选择1张手牌获得{Bonus:diff()}点[gold]伤害加成[/gold]。'),
     'JG03': ('JUNNA_REPEATED_PRACTICE', '选择一张手牌，使其额外造成1次伤害。'),
     'JA16': ('JUNNA_GUIDING_STAR', '造成{Damage:diff()}点伤害。NL下回合获得{energyPrefix:energyIcons(1)}。'),

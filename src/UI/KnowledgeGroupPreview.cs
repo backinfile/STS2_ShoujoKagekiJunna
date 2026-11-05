@@ -104,7 +104,7 @@ public partial class KnowledgeGroupPreview : Control
             _spread = !_spread;
             RenderCards();
         });
-        _confirmButton = CreateChoiceButton("Confirm", "JUNNA.KNOWLEDGE_CONFIRM", MegaInput.confirm, () =>
+        _confirmButton = CreateChoiceButton("Confirm", "JUNNA.KNOWLEDGE_CONFIRM", GameApi.ConfirmHotkey, () =>
         {
             var confirm = _confirmSelection;
             if (confirm == null) return;
@@ -232,8 +232,11 @@ public partial class KnowledgeGroupPreview : Control
     {
         _layoutButton.Position = new(Size.X - 290, Size.Y - 98);
         _layoutButton.Size = new(210, 54);
-        _confirmButton.Position = new(Size.X - 500, Size.Y - 125);
-        _cancelButton.Position = new(100, Size.Y - 125);
+        float choicesWidth = _cancelButton.Size.X + _confirmButton.Size.X + 32;
+        float choicesY = _screen.GetNode<Control>("%Upgrade").GetGlobalRect().Position.Y - GlobalPosition.Y
+            - Math.Max(_cancelButton.Size.Y, _confirmButton.Size.Y) - 32;
+        _cancelButton.Position = new((Size.X - choicesWidth) / 2, choicesY);
+        _confirmButton.Position = _cancelButton.Position + new Vector2(_cancelButton.Size.X + 32, 0);
         if (_gridCards.Count == 0) return;
         int count = _gridCards.Count;
         int columns = count <= 3 ? count : Math.Min(4, (int)Math.Ceiling(Math.Sqrt(count)));
@@ -292,6 +295,12 @@ public partial class KnowledgeGroupPreview : Control
         _scroll.ScrollVertical = 0;
     }
 
+    public override void _Input(InputEvent input)
+    {
+        if (IsVisibleInTree() && !NDevConsole.Instance.IsVisibleInTree() && ActiveScreenContext.Instance.IsCurrent(_screen))
+            HandleInput(input);
+    }
+
     internal bool HandleInput(InputEvent input)
     {
         if (!IsVisibleInTree() || _spread || input is not InputEventMouseButton { Pressed: true } mouse ||
@@ -316,12 +325,4 @@ internal static class KnowledgeInspectClosePatch
 {
     private static void Prefix(NInspectCardScreen __instance) =>
         __instance.GetNodeOrNull<KnowledgeGroupPreview>("JunnaKnowledgePreview")?.Reset();
-}
-
-[HarmonyPatch(typeof(NInspectCardScreen), nameof(NInspectCardScreen._Input))]
-internal static class KnowledgeInspectInputPatch
-{
-    private static bool Prefix(NInspectCardScreen __instance, InputEvent inputEvent) =>
-        NDevConsole.IsConsoleVisible || !ActiveScreenContext.Instance.IsCurrent(__instance) ||
-        __instance.GetNodeOrNull<KnowledgeGroupPreview>("JunnaKnowledgePreview")?.HandleInput(inputEvent) != true;
 }

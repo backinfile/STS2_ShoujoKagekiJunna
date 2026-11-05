@@ -7,8 +7,11 @@
       <stop stop-color="#f4ffe1"/><stop offset=".35" stop-color="#c9ffe0" stop-opacity=".85"/><stop offset=".7" stop-color="#70ffbd" stop-opacity=".2"/><stop offset="1" stop-color="#70ffbd" stop-opacity="0"/>
     </radialGradient>
   </defs>
+  <g transform="translate(5 12)">
   <ellipse cx="59" cy="52" rx="58" ry="51" fill="url(#aura)"/>
   <path d="m57 4 4 37 39-24-31 31 52 6-52 5 26 34-34-27-9 45 0-45-39 24 31-32-39-9 41-2-24-31 29 25Z" fill="#a2ffcf" opacity=".45"/>
+  </g>
+  <g transform="translate(-22.1 -10.2) scale(1.4)">
   <path d="M48 14 72 13 90 26 99 48 94 70 79 88 64 93 50 92 36 82 24 61 28 37Z" fill="#187c57" stroke="#23523c" stroke-width="4" stroke-linejoin="round"/>
   <path d="M48 14 51 34 28 37Z" fill="#c8ffbf"/>
   <path d="m48 14 24-1-6 18-15 3Z" fill="#e9ffd6"/>
@@ -33,4 +36,5 @@
   <path d="m32 34 16-16 20-1" fill="none" stroke="#edffdc" stroke-width="2" stroke-linecap="round"/>
   <path d="m57 27 4 19 25 5-25 4-3 22-4-22-23-4 23-4Z" fill="#d9ffe0" opacity=".65"/>
   <path d="m57 37 3 11 14 3-14 2-2 15-3-15-12-2 12-3Z" fill="#fffde8"/>
+  </g>
 </svg>

@@ -14,8 +14,13 @@ public sealed class JunnaFullDraw() : JunnaCard(1, ArrowPile.ArrowType, CardRari
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(25, ValueProp.Move), new DynamicVar("Turns", 3)];
     public override CardType Type => ArrowConversion.IsConverted(this) ? CardType.Attack : ArrowPile.ArrowType;
+#if STS2_BETA
     protected override CardLocation GetResultLocationForCardPlay() => CardCatalog.IsArrow(this)
         ? new(Owner, ArrowPile.PileId, CardPilePosition.Bottom) : base.GetResultLocationForCardPlay();
+#else
+    protected override PileType GetResultPileTypeForCardPlay() => CardCatalog.IsArrow(this)
+        ? ArrowPile.PileId : base.GetResultPileTypeForCardPlay();
+#endif
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         if (!CardCatalog.IsArrow(this)) { await ResolveArrow(context, play); return; }

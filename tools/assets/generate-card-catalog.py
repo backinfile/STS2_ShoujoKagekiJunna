@@ -28,6 +28,10 @@ def display_description(card, text, card_names, values, upgraded=False):
         icons = '{energyPrefix:energyIcons(' + str(value if 1 <= value <= 3 else 1) + ')}'
         return icons if 1 <= value <= 3 else match[0].removesuffix('点能量') + icons
 
+    text = re.sub(r'((?:可)?保留)(\{\w+:diff\(\)\}|\d+)点能量',
+                  lambda m: m[1] + m[2] + '{energyPrefix:energyIcons(1)}', text)
+    text = re.sub(r'(\{\w+:diff\(\)\}|\d+)点能量(?=(?:并|且)(?:可)?保留(?:到|至)下(?:个)?回合)',
+                  lambda m: m[1] + '{energyPrefix:energyIcons(1)}', text)
     text = re.sub(r'\{(\w+):diff\(\)\}点能量', energy, text)
     text = re.sub(r'(\d+)点能量', lambda m: '{energyPrefix:energyIcons(' + m[1] + ')}', text)
     # Arrow countdowns are rendered on their existing plaque.
@@ -39,8 +43,6 @@ def display_description(card, text, card_names, values, upgraded=False):
     highlighted.update(name + '+' for name in card_names)
     pattern = '|'.join(re.escape(word) for word in sorted(highlighted, key=len, reverse=True))
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
-    if card['type'] == '箭矢':
-        text = '[blue]{Turns:diff()}回合后[/blue]\n' + text
     return text
 
 
@@ -144,8 +146,6 @@ def main():
             upgrade = upgrade.replace('X', '{Damage:diff()}')
         if card['type'] == '箭矢':
             values.append({'name': 'Turns', 'base': card['turns'], 'upgraded': card['upgradedTurns']})
-            base = '[blue]{Turns:diff()}回合[/blue]。\n' + base
-            upgrade = '[blue]{Turns:diff()}回合[/blue]。\n' + upgrade
         # Existing implementations use their established variable names.
         if cid in ('JA16', 'JA17'):
             base = re.sub(r'\{N\d+:diff\(\)\}', str(1 if cid == 'JA16' else 2), base)

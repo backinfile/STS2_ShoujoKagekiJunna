@@ -137,7 +137,7 @@ public sealed class JunnaProbeCommand : AbstractConsoleCmd
             {
                 var canonical = ModelDb.AllCards.Single(c => c.Id.Entry == "KAREN_STRIKE");
                 var karen = state.CreateCard(canonical, player);
-                Check("Karen card comes from real mod", karen.GetType().Assembly.GetName().Name!, "ShoujoKagekiAijoKaren.Beta");
+                Check("Karen card comes from real mod", karen.GetType().Assembly.GetName().Name!.StartsWith("ShoujoKagekiAijoKaren", StringComparison.Ordinal), true);
                 Check("Karen strike eligible", DamageModifiers.CanDealDamage(karen), true);
                 var baseline = karen.DynamicVars.Damage.IntValue;
                 Check("Karen strike accepts investment", DamageModifiers.Add(karen, 2, 1), true);
