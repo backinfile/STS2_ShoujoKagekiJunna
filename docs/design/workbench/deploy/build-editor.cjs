@@ -15,7 +15,7 @@ const assets=JSON.parse(publicHTML.match(/<script id="workbench-assets" type="ap
 for(const id of Object.keys(assets))assets[id]='/'+assets[id];
 const state={...snapshot,assets:Object.fromEntries(Object.keys(snapshot.assets).map(id=>[id,assets[id]])),history:[],undoStack:[],redoStack:[],seedBatches:[],appliedSeedBatches:[]};
 delete state.mcpRequests;
-const connection={baseURL:config.origin+config.prefix,token:config.secret,workspaceId:state.workspaceId};
+const connection={baseURL:config.origin+config.prefix,token:config.secret,workspaceId:state.workspaceId,timeoutMs:60000};
 let app=read('app.js');
 const before="/^http:\\/\\/127\\.0\\.0\\.1:\\d+$/.test(c.baseURL)";
 if(!app.includes(before))throw Error('Connection anchor missing');
