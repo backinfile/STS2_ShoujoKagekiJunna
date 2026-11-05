@@ -193,18 +193,19 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
         int ordinal = AttackEventHistory.Ordinal(result);
         foreach (var grant in _grants.ToArray())
             if (ordinal > 0 && ordinal <= grant.N(0))
-                await CardActions.Fly(context, Owner.Player!, result.TotalDamage, upgraded: grant.Card.IsUpgraded);
+                await CardActions.Fly(context, Owner.Player!, result.TotalDamage, target, grant.Card.IsUpgraded);
     }
 
     public override Task AfterEnergySpent(CardModel card, int amount) => card.Owner == Owner.Player && amount > 0 && DesignId == "JH30"
-        ? EnergyDamage(new ThrowingPlayerChoiceContext()) : Task.CompletedTask;
+        ? EnergyDamage(new ThrowingPlayerChoiceContext(), amount) : Task.CompletedTask;
 
-    public static async Task EnergyGained(Player player)
+    public static async Task EnergyChanged(Player player, int amount)
     {
+        if (amount <= 0) return;
         foreach (var power in player.Creature.Powers.OfType<CatalogPower>().Where(p => p.DesignId == "JH30").ToArray())
-            await power.EnergyDamage(new ThrowingPlayerChoiceContext());
+            await power.EnergyDamage(new ThrowingPlayerChoiceContext(), amount);
     }
-    private async Task EnergyDamage(PlayerChoiceContext context)
+    private async Task EnergyDamage(PlayerChoiceContext context, int amount)
     {
         foreach (var grant in _grants.ToArray())
         {
@@ -212,7 +213,7 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
             if (targets.Length == 0) return;
             var target = Owner.Player!.RunState.Rng.CombatTargets.NextItem(targets);
             using (DamageExecution.BeginCardResolution(grant.Card))
-                await CreatureCmd.Damage(context, target!, grant.V("Damage"), ValueProp.Move, Owner, grant.Card, grant.Play);
+                await CreatureCmd.Damage(context, target!, amount, ValueProp.Move, Owner, grant.Card, grant.Play);
         }
     }
 }

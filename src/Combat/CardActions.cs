@@ -97,6 +97,20 @@ public static class CardActions
         return true;
     }
 
+    public static async Task FreePlay(PlayerChoiceContext context, CardModel card)
+    {
+        if (CombatManager.Instance.IsOverOrEnding || card.Owner.Creature.IsDead ||
+            card.Keywords.Contains(CardKeyword.Unplayable) ||
+            !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) return;
+        Creature? target = null;
+        if (card.TargetType == TargetType.AnyEnemy)
+        {
+            target = await ChooseTarget(context, card);
+            if (target == null) return;
+        }
+        await CardCmd.AutoPlay(context, card, target);
+    }
+
     public static async Task<Creature?> ChooseTarget(PlayerChoiceContext context, CardModel card)
     {
         var enemies = card.Owner.Creature.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
@@ -143,7 +157,18 @@ public static class CardActions
         if (upgraded) { arrow.UpgradeInternal(); arrow.FinalizeUpgradeInternal(); }
         arrow.SetGeneratedDamage(damage);
         await CardPileCmd.AddGeneratedCardToCombat(arrow, PileType.Play, player);
-        if (!await PaidPlay(context, arrow, target)) await CardPileCmd.Add(arrow, PileType.Discard);
+        // Generated arrows use the native automatic-play target policy, independently per card.
+        // An effect may supply a target; otherwise the combat target RNG selects one.
+        if (target != null)
+        {
+            target = ArrowCombat.ResolveEffectTarget(target, player.Creature.CombatState!);
+            if (target == null)
+            {
+                await CardPileCmd.Add(arrow, PileType.Discard);
+                return;
+            }
+        }
+        await CardCmd.AutoPlay(context, arrow, target);
     }
 
 }

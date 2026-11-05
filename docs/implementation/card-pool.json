@@ -1,5 +1,5 @@
 {
-  "revision": 2550,
+  "revision": 2592,
   "cards": [
     {
       "id": "JA04",
@@ -421,8 +421,8 @@
       "values": [
         {
           "name": "N0",
-          "base": 1,
-          "upgraded": 2
+          "base": 2,
+          "upgraded": 3
         },
         {
           "name": "N1",
@@ -430,8 +430,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。每回合第1次打出知识牌时，将其1张复制放入抽牌堆。",
-      "upgradedText": "知识。每回合前2次打出知识牌时，将其1张复制放入抽牌堆。"
+      "text": "知识。每回合前2次打出知识牌时，将其1张复制放入抽牌堆。",
+      "upgradedText": "知识。每回合前3次打出知识牌时，将其1张复制放入抽牌堆。"
     },
     {
       "id": "JK15B",
@@ -737,12 +737,12 @@
       "values": [
         {
           "name": "N0",
-          "base": 2,
-          "upgraded": 3
+          "base": 1,
+          "upgraded": 2
         }
       ],
-      "text": "回合开始时，所有箭矢加速2回合。",
-      "upgradedText": "回合开始时，所有箭矢加速3回合。"
+      "text": "回合开始时，所有箭矢加速1回合。",
+      "upgradedText": "回合开始时，所有箭矢加速2回合。"
     },
     {
       "id": "JK32",
@@ -1667,8 +1667,8 @@
           "upgraded": 1
         }
       ],
-      "text": "每回合打出前2张箭矢牌时，其加速1回合。",
-      "upgradedText": "每回合打出前3张箭矢牌时，其加速1回合。"
+      "text": "每回合前2次打出打出箭矢牌时，其加速1回合。",
+      "upgradedText": "每回合前3次打出打出箭矢牌时，其加速1回合。"
     },
     {
       "id": "JA53",
@@ -3820,7 +3820,7 @@
       "className": "JunnaCardJH30",
       "name": "星芒",
       "cost": 1,
-      "upgradedCost": 1,
+      "upgradedCost": 0,
       "costsX": false,
       "type": "能力",
       "target": "Self",
@@ -3834,15 +3834,9 @@
       "upgradedRetain": false,
       "damageCapable": true,
       "portrait": "JH30.jpg",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "获得或消耗能量时，对随机敌人造成1点伤害。",
-      "upgradedText": "获得或消耗能量时，对随机敌人造成1点伤害。"
+      "values": [],
+      "text": "获得或消耗能量时，对随机敌人造成等量伤害。",
+      "upgradedText": "获得或消耗能量时，对随机敌人造成等量伤害。"
     },
     {
       "id": "JA82",

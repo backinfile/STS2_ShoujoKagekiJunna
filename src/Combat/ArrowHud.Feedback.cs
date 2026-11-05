@@ -77,15 +77,18 @@ public partial class ArrowHud
             targets = [LocalPoint(owner.VfxSpawnPosition)];
         view.ExitPosition = GetGlobalTransform() * (targets.Length == 0 ? origin + Vector2.Up * 110
             : targets.Aggregate(Vector2.Zero, (sum, point) => sum + point) / targets.Length);
-        if (targets.Length > 0)
-            view.Frame.Rotation = (targets.Aggregate(Vector2.Zero, (sum, point) => sum + point) / targets.Length - origin).Angle() - Mathf.Pi * .5f;
         view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
         view.Root.PivotOffset = IconSize * .5f;
         var effect = new ArrowReleaseVfx { Name = "ArrowRelease", Position = origin, ZIndex = 6 };
         AddChild(effect);
         view.Root.Reparent(effect);
         view.Root.Position = -IconSize * .5f;
-        effect.Initialize(view.Root, targets.Select(point => point - origin).ToArray());
+        effect.Initialize(view.Root, targets.Select(point => point - origin).ToArray(), (direction, delta) =>
+        {
+            view.Motion.Advance(origin, origin + direction, delta);
+            view.Frame.Rotation = view.Motion.Angle;
+            view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
+        });
         return Cmd.Wait(ArrowReleaseVfx.ImpactTime);
     }
 }
@@ -99,12 +102,14 @@ public partial class ArrowReleaseVfx : Node2D
     private Vector2 _rest;
     private Vector2[] _targets = [];
     private float _time;
+    private Action<Vector2, float>? _turn;
 
-    internal void Initialize(Control arrow, Vector2[] targets)
+    internal void Initialize(Control arrow, Vector2[] targets, Action<Vector2, float>? turn = null)
     {
         _arrow = arrow;
         _rest = arrow.Position;
         _targets = targets;
+        _turn = turn;
     }
 
     public override void _Process(double delta)
@@ -113,6 +118,7 @@ public partial class ArrowReleaseVfx : Node2D
         if (_time >= Duration) { QueueFree(); return; }
         float flight = Mathf.Clamp((_time - Hold) / Flight, 0, 1);
         var aim = _targets.Length == 0 ? new Vector2(0, -110) : _targets.Aggregate(Vector2.Zero, (sum, p) => sum + p) / _targets.Length;
+        _turn?.Invoke(aim, (float)delta);
         _arrow.Position = _rest + aim * flight * flight;
         _arrow.Scale = Vector2.One * Mathf.Lerp(1.25f, .65f, flight);
         _arrow.Modulate = new Color(1.5f, 1.5f, 1.25f, 1 - Mathf.SmoothStep(.65f, 1, flight));

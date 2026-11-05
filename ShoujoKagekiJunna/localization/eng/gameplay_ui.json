@@ -1,6 +1,22 @@
 {
   "JUNNA.SELECT_DAMAGE_CARD": "选择一张牌",
   "JUNNA.CARD_TYPE.ARROW": "箭矢",
+  "JUNNA.INVESTMENT": "Damage Boosts",
+  "JUNNA.INVESTMENT_BONUS": "Damage dealt increases by {Amount}.",
+  "JUNNA.INVESTMENT_HITS": "Extra damage instances: {Amount}.",
   "JUNNA.KNOWLEDGE_SPREAD_LAYOUT": "Tile",
-  "JUNNA.KNOWLEDGE_STACK_LAYOUT": "Stack"
+  "JUNNA.KNOWLEDGE_STACK_LAYOUT": "Stack",
+  "JUNNA.KNOWLEDGE_GROUP": "Related Cards",
+  "JUNNA.KNOWLEDGE_CONFIRM": "Confirm",
+  "JUNNA.KNOWLEDGE_CANCEL": "Cancel",
+  "JUNNA.KNOWLEDGE_BACKGROUND": "Knowledge Background",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK33": "Revue Starlight, TV episode 9. Junna quotes Nietzsche while discussing how the past and future shape the present.",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK33B": "Revue Starlight, TV episode 9. Junna quotes Nietzsche while discussing how the past and future shape the present.",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK34": "The play within Revue Starlight, written by Kanata Nakamura. Two girls climb a tower to reach the stars; their story originally ends in separation.",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK43": "William Shakespeare and John Fletcher, Henry VIII, Act 1, Scene 1: a steep hill calls for a slow pace at first.",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK43B": "William Shakespeare and John Fletcher, Henry VIII, Act 1, Scene 1: a steep hill calls for a slow pace at first.",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK47": "William Shakespeare, Hamlet, Act 3, Scene 1. Hamlet weighs enduring suffering against taking up arms to oppose it.",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK47B": "William Shakespeare, Hamlet, Act 3, Scene 1. Taking up arms against suffering is the other choice in the same soliloquy.",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK49": "William Shakespeare, Hamlet, Act 3, Scene 1: taking up arms against a sea of troubles.",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK49B": "William Shakespeare, Hamlet, Act 3, Scene 1: enduring the slings and arrows of fortune."
 }

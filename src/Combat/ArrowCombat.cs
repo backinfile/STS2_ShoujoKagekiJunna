@@ -128,7 +128,12 @@ public static partial class ArrowCombat
             if (Find(arrow.Card) != null) return;
             if (arrow.Card.Pile?.Type != ArrowPile.PileId) return;
             using var pileExit = new ArrowPileExit(hud?.PileExitPosition(arrow.Card));
-            if (arrow.Card.Keywords.Contains(CardKeyword.Exhaust)) await CardCmd.Exhaust(context, arrow.Card);
+            if (arrow.Card.Keywords.Contains(CardKeyword.Exhaust))
+            {
+                var result = await CardCmd.Exhaust(context, arrow.Card, skipVisuals: true);
+                // Silent transfers skip the native completion event used by the pile counter.
+                if (result is { success: true }) PileType.Exhaust.GetPile(arrow.Card.Owner).InvokeCardAddFinished();
+            }
             else if (CatalogPower.Has(arrow.Card.Owner, "JA22")) await CardPileCmd.Add(arrow.Card, PileType.Hand);
             else await CardPileCmd.Add(arrow.Card, PileType.Discard);
         }

@@ -1,6 +1,22 @@
 {
   "JUNNA.SELECT_DAMAGE_CARD": "选择一张牌",
   "JUNNA.CARD_TYPE.ARROW": "箭矢",
+  "JUNNA.INVESTMENT": "伤害强化",
+  "JUNNA.INVESTMENT_BONUS": "造成伤害增加{Amount}点。",
+  "JUNNA.INVESTMENT_HITS": "额外造成{Amount}次伤害。",
   "JUNNA.KNOWLEDGE_SPREAD_LAYOUT": "平铺",
-  "JUNNA.KNOWLEDGE_STACK_LAYOUT": "堆叠"
+  "JUNNA.KNOWLEDGE_STACK_LAYOUT": "堆叠",
+  "JUNNA.KNOWLEDGE_GROUP": "关联牌",
+  "JUNNA.KNOWLEDGE_CONFIRM": "确认",
+  "JUNNA.KNOWLEDGE_CANCEL": "取消",
+  "JUNNA.KNOWLEDGE_BACKGROUND": "知识背景",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK33": "《少女☆歌剧》TV第9话。纯那引用尼采，谈过去与未来对当下的影响。",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK33B": "《少女☆歌剧》TV第9话。纯那引用尼采，谈过去与未来对当下的影响。",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK34": "《少女☆歌剧》中的剧中剧，脚本：中村彼方。两位少女登塔摘星，故事原本以离别告终。",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK43": "莎士比亚、约翰·弗莱彻《亨利八世》第一幕第一场：攀登险丘，须先缓步。",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK43B": "莎士比亚、约翰·弗莱彻《亨利八世》第一幕第一场：攀登险丘，须先缓步。",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK47": "莎士比亚《哈姆雷特》第三幕第一场。哈姆雷特在独白中权衡忍受苦难与挺身反抗。",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK47B": "莎士比亚《哈姆雷特》第三幕第一场。拿起武器反抗苦难，是同一段独白中的另一种选择。",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK49": "莎士比亚《哈姆雷特》第三幕第一场：拿起武器，反抗苦难之海。",
+  "JUNNA.KNOWLEDGE_BACKGROUND.JK49B": "莎士比亚《哈姆雷特》第三幕第一场：承受命运的投石与飞箭。"
 }

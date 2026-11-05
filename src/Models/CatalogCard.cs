@@ -22,7 +22,7 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     protected override bool HasEnergyCostX => Definition.CostsX;
     public override int MaxUpgradeLevel => DesignId == "JK82" ? int.MaxValue : 1;
     public override HashSet<CardKeyword> CanonicalKeywords =>
-        [..(Definition.Exhaust ? new[] { CardKeyword.Exhaust } : []), ..(Definition.Retain ? new[] { CardKeyword.Retain } : [])];
+        [..base.CanonicalKeywords, ..(Definition.Exhaust ? new[] { CardKeyword.Exhaust } : []), ..(Definition.Retain ? new[] { CardKeyword.Retain } : [])];
     private IEnumerable<CardNumber> FormValues => HasAlternateForm
         ? CardCatalog.Get("JK49").Values.Concat(CardCatalog.Get("JK49B").Values) : Definition.Values;
     protected override IEnumerable<DynamicVar> CanonicalVars => FormValues.Select(n => n.Name switch
@@ -39,6 +39,7 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     {
         AssertMutable();
         Converted = true;
+        RemoveKeyword(JunnaKeywords.Arrow);
         EnergyCost.AddThisCombat(1);
         InvokeEnergyCostChanged();
     }

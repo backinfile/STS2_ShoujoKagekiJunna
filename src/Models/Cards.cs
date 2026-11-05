@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using BaseLib.Utils.Attributes;
@@ -21,14 +22,47 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
 {
     public virtual string DesignId => designId;
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get(DesignId).Portrait;
+    public override HashSet<CardKeyword> CanonicalKeywords =>
+        [..(CardCatalog.IsKnowledge(this) ? new[] { JunnaKeywords.Knowledge } : []),
+         ..(CardCatalog.IsArrow(this) ? new[] { JunnaKeywords.Arrow } : [])];
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
         get
         {
+            var definition = CardCatalog.Get(DesignId);
+            string text = IsUpgraded ? definition.UpgradedText : definition.Text;
+            // Extra tips precede native keyword tips; adding this first also fixes the group ordering.
+            if (CardCatalog.IsKnowledge(this) || text.Contains("知识"))
+                yield return HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge);
             var group = KnowledgeCombat.Group(this);
             if (group != null)
+            {
+                var members = group.GrantedCardIds.Prepend(group.MainCardId).Select(id =>
+                {
+                    var model = (CardModel)CardCatalog.Model(id).MutableClone();
+                    if (IsUpgraded && model.IsUpgradable) model.UpgradeInternal();
+                    int count = id == group.MainCardId ? 1 : group.GrantedCardCounts.GetValueOrDefault(id, 1);
+                    return $"[gold]{model.Title}[/gold]" + (count > 1 ? $" ×{count}" : "");
+                });
+                yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
+                    { Id = "junna_knowledge_group_" + group.MainCardId };
                 foreach (var id in group.GrantedCardIds.Prepend(group.MainCardId).Where(id => id != DesignId))
                     yield return HoverTipFactory.FromCard(CardCatalog.Model(id));
+            }
+            var background = LocString.GetIfExists("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND." + DesignId);
+            if (background != null)
+                yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND"), background)
+                    { Id = "junna_knowledge_background_" + DesignId };
+            if (CardCatalog.IsArrow(this) || text.Contains("箭矢"))
+                yield return HoverTipFactory.FromKeyword(JunnaKeywords.Arrow);
+            if (text.Contains("伤害加成") || DamageModifiers.CaptureDamageModifierSnapshot(this).DamageBonus > 0)
+                yield return HoverTipFactory.FromKeyword(JunnaKeywords.DamageBonus);
+            if (text.Contains("易伤")) yield return HoverTipFactory.FromPower<VulnerablePower>();
+            if (text.Contains("虚弱")) yield return HoverTipFactory.FromPower<WeakPower>();
+            if (text.Contains("保留") && text.Contains("手牌") && !Keywords.Contains(CardKeyword.Retain))
+                yield return HoverTipFactory.FromKeyword(CardKeyword.Retain);
+            if (text.Contains("能量") || text.Contains("耗能") || Regex.IsMatch(text, @"\d+费"))
+                yield return EnergyHoverTip;
         }
     }
 

@@ -4,8 +4,11 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.UI;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
+using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
+using MegaCrit.Sts2.Core.Nodes.HoverTips;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardLibrary;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
@@ -13,6 +16,23 @@ using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.UI;
+
+[HarmonyPatch(typeof(NCardHolder), "CreateHoverTips")]
+internal static class KnowledgeOfferHoverTipsPatch
+{
+    private static bool Prefix(NCardHolder __instance)
+    {
+        if (__instance.CardNode?.Model is not JunnaCard card || KnowledgeCombat.Group(card) == null) return true;
+        for (Node? parent = __instance.GetParent(); parent != null; parent = parent.GetParent())
+            if (parent is NCardLibraryGrid or NCardRewardSelectionScreen or NChooseACardSelectionScreen)
+            {
+                NHoverTipSet.CreateAndShow(__instance, card.HoverTips.Where(tip => tip is not CardHoverTip))
+                    ?.SetAlignmentForCardHolder(__instance);
+                return false;
+            }
+        return true;
+    }
+}
 
 /// <summary>One preview per physical card, including repeated copies of the same model.</summary>
 public static class KnowledgePreviewCards

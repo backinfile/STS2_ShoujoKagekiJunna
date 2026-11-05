@@ -173,7 +173,10 @@ public static class CardCompletionProbe
                     case "JX07": case "JH11": case "JH17": Check("energy gain", player.PlayerCombatState.Energy, energyBefore - definition.Cost + N("N1")); break;
                     case "JH29": Check("energy total", player.PlayerCombatState.Energy, energyBefore - (up ? definition.UpgradedCost : definition.Cost) + 4); break;
                     case "JH01": Check("first swapped cost", CardActions.Cost(helpers[0]), 3); Check("second swapped cost", CardActions.Cost(helpers[1]), 1); break;
-                    case "JA65": case "JK73B": Check("selected arrow deployed", ArrowCombat.Find(selected!) != null, true); break;
+                    case "JA65":
+                        Check("selected arrow deployed", ArrowCombat.Find(selected!) != null, true);
+                        Check("selected arrow plays free", player.PlayerCombatState.Energy, energyBefore - (up ? definition.UpgradedCost : definition.Cost)); break;
+                    case "JK73B": Check("selected arrow deployed", ArrowCombat.Find(selected!) != null, true); break;
                     case "JA81": case "JA76": case "JA82":
                         var flying = ArrowCombat.Deployed.Where(a => CardCatalog.DesignId(a.Card) == "JA81B").ToArray();
                         Check("flying count", flying.Length, id == "JA82" ? 3 : id == "JA76" ? state.GetOpponentsOf(player.Creature).Count() : 1);
@@ -287,6 +290,65 @@ public static class CardCompletionProbe
                 await PlayerCmd.GainEnergy(1, player); await PlayerCmd.LoseEnergy(1, player);
                 Check("actual gains and spending remain events", hp - target.CurrentHp, 2);
             });
+            await Scenario("energy damage keeps investment snapshot", async () =>
+            {
+                var star = await Card("JH30"); DamageModifiers.Add(star, 2, 1); await Play(star);
+                int hp = target.CurrentHp; await PlayerCmd.GainEnergy(3, player);
+                Check("amount with bonus and extra hit", hp - target.CurrentHp, 10);
+                DamageModifiers.Add(star, 100);
+                hp = target.CurrentHp; await PlayerCmd.GainEnergy(2, player);
+                Check("later investment preserves installed snapshot", hp - target.CurrentHp, 8);
+            });
+            await Scenario("ambush free play preserves card", async () =>
+            {
+                await Play(await Card("JH30")); await Play(await Card("JA45"));
+                var ambush = await Card("JA65"); await Play(ambush);
+                var selected = await Card("JK37", PileType.Draw, up: true);
+                CostChanges.SetFixed(selected, 4); DamageModifiers.Add(selected, 2, 1);
+                player.PlayerCombatState!.Energy = 0; int hp = target.CurrentHp;
+                await Finish(ambush);
+                Check("zero energy still deploys", ArrowCombat.Find(selected) != null, true);
+                Check("no energy consumed", player.PlayerCombatState.Energy, 0);
+                Check("no energy damage event", hp - target.CurrentHp, 0);
+                Check("modified cost preserved", CardActions.Cost(selected), 4);
+                Check("upgrade preserved", selected.IsUpgraded, true);
+                Check("free play counts toward arrow trigger", ArrowCombat.Find(selected)!.Remaining, selected.DynamicVars["Turns"].IntValue - 1);
+                await Finish(selected);
+                Check("damage investment preserved", hp - target.CurrentHp, ((int)selected.DynamicVars.Damage.BaseValue + 2) * 2);
+            });
+            await Scenario("ambush X free play", async () =>
+            {
+                var ambush = await Card("JA65"); await Play(ambush);
+                var selected = await Card("JA59", PileType.Draw);
+                player.PlayerCombatState!.Energy = 3; await Finish(ambush);
+                Check("native free X captures available energy", selected.EnergyCost.CapturedXValue, 3);
+                Check("X does not consume energy", player.PlayerCombatState.Energy, 3);
+                Check("X cost preserved", selected.EnergyCost.CostsX, true);
+                Check("X adjusts initial countdown", ArrowCombat.Find(selected)!.Remaining, selected.DynamicVars["Turns"].IntValue - 3);
+            });
+            foreach (bool up in new[] { false, true })
+            await Scenario("argument free play" + (up ? "+" : ""), async () =>
+            {
+                await Play(await Card("JK15"));
+                var selected = await Card("JK50", up: up);
+                var argument = await Card("JK50B", up: up);
+                player.PlayerCombatState!.Energy = 2;
+                int hp = target.CurrentHp;
+                Check("argument paid normally", await Play(argument), true);
+                Check("only argument energy consumed", player.PlayerCombatState.Energy, 0);
+                Check("target damage resolves without payable energy", hp - target.CurrentHp, up ? 52 : 40);
+                Check("target printed cost preserved", CardActions.Cost(selected), 4);
+                Check("target upgrade preserved", selected.IsUpgraded, up);
+                Check("both knowledge plays count", player.PlayerCombatState.DrawPile.Cards.Count, 2);
+            });
+            await Scenario("ambush respects play restriction", async () =>
+            {
+                var ambush = await Card("JA65"); await Play(ambush);
+                var selected = await Card("JA38", PileType.Draw); selected.AddKeyword(CardKeyword.Unplayable);
+                await Finish(ambush);
+                Check("unplayable arrow stays in draw pile", selected.Pile!.Type, PileType.Draw);
+                Check("unplayable arrow is not deployed", ArrowCombat.Find(selected) == null, true);
+            });
             await Scenario("attack history before installing trigger", async () =>
             {
                 await Play(await Card("JB01")); await Play(await Card("JZ05")); await Play(await Card("JB01"));
@@ -339,7 +401,10 @@ public static class CardCompletionProbe
                         Check("energy cap", player.PlayerCombatState.Energy, before - 12 + (up ? 2 : 1)); break;
                     case "JK15":
                         for (int i = 0; i < 3; i++) await Play(await Card("JK15B"));
-                        Check("copy cap", player.PlayerCombatState.DrawPile.Cards.Count, up ? 2 : 1); break;
+                        Check("copy cap", player.PlayerCombatState.DrawPile.Cards.Count, up ? 3 : 2);
+                        player.PlayerCombatState.IncrementTurnNumber();
+                        for (int i = 0; i < 3; i++) await Play(await Card("JK15B"));
+                        Check("next turn restores trigger allowance", player.PlayerCombatState.DrawPile.Cards.Count, up ? 6 : 4); break;
                     case "A": await End(); Check("end generation", player.PlayerCombatState.DrawPile.Cards.Count, up ? 2 : 1); break;
                     case "JK27":
                         await Card("JK11", PileType.Draw); await Card("JK11B", PileType.Draw);
@@ -347,9 +412,9 @@ public static class CardCompletionProbe
                         Check("linked draw", player.PlayerCombatState.Hand.Cards.Count, 2); break;
                     case "JA35":
                         var longArrow = await Card("JK37"); await Play(longArrow); await Start();
-                        Check("start acceleration", ArrowCombat.Find(longArrow)!.Remaining, up ? 7 : 8);
+                        Check("start acceleration", ArrowCombat.Find(longArrow)!.Remaining, up ? 8 : 9);
                         await ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>()).AfterPlayerTurnStartLate(context, player);
-                        Check("natural countdown additional", ArrowCombat.Find(longArrow)!.Remaining, up ? 6 : 7); break;
+                        Check("natural countdown additional", ArrowCombat.Find(longArrow)!.Remaining, up ? 7 : 8); break;
                     case "JK32":
                         for (int i = 0; i < 3; i++) await Card("JB01", PileType.Draw);
                         await Start(); Check("start draw", player.PlayerCombatState.Hand.Cards.Count, up ? 2 : 1); break;
@@ -417,8 +482,15 @@ public static class CardCompletionProbe
                         await Card("JA59"); await Card("JH27"); int starting = player.PlayerCombatState.Energy;
                         await Start(); Check("numeric maximum energy", player.PlayerCombatState.Energy, starting + 3); break;
                     case "JH30":
-                        int starHp = target.CurrentHp; await PlayerCmd.GainEnergy(0, player); await PlayerCmd.GainEnergy(3, player); await PlayerCmd.LoseEnergy(2, player);
-                        Check("one trigger per actual energy event", starHp - target.CurrentHp, 2); break;
+                        Check("description formats equal damage", source.GetDescriptionForPile(PileType.Hand).Contains("等量伤害"), true);
+                        int starHp = target.CurrentHp; await PlayerCmd.GainEnergy(0, player);
+                        Check("zero energy change skips damage", starHp - target.CurrentHp, 0);
+                        await PlayerCmd.GainEnergy(3, player); await PlayerCmd.LoseEnergy(2, player);
+                        Check("damage scales with actual energy change", starHp - target.CurrentHp, 5);
+                        var costly = await Card("JB02"); CostChanges.SetFixed(costly, 4); await Play(costly);
+                        Check("payment damage uses spent amount", starHp - target.CurrentHp, 9);
+                        player.PlayerCombatState.Energy = 1; await PlayerCmd.LoseEnergy(9, player);
+                        Check("energy loss damage uses actual loss", starHp - target.CurrentHp, 10); break;
                     case "JK46":
                         await Start(); var generated = player.PlayerCombatState.Hand.Cards.Single();
                         Check("generated knowledge", CardCatalog.DesignId(generated)!, "JK46B");

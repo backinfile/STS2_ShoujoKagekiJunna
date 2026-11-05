@@ -54,7 +54,8 @@ public sealed class EnergyReserve : CustomPowerModel
         private static async Task Complete(Task task, Player player, int before)
         {
             await task;
-            if (!SettingEnergy.Value && player.PlayerCombatState?.Energy > before) await CatalogPower.EnergyGained(player);
+            if (!SettingEnergy.Value && player.PlayerCombatState?.Energy > before)
+                await CatalogPower.EnergyChanged(player, player.PlayerCombatState.Energy - before);
         }
     }
     [HarmonyPatch(typeof(PlayerCmd), nameof(PlayerCmd.LoseEnergy))]
@@ -65,7 +66,8 @@ public sealed class EnergyReserve : CustomPowerModel
         private static async Task Complete(Task task, Player player, int before)
         {
             await task;
-            if (!SettingEnergy.Value && player.PlayerCombatState?.Energy < before) await CatalogPower.EnergyGained(player);
+            if (!SettingEnergy.Value && player.PlayerCombatState?.Energy < before)
+                await CatalogPower.EnergyChanged(player, before - player.PlayerCombatState.Energy);
         }
     }
     [HarmonyPatch(typeof(PlayerCmd), nameof(PlayerCmd.SetEnergy))]

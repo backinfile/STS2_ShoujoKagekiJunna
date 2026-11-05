@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.DevConsole.ConsoleCommands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.UI;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
@@ -42,6 +43,8 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
             case "check": return new(Check(player!), true, "Knowledge checks completed");
             case "collection-check": return new(CheckCollection(), true, "Collection checks completed");
             case "layout-check": return new(CheckLayouts(), true, "Layout checks completed");
+            case "hover-check": return new(CheckHoverUi(), true, "Hover checks completed");
+            case "acquisition-check": return new(CheckAcquisition(player!, args.Contains("slow")), true, "Acquisition checks completed");
             case "layout": return new(Click(inspect.GetNode<Control>("JunnaKnowledgePreview/LayoutToggle")), true, "Changed knowledge layout");
             case "many":
                 var group = KnowledgeCombat.Group(Card("A"))!;
@@ -126,6 +129,86 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         .Select(card => new { path = card.GetPath().ToString(), id = CardCatalog.DesignId(card.Model!),
             upgraded = card.Model!.IsUpgraded, position = card.GlobalPosition.ToString(), scale = card.GetGlobalTransform().Scale.ToString() }).ToArray();
 
+    private async Task CheckHoverUi()
+    {
+        var rows = new List<object>();
+        void CheckValue(string name, object actual, object expected) => rows.Add(new { name, actual, expected, pass = Equals(actual, expected) });
+        string directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "../../..", "out/tmp/knowledge-ui-hover-fixes"));
+        System.IO.Directory.CreateDirectory(directory);
+        Task Settle() => Task.Delay(650);
+        async Task Hover(Control control)
+        {
+            Vector2 point = control.GetGlobalRect().GetCenter();
+            control.GetViewport().PushInput(new InputEventMouseMotion { Position = point, GlobalPosition = point }, true);
+            await Settle();
+        }
+        void Capture(string name) => NGame.Instance!.GetViewport().GetTexture().GetImage().SavePng(System.IO.Path.Combine(directory, name + ".png"));
+        foreach (string id in new[] { "A", "B", "JK32", "JK32C", "JK43", "JK43B" })
+        {
+            var model = (CardModel)CardCatalog.Model(id).MutableClone();
+            var tips = model.HoverTips.OfType<HoverTip>().ToArray();
+            CheckValue(id + " registered knowledge keyword", model.Keywords.Contains(JunnaKeywords.Knowledge), true);
+            CheckValue(id + " knowledge rule tooltip", tips.Any(tip => tip.Title == "知识"), true);
+            var members = tips.SingleOrDefault(tip => tip.Title == "关联牌");
+            var group = KnowledgeCombat.Group(model)!;
+            var names = group.GrantedCardIds.Prepend(group.MainCardId).Select(member => CardCatalog.Model(member).Title).ToArray();
+            CheckValue(id + " group list includes every member", names.All(name => members.Description?.Contains(name) == true), true);
+            CheckValue(id + " group list starts with main card", members.Description?.StartsWith("[gold]" + names[0]) == true, true);
+            CheckValue(id + " literary background only when supplied", tips.Any(tip => tip.Title == "知识背景"), id.StartsWith("JK43"));
+        }
+        var inspect = NGame.Instance!.GetInspectCardScreen();
+        inspect.Open([(CardModel)CardCatalog.Model("A").MutableClone()], 0);
+        await Settle();
+        var preview = inspect.GetNode<KnowledgeGroupPreview>("JunnaKnowledgePreview");
+        var toggle = preview.GetNode<Control>("LayoutToggle");
+        CheckValue("layout toggle uses native game button", toggle is NButton, true);
+        Capture("stack");
+        await Click(toggle);
+        await Settle();
+        var scroll = preview.GetNode<ScrollContainer>("Cards");
+        var grid = Descendants(scroll).OfType<GridContainer>().Single();
+        var slot = grid.GetChildren().OfType<Control>().First();
+        var card = Descendants(slot).OfType<NCard>().First();
+        await Hover(toggle);
+        float normal = card.GetGlobalTransform().Scale.X;
+        await Hover(slot);
+        float focused = card.GetGlobalTransform().Scale.X;
+        CheckValue("spread card hover enlarges like collection", focused / normal > 1.2f, true);
+        CheckValue("spread tooltips stay outside enlarged card", Descendants(NGame.Instance!).OfType<Control>()
+            .Where(node => node.IsVisibleInTree() && node.SceneFilePath == "res://scenes/ui/hover_tip.tscn")
+            .All(tip => !tip.GetGlobalRect().Intersects(card.Body.GetGlobalRect())), true);
+        Capture("spread-hover");
+        await Hover(toggle);
+        CheckValue("spread card exit restores scale", Math.Abs(card.GetGlobalTransform().Scale.X - normal) < .01f, true);
+        CheckValue("spread exit removes owned hover tips", !Descendants(NGame.Instance!).Any(node => node is MegaCrit.Sts2.Core.Nodes.HoverTips.NHoverTipSet && node.IsInsideTree() && ((Control)node).IsVisibleInTree()), true);
+        inspect.Close();
+        await Settle();
+        Process(null, ["library"]);
+        await Settle();
+        Process(null, ["filter"]);
+        await Settle();
+        var libraryGrid = Descendants(NGame.Instance!).OfType<NCardLibraryGrid>().Single(node => node.IsVisibleInTree());
+        var holder = Descendants(libraryGrid).OfType<NGridCardHolder>().First(node => node.IsVisibleInTree() && CardCatalog.DesignId(node.CardModel!) == "A");
+        await Hover(holder.Hitbox);
+        CheckValue("collection hover has no companion card previews", Descendants(NGame.Instance!).OfType<NCard>().Count(node => node.IsVisibleInTree() && node.GetPath().ToString().Contains("HoverTips")), 0);
+        Capture("collection-hover");
+        Process(null, ["close-library"]);
+        await Settle();
+        foreach (string id in new[] { "JK05", "JK27" })
+        {
+            var model = CardCatalog.Model(id);
+            CheckValue(id + " references knowledge without acquiring keyword", model.Keywords.Contains(JunnaKeywords.Knowledge), false);
+            CheckValue(id + " explains referenced knowledge keyword", model.HoverTips.OfType<HoverTip>().Any(tip => tip.Title == "知识"), true);
+        }
+        inspect.Open([(CardModel)CardCatalog.Model("JK43B").MutableClone()], 0);
+        await Settle();
+        Capture("background");
+        inspect.Close();
+        await Settle();
+        System.IO.File.WriteAllText(System.IO.Path.Combine(directory, "hover-results.json"), JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
+        if (rows.Any(row => !(bool)row.GetType().GetProperty("pass")!.GetValue(row)!)) throw new InvalidOperationException("Knowledge hover check failed");
+    }
+
     private static async Task Click(Control control, MouseButton button = MouseButton.Left)
     {
         var viewport = control.GetViewport();
@@ -134,6 +217,77 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         await control.ToSignal(control.GetTree(), SceneTree.SignalName.ProcessFrame);
         viewport.PushInput(new InputEventMouseButton { Position = point, GlobalPosition = point, ButtonIndex = button, Pressed = true }, true);
         viewport.PushInput(new InputEventMouseButton { Position = point, GlobalPosition = point, ButtonIndex = button, Pressed = false }, true);
+    }
+
+    private async Task CheckAcquisition(Player player, bool slow = false)
+    {
+        var rows = new List<object>();
+        void CheckValue(string name, object actual, object expected) => rows.Add(new { name, actual, expected, pass = Equals(actual, expected) });
+        string directory = System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "../../..", "out/tmp/knowledge-ui-hover-fixes"));
+        System.IO.Directory.CreateDirectory(directory);
+        Task Settle() => Task.Delay(slow ? 1700 : 650);
+        var inspect = NGame.Instance!.GetInspectCardScreen();
+        foreach (bool discover in new[] { false, true })
+        {
+            string name = discover ? "discover" : "reward";
+            var cards = new[] { "A", "JK32", "JB01" }.Select(id => player.RunState.CreateCard(CardCatalog.Model(id), player)).ToArray();
+            Control screen;
+            Task selection;
+            if (discover)
+            {
+                var choice = NChooseACardSelectionScreen.ShowScreen(cards, true)!;
+                screen = choice;
+                selection = choice.CardsSelected();
+            }
+            else
+            {
+                var reward = NCardRewardSelectionScreen.ShowScreen(cards.Select(card => new CardCreationResult(card)).ToArray(), [])!;
+                screen = reward;
+                selection = reward.OptionSelected();
+            }
+            await Settle();
+            var holder = Descendants(screen).OfType<NGridCardHolder>().First(node => CardCatalog.DesignId(node.CardModel!) == "A");
+            Vector2 point = holder.Hitbox.GetGlobalRect().GetCenter();
+            screen.GetViewport().PushInput(new InputEventMouseMotion { Position = point, GlobalPosition = point }, true);
+            await Settle();
+            CheckValue(name + " hover hides companion card previews", Descendants(NGame.Instance!).OfType<NCard>().Count(node => node.IsVisibleInTree() && node.GetPath().ToString().Contains("HoverTips")), 0);
+            int before = player.Deck.Cards.Count;
+            await Click(holder.Hitbox);
+            await Settle();
+            var preview = inspect.GetNodeOrNull<KnowledgeGroupPreview>("JunnaKnowledgePreview");
+            var confirm = preview?.GetNodeOrNull<NButton>("Confirm");
+            var cancel = preview?.GetNodeOrNull<NButton>("Cancel");
+            CheckValue(name + " left click awaits confirmation", !selection.IsCompleted, true);
+            CheckValue(name + " left click opens tiled group", inspect.Visible && preview?.GetNode<ScrollContainer>("Cards").IsVisibleInTree() == true, true);
+            CheckValue(name + " provides confirm and cancel", confirm?.IsVisibleInTree() == true && cancel?.IsVisibleInTree() == true, true);
+            CheckValue(name + " preview grants no cards", player.Deck.Cards.Count, before);
+            if (confirm?.IsVisibleInTree() == true && cancel?.IsVisibleInTree() == true)
+            {
+                CheckValue(name + " tiles include repeated copies", Descendants(preview!.GetNode("Cards")).OfType<NCard>().Count(), 3);
+                await Click(cancel);
+                await Settle();
+                CheckValue(name + " cancel returns to original choices", !inspect.Visible && screen.IsVisibleInTree() && !selection.IsCompleted, true);
+                CheckValue(name + " cancel grants no cards", player.Deck.Cards.Count, before);
+                await Click(holder.Hitbox, MouseButton.Right);
+                await Settle();
+                CheckValue(name + " right click opens tiled confirmation", confirm.IsVisibleInTree() && preview.GetNode<ScrollContainer>("Cards").IsVisibleInTree() && !selection.IsCompleted, true);
+                NGame.Instance.GetViewport().GetTexture().GetImage().SavePng(System.IO.Path.Combine(directory, name + "-confirmation.png"));
+                await Click(confirm);
+                await selection.WaitAsync(TimeSpan.FromSeconds(2));
+                await Settle();
+                CheckValue(name + " confirm closes preview", inspect.Visible, false);
+                CheckValue(name + " confirms original offered model", discover ? ((Task<IEnumerable<CardModel>>)selection).Result.Single() == cards[0] : ((Task<int?>)selection).Result == 0, true);
+                confirm.EmitSignal(NClickableControl.SignalName.Released, confirm);
+                CheckValue(name + " repeated confirm stays closed", confirm.IsVisibleInTree(), false);
+                await CardPileCmd.Add(cards[0], PileType.Deck);
+                CheckValue(name + " confirmed grant includes entire group once", player.Deck.Cards.Count - before, 3);
+            }
+            inspect.Close();
+            if (GodotObject.IsInstanceValid(screen) && screen.IsInsideTree() && NOverlayStack.Instance!.Peek() == screen) NOverlayStack.Instance.Remove((IOverlayScreen)screen);
+            await Settle();
+        }
+        System.IO.File.WriteAllText(System.IO.Path.Combine(directory, "acquisition-results.json"), JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
+        if (rows.Any(row => !(bool)row.GetType().GetProperty("pass")!.GetValue(row)!)) throw new InvalidOperationException("Knowledge acquisition check failed");
     }
 
     private static void Wheel(NInspectCardScreen inspect, MouseButton button)
@@ -223,8 +377,12 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         CheckValue("reward thumbnail exposes both backing edges", backing.All(card => card.Position.Y < 0), true);
         await Click(holder.Hitbox, MouseButton.Right);
         await Settle();
+        await Click(inspect.GetNode<Control>("JunnaKnowledgePreview/Cancel"));
+        await Settle();
+        inspect.Open([holder.CardModel!], 0);
+        await Settle();
         var preview = inspect.GetNode<KnowledgeGroupPreview>("JunnaKnowledgePreview");
-        var toggle = preview.GetNode<Button>("LayoutToggle");
+        var toggle = preview.GetNode<Control>("LayoutToggle");
         var front = inspect.GetNode<NCard>("Card");
         var stack = front.GetNode<Control>("JunnaInspectStack");
         var scroll = preview.GetNode<ScrollContainer>("Cards");

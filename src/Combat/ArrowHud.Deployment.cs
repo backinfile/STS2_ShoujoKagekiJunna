@@ -27,14 +27,10 @@ public partial class ArrowHud
         }
         view.Root.Visible = false;
         effect.SetProgress(0);
+        effect.Start(() => FinishDeployment(arrow));
         QueueRedraw();
-        // BaseLib owns the pile transfer tween. Completing this segment also completes the transfer.
-        tween.Parallel().TweenMethod(Callable.From<float>(progress =>
-        {
-            if (GodotObject.IsInstanceValid(effect)) effect.SetProgress(progress);
-        }), 0f, 1f, effect.Duration);
-        tween.Parallel().TweenCallback(Callable.From(() => FinishDeployment(arrow)))
-            .SetDelay(effect.Duration);
+        // Release the action queue at the first bow pull. The remaining visual has its own clock.
+        tween.Parallel().TweenInterval(effect.InputReleaseTime);
         return true;
     }
 
@@ -61,7 +57,10 @@ public partial class ArrowHud
         }
         if (_views.TryGetValue(arrow, out var view))
         {
+            // Hand the deployment's final pose to layout motion without a visual snap.
+            view.Motion.Reset(view.Root.Position + IconSize * view.Root.Scale * .5f, view.Frame.Rotation);
             view.Root.Scale = Vector2.One;
+            view.Root.Position = view.Motion.Center - IconSize * .5f;
             view.Root.Modulate = Colors.White;
             view.Root.Visible = true;
         }
@@ -90,6 +89,7 @@ public partial class ArrowDeploymentVfx : Control
     private float DrawEndTime => DrawTime + .40f;
     private float HoldEndTime => DrawEndTime + .40f;
     public double Duration => HoldEndTime + .24f;
+    internal double InputReleaseTime => DrawTime;
     private const float ShaftLength = 160;
     private const float BowGripOffset = 36;
     private const float BraceHeight = 10;
@@ -112,6 +112,8 @@ public partial class ArrowDeploymentVfx : Control
     private Vector2 _aim;
     private bool _aimLocked;
     private float _time;
+    private Action? _completed;
+    private bool _running;
     public bool ArrowVisible => _time >= ArrowTime;
     public float ArrowAlpha => Mathf.SmoothStep(ArrowTime, CardGoneTime, _time);
     // Pull most of the distance in one stroke, then slowly work against the tension.
@@ -237,6 +239,23 @@ public partial class ArrowDeploymentVfx : Control
         QueueRedraw();
     }
 
+    internal void Start(Action completed)
+    {
+        _completed = completed;
+        _running = true;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (!_running) return;
+        SetProgress(Math.Min(1, (_time + (float)delta) / (float)Duration));
+        if (_time < Duration) return;
+        _running = false;
+        var completed = _completed;
+        _completed = null;
+        completed?.Invoke();
+    }
+
     internal void UpdateAim(Vector2 destination, Vector2 aim)
     {
         // Hold the bow's world pose while the arrow draws through it.
@@ -293,7 +312,12 @@ public partial class ArrowDeploymentVfx : Control
         _cardNode = null;
     }
 
-    public override void _ExitTree() => ReleaseCard();
+    public override void _ExitTree()
+    {
+        _running = false;
+        _completed = null;
+        ReleaseCard();
+    }
 
     public override void _Draw()
     {

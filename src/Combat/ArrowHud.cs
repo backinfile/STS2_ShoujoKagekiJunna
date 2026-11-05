@@ -35,9 +35,9 @@ public partial class ArrowHud : Control
     private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, SatelliteMotion[] Satellites,
         CpuParticles2D Flash)
     {
+        public ArrowLayoutMotion Motion { get; } = new();
         internal Tween? CountTween;
         internal bool Releasing;
-        internal Vector2? Center;
         internal Vector2? ExitPosition;
     }
     private readonly Dictionary<ArrowDeployment, ArrowView> _views = [];
@@ -80,18 +80,16 @@ public partial class ArrowHud : Control
                 _views.Add(arrow, view);
             }
             if (view.Releasing) continue;
-            var goal = _slots[arrow];
-            var center = view.Center?.Lerp(goal, 1 - Mathf.Exp(-16 * (float)delta)) ?? goal;
-            view.Center = center;
+            var center = _slots[arrow];
             float bob = Mathf.Sin((float)_elapsed * 1.8f + arrow.Sequence * .8f) * 2;
-            view.Root.Position = center + Vector2.Down * bob - IconSize * .5f;
             var targets = TargetPoints(arrow);
             var aim = targets.Length == 0 ? center + new Vector2(400, 400)
                 : targets.Aggregate(Vector2.Zero, (sum, p) => sum + p) / targets.Length;
             // Aim the lower point directly at the target, including the current floating offset.
             // Countdown numerals remain upright as the frame rotates.
-            var facingCenter = view.Root.Position + IconSize * .5f;
-            view.Frame.Rotation = (aim - facingCenter).Angle() - Mathf.Pi * .5f;
+            view.Motion.Advance(center + Vector2.Down * bob, aim, (float)delta);
+            view.Root.Position = view.Motion.Center - IconSize * .5f;
+            view.Frame.Rotation = view.Motion.Angle;
             UpdateDeployment(arrow, view, aim);
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
             UpdateCountdown(arrow, view);

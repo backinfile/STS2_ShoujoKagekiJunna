@@ -15,14 +15,19 @@ public static class ArrowConversion
     {
         if (!CardCatalog.IsArrow(card)) return;
         if (card is CatalogCard catalog) catalog.ConvertArrow();
-        else { Converted.GetOrCreateValue(card); card.EnergyCost.AddThisCombat(1); }
+        else
+        {
+            Converted.GetOrCreateValue(card);
+            card.RemoveKeyword(JunnaKeywords.Arrow);
+            card.EnergyCost.AddThisCombat(1);
+        }
         card.InvokeEnergyCostChanged();
     }
     internal static void Describe(CardModel card, Creature? target, ref string description)
     {
         // Printed turns have their own plaque; converted cards omit that plaque as well.
         if (card is JunnaCard junna && CardCatalog.Get(junna.DesignId).Type == "箭矢")
-            description = Regex.Replace(description, @"^\[blue\][^\r\n]*回合(?:后)?\[/blue\]。?\r?\n", "");
+            description = Regex.Replace(description, @"(?m)^\[blue\][^\r\n]*回合(?:后)?\[/blue\]。?\r?\n", "");
     }
     [HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
     private static class CloneConversion

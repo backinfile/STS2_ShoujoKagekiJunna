@@ -117,7 +117,7 @@ public static class CardEffects
                 await Block(); CardForms.AfterPlay(card, "JK49"); break;
             case "JK50B":
                 foreach (var selected in await Choose(hand.Cards.Where(c => CardCatalog.DesignId(c) == "JK50")))
-                    await CardActions.PaidPlay(context, selected);
+                    await CardActions.FreePlay(context, selected);
                 break;
             case "JK53":
                 foreach (var selected in await Choose(hand.Cards.Where(CardCatalog.IsKnowledge)))
@@ -160,8 +160,8 @@ public static class CardEffects
                 await Improve(ArrowCombat.Deployed.Where(a => a.Card.Owner == player).Select(a => a.Card), concentrated.Sum(r => r.TotalDamage));
                 break;
             case "JA65":
-                foreach (var selected in await Choose(player.PlayerCombatState.DrawPile.Cards.Where(c => CardCatalog.IsArrow(c) && player.PlayerCombatState.HasEnoughResourcesFor(c, out _))))
-                    await CardActions.PaidPlay(context, selected);
+                foreach (var selected in await Choose(player.PlayerCombatState.DrawPile.Cards.Where(CardCatalog.IsArrow)))
+                    await CardActions.FreePlay(context, selected);
                 break;
             case "JG33":
                 await Attack(); DamageModifiers.Add(card, V("Bonus")); await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Random); break;
@@ -200,13 +200,13 @@ public static class CardEffects
             case "JA76":
                 var swept = await DealDamage(card, context, play, V("Damage"), 1);
                 foreach (var group in swept.GroupBy(r => r.Receiver))
-                    await CardActions.Fly(context, player, group.Sum(r => r.TotalDamage), upgraded: card.IsUpgraded);
+                    await CardActions.Fly(context, player, group.Sum(r => r.TotalDamage), group.Key, card.IsUpgraded);
                 break;
             case "JH29":
                 await Energy(hand.Cards.Where(c => c != card && CardActions.HasNumericCost(c)).Sum(CardActions.Cost)); break;
             case "JA81":
                 var linked = await DealDamage(card, context, play, V("Damage"), 1);
-                await CardActions.Fly(context, player, linked.Sum(r => r.TotalDamage), upgraded: card.IsUpgraded); break;
+                await CardActions.Fly(context, player, linked.Sum(r => r.TotalDamage), play.Target, card.IsUpgraded); break;
             case "JA82":
                 int x = card.ResolveEnergyXValue();
                 for (int i = 0; i < x; i++) await CardActions.Fly(context, player, V("Damage"), upgraded: card.IsUpgraded);

@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -12,7 +13,7 @@ public static partial class ArrowCombat
 
     internal static void RememberDeathOrder(Creature creature)
     {
-        if (Arrows.Count > 0 && creature.IsEnemy && creature.CombatState is { } state)
+        if (creature.IsEnemy && creature.CombatState is { } state)
             DeathOrders[creature] = state.Enemies.Select((enemy, index) => (enemy,
                 x: NCombatRoom.Instance?.GetCreatureNode(enemy)?.VfxSpawnPosition.X ?? index))
                 .OrderBy(pair => pair.x).Select(pair => pair.enemy).ToArray();
@@ -26,9 +27,24 @@ public static partial class ArrowCombat
             state.ContainsCreature(target) && (target.IsAlive || !Hook.ShouldCreatureBeRemovedFromCombatAfterDeath(state, target)));
     }
 
+    internal static Creature? ResolveEffectTarget(Creature target, ICombatState state)
+    {
+        bool Available(Creature creature) => state.ContainsCreature(creature) &&
+            (creature.IsAlive || !Hook.ShouldCreatureBeRemovedFromCombatAfterDeath(state, creature));
+        if (Available(target)) return target;
+        // A damage hook may create its arrow before the pending death notification.
+        // Keep that target until the normal death handler can retarget the deployment.
+        if (!DeathOrders.TryGetValue(target, out var order)) return state.ContainsCreature(target) ? target : null;
+        int index = Array.IndexOf(order, target);
+        return index < 0 ? null : order.Skip(index + 1).FirstOrDefault(Available)
+            ?? order.Take(index).Reverse().FirstOrDefault(Available);
+    }
+
     internal static async Task AfterTargetDeath(Creature creature, bool wasRemovalPrevented)
     {
-        DeathOrders.Remove(creature, out var order);
+        // Keep the death-time order until combat ends: effects can create their arrow after
+        // the damage command has already removed the original target.
+        DeathOrders.TryGetValue(creature, out var order);
         var state = creature.CombatState;
         // These predicates also cover modded rebirth and transformation powers.
         if (!creature.IsEnemy || wasRemovalPrevented || creature.IsAlive || state == null ||

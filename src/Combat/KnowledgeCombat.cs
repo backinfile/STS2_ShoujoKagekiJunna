@@ -49,6 +49,7 @@ public static class KnowledgeCombat
         if (group == null) return;
         using var single = SingleCard();
         var counts = new Dictionary<string, int>(group.GrantedCardCounts) { [group.MainCardId] = 1 };
+        var gained = new List<CardModel> { acquired };
         string id = CardCatalog.DesignId(acquired)!;
         if (counts.ContainsKey(id)) counts[id]--;
         foreach (var (partnerId, count) in counts)
@@ -57,9 +58,24 @@ public static class KnowledgeCombat
                 var card = destination == PileType.Deck
                     ? acquired.Owner.RunState.CreateCard(CardCatalog.Model(partnerId), acquired.Owner)
                     : CardCatalog.Create(partnerId, acquired.Owner);
-                if (destination == PileType.Deck) await CardPileCmd.Add(card, PileType.Deck);
+                if (destination == PileType.Deck)
+                {
+                    var result = await CardPileCmd.Add(card, PileType.Deck);
+                    if (result.success && result.cardAdded.Pile == acquired.Pile) gained.Add(result.cardAdded);
+                }
                 else await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner);
             }
+        if (destination == PileType.Deck && acquired.Pile is { Type: PileType.Deck } deck)
+        {
+            // Native batches (e.g. Hefty Tablet: chosen card + Injury) finish before partners
+            // are granted. Keep just this newly gained group adjacent, without acquiring twice.
+            int index = deck.Cards.ToList().IndexOf(acquired);
+            var order = group.GrantedCardIds.Prepend(group.MainCardId).Distinct().ToList();
+            var ordered = gained.Where(c => c.Pile == deck).OrderBy(c => order.IndexOf(CardCatalog.DesignId(c)!)).ToArray();
+            foreach (var card in ordered) deck.RemoveInternal(card, silent: true);
+            foreach (var card in ordered) deck.AddInternal(card, index++, silent: true);
+            deck.InvokeContentsChanged();
+        }
     }
 
     [HarmonyPatch]

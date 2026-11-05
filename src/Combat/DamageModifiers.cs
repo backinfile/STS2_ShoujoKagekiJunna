@@ -3,6 +3,8 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Models;
 
@@ -57,6 +59,27 @@ public static class DamageModifiers
     {
         var endurance = snapshot.Owner?.Creature.GetPower<JunnaEndurancePower>()?.Amount ?? 0;
         return checked(snapshot.ExtraHits + (int)Math.Floor(snapshot.DamageBonus / 6m) * endurance);
+    }
+
+    internal static HoverTip? InvestmentTip(CardModel card)
+    {
+        var snapshot = CaptureDamageModifierSnapshot(card);
+        int hits = ExtraHits(snapshot);
+        if (snapshot.DamageBonus == 0 && hits == 0) return null;
+        var lines = new List<string>();
+        if (snapshot.DamageBonus != 0)
+        {
+            var text = new LocString("gameplay_ui", "JUNNA.INVESTMENT_BONUS");
+            text.Add("Amount", snapshot.DamageBonus);
+            lines.Add(text.GetFormattedText());
+        }
+        if (hits != 0)
+        {
+            var text = new LocString("gameplay_ui", "JUNNA.INVESTMENT_HITS");
+            text.Add("Amount", hits);
+            lines.Add(text.GetFormattedText());
+        }
+        return new HoverTip(new LocString("gameplay_ui", "JUNNA.INVESTMENT"), string.Join("\n", lines)) { Id = "junna_investment" };
     }
 
     internal static void Copy(AbstractModel original, AbstractModel clone)
