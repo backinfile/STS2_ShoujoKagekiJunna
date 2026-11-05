@@ -12,6 +12,8 @@
 
 > 确认合并
 
+> 确认清理
+
 ## Brief task plan
 
 - 从 `main` 的 `7c01273635ed02da048a0494c5b264d71b4ab207` 创建 `task/remove-relic-leaves`。
@@ -32,6 +34,8 @@
 - 原始实机截图为 `out/tmp/gem-relic-preview/01-both-gems.png` 和 `02-both-gems-next-turn.png`。渲染验证记录为 `artifacts/remove-relic-leaves/bevel-validation.json`，录像记录为 `out/tmp/gem-relic-preview/recording.json`。
 - 启动预载出现已有的 Godot `Invalid Task ID` 日志，进入战斗后的正常出牌与录像完成。验证范围为本次遗物图稿、轮廓、构建和实机显示。
 - 已审阅 Git 跟踪的文本说明文档及本任务文档，检查敏感信息、本地绝对路径和中文编码。`git diff --check` 通过。
-- 实机录像完成后同步本地 `main` 至 `30b9db7`，四张 SVG 与录像中的版本内容一致，同步后重新构建、导入与打包通过。原目录初始的 9 项能量相关修改已随本地 `main` 更新提交，原目录当前干净。任务结果已完成，用户已确认合并到 `main`，工作树与任务分支清理待单独确认。
+- 实机录像完成后同步本地 `main` 至 `30b9db7`，四张 SVG 与录像中的版本内容一致，同步后重新构建、导入与打包通过。原目录初始的 9 项能量相关修改已随本地 `main` 更新提交，原目录当前干净。任务结果已合并到 `main`，用户已确认清理本次工作树、任务分支及其中的缓存和独立测试环境。
 
 - 本次实机视频、截图和验证记录已按相对路径保留到主目录的 `out/tmp/gem-relic-preview/` 与 `artifacts/remove-relic-leaves/`，共 43 个文件逐项哈希一致。
+
+- 已授权的清理范围为工作树 `../worktrees/STS2_ShoujoKagekiJunna/remove-relic-leaves`、任务分支 `task/remove-relic-leaves` 及工作树内的构建、导入、测试环境和重复临时文件。主目录中的任务记录和已归档验证产物继续保留。
