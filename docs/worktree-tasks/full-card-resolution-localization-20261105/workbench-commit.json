@@ -1,0 +1,39 @@
+{
+  "requestId": "b2f27303-5418-4182-a479-7b87f0085493",
+  "revision": 2598,
+  "workspaceId": "junna-mod-workbench-20261101-v1",
+  "changed": [
+    {
+      "collection": "cards",
+      "id": "JK78"
+    },
+    {
+      "collection": "cards",
+      "id": "JA76"
+    },
+    {
+      "collection": "cards",
+      "id": "JK78D"
+    },
+    {
+      "collection": "cards",
+      "id": "JK78E"
+    },
+    {
+      "collection": "fitPool",
+      "id": "FIT_CARD_JX05"
+    },
+    {
+      "collection": "fitPool",
+      "id": "FIT_CARD_JG32"
+    }
+  ],
+  "versions": {
+    "cards/junna-pool-gap-fill-20261103_JK78": "38:beb9d2392b4bdee5d293ee450bf8a2d601e3714a4c1059db006b6ef2db760225",
+    "cards/junna-card-gap-fill-20261104_JA76": "9:fcd9898d9164ca8258939c3da6c6a272f066b83603881c05bdd3e21adbdd564d",
+    "cards/junna_selection_option_JK78D": "1:eb69e6fc49d62c15d82233577d21c346fc3fbaad653a3a9684172fa14a8b5bae",
+    "cards/junna_selection_option_JK78E": "1:dd1175421fd6e2355c99028c313fe0ed4747a260aa8d057bf95b91995cf2c88b",
+    "fitPool/fit_card_complete_pool_JX05": "2:acdb4e8fb4444e0609d9b6aa239516a4099ca33478fa97640ece3fc7029ec810",
+    "fitPool/fit_card_x_cost_exploration_JG32": "2:fba149c6efc61a45f40bb5d703d2bda2c97e37fbc913552cebcfb5f785909320"
+  }
+}

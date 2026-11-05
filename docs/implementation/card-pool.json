@@ -1,5 +1,5 @@
 {
-  "revision": 2592,
+  "revision": 2602,
   "cards": [
     {
       "id": "JA04",
@@ -2434,6 +2434,11 @@
           "name": "Block",
           "base": 4,
           "upgraded": 7
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
         }
       ],
       "text": "获得4点格挡。下一张非能力牌重放1次。",
@@ -3902,6 +3907,76 @@
       ],
       "text": "抽取2张0费牌。",
       "upgradedText": "抽取3张0费牌。"
+    },
+    {
+      "id": "JK78D",
+      "modelId": "JUNNA_JK78D",
+      "className": "JunnaCardJK78D",
+      "name": "抽牌堆",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "damageCapable": false,
+      "portrait": "JK78D.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 3,
+          "upgraded": 3
+        },
+        {
+          "name": "Bonus",
+          "base": 6,
+          "upgraded": 8
+        }
+      ],
+      "text": "选择抽牌堆中至多3张牌，使它们获得6点伤害加成。",
+      "upgradedText": "选择抽牌堆中至多3张牌，使它们获得8点伤害加成。"
+    },
+    {
+      "id": "JK78E",
+      "modelId": "JUNNA_JK78E",
+      "className": "JunnaCardJK78E",
+      "name": "弃牌堆",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "damageCapable": false,
+      "portrait": "JK78E.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 3,
+          "upgraded": 3
+        },
+        {
+          "name": "Bonus",
+          "base": 6,
+          "upgraded": 8
+        }
+      ],
+      "text": "选择弃牌堆中至多3张牌，使它们获得6点伤害加成。",
+      "upgradedText": "选择弃牌堆中至多3张牌，使它们获得8点伤害加成。"
     }
   ],
   "groups": [
@@ -4138,5 +4213,5 @@
       }
     }
   ],
-  "arrowArtRevision": 2582
+  "arrowArtRevision": 2594
 }

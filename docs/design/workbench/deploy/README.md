@@ -11,9 +11,11 @@
 | `/var/www/junna/assets` | 按内容摘要命名的不可变公开资产 |
 | `/etc/nginx/conf.d/junna-https.conf` | 只读站点与长链接入口配置 |
 
-`relay.cjs` 仅连接本服务器的内部 MCP；`run-server.cjs` 从持久化路径加载主台；`publish-readonly.cjs` 在提交产生新 revision 后更新公开快照。数据和内部连接配置独立于程序发布目录。更新程序时继续使用已有数据和密钥。
+`relay.cjs` 仅连接本服务器的内部 MCP；`run-server.cjs` 从持久化路径加载主台；`publish-readonly.cjs` 在提交产生新 revision 后更新公开快照。数据和内部连接配置独立于程序发布目录。更新程序时继续使用已有数据、长路径和密钥。当前客户端直接通过 HTTPS 长地址连接 vipcloud，入口未设置 IP 白名单。
 
 本地 `docs/design/workbench/local-save.config.json` 的 `remoteURL` 是编辑长链接去掉末尾 `/`，`remoteToken` 是长链接密钥。SDK 连接地址为 `remoteURL + '/mcp'`。项目 `.codex/config.toml` 指向主目录的 MCP 客户端；其他工作树可复用主目录客户端，或仅复制这两个连接字段。私有连接信息和导出快照保存在 Git 忽略的 `artifacts/` 中。
+
+轮换入口时同步服务端 `relay.config.json` 的 `prefix`、`secret`、编辑页连接信息、Nginx 路径及客户端连接字段，关闭旧入口。已启动的 STDIO 客户端需重新连接；切换期间可直接运行主目录的 `mcp-client.cjs`，它会读取最新连接配置。
 
 仓库中的历史工作台 JSON 保留为迁移前的离线基线；主目录迁移前文件保留原样，当前主台以云端数据为准。任务工作树的离线内容差异，在对应增量已提交云端且保留 `workbench-changes.json`、提交回执后，可将该文件恢复至本工作树 HEAD。后续构建读取云端导出的快照，新增内容通过 MCP 提交。
 

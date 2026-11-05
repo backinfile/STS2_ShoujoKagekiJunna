@@ -54,6 +54,11 @@ public sealed class JunnaProbeCommand : AbstractConsoleCmd
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args)
     {
+        if (args.FirstOrDefault() == "speed")
+        {
+            Godot.Engine.TimeScale = args.Length > 1 ? double.Parse(args[1], System.Globalization.CultureInfo.InvariantCulture) : 1;
+            return new(true, "Test animation speed updated");
+        }
         if (args.FirstOrDefault() == "render")
         {
             return new(true, "Offscreen rendering enabled; window stays minimized");

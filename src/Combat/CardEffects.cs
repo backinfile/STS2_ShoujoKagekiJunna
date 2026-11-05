@@ -182,7 +182,11 @@ public static class CardEffects
             case "JA71":
                 await Block(); await ArrowCombat.AccelerateAll(context, player, int.MaxValue); break;
             case "JK78":
-                await ImproveSelected(player.PlayerCombatState.DrawPile.Cards.Concat(player.PlayerCombatState.DiscardPile.Cards), V("Bonus"), N(0), true); break;
+                await Improve(await CardChoices.ChooseTrainingPile(context, card), V("Bonus")); break;
+            case "JK78D":
+                await ImproveSelected(player.PlayerCombatState.DrawPile.Cards, V("Bonus"), N(0), true); break;
+            case "JK78E":
+                await ImproveSelected(player.PlayerCombatState.DiscardPile.Cards, V("Bonus"), N(0), true); break;
             case "JA73":
                 await Attack(); if (ArrowCombat.Deployed.Any(a => a.Card.Owner == player)) await Block(); break;
             case "JH26":
@@ -200,7 +204,7 @@ public static class CardEffects
             case "JA76":
                 var swept = await DealDamage(card, context, play, V("Damage"), 1);
                 foreach (var group in swept.GroupBy(r => r.Receiver))
-                    await CardActions.Fly(context, player, group.Sum(r => r.TotalDamage), group.Key, card.IsUpgraded);
+                    await CardActions.Fly(context, player, group.Sum(r => r.TotalDamage), group.Key);
                 break;
             case "JH29":
                 await Energy(hand.Cards.Where(c => c != card && CardActions.HasNumericCost(c)).Sum(CardActions.Cost)); break;
