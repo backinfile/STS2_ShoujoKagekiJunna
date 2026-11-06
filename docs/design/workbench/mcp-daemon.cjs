@@ -7,8 +7,8 @@ const {StreamableHTTPServerTransport}=require('@modelcontextprotocol/sdk/server/
 const {WorkbenchStore}=require('./mcp-store.cjs');
 const {createToolHandlers,createProtocolServer}=require('./mcp-tools.cjs');
 const {ensureConfig,dataPath,workspaceId}=require('./mcp-config.cjs');
-function createDaemon({file=dataPath,seed=JSON.parse(fs.readFileSync(path.join(__dirname,'seed.json'),'utf8')),token,port,pageFile=path.resolve(__dirname,'../纯那Mod设计工作台.html')}={}){
-  const store=new WorkbenchStore({file,seed,workspaceId}),url='http://127.0.0.1:'+port,handlers=createToolHandlers(store,{url});
+function createDaemon({file=dataPath,seed=JSON.parse(fs.readFileSync(path.join(__dirname,'seed.json'),'utf8')),token,port,assetDirectory,pageFile=path.resolve(__dirname,'../纯那Mod设计工作台.html')}={}){
+  const store=new WorkbenchStore({file,seed,workspaceId,assetDirectory}),url='http://127.0.0.1:'+port,handlers=createToolHandlers(store,{url});
   const server=http.createServer(async(req,res)=>{
     const reply=(status,value)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(value));};
     const host=req.headers.host,origin=req.headers.origin;
@@ -21,6 +21,17 @@ function createDaemon({file=dataPath,seed=JSON.parse(fs.readFileSync(path.join(_
     const auth=String(req.headers.authorization||'');if(auth.length!==71||!crypto.timingSafeEqual(Buffer.from(auth),Buffer.from('Bearer '+token)))return reply(401,{error:'本地 MCP 连接无效'});
     if(req.url==='/health'&&req.method==='GET')return reply(200,{connected:true,workspaceId,serverType:'junna-workbench-mcp',url});
     if(req.url==='/file')return reply(410,{error:'请通过 MCP 读取和提交条目',code:'MCP_REQUIRED'});
+    if(req.url==='/upload'&&req.method==='POST'){
+      try{
+        const mime=String(req.headers['content-type']);
+        if(!/^image\/(png|jpeg|webp|gif)$/.test(mime))return reply(400,{message:'图片类型无效'});
+        let size=0;const chunks=[];
+        for await(const chunk of req){size+=chunk.length;if(size>16*1024*1024)return reply(413,{message:'图片超过16MB'});chunks.push(chunk);}
+        const assetId=String(req.headers['x-asset-id']||'');
+        const result=await store.commit({requestId:String(req.headers['x-request-id']||''),clientId:String(req.headers['x-client-id']||''),label:'导入图片',changes:[],assets:{[assetId]:'data:'+mime+';base64,'+Buffer.concat(chunks).toString('base64')}});
+        return reply(200,{...result,url:store.assets([assetId])[assetId]});
+      }catch(error){return reply(400,{message:error.message,code:error.code});}
+    }
     if(req.url!=='/mcp')return reply(404,{error:'路径无效'});
     if(req.method!=='POST')return reply(405,{error:'使用 MCP POST 请求'});
     let protocol,transport;

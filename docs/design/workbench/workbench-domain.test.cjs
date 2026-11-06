@@ -30,6 +30,25 @@ test('多张主牌经过标准化、导出读取及切回后仍保留原数量',
   assert.deepEqual(data,before);
 });
 
+test('同一种知识牌三张经过标准化和导出读取后保留同一模型及数量',()=>{
+  const data=fixture();
+  data.cards=data.cards.slice(0,1);
+  Object.assign(data.partnerGroups[0],{mainCardCount:3,grantedCardIds:[],grantedCardCounts:{}});
+  const normalize=domain.create({seed:{data:structuredClone(data)},uid:()=>assert.fail('不应生成新编号'),JunnaFitPool:{normalizeEntry:entry=>entry}});
+  const normalized=normalize(data);
+  const group=normalized.partnerGroups[0];
+  assert.equal(normalized.cards.length,1);
+  assert.equal(domain.groupCardCount(group,'A'),3);
+  assert.deepEqual(group.grantedCardIds,[]);
+  assert.deepEqual(normalized.cards[0].partnerCardIds,[]);
+  assert.ok(normalized.cards[0].keywords.includes('知识'));
+  assert.equal(normalized.cards[0].pool,true);
+  assert.equal(domain.cardGroup(normalized,'card_A').cards.length,1);
+  assert.deepEqual(normalize(JSON.parse(JSON.stringify(normalized))),normalized);
+  group.mainCardCount=1;
+  assert.equal(normalize(normalized).partnerGroups.length,0);
+});
+
 test('切换主牌保留备用与删除状态及自定义组名',()=>{
   const data=fixture();data.cards[0].trashedAt='2026-11-01';data.cards[1].reservedAt='2026-11-02';data.partnerGroups[0].title='阅读组';
   domain.setGroupMain(data,'group_A','card_B');

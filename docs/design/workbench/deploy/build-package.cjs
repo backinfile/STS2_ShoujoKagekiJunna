@@ -7,8 +7,9 @@ const snapshot=path.resolve(snapshotFile),configFile=path.resolve(connectionFile
 const config=JSON.parse(fs.readFileSync(configFile,'utf8').replace(/^\uFEFF/,''));
 if(new URL(config.origin).protocol!=='https:'||!/^[a-f0-9]{64}$/.test(config.secret))throw Error('Cloud connection configuration is invalid');
 fs.mkdirSync(out,{recursive:true});
-for(const name of ['mcp-daemon.cjs','mcp-config.cjs','mcp-store.cjs','mcp-tools.cjs','workbench-domain.js','fit-pool-view.js','package.json','package-lock.json'])fs.copyFileSync(path.join(source,name),path.join(out,name));
-for(const name of ['relay.cjs','run-server.cjs','publish-readonly.cjs'])fs.copyFileSync(path.join(__dirname,name),path.join(out,name));
+for(const name of ['mcp-daemon.cjs','mcp-config.cjs','mcp-store.cjs','mcp-sqlite.cjs','mcp-tools.cjs','workbench-domain.js','fit-pool-view.js','package.json','package-lock.json'])fs.copyFileSync(path.join(source,name),path.join(out,name));
+for(const name of ['relay.cjs','run-server.cjs','publish-readonly.cjs','static-runtime.cjs','migrate-storage.cjs'])fs.copyFileSync(path.join(__dirname,name),path.join(out,name));
+for(const name of ['publish-readonly.cjs','migrate-storage.cjs']){const file=path.join(out,name);fs.writeFileSync(file,fs.readFileSync(file,'utf8').replaceAll("require('../mcp-","require('./mcp-"));}
 execFileSync(process.execPath,[path.join(source,'build-readonly.cjs'),snapshot,path.join(out,'public')],{stdio:'inherit'});
 execFileSync(process.execPath,[path.join(__dirname,'build-editor.cjs'),snapshot,path.join(out,'public'),out,configFile],{stdio:'inherit',env:{...process.env,JUNNA_DEPLOY_SOURCE:source}});
 fs.copyFileSync(path.join(out,'public/index.html'),path.join(out,'public-template.html'));
