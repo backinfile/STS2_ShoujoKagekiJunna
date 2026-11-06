@@ -20,7 +20,7 @@ for(const [collection,a,b]of [['powers','p1','p2'],['relics','r1','r2']])test(co
 test('legacy meta changes update only the affected Power entry version',async t=>{
   const store=fixture(t),meta=store.get({collection:'root',uid:'meta'}),first=store.get({collection:'powers',uid:'p1'}),second=store.get({collection:'powers',uid:'p2'}),after=structuredClone(meta.entity);after.powers[0].name='旧客户端修改';
   const result=await store.commit(input([{collection:'root',uid:'meta',expectedVersion:meta.version,before:meta.entity,after}]));
-  assert(result.versions['powers/p1']);assert(!result.versions['root/meta']);
+  assert(result.versions['powers/p1']);assert.equal(result.versions['root/meta'],meta.version);
   assert.notEqual(store.get({collection:'powers',uid:'p1'}).version,first.version);
   assert.equal(store.get({collection:'powers',uid:'p2'}).version,second.version);
   assert.equal(store.get({collection:'root',uid:'meta'}).version,meta.version);

@@ -10,11 +10,16 @@ const server=http.createServer(async(req,res)=>{
   res.setHeader('Cache-Control','no-store');res.setHeader('Referrer-Policy','no-referrer');
   if(req.headers.origin&&req.headers.origin!==config.origin)return reply(403,{error:'来源无效'});
   if(req.method==='GET'&&req.url==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});return fs.createReadStream(path.join(here,'editor.html')).pipe(res);}
-  if(req.method!=='POST'||req.url!=='/mcp')return reply(404,{error:'路径无效'});
+  if(req.method!=='POST'||!['/mcp','/upload'].includes(req.url))return reply(404,{error:'路径无效'});
   const expected=Buffer.from('Bearer '+config.secret),auth=Buffer.from(String(req.headers.authorization||''));
   if(auth.length!==expected.length||!crypto.timingSafeEqual(auth,expected))return reply(401,{error:'连接无效'});
   try{
     let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>128*1024*1024)return reply(413,{error:'提交过大'});chunks.push(chunk);}
+    if(req.url==='/upload'){
+      const local=ensureConfig(),url='http://127.0.0.1:'+local.port;
+      const upstream=await fetch(url+'/upload',{method:'POST',headers:{Authorization:'Bearer '+local.token,Origin:url,'Content-Type':req.headers['content-type'],'X-Asset-Id':req.headers['x-asset-id'],'X-Request-Id':req.headers['x-request-id'],'X-Client-Id':req.headers['x-client-id']},body:Buffer.concat(chunks),signal:AbortSignal.timeout(90000)});
+      return reply(upstream.status,await upstream.json());
+    }
     const body=JSON.parse(Buffer.concat(chunks).toString('utf8'));
     if(!['initialize','ping','tools/list','tools/call','notifications/initialized','notifications/cancelled'].includes(body.method))return reply(403,{error:'方法无效'});
     if(body.method==='tools/call'&&!allowed.has(body.params?.name))return reply(403,{error:'工具无效'});

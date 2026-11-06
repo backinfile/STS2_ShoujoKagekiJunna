@@ -15,12 +15,11 @@ const assets=JSON.parse(publicHTML.match(/<script id="workbench-assets" type="ap
 for(const id of Object.keys(assets))assets[id]='/'+assets[id];
 const state={...snapshot,assets:Object.fromEntries(Object.keys(snapshot.assets).map(id=>[id,assets[id]])),history:[],undoStack:[],redoStack:[],seedBatches:[],appliedSeedBatches:[]};
 delete state.mcpRequests;
-const connection={baseURL:config.origin+config.prefix,token:config.secret,workspaceId:state.workspaceId,timeoutMs:60000};
+const connection={baseURL:config.origin+config.prefix,token:config.secret,workspaceId:state.workspaceId,timeoutMs:60000,assetURLs:true};
 let app=read('app.js');
 const before="/^http:\\/\\/127\\.0\\.0\\.1:\\d+$/.test(c.baseURL)";
 if(!app.includes(before))throw Error('Connection anchor missing');
 app=app.replace(before,'c.baseURL===location.origin+location.pathname.replace(/\\/$/,\'\')');
-app=app.replace('if(blobURLs.has(source))',"if(source.startsWith('/assets/'))return source;if(blobURLs.has(source))");
 let transport=read('mcp-web-client.js');
 transport=transport.replace('knownAssets=new Set()','knownAssets=new Set(Object.keys(getAssets()))')
   .replace('includeAssets:initial','includeAssets:false').replace('if(!initial&&missing.length)','if(missing.length)');
@@ -29,12 +28,13 @@ new vm.Script(script);
 const css=['workbench.css','card-model.css','fit-pool.css','relic.css','power.css','card-hover-tips.css','mobile.css'].map(read).join('\n').replaceAll('__REGULAR_FONT__',assets['game-regular']).replaceAll('__BOLD_FONT__',assets['game-bold']);
 const inline=(id,value)=>'<script id="'+id+'" type="application/json">'+safe(value)+'</script>';
 const optional=name=>{const file=path.join(source,'../data',name);return fs.existsSync(file)?json(file):null;};
-const html=read('shell.html').replace('<!--STYLE-->','<style>'+css+'</style>')
+let html=read('shell.html').replace('<!--STYLE-->','<style>'+css+'</style>')
   .replace('<!--CONNECTION-->',()=>inline('workbench-connection',connection))
   .replace('<!--ASSETS-->',()=>inline('workbench-assets',assets))
-  .replace('<!--DATA-->',()=>inline('workbench-data',state))
+  .replace('<!--DATA-->',()=>'<script id="workbench-data" type="application/json" data-src="/snapshot.json">'+safe({ui:state.ui})+'</script>')
   .replace('<!--ROUTE_DATA-->',()=>inline('workbench-route-data',json(path.join(source,'route-statistics-defaults.json'))))
   .replace('<!--APP-->',()=>inline('workbench-battle-sim',optional('纯那箭矢等待补偿战斗模拟_20261103.json'))+inline('workbench-card-audit',optional('纯那全卡牌数值校验_20261103.json'))+'<script>'+script+'</script>');
 fs.mkdirSync(here,{recursive:true});
+html=require('./static-runtime.cjs').externalize(html,publicDirectory);
 fs.writeFileSync(path.join(here,'editor.html'),html);
 console.log(JSON.stringify({revision:snapshot.revision,editorBytes:Buffer.byteLength(html),assets:Object.keys(assets).length}));

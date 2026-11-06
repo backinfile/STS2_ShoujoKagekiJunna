@@ -29,6 +29,11 @@ for (const [id, file] of Object.entries({
 })) assets[id] = 'data:image/png;base64,' + fs.readFileSync(path.join(design, 'assets/arrow/2026-11-02', file)).toString('base64');
 const assetFiles = new Set();
 for (const [id, value] of Object.entries(assets)) {
+  if (value.startsWith('/assets/')) {
+    assetFiles.add(path.basename(value));
+    assets[id] = value.slice(1);
+    continue;
+  }
   const match = /^data:([^;,]+);base64,([\s\S]+)$/.exec(value);
   if (!match) throw Error('Unsupported asset: ' + id);
   const bytes = Buffer.from(match[2], 'base64');
@@ -63,7 +68,7 @@ app = app.slice(0, tail) + "  window.__JUNNA_READONLY__={revision:state.revision
 // Browser draft storage and MCP transport are omitted from the published runtime.
 app = app.replace(/  try\{oldDraftKey=sessionStorage[^\n]+\n/, '');
 app = app.replace(/  async function connectLocalService\(\)\{[\s\S]*?\n  \}/, '  async function connectLocalService(){return false;}');
-app = app.replace(/  function saveHTML\(\)\{[^\n]+\n/, '  function saveHTML(){}\n');
+app = app.replace(/  async function saveHTML\(\)\{[\s\S]*?(?=  function imageDataURL)/, '  async function saveHTML(){}\n');
 const guard = read('readonly-view.js');
 const sources = ['arrow-focus.js','energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','card-model-view.js','fit-pool-view.js','relic-view.js','power-view.js','card-hover-tips.js','workbench-domain.js','mobile-layout.js'].map(read);
 const script = [guard, ...sources, app].join('\n');
@@ -75,15 +80,17 @@ let html = read('shell.html')
   .replace('<!--STYLE-->', () => '<style>' + css + '</style>')
   .replace('<!--CONNECTION-->', '')
   .replace('<!--ASSETS-->', () => inlineData('workbench-assets', assets))
-  .replace('<!--DATA-->', () => inlineData('workbench-data', state))
+  .replace('<!--DATA-->', () => '<script id="workbench-data" type="application/json" data-src="/snapshot.json">'+safe({ui:state.ui})+'</script>')
   .replace('<!--ROUTE_DATA-->', () => inlineData('workbench-route-data', json(path.join(here,'route-statistics-defaults.json'))))
   .replace('<!--APP-->', () => inlineData('workbench-battle-sim',optionalData('纯那箭矢等待补偿战斗模拟_20261103.json')) + inlineData('workbench-card-audit',optionalData('纯那全卡牌数值校验_20261103.json')) + '<script>' + script + '</script>')
-  .replace('<head>', '<head><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'unsafe-inline\'; style-src \'unsafe-inline\'; img-src \'self\' data: blob:; font-src \'self\' data:; connect-src \'none\'; base-uri \'none\'; form-action \'none\'; object-src \'none\'"><meta name="robots" content="noindex,nofollow">')
+  .replace('<head>', '<head><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: blob:; font-src \'self\' data:; connect-src \'self\'; base-uri \'none\'; form-action \'none\'; object-src \'none\'"><meta name="robots" content="noindex,nofollow">')
   .replace('<body>', '<body class="readonly">')
   .replace('<div class="global-actions">', '<div class="global-actions"><span class="readonly-status">只读 · ' + new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Shanghai',dateStyle:'short'}).format(new Date(stamp)) + '</span>')
   .replace('title="编辑名称"', 'title="纯那 Mod 设计工作台" tabindex="-1"')
   .replace('aria-label="编辑栏"', 'aria-label="详情"');
 if (/"token"\s*:|workbench-connection|JunnaWorkbenchMcp\.create/.test(html)) throw Error('Published snapshot contains connection information');
+html = require('./deploy/static-runtime.cjs').externalize(html, out);
+fs.writeFileSync(path.join(out,'snapshot.json'),safe({...state,workspaceId:original.workspaceId,assets:Object.fromEntries(Object.keys(original.assets).map(id=>[id,'/'+assets[id]]))}));
 fs.writeFileSync(path.join(out,'index.html'), html);
 fs.writeFileSync(path.join(out,'index.html.gz'), zlib.gzipSync(html,{level:9}));
 const manifest = {revision:original.revision,exportedAt:stamp,counts:Object.fromEntries(Object.entries(original.data).filter(([,v])=>Array.isArray(v)).map(([k,v])=>[k,v.length])),assets:assetFiles.size,htmlBytes:Buffer.byteLength(html),sha256:crypto.createHash('sha256').update(html).digest('hex')};

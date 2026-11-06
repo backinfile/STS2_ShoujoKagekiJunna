@@ -4,7 +4,14 @@
   const escape=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const uid=()=>globalThis.crypto?.randomUUID?.()||'u_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2);
   const safeJSON=x=>JSON.stringify(x).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
-  const seed=JSON.parse($('workbench-data').textContent),builtAssets=JSON.parse($('workbench-assets').textContent),flowDefaults=JSON.parse($('workbench-route-data').textContent);
+  const seedElement=$('workbench-data'),embeddedSeed=JSON.parse(seedElement.textContent);
+  let seed=embeddedSeed;
+  if(seedElement.dataset.src){
+    const response=await fetch(seedElement.dataset.src,{cache:'no-cache'});
+    if(!response.ok)throw Error('工作台数据载入失败');
+    seed={...await response.json(),...(embeddedSeed.ui?{ui:embeddedSeed.ui}:{})};
+  }
+  const builtAssets=JSON.parse($('workbench-assets').textContent),flowDefaults=JSON.parse($('workbench-route-data').textContent);
   const previewMode=new URLSearchParams(location.hash.slice(1)).get('preview')==='1';
   const workspaceId=seed.workspaceId+(previewMode?':card-ui-preview':''),mirrorKey='junna-workbench:'+workspaceId,uiKey=mirrorKey+':ui';
   let connection=null;if(!previewMode)try{const c=JSON.parse($('workbench-connection')?.textContent||'{}');if(c.workspaceId===workspaceId&&/^http:\/\/127\.0\.0\.1:\d+$/.test(c.baseURL)&&/^[a-f0-9]{64}$/.test(c.token))connection=c;}catch(_){}
@@ -16,7 +23,7 @@
   const LABELS={cards:'卡牌',terms:'词条',mechanisms:'机制',archetypes:'流派',partnerGroups:'知识组',styles:'风格约定',fitPool:'契合',relics:'遗物',powers:'Power',root:'制作台'};
   const FIELD_LABELS={content:'内容',name:'名称',id:'编号',text:'牌面',upgradedText:'升级牌面',cost:'费用',upgradedCost:'升级费用',turns:'回合数',upgradedTurns:'升级回合数',type:'类型',rarity:'稀有度',system:'体系',pool:'入池',termIds:'词条',archetypeIds:'流派',keywords:'关键词',definition:'定义',template:'卡面约定',rules:'规则',templates:'描述约定',notes:'备注',role:'卡位',direction:'配合方向',art:'插画',arrowFocus:'箭头聚焦',naming:'出处',partnerCardIds:'知识关系',grantedCardIds:'同组牌',grantedCardCounts:'发放数量',level:'层级',title:'名称',kind:'类别',unit:'单位',systems:'适用体系',sources:'来源',trashedAt:'删除时间',meta:'规则数据'};
   FIELD_LABELS.reservedAt='备用时间';Object.assign(FIELD_LABELS,{category:'分类',mainCardId:'主牌',mainCardCount:'主牌数量',extraHoverTips:'额外悬停提示',knowledgeBackground:'知识背景',theme:'主题',original:'原文',source:'出处',sourceUrl:'来源链接',cardIds:'实装卡牌'});
-  let state=clone(seed),db=null,saveQueue=Promise.resolve(),pending=null,editTimer,toastTimer,fitTimer;
+  let state=clone(seed),db=null,saveQueue=Promise.resolve(),pending=null,editTimer,toastTimer,fitTimer,searchTimer;
   let persistedRecords=new Set(),persistedAssets=new Set(),lastSaveError=null;
   let diskHandle=null,diskFingerprint=null,diskGranted=false,diskConflict=false,diskError=null,diskWriting=false,diskDirty=false,diskSuspended=false,diskQueue=Promise.resolve();
   const blobURLs=new Map();
@@ -34,7 +41,7 @@
   if(ui.selected?.collection==='cards'&&ui.selected.cardSlot)knowledgeFaces.set(ui.selected.cardOrigin||ui.selected.uid,ui.selected.cardSlot);
   if(ui.type==='言葉'||ui.type==='\u661f\u77e2')ui.type='箭矢';
   function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(()=>$('toast').hidden=true,3200);}
-  function assetURL(id){const source=state.assets?.[id]||builtAssets[id]||builtAssets.defaultPortrait;if(blobURLs.has(source))return blobURLs.get(source);const comma=source.indexOf(','),type=source.slice(5,source.indexOf(';')),binary=atob(source.slice(comma+1)),bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);const url=URL.createObjectURL(new Blob([bytes],{type}));blobURLs.set(source,url);return url;}
+  function assetURL(id){const source=state.assets?.[id]||builtAssets[id]||builtAssets.defaultPortrait;if(source.startsWith('/assets/')||source.startsWith('https://'))return source;if(blobURLs.has(source))return blobURLs.get(source);const comma=source.indexOf(','),type=source.slice(5,source.indexOf(';')),binary=atob(source.slice(comma+1)),bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);const url=URL.createObjectURL(new Blob([bytes],{type}));blobURLs.set(source,url);return url;}
   function field(label,key,value,extra=''){return '<label class="field"><span class="field-label">'+escape(label)+'</span><input data-field="'+escape(key)+'" value="'+escape(value)+'" '+extra+'></label>';}
   function area(label,key,value,rows=4,extra=''){return '<label class="field"><span class="field-label">'+escape(label)+'</span><textarea data-field="'+escape(key)+'" rows="'+rows+'" '+extra+'>'+escape(value)+'</textarea></label>';}
   function options(values,current,allLabel){return (allLabel?'<option value="all">'+allLabel+'</option>':'')+values.map(x=>{const v=typeof x==='object'?x.value:x,label=typeof x==='object'?x.label:x;return '<option value="'+escape(v)+'"'+(String(v)===String(current)?' selected':'')+'>'+escape(label)+'</option>';}).join('');}
@@ -48,35 +55,55 @@
     for(const key of ['title','meta'])if(JSON.stringify(rootEntity(before,key))!==JSON.stringify(rootEntity(after,key)))patches.push({collection:'root',uid:key,before:clone(rootEntity(before,key)),after:clone(rootEntity(after,key))});
     return patches;
   }
-  function applyPatches(patches,side){for(const p of patches){if(p.collection==='root'){if(!['title','meta'].includes(p.uid))throw Error('记录中的字段无效');assignRoot(state.data,p.uid,p[side]);continue;}if(!COLLECTIONS.includes(p.collection))throw Error('记录中的条目类型无效');const list=entityList(state.data,p.collection,true),at=list.findIndex(e=>e.uid===p.uid);if(at>=0)list.splice(at,1);if(p[side])list.splice(Math.min(p[side+'Index']<0?list.length:p[side+'Index'],list.length),0,clone(p[side]));}state.data=normalizeData(state.data);}
+  function applyPatches(patches,side,fieldsOnly=false){for(const p of patches){if(p.collection==='root'){if(!['title','meta'].includes(p.uid))throw Error('记录中的字段无效');assignRoot(state.data,p.uid,p[side]);continue;}if(!COLLECTIONS.includes(p.collection))throw Error('记录中的条目类型无效');const list=entityList(state.data,p.collection,true),at=list.findIndex(e=>e.uid===p.uid);if(fieldsOnly&&p.before&&p.after&&at>=0){const value={...list[at]};for(const {key}of changedFields(p)){if(Object.hasOwn(p[side],key))value[key]=clone(p[side][key]);else delete value[key];}list[at]=value;continue;}if(at>=0)list.splice(at,1);if(p[side])list.splice(Math.min(p[side+'Index']<0?list.length:p[side+'Index'],list.length),0,clone(p[side]));}state.data=normalizeData(state.data);}
   function syncMirror(){try{localStorage.setItem(mirrorKey,JSON.stringify(state));return true;}catch(_){if(db)try{localStorage.setItem(mirrorKey,JSON.stringify({...state,assets:{}}));return true;}catch(_){}return false;}}
   async function openDB(){return new Promise((resolve,reject)=>{const request=indexedDB.open('junna-mod-workbench',2);request.onupgradeneeded=()=>{for(const name of ['documents','records','assets','files'])if(!request.result.objectStoreNames.contains(name))request.result.createObjectStore(name);};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});}
   const requestValue=request=>new Promise((resolve,reject)=>{request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});
   async function readDB(){const tx=db.transaction(['documents','records','assets'],'readonly'),range=IDBKeyRange.bound(workspaceId+':',workspaceId+':\uffff');const [doc,records,assets]=await Promise.all([requestValue(tx.objectStore('documents').get(workspaceId)),requestValue(tx.objectStore('records').getAll(range)),requestValue(tx.objectStore('assets').getAll(range))]);if(!doc)return null;persistedRecords=new Set(records.map(r=>r.id));persistedAssets=new Set(assets.map(a=>a.id));return {...doc,history:records.sort((a,b)=>a.seq-b.seq),assets:Object.fromEntries(assets.map(a=>[a.id,a.value]))};}
-  let mcp=null,mcpStatus={ready:false,pending:0,busy:false},recoveredDraft=null,mcpHasSnapshot=false;
+  let mcp=null,mcpStatus={ready:false,pending:0,busy:false},recoveredDraft=null,mcpHasSnapshot=false,mcpConnecting=!!connection;
+  let historyOffset=0,historyLoading=false,historyQueryTotal=0,historyReloadPending=false,historyFilterTimer;
   const mcpClientId=uid(),draftSessionKey=mirrorKey+':mcp-draft-key';let oldDraftKey=null;
   try{oldDraftKey=sessionStorage.getItem(draftSessionKey);sessionStorage.setItem(draftSessionKey,mcpClientId);}catch(_){}
   function updateDiskState(){
     const b=$('file-state');
-    if(mcp){diskGranted=mcpStatus.ready;diskConflict=!!mcpStatus.conflict;diskDirty=!!(mcpStatus.pending||pending);diskWriting=mcpStatus.busy;diskError=mcpStatus.error;b.textContent=diskConflict?'版本冲突':!diskGranted?'MCP 未连接':diskWriting?'MCP 保存中':diskDirty?'MCP 待保存':'MCP 已保存';b.dataset.state=diskConflict||!diskGranted?'error':diskDirty||diskWriting?'pending':'saved';b.title='本地 MCP';}
-    else {b.textContent=previewMode?'预览':connection?'MCP 未连接':'只读副本';b.dataset.state=connection?'error':'saved';}
+    if(mcp){diskGranted=mcpStatus.ready;diskConflict=!!mcpStatus.conflict;diskDirty=!!(mcpStatus.pending||pending);diskWriting=mcpStatus.busy;diskError=mcpStatus.error;b.textContent=diskConflict?(mcpStatus.conflict.code==='VERSION_CONFLICT'?'版本冲突':'保存失败'):!diskGranted?(mcpConnecting?'MCP 连接中':'MCP 未连接'):diskWriting?'MCP 保存中':diskDirty?'MCP 待保存':'MCP 已保存';b.dataset.state=diskConflict||!diskGranted&&!mcpConnecting?'error':mcpConnecting||diskDirty||diskWriting?'pending':'saved';b.title=diskError?.message||'MCP';}
+    else {b.textContent=previewMode?'预览':connection?'MCP 连接中':'只读副本';b.dataset.state=connection?'pending':'saved';}
     $('read-local-file').disabled=!mcp;$('bind-local-file').hidden=true;$('disconnect-local-file').hidden=true;
   }
   function localBundle(){return {...clone(state),ui:clone(ui),exportedAt:new Date().toISOString()};}
   function storeMcpDraft(draft,backup=false){
-    if(!db||!mcp)return;if(!backup&&!draft.outbox.length){db.transaction('documents','readwrite').objectStore('documents').delete(workspaceId+':mcp-draft:'+mcpClientId);return;}const key=workspaceId+':mcp-draft:'+(backup?mcpClientId+':backup:'+Date.now():mcpClientId),value={...draft,data:clone(state.data),assets:clone(state.assets),history:state.history.filter(r=>draft.outbox.some(x=>x.record.id===r.id)),undoStack:clone(state.undoStack),redoStack:clone(state.redoStack)};
-    const tx=db.transaction('documents','readwrite');tx.objectStore('documents').put(value,key);
-    tx.onerror=()=>{lastSaveError=tx.error;$('save-state').textContent='草稿暂存失败';};
+    if(!mcp)return;
+    const key=workspaceId+':mcp-draft:'+(backup?mcpClientId+':backup:'+Date.now():mcpClientId);
+    const value={...draft,assets:Object.assign({},...draft.outbox.map(item=>item.assets||{})),history:draft.outbox.map(item=>item.record),undoStack:clone(state.undoStack),redoStack:clone(state.redoStack)};
+    const empty=!backup&&!draft.outbox.length;
+    saveQueue=saveQueue.catch(()=>{}).then(()=>new Promise((resolve,reject)=>{
+      if(!db){try{empty?localStorage.removeItem(key):localStorage.setItem(key,JSON.stringify(value));resolve();}catch(error){reject(error);}return;}
+      const tx=db.transaction('documents','readwrite');
+      if(empty)tx.objectStore('documents').delete(key);else tx.objectStore('documents').put(value,key);
+      tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||Error('草稿暂存失败'));
+    })).then(()=>{lastSaveError=null;$('save-state').textContent='已暂存';}).catch(error=>{lastSaveError=error;$('save-state').textContent='草稿暂存失败';});
   }
-  function receiveMcpSnapshot(bundle){
-    const undoStack=mcpHasSnapshot?(state.undoStack||[]):[],redoStack=mcpHasSnapshot?(state.redoStack||[]):[],assets=state.assets||{};mcpHasSnapshot=true;state={...clone(bundle),assets:{...assets,...bundle.assets},undoStack,redoStack};
-    if(recoveredDraft?.outbox?.length){state.data=normalizeData(recoveredDraft.data);state.assets={...state.assets,...recoveredDraft.assets};state.history.push(...recoveredDraft.history.filter(r=>!state.history.some(x=>x.id===r.id)));state.undoStack=recoveredDraft.undoStack||[];state.redoStack=recoveredDraft.redoStack||[];recoveredDraft=null;}
-    renderAll();
+  function receiveMcpSnapshot(bundle,changes){
+    const undoStack=mcpHasSnapshot?(state.undoStack||[]):[],redoStack=mcpHasSnapshot?(state.redoStack||[]):[],history=mcpHasSnapshot?(state.history||[]):[],assets=state.assets||{};mcpHasSnapshot=true;state={...clone(bundle),history:[...new Map([...history,...bundle.history].map(record=>[record.id,record])).values()].sort((a,b)=>a.seq-b.seq),assets:{...assets,...bundle.assets},undoStack,redoStack};
+    restoreRecoveredDraft();recoveredDraft=null;
+    if(changes?.length&&changes.every(change=>change.collection==='cards')&&['cards','reserve','trash'].includes(ui.tab)){
+      renderSidebar();renderWorkspace();if(changes.some(change=>change.uid===ui.selected?.uid))renderInspector();
+    }else renderAll();
   }
+  function restoreRecoveredDraft(){if(recoveredDraft?.outbox?.length){if(recoveredDraft.data)state.data=normalizeData(recoveredDraft.data);else for(const item of recoveredDraft.outbox)applyPatches(item.record.patches,'after',true);state.assets={...state.assets,...recoveredDraft.assets};state.history.push(...recoveredDraft.history.filter(r=>!state.history.some(x=>x.id===r.id)));state.undoStack=recoveredDraft.undoStack||[];state.redoStack=recoveredDraft.redoStack||[];}}
   async function connectLocalService(){
     if(!connection)return false;
-    if(!mcp)mcp=JunnaWorkbenchMcp.create({connection,clientId:mcpClientId,uuid:uid,getAssets:()=>state.assets,onSnapshot:receiveMcpSnapshot,onCommit:(id,result)=>{const at=state.history.findIndex(r=>r.id===id);if(result.record&&at>=0)state.history[at]=result.record;state.revision=Math.max(state.revision,result.revision);persist();},onStatus:status=>{const wasConflict=!!mcpStatus.conflict;mcpStatus=status;updateChrome();if(status.conflict&&!wasConflict)showMcpConflict();},onDraft:storeMcpDraft});
-    const draft=recoveredDraft;const connected=await mcp.start(draft);if(!connected)toast(mcpStatus.error?.message||'MCP 未连接');updateDiskState();return connected;
+    if(!mcp)mcp=JunnaWorkbenchMcp.create({connection,initialSnapshot:seed.versions?{bundle:seed,versions:seed.versions}:null,clientId:mcpClientId,uuid:uid,getAssets:()=>state.assets,onSnapshot:receiveMcpSnapshot,onCommit:receiveMcpCommit,onStatus:status=>{const wasConflict=!!mcpStatus.conflict;mcpStatus=status;updateChrome();if(status.conflict&&!wasConflict)showMcpConflict();},onDraft:storeMcpDraft});
+    mcpConnecting=true;updateDiskState();
+    try{const connected=await mcp.start(recoveredDraft);if(!connected)toast(mcpStatus.error?.message||'MCP 未连接');return connected;}
+    finally{mcpConnecting=false;updateDiskState();}
+  }
+  function receiveMcpCommit(id,result){
+    const at=state.history.findIndex(record=>record.id===id);
+    if(at>=0){if(result.record)state.history[at]=result.record;else state.history.splice(at,1);}
+    else if(result.record){state.history.push(result.record);state.undoStack.push(id);state.redoStack=[];}
+    if(!result.record){state.undoStack=state.undoStack.filter(key=>key!==id);state.redoStack=state.redoStack.filter(key=>key!==id);}
+    state.revision=Math.max(state.revision,result.revision);persist();
   }
   function queueDiskSave(){if(mcp){diskQueue=mcp.flush();return diskQueue;}return Promise.resolve();}
   async function saveLocalFile(){flushEdit();if(!mcp)return connectLocalService();if(mcpStatus.conflict)return showMcpConflict();await queueDiskSave();if(!mcpStatus.pending)await mcp.pull();updateDiskState();}
@@ -85,13 +112,16 @@
   async function disconnectLocalFile(){return saveLocalFile();}
   async function restoreLocalFile(){return connectLocalService();}
   let conflictRows=[];
+  function conflictFields(value,fields){return fields?Object.fromEntries(fields.filter(field=>Object.hasOwn(value||{},field)).map(field=>[field,value[field]])):value;}
+  function discardPendingHistory(ids){state.history=state.history.filter(record=>!ids.has(record.id));state.undoStack=state.undoStack.filter(id=>!ids.has(id));state.redoStack=state.redoStack.filter(id=>!ids.has(id));renderAll();persist();}
   async function showMcpConflict(){
-    if(!mcpStatus.conflict)return;try{conflictRows=await mcp.proposals();const body=$('mcp-conflict-body');body.innerHTML=conflictRows.map((p,i)=>'<section class="mcp-conflict-entry"><h3>'+escape(p.local?.name||p.before?.name||p.uid)+'</h3><details><summary>本地草稿</summary><pre>'+escape(JSON.stringify(p.local,null,2))+'</pre></details><details><summary>服务器版本</summary><pre>'+escape(JSON.stringify(p.before,null,2))+'</pre></details><label class="field"><span class="field-label">合并内容</span><textarea data-merge-index="'+i+'" rows="10">'+escape(JSON.stringify(p.after,null,2))+'</textarea></label></section>').join('');if(!$('mcp-conflict-dialog').open)$('mcp-conflict-dialog').showModal();}catch(error){toast(error.message);}
+    if(!mcpStatus.conflict)return;try{flushEdit();conflictRows=await mcp.proposals();$('mcp-conflict-title').textContent=mcpStatus.conflict.code==='VERSION_CONFLICT'?'版本冲突':'保存失败';const body=$('mcp-conflict-body');body.innerHTML=conflictRows.map((p,i)=>'<section class="mcp-conflict-entry"><h3>'+escape(p.local?.name||p.before?.name||p.uid)+'</h3><details><summary>你的修改</summary><pre>'+escape(JSON.stringify(conflictFields(p.local,p.fields),null,2))+'</pre></details><details><summary>当前内容</summary><pre>'+escape(JSON.stringify(conflictFields(p.before,p.fields),null,2))+'</pre></details><label class="field"><span class="field-label">合并内容</span><textarea data-merge-index="'+i+'" rows="6">'+escape(JSON.stringify(conflictFields(p.after,p.fields),null,2))+'</textarea></label></section>').join('');if(!$('mcp-conflict-dialog').open)$('mcp-conflict-dialog').showModal();}catch(error){toast(error.message);}
   }
   $('mcp-export-draft').addEventListener('click',()=>download(JSON.stringify({draft:mcp.draft(),data:state.data,assets:state.assets},null,2),'纯那工作台_冲突草稿.json','application/json;charset=utf-8'));
-  $('mcp-use-server').addEventListener('click',async()=>{try{await mcp.replace([]);$('mcp-conflict-dialog').close();}catch(error){toast(error.message);}});
-  $('mcp-merge-submit').addEventListener('click',async()=>{try{const changes=conflictRows.map((p,i)=>({collection:p.collection,uid:p.uid,expectedVersion:p.expectedVersion,before:p.before,after:JSON.parse($('mcp-conflict-body').querySelector('[data-merge-index="'+i+'"]').value),afterIndex:p.afterIndex}));$('mcp-conflict-dialog').close();await mcp.replace(changes);}catch(error){toast(error.message);}});
+  $('mcp-use-server').addEventListener('click',async()=>{try{const ids=new Set(mcp.draft().outbox.map(entry=>entry.record.id));await mcp.replace([]);discardPendingHistory(ids);$('mcp-conflict-dialog').close();}catch(error){toast(error.message);}});
+  $('mcp-merge-submit').addEventListener('click',async()=>{try{const changes=conflictRows.map((p,i)=>{const edited=JSON.parse($('mcp-conflict-body').querySelector('[data-merge-index="'+i+'"]').value);let after=edited;if(p.fields){if(!edited||typeof edited!=='object'||Array.isArray(edited))throw Error('请填写字段对象');after={...p.before,...edited};for(const field of p.fields)if(!Object.hasOwn(edited,field))delete after[field];}return {collection:p.collection,uid:p.uid,expectedVersion:p.expectedVersion,before:p.before,after,afterIndex:p.afterIndex};});const ids=new Set(mcp.draft().outbox.map(entry=>entry.record.id));$('mcp-conflict-dialog').close();await mcp.replace(changes);discardPendingHistory(ids);}catch(error){toast(error.message);}});
   function persist(){
+    if(mcp){queueDiskSave();return saveQueue;}
     const snapshot=clone(state),mirrored=syncMirror();$('save-state').textContent='暂存中';queueDiskSave();
     saveQueue=saveQueue.catch(()=>{}).then(async()=>{
       if(!db){if(!mirrored)throw Error('浏览器存储空间不足，请导出保存');return;}
@@ -100,12 +130,17 @@
   }
   function record(before,label,kind='编辑',stack=true,reference=null){
     state.data=normalizeData(state.data);const patches=patchesBetween(before,state.data);if(!patches.length)return null;
-    const entry={id:uid(),seq:++state.revision,at:new Date().toISOString(),label,kind,patches,reference};state.history.push(entry);if(mcp)mcp.enqueue(entry);if(stack){state.undoStack.push(entry.id);state.redoStack=[];}persist();updateChrome();return entry;
+    const entry={id:uid(),seq:++state.revision,at:new Date().toISOString(),label,kind,patches,reference};state.history.push(entry);state.historyTotal=Math.max(state.historyTotal||0,state.history.length-1)+1;if(mcp)mcp.enqueue(entry);if(stack){state.undoStack.push(entry.id);state.redoStack=[];}persist();updateChrome();return entry;
   }
-  function transact(label,mutate,kind='编辑'){if(!previewMode&&(!mcpStatus.ready||mcpStatus.conflict)){toast(mcpStatus.conflict?'请先处理版本冲突':'MCP 未连接');return null;}flushEdit();const before=clone(state.data);try{mutate(state.data);const r=record(before,label,kind);renderAll();return r;}catch(error){state.data=before;renderAll();toast(error.message);return null;}}
+  function transact(label,mutate,kind='编辑'){if(!previewMode&&(!mcpStatus.ready||mcpStatus.conflict||mcpStatus.resolving)){toast(mcpStatus.conflict?'请先处理版本冲突':mcpStatus.resolving?'MCP 保存中':'MCP 未连接');return null;}flushEdit();const before=clone(state.data);try{mutate(state.data);const r=record(before,label,kind);renderAll();return r;}catch(error){state.data=before;renderAll();toast(error.message);return null;}}
   function beginEdit(){if(!pending){mcp?.invalidateSnapshots();pending={before:clone(state.data),label:(LABELS[ui.selected?.collection]||'制作台')+' · '+(current()?.name||state.data.title)};}}
-  function flushEdit(){clearTimeout(editTimer);if(!pending)return;const edit=pending;pending=null;try{record(edit.before,edit.label);renderWorkspace();if(['styles','flows','fits','relics','powers'].includes(ui.tab))renderSidebar();}catch(error){state.data=edit.before;renderAll();toast(error.message);}}
-  function updateChrome(){$('workspace-title').textContent=state.data.title;document.title=state.data.title;$('history-count').textContent=state.history.length;$('undo').disabled=!state.undoStack.length;$('redo').disabled=!state.redoStack.length;updateDiskState();}
+  function flushEdit(){clearTimeout(editTimer);if(!pending)return;const edit=pending;pending=null;try{const entry=record(edit.before,edit.label);if(entry?.patches.length===1&&entry.patches[0].collection==='cards'&&['cards','reserve','trash'].includes(ui.tab)){
+      const patch=entry.patches[0],before=patch.before,after=patch.after;
+      const stableLayout=before&&after&&['id','name','cost','upgradedCost','type','rarity','system','pool','reservedAt','trashedAt','termIds','archetypeIds','keywords','partnerCardIds'].every(field=>JSON.stringify(before[field])===JSON.stringify(after[field]));
+      const nodes=$('work-area').querySelectorAll('[data-card-face="'+CSS.escape(patch.uid)+'"]');
+      if(stableLayout&&nodes.length){for(const node of nodes)node.outerHTML=cardEntryHTML(find('cards',node.dataset.cardOrigin),ui.tab==='trash');fitCards();}else renderWorkspace();
+    }else renderWorkspace();if(['styles','flows','fits','relics','powers'].includes(ui.tab))renderSidebar();}catch(error){state.data=edit.before;renderAll();toast(error.message);}}
+  function updateChrome(){$('workspace-title').textContent=state.data.title;document.title=state.data.title;$('history-count').textContent=Math.max(state.historyTotal||0,state.history.length);$('undo').disabled=!state.undoStack.length||!!mcpStatus.resolving;$('redo').disabled=!state.redoStack.length||!!mcpStatus.resolving;$('editor-form').inert=!!mcpStatus.resolving;updateDiskState();}
   function saveUI(push=false){try{localStorage.setItem(uiKey,JSON.stringify(ui));}catch(_){}const params=new URLSearchParams();if(previewMode)params.set('preview','1');for(const key of ['tab','search','kind','type','rarity','pool','cost','archetype','term','sort','fitTheme','fitStatus','powerSystem','powerOrigin'])if(ui[key]&&(ui[key]!=='all'||key==='pool'&&ui.tab==='cards')&&ui[key]!=='id')params.set(key,ui[key]);if(ui.routePositions?.length)params.set('positions',ui.routePositions.join(','));if(ui.routeExcludedPositions?.length)params.set('excludePositions',ui.routeExcludedPositions.join(','));if(ui.tab==='overview'){if(ui.overviewScope!=='cards')params.set('overviewScope',ui.overviewScope);params.set('overviewBy',overviewDimensions().map(d=>d.key).join(',')||'none');if(ui.overviewAll)params.set('overviewAll','1');}if(ui.tab==='flows'){if(ui.flowScope!=='cards')params.set('flowScope',ui.flowScope);if(ui.flowRoute!=='all')params.set('flowRoute',ui.flowRoute);if(ui.flowOnlyRewards)params.set('flowRewards','1');}if(ui.upgraded)params.set('upgraded','1');if(ui.descending)params.set('descending','1');const hash=params.toString();if(location.hash.slice(1)!==hash&&!new URLSearchParams(location.hash.slice(1)).has('handoff'))history[push?'pushState':'replaceState'](null,'','#'+hash);}
   const cardTab=card=>card.trashedAt?'trash':card.reservedAt?'reserve':'cards';
   // 总览沿用现有编辑台：左栏选择范围与分组要素，中栏交叉分组，右栏统计当前范围。
@@ -156,10 +191,15 @@
   function readHash(){const p=new URLSearchParams(location.hash.slice(1));if(p.has('handoff'))return;for(const k of ['tab','search','kind','type','rarity','pool','cost','archetype','term','sort','fitTheme','fitStatus','powerSystem','powerOrigin'])if(p.has(k))ui[k]=p.get(k);if(ui.tab==='overview'||p.has('overviewScope'))ui.overviewScope=p.get('overviewScope')||'cards';if(!['cards','reserve','trash'].includes(ui.overviewScope))ui.overviewScope='cards';if(p.has('overviewBy'))ui.overviewBy=p.get('overviewBy').split(',');if(p.has('overviewBy')||p.has('overviewAll'))ui.overviewAll=p.get('overviewAll')==='1';if(ui.tab==='flows'){ui.flowScope=p.get('flowScope')||'cards';ui.flowRoute=p.get('flowRoute')||'all';ui.flowOnlyRewards=p.get('flowRewards')==='1';if(!['cards','reserve','trash'].includes(ui.flowScope))ui.flowScope='cards';}const legacy=!p.has('positions')&&!p.has('excludePositions')&&ui.routePositions===null;ui.routePositions=JunnaRouteStatistics.normalizePositions(p.get('positions')||p.get('routePosition')||(legacy?ui.routePosition:[]));ui.routeExcludedPositions=JunnaRouteStatistics.normalizePositions(p.get('excludePositions'));const oldBreakthrough=p.get('breakthrough')||(legacy?ui.breakthrough:'all');if(oldBreakthrough==='only')ui.routePositions.push('breakthrough');if(oldBreakthrough==='ordinary')ui.routeExcludedPositions.push('breakthrough');ui.routePositions=JunnaRouteStatistics.normalizePositions(ui.routePositions);ui.routeExcludedPositions=JunnaRouteStatistics.normalizePositions(ui.routeExcludedPositions).filter(tag=>!ui.routePositions.includes(tag));ui.routePosition=ui.breakthrough='all';if(ui.tab==='cards'&&!p.has('pool'))ui.pool='pool';ui.upgraded=p.get('upgraded')==='1';ui.descending=p.get('descending')==='1';if(ui.term==='U_TERM_001'&&!state.data.terms.some(t=>t.id===ui.term))ui.term='KW_PARTNER';if(!['overview','flows','mechanisms','terms','models','cards','powers','relics','fits','reserve','styles','trash'].includes(ui.tab))ui.tab='mechanisms';}
   function filteredCards(){const term=ui.search.trim().toLowerCase(),trash=ui.tab==='trash';let list=state.data.cards.filter(c=>cardTab(c)===ui.tab&&(trash||((ui.type==='all'||c.type===ui.type)&&(ui.rarity==='all'||c.rarity===ui.rarity)&&(ui.pool==='all'||c.pool===(ui.pool==='pool'))&&(ui.cost==='all'||(ui.cost==='3+'?Number(ui.upgraded?c.upgradedCost:c.cost)>=3:String(ui.upgraded?c.upgradedCost:c.cost)===ui.cost))&&(ui.archetype==='all'||c.archetypeIds.includes(ui.archetype))&&JunnaRouteStatistics.matchesPosition(c,state.data.archetypes,flowDefaults,ui.routePositions,ui.archetype,ui.routeExcludedPositions)&&(ui.term==='all'||c.termIds.includes(ui.term))))&&(!term||[c.id,c.name,c.text,c.upgradedText,c.role,...c.partnerCardIds.map(id=>state.data.cards.find(x=>x.id===id)?.name||''),...c.termIds.map(id=>state.data.terms.find(t=>t.id===id)?.name||'')].join(' ').toLowerCase().includes(term)));
     if(trash)return list.sort((a,b)=>String(b.trashedAt).localeCompare(String(a.trashedAt)));
-    const collator=new Intl.Collator('zh-CN',{numeric:true}),updated=new Map();if(ui.sort==='updated')for(const r of state.history)for(const p of r.patches)if(p.collection==='cards')updated.set(p.uid,r.seq);
+    const collator=new Intl.Collator('zh-CN',{numeric:true}),updated=new Map(Object.entries(state.cardUpdatedAt||{}));if(ui.sort==='updated')for(const r of state.history)for(const p of r.patches)if(p.collection==='cards')updated.set(p.uid,Math.max(updated.get(p.uid)||0,r.seq));
     list=list.slice().sort((a,b)=>{let result=0;if(ui.sort==='name')result=collator.compare(a.name,b.name);else if(ui.sort==='cost')result=((ui.upgraded?a.upgradedCost:a.cost)==='X'?99:Number(ui.upgraded?a.upgradedCost:a.cost))-((ui.upgraded?b.upgradedCost:b.cost)==='X'?99:Number(ui.upgraded?b.upgradedCost:b.cost));else if(ui.sort==='rarity')result=RARITIES.indexOf(a.rarity)-RARITIES.indexOf(b.rarity);else if(ui.sort==='type')result=TYPES.indexOf(a.type)-TYPES.indexOf(b.type);else if(ui.sort==='turns')result=(Number.isFinite(a.turns)?a.turns:Infinity)-(Number.isFinite(b.turns)?b.turns:Infinity);else if(ui.sort==='updated')result=(updated.get(b.uid)||0)-(updated.get(a.uid)||0);return (result||collator.compare(a.id,b.id))*(ui.descending?-1:1);});return list;}
   function filteredTerms(){const q=ui.search.trim().toLowerCase();return state.data.terms.filter(t=>(ui.kind==='all'||t.kind===ui.kind)&&(!q||[t.id,t.name,t.definition,t.template].join(' ').toLowerCase().includes(q))).sort((a,b)=>a.kind.localeCompare(b.kind)||a.id.localeCompare(b.id,undefined,{numeric:true}));}
   function energyText(text,card=null){return JunnaEnergyIcons.render(escape(text),assetURL('energy-junna'),card?.descriptionEnergyDisplay);}
+  function knowledgeCopies(card){
+    if(!card)return 1;
+    const group=groupsFor(card).find(group=>group.mainCardId===card.id&&group.grantedCardIds.length===0);
+    return group?JunnaWorkbenchDomain.groupCardCount(group,card.id):1;
+  }
   function richText(text,baseText,upgraded=ui.upgraded,card=null){
     const references=JunnaCardReferences.referencesFor(card,state.data.cards),protectedText=JunnaCardReferences.protect(text,references),base=baseText?JunnaCardReferences.protect(baseText,references).text:null;
     let value=escape(protectedText.text);if(upgraded&&base){const original=[...base.matchAll(/\d+/g)].map(m=>m[0]);let i=0;value=value.replace(/\d+/g,n=>n===original[i++]?n:'<span class="text-green">'+n+'</span>');}
@@ -170,13 +210,39 @@
     for(const item of protectedText.values){const targetText=item.upgraded?item.card.upgradedText:item.card.text;value=value.split(item.token).join('<span class="text-gold card-reference" data-card-reference="'+escape(item.card.uid)+'" title="'+escape(item.text+'\n'+targetText)+'">'+escape(item.text)+'</span>');}
     return value;
   }
-  function cardHTML(card,upgraded=ui.upgraded){const type=card.type==='攻击'?'attack':card.type==='能力'?'power':'skill',arrow=card.type==='箭矢',kind=arrow?'stage':type,rarity=card.rarity==='远古'?'ancient':card.rarity==='稀有'?'rare':card.rarity==='罕见'?'uncommon':'common',ancient=rarity==='ancient',cost=upgraded?card.upgradedCost:card.cost,text=upgraded?card.upgradedText:card.text;
-    const layer=(name,id)=>'<img class="native-layer '+name+'" src="'+assetURL(id)+'" alt="" draggable="false" decoding="async">';let layers='';
+  function cardHTML(card,upgraded=ui.upgraded,lazy=false){const type=card.type==='攻击'?'attack':card.type==='能力'?'power':'skill',arrow=card.type==='箭矢',kind=arrow?'stage':type,rarity=card.rarity==='远古'?'ancient':card.rarity==='稀有'?'rare':card.rarity==='罕见'?'uncommon':'common',ancient=rarity==='ancient',cost=upgraded?card.upgradedCost:card.cost,text=upgraded?card.upgradedText:card.text;
+    const layer=(name,id)=>'<img class="native-layer '+name+'" src="'+assetURL(id)+'" alt="" draggable="false" decoding="async"'+(lazy?' loading="lazy"':'')+'>';let layers='';
     if(ancient){layers+=layer('native-ancient-portrait',card.art)+layer('native-ancient-border','ancient-card-border')+layer('native-ancient-text','ancient-text-'+type)+layer('native-ancient-highlight','card-highlight-ancient')+(arrow?layer('native-arrow-badge','portrait-stage-junna'):'')+layer('native-banner','banner-ancient')+layer('native-ancient-flame','ancient-flame-0');}
-    else{layers+=layer('native-shadow','frame-'+type)+(arrow?'<svg class="native-layer native-arrow-portrait" viewBox="0 0 1456 1080" preserveAspectRatio="none" aria-hidden="true"><image href="'+assetURL(card.art)+'" width="1456" height="1080" preserveAspectRatio="xMidYMid slice" clip-path="url(#junna-arrow-window)"/></svg>':layer('native-portrait',card.art))+layer('native-frame','frame-'+type)+layer('native-class-frame','frame-'+type)+(arrow?layer('native-arrow-portrait-border','portrait-stage-junna'):layer('native-portrait-border','portrait-'+type+'-'+rarity))+layer('native-banner','banner-'+rarity);}
+    else{layers+=layer('native-shadow','frame-'+type)+(arrow?'<svg class="native-layer native-arrow-portrait" viewBox="0 0 1456 1080" preserveAspectRatio="none" aria-hidden="true"><image '+(lazy?'data-image-src':'href')+'="'+assetURL(card.art)+'" width="1456" height="1080" preserveAspectRatio="xMidYMid slice" clip-path="url(#junna-arrow-window)"/></svg>':layer('native-portrait',card.art))+layer('native-frame','frame-'+type)+layer('native-class-frame','frame-'+type)+(arrow?layer('native-arrow-portrait-border','portrait-stage-junna'):layer('native-portrait-border','portrait-'+type+'-'+rarity))+layer('native-banner','banner-'+rarity);}
     return '<div class="game-card '+(ancient?'ancient-card ':'')+(upgraded?'is-upgraded':'')+'" data-type="'+kind+'" data-rarity="'+rarity+'" data-frame="'+type+'" data-hover-card="'+escape(card.uid)+'">'+layers+'<div class="native-title"><span>'+escape(card.name)+(upgraded?'+':'')+'</span></div><div class="native-type" style="--plaque:url(\''+assetURL('plaque-'+rarity)+'\')">'+escape(card.type)+'</div><div class="native-description"><div>'+richText(text,upgraded?card.text:null,upgraded,card)+'</div></div><div class="native-energy '+(upgraded&&cost!==card.cost?'cost-upgraded':'')+'">'+layer('native-energy-art','energy-junna')+'<span>'+escape(cost)+'</span></div>'+(arrow?'<div class="native-arrow-turns '+(upgraded&&card.upgradedTurns!==card.turns?'turns-upgraded':'')+'">'+escape(upgraded?card.upgradedTurns:card.turns)+'</div>':'')+'</div>';
   }
-  function fitCards(){cancelAnimationFrame(fitTimer);fitTimer=requestAnimationFrame(()=>{for(const card of document.querySelectorAll('.game-card')){const scale=card.clientWidth/300;if(!scale)continue;const title=card.querySelector('.native-title span'),body=card.querySelector('.native-description>div');title.style.whiteSpace=title.textContent.length>10?'normal':'nowrap';for(const [node,max,min]of [[title,26,11],[body,21,12]]){let n=max;node.style.fontSize=n*scale+'px';while(n>min&&(node.scrollHeight>node.parentElement.clientHeight+1||node.scrollWidth>node.parentElement.clientWidth+1)){n--;node.style.fontSize=n*scale+'px';}}}});}
+  const fittedCards=new WeakMap();let fontGeneration=0;
+  function fitCard(card){
+    for(const image of card.querySelectorAll('[data-image-src]')){image.setAttribute('href',image.dataset.imageSrc);image.removeAttribute('data-image-src');}
+    const width=card.clientWidth;if(!width)return;
+    const title=card.querySelector('.native-title span'),body=card.querySelector('.native-description>div');
+    const key=width+':'+fontGeneration+':'+title.textContent+':'+body.textContent;
+    if(fittedCards.get(card)===key)return;
+    const scale=width/300;title.style.whiteSpace=title.textContent.length>10?'normal':'nowrap';
+    for(const [node,max,min]of [[title,26,11],[body,21,12]]){
+      const overflows=()=>node.scrollHeight>node.parentElement.clientHeight+1||node.scrollWidth>node.parentElement.clientWidth+1;
+      node.style.fontSize=max*scale+'px';if(!overflows())continue;
+      let low=min,high=max-1;
+      while(low<high){const middle=Math.ceil((low+high)/2);node.style.fontSize=middle*scale+'px';if(overflows())high=middle-1;else low=middle;}
+      node.style.fontSize=low*scale+'px';
+    }
+    fittedCards.set(card,key);
+  }
+  const cardFitObserver=typeof IntersectionObserver==='function'?new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting)fitCard(entry.target);},{rootMargin:'300px'}):null;
+  function fitCards(invalidate=false){
+    if(invalidate)fontGeneration++;
+    cancelAnimationFrame(fitTimer);fitTimer=requestAnimationFrame(()=>{
+      cardFitObserver?.disconnect();
+      const cards=[...document.querySelectorAll('.game-card')],visible=cards.filter(card=>{const bounds=card.getBoundingClientRect();return bounds.width&&bounds.bottom>=-300&&bounds.top<=innerHeight+300&&bounds.right>=0&&bounds.left<=innerWidth;});
+      if(cardFitObserver){for(const card of cards)cardFitObserver.observe(card);for(const card of visible)fitCard(card);}
+      else for(const card of cards)fitCard(card);
+    });
+  }
   function renderSidebar(){
     if(['cards','reserve'].includes(ui.tab)){if(ui.archetype!=='all'&&!state.data.archetypes.some(a=>a.id===ui.archetype))ui.archetype='all';if(ui.term!=='all'&&!state.data.terms.some(t=>t.id===ui.term&&t.kind==='关键词')){const term=state.data.terms.find(t=>t.id===ui.term);if(term&&!ui.search)ui.search=term.name;ui.term='all';}}
     const count=(key,value)=>state.data[key].filter(e=>value(e)).length;let html='';
@@ -200,9 +266,16 @@
   }
   function cardLinks(card){const link=(id,count=1)=>{const c=find('cards',id);return c?'<button type="button" class="text-button" data-open-card="'+escape(c.uid)+'">'+escape(c.name)+''+(count>1?' ×'+count:'')+(c.trashedAt?' · 已删除':'')+' ↗</button>':'';};return groupsFor(card).flatMap(g=>g.mainCardId===card.id?g.grantedCardIds.map(id=>link(id,g.grantedCardCounts[id])):[link(g.mainCardId)]).join('、');}
   function knowledgeEntries(group){return [group.mainCardId,...group.grantedCardIds].flatMap(id=>{const card=find('cards',id),copies=JunnaWorkbenchDomain.groupCardCount(group,id);return card&&(!card.trashedAt||ui.tab==='trash')?Array.from({length:copies},(_,copy)=>({card,count:1,copy,copies,key:card.uid+'::'+copy})):[];});}
-  function knowledgeButton(card,slot,origin=card.uid){const groups=groupsFor(card);if(!groups.length)return '';const entries=knowledgeEntries(groups[0]),entry=entries.find(item=>item.key===slot)||entries.find(item=>item.card.uid===card.uid);return '<button type="button" class="knowledge-open" data-knowledge-card="'+escape(card.uid)+'" data-knowledge-slot="'+escape(entry?.key||'')+'" data-knowledge-origin="'+escape(origin)+'" aria-label="查看 '+escape(card.name)+' 的知识牌组"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="5" width="10" height="12" rx="1" transform="rotate(-12 8 11)"/><rect x="8" y="3" width="9" height="12" rx="1"/></svg><span>知识</span>'+(entry?.copies>1?'<span class="knowledge-copy-position">'+(entry.copy+1)+'/'+entry.copies+'</span>':'')+'<span class="knowledge-size">'+(groups.length>1?groups.length+'组':entries.length+'张')+'</span></button>';}
-  function cardStackHTML(card,slot){const group=groupsFor(card)[0],entries=group?knowledgeEntries(group):[],selected=slot||entries.find(entry=>entry.card.uid===card.uid)?.key,others=entries.filter(entry=>entry.key!==selected).slice(0,2);return '<div class="card-stack'+(others.length?' has-knowledge':'')+'">'+others.map((entry,i)=>'<div class="card-companion" style="--stack-index:'+i+'" aria-hidden="true">'+cardHTML(entry.card)+'</div>').join('')+'<button class="card-button" data-edit="cards" data-uid="'+card.uid+'" title="'+escape(card.name)+'" aria-label="'+(card.trashedAt?'查看 ':'编辑 ')+escape(card.name)+'">'+cardHTML(card)+'</button></div>';}
-  function cardEntryHTML(origin,trash){const group=groupsFor(origin)[0],entries=group?knowledgeEntries(group):[],entry=entries.find(item=>item.key===knowledgeFaces.get(origin.uid))||entries.find(item=>item.card.uid===origin.uid),face=entry?.card||origin,selected=ui.selected?.collection==='cards'&&(ui.selected.cardOrigin||ui.selected.uid)===origin.uid&&ui.selected.uid===face.uid;return '<article class="card-entry '+(selected?'selected':'')+'" data-card-origin="'+escape(origin.uid)+'" data-card-face="'+escape(face.uid)+'" data-card-slot="'+escape(entry?.key||'')+'">'+cardStackHTML(face,entry?.key)+'<div class="card-caption"><span>'+escape(face.id)+' · '+escape(face.rarity)+'</span><span class="'+(face.partnerCardIds.length?'partner-marker':'')+'">'+(face.trashedAt?'已删除':face.keywords.includes('知识')?'知识牌':face.pool?'入池':'不入池')+'</span></div>'+knowledgeButton(face,entry?.key,origin.uid)+(trash&&face.trashedAt?'<button class="button trash-restore" data-restore-card="'+face.uid+'">恢复</button>':'')+'</article>';}
+  function knowledgeButton(card,slot,origin=card.uid){
+    const groups=groupsFor(card);if(!groups.length)return '';
+    const entries=knowledgeEntries(groups[0]),entry=entries.find(item=>item.key===slot)||entries.find(item=>item.card.uid===card.uid);
+    const copies=knowledgeCopies(card),label=copies>1?'知识×'+copies:'知识';
+    const position=copies===1&&entry?.copies>1?'<span class="knowledge-copy-position">'+(entry.copy+1)+'/'+entry.copies+'</span>':'';
+    const size=copies===1?'<span class="knowledge-size">'+(groups.length>1?groups.length+'组':entries.length+'张')+'</span>':'';
+    return '<button type="button" class="knowledge-open" data-knowledge-card="'+escape(card.uid)+'" data-knowledge-slot="'+escape(entry?.key||'')+'" data-knowledge-origin="'+escape(origin)+'" aria-label="查看 '+escape(card.name)+' 的知识牌组'+(copies>1?'，'+label:'')+'"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="5" width="10" height="12" rx="1" transform="rotate(-12 8 11)"/><rect x="8" y="3" width="9" height="12" rx="1"/></svg><span>'+label+'</span>'+position+size+'</button>';
+  }
+  function cardStackHTML(card,slot,lazy=false){const group=groupsFor(card)[0],entries=group?knowledgeEntries(group):[],selected=slot||entries.find(entry=>entry.card.uid===card.uid)?.key,others=entries.filter(entry=>entry.key!==selected).slice(0,2);return '<div class="card-stack'+(others.length?' has-knowledge':'')+'">'+others.map((entry,i)=>'<div class="card-companion" style="--stack-index:'+i+'" aria-hidden="true">'+cardHTML(entry.card,ui.upgraded,lazy)+'</div>').join('')+'<button class="card-button" data-edit="cards" data-uid="'+card.uid+'" title="'+escape(card.name)+'" aria-label="'+(card.trashedAt?'查看 ':'编辑 ')+escape(card.name)+'">'+cardHTML(card,ui.upgraded,lazy)+'</button></div>';}
+  function cardEntryHTML(origin,trash,index=0){const group=groupsFor(origin)[0],entries=group?knowledgeEntries(group):[],entry=entries.find(item=>item.key===knowledgeFaces.get(origin.uid))||entries.find(item=>item.card.uid===origin.uid),face=entry?.card||origin,selected=ui.selected?.collection==='cards'&&(ui.selected.cardOrigin||ui.selected.uid)===origin.uid&&ui.selected.uid===face.uid;return '<article class="card-entry '+(selected?'selected':'')+'" data-card-origin="'+escape(origin.uid)+'" data-card-face="'+escape(face.uid)+'" data-card-slot="'+escape(entry?.key||'')+'">'+cardStackHTML(face,entry?.key,index>=4)+'<div class="card-caption"><span>'+escape(face.id)+' · '+escape(face.rarity)+'</span><span class="'+(face.partnerCardIds.length?'partner-marker':'')+'">'+(face.trashedAt?'已删除':face.keywords.includes('知识')?'知识牌':face.pool?'入池':'不入池')+'</span></div>'+knowledgeButton(face,entry?.key,origin.uid)+(trash&&face.trashedAt?'<button class="button trash-restore" data-restore-card="'+face.uid+'">恢复</button>':'')+'</article>';}
   function cycleKnowledgeEntry(entry,direction,focus=false){if(!entry.classList.contains('selected'))return;const origin=find('cards',entry.dataset.cardOrigin),group=origin&&groupsFor(origin)[0],entries=group?knowledgeEntries(group):[];if(entries.length<2)return;const index=Math.max(0,entries.findIndex(item=>item.key===entry.dataset.cardSlot)),next=entries[(index+direction+entries.length)%entries.length];openEditor('cards',next.card.uid,origin.uid,next.key);if(focus)$('work-area').querySelector('[data-card-origin="'+CSS.escape(origin.uid)+'"] .card-button')?.focus({preventScroll:true});}
   function knowledgeWheel(event,cycle){if(event.ctrlKey||(!event.deltaY&&!event.deltaX))return;event.preventDefault();const now=performance.now();if(now-knowledgeWheelAt<180)return;knowledgeWheelAt=now;cycle((event.deltaY||event.deltaX)>0?1:-1);}
   function cycleKnowledgePreview(direction,focus=false){const card=current(),group=ui.selected?.collection==='cards'&&card&&groupsFor(card)[0],entries=group?knowledgeEntries(group):[];if(entries.length<2)return;let index=entries.findIndex(entry=>entry.key===ui.selected.cardSlot);if(index<0)index=entries.findIndex(entry=>entry.card.uid===card.uid);const next=entries[(index+direction+entries.length)%entries.length];openEditor('cards',next.card.uid,ui.selected.cardOrigin||card.uid,next.key);if(focus)$('preview').focus({preventScroll:true});}
@@ -258,7 +331,7 @@
     if(ui.tab==='mechanisms'){const list=state.data.mechanisms.filter(m=>ui.mechanismFilter==='all'||m.uid===ui.mechanismFilter);$('result-count').textContent=state.data.mechanisms.length+' 个机制';html=list.map((m,i)=>'<section class="mechanism-sheet '+(ui.selected?.uid===m.uid?'sheet-active':'')+'"><span class="sheet-number">'+String(state.data.mechanisms.indexOf(m)+1).padStart(2,'0')+'</span><div class="sheet-body"><h2>'+escape(m.name)+'</h2><span class="sheet-level">'+escape(m.level)+'</span><p class="sheet-definition">'+escape(m.definition)+'</p><ul class="sheet-rules">'+m.rules.slice(0,3).map(r=>'<li>'+escape(r)+'</li>').join('')+'</ul>'+(m.rules.length>3?'<details><summary>'+m.rules.length+' 条规则</summary><ul class="sheet-rules">'+m.rules.slice(3).map(r=>'<li>'+escape(r)+'</li>').join('')+'</ul></details>':'')+'<div class="sheet-template">'+m.templates.map(escape).join('<br>')+'</div></div><button class="button" data-edit="mechanisms" data-uid="'+m.uid+'">编辑</button></section>').join('');}
     else if(ui.tab==='styles'){$('result-count').textContent=state.data.styles.length+' 条 · '+styleGroups().length+' 类';html=renderStyles();}
     else if(ui.tab==='terms'){const list=filteredTerms();$('result-count').textContent=list.length+' / '+state.data.terms.length+' 个条目';html='<table class="term-table"><thead><tr><th style="width:24%">名称</th><th style="width:12%">类别</th><th style="width:56%">卡面约定</th><th style="width:8%">卡牌</th></tr></thead><tbody>'+list.map(t=>'<tr tabindex="0" data-term="'+t.uid+'" class="'+(ui.selected?.uid===t.uid?'selected':'')+'"><td><span class="term-name">'+escape(t.name)+'</span><span class="term-id">'+escape(t.id)+'</span></td><td>'+escape(t.kind)+'</td><td class="term-template">'+escape(t.template)+'</td><td class="term-count">'+state.data.cards.filter(c=>cardTab(c)==='cards'&&c.termIds.includes(t.id)).length+'</td></tr>').join('')+'</tbody></table>';if(!list.length)html='<p class="empty">没有匹配的条目</p>';}
-    else{const list=filteredCards(),trash=ui.tab==='trash';$('result-count').textContent=trash?list.length+' 张卡牌':ui.tab==='reserve'?list.length+' 张牌面 · 共 '+state.data.cards.filter(c=>cardTab(c)==='reserve').length+' 张':list.length+' 张牌面 · '+list.filter(c=>c.pool).length+' 张入池 · 共 '+state.data.cards.filter(c=>cardTab(c)==='cards').length+' 张';html='<div class="card-grid">'+list.map(c=>cardEntryHTML(c,trash)).join('')+'</div>';if(!list.length)html='<p class="empty">'+(trash?'垃圾桶为空':'没有匹配的卡牌')+'</p>';}
+    else{const list=filteredCards(),trash=ui.tab==='trash';$('result-count').textContent=trash?list.length+' 张卡牌':ui.tab==='reserve'?list.length+' 张牌面 · 共 '+state.data.cards.filter(c=>cardTab(c)==='reserve').length+' 张':list.length+' 张牌面 · '+list.filter(c=>c.pool).length+' 张入池 · 共 '+state.data.cards.filter(c=>cardTab(c)==='cards').length+' 张';html='<div class="card-grid">'+list.map((c,index)=>cardEntryHTML(c,trash,index)).join('')+'</div>';if(!list.length)html='<p class="empty">'+(trash?'垃圾桶为空':'没有匹配的卡牌')+'</p>';}
     $('work-area').innerHTML=html;fitCards();updateChrome();
   }
   function renderAll(){if(ui.archetype!=='all'&&!state.data.archetypes.some(route=>route.id===ui.archetype))ui.archetype='all';if(ui.flowRoute!=='all'&&!state.data.archetypes.some(route=>route.uid===ui.flowRoute))ui.flowRoute='all';if(ui.flowDrill&&!state.data.archetypes.some(route=>route.uid===ui.flowDrill.route))ui.flowDrill=null;document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===ui.tab)));$('body-layout').classList.toggle('is-overview',ui.tab==='overview');$('body-layout').classList.toggle('is-flow',ui.tab==='flows');$('body-layout').classList.toggle('is-models',ui.tab==='models');$('body-layout').classList.toggle('is-powers',ui.tab==='powers');$('body-layout').classList.toggle('is-relics',ui.tab==='relics');$('body-layout').classList.toggle('is-fit-pool',ui.tab==='fits');if(ui.tab!=='fits')$('body-layout').classList.remove('has-fit-selection');renderSidebar();renderWorkspace();renderInspector();saveUI();}
@@ -336,7 +409,7 @@
   }
   function renameCard(entity,next){const old=entity.name;if(old&&old!==next)for(const card of state.data.cards){const references=JunnaCardReferences.referencesFor(card,state.data.cards);if(!references.some(target=>target.uid===entity.uid))continue;for(const key of ['text','upgradedText'])card[key]=JunnaCardReferences.renameInText(card[key],references,entity.uid,next);}entity.name=next;}
   function applyField(input){
-    if(!previewMode&&(!mcpStatus.ready||mcpStatus.conflict)){renderInspector();toast(mcpStatus.conflict?'请先处理版本冲突':'MCP 未连接');return;}
+    if(!previewMode&&(!mcpStatus.ready||mcpStatus.conflict||mcpStatus.resolving)){renderInspector();toast(mcpStatus.conflict?'请先处理版本冲突':mcpStatus.resolving?'MCP 保存中':'MCP 未连接');return;}
     const key=input.dataset.field;if(!key||key==='rawMeta')return;let value=input.value;const e=current();if(!e&&ui.selected?.collection!=='root')return;
     input.setCustomValidity?.('');
     if(['name','id'].includes(key)&&!value.trim()){input.setCustomValidity?.('请输入'+(key==='name'?'名称':'编号'));return;}
@@ -389,13 +462,30 @@
 
   function changedFields(p){if(p.collection==='root')return [{key:p.uid,before:p.before,after:p.after}];const old=p.before||{},next=p.after||{};return [...new Set([...Object.keys(old),...Object.keys(next)])].filter(k=>k!=='uid'&&JSON.stringify(old[k])!==JSON.stringify(next[k])).map(key=>({key,before:old[key],after:next[key]}));}
   const printable=x=>x===undefined||x===null?'—':typeof x==='string'?x:typeof x==='boolean'?(x?'是':'否'):JSON.stringify(x,null,2);
+  async function loadHistoryPage(reset=false){
+    if(!mcp)return;
+    if(historyLoading){if(reset)historyReloadPending=true;return;}
+    if(reset)historyOffset=0;
+    historyLoading=true;renderHistory();
+    try{
+      const search=$('history-search').value.trim(),kind=$('history-kind').value;
+      const result=await mcp.call('workbench_history',{offset:historyOffset,limit:50,includePatches:true,search,...(kind==='all'?{}:{collection:kind})});
+      const records=new Map(state.history.map(record=>[record.id,record]));
+      for(const record of result.records)records.set(record.id,record);
+      state.history=[...records.values()].sort((a,b)=>a.seq-b.seq);
+      historyQueryTotal=result.total;if(!search&&kind==='all')state.historyTotal=result.total;
+      historyOffset+=result.records.length;updateChrome();
+    }catch(error){toast(error.message);}
+    finally{historyLoading=false;if($('history-dialog').open)renderHistory();if(historyReloadPending){historyReloadPending=false;loadHistoryPage(true);}}
+  }
   function renderHistory(){
     const q=$('history-search').value.trim().toLowerCase(),kind=$('history-kind').value,records=state.history.slice().reverse().filter(r=>(kind==='all'||r.patches.some(p=>p.collection===kind))&&(!q||JSON.stringify([r.label,r.kind,r.patches]).toLowerCase().includes(q)));
-    $('history-total').textContent=state.history.length+' 条';$('history-body').innerHTML=records.length?records.map(r=>{const rows=r.patches.flatMap(p=>changedFields(p).map(f=>'<div class="history-diff"><span class="diff-key">'+escape(FIELD_LABELS[f.key]||f.key)+'</span><del>'+escape(printable(f.before))+'</del><ins>'+escape(printable(f.after))+'</ins></div>'));return '<article class="history-record"><header><div><h3>'+escape(r.label)+'</h3><time datetime="'+escape(r.at)+'">'+new Date(r.at).toLocaleString('zh-CN',{hour12:false,timeZone:'Asia/Shanghai'})+' · '+escape(r.kind)+' · #'+r.seq+'</time></div><div class="history-actions"><button class="button" data-restore="'+r.id+'" data-side="before">恢复修改前</button><button class="button" data-restore="'+r.id+'" data-side="after">恢复修改后</button></div></header>'+rows.slice(0,3).join('')+(rows.length>3?'<details><summary class="text-button">'+rows.length+' 项修改</summary>'+rows.slice(3).join('')+'</details>':'')+'</article>';}).join(''):'<p class="empty">暂无记录</p>';
+    $('history-total').textContent=Math.max(state.historyTotal||0,state.history.length)+' 条';$('history-body').innerHTML=records.length?records.map(r=>{const rows=r.patches.flatMap(p=>changedFields(p).map(f=>'<div class="history-diff"><span class="diff-key">'+escape(FIELD_LABELS[f.key]||f.key)+'</span><del>'+escape(printable(f.before))+'</del><ins>'+escape(printable(f.after))+'</ins></div>'));return '<article class="history-record"><header><div><h3>'+escape(r.label)+'</h3><time datetime="'+escape(r.at)+'">'+new Date(r.at).toLocaleString('zh-CN',{hour12:false,timeZone:'Asia/Shanghai'})+' · '+escape(r.kind)+' · #'+r.seq+'</time></div><div class="history-actions"><button class="button" data-restore="'+r.id+'" data-side="before">恢复修改前</button><button class="button" data-restore="'+r.id+'" data-side="after">恢复修改后</button></div></header>'+rows.slice(0,3).join('')+(rows.length>3?'<details><summary class="text-button">'+rows.length+' 项修改</summary>'+rows.slice(3).join('')+'</details>':'')+'</article>';}).join(''):'<p class="empty">'+(historyLoading?'载入中':'暂无记录')+'</p>';
+    if(mcp&&(historyLoading||historyOffset<historyQueryTotal&&records.length<historyQueryTotal))$('history-body').insertAdjacentHTML('beforeend','<button class="button" data-more-history'+(historyLoading?' disabled':'')+'>'+(historyLoading?'载入中':'更多')+'</button>');
   }
-  function checkHistoryEndpoint(record,side){if(!mcp)return;for(const p of record.patches){const value=p.collection==='root'?(p.uid==='meta'&&!Object.hasOwn(p[side]||{},'powers')&&!Object.hasOwn(p[side]||{},'relics')?rootEntity(state.data,p.uid):state.data[p.uid]):find(p.collection,p.uid)||null;if(JSON.stringify(value)!==JSON.stringify(p[side]))throw Error('条目已有后续修改，请在历史中合并恢复');}}
-  function undo(){if(!previewMode&&(!mcpStatus.ready||mcpStatus.conflict))return;flushEdit();const id=state.undoStack.pop(),r=state.history.find(x=>x.id===id);if(!r)return;const before=clone(state.data);try{checkHistoryEndpoint(r,'after');applyPatches(r.patches,'before');state.redoStack.push(id);if(!record(before,'撤销 · '+r.label,'撤销',false,id))persist();renderAll();if($('history-dialog').open)renderHistory();}catch(error){state.data=before;state.undoStack.push(id);toast(error.message);}}
-  function redo(){if(!previewMode&&(!mcpStatus.ready||mcpStatus.conflict))return;flushEdit();const id=state.redoStack.pop(),r=state.history.find(x=>x.id===id);if(!r)return;const before=clone(state.data);try{checkHistoryEndpoint(r,'before');applyPatches(r.patches,'after');state.undoStack.push(id);if(!record(before,'重做 · '+r.label,'重做',false,id))persist();renderAll();if($('history-dialog').open)renderHistory();}catch(error){state.data=before;state.redoStack.push(id);toast(error.message);}}
+  function checkHistoryEndpoint(record,side){if(!mcp)return;for(const p of record.patches){const value=p.collection==='root'?(p.uid==='meta'&&!Object.hasOwn(p[side]||{},'powers')&&!Object.hasOwn(p[side]||{},'relics')?rootEntity(state.data,p.uid):state.data[p.uid]):find(p.collection,p.uid)||null;const matches=p.collection!=='root'&&p.before&&p.after&&value?changedFields(p).every(({key})=>Object.hasOwn(value,key)===Object.hasOwn(p[side],key)&&JSON.stringify(value[key])===JSON.stringify(p[side][key])):JSON.stringify(value)===JSON.stringify(p[side]);if(!matches)throw Error('修改的字段已有后续变化，请在历史中合并恢复');}}
+  function undo(){if(!previewMode&&(!mcpStatus.ready||mcpStatus.conflict||mcpStatus.resolving))return;flushEdit();const id=state.undoStack.pop(),r=state.history.find(x=>x.id===id);if(!r)return;const before=clone(state.data);try{checkHistoryEndpoint(r,'after');applyPatches(r.patches,'before',true);state.redoStack.push(id);if(!record(before,'撤销 · '+r.label,'撤销',false,id))persist();renderAll();if($('history-dialog').open)renderHistory();}catch(error){state.data=before;state.undoStack.push(id);toast(error.message);}}
+  function redo(){if(!previewMode&&(!mcpStatus.ready||mcpStatus.conflict||mcpStatus.resolving))return;flushEdit();const id=state.redoStack.pop(),r=state.history.find(x=>x.id===id);if(!r)return;const before=clone(state.data);try{checkHistoryEndpoint(r,'before');applyPatches(r.patches,'after',true);state.undoStack.push(id);if(!record(before,'重做 · '+r.label,'重做',false,id))persist();renderAll();if($('history-dialog').open)renderHistory();}catch(error){state.data=before;state.redoStack.push(id);toast(error.message);}}
   function restoreRecord(id,side){const r=state.history.find(r=>r.id===id);if(!r)return;transact('恢复'+(side==='before'?'修改前':'修改后')+' · '+r.label,()=>applyPatches(r.patches,side),'恢复');renderHistory();toast('已恢复');}
   function modernize(text){return String(text??'')
     .replace(/额外触发一个以(?:该敌人|目标敌人)为目标的箭矢的效果/g,'额外触发目标的一个箭矢的效果')
@@ -443,8 +533,63 @@
     if(bundle){if(mcp){for(const [id,value]of Object.entries(bundle.assets||{}))if(!Object.hasOwn(state.assets,id))state.assets[id]=value;}else mergeBundleHistory(bundle);}
     const r=transact(label,()=>{state.data=next;ui.selected=null;ui.search='';ui.type=ui.rarity=ui.pool=ui.cost=ui.archetype=ui.routePosition=ui.term=ui.breakthrough='all';ui.routePositions=[];ui.routeExcludedPositions=[];},'导入');if(!r)persist();renderAll();toast('已导入');
   }
-  function saveHTML(){const value=exportBundle();value.originWorkspace=workspaceId;value.workspaceId='junna-workbench-copy-'+uid();const copy=document.documentElement.cloneNode(true);copy.querySelector('#workbench-data').textContent=safeJSON(value);copy.querySelector('#workbench-connection')?.remove();copy.querySelector('#card-extra-hover-tips')?.remove();for(const id of ['sidebar','work-area','preview','editor-form','history-body','manage-body'])copy.querySelector('#'+id).replaceChildren();for(const dialog of copy.querySelectorAll('dialog'))dialog.removeAttribute('open');copy.querySelector('#toast').hidden=true;copy.removeAttribute('style');download('<!doctype html>\n'+copy.outerHTML,'纯那Mod设计工作台_已编辑.html','text/html;charset=utf-8');toast('已保存 HTML');}
-  function setCardArt(file){const e=current();if(!['cards','fitPool','powers'].includes(ui.selected?.collection)||!e)return;if(!/^image\/(png|jpeg|webp|gif)$/.test(file.type)){toast('请选择PNG、JPEG、WebP或GIF图片');return;}if(file.size>16*1024*1024){toast('图片超过16MB');return;}const targetUid=e.uid,targetCollection=ui.selected.collection,reader=new FileReader();reader.onload=()=>{const id='art_'+uid();state.assets[id]=reader.result;transact('替换插画 · '+e.name,d=>{const card=(targetCollection==='powers'?d.meta.powers:d[targetCollection]).find(c=>c.uid===targetUid);if(card)card.art=id;});};reader.readAsDataURL(file);}
+  async function completeExport(){
+    await saveLocalFile();
+    const bundle=exportBundle();
+    if(mcp){
+      const result=await mcp.call('workbench_get_state',{includeAssets:true,includeHistory:true});
+      bundle.assets={...bundle.assets,...result.bundle.assets};
+      bundle.history=[...new Map([...result.bundle.history,...bundle.history].map(record=>[record.id,record])).values()].sort((a,b)=>a.seq-b.seq);
+    }
+    return bundle;
+  }
+  async function saveHTML(){
+    const value=await completeExport();
+    value.originWorkspace=workspaceId;
+    value.workspaceId='junna-workbench-copy-'+uid();
+    const copy=document.documentElement.cloneNode(true);
+    copy.querySelector('#workbench-data').textContent=safeJSON(value);
+    copy.querySelector('#workbench-data').removeAttribute('data-src');
+    copy.querySelector('#workbench-connection')?.remove();
+    copy.querySelector('#card-extra-hover-tips')?.remove();
+    for(const link of copy.querySelectorAll('link[data-workbench-runtime]')){
+      const style=document.createElement('style');
+      style.textContent=await(await fetch(link.href)).text();
+      link.replaceWith(style);
+    }
+    for(const script of copy.querySelectorAll('script[data-workbench-runtime]')){
+      script.textContent=await(await fetch(script.src)).text();
+      script.removeAttribute('src');
+    }
+    const assets=JSON.parse(copy.querySelector('#workbench-assets').textContent),assetURLs={...assets};
+    await Promise.all(Object.entries(assets).map(async([id,url])=>{
+      if(url.startsWith('/assets/'))assets[id]=value.assets[id]?.startsWith('data:')?value.assets[id]:await imageDataURL(await(await fetch(url)).blob());
+    }));
+    copy.querySelector('#workbench-assets').textContent=safeJSON(assets);
+    for(const id of ['sidebar','work-area','preview','editor-form','history-body','manage-body'])copy.querySelector('#'+id).replaceChildren();
+    for(const dialog of copy.querySelectorAll('dialog'))dialog.removeAttribute('open');
+    copy.querySelector('#toast').hidden=true;
+    copy.removeAttribute('style');
+    let html=copy.outerHTML;
+    for(const [id,url]of Object.entries(assetURLs))if(url.startsWith('/assets/'))html=html.split(url).join(assets[id]);
+    download('<!doctype html>\n'+html,'纯那Mod设计工作台_已编辑.html','text/html;charset=utf-8');
+    toast('已保存 HTML');
+  }
+  function imageDataURL(blob){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(blob);});}
+  async function setCardArt(file){
+    const entry=current();
+    if(!['cards','fitPool','powers'].includes(ui.selected?.collection)||!entry)return;
+    if(!/^image\/(png|jpeg|webp|gif)$/.test(file.type)){toast('请选择PNG、JPEG、WebP或GIF图片');return;}
+    if(file.size>16*1024*1024){toast('图片超过16MB');return;}
+    const targetUid=entry.uid,targetCollection=ui.selected.collection,id='art_'+uid();
+    try{
+      state.assets[id]=connection?.assetURLs?(await mcp.uploadAsset(file,id)).url:await imageDataURL(file);
+      transact('替换插画 · '+entry.name,data=>{
+        const card=(targetCollection==='powers'?data.meta.powers:data[targetCollection]).find(card=>card.uid===targetUid);
+        if(card)card.art=id;
+      });
+    }catch(error){toast(error.message);}
+  }
   function rawApply(){const e=current();if(!e)return;try{const value=JSON.parse($('editor-form').querySelector('[data-raw-entity]').value);if(!value||typeof value!=='object'||Array.isArray(value))throw Error('请输入对象格式');if(value.id&&state.data[ui.selected.collection].some(x=>x.uid!==e.uid&&x.id===value.id))throw Error('编号已存在');transact('结构数据 · '+e.name,d=>{if(value.id!==e.id)renameId(ui.selected.collection,e,value.id);if(ui.selected.collection==='cards'&&value.name!==e.name)renameCard(e,value.name);const list=d[ui.selected.collection],at=list.findIndex(x=>x.uid===e.uid);list[at]={...value,uid:e.uid};});}catch(error){toast(error.message);}}
   function routeAction(action){
     if(action==='center-arrow-focus'){const card=current();if(ui.selected?.collection==='cards'&&card)transact('箭头聚焦 · '+card.name,()=>{card.arrowFocus={x:.5,y:.5};});}
@@ -459,7 +604,7 @@
   }
   document.querySelector('.tabs').addEventListener('click',event=>{const b=event.target.closest('[data-tab]');if(b){if(b.dataset.tab==='cards')ui.pool='pool';changeTab(b.dataset.tab);}});
   $('page-actions').addEventListener('click',event=>{if(changeSort(event))return;if(ui.tab==='models'&&modelView.workClick(event))return;const b=event.target.closest('[data-action]');if(b)routeAction(b.dataset.action);});
-  $('sidebar').addEventListener('input',event=>{if(event.target.id==='filter-search'){ui.search=event.target.value;renderWorkspace();saveUI();}});
+  $('sidebar').addEventListener('input',event=>{if(event.target.id==='filter-search'){ui.search=event.target.value;clearTimeout(searchTimer);if(!event.isComposing)searchTimer=setTimeout(()=>{renderWorkspace();saveUI();},120);}});
   $('sidebar').addEventListener('click',event=>{const style=event.target.closest('[data-style-target]');if(style){jumpStyle(style.dataset.styleTarget);return;}if(ui.tab==='models'&&modelView.sidebarClick(event))return;if(ui.tab==='flows'&&flowView.sidebarClick(event))return;const scope=event.target.closest('[data-overview-scope]');if(!scope)return;flushEdit();ui.overviewScope=scope.dataset.overviewScope;ui.selected=null;renderAll();});
   $('sidebar').addEventListener('change',event=>{if(flowView.positionChange(event))return;if(ui.tab==='flows'&&flowView.sidebarChange(event))return;const input=event.target;if(input.matches('[data-overview-all],[data-overview-dimension]')){const dimension=input.dataset.overviewDimension,selector=dimension?'[data-overview-dimension="'+dimension+'"]':'[data-overview-all]',scroll=$('sidebar').scrollTop;if(dimension){const selected=new Set(overviewDimensions().map(d=>d.key));input.checked?selected.add(dimension):selected.delete(dimension);ui.overviewBy=OVERVIEW_DIMENSIONS.filter(d=>selected.has(d.key)).map(d=>d.key);}else ui.overviewAll=input.checked;renderAll();$('sidebar').scrollTop=scroll;$('sidebar').querySelector(selector)?.focus({preventScroll:true});return;}const key=input.dataset.filter;if(key){ui[key]=input.type==='checkbox'?input.checked:input.value;renderWorkspace();saveUI();}});
   $('sidebar').addEventListener('click',event=>{if(ui.tab==='powers'&&powerView.sidebarClick(event))return;if(ui.tab==='fits'&&fitPoolView.sidebarClick(event))return;const filter=event.target.closest('button[data-filter-value]');if(filter){const key=filter.dataset.filter,value=filter.dataset.filterValue;if(ui[key]===value)return;ui[key]=value;for(const button of filter.closest('.filter-group').querySelectorAll('button[data-filter-value]'))button.setAttribute('aria-pressed',String(button===filter));renderWorkspace();saveUI();return;}const editor=event.target.closest('[data-edit]');if(editor){openEditor(editor.dataset.edit,editor.dataset.uid);renderSidebar();return;}const action=event.target.closest('[data-action]');if(action){routeAction(action.dataset.action);return;}const kind=event.target.closest('[data-kind]');if(kind){ui.kind=kind.dataset.kind;renderSidebar();renderWorkspace();saveUI();}const mechanism=event.target.closest('[data-mechanism-filter]');if(mechanism){ui.mechanismFilter=mechanism.dataset.mechanismFilter;renderSidebar();renderWorkspace();saveUI();}});
@@ -488,18 +633,21 @@
   $('set-group-main').addEventListener('click',()=>setKnowledgeMain($('set-group-main').dataset.groupUid));
   $('manage-body').addEventListener('change',event=>{const key=event.target.dataset.archetypeField,entry=event.target.closest('[data-archetype]');if(key&&entry){const a=find('archetypes',entry.dataset.archetype);transact('修改流派 · '+a.name,()=>{a[key]=event.target.value;});}});
   $('manage-body').addEventListener('click',event=>{const action=event.target.closest('[data-action]');if(action){routeAction(action.dataset.action);return;}const remove=event.target.closest('[data-delete-archetype]');if(remove){const a=find('archetypes',remove.dataset.deleteArchetype);transact('删除流派 · '+a.name,d=>{d.archetypes=d.archetypes.filter(x=>x.uid!==a.uid);},'删除');renderArchetypes();}const edit=event.target.closest('[data-edit-archetype]');if(edit){$('manage-dialog').close();openEditor('archetypes',edit.dataset.editArchetype);}});
-  $('history-button').addEventListener('click',()=>{flushEdit();renderHistory();$('history-dialog').showModal();});$('history-search').addEventListener('input',renderHistory);$('history-kind').addEventListener('change',renderHistory);
-  $('history-body').addEventListener('click',event=>{const b=event.target.closest('[data-restore]');if(b)restoreRecord(b.dataset.restore,b.dataset.side);});
+  $('history-button').addEventListener('click',()=>{flushEdit();renderHistory();$('history-dialog').showModal();if(mcp)loadHistoryPage(true);});
+  $('history-search').addEventListener('input',()=>{renderHistory();clearTimeout(historyFilterTimer);if(mcp)historyFilterTimer=setTimeout(()=>loadHistoryPage(true),250);});
+  $('history-kind').addEventListener('change',()=>{renderHistory();if(mcp)loadHistoryPage(true);});
+  $('history-body').addEventListener('click',event=>{if(event.target.closest('[data-more-history]'))return loadHistoryPage();const b=event.target.closest('[data-restore]');if(b)restoreRecord(b.dataset.restore,b.dataset.side);});
   document.querySelectorAll('[data-close-dialog]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.closeDialog).close()));
   $('undo').addEventListener('click',undo);$('redo').addEventListener('click',redo);
   $('import-button').addEventListener('click',()=>{flushEdit();$('import-file').click();});
   $('import-file').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{const text=(await file.text()).replace(/^\uFEFF/,'');let raw;if(/^\s*</.test(text)){const doc=new DOMParser().parseFromString(text,'text/html'),embedded=doc.querySelector('#workbench-data')||doc.querySelector('#seed-data');if(!embedded)throw Error('HTML中没有可导入的数据');raw=JSON.parse(embedded.textContent);}else raw=JSON.parse(text);await importBundle(raw,'导入 · '+file.name);}catch(error){toast('导入失败：'+error.message);}event.target.value='';});
   $('art-file').addEventListener('change',event=>{const file=event.target.files[0];if(file)setCardArt(file);event.target.value='';});
-  $('export-json').addEventListener('click',()=>{download(JSON.stringify(exportBundle(),null,2),'纯那Mod设计工作台_数据与历史.json','application/json;charset=utf-8');toast('已导出 JSON');});$('export-html').addEventListener('click',saveHTML);
+  $('export-json').addEventListener('click',async()=>{try{download(JSON.stringify(await completeExport(),null,2),'纯那Mod设计工作台_数据与历史.json','application/json;charset=utf-8');toast('已导出 JSON');}catch(error){toast(error.message);}});$('export-html').addEventListener('click',()=>saveHTML().catch(error=>toast(error.message)));
   $('file-state').addEventListener('click',saveLocalFile);$('bind-local-file').addEventListener('click',bindLocalFile);$('read-local-file').addEventListener('click',readLocalFile);$('disconnect-local-file').addEventListener('click',disconnectLocalFile);
   document.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='s'){event.preventDefault();saveLocalFile();return;}const editing=['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName);if(!editing&&(event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='z'){event.preventDefault();event.shiftKey?redo():undo();}else if(!editing&&(event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='y'){event.preventDefault();redo();}else if(event.key==='Escape'&&!document.querySelector('dialog[open]'))closeEditor();});
   window.addEventListener('hashchange',()=>{flushEdit();readHash();renderAll();});window.addEventListener('resize',fitCards);document.fonts.ready.then(fitCards);document.fonts.addEventListener('loadingdone',fitCards);
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){flushEdit();syncMirror();}});window.addEventListener('pagehide',()=>{flushEdit();syncMirror();});
+  async function syncIfIdle(){if(document.visibilityState!=='visible'||navigator.onLine===false||mcpConnecting||pending||mcpStatus.busy||mcpStatus.conflict||document.activeElement?.matches('input,textarea,select')||document.querySelector('dialog[open]'))return;if(mcpStatus.pending)await mcp?.flush();else await mcp?.pull();}
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){flushEdit();syncMirror();}else syncIfIdle();});window.addEventListener('online',syncIfIdle);window.addEventListener('pagehide',()=>{flushEdit();syncMirror();});
   window.addEventListener('beforeunload',event=>{if((mcp||diskHandle)&&(pending||diskDirty||diskWriting)){flushEdit();event.preventDefault();event.returnValue='';}});
   let saved=null,mirror=null;try{db=await openDB();saved=await readDB();}catch(_){db=null;}
   try{mirror=JSON.parse(localStorage.getItem(mirrorKey)||'null');}catch(_){}
@@ -517,9 +665,10 @@
     else if(!batch.wordingRules&&!batch.remove&&!batch.terminology){const ids=new Set(state.data[batch.collection].map(e=>e.id));for(const entry of [...seed.data[batch.collection].filter(e=>batch.ids.includes(e.id)),...(batch.entries||[])])if(!ids.has(entry.id)){state.data[batch.collection].push(clone(entry));ids.add(entry.id);}}
     state.appliedSeedBatches.push(batch.id);record(before,batch.label||'补充突破条目',batch.updates||batch.wordingRules||batch.remove||batch.terminology?'编辑':'导入');
   }
-  if(connection&&db&&oldDraftKey)try{recoveredDraft=await requestValue(db.transaction('documents','readonly').objectStore('documents').get(workspaceId+':mcp-draft:'+oldDraftKey));}catch(_){}
+  if(connection&&oldDraftKey)try{const key=workspaceId+':mcp-draft:'+oldDraftKey;recoveredDraft=db?await requestValue(db.transaction('documents','readonly').objectStore('documents').get(key)):JSON.parse(localStorage.getItem(key)||'null');}catch(_){}
+  restoreRecoveredDraft();
   readHash();document.documentElement.style.setProperty('--ancient-mask','url("'+assetURL('ancient-portrait-mask-large')+'")');document.querySelectorAll('[data-asset]').forEach(img=>img.src=assetURL(img.dataset.asset));renderAll();await restoreLocalFile();persist();
-  if(connection)setInterval(async()=>{if(!pending&&!mcpStatus.pending&&!mcpStatus.busy&&!document.activeElement?.matches('input,textarea,select')&&!document.querySelector('dialog[open]'))await mcp?.pull();},5000);
+  if(connection)setInterval(syncIfIdle,5000);
   const handoff=new URLSearchParams(location.hash.slice(1)).get('handoff');
   if(handoff&&window.opener){window.addEventListener('message',async event=>{if(event.source!==window.opener||event.data?.type!=='junna-workbench-transfer'||event.data.nonce!==handoff)return;try{await importBundle(event.data.data,'导入原编辑器当前修改');history.replaceState(null,'','#tab=cards');ui.tab='cards';renderAll();}catch(error){toast('接收失败：'+error.message);}});window.opener.postMessage({type:'junna-workbench-ready',nonce:handoff},'*');}
   window.__JUNNA_WORKBENCH__={getState:()=>clone(state),getUI:()=>clone(ui),flush:async()=>{flushEdit();await saveQueue;await diskQueue;return !lastSaveError&&(previewMode||mcpStatus.ready&&!pending&&!mcpStatus.pending&&!mcpStatus.busy&&!mcpStatus.conflict);},exportBundle,importBundle,saveLocalFile,readLocalFile,disconnectLocalFile,getFileState:()=>({name:diskHandle?.name,granted:diskGranted,conflict:diskConflict,dirty:diskDirty,error:diskError?.message}),openEditor,changeTab,undo,redo,restoreRecord,transact,filteredCards,cardHTML,normalizeData,ready:true};
