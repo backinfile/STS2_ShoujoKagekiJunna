@@ -8,8 +8,9 @@ using ShoujoKagekiJunna.Combat;
 namespace ShoujoKagekiJunna.Models;
 
 public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cost,
-    CardCatalog.Get(id).CardType, CardCatalog.Get(id).CardRarity, CardCatalog.Get(id).TargetType, id)
+    CardCatalog.Get(id).CardType, CardCatalog.Get(id).CardRarity, CardCatalog.Get(id).TargetType, id), ShoujoKageki.Core.V1.IShineDepletionHandler
 {
+    public Task OnShineDepleted(ShoujoKageki.Core.V1.ShineDepletionContext context) => KnowledgeProgress.Depleted(this, context);
     private string? _formId;
     public override string DesignId => _formId ?? base.DesignId;
     internal bool HasChangedForm => _formId != null;

@@ -46,7 +46,7 @@ public static class CardEffects
             case "JA04": case "JK10": case "JA22": case "JK15": case "A": case "JK27":
             case "JA35": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":
             case "JG31": case "JH21": case "JG34": case "JK75": case "JH23": case "JA70":
-            case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31":
+            case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31":
                 await CatalogPower.Install(card, context, play);
                 if (card.DesignId == "JK32") SetNamedFree(player, "JK32B", "JK32C");
                 break;
@@ -98,6 +98,7 @@ public static class CardEffects
             case "JK37": case "JK43": case "JK44": case "JK45": case "JK46B": case "JK50":
             case "JA38": case "JA41": case "JK67B": case "JK69B": case "JA59": case "JA64": case "JK75B":
             case "JZ03": case "JA72": case "JA77": case "JA81B":
+            case "JK112B": case "JK122": case "JK130B": case "JK131B":
                 await Attack(); break;
             case "JK37B":
                 await Attack(); await CardActions.DrawMatching(context, player, CardCatalog.IsArrow, N(1)); break;
@@ -228,6 +229,22 @@ public static class CardEffects
                 await Draw(N(0)); await HandArrow.Select(context, card, N(1)); break;
             case "JA94":
                 await Block(); await ArrowCombat.AccelerateSelf(context, player, N(1)); break;
+            case "JK112":
+                await Block(); await KnowledgeProgress.Revise(context, card); break;
+            case "JS19": case "JK130":
+                await Block(); break;
+            case "JK122B":
+                break;
+            case "JK126":
+                await Block(); await KnowledgeCombat.DrawPartners(context, card); break;
+            case "JK131":
+                await Draw(N(0)); break;
+            case "JK133":
+                await Attack(); await Draw(N(1)); break;
+            case "JK137":
+                await CardChoices.Notes(context, card); break;
+            case "JK139B":
+                await Energy(N(0)); break;
             case "JK84B":
                 await Attack(); await ArrowCombat.AccelerateAll(context, player, N(1)); break;
             default: throw new InvalidOperationException($"Missing card effect: {card.DesignId}");

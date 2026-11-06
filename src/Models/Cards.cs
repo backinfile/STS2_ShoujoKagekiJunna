@@ -18,7 +18,7 @@ namespace ShoujoKagekiJunna.Models;
 
 [Pool(typeof(JunnaCardPool))]
 public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, TargetType target, string designId)
-    : CustomCardModel(cost, type, rarity, target)
+    : CustomCardModel(cost, type, rarity, target, showInCardLibrary: CardCatalog.Cards.Any(c => c.Id == designId))
 {
     public virtual string DesignId => designId;
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get(DesignId).Portrait;
@@ -41,7 +41,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
                 {
                     var model = (CardModel)CardCatalog.Model(id).MutableClone();
                     if (IsUpgraded && model.IsUpgradable) model.UpgradeInternal();
-                    int count = id == group.MainCardId ? 1 : group.GrantedCardCounts.GetValueOrDefault(id, 1);
+                    int count = id == group.MainCardId ? group.MainCardCount : group.GrantedCardCounts.GetValueOrDefault(id, 1);
                     return $"[gold]{model.Title}[/gold]" + (count > 1 ? $" ×{count}" : "");
                 });
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))

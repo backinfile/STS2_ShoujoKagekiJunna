@@ -31,7 +31,7 @@ internal static class KnowledgeAcquisition
     private static bool Prefix(Control __instance, NCardHolder cardHolder)
     {
         var card = cardHolder.CardModel;
-        if (card == null || card.Pile != null || KnowledgeCombat.Group(card) == null) return true;
+        if (card == null || card.Pile != null || !KnowledgeCombat.HasGroup(card)) return true;
         if (!Pending(__instance)) return false;
         KnowledgeGroupPreview.OpenForSelection(card);
         return false;

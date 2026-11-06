@@ -3,6 +3,7 @@ using BaseLib.Abstracts;
 using BaseLib.Patches.Content;
 using BaseLib.Utils.Attributes;
 using Godot;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -190,11 +191,14 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override Task BeforeCombatStart()
     {
         MaxEnergyBonuses.Clear();
+        KnowledgeProgress.ResetCombat();
         DamageSourceScopes.Install();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
         return Task.CompletedTask;
     }
+    public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+        => KnowledgeProgress.OpenCombat(player, choiceContext);
     public override Task AfterPlayerTurnStartLate(PlayerChoiceContext context, Player player) => ArrowCombat.Advance(context, player);
     public override Task BeforeDeath(Creature creature)
     {
@@ -217,6 +221,7 @@ public sealed class JunnaCombatHooks : SingletonModel
         modifiedCost = free ? 0 : originalCost;
         return free;
     }
+    public override Task AfterCombatVictory(CombatRoom room) => KnowledgeProgress.WonCombat();
     public override Task AfterCombatEnd(CombatRoom room)
     {
         MaxEnergyBonuses.Clear();

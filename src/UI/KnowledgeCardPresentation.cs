@@ -22,7 +22,7 @@ internal static class KnowledgeOfferHoverTipsPatch
 {
     private static bool Prefix(NCardHolder __instance)
     {
-        if (__instance.CardNode?.Model is not JunnaCard card || KnowledgeCombat.Group(card) == null) return true;
+        if (__instance.CardNode?.Model is not JunnaCard card || !KnowledgeCombat.HasGroup(card)) return true;
         for (Node? parent = __instance.GetParent(); parent != null; parent = parent.GetParent())
             if (parent is NCardLibraryGrid or NCardRewardSelectionScreen or NChooseACardSelectionScreen)
             {
@@ -42,12 +42,13 @@ public static class KnowledgePreviewCards
     public static IReadOnlyList<CardModel> Create(CardModel source, bool upgradeAll = false)
     {
         var group = KnowledgeCombat.Group(source);
-        if (group == null) return [];
+        if (group == null)
+            return DynamicKnowledge.Members(source).Select(c => (CardModel)c.MutableClone()).ToArray();
         var cards = new List<CardModel>();
         bool usedSource = false;
         foreach (var id in group.GrantedCardIds.Prepend(group.MainCardId))
         {
-            int count = id == group.MainCardId ? 1 : group.GrantedCardCounts.GetValueOrDefault(id, 1);
+            int count = id == group.MainCardId ? group.MainCardCount : group.GrantedCardCounts.GetValueOrDefault(id, 1);
             for (int copy = 0; copy < count; copy++)
             {
                 // Keep the offered card's modifications; companion copies are independent, as when acquired.
@@ -111,7 +112,7 @@ public partial class KnowledgeCardStack : Control
     {
         if (!card.IsNodeReady()) return;
         var stack = card.GetNodeOrNull<KnowledgeCardStack>("JunnaKnowledgeStack");
-        bool supported = card.Model != null && card.Model.Pile == null && KnowledgeCombat.Group(card.Model) != null && IsSupported(card);
+        bool supported = card.Model != null && card.Model.Pile == null && KnowledgeCombat.HasGroup(card.Model) && IsSupported(card);
         if (!supported)
         {
             stack?.Clear();

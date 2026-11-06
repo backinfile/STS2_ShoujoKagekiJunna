@@ -8,7 +8,7 @@ using ShoujoKagekiJunna.Combat;
 namespace ShoujoKagekiJunna.Models;
 
 public sealed record CardNumber(string Name, int Base, int Upgraded);
-public sealed record KnowledgeGroup(string MainCardId, string[] GrantedCardIds, Dictionary<string, int> GrantedCardCounts);
+public sealed record KnowledgeGroup(string MainCardId, string[] GrantedCardIds, Dictionary<string, int> GrantedCardCounts, int MainCardCount = 1);
 public sealed record ArrowArtFocus(float X = .5f, float Y = .5f);
 public sealed record StartingCard(string CardId, int Count);
 
@@ -54,16 +54,16 @@ public sealed class CardDefinition
 
 public static class CardCatalog
 {
-    private sealed record Catalog(int Revision, CardDefinition[] Cards, KnowledgeGroup[] Groups, StartingCard[] StartingDeck);
+    private sealed record Catalog(int Revision, CardDefinition[] Cards, KnowledgeGroup[] Groups, StartingCard[] StartingDeck, CardDefinition[] RetiredCards);
     private static readonly Catalog Data = Load();
-    private static readonly Dictionary<string, CardDefinition> ById = Data.Cards.ToDictionary(c => c.Id);
+    private static readonly Dictionary<string, CardDefinition> ById = Data.Cards.Concat(Data.RetiredCards).ToDictionary(c => c.Id);
     public static int Revision => Data.Revision;
     public static IReadOnlyList<CardDefinition> Cards => Data.Cards;
     public static IReadOnlyList<KnowledgeGroup> Groups => Data.Groups;
     public static IEnumerable<CardModel> StartingDeck => Data.StartingDeck.SelectMany(c => Enumerable.Repeat(Model(c.CardId), c.Count));
     public static CardDefinition Get(string id) => ById[id];
     public static string? DesignId(CardModel card) => (card as JunnaCard)?.DesignId;
-    public static bool IsKnowledge(CardModel card) => card is JunnaCard junna && Get(junna.DesignId).Knowledge;
+    public static bool IsKnowledge(CardModel card) => (card is JunnaCard junna && Get(junna.DesignId).Knowledge) || DynamicKnowledge.IsLinked(card);
     public static bool IsArrow(CardModel card) => HandArrow.IsArrow(card) || card.Type == ArrowPile.ArrowType;
     public static CardModel Model(string id)
     {
@@ -73,7 +73,7 @@ public static class CardCatalog
     public static CardModel Create(string id, Player owner) => owner.Creature.CombatState!.CreateCard(Model(id), owner);
     public static void RegisterDamageCapabilities()
     {
-        foreach (var definition in Cards)
+        foreach (var definition in Cards.Concat(Data.RetiredCards))
         {
             var type = typeof(CardCatalog).Assembly.GetType("ShoujoKagekiJunna.Models." + definition.ClassName, true)!;
             DamageCapability.Register(type, card => card is CatalogCard catalog ? catalog.Definition.DamageCapable : definition.DamageCapable);

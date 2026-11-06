@@ -30,6 +30,12 @@ public sealed class JunnaPowerJH31() : CatalogPower("JH31");
 [CustomID("JUNNA_JK10_POWER")]
 public sealed class JunnaPowerJK10() : CatalogPower("JK10");
 
+[CustomID("JUNNA_JK127_POWER")]
+public sealed class JunnaPowerJK127() : CatalogPower("JK127");
+
+[CustomID("JUNNA_JK139_POWER")]
+public sealed class JunnaPowerJK139() : CatalogPower("JK139");
+
 [CustomID("JUNNA_JK15_POWER")]
 public sealed class JunnaPowerJK15() : CatalogPower("JK15");
 

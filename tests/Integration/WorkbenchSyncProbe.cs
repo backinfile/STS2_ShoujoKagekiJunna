@@ -24,7 +24,7 @@ public sealed class WorkbenchSyncCommand : AbstractConsoleCmd
     public override string Description => "Targeted workbench synchronization checks.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
-        ? new(false, "Combat required") : new(args.FirstOrDefault() == "prepare" ? WorkbenchSyncProbe.Prepare(player) : WorkbenchSyncProbe.Run(player), true, "Sync checks started");
+        ? new(false, "Combat required") : new(args.FirstOrDefault() switch { "r3366" => Workbench3366Probe.Run(player, string.Join(" ", args.Skip(1))), "prepare3366" => Workbench3366Probe.Prepare(player), "prepare" => WorkbenchSyncProbe.Prepare(player), _ => WorkbenchSyncProbe.Run(player) }, true, "Sync checks started");
 }
 
 public static class WorkbenchSyncProbe
@@ -83,7 +83,7 @@ public static class WorkbenchSyncProbe
         {
             await Case("catalog, models, upgrades and starter deck", async () =>
             {
-                Expect(CardCatalog.Revision == 2992 && CardCatalog.Cards.Count == 105 && CardCatalog.Groups.Count == 18, "Catalog counts");
+                Expect(CardCatalog.Revision == 3366 && CardCatalog.Cards.Count == 115 && CardCatalog.Groups.Count == 23, "Catalog counts");
                 foreach (var d in CardCatalog.Cards)
                 {
                     var c = await Card(player, d.Id, PileType.Discard);

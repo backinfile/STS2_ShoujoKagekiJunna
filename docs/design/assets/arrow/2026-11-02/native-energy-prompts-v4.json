@@ -9,10 +9,10 @@
     "cardPreview": "arrow-frame-d-lightblue-native-energy-v4.png"
   },
   "references": {
-    "nativeBlue": "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/assets/energy-gems/2026-10-31/references/energy_defect.png",
-    "nativeFiveTypes": "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/assets/energy-gems/2026-10-31/references/native-five-analysis.png",
-    "karenActualSprite": "D:/Github/STS2-MOD-INFO/assets/game-ui/karen-energy.png",
-    "karenInGame": "D:/Github/STS2-MOD-INFO/docs/screenshots/game-reference.png"
+    "nativeBlue": "<nana-repository>/docs/design/assets/energy-gems/2026-10-31/references/energy_defect.png",
+    "nativeFiveTypes": "<nana-repository>/docs/design/assets/energy-gems/2026-10-31/references/native-five-analysis.png",
+    "karenActualSprite": "<mod-info-repository>/assets/game-ui/karen-energy.png",
+    "karenInGame": "<mod-info-repository>/docs/screenshots/game-reference.png"
   },
   "revision": "以 Karen 的九边形手绘纹理为结构，参考本体蓝色能量的明暗，恢复宽阔亮色旋纹中心和彩色折边。",
   "retained": [

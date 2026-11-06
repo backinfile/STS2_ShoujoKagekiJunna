@@ -43,8 +43,8 @@ public static class DamageModifiers
 
     public static DamageModifierSnapshot CaptureDamageModifierSnapshot(CardModel card) =>
         _cards.TryGetValue(card, out var state)
-            ? new(state.Bonus, state.Hits, card.Owner)
-            : new(0, 0, card.IsMutable ? card.Owner : null);
+            ? new(state.Bonus, checked(state.Hits + KnowledgeProgress.PermanentHits(card)), card.Owner)
+            : new(0, KnowledgeProgress.PermanentHits(card), card.IsMutable ? card.Owner : null);
 
     internal static bool HasReceivedBonus(CardModel card) =>
         _cards.TryGetValue(card, out var state) && state.HasReceivedBonus;

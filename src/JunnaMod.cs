@@ -21,6 +21,8 @@ public static class JunnaMod
     {
         Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
         CustomPiles.RegisterCustomPile(ArrowPile.PileId, () => new ArrowPile());
+        KnowledgeProgress.Initialize();
+        DynamicKnowledge.Initialize();
         Models.CardCatalog.RegisterDamageCapabilities();
         Shine.RegisterDeferredResolutionPredicate(Models.CardCatalog.IsArrow);
         new Harmony(Id).PatchAll(Assembly.GetExecutingAssembly());

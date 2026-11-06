@@ -29,17 +29,21 @@ public static class KnowledgeCombat
         string? id = CardCatalog.DesignId(card);
         return id == null ? null : CardCatalog.Groups.FirstOrDefault(g => g.MainCardId == id || g.GrantedCardIds.Contains(id));
     }
+    public static bool HasGroup(CardModel card) => Group(card) != null || DynamicKnowledge.Members(card).Count > 1;
     public static async Task DrawPartners(PlayerChoiceContext context, CardModel card)
     {
         var group = Group(card);
-        if (group == null) return;
+        var members = DynamicKnowledge.Members(card);
+        if (group == null && members.Count == 0) return;
         var active = Drawing.Value ??= [];
-        string key = card.Owner.NetId + ":" + group.MainCardId;
+        string key = card.Owner.NetId + ":" + (group?.MainCardId ?? "dynamic");
         if (!active.Add(key)) return;
         try
         {
-            var ids = group.GrantedCardIds.Append(group.MainCardId).Where(id => id != CardCatalog.DesignId(card)).ToHashSet();
-            await CardActions.DrawMatching(context, card.Owner, c => ids.Contains(CardCatalog.DesignId(c) ?? ""), CardPile.MaxCardsInHand);
+            var ids = group?.GrantedCardIds.Append(group.MainCardId).Where(id =>
+                id != CardCatalog.DesignId(card) || (id == group.MainCardId ? group.MainCardCount : group.GrantedCardCounts.GetValueOrDefault(id, 1)) > 1).ToHashSet() ?? [];
+            await CardActions.DrawMatching(context, card.Owner,
+                c => c != card && (members.Contains(c) || ids.Contains(CardCatalog.DesignId(c) ?? "")), CardPile.MaxCardsInHand);
         }
         finally { active.Remove(key); }
     }
@@ -48,7 +52,7 @@ public static class KnowledgeCombat
         var group = Group(acquired);
         if (group == null) return;
         using var single = SingleCard();
-        var counts = new Dictionary<string, int>(group.GrantedCardCounts) { [group.MainCardId] = 1 };
+        var counts = new Dictionary<string, int>(group.GrantedCardCounts) { [group.MainCardId] = group.MainCardCount };
         var gained = new List<CardModel> { acquired };
         string id = CardCatalog.DesignId(acquired)!;
         if (counts.ContainsKey(id)) counts[id]--;
@@ -89,16 +93,21 @@ public static class KnowledgeCombat
             ]);
         private static void Prefix(AbstractModel? clonedBy, out bool __state) => __state = SingleDepth.Value > 0 || clonedBy != null;
         private static void Postfix(ref Task<IReadOnlyList<CardPileAddResult>> __result, bool __state)
-        { if (!__state) __result = Complete(__result); }
-        private static async Task<IReadOnlyList<CardPileAddResult>> Complete(Task<IReadOnlyList<CardPileAddResult>> task)
+        { __result = Complete(__result, __state); }
+        private static async Task<IReadOnlyList<CardPileAddResult>> Complete(Task<IReadOnlyList<CardPileAddResult>> task, bool single)
         {
             var results = await task;
             foreach (var result in results)
             {
                 var card = result.cardAdded;
-                if (!result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || Copies.TryGetValue(card, out _)) continue;
+                if (result.success && result.oldPile == null) KnowledgeProgress.Acquired(card);
+                if (single || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || Copies.TryGetValue(card, out _)) continue;
                 bool discovered = Discovered.Remove(card);
-                if (card.Pile!.Type == PileType.Deck || discovered) await GrantPartners(card, card.Pile!.Type);
+                if (card.Pile!.Type == PileType.Deck || discovered)
+                {
+                    await GrantPartners(card, card.Pile!.Type);
+                    await DynamicKnowledge.Acquire(card, card.Pile!.Type);
+                }
             }
             return results;
         }
@@ -106,11 +115,16 @@ public static class KnowledgeCombat
     [HarmonyPatch(typeof(CardSelectCmd), nameof(CardSelectCmd.FromChooseACardScreen))]
     private static class DiscoverGroup
     {
-        private static void Postfix(ref Task<CardModel?> __result) => __result = Complete(__result);
-        private static async Task<CardModel?> Complete(Task<CardModel?> task)
+        private static void Postfix(PlayerChoiceContext context, IReadOnlyList<CardModel> cards, ref Task<CardModel?> __result)
+            => __result = Complete(__result, context, cards);
+        private static async Task<CardModel?> Complete(Task<CardModel?> task, PlayerChoiceContext context, IReadOnlyList<CardModel> cards)
         {
             var card = await task;
-            if (card?.Pile == null && card != null && CardCatalog.IsKnowledge(card)) Discovered.GetOrCreateValue(card);
+            if (card?.Pile == null && card != null && CardCatalog.IsKnowledge(card))
+            {
+                Discovered.GetOrCreateValue(card);
+                await DynamicKnowledge.Prepare(context, card, cards);
+            }
             return card;
         }
     }

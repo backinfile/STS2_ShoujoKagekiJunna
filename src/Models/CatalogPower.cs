@@ -71,6 +71,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         int xValue = card.Definition.CostsX ? card.ResolveEnergyXValue() : 0;
         var snapshot = (CatalogCard)card.MutableClone();
         power._grants.Add(new(snapshot, play, xValue));
+        if (card.DesignId == "JK127") KnowledgeProgress.RegisterCopy(card.Owner);
         power.Synchronize();
     }
 
@@ -91,6 +92,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
             switch (DesignId)
             {
                 case "JA35": await ArrowCombat.AccelerateAll(context, player, grant.N(0)); break;
+                case "JK139": await PlayerCmd.GainEnergy(grant.N(0), player); break;
                 case "JK32": await CardPileCmd.Draw(context, grant.N(0), player); break;
                 case "JK46": await CardActions.Generate(player, "JK46B", grant.N(0), PileType.Hand, grant.Card.IsUpgraded); break;
                 case "JG34":
