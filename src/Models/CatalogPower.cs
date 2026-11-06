@@ -13,7 +13,7 @@ using ShoujoKagekiJunna.Combat;
 
 namespace ShoujoKagekiJunna.Models;
 
-public abstract class CatalogPower(string designId) : CustomPowerModel
+public abstract partial class CatalogPower(string designId) : CustomPowerModel
 {
     private sealed class Grant(CatalogCard card, CardPlay installedBy, int xValue)
     {
@@ -45,32 +45,33 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
     internal int ReplayGrants => _grants.Count;
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerStackType StackType => DesignId is "JA22" or "JK27" or "JK81" ? PowerStackType.Single : PowerStackType.Counter;
     public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}." +
         (DesignId is "JA87" or "JA96" or "JH31" ? "svg" : "png");
     public override string CustomBigIconPath => CustomPackedIconPath;
-    public override LocString Description
-    {
-        get
-        {
-            var description = new LocString("powers", "JUNNA_CATALOG.description");
-            description.Add("Effects", string.Join("\n", _grants.Count == 0 ? [CardCatalog.Get(DesignId).Text] :
-                _grants.Select(g => g.Card.IsUpgraded ? g.Card.Definition.UpgradedText : g.Card.Definition.Text)));
-            return description;
-        }
-    }
     protected override void DeepCloneFields() { base.DeepCloneFields(); _grants = new(_grants); }
 
     public static bool Has(Player player, string id) => player.Creature.Powers.OfType<CatalogPower>().Any(p => p.DesignId == id);
     public static async Task Install(CatalogCard card, PlayerChoiceContext context, CardPlay play)
     {
         var canonical = ModelDb.AllPowers.OfType<CatalogPower>().Single(p => p.DesignId == card.DesignId);
+        var existing = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
+        if (canonical.StackType == PowerStackType.Single && existing != null)
+        {
+            if (card.DesignId == "JK81" && card.Number(0) < existing._grants.Min(g => g.N(0)))
+            {
+                existing._grants = [new((CatalogCard)card.MutableClone(), play, 0)];
+                existing.Synchronize();
+            }
+            return;
+        }
         await PowerCmd.Apply(context, canonical.ToMutable(), card.Owner.Creature, 1, card.Owner.Creature, card);
         var power = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
         if (power == null) return;
         int xValue = card.Definition.CostsX ? card.ResolveEnergyXValue() : 0;
         var snapshot = (CatalogCard)card.MutableClone();
         power._grants.Add(new(snapshot, play, xValue));
+        power.Synchronize();
     }
 
     private async Task Block(Grant grant, int amount)
@@ -96,7 +97,6 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
                     using (DamageExecution.BeginCardResolution(grant.Card))
                         await CardEffects.DealDamage(grant.Card, context, grant.Play, grant.V("Damage"), grant.XValue);
                     break;
-                case "JH24": await PlayerCmd.GainEnergy(grant.N(1), player); break;
                 case "JZ06": await PlayerCmd.GainEnergy(player.PlayerCombatState!.Hand.Cards.Where(CardActions.HasNumericCost).Select(CardActions.Cost).DefaultIfEmpty().Max(), player); break;
             }
         }
@@ -152,6 +152,7 @@ public abstract class CatalogPower(string designId) : CustomPowerModel
             }
         }
         if (_grants.Count == 0) await PowerCmd.Remove(this);
+        else Synchronize();
     }
 
     public override async Task AfterCardDrawn(PlayerChoiceContext context, CardModel card, bool fromHandDraw)

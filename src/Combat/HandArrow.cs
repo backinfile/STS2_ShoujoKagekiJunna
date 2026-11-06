@@ -75,10 +75,20 @@ public static class HandArrow
 
     public static async Task Select(PlayerChoiceContext context, CardModel source, int count = 1, bool optional = false)
     {
-        var hand = source.Owner.PlayerCombatState!.Hand;
-        var selected = await CardActions.Choose(context, source, hand.Cards, count, optional);
-        foreach (var card in selected)
-            if (card.Pile == hand) await Play(context, card);
+        var combat = source.Owner.PlayerCombatState!;
+        var hand = combat.Hand;
+        var selected = (await CardActions.Choose(context, source, hand.Cards, count, optional))
+            .Where(card => card.Pile == hand).ToArray();
+        await CardPileCmd.Add(selected, combat.PlayPile);
+        try
+        {
+            foreach (var card in selected)
+                if (card.Pile == combat.PlayPile) await Play(context, card);
+        }
+        finally
+        {
+            await CardPileCmd.Add(selected.Where(card => card.Pile == combat.PlayPile).ToArray(), hand);
+        }
     }
 
     public static async Task Play(PlayerChoiceContext context, CardModel card)

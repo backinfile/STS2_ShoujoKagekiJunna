@@ -33,9 +33,7 @@ public partial class KnowledgeGroupPreview : Control
     private Control _stack = null!;
     private Label _counter = null!;
     private NCardViewSortButton _layoutButton = null!;
-    private NCardRewardAlternativeButton _confirmButton = null!;
-    private NCardRewardAlternativeButton _cancelButton = null!;
-    private Action? _confirmSelection;
+    private bool _selectionPreview;
     private ScrollContainer _scroll = null!;
     private GridContainer _grid = null!;
     private List<CardModel>? _cards;
@@ -43,12 +41,12 @@ public partial class KnowledgeGroupPreview : Control
     private bool _upgraded;
     private bool _spread;
 
-    internal static void OpenForSelection(CardModel card, Action confirm)
+    internal static void OpenForSelection(CardModel card)
     {
         var screen = NGame.Instance!.GetInspectCardScreen();
         screen.Open([card], 0);
         var preview = screen.GetNode<KnowledgeGroupPreview>("JunnaKnowledgePreview");
-        preview._confirmSelection = confirm;
+        preview._selectionPreview = true;
         preview._spread = true;
         preview.RenderCards();
     }
@@ -104,14 +102,6 @@ public partial class KnowledgeGroupPreview : Control
             _spread = !_spread;
             RenderCards();
         });
-        _confirmButton = CreateChoiceButton("Confirm", "JUNNA.KNOWLEDGE_CONFIRM", GameApi.ConfirmHotkey, () =>
-        {
-            var confirm = _confirmSelection;
-            if (confirm == null) return;
-            _screen.Close();
-            confirm();
-        });
-        _cancelButton = CreateChoiceButton("Cancel", "JUNNA.KNOWLEDGE_CANCEL", MegaInput.cancel, _screen.Close);
         _scroll = new ScrollContainer
         {
             Name = "Cards", HorizontalScrollMode = ScrollContainer.ScrollMode.Disabled,
@@ -140,15 +130,6 @@ public partial class KnowledgeGroupPreview : Control
         return button;
     }
 
-    private NCardRewardAlternativeButton CreateChoiceButton(string name, string label, string hotkey, Action released)
-    {
-        var button = NCardRewardAlternativeButton.Create(new LocString("gameplay_ui", label).GetFormattedText(), hotkey);
-        button.Name = name;
-        button.Connect(NClickableControl.SignalName.Released, Callable.From<NButton>(_ => released()));
-        AddChild(button);
-        return button;
-    }
-
     private NCard CreatePreview(CardModel source, Node parent)
     {
         var model = (CardModel)source.MutableClone();
@@ -168,8 +149,7 @@ public partial class KnowledgeGroupPreview : Control
         _front.Visible = !_spread;
         _stack.Visible = !_spread;
         _scroll.Visible = _spread;
-        _layoutButton.Visible = _confirmSelection == null;
-        _confirmButton.Visible = _cancelButton.Visible = _confirmSelection != null;
+        _layoutButton.Visible = !_selectionPreview;
         _counter.Text = $"{_index + 1} / {_cards.Count}";
         _layoutButton.SetLabel(new LocString("gameplay_ui", _spread ? "JUNNA.KNOWLEDGE_STACK_LAYOUT" : "JUNNA.KNOWLEDGE_SPREAD_LAYOUT").GetFormattedText());
         var left = _screen.GetNode<NButton>("LeftArrow");
@@ -232,11 +212,7 @@ public partial class KnowledgeGroupPreview : Control
     {
         _layoutButton.Position = new(Size.X - 290, Size.Y - 98);
         _layoutButton.Size = new(210, 54);
-        float choicesWidth = _cancelButton.Size.X + _confirmButton.Size.X + 32;
-        float choicesY = _screen.GetNode<Control>("%Upgrade").GetGlobalRect().Position.Y - GlobalPosition.Y
-            - Math.Max(_cancelButton.Size.Y, _confirmButton.Size.Y) - 32;
-        _cancelButton.Position = new((Size.X - choicesWidth) / 2, choicesY);
-        _confirmButton.Position = _cancelButton.Position + new Vector2(_cancelButton.Size.X + 32, 0);
+
         if (_gridCards.Count == 0) return;
         int count = _gridCards.Count;
         int columns = count <= 3 ? count : Math.Min(4, (int)Math.Ceiling(Math.Sqrt(count)));
@@ -289,9 +265,7 @@ public partial class KnowledgeGroupPreview : Control
         _front.Visible = !_spread;
         _cards = null;
         _spread = false;
-        _confirmSelection = null;
-        _confirmButton.Hide();
-        _cancelButton.Hide();
+        _selectionPreview = false;
         _scroll.ScrollVertical = 0;
     }
 

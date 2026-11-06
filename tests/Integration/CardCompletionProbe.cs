@@ -40,6 +40,7 @@ public static class CardCompletionProbe
         }
         async Task Reset()
         {
+            await ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>()).BeforeCombatStart();
             foreach (var power in player.Creature.Powers.ToArray()) await PowerCmd.Remove(power);
             foreach (var c in CardActions.All(player).Concat(player.PlayerCombatState!.PlayPile.Cards).Distinct().ToArray())
             { ArrowCombat.Cancel(c); await CardPileCmd.RemoveFromCombat(c, skipVisuals: true); }
@@ -380,7 +381,8 @@ public static class CardCompletionProbe
             foreach (bool up in new[] { false, true })
             await Scenario("event " + id + (up ? "+" : ""), async () =>
             {
-                player.PlayerCombatState!.Energy = id == "JG34" ? 2 : 50;
+                int maxEnergyBefore = player.PlayerCombatState!.MaxEnergy, permanentMaxEnergy = player.MaxEnergy;
+                player.PlayerCombatState.Energy = id == "JG34" ? 2 : 50;
                 var source = await Card(id, up: up);
                 if (id == "JG34") DamageModifiers.Add(source, 2, 1);
                 await Play(source);
@@ -471,7 +473,14 @@ public static class CardCompletionProbe
                         await Play(await Card("JA38")); await Play(await Card("JA38"));
                         Check("two arrow play blocks", player.Creature.Block, up ? 6 : 4); break;
                     case "JH24":
-                        int energy = player.PlayerCombatState.Energy; await Start(); Check("start energy", player.PlayerCombatState.Energy, energy + 1); break;
+                        Check("combat maximum increases immediately", player.PlayerCombatState.MaxEnergy, maxEnergyBefore + 1);
+                        Check("permanent maximum unchanged", player.MaxEnergy, permanentMaxEnergy);
+                        Check("no installed buff", CatalogPower.Has(player, id), false);
+                        Check("block preserved", player.Creature.Block, up ? 32 : 24);
+                        Check("no immediate energy grant", player.PlayerCombatState.Energy, 46);
+                        player.PlayerCombatState.IncrementTurnNumber(); player.PlayerCombatState.ResetEnergy();
+                        Check("next turn refresh uses increased maximum", player.PlayerCombatState.Energy, maxEnergyBefore + 1);
+                        break;
                     case "JK80":
                         await Play(await Card("JK15B")); await Play(await Card("JK15B"));
                         Check("only next knowledge block", player.Creature.Block, up ? 30 : 26); break;

@@ -24,9 +24,6 @@ public sealed class JunnaPowerJG34() : CatalogPower("JG34");
 [CustomID("JUNNA_JH19_POWER")]
 public sealed class JunnaPowerJH19() : CatalogPower("JH19");
 
-[CustomID("JUNNA_JH24_POWER")]
-public sealed class JunnaPowerJH24() : CatalogPower("JH24");
-
 [CustomID("JUNNA_JH31_POWER")]
 public sealed class JunnaPowerJH31() : CatalogPower("JH31");
 

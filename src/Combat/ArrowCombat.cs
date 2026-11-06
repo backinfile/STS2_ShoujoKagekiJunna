@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using BaseLib.Abstracts;
 using BaseLib.Patches.Content;
 using BaseLib.Utils.Attributes;
@@ -170,9 +171,14 @@ public static partial class ArrowCombat
 [CustomID("JUNNA_COMBAT_HOOKS")]
 public sealed class JunnaCombatHooks : SingletonModel
 {
+    private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> MaxEnergyBonuses = new();
+    public static void AddMaxEnergy(PlayerCombatState combat, int amount) => MaxEnergyBonuses.GetOrCreateValue(combat).Value += amount;
+    public override decimal ModifyMaxEnergy(Player player, decimal amount)
+        => amount + (player.PlayerCombatState is { } combat && MaxEnergyBonuses.TryGetValue(combat, out var bonus) ? bonus.Value : 0);
     public override bool ShouldReceiveCombatHooks => true;
     public override Task BeforeCombatStart()
     {
+        MaxEnergyBonuses.Clear();
         DamageSourceScopes.Install();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
@@ -202,6 +208,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     }
     public override Task AfterCombatEnd(CombatRoom room)
     {
+        MaxEnergyBonuses.Clear();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
         return Task.CompletedTask;

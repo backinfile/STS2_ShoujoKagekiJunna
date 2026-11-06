@@ -18,6 +18,8 @@
     <Compile Include="BonusBorderProbe.cs" />
     <Compile Include="StarterRelicProbe.cs" />
     <Compile Include="WorkbenchSyncProbe.cs" />
+    <Compile Include="PowerPresentationProbe.cs" />
+    <Compile Include="HandArrowBatchProbe.cs" />
     <Reference Include="ShoujoKagekiJunna" HintPath="$(JunnaAssemblyPath)" />
     <Reference Include="sts2" HintPath="D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll" />
     <Reference Include="GodotSharp" HintPath="D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/GodotSharp.dll" />

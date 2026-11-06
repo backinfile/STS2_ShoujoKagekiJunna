@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n17ugarhosvm"
-path="res://.godot/imported/JK78E.jpg-3e92c304e680eb77715bda6b7e71331c.ctex"
+uid="uid://buyalfticibef"
+path="res://.godot/imported/JK78D.png-60510d6d629de4b7d5167d9619ab0b08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ShoujoKagekiJunna/images/cards/JK78E.jpg"
-dest_files=["res://.godot/imported/JK78E.jpg-3e92c304e680eb77715bda6b7e71331c.ctex"]
+source_file="res://ShoujoKagekiJunna/images/cards/JK78D.png"
+dest_files=["res://.godot/imported/JK78D.png-60510d6d629de4b7d5167d9619ab0b08.ctex"]
 
 [params]
 

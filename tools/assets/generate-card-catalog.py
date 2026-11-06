@@ -4,6 +4,7 @@ The export is read-only. Effects are implemented explicitly in CardEffects.cs.
 """
 import argparse
 import base64
+from difflib import SequenceMatcher
 import json
 import re
 from pathlib import Path
@@ -70,6 +71,17 @@ def display_description(card, text, card_names, values, upgraded=False):
     pattern = '|'.join(re.escape(word) for word in sorted(highlighted, key=len, reverse=True))
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
     return text
+
+
+def upgrade_description(normal, improved):
+    """Keep shared wording outside upgrade-only spans, preserving formatter/tag boundaries."""
+    token = re.compile(r'\{(?:[^{}]|\{[^{}]*\})*\}|\[gold\].*?\[/gold\]|\[[^\]]+\]|.', re.S)
+    before, after = token.findall(normal), token.findall(improved)
+    parts = []
+    for operation, a, b, c, d in SequenceMatcher(a=before, b=after, autojunk=False).get_opcodes():
+        old, new = ''.join(before[a:b]), ''.join(after[c:d])
+        parts.append(old if operation == 'equal' else '{IfUpgraded:show:' + new + '|' + old + '}')
+    return ''.join(parts)
 
 
 def bind_numbers(text, prior=None):
@@ -190,7 +202,7 @@ def main():
             localization[model_id + '.selectionScreenPrompt'] = SELECTION_PROMPTS[cid]
         normal = display_description(card, base, card_names, values)
         improved = display_description(card, upgrade, card_names, values, upgraded=True)
-        localization[model_id + '.description'] = normal if normal == improved else '{IfUpgraded:show:' + improved + '|' + normal + '}'
+        localization[model_id + '.description'] = upgrade_description(normal, improved)
         if args.text_only:
             continue
         if args.rules_only:
@@ -256,13 +268,15 @@ def main():
         keywords_path.write_text(json.dumps(keywords, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         powers_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/powers.json'
         powers = json.loads(powers_path.read_text(encoding='utf-8'))
-        power_ids = {c['id'] for c in cards if c['type'] == '能力' and c['id'] != 'JG23'} | ({'JH19', 'JH24', 'JK80', 'JG31'} & ids)
+        power_ids = {c['id'] for c in cards if c['type'] == '能力' and c['id'] != 'JG23'} | ({'JH19', 'JK80', 'JG31'} & ids)
         for cid in sorted(power_ids):
             powers[f'JUNNA_{cid}_POWER.title'] = next(c['name'] for c in cards if c['id'] == cid)
-        powers.update({'JUNNA_CATALOG.description': '{Effects}', 'JUNNA_ENERGY_RESERVE.title': '能量保留',
-                       'JUNNA_ENERGY_RESERVE.description': '下回合保留至多{Amount}点剩余能量。',
-                       'JUNNA_NEXT_CARD_BONUS.title': '练习成果',
-                       'JUNNA_NEXT_CARD_BONUS.description': '你打出的下一张牌获得{Amount}点伤害加成。'})
+        for power in bundle['data'].get('powers', []):
+            if power.get('trashedAt'):
+                continue
+            for suffix, text in power.get('localization', {}).items():
+                powers[power['id'] + '.' + suffix] = text
+        powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         ui_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/gameplay_ui.json'
         ui = json.loads(ui_path.read_text(encoding='utf-8'))

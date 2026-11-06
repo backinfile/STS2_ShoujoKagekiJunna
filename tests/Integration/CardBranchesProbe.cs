@@ -140,6 +140,7 @@ public static class CardBranchesProbe
         void Check(string name, object? actual, object? expected) => checks.Add(new(name, actual, expected, Equals(actual, expected)));
         async Task Reset()
         {
+            await ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>()).BeforeCombatStart();
             selection.Count = null; selection.PileChoice = 0; selection.Calls.Clear();
             foreach (var p in player.Creature.Powers.ToArray()) await PowerCmd.Remove(p);
             foreach (var card in CardActions.All(player).Concat(player.PlayerCombatState!.PlayPile.Cards).Distinct().ToArray())
@@ -422,7 +423,25 @@ public static class CardBranchesProbe
 
                 if (part == "triggers")
                 {
-                    if ("JA04 JK10 JA22 JK15 A JK27 JA35 JK32 JK37C JA45 JK64 JK67 JG31 JH19 JH21 JG34 JK75 JH23 JA70 JH24 JK80 JK81 JZ05 JZ06 JH30 JK46".Split(' ').Contains(id))
+                    if (id == "JH24")
+                    Add(id, up, "战斗能量上限：叠加、刷新与战后清除", async () =>
+                    {
+                        int maximum = player.PlayerCombatState!.MaxEnergy, permanent = player.MaxEnergy;
+                        await Play(await Card(id, up: up));
+                        await Play(await Card(id, up: !up));
+                        Check("mixed upgrades stack maximum", player.PlayerCombatState.MaxEnergy, maximum + 2);
+                        Check("no installed buff", CatalogPower.Has(player, id), false);
+                        foreach (var power in player.Creature.Powers.ToArray()) await PowerCmd.Remove(power);
+                        Check("maximum independent of buffs", player.PlayerCombatState.MaxEnergy, maximum + 2);
+                        player.PlayerCombatState.ResetEnergy();
+                        Check("refresh uses stacked maximum", player.PlayerCombatState.Energy, maximum + 2);
+                        player.PlayerCombatState.AddMaxEnergyToCurrent();
+                        Check("full retention uses stacked maximum", player.PlayerCombatState.Energy, 2 * (maximum + 2));
+                        Check("permanent maximum unchanged", player.MaxEnergy, permanent);
+                        await ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>()).AfterCombatEnd(null!);
+                        Check("combat end clears bonus", player.PlayerCombatState.MaxEnergy, maximum);
+                    });
+                    if ("JA04 JK10 JA22 JK15 A JK27 JA35 JK32 JK37C JA45 JK64 JK67 JG31 JH19 JH21 JG34 JK75 JH23 JA70 JK80 JK81 JZ05 JZ06 JH30 JK46".Split(' ').Contains(id))
                     Add(id,up,"无关事件、条件不满足与延迟收益",async()=>
                     {
                         if(id=="JG34")player.PlayerCombatState!.Energy=0;
@@ -472,8 +491,7 @@ public static class CardBranchesProbe
                             int hp=target.CurrentHp;await power.AfterPlayerTurnStart(context,player);
                             Check("empty source no damage",target.CurrentHp,hp);Check("empty source no cards",player.PlayerCombatState!.Hand.Cards.Count,0);
                         }
-                        else if(id=="JH24")
-                        {int energy=player.PlayerCombatState!.Energy;await power.BeforeSideTurnEnd(context,player.Creature.Side,[player.Creature]);Check("energy waits for turn start",player.PlayerCombatState.Energy,energy);}
+
                         else if(id=="JA22")
                         {var c=await Card("JB01");await Play(c);Check("non-arrow destination",c.Pile!.Type,PileType.Discard);}
                     });

@@ -221,6 +221,11 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         viewport.PushInput(new InputEventMouseButton { Position = point, GlobalPosition = point, ButtonIndex = button, Pressed = false }, true);
     }
 
+    private static Task ClosePreview(NInspectCardScreen inspect)
+    {
+        inspect.GetNode<NButton>("Backstop").ForceClick();
+        return Task.CompletedTask;
+    }
     private async Task CheckAcquisition(Player player, bool slow = false)
     {
         var rows = new List<object>();
@@ -259,17 +264,17 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
             var preview = inspect.GetNodeOrNull<KnowledgeGroupPreview>("JunnaKnowledgePreview");
             var confirm = preview?.GetNodeOrNull<NButton>("Confirm");
             var cancel = preview?.GetNodeOrNull<NButton>("Cancel");
-            CheckValue(name + " right click awaits confirmation", !selection.IsCompleted, true);
+            CheckValue(name + " right click keeps the original choice pending", !selection.IsCompleted, true);
             CheckValue(name + " right click opens tiled group", inspect.Visible && preview?.GetNode<ScrollContainer>("Cards").IsVisibleInTree() == true, true);
-            CheckValue(name + " provides confirm and cancel", confirm?.IsVisibleInTree() == true && cancel?.IsVisibleInTree() == true, true);
+            CheckValue(name + " has no confirm or cancel buttons", confirm == null && cancel == null, true);
             CheckValue(name + " preview grants no cards", player.Deck.Cards.Count, before);
-            if (confirm?.IsVisibleInTree() == true && cancel?.IsVisibleInTree() == true)
+            if (preview != null && confirm == null && cancel == null)
             {
                 CheckValue(name + " tiles include repeated copies", Descendants(preview!.GetNode("Cards")).OfType<NCard>().Count(), 3);
-                await Click(cancel);
+                await ClosePreview(inspect);
                 await Settle();
-                CheckValue(name + " cancel returns to original choices", !inspect.Visible && screen.IsVisibleInTree() && !selection.IsCompleted, true);
-                CheckValue(name + " cancel grants no cards", player.Deck.Cards.Count, before);
+                CheckValue(name + " native close returns to original choices", !inspect.Visible && screen.IsVisibleInTree() && !selection.IsCompleted, true);
+                CheckValue(name + " native close grants no cards", player.Deck.Cards.Count, before);
                 var stack = holder.CardNode!.GetNode<KnowledgeCardStack>("JunnaKnowledgeStack");
                 CardModel? Front() => (CardModel?)AccessTools.Property(typeof(KnowledgeCardStack), "PreviewModel").GetValue(stack);
                 async Task Scroll(MouseButton button)
@@ -292,8 +297,7 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
                 await Settle();
                 CheckValue(name + " left click acquires directly", inspect.Visible, false);
                 CheckValue(name + " left click selects original offered model", discover ? ((Task<IEnumerable<CardModel>>)selection).Result.Single() == cards[0] : ((Task<int?>)selection).Result == 0, true);
-                confirm.EmitSignal(NClickableControl.SignalName.Released, confirm);
-                CheckValue(name + " repeated confirm stays closed", confirm.IsVisibleInTree(), false);
+
                 await CardPileCmd.Add(cards[0], PileType.Deck);
                 CheckValue(name + " direct grant includes entire group once", player.Deck.Cards.Count - before, 3);
             }
@@ -369,7 +373,7 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
             await Click(holder.Hitbox, MouseButton.WheelUp); await Task.Delay(1700);
             await Click(holder.Hitbox, MouseButton.Right); await Task.Delay(2200);
             var inspect = NGame.Instance!.GetInspectCardScreen();
-            await Click(inspect.GetNode<Control>("JunnaKnowledgePreview/Cancel")); await Task.Delay(1300);
+            await ClosePreview(inspect); await Task.Delay(1300);
             await Click(holder.Hitbox); await selection.WaitAsync(TimeSpan.FromSeconds(3)); await Task.Delay(1400);
         }
         finally { await Post("recording/stop", new { }); }
@@ -461,7 +465,7 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         CheckValue("reward thumbnail exposes both backing edges", backing.All(card => card.Position.Y < 0), true);
         await Click(holder.Hitbox, MouseButton.Right);
         await Settle();
-        await Click(inspect.GetNode<Control>("JunnaKnowledgePreview/Cancel"));
+        await ClosePreview(inspect);
         await Settle();
         inspect.Open([holder.CardModel!], 0);
         await Settle();

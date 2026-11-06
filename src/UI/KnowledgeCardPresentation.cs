@@ -149,13 +149,20 @@ public partial class KnowledgeCardStack : Control
             AddChild(companion);
             companion.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
             KnowledgePreviewCards.IgnoreMouse(companion);
-            float step = Math.Min(24, 72f / Math.Max(1, cards.Count));
-            companion.Position = new((i + 1) * step, -(i + 1) * step * .6f);
+            LayoutCard(companion, i + 1, cards.Count);
             companion.RotationDegrees = 0;
-            companion.Scale = Vector2.One * (1 - Math.Min(.12f, .03f * (i + 1)));
             companion.Modulate = Colors.White;
             _companions.Insert(0, companion);
         }
+    }
+
+    private void LayoutCard(NCard card, int depth, int count)
+    {
+        bool inMerchant = Holder() is NMerchantCard;
+        float step = Math.Min(inMerchant ? 16 : 24, (inMerchant ? 40f : 72f) / Math.Max(1, count));
+        // Keep backing cost icons and banners covered by the offered card in the compact shop slots.
+        card.Position = new(depth * step, depth * step * (inMerchant ? .65f : -.6f));
+        card.Scale = Vector2.One * (1 - Math.Min(.12f, .03f * depth));
     }
 
     private Control? Holder()
@@ -200,13 +207,11 @@ public partial class KnowledgeCardStack : Control
         else
         {
             _source.Body.Visible = false;
-            float step = Math.Min(24, 72f / (count - 1));
             for (int depth = count - 1; depth >= 0; depth--)
             {
                 int index = (_previewIndex + depth) % count;
                 var card = index == 0 ? _sourcePreview! : _companions[index - 1];
-                card.Position = new(depth * step, -depth * step * .6f);
-                card.Scale = Vector2.One * (1 - Math.Min(.12f, .03f * depth));
+                LayoutCard(card, depth, count - 1);
                 card.ZIndex = depth == 0 ? 1 : 0;
                 MoveChild(card, GetChildCount() - 1);
             }
@@ -228,12 +233,10 @@ public partial class KnowledgeCardStack : Control
             _sourcePreview = null;
         }
         _previewIndex = 0;
-        float step = Math.Min(24, 72f / Math.Max(1, _companions.Count));
         for (int i = _companions.Count - 1; i >= 0; i--)
         {
             var card = _companions[i];
-            card.Position = new((i + 1) * step, -(i + 1) * step * .6f);
-            card.Scale = Vector2.One * (1 - Math.Min(.12f, .03f * (i + 1)));
+            LayoutCard(card, i + 1, _companions.Count);
             card.ZIndex = 0;
             MoveChild(card, GetChildCount() - 1);
         }

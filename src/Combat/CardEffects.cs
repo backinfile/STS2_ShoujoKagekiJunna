@@ -50,8 +50,10 @@ public static class CardEffects
                 await CatalogPower.Install(card, context, play);
                 if (card.DesignId == "JK32") SetNamedFree(player, "JK32B", "JK32C");
                 break;
-            case "JH19": case "JH24": case "JK80":
+            case "JH19": case "JK80":
                 await Block(); await CatalogPower.Install(card, context, play); break;
+            case "JH24":
+                await Block(); JunnaCombatHooks.AddMaxEnergy(player.PlayerCombatState, N(1)); break;
             case "JK05":
                 await CardActions.DrawMatching(context, player, CardCatalog.IsKnowledge, CardPile.MaxCardsInHand); break;
             case "JK10B": case "JK73":

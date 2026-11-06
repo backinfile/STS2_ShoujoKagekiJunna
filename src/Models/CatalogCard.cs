@@ -81,8 +81,9 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
             DynamicVars[Definition.Values[0].Name].UpgradeValueBy(1);
             return;
         }
-        foreach (var value in FormValues) DynamicVars[value.Name].UpgradeValueBy(value.Upgraded - value.Base);
-        EnergyCost.UpgradeBy(Definition.UpgradedCost - Definition.Cost);
+        foreach (var value in FormValues)
+            if (value.Upgraded != value.Base) DynamicVars[value.Name].UpgradeValueBy(value.Upgraded - value.Base);
+        if (Definition.UpgradedCost != Definition.Cost) EnergyCost.UpgradeBy(Definition.UpgradedCost - Definition.Cost);
         if (Definition.UpgradedExhaust) AddKeyword(CardKeyword.Exhaust); else RemoveKeyword(CardKeyword.Exhaust);
         if (Definition.UpgradedRetain) AddKeyword(CardKeyword.Retain); else RemoveKeyword(CardKeyword.Retain);
     }
