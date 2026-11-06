@@ -1,7 +1,7 @@
-const {chromium} = require('C:/Users/17575/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
+const {chromium} = require(path.join(os.homedir(), '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));
 const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const {pathToFileURL} = require('node:url');
@@ -20,7 +20,7 @@ const here = __dirname;
   const initialCards = seed.data.cards.filter(card => !card.trashedAt).length, totalCards = seed.data.cards.length, initialTerms = seed.data.terms.length;
   assert(initialCards > 0 && initialTerms >= 316);
   assert(!/奈奈|舞台装置|伙伴/.test(baseline));
-  const browser = await chromium.launch({headless: true, downloadsPath: path.join(previews, 'downloads'), executablePath: 'C:/Users/17575/AppData/Local/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-win64/chrome-headless-shell.exe'});
+  const browser = await chromium.launch({headless: true, downloadsPath: path.join(previews, 'downloads'), executablePath: path.join(os.homedir(), 'AppData/Local/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-win64/chrome-headless-shell.exe')});
   let server;
   try {
     const context = await browser.newContext({viewport: {width: 1440, height: 1000}, acceptDownloads: true});

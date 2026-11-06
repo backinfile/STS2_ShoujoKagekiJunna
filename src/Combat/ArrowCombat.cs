@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Rooms;
 using ShoujoKagekiJunna.Models;
+using ShoujoKageki.Core.V1;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -58,7 +59,16 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     {
         using var resolution = DamageExecution.BeginCardResolution(Card);
         if (Card.EnergyCost.CostsX && index < _xValues.Length) Card.EnergyCost.CapturedXValue = _xValues[index];
-        await resolve(context, Play);
+        var actualPlay = new CardPlay
+        {
+            Card = Card, Target = Play.Target, ResultPile = Play.ResultPile,
+#if STS2_BETA
+            Player = Card.Owner,
+#endif
+            Resources = Play.Resources, IsAutoPlay = Play.IsAutoPlay,
+            PlayIndex = index, PlayCount = PlayCount
+        };
+        await Shine.ResolveAsync(Card, context, actualPlay, () => resolve(context, actualPlay), CardResolutionKind.Arrow);
     }
     internal bool Resolving;
 }
@@ -137,6 +147,7 @@ public static partial class ArrowCombat
         context.PushModel(arrow.Card);
         try
         {
+            await using var resolutionBatch = Shine.BeginResolutionBatch();
             using var attack = ArrowAttackAnimation.Begin(arrow.Card.Owner);
             if (hud != null) await hud.ReleaseArrow(arrow);
             for (int replay = 0; replay < arrow.PlayCount; replay++)

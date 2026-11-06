@@ -6,6 +6,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Combat;
+using ShoujoKageki.Core.V1;
 
 namespace ShoujoKagekiJunna;
 
@@ -21,6 +22,7 @@ public static class JunnaMod
         Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
         CustomPiles.RegisterCustomPile(ArrowPile.PileId, () => new ArrowPile());
         Models.CardCatalog.RegisterDamageCapabilities();
+        Shine.RegisterDeferredResolutionPredicate(Models.CardCatalog.IsArrow);
         new Harmony(Id).PatchAll(Assembly.GetExecutingAssembly());
         ModHelper.SubscribeForCombatStateHooks(Id, _ => [ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>())]);
         DescriptionOverrides.CustomizeDescriptionPost += ArrowConversion.Describe;

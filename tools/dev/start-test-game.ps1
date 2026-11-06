@@ -34,10 +34,12 @@ if (!(Test-Path -LiteralPath $dataLink)) {
 }
 $mods = Join-Path $junnaGame 'mods'
 New-Item -ItemType Directory -Force $mods, "$mods/BaseLib", "$mods/ShoujoKagekiJunna" | Out-Null
-$basePackage = 'C:/Users/17575/.nuget/packages/alchyr.sts2.baselib/3.4.7'
+$basePackage = Join-Path ([Environment]::GetFolderPath('UserProfile')) '.nuget/packages/alchyr.sts2.baselib/3.4.7'
 Copy-Item -LiteralPath "$basePackage/lib/net9.0/BaseLib.dll", "$basePackage/Content/BaseLib.json", "$basePackage/Content/BaseLib.pck" -Destination "$mods/BaseLib"
 if (!$UseInstalledMod) {
     Copy-Item -Path "$junnaRoot/dist/ShoujoKagekiJunna/*" -Destination "$mods/ShoujoKagekiJunna" -Recurse -Force
+    New-Item -ItemType Directory -Force "$mods/ShoujoKagekiAijoCore" | Out-Null
+    Copy-Item -Path "$junnaRoot/dist/ShoujoKagekiAijoCore/*" -Destination "$mods/ShoujoKagekiAijoCore" -Recurse -Force
 }
 Copy-Item -LiteralPath "$junnaRoot/.tools/implementation/mcp/KarenSTS2MCP.dll" -Destination $mods
 Copy-Item -LiteralPath 'D:/Github/STS2_Mcp/mod_manifest.json' -Destination "$mods/KarenSTS2MCP.json"

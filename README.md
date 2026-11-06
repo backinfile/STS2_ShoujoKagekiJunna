@@ -14,8 +14,8 @@
 
 ## 构建与安装
 
-执行 `./build.ps1`。脚本的 `GameDir`、`Godot` 参数可指定游戏与 MegaDot 编辑器路径。
-产物位于 `dist/ShoujoKagekiJunna/`；将整个目录（包含 `lib/`）放到游戏的 `mods/`，同时安装 BaseLib 3.4.7。入口 DLL 按游戏版本选择 `lib/ShoujoKagekiJunna.Stable.dll` 或 `lib/ShoujoKagekiJunna.Beta.dll`；构建脚本使用正式版 0.107.1 引用包与 `GameDir` 中的测试版程序集分别编译。
+执行 `./build.ps1 -CorePackage <Core发行目录>`，或通过 `SHOUJO_CORE_PACKAGE` 指定同一目录。脚本的 `GameDir`、`Godot` 参数可指定游戏与 MegaDot 编辑器路径。
+产物位于 `dist/ShoujoKagekiJunna/` 和 `dist/ShoujoKagekiAijoCore/`。将两个完整目录放到游戏的 `mods/`，同时安装 BaseLib 3.4.7。加载顺序为 BaseLib → Core → Junna。入口 DLL 按游戏版本选择 `lib/ShoujoKagekiJunna.Stable.dll` 或 `lib/ShoujoKagekiJunna.Beta.dll`；构建脚本使用正式版 0.107.1 引用包与 `GameDir` 中的测试版程序集分别编译。
 
 当前卡牌与升级数值记录在 `docs/implementation/card-pool.json`，效果覆盖与验证见 [卡池实现记录](docs/implementation/card-effects.md)。
 `python tools/assets/generate-card-catalog.py <MCP导出快照>` 更新卡牌清单、模型入口、配图与本地化；具体牌效在 C# 中实现。工作台内容仍统一通过 MCP 编辑。

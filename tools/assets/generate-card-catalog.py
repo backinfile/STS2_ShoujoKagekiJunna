@@ -240,7 +240,9 @@ def main():
             entry['arrowFocus'] = existing_cards[cid]['arrowFocus']
         definitions.append(entry)
         if cid not in EXISTING:
-            wrappers.append(f'[CustomID("{model_id}")]\npublic sealed class {cls}() : CatalogCard("{cid}");\n')
+            shine = re.search(r'闪耀(\d+)[。.]', card['text'])
+            declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
+            wrappers.append(declaration + f'[CustomID("{model_id}")]\npublic sealed class {cls}() : CatalogCard("{cid}");\n')
     ids = {c['id'] for c in cards}
     groups = [g for g in bundle['data']['partnerGroups'] if g['mainCardId'] in ids and not g.get('trashedAt') and not g.get('reservedAt')]
     for group in groups:

@@ -3,7 +3,7 @@
 - 《杀戮尖塔 2》星见纯那角色 Mod，ID：`ShoujoKagekiJunna`；核心机制为箭矢、知识与伤害加成。
 - 技术栈：C# / .NET 9、Godot 4.5.1（MegaDot）、BaseLib 3.4.7
 - `src/` 为逻辑，`ShoujoKagekiJunna/` 为游戏资源，`docs/design/` 为工作台，`docs/implementation/` 为实现记录，`tests/Integration/` 为独立测试模组。
-- 构建：`./build.ps1`；产物：`dist/ShoujoKagekiJunna/`，整目录放入游戏 `mods/`。
+- 构建：`./build.ps1 -CorePackage <Core发行目录>`；产物为 `dist/ShoujoKagekiJunna/` 与 `dist/ShoujoKagekiAijoCore/`，两目录均放入游戏 `mods/`。
 
 # 工作台编辑
 

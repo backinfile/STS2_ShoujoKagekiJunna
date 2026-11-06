@@ -11,6 +11,7 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <GodotDisabledSourceGenerators>GodotPluginsInitializer</GodotDisabledSourceGenerators>
     <Sts2GameDir Condition="'$(Sts2GameDir)' == ''">D:/App/Stream/steamapps/common/Slay the Spire 2</Sts2GameDir>
+    <CoreApiPath Condition="'$(CoreApiPath)' == ''">$(MSBuildProjectDirectory)/vendor/core-sdk/api/ShoujoKagekiAijoCore.Api.V1.dll</CoreApiPath>
     <GameData>$(Sts2GameDir)/data_sts2_windows_x86_64</GameData>
   </PropertyGroup>
   <ItemGroup>
@@ -18,7 +19,11 @@
     <EmbeddedResource Include="docs/implementation/card-pool.json" LogicalName="Junna.CardPool" />
     <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.7" />
     <PackageReference Include="BSchneppe.Sts2.ReferenceAssemblies" Version="0.107.1" PrivateAssets="All" Condition="'$(Sts2ReferenceMode)' == 'package'" />
+    <Reference Include="ShoujoKagekiAijoCore.Api.V1" HintPath="$(CoreApiPath)" Private="false" />
     <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" Private="false" Condition="'$(Sts2ReferenceMode)' != 'package'" />
     <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" Private="false" />
   </ItemGroup>
+  <Target Name="RequireCoreSdk" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(CoreApiPath)')" Text="Core V1 SDK is required. Set CoreApiPath to the API assembly in the official Core package." />
+  </Target>
 </Project>

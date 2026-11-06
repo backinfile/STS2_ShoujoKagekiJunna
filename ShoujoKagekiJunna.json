@@ -8,5 +8,14 @@
   "has_pck": true,
   "affects_gameplay": true,
   "min_game_version": "v0.107.1",
-  "dependencies": [{"id":"BaseLib","min_version":"v3.4.7"}]
+  "dependencies": [
+    {
+      "id": "BaseLib",
+      "min_version": "v3.4.7"
+    },
+    {
+      "id": "ShoujoKagekiAijoCore",
+      "min_version": "1.0.0"
+    }
+  ]
 }
