@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -97,7 +98,7 @@ public static class CardEffects
             case "JK33B":
                 await Attack(); await Improve(CardActions.Named(player, "JK33"), 0, N(1)); break;
             case "JK37": case "JK43": case "JK44": case "JK45": case "JK46B": case "JK50":
-            case "JA38": case "JA41": case "JK67B": case "JK69B": case "JA59": case "JA64": case "JK75B":
+            case "JA108B": case "JA38": case "JA41": case "JK67B": case "JK69B": case "JA59": case "JA64": case "JK75B":
             case "JZ03": case "JA72": case "JA77": case "JA81B":
             case "JK112B": case "JK122": case "JK130B": case "JK131B":
             case "JS19": case "JG38": case "JK148": case "JK148D":
@@ -228,7 +229,9 @@ public static class CardEffects
             case "JA84":
                 await Block(); await HandArrow.Select(context, card, N(1)); break;
             case "JA88":
-                await Block(); await HandArrow.Select(context, card, CardPile.MaxCardsInHand, optional: true); break;
+                await Attack();
+                if (!CombatManager.Instance.IsOverOrEnding) await HandArrow.Select(context, card, CardPile.MaxCardsInHand, optional: true);
+                break;
             case "JK84":
                 await HandArrow.Select(context, card, N(0)); break;
             case "JG37":
@@ -255,6 +258,8 @@ public static class CardEffects
                 foreach (var selected in await Choose(player.PlayerCombatState.DrawPile.Cards.Where(CardCatalog.IsKnowledge), N(0)))
                     await CardPileCmd.Add(selected, PileType.Hand);
                 break;
+            case "JA108":
+                await CardActions.PlayDrawPileArrows(context, player); break;
             case "JA104":
                 await Block(); await CardChoices.AccelerateTargets(context, card); break;
             case "JK84B":

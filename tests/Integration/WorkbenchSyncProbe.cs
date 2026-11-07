@@ -24,7 +24,7 @@ public sealed class WorkbenchSyncCommand : AbstractConsoleCmd
     public override string Description => "Targeted workbench synchronization checks.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
-        ? new(false, "Combat required") : new(args.FirstOrDefault() switch { "energy-update" => Workbench3650Probe.RunEnergyUpdate(player), "prepare-energy" => Workbench3650Probe.PrepareEnergy(player), "r3650" => Workbench3650Probe.Run(player), "prepare3650" => Workbench3650Probe.Prepare(player), "r3366" => Workbench3366Probe.Run(player, string.Join(" ", args.Skip(1))), "prepare3366" => Workbench3366Probe.Prepare(player), "prepare" => WorkbenchSyncProbe.Prepare(player), _ => WorkbenchSyncProbe.Run(player) }, true, "Sync checks started");
+        ? new(false, "Combat required") : new(args.FirstOrDefault() switch { "keyword-update" => Workbench3650Probe.RunKeywordUpdate(player), "prepare-keywords" => Workbench3650Probe.PrepareKeywords(player), "formal-update" => Workbench3650Probe.RunFormalUpdate(player), "prepare-formal" => Workbench3650Probe.PrepareFormal(player), "energy-update" => Workbench3650Probe.RunEnergyUpdate(player), "prepare-energy" => Workbench3650Probe.PrepareEnergy(player), "r3650" => Workbench3650Probe.Run(player), "prepare3650" => Workbench3650Probe.Prepare(player), "r3366" => Workbench3366Probe.Run(player, string.Join(" ", args.Skip(1))), "prepare3366" => Workbench3366Probe.Prepare(player), "prepare" => WorkbenchSyncProbe.Prepare(player), _ => WorkbenchSyncProbe.Run(player) }, true, "Sync checks started");
 }
 
 public static class WorkbenchSyncProbe

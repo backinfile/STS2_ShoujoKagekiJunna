@@ -1,0 +1,37 @@
+{
+  "revision": 3702,
+  "source": "junna_workbench MCP",
+  "processing": "按原尺寸直接复用已登记的原作裁图，并核对SHA-256。",
+  "cards": [
+    {
+      "id": "JA108",
+      "name": "论证",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA108.jpg",
+      "assetId": "original-scene-jx09-20261102",
+      "sha256": "0b2fefc74a0ab63b22fbf593689ec3c4e0aec1deb920e01a82a02aa9aa58c7ea",
+      "source": {
+        "work": "2021剧场版·狩猎的Revue片段约02:24（配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=144",
+        "reusedFromCardId": "JX09"
+      },
+      "fit": "论证通过组织论据支持主张，把抽牌堆中待发的箭矢一并组织为将要展开的表达；答辩是对主张的运用。配图取纯那面向对手开口陈述的正面近景，突出组织并展开自己的表达。复用退役JX09的原作裁图 original-scene-jx09-20261102，名称按常用逻辑术语记录。"
+    },
+    {
+      "id": "JA108B",
+      "name": "答辩",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA108B.jpg",
+      "assetId": "original-scene-jk49-unbroken-pen-attack-20261103",
+      "sha256": "e17ae06a5cca4bedc54fed8fc3e853abb40b6a75f47f43325aaa112500c7d932",
+      "arrowFocus": {
+        "x": 0.44,
+        "y": 0.46
+      },
+      "source": {
+        "work": "2021剧场版·狩猎的Revue片段约07:55（配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=475",
+        "reusedFromCardId": "JK86B"
+      },
+      "fit": "答辩将已经组织的主张用于有力回应，承接主牌论证。配图取纯那主动向前与对手刀刃相接的交锋，保留出刀方向与相接的刀刃，以主动回应表现攻击；箭矢等待后完成范围伤害。复用备用JK86B原作裁图 original-scene-jk49-unbroken-pen-attack-20261103，区别于主牌开口陈述的近景。"
+    }
+  ]
+}

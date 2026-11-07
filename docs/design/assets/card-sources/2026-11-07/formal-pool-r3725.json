@@ -1,0 +1,80 @@
+{
+  "revision": 3725,
+  "source": "junna_workbench MCP",
+  "processing": "按原尺寸直接复用已登记的原作裁图，并核对SHA-256。",
+  "cards": [
+    {
+      "id": "JA108",
+      "name": "论证",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA108.jpg",
+      "assetId": "original-scene-jx09-20261102",
+      "sha256": "0b2fefc74a0ab63b22fbf593689ec3c4e0aec1deb920e01a82a02aa9aa58c7ea",
+      "source": {
+        "work": "2021剧场版·狩猎的Revue片段约02:24（配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=144",
+        "reusedFromCardId": "JX09"
+      },
+      "fit": "论证通过组织论据支持主张，把抽牌堆中待发的箭矢一并组织为将要展开的表达；答辩是对主张的运用。配图取纯那面向对手开口陈述的正面近景，突出组织并展开自己的表达。复用退役JX09的原作裁图 original-scene-jx09-20261102，名称按常用逻辑术语记录。"
+    },
+    {
+      "id": "JA108B",
+      "name": "答辩",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA108B.jpg",
+      "assetId": "original-scene-jk49-unbroken-pen-attack-20261103",
+      "sha256": "e17ae06a5cca4bedc54fed8fc3e853abb40b6a75f47f43325aaa112500c7d932",
+      "arrowFocus": {
+        "x": 0.44,
+        "y": 0.46
+      },
+      "source": {
+        "work": "2021剧场版·狩猎的Revue片段约07:55（配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=475",
+        "reusedFromCardId": "JK86B"
+      },
+      "fit": "答辩将已经组织的主张用于有力回应，承接主牌论证。配图取纯那主动向前与对手刀刃相接的交锋，保留出刀方向与相接的刀刃，以主动回应表现攻击；箭矢等待后完成范围伤害。复用备用JK86B原作裁图 original-scene-jk49-unbroken-pen-attack-20261103，区别于主牌开口陈述的近景。"
+    },
+    {
+      "id": "JA88",
+      "name": "迎击",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA88.jpg",
+      "assetId": "original-scene-jk32b-literary-group-recast-20261103",
+      "sha256": "6163679db9ce4d5cd0dad06e7765a1d5fc81e8fb615c776df18368bd3d46e5c2",
+      "arrowFocus": {
+        "x": 0.58,
+        "y": 0.42
+      },
+      "source": {
+        "work": "TV第1话约19:46（配图）",
+        "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1186",
+        "reusedFromCardId": "JA59"
+      },
+      "fit": "迎击是迎向对手主动发动攻击，先以射击造成伤害，再把所选手牌准备为之后抵达的箭矢。配图取纯那背身跃起张弓的原作画面，保留持弓手、箭杆、绷紧的弓弦与出箭方向。复用退役JA59的原作裁图 original-scene-jk32b-literary-group-recast-20261103。"
+    },
+    {
+      "id": "JG03",
+      "name": "重复练习",
+      "portrait": "ShoujoKagekiJunna/images/cards/JG03.jpg",
+      "assetId": "original-scene-jg03-20261102",
+      "sha256": "15aab2d937d1f8a059bdfa49f80fb97fdd0ff46b1d353d3a62a15e634f60dfd7",
+      "source": {
+        "work": "TV 第2话 · 约06:42",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=402",
+        "reusedFromCardId": "JG03"
+      },
+      "fit": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。同一段基本功再练一次，使选中的牌多造成一次伤害。配图取课堂带练的乐谱，表现按段反复练习。 卡图：日常练习或准备场景裁切，原始截图tv02-train-642-20261103.png。"
+    },
+    {
+      "id": "JA71",
+      "name": "弦声齐鸣",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA71.jpg",
+      "assetId": "original-scene-ja45-review-round2-20261104",
+      "sha256": "2ae72354cb7cf27b690fee2f16b5802e76874a4e3ae66eb22bc08b78bc1c5fb9",
+      "source": {
+        "work": "《少女☆歌剧 Re LIVE》圣翔音乐学园·星见纯那（1060012）原作卡图",
+        "url": "https://starlight.academy/card/1060012/Snow-Hoshimi-Junna-Seisho-Music-Academy/",
+        "reusedFromCardId": "JS21"
+      },
+      "fit": "纯那持弓扣弦准备出箭，持弓手、箭杆与完整弓身同框可辨；以一次松弦带动已经布置的箭矢一同完成，格挡承接持弓稳住当前行动。复用备用JS21登记的原作卡图 original-scene-ja45-review-round2-20261104，采用正面持弓构图，避免与横扫的转弓镜头重复。"
+    }
+  ]
+}

@@ -111,6 +111,30 @@ public static class CardActions
         await CardCmd.AutoPlay(context, card, target);
     }
 
+    public static async Task PlayDrawPileArrows(PlayerChoiceContext context, Player player)
+    {
+        var draw = player.PlayerCombatState!.DrawPile;
+        var arrows = draw.Cards.Where(CardCatalog.IsArrow).ToArray();
+        foreach (var card in arrows)
+        {
+            if (CombatManager.Instance.IsOverOrEnding || player.Creature.IsDead) break;
+            if (card.Pile != draw || card.Keywords.Contains(CardKeyword.Unplayable) ||
+                !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) continue;
+            var combat = player.Creature.CombatState!;
+            Creature? target = card.TargetType switch
+            {
+                TargetType.AnyEnemy => combat.HittableEnemies.FirstOrDefault(c => c.IsAlive && card.IsValidTarget(c)),
+                TargetType.Self or TargetType.AnyPlayer => player.Creature,
+                TargetType.AnyAlly => combat.PlayerCreatures.FirstOrDefault(c => c != player.Creature && c.IsAlive && card.IsValidTarget(c)),
+                _ => null
+            };
+            if (card.TargetType is TargetType.AnyEnemy or TargetType.AnyAlly && target == null) continue;
+            if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = 0;
+            CostChanges.CaptureFreePayment(card);
+            await CardCmd.AutoPlay(context, card, target, skipXCapture: true);
+        }
+    }
+
     public static async Task<Creature?> ChooseTarget(PlayerChoiceContext context, CardModel card)
     {
         var enemies = card.Owner.Creature.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();

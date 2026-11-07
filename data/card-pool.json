@@ -1,5 +1,5 @@
 {
-  "revision": 3677,
+  "revision": 3725,
   "cards": [
     {
       "id": "JG03",
@@ -16,9 +16,9 @@
       "pool": true,
       "knowledge": false,
       "exhaust": true,
-      "upgradedExhaust": true,
+      "upgradedExhaust": false,
       "retain": false,
-      "upgradedRetain": true,
+      "upgradedRetain": false,
       "damageCapable": false,
       "portrait": "JG03.jpg",
       "values": [
@@ -29,7 +29,7 @@
         }
       ],
       "text": "选择一张手牌，使其额外造成1次伤害。 \n消耗。",
-      "upgradedText": "保留。选择一张手牌，使其额外造成1次伤害。 \n消耗。"
+      "upgradedText": "选择一张手牌，使其额外造成1次伤害。"
     },
     {
       "id": "JA15",
@@ -1858,6 +1858,36 @@
       }
     },
     {
+      "id": "JA71",
+      "modelId": "JUNNA_JA71",
+      "className": "JunnaCardJA71",
+      "name": "弦声齐鸣",
+      "cost": 3,
+      "upgradedCost": 3,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "damageCapable": false,
+      "portrait": "JA71.jpg",
+      "values": [
+        {
+          "name": "Block",
+          "base": 10,
+          "upgraded": 15
+        }
+      ],
+      "text": "获得10点格挡。所有箭矢立即加速到完成。",
+      "upgradedText": "获得15点格挡。所有箭矢立即加速到完成。"
+    },
+    {
       "id": "JH24",
       "modelId": "JUNNA_JH24",
       "className": "JunnaCardJH24",
@@ -2560,27 +2590,27 @@
       "id": "JA88",
       "modelId": "JUNNA_JA88",
       "className": "JunnaCardJA88",
-      "name": "迎击架势",
+      "name": "迎击",
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
+      "type": "攻击",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
       "rarity": "稀有",
       "pool": true,
       "knowledge": false,
-      "exhaust": true,
-      "upgradedExhaust": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
       "retain": false,
       "upgradedRetain": false,
-      "damageCapable": false,
-      "portrait": "JA88.png",
+      "damageCapable": true,
+      "portrait": "JA88.jpg",
       "values": [
         {
-          "name": "Block",
-          "base": 12,
-          "upgraded": 16
+          "name": "Damage",
+          "base": 15,
+          "upgraded": 20
         },
         {
           "name": "N1",
@@ -2588,11 +2618,11 @@
           "upgraded": 5
         }
       ],
-      "text": "获得12点格挡。将任意手牌作为5回合的箭矢打出。消耗。",
-      "upgradedText": "获得16点格挡。将任意手牌作为5回合的箭矢打出。消耗。",
+      "text": "造成15点伤害。将任意手牌作为5回合的箭矢打出。",
+      "upgradedText": "造成20点伤害。将任意手牌作为5回合的箭矢打出。",
       "arrowFocus": {
-        "x": 0.31,
-        "y": 0.23
+        "x": 0.58,
+        "y": 0.42
       }
     },
     {
@@ -3136,8 +3166,8 @@
       "values": [
         {
           "name": "Damage",
-          "base": 8,
-          "upgraded": 12
+          "base": 6,
+          "upgraded": 8
         },
         {
           "name": "N1",
@@ -3150,8 +3180,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。造成8点伤害。每耗尽过1张关联牌，额外造成1次伤害。",
-      "upgradedText": "知识。造成12点伤害。每耗尽过1张关联牌，额外造成1次伤害。"
+      "text": "知识。造成6点伤害。每耗尽过1张关联牌，额外造成1次伤害。",
+      "upgradedText": "知识。造成8点伤害。每耗尽过1张关联牌，额外造成1次伤害。"
     },
     {
       "id": "JK148B",
@@ -3306,47 +3336,75 @@
         },
         {
           "name": "Turns",
-          "base": 2,
-          "upgraded": 2
+          "base": 1,
+          "upgraded": 1
         }
       ],
       "text": "知识。获得2点能量。消耗。闪耀6。",
       "upgradedText": "知识。获得3点能量。消耗。闪耀6。"
     },
     {
-      "id": "JG38",
-      "modelId": "JUNNA_JG38",
-      "className": "JunnaCardJG38",
-      "name": "肌肉记忆",
-      "cost": 1,
-      "upgradedCost": 1,
+      "id": "JA108",
+      "modelId": "JUNNA_JA108",
+      "className": "JunnaCardJA108",
+      "name": "论证",
+      "cost": 4,
+      "upgradedCost": 3,
       "costsX": false,
-      "type": "攻击",
-      "target": "AnyEnemy",
-      "arrowSubtype": "攻击",
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
       "rarity": "稀有",
       "pool": true,
-      "knowledge": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "damageCapable": false,
+      "portrait": "JA108.jpg",
+      "values": [],
+      "text": "知识。打出抽牌堆中的所有箭矢牌。",
+      "upgradedText": "知识。打出抽牌堆中的所有箭矢牌。"
+    },
+    {
+      "id": "JA108B",
+      "modelId": "JUNNA_JA108B",
+      "className": "JunnaCardJA108B",
+      "name": "答辩",
+      "cost": 3,
+      "upgradedCost": 3,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "AllEnemies",
+      "arrowSubtype": "攻击",
+      "rarity": "稀有",
+      "pool": false,
+      "knowledge": true,
       "exhaust": false,
       "upgradedExhaust": false,
       "retain": false,
       "upgradedRetain": false,
       "damageCapable": true,
-      "portrait": "JG38.jpg",
+      "portrait": "JA108B.jpg",
       "values": [
         {
           "name": "Damage",
-          "base": 1,
-          "upgraded": 1
+          "base": 50,
+          "upgraded": 65
         },
         {
-          "name": "Repeat",
-          "base": 2,
+          "name": "Turns",
+          "base": 3,
           "upgraded": 3
         }
       ],
-      "text": "造成1点伤害2次。这张牌每场战斗第一次获得的伤害加成永久保留。",
-      "upgradedText": "造成1点伤害3次。这张牌每场战斗第一次获得的伤害加成永久保留。"
+      "text": "知识。对所有敌人造成50点伤害。",
+      "upgradedText": "知识。对所有敌人造成65点伤害。",
+      "arrowFocus": {
+        "x": 0.44,
+        "y": 0.46
+      }
     }
   ],
   "groups": [
@@ -3568,6 +3626,24 @@
       "reference": "时空大盗拉法姆",
       "generatedCardIds": [],
       "notes": "六牌组，五种短期资料逐步耗尽，留下永久增加伤害次数的常驻论文。"
+    },
+    {
+      "uid": "junna-ja106-starlight-groups-20261107-GROUP_JA108",
+      "id": "GROUP_JA108",
+      "title": "论证",
+      "mainCardId": "JA108",
+      "grantedCardIds": [
+        "JA108B"
+      ],
+      "grantedCardCounts": {
+        "JA108B": 1
+      },
+      "design": {
+        "structure": "主牌＋范围攻击箭矢",
+        "rules": "知识组取得时按当前配置发放论证与一张答辩，独立升级；单张生成、复制与实际打出不重复发放关联牌。论证只支付自身当前版本费用（基础4、升级3）。结算时对自己抽牌堆中的全部实际箭矢牌建立快照，按当时牌堆顺序逐张免费正常打出，保留实际牌的升级、伤害加成及有效修改。单个敌人目标选战场排列最前面的存活且可选敌人；自己、所有敌人与无目标按各自目标类型处理。已离开抽牌堆、无法打出或没有合法目标的对象跳过；过程中新增的牌留给后续动作。每张记录一次正常出牌，X费箭矢实际投入为0。箭矢沿自身初始回合数与有效修改等待，0回合时立即完成；来源技能整批后正常弃置。",
+        "variantOfCardId": "JA106",
+        "knowledgeRelation": "论证将论据组织为支持主张的表达，答辩将已建立的主张用于回应质疑；主牌集中展开待发的言叶，关联牌承担有力的回应。"
+      }
     }
   ],
   "startingDeck": [
@@ -4690,35 +4766,40 @@
       "upgradedText": "知识。造成12点伤害。过去额外造成1次伤害。"
     },
     {
-      "id": "JA71",
-      "modelId": "JUNNA_JA71",
-      "className": "JunnaCardJA71",
-      "name": "弦声齐鸣",
-      "cost": 3,
-      "upgradedCost": 3,
+      "id": "JG38",
+      "modelId": "JUNNA_JG38",
+      "className": "JunnaCardJG38",
+      "name": "肌肉记忆",
+      "cost": 1,
+      "upgradedCost": 1,
       "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
+      "type": "攻击",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
       "rarity": "稀有",
       "pool": false,
       "knowledge": false,
-      "exhaust": true,
-      "upgradedExhaust": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
       "retain": false,
       "upgradedRetain": false,
-      "damageCapable": false,
-      "portrait": "JA71.jpg",
+      "damageCapable": true,
+      "portrait": "JG38.jpg",
       "values": [
         {
-          "name": "Block",
-          "base": 10,
-          "upgraded": 15
+          "name": "Damage",
+          "base": 1,
+          "upgraded": 1
+        },
+        {
+          "name": "Repeat",
+          "base": 2,
+          "upgraded": 3
         }
       ],
-      "text": "获得10点格挡。所有箭矢立即加速到完成。消耗。",
-      "upgradedText": "获得15点格挡。所有箭矢立即加速到完成。消耗。"
+      "text": "造成1点伤害2次。这张牌每场战斗第一次获得的伤害加成永久保留。",
+      "upgradedText": "造成1点伤害3次。这张牌每场战斗第一次获得的伤害加成永久保留。"
     }
   ],
-  "arrowArtRevision": 3677
+  "arrowArtRevision": 3725
 }
