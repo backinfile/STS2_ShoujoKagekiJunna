@@ -539,9 +539,9 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
             {
                 var source = CardCatalog.Model(sourceId);
                 var cards = KnowledgePreviewCards.Create(source);
-                CheckValue(sourceId + " count", cards.Count, 1 + group.GrantedCardIds.Sum(id => group.GrantedCardCounts.GetValueOrDefault(id, 1)));
+                CheckValue(sourceId + " count", cards.Count, group.MainCardCount + group.GrantedCardIds.Sum(id => group.GrantedCardCounts.GetValueOrDefault(id, 1)));
                 foreach (string id in group.GrantedCardIds.Prepend(group.MainCardId))
-                    CheckValue(sourceId + " copies of " + id, cards.Count(c => CardCatalog.DesignId(c) == id), id == group.MainCardId ? 1 : group.GrantedCardCounts.GetValueOrDefault(id, 1));
+                    CheckValue(sourceId + " copies of " + id, cards.Count(c => CardCatalog.DesignId(c) == id), id == group.MainCardId ? group.MainCardCount : group.GrantedCardCounts.GetValueOrDefault(id, 1));
                 CheckValue(sourceId + " independent instances", cards.Distinct().Count(), cards.Count);
             }
         }

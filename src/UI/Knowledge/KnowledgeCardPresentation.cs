@@ -46,9 +46,8 @@ public static class KnowledgePreviewCards
             return DynamicKnowledge.Members(source).Select(c => (CardModel)c.MutableClone()).ToArray();
         var cards = new List<CardModel>();
         bool usedSource = false;
-        foreach (var id in group.GrantedCardIds.Prepend(group.MainCardId))
+        foreach (var (id, count) in group.Members)
         {
-            int count = id == group.MainCardId ? group.MainCardCount : group.GrantedCardCounts.GetValueOrDefault(id, 1);
             for (int copy = 0; copy < count; copy++)
             {
                 // Keep the offered card's modifications; companion copies are independent, as when acquired.

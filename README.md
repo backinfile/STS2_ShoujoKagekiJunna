@@ -1,8 +1,8 @@
 # 星见纯那
 
-当前实现：纯那角色、115 张工作台有效牌面（含关联牌与生成牌）、19 组知识关系、箭矢牌堆、卡牌实例伤害加成与额外伤害次数。
+当前实现：纯那角色、115 张工作台有效牌面（含关联牌与生成牌）、23 组知识关系、箭矢牌堆、卡牌实例伤害加成与额外伤害次数。
 
-- 游戏版本：正式版 v0.107.1 与测试版 v0.111.0；BaseLib：3.4.7。
+- 游戏版本：正式版 v0.107.1 与测试版 v0.111.0；BaseLib：3.4.7；Core：1.0.1。
 - 初始牌组：5 打击、4 防御、1 满弦射击。
 - 生命暂设 70。起始遗物为绿色宝石：战斗开始时获得 1 点能量，可保留至下回合；升级为燃烧宝石后获得 3 点。通过奥罗巴斯之触替换升级。
 - 战斗立绘：2026-11-04 精修版 04 待机、02 攻击。
@@ -17,13 +17,21 @@
 执行 `./build.ps1 -CorePackage <Core发行目录>`，或通过 `SHOUJO_CORE_PACKAGE` 指定同一目录。脚本的 `GameDir`、`Godot` 参数可指定游戏与 MegaDot 编辑器路径。
 产物位于 `dist/ShoujoKagekiJunna/` 和 `dist/ShoujoKagekiAijoCore/`。将两个完整目录放到游戏的 `mods/`，同时安装 BaseLib 3.4.7。加载顺序为 BaseLib → Core → Junna。入口 DLL 按游戏版本选择 `lib/ShoujoKagekiJunna.Stable.dll` 或 `lib/ShoujoKagekiJunna.Beta.dll`；构建脚本使用正式版 0.107.1 引用包与 `GameDir` 中的测试版程序集分别编译。
 
-当前卡牌与升级数值记录在 `docs/implementation/card-pool.json`，效果覆盖与验证见 [卡池实现记录](docs/implementation/card-effects.md)。
+当前卡牌与升级数值记录在 `data/card-pool.json`，效果覆盖与验证见 [卡池实现记录](docs/implementation/card-effects.md)。
 `python tools/assets/generate-card-catalog.py <MCP导出快照>` 更新卡牌清单、模型入口、配图与本地化；具体牌效在 C# 中实现。工作台内容仍统一通过 MCP 编辑。
 
 ## 项目目录
 
 ```text
-src/                   模组 C# 源码
+src/Combat/Arrows/     箭矢调度、倒计时与类型转换
+src/Combat/Cards/      出牌、选牌与具体牌效
+src/Combat/Damage/     伤害加成、次数与来源作用域
+src/Combat/Knowledge/  知识组获取、抽取与永久进度
+src/Models/            角色、卡牌、能力、遗物及卡池定义
+src/UI/                HUD、卡面、动画与知识组预览
+src/Compatibility/     正式版与测试版 API 适配
+loader/                双版本程序集加载入口
+data/                  编译时嵌入的运行卡池
 ShoujoKagekiJunna/      游戏图片、场景与本地化资源
 docs/design/           工作台源码、设计数据与素材来源
 docs/implementation/   实现记录与兼容说明
@@ -32,11 +40,14 @@ tools/dev/             独立测试环境与录像脚本
 tools/balance-sim/     卡牌数值模拟
 tools/pack.gd          Godot 资源打包入口
 tests/Integration/     独立测试模组
+tests/ArrowLayout/     箭矢布局定向检查
+tests/KnowledgeGroups/ 知识组顺序、数量与旧数据检查
+Directory.Build.props  .NET、游戏路径与依赖版本
 ```
 
 Git 保存源码、运行资源、工作台初始数据与当前设计数据。构建输出 `dist/`、验证产物 `artifacts/`、素材处理中间文件 `output/`、下载工具 `.tools/`、依赖缓存、工作台预览与历史备份保留在本地。工作台生成页面包含本机连接信息，也由 `.gitignore` 排除。
 
-工具依赖与入口见 [tools/README.md](tools/README.md)，工作台启动与编辑流程见 [工作台说明](docs/design/workbench/README.md)。
+模块分工与维护入口见 [代码结构](docs/implementation/architecture.md)。工具依赖与入口见 [tools/README.md](tools/README.md)，工作台启动与编辑流程见 [工作台说明](docs/design/workbench/README.md)。
 
 ## 本轮验证
 

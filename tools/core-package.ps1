@@ -1,9 +1,12 @@
-function Get-CorePackage([string]$Path) {
+function Get-CorePackage([string]$Path, [string]$MinimumVersion) {
     if ([string]::IsNullOrWhiteSpace($Path)) {
         throw 'Set -CorePackage or SHOUJO_CORE_PACKAGE to an official Core distribution directory.'
     }
     $root = (Resolve-Path -LiteralPath $Path).Path
     $checked = & (Join-Path $root 'sdk/validate-package.ps1') -CorePackage $root
+    if ([Version]($checked.Bundle.releaseVersion.Split('-')[0]) -lt [Version]($MinimumVersion.Split('-')[0])) {
+        throw "Core $MinimumVersion or newer is required; package contains $($checked.Bundle.releaseVersion)."
+    }
     return [pscustomobject]@{
         Root = $checked.Root
         Bundle = $checked.Bundle

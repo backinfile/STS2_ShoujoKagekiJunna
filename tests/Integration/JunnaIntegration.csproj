@@ -1,31 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup><TargetFramework>net9.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  <PropertyGroup>
     <JunnaAssemblyPath Condition="'$(JunnaAssemblyPath)' == ''">../../dist/ShoujoKagekiJunna/lib/ShoujoKagekiJunna.Beta.dll</JunnaAssemblyPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Probe.cs" />
-    <Compile Include="ArrowHudProbe.cs" />
-    <Compile Include="CardPoolProbe.cs" />
-    <Compile Include="CardCompletionProbe.cs" />
-    <Compile Include="CardBranchesProbe.cs" />
-    <Compile Include="KnowledgeUiProbe.cs" />
-    <Compile Include="CardTextProbe.cs" />
-    <Compile Include="KeywordProbe.cs" />
-    <Compile Include="ArrowFollowupProbe.cs" />
-    <Compile Include="ArrowAttackPoseProbe.cs" />
-    <Compile Include="ArrowPivotProbe.cs" />
-    <Compile Include="InvestmentMarksProbe.cs" />
-    <Compile Include="BonusBorderProbe.cs" />
-    <Compile Include="StarterRelicProbe.cs" />
-    <Compile Include="WorkbenchSyncProbe.cs" />
-    <Compile Include="Workbench3366Probe.cs" />
-    <Compile Include="PowerPresentationProbe.cs" />
-    <Compile Include="HandArrowBatchProbe.cs" />
     <Reference Include="ShoujoKagekiAijoCore.Api.V1" HintPath="$(CoreApiPath)" />
     <Reference Include="ShoujoKagekiJunna" HintPath="$(JunnaAssemblyPath)" />
-    <Reference Include="sts2" HintPath="D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll" />
-    <Reference Include="GodotSharp" HintPath="D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/GodotSharp.dll" />
-    <Reference Include="0Harmony" HintPath="D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/0Harmony.dll" />
-    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.4.7" />
+    <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" />
+    <Reference Include="GodotSharp" HintPath="$(GameData)/GodotSharp.dll" />
+    <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" />
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="$(BaseLibVersion)" />
   </ItemGroup>
 </Project>

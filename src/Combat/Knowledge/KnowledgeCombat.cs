@@ -40,8 +40,8 @@ public static class KnowledgeCombat
         if (!active.Add(key)) return;
         try
         {
-            var ids = group?.GrantedCardIds.Append(group.MainCardId).Where(id =>
-                id != CardCatalog.DesignId(card) || (id == group.MainCardId ? group.MainCardCount : group.GrantedCardCounts.GetValueOrDefault(id, 1)) > 1).ToHashSet() ?? [];
+            var ids = group?.Members.Where(member => member.Id != CardCatalog.DesignId(card) || member.Count > 1)
+                .Select(member => member.Id).ToHashSet() ?? [];
             await CardActions.DrawMatching(context, card.Owner,
                 c => c != card && (members.Contains(c) || ids.Contains(CardCatalog.DesignId(c) ?? "")), CardPile.MaxCardsInHand);
         }
@@ -52,7 +52,8 @@ public static class KnowledgeCombat
         var group = Group(acquired);
         if (group == null) return;
         using var single = SingleCard();
-        var counts = new Dictionary<string, int>(group.GrantedCardCounts) { [group.MainCardId] = group.MainCardCount };
+        var counts = new Dictionary<string, int>(group.GrantedCardCounts);
+        foreach (var (memberId, count) in group.Members) counts[memberId] = count;
         var gained = new List<CardModel> { acquired };
         string id = CardCatalog.DesignId(acquired)!;
         if (counts.ContainsKey(id)) counts[id]--;
@@ -74,7 +75,7 @@ public static class KnowledgeCombat
             // Native batches (e.g. Hefty Tablet: chosen card + Injury) finish before partners
             // are granted. Keep just this newly gained group adjacent, without acquiring twice.
             int index = deck.Cards.ToList().IndexOf(acquired);
-            var order = group.GrantedCardIds.Prepend(group.MainCardId).Distinct().ToList();
+            var order = group.Members.Select(member => member.Id).Distinct().ToList();
             var ordered = gained.Where(c => c.Pile == deck).OrderBy(c => order.IndexOf(CardCatalog.DesignId(c)!)).ToArray();
             foreach (var card in ordered) deck.RemoveInternal(card, silent: true);
             foreach (var card in ordered) deck.AddInternal(card, index++, silent: true);

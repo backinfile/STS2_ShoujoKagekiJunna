@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Sts2GameDir Condition="'$(Sts2GameDir)' == ''">D:/App/Stream/steamapps/common/Slay the Spire 2</Sts2GameDir>
+    <GameData>$(Sts2GameDir)/data_sts2_windows_x86_64</GameData>
+    <BaseLibVersion>3.4.7</BaseLibVersion>
+    <Sts2StableApiVersion>0.107.1</Sts2StableApiVersion>
+  </PropertyGroup>
+</Project>

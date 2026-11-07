@@ -8,20 +8,10 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace ShoujoKagekiJunna.Combat;
-
-[HarmonyPatch(typeof(CardModel), nameof(CardModel.HoverTips), MethodType.Getter)]
-internal static class InvestmentHoverTipPatch
-{
-    private static void Postfix(CardModel __instance, ref IEnumerable<IHoverTip> __result)
-    {
-        if (DamageModifiers.InvestmentTip(__instance) is { } tip) __result = __result.Append(tip);
-    }
-}
 
 [HarmonyPatch]
 internal static class DamagePatches

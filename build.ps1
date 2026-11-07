@@ -5,7 +5,9 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'tools/core-package.ps1')
-$core = Get-CorePackage $CorePackage
+$manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'ShoujoKagekiJunna.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+$minimumCoreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiAijoCore' }).min_version
+$core = Get-CorePackage $CorePackage $minimumCoreVersion
 $previousCoreApi = $env:CoreApiPath
 $env:CoreApiPath = $core.ApiPath
 Push-Location $PSScriptRoot

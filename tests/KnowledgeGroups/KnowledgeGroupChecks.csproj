@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/Models/KnowledgeGroup.cs" Link="KnowledgeGroup.cs" />
+    <None Include="../../data/card-pool.json" Link="card-pool.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

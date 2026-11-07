@@ -37,17 +37,16 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             var group = KnowledgeCombat.Group(this);
             if (group != null)
             {
-                var members = group.GrantedCardIds.Prepend(group.MainCardId).Select(id =>
+                var members = group.Members.Select(member =>
                 {
-                    var model = (CardModel)CardCatalog.Model(id).MutableClone();
+                    var model = (CardModel)CardCatalog.Model(member.Id).MutableClone();
                     if (IsUpgraded && model.IsUpgradable) model.UpgradeInternal();
-                    int count = id == group.MainCardId ? group.MainCardCount : group.GrantedCardCounts.GetValueOrDefault(id, 1);
-                    return $"[gold]{model.Title}[/gold]" + (count > 1 ? $" ×{count}" : "");
+                    return $"[gold]{model.Title}[/gold]" + (member.Count > 1 ? $" ×{member.Count}" : "");
                 });
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
                     { Id = "junna_knowledge_group_" + group.MainCardId };
-                foreach (var id in group.GrantedCardIds.Prepend(group.MainCardId).Where(id => id != DesignId))
-                    yield return HoverTipFactory.FromCard(CardCatalog.Model(id));
+                foreach (var member in group.Members.Where(member => member.Id != DesignId))
+                    yield return HoverTipFactory.FromCard(CardCatalog.Model(member.Id));
             }
             var background = LocString.GetIfExists("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND." + DesignId);
             if (background != null)

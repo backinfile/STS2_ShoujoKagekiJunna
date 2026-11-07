@@ -8,7 +8,6 @@ using ShoujoKagekiJunna.Combat;
 namespace ShoujoKagekiJunna.Models;
 
 public sealed record CardNumber(string Name, int Base, int Upgraded);
-public sealed record KnowledgeGroup(string MainCardId, string[] GrantedCardIds, Dictionary<string, int> GrantedCardCounts, int MainCardCount = 1);
 public sealed record ArrowArtFocus(float X = .5f, float Y = .5f);
 public sealed record StartingCard(string CardId, int Count);
 
