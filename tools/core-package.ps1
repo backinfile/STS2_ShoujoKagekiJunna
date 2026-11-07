@@ -14,7 +14,7 @@ function Get-CorePackage([string]$Path, [string]$MinimumVersion) {
     }
 }
 
-function Copy-CoreRolePackage($Core, [string]$RoleDirectory, [string]$PackageRoot, [string]$RoleId) {
+function Write-CoreRoleMetadata($Core, [string]$RoleDirectory, [string]$PackageRoot, [string]$RoleId) {
     $packageRootPath = [IO.Path]::GetFullPath($PackageRoot)
     $destination = [IO.Path]::GetFullPath((Join-Path $packageRootPath 'ShoujoKagekiAijoCore'))
     if (-not $destination.StartsWith($packageRootPath + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase) -or
@@ -22,6 +22,18 @@ function Copy-CoreRolePackage($Core, [string]$RoleDirectory, [string]$PackageRoo
         $Core.Root.StartsWith($destination + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
         throw 'The source Core package must be separate from the build destination.'
     }
+    if ($Core.Bundle.features -notcontains 'shine@1') { throw 'Core lacks required feature shine@1' }
     if (Test-Path -LiteralPath $destination) { Remove-Item -LiteralPath $destination -Recurse -Force }
-    & (Join-Path $Core.Root 'sdk/pack-character.ps1') -CorePackage $Core.Root -CharacterDirectory $RoleDirectory -OutputDirectory $packageRootPath -ModId $RoleId
+    # Older Core SDK packers embed Core; write the V1 metadata without invoking them.
+    [ordered]@{
+        format=1; modId=$RoleId; apiMajor=1; minimumApiVersion='1.0.0'
+        requiredFeatures=@('shine@1'); optionalFeatures=@('diagnostics@1', 'music@1'); characterFamily='ShoujoKageki'
+    } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $RoleDirectory 'core.requirements') -Encoding UTF8
+    $lockFiles = [ordered]@{}
+    Get-ChildItem -LiteralPath $Core.Root -Recurse -File | Sort-Object FullName | ForEach-Object {
+        $relative = [IO.Path]::GetRelativePath($Core.Root, $_.FullName).Replace('\','/')
+        $lockFiles[$relative] = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+    }
+    [ordered]@{ format=1; releaseVersion=$Core.Bundle.releaseVersion; files=$lockFiles } | ConvertTo-Json -Depth 10 |
+        Set-Content -LiteralPath (Join-Path $RoleDirectory 'core.package.lock') -Encoding UTF8
 }

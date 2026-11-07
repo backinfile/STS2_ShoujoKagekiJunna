@@ -30,7 +30,7 @@ try {
     if ($LASTEXITCODE) { throw 'Resource packing failed' }
     Copy-Item -LiteralPath loader/bin/Release/net9.0/ShoujoKagekiJunna.dll -Destination dist/ShoujoKagekiJunna
     Copy-Item -LiteralPath ShoujoKagekiJunna.json -Destination dist/ShoujoKagekiJunna
-    Copy-CoreRolePackage $core (Join-Path $PSScriptRoot 'dist/ShoujoKagekiJunna') (Join-Path $PSScriptRoot 'dist') 'ShoujoKagekiJunna'
+    Write-CoreRoleMetadata $core (Join-Path $PSScriptRoot 'dist/ShoujoKagekiJunna') (Join-Path $PSScriptRoot 'dist') 'ShoujoKagekiJunna'
 } finally {
     $env:CoreApiPath = $previousCoreApi
     Pop-Location

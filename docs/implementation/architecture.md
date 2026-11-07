@@ -4,7 +4,7 @@
 
 `loader/Bootstrap.cs` 按游戏版本加载实现程序集。`src/JunnaMod.cs` 注册牌堆、存档字段、伤害资格、Core 延迟结算及 Harmony 补丁。`src/Combat/JunnaCombatHooks.cs` 连接回合、战斗、出牌与死亡事件。
 
-角色通过 Core V1 接口接入闪耀，运行依赖为 Core 1.0.1。`build.ps1` 先校验官方发行包及角色要求的最低版本，再编译正式版、测试版和加载器，导入资源并随包生成 Core 锁文件。
+角色通过 Core V1 接口接入闪耀，运行依赖为 Core 1.0.1。`build.ps1` 先校验官方发行包及角色要求的最低版本，再编译正式版、测试版和加载器，导入资源并生成 Core 需求与构建锁文件。Junna 通过独立 Core 工坊条目取得运行依赖；`tools/prepare-workshop.ps1` 生成仅含 Junna 的上传内容和 BaseLib、Core 必需物品配置。
 
 ## 模块分工
 
