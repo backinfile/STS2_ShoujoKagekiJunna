@@ -17,10 +17,10 @@
     "upgradedText": "知识。在你的回合结束时，将1张心得加入你的抽牌堆。"
   },
   "sources": {
-    "localization": "D:/Github/spire-codex/extraction/raw/localization/zhs/cards.json",
+    "localization": "<local-drive>/Github/spire-codex/extraction/raw/localization/zhs/cards.json",
     "implementation": [
-      "D:/Github/spire-codex/extraction/raw/src/Core/Models/Powers/SentryModePower.cs",
-      "D:/Github/spire-codex/extraction/raw/src/Core/Models/Cards/Reave.cs"
+      "<local-drive>/Github/spire-codex/extraction/raw/src/Core/Models/Powers/SentryModePower.cs",
+      "<local-drive>/Github/spire-codex/extraction/raw/src/Core/Models/Cards/Reave.cs"
     ]
   },
   "nativeExamples": [

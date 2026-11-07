@@ -141,12 +141,12 @@ public static class HandArrow
         : (PileType)AccessTools.Method(card.GetType(), "GetResultPileTypeForCardPlay").Invoke(card, null)!;
 #endif
 
-    internal static async Task<bool> Finish(PlayerChoiceContext context, CardModel card)
+    internal static async Task<bool> Finish(PlayerChoiceContext context, CardModel card, bool forceExhaust = false)
     {
         if (!Forms.TryGetValue(card, out var form)) return false;
         Restore(card);
         if (card.Pile?.Type != ArrowPile.PileId) return false;
-        if (form.OriginalType == CardType.Power)
+        if (form.OriginalType == CardType.Power && !forceExhaust)
         {
             await CardPileCmd.RemoveFromCombat(card);
             return true;

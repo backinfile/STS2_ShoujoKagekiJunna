@@ -51,6 +51,7 @@ public abstract partial class CatalogPower
         {
             "JA04" => [Format(("Amount", StackAmount()))],
             "JA22" or "JK27" => [Format()],
+            "JA105" => [Format(("Amount", _grants.Count))],
             "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => [Format(("Amount", Sum(0)))],
             "JG31" or "JK67" => [Format(("Amount", Bonus()))],
             "JH19" or "JZ06" or "JH30" => [Format(("Amount", _grants.Count), ("Repetition", Repetition(_grants.Count)))],
@@ -68,7 +69,7 @@ public abstract partial class CatalogPower
             "JZ05" => Groups(g => g.N(0), group => Format(("Limit", group.Key), ("Amount", group.Count()))),
             "JK46" => Groups(g => g.Card.IsUpgraded, group => Format(("Amount", group.Count()), ("Card", CardCatalog.Get("JK46B").Name + (group.Key ? "+" : "")))),
             "JG34" => Groups(g => g.V("Damage") + DamageModifiers.CaptureDamageModifierSnapshot(g.Card).DamageBonus,
-                group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => g.XValue * (1 + DamageModifiers.ExtraHits(DamageModifiers.CaptureDamageModifierSnapshot(g.Card))))))),
+                group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => g.BaseHits * (1 + DamageModifiers.ExtraHits(DamageModifiers.CaptureDamageModifierSnapshot(g.Card))))))),
             _ => throw new InvalidOperationException("Missing power description: " + DesignId)
         };
         return string.Join("\n", lines);

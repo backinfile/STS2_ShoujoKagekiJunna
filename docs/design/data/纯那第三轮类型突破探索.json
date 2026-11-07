@@ -5,10 +5,10 @@
   "title": "纯那第三轮类型突破探索",
   "sourceRevision": 189,
   "sources": [
-    "D:/Github/STS2_Card_Reserch/docs/体系分析流程.md",
-    "D:/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
-    "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
-    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md"
+    "<local-drive>/Github/STS2_Card_Reserch/docs/体系分析流程.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md"
   ],
   "criterion": "逐张说明原有类型规则、改变后的权限或生命周期、保留的代价及与既有职业流派的区别。",
   "style": {

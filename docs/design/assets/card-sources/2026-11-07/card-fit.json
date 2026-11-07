@@ -1,0 +1,167 @@
+{
+  "revision": 3677,
+  "source": "junna_workbench MCP",
+  "processing": "直接复用已登记的原作裁图，按 SHA-256 核对文件。",
+  "cards": [
+    {
+      "id": "JA104",
+      "name": "应变",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA104.jpg",
+      "assetId": "original-scene-ja55-guard-native-review-20261104",
+      "sha256": "455369951df7c104127fae0779a85572dd4fe41031dc14dff87f99da369d7368",
+      "source": {
+        "work": "2021剧场版狩猎片段约05:26",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=326",
+        "reusedFromCardId": "JA55"
+      },
+      "fit": "临场招架后选择推进防护或进攻方向，以格挡与两类箭矢的加速表现应变。"
+    },
+    {
+      "id": "JA105",
+      "name": "速射",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA105.jpg",
+      "assetId": "original-scene-ja04-20261102",
+      "sha256": "49256cb9835cd6e9aec0ceefa30c3ac0052e7f00c372da698e76aea3ffeeedf9",
+      "source": {
+        "work": "TV 第2话 · 18:31",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1111",
+        "reusedFromCardId": "JA04"
+      },
+      "fit": "加快每次放箭的准备，以缩短初始等待与箭矢一次性消耗表现快速射击。"
+    },
+    {
+      "id": "JH27B",
+      "name": "观星",
+      "portrait": "ShoujoKagekiJunna/images/cards/JH27B.jpg",
+      "assetId": "original-scene-jk69c-own-words-centered-20261103",
+      "sha256": "25f501ccd69a09ff2d95d4f0ebc4fa5ab20a1f7daa19c8df7f8c97c3210c25d8",
+      "source": {
+        "work": "TV 第9话 · 配图约20:22",
+        "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1222",
+        "reusedFromCardId": "JH28"
+      },
+      "fit": "观察与辨认星空中的星星，以观察获得新认识对应抽牌；与星之壁构成星空观察与星光防护的知识组。"
+    },
+    {
+      "id": "JG38",
+      "name": "肌肉记忆",
+      "portrait": "ShoujoKagekiJunna/images/cards/JG38.jpg",
+      "assetId": "original-scene-jk10b-literary-group-recast-20261103",
+      "sha256": "69ef6476bb110728c567b017f53bf75f1280a4c53de8b1597cf56ff899237e1e",
+      "source": {
+        "work": "TV第2话的观摩学习与约18:34的舞台攻防",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1114",
+        "reusedFromCardId": "JK10B"
+      },
+      "fit": "将反复练习的舞台攻防记在身体中，以每场第一次获得的伤害加成永久保留表现动作熟练度的积累。"
+    },
+    {
+      "id": "JS19",
+      "name": "学有所成",
+      "portrait": "ShoujoKagekiJunna/images/cards/JS19.jpg",
+      "assetId": "original-scene-jk44-break-preconception-20261104",
+      "sha256": "29a8c335cfbed0ce47e7f77d2af046e513cea2c55e1df4ac37e220ca11be3190",
+      "source": {
+        "work": "2021剧场版 · 狩猎的Revue片段约07:48（配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=468",
+        "reusedFromCardId": "JK116B"
+      },
+      "fit": "将学到的内容付诸主动进攻，闪耀耗尽后再把已掌握的知识整理成独立副本。"
+    },
+    {
+      "id": "JK148",
+      "name": "论文",
+      "portrait": "ShoujoKagekiJunna/images/cards/JK148.jpg",
+      "assetId": "original-scene-jk11-20261102",
+      "sha256": "b518225174e73ca0c804ba080c3f7912cccd326574acf677264c6d3bad58963c",
+      "source": {
+        "work": "TV 第2话 · 约10:48",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=648",
+        "reusedFromCardId": "JK112B"
+      },
+      "fit": "以有依据的论述正面回应对方；选题、调查、实验、分析、检验各自完成后，论文逐项增加一次伤害。"
+    },
+    {
+      "id": "JK148B",
+      "name": "选题",
+      "portrait": "ShoujoKagekiJunna/images/cards/JK148B.jpg",
+      "assetId": "original-scene-jk68-knowledge-fit-20261103",
+      "sha256": "8cebd97cd5232e8ea10c635e1d3f26e0ae2e9a34c8bb2be9f498b408fc700e5c",
+      "source": {
+        "work": "TV 第7话 · 约08:01",
+        "url": "https://www.bilibili.com/bangumi/play/ep232373?t=481",
+        "reusedFromCardId": "JK116"
+      },
+      "fit": "从已有资料中选择研究方向，以从抽牌堆选择知识牌对应选题。"
+    },
+    {
+      "id": "JK148C",
+      "name": "调查",
+      "portrait": "ShoujoKagekiJunna/images/cards/JK148C.jpg",
+      "assetId": "original-scene-jk15b-20261102",
+      "sha256": "408d407b3d17f271ecc80845fddb1cb0fdce75429ca8b5966b06072036916d61",
+      "source": {
+        "work": "TV 第2话 · 配图约00:04",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=4",
+        "reusedFromCardId": "JK135"
+      },
+      "fit": "收集与查阅研究资料，以抽牌表现调查中取得更多信息。"
+    },
+    {
+      "id": "JK148D",
+      "name": "实验",
+      "portrait": "ShoujoKagekiJunna/images/cards/JK148D.jpg",
+      "assetId": "original-scene-jg36-all-card-review-20261104",
+      "sha256": "6422c32b80255d95aa79dca6117116d643b8894b044950391ae141e2c20a06a4",
+      "source": {
+        "work": "2021剧场版狩猎片段约07:37的挥刃动作",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=457",
+        "reusedFromCardId": "JK113B"
+      },
+      "fit": "把研究中的设想投入舞台攻防，反复试验具体动作；以连续攻击呈现实验的多次尝试。"
+    },
+    {
+      "id": "JK148E",
+      "name": "分析",
+      "portrait": "ShoujoKagekiJunna/images/cards/JK148E.jpg",
+      "assetId": "original-scene-jk62-20261102",
+      "sha256": "f512709a36fcac9b1b0203bbf53aed0af7b1f8ea6cf0687fe510f37cb5eb8fe5",
+      "source": {
+        "work": "2021 剧场版 · 全片约21:00",
+        "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=1260",
+        "reusedFromCardId": "JK129"
+      },
+      "fit": "梳理已有资料并理解问题，以判断和准备获得防护。"
+    },
+    {
+      "id": "JK148F",
+      "name": "检验",
+      "portrait": "ShoujoKagekiJunna/images/cards/JK148F.jpg",
+      "assetId": "original-scene-jk10-observation-note-frame-20261103",
+      "sha256": "39ac1b926b41c078f9f1904dd22b652543534de6af1a80c821ae4a1e587b0093",
+      "source": {
+        "work": "TV第2话约09:42：纯那观摩表演并记录",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=582",
+        "reusedFromCardId": "JK10"
+      },
+      "fit": "对照实际演出观察并记录结果，以等待检验完成后取得继续行动的能量。"
+    },
+    {
+      "id": "JA80",
+      "name": "启明星",
+      "portrait": "ShoujoKagekiJunna/images/cards/JA80.jpg",
+      "assetId": "original-scene-ja16-guiding-star-20261103",
+      "sha256": "320ed8996f5f6808321b846ac12b13906f935523dfc7d4d56f2e098cbf3c072c",
+      "arrowFocus": {
+        "x": 0.32,
+        "y": 0.25
+      },
+      "source": {
+        "work": "2021 剧场版 · 狩猎的Revue片段约01:33（配图）",
+        "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=93",
+        "reusedFromCardId": "JA80"
+      },
+      "fit": "舞台上先亮起的一点星芒，等待后汇成行动能量，对应提前准备、随后取得资源。配图为剧场版狩猎片段约01:33首先亮起的星点，沿用原作裁图 original-scene-ja16-guiding-star-20261103。"
+    }
+  ]
+}

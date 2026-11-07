@@ -48,5 +48,6 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
         };
         await Shine.ResolveAsync(Card, context, actualPlay, () => resolve(context, actualPlay), CardResolutionKind.Arrow);
     }
+    public bool ExhaustAfterResolve { get; internal set; }
     internal bool Resolving;
 }

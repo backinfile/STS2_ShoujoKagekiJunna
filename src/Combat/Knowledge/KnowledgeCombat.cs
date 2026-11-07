@@ -70,6 +70,7 @@ public static class KnowledgeCombat
                 }
                 else await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner);
             }
+        if (destination == PileType.Deck) KnowledgeProgress.BindResearch(gained);
         if (destination == PileType.Deck && acquired.Pile is { Type: PileType.Deck } deck)
         {
             // Native batches (e.g. Hefty Tablet: chosen card + Injury) finish before partners

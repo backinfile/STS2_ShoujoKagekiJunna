@@ -4,16 +4,16 @@
   "date": "2026-11-02",
   "sourceRevision": 1751,
   "sources": [
-    "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
-    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_five_classes_card_analysis_summary_zh.md",
-    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md",
-    "D:/Github/STS2_ShoujoKagekiAijoKaren/src/Core/Models/Characters/Karen.cs",
-    "D:/Github/STS2_ShoujoKagekiAijoKaren/src/Core/Models/Cards/basic/KarenShineStrike.cs",
-    "D:/Github/STS2_ShoujoKagekiAijoKaren/src/Core/Models/Cards/basic/KarenFall.cs",
-    "D:/Github/spire-codex/extraction/raw/src/Core/Models/Relics/ArchaicTooth.cs"
+    "<local-drive>/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/mods/sts2_five_classes_card_analysis_summary_zh.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md",
+    "<karen-checkout>/src/Core/Models/Characters/Karen.cs",
+    "<karen-checkout>/src/Core/Models/Cards/basic/KarenShineStrike.cs",
+    "<karen-checkout>/src/Core/Models/Cards/basic/KarenFall.cs",
+    "<local-drive>/Github/spire-codex/extraction/raw/src/Core/Models/Relics/ArchaicTooth.cs"
   ],
   "nativeVerification": {
-    "assembly": "D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll",
+    "assembly": "<local-drive>/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll",
     "characterSources": ".tools/starter-audit/",
     "deckSizes": {
       "Ironclad": 10,

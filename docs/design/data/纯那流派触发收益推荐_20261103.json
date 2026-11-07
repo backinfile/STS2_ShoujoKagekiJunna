@@ -16,27 +16,27 @@
     },
     "sources": [
       {
-        "path": "D:/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
+        "path": "<local-drive>/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
         "line": 453,
         "basis": "大体系通常12—20张；稳定来源3—6张、核心收益2—5张；职业第一体系可更多。小体系触发素材2—4张、副轴收益1—3张。"
       },
       {
-        "path": "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+        "path": "<local-drive>/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
         "line": 105,
         "basis": "来源、收益、突破和中坚分别承担卡位；小体系可以缺独立端口，跨体系连接重复参与各自体系。"
       },
       {
-        "path": "D:/Github/STS2_Card_Reserch/docs/卡牌分析流程.md",
+        "path": "<local-drive>/Github/STS2_Card_Reserch/docs/卡牌分析流程.md",
         "line": 57,
         "basis": "触发牌和收益牌分别包含触发＋收益；跨体系在各体系分别计数。"
       },
       {
-        "path": "D:/Github/STS2_Card_Reserch/docs/mods/ironclad_systems_zh.md",
+        "path": "<local-drive>/Github/STS2_Card_Reserch/docs/mods/ironclad_systems_zh.md",
         "line": 75,
         "basis": "消耗触发10、收益12；自损触发9、收益4；格挡触发15、收益5。依机制选择比例。"
       },
       {
-        "path": "D:/Github/STS2_ShoujoKagekiJunna/docs/design/data/纯那职业卡池设计记录.json",
+        "path": "<junna-checkout>/docs/design/data/纯那职业卡池设计记录.json",
         "line": 7,
         "basis": "主体系为箭矢，次主体系为知识，伤害加成为输出小体系。"
       }

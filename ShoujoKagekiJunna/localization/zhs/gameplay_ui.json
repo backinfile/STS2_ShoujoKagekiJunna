@@ -10,10 +10,8 @@
   "JUNNA.KNOWLEDGE_CONFIRM": "确认",
   "JUNNA.KNOWLEDGE_CANCEL": "取消",
   "JUNNA.KNOWLEDGE_BACKGROUND": "知识背景",
-  "JUNNA.KNOWLEDGE_BACKGROUND.JK33": "《少女☆歌剧》TV第9话。纯那引用尼采，谈过去与未来对当下的影响。",
-  "JUNNA.KNOWLEDGE_BACKGROUND.JK33B": "《少女☆歌剧》TV第9话。纯那引用尼采，谈过去与未来对当下的影响。",
-  "JUNNA.KNOWLEDGE_BACKGROUND.JK43": "莎士比亚、约翰·弗莱彻《亨利八世》第一幕第一场：攀登险丘，须先缓步。",
-  "JUNNA.KNOWLEDGE_BACKGROUND.JK43B": "莎士比亚、约翰·弗莱彻《亨利八世》第一幕第一场：攀登险丘，须先缓步。",
+  "JUNNA.KNOWLEDGE_COPY_REWARD": "复制至多{Count}张知识牌",
+  "JUNNA.KNOWLEDGE_COPY_SELECT": "选择至多{Count}张知识牌。",
   "JUNNA.KNOWLEDGE_BACKGROUND.JK49": "莎士比亚《哈姆雷特》第三幕第一场：拿起武器，反抗苦难之海。",
   "JUNNA.KNOWLEDGE_BACKGROUND.JK49B": "莎士比亚《哈姆雷特》第三幕第一场：承受命运的投石与飞箭。"
 }

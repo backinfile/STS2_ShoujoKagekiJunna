@@ -6,10 +6,10 @@
   "sourceRevision": 1004,
   "scope": "补齐流派来源、触发、收益、运转、连接、起始与体系外功能；数量不设预定上限。",
   "sources": [
-    "D:/Github/STS2_Card_Reserch/docs/体系分析流程.md",
-    "D:/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
-    "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
-    "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/五职业与Karen流派结构复核及奈奈构筑深化.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/体系分析流程.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+    "<local-drive>/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/五职业与Karen流派结构复核及奈奈构筑深化.md",
     "纯那Mod设计工作台_本地编辑.json"
   ],
   "userOverrides": {

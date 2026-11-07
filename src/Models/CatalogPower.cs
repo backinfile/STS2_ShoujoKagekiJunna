@@ -20,6 +20,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         public readonly CatalogCard Card = card;
         public readonly CardPlay InstalledBy = installedBy;
         public readonly int XValue = xValue;
+        public int BaseHits => Card.Definition.CostsX ? XValue : 1;
         public int Turn = -1;
         public int Used;
         public int N(int index) => Card.Number(index);
@@ -50,6 +51,9 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         (DesignId is "JA87" or "JA96" or "JH31" ? "svg" : "png");
     public override string CustomBigIconPath => CustomPackedIconPath;
     protected override void DeepCloneFields() { base.DeepCloneFields(); _grants = new(_grants); }
+
+    public static int ArrowHaste(Player player) => player.Creature.Powers.OfType<CatalogPower>()
+        .Where(p => p.DesignId == "JA105").Sum(p => p._grants.Count);
 
     public static bool Has(Player player, string id) => player.Creature.Powers.OfType<CatalogPower>().Any(p => p.DesignId == id);
     public static async Task Install(CatalogCard card, PlayerChoiceContext context, CardPlay play)
@@ -97,11 +101,19 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
                 case "JK46": await CardActions.Generate(player, "JK46B", grant.N(0), PileType.Hand, grant.Card.IsUpgraded); break;
                 case "JG34":
                     using (DamageExecution.BeginCardResolution(grant.Card))
-                        await CardEffects.DealDamage(grant.Card, context, grant.Play, grant.V("Damage"), grant.XValue);
+                        await CardEffects.DealDamage(grant.Card, context, grant.Play, grant.V("Damage"), grant.BaseHits);
                     break;
                 case "JZ06": await PlayerCmd.GainEnergy(player.PlayerCombatState!.Hand.Cards.Where(CardActions.HasNumericCost).Select(CardActions.Cost).DefaultIfEmpty().Max(), player); break;
             }
         }
+    }
+
+    public override Task BeforeCardPlayed(CardPlay play)
+    {
+        if (DesignId == "JG31" && play.Card.Owner == Owner.Player && play.IsFirstInSeries)
+            foreach (var grant in _grants.ToArray())
+                if (!ReferenceEquals(play, grant.InstalledBy)) DamageModifiers.Add(play.Card, grant.V("Bonus"));
+        return Task.CompletedTask;
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay play)
@@ -138,7 +150,6 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
                     break;
                 case "JK64" when CardCatalog.IsKnowledge(play.Card):
                     await AccelerateChoice(grant, context, 1, grant.N(0)); break;
-                case "JG31": DamageModifiers.Add(play.Card, grant.V("Bonus")); break;
                 case "JK75" when CardCatalog.IsKnowledge(play.Card):
                     var eligible = play.Card.Owner.PlayerCombatState!.Hand.Cards.Where(DamageModifiers.CanDealDamage).ToArray();
                     if (eligible.Length > 0) DamageModifiers.Add(play.Card.Owner.RunState.Rng.CombatCardSelection.NextItem(eligible)!, grant.V("Bonus"));

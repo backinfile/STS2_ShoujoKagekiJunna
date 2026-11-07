@@ -18,15 +18,15 @@
     "突破限制牌重点是修改游戏规则（游戏底层机制，或者新增的机制）本身。可能是带来高数值，也可能是改变正常的打法，都有可能。"
   ],
   "sources": [
-    "D:/Github/STS2_Card_Reserch/docs/体系分析流程.md",
-    "D:/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
-    "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
-    "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/references/奈奈三个体系的结构与突破研究.md",
-    "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/奈奈突破限制牌修改整理.md",
-    "D:/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/奈奈突破限制牌候选_独立类型版.md",
-    "D:/Github/STS2_ShoujoKagekiJunna/docs/design/data/纯那Mod设计工作台_本地编辑.json",
-    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md",
-    "D:/Github/STS2_Card_Reserch/docs/mods/karen_mod_character_cards_zh.md"
+    "<local-drive>/Github/STS2_Card_Reserch/docs/体系分析流程.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+    "<local-drive>/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/references/奈奈三个体系的结构与突破研究.md",
+    "<local-drive>/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/奈奈突破限制牌修改整理.md",
+    "<local-drive>/Godot/Proj/STS2_ShoujoKagekiAijoNana/docs/design/奈奈突破限制牌候选_独立类型版.md",
+    "<junna-checkout>/docs/design/data/纯那Mod设计工作台_本地编辑.json",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/mods/karen_mod_character_cards_zh.md"
   ],
   "systems": {
     "stage": {

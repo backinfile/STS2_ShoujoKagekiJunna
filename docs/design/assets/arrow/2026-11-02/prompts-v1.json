@@ -13,7 +13,7 @@
     "数字后不添加回环",
     "当前为视觉候选，尚未接入工作台或游戏"
   ],
-  "reference": "D:\\Godot\\Proj\\STS2_ShoujoKagekiAijoNana\\docs\\design\\assets\\stage-device\\2026-11-01\\game-preview-a3\\all-native-a3-v15.png",
+  "reference": "<local-drive>/Godot\\Proj\\STS2_ShoujoKagekiAijoNana\\docs\\design\\assets\\stage-device\\2026-11-01\\game-preview-a3\\all-native-a3-v15.png",
   "variants": [
     {
       "key": "A",
@@ -41,4 +41,3 @@
     }
   ]
 }
-

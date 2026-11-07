@@ -6,6 +6,9 @@ namespace ShoujoKagekiJunna.Models;
 [CustomID("JUNNA_A_POWER")]
 public sealed class JunnaPowerA() : CatalogPower("A");
 
+[CustomID("JUNNA_JA105_POWER")]
+public sealed class JunnaPowerJA105() : CatalogPower("JA105");
+
 [CustomID("JUNNA_JA22_POWER")]
 public sealed class JunnaPowerJA22() : CatalogPower("JA22");
 

@@ -278,7 +278,7 @@
   ],
   "cardFaceChanges": 0,
   "runtimeEvidence": {
-    "assembly": "D:/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll",
+    "assembly": "<local-drive>/App/Stream/steamapps/common/Slay the Spire 2/data_sts2_windows_x86_64/sts2.dll",
     "assemblyModified": "2026-10-30",
     "observations": [
       "AttackCommand.FromCard保存CardModel来源，Execute调用Hook.ModifyAttackHitCount。",

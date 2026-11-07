@@ -18,5 +18,5 @@
   "contentEdits": "MCP with required per-entity expectedVersion",
   "targetedTests": 9,
   "stdioTools": 10,
-  "knowledgeExport": "D:\\Github\\STS2_ShoujoKagekiJunna\\docs\\design\\data\\纯那知识牌背景提示_20261103.json"
+  "knowledgeExport": "<junna-checkout>\\docs\\design\\data\\纯那知识牌背景提示_20261103.json"
 }

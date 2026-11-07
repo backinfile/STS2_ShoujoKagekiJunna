@@ -536,51 +536,51 @@
   ],
   "sources": [
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Slice.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Slice.cs",
       "sha256": "70c77e9b035557547d313400a38b3369a6a5389406ddf5c635ed7eacf0ad4bc9"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\TwinStrike.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\TwinStrike.cs",
       "sha256": "87131a9fa3797d8bc26be299aafc745ab698082346b98cbf6ac91d2697f63b29"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\DefendIronclad.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\DefendIronclad.cs",
       "sha256": "f2707481e0be1a5e856cab0dc788fb520e80fe3dff9c0a0f53869b857b8c7740"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\StrikeIronclad.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\StrikeIronclad.cs",
       "sha256": "b9514c7880abc575abc7a6e572273e1cb64a4a092192f83af7d4e3b6c211c388"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Leap.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Leap.cs",
       "sha256": "debd1d5bf376315b796e09c1d6bf6ea3bccca72a5b107cd6dfb5318b3330b412"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Backflip.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Cards\\Backflip.cs",
       "sha256": "af5ff7bc9381a70cbc39af78a55f5ca845855bafb90e62292365fc086ee10f10"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\FuzzyWurmCrawler.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\FuzzyWurmCrawler.cs",
       "sha256": "1b985c2625c86375a377bb8f124e339cba9af66ce4c6b7d0d5f4548662ce8bb8"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\Nibbit.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\Nibbit.cs",
       "sha256": "5f027dafe55d5be0d4001188ff010cbb087b3c0c9f5b069cd03713b33ea02912"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Encounters\\NibbitsNormal.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Encounters\\NibbitsNormal.cs",
       "sha256": "a5b84e1df56a5e85785ab654b899777db8baee453481de4faf140f7420f2edd9"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\SneakyGremlin.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\SneakyGremlin.cs",
       "sha256": "ad35c5bfcd96bad7cedd5e616340ea399653705fd88c205bacfc4cb817215725"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\DevotedSculptor.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Monsters\\DevotedSculptor.cs",
       "sha256": "3a3149c0c5ab743d7d2c18b9d302c61d94b5d3bf4ebdb0851dd446689b3c5217"
     },
     {
-      "file": "D:\\Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Powers\\RitualPower.cs",
+      "file": "<local-drive>/Github\\spire-codex\\extraction\\raw\\src\\Core\\Models\\Powers\\RitualPower.cs",
       "sha256": "68fb6b795725dfc7c771dcce7b93d6d12b04871289d9d1cf2b5767a8b8a397c4"
     }
   ],

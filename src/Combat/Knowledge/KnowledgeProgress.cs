@@ -14,7 +14,7 @@ using ShoujoKagekiJunna.Models;
 namespace ShoujoKagekiJunna.Combat;
 
 /// <summary>Permanent card progress and run rewards use BaseLib's saved fields.</summary>
-public static class KnowledgeProgress
+public static partial class KnowledgeProgress
 {
     private static readonly SavedSpireField<CatalogCard, int> ExtraHits = new(() => 0, "JunnaPermanentHits");
     private static readonly SavedSpireField<Player, int> OpeningInsights = new(() => 0, "JunnaOpeningInsights");
@@ -48,18 +48,14 @@ public static class KnowledgeProgress
     public static async Task Depleted(CatalogCard card, ShineDepletionContext context)
     {
         if (context.PermanentCard == null) return;
+        ResearchDepleted(card, context.PermanentCard);
         if (card.DesignId == "JK139B")
         {
             OpeningInsights.Set(context.Player, checked(OpeningInsights.Get(context.Player) + 1));
         }
         else if (card.DesignId == "JS19")
         {
-            var choices = context.Player.Deck.Cards.Where(c => c != context.PermanentCard && c.IsRemovable).ToArray();
-            if (choices.Length == 0) return;
-            var prefs = new CardSelectorPrefs(CardChoices.Prompt(card), 0, 1);
-            var selected = await CardSelectCmd.FromSimpleGrid(context.ChoiceContext ?? new BlockingPlayerChoiceContext(), choices, context.Player, prefs);
-            foreach (var target in selected.Where(context.Player.Deck.Cards.Contains).ToArray())
-                await CardPileCmd.RemoveFromDeck(target);
+            await OfferKnowledgeCopy(context.Player, card.IsUpgraded ? 2 : 1);
         }
     }
 
@@ -118,7 +114,10 @@ public static class KnowledgeProgress
         private static void Postfix(AbstractModel __instance, AbstractModel __result)
         {
             if (__instance is CatalogCard source && __result is CatalogCard clone)
+            {
                 ExtraHits.Set(clone, ExtraHits.Get(source));
+                CopyGrowth(source, clone);
+            }
         }
     }
 }

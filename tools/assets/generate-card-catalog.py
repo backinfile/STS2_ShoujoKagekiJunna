@@ -27,7 +27,7 @@ SELECTION_PROMPTS = {
     "JG16": "选择1张手牌。",
     "JT02": "选择1张非能力手牌。",
     "JA84": "选择1张手牌。",
-    "JA87": "选择至多1张手牌。",
+    "JA87": "选择至多{Cards}张手牌。",
     "JA88": "选择任意张手牌。",
     "JK84": "选择{Cards}张手牌。",
     "JG37": "选择1张手牌。",
@@ -48,8 +48,13 @@ SELECTION_PROMPTS = {
     "JK112": "选择1张舌战。",
     "JK126": "选择2张关联牌。",
     "JK127": "选择至多1张牌。",
-    "JS19": "选择至多1张牌。"
+    "JS19": "选择至多{Cards}张知识牌。",
+    "JK148B": "选择{Cards}张知识牌。"
 }
+
+def native_keyword(text, keyword):
+    return bool(re.search(r'(?:^|[。\n])\s*' + re.escape(keyword) + r'。', text))
+
 
 def display_description(card, text, card_names, values, upgraded=False):
     """Format the workbench wording without substituting independently curated rules."""
@@ -179,8 +184,8 @@ def main():
         upgrade = card['upgradedText'].strip()
         # Native keywords are rendered by CardModel; knowledge keeps its printed position.
         for keyword in ('保留', '消耗'):
-            base = base.replace(keyword + '。', '')
-            upgrade = upgrade.replace(keyword + '。', '')
+            base = re.sub(r'(^|[。\n])\s*' + re.escape(keyword) + r'。', r'\1', base)
+            upgrade = re.sub(r'(^|[。\n])\s*' + re.escape(keyword) + r'。', r'\1', upgrade)
         # Core renders the current Shine budget, including depletion and upgrades.
         base = re.sub(r'闪耀\d+[。.]', '', base)
         upgrade = re.sub(r'闪耀\d+[。.]', '', upgrade)
@@ -240,8 +245,8 @@ def main():
             'arrowSubtype': card.get('arrowSubtype', '攻击' if damage else '技能'),
             'rarity': card['rarity'], 'pool': bool(card.get('pool')),
             'knowledge': '知识' in card.get('keywords', []) or '知识。' in card['text'],
-            'exhaust': '消耗。' in card['text'], 'upgradedExhaust': '消耗。' in card['upgradedText'],
-            'retain': '保留。' in card['text'], 'upgradedRetain': '保留。' in card['upgradedText'],
+            'exhaust': native_keyword(card['text'], '消耗'), 'upgradedExhaust': native_keyword(card['upgradedText'], '消耗'),
+            'retain': native_keyword(card['text'], '保留'), 'upgradedRetain': native_keyword(card['upgradedText'], '保留'),
             'damageCapable': damage, 'portrait': portrait_name, 'values': values,
             'text': card['text'], 'upgradedText': card['upgradedText'],
         }
@@ -255,7 +260,9 @@ def main():
             declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
             wrappers.append(declaration + f'[CustomID("{model_id}")]\npublic sealed class {cls}() : CatalogCard("{cid}");\n')
     for card in retired.values():
-        wrappers.append(f'[CustomID("{card["modelId"]}")]\npublic sealed class {card["className"]}() : CatalogCard("{card["id"]}");\n')
+        shine = re.search(r'闪耀(\d+)[。.]', card.get('text', ''))
+        declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
+        wrappers.append(declaration + f'[CustomID("{card["modelId"]}")]\npublic sealed class {card["className"]}() : CatalogCard("{card["id"]}");\n')
     ids = {c['id'] for c in cards}
     groups = [g for g in bundle['data']['partnerGroups'] if g['mainCardId'] in ids and not g.get('trashedAt') and not g.get('reservedAt')]
     for group in groups:
@@ -273,6 +280,10 @@ def main():
     if not args.text_only and not args.rules_only:
         (ROOT / 'src/Models/CardCatalog.Generated.cs').write_text(header + '\n'.join(wrappers), encoding='utf-8')
     localization.update({
+        'JUNNA_ARROW_TARGET_SELF.title': '自己',
+        'JUNNA_ARROW_TARGET_SELF.description': '目标为自己的箭矢加速1回合。',
+        'JUNNA_ARROW_TARGET_ENEMY.title': '敌人',
+        'JUNNA_ARROW_TARGET_ENEMY.description': '目标为敌人的箭矢加速1回合。',
         'JUNNA_NOTES_DRAW.title': '抽牌',
         'JUNNA_NOTES_DRAW.description': '抽{Amount:diff()}张牌。',
         'JUNNA_NOTES_ENERGY.title': '能量',

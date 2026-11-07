@@ -47,8 +47,8 @@
     "payoffRecord": "Record the actual amount carried into this turn; keep the record fixed until the next owner turn.",
     "lifetime": "combat",
     "integrationReference": [
-      "D:/Github/spire-codex/extraction/raw/src/Core/Entities/Players/PlayerCombatState.cs",
-      "D:/Github/spire-codex/extraction/raw/src/Core/Models/Relics/IceCream.cs"
+      "<local-drive>/Github/spire-codex/extraction/raw/src/Core/Entities/Players/PlayerCombatState.cs",
+      "<local-drive>/Github/spire-codex/extraction/raw/src/Core/Models/Relics/IceCream.cs"
     ],
     "implementationStatus": "设计结算约定"
   },

@@ -7,7 +7,7 @@ using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
-/// <summary>Combat-only investment. Values are never written into base damage, Strength or enchantments.</summary>
+/// <summary>Damage investment stays separate from printed damage, Strength and enchantments.</summary>
 public readonly record struct DamageModifierSnapshot(decimal DamageBonus, int ExtraHits, Player? Owner)
 {
     public bool IsEmpty => DamageBonus == 0 && ExtraHits == 0;
@@ -20,9 +20,12 @@ public static class DamageModifiers
         public decimal Bonus;
         public int Hits;
         public bool HasReceivedBonus;
+        public bool FirstDamageBonusCaptured;
     }
 
     private static ConditionalWeakTable<CardModel, Investment> _cards = new();
+
+    private static Investment InvestmentFor(CardModel card) => _cards.GetValue(card, c => new Investment { Bonus = KnowledgeProgress.PermanentDamageBonus(c) });
 
     public static bool CanDealDamage(CardModel card) => DamageCapability.CanDealDamage(card);
 
@@ -30,7 +33,12 @@ public static class DamageModifiers
     {
         if (!card.IsMutable || card.Owner?.PlayerCombatState == null || !CanDealDamage(card)) return false;
         if (damageBonus < 0 || extraHits < 0) throw new ArgumentOutOfRangeException(nameof(damageBonus));
-        var state = _cards.GetOrCreateValue(card);
+        var state = InvestmentFor(card);
+        if (damageBonus > 0 && !state.FirstDamageBonusCaptured)
+        {
+            state.FirstDamageBonusCaptured = true;
+            KnowledgeProgress.PreserveFirstBonus(card, damageBonus);
+        }
         state.Bonus += damageBonus;
         state.Hits = checked(state.Hits + extraHits);
         state.HasReceivedBonus |= damageBonus > 0 || extraHits > 0;
@@ -41,7 +49,7 @@ public static class DamageModifiers
     public static DamageModifierSnapshot CaptureDamageModifierSnapshot(CardModel card) =>
         _cards.TryGetValue(card, out var state)
             ? new(state.Bonus, checked(state.Hits + KnowledgeProgress.PermanentHits(card)), card.Owner)
-            : new(0, KnowledgeProgress.PermanentHits(card), card.IsMutable ? card.Owner : null);
+            : new(KnowledgeProgress.PermanentDamageBonus(card), KnowledgeProgress.PermanentHits(card), card.IsMutable ? card.Owner : null);
 
     internal static bool HasReceivedBonus(CardModel card) =>
         _cards.TryGetValue(card, out var state) && state.HasReceivedBonus;
@@ -66,7 +74,7 @@ public static class DamageModifiers
     internal static void Copy(AbstractModel original, AbstractModel clone)
     {
         if (original is CardModel card && clone is CardModel copied && _cards.TryGetValue(card, out var investment))
-            _cards.AddOrUpdate(copied, new Investment { Bonus = investment.Bonus, Hits = investment.Hits, HasReceivedBonus = investment.HasReceivedBonus });
+            _cards.AddOrUpdate(copied, new Investment { Bonus = investment.Bonus, Hits = investment.Hits, HasReceivedBonus = investment.HasReceivedBonus, FirstDamageBonusCaptured = investment.FirstDamageBonusCaptured });
     }
 
     public static void TransferBonus(IEnumerable<CardModel> sources, CardModel target)
@@ -74,7 +82,7 @@ public static class DamageModifiers
         if (!CanDealDamage(target)) return;
         decimal bonus = 0;
         foreach (var card in sources.Distinct().Where(c => c != target))
-            if (_cards.TryGetValue(card, out var state)) { bonus += state.Bonus; state.Bonus = 0; }
+            { var state = InvestmentFor(card); bonus += state.Bonus; state.Bonus = 0; }
         Add(target, bonus);
     }
 

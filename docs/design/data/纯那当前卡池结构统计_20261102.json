@@ -4,7 +4,7 @@
   "date": "2026-11-02",
   "sourceRevision": 1014,
   "source": "纯那Mod设计工作台_本地编辑.json",
-  "standardSource": "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+  "standardSource": "<local-drive>/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
   "scope": "以当前流派标签为统计范围，按未升级牌面逐张重新判断职责；基础、关联及远古牌均计牌面，奖励入口单列。同一张牌可参与多条路线，路线内五种职责互斥，跨流派是重叠标记。",
   "definitions": {
     "load": "箭矢载荷或由指定关联牌协助使用的固定载体。",

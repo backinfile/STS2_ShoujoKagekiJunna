@@ -45,7 +45,8 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
                 });
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
                     { Id = "junna_knowledge_group_" + group.MainCardId };
-                foreach (var member in group.Members.Where(member => member.Id != DesignId))
+                // The full group is listed above; keep card previews within one viewport.
+                foreach (var member in group.Members.Where(member => member.Id != DesignId).Take(2))
                     yield return HoverTipFactory.FromCard(CardCatalog.Model(member.Id));
             }
             var background = LocString.GetIfExists("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND." + DesignId);

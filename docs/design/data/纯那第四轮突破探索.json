@@ -5,12 +5,12 @@
   "title": "纯那第四轮突破探索",
   "sourceRevision": 432,
   "sources": [
-    "D:/Github/STS2_Card_Reserch/docs/体系分析流程.md",
-    "D:/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
-    "D:/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
-    "D:/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md",
-    "D:/Github/STS2_Card_Reserch/docs/mods/karen_mod_character_cards_zh.md",
-    "D:/Github/STS2_ShoujoKagekiJunna/docs/design/data/纯那Mod设计工作台_本地编辑.json"
+    "<local-drive>/Github/STS2_Card_Reserch/docs/体系分析流程.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/体系驱动卡池设计流程.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/职业卡池设计要求_按五职业规律.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/mods/sts2_character_cards_zh.md",
+    "<local-drive>/Github/STS2_Card_Reserch/docs/mods/karen_mod_character_cards_zh.md",
+    "<junna-checkout>/docs/design/data/纯那Mod设计工作台_本地编辑.json"
   ],
   "criterion": "改变既有支付、时点、区域、对象集合或整组操作规则；不以高频触发、单纯大数值或周期收益充当突破。",
   "summary": {

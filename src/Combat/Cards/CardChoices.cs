@@ -18,6 +18,19 @@ public static class CardChoices
         return prompt;
     }
 
+    public static async Task AccelerateTargets(PlayerChoiceContext context, CatalogCard source)
+    {
+        var own = (CardModel)ModelDb.GetById<JunnaArrowTargetSelf>(ModelDb.GetId<JunnaArrowTargetSelf>()).MutableClone();
+        var enemies = (CardModel)ModelDb.GetById<JunnaArrowTargetEnemy>(ModelDb.GetId<JunnaArrowTargetEnemy>()).MutableClone();
+        own.Owner = enemies.Owner = source.Owner;
+        var selected = await CardSelectCmd.FromChooseACardScreen(context, [own, enemies], source.Owner);
+        if (selected == null) return;
+        bool self = selected == own;
+        var arrows = ArrowCombat.DisplayOrder().Where(a => a.Card.Owner == source.Owner &&
+            (self ? !a.TargetsGroup && a.Target == source.Owner.Creature : a.TargetsAllEnemies || a.Target?.IsEnemy == true)).ToArray();
+        foreach (var arrow in arrows) await ArrowCombat.Accelerate(context, arrow, source.Number(1));
+    }
+
     public static async Task Notes(PlayerChoiceContext context, CatalogCard source)
     {
         var draw = (JunnaNotesDraw)ModelDb.GetById<JunnaNotesDraw>(ModelDb.GetId<JunnaNotesDraw>()).MutableClone();

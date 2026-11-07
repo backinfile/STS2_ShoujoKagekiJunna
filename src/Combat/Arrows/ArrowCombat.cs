@@ -33,12 +33,15 @@ public static partial class ArrowCombat
     public static void Deploy(CardModel card, CardPlay play, int turns,
         Func<PlayerChoiceContext, CardPlay, Task> resolve)
     {
+        int haste = CatalogPower.ArrowHaste(card.Owner);
+        turns = Math.Max(0, turns - haste);
+        if (haste > 0) card.AddKeyword(CardKeyword.Exhaust);
         if (Find(card) is { } existing && !existing.Resolving)
             existing.PlayCount += play.PlayCount;
         else
         {
             Arrows.RemoveAll(a => a.Card == card);
-            Arrows.Add(new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve) { Sequence = _sequence++ });
+            Arrows.Add(new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve) { Sequence = _sequence++, ExhaustAfterResolve = haste > 0 });
         }
         var room = NCombatRoom.Instance;
         if (room != null && room.GetNodeOrNull<ArrowHud>("JunnaArrows") == null)
@@ -54,6 +57,17 @@ public static partial class ArrowCombat
         {
             await Accelerate(context, arrow, 1);
         }
+    }
+
+    public static async Task ActivateHaste(PlayerChoiceContext context, Player player)
+    {
+        var arrows = DisplayOrder().Where(a => a.Card.Owner == player).ToArray();
+        foreach (var arrow in arrows)
+        {
+            arrow.ExhaustAfterResolve = true;
+            arrow.Card.AddKeyword(CardKeyword.Exhaust);
+        }
+        foreach (var arrow in arrows) await Accelerate(context, arrow, 1);
     }
 
     public static async Task AccelerateAll(PlayerChoiceContext context, Player player, int turns)
@@ -91,7 +105,7 @@ public static partial class ArrowCombat
             // A resolving arrow may have deployed itself again. Keep that new deployment intact.
             Arrows.Remove(arrow);
             if (Find(arrow.Card) != null) return;
-            if (await HandArrow.Finish(context, arrow.Card)) return;
+            if (await HandArrow.Finish(context, arrow.Card, arrow.ExhaustAfterResolve)) return;
             if (arrow.Card.Pile?.Type != ArrowPile.PileId) return;
             using var pileExit = new ArrowPileExit(hud?.PileExitPosition(arrow.Card));
             if (arrow.Card.ExhaustOnNextPlay || arrow.Card.Keywords.Contains(CardKeyword.Exhaust))

@@ -3,8 +3,8 @@
   "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
   "local_only": true,
   "device": "cuda",
-  "tool_root": "D:\\Godot\\Proj\\STS2_ShoujoKagekiAijoKaren\\output\\imagegen\\starlight-nine\\texture-review\\artifact-cleaner",
-  "vae_root": "D:\\Godot\\Proj\\STS2_ShoujoKagekiAijoKaren\\output\\imagegen\\starlight-nine\\texture-review\\flux2-vae",
+  "tool_root": "<karen-checkout>\\output\\imagegen\\starlight-nine\\texture-review\\artifact-cleaner",
+  "vae_root": "<karen-checkout>\\output\\imagegen\\starlight-nine\\texture-review\\flux2-vae",
   "originals_preserved": true,
   "assets": [
     {
@@ -532,7 +532,7 @@
       "contours_identical": true,
       "source_sha256": "e7c7ef5b50c5045a86f330ea3e797b2c06460b7cd17cb614b1fa4e024de20843",
       "sha256": "585b4850a44c72acbcec2255cadf8d3ccbc8c33109b9e074b6b77d9056840060",
-      "seconds": 0.0
+      "seconds": 0
     }
   ]
 }

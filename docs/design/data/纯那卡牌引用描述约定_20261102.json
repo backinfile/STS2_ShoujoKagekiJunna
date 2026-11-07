@@ -4,8 +4,8 @@
   "date": "2026-11-02",
   "sourceRevision": 1112,
   "sources": [
-    "D:/Github/spire-codex/extraction/raw/localization/zhs/cards.json",
-    "D:/Github/spire-codex/extraction/raw/src/Core/Models/Cards/CloakAndDagger.cs"
+    "<local-drive>/Github/spire-codex/extraction/raw/localization/zhs/cards.json",
+    "<local-drive>/Github/spire-codex/extraction/raw/src/Core/Models/Cards/CloakAndDagger.cs"
   ],
   "nativeExamples": [
     {

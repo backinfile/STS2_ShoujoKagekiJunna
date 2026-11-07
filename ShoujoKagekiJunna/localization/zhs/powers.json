@@ -97,5 +97,6 @@
   "JUNNA_JK127_POWER.title": "誊写",
   "JUNNA_JK139_POWER.title": "领悟",
   "JUNNA_JK127_POWER.smartDescription": "战斗胜利后，可以复制牌组中的1张牌。{Repetition}",
-  "JUNNA_JK139_POWER.smartDescription": "每回合开始时，获得{Amount}点[gold]能量[/gold]。"
+  "JUNNA_JK139_POWER.smartDescription": "每回合开始时，获得{Amount}点[gold]能量[/gold]。",
+  "JUNNA_JA105_POWER.title": "速射"
 }
