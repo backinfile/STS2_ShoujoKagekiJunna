@@ -18,6 +18,65 @@ foreach (var (name, previous, capacity) in cases)
 Check("multiple rows", [0, null, 1, 4], Enumerable.Range(0, 6).Select(i => new Vector2(i % 3 * 108, i / 3 * 140)).ToArray());
 Console.WriteLine("PASS: 8 ordered layout cases match the exhaustive minimum of moved arrows and travel distance.");
 
+const float spacing = 108;
+foreach (var (name, allyLeft, allyRight, left, right) in new[]
+{
+    ("normal", 530f, 530f, false, true),
+    ("surrounded", 960f, 960f, true, true),
+    ("left enemies only", 1400f, 1400f, true, false),
+    ("allied formation surrounded", 780f, 1060f, true, true),
+    ("near left edge", 180f, 180f, true, true),
+    ("near right edge", 1720f, 1720f, true, true)
+})
+{
+    var regions = ArrowLayout.Regions(1920, allyLeft, allyRight, left, spacing);
+    var active = new[] { regions[(int)ArrowLane.FriendlyGroup], regions[(int)ArrowLane.FriendlySingle], regions[(int)ArrowLane.EnemyGroup] }
+        .Concat(left ? [regions[(int)ArrowLane.Left]] : Array.Empty<Vector2>())
+        .Concat(right ? [regions[(int)ArrowLane.Right]] : Array.Empty<Vector2>()).OrderBy(r => r.X).ToArray();
+    foreach (var region in active)
+        Require(region.X >= 1920 * .08f && region.Y <= 1920 * .9f && region.Y >= region.X,
+            name + ": region stays inside visible canvas");
+    for (int index = 1; index < active.Length; index++)
+        Require(active[index].X - active[index - 1].Y >= spacing - .01f, name + ": regions remain separated");
+    if (name is "normal" or "surrounded" or "left enemies only")
+        Require(regions[(int)ArrowLane.FriendlySingle].Y < allyLeft, name + ": friendly arrows stay left of player");
+    if (name == "surrounded")
+        Require(regions[(int)ArrowLane.Left].Y < allyLeft && regions[(int)ArrowLane.Right].X > allyRight,
+            "enemy singles stay on their target side");
+
+    // Populate several rows: row wrapping must never put a group to the right of a single.
+    Vector2[] Populate(ArrowLane lane)
+    {
+        var range = regions[(int)lane];
+        int columns = Math.Max(1, (int)((range.Y - range.X) / spacing) + 1);
+        const int count = 7;
+        int rows = (count + columns - 1) / columns;
+        var slots = Enumerable.Range(0, columns * rows)
+            .Select(i => new Vector2(range.X + i % columns * spacing, i / columns * 140)).ToArray();
+        return ArrowLayout.Assign(new Vector2?[count], slots).Select(i => slots[i]).ToArray();
+    }
+    var friendlyGroups = Populate(ArrowLane.FriendlyGroup);
+    var friendlySingles = Populate(ArrowLane.FriendlySingle);
+    var enemyGroups = Populate(ArrowLane.EnemyGroup);
+    var enemySingles = (left ? Populate(ArrowLane.Left) : Array.Empty<Vector2>())
+        .Concat(right ? Populate(ArrowLane.Right) : Array.Empty<Vector2>()).ToArray();
+    Require(friendlyGroups.Max(p => p.X) < friendlySingles.Min(p => p.X), name + ": every ally group is left of every ally single");
+    Require(enemyGroups.Max(p => p.X) < enemySingles.Min(p => p.X), name + ": every enemy group is left of every enemy single");
+    Console.WriteLine("PASS: " + name + " formation and group-before-single order across rows");
+}
+Require(ArrowLayout.Lane(true, true, 400, 960) == ArrowLane.FriendlyGroup, "all allies use group region");
+Require(ArrowLayout.Lane(true, false, 960, 960) == ArrowLane.FriendlySingle, "self uses friendly single region");
+Require(ArrowLayout.Lane(false, true, 400, 960) == ArrowLane.EnemyGroup, "left enemy group uses group region");
+Require(ArrowLayout.Lane(false, true, 1500, 960) == ArrowLane.EnemyGroup, "right enemy group uses group region");
+Require(ArrowLayout.Lane(false, false, 400, 960) == ArrowLane.Left, "left enemy single");
+Require(ArrowLayout.Lane(false, false, 1500, 960) == ArrowLane.Right, "right enemy single");
+Console.WriteLine("PASS: target lanes preserve faction and group-before-single order.");
+
+static void Require(bool condition, string name)
+{
+    if (!condition) throw new Exception(name);
+}
+
 static void Check(string name, int?[] oldSlots, Vector2[] slots)
 {
     var previous = oldSlots.Select(index => index is { } i ? (Vector2?)slots[i] : null).ToArray();

@@ -2,9 +2,32 @@ using Godot;
 
 namespace ShoujoKagekiJunna.Combat;
 
-/// <summary>Ordered slot assignment: minimize moved existing arrows, then their travel, then balance new arrows.</summary>
+internal enum ArrowLane { FriendlyGroup, FriendlySingle, EnemyGroup, Left, Right }
+
+/// <summary>Target regions and ordered slots, preserving existing arrows before balancing new arrows.</summary>
 internal static class ArrowLayout
 {
+    // Group regions stay horizontally left of every single-target region in the same faction.
+    // Overflow grows down within each region, preserving that rule across multiple rows.
+    internal static Vector2[] Regions(float width, float allyLeft, float allyRight,
+        bool enemiesLeft, float spacing)
+    {
+        float min = width * .08f, max = width * .9f;
+        float end = Mathf.Clamp(enemiesLeft ? allyRight - spacing * .5f : allyLeft - spacing * .75f,
+            min + spacing * (enemiesLeft ? 4 : 2), max - spacing * 3);
+        float start = Mathf.Clamp(enemiesLeft ? allyLeft - spacing * 1.5f : end - spacing * 2,
+            min + (enemiesLeft ? spacing * 3 : 0), end - spacing);
+        var enemyGroup = enemiesLeft ? new Vector2(min, min + spacing)
+            : new Vector2(end + spacing, end + spacing * 2);
+        return [new(start, start), new(start + spacing, end), enemyGroup,
+            new(min + spacing * 2, Math.Max(min + spacing * 2, start - spacing)),
+            new(enemiesLeft ? end + spacing : enemyGroup.Y + spacing, max)];
+    }
+
+    internal static ArrowLane Lane(bool friendly, bool group, float targetX, float allyCenter)
+        => friendly ? group ? ArrowLane.FriendlyGroup : ArrowLane.FriendlySingle
+            : group ? ArrowLane.EnemyGroup : targetX < allyCenter ? ArrowLane.Left : ArrowLane.Right;
+
     private readonly record struct Cost(int Moved, double Travel, double Balance) : IComparable<Cost>
     {
         public int CompareTo(Cost other)

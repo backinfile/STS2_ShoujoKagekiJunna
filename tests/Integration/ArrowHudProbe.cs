@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.DevConsole;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Orbs;
@@ -25,6 +26,22 @@ public sealed class GroupArrowProbe() : CustomCardModel(0, ArrowPile.ArrowType, 
 {
     public override string CustomPortraitPath => "res://ShoujoKagekiJunna/images/floating_arrows/JUNNA_FULL_DRAW.png";
     protected override Task OnPlay(PlayerChoiceContext context, CardPlay play) => Task.CompletedTask;
+}
+
+// Exercises the shared ally-target layout through normal card play.
+[CustomID("JUNNA_PROBE_ALLIES_ARROW")]
+[Pool(typeof(JunnaCardPool))]
+public sealed class AllAlliesArrowProbe() : CustomCardModel(0, ArrowPile.ArrowType, CardRarity.Common, TargetType.AllAllies)
+{
+    public override string CustomPortraitPath => "res://ShoujoKagekiJunna/images/floating_arrows/JUNNA_FULL_DRAW.png";
+    public override List<(string, string)> Localization => new CardLoc("\u53cb\u65b9\u7bad\u77e2", "");
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Turns", 3)];
+    protected override CardLocation GetResultLocationForCardPlay() => new(Owner, ArrowPile.PileId, CardPilePosition.Bottom);
+    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
+    {
+        ArrowCombat.Deploy(this, play, 3, (_, _) => Task.CompletedTask);
+        await CardPileCmd.Add(this, ArrowPile.PileId);
+    }
 }
 
 public static class ArrowHudProbe
@@ -56,7 +73,10 @@ public static class ArrowHudProbe
                 }).ToArray(),
                 orb = new { size = orb.Size.ToString(), scale = orb.Scale.ToString(), bounds = bounds.Size.ToString(),
                     outline = outline.Size.ToString(), outlineScale = outline.Scale.ToString() },
-                arrows = hud?.GetChildren().OfType<Control>().Select(n => new
+                slots = hud == null ? null : ((Dictionary<ArrowDeployment, Vector2>)AccessTools.Field(typeof(ArrowHud), "_slots").GetValue(hud)!)
+                    .Select(pair => new { id = pair.Key.Card.Id.Entry, x = pair.Value.X, y = pair.Value.Y, category = pair.Key.TargetCategory,
+                        targetX = pair.Key.Target == null ? (float?)null : room.GetCreatureNode(pair.Key.Target)?.VfxSpawnPosition.X }).ToArray(),
+                arrows = hud?.GetChildren().OfType<Control>().Where(n => n.HasNode("TiltedFrame")).Select(n => new
                 {
                     position = n.Position.ToString(), size = n.Size.ToString(),
                     angle = n.GetNode<Control>("TiltedFrame").Rotation,
@@ -64,6 +84,7 @@ public static class ArrowHudProbe
                 }).ToArray(),
                 deployed = ArrowCombat.Deployed.Select(a => new { id = a.Card.Id.Entry, a.Remaining, a.TargetsAllEnemies }).ToArray(),
                 creatures = room.CreatureNodes.Select(n => new { name = n.Entity.ModelId.Entry,
+                    enemy = n.Entity.IsEnemy, x = n.VfxSpawnPosition.X, y = n.VfxSpawnPosition.Y,
                     position = n.VfxSpawnPosition.ToString(), hitbox = n.Hitbox.GetGlobalRect().ToString() }).ToArray()
             };
             orb.QueueFree();
