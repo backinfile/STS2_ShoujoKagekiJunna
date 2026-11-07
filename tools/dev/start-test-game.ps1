@@ -1,5 +1,6 @@
 param([int]$Port = 15727, [switch]$UseInstalledMod,
-    [ValidatePattern('^[a-z0-9-]+$')][string]$Instance = 'dev-game')
+    [ValidatePattern('^[a-z0-9-]+$')][string]$Instance = 'dev-game',
+    [string]$CorePackage = $env:SHOUJO_CORE_PACKAGE)
 $ErrorActionPreference = 'Stop'
 $junnaRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $junnaArtifacts = Join-Path $junnaRoot "artifacts/$Instance"
@@ -37,9 +38,13 @@ New-Item -ItemType Directory -Force $mods, "$mods/BaseLib", "$mods/ShoujoKagekiJ
 $basePackage = Join-Path ([Environment]::GetFolderPath('UserProfile')) '.nuget/packages/alchyr.sts2.baselib/3.4.7'
 Copy-Item -LiteralPath "$basePackage/lib/net9.0/BaseLib.dll", "$basePackage/Content/BaseLib.json", "$basePackage/Content/BaseLib.pck" -Destination "$mods/BaseLib"
 if (!$UseInstalledMod) {
+    . (Join-Path $junnaRoot 'tools/core-package.ps1')
+    $manifest = Get-Content -LiteralPath (Join-Path $junnaRoot 'ShoujoKagekiJunna.json') -Raw -Encoding utf8 | ConvertFrom-Json
+    $minimumCoreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiAijoCore' }).min_version
+    $core = Get-CorePackage $CorePackage $minimumCoreVersion
     Copy-Item -Path "$junnaRoot/dist/ShoujoKagekiJunna/*" -Destination "$mods/ShoujoKagekiJunna" -Recurse -Force
     New-Item -ItemType Directory -Force "$mods/ShoujoKagekiAijoCore" | Out-Null
-    Copy-Item -Path "$junnaRoot/dist/ShoujoKagekiAijoCore/*" -Destination "$mods/ShoujoKagekiAijoCore" -Recurse -Force
+    Copy-Item -Path (Join-Path $core.Root '*') -Destination "$mods/ShoujoKagekiAijoCore" -Recurse -Force
 }
 Copy-Item -LiteralPath "$junnaRoot/.tools/implementation/mcp/KarenSTS2MCP.dll" -Destination $mods
 Copy-Item -LiteralPath 'D:/Github/STS2_Mcp/mod_manifest.json' -Destination "$mods/KarenSTS2MCP.json"

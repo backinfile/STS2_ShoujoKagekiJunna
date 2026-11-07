@@ -12,6 +12,8 @@
 
 追加范围确认：只完成正式卡池。
 
+追加授权：合并并清理
+
 ## Brief task plan
 
 - 通过云端 MCP 核对最新正式卡池，按当前牌效补齐名字、原作图片、关系与出处。
@@ -46,4 +48,5 @@
 - 起始分支 main，提交 a988a0d7adaf0de680e69b15420520b7b08df778。
 - 任务分支 task/sync-card-fit-20261107，工作树 ../worktrees/STS2_ShoujoKagekiJunna/sync-card-fit-20261107。
 - 主目录起始 13 项未提交文件中，12 项 SHA-256 保持一致；app.js 出现后续编辑，并另有 workbench.css 与 trash-pagination.test.cjs 两项工作台改动，均按当前内容保留。本任务与这 15 项未提交路径无重叠。起始文件列表：README.md、build.ps1、docs/design/workbench/app.js、docs/design/workbench/build-readonly.cjs、docs/design/workbench/deploy/build-editor.cjs、docs/design/workbench/mobile-layout.js、docs/design/workbench/mobile.css、docs/design/workbench/route-position-tags.test.cjs、tools/dev/start-test-game.ps1、docs/design/workbench/mobile-sort.test.cjs、docs/design/workbench/natural-sort.test.cjs、play.ps1、play.py。
-- 任务提交与本地 main 同步后等待合并确认。工作树、任务分支和交付文件保留，清理需另行确认。
+- 用户已授权合并与清理。main 随后加入 Core 工坊依赖调整，已同步 ddcac8a，未发生冲突；18 项打包检查通过，运行源码及角色包元数据与已验证交付版一致。同步报告为 out/tmp/card-fit/synchronization-checks.json。
+- 合并前再次按当前状态核对主目录未提交编辑。清理工作树和任务分支前，将安装包、录像、截图和验证报告保留到 artifacts/card-fit-20261107-delivery/。

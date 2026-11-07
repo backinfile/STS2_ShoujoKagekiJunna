@@ -15,7 +15,17 @@
 ## 构建与安装
 
 执行 `./build.ps1 -CorePackage <Core发行目录>`，或通过 `SHOUJO_CORE_PACKAGE` 指定同一目录。脚本的 `GameDir`、`Godot` 参数可指定游戏与 MegaDot 编辑器路径。
-产物位于 `dist/ShoujoKagekiJunna/` 和 `dist/ShoujoKagekiAijoCore/`。将两个完整目录放到游戏的 `mods/`，同时安装 BaseLib 3.4.7。加载顺序为 BaseLib → Core → Junna。入口 DLL 按游戏版本选择 `lib/ShoujoKagekiJunna.Stable.dll` 或 `lib/ShoujoKagekiJunna.Beta.dll`；构建脚本使用正式版 0.107.1 引用包与 `GameDir` 中的测试版程序集分别编译。
+产物位于 `dist/ShoujoKagekiJunna/`，编译时从 Core 发行包引用 API，并生成 `core.requirements` 和 `core.package.lock`。游玩时订阅独立的 Core 与 BaseLib 3.4.7 工坊条目；手动安装则将 Junna、Core 和 BaseLib 各自的完整目录放入游戏 `mods/`。加载顺序为 BaseLib → Core → Junna。入口 DLL 按游戏版本选择 `lib/ShoujoKagekiJunna.Stable.dll` 或 `lib/ShoujoKagekiJunna.Beta.dll`；构建脚本使用正式版 0.107.1 引用包与 `GameDir` 中的测试版程序集分别编译。
+
+Core 发布后，使用其 `mod_id.txt` 中的数字 ID 准备 Junna 工坊工作区：
+
+```powershell
+./tools/prepare-workshop.ps1 -CoreWorkshopId <Core工坊ID> -PreviewImage <小于1MB的PNG> -OutputDirectory out/workshop/junna
+```
+
+工作区的 `content/` 仅包含 Junna；`workshop.json` 声明 BaseLib 和 Core 的工坊依赖。更新已有 Junna 条目时传入 `-WorkshopId <Junna工坊ID>`。使用[官方 ModUploader](https://github.com/megacrit/sts2-mod-uploader)上传该工作区。
+
+独立开发环境通过 `./tools/dev/start-test-game.ps1 -CorePackage <Core发行目录>` 或 `SHOUJO_CORE_PACKAGE` 安装 Core，来源与发布包分开。
 
 当前卡牌与升级数值记录在 `data/card-pool.json`，效果覆盖与验证见 [卡池实现记录](docs/implementation/card-effects.md)。
 `python tools/assets/generate-card-catalog.py <MCP导出快照>` 更新卡牌清单、模型入口、配图与本地化；具体牌效在 C# 中实现。工作台内容仍统一通过 MCP 编辑。
