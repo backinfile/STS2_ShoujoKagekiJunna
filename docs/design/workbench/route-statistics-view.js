@@ -58,17 +58,6 @@ function createJunnaRouteStatisticsView(deps) {
     if(!rows.length)rows.push('<tr><td colspan="6" class="overview-empty">暂无卡牌</td></tr>');
     return '<div class="flow-card-list">'+table(route.name+' · '+label(key)+' · '+list.length+'张',['编号','牌名','稀有度','类型','费用','定位'],rows)+'</div>';
   }
-  function recommendations() {
-    if(ui().flowScope!=='cards')return '';
-    const value=logic.compute(data(),defaults,{scope:ui().flowScope,onlyRewards:ui().flowOnlyRewards,position:'all'});
-    const plans=selectedRoutes(value).map(route=>({route,plan:logic.recommend(route,defaults)})).filter(entry=>entry.plan);if(!plans.length)return '';
-    const difference=(current,target)=>current===target?'一致':(current>target?'多':'少')+Math.abs(current-target)+'张',pending=plans.some(entry=>entry.plan.pending);
-    const comparison=plans.map(({route,plan:p})=>'<tr>'+nameCell(route)+'<td>'+p.currentSides.trigger+'张</td><td>'+p.targetSides.trigger+'张</td><td>'+difference(p.currentSides.trigger,p.targetSides.trigger)+'</td><td>'+p.currentSides.payoff+'张</td><td>'+p.targetSides.payoff+'张</td><td>'+difference(p.currentSides.payoff,p.targetSides.payoff)+'</td>'+(pending?'<td>'+p.pending+'</td>':'')+'</tr>');
-    const ratios=plans.map(({route,plan:p})=>'<tr>'+nameCell(route)+'<td>'+logic.roleRatio(p.currentSides.trigger,p.currentSides.payoff)+'</td><td>'+logic.roleRatio(p.targetSides.trigger,p.targetSides.payoff)+'</td></tr>');
-    const keys=['trigger','payoff'],percent=new Intl.NumberFormat('zh-CN',{style:'percent',maximumFractionDigits:1});
-    const allocation=plans.map(({route,plan:p})=>'<tr>'+nameCell(route)+'<td>'+p.size+'</td>'+keys.map(key=>'<td>'+p.targetSides[key]+(p.targetSides[key]?'（'+percent.format(p.size?p.targetSides[key]/p.size:0)+'）':'')+'</td>').join('')+'</tr>');
-    return table('数量建议 · 整个流派',['流派','当前触发牌','建议触发牌','触发牌差额','当前收益牌','建议收益牌','收益牌差额',...(pending?['待分类']:[])],comparison)+'<p class="flow-counting-note">同一张牌可同时计入触发牌和收益牌。3∶1表示3张触发牌对应1张收益牌。</p>'+table('触发牌∶收益牌',['流派','当前比例','建议比例'],ratios)+table('推荐定位 · 数量（占比）',['流派','牌面总数',...keys.map(key=>(logic.positions[key]||logic.roles[key]))],allocation);
-  }
   function effectClassification() {
     const value=stats(),routes=selectedRoutes(value);
     const rows=routes.flatMap(route=>['trigger','payoff','both','tool'].flatMap(role=>{
@@ -90,7 +79,7 @@ function createJunnaRouteStatisticsView(deps) {
     const majorCount=routes.filter(route=>route.level!=='小体系').length,minorCount=routes.length-majorCount;
     dom('page-title').textContent='流派统计';dom('result-count').textContent=[...(majorCount?[majorCount+' 个流派']:[]),...(minorCount?[minorCount+' 个小体系']:[]),selectedCards(value).length+' 张牌面'].join(' · ');dom('work-area').setAttribute('aria-labelledby','tab-flows');dom('page-actions').innerHTML='';
     const keys=Object.keys(logic.positions);
-    const composition=routes.map(route=>'<tr>'+nameCell(route)+number(route,'all',route.members)+number(route,'rewards',route.rewards)+keys.map(key=>number(route,key,logic.membersFor(route,key))).join('')+'</tr>');
+    const composition=routes.map(route=>'<tr>'+nameCell(route)+number(route,'all',route.members)+number(route,'rewards',route.rewards)+keys.map(key=>number(route,key,logic.membersFor(route,key))).join('')+'<td>'+logic.roleRatio(logic.membersFor(route,'trigger').length,logic.membersFor(route,'payoff').length)+'</td></tr>');
     const rarity=routes.map(route=>'<tr>'+nameCell(route)+logic.rarities.map(r=>number(route,'rarity:'+r,route.rarity[r])).join('')+'</tr>');
     const portKeys=Object.keys(logic.ports),missingPorts=routes.some(route=>route.unassignedPorts.length);
     const ports=routes.map(route=>'<tr>'+nameCell(route)+portKeys.map(port=>number(route,'port:'+port,route.payoffPorts[port])).join('')+(missingPorts?number(route,'unassignedPorts',route.unassignedPorts):'')+'</tr>');
@@ -105,7 +94,7 @@ function createJunnaRouteStatisticsView(deps) {
       standard=table('当前卡池与标准',['稀有度','当前','标准','差额'],standardRows);
     }
     const effectDrill=ui().flowDrill?.key.startsWith('effect:');
-    dom('work-area').innerHTML='<div class="flow-statistics">'+effectClassification()+(effectDrill?cardList(value):'')+recommendations()+'<div class="flow-composition">'+table('定位分布',['流派','牌面','奖励入口',...keys.map(key=>logic.positions[key])],composition)+'</div>'+(effectDrill?'':cardList(value))+'<div class="flow-distributions">'+roleRarity+table('稀有度分布',['流派',...logic.rarities],rarity)+table('收益端口',['流派',...portKeys.map(key=>logic.ports[key]),...(missingPorts?['待分配']:[])],ports)+table('费用分布',['流派','0','1','2','3+','X'],cost)+standard+'</div></div>';
+    dom('work-area').innerHTML='<div class="flow-statistics">'+effectClassification()+(effectDrill?cardList(value):'')+'<div class="flow-composition">'+table('定位分布',['流派','牌面','奖励入口',...keys.map(key=>logic.positions[key]),'触发∶收益'],composition)+'</div>'+(effectDrill?'':cardList(value))+'<div class="flow-distributions">'+roleRarity+table('稀有度分布',['流派',...logic.rarities],rarity)+table('收益端口',['流派',...portKeys.map(key=>logic.ports[key]),...(missingPorts?['待分配']:[])],ports)+table('费用分布',['流派','0','1','2','3+','X'],cost)+standard+'</div></div>';
   }
   function inspector() {
     const value=stats(),routes=selectedRoutes(value),cards=selectedCards(value),unclassified=new Set(routes.flatMap(route=>route.buckets.unclassified.map(card=>card.uid))).size,related=new Set(data().partnerGroups.flatMap(group=>group.grantedCardIds));

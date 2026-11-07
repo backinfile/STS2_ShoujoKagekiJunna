@@ -47,6 +47,7 @@ dialog{color:var(--ink);background:var(--surface);border:1px solid #536069;borde
 @media(max-width:650px){.sidebar .filter-group{flex-basis:190px;margin:0}.filter-option{min-height:40px}}
 
 .trash-restore{margin-top:10px}
+.trash-pagination{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px 0 24px;font-variant-numeric:tabular-nums;color:var(--muted)}.card-grid+.trash-pagination{padding:24px 0 12px}.trash-pagination .button{min-height:40px}
 .inspector-footer{flex-wrap:wrap;gap:8px}.inspector-group-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));flex:0 0 100%;gap:8px}.inspector-group-actions .button{min-width:0}@media(max-width:650px){.inspector-group-actions{grid-template-columns:minmax(0,1fr)}}
 
 .card-links .text-button{font-size:inherit;line-height:inherit;text-align:left}

@@ -9,6 +9,17 @@
     const inspectorDialog = dom('mobile-inspector-dialog');
     const filtersButton = dom('mobile-filters-button');
     const inspectorButton = dom('mobile-inspector-button');
+    const actionMenu = document.querySelector('.global-actions .menu');
+    const menuItems = actionMenu.querySelector('.menu-items');
+    const menuSummary = actionMenu.querySelector('summary');
+    const firstFileAction = menuItems.firstElementChild;
+    const secondaryActions = ['undo', 'redo', 'history-button'].map(id => {
+      const button = dom(id);
+      const anchor = document.createComment(id + ' position');
+      button.before(anchor);
+      button.addEventListener('click', () => { actionMenu.open = false; });
+      return { button, anchor };
+    });
     const filtersAnchor = document.createComment('sidebar position');
     const inspectorAnchor = document.createComment('inspector position');
     filters.before(filtersAnchor);
@@ -16,6 +27,21 @@
     let preserveSelection = false;
     let updatePending = false;
     let activeTab = null;
+
+    function syncActions() {
+      for (const { button, anchor } of secondaryActions) {
+        if (narrowScreen.matches) {
+          if (button.parentElement !== menuItems) menuItems.insertBefore(button, firstFileAction);
+        } else if (button.parentElement !== anchor.parentElement) anchor.after(button);
+      }
+      const label = narrowScreen.matches ? '操作' : '文件';
+      if (menuSummary.textContent !== label) menuSummary.textContent = label;
+    }
+
+    function scrollToTop() {
+      dom('workspace').scrollTop = 0;
+      dom('work-area').scrollTop = 0;
+    }
 
     function openFilters() {
       if (!narrowScreen.matches || filtersDialog.open) return;
@@ -52,6 +78,7 @@
 
     function sync() {
       updatePending = false;
+      syncActions();
       filtersButton.disabled = !filters.children.length;
       inspectorButton.disabled = !dom('editor-form').children.length && !dom('preview').children.length;
       if (!narrowScreen.matches) return;
@@ -80,7 +107,7 @@
       update();
     });
 
-    return { update };
+    return { update, scrollToTop };
   }
 
   root.JunnaMobileLayout = { create };

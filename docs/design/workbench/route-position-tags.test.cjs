@@ -68,12 +68,12 @@ test('流派与关键词使用筛选按钮，排序选项位于列表顶部',()=
  vm.runInContext(source.slice(start,end)+'\n'+source.slice(sortStart,sortEnd)+'\nrenderSidebar();globalThis.topSort=sortControls();',context);
  const sidebar=nodes.sidebar.innerHTML;assert(sidebar.includes('data-filter="archetype" data-filter-value="SYS_stage"'));assert(sidebar.includes('data-filter="term" data-filter-value="K"'));
  assert(!sidebar.includes('<select'));assert(!sidebar.includes('data-filter="sort"'));assert(!sidebar.includes('倒序'));
- assert.equal((context.topSort.match(/data-sort-key=/g)||[]).length,7);assert(context.topSort.includes('data-sort-direction'));assert(context.topSort.includes('data-sort-key="cost" aria-pressed="true"'));
+ assert.equal((context.topSort.match(/data-sort-key=/g)||[]).length,8);assert(context.topSort.includes('data-sort-direction'));assert(context.topSort.includes('data-sort-key="cost" aria-pressed="true"'));
 });
 test('顶部排序按钮切换排序项和方向，并保存状态及返回列表顶部',()=>{
  const source=fs.readFileSync(require.resolve('./app.js'),'utf8'),a=source.indexOf('  const CARD_SORTS='),b=source.indexOf('  function renderWorkspace(){',a);
  const ui={sort:'id',descending:false},nodes={'work-area':{scrollTop:100},'page-actions':{querySelector(){return{focus(){}}}}};let rendered=0,saved=0;
- const context=vm.createContext({ui,$:id=>nodes[id],flushEdit(){},renderWorkspace(){rendered++},saveUI(){saved++}});
+ const context=vm.createContext({ui,$:id=>nodes[id],mobileLayout:{scrollToTop(){nodes['work-area'].scrollTop=0;}},flushEdit(){},renderWorkspace(){rendered++},saveUI(){saved++}});
  vm.runInContext(source.slice(a,b)+'\nglobalThis.change=changeSort;',context);
  const event=dataset=>({target:{closest(){return{dataset}}}});
  assert(context.change(event({sortKey:'cost'})));assert.equal(ui.sort,'cost');assert.equal(nodes['work-area'].scrollTop,0);

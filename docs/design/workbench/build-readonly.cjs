@@ -18,7 +18,7 @@ const state = {
   workspaceId: original.workspaceId + ':readonly:' + original.revision,
   revision: original.revision, data: original.data, assets: {},
   history: [], undoStack: [], redoStack: [], seedBatches: [], appliedSeedBatches: [],
-  ui: {tab: 'cards', pool: 'pool', sort: 'rarity', selected: null}, exportedAt: stamp
+  ui: {tab: 'cards', pool: 'pool', sort: 'natural', selected: null}, exportedAt: stamp
 };
 fs.mkdirSync(path.join(out, 'assets'), {recursive: true});
 const assets = {...json(path.join(here, 'assets.json')), ...original.assets};
@@ -49,7 +49,7 @@ function replaceOnce(before, after) {
 }
 replaceOnce("const previewMode=new URLSearchParams(location.hash.slice(1)).get('preview')==='1';", 'const previewMode=false;');
 app = app.replace(/  let connection=null;[^\n]+\n/, '  const connection=null;\n');
-replaceOnce('function assetURL(id){const source=', 'function assetURL(id){return state.assets?.[id]||builtAssets[id]||builtAssets.defaultPortrait;}\n  function unusedAssetURL(id){const source=');
+replaceOnce('function assetURL(id){const source=', 'function assetURL(id){return new URL(state.assets?.[id]||builtAssets[id]||builtAssets.defaultPortrait,location.href).href;}\n  function unusedAssetURL(id){const source=');
 replaceOnce('function syncMirror(){', 'function syncMirror(){return true;');
 replaceOnce('function persist(){', 'function persist(){return Promise.resolve();');
 replaceOnce("function transact(label,mutate,kind='编辑'){", "function transact(label,mutate,kind='编辑'){return null;");

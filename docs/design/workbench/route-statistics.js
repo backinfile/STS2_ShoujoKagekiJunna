@@ -118,26 +118,9 @@ const JunnaRouteStatistics = (() => {
     if(key==='unassignedPorts')return route.unassignedPorts;
     return route.buckets[key]||[];
   }
-  function recommend(route,defaults) {
-    const plan=defaults.recommendations?.routes.find(entry=>entry.id===route.id);if(!plan)return null;
-    const keys=['load','trigger','payoff','both','tool'],size=route.members.length;
-    const migratedWeights={...plan.weights,payoff:Number(plan.weights.payoff||0)+Number(plan.weights.tool||0),tool:0};
-    const weights=keys.map(role=>Number(migratedWeights[role]||0)),total=weights.reduce((sum,value)=>sum+value,0);
-    if(total<=0||weights.some(value=>!Number.isFinite(value)||value<0))return null;
-    const quotas=weights.map(value=>size*value/total),target=Object.fromEntries(keys.map((role,index)=>[role,Math.floor(quotas[index])]));
-    const order=keys.map((role,index)=>({role,index,remainder:quotas[index]-target[role]})).sort((a,b)=>b.remainder-a.remainder||a.index-b.index);
-    const remaining=size-Object.values(target).reduce((sum,value)=>sum+value,0);for(let i=0;i<remaining;i++)target[order[i].role]++;
-    const current=Object.fromEntries(keys.map(role=>[role,route.buckets[role].length]));
-    const sides=counts=>({trigger:counts.trigger+counts.both,payoff:counts.payoff+counts.both});
-    const currentSides=sides(current),targetSides=sides(target);
-    return {size,current,target,currentSides,targetSides,pending:route.buckets.unclassified.length,
-      share:Object.fromEntries(keys.map(role=>[role,size?target[role]/size:0])),
-      difference:{trigger:targetSides.trigger-currentSides.trigger,payoff:targetSides.payoff-currentSides.payoff},
-      nominalSides:sides(migratedWeights),rationale:plan.rationale};
-  }
   function roleRatio(trigger,payoff) {
     if(!trigger&&!payoff)return '—';let a=trigger,b=payoff;while(b){const rest=a%b;a=b;b=rest;}return trigger/a+'∶'+payoff/a;
   }
-  return {roles,positions,normalizePositions,positionTags,isBreakthrough,togglePositionFilter,ports,rarities,cardScope,isReward,inferProfile,profile,matchesPosition,compute,membersFor,recommend,roleRatio};
+  return {roles,positions,normalizePositions,positionTags,isBreakthrough,togglePositionFilter,ports,rarities,cardScope,isReward,inferProfile,profile,matchesPosition,compute,membersFor,roleRatio};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=JunnaRouteStatistics;

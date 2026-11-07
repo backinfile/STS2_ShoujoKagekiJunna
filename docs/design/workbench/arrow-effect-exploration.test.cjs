@@ -40,12 +40,3 @@ test('效果计数区分两种目标、一次与批量预约，读取基础牌�
  const energy={...route('energy'),members:[cards[0]],effectRoles:{payoff:{effects:[{id:'energy.auto-play'}]}}};
  assert.equal(effects.entries(energy,{cards,partnerGroups:[]},defaults,logic.profile)[0].members.length,1);
 });
-test('原工具推荐权重合入收益且保持牌面总数',()=>{
- const legacy=structuredClone(defaults);legacy.recommendations.routes[0].weights={load:0,trigger:65,payoff:15,both:10,tool:10};
- const r={...route('stage'),members:Array.from({length:20},(_,i)=>card(String(i),'')),buckets:{load:[],trigger:[],payoff:[],both:[],tool:[],unclassified:[]}};
- const p=logic.recommend(r,legacy);
- assert.equal(p.target.tool,0);
- assert.equal(p.target.payoff,5);
- assert.equal(Object.values(p.target).reduce((a,b)=>a+b,0),20);
- assert.deepEqual(p.nominalSides,{trigger:75,payoff:35});
-});
