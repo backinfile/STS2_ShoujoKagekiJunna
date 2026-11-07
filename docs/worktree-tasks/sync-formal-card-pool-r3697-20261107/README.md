@@ -151,6 +151,14 @@
 </send_user_message_question_reply>
 ````
 
+### 用户消息 10
+
+````text
+<send_user_message_question_reply>
+[{"answer":"合并并清理","question":"是否将 task/sync-formal-card-pool-r3697-20261107 的提交 75c3ca7 合并到 main？已包含 r3725 的98张正式牌、18个知识组，以及迎击、重复练习升级、弦声齐鸣的最新变化；双版本构建与本次追加6项实机检查通过。选择清理时，先将交付资料保留到 artifacts/formal-pool-r3725-delivery/，再删除本轮工作树、任务分支和临时构建／测试文件。","questionItemId":"[\"request_user_input_async\",\"call_15680e85251d4ced8fa9a849e1e12d74\",0]"}]
+</send_user_message_question_reply>
+````
+
 ## Brief task plan
 
 - 从 MCP 读取正式卡池及契合约定，对比已合入的 r3677。
@@ -179,4 +187,4 @@
 - 起始分支 main，提交 301e97f02e510d50e44a602d0e5449d3fd194b72。
 - 工作树 ../worktrees/STS2_ShoujoKagekiJunna/sync-formal-card-pool-r3697-20261107，任务分支 task/sync-formal-card-pool-r3697-20261107。
 - 起始主目录 5 项未提交文件已记录哈希并保留：README.md、build.ps1、tools/dev/start-test-game.ps1、play.ps1、play.py。主目录期间另有工作台并行编辑，按合并前当前状态一并保留。
-- 等待本轮合并与清理确认；拟清理本工作树、任务分支和树内临时构建、测试资料，交付包、两段录像、截图与验证报告将在清理前复制到主目录 artifacts/formal-pool-r3725-delivery/。
+- 本轮合并与清理已获用户授权。实现提交 75c3ca7 已快进合入 main，合并后的提交树与任务树一致；主目录当时全部 28 项未提交文件逐项核对 SHA-256 保持一致。安装包、两段录像、截图及验证报告共 24 项已保留到 artifacts/formal-pool-r3725-delivery/。清理本工作树、任务分支及树内临时构建和测试资料，执行状态见该目录 integration-result.json。
