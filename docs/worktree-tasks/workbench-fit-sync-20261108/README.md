@@ -143,6 +143,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 先完成在用卡池（推荐）
 
+### 5. 合并与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_dfa742a43f0944d19d2a7b12e15a68ec\",0]","question":"提交 3da62ac 已就绪（r4011，95 张牌、16 组知识，90 项定向实机检查及 955 项对照通过）。是否合入 main？主目录有 14 个重叠的未提交文件；若 Git 无法安全合并，将保留工作树。清理仅包含本次任务工作树、任务分支及其中临时文件，交付包与录像保留。","answer":"合并并清理本次工作树和分支"}]
+</send_user_message_question_reply>
+
 ## Brief task plan
 
 - 原始分支 `main`，原始提交 `5e73acb30f349e60b22d1a5faa09d5bd24921c40`。
@@ -162,4 +168,4 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 主目录原有118个未提交文件已记录哈希。本次始终在独立工作树修改；复核发现4个工作台页面相关文件在其他工作中继续变化，已保存差异清单。本次未写入这些文件。
 - 商店遗物“你的知识永远闪耀”在当前工作台效果为空，保留该设计状态。
 - 已审查136份Git跟踪文档及本次新增任务文档；未发现敏感值或本地绝对路径。
-- 本次源码和任务文档整理为一个任务提交，等待用户确认合并与清理。目标分支为最初捕获的 `main`；当前主目录仍有与本次同步重叠的未提交改动。
+- 本次源码和任务文档的任务提交为 `3da62ac`。用户已授权合并并清理本次工作树和任务分支；交付包与录像保留。确认后将 `main` 新增的 `b3df0e4`（美味饼干配图）同步到任务分支，合并目标仍为最初捕获的 `main`。同步后的Beta、Stable、加载器、Godot资源导入与打包均通过。主目录仍有14个重叠的未提交文件，Git只读合并预检以 `Entry README.md not uptodate. Cannot merge.` 拒绝落入目标树；预检前后主目录HEAD、分支、文件哈希、暂存补丁及未提交补丁完全一致。依据技能第7步，合并保持待处理状态，任务分支和工作树保留。用户合并及清理授权继续有效；需先处理主目录的重叠未提交改动。

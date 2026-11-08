@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-08",
+  "subject": "Junna native Yummy Cookie variant",
+  "generator": "built-in image_gen",
+  "prompt": "prompt.txt",
+  "identity_reference": "ShoujoKagekiJunna/images/portrait.png",
+  "style_references": [
+    "<karen-mod>/docs/design/assets/yummy-cookie-karen/master.png",
+    "<base-game-extracted-assets>/images/relics/yummy_cookie_silent.png",
+    "<base-game-extracted-assets>/images/relics/yummy_cookie_necro.png",
+    "<base-game-extracted-assets>/images/relics/yummy_cookie_defect.png"
+  ],
+  "cleanup": {
+    "tool": "GPT Image 2 Artifact Cleaner",
+    "strength": 0.25,
+    "local_only": true,
+    "regeneration": false,
+    "original": "generated.png",
+    "candidate": "master.png",
+    "original_sha256": "4c05c06ae0a6418bb75a228749269df734607e43b76a48eb1971f2f517da14fe",
+    "candidate_sha256": "48b44179ee58f4aa3c42779081149b7f8fe90e102878a4f92dd4c4502f104d2a",
+    "size": [
+      1254,
+      1254
+    ],
+    "alpha_identical": true,
+    "visible_rgb_mean_absolute_change": 2.1245,
+    "seconds": 3.297
+  },
+  "mi_ripple": {
+    "tool": "Mi-Ripple 0.1.0",
+    "actions": [
+      "diagnose",
+      "finish"
+    ],
+    "supported_artifact_detected": false,
+    "pixels_unchanged": true,
+    "report": "<local-artwork-preview>/mi-ripple/moire-review.json"
+  },
+  "checks": {
+    "alpha_identical_to_raw": true,
+    "original_size_preserved": true,
+    "export_sizes": [
+      85,
+      256
+    ],
+    "transparent_export_padding": true,
+    "visual_review": "Passed: inspected native-resolution before/after glasses and bell crops, full cleaned image, diagnostic board and heat map, and seven-cookie comparison at 256/85px. Glasses frames remain continuous, green eyes and bell slits remain distinct, left ponytail orientation and uneven baked contour retained."
+  },
+  "files": [
+    {
+      "path": "docs/implementation/assets/yummy-cookie-junna/generated.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "4c05c06ae0a6418bb75a228749269df734607e43b76a48eb1971f2f517da14fe"
+    },
+    {
+      "path": "docs/implementation/assets/yummy-cookie-junna/master.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "48b44179ee58f4aa3c42779081149b7f8fe90e102878a4f92dd4c4502f104d2a"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/yummy_cookie_junna.png",
+      "size": [
+        85,
+        85
+      ],
+      "sha256": "15dab2b6e66870790c60a26147360a2285281293ace80531ced5810b8685b9d0"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/yummy_cookie_junna_big.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "90220c12bc5bbb6daf472f1dcc4ace16d6511b193cc0397363a6d8a53c78828b"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/yummy_cookie_junna_outline.png",
+      "size": [
+        85,
+        85
+      ],
+      "sha256": "0d6031b0cd315c13a54dd727906c639dbff1411fac271141d24388c1c3ce05d4"
+    }
+  ],
+  "comparisons": [
+    "<local-artwork-preview>/all-cookies-dark.png",
+    "<local-artwork-preview>/cleanup-comparison.png"
+  ]
+}
