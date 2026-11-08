@@ -17,7 +17,7 @@ public static class CardEffects
     {
         var player = card.Owner;
         var hand = player.PlayerCombatState!.Hand;
-        int V(string name, int fallback = 0) => card.Value(name, fallback);
+        int V(string name, int? fallback = null) => fallback.HasValue ? card.Value(name, fallback.Value) : card.Value(name);
         Task Block(int? amount = null) => CreatureCmd.GainBlock(player.Creature, amount ?? V("Block"), ValueProp.Move, play);
         Task Draw(int count) => CardPileCmd.Draw(context, count, player);
         Task Energy(int amount) => PlayerCmd.GainEnergy(amount, player);
@@ -289,11 +289,11 @@ public static class CardEffects
         { c.EnergyCost.SetThisCombat(0); c.InvokeEnergyCostChanged(); }
     }
 
-    public static async Task<DamageResult[]> DealDamage(CatalogCard card, PlayerChoiceContext context, CardPlay play, int damage, int hits)
+    public static async Task<DamageResult[]> DealDamage(CardModel card, PlayerChoiceContext context, CardPlay play, int damage, int hits)
     {
         if (hits <= 0 || (card.TargetType == TargetType.AnyEnemy && play.Target?.IsAlive != true)) return [];
         var attack = DamageCmd.Attack(damage).FromCard(card, play).WithHitCount(hits).WithHitFx(VfxCmd.slashPath);
-        if (card.TargetType == TargetType.AllEnemies || card.DesignId == "JG34") attack.TargetingAllOpponents(card.Owner.Creature.CombatState!);
+        if (card.TargetType == TargetType.AllEnemies || CardCatalog.DesignId(card) == "JG34") attack.TargetingAllOpponents(card.Owner.Creature.CombatState!);
         else attack.Targeting(play.Target!);
         await attack.Execute(context);
         return attack.Results.SelectMany(r => r).ToArray();

@@ -73,7 +73,7 @@ public static class DamageModifiers
 
     internal static void Copy(AbstractModel original, AbstractModel clone)
     {
-        if (original is CardModel card && clone is CardModel copied && _cards.TryGetValue(card, out var investment))
+        if (original is CardModel card && clone is CardModel copied && card.Id == copied.Id && _cards.TryGetValue(card, out var investment))
             _cards.AddOrUpdate(copied, new Investment { Bonus = investment.Bonus, Hits = investment.Hits, HasReceivedBonus = investment.HasReceivedBonus, FirstDamageBonusCaptured = investment.FirstDamageBonusCaptured });
     }
 

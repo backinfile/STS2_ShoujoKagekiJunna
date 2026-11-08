@@ -15,18 +15,33 @@ namespace ShoujoKagekiJunna.Models;
 
 public abstract partial class CatalogPower(string designId) : CustomPowerModel
 {
-    private sealed class Grant(CatalogCard card, CardPlay installedBy, int xValue)
+    private sealed record EffectData(CardModel Source, IReadOnlyDictionary<string, int> Values,
+        bool IsUpgraded, bool CostsX, int XValue, ResourceInfo Resources)
     {
-        public readonly CatalogCard Card = card;
+        internal static EffectData Capture(CatalogCard card, CardPlay play)
+        {
+            var values = card.Definition.Values.SelectMany(value => value.Aliases.Prepend(value.Name)
+                .Select(name => new KeyValuePair<string, int>(name, card.DynamicVars[value.Name].IntValue)))
+                .ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.Ordinal);
+            return new(ShoujoKageki.Core.V1.CardCopies.Snapshot<CardModel>(card), values,
+                card.IsUpgraded, card.Definition.CostsX,
+                card.Definition.CostsX ? card.ResolveEnergyXValue() : 0, play.Resources);
+        }
+    }
+    private sealed class Grant(EffectData effect, CardPlay installedBy)
+    {
+        public CardModel Source => effect.Source;
+        public bool IsUpgraded => effect.IsUpgraded;
         public readonly CardPlay InstalledBy = installedBy;
-        public readonly int XValue = xValue;
-        public int BaseHits => Card.Definition.CostsX ? XValue : 1;
+        public int BaseHits => effect.CostsX ? effect.XValue : 1;
         public int Turn = -1;
         public int Used;
-        public int V(string name) => Card.Value(name);
+        public int V(string name) => effect.Values.TryGetValue(name, out var value) ? value
+            : throw new InvalidDataException($"Power {Source.Id} has no field {name}.");
+        public Grant Copy() => new(effect, InstalledBy) { Turn = Turn, Used = Used };
         public bool Take(int limit)
         {
-            int turn = Card.Owner.PlayerCombatState!.TurnNumber;
+            int turn = Source.Owner.PlayerCombatState!.TurnNumber;
             if (Turn != turn) { Turn = turn; Used = 0; }
             if (Used >= limit) return false;
             Used++;
@@ -34,11 +49,11 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         }
         public CardPlay Play => new()
         {
-            Card = Card, Target = null, ResultPile = PileType.None,
+            Card = Source, Target = null, ResultPile = PileType.None,
 #if STS2_BETA
-            Player = Card.Owner,
+            Player = Source.Owner,
 #endif
-            Resources = InstalledBy.Resources, IsAutoPlay = true, PlayIndex = 0, PlayCount = 1
+            Resources = effect.Resources, IsAutoPlay = true, PlayIndex = 0, PlayCount = 1
         };
     }
     private List<Grant> _grants = [];
@@ -48,7 +63,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
     public override PowerStackType StackType => DesignId is "JA22" or "JK27" or "JK81" ? PowerStackType.Single : PowerStackType.Counter;
     public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
-    protected override void DeepCloneFields() { base.DeepCloneFields(); _grants = new(_grants); }
+    protected override void DeepCloneFields() { base.DeepCloneFields(); _grants = _grants.Select(grant => grant.Copy()).ToList(); }
 
     public static int ArrowHaste(Player player) => player.Creature.Powers.OfType<CatalogPower>()
         .Where(p => p.DesignId == "JA105").Sum(p => p._grants.Count);
@@ -62,7 +77,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         {
             if (card.DesignId == "JK81" && card.Value("Threshold") < existing._grants.Min(g => g.V("Threshold")))
             {
-                existing._grants = [new((CatalogCard)card.MutableClone(), play, 0)];
+                existing._grants = [new(EffectData.Capture(card, play), play)];
                 existing.Synchronize();
             }
             return;
@@ -70,9 +85,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         await PowerCmd.Apply(context, canonical.ToMutable(), card.Owner.Creature, 1, card.Owner.Creature, card);
         var power = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
         if (power == null) return;
-        int xValue = card.Definition.CostsX ? card.ResolveEnergyXValue() : 0;
-        var snapshot = (CatalogCard)card.MutableClone();
-        power._grants.Add(new(snapshot, play, xValue));
+        power._grants.Add(new(EffectData.Capture(card, play), play));
         if (card.DesignId == "JK127") KnowledgeProgress.RegisterCopy(card.Owner);
         power.Synchronize();
     }
@@ -82,7 +95,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
     private async Task AccelerateChoice(Grant grant, PlayerChoiceContext context, int count, int turns)
     {
         var cards = ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player && !a.Resolving).Select(a => a.Card).ToArray();
-        foreach (var card in await CardActions.Choose(context, grant.Card, cards, count))
+        foreach (var card in await CardActions.Choose(context, grant.Source, cards, count))
             if (ArrowCombat.Find(card) is { } arrow) await ArrowCombat.Accelerate(context, arrow, turns);
     }
 

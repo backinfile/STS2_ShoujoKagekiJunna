@@ -157,13 +157,51 @@ def arrow_portraits_only(bundle):
     print(f'Updated {count} arrow portraits and focal points; runtime card rules preserved.')
 
 
+RULES_PATH = ROOT / 'data/card-rules.json'
+
+
+def enrich_definition(entry):
+    """Generate semantic field aliases and display hints without renaming saved fields."""
+    rules = json.loads(RULES_PATH.read_text(encoding='utf-8'))
+    bindings = rules['valueBindings'].get(entry['id'], {})
+    fields = {value['name'] for value in entry['values']}
+    for alias, field in bindings.items():
+        if field not in fields:
+            raise ValueError(f"{entry['id']} has no field {field} for {alias}")
+    for value in entry['values']:
+        value['aliases'] = [alias for alias, field in bindings.items()
+                            if field == value['name'] and alias != value['name']]
+    for output, source in (('tips', 'text'), ('upgradedTips', 'upgradedText')):
+        text = entry.get(source, '')
+        hints = [('Knowledge', entry['knowledge'] or '知识' in text),
+                 ('Arrow', entry['type'] == '箭矢' or '箭矢' in text),
+                 ('DamageBonus', '伤害加成' in text), ('Vulnerable', '易伤' in text),
+                 ('Weak', '虚弱' in text), ('Retain', '保留' in text and '手牌' in text),
+                 ('Energy', '能量' in text or '耗能' in text or bool(re.search(r'\d+费', text)))]
+        entry[output] = [name for name, present in hints if present]
+    return entry
+
+
+def refresh_metadata():
+    catalog = json.loads(CATALOG_PATH.read_text(encoding='utf-8'))
+    for card in catalog['cards'] + catalog.get('retiredCards', []):
+        enrich_definition(card)
+    CATALOG_PATH.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('snapshot', type=Path)
+    parser.add_argument('snapshot', type=Path, nargs='?')
+    parser.add_argument('--metadata-only', action='store_true', help='Refresh semantic aliases and hints from the local versioned catalog.')
     parser.add_argument('--text-only', action='store_true', help='Refresh display localization without rewriting card data, models or portraits.')
     parser.add_argument('--rules-only', action='store_true', help='Refresh runtime rules and localization while preserving portraits and model declarations.')
     parser.add_argument('--arrow-portraits-only', action='store_true', help='Refresh arrow portraits and focal points without changing runtime card rules or localization.')
     args = parser.parse_args()
+    if args.metadata_only:
+        refresh_metadata()
+        return
+    if args.snapshot is None:
+        parser.error('snapshot is required unless --metadata-only is used')
     bundle = json.loads(args.snapshot.read_text(encoding='utf-8-sig'))
     if args.arrow_portraits_only:
         arrow_portraits_only(bundle)
@@ -257,7 +295,7 @@ def main():
             entry['arrowFocus'] = card['arrowFocus']
         elif args.rules_only and 'arrowFocus' in existing_cards[cid]:
             entry['arrowFocus'] = existing_cards[cid]['arrowFocus']
-        definitions.append(entry)
+        definitions.append(enrich_definition(entry))
         if cid not in EXISTING:
             shine = re.search(r'闪耀(\d+)[。.]', card['text'])
             declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
@@ -274,7 +312,7 @@ def main():
         if any(cid not in ids for cid in group['grantedCardIds']):
             raise ValueError('Inactive knowledge group member: ' + group['id'])
     out = {'revision': bundle['revision'], 'cards': definitions, 'groups': groups,
-           'startingDeck': bundle['data']['meta']['startingDeck'], 'retiredCards': list(retired.values()),
+           'startingDeck': bundle['data']['meta']['startingDeck'], 'retiredCards': [enrich_definition(card) for card in retired.values()],
            'startingHp': bundle['data']['meta'].get('startingHp', 70),
            'startingGold': bundle['data']['meta'].get('startingGold', 99),
            'startingRelics': bundle['data']['meta'].get('startingRelics', ['JUNNA_GREEN_GEM'])}

@@ -34,7 +34,7 @@ public static class ArrowConversion
     {
         private static void Postfix(AbstractModel __instance, AbstractModel __result)
         {
-            if (__instance is CardModel card && __result is CardModel copied && IsConverted(card))
+            if (__instance is CardModel card && __result is CardModel copied && card.Id == copied.Id && IsConverted(card))
                 Converted.GetOrCreateValue(copied);
         }
     }

@@ -79,6 +79,7 @@ public static partial class KnowledgeProgress
     }
     public static async Task OpenCombat(Player player, PlayerChoiceContext context)
     {
+        KnowledgeRelations.Normalize(player);
         if (player.PlayerCombatState!.TurnNumber != 1 || !Opened.Add(player)) return;
         using var single = KnowledgeCombat.SingleCard();
         foreach (var arrow in player.PlayerCombatState.AllCards.Where(c => CardCatalog.DesignId(c) == "JK37").ToArray())

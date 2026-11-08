@@ -7,12 +7,19 @@ using ShoujoKagekiJunna.Combat;
 
 namespace ShoujoKagekiJunna.Models;
 
-public sealed record CardNumber(string Name, int Base, int Upgraded);
+public sealed record CardNumber(string Name, int Base, int Upgraded)
+{
+    public string[] Aliases { get; init; } = [];
+}
+[System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter<CardHint>))]
+public enum CardHint { Knowledge, Arrow, DamageBonus, Vulnerable, Weak, Retain, Energy }
 public sealed record ArrowArtFocus(float X = .5f, float Y = .5f);
 public sealed record StartingCard(string CardId, int Count);
 
 public sealed class CardDefinition
 {
+    public CardHint[] Tips { get; init; } = [];
+    public CardHint[] UpgradedTips { get; init; } = [];
     public string Id { get; init; } = "";
     public string ModelId { get; init; } = "";
     public string ClassName { get; init; } = "";

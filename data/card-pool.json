@@ -27,11 +27,14 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "选择一张手牌，使其额外造成1次伤害。 \n消耗。",
-      "upgradedText": "选择一张手牌，使其额外造成1次伤害。"
+      "upgradedText": "选择一张手牌，使其额外造成1次伤害。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JA15",
@@ -59,12 +62,16 @@
         {
           "name": "N0",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": [
+            "DrawCount"
+          ]
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "抽3张牌。",
@@ -72,7 +79,13 @@
       "arrowFocus": {
         "x": 0.53,
         "y": 0.54
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA17",
@@ -100,16 +113,24 @@
         {
           "name": "Damage",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "对所有敌人造成9点伤害。下回合获得2点能量。",
-      "upgradedText": "对所有敌人造成12点伤害。下回合获得2点能量。"
+      "upgradedText": "对所有敌人造成12点伤害。下回合获得2点能量。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JK11",
@@ -137,11 +158,18 @@
         {
           "name": "Block",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         }
       ],
       "text": "知识。获得9点格挡。无论何处，将驳论放入手牌。",
-      "upgradedText": "知识。获得12点格挡。无论何处，将驳论放入手牌。"
+      "upgradedText": "知识。获得12点格挡。无论何处，将驳论放入手牌。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK11B",
@@ -169,11 +197,18 @@
         {
           "name": "Damage",
           "base": 12,
-          "upgraded": 16
+          "upgraded": 16,
+          "aliases": []
         }
       ],
       "text": "知识。造成12点伤害。无论何处，将立论放入手牌。",
-      "upgradedText": "知识。造成16点伤害。无论何处，将立论放入手牌。"
+      "upgradedText": "知识。造成16点伤害。无论何处，将立论放入手牌。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JG09",
@@ -201,16 +236,24 @@
         {
           "name": "Block",
           "base": 7,
-          "upgraded": 9
+          "upgraded": 9,
+          "aliases": []
         },
         {
           "name": "Bonus",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "获得7点格挡。选择一张手牌获得2点伤害加成。",
-      "upgradedText": "获得9点格挡。选择一张手牌获得3点伤害加成。"
+      "upgradedText": "获得9点格挡。选择一张手牌获得3点伤害加成。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JA22",
@@ -236,7 +279,13 @@
       "portrait": "JA22.jpg",
       "values": [],
       "text": "箭矢完成后放回手牌。",
-      "upgradedText": "箭矢完成后放回手牌。"
+      "upgradedText": "箭矢完成后放回手牌。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JT02",
@@ -264,16 +313,26 @@
         {
           "name": "N0",
           "base": 5,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 0,
-          "upgraded": 0
+          "upgraded": 0,
+          "aliases": []
         }
       ],
       "text": "选择一张非能力牌，将其变为5回合的箭矢牌，并且耗能为0。",
-      "upgradedText": "选择一张非能力牌，将其变为5回合的箭矢牌，并且耗能为0。"
+      "upgradedText": "选择一张非能力牌，将其变为5回合的箭矢牌，并且耗能为0。",
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
     },
     {
       "id": "A",
@@ -301,11 +360,22 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Cards",
+            "DisplayedAmount",
+            "Threshold"
+          ]
         }
       ],
       "text": "知识。在你的回合结束时，将1张心得加入你的抽牌堆。",
-      "upgradedText": "知识。在你的回合结束时，将2张心得加入你的抽牌堆。"
+      "upgradedText": "知识。在你的回合结束时，将2张心得加入你的抽牌堆。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "B",
@@ -333,16 +403,30 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "DrawCount"
+          ]
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Energy"
+          ]
         }
       ],
       "text": "知识。抽1张牌。获得1点能量。消耗。",
-      "upgradedText": "知识。抽1张牌。获得2点能量。消耗。"
+      "upgradedText": "知识。抽1张牌。获得2点能量。消耗。",
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
     },
     {
       "id": "JK27",
@@ -368,7 +452,13 @@
       "portrait": "JK27.jpg",
       "values": [],
       "text": "抽到知识牌时，抽取其所有关联牌。",
-      "upgradedText": "抽到知识牌时，抽取其所有关联牌。"
+      "upgradedText": "抽到知识牌时，抽取其所有关联牌。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK32",
@@ -396,16 +486,30 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "DisplayedAmount",
+            "DrawCount",
+            "Threshold"
+          ]
         },
         {
           "name": "N1",
           "base": 0,
-          "upgraded": 0
+          "upgraded": 0,
+          "aliases": []
         }
       ],
       "text": "知识。回合开始时，抽1张牌。\n星象和天候耗能变为0。",
-      "upgradedText": "知识。回合开始时，抽2张牌。\n星象和天候耗能变为0。"
+      "upgradedText": "知识。回合开始时，抽2张牌。\n星象和天候耗能变为0。",
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
     },
     {
       "id": "JK32B",
@@ -433,17 +537,20 @@
         {
           "name": "Damage",
           "base": 16,
-          "upgraded": 22
+          "upgraded": 22,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 0,
-          "upgraded": 0
+          "upgraded": 0,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。造成16点伤害。掌舵和天候耗能变为0。",
@@ -451,7 +558,17 @@
       "arrowFocus": {
         "x": 0.63,
         "y": 0.54
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "Energy"
+      ]
     },
     {
       "id": "JK32C",
@@ -479,16 +596,26 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 0,
-          "upgraded": 0
+          "upgraded": 0,
+          "aliases": []
         }
       ],
       "text": "知识。获得8点格挡。掌舵和星象耗能变为0。",
-      "upgradedText": "知识。获得12点格挡。掌舵和星象耗能变为0。"
+      "upgradedText": "知识。获得12点格挡。掌舵和星象耗能变为0。",
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
     },
     {
       "id": "JK37",
@@ -516,12 +643,14 @@
         {
           "name": "Damage",
           "base": 50,
-          "upgraded": 60
+          "upgraded": 60,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 9,
-          "upgraded": 9
+          "upgraded": 9,
+          "aliases": []
         }
       ],
       "text": "知识。造成50点伤害。战斗开始时打出此牌。",
@@ -529,7 +658,15 @@
       "arrowFocus": {
         "x": 0.26,
         "y": 0.46
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JK37B",
@@ -557,11 +694,20 @@
         {
           "name": "Damage",
           "base": 4,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         }
       ],
       "text": "知识。造成4点伤害。所有目标为敌人的箭矢都指向当前目标。",
-      "upgradedText": "知识。造成6点伤害。所有目标为敌人的箭矢都指向当前目标。"
+      "upgradedText": "知识。造成6点伤害。所有目标为敌人的箭矢都指向当前目标。",
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JK37C",
@@ -589,16 +735,30 @@
         {
           "name": "N0",
           "base": 0,
-          "upgraded": 0
+          "upgraded": 0,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Turns"
+          ]
         }
       ],
       "text": "知识。打出0费牌后，随机一个箭矢加速1回合。",
-      "upgradedText": "知识。打出0费牌后，随机一个箭矢加速1回合。"
+      "upgradedText": "知识。打出0费牌后，随机一个箭矢加速1回合。",
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "Energy"
+      ]
     },
     {
       "id": "JK48",
@@ -626,16 +786,24 @@
         {
           "name": "Damage",
           "base": 6,
-          "upgraded": 10
+          "upgraded": 10,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。造成6点伤害。每有一张知识牌，伤害增加1。",
-      "upgradedText": "知识。造成10点伤害。每有一张知识牌，伤害增加1。"
+      "upgradedText": "知识。造成10点伤害。每有一张知识牌，伤害增加1。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK48B",
@@ -663,16 +831,24 @@
         {
           "name": "Block",
           "base": 4,
-          "upgraded": 7
+          "upgraded": 7,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。获得4点格挡。每有一张知识牌，格挡增加1。",
-      "upgradedText": "知识。获得7点格挡。每有一张知识牌，格挡增加1。"
+      "upgradedText": "知识。获得7点格挡。每有一张知识牌，格挡增加1。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK49",
@@ -700,11 +876,18 @@
         {
           "name": "Damage",
           "base": 20,
-          "upgraded": 28
+          "upgraded": 28,
+          "aliases": []
         }
       ],
       "text": "知识。造成20点伤害。",
-      "upgradedText": "知识。造成28点伤害。"
+      "upgradedText": "知识。造成28点伤害。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK49B",
@@ -732,11 +915,18 @@
         {
           "name": "Block",
           "base": 4,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         }
       ],
       "text": "知识。获得4点格挡。",
-      "upgradedText": "知识。获得6点格挡。"
+      "upgradedText": "知识。获得6点格挡。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JA38",
@@ -764,12 +954,14 @@
         {
           "name": "Damage",
           "base": 18,
-          "upgraded": 22
+          "upgraded": 22,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "造成18点伤害。",
@@ -777,7 +969,13 @@
       "arrowFocus": {
         "x": 0.64,
         "y": 0.44
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA43",
@@ -805,16 +1003,26 @@
         {
           "name": "Block",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Turns"
+          ]
         }
       ],
       "text": "获得9点格挡。所有箭矢加速1回合。",
-      "upgradedText": "获得12点格挡。所有箭矢加速1回合。"
+      "upgradedText": "获得12点格挡。所有箭矢加速1回合。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA53",
@@ -842,16 +1050,26 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 10
+          "upgraded": 10,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Cards"
+          ]
         }
       ],
       "text": "获得8点格挡。抽取1张箭矢牌。",
-      "upgradedText": "获得10点格挡。抽取2张箭矢牌。"
+      "upgradedText": "获得10点格挡。抽取2张箭矢牌。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA57",
@@ -879,17 +1097,24 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "DrawCount"
+          ]
         },
         {
           "name": "N1",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Energy"
+          ]
         },
         {
           "name": "Turns",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "抽2张牌。获得2点能量。",
@@ -897,7 +1122,15 @@
       "arrowFocus": {
         "x": 0.15,
         "y": 0.45
-      }
+      },
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
     },
     {
       "id": "JK67",
@@ -925,11 +1158,22 @@
         {
           "name": "Bonus",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "知识。回合结束时，所有布置中的箭矢获得2点伤害加成。",
-      "upgradedText": "知识。回合结束时，所有布置中的箭矢获得3点伤害加成。"
+      "upgradedText": "知识。回合结束时，所有布置中的箭矢获得3点伤害加成。",
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus"
+      ]
     },
     {
       "id": "JK67B",
@@ -957,17 +1201,20 @@
         {
           "name": "Damage",
           "base": 4,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "知识。造成4点伤害3次。",
@@ -975,7 +1222,15 @@
       "arrowFocus": {
         "x": 0.22,
         "y": 0.26
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JG27",
@@ -1003,16 +1258,24 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         },
         {
           "name": "Bonus",
           "base": 5,
-          "upgraded": 7
+          "upgraded": 7,
+          "aliases": []
         }
       ],
       "text": "选择1张手牌获得5点伤害加成。",
-      "upgradedText": "选择1张手牌获得7点伤害加成。"
+      "upgradedText": "选择1张手牌获得7点伤害加成。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JX01",
@@ -1040,16 +1303,26 @@
         {
           "name": "Block",
           "base": 6,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         },
         {
           "name": "Bonus",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "获得6点格挡。所有箭矢获得2点伤害加成。",
-      "upgradedText": "获得6点格挡。所有箭矢获得3点伤害加成。"
+      "upgradedText": "获得6点格挡。所有箭矢获得3点伤害加成。",
+      "tips": [
+        "Arrow",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "DamageBonus"
+      ]
     },
     {
       "id": "JH11",
@@ -1077,17 +1350,22 @@
         {
           "name": "Block",
           "base": 4,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Energy"
+          ]
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "获得4点格挡。获得1点能量。",
@@ -1095,7 +1373,15 @@
       "arrowFocus": {
         "x": 0.34,
         "y": 0.25
-      }
+      },
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
     },
     {
       "id": "JF10",
@@ -1123,11 +1409,22 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Debuff"
+          ]
         }
       ],
       "text": "给予1层易伤和虚弱。移除自己的易伤和虚弱。消耗。",
-      "upgradedText": "给予2层易伤和虚弱。移除自己的易伤和虚弱。消耗。"
+      "upgradedText": "给予2层易伤和虚弱。移除自己的易伤和虚弱。消耗。",
+      "tips": [
+        "Vulnerable",
+        "Weak"
+      ],
+      "upgradedTips": [
+        "Vulnerable",
+        "Weak"
+      ]
     },
     {
       "id": "JB01",
@@ -1155,11 +1452,14 @@
         {
           "name": "Damage",
           "base": 6,
-          "upgraded": 9
+          "upgraded": 9,
+          "aliases": []
         }
       ],
       "text": "造成6点伤害。",
-      "upgradedText": "造成9点伤害。"
+      "upgradedText": "造成9点伤害。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JB02",
@@ -1187,11 +1487,14 @@
         {
           "name": "Block",
           "base": 5,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         }
       ],
       "text": "获得5点格挡。",
-      "upgradedText": "获得8点格挡。"
+      "upgradedText": "获得8点格挡。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JB03",
@@ -1219,12 +1522,14 @@
         {
           "name": "Damage",
           "base": 25,
-          "upgraded": 32
+          "upgraded": 32,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "造成25点伤害。",
@@ -1232,7 +1537,13 @@
       "arrowFocus": {
         "x": 0.9,
         "y": 0.18
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA58",
@@ -1260,12 +1571,16 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Debuff"
+          ]
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "给予所有敌人2层易伤和虚弱。",
@@ -1273,7 +1588,17 @@
       "arrowFocus": {
         "x": 0.3,
         "y": 0.37
-      }
+      },
+      "tips": [
+        "Arrow",
+        "Vulnerable",
+        "Weak"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Vulnerable",
+        "Weak"
+      ]
     },
     {
       "id": "JH19",
@@ -1301,16 +1626,24 @@
         {
           "name": "Block",
           "base": 4,
-          "upgraded": 7
+          "upgraded": 7,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "获得4点格挡。本回合下一张非能力牌会消耗能量再打出1次。",
-      "upgradedText": "获得7点格挡。本回合下一张非能力牌会消耗能量再打出1次。"
+      "upgradedText": "获得7点格挡。本回合下一张非能力牌会消耗能量再打出1次。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JH22",
@@ -1338,11 +1671,20 @@
         {
           "name": "Damage",
           "base": 10,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         }
       ],
       "text": "造成10点伤害。布置的箭矢获得等同于造成伤害点数的伤害加成。",
-      "upgradedText": "造成12点伤害。布置的箭矢获得等同于造成伤害点数的伤害加成。"
+      "upgradedText": "造成12点伤害。布置的箭矢获得等同于造成伤害点数的伤害加成。",
+      "tips": [
+        "Arrow",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "DamageBonus"
+      ]
     },
     {
       "id": "JA64",
@@ -1370,17 +1712,20 @@
         {
           "name": "Damage",
           "base": 6,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 6,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 6,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         }
       ],
       "text": "造成6点伤害6次。",
@@ -1388,7 +1733,13 @@
       "arrowFocus": {
         "x": 0.25,
         "y": 0.58
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA65",
@@ -1416,12 +1767,14 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "从抽牌堆选择1张箭矢牌打出。",
@@ -1429,7 +1782,13 @@
       "arrowFocus": {
         "x": 0.42,
         "y": 0.8
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JG33",
@@ -1457,16 +1816,24 @@
         {
           "name": "Damage",
           "base": 30,
-          "upgraded": 40
+          "upgraded": 40,
+          "aliases": []
         },
         {
           "name": "Bonus",
           "base": 10,
-          "upgraded": 10
+          "upgraded": 10,
+          "aliases": []
         }
       ],
       "text": "造成30点伤害。获得10点伤害加成。将此牌放入抽牌堆。",
-      "upgradedText": "造成40点伤害。获得10点伤害加成。将此牌放入抽牌堆。"
+      "upgradedText": "造成40点伤害。获得10点伤害加成。将此牌放入抽牌堆。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JG34",
@@ -1494,11 +1861,14 @@
         {
           "name": "Damage",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": []
         }
       ],
       "text": "回合开始时，对所有敌人造成3点伤害。",
-      "upgradedText": "回合开始时，对所有敌人造成4点伤害。"
+      "upgradedText": "回合开始时，对所有敌人造成4点伤害。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JA67",
@@ -1526,12 +1896,14 @@
         {
           "name": "Damage",
           "base": 22,
-          "upgraded": 28
+          "upgraded": 28,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "造成22点伤害。重新打出此牌。",
@@ -1539,7 +1911,13 @@
       "arrowFocus": {
         "x": 0.49,
         "y": 0.42
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JZ03",
@@ -1567,12 +1945,14 @@
         {
           "name": "Damage",
           "base": 25,
-          "upgraded": 32
+          "upgraded": 32,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "造成25点伤害。",
@@ -1580,7 +1960,13 @@
       "arrowFocus": {
         "x": 0.9,
         "y": 0.18
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA71",
@@ -1608,11 +1994,18 @@
         {
           "name": "Block",
           "base": 12,
-          "upgraded": 16
+          "upgraded": 16,
+          "aliases": []
         }
       ],
       "text": "获得12点格挡。所有箭矢加速到完成。",
-      "upgradedText": "获得16点格挡。所有箭矢加速到完成。"
+      "upgradedText": "获得16点格挡。所有箭矢加速到完成。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JH24",
@@ -1640,16 +2033,26 @@
         {
           "name": "Block",
           "base": 15,
-          "upgraded": 20
+          "upgraded": 20,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Count"
+          ]
         }
       ],
       "text": "获得15点格挡。每回合开始时获得1点能量。",
-      "upgradedText": "获得20点格挡。每回合开始时获得1点能量。"
+      "upgradedText": "获得20点格挡。每回合开始时获得1点能量。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JK78",
@@ -1677,16 +2080,27 @@
         {
           "name": "N0",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Amount",
+            "Cards"
+          ]
         },
         {
           "name": "Bonus",
           "base": 6,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         }
       ],
       "text": "选择抽牌堆至多3张牌，使它们获得6点伤害加成。",
-      "upgradedText": "选择抽牌堆至多3张牌，使它们获得8点伤害加成。"
+      "upgradedText": "选择抽牌堆至多3张牌，使它们获得8点伤害加成。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JA72",
@@ -1714,12 +2128,14 @@
         {
           "name": "Damage",
           "base": 12,
-          "upgraded": 16
+          "upgraded": 16,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "对所有敌人造成12点伤害。",
@@ -1727,7 +2143,13 @@
       "arrowFocus": {
         "x": 0.51,
         "y": 0.45
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JH27",
@@ -1755,11 +2177,18 @@
         {
           "name": "Block",
           "base": 27,
-          "upgraded": 36
+          "upgraded": 36,
+          "aliases": []
         }
       ],
       "text": "知识。获得27点格挡。",
-      "upgradedText": "知识。获得36点格挡。"
+      "upgradedText": "知识。获得36点格挡。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JG36",
@@ -1787,16 +2216,24 @@
         {
           "name": "Damage",
           "base": 14,
-          "upgraded": 18
+          "upgraded": 18,
+          "aliases": []
         },
         {
           "name": "Bonus",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "造成14点伤害。所有手牌获得2点伤害加成。",
-      "upgradedText": "造成18点伤害。所有手牌获得3点伤害加成。"
+      "upgradedText": "造成18点伤害。所有手牌获得3点伤害加成。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JK82",
@@ -1824,11 +2261,22 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Energy"
+          ]
         }
       ],
       "text": "知识。获得2点能量。升级时单独获得一张新知。可多次升级。消耗。",
-      "upgradedText": "知识。获得3点能量。升级时单独获得一张新知。可多次升级。消耗。"
+      "upgradedText": "知识。获得3点能量。升级时单独获得一张新知。可多次升级。消耗。",
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
     },
     {
       "id": "JK82B",
@@ -1856,11 +2304,20 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "DrawCount"
+          ]
         }
       ],
       "text": "知识。抽2张牌。消耗。",
-      "upgradedText": "知识。抽3张牌。消耗。"
+      "upgradedText": "知识。抽3张牌。消耗。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JZ05",
@@ -1888,11 +2345,16 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Limit"
+          ]
         }
       ],
       "text": "每回合第1次造成攻击伤害时，打出一张造成等量伤害的流星。",
-      "upgradedText": "每回合前2次造成攻击伤害时，打出一张造成等量伤害的流星。"
+      "upgradedText": "每回合前2次造成攻击伤害时，打出一张造成等量伤害的流星。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JA76",
@@ -1920,11 +2382,14 @@
         {
           "name": "Damage",
           "base": 12,
-          "upgraded": 16
+          "upgraded": 16,
+          "aliases": []
         }
       ],
       "text": "对所有敌人造成12点伤害。分别打出一张造成等量伤害的流星。",
-      "upgradedText": "对所有敌人造成16点伤害。分别打出一张造成等量伤害的流星。"
+      "upgradedText": "对所有敌人造成16点伤害。分别打出一张造成等量伤害的流星。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JA77",
@@ -1952,17 +2417,20 @@
         {
           "name": "Damage",
           "base": 8,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "对所有敌人造成8点伤害3次。",
@@ -1970,7 +2438,13 @@
       "arrowFocus": {
         "x": 0.23,
         "y": 0.49
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA80",
@@ -1998,12 +2472,16 @@
         {
           "name": "N0",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": [
+            "Energy"
+          ]
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "获得3点能量。",
@@ -2011,7 +2489,15 @@
       "arrowFocus": {
         "x": 0.32,
         "y": 0.25
-      }
+      },
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
     },
     {
       "id": "JA81",
@@ -2039,11 +2525,14 @@
         {
           "name": "Damage",
           "base": 10,
-          "upgraded": 14
+          "upgraded": 14,
+          "aliases": []
         }
       ],
       "text": "造成10点伤害。打出一张造成等量伤害的流星。",
-      "upgradedText": "造成14点伤害。打出一张造成等量伤害的流星。"
+      "upgradedText": "造成14点伤害。打出一张造成等量伤害的流星。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JA81B",
@@ -2071,12 +2560,14 @@
         {
           "name": "Damage",
           "base": 0,
-          "upgraded": 0
+          "upgraded": 0,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "造成X点伤害。消耗。",
@@ -2084,7 +2575,13 @@
       "arrowFocus": {
         "x": 0.5,
         "y": 0.52
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA82",
@@ -2112,11 +2609,14 @@
         {
           "name": "Damage",
           "base": 14,
-          "upgraded": 18
+          "upgraded": 18,
+          "aliases": []
         }
       ],
       "text": "打出X张造成14点伤害的流星。",
-      "upgradedText": "打出X张造成18点伤害的流星。"
+      "upgradedText": "打出X张造成18点伤害的流星。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JK78D",
@@ -2144,16 +2644,26 @@
         {
           "name": "N0",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Amount"
+          ]
         },
         {
           "name": "Bonus",
           "base": 6,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         }
       ],
       "text": "选择抽牌堆中至多3张牌，使它们获得6点伤害加成。",
-      "upgradedText": "选择抽牌堆中至多3张牌，使它们获得8点伤害加成。"
+      "upgradedText": "选择抽牌堆中至多3张牌，使它们获得8点伤害加成。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JK78E",
@@ -2181,16 +2691,26 @@
         {
           "name": "N0",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Amount"
+          ]
         },
         {
           "name": "Bonus",
           "base": 6,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         }
       ],
       "text": "选择弃牌堆中至多3张牌，使它们获得6点伤害加成。",
-      "upgradedText": "选择弃牌堆中至多3张牌，使它们获得8点伤害加成。"
+      "upgradedText": "选择弃牌堆中至多3张牌，使它们获得8点伤害加成。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JA84",
@@ -2218,17 +2738,22 @@
         {
           "name": "Block",
           "base": 7,
-          "upgraded": 10
+          "upgraded": 10,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Cards"
+          ]
         },
         {
           "name": "N2",
           "base": 5,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         }
       ],
       "text": "获得7点格挡。将1张手牌作为5回合的箭矢打出。",
@@ -2236,7 +2761,13 @@
       "arrowFocus": {
         "x": 0.58,
         "y": 0.42
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA87",
@@ -2264,12 +2795,18 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Cards",
+            "DisplayedAmount",
+            "Threshold"
+          ]
         },
         {
           "name": "N1",
           "base": 5,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         }
       ],
       "text": "在你的回合结束时，可以将1张手牌作为5回合的箭矢打出。",
@@ -2277,7 +2814,13 @@
       "arrowFocus": {
         "x": 0.5,
         "y": 0.5
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA88",
@@ -2305,12 +2848,14 @@
         {
           "name": "Damage",
           "base": 15,
-          "upgraded": 20
+          "upgraded": 20,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 5,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         }
       ],
       "text": "造成15点伤害。将任意手牌作为5回合的箭矢打出。",
@@ -2318,7 +2863,13 @@
       "arrowFocus": {
         "x": 0.58,
         "y": 0.42
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA96",
@@ -2346,7 +2897,12 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "DisplayedAmount",
+            "Threshold",
+            "Turns"
+          ]
         }
       ],
       "text": "受到攻击伤害后，所有目标为敌人的箭矢加速1回合。",
@@ -2354,7 +2910,13 @@
       "arrowFocus": {
         "x": 0.5,
         "y": 0.4
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JK84",
@@ -2382,12 +2944,16 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Cards"
+          ]
         },
         {
           "name": "N1",
           "base": 5,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         }
       ],
       "text": "知识。将2张手牌作为5回合的箭矢打出。消耗。",
@@ -2395,7 +2961,15 @@
       "arrowFocus": {
         "x": 0.5,
         "y": 0.36
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JK84B",
@@ -2423,12 +2997,16 @@
         {
           "name": "Damage",
           "base": 12,
-          "upgraded": 16
+          "upgraded": 16,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Turns"
+          ]
         }
       ],
       "text": "知识。造成12点伤害。所有箭矢加速1回合。",
@@ -2436,7 +3014,15 @@
       "arrowFocus": {
         "x": 0.64,
         "y": 0.3
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JG37",
@@ -2464,17 +3050,24 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "DrawCount"
+          ]
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Cards"
+          ]
         },
         {
           "name": "N2",
           "base": 5,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         }
       ],
       "text": "抽2张牌。将1张手牌作为5回合的箭矢打出。",
@@ -2482,7 +3075,13 @@
       "arrowFocus": {
         "x": 0.2,
         "y": 0.58
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JS19",
@@ -2510,16 +3109,24 @@
         {
           "name": "Damage",
           "base": 30,
-          "upgraded": 40
+          "upgraded": 40,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "造成30点伤害。闪耀耗尽时，可单独复制牌组中1张知识牌。消耗。闪耀9。",
-      "upgradedText": "造成40点伤害。闪耀耗尽时，可单独复制牌组中2张知识牌。消耗。闪耀9。"
+      "upgradedText": "造成40点伤害。闪耀耗尽时，可单独复制牌组中2张知识牌。消耗。闪耀9。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK122",
@@ -2547,11 +3154,18 @@
         {
           "name": "Damage",
           "base": 16,
-          "upgraded": 22
+          "upgraded": 22,
+          "aliases": []
         }
       ],
       "text": "知识。造成16点伤害。",
-      "upgradedText": "知识。造成22点伤害。"
+      "upgradedText": "知识。造成22点伤害。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK122B",
@@ -2577,7 +3191,13 @@
       "portrait": "JK122B.jpg",
       "values": [],
       "text": "知识。消耗。闪耀3。",
-      "upgradedText": "知识。消耗。闪耀3。"
+      "upgradedText": "知识。消耗。闪耀3。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK126",
@@ -2605,11 +3225,18 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         }
       ],
       "text": "知识。获得8点格挡。抽取所有关联牌。",
-      "upgradedText": "知识。获得8点格挡。抽取所有关联牌。"
+      "upgradedText": "知识。获得8点格挡。抽取所有关联牌。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK127",
@@ -2637,11 +3264,18 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "战斗结束后，可以单独复制牌组中的1张知识牌。",
-      "upgradedText": "战斗结束后，可以单独复制牌组中的1张知识牌。"
+      "upgradedText": "战斗结束后，可以单独复制牌组中的1张知识牌。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK131",
@@ -2669,11 +3303,20 @@
         {
           "name": "N0",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": [
+            "DrawCount"
+          ]
         }
       ],
       "text": "知识。抽3张牌。闪耀9。",
-      "upgradedText": "知识。抽4张牌。闪耀9。"
+      "upgradedText": "知识。抽4张牌。闪耀9。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK131B",
@@ -2701,12 +3344,14 @@
         {
           "name": "Damage",
           "base": 50,
-          "upgraded": 70
+          "upgraded": 70,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "知识。对所有敌人造成50点伤害。",
@@ -2714,7 +3359,15 @@
       "arrowFocus": {
         "x": 0.5,
         "y": 0.5
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JK133",
@@ -2742,17 +3395,22 @@
         {
           "name": "Damage",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "DrawCount"
+          ]
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。造成9点伤害。抽1张牌。闪耀9。",
@@ -2760,7 +3418,15 @@
       "arrowFocus": {
         "x": 0.58,
         "y": 0.32
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JK137",
@@ -2788,16 +3454,30 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "DrawCount"
+          ]
         },
         {
           "name": "N1",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Energy"
+          ]
         }
       ],
       "text": "知识。选择：抽2张牌或获得2点能量。闪耀6。",
-      "upgradedText": "知识。选择：抽3张牌或获得3点能量。闪耀6。"
+      "upgradedText": "知识。选择：抽3张牌或获得3点能量。闪耀6。",
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
     },
     {
       "id": "JA104",
@@ -2825,16 +3505,26 @@
         {
           "name": "Block",
           "base": 4,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Turns"
+          ]
         }
       ],
       "text": "获得4点格挡。选择：所有目标为自己或者敌人的箭矢加速1回合。",
-      "upgradedText": "获得6点格挡。选择：所有目标为自己或者敌人的箭矢加速1回合。"
+      "upgradedText": "获得6点格挡。选择：所有目标为自己或者敌人的箭矢加速1回合。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA105",
@@ -2862,11 +3552,18 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "打出箭矢时使其加速1回合，并获得消耗。",
-      "upgradedText": "打出箭矢时使其加速1回合，并获得消耗。"
+      "upgradedText": "打出箭矢时使其加速1回合，并获得消耗。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JH27B",
@@ -2894,11 +3591,20 @@
         {
           "name": "N0",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": [
+            "DrawCount"
+          ]
         }
       ],
       "text": "知识。抽3张牌。消耗。",
-      "upgradedText": "知识。抽4张牌。消耗。"
+      "upgradedText": "知识。抽4张牌。消耗。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JA108",
@@ -2924,7 +3630,15 @@
       "portrait": "JA108.jpg",
       "values": [],
       "text": "知识。打出抽牌堆中的所有箭矢牌。",
-      "upgradedText": "知识。打出抽牌堆中的所有箭矢牌。"
+      "upgradedText": "知识。打出抽牌堆中的所有箭矢牌。",
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JA108B",
@@ -2952,12 +3666,14 @@
         {
           "name": "Damage",
           "base": 70,
-          "upgraded": 100
+          "upgraded": 100,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "知识。对所有敌人造成70点伤害。",
@@ -2965,7 +3681,15 @@
       "arrowFocus": {
         "x": 0.44,
         "y": 0.46
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JB06",
@@ -2993,11 +3717,14 @@
         {
           "name": "Block",
           "base": 9,
-          "upgraded": 9
+          "upgraded": 9,
+          "aliases": []
         }
       ],
       "text": "获得9点格挡。闪耀9。",
-      "upgradedText": "获得9点格挡。闪耀9。"
+      "upgradedText": "获得9点格挡。闪耀9。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JA118",
@@ -3025,11 +3752,18 @@
         {
           "name": "Block",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": []
         }
       ],
       "text": "打出箭矢时，获得3点格挡。",
-      "upgradedText": "打出箭矢时，获得4点格挡。"
+      "upgradedText": "打出箭矢时，获得4点格挡。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA119",
@@ -3057,11 +3791,20 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Turns"
+          ]
         }
       ],
       "text": "保留。指向目标的所有箭矢加速1回合。消耗。",
-      "upgradedText": "保留。指向目标的所有箭矢加速2回合。消耗。"
+      "upgradedText": "保留。指向目标的所有箭矢加速2回合。消耗。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JF13",
@@ -3089,16 +3832,22 @@
         {
           "name": "Block",
           "base": 5,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "DrawCount"
+          ]
         }
       ],
       "text": "固有。获得5点格挡。抽1张牌。消耗。闪耀6。",
-      "upgradedText": "固有。获得8点格挡。抽1张牌。消耗。闪耀6。"
+      "upgradedText": "固有。获得8点格挡。抽1张牌。消耗。闪耀6。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JK184",
@@ -3126,21 +3875,30 @@
         {
           "name": "Damage",
           "base": 6,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         },
         {
           "name": "N2",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。造成6点伤害。每耗尽过1张关联牌，额外造成1次伤害。",
-      "upgradedText": "知识。造成8点伤害。每耗尽过1张关联牌，额外造成1次伤害。"
+      "upgradedText": "知识。造成8点伤害。每耗尽过1张关联牌，额外造成1次伤害。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK184B",
@@ -3168,11 +3926,22 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Turns"
+          ]
         }
       ],
       "text": "知识。所有箭矢加速1回合。消耗。闪耀9。",
-      "upgradedText": "知识。所有箭矢加速1回合。消耗。闪耀9。"
+      "upgradedText": "知识。所有箭矢加速1回合。消耗。闪耀9。",
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JK184C",
@@ -3200,11 +3969,18 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         }
       ],
       "text": "知识。获得8点格挡。消耗。闪耀6。",
-      "upgradedText": "知识。获得12点格挡。消耗。闪耀6。"
+      "upgradedText": "知识。获得12点格挡。消耗。闪耀6。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK184D",
@@ -3232,11 +4008,20 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "DrawCount"
+          ]
         }
       ],
       "text": "知识。抽2张牌。消耗。闪耀3。",
-      "upgradedText": "知识。抽3张牌。消耗。闪耀3。"
+      "upgradedText": "知识。抽3张牌。消耗。闪耀3。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JA144",
@@ -3264,11 +4049,18 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Cards",
+            "DisplayedAmount",
+            "Threshold"
+          ]
         }
       ],
       "text": "回合开始时，获得1张更近一步。",
-      "upgradedText": "回合开始时，获得1张更近一步。"
+      "upgradedText": "回合开始时，获得1张更近一步。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JA145",
@@ -3296,16 +4088,22 @@
         {
           "name": "Damage",
           "base": 8,
-          "upgraded": 10
+          "upgraded": 10,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Cards"
+          ]
         }
       ],
       "text": "造成8点伤害。\n将1张更近一步加入手牌。",
-      "upgradedText": "造成10点伤害。\n将2张更近一步加入手牌。"
+      "upgradedText": "造成10点伤害。\n将2张更近一步加入手牌。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JS34",
@@ -3333,11 +4131,16 @@
         {
           "name": "N0",
           "base": 4,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": [
+            "DrawCount"
+          ]
         }
       ],
       "text": "抽4张牌。消耗。闪耀9。",
-      "upgradedText": "抽5张牌。消耗。闪耀9。"
+      "upgradedText": "抽5张牌。消耗。闪耀9。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JS35",
@@ -3365,11 +4168,14 @@
         {
           "name": "Block",
           "base": 10,
-          "upgraded": 14
+          "upgraded": 14,
+          "aliases": []
         }
       ],
       "text": "获得10点格挡。消耗。闪耀9。",
-      "upgradedText": "获得14点格挡。消耗。闪耀9。"
+      "upgradedText": "获得14点格挡。消耗。闪耀9。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JH59",
@@ -3397,11 +4203,22 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "DisplayedAmount",
+            "Energy",
+            "Threshold"
+          ]
         }
       ],
       "text": "回合开始时，获得1点能量。\n闪耀9。",
-      "upgradedText": "回合开始时，获得2点能量。\n闪耀9。"
+      "upgradedText": "回合开始时，获得2点能量。\n闪耀9。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JH60",
@@ -3429,16 +4246,28 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "EnergyNow"
+          ]
         },
         {
           "name": "N1",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": [
+            "EnergyLater"
+          ]
         }
       ],
       "text": "选择：获得2点能量或下回合获得3点能量。\n消耗。闪耀6。",
-      "upgradedText": "选择：获得3点能量或下回合获得4点能量。\n消耗。闪耀6。"
+      "upgradedText": "选择：获得3点能量或下回合获得4点能量。\n消耗。闪耀6。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     }
   ],
   "groups": [
@@ -3694,11 +4523,18 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。",
-      "upgradedText": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。"
+      "upgradedText": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK15B",
@@ -3724,11 +4560,18 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         }
       ],
       "text": "知识。获得8点格挡。消耗。",
-      "upgradedText": "知识。获得12点格挡。消耗。"
+      "upgradedText": "知识。获得12点格挡。消耗。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK44",
@@ -3754,11 +4597,18 @@
         {
           "name": "Damage",
           "base": 16,
-          "upgraded": 22
+          "upgraded": 22,
+          "aliases": []
         }
       ],
       "text": "知识。造成16点伤害。",
-      "upgradedText": "知识。造成22点伤害。"
+      "upgradedText": "知识。造成22点伤害。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK44B",
@@ -3782,7 +4632,13 @@
       "portrait": "JK44B.jpg",
       "values": [],
       "text": "知识。消耗。",
-      "upgradedText": "知识。消耗。"
+      "upgradedText": "知识。消耗。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JZ06",
@@ -3806,7 +4662,13 @@
       "portrait": "JZ06.jpg",
       "values": [],
       "text": "回合开始时，获得等同于手牌中最高耗能的能量。",
-      "upgradedText": "回合开始时，获得等同于手牌中最高耗能的能量。"
+      "upgradedText": "回合开始时，获得等同于手牌中最高耗能的能量。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JK10",
@@ -3832,21 +4694,38 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "EnergyThreshold"
+          ]
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "DrawCount"
+          ]
         },
         {
           "name": "N2",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Energy"
+          ]
         }
       ],
       "text": "知识。每回合第一次打出耗能不低于2的卡牌时，抽1张牌并获得1点能量。",
-      "upgradedText": "知识。每回合第一次打出耗能不低于2的卡牌时，抽1张牌并获得2点能量。"
+      "upgradedText": "知识。每回合第一次打出耗能不低于2的卡牌时，抽1张牌并获得2点能量。",
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
     },
     {
       "id": "JK10B",
@@ -3872,16 +4751,24 @@
         {
           "name": "Damage",
           "base": 10,
-          "upgraded": 14
+          "upgraded": 14,
+          "aliases": []
         },
         {
           "name": "Block",
           "base": 10,
-          "upgraded": 14
+          "upgraded": 14,
+          "aliases": []
         }
       ],
       "text": "知识。保留。造成10点伤害。获得10点格挡。",
-      "upgradedText": "知识。保留。造成14点伤害。获得14点格挡。"
+      "upgradedText": "知识。保留。造成14点伤害。获得14点格挡。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JT03",
@@ -3907,22 +4794,26 @@
         {
           "name": "Damage",
           "base": 12,
-          "upgraded": 16
+          "upgraded": 16,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         },
         {
           "name": "N2",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "造成12点伤害2次。布置期间每打出过一张箭矢牌，额外造成1次伤害。",
@@ -3930,7 +4821,13 @@
       "arrowFocus": {
         "x": 0.17,
         "y": 0.43
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JK43",
@@ -3956,16 +4853,24 @@
         {
           "name": "Damage",
           "base": 5,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 4,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         }
       ],
       "text": "知识。保留。造成5点伤害4次。",
-      "upgradedText": "知识。保留。造成5点伤害5次。"
+      "upgradedText": "知识。保留。造成5点伤害5次。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK43B",
@@ -3991,11 +4896,20 @@
         {
           "name": "Bonus",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": []
         }
       ],
       "text": "知识。抽取攀登险丘，使其获得3点伤害加成。",
-      "upgradedText": "知识。抽取攀登险丘，使其获得4点伤害加成。"
+      "upgradedText": "知识。抽取攀登险丘，使其获得4点伤害加成。",
+      "tips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "DamageBonus"
+      ]
     },
     {
       "id": "JK46",
@@ -4021,11 +4935,20 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Cards"
+          ]
         }
       ],
       "text": "知识。回合开始时，将1张笔锋加入手牌。",
-      "upgradedText": "知识。回合开始时，将1张笔锋+加入手牌。"
+      "upgradedText": "知识。回合开始时，将1张笔锋+加入手牌。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK46B",
@@ -4051,12 +4974,14 @@
         {
           "name": "Damage",
           "base": 30,
-          "upgraded": 40
+          "upgraded": 40,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "知识。保留。造成30点伤害。",
@@ -4064,7 +4989,15 @@
       "arrowFocus": {
         "x": 0.33,
         "y": 0.68
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JX02",
@@ -4090,11 +5023,20 @@
         {
           "name": "Damage",
           "base": 12,
-          "upgraded": 16
+          "upgraded": 16,
+          "aliases": []
         }
       ],
       "text": "造成12点伤害。获得等量于布置中箭矢数量的能量。",
-      "upgradedText": "造成16点伤害。获得等量于布置中箭矢数量的能量。"
+      "upgradedText": "造成16点伤害。获得等量于布置中箭矢数量的能量。",
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
     },
     {
       "id": "JH13",
@@ -4120,26 +5062,40 @@
         {
           "name": "Damage",
           "base": 6,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         },
         {
           "name": "N2",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Hits"
+          ]
         },
         {
           "name": "N3",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Hits4"
+          ]
         }
       ],
       "text": "造成6点伤害2次。每剩余1点能量，额外造成1次伤害。",
-      "upgradedText": "造成8点伤害2次。每剩余1点能量，额外造成1次伤害。"
+      "upgradedText": "造成8点伤害2次。每剩余1点能量，额外造成1次伤害。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JF07",
@@ -4165,11 +5121,16 @@
         {
           "name": "N0",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": [
+            "DrawCount"
+          ]
         }
       ],
       "text": "抽3张牌。消耗。",
-      "upgradedText": "抽4张牌。消耗。"
+      "upgradedText": "抽4张牌。消耗。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JH20",
@@ -4195,11 +5156,20 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Energy"
+          ]
         }
       ],
       "text": "获得1点能量并可保留到下回合。",
-      "upgradedText": "获得2点能量并可保留到下回合。"
+      "upgradedText": "获得2点能量并可保留到下回合。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JK75",
@@ -4225,11 +5195,20 @@
         {
           "name": "Bonus",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "知识。打出知识牌后，随机一张手牌获得1点伤害加成。",
-      "upgradedText": "知识。打出知识牌后，随机一张手牌获得2点伤害加成。"
+      "upgradedText": "知识。打出知识牌后，随机一张手牌获得2点伤害加成。",
+      "tips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "DamageBonus"
+      ]
     },
     {
       "id": "JA73",
@@ -4255,16 +5234,24 @@
         {
           "name": "Damage",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "Block",
           "base": 4,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         }
       ],
       "text": "造成9点伤害。有布置的箭矢时，获得4点格挡。",
-      "upgradedText": "造成12点伤害。有布置的箭矢时，获得6点格挡。"
+      "upgradedText": "造成12点伤害。有布置的箭矢时，获得6点格挡。",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JA75",
@@ -4290,12 +5277,14 @@
         {
           "name": "Bonus",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "所有手牌获得3点伤害加成。",
@@ -4303,7 +5292,15 @@
       "arrowFocus": {
         "x": 0.2,
         "y": 0.27
-      }
+      },
+      "tips": [
+        "Arrow",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "DamageBonus"
+      ]
     },
     {
       "id": "JH31",
@@ -4329,21 +5326,35 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "EnergyThreshold",
+            "Threshold"
+          ]
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Amount"
+          ]
         },
         {
           "name": "N2",
           "base": 0,
-          "upgraded": 0
+          "upgraded": 0,
+          "aliases": []
         }
       ],
       "text": "打出耗能不低于2的牌后，抽1张0费牌。",
-      "upgradedText": "打出耗能不低于2的牌后，抽1张0费牌。"
+      "upgradedText": "打出耗能不低于2的牌后，抽1张0费牌。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JA94",
@@ -4369,12 +5380,16 @@
         {
           "name": "Block",
           "base": 6,
-          "upgraded": 9
+          "upgraded": 9,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Turns"
+          ]
         }
       ],
       "text": "获得6点格挡。所有目标为自己的箭矢加速1回合。",
@@ -4382,7 +5397,13 @@
       "arrowFocus": {
         "x": 0.38,
         "y": 0.4
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JK75B",
@@ -4408,12 +5429,14 @@
         {
           "name": "Damage",
           "base": 4,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "知识。造成4点伤害3次。",
@@ -4421,7 +5444,13 @@
       "arrowFocus": {
         "x": 0.18,
         "y": 0.82
-      }
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK112",
@@ -4447,16 +5476,24 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。获得8点格挡。舌战永久额外造成1次伤害。消耗。闪耀3。",
-      "upgradedText": "知识。获得12点格挡。舌战永久额外造成1次伤害。消耗。闪耀3。"
+      "upgradedText": "知识。获得12点格挡。舌战永久额外造成1次伤害。消耗。闪耀3。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK112B",
@@ -4482,16 +5519,24 @@
         {
           "name": "Damage",
           "base": 4,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "知识。造成4点伤害2次。",
-      "upgradedText": "知识。造成4点伤害2次。"
+      "upgradedText": "知识。造成4点伤害2次。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK130",
@@ -4517,11 +5562,18 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 11
+          "upgraded": 11,
+          "aliases": []
         }
       ],
       "text": "知识。获得8点格挡。",
-      "upgradedText": "知识。获得11点格挡。"
+      "upgradedText": "知识。获得11点格挡。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK130B",
@@ -4547,12 +5599,14 @@
         {
           "name": "Damage",
           "base": 18,
-          "upgraded": 24
+          "upgraded": 24,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "知识。造成18点伤害。闪耀3。",
@@ -4560,7 +5614,15 @@
       "arrowFocus": {
         "x": 0.75,
         "y": 0.45
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JK139",
@@ -4586,11 +5648,24 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "DisplayedAmount",
+            "Energy",
+            "Threshold"
+          ]
         }
       ],
       "text": "知识。每回合开始时，获得1点能量。",
-      "upgradedText": "知识。每回合开始时，获得2点能量。"
+      "upgradedText": "知识。每回合开始时，获得2点能量。",
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
     },
     {
       "id": "JK139B",
@@ -4616,11 +5691,22 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Energy"
+          ]
         }
       ],
       "text": "知识。获得1点能量。闪耀耗尽后，之后的每场战斗开始时打出领悟。消耗。闪耀6。",
-      "upgradedText": "知识。获得2点能量。闪耀耗尽后，之后的每场战斗开始时打出领悟。消耗。闪耀6。"
+      "upgradedText": "知识。获得2点能量。闪耀耗尽后，之后的每场战斗开始时打出领悟。消耗。闪耀6。",
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
     },
     {
       "id": "JG16",
@@ -4644,7 +5730,14 @@
       "portrait": "JG16.jpg",
       "values": [],
       "text": "选择一张手牌，将所有伤害加成转移到该牌上。",
-      "upgradedText": "保留。选择一张手牌，将所有伤害加成转移到该牌上。"
+      "upgradedText": "保留。选择一张手牌，将所有伤害加成转移到该牌上。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus",
+        "Retain"
+      ]
     },
     {
       "id": "JH01",
@@ -4668,7 +5761,13 @@
       "portrait": "JH01.jpg",
       "values": [],
       "text": "选择两张手牌，交换其耗能。",
-      "upgradedText": "选择两张手牌，交换其耗能。"
+      "upgradedText": "选择两张手牌，交换其耗能。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JK33",
@@ -4694,16 +5793,26 @@
         {
           "name": "Damage",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "Bonus",
           "base": 6,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         }
       ],
       "text": "知识。造成9点伤害。未来获得6点伤害加成。",
-      "upgradedText": "知识。造成12点伤害。未来获得6点伤害加成。"
+      "upgradedText": "知识。造成12点伤害。未来获得6点伤害加成。",
+      "tips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "DamageBonus"
+      ]
     },
     {
       "id": "JK33B",
@@ -4729,16 +5838,26 @@
         {
           "name": "Damage",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Count"
+          ]
         }
       ],
       "text": "知识。造成9点伤害。过去额外造成1次伤害。",
-      "upgradedText": "知识。造成12点伤害。过去额外造成1次伤害。"
+      "upgradedText": "知识。造成12点伤害。过去额外造成1次伤害。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JG38",
@@ -4764,16 +5883,24 @@
         {
           "name": "Damage",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "造成1点伤害2次。这张牌每场战斗第一次获得的伤害加成永久保留。",
-      "upgradedText": "造成1点伤害3次。这张牌每场战斗第一次获得的伤害加成永久保留。"
+      "upgradedText": "造成1点伤害3次。这张牌每场战斗第一次获得的伤害加成永久保留。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JA16",
@@ -4799,16 +5926,24 @@
         {
           "name": "Damage",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "造成9点伤害。下回合获得1点能量。",
-      "upgradedText": "造成12点伤害。下回合获得1点能量。"
+      "upgradedText": "造成12点伤害。下回合获得1点能量。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JK45",
@@ -4834,17 +5969,20 @@
         {
           "name": "Damage",
           "base": 12,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 3,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 4,
-          "upgraded": 4
+          "upgraded": 4,
+          "aliases": []
         }
       ],
       "text": "知识。造成12点伤害3次。",
@@ -4852,7 +5990,15 @@
       "arrowFocus": {
         "x": 0.54,
         "y": 0.48
-      }
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
     },
     {
       "id": "JK45B",
@@ -4878,21 +6024,38 @@
         {
           "name": "N0",
           "base": 0,
-          "upgraded": 0
+          "upgraded": 0,
+          "aliases": []
         },
         {
           "name": "Bonus",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         },
         {
           "name": "N2",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Turns"
+          ]
         }
       ],
       "text": "知识。笔伐布置期间此牌耗能为0。所有箭矢获得2点伤害加成并加速1回合。",
-      "upgradedText": "知识。笔伐布置期间此牌耗能为0。所有箭矢获得3点伤害加成并加速1回合。"
+      "upgradedText": "知识。笔伐布置期间此牌耗能为0。所有箭矢获得3点伤害加成并加速1回合。",
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus",
+        "Energy"
+      ]
     },
     {
       "id": "JK50",
@@ -4918,11 +6081,18 @@
         {
           "name": "Damage",
           "base": 46,
-          "upgraded": 60
+          "upgraded": 60,
+          "aliases": []
         }
       ],
       "text": "知识。造成46点伤害。",
-      "upgradedText": "知识。造成60点伤害。"
+      "upgradedText": "知识。造成60点伤害。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK50B",
@@ -4946,7 +6116,14 @@
       "portrait": "JK50B.jpg",
       "values": [],
       "text": "知识。打出手牌中的雄辩。",
-      "upgradedText": "知识。保留。打出手牌中的雄辩。"
+      "upgradedText": "知识。保留。打出手牌中的雄辩。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Retain"
+      ]
     },
     {
       "id": "JA41",
@@ -4972,17 +6149,20 @@
         {
           "name": "Damage",
           "base": 8,
-          "upgraded": 10
+          "upgraded": 10,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         },
         {
           "name": "Turns",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "造成8点伤害3次。",
@@ -4990,7 +6170,13 @@
       "arrowFocus": {
         "x": 0.39,
         "y": 0.7
-      }
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     },
     {
       "id": "JX07",
@@ -5016,16 +6202,26 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Energy"
+          ]
         }
       ],
       "text": "获得8点格挡。获得2点能量并可保留到下回合。",
-      "upgradedText": "获得12点格挡。获得2点能量并可保留到下回合。"
+      "upgradedText": "获得12点格挡。获得2点能量并可保留到下回合。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JH10",
@@ -5051,16 +6247,20 @@
         {
           "name": "Damage",
           "base": 9,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 3,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": []
         }
       ],
       "text": "造成9点伤害3次。",
-      "upgradedText": "造成12点伤害3次。"
+      "upgradedText": "造成12点伤害3次。",
+      "tips": [],
+      "upgradedTips": []
     },
     {
       "id": "JH17",
@@ -5086,17 +6286,22 @@
         {
           "name": "Block",
           "base": 12,
-          "upgraded": 14
+          "upgraded": 14,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Energy"
+          ]
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "获得12点格挡。获得2点能量。",
@@ -5104,7 +6309,15 @@
       "arrowFocus": {
         "x": 0.54,
         "y": 0.53
-      }
+      },
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
     },
     {
       "id": "JG31",
@@ -5130,11 +6343,18 @@
         {
           "name": "Bonus",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         }
       ],
       "text": "在本回合内打出卡牌时，使其获得1点伤害加成。",
-      "upgradedText": "在本回合内打出卡牌时，使其获得2点伤害加成。"
+      "upgradedText": "在本回合内打出卡牌时，使其获得2点伤害加成。",
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
     },
     {
       "id": "JK80",
@@ -5160,16 +6380,28 @@
         {
           "name": "Block",
           "base": 6,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": [
+            "Threshold"
+          ]
         },
         {
           "name": "N1",
           "base": 4,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": [
+            "Amount"
+          ]
         }
       ],
       "text": "获得6点格挡。下次打出知识牌后再获得4点格挡。",
-      "upgradedText": "获得6点格挡。下次打出知识牌后再获得8点格挡。"
+      "upgradedText": "获得6点格挡。下次打出知识牌后再获得8点格挡。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JH26",
@@ -5195,16 +6427,26 @@
         {
           "name": "Block",
           "base": 4,
-          "upgraded": 6
+          "upgraded": 6,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": [
+            "Energy"
+          ]
         }
       ],
       "text": "获得4点格挡。可保留1点能量到下回合。",
-      "upgradedText": "获得6点格挡。可保留1点能量到下回合。"
+      "upgradedText": "获得6点格挡。可保留1点能量到下回合。",
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
     },
     {
       "id": "JK148",
@@ -5230,21 +6472,30 @@
         {
           "name": "Damage",
           "base": 6,
-          "upgraded": 8
+          "upgraded": 8,
+          "aliases": []
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         },
         {
           "name": "N2",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。造成6点伤害。每耗尽过1张关联牌，额外造成1次伤害。",
-      "upgradedText": "知识。造成8点伤害。每耗尽过1张关联牌，额外造成1次伤害。"
+      "upgradedText": "知识。造成8点伤害。每耗尽过1张关联牌，额外造成1次伤害。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK148B",
@@ -5270,11 +6521,20 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": [
+            "Cards"
+          ]
         }
       ],
       "text": "知识。从抽牌堆选择1张知识牌放入手牌。消耗。闪耀6。",
-      "upgradedText": "知识。从抽牌堆选择2张知识牌放入手牌。消耗。闪耀6。"
+      "upgradedText": "知识。从抽牌堆选择2张知识牌放入手牌。消耗。闪耀6。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK148C",
@@ -5300,11 +6560,20 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "DrawCount"
+          ]
         }
       ],
       "text": "知识。抽2张牌。消耗。闪耀6。",
-      "upgradedText": "知识。抽3张牌。消耗。闪耀6。"
+      "upgradedText": "知识。抽3张牌。消耗。闪耀6。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK148D",
@@ -5330,16 +6599,24 @@
         {
           "name": "Damage",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 2,
+          "aliases": []
         },
         {
           "name": "Repeat",
           "base": 5,
-          "upgraded": 5
+          "upgraded": 5,
+          "aliases": []
         }
       ],
       "text": "知识。造成2点伤害5次。闪耀6。",
-      "upgradedText": "知识。造成2点伤害5次。闪耀6。"
+      "upgradedText": "知识。造成2点伤害5次。闪耀6。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK148E",
@@ -5365,11 +6642,18 @@
         {
           "name": "Block",
           "base": 8,
-          "upgraded": 12
+          "upgraded": 12,
+          "aliases": []
         }
       ],
       "text": "知识。获得8点格挡。消耗。闪耀6。",
-      "upgradedText": "知识。获得12点格挡。消耗。闪耀6。"
+      "upgradedText": "知识。获得12点格挡。消耗。闪耀6。",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     },
     {
       "id": "JK148F",
@@ -5395,16 +6679,30 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 3,
+          "aliases": [
+            "Energy"
+          ]
         },
         {
           "name": "Turns",
           "base": 1,
-          "upgraded": 1
+          "upgraded": 1,
+          "aliases": []
         }
       ],
       "text": "知识。获得2点能量。消耗。闪耀6。",
-      "upgradedText": "知识。获得3点能量。消耗。闪耀6。"
+      "upgradedText": "知识。获得3点能量。消耗。闪耀6。",
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "Energy"
+      ]
     }
   ],
   "startingHp": 70,

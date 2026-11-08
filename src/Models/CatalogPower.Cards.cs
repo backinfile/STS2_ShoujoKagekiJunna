@@ -46,7 +46,7 @@ public abstract partial class CatalogPower
                 case "JK15" when CardCatalog.IsKnowledge(play.Card) && grant.Take(1):
                     using (KnowledgeCombat.SingleCard())
                     {
-                        var clone = play.Card.CreateCloneForPlayer(play.Card.Owner);
+                        var clone = ShoujoKageki.Core.V1.CardCopies.ForCombat(play.Card, play.Card.Owner, ShoujoKageki.Core.V1.CardCopyPurpose.TemporaryCopy);
                         await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, play.Card.Owner);
                     }
                     break;

@@ -149,7 +149,7 @@ public static class HandArrow
     {
         private static void Postfix(AbstractModel __instance, AbstractModel __result)
         {
-            if (__instance is CardModel card && __result is CardModel copy && Forms.TryGetValue(card, out var form))
+            if (__instance is CardModel card && __result is CardModel copy && card.Id == copy.Id && Forms.TryGetValue(card, out var form))
                 Forms.Add(copy, form);
         }
     }

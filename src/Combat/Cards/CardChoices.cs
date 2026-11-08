@@ -23,7 +23,7 @@ public static class CardChoices
         var own = (CardModel)ModelDb.GetById<JunnaArrowTargetSelf>(ModelDb.GetId<JunnaArrowTargetSelf>()).MutableClone();
         var enemies = (CardModel)ModelDb.GetById<JunnaArrowTargetEnemy>(ModelDb.GetId<JunnaArrowTargetEnemy>()).MutableClone();
         own.Owner = enemies.Owner = source.Owner;
-        var selected = await CardSelectCmd.FromChooseACardScreen(context, [own, enemies], source.Owner);
+        var selected = await ShoujoKageki.Core.V1.CardSelection.Choose(context, [own, enemies], source.Owner);
         if (selected == null) return;
         bool self = selected == own;
         var arrows = ArrowCombat.DisplayOrder().Where(a => a.Card.Owner == source.Owner &&
@@ -38,7 +38,7 @@ public static class CardChoices
         draw.Owner = energy.Owner = source.Owner;
         draw.DynamicVars["Amount"].BaseValue = source.Value("DrawCount");
         energy.DynamicVars["Amount"].BaseValue = source.Value("Energy");
-        var selected = await CardSelectCmd.FromChooseACardScreen(context, [draw, energy], source.Owner);
+        var selected = await ShoujoKageki.Core.V1.CardSelection.Choose(context, [draw, energy], source.Owner);
         if (selected == draw) await CardPileCmd.Draw(context, source.Value("DrawCount"), source.Owner);
         else if (selected == energy) await PlayerCmd.GainEnergy(source.Value("Energy"), source.Owner);
     }
@@ -50,7 +50,7 @@ public static class CardChoices
         now.Owner = later.Owner = source.Owner;
         now.DynamicVars["Amount"].BaseValue = source.Value("EnergyNow");
         later.DynamicVars["Amount"].BaseValue = source.Value("EnergyLater");
-        var selected = await CardSelectCmd.FromChooseACardScreen(context, [now, later], source.Owner);
+        var selected = await ShoujoKageki.Core.V1.CardSelection.Choose(context, [now, later], source.Owner);
         if (selected == now) await PlayerCmd.GainEnergy(source.Value("EnergyNow"), source.Owner);
         else if (selected == later) await PowerCmd.Apply<MegaCrit.Sts2.Core.Models.Powers.EnergyNextTurnPower>(
             context, source.Owner.Creature, source.Value("EnergyLater"), source.Owner.Creature, source);
@@ -68,7 +68,7 @@ public static class CardChoices
             return option;
         }
         var choices = new[] { Option("JK78D"), Option("JK78E") };
-        var selected = await CardSelectCmd.FromChooseACardScreen(context, choices, source.Owner);
+        var selected = await ShoujoKageki.Core.V1.CardSelection.Choose(context, choices, source.Owner);
         var pile = CardCatalog.DesignId(selected!) switch
         {
             "JK78D" => state.DrawPile,

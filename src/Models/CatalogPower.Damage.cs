@@ -22,7 +22,7 @@ public abstract partial class CatalogPower
         int ordinal = AttackEventHistory.Ordinal(result);
         foreach (var grant in _grants.ToArray())
             if (ordinal > 0 && ordinal <= grant.V("Limit"))
-                await CardActions.Fly(context, Owner.Player!, result.TotalDamage, target, grant.Card.IsUpgraded);
+                await CardActions.Fly(context, Owner.Player!, result.TotalDamage, target, grant.IsUpgraded);
     }
 
     public override async Task AfterDamageReceived(PlayerChoiceContext context, Creature target, DamageResult result,
@@ -48,8 +48,8 @@ public abstract partial class CatalogPower
             var targets = Owner.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
             if (targets.Length == 0) return;
             var target = Owner.Player!.RunState.Rng.CombatTargets.NextItem(targets);
-            using (DamageExecution.BeginCardResolution(grant.Card))
-                await GameApi.Damage(context, [target!], amount, ValueProp.Move, Owner, grant.Card, grant.Play);
+            using (DamageExecution.BeginCardResolution(grant.Source))
+                await GameApi.Damage(context, [target!], amount, ValueProp.Move, Owner, grant.Source, grant.Play);
         }
     }
 }

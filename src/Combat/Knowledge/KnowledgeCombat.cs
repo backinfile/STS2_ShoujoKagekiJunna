@@ -47,10 +47,10 @@ public static class KnowledgeCombat
         }
         finally { active.Remove(key); }
     }
-    private static async Task GrantPartners(CardModel acquired, PileType destination)
+    internal static async Task<IReadOnlyList<CardModel>> GrantPartners(CardModel acquired, PileType destination)
     {
         var group = Group(acquired);
-        if (group == null) return;
+        if (group == null) return [acquired];
         using var single = SingleCard();
         var counts = new Dictionary<string, int>(group.GrantedCardCounts);
         foreach (var (memberId, count) in group.Members) counts[memberId] = count;
@@ -68,7 +68,11 @@ public static class KnowledgeCombat
                     var result = await CardPileCmd.Add(card, PileType.Deck);
                     if (result.success && result.cardAdded.Pile == acquired.Pile) gained.Add(result.cardAdded);
                 }
-                else await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner);
+                else
+                {
+                    await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner);
+                    if (card.Pile?.Type == destination) gained.Add(card);
+                }
             }
         if (destination == PileType.Deck) KnowledgeProgress.BindResearch(gained);
         if (destination == PileType.Deck && acquired.Pile is { Type: PileType.Deck } deck)
@@ -82,6 +86,7 @@ public static class KnowledgeCombat
             foreach (var card in ordered) deck.AddInternal(card, index++, silent: true);
             deck.InvokeContentsChanged();
         }
+        return gained;
     }
 
     [HarmonyPatch]

@@ -16,21 +16,11 @@ namespace ShoujoKagekiJunna.Combat;
 /// <summary>Links identify physical knowledge groups, including cards from other characters.</summary>
 public static class DynamicKnowledge
 {
-    private static readonly SavedSpireField<CardModel, string> Links = new(() => null, "JunnaKnowledgeLinks");
-    private static readonly SavedSpireField<Player, int> NextGroup = new(() => 0, "JunnaKnowledgeGroupSequence");
     private static readonly ConditionalWeakTable<CardModel, CardModel[]> Pending = new();
     private static readonly ConditionalWeakTable<CardModel, CardReward> Offers = new();
-    public static void Initialize() { }
-    public static bool IsLinked(CardModel card) => !string.IsNullOrEmpty(Links.Get(card));
-    private static string[] Groups(CardModel card) => Links.Get(card)?.Split('\n', StringSplitOptions.RemoveEmptyEntries) ?? [];
-    public static IReadOnlyList<CardModel> Members(CardModel source)
-    {
-        if (!source.IsMutable || source.Owner == null || !IsLinked(source)) return [];
-        var groups = Groups(source).ToHashSet();
-        var cards = source.Pile?.IsCombatPile == true && source.Owner.PlayerCombatState != null
-            ? source.Owner.PlayerCombatState.AllCards : source.Owner.Deck.Cards;
-        return cards.Prepend(source).Distinct().Where(c => Groups(c).Any(groups.Contains)).ToArray();
-    }
+    public static void Initialize() => KnowledgeRelations.Initialize();
+    public static bool IsLinked(CardModel card) => KnowledgeRelations.IsLinked(card);
+    public static IReadOnlyList<CardModel> Members(CardModel source) => KnowledgeRelations.Members(source);
     public static async Task Prepare(PlayerChoiceContext context, CardModel selected, IEnumerable<CardModel> options)
     {
         if (CardCatalog.DesignId(selected) != "JK126" || IsLinked(selected)) return;
@@ -47,25 +37,28 @@ public static class DynamicKnowledge
         }
         if (!Pending.TryGetValue(acquired, out var partners)) return;
         Pending.Remove(acquired);
-        int sequence = checked(NextGroup.Get(acquired.Owner) + 1);
-        NextGroup.Set(acquired.Owner, sequence);
-        string group = acquired.Owner.NetId + "/" + sequence;
-        void Link(CardModel member)
-        {
-            Links.Set(member, string.Join("\n", Groups(member).Append(group).Distinct()));
-            member.AddKeyword(JunnaKeywords.Knowledge);
-        }
-        Link(acquired);
+        string group = KnowledgeRelations.CreateGroup(acquired.Owner);
+        KnowledgeRelations.Link(acquired, [group]);
         foreach (var partner in partners)
         {
-            // Ordinary knowledge entrances still acquire their existing static companions.
-            // No new choice context is created for an attached dynamic entrance.
             Offers.Remove(partner);
             Pending.Remove(partner);
-            if (destination == PileType.Deck) await CardPileCmd.Add(partner, PileType.Deck);
-            else await CardPileCmd.AddGeneratedCardToCombat(partner, destination, acquired.Owner);
-            if (partner.Pile?.Type == destination) Link(partner);
+            CardModel actual = partner;
+            using (KnowledgeCombat.SingleCard())
+            {
+                if (destination == PileType.Deck)
+                {
+                    var result = await CardPileCmd.Add(partner, PileType.Deck);
+                    if (!result.success) continue;
+                    actual = result.cardAdded;
+                }
+                else await CardPileCmd.AddGeneratedCardToCombat(partner, destination, acquired.Owner);
+            }
+            if (actual.Pile?.Type != destination) continue;
+            foreach (var member in await KnowledgeCombat.GrantPartners(actual, destination))
+                KnowledgeRelations.Link(member, [group]);
         }
+        KnowledgeRelations.Normalize(acquired.Owner);
     }
 
     [HarmonyPatch(typeof(CardReward), "OnSelect")]
@@ -82,9 +75,8 @@ public static class DynamicKnowledge
     {
         private static void Postfix(AbstractModel __instance, AbstractModel __result)
         {
-            if (__instance is not CardModel original || __result is not CardModel copy || !IsLinked(original)) return;
-            Links.Set(copy, Links.Get(original));
-            copy.AddKeyword(JunnaKeywords.Knowledge);
+            if (__instance is not CardModel original || __result is not CardModel copy || !IsLinked(original) || original.Id != copy.Id) return;
+            KnowledgeRelations.Copy(original, copy);
         }
     }
     [HarmonyPatch(typeof(CardModel), nameof(CardModel.FromSerializable))]

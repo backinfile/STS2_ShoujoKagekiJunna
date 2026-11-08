@@ -29,11 +29,9 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         _ => new DynamicVar(n.Name, n.Base)
     });
     public int Number(int index) => DynamicVars[Definition.Values[index].Name].IntValue;
-    public int Value(string name, int fallback = 0)
-    {
-        string field = CardValueNames.Resolve(DesignId, name);
-        return Definition.Values.Any(value => value.Name == field) ? DynamicVars[field].IntValue : fallback;
-    }
+    public int Value(string name) => DynamicVars[CardValueNames.Resolve(DesignId, name)].IntValue;
+    public int Value(string name, int fallback) => CardValueNames.TryResolve(Definition, name, out var field)
+        ? DynamicVars[field].IntValue : fallback;
 
     public void ConvertArrow()
     {

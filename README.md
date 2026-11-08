@@ -74,6 +74,6 @@ C-1 的构建、1/3/6 支排列与倒计时结算检查保存在 `artifacts/floa
 
 高空横列版本的实机截图与倒计时检查保存在 `artifacts/overhead-arrows/`。当前源码恢复 240∶416 的细长菱形比例，加厚灰色边框；1920×1080 游戏画布上箭矢框体约为 42×73，在 1280×720 窗口中约为 28×49。群体扇面引导线在目标距离的 70% 内渐隐。群体箭显示按卡牌的 `AllEnemies` 目标类型识别，并由独立测试模组的群体箭检查。本轮已重新打包 `dist/` 并验证正式版与测试版。
 
-机制接入与适配边界见 `docs/implementation/runtime-compatibility.md`。
+机制接入与适配边界见 `docs/implementation/runtime-compatibility.md`。公共快照、知识关系和生成元数据见 [公共生命周期接入](docs/implementation/shared-lifecycle.md)。
 
 本轮预览着色排查、知识按钮与文字、箭矢层级、宝石尺寸、能量保留和双星重放的修改及定向验证见 [任务记录](docs/worktree-tasks/pursuit-upgrade-preview-analysis-20261105/README.md)。

@@ -26,10 +26,10 @@ public abstract partial class CatalogPower
                 case "JA35": await ArrowCombat.AccelerateAll(context, player, grant.V("Turns")); break;
                 case "JH59": case "JK139": await PlayerCmd.GainEnergy(grant.V("Energy"), player); break;
                 case "JK32": await CardPileCmd.Draw(context, grant.V("DrawCount"), player); break;
-                case "JK46": await CardActions.Generate(player, "JK46B", grant.V("Cards"), PileType.Hand, grant.Card.IsUpgraded); break;
+                case "JK46": await CardActions.Generate(player, "JK46B", grant.V("Cards"), PileType.Hand, grant.IsUpgraded); break;
                 case "JG34":
-                    using (DamageExecution.BeginCardResolution(grant.Card))
-                        await CardEffects.DealDamage(grant.Card, context, grant.Play, grant.V("Damage"), grant.BaseHits);
+                    using (DamageExecution.BeginCardResolution(grant.Source))
+                        await CardEffects.DealDamage(grant.Source, context, grant.Play, grant.V("Damage"), grant.BaseHits);
                     break;
                 case "JZ06": await PlayerCmd.GainEnergy(player.PlayerCombatState!.Hand.Cards.Where(CardActions.HasNumericCost).Select(CardActions.Cost).DefaultIfEmpty().Max(), player); break;
             }
@@ -43,7 +43,7 @@ public abstract partial class CatalogPower
                 if (_grants.Any(g => CardActions.Cost(card) >= g.V("Threshold"))) card.GiveSingleTurnRetain();
         if (DesignId == "JA87" && player == Owner.Player)
             foreach (var grant in _grants.ToArray())
-                await HandArrow.Select(context, grant.Card, grant.V("Cards"), optional: true);
+                await HandArrow.Select(context, grant.Source, grant.V("Cards"), optional: true);
     }
 
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext context, CombatSide side, IEnumerable<Creature> participants)
