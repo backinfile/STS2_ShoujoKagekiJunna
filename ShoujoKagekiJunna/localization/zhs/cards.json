@@ -131,7 +131,7 @@
   "JUNNA_JG36.title": "挥刃练习",
   "JUNNA_JG36.description": "造成{Damage:diff()}点伤害。\n你打出的下一张牌获得{Bonus:diff()}点[gold]伤害加成[/gold]。",
   "JUNNA_JK82.title": "学无止境",
-  "JUNNA_JK82.description": "[gold]知识[/gold]。\n获得{IfUpgraded:show:{energyPrefix:energyIcons(3)}|{energyPrefix:energyIcons(2)}}。\n[gold]升级[/gold]时单独获得一张[gold]新知[/gold]。\n可多次[gold]升级[/gold]。",
+  "JUNNA_JK82.description": "[gold]知识[/gold]。\n获得{N0:diff()}{energyPrefix:energyIcons(1)}。\n[gold]升级[/gold]时单独获得一张[gold]新知[/gold]。\n可多次[gold]升级[/gold]。",
   "JUNNA_JK82B.title": "新知",
   "JUNNA_JK82B.description": "[gold]知识[/gold]。\n抽{N0:diff()}张牌。",
   "JUNNA_JZ05.title": "即兴",

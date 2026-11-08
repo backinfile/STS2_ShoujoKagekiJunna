@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ShoujoKagekiJunna" HintPath="../../.godot/mono/temp/bin/Release/ShoujoKagekiJunna.dll" />
+    <Reference Include="ShoujoKagekiAijoCore.Api.V1" HintPath="$(CoreApiPath)" />
+    <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" />
+    <Reference Include="GodotSharp" HintPath="$(GameData)/GodotSharp.dll" />
+    <Reference Include="SmartFormat" HintPath="$(GameData)/SmartFormat.dll" />
+    <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" />
+    <PackageReference Include="Alchyr.Sts2.BaseLib" Version="$(BaseLibVersion)" />
+  </ItemGroup>
+</Project>

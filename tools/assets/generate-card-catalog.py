@@ -60,6 +60,9 @@ def display_description(card, text, card_names, values, upgraded=False):
     numbers = {value['name']: value['upgraded' if upgraded else 'base'] for value in values}
 
     def energy(match):
+        # Learning can upgrade repeatedly, so its displayed gain must stay dynamic.
+        if card['id'] == 'JK82':
+            return match[0].removesuffix('点能量') + '{energyPrefix:energyIcons(1)}'
         value = numbers[match[1]]
         icons = '{energyPrefix:energyIcons(' + str(value if 1 <= value <= 3 else 1) + ')}'
         return icons if 1 <= value <= 3 else match[0].removesuffix('点能量') + icons
