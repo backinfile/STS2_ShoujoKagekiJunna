@@ -1,6 +1,6 @@
 # 后台报错逐项分析
 
-快照：2026-11-08T02:59:36.939515+00:00。生产 SQLite 使用只读连接，解码独立报错环境表；完整载荷位于忽略目录 `artifacts/error-reports/received-errors.json`。
+快照：2026-11-08T02:59:36.939515+00:00。生产 SQLite 使用只读连接，解码独立报错环境表；完整载荷位于忽略目录 `artifacts/task-deliverables/junna-error-reports-20261108/error-reports/received-errors.json`。
 
 共32组、39条报告、累计44次。消息或调用栈直接出现 Junna 的为8组、9条；其余来自安装 Junna 的环境。旧协议的 `mod_version` 表示 Karen 版本，Junna 版本以 `mods` 清单为准。
 
@@ -47,7 +47,7 @@ RitsuLib 0.6.10 将 `CardModel.OnPlay` 替换为 `RunCardOnPlayHooks`。原补�
 - 10项真实 DLL 的原版/联用出牌及攻击边界检查通过。
 - Core 1.0.1/1.0.2 与当前 Karen、Junna、RitsuLib 联用启动通过；`junna_compatibility check` 的7项真实卡面/目标解析检查通过。
 - 真实存档续玩成功；满弦射击到期伤害25、普通打击伤害6，回合继续。
-- 最小化启动采样未抢占前台；静默有声录像为 H.264/AAC、1280×720、约28秒，位于 `out/tmp/junna-error-reports-20261108/junna-compatibility.mp4`。
+- 最小化启动采样未抢占前台；静默有声录像为 H.264/AAC、1280×720、约28秒，位于 `artifacts/task-deliverables/junna-error-reports-20261108/video/junna-compatibility.mp4`。
 - 本轮仅运行受影响的编译、IL、启动、预览、续玩及首战验证。
 
 ## 资源预载对照
