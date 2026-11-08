@@ -23,15 +23,17 @@ function fixture(cards, overrides = {}) {
     cardTab: value => value.trashedAt ? 'trash' : value.reservedAt ? 'reserve' : 'cards',
     JunnaRouteStatistics: { matchesPosition: () => true }, flowDefaults: {},
     localStorage: { setItem() {} }, uiKey: 'test', previewMode: false,
+    clone: value => JSON.parse(JSON.stringify(value)),
     location: { hash: '' }, history: { replaceState(_state, _title, hash) { context.location.hash = hash; } },
     URLSearchParams
   });
   const save = source.slice(source.indexOf('  function saveUI('), source.indexOf('\n', source.indexOf('  function saveUI(')));
-  vm.runInContext(constants + '\n' + filtering + '\n' + save, context);
+  const tabState = source.split('\n').filter(line => /^  (const TAB_FILTER_DEFAULTS=|function rememberTabFilters\()/.test(line)).join('\n');
+  vm.runInContext(constants + '\n' + tabState + '\n' + filtering + '\n' + save, context);
   return { context, ids: () => Array.from(context.filteredCards(), value => value.id) };
 }
 
-test('natural sorting compares rarity, type, cost and numeric card ID in order', () => {
+test('natural sorting compares rarity, cost, type and numeric card ID in order', () => {
   const { ids } = fixture([
     card('C10'), card('C2'), card('C3', { cost: 0 }),
     card('S', { type: '技能', cost: 0 }), card('P', { type: '能力', cost: 0 }),
@@ -39,7 +41,7 @@ test('natural sorting compares rarity, type, cost and numeric card ID in order',
     card('R', { rarity: '稀有', cost: 0 }), card('B', { rarity: '基础', cost: 9 }),
     card('E', { rarity: '远古', cost: 0 })
   ]);
-  assert.deepEqual(ids(), ['B', 'C3', 'C2', 'C10', 'S', 'P', 'A', 'U', 'R', 'E']);
+  assert.deepEqual(ids(), ['B', 'C3', 'S', 'P', 'A', 'C2', 'C10', 'U', 'R', 'E']);
 });
 
 test('special rarities follow ancient cards and remain independently filterable by type and pool', () => {

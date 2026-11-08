@@ -46,3 +46,42 @@ test('overview checkbox reaches the reference tables and all faces use matching 
   ui.overviewAll=false;html=context.overviewReference({scope:'cards'});
   assert.match(html,/完整卡池参考 · 2张/);assert.match(html,/建议奖励牌/);
 });
+
+test('overview type groups merge arrows into attack and skill across scopes and related faces',()=>{
+  const source=fs.readFileSync(require.resolve('./app.js'),'utf8');
+  const stats=source.slice(source.indexOf('  function overviewStats('),source.indexOf('  function overviewTable('));
+  const comparison=source.slice(source.indexOf('  function overviewComparison('),source.indexOf('  function renderOverview('));
+  const scopes=['cards','reserve','trash'];
+  const cards=scopes.flatMap(scope=>{
+    const flags=scope==='reserve'?{reservedAt:'today'}:scope==='trash'?{trashedAt:'today'}:{};
+    return[
+      card(scope+'-attack',{...flags,partnerCardIds:[scope+'-companion']}),
+      card(scope+'-attack-arrow',{...flags,type:'箭矢',arrowSubtype:'攻击'}),
+      card(scope+'-skill-arrow',{...flags,type:'箭矢',arrowSubtype:'技能'}),
+      card(scope+'-companion',{...flags,type:'技能',pool:false})
+    ];
+  });
+  const before=JSON.stringify(cards),ui={overviewScope:'cards',overviewAll:false},data={cards,partnerGroups:[],terms:[],meta:{}};
+  let rendered,dimensions;
+  const context=vm.createContext({
+    state:{data},ui,JunnaPoolReference:reference,escape:String,
+    cardTab:c=>c.trashedAt?'trash':c.reservedAt?'reserve':'cards',
+    overviewDimensions:()=>dimensions,
+    overviewTable:(title,headers,rows)=>{rendered={title,headers,rows};return '';}
+  });
+  vm.runInContext(stats+'\n'+comparison,context);
+  for(const scope of scopes)for(const all of [false,true])for(const withRarity of [false,true]){
+    ui.overviewScope=scope;ui.overviewAll=all;
+    dimensions=[...(withRarity?[{key:'rarity',label:'稀有度'}]:[]),{key:'type',label:'卡牌类型',order:['攻击','技能','能力','箭矢']}];
+    context.overviewComparison(context.overviewStats());
+    const attack=rendered.rows.find(row=>row.includes('>攻击</')),skill=rendered.rows.find(row=>row.includes('>技能</'));
+    assert.equal(rendered.rows.length,3,scope);
+    assert.match(attack,/<td>2<\/td>/);
+    assert.match(skill,new RegExp('<td>'+(all?2:1)+'</td>'));
+    assert(attack.includes(all?'50.0%':'66.7%'));
+    assert(skill.includes(all?'50.0%':'33.3%'));
+    assert(!rendered.rows.join('').includes('箭矢'));
+    assert.match(rendered.rows.at(-1),new RegExp('<td>'+(all?4:3)+'</td>'));
+  }
+  assert.equal(JSON.stringify(cards),before);
+});

@@ -54,7 +54,9 @@ test('包含和排除各渲染四个原生复选框，统计及定位编辑不�
 test('旧筛选链接迁入新标签，新链接保存排除条件并支持重置',()=>{
  const source=fs.readFileSync(require.resolve('./app.js'),'utf8'),read=source.split('\n').find(line=>line.startsWith('  function readHash()')),save=source.split('\n').find(line=>line.startsWith('  function saveUI('));
  const context=vm.createContext({JunnaRouteStatistics:logic,URLSearchParams,ui:{tab:'cards',routePositions:null,routeExcludedPositions:null,routePosition:'all',breakthrough:'all',pool:'all'},state:{data:{terms:[]}},location:{hash:'#tab=cards&routePosition=both&breakthrough=ordinary'},previewMode:false,uiKey:'ui',localStorage:{setItem(){}},history:{replaceState(_a,_b,value){context.savedHash=value}}});
- vm.runInContext(read+'\n'+save+'\nreadHash();saveUI();',context);
+ const tabState=source.split('\n').filter(line=>/^  (const TAB_FILTER_DEFAULTS=|function (rememberTabFilters|selectTab)\()/.test(line)).join('\n');
+ context.clone=value=>JSON.parse(JSON.stringify(value));
+ vm.runInContext(tabState+'\n'+read+'\n'+save+'\nreadHash();saveUI();',context);
  assert.equal(JSON.stringify(context.ui.routePositions),JSON.stringify(['trigger','payoff']));
  assert.equal(JSON.stringify(context.ui.routeExcludedPositions),JSON.stringify(['breakthrough']));
  assert(context.savedHash.includes('positions=trigger%2Cpayoff'));assert(context.savedHash.includes('excludePositions=breakthrough'));assert(!context.savedHash.includes('routePosition='));
