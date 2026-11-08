@@ -106,9 +106,7 @@ public static partial class KnowledgeProgress
         {
             // Transfer serialization keeps permanent modifications and the current Shine budget.
             // The new physical card receives an independent depletion lifecycle from Core.
-            var budget = Shine.GetState(original);
-            var copy = player.RunState.LoadCard(original.ToSerializable(), player);
-            if (budget != null) Shine.SetState(copy, budget.Remaining, budget.Maximum);
+            var copy = ShoujoKageki.Core.V1.CardCopies.ForDeck(original, player, ShoujoKageki.Core.V1.CardCopyPurpose.Transfer);
             await CardPileCmd.Add(copy, PileType.Deck);
         }
     }

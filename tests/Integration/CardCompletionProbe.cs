@@ -48,9 +48,9 @@ public static class CardCompletionProbe
             {
                 foreach (var power in enemy.Powers.ToArray()) await PowerCmd.Remove(power);
                 await CreatureCmd.SetMaxHp(enemy, 1000000); await CreatureCmd.SetCurrentHp(enemy, 1000000);
-                await CreatureCmd.LoseBlock(context, enemy, enemy.Block, null);
+                await TestGameApi.LoseBlock(context, enemy, enemy.Block, null);
             }
-            await CreatureCmd.LoseBlock(context, player.Creature, player.Creature.Block, null);
+            await TestGameApi.LoseBlock(context, player.Creature, player.Creature.Block, null);
             player.PlayerCombatState.Energy = 10;
             player.PlayerCombatState.IncrementTurnNumber();
         }
@@ -106,7 +106,7 @@ public static class CardCompletionProbe
                     selected = await Card("JK11"); helpers.Add(selected);
                     helpers.Add(await Card("JK11B", PileType.Draw)); helpers.Add(await Card("JK15B", PileType.Draw));
                 }
-                if (id is "JA65" or "JA53" or "JK37B") { selected = await Card("JA38", PileType.Draw); helpers.Add(selected); }
+                if (id is "JA65" or "JA53") { selected = await Card("JA38", PileType.Draw); helpers.Add(selected); }
                 if (id == "JA66") { selected = await Card("JB01", PileType.Discard); helpers.Add(selected); helpers.Add(await Card("JB02", PileType.Discard)); }
                 if (id is "JK78" or "JK78D") { selected = await Card("JB01", PileType.Draw); helpers.Add(selected); helpers.Add(await Card("JB01", PileType.Discard)); }
                 if (id == "JK78E") { selected = await Card("JB01", PileType.Discard); helpers.Add(selected); }
@@ -156,18 +156,18 @@ public static class CardCompletionProbe
                 if (definition.Type == "能力")
                     Check("installed ability", player.Creature.Powers.Any(p => p is CatalogPower power && power.DesignId == id || id == "JG23" && p is JunnaEndurancePower), true);
                 else
-                    Check("destination", card.Pile?.Type ?? PileType.None, (up ? definition.UpgradedExhaust : definition.Exhaust) ? PileType.Exhaust : id == "JG33" ? PileType.Draw : PileType.Discard);
+                    Check("destination", card.Pile?.Type ?? PileType.None, (up ? definition.UpgradedExhaust : definition.Exhaust) ? PileType.Exhaust : id == "JA67" ? ArrowPile.PileId : id == "JG33" ? PileType.Draw : PileType.Discard);
                 switch (id)
                 {
                     case "JG03": Check("selected extra hit", DamageModifiers.CaptureDamageModifierSnapshot(selected!).ExtraHits, 1); break;
                     case "JG09": case "JG27": case "JG36": case "JK78": case "JK78D": case "JK78E": case "JA75":
                         Check("selected bonus", DamageModifiers.CaptureDamageModifierSnapshot(selected!).DamageBonus, (decimal)N("Bonus")); break;
                     case "JG16": Check("transfer total", DamageModifiers.CaptureDamageModifierSnapshot(selected!).DamageBonus, 7m); break;
-                    case "JT02": Check("converted type", selected!.Type, CardType.Attack); Check("converted cost", CardActions.Cost(selected!), 1); break;
+                    case "JT02": Check("converted type", selected!.Type, ArrowPile.ArrowType); Check("converted cost", CardActions.Cost(selected!), 0); Check("adapted waiting turns", HandArrow.Turns(selected!), 5); break;
                     case "JK33": Check("partner bonus", DamageModifiers.CaptureDamageModifierSnapshot(selected!).DamageBonus, 6m); break;
                     case "JK33B": Check("partner extra hit", DamageModifiers.CaptureDamageModifierSnapshot(selected!).ExtraHits, 1); break;
                     case "JK32": case "JK32B": case "JK32C": Check("partner free", CardActions.Cost(selected!), 0); break;
-                    case "JK11": case "JK11B": case "JK43B": case "JA53": case "JK37B": case "JA66":
+                    case "JK11": case "JK11B": case "JK43B": case "JA53": case "JA66":
                         Check("selected card in hand", selected!.Pile!.Type, PileType.Hand); break;
                     case "JK53": Check("linked card drawn", helpers[1].Pile!.Type, PileType.Hand); break;
                     case "JK05": Check("knowledge drawn", player.PlayerCombatState.Hand.Cards.Count, 3); break;
@@ -197,8 +197,8 @@ public static class CardCompletionProbe
                         if (id == "JF10") Check("self debuffs cleared", player.Creature.Powers.Count, 0); break;
                     case "JA16": case "JA17": Check("next turn energy", player.Creature.GetPower<EnergyNextTurnPower>()!.Amount, id == "JA16" ? 1 : 2); break;
                     case "JK49": case "JK49B":
-                        Check("same instance changed form", CardCatalog.DesignId(card)!, id == "JK49" ? "JK49B" : "JK49");
-                        Check("form cost", CardActions.Cost(card), id == "JK49" ? 0 : 2); break;
+                        Check("independent knowledge identity", CardCatalog.DesignId(card)!, id);
+                        Check("independent knowledge cost", CardActions.Cost(card), id == "JK49" ? 2 : 0); break;
                 }
                 rows.Add(new { name = current + ": complete face", pass = true }); Save();
             });
@@ -246,7 +246,7 @@ public static class CardCompletionProbe
             await Scenario("attack event classification", async () =>
             {
                 await Play(await Card("JZ05"));
-                await CreatureCmd.Damage(context, target, 2, ValueProp.Unpowered, player.Creature);
+                await TestGameApi.Damage(context, target, 2, ValueProp.Unpowered, player.Creature);
                 Check("non-attack damage keeps readiness", ArrowCombat.Deployed.Count, 0);
                 var foreignSkill = state.CreateCard(ModelDb.Card<ExternalDirectCard>(), player);
                 await CardPileCmd.Add(foreignSkill, PileType.Hand);
@@ -254,25 +254,26 @@ public static class CardCompletionProbe
                 Check("external skill attack damage triggers", ArrowCombat.Deployed.Count, 1);
                 Check("external attack damage captured", ArrowCombat.Deployed.Single().Card.DynamicVars.Damage.IntValue, 4);
             });
-            await Scenario("form replay and identity", async () =>
+            await Scenario("independent knowledge replay and identity", async () =>
             {
                 var card = await Card("JK49", up: true);
                 card.BaseReplayCount = 1; DamageModifiers.Add(card, 3, 1); card.EnergyCost.AddThisCombat(-1);
                 int hp = target.CurrentHp; await Play(card);
                 Check("replay retains attacking form until complete", hp - target.CurrentHp, 124);
                 Check("same instance survives", ReferenceEquals(CardActions.All(player).Single(), card), true);
-                Check("form title", card.Title, "默然忍受+");
-                Check("form description", card.GetDescriptionForPile(PileType.Hand).Contains("获得6点"), true);
-                Check("skill form target", card.TargetType, TargetType.Self);
+                Check("attack identity retained", CardCatalog.DesignId(card)!, "JK49");
                 Check("investment retained", DamageModifiers.CaptureDamageModifierSnapshot(card).DamageBonus, 3m);
-                await CardPileCmd.Add(card, PileType.Hand); await Play(card);
-                Check("block replay", player.Creature.Block, 12);
+                var defense = await Card("JK49B", up: true);
+                defense.BaseReplayCount = 1;
+                await Play(defense);
+                Check("independent block replay", player.Creature.Block, 12);
+                Check("defense identity retained", CardCatalog.DesignId(defense)!, "JK49B");
                 Check("attack form restored", card.Type, CardType.Attack);
                 Check("attack target restored", card.TargetType, TargetType.AnyEnemy);
                 Check("cost modifier retained", CardActions.Cost(card), 1);
                 Check("restored form accepts investment", DamageModifiers.Add(card, 1), true);
                 var clone = card.CreateCloneForPlayer(player);
-                Check("clone keeps form", CardCatalog.DesignId(clone)!, "JK49");
+                Check("clone keeps knowledge identity", CardCatalog.DesignId(clone)!, "JK49");
             });
             await Scenario("exhaust precedes arrow return", async () =>
             {

@@ -1,3 +1,4 @@
+using ShoujoKageki.Core.V1.Presentation;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,12 +19,14 @@ internal static class ArrowFeedback
         flash.LocalCoords = true;
         flash.ScaleAmountMin = flash.ScaleAmountMax = width / texture.GetWidth();
         flash.Emitting = false;
+        flash.Amount = CoreEffects.ParticleCount(flash.Amount);
         return flash;
     }
 
     internal static void PulseCounter(Label label, ref Tween? tween)
     {
         tween?.Kill();
+        if (!CoreEffects.Enabled) { label.Scale = Vector2.One; return; }
         label.PivotOffset = label.Size * .5f;
         label.Scale = Vector2.One;
         tween = label.CreateTween();
@@ -40,10 +43,10 @@ public partial class ArrowHud
         if (view.Count.Text == remaining) return;
         bool changed = view.Count.Text.Length > 0;
         view.Count.Text = remaining;
-        if (!changed) return;
+        if (!changed || !CoreEffects.Enabled) return;
         ArrowFeedback.PulseCounter(view.Count, ref view.CountTween);
         view.Flash.Restart();
-        view.Flash.Emitting = true;
+        view.Flash.Emitting = CoreEffects.Enabled;
     }
 
     internal void CountdownChanged(ArrowDeployment arrow)
@@ -68,7 +71,7 @@ public partial class ArrowHud
         view.Count.AddThemeColorOverride("font_color", new Color("FFF1AE"));
         ArrowFeedback.PulseCounter(view.Count, ref view.CountTween);
         view.Flash.Restart();
-        view.Flash.Emitting = true;
+        view.Flash.Emitting = CoreEffects.Enabled;
         view.Root.Scale = Vector2.One;
         var origin = view.Root.Position + BodyCenter;
         var targets = TargetPoints(arrow);
@@ -79,6 +82,7 @@ public partial class ArrowHud
             : targets.Aggregate(Vector2.Zero, (sum, point) => sum + point) / targets.Length);
         view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
         view.Root.PivotOffset = BodyCenter;
+        if (!CoreEffects.Enabled) { view.Root.Hide(); return Task.CompletedTask; }
         var effect = new ArrowReleaseVfx { Name = "ArrowRelease", Position = origin, ZIndex = 0 };
         AddChild(effect);
         view.Root.Reparent(effect);
@@ -122,7 +126,7 @@ public partial class ArrowReleaseVfx : Node2D
         _arrow.Position = _rest + aim * flight * flight;
         _arrow.Scale = Vector2.One * Mathf.Lerp(1.25f, .65f, flight);
         _arrow.Modulate = new Color(1.5f, 1.5f, 1.25f, 1 - Mathf.SmoothStep(.65f, 1, flight));
-        QueueRedraw();
+        CoreEffects.Redraw(this);
     }
 
     public override void _Draw()

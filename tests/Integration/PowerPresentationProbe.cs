@@ -64,8 +64,8 @@ public sealed class PowerPresentationCommand : AbstractConsoleCmd
                 var ratio = companion.GetNode<Control>("%Frame").GetGlobalRect().Size / sourceSize;
                 Check(id + " companion remains within source scale", ratio.X <= 1.01f && ratio.Y <= 1.01f, true);
                 Check(id + " companion uses matching body layout", companion.Body.GetTransform().IsEqualApprox(source.Body.GetTransform()), true);
-                Check(id + " backing cards stay below the offered header",
-                    companion.GetNode<Control>("%Frame").GetGlobalRect().Position.Y >= source.GetNode<Control>("%Frame").GetGlobalRect().Position.Y, true);
+                Check(id + " backing headers remain visible above the offered card",
+                    companion.GetNode<Control>("%Frame").GetGlobalRect().Position.Y < source.GetNode<Control>("%Frame").GetGlobalRect().Position.Y, true);
             }
         }
         File.WriteAllText(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..", "merchant-presentation-results.json")), JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
@@ -112,7 +112,7 @@ public sealed class PowerPresentationCommand : AbstractConsoleCmd
                 await CreatureCmd.SetMaxHp(enemy, 1000000);
                 await CreatureCmd.SetCurrentHp(enemy, 1000000);
             }
-            await CreatureCmd.LoseBlock(context, player.Creature, player.Creature.Block, null);
+            await TestGameApi.LoseBlock(context, player.Creature, player.Creature.Block, null);
             player.PlayerCombatState!.Energy = 99;
             player.PlayerCombatState.IncrementTurnNumber();
         }

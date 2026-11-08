@@ -46,7 +46,7 @@ public static class CardTriggerFixProbe
         foreach (var id in new[] { "JK37", "JA118", "JK37C", "JK37B", "JB06", "JB03" })
             await CardPileCmd.Add(CardCatalog.Create(id, player), id == "JK37" ? PileType.Draw : PileType.Hand, skipVisuals: false);
         await ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>()).BeforeHandDraw(player, new ThrowingPlayerChoiceContext(), player.Creature.CombatState!);
-        await CreatureCmd.LoseBlock(new ThrowingPlayerChoiceContext(), player.Creature, player.Creature.Block, null);
+        await TestGameApi.LoseBlock(new ThrowingPlayerChoiceContext(), player.Creature, player.Creature.Block, null);
     }
     public static async Task Run(Player player)
     {

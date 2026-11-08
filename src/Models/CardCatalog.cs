@@ -87,6 +87,8 @@ public static class CardCatalog
     private static Catalog Load()
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Junna.CardPool")!;
-        return JsonSerializer.Deserialize<Catalog>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        var catalog = JsonSerializer.Deserialize<Catalog>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        foreach (var card in catalog.Cards.Concat(catalog.RetiredCards)) CardValueNames.Validate(card);
+        return catalog;
     }
 }

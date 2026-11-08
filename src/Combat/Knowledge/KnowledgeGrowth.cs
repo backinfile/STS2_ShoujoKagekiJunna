@@ -80,9 +80,7 @@ public static partial class KnowledgeProgress
         using var single = KnowledgeCombat.SingleCard();
         foreach (var original in selected.Distinct().Where(player.Deck.Cards.Contains).ToArray())
         {
-            var budget = ShoujoKageki.Core.V1.Shine.GetState(original);
-            var copy = player.RunState.LoadCard(original.ToSerializable(), player);
-            if (budget != null) ShoujoKageki.Core.V1.Shine.SetState(copy, budget.Remaining, budget.Maximum);
+            var copy = ShoujoKageki.Core.V1.CardCopies.ForDeck(original, player, ShoujoKageki.Core.V1.CardCopyPurpose.Transfer);
             await CardPileCmd.Add(copy, PileType.Deck);
         }
     }

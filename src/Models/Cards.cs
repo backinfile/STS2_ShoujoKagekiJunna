@@ -133,14 +133,14 @@ public sealed class JunnaGuidingStar() : JunnaCard(1, CardType.Attack, CardRarit
 [CustomID("JUNNA_BREAK_ENCIRCLEMENT")]
 public sealed class JunnaBreakEncirclement() : JunnaCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies, "JA17")
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8, ValueProp.Move)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9, ValueProp.Move)];
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).TargetingAllOpponents(CombatState!)
             .WithHitFx(VfxCmd.slashPath).Execute(context);
         await PowerCmd.Apply<EnergyNextTurnPower>(context, Owner.Creature, 2, Owner.Creature, this);
     }
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(4);
+    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3);
 }
 
 [CustomID("JUNNA_TURNING_SLASH")]

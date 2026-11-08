@@ -11,10 +11,6 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     CardCatalog.Get(id).CardType, CardCatalog.Get(id).CardRarity, CardCatalog.Get(id).TargetType, id), ShoujoKageki.Core.V1.IShineDepletionHandler
 {
     public Task OnShineDepleted(ShoujoKageki.Core.V1.ShineDepletionContext context) => KnowledgeProgress.Depleted(this, context);
-    private string? _formId;
-    public override string DesignId => _formId ?? base.DesignId;
-    internal bool HasChangedForm => _formId != null;
-    internal bool HasAlternateForm => base.DesignId is "JK49" or "JK49B";
     public CardDefinition Definition => CardCatalog.Get(DesignId);
     public bool Converted { get; private set; }
     public override CardType Type => Converted ? Definition.InternalType : Definition.CardType;
@@ -25,9 +21,7 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     public override HashSet<CardKeyword> CanonicalKeywords =>
         [..base.CanonicalKeywords, ..(Definition.Exhaust ? new[] { CardKeyword.Exhaust } : []), ..(Definition.Retain ? new[] { CardKeyword.Retain } : []),
          ..(Definition.Innate ? new[] { CardKeyword.Innate } : [])];
-    private IEnumerable<CardNumber> FormValues => HasAlternateForm
-        ? CardCatalog.Get("JK49").Values.Concat(CardCatalog.Get("JK49B").Values) : Definition.Values;
-    protected override IEnumerable<DynamicVar> CanonicalVars => FormValues.Select(n => n.Name switch
+    protected override IEnumerable<DynamicVar> CanonicalVars => Definition.Values.Select(n => n.Name switch
     {
         "Damage" => (DynamicVar)new DamageVar(n.Base, ValueProp.Move),
         "Block" => new BlockVar(n.Base, ValueProp.Move),
@@ -35,7 +29,11 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         _ => new DynamicVar(n.Name, n.Base)
     });
     public int Number(int index) => DynamicVars[Definition.Values[index].Name].IntValue;
-    public int Value(string name, int fallback = 0) => Definition.Values.Any(n => n.Name == name) ? DynamicVars[name].IntValue : fallback;
+    public int Value(string name, int fallback = 0)
+    {
+        string field = CardValueNames.Resolve(DesignId, name);
+        return Definition.Values.Any(value => value.Name == field) ? DynamicVars[field].IntValue : fallback;
+    }
 
     public void ConvertArrow()
     {
@@ -49,13 +47,6 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     {
         AssertMutable();
         DynamicVars.Damage.BaseValue = damage;
-    }
-    internal void ChangeForm(string id)
-    {
-        AssertMutable();
-        _formId = id;
-        EnergyCost.SetCustomBaseCost(IsUpgraded ? Definition.UpgradedCost : Definition.Cost);
-        Owner.PlayerCombatState?.RecalculateCardValues();
     }
 #if STS2_BETA
     protected override CardLocation GetResultLocationForCardPlay() => CardCatalog.IsArrow(this)
@@ -80,10 +71,10 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     {
         if (DesignId == "JK82")
         {
-            DynamicVars[Definition.Values[0].Name].UpgradeValueBy(1);
+            DynamicVars[CardValueNames.Resolve(DesignId, "Energy")].UpgradeValueBy(1);
             return;
         }
-        foreach (var value in FormValues)
+        foreach (var value in Definition.Values)
             if (value.Upgraded != value.Base) DynamicVars[value.Name].UpgradeValueBy(value.Upgraded - value.Base);
         if (Definition.UpgradedCost != Definition.Cost) EnergyCost.UpgradeBy(Definition.UpgradedCost - Definition.Cost);
         if (Definition.UpgradedExhaust) AddKeyword(CardKeyword.Exhaust); else RemoveKeyword(CardKeyword.Exhaust);

@@ -1,3 +1,4 @@
+using ShoujoKageki.Core.V1.Presentation;
 using System.Runtime.CompilerServices;
 using Godot;
 using HarmonyLib;
@@ -20,6 +21,7 @@ internal static class ArrowAttackAnimation
 
     internal static IDisposable? Begin(Player player)
     {
+        if (!CoreEffects.Enabled) return null;
         var animator = Animator(NCombatRoom.Instance?.GetCreatureNode(player.Creature));
         if (animator == null || player.Creature.IsDead) return null;
         var state = States.GetValue(animator, _ => new State());

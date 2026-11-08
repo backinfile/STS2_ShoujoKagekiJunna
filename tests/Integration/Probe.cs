@@ -41,7 +41,7 @@ public sealed class ExternalDirectCard() : CustomCardModel(0, CardType.Skill, Ca
     public override string CustomPortraitPath => "res://ShoujoKagekiJunna/images/cards/JB01.jpg";
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
-        await CreatureCmd.Damage(context, [play.Target!], 4, ValueProp.Move, Owner.Creature, this, play);
+        await TestGameApi.Damage(context, [play.Target!], 4, ValueProp.Move, Owner.Creature, this, play);
         await CreatureCmd.GainBlock(Owner.Creature, 7, ValueProp.Move, play);
     }
 }
@@ -94,7 +94,7 @@ public sealed class JunnaProbeCommand : AbstractConsoleCmd
         var target = state.GetOpponentsOf(player.Creature).First();
         var card = state.CreateCard(ModelDb.Card<JunnaStrike>(), player);
         int before = target.CurrentHp;
-        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), [target, target], 2,
+        await TestGameApi.Damage(new ThrowingPlayerChoiceContext(), [target, target], 2,
             ValueProp.Unpowered, player.Creature, card, null);
         int actual = before - target.CurrentHp;
         System.IO.File.WriteAllText("D:/Github/STS2_ShoujoKagekiJunna/artifacts/dev-game/duplicate-targets.json",
@@ -123,7 +123,11 @@ public sealed class JunnaProbeCommand : AbstractConsoleCmd
         void Check(string name, object actual, object expected) => rows.Add(new { name, actual, expected, pass = Equals(actual, expected) });
         async Task Play(CardModel card)
         {
-            var play = new CardPlay { Card = card, Player = player, Target = target, ResultPile = PileType.Discard,
+            var play = new CardPlay { Card = card,
+#if STS2_BETA
+            Player = player,
+#endif
+ Target = target, ResultPile = PileType.Discard,
                 Resources = default, IsAutoPlay = true, PlayIndex = 0, PlayCount = 1 };
             context.PushModel(card);
             try { await (Task)AccessTools.Method(card.GetType(), "OnPlay").Invoke(card, [context, play])!; }
@@ -206,11 +210,11 @@ public sealed class JunnaProbeCommand : AbstractConsoleCmd
             Check("copy investment remains independent", DamageModifiers.CaptureDamageModifierSnapshot(strike).DamageBonus, 2m);
             Check("fresh card has no inherited investment", DamageModifiers.CaptureDamageModifierSnapshot(Card<JunnaStrike>()).DamageBonus, 0m);
             int playerBefore = player.Creature.CurrentHp;
-            await CreatureCmd.Damage(context, [player.Creature], 4, ValueProp.Unblockable | ValueProp.Unpowered, player.Creature, strike, null);
+            await TestGameApi.Damage(context, [player.Creature], 4, ValueProp.Unblockable | ValueProp.Unpowered, player.Creature, strike, null);
             Check("self damage unchanged", playerBefore - player.Creature.CurrentHp, 4);
             hpBefore = target.CurrentHp;
             using (DamageExecution.UseDamageSource(ModelDb.Relic<Anchor>()))
-                await CreatureCmd.Damage(context, [target], 4, ValueProp.Unpowered, player.Creature, null, null);
+                await TestGameApi.Damage(context, [target], 4, ValueProp.Unpowered, player.Creature, null, null);
             Check("unbound independent effect unchanged", hpBefore - target.CurrentHp, 4);
 
             var endurance = await PowerCmd.Apply<JunnaEndurancePower>(context, player.Creature, 2, player.Creature, null);

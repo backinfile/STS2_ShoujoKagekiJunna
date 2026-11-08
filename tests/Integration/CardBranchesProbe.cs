@@ -65,7 +65,7 @@ public static class CardBranchesProbe
         foreach(var card in CardActions.All(player).Concat(player.PlayerCombatState!.PlayPile.Cards).Distinct().ToArray())
         {ArrowCombat.Cancel(card);await CardPileCmd.RemoveFromCombat(card,skipVisuals:true);}
         foreach(var enemy in enemies)
-        {foreach(var power in enemy.Powers.ToArray())await PowerCmd.Remove(power);await CreatureCmd.SetMaxHp(enemy,1000000);await CreatureCmd.SetCurrentHp(enemy,1000000);await CreatureCmd.LoseBlock(context,enemy,enemy.Block,null);}
+        {foreach(var power in enemy.Powers.ToArray())await PowerCmd.Remove(power);await CreatureCmd.SetMaxHp(enemy,1000000);await CreatureCmd.SetCurrentHp(enemy,1000000);await TestGameApi.LoseBlock(context,enemy,enemy.Block,null);}
         var cards=new List<(string Id,bool Up,CardModel Card)>();
         var plan=CardCatalog.Cards.Where(d=>d.Type is "箭矢" or "星矢").SelectMany(d=>new[]{false,true}.Select(up=>new{d.Id,Upgraded=up,Branch="已布置箭矢：目标死亡后的单体转移、群体跟随和自己目标"})).ToArray();
         File.WriteAllText(Path.Combine(directory,"card-branches-retarget-plan.json"),JsonSerializer.Serialize(plan,Json));
@@ -149,9 +149,9 @@ public static class CardBranchesProbe
             {
                 foreach (var p in enemy.Powers.ToArray()) await PowerCmd.Remove(p);
                 await CreatureCmd.SetMaxHp(enemy, 1000000); await CreatureCmd.SetCurrentHp(enemy, 1000000);
-                await CreatureCmd.LoseBlock(context, enemy, enemy.Block, null);
+                await TestGameApi.LoseBlock(context, enemy, enemy.Block, null);
             }
-            await CreatureCmd.LoseBlock(context, player.Creature, player.Creature.Block, null);
+            await TestGameApi.LoseBlock(context, player.Creature, player.Creature.Block, null);
             player.PlayerCombatState.Energy = 99;
             player.PlayerCombatState.IncrementTurnNumber();
         }
@@ -475,7 +475,7 @@ public static class CardBranchesProbe
                         else if(id=="JK81")
                         {var low=await Card("JB01");await power.BeforeFlush(context,player);Check("below cost threshold",low.ShouldRetainThisTurn,false);}
                         else if(id=="JZ05")
-                        {await CreatureCmd.Damage(context,target,3,ValueProp.Unpowered,player.Creature);Check("nonattack excluded",ArrowCombat.Deployed.Count,0);}
+                        {await TestGameApi.Damage(context,target,3,ValueProp.Unpowered,player.Creature);Check("nonattack excluded",ArrowCombat.Deployed.Count,0);}
                         else if(id=="JH30")
                         {int hp=target.CurrentHp;await PlayerCmd.GainEnergy(0,player);await PlayerCmd.SetEnergy(4,player);Check("zero and set energy excluded",target.CurrentHp,hp);}
                         else if(id=="JZ06")

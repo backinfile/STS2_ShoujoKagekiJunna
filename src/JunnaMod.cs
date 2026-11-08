@@ -20,7 +20,8 @@ public static class JunnaMod
     public static void Initialize()
     {
         Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
-        CustomPiles.RegisterCustomPile(ArrowPile.PileId, () => new ArrowPile());
+        CoreApi.Get<ICardPlayRouting>().Register(HandArrow.Dispatch, card => HandArrow.IsArrow(card) ? ArrowPile.PileId : null);
+        DamageSourceScopes.Install();
         KnowledgeProgress.Initialize();
         DynamicKnowledge.Initialize();
         Models.CardCatalog.RegisterDamageCapabilities();

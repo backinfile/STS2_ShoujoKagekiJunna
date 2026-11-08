@@ -12,11 +12,11 @@ public abstract partial class CatalogPower
 
     private int StackAmount() => DesignId switch
     {
-        "JA04" => _grants.Sum(g => Math.Max(0, g.N(0) - g.Used)),
-        "JH59" or "JA144" or "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => _grants.Sum(g => g.N(0)),
+        "JA04" => _grants.Sum(g => Math.Max(0, g.V("Limit") - g.Used)),
+        "JH59" or "JA144" or "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => _grants.Sum(g => g.V("Threshold")),
         "JG31" or "JK67" => _grants.Sum(g => g.V("Bonus")),
         "JH21" or "JH23" or "JA70" or "JA118" => _grants.Sum(g => g.V("Block")),
-        "JK80" or "JH31" => _grants.Sum(g => g.N(1)),
+        "JK80" or "JH31" => _grants.Sum(g => g.V("Amount")),
         _ => _grants.Count
     };
 
@@ -42,7 +42,7 @@ public abstract partial class CatalogPower
             text.Add("Amount", count);
             return text.GetFormattedText();
         }
-        int Sum(int index) => _grants.Sum(g => g.N(index));
+        int Sum(string field) => _grants.Sum(g => g.V(field));
         int Bonus() => _grants.Sum(g => g.V("Bonus"));
         int Block() => _grants.Sum(g => g.V("Block"));
         IEnumerable<string> Groups<TKey>(Func<Grant, TKey> key, Func<IGrouping<TKey, Grant>, string> render)
@@ -52,21 +52,21 @@ public abstract partial class CatalogPower
             "JA04" => [Format(("Amount", StackAmount()))],
             "JA22" or "JK27" => [Format()],
             "JA105" => [Format(("Amount", _grants.Count))],
-            "JH59" or "JA144" or "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => [Format(("Amount", Sum(0)))],
+            "JH59" or "JA144" or "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => [Format(("Amount", Sum("DisplayedAmount")))],
             "JG31" or "JK67" => [Format(("Amount", Bonus()))],
             "JH19" or "JZ06" or "JH30" => [Format(("Amount", _grants.Count), ("Repetition", Repetition(_grants.Count)))],
             "JH21" or "JA70" or "JA118" => [Format(("Amount", Block()))],
-            "JK80" or "JH31" => [Format(("Amount", Sum(1)), ("Threshold", _grants[0].N(0)))],
+            "JK80" or "JH31" => [Format(("Amount", Sum("Amount")), ("Threshold", _grants[0].V("Threshold")))],
             "JK127" => [Format(("Amount", _grants.Count), ("Repetition", Repetition(_grants.Count)))],
             "JK15" => [Format(("Amount", _grants.Count))],
-            "JK81" => [Format(("Threshold", _grants.Min(g => g.N(0))))],
-            "JK10" => Groups(g => g.N(0), group => Format(("Threshold", group.Key), ("Draw", group.Sum(g => g.N(1))), ("Energy", group.Sum(g => g.N(2))))),
-            "JA45" => Groups(g => g.N(0), group => Format(("Limit", group.Key), ("Turns", group.Sum(g => g.N(1))))),
-            "JH23" => Groups(g => (Limit: g.N(0), Threshold: g.N(1)), group => Format(("Limit", group.Key.Limit), ("Threshold", group.Key.Threshold), ("Amount", group.Sum(g => g.V("Block"))))),
-            "JK37C" => Groups(g => g.N(1), group => Format(("Turns", group.Key), ("Repetition", Repetition(group.Count())))),
-            "JK64" => Groups(g => g.N(0), group => Format(("Turns", group.Key), ("Repetition", Repetition(group.Count())))),
+            "JK81" => [Format(("Threshold", _grants.Min(g => g.V("Threshold"))))],
+            "JK10" => Groups(g => g.V("EnergyThreshold"), group => Format(("Threshold", group.Key), ("Draw", group.Sum(g => g.V("DrawCount"))), ("Energy", group.Sum(g => g.V("Energy"))))),
+            "JA45" => Groups(g => g.V("Limit"), group => Format(("Limit", group.Key), ("Turns", group.Sum(g => g.V("Turns"))))),
+            "JH23" => Groups(g => (Limit: g.V("EnergyThreshold"), Threshold: g.V("EnergyThreshold2")), group => Format(("Limit", group.Key.Limit), ("Threshold", group.Key.Threshold), ("Amount", group.Sum(g => g.V("Block"))))),
+            "JK37C" => Groups(g => g.V("Turns"), group => Format(("Turns", group.Key), ("Repetition", Repetition(group.Count())))),
+            "JK64" => Groups(g => g.V("Turns"), group => Format(("Turns", group.Key), ("Repetition", Repetition(group.Count())))),
             "JK75" => Groups(g => g.V("Bonus"), group => Format(("Bonus", group.Key), ("Repetition", Repetition(group.Count())))),
-            "JZ05" => Groups(g => g.N(0), group => Format(("Limit", group.Key), ("Amount", group.Count()))),
+            "JZ05" => Groups(g => g.V("Limit"), group => Format(("Limit", group.Key), ("Amount", group.Count()))),
             "JK46" => Groups(g => g.Card.IsUpgraded, group => Format(("Amount", group.Count()), ("Card", CardCatalog.Get("JK46B").Name + (group.Key ? "+" : "")))),
             "JG34" => Groups(g => g.V("Damage") + DamageModifiers.CaptureDamageModifierSnapshot(g.Card).DamageBonus,
                 group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => g.BaseHits * (1 + DamageModifiers.ExtraHits(DamageModifiers.CaptureDamageModifierSnapshot(g.Card))))))),

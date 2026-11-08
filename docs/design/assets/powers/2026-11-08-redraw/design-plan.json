@@ -1,0 +1,185 @@
+{
+  "style": "Use case: stylized-concept. Asset type: ONE Slay the Spire 2 Power/status icon, transparent PNG, square. The supplied sheet is ONLY a style reference of actual shipped game icons; generate ONLY the requested new icon, no sheet, no labels. Match the sheet's strength, dexterity, accuracy and ritual: simple cartoon game pictogram, a VERY large bold compact silhouette filling ~86% of square, strong charcoal-black outline about 3.5% canvas width, handmade slightly irregular contour, flat saturated color, ONE large crisp shadow/highlight facet. Keep only 1 main motif. Extremely legible at 32px. Not app icon art: no badge, frame, rounded square, circular backdrop, pastel UI palette, photorealism, texture, gradient, 3D lighting, bloom, glow, noise, tiny lines, text, letters, numerals or watermark. Transparent exterior and interior holes. Center with equal clear margin. Approx 1024px canvas. Requested subject: ",
+  "icons": [
+    {
+      "key": "JA04",
+      "name": "速射",
+      "fit": "一支青绿短箭向右上飞出，宽箭头和粗箭杆形成主轮廓，配一道短尾迹。"
+    },
+    {
+      "key": "JK10",
+      "name": "观摩",
+      "fit": "一副青蓝眼镜，镜片各用一块高光，靠眼镜本身表现专注观察。"
+    },
+    {
+      "key": "JA22",
+      "name": "再上弦",
+      "fit": "一张弧形金弓与一道蓝色回转弦线，轮廓闭合紧凑。"
+    },
+    {
+      "key": "JK15",
+      "name": "反复研习",
+      "fit": "一本绿色笔记本，翻回的厚书页卷成简洁回环。"
+    },
+    {
+      "key": "A",
+      "name": "埋头学习",
+      "fit": "一本摊开的厚书，乳黄书页与青绿书脊，中央折线清晰。"
+    },
+    {
+      "key": "JK27",
+      "name": "关联阅读",
+      "fit": "两本红绿书相扣并靠，宽书脊与页块构成双书轮廓。"
+    },
+    {
+      "key": "JA35",
+      "name": "娓娓道来",
+      "fit": "两个紧接的青绿话语气泡，前大后小，表示接续表达。"
+    },
+    {
+      "key": "JK32",
+      "name": "掌舵",
+      "fit": "金色六辐船舵，粗轮缘、圆轴与短手柄。"
+    },
+    {
+      "key": "JK37C",
+      "name": "字斟句酌",
+      "fit": "一枚金色放大镜压在一块乳黄书页上，只保留两条粗字句。"
+    },
+    {
+      "key": "JA45",
+      "name": "搭箭",
+      "fit": "金色短弓横搭一支青绿箭，弓弦拉住箭尾。"
+    },
+    {
+      "key": "JK64",
+      "name": "理清思路",
+      "fit": "单个青蓝思考结由弯曲线条顺成向上的短线。"
+    },
+    {
+      "key": "JK67",
+      "name": "反复推敲",
+      "fit": "一枚金色钢笔尖划出一条重写的朱红笔迹。"
+    },
+    {
+      "key": "JG31",
+      "name": "连贯练习",
+      "fit": "一对前后接续的红色练功鞋印，鞋底与鞋跟清晰分开。"
+    },
+    {
+      "key": "JH19",
+      "name": "双星",
+      "fit": "两颗相邻的蓝白四角星，一大一小，保持双星轮廓。"
+    },
+    {
+      "key": "JH21",
+      "name": "长明",
+      "fit": "一颗金色星被一圈青蓝弧光承托，光弧向上合拢。"
+    },
+    {
+      "key": "JG34",
+      "name": "合唱练习",
+      "fit": "三枚相靠的红金音符组成一簇，粗音干与饱满音头。"
+    },
+    {
+      "key": "JK75",
+      "name": "学以致用",
+      "fit": "一只金色手指按下简化琴键，突出实际练习动作。"
+    },
+    {
+      "key": "JH23",
+      "name": "星芒护持",
+      "fit": "一块蓝色盾牌顶端嵌一颗金星，单一完整防护剪影。"
+    },
+    {
+      "key": "JA70",
+      "name": "掩护射击",
+      "fit": "一支金色箭横过蓝盾，箭锋指向右上。"
+    },
+    {
+      "key": "JH24",
+      "name": "星光结界",
+      "fit": "三颗金星由粗蓝色光环围拢，形成紧凑结界。"
+    },
+    {
+      "key": "JK80",
+      "name": "要点",
+      "fit": "一张金色便签，中央一笔红色下划线与两条粗记号。"
+    },
+    {
+      "key": "JK81",
+      "name": "书签",
+      "fit": "一条红色燕尾书签夹在青绿色厚书中。"
+    },
+    {
+      "key": "JZ05",
+      "name": "即兴",
+      "fit": "一颗金色流星折向前方，配两道短促红色尾迹。"
+    },
+    {
+      "key": "JZ06",
+      "name": "晨星",
+      "fit": "一颗淡金四角星升在深蓝弧形地平线上。"
+    },
+    {
+      "key": "JH30",
+      "name": "星芒",
+      "fit": "一颗金红色八角爆发星，四根长芒与四根短芒。"
+    },
+    {
+      "key": "JK46",
+      "name": "持续阅读",
+      "fit": "一本紫色厚书卷起一张宽书页，呈连续翻页的弧面。"
+    },
+    {
+      "key": "JG23",
+      "name": "耐力训练",
+      "fit": "一只红色跑鞋，粗厚鞋底和一条弧形跑迹。"
+    },
+    {
+      "key": "ENERGY_RESERVE",
+      "name": "能量保留",
+      "fit": "金色手掌围拢托住一颗青蓝星，手与星形成紧凑整体。"
+    },
+    {
+      "key": "JA87",
+      "name": "布阵",
+      "fit": "三支青绿箭成扇形并列，箭杆底部集中。"
+    },
+    {
+      "key": "JA96",
+      "name": "稳住阵脚",
+      "fit": "一双稳踏地面的红色靴子，脚下短粗蓝色基线。"
+    },
+    {
+      "key": "JH31",
+      "name": "筹备",
+      "fit": "两颗尚未点亮的金星由一颗亮起的蓝白星牵引汇聚。"
+    },
+    {
+      "key": "NEXT_CARD_BONUS",
+      "name": "练习成果",
+      "fit": "一只有力的红色拳头，掌侧一块明亮金色发力面。"
+    },
+    {
+      "key": "JA105",
+      "name": "速射",
+      "fit": "两支青绿箭紧靠着向右上飞出，形成连续速射轮廓。"
+    },
+    {
+      "key": "JA118",
+      "name": "箭阵",
+      "fit": "三支朝上的金色箭头围成蓝色盾形，整体呈防护阵列。"
+    },
+    {
+      "key": "JA144",
+      "name": "稳步前进",
+      "fit": "两级蓝绿色台阶上压着一只金色向上箭头，表现逐步推进。"
+    },
+    {
+      "key": "JH59",
+      "name": "北极星",
+      "fit": "一颗醒目的金白四角北极星，外圈一道短深蓝环弧。"
+    }
+  ]
+}

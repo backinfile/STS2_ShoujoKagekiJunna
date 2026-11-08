@@ -36,7 +36,11 @@ public sealed class AllAlliesArrowProbe() : CustomCardModel(0, ArrowPile.ArrowTy
     public override string CustomPortraitPath => "res://ShoujoKagekiJunna/images/floating_arrows/JUNNA_FULL_DRAW.png";
     public override List<(string, string)> Localization => new CardLoc("\u53cb\u65b9\u7bad\u77e2", "");
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Turns", 3)];
+#if STS2_BETA
     protected override CardLocation GetResultLocationForCardPlay() => new(Owner, ArrowPile.PileId, CardPilePosition.Bottom);
+#else
+    protected override PileType GetResultPileTypeForCardPlay() => ArrowPile.PileId;
+#endif
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         ArrowCombat.Deploy(this, play, 3, (_, _) => Task.CompletedTask);
@@ -116,7 +120,11 @@ public static class ArrowHudProbe
         {
             bool group = scenario == "mixed" && i == 0 || scenario == "group";
             CardModel card = state.CreateCard(group ? ModelDb.Card<GroupArrowProbe>() : ModelDb.Card<JunnaFullDraw>(), player);
-            var play = new CardPlay { Card = card, Player = player, Target = group ? null : targets[i % targets.Length],
+            var play = new CardPlay { Card = card,
+#if STS2_BETA
+            Player = player,
+#endif
+ Target = group ? null : targets[i % targets.Length],
                 ResultPile = ArrowPile.PileId, Resources = default, IsAutoPlay = true, PlayIndex = 0, PlayCount = 1 };
             await CardPileCmd.Add(card, ArrowPile.PileId);
             if (group) ArrowCombat.Deploy(card, play, 3, (context, original) =>

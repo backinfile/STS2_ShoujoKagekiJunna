@@ -4,12 +4,12 @@ using System.Runtime.Loader;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
 
-if (args.Length != 3)
-    throw new ArgumentException("Usage: CompatibilityChecks <Junna Beta DLL> <RitsuLib directory> <Core API DLL>");
+if (args.Length != 4)
+    throw new ArgumentException("Usage: CompatibilityChecks <Junna DLL> <RitsuLib directory> <Core API DLL> <Core runtime DLL>");
 
 string[] dependencies = Directory.GetFiles(Path.GetFullPath(args[1]), "*.dll", SearchOption.AllDirectories)
     .Where(path => !path.Contains($"{Path.DirectorySeparatorChar}compat{Path.DirectorySeparatorChar}") ||
-                   path.Contains($"{Path.DirectorySeparatorChar}0.111.0{Path.DirectorySeparatorChar}"))
+                   path.Contains($"{Path.DirectorySeparatorChar}{GameVersion()}{Path.DirectorySeparatorChar}"))
     .Append(Path.GetFullPath(args[2])).ToArray();
 AssemblyLoadContext.Default.Resolving += (context, name) =>
 {
@@ -18,23 +18,24 @@ AssemblyLoadContext.Default.Resolving += (context, name) =>
 };
 
 var junna = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.GetFullPath(args[0]));
+var core = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.GetFullPath(args[3]));
 var ritsu = Assembly.Load("STS2-RitsuLib.Runtime");
 var cardWrapper = MoveNext(AccessTools.Method(typeof(CardModel), nameof(CardModel.OnPlayWrapper)));
 var vanilla = PatchProcessor.GetOriginalInstructions(cardWrapper);
-var direct = Rewrite(junna, "ShoujoKagekiJunna.Combat.HandArrowPlayBoundary", vanilla);
-Expect("standalone card effect", Calls(direct, "ShoujoKagekiJunna.Combat.HandArrow", "Dispatch") == 1);
-Expect("standalone arrow destination", Calls(direct, "ShoujoKagekiJunna.Combat.HandArrow", "Result") == 1);
+var direct = Rewrite(core, "ShoujoKageki.Core.Runtime.Modules.Execution.CardPlayRoutingModule+NativeBoundary", vanilla);
+Expect("standalone card effect", Calls(direct, "ShoujoKageki.Core.Runtime.Modules.Execution.CardPlayRoutingModule", "Dispatch") == 1);
+Expect("standalone arrow destination", Calls(direct, "ShoujoKageki.Core.Runtime.Modules.Execution.CardPlayRoutingModule", "Result") == 1);
 
 var wrapped = Rewrite(ritsu, "STS2RitsuLib.Cards.Patches.CardOnPlayHookPatch", PatchProcessor.GetOriginalInstructions(cardWrapper));
 Expect("real RitsuLib replaces OnPlay", Calls(wrapped, "STS2RitsuLib.Cards.CardOnPlayHook", "RunCardOnPlayHooks") == 1);
-var combined = Rewrite(junna, "ShoujoKagekiJunna.Combat.HandArrowPlayBoundary", wrapped);
+var combined = Rewrite(core, "ShoujoKageki.Core.Runtime.Modules.Execution.CardPlayRoutingModule+NativeBoundary", wrapped);
 Expect("RitsuLib dispatcher retained", Calls(combined, "STS2RitsuLib.Cards.CardOnPlayHook", "RunCardOnPlayHooks") == 1);
-Expect("combined arrow destination", Calls(combined, "ShoujoKagekiJunna.Combat.HandArrow", "Result") == 1);
+Expect("combined arrow destination", Calls(combined, "ShoujoKageki.Core.Runtime.Modules.Execution.CardPlayRoutingModule", "Result") == 1);
 
 var dispatcher = AccessTools.Method(ritsu.GetType("STS2RitsuLib.Cards.CardOnPlayHook", true)!, "RunCardOnPlayHooks");
 var hookInstructions = PatchProcessor.GetOriginalInstructions(MoveNext(dispatcher));
-var hookCombined = Rewrite(junna, "ShoujoKagekiJunna.Combat.HandArrowHookPlayBoundary", hookInstructions);
-Expect("arrow dispatch at RitsuLib effect boundary", Calls(hookCombined, "ShoujoKagekiJunna.Combat.HandArrow", "DispatchFromHook") == 1);
+var hookCombined = Rewrite(core, "ShoujoKageki.Core.Runtime.Modules.Execution.CardPlayRoutingModule+RitsuBoundary", hookInstructions);
+Expect("arrow dispatch at RitsuLib effect boundary", Calls(hookCombined, "ShoujoKageki.Core.Runtime.Modules.Execution.CardPlayRoutingModule", "DispatchFromHook") == 1);
 foreach (string hook in new[] { "BeforeCardOnPlay", "AfterCardOnPlay" })
     Expect($"{hook} retained", Calls(hookCombined, "STS2RitsuLib.Cards.CardOnPlayHook", hook) ==
         Calls(hookInstructions, "STS2RitsuLib.Cards.CardOnPlayHook", hook) &&
@@ -60,3 +61,10 @@ static void Expect(string name, bool pass)
     if (!pass) throw new InvalidOperationException($"FAIL: {name}");
     Console.WriteLine($"PASS: {name}");
 }
+
+static string GameVersion() =>
+#if STS2_BETA
+    "0.111.0";
+#else
+    "0.107.1";
+#endif

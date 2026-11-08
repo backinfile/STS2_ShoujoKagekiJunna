@@ -47,9 +47,9 @@ public static class CardPoolProbe
                 foreach (var power in enemy.Powers.Where(p => p.Type == MegaCrit.Sts2.Core.Entities.Powers.PowerType.Debuff).ToArray()) await PowerCmd.Remove(power);
                 await CreatureCmd.SetMaxHp(enemy, 100000);
                 await CreatureCmd.SetCurrentHp(enemy, 100000);
-                await CreatureCmd.LoseBlock(context, enemy, enemy.Block, null);
+                await TestGameApi.LoseBlock(context, enemy, enemy.Block, null);
             }
-            await CreatureCmd.LoseBlock(context, player.Creature, player.Creature.Block, null);
+            await TestGameApi.LoseBlock(context, player.Creature, player.Creature.Block, null);
             player.PlayerCombatState!.Energy = 99;
             player.PlayerCombatState.IncrementTurnNumber();
         }
@@ -127,11 +127,11 @@ public static class CardPoolProbe
             player.PlayerCombatState!.Energy = 4;
             var arrow = await Card("JA67"); await Play(arrow);
             await ArrowCombat.Accelerate(context, ArrowCombat.Find(arrow)!, 2);
-            Check("redeploy pays second cost", player.PlayerCombatState.Energy, 0);
+            Check("redeploy preserves energy", player.PlayerCombatState.Energy, 2);
             Check("redeploy keeps one fresh instance", ArrowCombat.Deployed.Count, 1);
             Check("redeploy resets countdown", ArrowCombat.Find(arrow)!.Remaining, 2);
             await ArrowCombat.Accelerate(context, ArrowCombat.Find(arrow)!, 2);
-            Check("unaffordable redeploy ends normally", arrow.Pile!.Type, PileType.Discard);
+            Check("repeated redeploy remains in arrow pile", arrow.Pile!.Type, ArrowPile.PileId);
         });
         await Scenario("selection and paid play", async () =>
         {

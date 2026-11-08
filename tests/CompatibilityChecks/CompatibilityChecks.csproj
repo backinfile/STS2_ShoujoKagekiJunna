@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <Sts2Api Condition="'$(Sts2Api)' == ''">beta</Sts2Api>
+    <DefineConstants Condition="'$(Sts2Api)' == 'beta'">$(DefineConstants);STS2_BETA</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" />

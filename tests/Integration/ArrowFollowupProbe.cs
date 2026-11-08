@@ -42,8 +42,16 @@ public sealed class ArrowFollowupProbe : AbstractConsoleCmd
         args.FirstOrDefault() == "demo" ? Demo(player!, args.ElementAtOrDefault(1)) : Check(player!), true, "Follow-up checks completed");
     private static CardModel? _observed;
     private static int _visuals, _exhaustHooks;
+    private static void ObserveStableVisuals(MegaCrit.Sts2.Core.Nodes.Cards.NCard __1, CardPile __3)
+    { if (__1.Model == _observed && __3.Type == PileType.Exhaust) _visuals++; }
     private static void ObserveVisuals(IEnumerable<CardPileAddResult> results)
-    { if (results.Any(r => r.cardAdded == _observed && r.targetPile == PileType.Exhaust)) _visuals++; }
+    { if (results.Any(r => r.cardAdded == _observed &&
+#if STS2_BETA
+        r.targetPile == PileType.Exhaust
+#else
+        r.cardAdded.Pile?.Type == PileType.Exhaust
+#endif
+        )) _visuals++; }
     private static void ObserveExhaust(CardModel card) { if (card == _observed) _exhaustHooks++; }
 
     private static async Task Check(Player player)
@@ -82,8 +90,13 @@ public sealed class ArrowFollowupProbe : AbstractConsoleCmd
         Verify("effect-specified target is preserved", explicitArrow.Play.Target == targets.Last(), true);
         _observed = explicitArrow.Card; _visuals = 0; _exhaustHooks = 0;
         var harmony = new Harmony("junna.followup.observer");
-        harmony.Patch(AccessTools.Method(typeof(CardPileCmd), nameof(CardPileCmd.GetTweenForCardsChangingPiles), [typeof(IEnumerable<CardPileAddResult>), typeof(bool)]),
+#if STS2_BETA
+        harmony.Patch(AccessTools.Method(typeof(CardPileCmd), "GetTweenForCardsChangingPiles", [typeof(IEnumerable<CardPileAddResult>), typeof(bool)]),
             prefix: new HarmonyMethod(typeof(ArrowFollowupProbe), nameof(ObserveVisuals)));
+#else
+        harmony.Patch(AccessTools.Method(typeof(CardPileCmd), "AppendPileLerpTween"),
+            prefix: new HarmonyMethod(typeof(ArrowFollowupProbe), nameof(ObserveStableVisuals)));
+#endif
         harmony.Patch(AccessTools.Method(typeof(Hook), nameof(Hook.AfterCardExhausted)),
             prefix: new HarmonyMethod(typeof(ArrowFollowupProbe), nameof(ObserveExhaust)));
         try { await ArrowCombat.Accelerate(context, explicitArrow, 99); }

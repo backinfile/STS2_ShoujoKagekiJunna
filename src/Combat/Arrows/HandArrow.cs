@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
@@ -112,7 +111,7 @@ public static class HandArrow
     }
 
     // Called only at the engine's OnPlay boundary, so native play hooks still run once.
-    internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play)
+    internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, Func<CardPlay, Task> next)
     {
         PaidReplay.PrepareEffect(card, play.PlayIndex);
         if (IsArrow(card))
@@ -121,13 +120,7 @@ public static class HandArrow
             ArrowCombat.Deploy(card, play, 5, (choice, payload) => Resolve(card, choice, payload));
             await CardPileCmd.Add(card, ArrowPile.PileId);
         }
-        else await OriginalEffect(card, context, play);
-    }
-    internal static Task DispatchFromHook(Delegate original, CardModel card, PlayerChoiceContext context, CardPlay play)
-    {
-        if (IsArrow(card)) return Dispatch(card, context, play);
-        PaidReplay.PrepareEffect(card, play.PlayIndex);
-        return (Task)original.DynamicInvoke(card, context, play)!;
+        else await next(play);
     }
     private static async Task Resolve(CardModel card, PlayerChoiceContext context, CardPlay play)
     {
@@ -137,15 +130,6 @@ public static class HandArrow
     }
     private static Task OriginalEffect(CardModel card, PlayerChoiceContext context, CardPlay play)
         => (Task)AccessTools.Method(card.GetType(), "OnPlay", [typeof(PlayerChoiceContext), typeof(CardPlay)]).Invoke(card, [context, play])!;
-
-#if STS2_BETA
-    internal static CardLocation Result(CardModel card) => IsArrow(card)
-        ? new(card.Owner, ArrowPile.PileId, CardPilePosition.Bottom)
-        : (CardLocation)AccessTools.Method(card.GetType(), "GetResultLocationForCardPlay").Invoke(card, null)!;
-#else
-    internal static PileType Result(CardModel card) => IsArrow(card) ? ArrowPile.PileId
-        : (PileType)AccessTools.Method(card.GetType(), "GetResultPileTypeForCardPlay").Invoke(card, null)!;
-#endif
 
     internal static async Task<bool> Finish(PlayerChoiceContext context, CardModel card, bool forceExhaust = false)
     {
@@ -168,70 +152,5 @@ public static class HandArrow
             if (__instance is CardModel card && __result is CardModel copy && Forms.TryGetValue(card, out var form))
                 Forms.Add(copy, form);
         }
-    }
-}
-
-[HarmonyPatch]
-internal static class HandArrowPlayBoundary
-{
-    private static MethodBase TargetMethod() => AccessTools.Method(AccessTools.Method(typeof(CardModel), nameof(CardModel.OnPlayWrapper))
-        .GetCustomAttribute<AsyncStateMachineAttribute>()!.StateMachineType, "MoveNext");
-    [HarmonyPriority(int.MinValue)]
-    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
-    {
-        int effects = 0, results = 0;
-        foreach (var instruction in instructions)
-        {
-            if (instruction.operand is MethodInfo hook &&
-                hook.DeclaringType?.FullName == "STS2RitsuLib.Cards.CardOnPlayHook" && hook.Name == "RunCardOnPlayHooks")
-                effects++;
-            if (instruction.operand is MethodInfo { DeclaringType: var type, Name: var name } && type == typeof(CardModel))
-            {
-                string? replacement = name switch
-                {
-                    "OnPlay" => nameof(HandArrow.Dispatch),
-#if STS2_BETA
-                    "GetResultLocationForCardPlay" => nameof(HandArrow.Result),
-#else
-                    "GetResultPileTypeForCardPlay" => nameof(HandArrow.Result),
-#endif
-                    _ => null
-                };
-                if (replacement != null)
-                {
-                    if (name == "OnPlay") effects++; else results++;
-                    instruction.opcode = OpCodes.Call;
-                    instruction.operand = AccessTools.Method(typeof(HandArrow), replacement);
-                }
-            }
-            yield return instruction;
-        }
-        if (effects != 1 || results != 1) throw new InvalidOperationException($"Junna card boundaries: effects={effects}, results={results}");
-    }
-}
-
-// Keep RitsuLib's before/after hooks around the same effect boundary used without it.
-[HarmonyPatch]
-internal static class HandArrowHookPlayBoundary
-{
-    private static Type? HookType => AccessTools.TypeByName("STS2RitsuLib.Cards.CardOnPlayHook");
-    private static bool Prepare() => HookType != null;
-    private static MethodBase TargetMethod() => AccessTools.Method(AccessTools.Method(HookType!, "RunCardOnPlayHooks")
-        .GetCustomAttribute<AsyncStateMachineAttribute>()!.StateMachineType, "MoveNext");
-    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
-    {
-        int effects = 0;
-        foreach (var instruction in instructions)
-        {
-            if (instruction.operand is MethodInfo method && method.Name == "Invoke" &&
-                method.DeclaringType?.FullName == "STS2RitsuLib.Cards.CardOnPlayHook+CardOnPlayDelegate")
-            {
-                instruction.opcode = OpCodes.Call;
-                instruction.operand = AccessTools.Method(typeof(HandArrow), nameof(HandArrow.DispatchFromHook));
-                effects++;
-            }
-            yield return instruction;
-        }
-        if (effects != 1) throw new InvalidOperationException($"Junna RitsuLib card boundary: effects={effects}");
     }
 }

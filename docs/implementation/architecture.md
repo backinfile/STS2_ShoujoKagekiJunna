@@ -2,9 +2,9 @@
 
 ## 入口与依赖
 
-`loader/Bootstrap.cs` 按游戏版本加载实现程序集。`src/JunnaMod.cs` 注册牌堆、存档字段、伤害资格、Core 延迟结算及 Harmony 补丁。`src/Combat/JunnaCombatHooks.cs` 连接回合、战斗、出牌与死亡事件。
+`loader/Bootstrap.cs` 按游戏版本加载实现程序集。`src/JunnaMod.cs` 注册公共出牌中间件、存档字段、伤害资格、Core 延迟结算及 Harmony 补丁；BaseLib 在自定义枚举分配后自动登记 ArrowPile。`src/Combat/JunnaCombatHooks.cs` 连接回合、战斗、出牌与死亡事件。
 
-角色通过 Core V1 接口接入闪耀，运行依赖为 Core 1.0.1。`build.ps1` 先校验官方发行包及角色要求的最低版本，再编译正式版、测试版和加载器，导入资源并生成 Core 需求与构建锁文件。Junna 通过独立 Core 工坊条目取得运行依赖；`tools/prepare-workshop.ps1` 生成仅含 Junna 的上传内容和 BaseLib、Core 必需物品配置。
+角色通过 Core V1 接口接入闪耀，运行依赖为 Core 1.1.0。`build.ps1` 先校验官方发行包及角色要求的最低版本，再编译正式版、测试版和加载器，导入资源并生成 Core 需求与构建锁文件。Junna 通过独立 Core 工坊条目取得运行依赖；`tools/prepare-workshop.ps1` 生成仅含 Junna 的上传内容和 BaseLib、Core 必需物品配置。
 
 ## 模块分工
 
@@ -48,3 +48,5 @@ dotnet build tests/Integration/JunnaIntegration.csproj -c Release -p:CoreApiPath
 `tests/Integration/` 使用 SDK 默认源码发现，新增探针直接放入该目录。测试模组与角色发布程序集分别构建。
 
 2026-11-06 结构审查将战斗规则与表现文件归类，拆开箭矢文件中的多项职责，集中知识组数量规则和公共构建配置，并移除了闲置的伤害描述拼接方法。工作台应用已有独立的领域、统计、预览和 MCP 模块，源码与部署入口继续在 `docs/design/workbench/` 维护。
+
+2026-11-08 共享底座重构将模型方法挂钩、出牌边界、复制及表现预算接入 Core V1 增量接口。箭矢结算和死亡转向按战斗模型顺序、目标类别与部署序号处理。CardValueNames 将规则中的语义名称绑定到稳定存储字段，CatalogPower 按 Cards、Turns、Damage、Description 分组，卡池与本地化字段保持原值。角色需求和构建锁统一由 Core SDK 生成。

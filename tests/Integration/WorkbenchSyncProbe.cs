@@ -50,10 +50,10 @@ public static class WorkbenchSyncProbe
         {
             foreach (var p in enemy.Powers.ToArray()) await PowerCmd.Remove(p);
             await CreatureCmd.SetMaxHp(enemy, 1000000); await CreatureCmd.SetCurrentHp(enemy, 1000000);
-            await CreatureCmd.LoseBlock(Context, enemy, enemy.Block, null);
+            await TestGameApi.LoseBlock(Context, enemy, enemy.Block, null);
         }
         await CreatureCmd.SetMaxHp(player.Creature, 100000); await CreatureCmd.SetCurrentHp(player.Creature, 100000);
-        await CreatureCmd.LoseBlock(Context, player.Creature, player.Creature.Block, null);
+        await TestGameApi.LoseBlock(Context, player.Creature, player.Creature.Block, null);
         player.PlayerCombatState!.Energy = 30;
     }
     private static async Task<CardModel> Card(Player player, string id, PileType pile = PileType.Hand, bool up = false)
@@ -131,9 +131,9 @@ public static class WorkbenchSyncProbe
                 await Case("稳住阵脚: each attack damage event " + up, async () =>
                 {
                     var arrow = await Card(player, "JB03"); await Play(arrow); await Play(await Card(player, "JA96", up: up));
-                    await CreatureCmd.Damage(Context, [player.Creature], 1, ValueProp.Move, enemy, null, null);
+                    await TestGameApi.Damage(Context, [player.Creature], 1, ValueProp.Move, enemy, null, null);
                     Expect(ArrowCombat.Find(arrow)?.Remaining == (up ? 1 : 2), "First damage event");
-                    await CreatureCmd.Damage(Context, [player.Creature], 1, ValueProp.Move, enemy, null, null);
+                    await TestGameApi.Damage(Context, [player.Creature], 1, ValueProp.Move, enemy, null, null);
                     Expect(up ? ArrowCombat.Find(arrow) == null : ArrowCombat.Find(arrow)?.Remaining == 1, "Second damage event");
                 });
             }

@@ -23,7 +23,6 @@ public sealed class JunnaCombatHooks : SingletonModel
     {
         MaxEnergyBonuses.Clear();
         KnowledgeProgress.ResetCombat();
-        DamageSourceScopes.Install();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
         return Task.CompletedTask;
@@ -36,8 +35,6 @@ public sealed class JunnaCombatHooks : SingletonModel
         ArrowCombat.RememberDeathOrder(creature);
         return Task.CompletedTask;
     }
-    public override Task AfterDeath(PlayerChoiceContext context, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
-        => ArrowCombat.AfterTargetDeath(creature, wasRemovalPrevented);
     public override Task BeforeCardPlayed(CardPlay play)
     {
         if (play.IsFirstInSeries && CardCatalog.IsArrow(play.Card))

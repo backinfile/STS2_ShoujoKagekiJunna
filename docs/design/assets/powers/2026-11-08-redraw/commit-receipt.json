@@ -1,0 +1,2805 @@
+{
+  "saved": true,
+  "revision": 4032,
+  "record": {
+    "id": "1f91454a-69fc-4f1e-b0b0-875f0eb3bc52",
+    "seq": 4032,
+    "at": "2026-11-08T09:37:57.276Z",
+    "label": "参照本体重绘全部36项Power图标并完成本地Artifact Cleaner处理",
+    "kind": "设计",
+    "clientId": "codex-power-redraw-20261108",
+    "patches": [
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja04_power",
+        "before": {
+          "uid": "power_junna_ja04_power",
+          "id": "JUNNA_JA04_POWER",
+          "name": "速射",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "触发后移除",
+          "text": "你打出的下1张箭矢立即加速到完成。",
+          "upgradedText": "你打出的下2张箭矢立即加速到完成。",
+          "cardIds": [
+            "JA04"
+          ],
+          "iconDesign": "饱满的青绿箭头与两道短尾迹，表现下一箭迅速完成。",
+          "source": "TV 第2话 · 18:31",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1111",
+          "art": "power-icon-ja04-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA04.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA04.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA04.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA04",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "你打出的下[blue]1[/blue]张[gold]箭矢[/gold]立即加速到完成。",
+            "smartDescription": "你打出的下[blue]{Amount}[/blue]张[gold]箭矢[/gold]立即加速到完成。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja04_power",
+          "id": "JUNNA_JA04_POWER",
+          "name": "速射",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "触发后移除",
+          "text": "你打出的下1张箭矢立即加速到完成。",
+          "upgradedText": "你打出的下2张箭矢立即加速到完成。",
+          "cardIds": [
+            "JA04"
+          ],
+          "iconDesign": "一支青绿短箭向右上飞出，宽箭头和粗箭杆形成主轮廓，配一道短尾迹。",
+          "source": "TV 第2话 · 18:31",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1111",
+          "art": "power-icon-ja04-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA04.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA04.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA04",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "你打出的下[blue]1[/blue]张[gold]箭矢[/gold]立即加速到完成。",
+            "smartDescription": "你打出的下[blue]{Amount}[/blue]张[gold]箭矢[/gold]立即加速到完成。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 0,
+        "afterIndex": 0,
+        "afterVersion": "4:7a8a80fc22659106c04b895e949dcfeabd90784371388a3c565c44c3e60bc8d2"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk10_power",
+        "before": {
+          "uid": "power_junna_jk10_power",
+          "id": "JUNNA_JK10_POWER",
+          "name": "观摩",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "每回合第一次打出耗能不低于2的牌时，抽1张牌并获得1点能量。",
+          "upgradedText": "每回合第一次打出耗能不低于2的牌时，抽1张牌并获得2点能量。",
+          "cardIds": [
+            "JK10"
+          ],
+          "iconDesign": "眼镜与摊开的记录本组成单一剪影，表现观摩与记录。",
+          "source": "TV第2话约09:42：纯那观摩表演并记录",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=582",
+          "art": "power-icon-jk10-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK10.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK10.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK10.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK10",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每回合第一次打出耗能不低于[blue]2[/blue]的牌时，抽[blue]1[/blue]张牌并获得[blue]1[/blue]点能量。",
+            "smartDescription": "每回合第一次打出耗能不低于[blue]{Threshold}[/blue]的牌时，抽[blue]{Draw}[/blue]张牌并获得[blue]{Energy}[/blue]点能量。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk10_power",
+          "id": "JUNNA_JK10_POWER",
+          "name": "观摩",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "每回合第一次打出耗能不低于2的牌时，抽1张牌并获得1点能量。",
+          "upgradedText": "每回合第一次打出耗能不低于2的牌时，抽1张牌并获得2点能量。",
+          "cardIds": [
+            "JK10"
+          ],
+          "iconDesign": "一副青蓝眼镜，镜片各用一块高光，靠眼镜本身表现专注观察。",
+          "source": "TV第2话约09:42：纯那观摩表演并记录",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=582",
+          "art": "power-icon-jk10-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK10.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK10.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK10",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每回合第一次打出耗能不低于[blue]2[/blue]的牌时，抽[blue]1[/blue]张牌并获得[blue]1[/blue]点能量。",
+            "smartDescription": "每回合第一次打出耗能不低于[blue]{Threshold}[/blue]的牌时，抽[blue]{Draw}[/blue]张牌并获得[blue]{Energy}[/blue]点能量。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 1,
+        "afterIndex": 1,
+        "afterVersion": "2:1a98c3136067b544d85ef61abb0f9188135d578a5772de2dc9ec4a2cefc6a1d3"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja22_power",
+        "before": {
+          "uid": "power_junna_ja22_power",
+          "id": "JUNNA_JA22_POWER",
+          "name": "再上弦",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "你的箭矢完成后返回你的手牌。",
+          "upgradedText": "你的箭矢完成后返回你的手牌。",
+          "cardIds": [
+            "JA22"
+          ],
+          "iconDesign": "金色弓身与粗实蓝色回转箭头，表现射击完成后重新上弦。",
+          "source": "《少女☆歌剧 Re LIVE》圣翔音乐学园·星见纯那（1060011）原作卡图",
+          "sourceUrl": "https://starlight.academy/card/1060011/Snow-Hoshimi-Junna-Seisho-Music-Academy/",
+          "art": "power-icon-ja22-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA22.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA22.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA22.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA22",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Single",
+          "localization": {
+            "description": "你的[gold]箭矢[/gold]完成后返回你的[gold]手牌[/gold]。",
+            "smartDescription": "你的[gold]箭矢[/gold]完成后返回你的[gold]手牌[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja22_power",
+          "id": "JUNNA_JA22_POWER",
+          "name": "再上弦",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "你的箭矢完成后返回你的手牌。",
+          "upgradedText": "你的箭矢完成后返回你的手牌。",
+          "cardIds": [
+            "JA22"
+          ],
+          "iconDesign": "一张弧形金弓与一道蓝色回转弦线，轮廓闭合紧凑。",
+          "source": "《少女☆歌剧 Re LIVE》圣翔音乐学园·星见纯那（1060011）原作卡图",
+          "sourceUrl": "https://starlight.academy/card/1060011/Snow-Hoshimi-Junna-Seisho-Music-Academy/",
+          "art": "power-icon-ja22-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA22.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA22.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA22",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Single",
+          "localization": {
+            "description": "你的[gold]箭矢[/gold]完成后返回你的[gold]手牌[/gold]。",
+            "smartDescription": "你的[gold]箭矢[/gold]完成后返回你的[gold]手牌[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 2,
+        "afterIndex": 2,
+        "afterVersion": "4:5c75a9650aad78d06e2ce8cdf990d78fa950f66ea340969928e1c26ca238493c"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk15_power",
+        "before": {
+          "uid": "power_junna_jk15_power",
+          "id": "JUNNA_JK15_POWER",
+          "name": "反复研习",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "每回合第一次打出知识牌时，将其1张复制加入你的抽牌堆。",
+          "upgradedText": "每回合第一次打出知识牌时，将其1张复制加入你的抽牌堆。",
+          "cardIds": [
+            "JK15"
+          ],
+          "iconDesign": "一册研习笔记配粗实回转箭头，表现重复学习同一内容。",
+          "source": "TV 第3话 · 约09:56",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=596",
+          "art": "power-icon-jk15-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK15.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK15.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK15.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK15",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每回合第一次打出[gold]知识[/gold]牌时，将其[blue]1[/blue]张复制加入你的[gold]抽牌堆[/gold]。",
+            "smartDescription": "每回合第一次打出[gold]知识[/gold]牌时，将其[blue]{Amount}[/blue]张复制加入你的[gold]抽牌堆[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk15_power",
+          "id": "JUNNA_JK15_POWER",
+          "name": "反复研习",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "每回合第一次打出知识牌时，将其1张复制加入你的抽牌堆。",
+          "upgradedText": "每回合第一次打出知识牌时，将其1张复制加入你的抽牌堆。",
+          "cardIds": [
+            "JK15"
+          ],
+          "iconDesign": "一本绿色笔记本，翻回的厚书页卷成简洁回环。",
+          "source": "TV 第3话 · 约09:56",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=596",
+          "art": "power-icon-jk15-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK15.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK15.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK15",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每回合第一次打出[gold]知识[/gold]牌时，将其[blue]1[/blue]张复制加入你的[gold]抽牌堆[/gold]。",
+            "smartDescription": "每回合第一次打出[gold]知识[/gold]牌时，将其[blue]{Amount}[/blue]张复制加入你的[gold]抽牌堆[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 3,
+        "afterIndex": 3,
+        "afterVersion": "2:e242594abaa2d85d3caedcdb2de4d8ed8f59aa43afaed6b0a7ea502d33958bdd"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_a_power",
+        "before": {
+          "uid": "power_junna_a_power",
+          "id": "JUNNA_A_POWER",
+          "name": "埋头学习",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合结束时，将1张心得加入你的抽牌堆。",
+          "upgradedText": "在你的回合结束时，将2张心得加入你的抽牌堆。",
+          "cardIds": [
+            "A"
+          ],
+          "iconDesign": "摊开的书本与高耸的书写笔尖，表现持续阅读并形成心得。",
+          "source": "TV 第3话 · 配图约10:15",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=615",
+          "art": "power-icon-a-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/A.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/A.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/A.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerA",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合结束时，将[blue]1[/blue]张[gold]心得[/gold]加入你的[gold]抽牌堆[/gold]。",
+            "smartDescription": "在你的回合结束时，将[blue]{Amount}[/blue]张[gold]心得[/gold]加入你的[gold]抽牌堆[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_a_power",
+          "id": "JUNNA_A_POWER",
+          "name": "埋头学习",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合结束时，将1张心得加入你的抽牌堆。",
+          "upgradedText": "在你的回合结束时，将2张心得加入你的抽牌堆。",
+          "cardIds": [
+            "A"
+          ],
+          "iconDesign": "一本摊开的厚书，乳黄书页与青绿书脊，中央折线清晰。",
+          "source": "TV 第3话 · 配图约10:15",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=615",
+          "art": "power-icon-a-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/A.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/A.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerA",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合结束时，将[blue]1[/blue]张[gold]心得[/gold]加入你的[gold]抽牌堆[/gold]。",
+            "smartDescription": "在你的回合结束时，将[blue]{Amount}[/blue]张[gold]心得[/gold]加入你的[gold]抽牌堆[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 4,
+        "afterIndex": 4,
+        "afterVersion": "2:7942738fa57ea33a626549d997df8c2e1acc977fedcafdeb0cee40b2d278cfd6"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk27_power",
+        "before": {
+          "uid": "power_junna_jk27_power",
+          "id": "JUNNA_JK27_POWER",
+          "name": "关联阅读",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "每当你抽到知识牌时，抽取其所有关联牌。",
+          "upgradedText": "每当你抽到知识牌时，抽取其所有关联牌。",
+          "cardIds": [
+            "JK27"
+          ],
+          "iconDesign": "两册相邻的资料书由金色环相连，强调关联查阅。",
+          "source": "2021 剧场版 · 约08:01",
+          "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=481",
+          "art": "power-icon-jk27-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK27.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK27.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK27.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK27",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Single",
+          "localization": {
+            "description": "每当你抽到[gold]知识[/gold]牌时，抽取其所有关联牌。",
+            "smartDescription": "每当你抽到[gold]知识[/gold]牌时，抽取其所有关联牌。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk27_power",
+          "id": "JUNNA_JK27_POWER",
+          "name": "关联阅读",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "每当你抽到知识牌时，抽取其所有关联牌。",
+          "upgradedText": "每当你抽到知识牌时，抽取其所有关联牌。",
+          "cardIds": [
+            "JK27"
+          ],
+          "iconDesign": "两本红绿书相扣并靠，宽书脊与页块构成双书轮廓。",
+          "source": "2021 剧场版 · 约08:01",
+          "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=481",
+          "art": "power-icon-jk27-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK27.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK27.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK27",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Single",
+          "localization": {
+            "description": "每当你抽到[gold]知识[/gold]牌时，抽取其所有关联牌。",
+            "smartDescription": "每当你抽到[gold]知识[/gold]牌时，抽取其所有关联牌。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 5,
+        "afterIndex": 5,
+        "afterVersion": "2:c9f75c9e0aaf020f215ba63aaf87952d8fc38e245783a5dbaa59a5329b14c37c"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja35_power",
+        "before": {
+          "uid": "power_junna_ja35_power",
+          "id": "JUNNA_JA35_POWER",
+          "name": "娓娓道来",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，所有箭矢加速1回合。",
+          "upgradedText": "在你的回合开始时，所有箭矢加速2回合。",
+          "cardIds": [
+            "JA35"
+          ],
+          "iconDesign": "饱满的话语气泡和接续的字句，表现娓娓道来与言叶推进。",
+          "source": "TV 第9话 · 约19:21",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1161",
+          "art": "power-icon-ja35-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA35.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA35.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA35.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA35",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，所有[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "在你的回合开始时，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja35_power",
+          "id": "JUNNA_JA35_POWER",
+          "name": "娓娓道来",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，所有箭矢加速1回合。",
+          "upgradedText": "在你的回合开始时，所有箭矢加速2回合。",
+          "cardIds": [
+            "JA35"
+          ],
+          "iconDesign": "两个紧接的青绿话语气泡，前大后小，表示接续表达。",
+          "source": "TV 第9话 · 约19:21",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1161",
+          "art": "power-icon-ja35-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA35.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA35.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA35",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，所有[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "在你的回合开始时，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 6,
+        "afterIndex": 6,
+        "afterVersion": "4:9d610f6ecb8d93f96d3b418f756594b76ac59c2d744d790674ca6c20f4c14737"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk32_power",
+        "before": {
+          "uid": "power_junna_jk32_power",
+          "id": "JUNNA_JK32_POWER",
+          "name": "掌舵",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，抽1张牌。",
+          "upgradedText": "在你的回合开始时，抽2张牌。",
+          "cardIds": [
+            "JK32"
+          ],
+          "iconDesign": "金色船舵使用黑描边、宽轮缘和六根粗辐条，突出航海物件。",
+          "source": "《遥远的黄金国》纯那饰演萨尔瓦多的公演：约1:30:27的学习清单",
+          "sourceUrl": "https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=5427",
+          "art": "power-icon-jk32-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK32.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK32.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK32.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK32",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，抽[blue]1[/blue]张牌。",
+            "smartDescription": "在你的回合开始时，抽[blue]{Amount}[/blue]张牌。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk32_power",
+          "id": "JUNNA_JK32_POWER",
+          "name": "掌舵",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，抽1张牌。",
+          "upgradedText": "在你的回合开始时，抽2张牌。",
+          "cardIds": [
+            "JK32"
+          ],
+          "iconDesign": "金色六辐船舵，粗轮缘、圆轴与短手柄。",
+          "source": "《遥远的黄金国》纯那饰演萨尔瓦多的公演：约1:30:27的学习清单",
+          "sourceUrl": "https://www.bilibili.com/video/BV1SgYgeQECz/?p=2&t=5427",
+          "art": "power-icon-jk32-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK32.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK32.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK32",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，抽[blue]1[/blue]张牌。",
+            "smartDescription": "在你的回合开始时，抽[blue]{Amount}[/blue]张牌。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 7,
+        "afterIndex": 7,
+        "afterVersion": "2:05f259e3ec73343c4550d0d887b3f40747c7ca9a9a1c89357df3cd82c2c120f9"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk37c_power",
+        "before": {
+          "uid": "power_junna_jk37c_power",
+          "id": "JUNNA_JK37C_POWER",
+          "name": "字斟句酌",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "打出0费牌后，随机一个箭矢加速1回合。",
+          "upgradedText": "打出0费牌后，随机一个箭矢加速1回合。",
+          "cardIds": [
+            "JK37C"
+          ],
+          "iconDesign": "书页上的字句由金色放大镜圈选，强调仔细选择和推敲表达。",
+          "source": "TV第3话约10:06的教材与书页（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+          "art": "power-icon-jk37c-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK37C.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK37C.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK37C.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK37C",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你打出[blue]0[/blue]费牌后，随机一个[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "每当你打出[blue]0[/blue]费牌后，随机一个[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。{Repetition}"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk37c_power",
+          "id": "JUNNA_JK37C_POWER",
+          "name": "字斟句酌",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "打出0费牌后，随机一个箭矢加速1回合。",
+          "upgradedText": "打出0费牌后，随机一个箭矢加速1回合。",
+          "cardIds": [
+            "JK37C"
+          ],
+          "iconDesign": "一枚金色放大镜压在一块乳黄书页上，只保留两条粗字句。",
+          "source": "TV第3话约10:06的教材与书页（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+          "art": "power-icon-jk37c-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK37C.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK37C.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK37C",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你打出[blue]0[/blue]费牌后，随机一个[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "每当你打出[blue]0[/blue]费牌后，随机一个[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。{Repetition}"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 8,
+        "afterIndex": 8,
+        "afterVersion": "5:8bd2d0b26df2ee6e9a323bc451f0404926921895ac639f279e29d10d2a672789"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja45_power",
+        "before": {
+          "uid": "power_junna_ja45_power",
+          "id": "JUNNA_JA45_POWER",
+          "name": "搭箭",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "你每回合打出的前2张箭矢加速1回合。",
+          "upgradedText": "你每回合打出的前3张箭矢加速1回合。",
+          "cardIds": [
+            "JA45"
+          ],
+          "iconDesign": "弓弦上扣住粗实箭杆，保留上弦准备的识别轮廓。",
+          "source": "TV第1话约19:46的持箭上弦准备（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232367?t=1186",
+          "art": "power-icon-ja45-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA45.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA45.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA45.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA45",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "你每回合打出的前[blue]2[/blue]张[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "你每回合打出的前[blue]{Limit}[/blue]张[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja45_power",
+          "id": "JUNNA_JA45_POWER",
+          "name": "搭箭",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "你每回合打出的前2张箭矢加速1回合。",
+          "upgradedText": "你每回合打出的前3张箭矢加速1回合。",
+          "cardIds": [
+            "JA45"
+          ],
+          "iconDesign": "金色短弓横搭一支青绿箭，弓弦拉住箭尾。",
+          "source": "TV第1话约19:46的持箭上弦准备（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232367?t=1186",
+          "art": "power-icon-ja45-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA45.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA45.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA45",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "你每回合打出的前[blue]2[/blue]张[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "你每回合打出的前[blue]{Limit}[/blue]张[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 9,
+        "afterIndex": 9,
+        "afterVersion": "4:6317cfbc35caed60d48e31ab58c369d22720d5ac99026583f0fe4d088866fab3"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk64_power",
+        "before": {
+          "uid": "power_junna_jk64_power",
+          "id": "JUNNA_JK64_POWER",
+          "name": "理清思路",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本回合",
+          "text": "本回合，每当你打出知识牌后，选择一个箭矢加速1回合。",
+          "upgradedText": "本回合，每当你打出知识牌后，选择一个箭矢加速1回合。",
+          "cardIds": [
+            "JK64"
+          ],
+          "iconDesign": "纯那的眼镜与上方理顺的连线，线头顺畅向前。",
+          "source": "TV 第7话 · 约08:11",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232373?t=491",
+          "art": "power-icon-jk64-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK64.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK64.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK64.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK64",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "本回合，每当你打出[gold]知识[/gold]牌后，选择一个[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "本回合，每当你打出[gold]知识[/gold]牌后，选择一个[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。{Repetition}"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk64_power",
+          "id": "JUNNA_JK64_POWER",
+          "name": "理清思路",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本回合",
+          "text": "本回合，每当你打出知识牌后，选择一个箭矢加速1回合。",
+          "upgradedText": "本回合，每当你打出知识牌后，选择一个箭矢加速1回合。",
+          "cardIds": [
+            "JK64"
+          ],
+          "iconDesign": "单个青蓝思考结由弯曲线条顺成向上的短线。",
+          "source": "TV 第7话 · 约08:11",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232373?t=491",
+          "art": "power-icon-jk64-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK64.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK64.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK64",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "本回合，每当你打出[gold]知识[/gold]牌后，选择一个[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "本回合，每当你打出[gold]知识[/gold]牌后，选择一个[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。{Repetition}"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 10,
+        "afterIndex": 10,
+        "afterVersion": "4:577e59d616073022266eb736dd943c72592df32d95cf3b49e8653cb99bc42864"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk67_power",
+        "before": {
+          "uid": "power_junna_jk67_power",
+          "id": "JUNNA_JK67_POWER",
+          "name": "反复推敲",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合结束时，所有布置中的箭矢获得2点伤害加成。",
+          "upgradedText": "在你的回合结束时，所有布置中的箭矢获得3点伤害加成。",
+          "cardIds": [
+            "JK67"
+          ],
+          "iconDesign": "斜置的书写笔尖在修改稿上重写，突出反复打磨表达。",
+          "source": "2021 剧场版 · 全片约09:02",
+          "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+          "art": "power-icon-jk67-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK67.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK67.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK67.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK67",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合结束时，所有布置中的[gold]箭矢[/gold]获得[blue]2[/blue]点[gold]伤害加成[/gold]。",
+            "smartDescription": "在你的回合结束时，所有布置中的[gold]箭矢[/gold]获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk67_power",
+          "id": "JUNNA_JK67_POWER",
+          "name": "反复推敲",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合结束时，所有布置中的箭矢获得2点伤害加成。",
+          "upgradedText": "在你的回合结束时，所有布置中的箭矢获得3点伤害加成。",
+          "cardIds": [
+            "JK67"
+          ],
+          "iconDesign": "一枚金色钢笔尖划出一条重写的朱红笔迹。",
+          "source": "2021 剧场版 · 全片约09:02",
+          "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+          "art": "power-icon-jk67-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK67.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK67.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK67",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合结束时，所有布置中的[gold]箭矢[/gold]获得[blue]2[/blue]点[gold]伤害加成[/gold]。",
+            "smartDescription": "在你的回合结束时，所有布置中的[gold]箭矢[/gold]获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 11,
+        "afterIndex": 11,
+        "afterVersion": "5:888282f54be00836b0b03b6104b320c6af2a66bf97cf5d355cfaf35f7cb7bb18"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jg31_power",
+        "before": {
+          "uid": "power_junna_jg31_power",
+          "id": "JUNNA_JG31_POWER",
+          "name": "连贯练习",
+          "origin": "junna",
+          "type": "增益",
+          "system": "growth",
+          "duration": "本回合",
+          "text": "本回合，每当你打出一张牌时，使其获得1点伤害加成。",
+          "upgradedText": "本回合，每当你打出一张牌时，使其获得2点伤害加成。",
+          "cardIds": [
+            "JG31"
+          ],
+          "iconDesign": "两枚前后相接的彩色台步足迹，表现连贯完成动作的练习。",
+          "source": "2021 剧场版 · 约09:17",
+          "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+          "art": "power-icon-jg31-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG31.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG31.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JG31.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJG31",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "本回合，每当你打出一张牌时，使其获得[blue]1[/blue]点[gold]伤害加成[/gold]。",
+            "smartDescription": "本回合，每当你打出一张牌时，使其获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jg31_power",
+          "id": "JUNNA_JG31_POWER",
+          "name": "连贯练习",
+          "origin": "junna",
+          "type": "增益",
+          "system": "growth",
+          "duration": "本回合",
+          "text": "本回合，每当你打出一张牌时，使其获得1点伤害加成。",
+          "upgradedText": "本回合，每当你打出一张牌时，使其获得2点伤害加成。",
+          "cardIds": [
+            "JG31"
+          ],
+          "iconDesign": "一对前后接续的红色练功鞋印，鞋底与鞋跟清晰分开。",
+          "source": "2021 剧场版 · 约09:17",
+          "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+          "art": "power-icon-jg31-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JG31.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JG31.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJG31",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "本回合，每当你打出一张牌时，使其获得[blue]1[/blue]点[gold]伤害加成[/gold]。",
+            "smartDescription": "本回合，每当你打出一张牌时，使其获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 12,
+        "afterIndex": 12,
+        "afterVersion": "3:ad756b142375e0092cbc42db150ca42624f41c981084154bda0d7a99e2de7916"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jh19_power",
+        "before": {
+          "uid": "power_junna_jh19_power",
+          "id": "JUNNA_JH19_POWER",
+          "name": "双星",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本回合或触发后移除",
+          "text": "本回合，你的下一张非能力牌会消耗能量再打出1次。",
+          "upgradedText": "本回合，你的下一张非能力牌会消耗能量再打出1次。",
+          "cardIds": [
+            "JH19"
+          ],
+          "iconDesign": "两颗饱满青蓝四角星，以相邻的双星直接表现两次出手。",
+          "source": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+          "art": "power-icon-jh19-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH19.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH19.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH19.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH19",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "本回合，你的下一张非能力牌会消耗能量再打出[blue]1[/blue]次。",
+            "smartDescription": "本回合，你的下一张非能力牌会消耗能量再打出[blue]{Amount}[/blue]次。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jh19_power",
+          "id": "JUNNA_JH19_POWER",
+          "name": "双星",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本回合或触发后移除",
+          "text": "本回合，你的下一张非能力牌会消耗能量再打出1次。",
+          "upgradedText": "本回合，你的下一张非能力牌会消耗能量再打出1次。",
+          "cardIds": [
+            "JH19"
+          ],
+          "iconDesign": "两颗相邻的蓝白四角星，一大一小，保持双星轮廓。",
+          "source": "TV第2话片头约02:52 · 两颗四角星图案（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=172",
+          "art": "power-icon-jh19-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JH19.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JH19.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH19",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "本回合，你的下一张非能力牌会消耗能量再打出[blue]1[/blue]次。",
+            "smartDescription": "本回合，你的下一张非能力牌会消耗能量再打出[blue]{Amount}[/blue]次。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 13,
+        "afterIndex": 13,
+        "afterVersion": "3:533632ea52db6ec3e5ff564e6014fdb56daf93d1b7e75703365e8aefd0dbe0cf"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jh21_power",
+        "before": {
+          "uid": "power_junna_jh21_power",
+          "id": "JUNNA_JH21_POWER",
+          "name": "长明",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "在你的回合结束时，若有剩余能量，获得5点格挡。",
+          "upgradedText": "在你的回合结束时，若有剩余能量，获得7点格挡。",
+          "cardIds": [
+            "JH21"
+          ],
+          "iconDesign": "单颗持续明亮的金星被一道护光承托，余光形成防护。",
+          "source": "TV 第1话 · 约19:32",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232367?t=1172",
+          "art": "power-icon-jh21-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH21.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH21.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH21.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH21",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合结束时，若有剩余能量，获得[blue]5[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "在你的回合结束时，若有剩余能量，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jh21_power",
+          "id": "JUNNA_JH21_POWER",
+          "name": "长明",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "在你的回合结束时，若有剩余能量，获得5点格挡。",
+          "upgradedText": "在你的回合结束时，若有剩余能量，获得7点格挡。",
+          "cardIds": [
+            "JH21"
+          ],
+          "iconDesign": "一颗金色星被一圈青蓝弧光承托，光弧向上合拢。",
+          "source": "TV 第1话 · 约19:32",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232367?t=1172",
+          "art": "power-icon-jh21-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JH21.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JH21.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH21",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合结束时，若有剩余能量，获得[blue]5[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "在你的回合结束时，若有剩余能量，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 14,
+        "afterIndex": 14,
+        "afterVersion": "2:52f5f47ffcff3121af87ca4f26cce1d25a58afb8b22e60e4574ce51d19c28063"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jg34_power",
+        "before": {
+          "uid": "power_junna_jg34_power",
+          "id": "JUNNA_JG34_POWER",
+          "name": "合唱练习",
+          "origin": "junna",
+          "type": "增益",
+          "system": "growth",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，对所有敌人造成3点伤害。",
+          "upgradedText": "在你的回合开始时，对所有敌人造成4点伤害。",
+          "cardIds": [
+            "JG34"
+          ],
+          "iconDesign": "三枚粗实音符组成合唱的声音轮廓，表现持续发声与节拍练习。",
+          "source": "TV 第2话 · 约06:39",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=399",
+          "art": "power-icon-jg34-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG34.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG34.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JG34.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJG34",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，对所有敌人造成[blue]3[/blue]点伤害。",
+            "smartDescription": "在你的回合开始时，对所有敌人造成[blue]{Damage}[/blue]点伤害[blue]{Repeat}[/blue]次。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jg34_power",
+          "id": "JUNNA_JG34_POWER",
+          "name": "合唱练习",
+          "origin": "junna",
+          "type": "增益",
+          "system": "growth",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，对所有敌人造成3点伤害。",
+          "upgradedText": "在你的回合开始时，对所有敌人造成4点伤害。",
+          "cardIds": [
+            "JG34"
+          ],
+          "iconDesign": "三枚相靠的红金音符组成一簇，粗音干与饱满音头。",
+          "source": "TV 第2话 · 约06:39",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=399",
+          "art": "power-icon-jg34-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JG34.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JG34.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJG34",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，对所有敌人造成[blue]3[/blue]点伤害。",
+            "smartDescription": "在你的回合开始时，对所有敌人造成[blue]{Damage}[/blue]点伤害[blue]{Repeat}[/blue]次。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 15,
+        "afterIndex": 15,
+        "afterVersion": "3:828bf9b520a58a1111b7d68a0e7ebb81705ce6e9bca731012fe4518869240d1a"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk75_power",
+        "before": {
+          "uid": "power_junna_jk75_power",
+          "id": "JUNNA_JK75_POWER",
+          "name": "学以致用",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "每当你打出知识牌后，随机一张能造成伤害的手牌获得1点伤害加成。",
+          "upgradedText": "每当你打出知识牌后，随机一张能造成伤害的手牌获得2点伤害加成。",
+          "cardIds": [
+            "JK75"
+          ],
+          "iconDesign": "练习琴键中突出一处亮起的重点，表现把知识落实为熟练动作。",
+          "source": "TV 第2话 · 约06:31",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=391",
+          "art": "power-icon-jk75-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK75.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK75.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK75.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK75",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你打出[gold]知识[/gold]牌后，随机一张能造成伤害的[gold]手牌[/gold]获得[blue]1[/blue]点[gold]伤害加成[/gold]。",
+            "smartDescription": "每当你打出[gold]知识[/gold]牌后，随机一张能造成伤害的[gold]手牌[/gold]获得[blue]{Bonus}[/blue]点[gold]伤害加成[/gold]。{Repetition}"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk75_power",
+          "id": "JUNNA_JK75_POWER",
+          "name": "学以致用",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "每当你打出知识牌后，随机一张能造成伤害的手牌获得1点伤害加成。",
+          "upgradedText": "每当你打出知识牌后，随机一张能造成伤害的手牌获得2点伤害加成。",
+          "cardIds": [
+            "JK75"
+          ],
+          "iconDesign": "一只金色手指按下简化琴键，突出实际练习动作。",
+          "source": "TV 第2话 · 约06:31",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=391",
+          "art": "power-icon-jk75-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK75.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK75.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK75",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你打出[gold]知识[/gold]牌后，随机一张能造成伤害的[gold]手牌[/gold]获得[blue]1[/blue]点[gold]伤害加成[/gold]。",
+            "smartDescription": "每当你打出[gold]知识[/gold]牌后，随机一张能造成伤害的[gold]手牌[/gold]获得[blue]{Bonus}[/blue]点[gold]伤害加成[/gold]。{Repetition}"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 16,
+        "afterIndex": 16,
+        "afterVersion": "2:f6498dea8bc3ad97d869b5853a6a6e8d28ea336139be2ec23d8a4c145a4331a7"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jh23_power",
+        "before": {
+          "uid": "power_junna_jh23_power",
+          "id": "JUNNA_JH23_POWER",
+          "name": "星芒护持",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "每回合前1次打出耗能不低于2的牌后，获得6点格挡。",
+          "upgradedText": "每回合前1次打出耗能不低于2的牌后，获得9点格挡。",
+          "cardIds": [
+            "JH23"
+          ],
+          "iconDesign": "三颗星在弧形护光上聚集，表现较大能量投入后的守备。",
+          "source": "TV 第3话 · 约09:56",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=596",
+          "art": "power-icon-jh23-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH23.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH23.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH23.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH23",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每回合前[blue]1[/blue]次打出耗能不低于[blue]2[/blue]的牌后，获得[blue]6[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "每回合前[blue]{Limit}[/blue]次打出耗能不低于[blue]{Threshold}[/blue]的牌后，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jh23_power",
+          "id": "JUNNA_JH23_POWER",
+          "name": "星芒护持",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "每回合前1次打出耗能不低于2的牌后，获得6点格挡。",
+          "upgradedText": "每回合前1次打出耗能不低于2的牌后，获得9点格挡。",
+          "cardIds": [
+            "JH23"
+          ],
+          "iconDesign": "一块蓝色盾牌顶端嵌一颗金星，单一完整防护剪影。",
+          "source": "TV 第3话 · 约09:56",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=596",
+          "art": "power-icon-jh23-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JH23.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JH23.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH23",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每回合前[blue]1[/blue]次打出耗能不低于[blue]2[/blue]的牌后，获得[blue]6[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "每回合前[blue]{Limit}[/blue]次打出耗能不低于[blue]{Threshold}[/blue]的牌后，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 17,
+        "afterIndex": 17,
+        "afterVersion": "2:6e55a30b11358f176f5342133a153b5fed381931529c6f3f1a0751e1b3e83a7c"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja70_power",
+        "before": {
+          "uid": "power_junna_ja70_power",
+          "id": "JUNNA_JA70_POWER",
+          "name": "掩护射击",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "每当你打出箭矢后，获得2点格挡。",
+          "upgradedText": "每当你打出箭矢后，获得3点格挡。",
+          "cardIds": [
+            "JA70"
+          ],
+          "iconDesign": "粗实斜箭掠过蓝色盾面，以射击维持防护。",
+          "source": "TV第2话约18:42 · 烟尘中的持弓迎战（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1122",
+          "art": "power-icon-ja70-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JA70.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA70.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA70.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA70",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你打出[gold]箭矢[/gold]后，获得[blue]2[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "每当你打出[gold]箭矢[/gold]后，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja70_power",
+          "id": "JUNNA_JA70_POWER",
+          "name": "掩护射击",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "每当你打出箭矢后，获得2点格挡。",
+          "upgradedText": "每当你打出箭矢后，获得3点格挡。",
+          "cardIds": [
+            "JA70"
+          ],
+          "iconDesign": "一支金色箭横过蓝盾，箭锋指向右上。",
+          "source": "TV第2话约18:42 · 烟尘中的持弓迎战（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1122",
+          "art": "power-icon-ja70-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA70.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA70.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA70",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你打出[gold]箭矢[/gold]后，获得[blue]2[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "每当你打出[gold]箭矢[/gold]后，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 18,
+        "afterIndex": 18,
+        "afterVersion": "4:b6820744e58f6230d56215939f701cd5f3d12f46c20c077d8b54521ba75540e3"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jh24_power",
+        "before": {
+          "uid": "power_junna_jh24_power",
+          "id": "JUNNA_JH24_POWER",
+          "name": "星光结界",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "每回合开始时获得1点能量。",
+          "upgradedText": "每回合开始时获得1点能量。",
+          "cardIds": [
+            "JH24"
+          ],
+          "iconDesign": "五颗星以连线围出保护区域，中央亮星持续供能。",
+          "source": "TV 第9话 · 约20:46",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1246",
+          "art": "power-icon-jh24-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH24.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH24.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH24.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH24",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "trashedAt": "2026-11-06T01:23:35.824Z"
+        },
+        "after": {
+          "uid": "power_junna_jh24_power",
+          "id": "JUNNA_JH24_POWER",
+          "name": "星光结界",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "每回合开始时获得1点能量。",
+          "upgradedText": "每回合开始时获得1点能量。",
+          "cardIds": [
+            "JH24"
+          ],
+          "iconDesign": "三颗金星由粗蓝色光环围拢，形成紧凑结界。",
+          "source": "TV 第9话 · 约20:46",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1246",
+          "art": "power-icon-jh24-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JH24.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JH24.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH24",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "trashedAt": "2026-11-06T01:23:35.824Z",
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 19,
+        "afterIndex": 19,
+        "afterVersion": "2:f67912904a12ccf0d6c3de3b3f2499b96b6d2cb11dcff2fec9ca9438752b8960"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk80_power",
+        "before": {
+          "uid": "power_junna_jk80_power",
+          "id": "JUNNA_JK80_POWER",
+          "name": "要点",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "触发后移除",
+          "text": "下次打出知识牌后，获得4点格挡。",
+          "upgradedText": "下次打出知识牌后，获得8点格挡。",
+          "cardIds": [
+            "JK80"
+          ],
+          "iconDesign": "黄色要点笔记与醒目的红色重点标记，表现整理信息后的准备。",
+          "source": "TV 第9话 · 约22:15",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1335",
+          "art": "power-icon-jk80-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK80.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK80.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK80.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK80",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "下次打出[gold]知识[/gold]牌后，获得[blue]4[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "下次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk80_power",
+          "id": "JUNNA_JK80_POWER",
+          "name": "要点",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "触发后移除",
+          "text": "下次打出知识牌后，获得4点格挡。",
+          "upgradedText": "下次打出知识牌后，获得8点格挡。",
+          "cardIds": [
+            "JK80"
+          ],
+          "iconDesign": "一张金色便签，中央一笔红色下划线与两条粗记号。",
+          "source": "TV 第9话 · 约22:15",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1335",
+          "art": "power-icon-jk80-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK80.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK80.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK80",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "下次打出[gold]知识[/gold]牌后，获得[blue]4[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "下次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 20,
+        "afterIndex": 20,
+        "afterVersion": "2:35d0db19ae189f9d8aa862665117eced5c138f9e956bb2e458a4f5cf9189d930"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk81_power",
+        "before": {
+          "uid": "power_junna_jk81_power",
+          "id": "JUNNA_JK81_POWER",
+          "name": "书签",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合结束时，保留所有耗能不低于2的手牌。",
+          "upgradedText": "在你的回合结束时，保留所有耗能不低于2的手牌。",
+          "cardIds": [
+            "JK81"
+          ],
+          "iconDesign": "一本青绿封皮书夹着显眼的红色书签，留下继续阅读的位置。",
+          "source": "TV 第3话 · 约10:01",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=601",
+          "art": "power-icon-jk81-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK81.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK81.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK81.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK81",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Single",
+          "localization": {
+            "description": "在你的回合结束时，[gold]保留[/gold]所有耗能不低于[blue]2[/blue]的[gold]手牌[/gold]。",
+            "smartDescription": "在你的回合结束时，[gold]保留[/gold]所有耗能不低于[blue]{Threshold}[/blue]的[gold]手牌[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk81_power",
+          "id": "JUNNA_JK81_POWER",
+          "name": "书签",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合结束时，保留所有耗能不低于2的手牌。",
+          "upgradedText": "在你的回合结束时，保留所有耗能不低于2的手牌。",
+          "cardIds": [
+            "JK81"
+          ],
+          "iconDesign": "一条红色燕尾书签夹在青绿色厚书中。",
+          "source": "TV 第3话 · 约10:01",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=601",
+          "art": "power-icon-jk81-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK81.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK81.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK81",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Single",
+          "localization": {
+            "description": "在你的回合结束时，[gold]保留[/gold]所有耗能不低于[blue]2[/blue]的[gold]手牌[/gold]。",
+            "smartDescription": "在你的回合结束时，[gold]保留[/gold]所有耗能不低于[blue]{Threshold}[/blue]的[gold]手牌[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 21,
+        "afterIndex": 21,
+        "afterVersion": "2:f99ca93203c5016b333ab50a350ae891f540967db55ef0ff0fb9ac356bde283e"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jz05_power",
+        "before": {
+          "uid": "power_junna_jz05_power",
+          "id": "JUNNA_JZ05_POWER",
+          "name": "即兴",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "每回合前1次造成攻击伤害时，打出1张造成等量伤害的流星。",
+          "upgradedText": "每回合前2次造成攻击伤害时，打出1张造成等量伤害的流星。",
+          "cardIds": [
+            "JZ05"
+          ],
+          "iconDesign": "一次亮起的出手标记旁接出新箭，表现即兴续接的攻击。",
+          "source": "2021 剧场版 · 狩猎的Revue片段约01:25",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=85",
+          "art": "power-icon-jz05-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JZ05.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JZ05.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JZ05.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJZ05",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每回合前[blue]1[/blue]次造成攻击伤害时，打出[blue]1[/blue]张造成等量伤害的[gold]流星[/gold]。",
+            "smartDescription": "每回合前[blue]{Limit}[/blue]次造成攻击伤害时，打出[blue]{Amount}[/blue]张造成等量伤害的[gold]流星[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jz05_power",
+          "id": "JUNNA_JZ05_POWER",
+          "name": "即兴",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "每回合前1次造成攻击伤害时，打出1张造成等量伤害的流星。",
+          "upgradedText": "每回合前2次造成攻击伤害时，打出1张造成等量伤害的流星。",
+          "cardIds": [
+            "JZ05"
+          ],
+          "iconDesign": "一颗金色流星折向前方，配两道短促红色尾迹。",
+          "source": "2021 剧场版 · 狩猎的Revue片段约01:25",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=85",
+          "art": "power-icon-jz05-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JZ05.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JZ05.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJZ05",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每回合前[blue]1[/blue]次造成攻击伤害时，打出[blue]1[/blue]张造成等量伤害的[gold]流星[/gold]。",
+            "smartDescription": "每回合前[blue]{Limit}[/blue]次造成攻击伤害时，打出[blue]{Amount}[/blue]张造成等量伤害的[gold]流星[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 22,
+        "afterIndex": 22,
+        "afterVersion": "3:7c952a37e457c5f7b0f9c44533c58dcf6d41e3daa1955e1fea3ca57f59b85b2d"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jz06_power",
+        "before": {
+          "uid": "power_junna_jz06_power",
+          "id": "JUNNA_JZ06_POWER",
+          "name": "晨星",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，获得手牌中最高耗能1倍的能量。",
+          "upgradedText": "在你的回合开始时，获得手牌中最高耗能1倍的能量。",
+          "cardIds": [
+            "JZ06"
+          ],
+          "iconDesign": "一颗青白晨星升在弧形地平线上，标记回合开始的星光汇聚。",
+          "source": "TV 第9话 · 约20:08（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1208",
+          "art": "power-icon-jz06-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JZ06.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JZ06.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JZ06.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJZ06",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，获得[gold]手牌[/gold]中最高耗能[blue]1[/blue]倍的能量。",
+            "smartDescription": "在你的回合开始时，获得[gold]手牌[/gold]中最高耗能[blue]{Amount}[/blue]倍的能量。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jz06_power",
+          "id": "JUNNA_JZ06_POWER",
+          "name": "晨星",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，获得手牌中最高耗能1倍的能量。",
+          "upgradedText": "在你的回合开始时，获得手牌中最高耗能1倍的能量。",
+          "cardIds": [
+            "JZ06"
+          ],
+          "iconDesign": "一颗淡金四角星升在深蓝弧形地平线上。",
+          "source": "TV 第9话 · 约20:08（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1208",
+          "art": "power-icon-jz06-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JZ06.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JZ06.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJZ06",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，获得[gold]手牌[/gold]中最高耗能[blue]1[/blue]倍的能量。",
+            "smartDescription": "在你的回合开始时，获得[gold]手牌[/gold]中最高耗能[blue]{Amount}[/blue]倍的能量。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 23,
+        "afterIndex": 23,
+        "afterVersion": "2:02218cd12418bdf2dec31241047dccbf2e29966b515309df4b42a7249952ebcb"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jh30_power",
+        "before": {
+          "uid": "power_junna_jh30_power",
+          "id": "JUNNA_JH30_POWER",
+          "name": "星芒",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。",
+          "upgradedText": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。",
+          "cardIds": [
+            "JH30"
+          ],
+          "iconDesign": "金色中心星向四方射出清晰光芒，对应能量流动引发伤害。",
+          "source": "TV第2话片头约02:22的星形亮光（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=142",
+          "art": "power-icon-jh30-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JH30.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH30.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH30.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH30",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。",
+            "smartDescription": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。{Repetition}"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jh30_power",
+          "id": "JUNNA_JH30_POWER",
+          "name": "星芒",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。",
+          "upgradedText": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。",
+          "cardIds": [
+            "JH30"
+          ],
+          "iconDesign": "一颗金红色八角爆发星，四根长芒与四根短芒。",
+          "source": "TV第2话片头约02:22的星形亮光（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=142",
+          "art": "power-icon-jh30-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JH30.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JH30.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH30",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。",
+            "smartDescription": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。{Repetition}"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 24,
+        "afterIndex": 24,
+        "afterVersion": "2:2e8f4fafcfcf68bb460d65eaaa027f61bf99f7a2c61add79efe494d3de27207e"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jk46_power",
+        "before": {
+          "uid": "power_junna_jk46_power",
+          "id": "JUNNA_JK46_POWER",
+          "name": "持续阅读",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，将1张笔锋加入你的手牌。",
+          "upgradedText": "在你的回合开始时，将1张笔锋+加入你的手牌。",
+          "cardIds": [
+            "JK46"
+          ],
+          "iconDesign": "翻起的新书页和连续露出的页边，表现阅读推进并形成笔锋。",
+          "source": "TV 第3话 · 约10:06",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+          "art": "power-icon-jk46-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JK46.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JK46.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JK46.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK46",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，将[blue]1[/blue]张[gold]笔锋[/gold]加入你的[gold]手牌[/gold]。",
+            "smartDescription": "在你的回合开始时，将[blue]{Amount}[/blue]张[gold]{Card}[/gold]加入你的[gold]手牌[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jk46_power",
+          "id": "JUNNA_JK46_POWER",
+          "name": "持续阅读",
+          "origin": "junna",
+          "type": "增益",
+          "system": "partner",
+          "duration": "本场战斗",
+          "text": "在你的回合开始时，将1张笔锋加入你的手牌。",
+          "upgradedText": "在你的回合开始时，将1张笔锋+加入你的手牌。",
+          "cardIds": [
+            "JK46"
+          ],
+          "iconDesign": "一本紫色厚书卷起一张宽书页，呈连续翻页的弧面。",
+          "source": "TV 第3话 · 约10:06",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232369?t=606",
+          "art": "power-icon-jk46-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JK46.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JK46.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJK46",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合开始时，将[blue]1[/blue]张[gold]笔锋[/gold]加入你的[gold]手牌[/gold]。",
+            "smartDescription": "在你的回合开始时，将[blue]{Amount}[/blue]张[gold]{Card}[/gold]加入你的[gold]手牌[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 25,
+        "afterIndex": 25,
+        "afterVersion": "2:e5691d9b542de21dce3690799223a6ff5bb111c4c0ffa2676a3437509abcc774"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_endurance_power",
+        "before": {
+          "uid": "power_junna_endurance_power",
+          "id": "JUNNA_ENDURANCE_POWER",
+          "name": "耐力训练",
+          "origin": "junna",
+          "type": "增益",
+          "system": "growth",
+          "duration": "本场战斗",
+          "text": "卡牌每拥有6点伤害加成，便额外造成1次伤害。",
+          "upgradedText": "卡牌每拥有6点伤害加成，便额外造成1次伤害。",
+          "cardIds": [
+            "JG23"
+          ],
+          "iconDesign": "运动鞋与向前的弧形跑迹，直接采用纯那晨跑的日常训练契合。",
+          "source": "TV 第2话约00:28的晨跑（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=28",
+          "art": "power-icon-jg23-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/JG23.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JG23.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JG23.svg",
+          "implementation": "src/Models/JunnaEndurancePower.cs",
+          "model": "JunnaEndurancePower",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "卡牌每拥有[blue]6[/blue]点[gold]伤害加成[/gold]，便额外造成[blue]1[/blue]次伤害。",
+            "smartDescription": "卡牌每拥有[blue]6[/blue]点[gold]伤害加成[/gold]，便额外造成[blue]{Amount}[/blue]次伤害。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_endurance_power",
+          "id": "JUNNA_ENDURANCE_POWER",
+          "name": "耐力训练",
+          "origin": "junna",
+          "type": "增益",
+          "system": "growth",
+          "duration": "本场战斗",
+          "text": "卡牌每拥有6点伤害加成，便额外造成1次伤害。",
+          "upgradedText": "卡牌每拥有6点伤害加成，便额外造成1次伤害。",
+          "cardIds": [
+            "JG23"
+          ],
+          "iconDesign": "一只红色跑鞋，粗厚鞋底和一条弧形跑迹。",
+          "source": "TV 第2话约00:28的晨跑（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=28",
+          "art": "power-icon-jg23-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JG23.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JG23.png",
+          "implementation": "src/Models/JunnaEndurancePower.cs",
+          "model": "JunnaEndurancePower",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "卡牌每拥有[blue]6[/blue]点[gold]伤害加成[/gold]，便额外造成[blue]1[/blue]次伤害。",
+            "smartDescription": "卡牌每拥有[blue]6[/blue]点[gold]伤害加成[/gold]，便额外造成[blue]{Amount}[/blue]次伤害。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 26,
+        "afterIndex": 26,
+        "afterVersion": "2:648302bf0802238d6ad3bab03e5b49821baf3bf1e1cc1bbfc659ca061331d60c"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_energy_reserve",
+        "before": {
+          "uid": "power_junna_energy_reserve",
+          "id": "JUNNA_ENERGY_RESERVE",
+          "name": "能量保留",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "下一回合",
+          "text": "下回合保留至多1点剩余能量。",
+          "upgradedText": "下回合保留至多1点剩余能量。",
+          "cardIds": [
+            "JX07",
+            "JH20",
+            "JH26"
+          ],
+          "iconDesign": "掌心托住星光，围拢的手指强调将剩余行动力量留到下回合。",
+          "source": "2021 剧场版 · 狩猎的Revue片段约06:04；TV 第9话 · 约20:09；TV第2话约17:12；2021 剧场版 · 狩猎的Revue片段约01:33（配图）",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=364",
+          "art": "power-icon-energy-reserve-native-v3-20261105",
+          "iconPath": "docs/design/assets/powers/2026-11-05/native-v3/icons/ENERGY_RESERVE.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/ENERGY_RESERVE.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/ENERGY_RESERVE.svg",
+          "implementation": "src/Combat/EnergyReserve.cs",
+          "model": "EnergyReserve",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "下回合保留至多[blue]1[/blue]点剩余能量。",
+            "smartDescription": "下回合保留至多[blue]{Amount}[/blue]点剩余能量。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_energy_reserve",
+          "id": "JUNNA_ENERGY_RESERVE",
+          "name": "能量保留",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "下一回合",
+          "text": "下回合保留至多1点剩余能量。",
+          "upgradedText": "下回合保留至多1点剩余能量。",
+          "cardIds": [
+            "JX07",
+            "JH20",
+            "JH26"
+          ],
+          "iconDesign": "金色手掌围拢托住一颗青蓝星，手与星形成紧凑整体。",
+          "source": "2021 剧场版 · 狩猎的Revue片段约06:04；TV 第9话 · 约20:09；TV第2话约17:12；2021 剧场版 · 狩猎的Revue片段约01:33（配图）",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=364",
+          "art": "power-icon-energy-reserve-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/ENERGY_RESERVE.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/ENERGY_RESERVE.png",
+          "implementation": "src/Combat/EnergyReserve.cs",
+          "model": "EnergyReserve",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "下回合保留至多[blue]1[/blue]点剩余能量。",
+            "smartDescription": "下回合保留至多[blue]{Amount}[/blue]点剩余能量。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 27,
+        "afterIndex": 27,
+        "afterVersion": "3:3196056705254ed9dc5a1f8eb2cd0ade68d23be111dffcb392bdc1d306564387"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja87_power",
+        "before": {
+          "uid": "power_junna_ja87_power",
+          "id": "JUNNA_JA87_POWER",
+          "name": "布阵",
+          "origin": "junna",
+          "type": "增益",
+          "duration": "本场战斗",
+          "cardIds": [
+            "JA87"
+          ],
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA87",
+          "text": "在你的回合结束时，可以将1张手牌作为5回合的箭矢打出。",
+          "upgradedText": "在你的回合结束时，可以将2张手牌作为5回合的箭矢打出。",
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合结束时，可以将[blue]1[/blue]张[gold]手牌[/gold]作为[blue]5[/blue]回合的[gold]箭矢[/gold]打出。",
+            "smartDescription": "在你的回合结束时，可以将[blue]{Amount}[/blue]张[gold]手牌[/gold]作为[blue]5[/blue]回合的[gold]箭矢[/gold]打出。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja87_power",
+          "id": "JUNNA_JA87_POWER",
+          "name": "布阵",
+          "origin": "junna",
+          "type": "增益",
+          "duration": "本场战斗",
+          "cardIds": [
+            "JA87"
+          ],
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA87",
+          "text": "在你的回合结束时，可以将1张手牌作为5回合的箭矢打出。",
+          "upgradedText": "在你的回合结束时，可以将2张手牌作为5回合的箭矢打出。",
+          "stackType": "Counter",
+          "localization": {
+            "description": "在你的回合结束时，可以将[blue]1[/blue]张[gold]手牌[/gold]作为[blue]5[/blue]回合的[gold]箭矢[/gold]打出。",
+            "smartDescription": "在你的回合结束时，可以将[blue]{Amount}[/blue]张[gold]手牌[/gold]作为[blue]5[/blue]回合的[gold]箭矢[/gold]打出。"
+          },
+          "art": "power-icon-ja87-redraw-20261108",
+          "iconDesign": "三支青绿箭成扇形并列，箭杆底部集中。",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA87.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA87.png",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 28,
+        "afterIndex": 28,
+        "afterVersion": "3:fb4a14b9b725f12e59f6d4793fe0de7bac5e1a817b5c44b0dab240665db4c5e6"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja96_power",
+        "before": {
+          "uid": "power_junna_ja96_power",
+          "id": "JUNNA_JA96_POWER",
+          "name": "稳住阵脚",
+          "origin": "junna",
+          "type": "增益",
+          "duration": "本场战斗",
+          "cardIds": [
+            "JA96"
+          ],
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA96",
+          "text": "每当你受到攻击造成的伤害后，所有箭矢加速1回合。",
+          "upgradedText": "每当你受到攻击造成的伤害后，所有箭矢加速2回合。",
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你受到攻击造成的伤害后，所有[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "每当你受到攻击造成的伤害后，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja96_power",
+          "id": "JUNNA_JA96_POWER",
+          "name": "稳住阵脚",
+          "origin": "junna",
+          "type": "增益",
+          "duration": "本场战斗",
+          "cardIds": [
+            "JA96"
+          ],
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA96",
+          "text": "每当你受到攻击造成的伤害后，所有箭矢加速1回合。",
+          "upgradedText": "每当你受到攻击造成的伤害后，所有箭矢加速2回合。",
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你受到攻击造成的伤害后，所有[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+            "smartDescription": "每当你受到攻击造成的伤害后，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。"
+          },
+          "art": "power-icon-ja96-redraw-20261108",
+          "iconDesign": "一双稳踏地面的红色靴子，脚下短粗蓝色基线。",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA96.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA96.png",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 29,
+        "afterIndex": 29,
+        "afterVersion": "2:ff5ad2f189871defba28e27eced8a2e3498e614e37effd3c11e55d851c16b376"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jh31_power",
+        "before": {
+          "uid": "power_junna_jh31_power",
+          "id": "JUNNA_JH31_POWER",
+          "name": "筹备",
+          "origin": "junna",
+          "type": "增益",
+          "duration": "本场战斗",
+          "cardIds": [
+            "JH31"
+          ],
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH31",
+          "text": "每当你打出耗能不低于2的牌后，抽1张0费牌。",
+          "upgradedText": "每当你打出耗能不低于2的牌后，抽1张0费牌。",
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你打出耗能不低于[blue]2[/blue]的牌后，抽[blue]1[/blue]张[blue]0[/blue]费牌。",
+            "smartDescription": "每当你打出耗能不低于[blue]{Threshold}[/blue]的牌后，抽[blue]{Amount}[/blue]张[blue]0[/blue]费牌。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jh31_power",
+          "id": "JUNNA_JH31_POWER",
+          "name": "筹备",
+          "origin": "junna",
+          "type": "增益",
+          "duration": "本场战斗",
+          "cardIds": [
+            "JH31"
+          ],
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH31",
+          "text": "每当你打出耗能不低于2的牌后，抽1张0费牌。",
+          "upgradedText": "每当你打出耗能不低于2的牌后，抽1张0费牌。",
+          "stackType": "Counter",
+          "localization": {
+            "description": "每当你打出耗能不低于[blue]2[/blue]的牌后，抽[blue]1[/blue]张[blue]0[/blue]费牌。",
+            "smartDescription": "每当你打出耗能不低于[blue]{Threshold}[/blue]的牌后，抽[blue]{Amount}[/blue]张[blue]0[/blue]费牌。"
+          },
+          "art": "power-icon-jh31-redraw-20261108",
+          "iconDesign": "两颗尚未点亮的金星由一颗亮起的蓝白星牵引汇聚。",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JH31.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JH31.png",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 30,
+        "afterIndex": 30,
+        "afterVersion": "2:f012405a76172d87bb690fbe084ee7653246e1707c8fe262a87db5239b36be0b"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_next_card_bonus",
+        "before": {
+          "uid": "power_junna_next_card_bonus",
+          "id": "JUNNA_NEXT_CARD_BONUS",
+          "name": "练习成果",
+          "origin": "junna",
+          "type": "增益",
+          "duration": "本场战斗",
+          "cardIds": [
+            "JG36"
+          ],
+          "implementation": "src/Models/JunnaNextCardBonus.cs",
+          "model": "JunnaNextCardBonus",
+          "text": "你打出的下一张牌获得1点伤害加成。",
+          "upgradedText": "你打出的下一张牌获得1点伤害加成。",
+          "stackType": "Counter",
+          "localization": {
+            "description": "你打出的下一张牌获得[blue]1[/blue]点[gold]伤害加成[/gold]。",
+            "smartDescription": "你打出的下一张牌获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_next_card_bonus",
+          "id": "JUNNA_NEXT_CARD_BONUS",
+          "name": "练习成果",
+          "origin": "junna",
+          "type": "增益",
+          "duration": "本场战斗",
+          "cardIds": [
+            "JG36"
+          ],
+          "implementation": "src/Models/JunnaNextCardBonus.cs",
+          "model": "JunnaNextCardBonus",
+          "text": "你打出的下一张牌获得1点伤害加成。",
+          "upgradedText": "你打出的下一张牌获得1点伤害加成。",
+          "stackType": "Counter",
+          "localization": {
+            "description": "你打出的下一张牌获得[blue]1[/blue]点[gold]伤害加成[/gold]。",
+            "smartDescription": "你打出的下一张牌获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。"
+          },
+          "art": "power-icon-next-card-bonus-redraw-20261108",
+          "iconDesign": "一只有力的红色拳头，掌侧一块明亮金色发力面。",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/NEXT_CARD_BONUS.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/NEXT_CARD_BONUS.png",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 31,
+        "afterIndex": 31,
+        "afterVersion": "2:674bac03710d1c51144d246e6e718a54002d8c2b2bb8b4229cffedf6dc89aa73"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja105_power",
+        "before": {
+          "uid": "power_junna_ja105_power",
+          "id": "JUNNA_JA105_POWER",
+          "name": "速射",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "所有箭矢的初始回合数减少1，最低0；完成后消耗。",
+          "upgradedText": "所有箭矢的初始回合数减少1，最低0；完成后消耗。",
+          "cardIds": [
+            "JA105"
+          ],
+          "art": "power-icon-ja04-native-v3-20261105",
+          "iconDesign": "复用原速射能力图标，表示缩短放箭准备。",
+          "source": "TV 第2话 · 18:31",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1111",
+          "stackType": "Counter",
+          "localization": {
+            "description": "所有[gold]箭矢[/gold]的初始回合数减少[blue]1[/blue]，最低[blue]0[/blue]；完成后[gold]消耗[/gold]。",
+            "smartDescription": "所有[gold]箭矢[/gold]的初始回合数减少[blue]{Amount}[/blue]，最低[blue]0[/blue]；完成后[gold]消耗[/gold]。"
+          },
+          "notes": "每次安装先令已有箭矢具有消耗，再加速1回合；持续效果影响后续布置。消耗优先于回手和重打。"
+        },
+        "after": {
+          "uid": "power_junna_ja105_power",
+          "id": "JUNNA_JA105_POWER",
+          "name": "速射",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "所有箭矢的初始回合数减少1，最低0；完成后消耗。",
+          "upgradedText": "所有箭矢的初始回合数减少1，最低0；完成后消耗。",
+          "cardIds": [
+            "JA105"
+          ],
+          "art": "power-icon-ja105-redraw-20261108",
+          "iconDesign": "两支青绿箭紧靠着向右上飞出，形成连续速射轮廓。",
+          "source": "TV 第2话 · 18:31",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1111",
+          "stackType": "Counter",
+          "localization": {
+            "description": "所有[gold]箭矢[/gold]的初始回合数减少[blue]1[/blue]，最低[blue]0[/blue]；完成后[gold]消耗[/gold]。",
+            "smartDescription": "所有[gold]箭矢[/gold]的初始回合数减少[blue]{Amount}[/blue]，最低[blue]0[/blue]；完成后[gold]消耗[/gold]。"
+          },
+          "notes": "每次安装先令已有箭矢具有消耗，再加速1回合；持续效果影响后续布置。消耗优先于回手和重打。",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA105.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA105.png",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 32,
+        "afterIndex": 32,
+        "afterVersion": "3:f43cad37af707b60169ff0f4319737a94dc344b5013ae84010432d9c0c4a7bed"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja118_power",
+        "before": {
+          "uid": "power_junna_ja118_power",
+          "id": "JUNNA_JA118_POWER",
+          "name": "箭阵",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "打出箭矢时，获得3点格挡。",
+          "upgradedText": "打出箭矢时，获得4点格挡。",
+          "cardIds": [
+            "JA118"
+          ],
+          "art": "power-icon-ja70-native-v3-20261105",
+          "stackType": "Counter",
+          "iconDesign": "箭与盾，表示打出箭矢提供防护。",
+          "localization": {
+            "description": "打出[gold]箭矢[/gold]时，获得[blue]3[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "打出[gold]箭矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja118_power",
+          "id": "JUNNA_JA118_POWER",
+          "name": "箭阵",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "打出箭矢时，获得3点格挡。",
+          "upgradedText": "打出箭矢时，获得4点格挡。",
+          "cardIds": [
+            "JA118"
+          ],
+          "art": "power-icon-ja118-redraw-20261108",
+          "stackType": "Counter",
+          "iconDesign": "三支朝上的金色箭头围成蓝色盾形，整体呈防护阵列。",
+          "localization": {
+            "description": "打出[gold]箭矢[/gold]时，获得[blue]3[/blue]点[gold]格挡[/gold]。",
+            "smartDescription": "打出[gold]箭矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+          },
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA118.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA118.png",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 33,
+        "afterIndex": 33,
+        "afterVersion": "2:ad99274bb87bf6c1fd292afa576cca7856cdaecbd2b291dc9c07663d08e97f33"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja144_power",
+        "before": {
+          "uid": "power_junna_ja144_power",
+          "id": "JUNNA_JA144_POWER",
+          "name": "稳步前进",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "回合开始时，获得1张更近一步。",
+          "upgradedText": "回合开始时，获得1张更近一步。",
+          "cardIds": [
+            "JA144"
+          ],
+          "iconDesign": "复用已登记的箭矢推进图标，表示持续获得更近一步。",
+          "source": "复用箭矢推进图标",
+          "sourceUrl": "",
+          "art": "power-icon-ja35-native-v3-20261105",
+          "iconPath": "ShoujoKagekiJunna/images/powers/JA144.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JA35.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JA35.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA144",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "回合开始时，获得[blue]1[/blue]张[gold]更近一步[/gold]。",
+            "smartDescription": "回合开始时，获得[blue]{Amount}[/blue]张[gold]更近一步[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja144_power",
+          "id": "JUNNA_JA144_POWER",
+          "name": "稳步前进",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "回合开始时，获得1张更近一步。",
+          "upgradedText": "回合开始时，获得1张更近一步。",
+          "cardIds": [
+            "JA144"
+          ],
+          "iconDesign": "两级蓝绿色台阶上压着一只金色向上箭头，表现逐步推进。",
+          "source": "复用箭矢推进图标",
+          "sourceUrl": "",
+          "art": "power-icon-ja144-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA144.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA144.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA144",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "回合开始时，获得[blue]1[/blue]张[gold]更近一步[/gold]。",
+            "smartDescription": "回合开始时，获得[blue]{Amount}[/blue]张[gold]更近一步[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 34,
+        "afterIndex": 34,
+        "afterVersion": "2:cf06be687ed0d3146496042c7fe66934ceb663899643c56d8fa4f4b4d025081b"
+      },
+      {
+        "collection": "powers",
+        "uid": "power_junna_jh59_power",
+        "before": {
+          "uid": "power_junna_jh59_power",
+          "id": "JUNNA_JH59_POWER",
+          "name": "北极星",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "回合开始时，获得1点能量。",
+          "upgradedText": "回合开始时，获得2点能量。",
+          "cardIds": [
+            "JH59"
+          ],
+          "iconDesign": "五颗星以连线围出保护区域，中央亮星持续供能。",
+          "source": "TV 第9话 · 约20:46",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1246",
+          "art": "power-icon-jh24-native-v3-20261105",
+          "iconPath": "ShoujoKagekiJunna/images/powers/JH59.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-05/native-v3/originals/JH24.png",
+          "vectorPath": "docs/design/assets/powers/2026-11-05/native-v3/svg/JH24.svg",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH59",
+          "iconStyle": "本体 Power 风格：黑色粗描边、高饱和纯色、硬边双色明暗、饱满透明底剪影。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "trashedAt": "2026-11-06T01:23:35.824Z",
+          "localization": {
+            "description": "回合开始时，获得1点[gold]能量[/gold]。",
+            "smartDescription": "回合开始时，获得{Amount}点[gold]能量[/gold]。"
+          }
+        },
+        "after": {
+          "uid": "power_junna_jh59_power",
+          "id": "JUNNA_JH59_POWER",
+          "name": "北极星",
+          "origin": "junna",
+          "type": "增益",
+          "system": "energy",
+          "duration": "本场战斗",
+          "text": "回合开始时，获得1点能量。",
+          "upgradedText": "回合开始时，获得2点能量。",
+          "cardIds": [
+            "JH59"
+          ],
+          "iconDesign": "一颗醒目的金白四角北极星，外圈一道短深蓝环弧。",
+          "source": "TV 第9话 · 约20:46",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1246",
+          "art": "power-icon-jh59-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JH59.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JH59.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJH59",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "trashedAt": "2026-11-06T01:23:35.824Z",
+          "localization": {
+            "description": "回合开始时，获得1点[gold]能量[/gold]。",
+            "smartDescription": "回合开始时，获得{Amount}点[gold]能量[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 35,
+        "afterIndex": 35,
+        "afterVersion": "3:1fb02b89b42699dbf09d338773a25f59c6566a1d3bd67b6905f568ab6b3e3f52"
+      }
+    ],
+    "reference": null
+  },
+  "versions": {
+    "powers/power_junna_ja04_power": "4:7a8a80fc22659106c04b895e949dcfeabd90784371388a3c565c44c3e60bc8d2",
+    "powers/power_junna_jk10_power": "2:1a98c3136067b544d85ef61abb0f9188135d578a5772de2dc9ec4a2cefc6a1d3",
+    "powers/power_junna_ja22_power": "4:5c75a9650aad78d06e2ce8cdf990d78fa950f66ea340969928e1c26ca238493c",
+    "powers/power_junna_jk15_power": "2:e242594abaa2d85d3caedcdb2de4d8ed8f59aa43afaed6b0a7ea502d33958bdd",
+    "powers/power_junna_a_power": "2:7942738fa57ea33a626549d997df8c2e1acc977fedcafdeb0cee40b2d278cfd6",
+    "powers/power_junna_jk27_power": "2:c9f75c9e0aaf020f215ba63aaf87952d8fc38e245783a5dbaa59a5329b14c37c",
+    "powers/power_junna_ja35_power": "4:9d610f6ecb8d93f96d3b418f756594b76ac59c2d744d790674ca6c20f4c14737",
+    "powers/power_junna_jk32_power": "2:05f259e3ec73343c4550d0d887b3f40747c7ca9a9a1c89357df3cd82c2c120f9",
+    "powers/power_junna_jk37c_power": "5:8bd2d0b26df2ee6e9a323bc451f0404926921895ac639f279e29d10d2a672789",
+    "powers/power_junna_ja45_power": "4:6317cfbc35caed60d48e31ab58c369d22720d5ac99026583f0fe4d088866fab3",
+    "powers/power_junna_jk64_power": "4:577e59d616073022266eb736dd943c72592df32d95cf3b49e8653cb99bc42864",
+    "powers/power_junna_jk67_power": "5:888282f54be00836b0b03b6104b320c6af2a66bf97cf5d355cfaf35f7cb7bb18",
+    "powers/power_junna_jg31_power": "3:ad756b142375e0092cbc42db150ca42624f41c981084154bda0d7a99e2de7916",
+    "powers/power_junna_jh19_power": "3:533632ea52db6ec3e5ff564e6014fdb56daf93d1b7e75703365e8aefd0dbe0cf",
+    "powers/power_junna_jh21_power": "2:52f5f47ffcff3121af87ca4f26cce1d25a58afb8b22e60e4574ce51d19c28063",
+    "powers/power_junna_jg34_power": "3:828bf9b520a58a1111b7d68a0e7ebb81705ce6e9bca731012fe4518869240d1a",
+    "powers/power_junna_jk75_power": "2:f6498dea8bc3ad97d869b5853a6a6e8d28ea336139be2ec23d8a4c145a4331a7",
+    "powers/power_junna_jh23_power": "2:6e55a30b11358f176f5342133a153b5fed381931529c6f3f1a0751e1b3e83a7c",
+    "powers/power_junna_ja70_power": "4:b6820744e58f6230d56215939f701cd5f3d12f46c20c077d8b54521ba75540e3",
+    "powers/power_junna_jh24_power": "2:f67912904a12ccf0d6c3de3b3f2499b96b6d2cb11dcff2fec9ca9438752b8960",
+    "powers/power_junna_jk80_power": "2:35d0db19ae189f9d8aa862665117eced5c138f9e956bb2e458a4f5cf9189d930",
+    "powers/power_junna_jk81_power": "2:f99ca93203c5016b333ab50a350ae891f540967db55ef0ff0fb9ac356bde283e",
+    "powers/power_junna_jz05_power": "3:7c952a37e457c5f7b0f9c44533c58dcf6d41e3daa1955e1fea3ca57f59b85b2d",
+    "powers/power_junna_jz06_power": "2:02218cd12418bdf2dec31241047dccbf2e29966b515309df4b42a7249952ebcb",
+    "powers/power_junna_jh30_power": "2:2e8f4fafcfcf68bb460d65eaaa027f61bf99f7a2c61add79efe494d3de27207e",
+    "powers/power_junna_jk46_power": "2:e5691d9b542de21dce3690799223a6ff5bb111c4c0ffa2676a3437509abcc774",
+    "powers/power_junna_endurance_power": "2:648302bf0802238d6ad3bab03e5b49821baf3bf1e1cc1bbfc659ca061331d60c",
+    "powers/power_junna_energy_reserve": "3:3196056705254ed9dc5a1f8eb2cd0ade68d23be111dffcb392bdc1d306564387",
+    "powers/power_junna_ja87_power": "3:fb4a14b9b725f12e59f6d4793fe0de7bac5e1a817b5c44b0dab240665db4c5e6",
+    "powers/power_junna_ja96_power": "2:ff5ad2f189871defba28e27eced8a2e3498e614e37effd3c11e55d851c16b376",
+    "powers/power_junna_jh31_power": "2:f012405a76172d87bb690fbe084ee7653246e1707c8fe262a87db5239b36be0b",
+    "powers/power_junna_next_card_bonus": "2:674bac03710d1c51144d246e6e718a54002d8c2b2bb8b4229cffedf6dc89aa73",
+    "powers/power_junna_ja105_power": "3:f43cad37af707b60169ff0f4319737a94dc344b5013ae84010432d9c0c4a7bed",
+    "powers/power_junna_ja118_power": "2:ad99274bb87bf6c1fd292afa576cca7856cdaecbd2b291dc9c07663d08e97f33",
+    "powers/power_junna_ja144_power": "2:cf06be687ed0d3146496042c7fe66934ceb663899643c56d8fa4f4b4d025081b",
+    "powers/power_junna_jh59_power": "3:1fb02b89b42699dbf09d338773a25f59c6566a1d3bd67b6905f568ab6b3e3f52"
+  },
+  "assetIds": [
+    "power-icon-ja04-redraw-20261108",
+    "power-icon-jk10-redraw-20261108",
+    "power-icon-ja22-redraw-20261108",
+    "power-icon-jk15-redraw-20261108",
+    "power-icon-a-redraw-20261108",
+    "power-icon-jk27-redraw-20261108",
+    "power-icon-ja35-redraw-20261108",
+    "power-icon-jk32-redraw-20261108",
+    "power-icon-jk37c-redraw-20261108",
+    "power-icon-ja45-redraw-20261108",
+    "power-icon-jk64-redraw-20261108",
+    "power-icon-jk67-redraw-20261108",
+    "power-icon-jg31-redraw-20261108",
+    "power-icon-jh19-redraw-20261108",
+    "power-icon-jh21-redraw-20261108",
+    "power-icon-jg34-redraw-20261108",
+    "power-icon-jk75-redraw-20261108",
+    "power-icon-jh23-redraw-20261108",
+    "power-icon-ja70-redraw-20261108",
+    "power-icon-jh24-redraw-20261108",
+    "power-icon-jk80-redraw-20261108",
+    "power-icon-jk81-redraw-20261108",
+    "power-icon-jz05-redraw-20261108",
+    "power-icon-jz06-redraw-20261108",
+    "power-icon-jh30-redraw-20261108",
+    "power-icon-jk46-redraw-20261108",
+    "power-icon-jg23-redraw-20261108",
+    "power-icon-energy-reserve-redraw-20261108",
+    "power-icon-ja87-redraw-20261108",
+    "power-icon-ja96-redraw-20261108",
+    "power-icon-jh31-redraw-20261108",
+    "power-icon-next-card-bonus-redraw-20261108",
+    "power-icon-ja105-redraw-20261108",
+    "power-icon-ja118-redraw-20261108",
+    "power-icon-ja144-redraw-20261108",
+    "power-icon-jh59-redraw-20261108"
+  ]
+}

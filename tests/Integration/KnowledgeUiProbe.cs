@@ -53,7 +53,7 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
                 int count = group.GrantedCardCounts["B"];
                 try
                 {
-                    group.GrantedCardCounts["B"] = 9;
+                    group.GrantedCardCounts["B"] = args.Length > 1 ? int.Parse(args[1]) : 9;
                     inspect.Open([Card("A")], 0);
                 }
                 finally { group.GrantedCardCounts["B"] = count; }
@@ -475,8 +475,10 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         var stack = front.GetNode<Control>("JunnaInspectStack");
         var scroll = preview.GetNode<ScrollContainer>("Cards");
         var grid = Descendants(scroll).OfType<GridContainer>().Single();
-        CheckValue("reward inspection starts with native stack", front.Visible && !scroll.Visible, true);
+        CheckValue("reward inspection defaults to spread", !front.Visible && scroll.Visible, true);
         CheckValue("reward inspection exposes layout button", toggle.IsVisibleInTree(), true);
+        await Click(toggle);
+        await Settle();
         await Click(inspect.GetNode<Control>("RightArrow"));
         await Settle();
         await Click(toggle);
@@ -499,11 +501,9 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         inspect.Close();
         await Settle();
         NOverlayStack.Instance.Remove(reward);
-        Process(null, ["many"]);
+        Process(null, ["many", "19"]);
         await Settle();
-        await Click(toggle);
-        await Settle();
-        CheckValue("long group retains all ten copies", Descendants(grid).OfType<NCard>().Count(), 10);
+        CheckValue("long group retains all twenty copies", Descendants(grid).OfType<NCard>().Count(), 20);
         CheckValue("long group uses multiple grid rows", grid.GetChildren().OfType<Control>().Select(slot => slot.Position.Y).Distinct().Count() > 1, true);
         scroll.ScrollVertical = 10000;
         await Settle();
@@ -514,8 +514,6 @@ public sealed class KnowledgeUiProbe : AbstractConsoleCmd
         CheckValue("close hides layout toggle", toggle.IsVisibleInTree(), false);
         await CheckCollection();
         Process(null, ["click-card", "A"]);
-        await Settle();
-        await Click(toggle);
         await Settle();
         CheckValue("collection opens the same spread layout", scroll.Visible && Descendants(grid).OfType<NCard>().Count() == 3, true);
         inspect.Close();

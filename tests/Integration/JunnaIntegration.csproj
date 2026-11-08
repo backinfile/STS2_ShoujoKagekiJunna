@@ -1,5 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <Sts2Api Condition="'$(Sts2Api)' == ''">beta</Sts2Api>
+    <DefineConstants Condition="'$(Sts2Api)' == 'beta'">$(DefineConstants);STS2_BETA</DefineConstants>
     <JunnaAssemblyPath Condition="'$(JunnaAssemblyPath)' == ''">../../dist/ShoujoKagekiJunna/lib/ShoujoKagekiJunna.Beta.dll</JunnaAssemblyPath>
   </PropertyGroup>
   <ItemGroup>

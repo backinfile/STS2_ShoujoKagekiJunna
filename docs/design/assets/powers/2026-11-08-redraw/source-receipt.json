@@ -1,0 +1,102 @@
+{
+  "saved": true,
+  "revision": 4033,
+  "record": {
+    "id": "bb736fb3-57c6-4b61-bc92-93f570c806d9",
+    "seq": 4033,
+    "at": "2026-11-08T09:38:46.210Z",
+    "label": "同步稳步前进重绘图标的出处记录",
+    "kind": "设计",
+    "clientId": "codex-power-redraw-20261108",
+    "patches": [
+      {
+        "collection": "powers",
+        "uid": "power_junna_ja144_power",
+        "before": {
+          "uid": "power_junna_ja144_power",
+          "id": "JUNNA_JA144_POWER",
+          "name": "稳步前进",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "回合开始时，获得1张更近一步。",
+          "upgradedText": "回合开始时，获得1张更近一步。",
+          "cardIds": [
+            "JA144"
+          ],
+          "iconDesign": "两级蓝绿色台阶上压着一只金色向上箭头，表现逐步推进。",
+          "source": "复用箭矢推进图标",
+          "sourceUrl": "",
+          "art": "power-icon-ja144-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA144.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA144.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA144",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "回合开始时，获得[blue]1[/blue]张[gold]更近一步[/gold]。",
+            "smartDescription": "回合开始时，获得[blue]{Amount}[/blue]张[gold]更近一步[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "after": {
+          "uid": "power_junna_ja144_power",
+          "id": "JUNNA_JA144_POWER",
+          "name": "稳步前进",
+          "origin": "junna",
+          "type": "增益",
+          "system": "stage",
+          "duration": "本场战斗",
+          "text": "回合开始时，获得1张更近一步。",
+          "upgradedText": "回合开始时，获得1张更近一步。",
+          "cardIds": [
+            "JA144"
+          ],
+          "iconDesign": "两级蓝绿色台阶上压着一只金色向上箭头，表现逐步推进。",
+          "source": "原创图标：台阶与上行箭头（2026-11-08重绘）",
+          "sourceUrl": "",
+          "art": "power-icon-ja144-redraw-20261108",
+          "iconPath": "docs/design/assets/powers/2026-11-08-redraw/icons/JA144.png",
+          "originalIconPath": "docs/design/assets/powers/2026-11-08-redraw/generated/JA144.png",
+          "implementation": "src/Models/CatalogPower.cs",
+          "model": "JunnaPowerJA144",
+          "iconStyle": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+          "iconSize": [
+            256,
+            256
+          ],
+          "stackType": "Counter",
+          "localization": {
+            "description": "回合开始时，获得[blue]1[/blue]张[gold]更近一步[/gold]。",
+            "smartDescription": "回合开始时，获得[blue]{Amount}[/blue]张[gold]更近一步[/gold]。"
+          },
+          "iconCleanup": {
+            "tool": "GPT Image 2 Artifact Cleaner",
+            "strength": 0.25,
+            "interiorBlend": 0.25,
+            "record": "docs/design/assets/powers/2026-11-08-redraw/cleanup.json"
+          }
+        },
+        "beforeIndex": 34,
+        "afterIndex": 34,
+        "afterVersion": "3:1c6c25ddc8d51a8d7f36f13cb65826f5d3929551435cae828295847b1856f7e0"
+      }
+    ],
+    "reference": null
+  },
+  "versions": {
+    "powers/power_junna_ja144_power": "3:1c6c25ddc8d51a8d7f36f13cb65826f5d3929551435cae828295847b1856f7e0"
+  },
+  "assetIds": []
+}

@@ -28,7 +28,7 @@ public static class CardChoices
         bool self = selected == own;
         var arrows = ArrowCombat.DisplayOrder().Where(a => a.Card.Owner == source.Owner &&
             (self ? !a.TargetsGroup && a.Target == source.Owner.Creature : a.TargetsAllEnemies || a.Target?.IsEnemy == true)).ToArray();
-        foreach (var arrow in arrows) await ArrowCombat.Accelerate(context, arrow, source.Number(1));
+        foreach (var arrow in arrows) await ArrowCombat.Accelerate(context, arrow, source.Value("Turns"));
     }
 
     public static async Task Notes(PlayerChoiceContext context, CatalogCard source)
@@ -36,11 +36,11 @@ public static class CardChoices
         var draw = (JunnaNotesDraw)ModelDb.GetById<JunnaNotesDraw>(ModelDb.GetId<JunnaNotesDraw>()).MutableClone();
         var energy = (JunnaNotesEnergy)ModelDb.GetById<JunnaNotesEnergy>(ModelDb.GetId<JunnaNotesEnergy>()).MutableClone();
         draw.Owner = energy.Owner = source.Owner;
-        draw.DynamicVars["Amount"].BaseValue = source.Number(0);
-        energy.DynamicVars["Amount"].BaseValue = source.Number(1);
+        draw.DynamicVars["Amount"].BaseValue = source.Value("DrawCount");
+        energy.DynamicVars["Amount"].BaseValue = source.Value("Energy");
         var selected = await CardSelectCmd.FromChooseACardScreen(context, [draw, energy], source.Owner);
-        if (selected == draw) await CardPileCmd.Draw(context, source.Number(0), source.Owner);
-        else if (selected == energy) await PlayerCmd.GainEnergy(source.Number(1), source.Owner);
+        if (selected == draw) await CardPileCmd.Draw(context, source.Value("DrawCount"), source.Owner);
+        else if (selected == energy) await PlayerCmd.GainEnergy(source.Value("Energy"), source.Owner);
     }
 
     public static async Task EnergyTiming(PlayerChoiceContext context, CatalogCard source)
@@ -48,12 +48,12 @@ public static class CardChoices
         var now = (JunnaEnergyNow)ModelDb.GetById<JunnaEnergyNow>(ModelDb.GetId<JunnaEnergyNow>()).MutableClone();
         var later = (JunnaEnergyLater)ModelDb.GetById<JunnaEnergyLater>(ModelDb.GetId<JunnaEnergyLater>()).MutableClone();
         now.Owner = later.Owner = source.Owner;
-        now.DynamicVars["Amount"].BaseValue = source.Number(0);
-        later.DynamicVars["Amount"].BaseValue = source.Number(1);
+        now.DynamicVars["Amount"].BaseValue = source.Value("EnergyNow");
+        later.DynamicVars["Amount"].BaseValue = source.Value("EnergyLater");
         var selected = await CardSelectCmd.FromChooseACardScreen(context, [now, later], source.Owner);
-        if (selected == now) await PlayerCmd.GainEnergy(source.Number(0), source.Owner);
+        if (selected == now) await PlayerCmd.GainEnergy(source.Value("EnergyNow"), source.Owner);
         else if (selected == later) await PowerCmd.Apply<MegaCrit.Sts2.Core.Models.Powers.EnergyNextTurnPower>(
-            context, source.Owner.Creature, source.Number(1), source.Owner.Creature, source);
+            context, source.Owner.Creature, source.Value("EnergyLater"), source.Owner.Creature, source);
     }
 
     public static async Task<CardModel[]> ChooseTrainingPile(PlayerChoiceContext context, CatalogCard source)
@@ -76,6 +76,6 @@ public static class CardChoices
             _ => null
         };
         return pile == null ? [] : await CardActions.Choose(context, source,
-            pile.Cards.Where(DamageModifiers.CanDealDamage), source.Number(0), optional: true);
+            pile.Cards.Where(DamageModifiers.CanDealDamage), source.Value("Cards"), optional: true);
     }
 }

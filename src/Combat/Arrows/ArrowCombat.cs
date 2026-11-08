@@ -16,11 +16,10 @@ public static partial class ArrowCombat
     private static readonly Dictionary<ulong, int> LastTick = [];
     private static long _sequence;
     public static IReadOnlyList<ArrowDeployment> Deployed => Arrows;
-    public static ArrowDeployment[] DisplayOrder() => Arrows.OrderBy(a => a.TargetCategory)
-        .ThenBy(a => !a.TargetsGroup && a.Target is { } target
-            ? NCombatRoom.Instance?.GetCreatureNode(target)?.VfxSpawnPosition.X
-                ?? Array.IndexOf(a.Card.CombatState?.Creatures.ToArray() ?? [], target) : 0)
+    public static ArrowDeployment[] ResolutionOrder() => Arrows.OrderBy(a => a.TargetCategory)
+        .ThenBy(a => a.Target is { } target ? Array.IndexOf(a.Card.CombatState?.Creatures.ToArray() ?? [], target) : 0)
         .ThenBy(a => a.Sequence).ToArray();
+    public static ArrowDeployment[] DisplayOrder() => ResolutionOrder();
     public static ArrowDeployment? Find(CardModel card) => Arrows.FirstOrDefault(a => a.Card == card);
     public static void Cancel(CardModel card)
     {
@@ -54,7 +53,7 @@ public static partial class ArrowCombat
         int round = player.PlayerCombatState!.TurnNumber;
         if (LastTick.TryGetValue(player.NetId, out var previous) && previous == round) return;
         LastTick[player.NetId] = round;
-        foreach (var arrow in DisplayOrder().Where(a => a.Card.Owner == player && a.DeployedRound < round))
+        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player && a.DeployedRound < round).ToArray())
         {
             await Accelerate(context, arrow, 1);
         }
@@ -62,7 +61,7 @@ public static partial class ArrowCombat
 
     public static async Task ActivateHaste(PlayerChoiceContext context, Player player)
     {
-        var arrows = DisplayOrder().Where(a => a.Card.Owner == player).ToArray();
+        var arrows = ResolutionOrder().Where(a => a.Card.Owner == player).ToArray();
         foreach (var arrow in arrows)
         {
             arrow.ExhaustAfterResolve = true;
@@ -73,21 +72,28 @@ public static partial class ArrowCombat
 
     public static async Task AccelerateAll(PlayerChoiceContext context, Player player, int turns)
     {
-        foreach (var arrow in DisplayOrder().Where(a => a.Card.Owner == player))
+        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player))
             await Accelerate(context, arrow, turns);
     }
 
     public static async Task AccelerateTarget(PlayerChoiceContext context, Player player, Creature target, int turns)
     {
-        var arrows = DisplayOrder().Where(a => a.Card.Owner == player && !a.Resolving &&
+        var arrows = ResolutionOrder().Where(a => a.Card.Owner == player && !a.Resolving &&
             a.Targets.Contains(target)).ToArray();
         foreach (var arrow in arrows) await Accelerate(context, arrow, turns);
     }
 
     public static async Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns)
     {
-        foreach (var arrow in DisplayOrder().Where(a => a.Card.Owner == player && !a.TargetsGroup &&
+        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player && !a.TargetsGroup &&
                      (a.Target == player.Creature || a.Target == null)))
+            await Accelerate(context, arrow, turns);
+    }
+
+    public static async Task AccelerateEnemies(PlayerChoiceContext context, Player player, int turns)
+    {
+        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player &&
+                     (a.TargetsAllEnemies || a.Target?.IsEnemy == true)))
             await Accelerate(context, arrow, turns);
     }
 

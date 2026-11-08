@@ -1,4 +1,6 @@
-﻿using Godot;
+using ShoujoKageki.Core.V1;
+using ShoujoKageki.Core.V1.Presentation;
+using Godot;
 using MegaCrit.Sts2.Core.Entities.UI;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
@@ -14,6 +16,7 @@ public partial class CardBonusVfx : Node2D
     private CpuParticles2D? _glow, _sparks, _flare;
     private DamageModifierSnapshot _previous;
     private bool _active;
+    private CoreVfxLevel? _particleLevel;
     private float _pulse;
     private static Texture2D? _moteTexture;
     private static CanvasItemMaterial? _additive;
@@ -43,7 +46,7 @@ public partial class CardBonusVfx : Node2D
     private void Refresh(float delta)
     {
         var card = _arrowCard ?? _cardNode?.Model;
-        bool active = card != null && DamageModifiers.HasReceivedBonus(card)
+        bool active = CoreEffects.Enabled && card != null && DamageModifiers.HasReceivedBonus(card)
             && (_cardNode == null || _cardNode.Visibility == ModelVisibility.Visible);
         var snapshot = card == null ? default : DamageModifiers.CaptureDamageModifierSnapshot(card);
         bool gained = active && card == _observedCard
@@ -54,6 +57,13 @@ public partial class CardBonusVfx : Node2D
         Visible = active;
         if (active && _glow == null) CreateParticles();
         if (_glow == null) return;
+        if (_particleLevel != CoreEffects.Level)
+        {
+            _particleLevel = CoreEffects.Level;
+            _glow.Amount = CoreEffects.ParticleCount(Compact ? 18 : 54);
+            _sparks!.Amount = CoreEffects.ParticleCount(Compact ? 10 : 30);
+            _flare!.Amount = CoreEffects.ParticleCount(Compact ? 16 : 48);
+        }
         bool emitting = active && IsVisibleInTree();
         if (emitting != _glow.Emitting)
         {
@@ -125,7 +135,7 @@ public partial class CardBonusVfx : Node2D
         float unit = Compact ? .3f : 1;
         var particles = new CpuParticles2D
         {
-            Name = name, Emitting = false, Amount = amount, Lifetime = lifetime, Preprocess = lifetime,
+            Name = name, Emitting = false, Amount = CoreEffects.ParticleCount(amount), Lifetime = lifetime, Preprocess = lifetime,
             LocalCoords = true, Texture = _moteTexture, Material = _additive,
             EmissionShape = CpuParticles2D.EmissionShapeEnum.DirectedPoints,
             EmissionPoints = points.ToArray(), EmissionNormals = normals.ToArray(),

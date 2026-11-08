@@ -1,3 +1,4 @@
+using ShoujoKageki.Core.V1.Presentation;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Helpers;
@@ -13,6 +14,7 @@ public partial class ArrowHud
 
     internal bool AnimateDeployment(Tween tween, CardModel card, NCard cardNode)
     {
+        if (!CoreEffects.Enabled) return false;
         var arrow = ArrowCombat.Find(card);
         if (arrow == null) return false;
         FinishDeployment(arrow);
@@ -28,7 +30,7 @@ public partial class ArrowHud
         view.Root.Visible = false;
         effect.SetProgress(0);
         effect.Start(() => FinishDeployment(arrow));
-        QueueRedraw();
+        CoreEffects.Redraw(this);
         // Release the action queue at the first bow pull. The remaining visual has its own clock.
         tween.Parallel().TweenInterval(effect.InputReleaseTime);
         return true;
@@ -237,7 +239,7 @@ public partial class ArrowDeploymentVfx : Control
             _trail = null;
         }
         if (_time >= CardGoneTime) ReleaseCard();
-        QueueRedraw();
+        CoreEffects.Redraw(this);
     }
 
     internal void Start(Action completed)

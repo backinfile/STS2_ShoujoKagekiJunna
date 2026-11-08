@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Sts2Api Condition="'$(Sts2Api)' == ''">beta</Sts2Api>
+    <DefineConstants Condition="'$(Sts2Api)' == 'beta'">$(DefineConstants);STS2_BETA</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../CompatibilityChecks/Program.cs" Link="Program.cs" />
+    <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" />
+    <Reference Include="GodotSharp" HintPath="$(GameData)/GodotSharp.dll" />
+    <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" />
+  </ItemGroup>
+</Project>

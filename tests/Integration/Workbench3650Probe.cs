@@ -49,9 +49,9 @@ public static partial class Workbench3650Probe
         {
             foreach (var power in enemy.Powers.ToArray()) await PowerCmd.Remove(power);
             await CreatureCmd.SetMaxHp(enemy, 1000000); await CreatureCmd.SetCurrentHp(enemy, 1000000);
-            await CreatureCmd.LoseBlock(Context, enemy, enemy.Block, null);
+            await TestGameApi.LoseBlock(Context, enemy, enemy.Block, null);
         }
-        await CreatureCmd.LoseBlock(Context, player.Creature, player.Creature.Block, null);
+        await TestGameApi.LoseBlock(Context, player.Creature, player.Creature.Block, null);
         player.PlayerCombatState.Energy = 99;
     }
     private static async Task<CardModel> Card(Player player, string id, bool upgraded = false, PileType pile = PileType.Hand)
