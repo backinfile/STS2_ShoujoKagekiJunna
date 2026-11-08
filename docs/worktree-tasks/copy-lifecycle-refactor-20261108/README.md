@@ -246,6 +246,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 </skill>
 
+### 后续用户输入
+
+> 合并 Core/Karen，保留全部工作树（推荐）
+
+> 清理不再用到的工作树
+
 ## Brief task plan
 
 - 在 ../worktrees/STS2_ShoujoKagekiJunna/copy-lifecycle-refactor-20261108 工作，原分支 main，起点 d87b81d80cf63b157e8a7416572963e7f344816e。
@@ -279,3 +285,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 本仓库构建产物：`out/tmp/copy-lifecycle-refactor-20261108/packages-r3/`。双版本实机证据由 Core 对应任务的定向回归目录维护。
 
 提交前审查：完整暂存索引及归档文本隐私检查通过，所有受 Git 跟踪文档通过本机绝对路径检查，使用匿名任务提交身份。
+
+## 合并与工作树清理
+
+本仓库本次重构继续保留在任务分支，等待整合原检出的未提交内容。
+
+用户后续授权清理不再使用的工作树。本次清理范围：Core、Karen 的 copy-lifecycle-refactor-20261108，以及 Junna 的 full-card-resolution-localization-20261105、pursuit-upgrade-preview-analysis-20261105。四个工作树均干净，提交均已包含于各自 main，没有进程引用这些路径。代码与任务记录由 main 保留；相关分支和既有归档保留。
+
+Junna 的 copy-lifecycle-refactor-20261108、junna-a0-playtest-20261107 尚未合并，保留工作树。Junna 原检出的未提交内容保持在原处。
