@@ -31,7 +31,7 @@ function Write-CoreRoleMetadata($Core, [string]$RoleDirectory, [string]$PackageR
     } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $RoleDirectory 'core.requirements') -Encoding UTF8
     $lockFiles = [ordered]@{}
     Get-ChildItem -LiteralPath $Core.Root -Recurse -File | Sort-Object FullName | ForEach-Object {
-        $relative = [IO.Path]::GetRelativePath($Core.Root, $_.FullName).Replace('\','/')
+        $relative = $_.FullName.Substring($Core.Root.TrimEnd('\', '/').Length + 1).Replace('\','/')
         $lockFiles[$relative] = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
     }
     [ordered]@{ format=1; releaseVersion=$Core.Bundle.releaseVersion; files=$lockFiles } | ConvertTo-Json -Depth 10 |
