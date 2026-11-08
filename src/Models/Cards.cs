@@ -53,6 +53,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             if (background != null)
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND"), background)
                     { Id = "junna_knowledge_background_" + DesignId };
+            if (DesignId is "JA144" or "JA145") yield return new CardHoverTip(CardCatalog.Model("JA119"));
             if (CardCatalog.IsArrow(this) || text.Contains("箭矢"))
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Arrow);
             if (text.Contains("伤害加成") || DamageModifiers.CaptureDamageModifierSnapshot(this).DamageBonus > 0)
@@ -103,7 +104,7 @@ public sealed class JunnaWarmUp() : JunnaCard(1, CardType.Skill, CardRarity.Comm
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-        await PowerCmd.Apply<JunnaNextCardBonus>(context, Owner.Creature, DynamicVars["Bonus"].BaseValue, Owner.Creature, this);
+        await ImproveHand(context, DynamicVars["Bonus"].BaseValue);
     }
     protected override void OnUpgrade() { DynamicVars.Block.UpgradeValueBy(2); DynamicVars["Bonus"].UpgradeValueBy(1); }
 }

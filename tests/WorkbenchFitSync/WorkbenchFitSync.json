@@ -1,0 +1,16 @@
+{
+  "id": "JunnaWorkbenchFitSync",
+  "name": "Junna Workbench Fit Sync Checks",
+  "author": "Local",
+  "description": "Targeted checks",
+  "version": "1.0.0",
+  "has_dll": true,
+  "has_pck": false,
+  "dependencies": [
+    {
+      "id": "ShoujoKagekiJunna",
+      "min_version": "0.1.0"
+    }
+  ],
+  "affects_gameplay": true
+}

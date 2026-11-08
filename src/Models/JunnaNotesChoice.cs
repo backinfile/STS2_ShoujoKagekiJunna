@@ -16,3 +16,14 @@ public abstract class JunnaNotesChoice() : CustomCardModel(0, CardType.Skill, Ca
 public sealed class JunnaNotesDraw : JunnaNotesChoice;
 [CustomID("JUNNA_NOTES_ENERGY")]
 public sealed class JunnaNotesEnergy : JunnaNotesChoice;
+
+[CustomID("JUNNA_ENERGY_NOW")]
+public sealed class JunnaEnergyNow : JunnaNotesChoice
+{
+    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JH60").Portrait;
+}
+[CustomID("JUNNA_ENERGY_LATER")]
+public sealed class JunnaEnergyLater : JunnaNotesChoice
+{
+    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JH60").Portrait;
+}

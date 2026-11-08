@@ -13,7 +13,7 @@ public abstract partial class CatalogPower
     private int StackAmount() => DesignId switch
     {
         "JA04" => _grants.Sum(g => Math.Max(0, g.N(0) - g.Used)),
-        "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => _grants.Sum(g => g.N(0)),
+        "JH59" or "JA144" or "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => _grants.Sum(g => g.N(0)),
         "JG31" or "JK67" => _grants.Sum(g => g.V("Bonus")),
         "JH21" or "JH23" or "JA70" or "JA118" => _grants.Sum(g => g.V("Block")),
         "JK80" or "JH31" => _grants.Sum(g => g.N(1)),
@@ -52,7 +52,7 @@ public abstract partial class CatalogPower
             "JA04" => [Format(("Amount", StackAmount()))],
             "JA22" or "JK27" => [Format()],
             "JA105" => [Format(("Amount", _grants.Count))],
-            "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => [Format(("Amount", Sum(0)))],
+            "JH59" or "JA144" or "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => [Format(("Amount", Sum(0)))],
             "JG31" or "JK67" => [Format(("Amount", Bonus()))],
             "JH19" or "JZ06" or "JH30" => [Format(("Amount", _grants.Count), ("Repetition", Repetition(_grants.Count)))],
             "JH21" or "JA70" or "JA118" => [Format(("Amount", Block()))],

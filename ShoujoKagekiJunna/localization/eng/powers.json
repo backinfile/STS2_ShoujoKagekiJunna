@@ -103,5 +103,9 @@
   "JUNNA_JA105_POWER.smartDescription": "所有[gold]箭矢[/gold]的初始回合数减少[blue]{Amount}[/blue]，最低[blue]0[/blue]；完成后[gold]消耗[/gold]。",
   "JUNNA_JA118_POWER.title": "箭阵",
   "JUNNA_JA118_POWER.description": "打出[gold]箭矢[/gold]时，获得[blue]3[/blue]点[gold]格挡[/gold]。",
-  "JUNNA_JA118_POWER.smartDescription": "打出[gold]箭矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
+  "JUNNA_JA118_POWER.smartDescription": "打出[gold]箭矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
+  "JUNNA_JA144_POWER.title": "稳步前进",
+  "JUNNA_JA144_POWER.description": "回合开始时，获得[blue]1[/blue]张[gold]更近一步[/gold]。",
+  "JUNNA_JA144_POWER.smartDescription": "回合开始时，获得[blue]{Amount}[/blue]张[gold]更近一步[/gold]。",
+  "JUNNA_JH59_POWER.title": "北极星"
 }

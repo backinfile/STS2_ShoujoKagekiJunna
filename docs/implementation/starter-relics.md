@@ -2,14 +2,14 @@
 
 | 遗物 | 效果 | 获取 |
 | --- | --- | --- |
-| 绿色宝石 | 战斗开始时，获得1点能量并可保留到下一回合。 | 纯那初始遗物 |
-| 燃烧宝石 | 战斗开始时，获得3点能量并可保留到下一回合。 | 奥罗巴斯之触替换绿色宝石 |
+| 绿色宝石 | 战斗开始时，将1张更近一步加入手牌。 | 纯那初始遗物 |
+| 燃烧宝石 | 回合开始时，将1张更近一步加入手牌。 | 奥罗巴斯之触替换绿色宝石 |
 
 契合与数值通过 `junna_workbench` 写入 `meta.relics`、`meta.startingRelics` 及两个契合池条目。
 
 绿色宝石取自[TV第2话约17:05—17:12](https://www.bilibili.com/bangumi/play/ep232368?t=1025)纯那弓端发光的宝石。核对素材为 `docs/design/assets/card-sources/2026-11-02/tv02-energy-gem-1704-20261103.png` 与 `tv02-energy-gem-1710-20261103.png`，名称是物件概括。
 
-燃烧宝石取自[剧场版狩猎的Revue结尾](https://www.bilibili.com/video/BV1u3411v7i7/)奈奈形容纯那的“燃える宝石のようなキラめき”。名称对应原文中的“燃える宝石”，3点能量表现更充分的行动力量。
+燃烧宝石取自[剧场版狩猎的Revue结尾](https://www.bilibili.com/video/BV1u3411v7i7/)奈奈形容纯那的“燃える宝石のようなキラめき”。名称对应原文中的“燃える宝石”，每回合持续获得更近一步，表现持续推进箭矢的力量。
 
 存档ID为 `JUNNA_GREEN_GEM` 与 `JUNNA_BURNING_GEM`，显示名称分别为绿色宝石与燃烧宝石。
 
@@ -20,6 +20,14 @@
 官方[《Memory of Revue》书目](https://bushiroad-store.com/products/2000148901649)确认收录剧场版分镜及未公开设定；[读者记录](https://humandistortion.hatenablog.com/entry/2023/12/03/201419)提到纯那宝石为祖母绿，材质线索待原设定页核对，当前造型依据为原作近景。工作台配图为 `relic-green-gem-vector-v2-20261105` 与 `relic-burning-gem-vector-v2-20261105`，MCP修订2586。旧版SVG、128像素原尺寸预览、32／48／64像素检查图及导入日志保存在 `artifacts/starter-relics/art-v2/`。
 
 本次图标验证通过：Godot导入与PCK打包成功；实机分别显示两版遗物，确认径向渐变、透明边缘和遗物栏小尺寸显示；四张图标均为128×128，白色轮廓覆盖宝石与包托的实体主体。验证记录为 `artifacts/starter-relics/art-v2/validation.json`，实机截图为同目录的 `green-in-game.png` 与 `burning-in-game.png`。本次按图标改动范围验证，原有能量机制检查记录保留如下。
+
+## 2026-11-08：工作台 r4011
+
+绿色宝石仅在第一个自己的回合抽牌前生成1张基础版更近一步；燃烧宝石在每个自己的回合抽牌前生成1张。两版均调用本体生成牌流程；更近一步为0费衍生技能，保留、消耗，可选择自己或敌人，使指向所选目标的己方布置按显示顺序加速1回合，升级加速2回合。遗物悬停提供该牌预览。
+
+验证见 `tests/WorkbenchFitSync/` 与 `docs/worktree-tasks/workbench-fit-sync-20261108/README.md`。
+
+## 2026-11-05历史能量机制
 
 首次自己的回合刷新能量后、常规抽牌前结算，和本体开局额外能量的时序一致。按实际获得量增加一次性保留额度；下次刷新时，结转量为剩余能量与累计额度的较小值，随后清除额度。复用卡牌已有的 `EnergyReserve`，卡牌与遗物额度相加，完整保留能量时沿用原结转方式。
 

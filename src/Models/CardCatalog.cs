@@ -30,6 +30,8 @@ public sealed class CardDefinition
     public bool UpgradedExhaust { get; init; }
     public bool Retain { get; init; }
     public bool UpgradedRetain { get; init; }
+    public bool Innate { get; init; }
+    public bool UpgradedInnate { get; init; }
     public bool DamageCapable { get; init; }
     public string Portrait { get; init; } = "";
     public ArrowArtFocus? ArrowFocus { get; init; }
@@ -42,7 +44,7 @@ public sealed class CardDefinition
     public CardRarity CardRarity => Rarity switch
     {
         "基础" => CardRarity.Basic, "普通" => CardRarity.Common, "罕见" => CardRarity.Uncommon,
-        "稀有" => CardRarity.Rare, "远古" => CardRarity.Ancient,
+        "稀有" => CardRarity.Rare, "远古" => CardRarity.Ancient, "衍生" => CardRarity.Token,
         _ => throw new InvalidOperationException($"Unknown rarity: {Id}/{Rarity}")
     };
     private static CardType ToType(string value) => value switch

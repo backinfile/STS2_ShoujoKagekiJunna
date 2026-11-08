@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -74,6 +75,13 @@ public static partial class ArrowCombat
     {
         foreach (var arrow in DisplayOrder().Where(a => a.Card.Owner == player))
             await Accelerate(context, arrow, turns);
+    }
+
+    public static async Task AccelerateTarget(PlayerChoiceContext context, Player player, Creature target, int turns)
+    {
+        var arrows = DisplayOrder().Where(a => a.Card.Owner == player && !a.Resolving &&
+            a.Targets.Contains(target)).ToArray();
+        foreach (var arrow in arrows) await Accelerate(context, arrow, turns);
     }
 
     public static async Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns)

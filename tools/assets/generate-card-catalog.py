@@ -185,7 +185,7 @@ def main():
         base = card['text'].strip()
         upgrade = card['upgradedText'].strip()
         # Native keywords are rendered by CardModel; knowledge keeps its printed position.
-        for keyword in ('保留', '消耗'):
+        for keyword in ('保留', '消耗', '固有'):
             base = re.sub(r'(^|[。\n])\s*' + re.escape(keyword) + r'。', r'\1', base)
             upgrade = re.sub(r'(^|[。\n])\s*' + re.escape(keyword) + r'。', r'\1', upgrade)
         # Core renders the current Shine budget, including depletion and upgrades.
@@ -236,7 +236,7 @@ def main():
         damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid == 'JH30') and cid != 'JA82'
         target = {'自己': 'Self', '敌人': 'AnyEnemy', '任意敌人': 'AnyEnemy', '所有敌人': 'AllEnemies',
                   '无': 'None', '无需目标': 'None', '所有玩家': 'AllAllies',
-                  '玩家': 'AnyPlayer', '队友': 'AnyAlly'}.get(card.get('target'))
+                  '玩家': 'AnyPlayer', '队友': 'AnyAlly', '敌人或自己': 'AnyEnemy'}.get(card.get('target'))
         if target is None:
             raise ValueError('Unknown target: ' + cid + '/' + str(card.get('target')))
         entry = {
@@ -249,6 +249,7 @@ def main():
             'knowledge': '知识' in card.get('keywords', []) or '知识。' in card['text'],
             'exhaust': native_keyword(card['text'], '消耗'), 'upgradedExhaust': native_keyword(card['upgradedText'], '消耗'),
             'retain': native_keyword(card['text'], '保留'), 'upgradedRetain': native_keyword(card['upgradedText'], '保留'),
+            'innate': native_keyword(card['text'], '固有'), 'upgradedInnate': native_keyword(card['upgradedText'], '固有'),
             'damageCapable': damage, 'portrait': portrait_name, 'values': values,
             'text': card['text'], 'upgradedText': card['upgradedText'],
         }
@@ -262,6 +263,8 @@ def main():
             declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
             wrappers.append(declaration + f'[CustomID("{model_id}")]\npublic sealed class {cls}() : CatalogCard("{cid}");\n')
     for card in retired.values():
+        if card['id'] in EXISTING:
+            continue
         shine = re.search(r'闪耀(\d+)[。.]', card.get('text', ''))
         declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
         wrappers.append(declaration + f'[CustomID("{card["modelId"]}")]\npublic sealed class {card["className"]}() : CatalogCard("{card["id"]}");\n')
@@ -289,6 +292,10 @@ def main():
         'JUNNA_ARROW_TARGET_SELF.description': '目标为自己的箭矢加速1回合。',
         'JUNNA_ARROW_TARGET_ENEMY.title': '敌人',
         'JUNNA_ARROW_TARGET_ENEMY.description': '目标为敌人的箭矢加速1回合。',
+        'JUNNA_ENERGY_NOW.title': '现在',
+        'JUNNA_ENERGY_NOW.description': '获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
+        'JUNNA_ENERGY_LATER.title': '下回合',
+        'JUNNA_ENERGY_LATER.description': '下回合获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
         'JUNNA_NOTES_DRAW.title': '抽牌',
         'JUNNA_NOTES_DRAW.description': '抽{Amount:diff()}张牌。',
         'JUNNA_NOTES_ENERGY.title': '能量',
@@ -312,13 +319,21 @@ def main():
         power_ids.update(card['id'] for card in retired.values() if card['type'] == '能力')
         for cid in sorted(power_ids):
             powers[f'JUNNA_{cid}_POWER.title'] = next(c['name'] for c in cards + list(retired.values()) if c['id'] == cid)
-        for power in bundle['data'].get('powers', []):
+        for power in bundle['data']['meta'].get('powers', []):
             if power.get('trashedAt'):
                 continue
             for suffix, text in power.get('localization', {}).items():
                 powers[power['id'] + '.' + suffix] = text
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        relics_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/relics.json'
+        relics = json.loads(relics_path.read_text(encoding='utf-8'))
+        for relic in bundle['data']['meta'].get('relics', []):
+            if relic.get('trashedAt') or not relic.get('text', '').strip():
+                continue
+            relics[relic['id'] + '.title'] = relic['name']
+            relics[relic['id'] + '.description'] = relic['text']
+        relics_path.write_text(json.dumps(relics, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         ui_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/gameplay_ui.json'
         ui = json.loads(ui_path.read_text(encoding='utf-8'))
         ui = {k: v for k, v in ui.items() if not k.startswith('JUNNA.KNOWLEDGE_BACKGROUND.')}

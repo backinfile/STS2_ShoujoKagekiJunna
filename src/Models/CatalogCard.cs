@@ -23,7 +23,8 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     protected override bool HasEnergyCostX => Definition.CostsX;
     public override int MaxUpgradeLevel => DesignId == "JK82" ? int.MaxValue : 1;
     public override HashSet<CardKeyword> CanonicalKeywords =>
-        [..base.CanonicalKeywords, ..(Definition.Exhaust ? new[] { CardKeyword.Exhaust } : []), ..(Definition.Retain ? new[] { CardKeyword.Retain } : [])];
+        [..base.CanonicalKeywords, ..(Definition.Exhaust ? new[] { CardKeyword.Exhaust } : []), ..(Definition.Retain ? new[] { CardKeyword.Retain } : []),
+         ..(Definition.Innate ? new[] { CardKeyword.Innate } : [])];
     private IEnumerable<CardNumber> FormValues => HasAlternateForm
         ? CardCatalog.Get("JK49").Values.Concat(CardCatalog.Get("JK49B").Values) : Definition.Values;
     protected override IEnumerable<DynamicVar> CanonicalVars => FormValues.Select(n => n.Name switch
@@ -87,5 +88,6 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         if (Definition.UpgradedCost != Definition.Cost) EnergyCost.UpgradeBy(Definition.UpgradedCost - Definition.Cost);
         if (Definition.UpgradedExhaust) AddKeyword(CardKeyword.Exhaust); else RemoveKeyword(CardKeyword.Exhaust);
         if (Definition.UpgradedRetain) AddKeyword(CardKeyword.Retain); else RemoveKeyword(CardKeyword.Retain);
+        if (Definition.UpgradedInnate) AddKeyword(CardKeyword.Innate); else RemoveKeyword(CardKeyword.Innate);
     }
 }

@@ -31,26 +31,28 @@ public static partial class KnowledgeProgress
     internal static void BindResearch(IEnumerable<CardModel> acquired)
     {
         var cards = acquired.OfType<CatalogCard>().ToArray();
-        if (!cards.Any(c => c.DesignId == "JK148")) return;
+        if (!cards.Any(c => c.DesignId is "JK148" or "JK184")) return;
         var owner = cards[0].Owner;
         int sequence = checked(ResearchSequence.Get(owner) + 1);
         ResearchSequence.Set(owner, sequence);
         string link = owner.NetId + "/" + sequence;
-        foreach (var card in cards.Where(c => c.DesignId is "JK148" or "JK148B" or "JK148C" or "JK148D" or "JK148E" or "JK148F"))
+        foreach (var card in cards.Where(c => c.DesignId is "JK148" or "JK148B" or "JK148C" or "JK148D" or "JK148E" or "JK148F" or "JK184" or "JK184B" or "JK184C" or "JK184D"))
             ResearchLinks.Set(card, link);
     }
 
     private static void ResearchDepleted(CatalogCard source, CardModel permanent)
     {
-        if (source.DesignId is not ("JK148B" or "JK148C" or "JK148D" or "JK148E" or "JK148F")
+        if (source.DesignId is not ("JK148B" or "JK148C" or "JK148D" or "JK148E" or "JK148F" or "JK184B" or "JK184C" or "JK184D")
             || permanent is not CatalogCard member || ResearchCompleted.Get(member)) return;
         string? link = ResearchLinks.Get(member);
         if (string.IsNullOrEmpty(link)) return;
         ResearchCompleted.Set(member, true);
+        string mainId = source.DesignId.StartsWith("JK184", StringComparison.Ordinal) ? "JK184" : "JK148";
         foreach (var paper in source.Owner.Deck.Cards.OfType<CatalogCard>()
-                     .Where(c => c.DesignId == "JK148" && ResearchLinks.Get(c) == link))
+                     .Where(c => c.DesignId == mainId && ResearchLinks.Get(c) == link))
         {
             int hits = checked(ExtraHits.Get(paper) + 1);
+            if (mainId == "JK184") hits = Math.Min(6, hits);
             ExtraHits.Set(paper, hits);
             if (source.Owner.PlayerCombatState is { } combat)
                 foreach (var copy in combat.AllCards.OfType<CatalogCard>().Where(c => c.DeckVersion == paper))

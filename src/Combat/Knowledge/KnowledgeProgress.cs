@@ -96,7 +96,7 @@ public static partial class KnowledgeProgress
 
     public static async Task CopyDeckCard(Player player)
     {
-        var candidates = player.Deck.Cards.Where(c => Shine.GetState(c) is not { Remaining: <= 0 }).ToArray();
+        var candidates = player.Deck.Cards.Where(CardCatalog.IsKnowledge).Where(c => Shine.GetState(c) is not { Remaining: <= 0 }).ToArray();
         if (candidates.Length == 0) return;
         var prompt = new LocString("cards", "JUNNA_JK127.selectionScreenPrompt");
         var selected = await CardSelectCmd.FromSimpleGrid(new BlockingPlayerChoiceContext(), candidates, player,

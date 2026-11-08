@@ -43,6 +43,19 @@ public static class CardChoices
         else if (selected == energy) await PlayerCmd.GainEnergy(source.Number(1), source.Owner);
     }
 
+    public static async Task EnergyTiming(PlayerChoiceContext context, CatalogCard source)
+    {
+        var now = (JunnaEnergyNow)ModelDb.GetById<JunnaEnergyNow>(ModelDb.GetId<JunnaEnergyNow>()).MutableClone();
+        var later = (JunnaEnergyLater)ModelDb.GetById<JunnaEnergyLater>(ModelDb.GetId<JunnaEnergyLater>()).MutableClone();
+        now.Owner = later.Owner = source.Owner;
+        now.DynamicVars["Amount"].BaseValue = source.Number(0);
+        later.DynamicVars["Amount"].BaseValue = source.Number(1);
+        var selected = await CardSelectCmd.FromChooseACardScreen(context, [now, later], source.Owner);
+        if (selected == now) await PlayerCmd.GainEnergy(source.Number(0), source.Owner);
+        else if (selected == later) await PowerCmd.Apply<MegaCrit.Sts2.Core.Models.Powers.EnergyNextTurnPower>(
+            context, source.Owner.Creature, source.Number(1), source.Owner.Creature, source);
+    }
+
     public static async Task<CardModel[]> ChooseTrainingPile(PlayerChoiceContext context, CatalogCard source)
     {
         var state = source.Owner.PlayerCombatState!;

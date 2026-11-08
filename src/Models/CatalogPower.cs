@@ -95,8 +95,9 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         {
             switch (DesignId)
             {
+                case "JA144": await CardActions.Generate(player, "JA119", grant.N(0), PileType.Hand); break;
                 case "JA35": await ArrowCombat.AccelerateAll(context, player, grant.N(0)); break;
-                case "JK139": await PlayerCmd.GainEnergy(grant.N(0), player); break;
+                case "JH59": case "JK139": await PlayerCmd.GainEnergy(grant.N(0), player); break;
                 case "JK32": await CardPileCmd.Draw(context, grant.N(0), player); break;
                 case "JK46": await CardActions.Generate(player, "JK46B", grant.N(0), PileType.Hand, grant.Card.IsUpgraded); break;
                 case "JG34":

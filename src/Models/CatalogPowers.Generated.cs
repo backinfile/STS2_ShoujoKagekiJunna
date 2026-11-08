@@ -9,6 +9,12 @@ public sealed class JunnaPowerA() : CatalogPower("A");
 [CustomID("JUNNA_JA105_POWER")]
 public sealed class JunnaPowerJA105() : CatalogPower("JA105");
 
+[CustomID("JUNNA_JA118_POWER")]
+public sealed class JunnaPowerJA118() : CatalogPower("JA118");
+
+[CustomID("JUNNA_JA144_POWER")]
+public sealed class JunnaPowerJA144() : CatalogPower("JA144");
+
 [CustomID("JUNNA_JA22_POWER")]
 public sealed class JunnaPowerJA22() : CatalogPower("JA22");
 
@@ -18,9 +24,6 @@ public sealed class JunnaPowerJA87() : CatalogPower("JA87");
 [CustomID("JUNNA_JA96_POWER")]
 public sealed class JunnaPowerJA96() : CatalogPower("JA96");
 
-[CustomID("JUNNA_JG31_POWER")]
-public sealed class JunnaPowerJG31() : CatalogPower("JG31");
-
 [CustomID("JUNNA_JG34_POWER")]
 public sealed class JunnaPowerJG34() : CatalogPower("JG34");
 
@@ -29,6 +32,9 @@ public sealed class JunnaPowerJH19() : CatalogPower("JH19");
 
 [CustomID("JUNNA_JH31_POWER")]
 public sealed class JunnaPowerJH31() : CatalogPower("JH31");
+
+[CustomID("JUNNA_JH59_POWER")]
+public sealed class JunnaPowerJH59() : CatalogPower("JH59");
 
 [CustomID("JUNNA_JK10_POWER")]
 public sealed class JunnaPowerJK10() : CatalogPower("JK10");
@@ -60,14 +66,8 @@ public sealed class JunnaPowerJK67() : CatalogPower("JK67");
 [CustomID("JUNNA_JK75_POWER")]
 public sealed class JunnaPowerJK75() : CatalogPower("JK75");
 
-[CustomID("JUNNA_JK80_POWER")]
-public sealed class JunnaPowerJK80() : CatalogPower("JK80");
-
 [CustomID("JUNNA_JZ05_POWER")]
 public sealed class JunnaPowerJZ05() : CatalogPower("JZ05");
 
 [CustomID("JUNNA_JZ06_POWER")]
 public sealed class JunnaPowerJZ06() : CatalogPower("JZ06");
-
-[CustomID("JUNNA_JA118_POWER")]
-public sealed class JunnaPowerJA118() : CatalogPower("JA118");
