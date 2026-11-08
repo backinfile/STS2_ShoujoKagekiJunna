@@ -1,4 +1,4 @@
-﻿.body-layout.is-initial{grid-template-columns:minmax(0,1fr)}
+.body-layout.is-initial{grid-template-columns:minmax(0,1fr)}
 .is-initial>.sidebar,.is-initial>.inspector{display:none}
 .initial-config{max-width:780px;margin:0 auto;padding:8px 12px 40px}
 .initial-config section{padding:24px 0;border-bottom:1px solid var(--line)}

@@ -6,6 +6,20 @@ const makeCard=(id,pool)=>({uid:'card_'+id,id,name:id,type:'技能',rarity:'罕�
 function fixture(){return {cards:[makeCard('A',true),makeCard('B',false),makeCard('C',false)],partnerGroups:[{uid:'group_A',id:'GROUP_A',title:'A',mainCardId:'A',grantedCardIds:['B','C'],grantedCardCounts:{B:2,C:1}}],meta:{startingDeck:[{cardId:'A',count:1}]}};}
 const quantities=group=>Object.fromEntries([group.mainCardId,...group.grantedCardIds].sort().map(id=>[id,domain.groupCardCount(group,id)]));
 
+test('本体特殊稀有度与卡牌类型经过标准化和导出读取后保留，入池身份独立',()=>{
+  const classifications=[['技能','事件'],['攻击','衍生'],['状态','状态'],['诅咒','诅咒'],['任务','任务']];
+  const cards=classifications.map(([type,rarity],i)=>({...makeCard('S'+i,false),type,rarity,keywords:[],text:'',upgradedText:''}));
+  const data={cards,partnerGroups:[]};
+  const normalize=domain.create({seed:{data:structuredClone(data)},uid:()=>assert.fail('不应生成新编号'),JunnaFitPool:{normalizeEntry:entry=>entry}});
+  const reloaded=normalize(JSON.parse(JSON.stringify(normalize(data))));
+  assert.deepEqual(reloaded.cards.map(({type,rarity,pool})=>[type,rarity,pool]),classifications.map(([type,rarity])=>[type,rarity,false]));
+  const root={...makeCard('root',true),partnerCardIds:cards.map(c=>c.id)};
+  const reference=require('./pool-reference.js').compute({...reloaded,cards:[root,...reloaded.cards]},{includeAll:true});
+  assert.equal(reference.rarities.reduce((sum,row)=>sum+row.current,0),cards.length+1);
+  assert.equal(reference.unknownTypes,0);
+  for(const [,rarity] of classifications)assert.ok(require('./route-statistics.js').rarities.includes(rarity));
+});
+
 test('设置主牌保留组内每张牌的数量、其他牌面字段与初始牌组',()=>{
   const data=fixture(),before=structuredClone(data),counts=quantities(data.partnerGroups[0]);
   assert.equal(domain.setGroupMain(data,'group_A','card_B'),true);

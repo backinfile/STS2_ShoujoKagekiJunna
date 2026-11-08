@@ -10,7 +10,7 @@
   }
   function rootEntity(data,key){if(key!=='meta')return data[key];const meta={...data.meta};for(const collection of META_COLLECTIONS)delete meta[collection];return meta;}
   function assignRoot(data,key,value){const next=JSON.parse(JSON.stringify(value));if(key==='meta')for(const collection of META_COLLECTIONS)if(!Object.hasOwn(next,collection)&&Object.hasOwn(data.meta||{},collection))next[collection]=data.meta[collection];data[key]=next;}
-  const TYPES=['攻击','技能','能力','箭矢'],RARITIES=['基础','普通','罕见','稀有','远古'];
+  const TYPES=['攻击','技能','能力','箭矢','状态','诅咒','任务'],RARITIES=['基础','普通','罕见','稀有','远古','事件','衍生','状态','诅咒','任务'];
   function groupCardCount(group,cardId){return Math.max(1,Math.floor(Number(cardId===group.mainCardId?group.mainCardCount:group.grantedCardCounts?.[cardId])||1));}
   function setGroupMain(data,groupUid,cardUid){
     const group=data.partnerGroups.find(entry=>entry.uid===groupUid),card=data.cards.find(entry=>entry.uid===cardUid);

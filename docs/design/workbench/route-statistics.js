@@ -8,7 +8,7 @@ const JunnaRouteStatistics = (() => {
   const effectStatistics=typeof module!=='undefined'&&module.exports?require('./effect-statistics.js'):JunnaEffectStatistics;
   const roles = {load:'载体',trigger:'触发',payoff:'收益',both:'兼具',tool:'工具',unclassified:'待分类'};
   const ports = {output:'输出',defense:'防御',operation:'运转'};
-  const rarities = ['基础','普通','罕见','稀有','远古'];
+  const rarities = ['基础','普通','罕见','稀有','远古','事件','衍生','状态','诅咒','任务'];
   const cardScope = card => card.trashedAt ? 'trash' : card.reservedAt ? 'reserve' : 'cards';
   const isReward = card => card.pool && ['普通','罕见','稀有'].includes(card.rarity);
   function inferProfile(card,route) {

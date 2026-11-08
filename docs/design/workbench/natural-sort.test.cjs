@@ -42,6 +42,20 @@ test('natural sorting compares rarity, type, cost and numeric card ID in order',
   assert.deepEqual(ids(), ['B', 'C3', 'C2', 'C10', 'S', 'P', 'A', 'U', 'R', 'E']);
 });
 
+test('special rarities follow ancient cards and remain independently filterable by type and pool', () => {
+  const {context,ids}=fixture([
+    card('Curse',{type:'诅咒',rarity:'诅咒',pool:false}),
+    card('Status',{type:'状态',rarity:'状态',pool:false}),
+    card('Token',{rarity:'衍生',pool:false}),
+    card('Quest',{type:'任务',rarity:'任务',pool:false}),
+    card('Event',{rarity:'事件',pool:false}),card('Common'),card('Ancient',{rarity:'远古'})
+  ]);
+  assert.deepEqual(ids(),['Common','Ancient','Event','Token','Status','Curse','Quest']);
+  context.ui.rarity='衍生';context.ui.type='攻击';context.ui.pool='granted';
+  assert.deepEqual(ids(),['Token']);
+  context.ui.type='技能';assert.deepEqual(ids(),[]);
+});
+
 test('natural and cost sorting keep base-cost order when upgraded faces are toggled', () => {
   const { context, ids } = fixture([
     card('X10', { cost: 'X', upgradedCost: 0 }),
