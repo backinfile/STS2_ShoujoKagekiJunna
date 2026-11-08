@@ -598,8 +598,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。打出0费牌后，一个箭矢加速1回合。",
-      "upgradedText": "知识。打出0费牌后，一个箭矢加速1回合。"
+      "text": "知识。打出0费牌后，随机一个箭矢加速1回合。",
+      "upgradedText": "知识。打出0费牌后，随机一个箭矢加速1回合。"
     },
     {
       "id": "JK45",
@@ -3405,6 +3405,66 @@
         "x": 0.44,
         "y": 0.46
       }
+    },
+    {
+      "id": "JB06",
+      "modelId": "JUNNA_JB06",
+      "className": "JunnaCardJB06",
+      "name": "招架",
+      "cost": 1,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "基础",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "damageCapable": false,
+      "portrait": "JB06.jpg",
+      "values": [
+        {
+          "name": "Block",
+          "base": 9,
+          "upgraded": 9
+        }
+      ],
+      "text": "获得9点格挡。闪耀9。",
+      "upgradedText": "获得9点格挡。闪耀9。"
+    },
+    {
+      "id": "JA118",
+      "modelId": "JUNNA_JA118",
+      "className": "JunnaCardJA118",
+      "name": "箭阵",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "能力",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "damageCapable": false,
+      "portrait": "JA118.jpg",
+      "values": [
+        {
+          "name": "Block",
+          "base": 3,
+          "upgraded": 4
+        }
+      ],
+      "text": "打出箭矢时，获得3点格挡。",
+      "upgradedText": "打出箭矢时，获得4点格挡。"
     }
   ],
   "groups": [
@@ -3660,7 +3720,7 @@
       "count": 1
     },
     {
-      "cardId": "JH26",
+      "cardId": "JB06",
       "count": 1
     }
   ],
@@ -4801,5 +4861,10 @@
       "upgradedText": "造成1点伤害3次。这张牌每场战斗第一次获得的伤害加成永久保留。"
     }
   ],
-  "arrowArtRevision": 3725
+  "arrowArtRevision": 3725,
+  "startingHp": 70,
+  "startingGold": 99,
+  "startingRelics": [
+    "JUNNA_GREEN_GEM"
+  ]
 }

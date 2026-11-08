@@ -34,6 +34,7 @@
   const fitPoolView=JunnaFitPool.create({data:()=>state.data,ui:()=>ui,dom:$,escape,assetURL,field,area,checkedPicker,render:renderAll,flush:flushEdit});
   const relicView=JunnaRelics.create({data:()=>state.data,ui:()=>ui,dom:$,escape,assetURL,energyText,field,area});
   const powerView=JunnaPowers.create({data:()=>state.data,ui:()=>ui,dom:$,escape,assetURL,energyText,field,area,flush:flushEdit,render:renderAll});
+  const initialView=JunnaInitialConfig.create({data:()=>state.data,dom:$,escape,transact,toast});
   const cardHoverTips=JunnaCardHoverTips.create({cardByUid:key=>find('cards',key),escape});
   let knowledgeView=null;
   const knowledgeFaces=new Map();let knowledgeWheelAt=-Infinity;
@@ -255,6 +256,7 @@
     });
   }
   function renderSidebar(){
+    if(ui.tab==='initial'){$('sidebar').innerHTML='';return;}
     if(['cards','reserve'].includes(ui.tab)){if(ui.archetype!=='all'&&!state.data.archetypes.some(a=>a.id===ui.archetype))ui.archetype='all';if(ui.term!=='all'&&!state.data.terms.some(t=>t.id===ui.term&&t.kind==='关键词')){const term=state.data.terms.find(t=>t.id===ui.term);if(term&&!ui.search)ui.search=term.name;ui.term='all';}}
     const count=(key,value)=>state.data[key].filter(e=>value(e)).length;let html='';
     if(ui.tab==='powers')html=powerView.sidebar();
@@ -345,6 +347,7 @@
     return '<nav class="trash-pagination" aria-label="垃圾桶分页" tabindex="-1"><button type="button" class="button" data-trash-page="-1"'+(trashPage===0?' disabled':'')+'>上一页</button><span>'+(trashPage+1)+' / '+pages+'</span><button type="button" class="button" data-trash-page="1"'+(trashPage===pages-1?' disabled':'')+'>下一页</button></nav>';
   }
   function renderWorkspace(){
+    if(ui.tab==='initial'){initialView.render();updateChrome();return;}
     if(ui.tab==='powers'){powerView.workspace();updateChrome();return;}
     if(ui.tab==='relics'){relicView.workspace();$('sidebar').innerHTML=relicView.sidebar();updateChrome();return;}
     if(ui.tab==='fits'){fitPoolView.workspace();updateChrome();return;}
@@ -358,7 +361,7 @@
     else{const list=filteredCards(),trash=ui.tab==='trash',visible=trash?trashPageCards(list):list,pagination=trash?trashPaginationHTML(list.length):'';$('result-count').textContent=trash?list.length+' 张卡牌':ui.tab==='reserve'?list.length+' 张牌面 · 共 '+state.data.cards.filter(c=>cardTab(c)==='reserve').length+' 张':list.length+' 张牌面 · '+list.filter(c=>c.pool).length+' 张入池 · 共 '+state.data.cards.filter(c=>cardTab(c)==='cards').length+' 张';html=pagination+'<div class="card-grid">'+visible.map((c,index)=>cardEntryHTML(c,trash,index)).join('')+'</div>'+pagination;if(!list.length)html='<p class="empty">'+(trash?'垃圾桶为空':'没有匹配的卡牌')+'</p>';}
     $('work-area').innerHTML=html;fitCards();updateChrome();
   }
-  function renderAll(){if(ui.archetype!=='all'&&!state.data.archetypes.some(route=>route.id===ui.archetype))ui.archetype='all';if(ui.flowRoute!=='all'&&!state.data.archetypes.some(route=>route.uid===ui.flowRoute))ui.flowRoute='all';if(ui.flowDrill&&!state.data.archetypes.some(route=>route.uid===ui.flowDrill.route))ui.flowDrill=null;document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===ui.tab)));$('body-layout').classList.toggle('is-overview',ui.tab==='overview');$('body-layout').classList.toggle('is-flow',ui.tab==='flows');$('body-layout').classList.toggle('is-models',ui.tab==='models');$('body-layout').classList.toggle('is-powers',ui.tab==='powers');$('body-layout').classList.toggle('is-relics',ui.tab==='relics');$('body-layout').classList.toggle('is-fit-pool',ui.tab==='fits');if(ui.tab!=='fits')$('body-layout').classList.remove('has-fit-selection');renderSidebar();renderWorkspace();renderInspector();saveUI();}
+  function renderAll(){if(ui.archetype!=='all'&&!state.data.archetypes.some(route=>route.id===ui.archetype))ui.archetype='all';if(ui.flowRoute!=='all'&&!state.data.archetypes.some(route=>route.uid===ui.flowRoute))ui.flowRoute='all';if(ui.flowDrill&&!state.data.archetypes.some(route=>route.uid===ui.flowDrill.route))ui.flowDrill=null;document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===ui.tab)));$('body-layout').classList.toggle('is-initial',ui.tab==='initial');$('body-layout').classList.toggle('is-overview',ui.tab==='overview');$('body-layout').classList.toggle('is-flow',ui.tab==='flows');$('body-layout').classList.toggle('is-models',ui.tab==='models');$('body-layout').classList.toggle('is-powers',ui.tab==='powers');$('body-layout').classList.toggle('is-relics',ui.tab==='relics');$('body-layout').classList.toggle('is-fit-pool',ui.tab==='fits');if(ui.tab!=='fits')$('body-layout').classList.remove('has-fit-selection');renderSidebar();renderWorkspace();renderInspector();saveUI();}
 
   function openEditor(collection,key,origin=key,slot){flushEdit();const e=find(collection,key);if(collection!=='root'&&!e)return;ui.selected={collection,uid:e?.uid||key};if(collection==='cards'){ui.selected.cardOrigin=find('cards',origin)?.uid||e.uid;const group=groupsFor(e)[0],entries=group?knowledgeEntries(group):[],entry=entries.find(item=>item.key===slot)||entries.find(item=>item.card.uid===e.uid);if(entry){ui.selected.cardSlot=entry.key;knowledgeFaces.set(ui.selected.cardOrigin,entry.key);}if(ui.tab==='trash'){const index=filteredCards().findIndex(card=>card.uid===ui.selected.cardOrigin);if(index>=0){trashPage=Math.floor(index/TRASH_PAGE_SIZE);trashPageSearch=ui.search;}}}renderInspector();renderWorkspace();saveUI();}
   function closeEditor(){flushEdit();ui.selected=null;renderInspector();renderWorkspace();saveUI();}
@@ -387,6 +390,7 @@
     if(source.naturalWidth)for(const [key,value]of Object.entries(JunnaArrowFocus.layout(source.naturalWidth,source.naturalHeight,focus)))image.setAttribute(key,value);
   }
   function renderInspector(){
+    if(ui.tab==='initial'){$('inspector').hidden=true;$('editor-form').innerHTML='';return;}
     mobileLayout.update();
     if(ui.tab==='powers'&&ui.selected?.collection!=='root'){powerView.inspector();return;}
     if(ui.tab==='relics'&&ui.selected?.collection!=='root'){relicView.inspector();return;}

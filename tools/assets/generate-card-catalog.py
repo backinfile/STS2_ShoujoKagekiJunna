@@ -43,7 +43,6 @@ SELECTION_PROMPTS = {
     "JK78": "选择至多{Cards}张牌。",
     "JK78D": "选择至多{Cards}张牌。",
     "JK78E": "选择至多{Cards}张牌。",
-    "JK37C": "选择1张箭矢。",
     "JK64": "选择1张箭矢。",
     "JK112": "选择1张舌战。",
     "JK126": "选择2张关联牌。",
@@ -269,7 +268,10 @@ def main():
         if any(cid not in ids for cid in group['grantedCardIds']):
             raise ValueError('Inactive knowledge group member: ' + group['id'])
     out = {'revision': bundle['revision'], 'cards': definitions, 'groups': groups,
-           'startingDeck': bundle['data']['meta']['startingDeck'], 'retiredCards': list(retired.values())}
+           'startingDeck': bundle['data']['meta']['startingDeck'], 'retiredCards': list(retired.values()),
+           'startingHp': bundle['data']['meta'].get('startingHp', 70),
+           'startingGold': bundle['data']['meta'].get('startingGold', 99),
+           'startingRelics': bundle['data']['meta'].get('startingRelics', ['JUNNA_GREEN_GEM'])}
     if args.rules_only:
         out['arrowArtRevision'] = existing.get('arrowArtRevision', existing['revision'])
     else:

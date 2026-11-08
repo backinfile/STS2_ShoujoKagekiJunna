@@ -51,8 +51,8 @@
   "JUNNA_JA35_POWER.smartDescription": "在你的回合开始时，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。",
   "JUNNA_JK32_POWER.description": "在你的回合开始时，抽[blue]1[/blue]张牌。",
   "JUNNA_JK32_POWER.smartDescription": "在你的回合开始时，抽[blue]{Amount}[/blue]张牌。",
-  "JUNNA_JK37C_POWER.description": "每当你打出[blue]0[/blue]费牌后，选择一个[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
-  "JUNNA_JK37C_POWER.smartDescription": "每当你打出[blue]0[/blue]费牌后，选择一个[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。{Repetition}",
+  "JUNNA_JK37C_POWER.description": "每当你打出[blue]0[/blue]费牌后，随机一个[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
+  "JUNNA_JK37C_POWER.smartDescription": "每当你打出[blue]0[/blue]费牌后，随机一个[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。{Repetition}",
   "JUNNA_JA45_POWER.description": "你每回合打出的前[blue]2[/blue]张[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
   "JUNNA_JA45_POWER.smartDescription": "你每回合打出的前[blue]{Limit}[/blue]张[gold]箭矢[/gold]加速[blue]{Turns}[/blue]回合。",
   "JUNNA_JK64_POWER.description": "本回合，每当你打出[gold]知识[/gold]牌后，选择一个[gold]箭矢[/gold]加速[blue]1[/blue]回合。",
@@ -100,5 +100,8 @@
   "JUNNA_JK139_POWER.smartDescription": "每回合开始时，获得{Amount}点[gold]能量[/gold]。",
   "JUNNA_JA105_POWER.title": "速射",
   "JUNNA_JA105_POWER.description": "所有[gold]箭矢[/gold]的初始回合数减少[blue]1[/blue]，最低[blue]0[/blue]；完成后[gold]消耗[/gold]。",
-  "JUNNA_JA105_POWER.smartDescription": "所有[gold]箭矢[/gold]的初始回合数减少[blue]{Amount}[/blue]，最低[blue]0[/blue]；完成后[gold]消耗[/gold]。"
+  "JUNNA_JA105_POWER.smartDescription": "所有[gold]箭矢[/gold]的初始回合数减少[blue]{Amount}[/blue]，最低[blue]0[/blue]；完成后[gold]消耗[/gold]。",
+  "JUNNA_JA118_POWER.title": "箭阵",
+  "JUNNA_JA118_POWER.description": "打出[gold]箭矢[/gold]时，获得[blue]3[/blue]点[gold]格挡[/gold]。",
+  "JUNNA_JA118_POWER.smartDescription": "打出[gold]箭矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。"
 }

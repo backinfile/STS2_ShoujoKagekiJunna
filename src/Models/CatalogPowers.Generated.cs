@@ -68,3 +68,6 @@ public sealed class JunnaPowerJZ05() : CatalogPower("JZ05");
 
 [CustomID("JUNNA_JZ06_POWER")]
 public sealed class JunnaPowerJZ06() : CatalogPower("JZ06");
+
+[CustomID("JUNNA_JA118_POWER")]
+public sealed class JunnaPowerJA118() : CatalogPower("JA118");

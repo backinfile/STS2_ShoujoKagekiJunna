@@ -15,7 +15,7 @@ public abstract partial class CatalogPower
         "JA04" => _grants.Sum(g => Math.Max(0, g.N(0) - g.Used)),
         "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => _grants.Sum(g => g.N(0)),
         "JG31" or "JK67" => _grants.Sum(g => g.V("Bonus")),
-        "JH21" or "JH23" or "JA70" => _grants.Sum(g => g.V("Block")),
+        "JH21" or "JH23" or "JA70" or "JA118" => _grants.Sum(g => g.V("Block")),
         "JK80" or "JH31" => _grants.Sum(g => g.N(1)),
         _ => _grants.Count
     };
@@ -55,7 +55,7 @@ public abstract partial class CatalogPower
             "A" or "JA35" or "JK32" or "JK139" or "JA87" or "JA96" => [Format(("Amount", Sum(0)))],
             "JG31" or "JK67" => [Format(("Amount", Bonus()))],
             "JH19" or "JZ06" or "JH30" => [Format(("Amount", _grants.Count), ("Repetition", Repetition(_grants.Count)))],
-            "JH21" or "JA70" => [Format(("Amount", Block()))],
+            "JH21" or "JA70" or "JA118" => [Format(("Amount", Block()))],
             "JK80" or "JH31" => [Format(("Amount", Sum(1)), ("Threshold", _grants[0].N(0)))],
             "JK127" => [Format(("Amount", _grants.Count), ("Repetition", Repetition(_grants.Count)))],
             "JK15" => [Format(("Amount", _grants.Count))],

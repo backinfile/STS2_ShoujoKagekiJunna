@@ -144,7 +144,10 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
                     }
                     break;
                 case "JK37C" when play.Resources.EnergyValue == 0:
-                    await AccelerateChoice(grant, context, 1, grant.N(1)); break;
+                    var eligibleArrows = ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player && !a.Resolving && a.Remaining > 0).ToArray();
+                    if (eligibleArrows.Length > 0)
+                        await ArrowCombat.Accelerate(context, Owner.Player.RunState.Rng.CombatCardSelection.NextItem(eligibleArrows)!, grant.N(1));
+                    break;
                 case "JA45" when CardCatalog.IsArrow(play.Card) && grant.Take(grant.N(0)):
                     if (ArrowCombat.Find(play.Card) is { } arrow) await ArrowCombat.Accelerate(context, arrow, grant.N(1));
                     break;
@@ -156,6 +159,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
                     break;
                 case "JH23" when play.Resources.EnergyValue >= grant.N(1) && grant.Take(grant.N(0)):
                     await Block(grant, grant.V("Block")); break;
+                case "JA118" when CardCatalog.IsArrow(play.Card):
                 case "JA70" when CardCatalog.IsArrow(play.Card): await Block(grant, grant.V("Block")); break;
                 case "JK80" when CardCatalog.IsKnowledge(play.Card):
                     _grants.Remove(grant);

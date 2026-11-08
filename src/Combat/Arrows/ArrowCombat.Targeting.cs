@@ -11,6 +11,13 @@ public static partial class ArrowCombat
 {
     private static readonly Dictionary<Creature, Creature[]> DeathOrders = [];
 
+    public static void RetargetEnemies(MegaCrit.Sts2.Core.Entities.Players.Player player, Creature target)
+    {
+        foreach (var arrow in Arrows.Where(a => a.Card.Owner == player && !a.Resolving &&
+            a.Card.TargetType == TargetType.AnyEnemy && a.Card.IsValidTarget(target)).ToArray())
+            arrow.Retarget(target);
+    }
+
     internal static void RememberDeathOrder(Creature creature)
     {
         if (creature.IsEnemy && creature.CombatState is { } state)

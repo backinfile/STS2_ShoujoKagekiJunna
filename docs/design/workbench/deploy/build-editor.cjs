@@ -23,9 +23,9 @@ app=app.replace(before,'c.baseURL===location.origin+location.pathname.replace(/\
 let transport=read('mcp-web-client.js');
 transport=transport.replace('knownAssets=new Set()','knownAssets=new Set(Object.keys(getAssets()))')
   .replace('includeAssets:initial','includeAssets:false').replace('if(!initial&&missing.length)','if(missing.length)');
-const script=['arrow-focus.js','energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','card-model-view.js','fit-pool-view.js','relic-view.js','power-view.js','card-hover-tips.js','workbench-domain.js','mobile-layout.js'].map(read).concat(transport,app).join('\n');
+const script=['arrow-focus.js','energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','card-model-view.js','fit-pool-view.js','relic-view.js','power-view.js','card-hover-tips.js','workbench-domain.js','initial-config.js','mobile-layout.js'].map(read).concat(transport,app).join('\n');
 new vm.Script(script);
-const css=['workbench.css','card-model.css','fit-pool.css','relic.css','power.css','card-hover-tips.css','mobile.css'].map(read).join('\n').replaceAll('__REGULAR_FONT__',assets['game-regular']).replaceAll('__BOLD_FONT__',assets['game-bold']);
+const css=['workbench.css','card-model.css','fit-pool.css','relic.css','power.css','card-hover-tips.css','initial-config.css','mobile.css'].map(read).join('\n').replaceAll('__REGULAR_FONT__',assets['game-regular']).replaceAll('__BOLD_FONT__',assets['game-bold']);
 const inline=(id,value)=>'<script id="'+id+'" type="application/json">'+safe(value)+'</script>';
 const optional=name=>{const file=path.join(source,'../data',name);return fs.existsSync(file)?json(file):null;};
 let html=read('shell.html').replace('<!--STYLE-->','<style>'+css+'</style>')

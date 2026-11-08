@@ -3,7 +3,7 @@
 当前实现：纯那角色、115 张工作台有效牌面（含关联牌与生成牌）、23 组知识关系、箭矢牌堆、卡牌实例伤害加成与额外伤害次数。
 
 - 游戏版本：正式版 v0.107.1 与测试版 v0.111.0；BaseLib：3.4.7；Core：1.0.1。
-- 初始牌组：5 打击、4 防御、1 满弦射击。
+- 初始牌组：4 打击、4 防御、1 满弦射击、1 招架。招架为 1 费、9 格挡、闪耀 9，升级后变为 0 费。
 - 生命暂设 70。起始遗物为绿色宝石：战斗开始时获得 1 点能量，可保留至下回合；升级为燃烧宝石后获得 3 点。通过奥罗巴斯之触替换升级。
 - 战斗立绘：2026-11-04 精修版 04 待机、02 攻击。
 - 强化标记采用 C 型底边嵌条，伤害加成与额外次数沿卡图底边靠左横排，单项存在时按内容收紧。1～3 次逐枚显示小箭头，4 次起显示箭头和次数数字。箭矢牌避开中央回合数徽牌，场上悬浮箭矢只显示额外次数。[显示预览与定向验证](docs/worktree-tasks/card-investment-marks/README.md)。
@@ -26,6 +26,8 @@ Core 发布后，使用其 `mod_id.txt` 中的数字 ID 准备 Junna 工坊工�
 工作区的 `content/` 仅包含 Junna；`workshop.json` 声明 BaseLib 和 Core 的工坊依赖。更新已有 Junna 条目时传入 `-WorkshopId <Junna工坊ID>`。使用[官方 ModUploader](https://github.com/megacrit/sts2-mod-uploader)上传该工作区。
 
 独立开发环境通过 `./tools/dev/start-test-game.ps1 -CorePackage <Core发行目录>` 或 `SHOUJO_CORE_PACKAGE` 安装 Core，来源与发布包分开。
+
+工作台“初始”页签配置生命、金币、初始牌组和遗物；导出卡池时写入运行配置，新开局读取这些数值。
 
 当前卡牌与升级数值记录在 `data/card-pool.json`，效果覆盖与验证见 [卡池实现记录](docs/implementation/card-effects.md)。
 `python tools/assets/generate-card-catalog.py <MCP导出快照>` 更新卡牌清单、模型入口、配图与本地化；具体牌效在 C# 中实现。工作台内容仍统一通过 MCP 编辑。

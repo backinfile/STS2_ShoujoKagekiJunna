@@ -39,8 +39,7 @@
   "JUNNA_JK37B.title": "唇枪舌剑",
   "JUNNA_JK37B.description": "[gold]知识[/gold]。\n造成{Damage:diff()}点伤害。\n所有目标为敌人的[gold]箭矢[/gold]都指向当前目标。",
   "JUNNA_JK37C.title": "字斟句酌",
-  "JUNNA_JK37C.selectionScreenPrompt": "选择1张箭矢。",
-  "JUNNA_JK37C.description": "[gold]知识[/gold]。\n打出{N0:diff()}费牌后，一个[gold]箭矢[/gold]加速{N1:diff()}回合。",
+  "JUNNA_JK37C.description": "[gold]知识[/gold]。\n打出{N0:diff()}费牌后，随机一个[gold]箭矢[/gold]加速{N1:diff()}回合。",
   "JUNNA_JK45.title": "笔伐",
   "JUNNA_JK45.description": "[gold]知识[/gold]。\n造成{Damage:diff()}点伤害{Repeat:diff()}次。",
   "JUNNA_JK45B.title": "措辞",
@@ -294,5 +293,9 @@
   "JUNNA_JK33B.title": "未来",
   "JUNNA_JK33B.description": "[gold]知识[/gold]。\n造成{Damage:diff()}点伤害。\n[gold]过去[/gold]额外造成{N1:diff()}次伤害。",
   "JUNNA_JG38.title": "肌肉记忆",
-  "JUNNA_JG38.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n这张牌每场战斗第一次获得的[gold]伤害加成[/gold]永久[gold]保留[/gold]。"
+  "JUNNA_JG38.description": "造成{Damage:diff()}点伤害{Repeat:diff()}次。\n这张牌每场战斗第一次获得的[gold]伤害加成[/gold]永久[gold]保留[/gold]。",
+  "JUNNA_JB06.title": "招架",
+  "JUNNA_JB06.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+  "JUNNA_JA118.title": "箭阵",
+  "JUNNA_JA118.description": "打出[gold]箭矢[/gold]时，获得{Block:diff()}点[gold]格挡[/gold]。"
 }

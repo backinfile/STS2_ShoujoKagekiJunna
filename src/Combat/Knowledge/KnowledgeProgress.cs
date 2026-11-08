@@ -81,6 +81,11 @@ public static partial class KnowledgeProgress
     {
         if (player.PlayerCombatState!.TurnNumber != 1 || !Opened.Add(player)) return;
         using var single = KnowledgeCombat.SingleCard();
+        foreach (var arrow in player.PlayerCombatState.AllCards.Where(c => CardCatalog.DesignId(c) == "JK37").ToArray())
+        {
+            var target = player.Creature.CombatState!.HittableEnemies.FirstOrDefault(c => c.IsAlive && arrow.IsValidTarget(c));
+            if (target != null) await CardCmd.AutoPlay(context, arrow, target);
+        }
         for (int i = 0; i < OpeningInsights.Get(player); i++)
         {
             var insight = CardCatalog.Create("JK139", player);

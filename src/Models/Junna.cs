@@ -12,7 +12,8 @@ public sealed class Junna : PlaceholderCharacterModel
 {
     public override string PlaceholderID => "silent";
     public override CharacterGender Gender => CharacterGender.Feminine;
-    public override int StartingHp => 70;
+    public override int StartingHp => CardCatalog.StartingHp;
+    public override int StartingGold => CardCatalog.StartingGold;
     public override Color NameColor => new("74BDEB");
     public override Color EnergyLabelOutlineColor => new("173C2F");
     public override Color DialogueColor => new("74BDEB");
@@ -23,7 +24,7 @@ public sealed class Junna : PlaceholderCharacterModel
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<JunnaRelicPool>();
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<SilentPotionPool>();
     public override IEnumerable<CardModel> StartingDeck => CardCatalog.StartingDeck;
-    public override IReadOnlyList<RelicModel> StartingRelics => [ModelDb.Relic<JunnaGreenGem>()];
+    public override IReadOnlyList<RelicModel> StartingRelics => CardCatalog.StartingRelics;
     public override string CustomVisualPath => JunnaMod.ResourceRoot + "scenes/junna_combat.tscn";
     public override string CustomCharacterSelectBg => JunnaMod.ResourceRoot + "scenes/junna_select.tscn";
     public override string CustomCharacterSelectIconPath => JunnaMod.ResourceRoot + "images/character_select_icon.png";

@@ -47,7 +47,7 @@ public static class CardEffects
             case "JA04": case "JK10": case "JA22": case "JK15": case "A": case "JK27":
             case "JA35": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":
             case "JG31": case "JH21": case "JG34": case "JK75": case "JH23": case "JA70":
-            case "JA105": case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31":
+            case "JA118": case "JA105": case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31":
                 await CatalogPower.Install(card, context, play);
                 if (card.DesignId == "JA105") await ArrowCombat.ActivateHaste(context, player);
                 if (card.DesignId == "JK32") SetNamedFree(player, "JK32B", "JK32C");
@@ -66,6 +66,7 @@ public static class CardEffects
                 await Block(); await CardActions.Recall(context, card, "JK11B"); break;
             case "JK11B":
                 await Attack(); await CardActions.Recall(context, card, "JK11"); break;
+            case "JB06":
             case "JK15B":
                 await Block(); break;
             case "JG16":
@@ -104,7 +105,9 @@ public static class CardEffects
             case "JS19": case "JG38": case "JK148": case "JK148D":
                 await Attack(); break;
             case "JK37B":
-                await Attack(); await CardActions.DrawMatching(context, player, CardCatalog.IsArrow, N(1)); break;
+                await Attack();
+                if (play.Target is { IsAlive: true } redirectedTarget) ArrowCombat.RetargetEnemies(player, redirectedTarget);
+                break;
             case "JK43B":
                 await Improve(await CardActions.DrawMatching(context, player, c => CardCatalog.DesignId(c) == "JK43", 1), V("Bonus"));
                 break;

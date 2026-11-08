@@ -387,3 +387,10 @@ public sealed class JunnaCardJK33B() : CatalogCard("JK33B");
 
 [CustomID("JUNNA_JG38")]
 public sealed class JunnaCardJG38() : CatalogCard("JG38");
+
+[ShoujoKageki.Core.V1.ShineCard(9)]
+[CustomID("JUNNA_JB06")]
+public sealed class JunnaCardJB06() : CatalogCard("JB06");
+
+[CustomID("JUNNA_JA118")]
+public sealed class JunnaCardJA118() : CatalogCard("JA118");
