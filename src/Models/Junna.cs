@@ -1,4 +1,5 @@
 using BaseLib.Abstracts;
+using BaseLib.Patches.UI;
 using BaseLib.Utils.Attributes;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
@@ -25,6 +26,10 @@ public sealed class Junna : PlaceholderCharacterModel
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<SilentPotionPool>();
     public override IEnumerable<CardModel> StartingDeck => CardCatalog.StartingDeck;
     public override IReadOnlyList<RelicModel> StartingRelics => CardCatalog.StartingRelics;
+    public override RelicIconData CustomYummyCookie => new(
+        JunnaMod.ResourceRoot + "images/relics/yummy_cookie_junna_big.png",
+        JunnaMod.ResourceRoot + "images/relics/yummy_cookie_junna.png",
+        JunnaMod.ResourceRoot + "images/relics/yummy_cookie_junna_outline.png");
     public override string CustomVisualPath => JunnaMod.ResourceRoot + "scenes/junna_combat.tscn";
     public override string CustomCharacterSelectBg => JunnaMod.ResourceRoot + "scenes/junna_select.tscn";
     public override string CustomCharacterSelectIconPath => JunnaMod.ResourceRoot + "images/character_select_icon.png";

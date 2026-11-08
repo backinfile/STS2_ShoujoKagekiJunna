@@ -1,0 +1,63 @@
+{
+  "scope": "双版本单人定向饼干外观与原效果检查；与 Karen 同时加载。",
+  "package": {
+    "core.package.lock": "5d4d4cd8fcda9b810d238798e982facd2a8b01dbc466bda85cde476e0b98e013",
+    "core.requirements": "fa0dc3da84ee9f94cc4e116d3751119be11c3fae0b2ccdf682fdf038dbd72726",
+    "ShoujoKagekiJunna.dll": "f04a8d9e7c31161fd3e4c260f7bab1c7ab8d2f42e276b135127f277092d29448",
+    "ShoujoKagekiJunna.json": "dbbda66f26b601f3f39ba08846624ad26590c7383f783a97710de3db21048d6f",
+    "ShoujoKagekiJunna.pck": "b04a7d53336f4238c6b2ded4347e37665b62611adb02c18bf0eaa94f1622091e",
+    "lib/ShoujoKagekiJunna.Beta.dll": "e45d9719bf5fd82fa8658edc4c8f82f1a678ba5e24ede05eaca0eb84c5417d3f",
+    "lib/ShoujoKagekiJunna.Stable.dll": "e6971b939cf0f41bfeed250d0ad8ee2fe1dff698dbb6c686b257f1c6dcf4a683"
+  },
+  "test_probe_in_package": false,
+  "versions": {
+    "stable": {
+      "passed": true,
+      "owned_character_cases": 7,
+      "small_and_outline": [
+        85,
+        85
+      ],
+      "big": [
+        256,
+        256
+      ],
+      "karen_and_vanilla_unchanged": true,
+      "upgrade_four_cards": true,
+      "screenshot": "evidence/stable.png",
+      "video": "out/tmp/junna-yummy-cookie-20261108/stable/native-cookie.mp4",
+      "video_duration": "5.666016",
+      "video_stream": {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "nb_frames": "85"
+      },
+      "runtime_errors": 0
+    },
+    "beta": {
+      "passed": true,
+      "owned_character_cases": 7,
+      "small_and_outline": [
+        85,
+        85
+      ],
+      "big": [
+        256,
+        256
+      ],
+      "karen_and_vanilla_unchanged": true,
+      "upgrade_four_cards": true,
+      "screenshot": "evidence/beta.png",
+      "video": "out/tmp/junna-yummy-cookie-20261108/beta/native-cookie.mp4",
+      "video_duration": "5.666016",
+      "video_stream": {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 720,
+        "nb_frames": "85"
+      },
+      "runtime_errors": 0
+    }
+  }
+}
