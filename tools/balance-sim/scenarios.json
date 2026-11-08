@@ -45,7 +45,7 @@
       {"name": "虔诚雕刻师", "hp": [162,162], "opener": [{"ritual":9}], "moves": [{"damage":12}]}
     ]}
   ],
-  "sourceRoot": "D:/Github/spire-codex/extraction/raw/src/Core/Models",
+  "sourceRoot": "../spire-codex/extraction/raw/src/Core/Models",
   "sourceFiles": [
     "Cards/Slice.cs", "Cards/TwinStrike.cs", "Cards/DefendIronclad.cs", "Cards/StrikeIronclad.cs", "Cards/Leap.cs", "Cards/Backflip.cs",
     "Monsters/FuzzyWurmCrawler.cs", "Monsters/Nibbit.cs", "Encounters/NibbitsNormal.cs", "Monsters/SneakyGremlin.cs", "Monsters/DevotedSculptor.cs", "Powers/RitualPower.cs"

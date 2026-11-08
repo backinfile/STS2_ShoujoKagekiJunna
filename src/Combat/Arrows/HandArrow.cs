@@ -123,6 +123,12 @@ public static class HandArrow
         }
         else await OriginalEffect(card, context, play);
     }
+    internal static Task DispatchFromHook(Delegate original, CardModel card, PlayerChoiceContext context, CardPlay play)
+    {
+        if (IsArrow(card)) return Dispatch(card, context, play);
+        PaidReplay.PrepareEffect(card, play.PlayIndex);
+        return (Task)original.DynamicInvoke(card, context, play)!;
+    }
     private static async Task Resolve(CardModel card, PlayerChoiceContext context, CardPlay play)
     {
         if (card is CatalogCard catalog) await CardEffects.Resolve(catalog, context, play);
@@ -170,11 +176,15 @@ internal static class HandArrowPlayBoundary
 {
     private static MethodBase TargetMethod() => AccessTools.Method(AccessTools.Method(typeof(CardModel), nameof(CardModel.OnPlayWrapper))
         .GetCustomAttribute<AsyncStateMachineAttribute>()!.StateMachineType, "MoveNext");
+    [HarmonyPriority(int.MinValue)]
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         int effects = 0, results = 0;
         foreach (var instruction in instructions)
         {
+            if (instruction.operand is MethodInfo hook &&
+                hook.DeclaringType?.FullName == "STS2RitsuLib.Cards.CardOnPlayHook" && hook.Name == "RunCardOnPlayHooks")
+                effects++;
             if (instruction.operand is MethodInfo { DeclaringType: var type, Name: var name } && type == typeof(CardModel))
             {
                 string? replacement = name switch
@@ -197,5 +207,31 @@ internal static class HandArrowPlayBoundary
             yield return instruction;
         }
         if (effects != 1 || results != 1) throw new InvalidOperationException($"Junna card boundaries: effects={effects}, results={results}");
+    }
+}
+
+// Keep RitsuLib's before/after hooks around the same effect boundary used without it.
+[HarmonyPatch]
+internal static class HandArrowHookPlayBoundary
+{
+    private static Type? HookType => AccessTools.TypeByName("STS2RitsuLib.Cards.CardOnPlayHook");
+    private static bool Prepare() => HookType != null;
+    private static MethodBase TargetMethod() => AccessTools.Method(AccessTools.Method(HookType!, "RunCardOnPlayHooks")
+        .GetCustomAttribute<AsyncStateMachineAttribute>()!.StateMachineType, "MoveNext");
+    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+    {
+        int effects = 0;
+        foreach (var instruction in instructions)
+        {
+            if (instruction.operand is MethodInfo method && method.Name == "Invoke" &&
+                method.DeclaringType?.FullName == "STS2RitsuLib.Cards.CardOnPlayHook+CardOnPlayDelegate")
+            {
+                instruction.opcode = OpCodes.Call;
+                instruction.operand = AccessTools.Method(typeof(HandArrow), nameof(HandArrow.DispatchFromHook));
+                effects++;
+            }
+            yield return instruction;
+        }
+        if (effects != 1) throw new InvalidOperationException($"Junna RitsuLib card boundary: effects={effects}");
     }
 }
