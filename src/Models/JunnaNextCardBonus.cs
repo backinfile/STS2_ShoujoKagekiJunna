@@ -12,7 +12,7 @@ public sealed class JunnaNextCardBonus : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/powers/JG31.png";
+    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/powers/NEXT_CARD_BONUS.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     public override async Task BeforeCardPlayed(CardPlay play)
     {

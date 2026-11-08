@@ -1,0 +1,552 @@
+{
+  "revision": 4033,
+  "iconRevision": 4032,
+  "style": "参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。",
+  "generationMode": "built-in image_gen",
+  "prompts": "generation-final.json",
+  "cleanup": "cleanup.json",
+  "icons": [
+    {
+      "key": "JA04",
+      "name": "速射",
+      "fit": "一支青绿短箭向右上飞出，宽箭头和粗箭杆形成主轮廓，配一道短尾迹。",
+      "uid": "power_junna_ja04_power",
+      "id": "JUNNA_JA04_POWER",
+      "assetId": "power-icon-ja04-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA04.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA04.png"
+    },
+    {
+      "key": "JK10",
+      "name": "观摩",
+      "fit": "一副青蓝眼镜，镜片各用一块高光，靠眼镜本身表现专注观察。",
+      "uid": "power_junna_jk10_power",
+      "id": "JUNNA_JK10_POWER",
+      "assetId": "power-icon-jk10-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK10.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK10.png"
+    },
+    {
+      "key": "JA22",
+      "name": "再上弦",
+      "fit": "一张弧形金弓与一道蓝色回转弦线，轮廓闭合紧凑。",
+      "uid": "power_junna_ja22_power",
+      "id": "JUNNA_JA22_POWER",
+      "assetId": "power-icon-ja22-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA22.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA22.png"
+    },
+    {
+      "key": "JK15",
+      "name": "反复研习",
+      "fit": "一本绿色笔记本，翻回的厚书页卷成简洁回环。",
+      "uid": "power_junna_jk15_power",
+      "id": "JUNNA_JK15_POWER",
+      "assetId": "power-icon-jk15-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK15.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK15.png"
+    },
+    {
+      "key": "A",
+      "name": "埋头学习",
+      "fit": "一本摊开的厚书，乳黄书页与青绿书脊，中央折线清晰。",
+      "uid": "power_junna_a_power",
+      "id": "JUNNA_A_POWER",
+      "assetId": "power-icon-a-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/A.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/A.png"
+    },
+    {
+      "key": "JK27",
+      "name": "关联阅读",
+      "fit": "两本红绿书相扣并靠，宽书脊与页块构成双书轮廓。",
+      "uid": "power_junna_jk27_power",
+      "id": "JUNNA_JK27_POWER",
+      "assetId": "power-icon-jk27-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK27.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK27.png"
+    },
+    {
+      "key": "JA35",
+      "name": "娓娓道来",
+      "fit": "两个紧接的青绿话语气泡，前大后小，表示接续表达。",
+      "uid": "power_junna_ja35_power",
+      "id": "JUNNA_JA35_POWER",
+      "assetId": "power-icon-ja35-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA35.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA35.png"
+    },
+    {
+      "key": "JK32",
+      "name": "掌舵",
+      "fit": "金色六辐船舵，粗轮缘、圆轴与短手柄。",
+      "uid": "power_junna_jk32_power",
+      "id": "JUNNA_JK32_POWER",
+      "assetId": "power-icon-jk32-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK32.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK32.png"
+    },
+    {
+      "key": "JK37C",
+      "name": "字斟句酌",
+      "fit": "一枚金色放大镜压在一块乳黄书页上，只保留两条粗字句。",
+      "uid": "power_junna_jk37c_power",
+      "id": "JUNNA_JK37C_POWER",
+      "assetId": "power-icon-jk37c-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK37C.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK37C.png"
+    },
+    {
+      "key": "JA45",
+      "name": "搭箭",
+      "fit": "金色短弓横搭一支青绿箭，弓弦拉住箭尾。",
+      "uid": "power_junna_ja45_power",
+      "id": "JUNNA_JA45_POWER",
+      "assetId": "power-icon-ja45-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA45.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA45.png"
+    },
+    {
+      "key": "JK64",
+      "name": "理清思路",
+      "fit": "单个青蓝思考结由弯曲线条顺成向上的短线。",
+      "uid": "power_junna_jk64_power",
+      "id": "JUNNA_JK64_POWER",
+      "assetId": "power-icon-jk64-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK64.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK64.png"
+    },
+    {
+      "key": "JK67",
+      "name": "反复推敲",
+      "fit": "一枚金色钢笔尖划出一条重写的朱红笔迹。",
+      "uid": "power_junna_jk67_power",
+      "id": "JUNNA_JK67_POWER",
+      "assetId": "power-icon-jk67-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK67.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK67.png"
+    },
+    {
+      "key": "JG31",
+      "name": "连贯练习",
+      "fit": "一对前后接续的红色练功鞋印，鞋底与鞋跟清晰分开。",
+      "uid": "power_junna_jg31_power",
+      "id": "JUNNA_JG31_POWER",
+      "assetId": "power-icon-jg31-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JG31.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JG31.png"
+    },
+    {
+      "key": "JH19",
+      "name": "双星",
+      "fit": "两颗相邻的蓝白四角星，一大一小，保持双星轮廓。",
+      "uid": "power_junna_jh19_power",
+      "id": "JUNNA_JH19_POWER",
+      "assetId": "power-icon-jh19-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JH19.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JH19.png"
+    },
+    {
+      "key": "JH21",
+      "name": "长明",
+      "fit": "一颗金色星被一圈青蓝弧光承托，光弧向上合拢。",
+      "uid": "power_junna_jh21_power",
+      "id": "JUNNA_JH21_POWER",
+      "assetId": "power-icon-jh21-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JH21.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JH21.png"
+    },
+    {
+      "key": "JG34",
+      "name": "合唱练习",
+      "fit": "三枚相靠的红金音符组成一簇，粗音干与饱满音头。",
+      "uid": "power_junna_jg34_power",
+      "id": "JUNNA_JG34_POWER",
+      "assetId": "power-icon-jg34-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JG34.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JG34.png"
+    },
+    {
+      "key": "JK75",
+      "name": "学以致用",
+      "fit": "一只金色手指按下简化琴键，突出实际练习动作。",
+      "uid": "power_junna_jk75_power",
+      "id": "JUNNA_JK75_POWER",
+      "assetId": "power-icon-jk75-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK75.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK75.png"
+    },
+    {
+      "key": "JH23",
+      "name": "星芒护持",
+      "fit": "一块蓝色盾牌顶端嵌一颗金星，单一完整防护剪影。",
+      "uid": "power_junna_jh23_power",
+      "id": "JUNNA_JH23_POWER",
+      "assetId": "power-icon-jh23-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JH23.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JH23.png"
+    },
+    {
+      "key": "JA70",
+      "name": "掩护射击",
+      "fit": "一支金色箭横过蓝盾，箭锋指向右上。",
+      "uid": "power_junna_ja70_power",
+      "id": "JUNNA_JA70_POWER",
+      "assetId": "power-icon-ja70-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA70.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA70.png"
+    },
+    {
+      "key": "JH24",
+      "name": "星光结界",
+      "fit": "三颗金星由粗蓝色光环围拢，形成紧凑结界。",
+      "uid": "power_junna_jh24_power",
+      "id": "JUNNA_JH24_POWER",
+      "assetId": "power-icon-jh24-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JH24.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JH24.png"
+    },
+    {
+      "key": "JK80",
+      "name": "要点",
+      "fit": "一张金色便签，中央一笔红色下划线与两条粗记号。",
+      "uid": "power_junna_jk80_power",
+      "id": "JUNNA_JK80_POWER",
+      "assetId": "power-icon-jk80-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK80.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK80.png"
+    },
+    {
+      "key": "JK81",
+      "name": "书签",
+      "fit": "一条红色燕尾书签夹在青绿色厚书中。",
+      "uid": "power_junna_jk81_power",
+      "id": "JUNNA_JK81_POWER",
+      "assetId": "power-icon-jk81-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK81.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK81.png"
+    },
+    {
+      "key": "JZ05",
+      "name": "即兴",
+      "fit": "一颗金色流星折向前方，配两道短促红色尾迹。",
+      "uid": "power_junna_jz05_power",
+      "id": "JUNNA_JZ05_POWER",
+      "assetId": "power-icon-jz05-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JZ05.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JZ05.png"
+    },
+    {
+      "key": "JZ06",
+      "name": "晨星",
+      "fit": "一颗淡金四角星升在深蓝弧形地平线上。",
+      "uid": "power_junna_jz06_power",
+      "id": "JUNNA_JZ06_POWER",
+      "assetId": "power-icon-jz06-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JZ06.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JZ06.png"
+    },
+    {
+      "key": "JH30",
+      "name": "星芒",
+      "fit": "一颗金红色八角爆发星，四根长芒与四根短芒。",
+      "uid": "power_junna_jh30_power",
+      "id": "JUNNA_JH30_POWER",
+      "assetId": "power-icon-jh30-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JH30.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JH30.png"
+    },
+    {
+      "key": "JK46",
+      "name": "持续阅读",
+      "fit": "一本紫色厚书卷起一张宽书页，呈连续翻页的弧面。",
+      "uid": "power_junna_jk46_power",
+      "id": "JUNNA_JK46_POWER",
+      "assetId": "power-icon-jk46-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JK46.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JK46.png"
+    },
+    {
+      "key": "JG23",
+      "name": "耐力训练",
+      "fit": "一只红色跑鞋，粗厚鞋底和一条弧形跑迹。",
+      "uid": "power_junna_endurance_power",
+      "id": "JUNNA_ENDURANCE_POWER",
+      "assetId": "power-icon-jg23-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JG23.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JG23.png"
+    },
+    {
+      "key": "ENERGY_RESERVE",
+      "name": "能量保留",
+      "fit": "金色手掌围拢托住一颗青蓝星，手与星形成紧凑整体。",
+      "uid": "power_junna_energy_reserve",
+      "id": "JUNNA_ENERGY_RESERVE",
+      "assetId": "power-icon-energy-reserve-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/ENERGY_RESERVE.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/ENERGY_RESERVE.png"
+    },
+    {
+      "key": "JA87",
+      "name": "布阵",
+      "fit": "三支青绿箭成扇形并列，箭杆底部集中。",
+      "uid": "power_junna_ja87_power",
+      "id": "JUNNA_JA87_POWER",
+      "assetId": "power-icon-ja87-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA87.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA87.png"
+    },
+    {
+      "key": "JA96",
+      "name": "稳住阵脚",
+      "fit": "一双稳踏地面的红色靴子，脚下短粗蓝色基线。",
+      "uid": "power_junna_ja96_power",
+      "id": "JUNNA_JA96_POWER",
+      "assetId": "power-icon-ja96-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA96.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA96.png"
+    },
+    {
+      "key": "JH31",
+      "name": "筹备",
+      "fit": "两颗尚未点亮的金星由一颗亮起的蓝白星牵引汇聚。",
+      "uid": "power_junna_jh31_power",
+      "id": "JUNNA_JH31_POWER",
+      "assetId": "power-icon-jh31-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JH31.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JH31.png"
+    },
+    {
+      "key": "NEXT_CARD_BONUS",
+      "name": "练习成果",
+      "fit": "一只有力的红色拳头，掌侧一块明亮金色发力面。",
+      "uid": "power_junna_next_card_bonus",
+      "id": "JUNNA_NEXT_CARD_BONUS",
+      "assetId": "power-icon-next-card-bonus-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/NEXT_CARD_BONUS.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/NEXT_CARD_BONUS.png"
+    },
+    {
+      "key": "JA105",
+      "name": "速射",
+      "fit": "两支青绿箭紧靠着向右上飞出，形成连续速射轮廓。",
+      "uid": "power_junna_ja105_power",
+      "id": "JUNNA_JA105_POWER",
+      "assetId": "power-icon-ja105-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA105.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA105.png"
+    },
+    {
+      "key": "JA118",
+      "name": "箭阵",
+      "fit": "三支朝上的金色箭头围成蓝色盾形，整体呈防护阵列。",
+      "uid": "power_junna_ja118_power",
+      "id": "JUNNA_JA118_POWER",
+      "assetId": "power-icon-ja118-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA118.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA118.png"
+    },
+    {
+      "key": "JA144",
+      "name": "稳步前进",
+      "fit": "两级蓝绿色台阶上压着一只金色向上箭头，表现逐步推进。",
+      "uid": "power_junna_ja144_power",
+      "id": "JUNNA_JA144_POWER",
+      "assetId": "power-icon-ja144-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JA144.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JA144.png"
+    },
+    {
+      "key": "JH59",
+      "name": "北极星",
+      "fit": "一颗醒目的金白四角北极星，外圈一道短深蓝环弧。",
+      "uid": "power_junna_jh59_power",
+      "id": "JUNNA_JH59_POWER",
+      "assetId": "power-icon-jh59-redraw-20261108",
+      "file": "docs/design/assets/powers/2026-11-08-redraw/icons/JH59.png",
+      "original": "docs/design/assets/powers/2026-11-08-redraw/generated/JH59.png"
+    }
+  ],
+  "checks": [
+    {
+      "uid": "power_junna_ja04_power",
+      "assetId": "power-icon-ja04-redraw-20261108",
+      "version": "4:7a8a80fc22659106c04b895e949dcfeabd90784371388a3c565c44c3e60bc8d2"
+    },
+    {
+      "uid": "power_junna_jk10_power",
+      "assetId": "power-icon-jk10-redraw-20261108",
+      "version": "2:1a98c3136067b544d85ef61abb0f9188135d578a5772de2dc9ec4a2cefc6a1d3"
+    },
+    {
+      "uid": "power_junna_ja22_power",
+      "assetId": "power-icon-ja22-redraw-20261108",
+      "version": "4:5c75a9650aad78d06e2ce8cdf990d78fa950f66ea340969928e1c26ca238493c"
+    },
+    {
+      "uid": "power_junna_jk15_power",
+      "assetId": "power-icon-jk15-redraw-20261108",
+      "version": "2:e242594abaa2d85d3caedcdb2de4d8ed8f59aa43afaed6b0a7ea502d33958bdd"
+    },
+    {
+      "uid": "power_junna_a_power",
+      "assetId": "power-icon-a-redraw-20261108",
+      "version": "2:7942738fa57ea33a626549d997df8c2e1acc977fedcafdeb0cee40b2d278cfd6"
+    },
+    {
+      "uid": "power_junna_jk27_power",
+      "assetId": "power-icon-jk27-redraw-20261108",
+      "version": "2:c9f75c9e0aaf020f215ba63aaf87952d8fc38e245783a5dbaa59a5329b14c37c"
+    },
+    {
+      "uid": "power_junna_ja35_power",
+      "assetId": "power-icon-ja35-redraw-20261108",
+      "version": "4:9d610f6ecb8d93f96d3b418f756594b76ac59c2d744d790674ca6c20f4c14737"
+    },
+    {
+      "uid": "power_junna_jk32_power",
+      "assetId": "power-icon-jk32-redraw-20261108",
+      "version": "2:05f259e3ec73343c4550d0d887b3f40747c7ca9a9a1c89357df3cd82c2c120f9"
+    },
+    {
+      "uid": "power_junna_jk37c_power",
+      "assetId": "power-icon-jk37c-redraw-20261108",
+      "version": "5:8bd2d0b26df2ee6e9a323bc451f0404926921895ac639f279e29d10d2a672789"
+    },
+    {
+      "uid": "power_junna_ja45_power",
+      "assetId": "power-icon-ja45-redraw-20261108",
+      "version": "4:6317cfbc35caed60d48e31ab58c369d22720d5ac99026583f0fe4d088866fab3"
+    },
+    {
+      "uid": "power_junna_jk64_power",
+      "assetId": "power-icon-jk64-redraw-20261108",
+      "version": "4:577e59d616073022266eb736dd943c72592df32d95cf3b49e8653cb99bc42864"
+    },
+    {
+      "uid": "power_junna_jk67_power",
+      "assetId": "power-icon-jk67-redraw-20261108",
+      "version": "5:888282f54be00836b0b03b6104b320c6af2a66bf97cf5d355cfaf35f7cb7bb18"
+    },
+    {
+      "uid": "power_junna_jg31_power",
+      "assetId": "power-icon-jg31-redraw-20261108",
+      "version": "3:ad756b142375e0092cbc42db150ca42624f41c981084154bda0d7a99e2de7916"
+    },
+    {
+      "uid": "power_junna_jh19_power",
+      "assetId": "power-icon-jh19-redraw-20261108",
+      "version": "3:533632ea52db6ec3e5ff564e6014fdb56daf93d1b7e75703365e8aefd0dbe0cf"
+    },
+    {
+      "uid": "power_junna_jh21_power",
+      "assetId": "power-icon-jh21-redraw-20261108",
+      "version": "2:52f5f47ffcff3121af87ca4f26cce1d25a58afb8b22e60e4574ce51d19c28063"
+    },
+    {
+      "uid": "power_junna_jg34_power",
+      "assetId": "power-icon-jg34-redraw-20261108",
+      "version": "3:828bf9b520a58a1111b7d68a0e7ebb81705ce6e9bca731012fe4518869240d1a"
+    },
+    {
+      "uid": "power_junna_jk75_power",
+      "assetId": "power-icon-jk75-redraw-20261108",
+      "version": "2:f6498dea8bc3ad97d869b5853a6a6e8d28ea336139be2ec23d8a4c145a4331a7"
+    },
+    {
+      "uid": "power_junna_jh23_power",
+      "assetId": "power-icon-jh23-redraw-20261108",
+      "version": "2:6e55a30b11358f176f5342133a153b5fed381931529c6f3f1a0751e1b3e83a7c"
+    },
+    {
+      "uid": "power_junna_ja70_power",
+      "assetId": "power-icon-ja70-redraw-20261108",
+      "version": "4:b6820744e58f6230d56215939f701cd5f3d12f46c20c077d8b54521ba75540e3"
+    },
+    {
+      "uid": "power_junna_jh24_power",
+      "assetId": "power-icon-jh24-redraw-20261108",
+      "version": "2:f67912904a12ccf0d6c3de3b3f2499b96b6d2cb11dcff2fec9ca9438752b8960"
+    },
+    {
+      "uid": "power_junna_jk80_power",
+      "assetId": "power-icon-jk80-redraw-20261108",
+      "version": "2:35d0db19ae189f9d8aa862665117eced5c138f9e956bb2e458a4f5cf9189d930"
+    },
+    {
+      "uid": "power_junna_jk81_power",
+      "assetId": "power-icon-jk81-redraw-20261108",
+      "version": "2:f99ca93203c5016b333ab50a350ae891f540967db55ef0ff0fb9ac356bde283e"
+    },
+    {
+      "uid": "power_junna_jz05_power",
+      "assetId": "power-icon-jz05-redraw-20261108",
+      "version": "3:7c952a37e457c5f7b0f9c44533c58dcf6d41e3daa1955e1fea3ca57f59b85b2d"
+    },
+    {
+      "uid": "power_junna_jz06_power",
+      "assetId": "power-icon-jz06-redraw-20261108",
+      "version": "2:02218cd12418bdf2dec31241047dccbf2e29966b515309df4b42a7249952ebcb"
+    },
+    {
+      "uid": "power_junna_jh30_power",
+      "assetId": "power-icon-jh30-redraw-20261108",
+      "version": "2:2e8f4fafcfcf68bb460d65eaaa027f61bf99f7a2c61add79efe494d3de27207e"
+    },
+    {
+      "uid": "power_junna_jk46_power",
+      "assetId": "power-icon-jk46-redraw-20261108",
+      "version": "2:e5691d9b542de21dce3690799223a6ff5bb111c4c0ffa2676a3437509abcc774"
+    },
+    {
+      "uid": "power_junna_endurance_power",
+      "assetId": "power-icon-jg23-redraw-20261108",
+      "version": "2:648302bf0802238d6ad3bab03e5b49821baf3bf1e1cc1bbfc659ca061331d60c"
+    },
+    {
+      "uid": "power_junna_energy_reserve",
+      "assetId": "power-icon-energy-reserve-redraw-20261108",
+      "version": "3:3196056705254ed9dc5a1f8eb2cd0ade68d23be111dffcb392bdc1d306564387"
+    },
+    {
+      "uid": "power_junna_ja87_power",
+      "assetId": "power-icon-ja87-redraw-20261108",
+      "version": "3:fb4a14b9b725f12e59f6d4793fe0de7bac5e1a817b5c44b0dab240665db4c5e6"
+    },
+    {
+      "uid": "power_junna_ja96_power",
+      "assetId": "power-icon-ja96-redraw-20261108",
+      "version": "2:ff5ad2f189871defba28e27eced8a2e3498e614e37effd3c11e55d851c16b376"
+    },
+    {
+      "uid": "power_junna_jh31_power",
+      "assetId": "power-icon-jh31-redraw-20261108",
+      "version": "2:f012405a76172d87bb690fbe084ee7653246e1707c8fe262a87db5239b36be0b"
+    },
+    {
+      "uid": "power_junna_next_card_bonus",
+      "assetId": "power-icon-next-card-bonus-redraw-20261108",
+      "version": "2:674bac03710d1c51144d246e6e718a54002d8c2b2bb8b4229cffedf6dc89aa73"
+    },
+    {
+      "uid": "power_junna_ja105_power",
+      "assetId": "power-icon-ja105-redraw-20261108",
+      "version": "3:f43cad37af707b60169ff0f4319737a94dc344b5013ae84010432d9c0c4a7bed"
+    },
+    {
+      "uid": "power_junna_ja118_power",
+      "assetId": "power-icon-ja118-redraw-20261108",
+      "version": "2:ad99274bb87bf6c1fd292afa576cca7856cdaecbd2b291dc9c07663d08e97f33"
+    },
+    {
+      "uid": "power_junna_ja144_power",
+      "assetId": "power-icon-ja144-redraw-20261108",
+      "version": "3:1c6c25ddc8d51a8d7f36f13cb65826f5d3929551435cae828295847b1856f7e0"
+    },
+    {
+      "uid": "power_junna_jh59_power",
+      "assetId": "power-icon-jh59-redraw-20261108",
+      "version": "3:1fb02b89b42699dbf09d338773a25f59c6566a1d3bd67b6905f568ab6b3e3f52"
+    }
+  ]
+}

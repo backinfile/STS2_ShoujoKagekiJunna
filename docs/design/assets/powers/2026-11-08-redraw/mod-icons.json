@@ -1,0 +1,275 @@
+{
+  "sourceRevision": 4032,
+  "size": [
+    256,
+    256
+  ],
+  "icons": [
+    {
+      "key": "JA04",
+      "sourceKey": "JA04",
+      "file": "ShoujoKagekiJunna/images/powers/JA04.png",
+      "sha256": "80faa41a3fbb3ed14d0d9ec3111a3652f013b9050374adac908055f096dffa23",
+      "visibleRgbaSha256": "e07d0629a60cbde9d33be95be47fab49854758351eef00d7a3437e7f83ae67d3"
+    },
+    {
+      "key": "JK10",
+      "sourceKey": "JK10",
+      "file": "ShoujoKagekiJunna/images/powers/JK10.png",
+      "sha256": "675715738ae488f422f08b28a069ec98aee92370648323ff7e86aebd3837d557",
+      "visibleRgbaSha256": "33c97778da92744e2280ec38208856fbfeb6bc19af701def66dbc0f1c5e7b662"
+    },
+    {
+      "key": "JA22",
+      "sourceKey": "JA22",
+      "file": "ShoujoKagekiJunna/images/powers/JA22.png",
+      "sha256": "ce7324b1245228deb38aa6ebb0d7507e68dc27f57fe9605afa8195762181da84",
+      "visibleRgbaSha256": "bf48ba437ab3669c1f97c21bf462733de68aae25331a158c2f4a462c98776a33"
+    },
+    {
+      "key": "JK15",
+      "sourceKey": "JK15",
+      "file": "ShoujoKagekiJunna/images/powers/JK15.png",
+      "sha256": "7a26a67bf967630c5d8fac87ae1dc090149336b481c2b4e7f985c79877364ea4",
+      "visibleRgbaSha256": "bef56609dbbbe7bdae545807009bd2161f97fe30eca71f3b0c4f10d5597934db"
+    },
+    {
+      "key": "A",
+      "sourceKey": "A",
+      "file": "ShoujoKagekiJunna/images/powers/A.png",
+      "sha256": "b4f0402da57eb8e902e9a63ddc28b64450de6ce0f2a53f280502f652f6fb4586",
+      "visibleRgbaSha256": "04a1322170bcfd82c9d8680a890178b7553092a4c9e7b74e9f55ce07d58752fe"
+    },
+    {
+      "key": "JK27",
+      "sourceKey": "JK27",
+      "file": "ShoujoKagekiJunna/images/powers/JK27.png",
+      "sha256": "1ae7f1bbfbce2560587c92ebba74a542321fa39b6989213e6c0d6607e2168b31",
+      "visibleRgbaSha256": "97e87fe8975d3c00962dfbb75f27d4d1a2b32fff83a07be08a3f4a9c13b4acc1"
+    },
+    {
+      "key": "JA35",
+      "sourceKey": "JA35",
+      "file": "ShoujoKagekiJunna/images/powers/JA35.png",
+      "sha256": "16687f00374007771439343a1ccb55add09204793731a65819903e09d279a32e",
+      "visibleRgbaSha256": "a19f2f922a81858014d32141bba580234602a7657c8be4a4de1ab2a92f2147d1"
+    },
+    {
+      "key": "JK32",
+      "sourceKey": "JK32",
+      "file": "ShoujoKagekiJunna/images/powers/JK32.png",
+      "sha256": "82106ed7ba1c0d5dbd83efd6d17c29ff7fce9ca822f0f429b6b1d98e8bad9033",
+      "visibleRgbaSha256": "ece7044dffd2256035d3f2341f1e7db2606c2345e9171602246725372dd3230b"
+    },
+    {
+      "key": "JK37C",
+      "sourceKey": "JK37C",
+      "file": "ShoujoKagekiJunna/images/powers/JK37C.png",
+      "sha256": "371316e2a2d7df5b2cea5145a661431cf1892b176b48b2771f6106935c4db3cf",
+      "visibleRgbaSha256": "4c1fd1725bb906f1f1bf5b159ed3a2b97155178b3ad17eafe46c4162fd5cd3ae"
+    },
+    {
+      "key": "JA45",
+      "sourceKey": "JA45",
+      "file": "ShoujoKagekiJunna/images/powers/JA45.png",
+      "sha256": "f9658187285d5ae69f915c7e6caa502231e027f1fd0841b1ed394b1d056d2f09",
+      "visibleRgbaSha256": "41555f15603eae62597ed22dbf8dcfe97bf790f495ae13b2e34f6ff3a85ff7a2"
+    },
+    {
+      "key": "JK64",
+      "sourceKey": "JK64",
+      "file": "ShoujoKagekiJunna/images/powers/JK64.png",
+      "sha256": "7dea97ea0f99f2e5aad72f607b5a85cfb53fd3f2664ca9e0b535c83c9bdbd106",
+      "visibleRgbaSha256": "45fd924c2f771f8852800101e12f2c2ad418ad8d57153d7e6d57613380fb7e5a"
+    },
+    {
+      "key": "JK67",
+      "sourceKey": "JK67",
+      "file": "ShoujoKagekiJunna/images/powers/JK67.png",
+      "sha256": "5139ae44fe4f32eb00fc526eebe7718ee80906bc7a464309c9090840b770a8ec",
+      "visibleRgbaSha256": "3af0dfa54371118149d60fbce2de2e06057cf3b1a5003c43e6fcbf7bd8bf6621"
+    },
+    {
+      "key": "JG31",
+      "sourceKey": "JG31",
+      "file": "ShoujoKagekiJunna/images/powers/JG31.png",
+      "sha256": "704042581a2f2bd9cb2643db237b3a6dfbffbb14d4037353fd202090650de8c4",
+      "visibleRgbaSha256": "53280f9d0b2eb4fda3aa20823dff179ee6a384261729ff71750a57d98556bec8"
+    },
+    {
+      "key": "JH19",
+      "sourceKey": "JH19",
+      "file": "ShoujoKagekiJunna/images/powers/JH19.png",
+      "sha256": "cfee8d047d362c3d506618f75d85d526fb65a64d200a7ed09a8c3428fe927c3c",
+      "visibleRgbaSha256": "c185da650238af7e954b36ca4d3fcf6fe974acf206f24f937437d479099af1ab"
+    },
+    {
+      "key": "JH21",
+      "sourceKey": "JH21",
+      "file": "ShoujoKagekiJunna/images/powers/JH21.png",
+      "sha256": "4348ef3043cdedc9826fa631f921fdc2949f032a103d271b9bd8bc55dbb3b126",
+      "visibleRgbaSha256": "ae4779b500f90e0f3b0e76930742d7ed09a8c76fa39777ec60a3548e7327f807"
+    },
+    {
+      "key": "JG34",
+      "sourceKey": "JG34",
+      "file": "ShoujoKagekiJunna/images/powers/JG34.png",
+      "sha256": "5f54be335c768e3795120828613805e128128c5b12ebca4010f4a9247a993792",
+      "visibleRgbaSha256": "8004a37c157aa0f602e32499e406456e51bdfa24f9c1bbaf4b020314379ca06e"
+    },
+    {
+      "key": "JK75",
+      "sourceKey": "JK75",
+      "file": "ShoujoKagekiJunna/images/powers/JK75.png",
+      "sha256": "093efba49af26ae4effb5a6616e61fe8a144885e3a965804b4c18d8ae0fb96cd",
+      "visibleRgbaSha256": "a5cd855580d836f2fd5267e43744b4f19d22d40c36f552629fb0663e2fa2c583"
+    },
+    {
+      "key": "JH23",
+      "sourceKey": "JH23",
+      "file": "ShoujoKagekiJunna/images/powers/JH23.png",
+      "sha256": "62efa921c112211c284210d127421bfff45d761e86014e20870cc28a2ab307ee",
+      "visibleRgbaSha256": "5f5921c51364d27cdcb3e46f434ad4579b9601752953b33779f857fe214178bd"
+    },
+    {
+      "key": "JA70",
+      "sourceKey": "JA70",
+      "file": "ShoujoKagekiJunna/images/powers/JA70.png",
+      "sha256": "0e89511d69dcac2e161674e4cd3f60e56c2b2c0f997521a6a4de802c0e666f74",
+      "visibleRgbaSha256": "ad5111dc93541089f080ee4e6e2f734805a613e1dd4a3199776478b60f8d345e"
+    },
+    {
+      "key": "JH24",
+      "sourceKey": "JH24",
+      "file": "ShoujoKagekiJunna/images/powers/JH24.png",
+      "sha256": "07ef0687f8a9c152f1dda5a7008ec804598f648b7d8e59b21584205d6b1331c1",
+      "visibleRgbaSha256": "59f0de5a849634ba56fc949d6c27ed1647a9db6baa8b9bc5f573c4aaf42aa5e0"
+    },
+    {
+      "key": "JK80",
+      "sourceKey": "JK80",
+      "file": "ShoujoKagekiJunna/images/powers/JK80.png",
+      "sha256": "cd674c3e749426f09b183896280b0776544434f511050bbf74943e106f2402fe",
+      "visibleRgbaSha256": "77c6970a7f8368a276c707581654456540cc7a5e2887d4f9c1eabfcecf4946e1"
+    },
+    {
+      "key": "JK81",
+      "sourceKey": "JK81",
+      "file": "ShoujoKagekiJunna/images/powers/JK81.png",
+      "sha256": "3df3b1f85871240ddccf70d8b446be63fab6b262145cb117a7e22cf02cb5b8b0",
+      "visibleRgbaSha256": "88bdc42b47413f8dbd2e65c71742cc8967f2cd534da71069c1dea0420517715e"
+    },
+    {
+      "key": "JZ05",
+      "sourceKey": "JZ05",
+      "file": "ShoujoKagekiJunna/images/powers/JZ05.png",
+      "sha256": "3e51bbe71e64ee8a2f988457da402e0377f0a36bfeb1bdd4c515331585455594",
+      "visibleRgbaSha256": "e2760b37be77a35767a5b478655f348cfe5977134c1a9dc2c12068733b669db9"
+    },
+    {
+      "key": "JZ06",
+      "sourceKey": "JZ06",
+      "file": "ShoujoKagekiJunna/images/powers/JZ06.png",
+      "sha256": "751e3760a1f47cfb6e95d327106957a94de9b3b30acd040cfe2003d3ecc60b95",
+      "visibleRgbaSha256": "9ec1d668d850c6027845ea05e69fbc7197b22efa8654155d110515790a2fd78b"
+    },
+    {
+      "key": "JH30",
+      "sourceKey": "JH30",
+      "file": "ShoujoKagekiJunna/images/powers/JH30.png",
+      "sha256": "32943d9441e80a10895af877ed56e15b3e06304588ef94b3cad40995f9ab2db7",
+      "visibleRgbaSha256": "91c78625a93192461bfd39b3afcc9d789599f342a58e0fda5d28890bea18ecd0"
+    },
+    {
+      "key": "JK46",
+      "sourceKey": "JK46",
+      "file": "ShoujoKagekiJunna/images/powers/JK46.png",
+      "sha256": "4e9cbb42b4226ec389425fb25da7949bab85bb9bb7f22d4c9e25c9fa332b6c1a",
+      "visibleRgbaSha256": "42a5bbb9eb32ecedc3f622d8db2f4818ed7a2623caf5568c514633cd641bff16"
+    },
+    {
+      "key": "JG23",
+      "sourceKey": "JG23",
+      "file": "ShoujoKagekiJunna/images/powers/JG23.png",
+      "sha256": "62fdaf06c075d41dd5e4062f62e10f437a07f46d81dafaa83e05786dbac198aa",
+      "visibleRgbaSha256": "4a559ab7c9fe990532766e683f00730a7879564b81eb79aedb761cc3f7984f90"
+    },
+    {
+      "key": "ENERGY_RESERVE",
+      "sourceKey": "ENERGY_RESERVE",
+      "file": "ShoujoKagekiJunna/images/powers/ENERGY_RESERVE.png",
+      "sha256": "ccf84ad6d60ba3c4c516ca3bb97163f78e4dbe5c82588f1df03885812613fadc",
+      "visibleRgbaSha256": "a1cc10e671afe85ea13ffca3c66d584d58d5130c193430e3709bdadf00e691f4"
+    },
+    {
+      "key": "JA87",
+      "sourceKey": "JA87",
+      "file": "ShoujoKagekiJunna/images/powers/JA87.png",
+      "sha256": "aa8925288887a65bb832150815fd2936dea578f51eb8eec04eebeacbd45adb63",
+      "visibleRgbaSha256": "6b70b25563372f3d576cf194d8700355251a350387d5a5a0fd2a78c2abef47b9"
+    },
+    {
+      "key": "JA96",
+      "sourceKey": "JA96",
+      "file": "ShoujoKagekiJunna/images/powers/JA96.png",
+      "sha256": "abdad63777619256822614ab3ed91ec7ec105ac91b2120d4a7e10e468cc9a2df",
+      "visibleRgbaSha256": "3d9d3d8c2958d4230b0ac7e5488e5c7ede97080529e56ea49bb29693960d2c4a"
+    },
+    {
+      "key": "JH31",
+      "sourceKey": "JH31",
+      "file": "ShoujoKagekiJunna/images/powers/JH31.png",
+      "sha256": "c0b8bc282f5fe35ce9c8efef4f2df1674444a5453e9701228e9767cfb0d3ea75",
+      "visibleRgbaSha256": "28dc92d2a2f9ac158af4d48f56907441193006d51dac62faab05c78acc7a7aeb"
+    },
+    {
+      "key": "NEXT_CARD_BONUS",
+      "sourceKey": "NEXT_CARD_BONUS",
+      "file": "ShoujoKagekiJunna/images/powers/NEXT_CARD_BONUS.png",
+      "sha256": "2f17172d034672af77642987823b9bfb2275a18f24824004675cfa0a1b3031b3",
+      "visibleRgbaSha256": "3668c06358c5d7c377c786abf5461430d92b7478b8237dba4e3b0c19531df6c7"
+    },
+    {
+      "key": "JA105",
+      "sourceKey": "JA105",
+      "file": "ShoujoKagekiJunna/images/powers/JA105.png",
+      "sha256": "e3b0f650efe0a624ee3246c17ce8eaf9d39e86277cc17c4f07af8112a39fbad9",
+      "visibleRgbaSha256": "5f31141c78fca798345c3711ff15d85b6adc956fae104c9ca7c43e85281c61bc"
+    },
+    {
+      "key": "JA118",
+      "sourceKey": "JA118",
+      "file": "ShoujoKagekiJunna/images/powers/JA118.png",
+      "sha256": "050302f78e22d3472b3a5eb6c592dfcd3b20aa2c85805858abba4883f58826e4",
+      "visibleRgbaSha256": "a23c5ba05e6651edeeb5b25a9ba87d280d0e2e5b6d009f1d13c79e6b8eac2f6c"
+    },
+    {
+      "key": "JA144",
+      "sourceKey": "JA144",
+      "file": "ShoujoKagekiJunna/images/powers/JA144.png",
+      "sha256": "cd9605511ca0ab9df29be92d6d0201925287989baa2c43ab6979e52bbe1efcf3",
+      "visibleRgbaSha256": "ed71530de70cd184d78d147d15d6b4993ac392c937d9e887382267ac1825be15"
+    },
+    {
+      "key": "JH59",
+      "sourceKey": "JH59",
+      "file": "ShoujoKagekiJunna/images/powers/JH59.png",
+      "sha256": "859cb5e53520920ec78c132368c3902e96cf8a1b00f8622e2dfdec281ef00dd6",
+      "visibleRgbaSha256": "c3287102327a6ac3fd2d34e18d062032af8d9ddd96b9725a928aca9eab9ada6f"
+    },
+    {
+      "key": "JK127",
+      "sourceKey": "JK15",
+      "file": "ShoujoKagekiJunna/images/powers/JK127.png",
+      "sha256": "7a26a67bf967630c5d8fac87ae1dc090149336b481c2b4e7f985c79877364ea4",
+      "visibleRgbaSha256": "bef56609dbbbe7bdae545807009bd2161f97fe30eca71f3b0c4f10d5597934db"
+    },
+    {
+      "key": "JK139",
+      "sourceKey": "JZ06",
+      "file": "ShoujoKagekiJunna/images/powers/JK139.png",
+      "sha256": "751e3760a1f47cfb6e95d327106957a94de9b3b30acd040cfe2003d3ecc60b95",
+      "visibleRgbaSha256": "9ec1d668d850c6027845ea05e69fbc7197b22efa8654155d110515790a2fd78b"
+    }
+  ]
+}

@@ -1,0 +1,581 @@
+{
+  "count": 36,
+  "assets": [
+    {
+      "key": "JA04",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        17,
+        244,
+        238
+      ]
+    },
+    {
+      "key": "JK10",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        45,
+        244,
+        211
+      ]
+    },
+    {
+      "key": "JA22",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        35,
+        12,
+        221,
+        244
+      ]
+    },
+    {
+      "key": "JK15",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        16,
+        244,
+        239
+      ]
+    },
+    {
+      "key": "A",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        45,
+        244,
+        210
+      ]
+    },
+    {
+      "key": "JK27",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        24,
+        244,
+        232
+      ]
+    },
+    {
+      "key": "JA35",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": false,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        22,
+        244,
+        233
+      ]
+    },
+    {
+      "key": "JK32",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        23,
+        12,
+        232,
+        244
+      ]
+    },
+    {
+      "key": "JK37C",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        13,
+        244,
+        243
+      ]
+    },
+    {
+      "key": "JA45",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        13,
+        12,
+        242,
+        244
+      ]
+    },
+    {
+      "key": "JK64",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        17,
+        244,
+        239
+      ]
+    },
+    {
+      "key": "JK67",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        12,
+        244,
+        243
+      ]
+    },
+    {
+      "key": "JG31",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        23,
+        12,
+        233,
+        244
+      ]
+    },
+    {
+      "key": "JH19",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        17,
+        244,
+        239
+      ]
+    },
+    {
+      "key": "JH21",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        12,
+        244,
+        243
+      ]
+    },
+    {
+      "key": "JG34",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        25,
+        244,
+        231
+      ]
+    },
+    {
+      "key": "JK75",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        17,
+        244,
+        239
+      ]
+    },
+    {
+      "key": "JH23",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        39,
+        12,
+        216,
+        244
+      ]
+    },
+    {
+      "key": "JA70",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        17,
+        12,
+        239,
+        244
+      ]
+    },
+    {
+      "key": "JH24",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        20,
+        244,
+        235
+      ]
+    },
+    {
+      "key": "JK80",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        16,
+        12,
+        239,
+        244
+      ]
+    },
+    {
+      "key": "JK81",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        17,
+        244,
+        238
+      ]
+    },
+    {
+      "key": "JZ05",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        36,
+        244,
+        220
+      ]
+    },
+    {
+      "key": "JZ06",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        31,
+        12,
+        225,
+        244
+      ]
+    },
+    {
+      "key": "JH30",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        14,
+        12,
+        242,
+        244
+      ]
+    },
+    {
+      "key": "JK46",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        23,
+        12,
+        232,
+        244
+      ]
+    },
+    {
+      "key": "JG23",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        12,
+        244,
+        243
+      ]
+    },
+    {
+      "key": "ENERGY_RESERVE",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        12,
+        244,
+        244
+      ]
+    },
+    {
+      "key": "JA87",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        21,
+        244,
+        235
+      ]
+    },
+    {
+      "key": "JA96",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        42,
+        244,
+        213
+      ]
+    },
+    {
+      "key": "JH31",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        12,
+        12,
+        244,
+        243
+      ]
+    },
+    {
+      "key": "NEXT_CARD_BONUS",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        25,
+        12,
+        231,
+        244
+      ]
+    },
+    {
+      "key": "JA105",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        17,
+        12,
+        239,
+        244
+      ]
+    },
+    {
+      "key": "JA118",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        23,
+        12,
+        232,
+        244
+      ]
+    },
+    {
+      "key": "JA144",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        24,
+        12,
+        232,
+        244
+      ]
+    },
+    {
+      "key": "JH59",
+      "size": [
+        256,
+        256
+      ],
+      "alpha_preserved": true,
+      "external_alpha_preserved": true,
+      "transparent": true,
+      "bbox": [
+        14,
+        12,
+        241,
+        244
+      ]
+    }
+  ]
+}

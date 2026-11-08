@@ -47,8 +47,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => DesignId is "JA22" or "JK27" or "JK81" ? PowerStackType.Single : PowerStackType.Counter;
-    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}." +
-        (DesignId is "JA87" or "JA96" or "JH31" ? "svg" : "png");
+    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     protected override void DeepCloneFields() { base.DeepCloneFields(); _grants = new(_grants); }
 
