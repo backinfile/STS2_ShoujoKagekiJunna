@@ -149,7 +149,7 @@ public partial class ArrowCardPresentation : Control
         _description.Size = new(_descriptionSize.X, 116.05f);
         if (_portrait.Visible)
         {
-            _portrait.Texture = card.Portrait;
+            _portrait.Texture = ArrowPortraitTexture.Resolve(card.Portrait);
             var textureSize = card.Portrait.GetSize();
             float cover = Math.Max(SpriteSize.X / textureSize.X, SpriteSize.Y / textureSize.Y);
             var crop = (textureSize - SpriteSize / cover) * .5f;

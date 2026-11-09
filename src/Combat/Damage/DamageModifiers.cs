@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Models;
@@ -41,7 +42,8 @@ public static class DamageModifiers
         var owners = new HashSet<Player>();
         try
         {
-            foreach (var card in cards.Distinct().ToArray())
+            foreach (var card in cards.Distinct()
+                .Where(card => HandArrow.OriginalType(card) is not (CardType.Status or CardType.Curse)).ToArray())
                 if (Apply(card, damageBonus, extraHits)) owners.Add(card.Owner);
         }
         finally

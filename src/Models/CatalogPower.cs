@@ -1,4 +1,5 @@
 using BaseLib.Abstracts;
+using System.Runtime.CompilerServices;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -42,13 +43,19 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         };
     }
     private List<Grant> _grants = [];
+    private ConditionalWeakTable<CardPlay, CardModel[]> _partnerHands = new();
     internal int ReplayGrants => _grants.Count;
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => CardRules.Get(DesignId).SinglePower ? PowerStackType.Single : PowerStackType.Counter;
     public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
-    protected override void DeepCloneFields() { base.DeepCloneFields(); _grants = new(_grants); }
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _grants = new(_grants);
+        _partnerHands = new();
+    }
 
     public static int ArrowHaste(Player player) => player.Creature.Powers.OfType<CatalogPower>()
         .Where(p => p.DesignId == "JA105").Sum(p => p._grants.Count);

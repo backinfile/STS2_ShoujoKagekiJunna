@@ -276,7 +276,7 @@ public partial class ArrowHud : Control
         var root = new Control { Name = "FloatingArrow", Size = IconSize, MouseFilter = MouseFilterEnum.Ignore };
         var frame = new Control { Name = "TiltedFrame", Size = IconSize, PivotOffset = BodyCenter, MouseFilter = MouseFilterEnum.Stop };
         root.AddChild(frame);
-        var portrait = arrow.Card.Portrait;
+        var portrait = ArrowPortraitTexture.Resolve(arrow.Card.Portrait);
         var textureSize = portrait.GetSize();
         var designId = CardCatalog.DesignId(arrow.Card);
         var focus = designId is null ? null : CardCatalog.Get(designId).ArrowFocus;

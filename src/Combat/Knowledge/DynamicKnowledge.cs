@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rewards;
@@ -207,6 +208,13 @@ public static class DynamicKnowledge
             options = options.WithCustomPool(options.GetPossibleCards(player).Where(card => IsRewardEntrance(player, card)).ToArray());
 #endif
         }
+    }
+    [HarmonyPatch(typeof(Hook), nameof(Hook.ModifyMerchantCardPool))]
+    private static class MerchantEntrances
+    {
+        [HarmonyPostfix, HarmonyPriority(Priority.Last)]
+        private static void Postfix(Player player, ref IEnumerable<CardModel> __result)
+            => __result = __result.Where(card => IsRewardEntrance(player, card));
     }
     [HarmonyPatch(typeof(CardModel), "get_HoverTips")]
     private static class RelationTip
