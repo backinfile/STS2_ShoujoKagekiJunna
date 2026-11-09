@@ -1,6 +1,8 @@
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShoujoKagekiJunna.Combat;
@@ -34,6 +36,13 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
             card is CatalogCard { DesignId: "JK206" } ? card.Owner.Deck.Cards.Count :
                 CardActions.All(card.Owner).Count(other => other != card && CardCatalog.IsKnowledge(other)))
     } : []);
+    protected override void AddExtraArgsToDescription(LocString description)
+    {
+        base.AddExtraArgsToDescription(description);
+        if (DesignId == "JK206" && IsMutable && Owner != null && !CombatManager.Instance.IsInProgress)
+            description.Add(new DamageVar(DynamicVars.Damage.BaseValue + Owner.Deck.Cards.Count, ValueProp.Move));
+    }
+
     public int Number(int index) => DynamicVars[Definition.Values[index].Name].IntValue;
     public int Value(string name, int fallback = 0)
     {
