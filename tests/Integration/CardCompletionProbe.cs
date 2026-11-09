@@ -133,8 +133,8 @@ public static class CardCompletionProbe
                 int expectedBlock = baseBlock;
                 if (definition.Type == "能力") expectedBlock = 0;
                 if (id is "JG34" or "JH30" or "JA82") expectedDamage = 0;
-                if (id == "JK48") expectedDamage += helpers.Count(CardCatalog.IsKnowledge);
-                if (id == "JK48B") expectedBlock += helpers.Count(CardCatalog.IsKnowledge);
+                if (id == "JK48") expectedDamage += player.Deck.Cards.Count(CardCatalog.IsKnowledge);
+                if (id == "JK48B") expectedBlock += player.Deck.Cards.Count(CardCatalog.IsKnowledge);
                 if (id == "JH13") expectedDamage *= 1 + (energyBefore - (up ? definition.UpgradedCost : definition.Cost)) / 2;
                 if (id == "JK74") expectedDamage *= 2;
                 if (id == "JK74B") expectedBlock *= 2;

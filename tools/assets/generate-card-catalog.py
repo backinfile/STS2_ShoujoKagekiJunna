@@ -69,6 +69,16 @@ def display_description(card, text, card_names, values, upgraded=False):
         icons = '{energyPrefix:energyIcons(' + str(value if 1 <= value <= 3 else 1) + ')}'
         return icons if 1 <= value <= 3 else match[0].removesuffix('点能量') + icons
 
+    # Live quantities are supplied through CardModel's description arguments.
+    if card['id'] in ('JK48', 'JK48B'):
+        text = text.replace('知识牌，', '知识牌（{KnowledgeCount}张），')
+    elif card['id'] == 'JK206':
+        text = text.replace('卡牌数量', '卡牌数量（{DeckCount}张）')
+    elif card['id'] == 'JK184':
+        text = text.replace('点伤害。', '点伤害（{HitCount}次）。', 1)
+    elif card['id'] == 'JA82':
+        text = text.replace('打出X张', '打出X张（{EnergyCount}张）')
+
     text = re.sub(r'((?:可)?保留)(\{\w+:diff\(\)\}|\d+)点能量',
                   lambda m: m[1] + m[2] + '{energyPrefix:energyIcons(1)}', text)
     text = re.sub(r'(\{\w+:diff\(\)\}|\d+)点能量(?=(?:并|且)(?:可)?保留(?:到|至)下(?:个)?回合)',

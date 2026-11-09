@@ -664,7 +664,7 @@ public static class CardBranchesProbe
                     await Card("JB01", PileType.Draw); int hp = target.CurrentHp;
                     await Play(await Card(id, up: up));
                     Check("knowledge count", id == "JK48" ? hp - target.CurrentHp : player.Creature.Block,
-                        (id == "JK48" ? up ? 10 : 6 : up ? 7 : 4) + count);
+                        (id == "JK48" ? up ? 10 : 6 : up ? 7 : 4) + player.Deck.Cards.Count(CardCatalog.IsKnowledge));
                 });
                 if (id is "JA73" or "JX02")
                 foreach (int count in new[] { 0, 1, 3 })
