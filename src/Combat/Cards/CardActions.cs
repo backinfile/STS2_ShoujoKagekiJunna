@@ -44,12 +44,11 @@ public static class CardActions
     {
         var cards = candidates.Where(c => c != source).Distinct().ToArray();
         if (cards.Length == 0) return [];
-        int maximum = Math.Min(cards.Length, count);
-        var prefs = new CardSelectorPrefs(CardChoices.Prompt(source, count), optional ? 0 : maximum, maximum);
-        var chosen = cards.All(c => c.Pile?.Type == PileType.Hand)
-            ? await CardSelectCmd.FromHand(context, source.Owner, prefs, cards.Contains, source)
-            : await CardSelectCmd.FromSimpleGrid(context, cards, source.Owner, prefs);
-        return chosen.Where(cards.Contains).Distinct().ToArray();
+        return (await CardPicking.Pick(context, source.Owner, cards, new CardPickRequest
+        {
+            Prompt = CardChoices.Prompt(source, count), Minimum = optional ? 0 : Math.Max(0, count),
+            Maximum = Math.Max(0, count), Source = source
+        })).ToArray();
     }
 
     public static async Task<CardModel[]> DrawMatching(PlayerChoiceContext context, Player player,

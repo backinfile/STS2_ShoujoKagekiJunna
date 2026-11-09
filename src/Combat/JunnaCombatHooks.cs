@@ -25,6 +25,7 @@ public sealed class JunnaCombatHooks : SingletonModel
         KnowledgeProgress.ResetCombat();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
+        foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);
         return Task.CompletedTask;
     }
     public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
@@ -55,6 +56,7 @@ public sealed class JunnaCombatHooks : SingletonModel
         MaxEnergyBonuses.Clear();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
+        foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);
         return Task.CompletedTask;
     }
 }

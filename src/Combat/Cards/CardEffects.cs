@@ -27,7 +27,7 @@ public static class CardEffects
         IEnumerable<CardModel> Arrows() => All().Where(CardCatalog.IsArrow);
         async Task Improve(IEnumerable<CardModel> cards, int bonus, int extraHits = 0)
         {
-            foreach (var chosen in cards.ToArray()) DamageModifiers.Add(chosen, bonus, extraHits);
+            DamageModifiers.AddMany(cards, bonus, extraHits);
             await Task.CompletedTask;
         }
         async Task Attack(int? damage = null, int? hits = null)
@@ -174,7 +174,6 @@ public static class CardEffects
             case "JA71":
                 await Block(); await ArrowCombat.AccelerateAll(context, player, int.MaxValue); break;
             case "JK78":
-                await ImproveSelected(player.PlayerCombatState.DrawPile.Cards, V("Bonus"), V("Amount"), true); break;
             case "JK78D":
                 await ImproveSelected(player.PlayerCombatState.DrawPile.Cards, V("Bonus"), V("Amount"), true); break;
             case "JK78E":

@@ -30,14 +30,40 @@ public static class DynamicKnowledge
         var groups = Groups(source).ToHashSet();
         var cards = source.Pile?.IsCombatPile == true && source.Owner.PlayerCombatState != null
             ? source.Owner.PlayerCombatState.AllCards : source.Owner.Deck.Cards;
-        // Older acquisitions linked the paper but omitted its physical research companions.
-        var research = cards.Where(c => Groups(c).Any(groups.Contains)).Select(KnowledgeProgress.ResearchGroup)
-            .Where(link => !string.IsNullOrEmpty(link)).ToHashSet();
-        foreach (var member in cards.Where(c => research.Contains(KnowledgeProgress.ResearchGroup(c))))
-            if (KnowledgeProgress.ResearchGroup(member) != null)
-                Links.Set(member, string.Join("\n", Groups(member).Concat(groups).Distinct()));
         var members = cards.Where(c => Groups(c).Any(groups.Contains)).ToArray();
         return members.Length > 0 ? members : [source];
+    }
+    internal static void Normalize(Player player)
+    {
+        NormalizeCards(player.Deck.Cards);
+        if (player.PlayerCombatState is { } combat) NormalizeCards(combat.AllCards);
+    }
+    private static void NormalizeCards(IEnumerable<CardModel> cards)
+    {
+        var snapshot = cards.ToArray();
+        foreach (var research in snapshot.GroupBy(KnowledgeProgress.ResearchGroup).Where(group => !string.IsNullOrEmpty(group.Key)))
+        {
+            var links = research.SelectMany(Groups).Distinct().ToArray();
+            if (links.Length == 0) continue;
+            foreach (var member in research)
+            {
+                var normalized = string.Join("\n", Groups(member).Concat(links).Distinct());
+                if (Links.Get(member) != normalized) Links.Set(member, normalized);
+                member.AddKeyword(JunnaKeywords.Knowledge);
+            }
+        }
+    }
+    [HarmonyPatch(typeof(Player), nameof(Player.FromSerializable))]
+    private static class RestoreGroups
+    {
+        [HarmonyPostfix, HarmonyPriority(Priority.Last)]
+        private static void Postfix(Player __result) => Normalize(__result);
+    }
+    [HarmonyPatch(typeof(Player), nameof(Player.SyncWithSerializedPlayer))]
+    private static class SyncGroups
+    {
+        [HarmonyPostfix, HarmonyPriority(Priority.Last)]
+        private static void Postfix(Player __instance) => Normalize(__instance);
     }
     public static async Task Prepare(PlayerChoiceContext context, CardModel selected, IEnumerable<CardModel> options)
     {
@@ -78,6 +104,7 @@ public static class DynamicKnowledge
             if (partner.Pile?.Type == destination)
                 foreach (var member in await KnowledgeCombat.GrantPartners(partner, destination)) Link(member);
         }
+        Normalize(acquired.Owner);
     }
 
     internal static void Describe(CardModel card, Creature? target, ref string description)

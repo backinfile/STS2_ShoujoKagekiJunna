@@ -141,7 +141,7 @@ public partial class KnowledgeGroupPreview : Control
 
     private NCard CreatePreview(CardModel source, Node parent)
     {
-        var model = (CardModel)source.MutableClone();
+        var model = ShoujoKageki.Core.V1.CardCopies.Snapshot(source);
         if (_upgraded && !model.IsUpgraded && model.IsUpgradable) model.UpgradeInternal();
         else if (!_upgraded && model.IsUpgraded) CardCmd.Downgrade(model);
         var card = NCard.Create(model)!;

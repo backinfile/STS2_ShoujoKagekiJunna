@@ -161,8 +161,8 @@ public static class CardPoolProbe
             await CardActions.Generate(player, "A", 1, PileType.Hand);
             Check("single generated knowledge stays single", CardActions.All(player).Count() - before, 1);
             var study = await Card("JK82");
-            CardCmd.Upgrade(study, CardPreviewStyle.None); await KnowledgeCombat.PendingUpgrades;
-            CardCmd.Upgrade(study, CardPreviewStyle.None); await KnowledgeCombat.PendingUpgrades;
+            await ShoujoKageki.Core.V1.CardUpgrades.Upgrade(study, CardPreviewStyle.None);
+            await ShoujoKageki.Core.V1.CardUpgrades.Upgrade(study, CardPreviewStyle.None);
             Check("repeat upgrades keep zero cost", CardActions.Cost(study), 0);
             Check("repeat upgrades increase energy", ((CatalogCard)study).Number(0), 4);
             Check("each upgrade creates one new knowledge", CardActions.All(player).Count(c => CardCatalog.DesignId(c) == "JK82B"), 2);

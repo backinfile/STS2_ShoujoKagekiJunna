@@ -31,6 +31,27 @@ public static class DamageModifiers
 
     public static bool Add(CardModel card, decimal damageBonus = 0, int extraHits = 0)
     {
+        bool changed = Apply(card, damageBonus, extraHits);
+        if (changed) card.Owner.PlayerCombatState!.RecalculateCardValues();
+        return changed;
+    }
+
+    public static void AddMany(IEnumerable<CardModel> cards, decimal damageBonus = 0, int extraHits = 0)
+    {
+        var owners = new HashSet<Player>();
+        try
+        {
+            foreach (var card in cards.Distinct().ToArray())
+                if (Apply(card, damageBonus, extraHits)) owners.Add(card.Owner);
+        }
+        finally
+        {
+            foreach (var owner in owners) owner.PlayerCombatState?.RecalculateCardValues();
+        }
+    }
+
+    private static bool Apply(CardModel card, decimal damageBonus, int extraHits)
+    {
         if (!card.IsMutable || card.Owner?.PlayerCombatState == null || !CanDealDamage(card)) return false;
         if (damageBonus < 0 || extraHits < 0) throw new ArgumentOutOfRangeException(nameof(damageBonus));
         var state = InvestmentFor(card);
@@ -42,7 +63,6 @@ public static class DamageModifiers
         state.Bonus += damageBonus;
         state.Hits = checked(state.Hits + extraHits);
         state.HasReceivedBonus |= damageBonus > 0 || extraHits > 0;
-        card.Owner.PlayerCombatState.RecalculateCardValues();
         return true;
     }
 

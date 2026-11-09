@@ -55,8 +55,7 @@ public abstract partial class CatalogPower
             {
                 case "A": await CardActions.Generate(Owner.Player!, "B", grant.V("Cards"), PileType.Draw); break;
                 case "JK67":
-                    foreach (var card in ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card).Distinct().ToArray())
-                        DamageModifiers.Add(card, grant.V("Bonus"));
+                    DamageModifiers.AddMany(ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card), grant.V("Bonus"));
                     break;
                 case "JH21" when Owner.Player!.PlayerCombatState!.Energy > 0: await Block(grant, grant.V("Block")); break;
             }

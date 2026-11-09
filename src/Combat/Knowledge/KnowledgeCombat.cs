@@ -18,7 +18,6 @@ public static class KnowledgeCombat
     private static readonly AsyncLocal<HashSet<string>?> Drawing = new();
     private static readonly ConditionalWeakTable<CardModel, object> Discovered = new();
     private static readonly ConditionalWeakTable<CardModel, object> Copies = new();
-    public static Task PendingUpgrades { get; private set; } = Task.CompletedTask;
     private sealed class Scope : IDisposable
     {
         public Scope() => SingleDepth.Value++;
@@ -93,6 +92,7 @@ public static class KnowledgeCombat
                 }
             }
         if (destination == PileType.Deck) KnowledgeProgress.BindResearch(gained);
+        DynamicKnowledge.Normalize(acquired.Owner);
         if (destination == PileType.Deck && acquired.Pile is { Type: PileType.Deck } deck)
         {
             // Native batches (e.g. Hefty Tablet: chosen card + Injury) finish before partners
@@ -160,32 +160,21 @@ public static class KnowledgeCombat
     {
         private static void Postfix(CardModel __result) => Copies.GetOrCreateValue(__result);
     }
-    [HarmonyPatch(typeof(CardCmd), nameof(CardCmd.Upgrade), [typeof(IEnumerable<CardModel>), typeof(CardPreviewStyle)])]
-    private static class EndlessStudyUpgrade
+    private static IDisposable? _upgrades;
+    internal static void Initialize()
     {
-        private static void Prefix(ref IEnumerable<CardModel> cards, out Dictionary<CardModel, int> __state)
+        _upgrades ??= ShoujoKageki.Core.V1.CoreApi.Get<ShoujoKageki.Core.V1.ICardUpgrades>().Register(
+            card => CardCatalog.DesignId(card) == "JK82", GrantUpgrade);
+    }
+    private static async Task GrantUpgrade(CardModel card, int previous, int current)
+    {
+        using var single = SingleCard();
+        for (int i = previous; i < current; i++)
         {
-            cards = cards.ToArray();
-            __state = cards.Where(c => CardCatalog.DesignId(c) == "JK82" && c.Pile != null)
-                .ToDictionary(c => c, c => c.CurrentUpgradeLevel);
-        }
-        private static void Postfix(Dictionary<CardModel, int> __state)
-        {
-            var upgrades = __state.Where(kv => kv.Key.CurrentUpgradeLevel > kv.Value).ToArray();
-            if (upgrades.Length == 0) return;
-            PendingUpgrades = Grant(upgrades);
-            TaskHelper.RunSafely(PendingUpgrades);
-        }
-        private static async Task Grant(KeyValuePair<CardModel, int>[] upgrades)
-        {
-            using var single = SingleCard();
-            foreach (var (card, previous) in upgrades)
-                for (int i = previous; i < card.CurrentUpgradeLevel; i++)
-                {
-                    if (card.Pile?.Type == PileType.Deck)
-                        await CardPileCmd.Add(card.Owner.RunState.CreateCard(CardCatalog.Model("JK82B"), card.Owner), PileType.Deck);
-                    else await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw);
-                }
+            if (card.Pile?.Type == PileType.Deck)
+                await CardPileCmd.Add(card.Owner.RunState.CreateCard(CardCatalog.Model("JK82B"), card.Owner), PileType.Deck);
+            else if (card.Owner.PlayerCombatState != null && !card.HasBeenRemovedFromState)
+                await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw);
         }
     }
 }
