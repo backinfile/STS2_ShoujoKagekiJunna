@@ -184,3 +184,15 @@ worktreetask 不能被打出的牌也应该会被以5回合箭矢打出这种效
 </send_user_message_question_reply>
 
 用户已批准整合至main并清理任务工作树和分支。批准时任务源码与9c718c6一致，之后的差异仅为用户发送偏好记录。继续执行“暂不发送APK”。
+
+## 后续用户输入：补充原合并确认
+
+<send_user_message_question_reply>
+[{"answer":"合并并清理（推荐）","question":"是否将提交 e36137d 合并到 main，保留现有 54 个文件的本地改动，并清理本任务工作树、codex/allow-unplayable-arrow-effects 分支及其临时游戏和构建产物？最终录像、断言与任务文档会保留。","questionItemId":"[\"request_user_input_async\",\"call_1c5ac654ae344ec7880e11c3b995f604\",0]"}]
+</send_user_message_question_reply>
+
+## 同步验证
+
+- 原分支同期加入 `dce1673` 与 `c1555de` 的箭矢布局调整；在任务工作树同步，未出现内容冲突。
+- 保留原目录既有r4444修改的组合副本同步采用新布局，Beta、Stable和测试模组重新编译，均0警告0错误；布局的定向检查通过。
+- 继续保留已通过的28项数值与6项箭阵断言、APK、签名回执及演示；本次同步未修改已验证的卡牌数值与转化逻辑。

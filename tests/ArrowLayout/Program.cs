@@ -72,6 +72,53 @@ Require(ArrowLayout.Lane(false, false, 400, 960) == ArrowLane.Left, "left enemy 
 Require(ArrowLayout.Lane(false, false, 1500, 960) == ArrowLane.Right, "right enemy single");
 Console.WriteLine("PASS: target lanes preserve faction and group-before-single order.");
 
+// Dense scenes exercise the actual occupied-lane allocator, including a single crowded group.
+foreach (var (name, allyLeft, allyRight, left, counts) in new[]
+{
+    ("48 enemy singles at live formation", 482.5f, 482.5f, false, new[] { 0, 0, 0, 0, 48 }),
+    ("45 mixed arrows at live formation", 482.5f, 482.5f, false, new[] { 0, 0, 14, 0, 31 }),
+    ("42 enemy singles", 530f, 530f, false, new[] { 0, 0, 0, 0, 42 }),
+    ("42 enemy groups", 530f, 530f, false, new[] { 0, 0, 42, 0, 0 }),
+    ("mixed enemy arrows", 530f, 530f, false, new[] { 0, 0, 12, 0, 30 }),
+    ("friendly groups reuse empty lane", 530f, 530f, false, new[] { 12, 0, 0, 0, 0 }),
+    ("friendly singles reuse empty lane", 530f, 530f, false, new[] { 0, 12, 0, 0, 0 }),
+    ("all five lanes", 960f, 960f, true, new[] { 3, 3, 9, 12, 15 }),
+    ("left edge", 180f, 180f, true, new[] { 2, 3, 7, 11, 19 }),
+    ("right edge", 1720f, 1720f, true, new[] { 2, 3, 7, 11, 19 })
+})
+{
+    const float denseSpacing = 80;
+    var regions = ArrowLayout.OccupiedRegions(1920, allyLeft, allyRight, left, denseSpacing, counts);
+    var points = new Dictionary<ArrowLane, Vector2[]>();
+    foreach (var lane in Enum.GetValues<ArrowLane>().Where(lane => counts[(int)lane] > 0))
+    {
+        var range = regions[(int)lane];
+        Require(range.X >= 1920 * .08f && range.Y <= 1920 * .9f && range.Y >= range.X,
+            name + ": occupied region stays on screen");
+        int columns = Math.Max(1, (int)MathF.Round((range.Y - range.X) / denseSpacing) + 1);
+        int rows = (counts[(int)lane] + columns - 1) / columns;
+        var slots = Enumerable.Range(0, columns * rows)
+            .Select(i => new Vector2(range.X + i % columns * denseSpacing, 188 + i / columns * 96)).ToArray();
+        points[lane] = ArrowLayout.Assign(new Vector2?[counts[(int)lane]], slots).Select(i => slots[i]).ToArray();
+        if (name is not ("left edge" or "right edge"))
+            Require(points[lane].Max(p => p.Y) <= 380, name + ": fits in three overhead rows");
+    }
+    var all = points.Values.SelectMany(p => p).ToArray();
+    for (int i = 0; i < all.Length; i++)
+        for (int j = i + 1; j < all.Length; j++)
+            Require(all[i].DistanceTo(all[j]) >= denseSpacing - .01f, name + ": icons retain clearance");
+    void GroupBeforeSingle(ArrowLane group, params ArrowLane[] singles)
+    {
+        if (!points.TryGetValue(group, out var groups)) return;
+        var singlePoints = singles.Where(points.ContainsKey).SelectMany(lane => points[lane]).ToArray();
+        if (singlePoints.Length > 0)
+            Require(groups.Max(p => p.X) < singlePoints.Min(p => p.X), name + ": group stays left of singles");
+    }
+    GroupBeforeSingle(ArrowLane.FriendlyGroup, ArrowLane.FriendlySingle);
+    GroupBeforeSingle(ArrowLane.EnemyGroup, ArrowLane.Left, ArrowLane.Right);
+    Console.WriteLine("PASS: " + name + " density, clearance and ordering");
+}
+
 static void Require(bool condition, string name)
 {
     if (!condition) throw new Exception(name);
