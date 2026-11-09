@@ -104,7 +104,7 @@ public static class CardEffects
             case "JK48":
                 await Attack((int)card.DynamicVars.CalculatedDamage.Calculate(play.Target)); break;
             case "JK48B":
-                await Block(V("Block") + All().Count(CardCatalog.IsKnowledge)); break;
+                await Block((int)card.DynamicVars.CalculatedBlock.Calculate(play.Target)); break;
             case "JK50B":
                 var eloquence = hand.Cards.Where(c => CardCatalog.DesignId(c) == "JK50").ToArray();
                 foreach (var selected in eloquence)

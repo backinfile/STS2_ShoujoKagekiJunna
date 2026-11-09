@@ -27,7 +27,7 @@ public sealed class DamagePreviewProbe : AbstractConsoleCmd
         var partner = CardCatalog.Create("B", player);
         await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);
         await CardPileCmd.AddGeneratedCardToCombat(partner, PileType.Draw, player);
-        int count = CardActions.All(player).Count(other => other != card && CardCatalog.IsKnowledge(other));
+        int count = player.Deck.Cards.Count(CardCatalog.IsKnowledge);
         card.UpdateDynamicVarPreview(CardPreviewMode.Normal, null, card.DynamicVars);
         Expect("knowledge count changes displayed damage", card.DynamicVars.Damage.PreviewValue, 6 + count);
         DamageModifiers.Add(card, 3);

@@ -24,7 +24,7 @@
 
 ## Result and changes
 
-实现与组合验证已完成；合并及清理已获用户授权，正在同步更新后的本地主分支。
+实现与集成验证已完成，合并及清理已获用户授权。
 
 - `src/Models/KnowledgeRelation.cs` 保存以完整模型 ID 为键的关联成员与张数，传递合并重叠组，强制以兼收并蓄为其所在组的入口。保留既定的同名成员数量，重复实体不会扩大关系定义。
 - `src/Combat/Knowledge/DynamicKnowledge.cs` 将动态关系持久化到本局玩家数据；已有牌、复制牌、未来新牌、外角色牌和预览均按 ID 读取同一份关系。完整迁移旧实例关联，成员移除后关系仍保留，存档读取与原生玩家快照同步均恢复关系。
@@ -56,3 +56,11 @@
 - 与原有 r4444 改动组合后，双版本编译、资源打包和 30 项逻辑检查通过，Beta 实机 57 项断言全部通过。
 - 原有修改、组合发行包、录像和断言报告已保留至原检出的 `out/tmp/knowledge-global-groups-20261109/`，清单为 `preservation-manifest.json` 和 `combined-input-manifest.json`。
 - 首次合并前检查发现 `main` 已从起始提交推进到 `c1555de`（箭矢布局整合），因此在写入主目录代码前停止，转为先同步该提交。
+
+### 最新主分支同步
+
+- 同步目标最终为 `main` 的 `6c15e4c`，包括同期已合并的箭矢布局、不可打出材料转化和牌面数值预览。同步未发生内容冲突。
+- 同期整合使原检出 7 个文件发生了必要的合并变化；本任务以其最新内容重新备份全部 52 项现有改动，保存于 `out/tmp/knowledge-global-groups-20261109/pre-integration-after-sync/`。
+- 最终组合版本重新通过 Beta、Stable 编译、资源打包、31 项知识组逻辑检查和 Beta 的 57 项实机断言。新录像完成封装、抽帧与完整解码检查。
+- 最终发行包位于 `out/tmp/knowledge-global-groups-20261109/packages/integrated/ShoujoKagekiJunna/`，报告与录像位于同目录根下的 `evidence/integrated/`；保留的 `combined-input-manifest.json` 记录组合版本输入哈希，`preservation-manifest.json` 记录交付文件哈希。
+- 组合验证使用临时覆盖层，完成后已移除；原有改动将继续保留为主目录的未提交状态，`PlayPartners` 的 ID 匹配兼容调整归入该原有未提交改动。

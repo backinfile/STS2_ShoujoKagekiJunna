@@ -25,6 +25,7 @@ public sealed class CardTextProbe : AbstractConsoleCmd
         text = Regex.Replace(text, @"(?<=\d)(?:@energy@)+", "");
         text = Regex.Replace(text, @"(?:@energy@)+", match => (match.Length / "@energy@".Length).ToString());
         text = text.Replace("点能量", "");
+        text = Regex.Replace(text, @"[（(]\d+(?:\.\d+)?(?:张|次)?[）)]", "");
         text = Regex.Replace(text, @"(?:保留|消耗)。", "");
         return Regex.Replace(text, @"\s+", "");
     }

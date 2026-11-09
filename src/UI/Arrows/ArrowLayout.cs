@@ -24,6 +24,49 @@ internal static class ArrowLayout
             new(enemiesLeft ? end + spacing : enemyGroup.Y + spacing, max)];
     }
 
+    // Share the available columns between occupied lanes instead of reserving empty lanes.
+    internal static Vector2[] OccupiedRegions(float width, float allyLeft, float allyRight,
+        bool enemiesLeft, float spacing, IReadOnlyList<int> counts)
+    {
+        var regions = Regions(width, allyLeft, allyRight, enemiesLeft, spacing);
+        float min = width * .08f, max = width * .9f;
+        float friendlyStart = regions[(int)ArrowLane.FriendlyGroup].X;
+        float friendlyEnd = regions[(int)ArrowLane.FriendlySingle].Y;
+        if (enemiesLeft)
+        {
+            Share(min, friendlyStart - spacing, ArrowLane.EnemyGroup, ArrowLane.Left);
+            Share(friendlyStart, friendlyEnd, ArrowLane.FriendlyGroup, ArrowLane.FriendlySingle);
+            Share(friendlyEnd + spacing, max, ArrowLane.Right);
+        }
+        else
+        {
+            Share(min, friendlyEnd, ArrowLane.FriendlyGroup, ArrowLane.FriendlySingle);
+            Share(friendlyEnd + spacing, max, ArrowLane.EnemyGroup, ArrowLane.Right);
+        }
+        return regions;
+
+        void Share(float start, float end, params ArrowLane[] lanes)
+        {
+            var active = lanes.Where(lane => counts[(int)lane] > 0).ToArray();
+            if (active.Length == 0) return;
+            int capacity = Math.Max(active.Length, (int)((end - start) / spacing) + 1);
+            var columns = Enumerable.Repeat(1, active.Length).ToArray();
+            // Give the next column to the lane with the greatest rows-per-column pressure.
+            for (int extra = active.Length; extra < capacity; extra++)
+            {
+                int next = 0;
+                for (int i = 1; i < active.Length; i++)
+                    if ((double)counts[(int)active[i]] / columns[i] > (double)counts[(int)active[next]] / columns[next]) next = i;
+                columns[next]++;
+            }
+            for (int i = 0; i < active.Length; i++)
+            {
+                regions[(int)active[i]] = new(start, start + (columns[i] - 1) * spacing);
+                start += columns[i] * spacing;
+            }
+        }
+    }
+
     internal static ArrowLane Lane(bool friendly, bool group, float targetX, float allyCenter)
         => friendly ? group ? ArrowLane.FriendlyGroup : ArrowLane.FriendlySingle
             : group ? ArrowLane.EnemyGroup : targetX < allyCenter ? ArrowLane.Left : ArrowLane.Right;

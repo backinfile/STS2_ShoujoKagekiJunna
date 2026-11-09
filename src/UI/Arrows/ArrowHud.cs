@@ -12,7 +12,8 @@ public partial class ArrowHud : Control
     // Game canvas units (1920 x 1080). Preserve the original kite proportions at orb scale.
     private const float IconWidth = 42;
     private const float FrameScale = IconWidth / 240;
-    private const float SlotSpacing = 108;
+    private const float SlotSpacing = 80;
+    private const float RowSpacing = 96;
     private static readonly Vector2 FrameSize = new(240, 416);
     private static readonly Vector2 IconSize = FrameSize * FrameScale;
     // Pivot around the portrait body, above the kite's long lower point.

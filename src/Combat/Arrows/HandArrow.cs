@@ -104,14 +104,21 @@ public static class HandArrow
         CostChanges.CaptureFreePayment(card);
         Mark(card, true);
         bool played = false;
+        bool unplayable = card.Keywords.Contains(CardKeyword.Unplayable);
         try
         {
+            // Converting a card into an arrow also accepts unplayable material.
+            if (unplayable) card.RemoveKeyword(CardKeyword.Unplayable);
             played = await CardExecution.Play(context, card, new CardExecutionRequest
             {
                 Target = target, CaptureAvailableX = false, PreserveEnergyValue = true
             });
         }
-        finally { if (!played) Restore(card); }
+        finally
+        {
+            if (unplayable) card.AddKeyword(CardKeyword.Unplayable);
+            if (!played) Restore(card);
+        }
     }
 
     internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, CardEffectContinuation next)

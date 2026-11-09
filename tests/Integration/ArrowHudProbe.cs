@@ -59,6 +59,12 @@ public static class ArrowHudProbe
             AccessTools.Property(typeof(ArrowDeploymentVfx), "PreviewTrajectory").SetValue(null, style);
             return new(true, $"Arrow trajectory {style}");
         }
+        if (args.FirstOrDefault() == "remove")
+        {
+            var arrow = ArrowCombat.DisplayOrder()[int.Parse(args[1])];
+            ArrowCombat.Cancel(arrow.Card);
+            return new(CardPileCmd.Add(arrow.Card, PileType.Discard), true, "Arrow removed");
+        }
         if (args.FirstOrDefault() == "info")
         {
             var room = NCombatRoom.Instance!;
@@ -78,7 +84,7 @@ public static class ArrowHudProbe
                 orb = new { size = orb.Size.ToString(), scale = orb.Scale.ToString(), bounds = bounds.Size.ToString(),
                     outline = outline.Size.ToString(), outlineScale = outline.Scale.ToString() },
                 slots = hud == null ? null : ((Dictionary<ArrowDeployment, Vector2>)AccessTools.Field(typeof(ArrowHud), "_slots").GetValue(hud)!)
-                    .Select(pair => new { id = pair.Key.Card.Id.Entry, x = pair.Value.X, y = pair.Value.Y, category = pair.Key.TargetCategory,
+                    .Select(pair => new { id = pair.Key.Card.Id.Entry, sequence = pair.Key.Sequence, x = pair.Value.X, y = pair.Value.Y, category = pair.Key.TargetCategory,
                         targetX = pair.Key.Target == null ? (float?)null : room.GetCreatureNode(pair.Key.Target)?.VfxSpawnPosition.X }).ToArray(),
                 arrows = hud?.GetChildren().OfType<Control>().Where(n => n.HasNode("TiltedFrame")).Select(n => new
                 {
@@ -115,10 +121,12 @@ public static class ArrowHudProbe
         }
         var state = player.Creature.CombatState!;
         var targets = state.GetOpponentsOf(player.Creature).ToArray();
-        int count = int.TryParse(scenario, out var requested) ? requested : 3;
+        var parts = scenario.Split(':');
+        scenario = parts[0];
+        int count = int.TryParse(parts.Last(), out var requested) ? Math.Clamp(requested, 1, 100) : 3;
         for (int i = 0; i < count; i++)
         {
-            bool group = scenario == "mixed" && i == 0 || scenario == "group";
+            bool group = scenario == "mixed" && i < count / 3 || scenario == "group";
             CardModel card = state.CreateCard(group ? ModelDb.Card<GroupArrowProbe>() : ModelDb.Card<JunnaFullDraw>(), player);
             var play = new CardPlay { Card = card,
 #if STS2_BETA

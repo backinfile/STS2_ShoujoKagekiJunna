@@ -204,7 +204,7 @@ public sealed class JunnaCardJK131() : CatalogCard("JK131");
 [CustomID("JUNNA_JK131B")]
 public sealed class JunnaCardJK131B() : CatalogCard("JK131B");
 
-[ShoujoKageki.Core.V1.ShineCard(9)]
+[ShoujoKageki.Core.V1.ShineCard(6)]
 [CustomID("JUNNA_JK133")]
 public sealed class JunnaCardJK133() : CatalogCard("JK133");
 
