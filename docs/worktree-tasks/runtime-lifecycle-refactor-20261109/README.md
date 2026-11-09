@@ -233,6 +233,8 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ### Junna 基线确认
 
+Junna 当前有大量未提交的源码、卡池和工作台改动，并且与本次重构重叠。Junna 的重构基线选哪一个？Core 和 Karen 会继续从各自干净的 main 开始。
+
 按 skill 默认，从 main 最新提交开始，原未提交改动留在原检出
 
 ## Brief task plan
@@ -246,7 +248,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-已实现本次重构，正在汇总任务提交及同步最新 main。
+已完成本次重构和定向验证。任务分支已同步本地 main，等待合并与清理确认。
 
 - 自然箭矢与临时箭矢统一登记延迟路由，保存后续调用链及结算时选择上下文。
 - 付费、免费与手牌箭矢执行迁入 Core，能力和知识预览改用原模型快照，展示选项共用公共入口。
@@ -254,17 +256,18 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 校验 160 项规则、23 项能力显示及保存字段，58 项简单牌效复用明确的通用执行器。
 - 移除中文正文解析关键字和已失效的箭矢描述替换，保留复杂牌效及兼容调用。
 - 开始时 main 为 d87b81d，原检出有未提交变更。用户选择以该已提交版本为基线。
-- 收尾时检测到原 main 经外部操作提交到 17858f5，原检出已干净。下一步在本工作树同步该提交并重验。
+- 收尾时检测到原 main 经外部操作提交到 17858f5，原检出已干净。已在任务工作树合并该提交，解决四处冲突并保留新增目标修复、动态知识、流星预览及 PowerShell 入口，重新生成元数据并打包。
 
 ### 验证
 
 - 三项目双版本编译与资源打包完成，正式版 v0.107.1、测试版 v0.111.0 使用真实 Windows 游戏引用。
 - API V1 的 410 项已发布类型与成员签名保持兼容，AssemblyVersion 为 1.0.0.0。
 - 两版原生异步结算各 11 项检查通过，覆盖重放、同卡嵌套、额外效果、部署保留、实际扣除及异常收尾。
-- 游戏 MCP 两版各 28 项定向断言通过，覆盖选项隔离、三选一及网格、耗尽能力快照、双代路由、当前选择上下文、付费与 X 费、阻止执行、遗物身份与显示、能量显示、特效开关。
+- 同步后游戏 MCP 两版各 28 项定向断言通过，覆盖选项隔离、三选一及网格、耗尽能力快照、双代路由、当前选择上下文、付费与 X 费、阻止执行、遗物身份与显示、能量显示、特效开关。
 - 正常移牌后两版手牌模型与可见节点均为 1，缺失与多余节点均为 0，前后截图已查看。
-- 自然箭矢通过合法出牌与三回合结算录制，静默测试开启、内部混音保留，录像完成后查看真实帧。
+- 同步前自然箭矢通过合法出牌与三回合结算录制，静默测试开启、内部混音保留，录像完成后查看真实帧。同步后以两版集成探针和前后截图重验。
 - 58 项通用牌效与起点逐项比对，语句顺序及字段名一致。元数据生成检查通过。
+- FoundationChecks 的 18 项择版和完整性检查通过，候选版本随实际发行版本生成。
 - 最终实测包与发行目录逐文件哈希一致，Core 严格清单校验通过。
 - 完整双版本单人及多人矩阵、性能和特效专项需要另行确认。
 
@@ -273,6 +276,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - Core 工作树的 out/tmp/runtime-lifecycle-refactor-20261109/ 保存隔离用户目录、日志、截图、录像、断言报告、包和 final-package-hashes.json，均在忽略目录。
 - 实机发现并修正辅助方法被 Harmony 识别为 Prepare、JIT 内联跳过薄包装、编辑器错误导出原生子场景、能量计基类订阅遗漏。最终定向断言全部通过。
 - Karen 构建保留已有编译警告，Core 与 Junna 编译无警告。
+- 完整暂存索引、压缩包内文本、全部跟踪文档及提交身份完成隐私检查。
 - 三项目均在 codex/runtime-lifecycle-refactor-20261109，目标为各自 main。按 $worktree-task 等待合并与清理确认。
 - 提交隐私检查发现本地 Git 邮箱为私人邮箱，本次提交使用仓库作者的 GitHub noreply 身份，原配置保留。
 
@@ -281,5 +285,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 | 文件 | SHA-256 |
 | --- | --- |
 | ShoujoKagekiJunna.pck | b83cf1248d01a7c18f7a9cdba0d53474843cb797ccb0c2b7fcf164322e30ce3f |
-| lib/ShoujoKagekiJunna.Beta.dll | bb3c0b02fbc69a96b566f8d708829870dc7572aedd268e26097b3ca1263ca7a0 |
-| lib/ShoujoKagekiJunna.Stable.dll | 4fc5aaf10e3edac2800d3d95c9d08ed92dd75f57c20eddff81a1b3b3bec6e17a |
+| lib/ShoujoKagekiJunna.Beta.dll | 4511233b1753f79965b7957208afdb23b5e832b11b18a00962c5832512375433 |
+| lib/ShoujoKagekiJunna.Stable.dll | 3ac6a063c133cff26b6d4c3869c6103437db84ab28382d83dcdaebd6f4246985 |
+
+### 同步验证
+
+- 同步目标 main 的提交为 17858f591eea8cd5fe82ce1577980df0b7f59a07。
+- 新增流星预览写入显式提示元数据，动态知识预览继续采用原模型快照。
+- 同步后双版本编译无警告，160 项元数据、23 项能力及两版各 28 项实机断言通过，手牌模型和可见节点一致。

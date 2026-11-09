@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const allowed = new Set(['upgrade','clear-filters','meta','copy-template','cards-by-term']);
-  const blocked = '#edit-title,#inspector-footer,#knowledge-edit,.global-actions> :not(.readonly-status),[data-remove-grant],[data-restore-card],[data-restore],[data-delete-archetype],[data-edit-archetype]';
+  const blocked = '#edit-title,#inspector-footer,#knowledge-edit,.global-actions> :not(.readonly-status):not(#install-app),[data-remove-grant],[data-restore-card],[data-restore],[data-delete-archetype],[data-edit-archetype]';
   document.addEventListener('click', event => {
     const target = event.target.closest?.('button,a,summary,input,select,textarea');
     if (!target) return;

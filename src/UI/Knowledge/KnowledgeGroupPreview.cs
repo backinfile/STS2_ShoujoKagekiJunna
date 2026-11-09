@@ -33,7 +33,7 @@ public partial class KnowledgeGroupPreview : Control
     private Control _stack = null!;
     private Label _counter = null!;
     private NCardViewSortButton _layoutButton = null!;
-    private bool _selectionPreview;
+    private Label _layoutLabel = null!;
     private ScrollContainer _scroll = null!;
     private GridContainer _grid = null!;
     private List<CardModel>? _cards;
@@ -45,17 +45,13 @@ public partial class KnowledgeGroupPreview : Control
     {
         var screen = NGame.Instance!.GetInspectCardScreen();
         screen.Open([card], 0);
-        var preview = screen.GetNode<KnowledgeGroupPreview>("JunnaKnowledgePreview");
-        preview._selectionPreview = true;
-        preview._spread = true;
-        preview.RenderCards();
     }
 
     internal static void Prepare(ref List<CardModel> cards, ref int index)
     {
         if (Groups.TryGetValue(cards, out _)) return;
         var source = cards[index];
-        if (source.Pile != null || KnowledgeCombat.Group(source) == null) return;
+        if (!KnowledgeCombat.HasGroup(source)) return;
         cards = KnowledgePreviewCards.Create(source).ToList();
         index = Math.Max(0, cards.FindIndex(card => CardCatalog.DesignId(card) == CardCatalog.DesignId(source)));
         Groups.Add(cards, new object());
@@ -74,7 +70,7 @@ public partial class KnowledgeGroupPreview : Control
             preview = new KnowledgeGroupPreview { Name = "JunnaKnowledgePreview", _screen = screen, _front = front };
             screen.AddChild(preview);
         }
-        if (preview._cards != cards) preview._spread = false;
+        if (preview._cards != cards) preview._spread = true;
         preview._cards = cards;
         preview._index = index;
         preview._upgraded = upgraded;
@@ -127,6 +123,19 @@ public partial class KnowledgeGroupPreview : Control
         button.Connect(NClickableControl.SignalName.Released, Callable.From<NButton>(_ => released()));
         AddChild(button);
         button.GetNode<TextureRect>("%Image").Hide();
+        var originalLabel = button.GetNode<Label>("%Label");
+        originalLabel.Hide();
+        _layoutLabel = new Label
+        {
+            MouseFilter = MouseFilterEnum.Ignore,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center
+        };
+        _layoutLabel.AddThemeFontOverride("font", originalLabel.GetThemeFont("font"));
+        _layoutLabel.AddThemeFontSizeOverride("font_size", 28);
+        _layoutLabel.AddThemeColorOverride("font_color", originalLabel.GetThemeColor("font_color"));
+        button.GetNode<Control>("%ButtonImage").AddChild(_layoutLabel);
+        _layoutLabel.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
         return button;
     }
 
@@ -149,9 +158,9 @@ public partial class KnowledgeGroupPreview : Control
         _front.Visible = !_spread;
         _stack.Visible = !_spread;
         _scroll.Visible = _spread;
-        _layoutButton.Visible = !_selectionPreview;
+        _layoutButton.Visible = true;
         _counter.Text = $"{_index + 1} / {_cards.Count}";
-        _layoutButton.SetLabel(new LocString("gameplay_ui", _spread ? "JUNNA.KNOWLEDGE_STACK_LAYOUT" : "JUNNA.KNOWLEDGE_SPREAD_LAYOUT").GetFormattedText());
+        _layoutLabel.Text = new LocString("gameplay_ui", _spread ? "JUNNA.KNOWLEDGE_STACK_LAYOUT" : "JUNNA.KNOWLEDGE_SPREAD_LAYOUT").GetFormattedText();
         var left = _screen.GetNode<NButton>("LeftArrow");
         var right = _screen.GetNode<NButton>("RightArrow");
         left.Visible = !_spread && _index > 0;
@@ -210,16 +219,18 @@ public partial class KnowledgeGroupPreview : Control
 
     private void LayoutCards()
     {
-        _layoutButton.Position = new(Size.X - 290, Size.Y - 98);
-        _layoutButton.Size = new(210, 54);
+        _layoutButton.Position = new(Size.X / 2 + 180, Size.Y - 88);
+        _layoutButton.Size = new(180, 54);
 
         if (_gridCards.Count == 0) return;
         int count = _gridCards.Count;
-        int columns = count <= 3 ? count : Math.Min(4, (int)Math.Ceiling(Math.Sqrt(count)));
-        int rows = (count + columns - 1) / columns;
         float availableWidth = Math.Max(300, Size.X - 200);
-        float availableHeight = Math.Max(422, Size.Y - 230);
-        float scale = rows == 1 ? Math.Clamp(Size.Y / 800, .9f, 1.35f) : Math.Clamp((availableHeight - 96) / 844, .85f, 1.15f);
+        float availableHeight = Math.Max(422, Size.Y - 180);
+        int maxColumns = Math.Clamp((int)((availableWidth - 160 + 28) / (300 * .75f + 28)), 1, 5);
+        int columns = Math.Min(maxColumns, count <= 3 ? count : (count + 1) / 2);
+        int rows = (count + columns - 1) / columns;
+        float scale = rows == 1 ? Math.Clamp(Size.Y / 800, .9f, 1.35f)
+            : Math.Clamp((availableHeight - 160 - (rows - 1) * 28 - 2) / (rows * 422), .75f, 1.15f);
         scale = Math.Min(scale, (availableWidth - (columns - 1) * 28 - 160) / (columns * 300));
         var cardSize = new Vector2(300, 422) * scale;
         float width = columns * cardSize.X + (columns - 1) * 28;
@@ -265,7 +276,6 @@ public partial class KnowledgeGroupPreview : Control
         _front.Visible = !_spread;
         _cards = null;
         _spread = false;
-        _selectionPreview = false;
         _scroll.ScrollVertical = 0;
     }
 

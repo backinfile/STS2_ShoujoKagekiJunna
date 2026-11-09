@@ -16,7 +16,7 @@ function fixture(cards, overrides = {}) {
   const context = vm.createContext({
     ui: {
       tab: 'cards', sort: 'natural', descending: false, upgraded: false, search: '',
-      type: 'all', rarity: 'all', pool: 'all', cost: 'all', archetype: 'all', term: 'all',
+      type: 'all', rarity: 'all', cardPool:'all', pool: 'all', cost: 'all', archetype: 'all', term: 'all',
       ...overrides
     },
     state: { data: { cards, archetypes: [] }, history: [] },
@@ -56,6 +56,15 @@ test('special rarities follow ancient cards and remain independently filterable 
   context.ui.rarity='衍生';context.ui.type='攻击';context.ui.pool='granted';
   assert.deepEqual(ids(),['Token']);
   context.ui.type='技能';assert.deepEqual(ids(),[]);
+});
+
+test('card-pool filters distinguish character companions, generated tokens and curses',()=>{
+  const {context,ids}=fixture([card('reward'),card('companion',{pool:false,cardPool:'角色'}),card('token',{pool:false,rarity:'衍生',cardPool:'衍生'}),card('curse',{pool:false,type:'诅咒',rarity:'诅咒',cardPool:'诅咒'})]);
+  context.ui.cardPool='角色';assert.deepEqual(ids(),['companion','reward']);
+  context.ui.pool='granted';assert.deepEqual(ids(),['companion']);
+  context.ui.pool='all';context.ui.cardPool='衍生';assert.deepEqual(ids(),['token']);
+  context.ui.cardPool='诅咒';assert.deepEqual(ids(),['curse']);
+  context.saveUI();assert.equal(new URLSearchParams(context.location.hash.slice(1)).get('cardPool'),'诅咒');
 });
 
 test('natural and cost sorting keep base-cost order when upgraded faces are toggled', () => {

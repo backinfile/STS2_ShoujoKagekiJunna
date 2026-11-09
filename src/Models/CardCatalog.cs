@@ -44,12 +44,15 @@ public sealed class CardDefinition
     public CardRarity CardRarity => Rarity switch
     {
         "基础" => CardRarity.Basic, "普通" => CardRarity.Common, "罕见" => CardRarity.Uncommon,
-        "稀有" => CardRarity.Rare, "远古" => CardRarity.Ancient, "衍生" => CardRarity.Token,
+        "稀有" => CardRarity.Rare, "远古" => CardRarity.Ancient,
+        "事件" => CardRarity.Event, "衍生" => CardRarity.Token, "状态" => CardRarity.Status,
+        "诅咒" => CardRarity.Curse, "任务" => CardRarity.Quest,
         _ => throw new InvalidOperationException($"Unknown rarity: {Id}/{Rarity}")
     };
     private static CardType ToType(string value) => value switch
     {
-        "箭矢" => ArrowPile.ArrowType, "攻击" => CardType.Attack, "能力" => CardType.Power, _ => CardType.Skill
+        "箭矢" => ArrowPile.ArrowType, "攻击" => CardType.Attack, "能力" => CardType.Power,
+        "状态" => CardType.Status, "诅咒" => CardType.Curse, "任务" => CardType.Quest, _ => CardType.Skill
     };
 }
 

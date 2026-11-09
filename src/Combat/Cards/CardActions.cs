@@ -30,6 +30,12 @@ public static class CardActions
     public static IEnumerable<CardModel> Named(Player player, string id) => Available(player).Where(c => CardCatalog.DesignId(c) == id);
     public static int Cost(CardModel card) => card.EnergyCost.CostsX
         ? Math.Max(0, card.Owner.PlayerCombatState?.Energy ?? 0) : Math.Max(0, card.EnergyCost.GetWithModifiers(CostModifiers.All));
+    internal static CardPlay ResolveTarget(CardPlay play)
+    {
+        if (play.Card.TargetType != TargetType.AnyEnemy || play.Target is not { } original) return play;
+        var target = ArrowCombat.ResolveEffectTarget(original, play.Card.Owner.Creature.CombatState!);
+        return target != null && target != original ? GameApi.WithTarget(play, target) : play;
+    }
     public static bool HasNumericCost(CardModel card) => !card.EnergyCost.CostsX &&
         card.EnergyCost.GetWithModifiers(CostModifiers.All) >= 0 && !card.Keywords.Contains(CardKeyword.Unplayable);
 
@@ -93,17 +99,20 @@ public static class CardActions
         return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, Payment = CardPayment.Paid });
     }
 
-    public static async Task FreePlay(PlayerChoiceContext context, CardModel card)
+    public static async Task FreePlay(PlayerChoiceContext context, CardModel card, Creature? target = null,
+        bool keepTarget = false)
     {
         if (CombatManager.Instance.IsOverOrEnding || card.Owner.Creature.IsDead ||
             card.Keywords.Contains(CardKeyword.Unplayable) ||
             !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) return;
-        Creature? target = null;
         if (card.TargetType == TargetType.AnyEnemy)
         {
-            target = await ChooseTarget(context, card);
+            target = keepTarget ? target == null ? null : ArrowCombat.ResolveEffectTarget(target, card.Owner.Creature.CombatState!)
+                : await ChooseTarget(context, card);
             if (target == null) return;
         }
+        else target = null;
+        ArrowCombat.Cancel(card);
         await CardExecution.Play(context, card, new CardExecutionRequest { Target = target });
     }
 

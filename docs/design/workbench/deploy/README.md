@@ -38,6 +38,8 @@ node docs/design/workbench/deploy/build-package.cjs artifacts/cloud/snapshot.jso
 
 当前 HTTPS 配置将长链接前缀下的 `/mcp` 和 `/upload` 转发到内部网关。编辑页和公开页允许同源脚本、样式和数据快照请求；公开路径通过 Nginx 限定为 GET、HEAD。长链接路径关闭访问日志并发送 `Referrer-Policy: no-referrer`。网关开放八个条目查询、读取、提交和恢复工具；文件系统路径工具保留在内部 MCP，远端客户端可用 `workbench_get_state` 读取快照。
 
+公开页和编辑页支持安装为 PWA。安卓 Chrome 中打开对应页面，从浏览器菜单选择“安装应用”或“添加到主屏幕”；Chrome 提供安装事件时，公开页显示“安装应用”，编辑页的“操作／文件”菜单显示同名按钮。安装后以独立窗口打开原入口。`pwa.cjs` 构建 192／512 图标和应用清单；公开清单位于共享哈希资产目录，编辑清单由网关的 `/app.webmanifest` 提供，相对启动路径保留编辑入口。Nginx 两处 CSP 均需允许 `manifest-src 'self'`。
+
 `nginx-edit-location.conf.template` 对应当前编辑入口；将 `__EDIT_PREFIX__` 替换为私有配置中的 `prefix`，放入现有 HTTPS server 块，并在 `nginx -t` 通过后重载。公开站点的现有静态路径与 TLS 配置继续沿用。
 
 本轮定向验证覆盖公开只读、长链接访问、SDK 初始化、旧版本冲突、空提交及请求重试。6 条后续增量已在 r2598 通过远端客户端提交，公开快照随 revision 更新。

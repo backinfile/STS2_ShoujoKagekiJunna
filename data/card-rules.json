@@ -515,8 +515,14 @@
       }
     },
     "JA76": {
-      "tips": [],
-      "upgradedTips": []
+      "tips": [
+        "Arrow",
+        "Meteor"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Meteor"
+      ]
     },
     "JA77": {
       "tips": [],
@@ -536,8 +542,14 @@
       "effect": "Energy"
     },
     "JA81": {
-      "tips": [],
-      "upgradedTips": []
+      "tips": [
+        "Arrow",
+        "Meteor"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Meteor"
+      ]
     },
     "JA81B": {
       "tips": [],
@@ -545,8 +557,14 @@
       "effect": "Attack"
     },
     "JA82": {
-      "tips": [],
-      "upgradedTips": []
+      "tips": [
+        "Arrow",
+        "Meteor"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Meteor"
+      ]
     },
     "JK78D": {
       "fields": {

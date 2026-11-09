@@ -174,7 +174,7 @@ public partial class ArrowCardPresentation : Control
         int turns = deployment?.Remaining ?? HandArrow.Turns(card);
         if (!HandArrow.IsArrow(card) && turnValue != null && deployment == null && previewMode == CardPreviewMode.Upgrade && !card.IsUpgraded)
             turns += turnValue.Upgraded - turnValue.Base;
-        if (deployment == null && card.IsMutable && card.Owner?.PlayerCombatState != null)
+        if (deployment == null && card.Pile?.IsCombatPile == true && card.Owner?.PlayerCombatState != null)
             turns = Math.Max(0, turns - CatalogPower.ArrowHaste(card.Owner));
         _turns.Visible = _card.Visibility == ModelVisibility.Visible;
         string remaining = turns.ToString();

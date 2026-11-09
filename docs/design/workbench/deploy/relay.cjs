@@ -10,6 +10,7 @@ const server=http.createServer(async(req,res)=>{
   res.setHeader('Cache-Control','no-store');res.setHeader('Referrer-Policy','no-referrer');
   if(req.headers.origin&&req.headers.origin!==config.origin)return reply(403,{error:'来源无效'});
   if(req.method==='GET'&&req.url==='/'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});return fs.createReadStream(path.join(here,'editor.html')).pipe(res);}
+  if(['GET','HEAD'].includes(req.method)&&req.url==='/app.webmanifest'){res.writeHead(200,{'Content-Type':'application/manifest+json; charset=utf-8'});return req.method==='HEAD'?res.end():fs.createReadStream(path.join(here,'app.webmanifest')).pipe(res);}
   if(req.method!=='POST'||!['/mcp','/upload'].includes(req.url))return reply(404,{error:'路径无效'});
   const expected=Buffer.from('Bearer '+config.secret),auth=Buffer.from(String(req.headers.authorization||''));
   if(auth.length!==expected.length||!crypto.timingSafeEqual(auth,expected))return reply(401,{error:'连接无效'});

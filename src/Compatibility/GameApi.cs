@@ -12,6 +12,14 @@ namespace ShoujoKagekiJunna;
 
 internal static class GameApi
 {
+    internal static CardPlay WithTarget(CardPlay play, Creature target) => new()
+    {
+        Card = play.Card, Target = target, ResultPile = play.ResultPile,
+#if STS2_BETA
+        Player = play.Card.Owner,
+#endif
+        Resources = play.Resources, IsAutoPlay = play.IsAutoPlay, PlayIndex = play.PlayIndex, PlayCount = play.PlayCount
+    };
     internal static StringName ConfirmHotkey =>
 #if STS2_BETA
         MegaInput.confirm;

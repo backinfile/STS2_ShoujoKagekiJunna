@@ -1,5 +1,6 @@
-param([int]$Port = 15727, [switch]$UseInstalledMod,
+param([ValidateRange(0, 65535)][int]$Port = 15727, [switch]$UseInstalledMod,
     [ValidatePattern('^[a-z0-9-]+$')][string]$Instance = 'dev-game',
+    [switch]$Playable,
     [string]$CorePackage = $env:SHOUJO_CORE_PACKAGE)
 $ErrorActionPreference = 'Stop'
 $junnaRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
@@ -7,6 +8,23 @@ $junnaArtifacts = Join-Path $junnaRoot "artifacts/$Instance"
 $junnaGame = Join-Path $junnaArtifacts 'game'
 $junnaUser = Join-Path $junnaArtifacts 'user'
 $sourceGame = 'D:/App/Stream/steamapps/common/Slay the Spire 2'
+if (Get-Process -Name SlayTheSpire2 -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq (Join-Path $junnaGame 'SlayTheSpire2.exe') }) {
+    throw "Close the $Instance game window before updating its mods."
+}
+if ($Port -eq 0) {
+    $portProbe = [Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, 0)
+    $portProbe.Start()
+    $Port = $portProbe.LocalEndpoint.Port
+    $portProbe.Stop()
+}
+$windowMode = 1
+$noFocus = 'true'
+$windowStyle = 'Hidden'
+if ($Playable) {
+    $windowMode = 0
+    $noFocus = 'false'
+    $windowStyle = 'Normal'
+}
 New-Item -ItemType Directory -Force $junnaGame, $junnaUser | Out-Null
 $settingsPath = Join-Path $junnaUser 'AppData/Roaming/SlayTheSpire2/default/1/settings.save'
 New-Item -ItemType Directory -Force (Split-Path $settingsPath -Parent) | Out-Null
@@ -48,28 +66,32 @@ if (!$UseInstalledMod) {
 }
 Copy-Item -LiteralPath "$junnaRoot/.tools/implementation/mcp/KarenSTS2MCP.dll" -Destination $mods
 Copy-Item -LiteralPath 'D:/Github/STS2_Mcp/mod_manifest.json' -Destination "$mods/KarenSTS2MCP.json"
-@{port=$Port; fullscreen=$false; muted=$false; silent_test=$true; skip_tutorial=$true; skip_first_prompt=$true; window_width=1280; window_height=720} |
+@{port=$Port; fullscreen=$false; muted=$false; silent_test=(!$Playable); skip_tutorial=$true; skip_first_prompt=$true; window_width=1280; window_height=720} |
     ConvertTo-Json | Set-Content -LiteralPath "$mods/KarenSTS2MCP.conf" -Encoding utf8
-@'
+@"
 [display]
-window/size/mode=1
-window/size/no_focus=true
+window/size/mode=$windowMode
+window/size/no_focus=$noFocus
 window/size/viewport_width=1280
 window/size/viewport_height=720
 [audio]
 driver/enable_input=false
-'@ | ForEach-Object { [System.IO.File]::WriteAllText("$junnaGame/override.cfg", $_, (New-Object System.Text.UTF8Encoding($false))) }
+"@ | ForEach-Object { [System.IO.File]::WriteAllText("$junnaGame/override.cfg", $_, (New-Object System.Text.UTF8Encoding($false))) }
 $oldAppData = $env:APPDATA
 $oldLocalAppData = $env:LOCALAPPDATA
 $oldFfmpeg = $env:STS2_MCP_FFMPEG
 try {
     $env:APPDATA = Join-Path $junnaUser 'AppData/Roaming'
     $env:LOCALAPPDATA = Join-Path $junnaUser 'AppData/Local'
-    $env:STS2_MCP_FFMPEG = (Get-Command ffmpeg).Source
+    if (!$Playable) { $env:STS2_MCP_FFMPEG = (Get-Command ffmpeg).Source }
     New-Item -ItemType Directory -Force $env:APPDATA, $env:LOCALAPPDATA | Out-Null
-    $junnaProcess = Start-Process -FilePath "$junnaGame/SlayTheSpire2.exe" -WorkingDirectory $junnaGame -WindowStyle Hidden -PassThru `
-        -ArgumentList '--force-steam=off','--rendering-method','gl_compatibility','--log-file',"$junnaArtifacts/game.log"
+    $junnaProcess = Start-Process -FilePath "$junnaGame/SlayTheSpire2.exe" -WorkingDirectory $junnaGame -WindowStyle $windowStyle -PassThru `
+        -ArgumentList '--force-steam=off','--rendering-method','gl_compatibility','--log-file',('"' + "$junnaArtifacts/game.log" + '"')
     $junnaProcess.Id | Set-Content -LiteralPath "$junnaArtifacts/process-id.txt"
+    if ($Playable) {
+        Write-Output "Junna play process=$($junnaProcess.Id) MCP port=$Port"
+        return
+    }
     Write-Output "Junna test process=$($junnaProcess.Id) MCP port=$Port"
     Add-Type @'
 using System;

@@ -251,6 +251,8 @@ internal static partial class CardRules
         },
         ["JA76"] = new()
         {
+            Tips = [CardTip.Arrow, CardTip.Meteor],
+            UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
         },
         ["JA77"] = new()
         {
@@ -268,6 +270,8 @@ internal static partial class CardRules
         },
         ["JA81"] = new()
         {
+            Tips = [CardTip.Arrow, CardTip.Meteor],
+            UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
         },
         ["JA81B"] = new()
         {
@@ -275,6 +279,8 @@ internal static partial class CardRules
         },
         ["JA82"] = new()
         {
+            Tips = [CardTip.Arrow, CardTip.Meteor],
+            UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
         },
         ["JA84"] = new()
         {

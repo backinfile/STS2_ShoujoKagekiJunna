@@ -15,6 +15,7 @@ public static class CardEffects
 {
     public static async Task Resolve(CatalogCard card, PlayerChoiceContext context, CardPlay play)
     {
+        play = CardActions.ResolveTarget(play);
         var player = card.Owner;
         var hand = player.PlayerCombatState!.Hand;
         int V(string name, int fallback = 0) => card.Value(name, fallback);
@@ -100,7 +101,7 @@ public static class CardEffects
             case "JK45B":
                 await Improve(Arrows(), V("Bonus")); await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
             case "JK48":
-                await Attack(V("Damage") + All().Count(CardCatalog.IsKnowledge)); break;
+                await Attack((int)card.DynamicVars.CalculatedDamage.Calculate(play.Target)); break;
             case "JK48B":
                 await Block(V("Block") + All().Count(CardCatalog.IsKnowledge)); break;
             case "JK50B":
@@ -157,12 +158,13 @@ public static class CardEffects
                     await CardPileCmd.Add(selected, PileType.Hand);
                 break;
             case "JK73B":
-                foreach (var selected in await Choose(CardActions.Named(player, "JK73").Where(c => player.PlayerCombatState.HasEnoughResourcesFor(c, out _))))
-                    await CardActions.PaidPlay(context, selected);
+                foreach (var selected in CardActions.Named(player, "JK73").ToArray())
+                    await CardActions.FreePlay(context, selected);
                 break;
             case "JA67":
                 await Attack();
-                if (ArrowCombat.Find(card)?.ExhaustAfterResolve != true) await CardActions.PaidPlay(context, card);
+                if (ArrowCombat.Find(card)?.ExhaustAfterResolve != true)
+                    await CardActions.FreePlay(context, card, play.Target, keepTarget: true);
                 break;
             case "JK74":
                 await Attack(hits: hand.Cards.Any(c => CardCatalog.DesignId(c) == "JK74B") ? 2 : 1); break;

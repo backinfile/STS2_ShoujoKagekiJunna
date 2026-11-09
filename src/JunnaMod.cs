@@ -28,6 +28,7 @@ public static class JunnaMod
         Shine.RegisterDeferredResolutionPredicate(Models.CardCatalog.IsArrow);
         new Harmony(Id).PatchAll(Assembly.GetExecutingAssembly());
         ModHelper.SubscribeForCombatStateHooks(Id, _ => [ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>())]);
+        DescriptionOverrides.CustomizeDescriptionPost += DynamicKnowledge.Describe;
         Log.Info("Junna 0.1.0 initialized; direct card damage: AttackCommand / CreatureCmd; extra hits once per resolution.");
     }
 }

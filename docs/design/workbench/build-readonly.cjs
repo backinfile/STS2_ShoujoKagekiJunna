@@ -70,20 +70,21 @@ app = app.replace(/  try\{oldDraftKey=sessionStorage[^\n]+\n/, '');
 app = app.replace(/  async function connectLocalService\(\)\{[\s\S]*?\n  \}/, '  async function connectLocalService(){return false;}');
 app = app.replace(/  async function saveHTML\(\)\{[\s\S]*?(?=  function imageDataURL)/, '  async function saveHTML(){}\n');
 const guard = read('readonly-view.js');
-const sources = ['arrow-focus.js','energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','card-model-view.js','fit-pool-view.js','relic-view.js','power-view.js','card-hover-tips.js','workbench-domain.js','initial-config.js','mobile-layout.js'].map(read);
-const script = [guard, ...sources, app].join('\n');
+const sources = ['arrow-focus.js','energy-wording.js','card-reference-wording.js','effect-statistics.js','route-statistics.js','route-statistics-view.js','pool-reference.js','native-card-pools.js','native-pool-comparison.js','card-model-view.js','fit-pool-view.js','relic-view.js','power-view.js','card-hover-tips.js','workbench-domain.js','initial-config.js','mobile-layout.js'].map(read);
+const script = [guard, read('pwa.js'), ...sources, app].join('\n');
 new vm.Script(script);
 const css = ['workbench.css','card-model.css','fit-pool.css','relic.css','power.css','card-hover-tips.css','readonly.css','initial-config.css','mobile.css'].map(read).join('\n').replaceAll('__REGULAR_FONT__', assets['game-regular']).replaceAll('__BOLD_FONT__', assets['game-bold']);
 const inlineData = (id, data) => '<script id="' + id + '" type="application/json">' + safe(data) + '</script>';
 const optionalData = name => {const file=path.join(design,'data',name);return fs.existsSync(file)?json(file):null;};
 let html = read('shell.html')
+  .replace('<!--PWA-->', () => require('./pwa.cjs').buildPwa(out))
   .replace('<!--STYLE-->', () => '<style>' + css + '</style>')
   .replace('<!--CONNECTION-->', '')
   .replace('<!--ASSETS-->', () => inlineData('workbench-assets', assets))
   .replace('<!--DATA-->', () => '<script id="workbench-data" type="application/json" data-src="/snapshot.json">'+safe({ui:state.ui})+'</script>')
   .replace('<!--ROUTE_DATA-->', () => inlineData('workbench-route-data', json(path.join(here,'route-statistics-defaults.json'))))
   .replace('<!--APP-->', () => inlineData('workbench-battle-sim',optionalData('纯那箭矢等待补偿战斗模拟_20261103.json')) + inlineData('workbench-card-audit',optionalData('纯那全卡牌数值校验_20261103.json')) + '<script>' + script + '</script>')
-  .replace('<head>', '<head><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: blob:; font-src \'self\' data:; connect-src \'self\'; base-uri \'none\'; form-action \'none\'; object-src \'none\'"><meta name="robots" content="noindex,nofollow">')
+  .replace('<head>', '<head><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; manifest-src \'self\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: blob:; font-src \'self\' data:; connect-src \'self\'; base-uri \'none\'; form-action \'none\'; object-src \'none\'"><meta name="robots" content="noindex,nofollow">')
   .replace('<body>', '<body class="readonly">')
   .replace('<div class="global-actions">', '<div class="global-actions"><span class="readonly-status">只读 · ' + new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Shanghai',dateStyle:'short'}).format(new Date(stamp)) + '</span>')
   .replace('title="编辑名称"', 'title="纯那 Mod 设计工作台" tabindex="-1"')

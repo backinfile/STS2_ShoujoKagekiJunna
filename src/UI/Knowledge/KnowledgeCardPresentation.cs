@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Nodes.HoverTips;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardLibrary;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
 
@@ -41,6 +42,14 @@ public static class KnowledgePreviewCards
     private static readonly ConditionalWeakTable<NCard, List<(Control Control, Control.MouseFilterEnum Filter)>> MouseFilters = new();
     public static IReadOnlyList<CardModel> Create(CardModel source, bool upgradeAll = false)
     {
+        var dynamicMembers = DynamicKnowledge.Members(source);
+        if (dynamicMembers.Count > 1)
+            return dynamicMembers.Select(member =>
+            {
+                var copy = ShoujoKageki.Core.V1.CardCopies.Snapshot(member);
+                if (upgradeAll && !copy.IsUpgraded && copy.IsUpgradable) copy.UpgradeInternal();
+                return copy;
+            }).ToArray();
         var group = KnowledgeCombat.Group(source);
         if (group == null)
             return DynamicKnowledge.Members(source).Select(c => ShoujoKageki.Core.V1.CardCopies.Snapshot(c)).ToArray();
@@ -101,7 +110,7 @@ public partial class KnowledgeCardStack : Control
         for (Node? parent = card.GetParent(); parent != null; parent = parent.GetParent())
         {
             if (parent is KnowledgeCardStack or KnowledgeGroupPreview) return false;
-            if (parent is NCardRewardSelectionScreen or NChooseACardSelectionScreen or NMerchantCard or NCardLibraryGrid)
+            if (parent is NCardRewardSelectionScreen or NChooseACardSelectionScreen or NChooseABundleSelectionScreen or NMerchantCard or NCardLibraryGrid)
                 return true;
         }
         return false;
@@ -159,9 +168,8 @@ public partial class KnowledgeCardStack : Control
     private void LayoutCard(NCard card, int depth, int count)
     {
         bool inMerchant = Holder() is NMerchantCard;
-        float step = Math.Min(inMerchant ? 16 : 24, (inMerchant ? 40f : 72f) / Math.Max(1, count));
-        // Keep backing cost icons and banners covered by the offered card in the compact shop slots.
-        card.Position = new(depth * step, depth * step * (inMerchant ? .65f : -.6f));
+        float step = Math.Min(24, (inMerchant ? 64f : 72f) / Math.Max(1, count));
+        card.Position = new(depth * step, -depth * step * .6f);
         card.Scale = Vector2.One * (1 - Math.Min(.12f, .03f * depth));
     }
 
@@ -269,6 +277,18 @@ internal static class KnowledgeCardPoolPatch
         // Native cards return to a shared pool, including cards previously used as non-interactive previews.
         KnowledgePreviewCards.RestoreMouse(__instance);
         var stack = __instance.GetNodeOrNull<KnowledgeCardStack>("JunnaKnowledgeStack");
+        stack?.Clear();
+        if (stack != null) stack.Visible = false;
+    }
+}
+
+[HarmonyPatch(typeof(NCardFlyVfx), nameof(NCardFlyVfx._Ready))]
+internal static class KnowledgeCardFlightPatch
+{
+    private static void Prefix(NCard ____card)
+    {
+        // Native flight animates Body only; offer companions must not follow at full size.
+        var stack = ____card.GetNodeOrNull<KnowledgeCardStack>("JunnaKnowledgeStack");
         stack?.Clear();
         if (stack != null) stack.Visible = false;
     }

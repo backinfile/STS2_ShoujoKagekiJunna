@@ -116,6 +116,7 @@ public static class HandArrow
 
     internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, CardEffectContinuation next)
     {
+        play = CardActions.ResolveTarget(play);
         PaidReplay.PrepareEffect(card, play.PlayIndex);
         if (!CardCatalog.IsArrow(card))
         {

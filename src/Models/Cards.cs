@@ -28,7 +28,6 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
     {
         get
         {
-            var definition = CardCatalog.Get(DesignId);
             var rules = CardRules.Get(DesignId);
             // Extra tips precede native keyword tips; adding this first also fixes the group ordering.
             if (CardCatalog.IsKnowledge(this) || rules.HasTip(CardTip.Knowledge, IsUpgraded))
@@ -36,23 +35,23 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             var group = KnowledgeCombat.Group(this);
             if (group != null)
             {
-                var members = group.Members.Select(member =>
-                {
-                    var model = (CardModel)CardCatalog.Model(member.Id).MutableClone();
-                    if (IsUpgraded && model.IsUpgradable) model.UpgradeInternal();
-                    return $"[gold]{model.Title}[/gold]" + (member.Count > 1 ? $" ×{member.Count}" : "");
-                });
+                var members = group.Members.SelectMany(member =>
+                    Enumerable.Repeat($"[gold]{CardCatalog.Model(member.Id).Title}[/gold]", member.Count));
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
                     { Id = "junna_knowledge_group_" + group.MainCardId };
-                // The full group is listed above; keep card previews within one viewport.
-                foreach (var member in group.Members.Where(member => member.Id != DesignId).Take(2))
-                    yield return HoverTipFactory.FromCard(CardCatalog.Model(member.Id));
             }
             var background = LocString.GetIfExists("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND." + DesignId);
             if (background != null)
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND"), background)
                     { Id = "junna_knowledge_background_" + DesignId };
             foreach (var related in rules.RelatedCards) yield return new CardHoverTip(CardCatalog.Model(related));
+            if (rules.HasTip(CardTip.Meteor, IsUpgraded))
+            {
+                var meteor = (CatalogCard)ShoujoKageki.Core.V1.CardCopies.Snapshot(CardCatalog.Model("JA81B"));
+                if (IsUpgraded) { meteor.UpgradeInternal(); meteor.FinalizeUpgradeInternal(); }
+                meteor.SetGeneratedDamage((int)DynamicVars.Damage.PreviewValue);
+                yield return new CardHoverTip(meteor);
+            }
             if (CardCatalog.IsArrow(this) || rules.HasTip(CardTip.Arrow, IsUpgraded))
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Arrow);
             if (rules.HasTip(CardTip.DamageBonus, IsUpgraded) || DamageModifiers.CaptureDamageModifierSnapshot(this).DamageBonus > 0)

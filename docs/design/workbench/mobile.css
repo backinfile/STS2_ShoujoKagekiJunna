@@ -132,6 +132,15 @@
     justify-content: flex-end;
   }
 
+  .readonly #install-app {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .readonly:has(#install-app:not([hidden])) .readonly-status {
+    grid-column: 2;
+  }
+
   .readonly-status {
     grid-column: 2 / -1;
     grid-row: 1;

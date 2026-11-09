@@ -20,14 +20,7 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     public IEnumerable<Creature> Targets => TargetsAllPlayers ? Card.CombatState?.PlayerCreatures ?? []
         : TargetsAllEnemies ? Card.CombatState?.GetOpponentsOf(Card.Owner.Creature) ?? []
         : Target is { } target ? [target] : [];
-    internal void Retarget(Creature target) => Play = new CardPlay
-    {
-        Card = Play.Card, Target = target, ResultPile = Play.ResultPile,
-#if STS2_BETA
-        Player = Play.Card.Owner,
-#endif
-        Resources = Play.Resources, IsAutoPlay = Play.IsAutoPlay, PlayIndex = Play.PlayIndex, PlayCount = Play.PlayCount
-    };
+    internal void Retarget(Creature target) => Play = GameApi.WithTarget(Play, target);
     public int Remaining { get; internal set; } = remaining;
     public int DeployedRound { get; } = round;
     public int AttacksWhileWaiting { get; internal set; }

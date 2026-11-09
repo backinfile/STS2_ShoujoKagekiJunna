@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using MegaCrit.Sts2.Core.Random;
 using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
@@ -23,6 +24,23 @@ public static class KnowledgeCombat
         public Scope() => SingleDepth.Value++;
         public void Dispose() => SingleDepth.Value--;
     }
+
+    private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, bool single)
+    {
+        foreach (var result in results)
+        {
+            var card = result.cardAdded;
+            if (result.success && result.oldPile == null) KnowledgeProgress.Acquired(card);
+            if (single || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || Copies.TryGetValue(card, out _)) continue;
+            bool discovered = Discovered.Remove(card);
+            bool generated = card.Pile!.IsCombatPile && card.Pile.Type != PileType.Play && card.DeckVersion == null;
+            if (card.Pile.Type == PileType.Deck || discovered || generated)
+            {
+                await GrantPartners(card, card.Pile!.Type);
+                await DynamicKnowledge.Acquire(card, card.Pile!.Type);
+            }
+        }
+    }
     public static IDisposable SingleCard() => new Scope();
     public static KnowledgeGroup? Group(CardModel card)
     {
@@ -32,8 +50,8 @@ public static class KnowledgeCombat
     public static bool HasGroup(CardModel card) => Group(card) != null || DynamicKnowledge.Members(card).Count > 1;
     public static async Task DrawPartners(PlayerChoiceContext context, CardModel card)
     {
-        var group = Group(card);
         var members = DynamicKnowledge.Members(card);
+        var group = members.Count > 1 ? null : Group(card);
         if (group == null && members.Count == 0) return;
         var active = Drawing.Value ??= [];
         string key = card.Owner.NetId + ":" + (group?.MainCardId ?? "dynamic");
@@ -47,10 +65,10 @@ public static class KnowledgeCombat
         }
         finally { active.Remove(key); }
     }
-    private static async Task GrantPartners(CardModel acquired, PileType destination)
+    internal static async Task<IReadOnlyList<CardModel>> GrantPartners(CardModel acquired, PileType destination)
     {
         var group = Group(acquired);
-        if (group == null) return;
+        if (group == null) return [acquired];
         using var single = SingleCard();
         var counts = new Dictionary<string, int>(group.GrantedCardCounts);
         foreach (var (memberId, count) in group.Members) counts[memberId] = count;
@@ -68,7 +86,11 @@ public static class KnowledgeCombat
                     var result = await CardPileCmd.Add(card, PileType.Deck);
                     if (result.success && result.cardAdded.Pile == acquired.Pile) gained.Add(result.cardAdded);
                 }
-                else await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner);
+                else
+                {
+                    await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner);
+                    if (card.Pile?.Type == destination) gained.Add(card);
+                }
             }
         if (destination == PileType.Deck) KnowledgeProgress.BindResearch(gained);
         if (destination == PileType.Deck && acquired.Pile is { Type: PileType.Deck } deck)
@@ -82,6 +104,7 @@ public static class KnowledgeCombat
             foreach (var card in ordered) deck.AddInternal(card, index++, silent: true);
             deck.InvokeContentsChanged();
         }
+        return gained;
     }
 
     [HarmonyPatch]
@@ -99,18 +122,20 @@ public static class KnowledgeCombat
         private static async Task<IReadOnlyList<CardPileAddResult>> Complete(Task<IReadOnlyList<CardPileAddResult>> task, bool single)
         {
             var results = await task;
-            foreach (var result in results)
-            {
-                var card = result.cardAdded;
-                if (result.success && result.oldPile == null) KnowledgeProgress.Acquired(card);
-                if (single || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || Copies.TryGetValue(card, out _)) continue;
-                bool discovered = Discovered.Remove(card);
-                if (card.Pile!.Type == PileType.Deck || discovered)
-                {
-                    await GrantPartners(card, card.Pile!.Type);
-                    await DynamicKnowledge.Acquire(card, card.Pile!.Type);
-                }
-            }
+            await CompleteAcquisition(results, single);
+            return results;
+        }
+    }
+    [HarmonyPatch(typeof(CardCmd), nameof(CardCmd.Transform), [typeof(IEnumerable<CardTransformation>), typeof(Rng), typeof(CardPreviewStyle)])]
+    private static class TransformGroup
+    {
+        private static void Prefix(out bool __state) => __state = SingleDepth.Value > 0;
+        private static void Postfix(ref Task<IEnumerable<CardPileAddResult>> __result, bool __state)
+            => __result = Complete(__result, __state);
+        private static async Task<IEnumerable<CardPileAddResult>> Complete(Task<IEnumerable<CardPileAddResult>> task, bool single)
+        {
+            var results = (await task).ToArray();
+            await CompleteAcquisition(results, single);
             return results;
         }
     }
