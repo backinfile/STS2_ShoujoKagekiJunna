@@ -664,13 +664,8 @@ internal static partial class CardRules
         },
         ["JK131"] = new()
         {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N0",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Draw,
+            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
+            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
         },
         ["JK131B"] = new()
         {
@@ -813,6 +808,48 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
             Effect = SimpleCardEffect.Draw,
+        },
+        ["JK200"] = new()
+        {
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+            Effect = SimpleCardEffect.Attack,
+        },
+        ["JK200B"] = new()
+        {
+            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
+            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
+        },
+        ["JK206"] = new()
+        {
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["JK206B"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Cards"] = "N0",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["JK235"] = new()
+        {
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+            PowerDescription = PowerDescriptionKind.DamageGroups,
+            PowerAmount = PowerAmountKind.Applications,
+            SinglePower = false,
+        },
+        ["JK235B"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N1",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
         },
         ["JK27"] = new()
         {
@@ -1119,6 +1156,16 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
             Effect = SimpleCardEffect.Attack,
+        },
+        ["JS33"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["ArrowCount"] = "N0",
+                ["KnowledgeCount"] = "N1",
+            },
+            Tips = [CardTip.Arrow, CardTip.Knowledge],
+            UpgradedTips = [CardTip.Arrow, CardTip.Knowledge],
         },
         ["JS34"] = new()
         {

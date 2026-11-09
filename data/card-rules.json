@@ -730,16 +730,14 @@
       }
     },
     "JK131": {
-      "fields": {
-        "DrawCount": "N0"
-      },
       "tips": [
-        "Knowledge"
+        "Knowledge",
+        "DamageBonus"
       ],
       "upgradedTips": [
-        "Knowledge"
-      ],
-      "effect": "Draw"
+        "Knowledge",
+        "DamageBonus"
+      ]
     },
     "JK131B": {
       "tips": [
@@ -1647,6 +1645,82 @@
     "JA59": {
       "legacy": true,
       "effect": "Attack"
+    },
+    "JS33": {
+      "fields": {
+        "ArrowCount": "N0",
+        "KnowledgeCount": "N1"
+      },
+      "tips": [
+        "Arrow",
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Knowledge"
+      ]
+    },
+    "JK200": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK200B": {
+      "tips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "DamageBonus"
+      ]
+    },
+    "JK206": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK206B": {
+      "fields": {
+        "Cards": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK235": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "DamageGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JK235B": {
+      "fields": {
+        "DrawCount": "N1"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
     }
   }
 }

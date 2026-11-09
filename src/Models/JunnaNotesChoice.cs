@@ -17,6 +17,17 @@ public sealed class JunnaNotesDraw : JunnaNotesChoice;
 [CustomID("JUNNA_NOTES_ENERGY")]
 public sealed class JunnaNotesEnergy : JunnaNotesChoice;
 
+[CustomID("JUNNA_PREPARE_ARROWS")]
+public sealed class JunnaPrepareArrows : JunnaNotesChoice
+{
+    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JS33").Portrait;
+}
+[CustomID("JUNNA_PREPARE_KNOWLEDGE")]
+public sealed class JunnaPrepareKnowledge : JunnaNotesChoice
+{
+    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JS33").Portrait;
+}
+
 [CustomID("JUNNA_ENERGY_NOW")]
 public sealed class JunnaEnergyNow : JunnaNotesChoice
 {

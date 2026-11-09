@@ -26,7 +26,8 @@ SELECTION_PROMPTS = {
     "JG03": "选择1张手牌。",
     "JG09": "选择1张手牌。",
     "JG16": "选择1张手牌。",
-    "JT02": "选择1张非能力手牌。",
+    "JT02": "选择1张手牌。",
+    "JK206B": "选择{Cards}张知识牌。",
     "JA84": "选择1张手牌。",
     "JA87": "选择至多{Cards}张手牌。",
     "JA88": "选择任意张手牌。",
@@ -192,8 +193,14 @@ def main():
         # Core renders the current Shine budget, including depletion and upgrades.
         base = re.sub(r'闪耀\d+[。.]', '', base)
         upgrade = re.sub(r'闪耀\d+[。.]', '', upgrade)
-        base, values = bind_numbers(base)
-        upgrade, upgraded_values = bind_numbers(upgrade, values)
+        if cid == 'JK206':
+            base = base.replace('的伤害', '的伤害（{Damage:diff()}）')
+            upgrade = upgrade.replace('的伤害', '的伤害（{Damage:diff()}）')
+            values = [{'name': 'Damage', 'base': 0}]
+            upgraded_values = [{'name': 'Damage', 'base': 8}]
+        else:
+            base, values = bind_numbers(base)
+            upgrade, upgraded_values = bind_numbers(upgrade, values)
         # Upgrades can replace a fixed count with "all" (e.g. 论据).
         if len(upgraded_values) > len(values):
             raise ValueError('Upgrade introduces unmatched numbers: ' + cid)
@@ -206,9 +213,9 @@ def main():
         if card['type'] == '箭矢':
             values.append({'name': 'Turns', 'base': card['turns'], 'upgraded': card['upgradedTurns']})
         # Existing implementations use their established variable names.
-        if cid in ('JA16', 'JA17'):
-            base = re.sub(r'\{N\d+:diff\(\)\}', str(1 if cid == 'JA16' else 2), base)
-            upgrade = re.sub(r'\{N\d+:diff\(\)\}', str(1 if cid == 'JA16' else 2), upgrade)
+        if cid == 'JA16':
+            base = re.sub(r'\{N\d+:diff\(\)\}', '1', base)
+            upgrade = re.sub(r'\{N\d+:diff\(\)\}', '1', upgrade)
         if cid == 'JG09':
             base = base.replace('{N1:diff()}', '1')
             upgrade = upgrade.replace('{N1:diff()}', '1')
@@ -227,14 +234,20 @@ def main():
         if args.rules_only:
             portrait_name = existing_cards[cid]['portrait']
         else:
-            art = bundle['assets'][card['art']]
+            art = (json.loads((ROOT / 'docs/design/workbench/assets.json').read_text(encoding='utf-8'))['defaultPortrait']
+                   if card['art'] == 'defaultPortrait' else bundle['assets'][card['art']])
             mime, data = art.split(',', 1)
             image_bytes = base64.b64decode(data)
             # Some exported data URLs carry a stale MIME label; use the actual file signature.
-            extension = '.png' if image_bytes.startswith(b'\x89PNG\r\n\x1a\n') else '.jpg'
+            if mime == 'data:image/svg+xml;base64':
+                extension = '.svg'
+            elif image_bytes.startswith(b'\x89PNG\r\n\x1a\n'):
+                extension = '.png'
+            else:
+                extension = '.jpg'
             portrait_name = cid + extension
             (ROOT / 'ShoujoKagekiJunna/images/cards' / portrait_name).write_bytes(image_bytes)
-        damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid == 'JH30') and cid != 'JA82'
+        damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid in ('JH30', 'JK206')) and cid != 'JA82'
         target = {'自己': 'Self', '敌人': 'AnyEnemy', '任意敌人': 'AnyEnemy', '所有敌人': 'AllEnemies',
                   '无': 'None', '无需目标': 'None', '所有玩家': 'AllAllies',
                   '玩家': 'AnyPlayer', '队友': 'AnyAlly', '敌人或自己': 'AnyEnemy'}.get(card.get('target'))
@@ -297,6 +310,10 @@ def main():
         'JUNNA_ENERGY_NOW.description': '获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
         'JUNNA_ENERGY_LATER.title': '下回合',
         'JUNNA_ENERGY_LATER.description': '下回合获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
+        'JUNNA_PREPARE_ARROWS.title': '箭矢',
+        'JUNNA_PREPARE_ARROWS.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]箭矢[/gold]牌。',
+        'JUNNA_PREPARE_KNOWLEDGE.title': '知识',
+        'JUNNA_PREPARE_KNOWLEDGE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]知识[/gold]牌。',
         'JUNNA_NOTES_DRAW.title': '抽牌',
         'JUNNA_NOTES_DRAW.description': '抽{Amount:diff()}张牌。',
         'JUNNA_NOTES_ENERGY.title': '能量',

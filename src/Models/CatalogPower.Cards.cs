@@ -58,6 +58,15 @@ public abstract partial class CatalogPower
                 case "JA45" when CardCatalog.IsArrow(play.Card) && grant.Take(grant.V("Limit")):
                     if (ArrowCombat.Find(play.Card) is { } arrow) await ArrowCombat.Accelerate(context, arrow, grant.V("Turns"));
                     break;
+                case "JK235" when CardCatalog.IsKnowledge(play.Card):
+                    var targets = Owner.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
+                    if (targets.Length > 0)
+                    {
+                        var target = play.Card.Owner.RunState.Rng.CombatTargets.NextItem(targets)!;
+                        using (DamageExecution.BeginCardResolution(grant.Card))
+                            await GameApi.Damage(context, [target], grant.V("Damage"), ValueProp.Move, Owner, grant.Card, grant.Play);
+                    }
+                    break;
                 case "JK64" when CardCatalog.IsKnowledge(play.Card):
                     await AccelerateChoice(grant, context, 1, grant.V("Turns")); break;
                 case "JK75" when CardCatalog.IsKnowledge(play.Card):

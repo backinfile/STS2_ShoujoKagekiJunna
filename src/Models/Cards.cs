@@ -136,7 +136,7 @@ public sealed class JunnaBreakEncirclement() : JunnaCard(2, CardType.Attack, Car
     {
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).TargetingAllOpponents(CombatState!)
             .WithHitFx(VfxCmd.slashPath).Execute(context);
-        await PowerCmd.Apply<EnergyNextTurnPower>(context, Owner.Creature, 2, Owner.Creature, this);
+        await PowerCmd.Apply<EnergyNextTurnPower>(context, Owner.Creature, IsUpgraded ? 3 : 2, Owner.Creature, this);
     }
     protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3);
 }
