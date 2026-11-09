@@ -198,10 +198,10 @@ public static class CardEffects
                 await Energy(hand.Cards.Where(c => c != card && CardActions.HasNumericCost(c)).Sum(CardActions.Cost)); break;
             case "JA81":
                 var linked = await DealDamage(card, context, play, V("Damage"), 1);
-                await CardActions.Fly(context, player, linked.Sum(r => r.TotalDamage), play.Target, card.IsUpgraded); break;
+                await CardActions.Fly(context, player, linked.Sum(r => r.TotalDamage), play.Target); break;
             case "JA82":
                 int x = card.ResolveEnergyXValue();
-                for (int i = 0; i < x; i++) await CardActions.Fly(context, player, V("Damage"), upgraded: card.IsUpgraded);
+                for (int i = 0; i < x; i++) await CardActions.Fly(context, player, V("Damage"));
                 break;
             case "JA84":
                 await Block(); await HandArrow.Select(context, card, V("Cards")); break;

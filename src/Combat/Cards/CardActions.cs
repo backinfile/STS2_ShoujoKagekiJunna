@@ -73,9 +73,7 @@ public static class CardActions
     public static async Task Recall(PlayerChoiceContext context, CardModel source, string id)
     {
         var candidates = Named(source.Owner, id).Where(c => c != source && c.Pile?.Type != PileType.Hand).ToArray();
-        if (candidates.Length == 0) return;
-        var chosen = candidates.Length == 1 ? candidates : await Choose(context, source, candidates);
-        foreach (var card in chosen)
+        foreach (var card in candidates)
         {
             ArrowCombat.Cancel(card);
             await CardPileCmd.Add(card, PileType.Hand);

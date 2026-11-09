@@ -78,7 +78,7 @@
   "JUNNA_JK81_POWER.description": "在你的回合结束时，[gold]保留[/gold]所有耗能不低于[blue]2[/blue]的[gold]手牌[/gold]。",
   "JUNNA_JK81_POWER.smartDescription": "在你的回合结束时，[gold]保留[/gold]所有耗能不低于[blue]{Threshold}[/blue]的[gold]手牌[/gold]。",
   "JUNNA_JZ05_POWER.description": "每回合前[blue]1[/blue]次造成攻击伤害时，打出[blue]1[/blue]张造成等量伤害的[gold]流星[/gold]。",
-  "JUNNA_JZ05_POWER.smartDescription": "每回合前[blue]{Limit}[/blue]次造成攻击伤害时，打出[blue]{Amount}[/blue]张造成等量伤害的[gold]流星[/gold]。",
+  "JUNNA_JZ05_POWER.smartDescription": "每回合前[blue]{Amount}[/blue]次造成攻击伤害时，打出[blue]1[/blue]张造成等量伤害的[gold]流星[/gold]。",
   "JUNNA_JZ06_POWER.description": "在你的回合开始时，获得[gold]手牌[/gold]中最高耗能[blue]1[/blue]倍的能量。",
   "JUNNA_JZ06_POWER.smartDescription": "在你的回合开始时，获得[gold]手牌[/gold]中最高耗能[blue]{Amount}[/blue]倍的能量。",
   "JUNNA_JH30_POWER.description": "每当你获得、失去或消耗能量时，对一个随机敌人造成等量伤害。",

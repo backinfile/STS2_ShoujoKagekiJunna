@@ -504,13 +504,15 @@
     },
     "JZ05": {
       "fields": {
-        "Limit": "N0"
+        "Limit": "N0",
+        "Threshold": "N0",
+        "DisplayedAmount": "N0"
       },
       "tips": [],
       "upgradedTips": [],
       "power": {
-        "description": "LimitGroups",
-        "amount": "Applications",
+        "description": "ThresholdSum",
+        "amount": "Threshold",
         "single": false
       }
     },

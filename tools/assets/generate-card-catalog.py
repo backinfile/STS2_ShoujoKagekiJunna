@@ -267,6 +267,8 @@ def main():
             'damageCapable': damage, 'portrait': portrait_name, 'values': values,
             'text': card['text'], 'upgradedText': card['upgradedText'],
         }
+        if card.get('choiceOnly'):
+            entry['choiceOnly'] = True
         if 'arrowFocus' in card:
             entry['arrowFocus'] = card['arrowFocus']
         elif args.rules_only and 'arrowFocus' in existing_cards[cid]:

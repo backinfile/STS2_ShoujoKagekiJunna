@@ -17,7 +17,7 @@ namespace ShoujoKagekiJunna.Models;
 
 [Pool(typeof(JunnaCardPool))]
 public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, TargetType target, string designId)
-    : CustomCardModel(cost, type, rarity, target, showInCardLibrary: CardCatalog.Cards.Any(c => c.Id == designId))
+    : CustomCardModel(cost, type, rarity, target, showInCardLibrary: CardCatalog.Cards.Any(c => c.Id == designId && !c.ChoiceOnly))
 {
     public virtual string DesignId => designId;
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get(DesignId).Portrait;
@@ -48,7 +48,6 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             if (rules.HasTip(CardTip.Meteor, IsUpgraded))
             {
                 var meteor = (CatalogCard)ShoujoKageki.Core.V1.CardCopies.Snapshot(CardCatalog.Model("JA81B"));
-                if (IsUpgraded) { meteor.UpgradeInternal(); meteor.FinalizeUpgradeInternal(); }
                 meteor.SetGeneratedDamage((int)DynamicVars.Damage.PreviewValue);
                 yield return new CardHoverTip(meteor);
             }
