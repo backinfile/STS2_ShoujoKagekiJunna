@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Models;
@@ -22,12 +21,6 @@ public static class ArrowConversion
             card.EnergyCost.AddThisCombat(1);
         }
         card.InvokeEnergyCostChanged();
-    }
-    internal static void Describe(CardModel card, Creature? target, ref string description)
-    {
-        // Printed turns have their own plaque; converted cards omit that plaque as well.
-        if (card is JunnaCard junna && CardCatalog.Get(junna.DesignId).Type == "箭矢")
-            description = Regex.Replace(description, @"(?m)^\[blue\][^\r\n]*回合(?:后)?\[/blue\]。?\r?\n", "");
     }
     [HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
     private static class CloneConversion

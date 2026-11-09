@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using BaseLib.Utils.Attributes;
@@ -30,9 +29,9 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
         get
         {
             var definition = CardCatalog.Get(DesignId);
-            string text = IsUpgraded ? definition.UpgradedText : definition.Text;
+            var rules = CardRules.Get(DesignId);
             // Extra tips precede native keyword tips; adding this first also fixes the group ordering.
-            if (CardCatalog.IsKnowledge(this) || text.Contains("知识"))
+            if (CardCatalog.IsKnowledge(this) || rules.HasTip(CardTip.Knowledge, IsUpgraded))
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge);
             var group = KnowledgeCombat.Group(this);
             if (group != null)
@@ -53,16 +52,16 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             if (background != null)
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND"), background)
                     { Id = "junna_knowledge_background_" + DesignId };
-            if (DesignId is "JA144" or "JA145") yield return new CardHoverTip(CardCatalog.Model("JA119"));
-            if (CardCatalog.IsArrow(this) || text.Contains("箭矢"))
+            foreach (var related in rules.RelatedCards) yield return new CardHoverTip(CardCatalog.Model(related));
+            if (CardCatalog.IsArrow(this) || rules.HasTip(CardTip.Arrow, IsUpgraded))
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Arrow);
-            if (text.Contains("伤害加成") || DamageModifiers.CaptureDamageModifierSnapshot(this).DamageBonus > 0)
+            if (rules.HasTip(CardTip.DamageBonus, IsUpgraded) || DamageModifiers.CaptureDamageModifierSnapshot(this).DamageBonus > 0)
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.DamageBonus);
-            if (text.Contains("易伤")) yield return HoverTipFactory.FromPower<VulnerablePower>();
-            if (text.Contains("虚弱")) yield return HoverTipFactory.FromPower<WeakPower>();
-            if (text.Contains("保留") && text.Contains("手牌") && !Keywords.Contains(CardKeyword.Retain))
+            if (rules.HasTip(CardTip.Vulnerable, IsUpgraded)) yield return HoverTipFactory.FromPower<VulnerablePower>();
+            if (rules.HasTip(CardTip.Weak, IsUpgraded)) yield return HoverTipFactory.FromPower<WeakPower>();
+            if (rules.HasTip(CardTip.Retain, IsUpgraded) && !Keywords.Contains(CardKeyword.Retain))
                 yield return HoverTipFactory.FromKeyword(CardKeyword.Retain);
-            if (text.Contains("能量") || text.Contains("耗能") || Regex.IsMatch(text, @"\d+费"))
+            if (rules.HasTip(CardTip.Energy, IsUpgraded))
                 yield return EnergyHoverTip;
         }
     }

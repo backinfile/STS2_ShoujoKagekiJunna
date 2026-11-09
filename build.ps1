@@ -4,6 +4,8 @@ param(
     [string]$Godot = 'D:/Godot/megadot-4.5.1-m.12-windows-x86_64-llvm-editor-csharp/MegaDot_v4.5.1-stable_mono_win64_console.exe'
 )
 $ErrorActionPreference = 'Stop'
+& py -3 (Join-Path $PSScriptRoot 'tools/assets/generate-card-rules.py') --check
+if ($LASTEXITCODE) { throw 'Card runtime metadata validation failed' }
 . (Join-Path $PSScriptRoot 'tools/core-package.ps1')
 $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'ShoujoKagekiJunna.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $minimumCoreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiAijoCore' }).min_version

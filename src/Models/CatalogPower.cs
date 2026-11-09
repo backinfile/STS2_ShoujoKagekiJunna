@@ -45,7 +45,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
     internal int ReplayGrants => _grants.Count;
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
-    public override PowerStackType StackType => DesignId is "JA22" or "JK27" or "JK81" ? PowerStackType.Single : PowerStackType.Counter;
+    public override PowerStackType StackType => CardRules.Get(DesignId).SinglePower ? PowerStackType.Single : PowerStackType.Counter;
     public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{DesignId}.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     protected override void DeepCloneFields() { base.DeepCloneFields(); _grants = new(_grants); }
@@ -62,7 +62,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         {
             if (card.DesignId == "JK81" && card.Value("Threshold") < existing._grants.Min(g => g.V("Threshold")))
             {
-                existing._grants = [new((CatalogCard)card.MutableClone(), play, 0)];
+                existing._grants = [new(ShoujoKageki.Core.V1.CardCopies.Snapshot(card), play, 0)];
                 existing.Synchronize();
             }
             return;
@@ -71,7 +71,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         var power = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
         if (power == null) return;
         int xValue = card.Definition.CostsX ? card.ResolveEnergyXValue() : 0;
-        var snapshot = (CatalogCard)card.MutableClone();
+        var snapshot = ShoujoKageki.Core.V1.CardCopies.Snapshot(card);
         power._grants.Add(new(snapshot, play, xValue));
         if (card.DesignId == "JK127") KnowledgeProgress.RegisterCopy(card.Owner);
         power.Synchronize();

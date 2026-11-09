@@ -20,7 +20,7 @@ public static class JunnaMod
     public static void Initialize()
     {
         Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
-        CoreApi.Get<ICardPlayRouting>().Register(HandArrow.Dispatch, card => HandArrow.IsArrow(card) ? ArrowPile.PileId : null);
+        CoreApi.Get<ICardEffectRouting>().Register(HandArrow.Dispatch, card => Models.CardCatalog.IsArrow(card) ? ArrowPile.PileId : null);
         DamageSourceScopes.Install();
         KnowledgeProgress.Initialize();
         DynamicKnowledge.Initialize();
@@ -28,7 +28,6 @@ public static class JunnaMod
         Shine.RegisterDeferredResolutionPredicate(Models.CardCatalog.IsArrow);
         new Harmony(Id).PatchAll(Assembly.GetExecutingAssembly());
         ModHelper.SubscribeForCombatStateHooks(Id, _ => [ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>())]);
-        DescriptionOverrides.CustomizeDescriptionPost += ArrowConversion.Describe;
         Log.Info("Junna 0.1.0 initialized; direct card damage: AttackCommand / CreatureCmd; extra hits once per resolution.");
     }
 }

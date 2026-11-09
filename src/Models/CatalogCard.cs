@@ -48,24 +48,7 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         AssertMutable();
         DynamicVars.Damage.BaseValue = damage;
     }
-#if STS2_BETA
-    protected override CardLocation GetResultLocationForCardPlay() => CardCatalog.IsArrow(this)
-        ? new(Owner, ArrowPile.PileId, CardPilePosition.Bottom) : base.GetResultLocationForCardPlay();
-#else
-    protected override PileType GetResultPileTypeForCardPlay() => CardCatalog.IsArrow(this)
-        ? ArrowPile.PileId : base.GetResultPileTypeForCardPlay();
-#endif
-    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
-    {
-        if (CardCatalog.IsArrow(this))
-        {
-            if (!play.IsFirstInSeries) return;
-            int turns = Math.Max(0, Value("Turns") - (DesignId == "JA59" ? ResolveEnergyXValue() : 0));
-            ArrowCombat.Deploy(this, play, turns, ResolveArrow);
-            await CardPileCmd.Add(this, ArrowPile.PileId);
-        }
-        else await CardEffects.Resolve(this, context, play);
-    }
+    protected override Task OnPlay(PlayerChoiceContext context, CardPlay play) => CardEffects.Resolve(this, context, play);
     internal Task ResolveArrow(PlayerChoiceContext context, CardPlay play) => CardEffects.Resolve(this, context, play);
     protected override void OnUpgrade()
     {

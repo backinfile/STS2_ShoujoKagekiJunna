@@ -3,6 +3,7 @@
 The export is read-only. Effects are implemented explicitly in CardEffects.cs.
 """
 import argparse
+import runpy
 import base64
 from difflib import SequenceMatcher
 import json
@@ -356,3 +357,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    runpy.run_path(str(ROOT / 'tools/assets/generate-card-rules.py'))['generate'](ROOT)

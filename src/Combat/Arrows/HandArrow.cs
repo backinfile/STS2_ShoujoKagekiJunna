@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Models;
+using ShoujoKageki.Core.V1;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -100,36 +101,33 @@ public static class HandArrow
             _ => null
         };
         if (card.TargetType is TargetType.AnyEnemy or TargetType.AnyAlly && target == null) return;
-        int energyValue = card.EnergyCost.CostsX ? 0 : CardActions.Cost(card);
-        if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = 0;
         CostChanges.CaptureFreePayment(card);
         Mark(card, true);
-        await card.OnPlayWrapper(context, target, true, new ResourceInfo
+        bool played = false;
+        try
         {
-            EnergySpent = 0, EnergyValue = energyValue, StarsSpent = 0, StarValue = Math.Max(0, card.GetStarCostWithModifiers())
-        });
+            played = await CardExecution.Play(context, card, new CardExecutionRequest
+            {
+                Target = target, CaptureAvailableX = false, PreserveEnergyValue = true
+            });
+        }
+        finally { if (!played) Restore(card); }
     }
 
-    // Called only at the engine's OnPlay boundary, so native play hooks still run once.
-    internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, Func<CardPlay, Task> next)
+    internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, CardEffectContinuation next)
     {
         PaidReplay.PrepareEffect(card, play.PlayIndex);
-        if (IsArrow(card))
+        if (!CardCatalog.IsArrow(card))
         {
-            if (!play.IsFirstInSeries) return;
-            ArrowCombat.Deploy(card, play, 5, (choice, payload) => Resolve(card, choice, payload));
-            await CardPileCmd.Add(card, ArrowPile.PileId);
+            await next(context, play);
+            return;
         }
-        else await next(play);
+        if (!play.IsFirstInSeries) return;
+        int turns = Turns(card);
+        if (!IsArrow(card) && CardCatalog.DesignId(card) == "JA59") turns = Math.Max(0, turns - card.ResolveEnergyXValue());
+        ArrowCombat.Deploy(card, play, turns, (choice, payload) => next(choice, payload));
+        await CardPileCmd.Add(card, ArrowPile.PileId);
     }
-    private static async Task Resolve(CardModel card, PlayerChoiceContext context, CardPlay play)
-    {
-        if (card is CatalogCard catalog) await CardEffects.Resolve(catalog, context, play);
-        else if (card is JunnaFullDraw fullDraw) await fullDraw.ResolveArrow(context, play);
-        else await OriginalEffect(card, context, play);
-    }
-    private static Task OriginalEffect(CardModel card, PlayerChoiceContext context, CardPlay play)
-        => (Task)AccessTools.Method(card.GetType(), "OnPlay", [typeof(PlayerChoiceContext), typeof(CardPlay)]).Invoke(card, [context, play])!;
 
     internal static async Task<bool> Finish(PlayerChoiceContext context, CardModel card, bool forceExhaust = false)
     {

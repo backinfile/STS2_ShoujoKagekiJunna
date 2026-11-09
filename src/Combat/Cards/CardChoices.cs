@@ -20,10 +20,9 @@ public static class CardChoices
 
     public static async Task AccelerateTargets(PlayerChoiceContext context, CatalogCard source)
     {
-        var own = (CardModel)ModelDb.GetById<JunnaArrowTargetSelf>(ModelDb.GetId<JunnaArrowTargetSelf>()).MutableClone();
-        var enemies = (CardModel)ModelDb.GetById<JunnaArrowTargetEnemy>(ModelDb.GetId<JunnaArrowTargetEnemy>()).MutableClone();
-        own.Owner = enemies.Owner = source.Owner;
-        var selected = await CardSelectCmd.FromChooseACardScreen(context, [own, enemies], source.Owner);
+        var own = ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaArrowTargetSelf>(ModelDb.GetId<JunnaArrowTargetSelf>()), source.Owner);
+        var enemies = ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaArrowTargetEnemy>(ModelDb.GetId<JunnaArrowTargetEnemy>()), source.Owner);
+        var selected = await ShoujoKageki.Core.V1.CardOptions.Choose(context, [own, enemies], source.Owner);
         if (selected == null) return;
         bool self = selected == own;
         var arrows = ArrowCombat.DisplayOrder().Where(a => a.Card.Owner == source.Owner &&
@@ -33,49 +32,25 @@ public static class CardChoices
 
     public static async Task Notes(PlayerChoiceContext context, CatalogCard source)
     {
-        var draw = (JunnaNotesDraw)ModelDb.GetById<JunnaNotesDraw>(ModelDb.GetId<JunnaNotesDraw>()).MutableClone();
-        var energy = (JunnaNotesEnergy)ModelDb.GetById<JunnaNotesEnergy>(ModelDb.GetId<JunnaNotesEnergy>()).MutableClone();
-        draw.Owner = energy.Owner = source.Owner;
+        var draw = (JunnaNotesDraw)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaNotesDraw>(ModelDb.GetId<JunnaNotesDraw>()), source.Owner);
+        var energy = (JunnaNotesEnergy)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaNotesEnergy>(ModelDb.GetId<JunnaNotesEnergy>()), source.Owner);
         draw.DynamicVars["Amount"].BaseValue = source.Value("DrawCount");
         energy.DynamicVars["Amount"].BaseValue = source.Value("Energy");
-        var selected = await CardSelectCmd.FromChooseACardScreen(context, [draw, energy], source.Owner);
+        var selected = await ShoujoKageki.Core.V1.CardOptions.Choose(context, [draw, energy], source.Owner);
         if (selected == draw) await CardPileCmd.Draw(context, source.Value("DrawCount"), source.Owner);
         else if (selected == energy) await PlayerCmd.GainEnergy(source.Value("Energy"), source.Owner);
     }
 
     public static async Task EnergyTiming(PlayerChoiceContext context, CatalogCard source)
     {
-        var now = (JunnaEnergyNow)ModelDb.GetById<JunnaEnergyNow>(ModelDb.GetId<JunnaEnergyNow>()).MutableClone();
-        var later = (JunnaEnergyLater)ModelDb.GetById<JunnaEnergyLater>(ModelDb.GetId<JunnaEnergyLater>()).MutableClone();
-        now.Owner = later.Owner = source.Owner;
+        var now = (JunnaEnergyNow)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaEnergyNow>(ModelDb.GetId<JunnaEnergyNow>()), source.Owner);
+        var later = (JunnaEnergyLater)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaEnergyLater>(ModelDb.GetId<JunnaEnergyLater>()), source.Owner);
         now.DynamicVars["Amount"].BaseValue = source.Value("EnergyNow");
         later.DynamicVars["Amount"].BaseValue = source.Value("EnergyLater");
-        var selected = await CardSelectCmd.FromChooseACardScreen(context, [now, later], source.Owner);
+        var selected = await ShoujoKageki.Core.V1.CardOptions.Choose(context, [now, later], source.Owner);
         if (selected == now) await PlayerCmd.GainEnergy(source.Value("EnergyNow"), source.Owner);
         else if (selected == later) await PowerCmd.Apply<MegaCrit.Sts2.Core.Models.Powers.EnergyNextTurnPower>(
             context, source.Owner.Creature, source.Value("EnergyLater"), source.Owner.Creature, source);
     }
 
-    public static async Task<CardModel[]> ChooseTrainingPile(PlayerChoiceContext context, CatalogCard source)
-    {
-        var state = source.Owner.PlayerCombatState!;
-        if (!state.DrawPile.Cards.Concat(state.DiscardPile.Cards).Any(DamageModifiers.CanDealDamage)) return [];
-        CardModel Option(string id)
-        {
-            var option = (CardModel)CardCatalog.Model(id).MutableClone();
-            option.Owner = source.Owner;
-            if (source.IsUpgraded) { option.UpgradeInternal(); option.FinalizeUpgradeInternal(); }
-            return option;
-        }
-        var choices = new[] { Option("JK78D"), Option("JK78E") };
-        var selected = await CardSelectCmd.FromChooseACardScreen(context, choices, source.Owner);
-        var pile = CardCatalog.DesignId(selected!) switch
-        {
-            "JK78D" => state.DrawPile,
-            "JK78E" => state.DiscardPile,
-            _ => null
-        };
-        return pile == null ? [] : await CardActions.Choose(context, source,
-            pile.Cards.Where(DamageModifiers.CanDealDamage), source.Value("Cards"), optional: true);
-    }
 }

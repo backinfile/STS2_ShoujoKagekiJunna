@@ -18,6 +18,8 @@ using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 using ShoujoKagekiJunna.Models;
 
+using ShoujoKageki.Core.V1;
+
 namespace ShoujoKagekiJunna.Combat;
 
 public static class CardActions
@@ -87,14 +89,8 @@ public static class CardActions
         }
         else target = null;
         if (!card.Owner.PlayerCombatState.HasEnoughResourcesFor(card, out _)) return false;
-        int energyValue = Cost(card), starValue = Math.Max(0, card.GetStarCostWithModifiers());
-        var (energySpent, starsSpent) = await card.SpendResources();
         if (restartArrow) ArrowCombat.Cancel(card);
-        await card.OnPlayWrapper(context, target, true, new ResourceInfo
-        {
-            EnergySpent = energySpent, EnergyValue = energyValue, StarsSpent = starsSpent, StarValue = starValue
-        });
-        return true;
+        return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, Payment = CardPayment.Paid });
     }
 
     public static async Task FreePlay(PlayerChoiceContext context, CardModel card)
@@ -108,7 +104,7 @@ public static class CardActions
             target = await ChooseTarget(context, card);
             if (target == null) return;
         }
-        await CardCmd.AutoPlay(context, card, target);
+        await CardExecution.Play(context, card, new CardExecutionRequest { Target = target });
     }
 
     public static async Task PlayDrawPileArrows(PlayerChoiceContext context, Player player)
@@ -131,7 +127,7 @@ public static class CardActions
             if (card.TargetType is TargetType.AnyEnemy or TargetType.AnyAlly && target == null) continue;
             if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = 0;
             CostChanges.CaptureFreePayment(card);
-            await CardCmd.AutoPlay(context, card, target, skipXCapture: true);
+            await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, CaptureAvailableX = false });
         }
     }
 

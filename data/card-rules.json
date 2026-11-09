@@ -1,0 +1,1634 @@
+{
+  "format": 1,
+  "cards": {
+    "JG03": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JA15": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Draw"
+    },
+    "JA17": {
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JK11": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK11B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JG09": {
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
+    },
+    "JA22": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "power": {
+        "description": "Passive",
+        "amount": "Applications",
+        "single": true
+      }
+    },
+    "JT02": {
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
+    },
+    "A": {
+      "fields": {
+        "Cards": "N0",
+        "DisplayedAmount": "N0",
+        "Threshold": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "ThresholdSum",
+        "amount": "Threshold",
+        "single": false
+      }
+    },
+    "B": {
+      "fields": {
+        "DrawCount": "N0",
+        "Energy": "N1"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "effect": "DrawAndEnergy"
+    },
+    "JK27": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "Passive",
+        "amount": "Applications",
+        "single": true
+      }
+    },
+    "JK32": {
+      "fields": {
+        "DisplayedAmount": "N0",
+        "DrawCount": "N0",
+        "Threshold": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "power": {
+        "description": "ThresholdSum",
+        "amount": "Threshold",
+        "single": false
+      }
+    },
+    "JK32B": {
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
+    },
+    "JK32C": {
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
+    },
+    "JK37": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK37B": {
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
+    },
+    "JK37C": {
+      "fields": {
+        "Turns": "N1"
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "Energy"
+      ],
+      "power": {
+        "description": "TurnGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JK48": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK48B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK49": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK49B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Block"
+    },
+    "JA38": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Attack"
+    },
+    "JA43": {
+      "fields": {
+        "Turns": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JA53": {
+      "fields": {
+        "Cards": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JA57": {
+      "fields": {
+        "DrawCount": "N0",
+        "Energy": "N1"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ],
+      "effect": "DrawAndEnergy"
+    },
+    "JK67": {
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus"
+      ],
+      "power": {
+        "description": "BonusSum",
+        "amount": "Bonus",
+        "single": false
+      }
+    },
+    "JK67B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JG27": {
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
+    },
+    "JX01": {
+      "tips": [
+        "Arrow",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "DamageBonus"
+      ]
+    },
+    "JH11": {
+      "fields": {
+        "Energy": "N1"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ],
+      "effect": "BlockAndEnergy"
+    },
+    "JF10": {
+      "fields": {
+        "Debuff": "N0"
+      },
+      "tips": [
+        "Vulnerable",
+        "Weak"
+      ],
+      "upgradedTips": [
+        "Vulnerable",
+        "Weak"
+      ]
+    },
+    "JB01": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JB02": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JB03": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JA58": {
+      "fields": {
+        "Debuff": "N0"
+      },
+      "tips": [
+        "Vulnerable",
+        "Weak"
+      ],
+      "upgradedTips": [
+        "Vulnerable",
+        "Weak"
+      ]
+    },
+    "JH19": {
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ],
+      "power": {
+        "description": "RepeatedApplications",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JH22": {
+      "tips": [
+        "Arrow",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "DamageBonus"
+      ]
+    },
+    "JA64": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Attack"
+    },
+    "JA65": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JG33": {
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
+    },
+    "JG34": {
+      "tips": [],
+      "upgradedTips": [],
+      "power": {
+        "description": "DamageGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JA67": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JZ03": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Attack"
+    },
+    "JA71": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JH24": {
+      "fields": {
+        "Count": "N1"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JK78": {
+      "fields": {
+        "Amount": "N0",
+        "Cards": "N0"
+      },
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
+    },
+    "JA72": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Attack"
+    },
+    "JH27": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Block"
+    },
+    "JG36": {
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
+    },
+    "JK82": {
+      "fields": {
+        "Energy": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "effect": "Energy"
+    },
+    "JK82B": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Draw"
+    },
+    "JZ05": {
+      "fields": {
+        "Limit": "N0"
+      },
+      "tips": [],
+      "upgradedTips": [],
+      "power": {
+        "description": "LimitGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JA76": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JA77": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Attack"
+    },
+    "JA80": {
+      "fields": {
+        "Energy": "N0"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ],
+      "effect": "Energy"
+    },
+    "JA81": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JA81B": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Attack"
+    },
+    "JA82": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JK78D": {
+      "fields": {
+        "Amount": "N0"
+      },
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
+    },
+    "JK78E": {
+      "fields": {
+        "Amount": "N0"
+      },
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
+    },
+    "JA84": {
+      "fields": {
+        "Cards": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JA87": {
+      "fields": {
+        "Cards": "N0",
+        "DisplayedAmount": "N0",
+        "Threshold": "N0"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "power": {
+        "description": "ThresholdSum",
+        "amount": "Threshold",
+        "single": false
+      }
+    },
+    "JA88": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JA96": {
+      "fields": {
+        "DisplayedAmount": "N0",
+        "Threshold": "N0",
+        "Turns": "N0"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "power": {
+        "description": "ThresholdSum",
+        "amount": "Threshold",
+        "single": false
+      }
+    },
+    "JK84": {
+      "fields": {
+        "Cards": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
+    },
+    "JK84B": {
+      "fields": {
+        "Turns": "N1"
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
+    },
+    "JG37": {
+      "fields": {
+        "Cards": "N1",
+        "DrawCount": "N0"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JS19": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK122": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK122B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Noop"
+    },
+    "JK126": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK127": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "RepeatedApplications",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JK131": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Draw"
+    },
+    "JK131B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK133": {
+      "fields": {
+        "DrawCount": "N1"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "AttackAndDraw"
+    },
+    "JK137": {
+      "fields": {
+        "DrawCount": "N0",
+        "Energy": "N1"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
+    },
+    "JA104": {
+      "fields": {
+        "Turns": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JA105": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "power": {
+        "description": "Applications",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JH27B": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Draw"
+    },
+    "JA108": {
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
+    },
+    "JA108B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JB06": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Block"
+    },
+    "JA118": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "power": {
+        "description": "BlockSum",
+        "amount": "Block",
+        "single": false
+      }
+    },
+    "JA119": {
+      "fields": {
+        "Turns": "N0"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JF13": {
+      "fields": {
+        "DrawCount": "N1"
+      },
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "BlockAndDraw"
+    },
+    "JK184": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK184B": {
+      "fields": {
+        "Turns": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
+    },
+    "JK184C": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Block"
+    },
+    "JK184D": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Draw"
+    },
+    "JA144": {
+      "fields": {
+        "Cards": "N0",
+        "DisplayedAmount": "N0",
+        "Threshold": "N0"
+      },
+      "tips": [],
+      "upgradedTips": [],
+      "relatedCards": [
+        "JA119"
+      ],
+      "power": {
+        "description": "ThresholdSum",
+        "amount": "Threshold",
+        "single": false
+      }
+    },
+    "JA145": {
+      "fields": {
+        "Cards": "N1"
+      },
+      "tips": [],
+      "upgradedTips": [],
+      "relatedCards": [
+        "JA119"
+      ]
+    },
+    "JS34": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Draw"
+    },
+    "JS35": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Block"
+    },
+    "JH59": {
+      "fields": {
+        "DisplayedAmount": "N0",
+        "Energy": "N0",
+        "Threshold": "N0"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ],
+      "power": {
+        "description": "ThresholdSum",
+        "amount": "Threshold",
+        "single": false
+      }
+    },
+    "JH60": {
+      "fields": {
+        "EnergyLater": "N1",
+        "EnergyNow": "N0"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JK15": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "Applications",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JK15B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Block"
+    },
+    "JK44": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK44B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Noop"
+    },
+    "JZ06": {
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ],
+      "power": {
+        "description": "RepeatedApplications",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JK10": {
+      "fields": {
+        "DrawCount": "N1",
+        "Energy": "N2",
+        "EnergyThreshold": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "power": {
+        "description": "EnergyThresholdGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JK10B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "AttackAndBlock"
+    },
+    "JT03": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JK43": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK43B": {
+      "tips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "DamageBonus"
+      ]
+    },
+    "JK46": {
+      "fields": {
+        "Cards": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "GeneratedCardGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JK46B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JX02": {
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
+    },
+    "JH13": {
+      "fields": {
+        "Hits": "N2",
+        "Hits4": "N3"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JF07": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Draw"
+    },
+    "JH20": {
+      "fields": {
+        "Energy": "N0"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JK75": {
+      "tips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "power": {
+        "description": "BonusGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JA73": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JA75": {
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ]
+    },
+    "JH31": {
+      "fields": {
+        "Amount": "N1",
+        "EnergyThreshold": "N0",
+        "Threshold": "N0"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ],
+      "power": {
+        "description": "AmountWithThreshold",
+        "amount": "Amount",
+        "single": false
+      }
+    },
+    "JA94": {
+      "fields": {
+        "Turns": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JK75B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK112": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK112B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK130": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Block"
+    },
+    "JK130B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK139": {
+      "fields": {
+        "DisplayedAmount": "N0",
+        "Energy": "N0",
+        "Threshold": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "power": {
+        "description": "ThresholdSum",
+        "amount": "Threshold",
+        "single": false
+      }
+    },
+    "JK139B": {
+      "fields": {
+        "Energy": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "effect": "Energy"
+    },
+    "JG16": {
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus",
+        "Retain"
+      ]
+    },
+    "JH01": {
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JK33": {
+      "tips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "DamageBonus"
+      ]
+    },
+    "JK33B": {
+      "fields": {
+        "Count": "N1"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JG38": {
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ],
+      "effect": "Attack"
+    },
+    "JA16": {
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JK45": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK45B": {
+      "fields": {
+        "Turns": "N2"
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus",
+        "Energy"
+      ]
+    },
+    "JK50": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK50B": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Retain"
+      ]
+    },
+    "JA41": {
+      "tips": [],
+      "upgradedTips": [],
+      "effect": "Attack"
+    },
+    "JX07": {
+      "fields": {
+        "Energy": "N1"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JH10": {
+      "tips": [],
+      "upgradedTips": []
+    },
+    "JH17": {
+      "fields": {
+        "Energy": "N1"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ],
+      "effect": "BlockAndEnergy"
+    },
+    "JG31": {
+      "tips": [
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "DamageBonus"
+      ],
+      "power": {
+        "description": "BonusSum",
+        "amount": "Bonus",
+        "single": false
+      }
+    },
+    "JK80": {
+      "fields": {
+        "Amount": "N1",
+        "Threshold": "Block"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "AmountWithThreshold",
+        "amount": "Amount",
+        "single": false
+      }
+    },
+    "JH26": {
+      "fields": {
+        "Energy": "N1"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "JK148": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK148B": {
+      "fields": {
+        "Cards": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK148C": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Draw"
+    },
+    "JK148D": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
+    },
+    "JK148E": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Block"
+    },
+    "JK148F": {
+      "fields": {
+        "Energy": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "effect": "Energy"
+    },
+    "JA04": {
+      "legacy": true,
+      "fields": {
+        "Limit": "N0"
+      },
+      "power": {
+        "description": "RemainingUses",
+        "amount": "RemainingLimit",
+        "single": false
+      }
+    },
+    "JA35": {
+      "legacy": true,
+      "fields": {
+        "DisplayedAmount": "N0",
+        "Threshold": "N0",
+        "Turns": "N0"
+      },
+      "power": {
+        "description": "ThresholdSum",
+        "amount": "Threshold",
+        "single": false
+      }
+    },
+    "JA45": {
+      "legacy": true,
+      "fields": {
+        "Limit": "N0",
+        "Turns": "N1"
+      },
+      "power": {
+        "description": "ArrowLimitGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JA66": {
+      "legacy": true,
+      "fields": {
+        "Cards": "N0"
+      }
+    },
+    "JH23": {
+      "legacy": true,
+      "fields": {
+        "EnergyThreshold": "N0",
+        "EnergyThreshold2": "N1"
+      },
+      "power": {
+        "description": "BlockLimitGroups",
+        "amount": "Block",
+        "single": false
+      }
+    },
+    "JK64": {
+      "legacy": true,
+      "fields": {
+        "Turns": "N0"
+      },
+      "power": {
+        "description": "TurnGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JK81": {
+      "legacy": true,
+      "fields": {
+        "Threshold": "N0"
+      },
+      "power": {
+        "description": "MinimumThreshold",
+        "amount": "Applications",
+        "single": true
+      }
+    },
+    "JK81B": {
+      "legacy": true,
+      "fields": {
+        "Count": "N1"
+      }
+    },
+    "JH30": {
+      "legacy": true,
+      "power": {
+        "description": "RepeatedApplications",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "JH21": {
+      "legacy": true,
+      "power": {
+        "description": "BlockSum",
+        "amount": "Block",
+        "single": false
+      }
+    },
+    "JA70": {
+      "legacy": true,
+      "power": {
+        "description": "BlockSum",
+        "amount": "Block",
+        "single": false
+      }
+    },
+    "JK73": {
+      "legacy": true,
+      "effect": "AttackAndBlock"
+    },
+    "JK69B": {
+      "legacy": true,
+      "effect": "Attack"
+    },
+    "JA59": {
+      "legacy": true,
+      "effect": "Attack"
+    }
+  }
+}

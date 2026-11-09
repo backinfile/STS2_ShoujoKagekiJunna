@@ -43,7 +43,7 @@ public static class KnowledgePreviewCards
     {
         var group = KnowledgeCombat.Group(source);
         if (group == null)
-            return DynamicKnowledge.Members(source).Select(c => (CardModel)c.MutableClone()).ToArray();
+            return DynamicKnowledge.Members(source).Select(c => ShoujoKageki.Core.V1.CardCopies.Snapshot(c)).ToArray();
         var cards = new List<CardModel>();
         bool usedSource = false;
         foreach (var (id, count) in group.Members)
@@ -52,7 +52,7 @@ public static class KnowledgePreviewCards
             {
                 // Keep the offered card's modifications; companion copies are independent, as when acquired.
                 bool isSource = !usedSource && id == CardCatalog.DesignId(source);
-                var card = (CardModel)(isSource ? source : CardCatalog.Model(id)).MutableClone();
+                var card = ShoujoKageki.Core.V1.CardCopies.Snapshot(isSource ? source : CardCatalog.Model(id));
                 usedSource |= isSource;
                 if (upgradeAll && !card.IsUpgraded && card.IsUpgradable) card.UpgradeInternal();
                 cards.Add(card);
@@ -196,7 +196,7 @@ public partial class KnowledgeCardStack : Control
         if (_previewIndex == 0)
         {
             _bodyWasVisible = _source.Body.Visible;
-            _sourcePreview = NCard.Create((CardModel)_model!.MutableClone())!;
+            _sourcePreview = NCard.Create(ShoujoKageki.Core.V1.CardCopies.Snapshot(_model!))!;
             AddChild(_sourcePreview);
             _sourcePreview.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
             KnowledgePreviewCards.IgnoreMouse(_sourcePreview);
