@@ -1,56 +1,113 @@
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using BaseLib.Patches.Saves;
 using BaseLib.Utils;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
-/// <summary>Links identify physical knowledge groups, including cards from other characters.</summary>
+/// <summary>Run-wide model-ID relations, including cards from other characters.</summary>
 public static class DynamicKnowledge
 {
+    // Retained only to migrate groups saved by the former per-card implementation.
     private static readonly SavedSpireField<CardModel, string> Links = new(() => null, "JunnaKnowledgeLinks");
-    private static readonly SavedSpireField<Player, int> NextGroup = new(() => 0, "JunnaKnowledgeGroupSequence");
+    private static readonly SavedSpireField<Player, string> Relations = new(() => null, "JunnaKnowledgeRelations");
+    private sealed class RelationCache
+    {
+        public string? Serialized;
+        public List<KnowledgeRelation> Groups = [];
+    }
+    private static readonly ConditionalWeakTable<Player, RelationCache> Cache = new();
     private static readonly ConditionalWeakTable<CardModel, CardModel[]> Pending = new();
     private static readonly ConditionalWeakTable<CardModel, CardReward> Offers = new();
     public static void Initialize() { }
-    public static bool IsLinked(CardModel card) => !string.IsNullOrEmpty(Links.Get(card));
-    private static string[] Groups(CardModel card) => Links.Get(card)?.Split('\n', StringSplitOptions.RemoveEmptyEntries) ?? [];
+    private static string PreferredEntrance => CardCatalog.Model("JK126").Id.ToString();
+    private static List<KnowledgeRelation> Groups(Player player)
+    {
+        var cache = Cache.GetOrCreateValue(player);
+        string? serialized = Relations.Get(player);
+        if (cache.Serialized != serialized)
+        {
+            cache.Groups = string.IsNullOrEmpty(serialized) ? [] : JsonSerializer.Deserialize<List<KnowledgeRelation>>(serialized)!;
+            cache.Serialized = serialized;
+        }
+        return cache.Groups;
+    }
+    internal static KnowledgeRelation? Group(CardModel card) => card.IsMutable && card.Owner is { } owner
+        ? Groups(owner).FirstOrDefault(group => group.CardCounts.ContainsKey(card.Id.ToString())) : null;
+    public static bool IsLinked(CardModel card) => Group(card) != null;
+    private static string RewardEntranceId(Player player, CardModel card)
+    {
+        var group = Groups(player).FirstOrDefault(group => group.CardCounts.ContainsKey(card.Id.ToString()));
+        return group?.EntranceId ?? (KnowledgeCombat.Group(card) is { } original
+            ? CardCatalog.Model(original.MainCardId).Id.ToString() : card.Id.ToString());
+    }
+    public static bool IsRewardEntrance(Player player, CardModel card) => RewardEntranceId(player, card) == card.Id.ToString();
+    internal static IEnumerable<(CardModel Model, int Count)>? Definition(CardModel card) => Group(card)?.Members
+        .Select(member => (ModelDb.GetById<CardModel>(ModelId.Deserialize(member.Id)), member.Count));
     public static IReadOnlyList<CardModel> Members(CardModel source)
     {
-        if (!source.IsMutable || source.Owner == null || !IsLinked(source)) return [];
-        var groups = Groups(source).ToHashSet();
+        var group = Group(source);
+        if (group == null) return [];
         var cards = source.Pile?.IsCombatPile == true && source.Owner.PlayerCombatState != null
             ? source.Owner.PlayerCombatState.AllCards : source.Owner.Deck.Cards;
-        var members = cards.Where(c => Groups(c).Any(groups.Contains)).ToArray();
-        return members.Length > 0 ? members : [source];
+        var available = cards.Where(card => card != source).Prepend(source).ToLookup(card => card.Id.ToString());
+        return group.Members.SelectMany(member =>
+        {
+            var existing = available[member.Id].Take(member.Count).ToList();
+            while (existing.Count < member.Count)
+            {
+                var preview = (CardModel)ModelDb.GetById<CardModel>(ModelId.Deserialize(member.Id)).MutableClone();
+                preview.Owner = source.Owner;
+                existing.Add(preview);
+            }
+            return existing;
+        }).ToArray();
+    }
+    private static void Merge(Player player, IEnumerable<CardModel> cards)
+    {
+        var groups = Groups(player);
+        var counts = cards.Select(card => card.Id.ToString()).Distinct().ToDictionary(id => id, _ => 1);
+        counts.TryAdd(PreferredEntrance, 1);
+        var merged = KnowledgeRelation.Merge(groups, new(PreferredEntrance, counts), PreferredEntrance);
+        bool changed;
+        do
+        {
+            changed = false;
+            foreach (var original in CardCatalog.Groups)
+            {
+                var members = original.Members.ToDictionary(member => CardCatalog.Model(member.Id).Id.ToString(), member => member.Count);
+                if (!members.Keys.Any(merged.CardCounts.ContainsKey) ||
+                    members.All(member => merged.CardCounts.GetValueOrDefault(member.Key) >= member.Value)) continue;
+                merged = KnowledgeRelation.Merge(groups, new(CardCatalog.Model(original.MainCardId).Id.ToString(), members), PreferredEntrance);
+                changed = true;
+            }
+        } while (changed);
+        Relations.Set(player, JsonSerializer.Serialize(groups));
     }
     internal static void Normalize(Player player)
     {
-        NormalizeCards(player.Deck.Cards);
-        if (player.PlayerCombatState is { } combat) NormalizeCards(combat.AllCards);
-    }
-    private static void NormalizeCards(IEnumerable<CardModel> cards)
-    {
-        var snapshot = cards.ToArray();
-        foreach (var research in snapshot.GroupBy(KnowledgeProgress.ResearchGroup).Where(group => !string.IsNullOrEmpty(group.Key)))
+        var cards = player.Deck.Cards.Concat(player.PlayerCombatState?.AllCards ?? []).Distinct().ToArray();
+        var legacy = cards.SelectMany(card => (Links.Get(card)?.Split('\n', StringSplitOptions.RemoveEmptyEntries) ?? [])
+            .Select(link => (Card: card, Link: link))).GroupBy(pair => pair.Link);
+        foreach (var group in legacy) Merge(player, group.Select(pair => pair.Card));
+        foreach (var card in cards)
         {
-            var links = research.SelectMany(Groups).Distinct().ToArray();
-            if (links.Length == 0) continue;
-            foreach (var member in research)
-            {
-                var normalized = string.Join("\n", Groups(member).Concat(links).Distinct());
-                if (Links.Get(member) != normalized) Links.Set(member, normalized);
-                member.AddKeyword(JunnaKeywords.Knowledge);
-            }
+            if (!string.IsNullOrEmpty(Links.Get(card))) Links.Set(card, null!);
+            if (IsLinked(card)) card.AddKeyword(JunnaKeywords.Knowledge);
         }
     }
     [HarmonyPatch(typeof(Player), nameof(Player.FromSerializable))]
@@ -63,7 +120,13 @@ public static class DynamicKnowledge
     private static class SyncGroups
     {
         [HarmonyPostfix, HarmonyPriority(Priority.Last)]
-        private static void Postfix(Player __instance) => Normalize(__instance);
+        private static void Postfix(Player __instance, SerializablePlayer player)
+        {
+            // Native player synchronization does not import BaseLib's extended player fields.
+            var saved = ExtendedSaveHandlers<Player, SerializablePlayer>.ExtendedData.Get(player).DictForType<string>();
+            Relations.Set(__instance, saved.GetValueOrDefault("spirefield_" + Relations.Name)!);
+            Normalize(__instance);
+        }
     }
     public static async Task Prepare(PlayerChoiceContext context, CardModel selected, IEnumerable<CardModel> options)
     {
@@ -72,39 +135,24 @@ public static class DynamicKnowledge
         var partners = others.Length <= 2 ? others : await CardActions.Choose(context, selected, others, 2);
         if (partners.Length > 0) Pending.AddOrUpdate(selected, partners);
     }
-    public static async Task Acquire(CardModel acquired, PileType destination)
+    public static async Task<bool> Acquire(CardModel acquired, PileType destination)
     {
         if (Offers.TryGetValue(acquired, out var reward))
         {
             Offers.Remove(acquired);
             await Prepare(new BlockingPlayerChoiceContext(), acquired, reward.Cards);
         }
-        if (!Pending.TryGetValue(acquired, out var partners)) return;
+        if (!Pending.TryGetValue(acquired, out var partners)) return false;
         Pending.Remove(acquired);
-        int sequence = checked(NextGroup.Get(acquired.Owner) + 1);
-        NextGroup.Set(acquired.Owner, sequence);
-        string group = acquired.Owner.NetId + "/" + sequence;
-        void Link(CardModel member)
-        {
-            Links.Set(member, string.Join("\n", Groups(member).Append(group).Distinct()));
-            member.AddKeyword(JunnaKeywords.Knowledge);
-        }
-        Link(acquired);
+        Merge(acquired.Owner, partners.Prepend(acquired));
         foreach (var partner in partners)
         {
-            // Ordinary knowledge entrances still acquire their existing static companions.
-            // No new choice context is created for an attached dynamic entrance.
             Offers.Remove(partner);
             Pending.Remove(partner);
-            using (KnowledgeCombat.SingleCard())
-            {
-                if (destination == PileType.Deck) await CardPileCmd.Add(partner, PileType.Deck);
-                else await CardPileCmd.AddGeneratedCardToCombat(partner, destination, acquired.Owner);
-            }
-            if (partner.Pile?.Type == destination)
-                foreach (var member in await KnowledgeCombat.GrantPartners(partner, destination)) Link(member);
         }
         Normalize(acquired.Owner);
+        await KnowledgeCombat.GrantPartners(acquired, destination, partners);
+        return true;
     }
 
     internal static void Describe(CardModel card, Creature? target, ref string description)
@@ -117,28 +165,47 @@ public static class DynamicKnowledge
     [HarmonyPatch(typeof(CardReward), "OnSelect")]
     private static class RewardOptions
     {
-        private static void Prefix(CardReward __instance)
+        private static void Prefix(CardReward __instance, List<CardCreationResult> ____cards)
         {
+            var seen = new HashSet<string>();
+            for (int index = 0; index < ____cards.Count; index++)
+            {
+                var card = ____cards[index].Card;
+                string entrance = RewardEntranceId(__instance.Player, card);
+                if (entrance != card.Id.ToString())
+                {
+                    var replacement = __instance.Player.RunState.CreateCard(ModelDb.GetById<CardModel>(ModelId.Deserialize(entrance)), __instance.Player);
+                    if (card.IsUpgraded && replacement.IsUpgradable) { replacement.UpgradeInternal(); replacement.FinalizeUpgradeInternal(); }
+                    ____cards[index] = new CardCreationResult(replacement);
+                }
+                if (Groups(__instance.Player).Any(group => group.EntranceId == entrance) || KnowledgeCombat.Group(card) != null)
+                    if (!seen.Add(entrance)) ____cards.RemoveAt(index--);
+            }
             foreach (var card in __instance.Cards.Where(c => CardCatalog.DesignId(c) == "JK126"))
                 Offers.AddOrUpdate(card, __instance);
         }
     }
-    [HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
-    private static class CopyLinks
+    [HarmonyPatch(typeof(CardModel), nameof(CardModel.GetKeywordsWithSources))]
+    private static class LinkedKeyword
     {
-        private static void Postfix(AbstractModel __instance, AbstractModel __result)
+        private static void Postfix(CardModel __instance, KeywordSources sources, ref IReadOnlySet<CardKeyword> __result)
         {
-            if (__instance is not CardModel original || __result is not CardModel copy || !IsLinked(original)) return;
-            Links.Set(copy, Links.Get(original));
-            copy.AddKeyword(JunnaKeywords.Knowledge);
+            if (sources.HasFlag(KeywordSources.Local) && IsLinked(__instance) && !__result.Contains(JunnaKeywords.Knowledge))
+                __result = __result.Append(JunnaKeywords.Knowledge).ToHashSet();
         }
     }
-    [HarmonyPatch(typeof(CardModel), nameof(CardModel.FromSerializable))]
-    private static class RestoreLinks
+    [HarmonyPatch(typeof(CardFactory), "CreateForReward", [typeof(Player), typeof(IEnumerable<CardModel>), typeof(CardCreationOptions)])]
+    private static class RewardEntrances
     {
-        private static void Postfix(CardModel __result)
+        private static void Prefix(Player player, ref CardCreationOptions options)
         {
-            if (IsLinked(__result)) __result.AddKeyword(JunnaKeywords.Knowledge);
+            options = options with { };
+#if STS2_BETA
+            var originalFilter = options.CardPoolFilter;
+            options.WithFilter(card => (originalFilter?.Invoke(card) ?? true) && IsRewardEntrance(player, card));
+#else
+            options = options.WithCustomPool(options.GetPossibleCards(player).Where(card => IsRewardEntrance(player, card)).ToArray());
+#endif
         }
     }
     [HarmonyPatch(typeof(CardModel), "get_HoverTips")]
