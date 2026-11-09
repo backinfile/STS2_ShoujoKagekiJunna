@@ -143,6 +143,25 @@ public sealed class KnowledgeRelationsProbe : AbstractConsoleCmd
             field.Set(player, field.Get(restored));
             player.SyncWithSerializedPlayer(synchronized);
             Group(player.Deck.Cards.First(card => card.Id == _source.Id), expected);
+            if (typeof(KnowledgeCombat).GetMethod("PlayPartners") is { } playPartners)
+            {
+                foreach (var card in player.PlayerCombatState.Hand.Cards.ToArray())
+                    await CardPileCmd.RemoveFromCombat(card, skipVisuals: true);
+                var source = CardCatalog.Create("JK126", player);
+                var first = CardCatalog.Create("JK184C", player);
+                var second = CardCatalog.Create("JK184C", player);
+                CardModel copy;
+                using (KnowledgeCombat.SingleCard())
+                {
+                    foreach (var card in new[] { source, first, second })
+                        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);
+                    copy = first.CreateClone();
+                    await CardPileCmd.Add(copy, PileType.Hand, skipVisuals: true);
+                }
+                await (Task)playPartners.Invoke(null, [new ThrowingPlayerChoiceContext(), source])!;
+                Expect("integrated partner play includes every same-ID copy", new[] { first, second, copy }.All(card => card.Pile != player.PlayerCombatState.Hand));
+                Expect("integrated partner play leaves its source in hand", source.Pile == player.PlayerCombatState.Hand);
+            }
             var queued = new CardReward([fresh, player.RunState.CreateCard(CardCatalog.Model("JK126"), player)],
                 CardCreationSource.Other, player, new CardCreationOptions([], CardCreationSource.Other, CardRarityOddsType.Uniform));
             _ = queued.SelectUnsynchronized();

@@ -6,6 +6,14 @@
 
 > worktreetask 我来确认下知识关联牌的实现细节。要求不要改卡牌或关键字描述，只改实现：1 关联组为全局效果，一张牌加入关联组后，其中所有牌都共享一个关联组，因此所有牌的关联组tips都会更新 2 关联组中的卡牌按卡牌名字（卡牌ID）引用，复制牌也会遵循同样的关联组，本局游戏中之后出现的牌也有对应的关联组。进入关联组之后，一个关联组只有一张卡牌入口（其他牌不会作为卡牌奖励掉落），兼收并蓄永远会作为其关联组的入口。
 
+
+第三条用户输入（合并及清理确认）：
+
+```xml
+<send_user_message_question_reply>
+[{"answer":"整合既有修改，合并到 main 并清理","question":"任务已提交为 5a3f669，目标为 main；55 项实机检查、30 项逻辑检查及双版本编译通过。主目录 KnowledgeCombat.cs 有需保留并整合的既有修改。如何处理？选择清理时，会先保留录像、断言报告和发行包，再删除任务工作树、任务分支及本次临时状态快照。","questionItemId":"[\"request_user_input_async\",\"call_d9c145c658564faab8e79321c10024f1\",0]"}]
+</send_user_message_question_reply>
+```
 ## Brief task plan
 
 - 从 `main` 的 `65538012c43ab020965b7fef2c9eceb91d5c38a8` 创建 `codex/knowledge-global-groups-20261109`，工作树位于 `../worktrees/STS2_ShoujoKagekiJunna/knowledge-global-groups-20261109`。
@@ -16,7 +24,7 @@
 
 ## Result and changes
 
-实现已完成，等待合并确认。
+实现与组合验证已完成；合并及清理已获用户授权，正在同步更新后的本地主分支。
 
 - `src/Models/KnowledgeRelation.cs` 保存以完整模型 ID 为键的关联成员与张数，传递合并重叠组，强制以兼收并蓄为其所在组的入口。保留既定的同名成员数量，重复实体不会扩大关系定义。
 - `src/Combat/Knowledge/DynamicKnowledge.cs` 将动态关系持久化到本局玩家数据；已有牌、复制牌、未来新牌、外角色牌和预览均按 ID 读取同一份关系。完整迁移旧实例关联，成员移除后关系仍保留，存档读取与原生玩家快照同步均恢复关系。
@@ -40,3 +48,11 @@
 - 起始目标固定为 `main` 的 `65538012c43ab020965b7fef2c9eceb91d5c38a8`，任务分支为 `codex/knowledge-global-groups-20261109`。
 - 原检出的 52 个未提交或未跟踪文件已逐文件 SHA-256 核对，内容与 Git 状态均保持不变；其中 `src/Combat/Knowledge/KnowledgeCombat.cs` 与本任务修改文件重叠。保留原检出，合并前需要整合该文件中的既有修改。
 - 任务分支、工作树、发行包及证据保留，等待用户确认后再合并或清理。
+
+### 获准后的整合验证
+
+- 原有 52 项改动完整备份于 `out/tmp/knowledge-global-groups-20261109/pre-integration/`。
+- 既有未提交的 `PlayPartners` 保留，并在组合版本中改用完整模型 ID 匹配全部同名实体。新增两项定向断言验证三张同名牌（含复制牌）全部自动打出，来源牌保留在手牌。
+- 与原有 r4444 改动组合后，双版本编译、资源打包和 30 项逻辑检查通过，Beta 实机 57 项断言全部通过。
+- 原有修改、组合发行包、录像和断言报告已保留至原检出的 `out/tmp/knowledge-global-groups-20261109/`，清单为 `preservation-manifest.json` 和 `combined-input-manifest.json`。
+- 首次合并前检查发现 `main` 已从起始提交推进到 `c1555de`（箭矢布局整合），因此在写入主目录代码前停止，转为先同步该提交。
