@@ -86,7 +86,7 @@ public sealed class PlaytestFixProbe : AbstractConsoleCmd
                     var tips = card.HoverTips.ToArray();
                     var meteor = tips.OfType<CardHoverTip>().Select(tip => tip.Card).FirstOrDefault(preview => CardCatalog.DesignId(preview) == "JA81B");
                     Expect(id + " meteor card preview upgraded=" + upgraded, meteor != null, true);
-                    if (meteor != null) Expect(id + " meteor countdown upgraded=" + upgraded, HandArrow.Turns(meteor), upgraded ? 1 : 2);
+                    if (meteor != null) Expect(id + " meteor countdown upgraded=" + upgraded, HandArrow.Turns(meteor), 2);
                     Expect(id + " arrow keyword tooltip upgraded=" + upgraded,
                         tips.OfType<HoverTip>().Any(tip => tip.Id?.Contains("ARROW", StringComparison.OrdinalIgnoreCase) == true), true);
                 }

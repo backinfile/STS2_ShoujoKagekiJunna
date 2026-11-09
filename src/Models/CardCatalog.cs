@@ -25,6 +25,7 @@ public sealed class CardDefinition
     public string ArrowSubtype { get; init; } = "";
     public string Rarity { get; init; } = "";
     public bool Pool { get; init; }
+    public bool ChoiceOnly { get; init; }
     public bool Knowledge { get; init; }
     public bool Exhaust { get; init; }
     public bool UpgradedExhaust { get; init; }

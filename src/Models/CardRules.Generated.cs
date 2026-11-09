@@ -1216,10 +1216,12 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
+                ["DisplayedAmount"] = "N0",
                 ["Limit"] = "N0",
+                ["Threshold"] = "N0",
             },
-            PowerDescription = PowerDescriptionKind.LimitGroups,
-            PowerAmount = PowerAmountKind.Applications,
+            PowerDescription = PowerDescriptionKind.ThresholdSum,
+            PowerAmount = PowerAmountKind.Threshold,
             SinglePower = false,
         },
         ["JZ06"] = new()

@@ -280,3 +280,18 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 | ShoujoKagekiJunna.pck | 7e6ad7093564074bb7bed843898b4f2f1fcd97fbf99f386ff6a2386db21672a8 |
 | lib/ShoujoKagekiJunna.Beta.dll | 5a2c521092a81177d4c0196c10ff44e2cb4657baeffc2784168b40c6800222ad |
 | lib/ShoujoKagekiJunna.Stable.dll | b3a711f4f2a2989d983be5ee73f3d7d1305e3d39b4e84f560269d493d21de589 |
+
+### 同步后验证
+
+已同步原 main 的 0cd60b8，保留 306d339 的流星生成、选项可见性和对应卡召回修复。自动合并无冲突。同步后重新构建正式版和测试版 Junna DLL，并重新导入、打包当前资源。两版均为 0 警告、0 错误。167 项卡牌规则和 24 项能力元数据检查通过。
+
+正式版 v0.107.1、测试版 v0.111.0 各 19 项定向断言再次通过。移牌前后模型与可见节点分别为 5／5 和 7／7。最新截图及录像画面已查看，录像含内部混音音轨且已完成，焦点违规为 0。最新实测包与 final-packages/ 逐文件哈希一致，汇总已更新至共享证据 validation.json。
+
+| 文件 | 同步后 SHA-256 |
+| --- | --- |
+| ShoujoKagekiJunna.dll | 68075c94996599bdd6e549a7b1626b7baa7d2e1974cd2fd4aafb2565db168685 |
+| ShoujoKagekiJunna.pck | 2945b457a39b80da6186dee2b3b83198654e90f95dd839848bde76e285c05d6e |
+| lib/ShoujoKagekiJunna.Beta.dll | 07686ec3f2ec9de05549b5e7432ccb069e9df2fa8276454e4b93f044cebd395d |
+| lib/ShoujoKagekiJunna.Stable.dll | b9d14b3cc6d8359413a5d0f49be9b7814e784dd4e463660ad75611e5b2cd35df |
+
+同步后的任务提交保留在任务分支，合并三个原 main 与清理本次工作树等待用户确认。
