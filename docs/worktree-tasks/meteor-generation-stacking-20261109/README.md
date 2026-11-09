@@ -109,6 +109,64 @@
 
 立论和悖论两张牌打出后，都是会获取所有的相对的牌的（不要修改卡牌描述）
 
+### 8. 合并与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_08a64fc012014af9a494174ecca5e69b\",0]","question":"按 `$worktree-task` 的明确要求，请确认是否将本次扩展后的提交 `306d339` 合入 `main`。包含流星生成、即兴叠加、选项牌隐藏、图鉴解锁判定，以及立论／驳论取回全部对应牌，牌面描述保持原文。双版本构建通过，152项定向检查通过，原 main 工作区干净。选择清理时，会先把安装包、报告、截图和录像保存到主目录 `artifacts/task-deliverables/meteor-generation-stacking-20261109/`，再删除本次工作树、任务分支及其中临时文件。","answer":"合并并清理本次工作树和分支"}]
+</send_user_message_question_reply>
+
+### 9. 工作树技能要求
+
+<skill>
+<name>worktree-task</name>
+<path>$worktree-task</path>
+---
+name: worktree-task
+description: Use when completing a repository change in an isolated Git worktree, consolidating its task changes into one commit, and merging it back to the starting branch.
+---
+
+# Worktree Task
+
+Complete the requested change in a temporary worktree, then integrate it safely into the branch that was current when the task began.
+
+## Rules
+
+- Capture the original checkout, branch, and revision once; never re-infer the integration target.
+- Refuse an active Git operation. If the original checkout is dirty, warn that its uncommitted changes will not enter the worktree, preserve them untouched, and proceed from the current branch's latest commit by default.
+- Place the worktree at `../worktrees/<projectName>/<task-slug>` relative to the repository root, unless repository instructions override it.
+- Perform all modification and verification work inside the worktree.
+- Keep a task document under `docs/worktree-tasks/<task-slug>/` inside the worktree and include it in the task commit, so it survives integration and worktree cleanup.
+- Sanitize every document tracked by Git or being added to Git, including existing unchanged documents. Replace sensitive data such as private personal details and credentials with descriptive placeholders while preserving meaning.
+- Use repository-relative paths in persisted documents and express worktree locations relative to the repository root. Never persist local absolute paths, including in quoted user input or Markdown links. Use descriptive placeholders for paths outside the repository and `$skill-name` for local skill references. Tool calls and safety checks may use absolute paths internally.
+- Do not perform remote operations or rewrite existing original-branch history unless explicitly requested.
+- For merge and cleanup confirmation, use `request_user_input_async` when available and permitted; otherwise ask in chat. One explicit confirmation may approve both merging and the listed cleanup; the original task request alone is not approval.
+- Preserve the task branch and worktree whenever a safety check or integration fails.
+
+## Task Document
+
+Use `docs/worktree-tasks/<task-slug>/README.md` by default, with the same task slug as the worktree. Create it before implementation. Keep the input record complete and the plan and results concise:
+
+- **Original user input:** Record the full text of every task-related user message in chronological order, including introductory guidance, skill invocations, constraints, and follow-up corrections. Preserve the original wording and formatting, applying only the sanitization above. Append later messages in full.
+- **Brief task plan:** Record the intended approach and main steps; update it when the approach changes.
+- **Result and changes:** After implementation, summarize the actual completion status, changed files and behavior, verification results, and any remaining work or limitations. If work stops early, record partial progress accurately.
+
+Before each commit, check the input record against the user messages, finalize the result section, and review all Git-tracked documents and documents being added for sensitive data and local absolute paths, including quoted input and link targets. If synchronization changes the implementation or verification results, update the document in the synchronization commit. Preserve the document with the task changes and include its path in the final report.
+
+## Workflow
+
+1. Check the repository state and refuse conflicting worktree paths or branches. Record any original uncommitted state so it can be protected and verified later.
+2. Create a uniquely named task branch and worktree from the captured original branch's latest commit. Create the task document with the sanitized user input and brief plan.
+3. Establish a clean baseline, implement the task, and verify it. Complete the task document's result section, then consolidate all task changes, including the document, into one commit before synchronization unless the user or repository policy requires multiple commits.
+4. Merge the latest local original branch into the task branch. Resolve conflicts only in the worktree, then verify and commit the synchronized result.
+5. Confirm the original checkout is still on the captured branch, its committed HEAD is unchanged since synchronization, and any pre-existing uncommitted state remains intact. If HEAD advanced, repeat synchronization; stop after three races.
+6. Show the target branch, task commit, change summary, verification results, any original uncommitted state, and proposed cleanup items. Request one confirmation with choices to merge and clean up, merge and keep, or defer.
+7. Only after confirmation, merge the synchronized task branch back without creating an additional integration commit when possible. If integration would overwrite uncommitted state, preserve the worktree and report that integration is pending instead.
+8. Verify the committed trees match, checks pass, the original branch contains the consolidated task commit, and pre-existing uncommitted state was preserved.
+9. After successful integration verification, remove this run's clean worktree, task branch, and disposable temporary files covered by the cleanup approval, after proving needed content is preserved. Reuse combined approval from step 6 without asking again. If only merging was approved, retain these items until the user approves cleanup; request further confirmation for any additional cleanup items.
+
+Report the resulting branch, commit, verification, cleanup state, and task document path.
+</skill>
+
 ## Brief task plan
 
 - 原始分支 `main`，原始提交 `c450f4b86fb1f83311c853c291083226ab9e6d38`，工作区干净。
@@ -121,22 +179,22 @@
 
 ## Result and changes
 
-- 修复与定向验证完成，等待按 `$worktree-task` 确认合入 `main`。使用已安装r4272卡池为基线，相关工作台规则通过MCP提交为r4275，回执 `f4b073cb-fb2e-4d55-9565-704b8b697ea8`。
+- 修复与定向验证完成，用户已确认将实现提交 `306d339` 合入 `main` 并清理本次工作树和分支。使用已安装r4272卡池为基线，相关工作台规则通过MCP提交为r4275，回执 `f4b073cb-fb2e-4d55-9565-704b8b697ea8`。
 - 即兴、连射与箭雨的基础／升级版均生成基础流星，初始等待2回合。修正横扫、连射与箭雨的流星预览。显式生成升级流星及流星自身升级已纳入回归。
 - 即兴按所有已安装来源的当前牌面次数合计本回合触发上限，每个有效攻击伤害事件生成1张流星。普通＋普通为前2次，普通＋升级为前3次，升级＋升级为前4次。能力层数与悬停描述同步显示累计上限。
 - 核对全部当前生成入口。持续阅读+的牌面指定笔锋+，生成升级笔锋。复制牌与知识关联发放的版本由对应规则确定。
 - 新增真实入口回归 `tests/WorkbenchFitSync/MeteorProbe.cs`，同步旧流星预览断言。修复前82项断言中48项通过、34项失败，修复后82项全部通过。覆盖四种生成来源及预览、普通和升级即兴的四种组合、单事件生成数量、回合上限、下一回合刷新、安装前的攻击记录、流星完成后的嵌套触发、明确升级生成与伤害记录。
-- 失败基线 `out/tmp/meteor-fix/before.json`，最终结果 `out/tmp/meteor-fix/results.json`。用于复现与验证的游戏内命令为 `junna_meteor_fix check`。
+- 失败基线 `artifacts/task-deliverables/meteor-generation-stacking-20261109/meteor-fix/before.json`，最终结果 `artifacts/task-deliverables/meteor-generation-stacking-20261109/meteor-fix/results.json`。用于复现与验证的游戏内命令为 `junna_meteor_fix check`。
 - Beta、Stable、加载器均为0警告、0错误，Godot导入与PCK打包通过。167项运行规则、24项能力规则及字段身份校验通过。只执行本次修复所需定向检查。
-- 已录制12.8秒原生悬停与出牌演示，即兴和即兴+合计上限3，前三次攻击各生成1张2回合流星，第四次不再生成。H.264＋AAC，15fps，191次实际采集、1帧补帧、0丢帧。录像记录位于 `out/tmp/meteor-fix/recording.json`，帧拼图与原生截图位于同目录和 `video/`。
+- 已录制12.8秒原生悬停与出牌演示，即兴和即兴+合计上限3，前三次攻击各生成1张2回合流星，第四次不再生成。H.264＋AAC，15fps，191次实际采集、1帧补帧、0丢帧。录像记录位于 `artifacts/task-deliverables/meteor-generation-stacking-20261109/meteor-fix/recording.json`，帧拼图与原生截图位于同目录和 `video/`。
 - 独立实例采用随机端口、满解锁、最小化与静默配置，启动焦点采样0次前台占用。本次测试实例已退出。
-- 修复包 `artifacts/meteor-fix/Junna-meteor-fix.zip` 完整性检查通过，SHA-256为 `b4a37f973aaa0504744315f4ea63fc91124fa541ebe094b8cc60824d071db206`。
+- 修复包 `artifacts/task-deliverables/meteor-generation-stacking-20261109/Junna-fixes.zip` 完整性检查通过，SHA-256为 `b4a37f973aaa0504744315f4ea63fc91124fa541ebe094b8cc60824d071db206`。
 - 统一隐藏10张专用选项牌。原有8张辅助模型已设置隐藏，补齐JK78D抽牌堆／JK78E弃牌堆的choiceOnly导出与运行读取。工作台已有这两张牌的正确标记。整备原生选项选择正常，选择箭矢后实际抽取2张箭矢，已保存19.27秒录像。
 - 当前Steam档案中纯那衍生牌已有发现记录。原生图鉴先按奖励池生成已解锁集合，再检查已发现集合，纯那奖励池对基础牌、衍生牌与知识关联牌的过滤因此误显示锁定。新增局部图鉴补丁，将当前可展示纯那牌纳入图鉴解锁集合。奖励池资格与已发现判断继续沿原生流程。
-- 原生图鉴定向回归修复前21/30通过，修复后30/30通过，覆盖10张选项牌隐藏、流星／更近一步／基础牌／知识关联牌的可见状态、未发现流星状态及奖励资格。结果位于out/tmp/option-library/results.json，截图native-meteor-unlocked.png显示衍生池中的流星正常展示。
+- 原生图鉴定向回归修复前21/30通过，修复后30/30通过，覆盖10张选项牌隐藏、流星／更近一步／基础牌／知识关联牌的可见状态、未发现流星状态及奖励资格。结果位于artifacts/task-deliverables/meteor-generation-stacking-20261109/option-library/results.json，截图native-meteor-unlocked.png显示衍生池中的流星正常展示。
 - 立论／驳论打出后取回全部既有对应副本，手牌内实例保持原位，抽牌堆、弃牌堆和消耗堆中实例进入手牌，执行中的牌沿原有排除规则。保留实例的升级状态与原生回手去向。基础与升级牌面描述保持原文。工作台仅更新内部结算规则与备注，MCP回执36166c5f-6976-42b7-a152-7769d829659a，修订4298。
-- 新增对应牌回手回归tests/WorkbenchFitSync/RecallProbe.cs，40/40通过，覆盖双方普通／升级版、多副本跨牌堆、已有手牌、执行中对象、无对象场景、支付与结算去向。结果out/tmp/recall-all/results.json。实机录像6.27秒，打出立论取回3张驳论，随后打出驳论取回4张立论，94次采集、0补帧、0丢帧。测试辅助模组构建0警告、0错误。
-- 最终Beta、Stable和加载器构建0警告、0错误，Godot导入与PCK打包通过。构建记录out/tmp/recall-all/build.log，最终ZIP包含上述全部修复。
+- 新增对应牌回手回归tests/WorkbenchFitSync/RecallProbe.cs，40/40通过，覆盖双方普通／升级版、多副本跨牌堆、已有手牌、执行中对象、无对象场景、支付与结算去向。结果artifacts/task-deliverables/meteor-generation-stacking-20261109/recall-all/results.json。实机录像6.27秒，打出立论取回3张驳论，随后打出驳论取回4张立论，94次采集、0补帧、0丢帧。测试辅助模组构建0警告、0错误。
+- 最终Beta、Stable和加载器构建0警告、0错误，Godot导入与PCK打包通过。构建记录artifacts/task-deliverables/meteor-generation-stacking-20261109/build.log，最终ZIP包含上述全部修复。
 - 全部210份跟踪及新增文档经过敏感信息与本地绝对路径审查，未发现需要脱敏的内容。
-- Steam游戏进程仍在运行，本地更新将在退出后进行。主目录当前为原始提交且工作区干净。
-- 合并清理若获确认，将先把修复包、回归结果、构建日志、工作台回执、截图和录像保留到主目录忽略的 `artifacts/task-deliverables/meteor-generation-stacking-20261109/`，再清理本次工作树与任务分支。
+- 合入前核对原主目录仍为main及原始提交，工作区干净。Steam游戏进程仍在运行，本地更新将在退出后进行。
+- 已将27项修复包、回归结果、构建日志、工作台回执、截图和录像保留到主目录忽略的 `artifacts/task-deliverables/meteor-generation-stacking-20261109/`，复制文件逐项哈希一致。ZIP解包后7个安装文件与工作树发行目录一致。保留清单为同目录preservation-manifest.json，集成与清理回执为integration-receipt.json。本次工作树和任务分支在成功集成核验后按确认清理。
