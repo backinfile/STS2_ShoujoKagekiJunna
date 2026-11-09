@@ -47,6 +47,18 @@ public static class KnowledgeCombat
         return id == null ? null : CardCatalog.Groups.FirstOrDefault(g => g.MainCardId == id || g.GrantedCardIds.Contains(id));
     }
     public static bool HasGroup(CardModel card) => Group(card) != null || DynamicKnowledge.IsLinked(card);
+    public static async Task PlayPartners(PlayerChoiceContext context, CardModel card)
+    {
+        var relation = DynamicKnowledge.Group(card);
+        var group = relation == null ? Group(card) : null;
+        var ids = relation?.CardCounts.Keys.ToHashSet() ?? group?.Members
+            .Where(member => member.Id != CardCatalog.DesignId(card) || member.Count > 1)
+            .Select(member => CardCatalog.Model(member.Id).Id.ToString()).ToHashSet() ?? [];
+        var hand = card.Owner.PlayerCombatState!.Hand;
+        var partners = hand.Cards.Where(c => c != card && ids.Contains(c.Id.ToString())).ToArray();
+        foreach (var partner in partners)
+            if (partner.Pile == hand) await CardActions.FreePlay(context, partner);
+    }
     public static async Task DrawPartners(PlayerChoiceContext context, CardModel card)
     {
         var relation = DynamicKnowledge.Group(card);

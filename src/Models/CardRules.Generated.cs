@@ -124,6 +124,28 @@ internal static partial class CardRules
             Tips = [CardTip.Energy],
             UpgradedTips = [CardTip.Energy],
         },
+        ["JA176"] = new()
+        {
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+        },
+        ["JA177"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Turns"] = "N0",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+        },
+        ["JA205"] = new()
+        {
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            PowerDescription = PowerDescriptionKind.Passive,
+            PowerAmount = PowerAmountKind.Applications,
+            SinglePower = true,
+        },
         ["JA22"] = new()
         {
             Tips = [CardTip.Arrow],
@@ -851,6 +873,26 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
         },
+        ["JK254"] = new()
+        {
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+            PowerDescription = PowerDescriptionKind.Passive,
+            PowerAmount = PowerAmountKind.Applications,
+            SinglePower = true,
+        },
+        ["JK260"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Amount"] = "N0",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+            PowerDescription = PowerDescriptionKind.AmountWithThreshold,
+            PowerAmount = PowerAmountKind.Amount,
+            SinglePower = false,
+        },
         ["JK27"] = new()
         {
             Tips = [CardTip.Knowledge],
@@ -858,6 +900,24 @@ internal static partial class CardRules
             PowerDescription = PowerDescriptionKind.Passive,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = true,
+        },
+        ["JK272"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Amount"] = "N0",
+            },
+            Tips = [CardTip.Knowledge, CardTip.Weak],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Weak],
+        },
+        ["JK272B"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Amount"] = "N0",
+            },
+            Tips = [CardTip.Knowledge, CardTip.Vulnerable],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Vulnerable],
         },
         ["JK32"] = new()
         {
@@ -1231,6 +1291,16 @@ internal static partial class CardRules
             PowerDescription = PowerDescriptionKind.RepeatedApplications,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
+        },
+        ["U_CARD_005"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Cards"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            RelatedCards = ["U_CARD_005"],
         },
     };
 }

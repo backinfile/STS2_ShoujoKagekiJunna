@@ -22,7 +22,8 @@ public static class CloserStepTargeting
     {
         private static void Postfix(CardModel __instance, Creature? target, ref bool __result)
         {
-            if (CardCatalog.DesignId(__instance) == "JA119") __result = Accepts(__instance, target);
+            if (CardCatalog.DesignId(__instance) == "JA119" && __instance.TargetType == MegaCrit.Sts2.Core.Entities.Cards.TargetType.AnyEnemy)
+                __result = Accepts(__instance, target);
         }
     }
 

@@ -1542,7 +1542,6 @@
       }
     },
     "JA35": {
-      "legacy": true,
       "fields": {
         "DisplayedAmount": "N0",
         "Threshold": "N0",
@@ -1722,6 +1721,107 @@
       ],
       "upgradedTips": [
         "Knowledge"
+      ]
+    },
+    "JA176": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JA177": {
+      "fields": {
+        "Turns": "N0"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "JA205": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "power": {
+        "description": "Passive",
+        "amount": "Applications",
+        "single": true
+      }
+    },
+    "JK254": {
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "Passive",
+        "amount": "Applications",
+        "single": true
+      }
+    },
+    "JK260": {
+      "fields": {
+        "Amount": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "power": {
+        "description": "AmountWithThreshold",
+        "amount": "Amount",
+        "single": false
+      }
+    },
+    "U_CARD_005": {
+      "fields": {
+        "Cards": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "relatedCards": [
+        "U_CARD_005"
+      ]
+    },
+    "JK272": {
+      "fields": {
+        "Amount": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Weak"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Weak"
+      ]
+    },
+    "JK272B": {
+      "fields": {
+        "Amount": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Vulnerable"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Vulnerable"
       ]
     }
   }

@@ -1,13 +1,15 @@
 using System.Text.Json;
-using Godot;
-using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.DevConsole;
 using MegaCrit.Sts2.Core.DevConsole.ConsoleCommands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
+using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Runs;
 using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
 
@@ -16,88 +18,106 @@ namespace JunnaIntegration;
 public sealed class StarterRelicProbe : AbstractConsoleCmd
 {
     public override string CmdName => "junna_relics";
-    public override string Args => "check";
-    public override string Description => "Starter gem energy, retention and upgrade checks.";
+    public override string Args => "check | prepare";
+    public override string Description => "Check starter gem healing through native deck commands.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
-        ? new(false, "Combat required") : new(Check(player), true, "Starter relic checks started");
+        ? new(false, "Combat required")
+        : new(args.FirstOrDefault() == "prepare" ? Prepare(player) : Check(player), true, "Starter relic checks started");
+
+    private static async Task Prepare(Player player)
+    {
+        await CreatureCmd.SetCurrentHp(player.Creature, 40);
+        var cards = new[] { "JK11", "JA105", "JG03" }
+            .Select(id => player.RunState.CreateCard(CardCatalog.Model(id), player)).ToArray();
+        var reward = new CardReward(cards, CardCreationSource.Other, player,
+            new CardCreationOptions([], CardCreationSource.Other, CardRarityOddsType.Uniform));
+        _ = reward.SelectUnsynchronized();
+    }
 
     private static async Task Check(Player player)
     {
-        const string report = "D:/Github/STS2_ShoujoKagekiJunna/artifacts/starter-relics/results.json";
         var rows = new List<object>();
-        var context = new ThrowingPlayerChoiceContext();
-        var state = player.Creature.CombatState!;
-        var combat = player.PlayerCombatState!;
-        int originalEnergy = combat.Energy, originalTurn = combat.TurnNumber;
-        var turnField = AccessTools.Field(typeof(PlayerCombatState), "<TurnNumber>k__BackingField");
-        void CheckValue(string name, object actual, object expected) => rows.Add(new { name, actual, expected, pass = Equals(actual, expected) });
-        void Turn(int turn) => turnField.SetValue(combat, turn);
-        async Task ClearReserve()
-        {
-            if (player.Creature.GetPower<EnergyReserve>() is { } reserve) await PowerCmd.Remove(reserve);
-        }
-        async Task Refresh()
-        {
-            combat.ResetEnergy();
-            if (player.Creature.GetPower<EnergyReserve>() is { } reserve) await reserve.AfterEnergyReset(player);
-        }
+        void Expect(string name, bool pass) => rows.Add(new { name, pass });
+        var originalCards = player.Deck.Cards.ToHashSet();
+        var originalGems = player.Relics.OfType<JunnaGem>().ToArray();
+        int originalHp = player.Creature.CurrentHp;
+        double speed = Godot.Engine.TimeScale;
+        Godot.Engine.TimeScale = 15;
         try
         {
-            CheckValue("new run starter", ModelDb.Character<Junna>().StartingRelics.Single().Id, ModelDb.Relic<JunnaGreenGem>().Id);
-            CheckValue("natural first-turn energy", combat.Energy, combat.MaxEnergy + 1);
-            CheckValue("natural first-turn reserve", player.Creature.GetPower<EnergyReserve>()?.Amount ?? 0, 1);
-            CheckValue("relic pool energy icon", ResourceLoader.Exists(ModelDb.RelicPool<JunnaRelicPool>().TextEnergyIconPath), true);
-            foreach (var (canonical, amount) in new (RelicModel, int)[] { (ModelDb.Relic<JunnaGreenGem>(), 1), (ModelDb.Relic<JunnaBurningGem>(), 3) })
+            Expect("workbench r4456", CardCatalog.Revision == 4456);
+            Expect("107 cards and 20 knowledge groups", CardCatalog.Cards.Count == 107 && CardCatalog.Groups.Count == 20);
+            Expect("all active model rarities match workbench", CardCatalog.Cards.All(definition =>
+                CardCatalog.Model(definition.Id).Rarity == definition.CardRarity));
+            Expect("updated rarity", CardCatalog.Model("JG03").Rarity == CardRarity.Uncommon
+                && CardCatalog.Model("JK48").Rarity == CardRarity.Rare && CardCatalog.Model("JK48B").Rarity == CardRarity.Rare);
+            Expect("updated thesis values", CardCatalog.Get("JK11").Values.First().Base == 7
+                && CardCatalog.Get("JK11").Values.First().Upgraded == 10
+                && CardCatalog.Get("JK11B").Values.First().Base == 10
+                && CardCatalog.Get("JK11B").Values.First().Upgraded == 13);
+            foreach (var gem in originalGems) await RelicCmd.Remove(gem);
+            foreach (var (canonical, amount) in new (RelicModel, int)[]
+                { (ModelDb.Relic<JunnaGreenGem>(), 1), (ModelDb.Relic<JunnaBurningGem>(), 2) })
             {
-                var relic = (JunnaGem)canonical.ToMutable();
-                relic.Owner = player;
-                string label = relic.Id.Entry;
-                string description = relic.DynamicDescription.GetFormattedText();
-                CheckValue(label + " description", !description.Contains("ERROR") && !description.Contains("{"), true);
-                CheckValue(label + " icon", ResourceLoader.Exists(relic.PackedIconPath), true);
-                CheckValue(label + " icon outline", relic.IconOutline.GetSize(), new Vector2(128, 128));
-                CheckValue(label + " pool", relic.Pool.Id, ModelDb.RelicPool<JunnaRelicPool>().Id);
-                foreach (int remaining in new[] { 0, 1, 9 }.Distinct())
-                {
-                    await ClearReserve(); Turn(1); combat.Energy = combat.MaxEnergy;
-                    await relic.BeforeHandDraw(player, context, state);
-                    CheckValue(label + $" gain before remainder {remaining}", combat.Energy, combat.MaxEnergy + amount);
-                    CheckValue(label + $" capacity before remainder {remaining}", player.Creature.GetPower<EnergyReserve>()!.Amount, amount);
-                    combat.Energy = remaining; Turn(2); await Refresh();
-                    CheckValue(label + $" carries remainder {remaining}", combat.Energy, combat.MaxEnergy + Math.Min(remaining, amount));
-                    CheckValue(label + " reserve removed", player.Creature.GetPower<EnergyReserve>() == null, true);
-                    int before = combat.Energy;
-                    await relic.BeforeHandDraw(player, context, state);
-                    CheckValue(label + " no second-turn grant", combat.Energy, before);
-                    Turn(3); await Refresh();
-                    CheckValue(label + " no third-turn carry", combat.Energy, combat.MaxEnergy);
-                }
-                await ClearReserve(); Turn(1); combat.Energy = combat.MaxEnergy;
-                await relic.BeforeHandDraw(player, context, state);
-                await EnergyReserve.Add(context, player, 2);
-                CheckValue(label + " stacks card capacity", player.Creature.GetPower<EnergyReserve>()!.Amount, amount + 2);
-                combat.Energy = 9; Turn(2); await Refresh();
-                CheckValue(label + " stacked carry", combat.Energy, combat.MaxEnergy + amount + 2);
-                await ClearReserve(); Turn(1); combat.Energy = combat.MaxEnergy;
-                await relic.BeforeHandDraw(player, context, state);
-                combat.Energy = amount; combat.AddMaxEnergyToCurrent();
-                if (player.Creature.GetPower<EnergyReserve>() is { } retained) await retained.AfterEnergyReset(player);
-                CheckValue(label + " full retention counted once", combat.Energy, combat.MaxEnergy + amount);
-                CheckValue(label + " full retention clears reserve", player.Creature.GetPower<EnergyReserve>() == null, true);
+                var gem = await RelicCmd.Obtain(canonical.ToMutable(), player);
+                string label = gem.Id.Entry;
+                string description = gem.DynamicDescription.GetFormattedText();
+                Expect(label + " description excludes notes", description.Contains($"回复{amount}点生命") && !description.Contains("按张数"));
+                Expect(label + " no generated-card tooltip", !gem.HoverTips.Any(tip => tip is MegaCrit.Sts2.Core.HoverTips.CardHoverTip));
+                await CreatureCmd.SetCurrentHp(player.Creature, 20);
+                var single = player.RunState.CreateCard(CardCatalog.Model("JB01"), player);
+                await CardPileCmd.Add(single, PileType.Deck, skipVisuals: true);
+                Expect(label + " single gain", player.Creature.CurrentHp == 20 + amount);
+                await CardPileCmd.RemoveFromDeck(single, showPreview: false);
+                Expect(label + " single loss", player.Creature.CurrentHp == 20 + amount * 2);
+                await CreatureCmd.SetCurrentHp(player.Creature, 20);
+                var batch = Enumerable.Range(0, 3).Select(_ => player.RunState.CreateCard(CardCatalog.Model("JB02"), player)).ToArray();
+                await CardPileCmd.Add(batch, player.Deck, skipVisuals: true);
+                Expect(label + " three-card gain", player.Creature.CurrentHp == 20 + amount * 3);
+                await CardPileCmd.RemoveFromDeck(batch, showPreview: false);
+                Expect(label + " three-card loss", player.Creature.CurrentHp == 20 + amount * 6);
+                await CreatureCmd.SetCurrentHp(player.Creature, 20);
+                int before = player.Deck.Cards.Count;
+                var knowledge = player.RunState.CreateCard(CardCatalog.Model("JK11"), player);
+                await CardPileCmd.Add(knowledge, PileType.Deck, skipVisuals: true);
+                Expect(label + " knowledge group gains two physical cards", player.Deck.Cards.Count == before + 2
+                    && player.Creature.CurrentHp == 20 + amount * 2);
+                var gained = player.Deck.Cards.Where(card => !originalCards.Contains(card)).ToArray();
+                await CardPileCmd.RemoveFromDeck(gained, showPreview: false);
+                Expect(label + " knowledge batch loss", player.Creature.CurrentHp == 20 + amount * 4);
+                await CreatureCmd.SetCurrentHp(player.Creature, 20);
+                var temporary = CardCatalog.Create("JB01", player);
+                await CardPileCmd.AddGeneratedCardToCombat(temporary, PileType.Hand, player);
+                await CardPileCmd.Add(temporary, PileType.Discard, skipVisuals: true);
+                await CardPileCmd.RemoveFromCombat(temporary, skipVisuals: true);
+                Expect(label + " combat generation, movement and removal", player.Creature.CurrentHp == 20);
+                var transformed = player.RunState.CreateCard(CardCatalog.Model("JB01"), player);
+                await CardPileCmd.Add(transformed, PileType.Deck, skipVisuals: true);
+                await CreatureCmd.SetCurrentHp(player.Creature, 20);
+                await CardCmd.Transform(transformed, player.RunState.CreateCard(CardCatalog.Model("JB02"), player));
+                Expect(label + " transformation counts old and new cards", player.Creature.CurrentHp == 20 + amount * 2);
+                await CreatureCmd.SetCurrentHp(player.Creature, player.Creature.MaxHp - 1);
+                var capped = player.RunState.CreateCard(CardCatalog.Model("JB01"), player);
+                await CardPileCmd.Add(capped, PileType.Deck, skipVisuals: true);
+                Expect(label + " healing capped at max hp", player.Creature.CurrentHp == player.Creature.MaxHp);
+                await RelicCmd.Remove(gem);
+                await CardPileCmd.RemoveFromDeck(player.Deck.Cards.Where(card => !originalCards.Contains(card)).ToArray(), showPreview: false);
             }
             var touch = (TouchOfOrobas)ModelDb.Relic<TouchOfOrobas>().ToMutable();
-            CheckValue("Orobas replacement", touch.GetUpgradedStarterRelic(ModelDb.Relic<JunnaGreenGem>()).Id, ModelDb.Relic<JunnaBurningGem>().Id);
-            CheckValue("Orobas setup", touch.SetupForPlayer(player), true);
-            await RelicCmd.Obtain(touch, player);
-            CheckValue("old starter replaced", player.Relics.OfType<JunnaGreenGem>().Count(), 0);
-            CheckValue("one upgraded starter", player.Relics.OfType<JunnaBurningGem>().Count(), 1);
+            Expect("native starter upgrade replacement", touch.GetUpgradedStarterRelic(ModelDb.Relic<JunnaGreenGem>()).Id == ModelDb.Relic<JunnaBurningGem>().Id);
         }
-        catch (Exception ex) { rows.Add(new { name = "exception", pass = false, error = ex.ToString() }); }
+        catch (Exception error) { rows.Add(new { name = "exception", pass = false, error = error.ToString() }); }
         finally
         {
-            await ClearReserve(); Turn(originalTurn); combat.Energy = originalEnergy;
-            File.WriteAllText(report, JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
+            foreach (var gem in player.Relics.OfType<JunnaGem>().ToArray()) await RelicCmd.Remove(gem);
+            await CardPileCmd.RemoveFromDeck(player.Deck.Cards.Where(card => !originalCards.Contains(card)).ToArray(), showPreview: false);
+            foreach (var gem in originalGems) await RelicCmd.Obtain(((RelicModel)gem.CanonicalInstance).ToMutable(), player);
+            await CreatureCmd.SetCurrentHp(player.Creature, originalHp);
+            Godot.Engine.TimeScale = speed;
+            string directory = Environment.GetEnvironmentVariable("JUNNA_TEST_OUTPUT") ?? Path.Combine(Environment.CurrentDirectory, "out/tmp/relic-health");
+            Directory.CreateDirectory(directory);
+            File.WriteAllText(Path.Combine(directory, "relic-results.json"), JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
         }
     }
 }

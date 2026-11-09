@@ -76,6 +76,32 @@ public static partial class ArrowCombat
             await Accelerate(context, arrow, turns);
     }
 
+    public static async Task CopyAll(PlayerChoiceContext context, Player player)
+    {
+        var originals = DisplayOrder().Where(a => a.Card.Owner == player && !a.Resolving && a.Remaining > 0).ToArray();
+        using var single = KnowledgeCombat.SingleCard();
+        foreach (var original in originals)
+        {
+            var copy = CardCopies.ForCombat(original.Card, player, CardCopyPurpose.TemporaryCopy);
+            var play = new CardPlay
+            {
+                Card = copy, Target = original.Play.Target, ResultPile = original.Play.ResultPile,
+#if STS2_BETA
+                Player = player,
+#endif
+                Resources = original.Play.Resources, IsAutoPlay = true, PlayIndex = 0, PlayCount = original.PlayCount
+            };
+            await CardPileCmd.AddGeneratedCardToCombat(copy, ArrowPile.PileId, player);
+            Arrows.Add(new(copy, play, original.Remaining, player.PlayerCombatState!.TurnNumber,
+                (choice, payload) => (Task)HarmonyLib.AccessTools.Method(copy.GetType(), "OnPlay")
+                    .Invoke(copy, [choice, payload])!, original.CopyXValues())
+            {
+                Sequence = _sequence++, PlayCount = original.PlayCount,
+                ExhaustAfterResolve = original.ExhaustAfterResolve, AttacksWhileWaiting = original.AttacksWhileWaiting
+            });
+        }
+    }
+
     public static async Task AccelerateTarget(PlayerChoiceContext context, Player player, Creature target, int turns)
     {
         var arrows = ResolutionOrder().Where(a => a.Card.Owner == player && !a.Resolving &&

@@ -107,7 +107,7 @@ public sealed class JunnaWarmUp() : JunnaCard(1, CardType.Skill, CardRarity.Comm
 }
 
 [CustomID("JUNNA_REPEATED_PRACTICE")]
-public sealed class JunnaRepeatedPractice() : JunnaCard(1, CardType.Skill, CardRarity.Rare, TargetType.Self, "JG03")
+public sealed class JunnaRepeatedPractice() : JunnaCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self, "JG03")
 {
     public override HashSet<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play) => await ImproveHand(context, 0, 1);

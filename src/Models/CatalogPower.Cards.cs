@@ -69,6 +69,11 @@ public abstract partial class CatalogPower
                     break;
                 case "JK64" when CardCatalog.IsKnowledge(play.Card):
                     await AccelerateChoice(grant, context, 1, grant.V("Turns")); break;
+                case "JK254" when CardCatalog.IsKnowledge(play.Card):
+                    await KnowledgeCombat.PlayPartners(context, play.Card); break;
+                case "JK260" when CardCatalog.IsKnowledge(play.Card) && grant.Take(1):
+                    await PowerCmd.Apply<MegaCrit.Sts2.Core.Models.Powers.StrengthPower>(
+                        context, Owner, grant.V("Amount"), Owner, grant.Card); break;
                 case "JK75" when CardCatalog.IsKnowledge(play.Card):
                     var eligible = play.Card.Owner.PlayerCombatState!.Hand.Cards.Where(DamageModifiers.CanDealDamage).ToArray();
                     if (eligible.Length > 0) DamageModifiers.Add(play.Card.Owner.RunState.Rng.CombatCardSelection.NextItem(eligible)!, grant.V("Bonus"));

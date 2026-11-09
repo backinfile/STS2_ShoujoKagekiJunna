@@ -4,6 +4,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Hooks;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Commands.Builders;
+using MegaCrit.Sts2.Core.Models;
+using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -66,6 +69,20 @@ public static partial class ArrowCombat
             if (replacement != null) arrow.Retarget(replacement);
         // A later death listener or wave transition may still create enemies. Combat end owns cleanup.
         return Task.CompletedTask;
+    }
+}
+
+[HarmonyPatch(typeof(AttackCommand), nameof(AttackCommand.Execute))]
+internal static class ArrowAllEnemiesPatch
+{
+    private static void Prefix(AttackCommand __instance, ref Creature? ____singleTarget)
+    {
+        if (__instance.IsSingleTargeted && __instance.ModelSource is CardModel card && CardCatalog.IsArrow(card) &&
+            card.TargetType == TargetType.AnyEnemy && CatalogPower.Has(card.Owner, "JA205"))
+        {
+            ____singleTarget = null;
+            __instance.TargetingAllOpponents(card.Owner.Creature.CombatState!);
+        }
     }
 }
 

@@ -47,7 +47,7 @@ public static class CardEffects
         {
             // Installed rules keep an independent snapshot and per-turn counters for every application.
             case "JA04": case "JK10": case "JA22": case "JK15": case "A": case "JK27":
-            case "JA35": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":
+            case "JA35": case "JA205": case "JK254": case "JK260": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":
             case "JG31": case "JH21": case "JG34": case "JK75": case "JH23": case "JA70":
             case "JK235": case "JH59": case "JA144": case "JA118": case "JA105": case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31":
                 await CatalogPower.Install(card, context, play);
@@ -244,8 +244,31 @@ public static class CardEffects
             case "JH60":
                 await CardChoices.EnergyTiming(context, card); break;
             case "JA119":
-                if (play.Target is { } selectedTarget)
-                    await ArrowCombat.AccelerateTarget(context, player, selectedTarget, V("Turns"));
+                await CardChoices.AccelerateTargets(context, card);
+                break;
+            case "JA176":
+                await ArrowCombat.CopyAll(context, player);
+                break;
+            case "JA177":
+                await ArrowCombat.AccelerateAll(context, player, V("Turns"));
+                break;
+            case "JK272":
+                foreach (var enemy in player.Creature.CombatState!.HittableEnemies.Where(e => e.IsAlive).ToArray())
+                    await PowerCmd.Apply<WeakPower>(context, enemy, V("Amount"), player.Creature, card);
+                break;
+            case "JK272B":
+                foreach (var enemy in player.Creature.CombatState!.HittableEnemies.Where(e => e.IsAlive).ToArray())
+                    await PowerCmd.Apply<VulnerablePower>(context, enemy, V("Amount"), player.Creature, card);
+                break;
+            case "U_CARD_005":
+                await Attack();
+                for (int i = 0; i < V("Cards"); i++)
+                {
+                    using var single = KnowledgeCombat.SingleCard();
+                    var stardust = CardCatalog.Create("U_CARD_005", player);
+                    await CardPileCmd.AddGeneratedCardToCombat(stardust, PileType.Play, player);
+                    await CardActions.FreePlay(context, stardust, play.Target, keepTarget: true);
+                }
                 break;
             case "JK84B":
                 await Attack(); await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;

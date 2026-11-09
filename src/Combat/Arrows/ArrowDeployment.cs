@@ -7,7 +7,7 @@ using ShoujoKageki.Core.V1;
 namespace ShoujoKagekiJunna.Combat;
 
 public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining, int round,
-    Func<PlayerChoiceContext, CardPlay, Task> resolve)
+    Func<PlayerChoiceContext, CardPlay, Task> resolve, int[]? xValues = null)
 {
     public CardModel Card { get; } = card;
     public CardPlay Play { get; private set; } = play;
@@ -25,7 +25,8 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     public int DeployedRound { get; } = round;
     public int AttacksWhileWaiting { get; internal set; }
     public int PlayCount { get; internal set; } = play.PlayCount;
-    private readonly int[] _xValues = PaidReplay.Capture(card);
+    private readonly int[] _xValues = xValues ?? PaidReplay.Capture(card);
+    internal int[] CopyXValues() => _xValues.ToArray();
     internal async Task Resolve(PlayerChoiceContext context, int index)
     {
         using var resolution = DamageExecution.BeginCardResolution(Card);
