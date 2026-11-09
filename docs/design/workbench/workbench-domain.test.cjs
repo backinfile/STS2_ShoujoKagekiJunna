@@ -6,6 +6,18 @@ const makeCard=(id,pool)=>({uid:'card_'+id,id,name:id,type:'技能',rarity:'罕�
 function fixture(){return {cards:[makeCard('A',true),makeCard('B',false),makeCard('C',false)],partnerGroups:[{uid:'group_A',id:'GROUP_A',title:'A',mainCardId:'A',grantedCardIds:['B','C'],grantedCardCounts:{B:2,C:1}}],meta:{startingDeck:[{cardId:'A',count:1}]}};}
 const quantities=group=>Object.fromEntries([group.mainCardId,...group.grantedCardIds].sort().map(id=>[id,domain.groupCardCount(group,id)]));
 
+test('知识关联牌分别保留诅咒和衍生分类，卡池归属与入池状态独立',()=>{
+  const data=fixture();
+  Object.assign(data.cards[0],{cardPool:'角色'});
+  Object.assign(data.cards[1],{type:'诅咒',rarity:'诅咒',cardPool:'诅咒'});
+  Object.assign(data.cards[2],{rarity:'衍生',cardPool:'衍生'});
+  const normalize=domain.create({seed:{data:structuredClone(data)},uid:()=>assert.fail('不应生成新编号'),JunnaFitPool:{normalizeEntry:entry=>entry}});
+  const reloaded=normalize(JSON.parse(JSON.stringify(normalize(data))));
+  assert.deepEqual(reloaded.cards.map(({rarity,cardPool,pool})=>[rarity,cardPool,pool]),[['罕见','角色',true],['诅咒','诅咒',false],['衍生','衍生',false]]);
+  assert.deepEqual(reloaded.cards[0].partnerCardIds,['B','C']);
+  assert.throws(()=>normalize({...data,cards:[{...data.cards[0],cardPool:'未知'}]}),/卡池/);
+});
+
 test('本体特殊稀有度与卡牌类型经过标准化和导出读取后保留，入池身份独立',()=>{
   const classifications=[['技能','事件'],['攻击','衍生'],['状态','状态'],['诅咒','诅咒'],['任务','任务']];
   const cards=classifications.map(([type,rarity],i)=>({...makeCard('S'+i,false),type,rarity,keywords:[],text:'',upgradedText:''}));

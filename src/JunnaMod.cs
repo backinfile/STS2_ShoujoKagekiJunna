@@ -29,6 +29,7 @@ public static class JunnaMod
         new Harmony(Id).PatchAll(Assembly.GetExecutingAssembly());
         ModHelper.SubscribeForCombatStateHooks(Id, _ => [ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>())]);
         DescriptionOverrides.CustomizeDescriptionPost += ArrowConversion.Describe;
+        DescriptionOverrides.CustomizeDescriptionPost += DynamicKnowledge.Describe;
         Log.Info("Junna 0.1.0 initialized; direct card damage: AttackCommand / CreatureCmd; extra hits once per resolution.");
     }
 }

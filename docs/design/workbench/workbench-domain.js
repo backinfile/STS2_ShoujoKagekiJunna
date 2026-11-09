@@ -11,6 +11,7 @@
   function rootEntity(data,key){if(key!=='meta')return data[key];const meta={...data.meta};for(const collection of META_COLLECTIONS)delete meta[collection];return meta;}
   function assignRoot(data,key,value){const next=JSON.parse(JSON.stringify(value));if(key==='meta')for(const collection of META_COLLECTIONS)if(!Object.hasOwn(next,collection)&&Object.hasOwn(data.meta||{},collection))next[collection]=data.meta[collection];data[key]=next;}
   const TYPES=['攻击','技能','能力','箭矢','状态','诅咒','任务'],RARITIES=['基础','普通','罕见','稀有','远古','事件','衍生','状态','诅咒','任务'];
+  const CARD_POOLS=['角色','无色','事件','衍生','状态','诅咒','任务'];
   function groupCardCount(group,cardId){return Math.max(1,Math.floor(Number(cardId===group.mainCardId?group.mainCardCount:group.grantedCardCounts?.[cardId])||1));}
   function setGroupMain(data,groupUid,cardUid){
     const group=data.partnerGroups.find(entry=>entry.uid===groupUid),card=data.cards.find(entry=>entry.uid===cardUid);
@@ -67,6 +68,7 @@
       }
       if(c.type==='\u661f\u77e2')c.type='箭矢';
       if(c.type==='言葉')c.type='箭矢';
+      if(c.cardPool!==undefined&&!CARD_POOLS.includes(c.cardPool))throw Error('卡池无效：'+c.id);
       c.name=String(c.name||'未命名');c.text=String(c.text??'');c.upgradedText=String(c.upgradedText??c.text);c.type=TYPES.includes(c.type)?c.type:'技能';c.cost=String(c.cost).toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.cost)||0));c.upgradedCost=String(c.upgradedCost??c.cost).toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.upgradedCost??c.cost)||0));c.turns=c.type==='箭矢'?(String(c.turns).trim().toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.turns)||0))):null;c.upgradedTurns=c.type==='箭矢'?(String(c.upgradedTurns??c.turns).trim().toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.upgradedTurns??c.turns)||0))):null;
       if(c.type==='箭矢'){const subtype=c.arrowSubtype??seed.data.cards.find(entry=>entry.id===c.id)?.arrowSubtype??'技能';if(!['攻击','技能','能力'].includes(subtype))throw Error('箭矢子类型无效：'+c.id);c.arrowSubtype=subtype;}
       c.pool=typeof c.pool==='boolean'?c.pool:true;c.rarity=RARITIES.includes(c.rarity)?c.rarity:'普通';c.system=c.system||'stage';c.keywords=[...new Set(Array.isArray(c.keywords)?c.keywords:[])];c.termIds=[...new Set(c.termIds||[])].filter(id=>termIds.has(id));c.archetypeIds=[...new Set(c.archetypeIds||[])].filter(id=>archetypeIds.has(id));c.breakthroughIds=c.termIds.filter(id=>d.terms.some(t=>t.id===id&&t.kind==='突破'));c.naming=c.naming&&typeof c.naming==='object'?c.naming:{};c.art=c.art||'defaultPortrait';
@@ -77,7 +79,7 @@
       if(mains.has(c.id))c.pool=c.rarity!=='基础';
       if(grants.has(c.id))c.pool=false;
     }
-    for(const g of d.partnerGroups){const main=d.cards.find(c=>c.id===g.mainCardId);for(const id of g.grantedCardIds){const card=d.cards.find(c=>c.id===id);main.partnerCardIds.push(id);card.partnerCardIds.push(g.mainCardId);card.rarity=main.rarity;}}
+    for(const g of d.partnerGroups){const main=d.cards.find(c=>c.id===g.mainCardId);for(const id of g.grantedCardIds){const card=d.cards.find(c=>c.id===id);main.partnerCardIds.push(id);card.partnerCardIds.push(g.mainCardId);}}
     if(Array.isArray(d.meta.startingDeck))d.meta.startingDeck=d.meta.startingDeck.filter(e=>cardIds.has(e.cardId));
     for(const t of d.terms){t.name=String(t.name||'未命名词条');t.kind=String(t.kind||'效果');t.template=String(t.template??'');t.definition=String(t.definition??'');t.systems=Array.isArray(t.systems)?t.systems:[];}
     for(const m of d.mechanisms){m.name=String(m.name||'未命名机制');m.rules=Array.isArray(m.rules)?m.rules:[];m.templates=Array.isArray(m.templates)?m.templates:[];}
@@ -88,7 +90,7 @@
 
     return normalizeData;
   }
-  const api={COLLECTIONS,ENTITY_COLLECTIONS,entityList,rootEntity,assignRoot,create,cardGroup,moveCards,groupCardCount,setGroupMain};
+  const api={COLLECTIONS,ENTITY_COLLECTIONS,CARD_POOLS,entityList,rootEntity,assignRoot,create,cardGroup,moveCards,groupCardCount,setGroupMain};
   if(typeof module==='object'&&module.exports)module.exports=api;
   else root.JunnaWorkbenchDomain=api;
 })(typeof globalThis==='object'?globalThis:this);

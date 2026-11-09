@@ -9,9 +9,28 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
+
+[HarmonyPatch]
+internal static class DamageInvestmentPreviewPatch
+{
+    private static IEnumerable<MethodBase> TargetMethods()
+    {
+        yield return AccessTools.Method(typeof(DamageVar), nameof(DamageVar.UpdateCardPreview));
+        yield return AccessTools.Method(typeof(CalculatedDamageVar), nameof(CalculatedDamageVar.UpdateCardPreview));
+    }
+    private static void Postfix(DynamicVar __instance, CardModel card, Creature? target, bool runGlobalHooks)
+    {
+        if (runGlobalHooks || !card.IsMutable) return;
+        var snapshot = DamageModifiers.CaptureDamageModifierSnapshot(card);
+        if (snapshot.Owner == null || target?.Side == snapshot.Owner.Creature.Side) return;
+        __instance.PreviewValue = Math.Max(0, __instance.PreviewValue + snapshot.DamageBonus + JunnaNextCardBonus.PreviewBonus(card));
+    }
+}
 
 [HarmonyPatch]
 internal static class DamagePatches
@@ -59,6 +78,7 @@ internal static class DamageBonusPatch
             : cardSource == null ? default : DamageModifiers.CaptureDamageModifierSnapshot(cardSource);
         if (snapshot.Owner == null || (target != null && target.Side == snapshot.Owner.Creature.Side)) return;
         damage += snapshot.DamageBonus;
+        if (frame == null && cardSource != null) damage += JunnaNextCardBonus.PreviewBonus(cardSource);
     }
 }
 

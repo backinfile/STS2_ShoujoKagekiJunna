@@ -37,24 +37,25 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             var group = KnowledgeCombat.Group(this);
             if (group != null)
             {
-                var members = group.Members.Select(member =>
-                {
-                    var model = (CardModel)CardCatalog.Model(member.Id).MutableClone();
-                    if (IsUpgraded && model.IsUpgradable) model.UpgradeInternal();
-                    return $"[gold]{model.Title}[/gold]" + (member.Count > 1 ? $" ×{member.Count}" : "");
-                });
+                var members = group.Members.SelectMany(member =>
+                    Enumerable.Repeat($"[gold]{CardCatalog.Model(member.Id).Title}[/gold]", member.Count));
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
                     { Id = "junna_knowledge_group_" + group.MainCardId };
-                // The full group is listed above; keep card previews within one viewport.
-                foreach (var member in group.Members.Where(member => member.Id != DesignId).Take(2))
-                    yield return HoverTipFactory.FromCard(CardCatalog.Model(member.Id));
             }
             var background = LocString.GetIfExists("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND." + DesignId);
             if (background != null)
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND"), background)
                     { Id = "junna_knowledge_background_" + DesignId };
             if (DesignId is "JA144" or "JA145") yield return new CardHoverTip(CardCatalog.Model("JA119"));
-            if (CardCatalog.IsArrow(this) || text.Contains("箭矢"))
+            bool createsMeteor = DesignId is "JA76" or "JA81" or "JA82";
+            if (createsMeteor)
+            {
+                var meteor = (CatalogCard)CardCatalog.Model("JA81B").MutableClone();
+                if (IsUpgraded) { meteor.UpgradeInternal(); meteor.FinalizeUpgradeInternal(); }
+                meteor.SetGeneratedDamage((int)DynamicVars.Damage.PreviewValue);
+                yield return new CardHoverTip(meteor);
+            }
+            if (CardCatalog.IsArrow(this) || text.Contains("箭矢") || createsMeteor)
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Arrow);
             if (text.Contains("伤害加成") || DamageModifiers.CaptureDamageModifierSnapshot(this).DamageBonus > 0)
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.DamageBonus);

@@ -113,6 +113,7 @@ public static class HandArrow
     // Called only at the engine's OnPlay boundary, so native play hooks still run once.
     internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, Func<CardPlay, Task> next)
     {
+        play = CardActions.ResolveTarget(play);
         PaidReplay.PrepareEffect(card, play.PlayIndex);
         if (IsArrow(card))
         {

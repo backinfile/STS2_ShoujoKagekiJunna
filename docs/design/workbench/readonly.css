@@ -1,4 +1,4 @@
-.readonly .global-actions> :not(.readonly-status),
+.readonly .global-actions> :not(.readonly-status):not(#install-app),
 .readonly #inspector-footer,.readonly #knowledge-edit,
 .readonly [data-remove-grant],.readonly [data-restore-card],
 .readonly [data-restore],.readonly [data-delete-archetype],.readonly [data-edit-archetype],

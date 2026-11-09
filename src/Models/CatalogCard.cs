@@ -27,7 +27,12 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         "Block" => new BlockVar(n.Base, ValueProp.Move),
         "Repeat" => new RepeatVar(n.Base),
         _ => new DynamicVar(n.Name, n.Base)
-    });
+    }).Concat(DesignId == "JK48" ? new DynamicVar[]
+    {
+        new ExtraDamageVar(1),
+        new KnowledgeDamageVar().WithMultiplier(static (card, _) =>
+            CardActions.All(card.Owner).Count(other => other != card && CardCatalog.IsKnowledge(other)))
+    } : []);
     public int Number(int index) => DynamicVars[Definition.Values[index].Name].IntValue;
     public int Value(string name, int fallback = 0)
     {

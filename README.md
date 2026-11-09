@@ -14,6 +14,12 @@
 
 ## 构建与安装
 
+自行游玩时，在仓库根目录运行 `python play.py`，会编译 DLL、打包资源、安装到独立游玩目录并打开中文有声窗口。后续启动沿用 `artifacts/play-game/user/` 中的存档。
+
+默认按模组清单中的最低 Core 依赖版本，从相邻 Core 仓库的 `dist/ShoujoKagekiAijoCore-<版本>/` 读取发行包，也可用 `--core-package <Core发行目录>` 或 `SHOUJO_CORE_PACKAGE` 指定。已有打包产物时，运行 `python play.py --skip-build` 直接安装并启动。
+
+Python 入口自动选择本机 PowerShell 7 执行构建与启动。游戏已运行时显示当前进程，关闭游戏后再次运行即可重新打包启动。原有 `./play.ps1` 入口同样可用。
+
 执行 `./build.ps1 -CorePackage <Core发行目录>`，或通过 `SHOUJO_CORE_PACKAGE` 指定同一目录。脚本的 `GameDir`、`Godot` 参数可指定游戏与 MegaDot 编辑器路径。
 产物位于 `dist/ShoujoKagekiJunna/`，编译时从 Core 发行包引用 API，并生成 `core.requirements` 和 `core.package.lock`。游玩时订阅独立的 Core 与 BaseLib 3.4.7 工坊条目；手动安装则将 Junna、Core 和 BaseLib 各自的完整目录放入游戏 `mods/`。加载顺序为 BaseLib → Core → Junna。入口 DLL 按游戏版本选择 `lib/ShoujoKagekiJunna.Stable.dll` 或 `lib/ShoujoKagekiJunna.Beta.dll`；构建脚本使用正式版 0.107.1 引用包与 `GameDir` 中的测试版程序集分别编译。
 

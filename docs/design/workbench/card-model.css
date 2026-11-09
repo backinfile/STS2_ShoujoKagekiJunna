@@ -34,6 +34,7 @@
 .model-list li+li{margin-top:10px}
 .model-note,.model-secondary,.model-card-id{color:var(--muted)}
 .model-note{font-size:12px;line-height:1.8;margin:16px 0 0}
+.model-source-notes{white-space:pre-line;overflow-wrap:anywhere}
 .model-starter{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline}
 .model-starter .text-button{font-size:15px}
 .model-card-id{display:block;font-size:11px;margin-top:5px;white-space:nowrap}
@@ -41,6 +42,17 @@
 .model-card-table th:first-child{width:22%}
 .model-card-table th:nth-child(2){width:40%}
 .model-card-table .text-button{text-align:left;line-height:1.6}
+.model-native-table{min-width:720px;table-layout:fixed}
+.model-native-table th:first-child{width:23%}
+.model-native-table th:nth-child(2){width:17%}
+.model-native-table td{white-space:pre-line;overflow-wrap:anywhere}
+.model-native-table .selected{background:var(--raised)}
+.model-native-table .text-button{text-align:left;line-height:1.6}
+.model-native-table .model-card-id{white-space:normal;overflow-wrap:anywhere}
+.model-native-detail h3{font-size:14px;font-weight:500;margin:24px 0 10px}
+.model-native-detail p{white-space:pre-line;font-size:13px;line-height:1.8}
+.model-native-detail .model-table{min-width:0}
+.model-native-detail .model-breakdown dd{white-space:normal;text-align:right}
 .model-example-spec{font-size:13px;color:var(--muted);margin:0 0 24px}
 .model-exhaust-check{margin:0 0 26px}
 .model-results{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:20px 0;margin:0;border-block:1px solid var(--line);font-variant-numeric:tabular-nums}

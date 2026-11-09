@@ -3,6 +3,7 @@ using BaseLib.Utils;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -29,7 +30,14 @@ public static class DynamicKnowledge
         var groups = Groups(source).ToHashSet();
         var cards = source.Pile?.IsCombatPile == true && source.Owner.PlayerCombatState != null
             ? source.Owner.PlayerCombatState.AllCards : source.Owner.Deck.Cards;
-        return cards.Prepend(source).Distinct().Where(c => Groups(c).Any(groups.Contains)).ToArray();
+        // Older acquisitions linked the paper but omitted its physical research companions.
+        var research = cards.Where(c => Groups(c).Any(groups.Contains)).Select(KnowledgeProgress.ResearchGroup)
+            .Where(link => !string.IsNullOrEmpty(link)).ToHashSet();
+        foreach (var member in cards.Where(c => research.Contains(KnowledgeProgress.ResearchGroup(c))))
+            if (KnowledgeProgress.ResearchGroup(member) != null)
+                Links.Set(member, string.Join("\n", Groups(member).Concat(groups).Distinct()));
+        var members = cards.Where(c => Groups(c).Any(groups.Contains)).ToArray();
+        return members.Length > 0 ? members : [source];
     }
     public static async Task Prepare(PlayerChoiceContext context, CardModel selected, IEnumerable<CardModel> options)
     {
@@ -62,10 +70,21 @@ public static class DynamicKnowledge
             // No new choice context is created for an attached dynamic entrance.
             Offers.Remove(partner);
             Pending.Remove(partner);
-            if (destination == PileType.Deck) await CardPileCmd.Add(partner, PileType.Deck);
-            else await CardPileCmd.AddGeneratedCardToCombat(partner, destination, acquired.Owner);
-            if (partner.Pile?.Type == destination) Link(partner);
+            using (KnowledgeCombat.SingleCard())
+            {
+                if (destination == PileType.Deck) await CardPileCmd.Add(partner, PileType.Deck);
+                else await CardPileCmd.AddGeneratedCardToCombat(partner, destination, acquired.Owner);
+            }
+            if (partner.Pile?.Type == destination)
+                foreach (var member in await KnowledgeCombat.GrantPartners(partner, destination)) Link(member);
         }
+    }
+
+    internal static void Describe(CardModel card, Creature? target, ref string description)
+    {
+        if (!IsLinked(card) || card is JunnaCard junna && CardCatalog.Get(junna.DesignId).Knowledge) return;
+        string keyword = new LocString("card_keywords", "SHOUJOKAGEKIJUNNA-KNOWLEDGE.title").GetFormattedText();
+        description = $"[gold]{keyword}[/gold]。\n" + description;
     }
 
     [HarmonyPatch(typeof(CardReward), "OnSelect")]
@@ -102,10 +121,13 @@ public static class DynamicKnowledge
         {
             var members = Members(__instance);
             if (members.Count <= 1) return;
+            var names = members.Select(card => "[gold]" + (card is JunnaCard junna
+                ? CardCatalog.Model(junna.DesignId).Title : ((CardModel)card.CanonicalInstance).Title) + "[/gold]");
             var tip = new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
-                string.Join("\n", members.Select(c => "[gold]" + c.Title + "[/gold]")))
+                string.Join("\n", names))
                 { Id = "junna_dynamic_knowledge_group" };
-            __result = __result.Append(tip);
+            __result = __result.Where(t => t is not HoverTip existing ||
+                existing.Id?.StartsWith("junna_knowledge_group_") != true && existing.Id != "junna_dynamic_knowledge_group").Append(tip);
         }
     }
 }

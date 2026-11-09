@@ -18,6 +18,8 @@ public static partial class KnowledgeProgress
     public static decimal PermanentDamageBonus(CardModel card) => card is CatalogCard catalog
         ? decimal.Parse(DamageBonus.Get(catalog) ?? "0", System.Globalization.CultureInfo.InvariantCulture) : 0m;
 
+    internal static string? ResearchGroup(CardModel card) => card is CatalogCard catalog ? ResearchLinks.Get(catalog) : null;
+
     internal static void PreserveFirstBonus(CardModel card, decimal amount)
     {
         if (card is not CatalogCard { DesignId: "JG38", IsDupe: false } current || amount <= 0) return;

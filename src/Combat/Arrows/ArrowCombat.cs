@@ -101,6 +101,11 @@ public static partial class ArrowCombat
     {
         if (arrow.Resolving || !Arrows.Contains(arrow)) return;
         if (arrow.Card.Pile?.Type != ArrowPile.PileId) { Arrows.Remove(arrow); return; }
+        if (!arrow.TargetsGroup && arrow.Target is { } target && arrow.Card.CombatState is { } state)
+        {
+            var replacement = ResolveEffectTarget(target, state);
+            if (replacement != null && replacement != target) arrow.Retarget(replacement);
+        }
         int previousRemaining = arrow.Remaining;
         arrow.Remaining = Math.Max(0, arrow.Remaining - Math.Max(0, turns));
         var hud = NCombatRoom.Instance?.GetNodeOrNull<ArrowHud>("JunnaArrows");
