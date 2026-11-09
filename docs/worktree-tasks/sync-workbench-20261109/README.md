@@ -142,6 +142,65 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 </skill>
 
+### 4. 合并与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_17433189b1414fbca9253e607212b03a\",0]","question":"按 `$worktree-task` 的明确要求，请确认是否将提交 `725b107` 合入 `main`。已同步工作台 r4272 的98张牌与19个知识组，双版本构建、31项实机检查及1331项对照通过，原 main 工作区干净。若选择清理，会先把安装包、报告、快照和42秒录像保留到主目录 `artifacts/task-deliverables/sync-workbench-20261109/`，再删除本次工作树、任务分支及其中临时文件。","answer":"合并并清理本次工作树和分支"}]
+</send_user_message_question_reply>
+
+### 5. 再次调用技能
+
+<skill>
+<name>worktree-task</name>
+<path>$worktree-task</path>
+---
+name: worktree-task
+description: Use when completing a repository change in an isolated Git worktree, consolidating its task changes into one commit, and merging it back to the starting branch.
+---
+
+# Worktree Task
+
+Complete the requested change in a temporary worktree, then integrate it safely into the branch that was current when the task began.
+
+## Rules
+
+- Capture the original checkout, branch, and revision once; never re-infer the integration target.
+- Refuse an active Git operation. If the original checkout is dirty, warn that its uncommitted changes will not enter the worktree, preserve them untouched, and proceed from the current branch's latest commit by default.
+- Place the worktree at `../worktrees/<projectName>/<task-slug>` relative to the repository root, unless repository instructions override it.
+- Perform all modification and verification work inside the worktree.
+- Keep a task document under `docs/worktree-tasks/<task-slug>/` inside the worktree and include it in the task commit, so it survives integration and worktree cleanup.
+- Sanitize every document tracked by Git or being added to Git, including existing unchanged documents. Replace sensitive data such as private personal details and credentials with descriptive placeholders while preserving meaning.
+- Use repository-relative paths in persisted documents and express worktree locations relative to the repository root. Never persist local absolute paths, including in quoted user input or Markdown links. Use descriptive placeholders for paths outside the repository and `$skill-name` for local skill references. Tool calls and safety checks may use absolute paths internally.
+- Do not perform remote operations or rewrite existing original-branch history unless explicitly requested.
+- For merge and cleanup confirmation, use `request_user_input_async` when available and permitted; otherwise ask in chat. One explicit confirmation may approve both merging and the listed cleanup; the original task request alone is not approval.
+- Preserve the task branch and worktree whenever a safety check or integration fails.
+
+## Task Document
+
+Use `docs/worktree-tasks/<task-slug>/README.md` by default, with the same task slug as the worktree. Create it before implementation. Keep the input record complete and the plan and results concise:
+
+- **Original user input:** Record the full text of every task-related user message in chronological order, including introductory guidance, skill invocations, constraints, and follow-up corrections. Preserve the original wording and formatting, applying only the sanitization above. Append later messages in full.
+- **Brief task plan:** Record the intended approach and main steps; update it when the approach changes.
+- **Result and changes:** After implementation, summarize the actual completion status, changed files and behavior, verification results, and any remaining work or limitations. If work stops early, record partial progress accurately.
+
+Before each commit, check the input record against the user messages, finalize the result section, and review all Git-tracked documents and documents being added for sensitive data and local absolute paths, including quoted input and link targets. If synchronization changes the implementation or verification results, update the document in the synchronization commit. Preserve the document with the task changes and include its path in the final report.
+
+## Workflow
+
+1. Check the repository state and refuse conflicting worktree paths or branches. Record any original uncommitted state so it can be protected and verified later.
+2. Create a uniquely named task branch and worktree from the captured original branch's latest commit. Create the task document with the sanitized user input and brief plan.
+3. Establish a clean baseline, implement the task, and verify it. Complete the task document's result section, then consolidate all task changes, including the document, into one commit before synchronization unless the user or repository policy requires multiple commits.
+4. Merge the latest local original branch into the task branch. Resolve conflicts only in the worktree, then verify and commit the synchronized result.
+5. Confirm the original checkout is still on the captured branch, its committed HEAD is unchanged since synchronization, and any pre-existing uncommitted state remains intact. If HEAD advanced, repeat synchronization; stop after three races.
+6. Show the target branch, task commit, change summary, verification results, any original uncommitted state, and proposed cleanup items. Request one confirmation with choices to merge and clean up, merge and keep, or defer.
+7. Only after confirmation, merge the synchronized task branch back without creating an additional integration commit when possible. If integration would overwrite uncommitted state, preserve the worktree and report that integration is pending instead.
+8. Verify the committed trees match, checks pass, the original branch contains the consolidated task commit, and pre-existing uncommitted state was preserved.
+9. After successful integration verification, remove this run's clean worktree, task branch, and disposable temporary files covered by the cleanup approval, after proving needed content is preserved. Reuse combined approval from step 6 without asking again. If only merging was approved, retain these items until the user approves cleanup; request further confirmation for any additional cleanup items.
+
+Report the resulting branch, commit, verification, cleanup state, and task document path.
+
+</skill>
+
 ## Brief task plan
 
 - 原始分支 `main`，原始提交 `602d9e9a3d19c9125237aa9b32d492bc78652426`，原始工作区干净。
@@ -152,7 +211,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-- 实现与定向验证完成，工作台收尾复查仍为 r4272；待用户确认合并到 `main`。
+- 实现与定向验证完成，工作台收尾复查仍为 r4272；用户已明确批准合入 `main` 并清理本次工作树与分支。实现提交为 `725b107`。
 - 同步98张启用牌、19个知识组、卡名、稀有度、费用、基础与升级效果、关联发放数量、本地化与工作台原图。新增整备、质疑／疑问、旁征博引／查阅、理想的国语教科书／品读；准备活动、重整、合唱练习与星盘退出在用池，保留已有模型与资源以兼容旧存档。
 - 补齐整备两种定向抽取、疑问的手牌加成、旁征博引按永久牌组数量计算的伤害与动态预览、查阅知识牌选择、教材知识触发随机伤害及品读检索。挥刃练习与引言覆盖手牌、抽牌堆、弃牌堆、消耗牌堆及箭矢区。改编允许选择能力牌，超越极限正常弃置，破围升级下回合获得3能量；同步布阵、列阵、北极星、静心与戒备的当前牌面。
 - 当前基础／升级牌面优先于未同步的旧设计备注。教材组在工作台仍为默认图，沿用工作台内置默认SVG；教材能力图标复用现有持续阅读图标。没有生成新图片。
@@ -163,4 +222,4 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 随机端口、满解锁、最小化与静默测试通过，启动焦点采样0次前台占用。42秒原生操作录像为H.264＋AAC，15fps，629帧，无补帧与丢帧；录制过程中仅用合法悬停、出牌、选牌和结束回合操作。录像与帧拼图位于 `out/tmp/sync-workbench/video/`。
 - 安装包 `artifacts/sync-workbench/Junna-r4272.zip` 完整性检查通过；依赖独立Core 1.3.0发行包，构建使用已有发行包的任务内副本。
 - 全部209份跟踪及新增文档经过敏感信息与本地绝对路径审查，未发现需要脱敏的内容。
-- 合并清理若获批准，将先把安装包、最终验证结果、快照、日志和录像保留到主目录忽略的 `artifacts/task-deliverables/sync-workbench-20261109/`，再清理本次工作树、任务分支和其中临时文件。
+- 安装包、最终报告、工作台快照、日志和42秒录像共15个文件已保留到主目录忽略的 `artifacts/task-deliverables/sync-workbench-20261109/`，逐文件SHA-256校验通过，清单位于该目录的 `manifest.json`。主目录当前仍为原始 `main` 提交且工作区干净；任务提交包含该提交，可以快进合并。用户批准的清理范围为本次工作树、任务分支及其中临时文件。
