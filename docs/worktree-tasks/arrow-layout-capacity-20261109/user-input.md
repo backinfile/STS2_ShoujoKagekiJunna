@@ -89,3 +89,8 @@
 # 原始用户输入 2：任务
 
 你继续优化下箭矢在场景中的布局，继续能容纳更多的箭矢箭头。worktreetask
+# 原始用户输入 3：合并与清理确认
+
+<send_user_message_question_reply>
+[{"answer":"合并并清理（推荐）","question":"是否将提交 dce1673 合入 main，并清理本任务分支 codex/arrow-layout-capacity-20261109 和工作树？录像、截图及验证记录已归档保留。","questionItemId":"[\"request_user_input_async\",\"call_a893a8d071234be7a1154fdb8c422810\",0]"}]
+</send_user_message_question_reply>
