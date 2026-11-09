@@ -38,4 +38,28 @@ foreach (var definition in catalog.RootElement.GetProperty("groups").EnumerateAr
     CheckMembers(group, expected.ToArray());
 }
 
-Console.WriteLine($"PASS {checks} knowledge group checks, including legacy defaults, repeated main cards and live counts.");
+void Check(bool condition, string message)
+{
+    if (!condition) throw new InvalidOperationException(message);
+    checks++;
+}
+
+var relations = new List<KnowledgeRelation>
+{
+    new("C", new() { ["C"] = 1, ["D"] = 2 }),
+    new("A", new() { ["A"] = 1, ["B"] = 1, ["C"] = 1 }),
+    new("X", new() { ["X"] = 1, ["Y"] = 1 })
+};
+var merged = KnowledgeRelation.Merge(relations, new("JK126", new() { ["JK126"] = 1, ["A"] = 1 }), "JK126");
+Check(relations.Count == 2, "Overlapping groups must merge transitively, leaving unrelated groups intact.");
+Check(merged.CardCounts.Keys.ToHashSet().SetEquals(["JK126", "A", "B", "C", "D"]), "All members must share one group.");
+Check(merged.EntranceId == "JK126" && merged.Members.First().Id == "JK126", "JK126 must remain the first and only entrance.");
+Check(merged.CardCounts["D"] == 2 && merged.CardCounts["C"] == 1, "Merging must preserve group multiplicities without counting physical copies.");
+merged = KnowledgeRelation.Merge(relations, new("X", new() { ["X"] = 1, ["D"] = 1 }), "JK126");
+Check(relations.Count == 1 && merged.EntranceId == "JK126" && merged.CardCounts.ContainsKey("Y"), "A later merge must keep JK126 as entrance and include the complete other group.");
+var restored = JsonSerializer.Deserialize<List<KnowledgeRelation>>(JsonSerializer.Serialize(relations))!;
+Check(restored.Single().EntranceId == "JK126" && restored.Single().Members.SequenceEqual(merged.Members), "Run relations and counts must survive serialization.");
+KnowledgeRelation.Merge(restored, new("JK126", new() { ["JK126"] = 1, ["A"] = 1 }), "JK126");
+Check(restored.Count == 1 && restored.Single().CardCounts["D"] == 2, "Reacquiring an existing ID must not duplicate or shrink its group.");
+
+Console.WriteLine($"PASS {checks} knowledge group checks, including counts, transitive ID relations, entrance priority and serialization.");

@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/Models/KnowledgeGroup.cs" Link="KnowledgeGroup.cs" />
+    <Compile Include="../../src/Models/KnowledgeRelation.cs" Link="KnowledgeRelation.cs" />
     <None Include="../../data/card-pool.json" Link="card-pool.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

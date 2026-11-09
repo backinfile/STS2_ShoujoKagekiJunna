@@ -53,7 +53,7 @@ public partial class KnowledgeGroupPreview : Control
         var source = cards[index];
         if (!KnowledgeCombat.HasGroup(source)) return;
         cards = KnowledgePreviewCards.Create(source).ToList();
-        index = Math.Max(0, cards.FindIndex(card => CardCatalog.DesignId(card) == CardCatalog.DesignId(source)));
+        index = Math.Max(0, cards.FindIndex(card => card.Id == source.Id));
         Groups.Add(cards, new object());
     }
 

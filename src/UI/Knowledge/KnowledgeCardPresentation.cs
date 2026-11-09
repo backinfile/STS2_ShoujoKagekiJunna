@@ -23,7 +23,7 @@ internal static class KnowledgeOfferHoverTipsPatch
 {
     private static bool Prefix(NCardHolder __instance)
     {
-        if (__instance.CardNode?.Model is not JunnaCard card || !KnowledgeCombat.HasGroup(card)) return true;
+        if (__instance.CardNode?.Model is not { } card || !KnowledgeCombat.HasGroup(card)) return true;
         for (Node? parent = __instance.GetParent(); parent != null; parent = parent.GetParent())
             if (parent is NCardLibraryGrid or NCardRewardSelectionScreen or NChooseACardSelectionScreen)
             {
@@ -100,6 +100,7 @@ public partial class KnowledgeCardStack : Control
     private CardModel? _model;
     private readonly List<NCard> _companions = [];
     private bool _libraryUpgrade;
+    private KnowledgeRelation? _relation;
     private int _previewIndex;
     private NCard? _sourcePreview;
     private bool _bodyWasVisible;
@@ -145,12 +146,14 @@ public partial class KnowledgeCardStack : Control
         bool inLibrary = false;
         for (Node? node = GetParent(); node != null; node = node.GetParent()) inLibrary |= node is NCardLibraryGrid;
         bool libraryUpgrade = inLibrary && _source.Model!.IsUpgraded;
-        if (_model == _source.Model && _libraryUpgrade == libraryUpgrade) return;
+        var relation = DynamicKnowledge.Group(_source.Model!);
+        if (_model == _source.Model && _libraryUpgrade == libraryUpgrade && _relation == relation) return;
         Clear();
         _model = _source.Model;
         _libraryUpgrade = libraryUpgrade;
+        _relation = relation;
         var cards = KnowledgePreviewCards.Create(_model!, libraryUpgrade).ToList();
-        int sourceIndex = cards.FindIndex(card => CardCatalog.DesignId(card) == CardCatalog.DesignId(_model!));
+        int sourceIndex = cards.FindIndex(card => card.Id == _model!.Id);
         if (sourceIndex >= 0) cards.RemoveAt(sourceIndex);
         for (int i = cards.Count - 1; i >= 0; i--)
         {

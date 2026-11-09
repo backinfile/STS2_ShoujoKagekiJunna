@@ -35,8 +35,8 @@ public static class KnowledgeCombat
             bool generated = card.Pile!.IsCombatPile && card.Pile.Type != PileType.Play && card.DeckVersion == null;
             if (card.Pile.Type == PileType.Deck || discovered || generated)
             {
-                await GrantPartners(card, card.Pile!.Type);
-                await DynamicKnowledge.Acquire(card, card.Pile!.Type);
+                if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type))
+                    await GrantPartners(card, card.Pile!.Type);
             }
         }
     }
@@ -46,40 +46,42 @@ public static class KnowledgeCombat
         string? id = CardCatalog.DesignId(card);
         return id == null ? null : CardCatalog.Groups.FirstOrDefault(g => g.MainCardId == id || g.GrantedCardIds.Contains(id));
     }
-    public static bool HasGroup(CardModel card) => Group(card) != null || DynamicKnowledge.Members(card).Count > 1;
+    public static bool HasGroup(CardModel card) => Group(card) != null || DynamicKnowledge.IsLinked(card);
     public static async Task DrawPartners(PlayerChoiceContext context, CardModel card)
     {
-        var members = DynamicKnowledge.Members(card);
-        var group = members.Count > 1 ? null : Group(card);
-        if (group == null && members.Count == 0) return;
+        var relation = DynamicKnowledge.Group(card);
+        var group = relation == null ? Group(card) : null;
+        if (group == null && relation == null) return;
         var active = Drawing.Value ??= [];
-        string key = card.Owner.NetId + ":" + (group?.MainCardId ?? "dynamic");
+        string key = card.Owner.NetId + ":" + (relation?.EntranceId ?? group!.MainCardId);
         if (!active.Add(key)) return;
         try
         {
-            var ids = group?.Members.Where(member => member.Id != CardCatalog.DesignId(card) || member.Count > 1)
-                .Select(member => member.Id).ToHashSet() ?? [];
+            var ids = relation?.CardCounts.Keys.ToHashSet() ?? group!.Members
+                .Where(member => member.Id != CardCatalog.DesignId(card) || member.Count > 1)
+                .Select(member => CardCatalog.Model(member.Id).Id.ToString()).ToHashSet();
             await CardActions.DrawMatching(context, card.Owner,
-                c => c != card && (members.Contains(c) || ids.Contains(CardCatalog.DesignId(c) ?? "")), CardPile.MaxCardsInHand);
+                c => c != card && ids.Contains(c.Id.ToString()), CardPile.MaxCardsInHand);
         }
         finally { active.Remove(key); }
     }
-    internal static async Task<IReadOnlyList<CardModel>> GrantPartners(CardModel acquired, PileType destination)
+    internal static async Task<IReadOnlyList<CardModel>> GrantPartners(CardModel acquired, PileType destination,
+        IReadOnlyList<CardModel>? selected = null)
     {
-        var group = Group(acquired);
-        if (group == null) return [acquired];
+        var members = (DynamicKnowledge.Definition(acquired) ?? Group(acquired)?.Members
+            .Select(member => (Model: CardCatalog.Model(member.Id), member.Count)))?.ToArray();
+        if (members == null) return [acquired];
         using var single = SingleCard();
-        var counts = new Dictionary<string, int>(group.GrantedCardCounts);
-        foreach (var (memberId, count) in group.Members) counts[memberId] = count;
         var gained = new List<CardModel> { acquired };
-        string id = CardCatalog.DesignId(acquired)!;
-        if (counts.ContainsKey(id)) counts[id]--;
-        foreach (var (partnerId, count) in counts)
-            for (int i = 0; i < count; i++)
+        var offered = (selected ?? []).ToList();
+        foreach (var (model, count) in members)
+            for (int i = model.Id == acquired.Id ? 1 : 0; i < count; i++)
             {
-                var card = destination == PileType.Deck
-                    ? acquired.Owner.RunState.CreateCard(CardCatalog.Model(partnerId), acquired.Owner)
-                    : CardCatalog.Create(partnerId, acquired.Owner);
+                var card = offered.FirstOrDefault(card => card.Id == model.Id);
+                if (card != null) offered.Remove(card);
+                else card = destination == PileType.Deck
+                    ? acquired.Owner.RunState.CreateCard(model, acquired.Owner)
+                    : acquired.Owner.Creature.CombatState!.CreateCard(model, acquired.Owner);
                 if (destination == PileType.Deck)
                 {
                     var result = await CardPileCmd.Add(card, PileType.Deck);
@@ -98,8 +100,8 @@ public static class KnowledgeCombat
             // Native batches (e.g. Hefty Tablet: chosen card + Injury) finish before partners
             // are granted. Keep just this newly gained group adjacent, without acquiring twice.
             int index = deck.Cards.ToList().IndexOf(acquired);
-            var order = group.Members.Select(member => member.Id).Distinct().ToList();
-            var ordered = gained.Where(c => c.Pile == deck).OrderBy(c => order.IndexOf(CardCatalog.DesignId(c)!)).ToArray();
+            var order = members.Select(member => member.Model.Id).Distinct().ToList();
+            var ordered = gained.Where(c => c.Pile == deck).OrderBy(c => order.IndexOf(c.Id)).ToArray();
             foreach (var card in ordered) deck.RemoveInternal(card, silent: true);
             foreach (var card in ordered) deck.AddInternal(card, index++, silent: true);
             deck.InvokeContentsChanged();
