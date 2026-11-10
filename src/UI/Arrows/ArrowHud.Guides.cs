@@ -7,10 +7,16 @@ public partial class ArrowHud
 {
     internal void DrawGuides(ArrowGuides guides)
     {
-        // Draw behind the portrait children. Dead or removed targets have no guide.
+        float density = Math.Min(1, MathF.Sqrt(8f / Math.Max(8, _visibleArrows.Count)));
+        bool focused = _highlightedArrows.Count > 0;
+        // Draw behind the portrait children. Only the inspected overflow page adds hidden guides.
         foreach (var (arrow, view) in _views)
         {
-            if (view.Releasing) continue;
+            bool highlighted = _highlightedArrows.Contains(arrow);
+            bool inspected = _inspectedArrow == arrow;
+            if (view.Releasing || !_visibleArrows.Contains(arrow) && !inspected) continue;
+            float opacity = density;
+            if (focused) opacity = inspected ? 1.7f : highlighted ? density * .4f : density * .12f;
             var targets = view.Targets;
             if (targets.Count == 0) continue;
             var tip = LocalPoint(view.Frame.GetGlobalTransform() * Tip);
@@ -18,7 +24,7 @@ public partial class ArrowHud
                 ? deployment.CurrentPosition.Lerp(tip, deployment.ArrowAlpha) : tip;
             float guideProgress = deployment?.DrawProgress ?? 1;
             if (guideProgress <= 0) continue;
-            if (arrow.TargetsGroup)
+            if (view.Group)
             {
                 var left = targets[0] + new Vector2(-55, 25);
                 var right = targets[^1] + new Vector2(55, 25);
@@ -28,17 +34,19 @@ public partial class ArrowHud
                 left = start.Lerp(left, guideProgress);
                 right = start.Lerp(right, guideProgress);
                 var fanStart = start.MoveToward(midpoint, 18 * guideProgress);
-                guides.DrawFan(fanStart, left, right);
-                guides.DrawGroupGuide(fanStart, left, boundary: true);
-                guides.DrawGroupGuide(fanStart, right, boundary: true);
+                guides.DrawFan(fanStart, left, right, opacity);
+                guides.DrawGroupGuide(fanStart, left, boundary: true, opacity);
+                guides.DrawGroupGuide(fanStart, right, boundary: true, opacity);
                 foreach (var end in targets)
-                    guides.DrawGroupGuide(fanStart, start.Lerp(end, guideProgress), boundary: false);
+                    guides.DrawGroupGuide(fanStart, start.Lerp(end, guideProgress), boundary: false, opacity);
             }
             else
             {
                 var end = start.Lerp(targets[0], guideProgress);
-                guides.DrawSingleGuide(start, end);
+                guides.DrawSingleGuide(start, end, opacity);
             }
+            if (highlighted)
+                foreach (var target in targets) guides.HighlightTarget(target);
         }
     }
 }
@@ -48,6 +56,7 @@ internal partial class ArrowGuides : Node2D
 {
     internal ArrowHud Hud { get; init; } = null!;
     private static ArrayMesh? _fanMesh, _groupMesh, _singleMesh;
+    private readonly HashSet<Vector2> _highlightedTargets = [];
     private MeshBatch _fans = null!, _groups = null!, _singles = null!;
 
     public override void _Ready()
@@ -60,6 +69,7 @@ internal partial class ArrowGuides : Node2D
 
     public override void _Draw()
     {
+        _highlightedTargets.Clear();
         _fans.Reset();
         _groups.Reset();
         _singles.Reset();
@@ -69,10 +79,16 @@ internal partial class ArrowGuides : Node2D
         _singles.Commit();
     }
 
-    internal void DrawSingleGuide(Vector2 start, Vector2 target)
-        => _singles.Add(LineTransform(start, target), 1);
-    internal void DrawGroupGuide(Vector2 start, Vector2 target, bool boundary)
-        => _groups.Add(LineTransform(start, target), boundary ? .2f : .13f);
+    internal void DrawSingleGuide(Vector2 start, Vector2 target, float opacity)
+        => _singles.Add(LineTransform(start, target), opacity);
+    internal void DrawGroupGuide(Vector2 start, Vector2 target, bool boundary, float opacity)
+        => _groups.Add(LineTransform(start, target), (boundary ? .2f : .13f) * opacity);
+
+    internal void HighlightTarget(Vector2 target)
+    {
+        if (!_highlightedTargets.Add(target)) return;
+        DrawArc(target, 40, .15f * Mathf.Pi, .85f * Mathf.Pi, 24, new Color(.65f, .88f, 1, .8f), 2, true);
+    }
 
     private static Transform2D LineTransform(Vector2 start, Vector2 target)
     {
@@ -80,11 +96,11 @@ internal partial class ArrowGuides : Node2D
         return new(axis * .7f, axis.Normalized().Orthogonal(), start);
     }
 
-    internal void DrawFan(Vector2 start, Vector2 left, Vector2 right)
+    internal void DrawFan(Vector2 start, Vector2 left, Vector2 right, float opacity)
     {
         var leftAxis = left - start;
         var rightAxis = right - start;
-        if (Mathf.Abs(leftAxis.Cross(rightAxis)) >= 64) _fans.Add(new(leftAxis, rightAxis, start), 1);
+        if (Mathf.Abs(leftAxis.Cross(rightAxis)) >= 64) _fans.Add(new(leftAxis, rightAxis, start), opacity);
     }
 
     private static float GroupFade(float progress)

@@ -35,10 +35,12 @@ public partial class ArrowHud : Control
     ];
 
     private sealed record SatelliteMotion(Node2D Node, float Height, float Radius, float Phase, float WobbleSpeed);
-    private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, SatelliteMotion[] Satellites,
+    private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, TextureRect Border,
         CpuParticles2D Flash)
     {
         public ArrowLayoutMotion Motion { get; } = new();
+        public SatelliteMotion[] Satellites { get; set; } = [];
+        internal bool Group;
         internal Tween? CountTween;
         internal bool Releasing;
         internal Vector2? ExitPosition;
@@ -83,6 +85,9 @@ public partial class ArrowHud : Control
             var arrow = arrows[index];
             var view = _views[arrow];
             var center = _slots[arrow];
+            bool visible = _visibleArrows.Contains(arrow);
+            if (!visible) FinishDeployment(arrow);
+            view.Root.Visible = visible;
             float bob = CoreEffects.AmbientEffects ? Mathf.Sin((float)_elapsed * 1.8f + arrow.Sequence * .8f) * 2 : 0;
             var aim = view.Targets.Count == 0 ? center + new Vector2(400, 400) : view.TargetCenter;
             // Aim the lower point directly at the target, including the current floating offset.
@@ -90,7 +95,7 @@ public partial class ArrowHud : Control
             view.Motion.Advance(center + Vector2.Down * bob, aim, (float)delta);
             view.Root.Position = view.Motion.Center - BodyCenter;
             view.Frame.Rotation = view.Motion.Angle;
-            UpdateDeployment(arrow, view, aim);
+            if (visible) UpdateDeployment(arrow, view, aim);
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
             UpdateCountdown(arrow, view);
             if (view.PlayCount != arrow.PlayCount)
@@ -99,7 +104,7 @@ public partial class ArrowHud : Control
                 view.Repeats.Visible = arrow.PlayCount > 1;
                 view.Repeats.Text = $"×{arrow.PlayCount}";
             }
-            bool satellitesVisible = CoreEffects.AmbientEffects && view.Targets.Count > 0;
+            bool satellitesVisible = visible && CoreEffects.AmbientEffects && view.Targets.Count > 0;
             foreach (var satellite in view.Satellites)
             {
                 if (view.SatellitesVisible != satellitesVisible) satellite.Node.Visible = satellitesVisible;
@@ -108,6 +113,9 @@ public partial class ArrowHud : Control
             view.SatellitesVisible = satellitesVisible;
         }
         UpdateHoverPreview(room);
+        foreach (var arrow in arrows)
+            _views[arrow].Frame.Modulate = new Color(1, 1, 1,
+                _highlightedArrows.Count == 0 || _highlightedArrows.Contains(arrow) ? 1 : .55f);
         CoreEffects.Redraw(_guides);
     }
 
@@ -130,7 +138,7 @@ public partial class ArrowHud : Control
     {
         var room = NCombatRoom.Instance;
         if (room == null || arrow.Card.CombatState == null) return [];
-        return arrow.Targets.Where(t => t.IsAlive || ArrowCombat.AwaitingReturn(arrow))
+        return arrow.DisplayTargets.Where(t => t.IsAlive || ArrowCombat.AwaitingReturn(arrow))
             .Select(room.GetCreatureNode).Where(n => n != null)
             .Select(n => LocalPoint(n!.VfxSpawnPosition)).OrderBy(p => p.X).ToArray();
     }
@@ -196,26 +204,36 @@ public partial class ArrowHud : Control
             UV = PortraitWindow.Select(p => p / coverScale + cropOffset).ToArray(),
             Texture = portrait, Antialiased = true
         });
-        frame.AddChild(new TextureRect
+        var border = new TextureRect
         {
             Name = "ArrowFrame", ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
             StretchMode = TextureRect.StretchModeEnum.Scale,
-            Texture = arrow.TargetsGroup ? _groupFrame : _frame,
+            Texture = arrow.DisplaysGroup ? _groupFrame : _frame,
             Size = IconSize, MouseFilter = MouseFilterEnum.Ignore
-        });
+        };
+        frame.AddChild(border);
         frame.AddChild(CardBonusVfx.ForArrow(arrow.Card,
             new Vector2[] { new(120, 14), new(228, 138), new(120, 401), new(12, 138) }
                 .Select(p => p * FrameScale).ToArray()));
-        var count = MakeLabel("Countdown", Vector2.Zero, new(20, 20), 14);
+        var count = MakeLabel("Countdown", Vector2.Zero, new(26, 26), 20);
+        count.AddThemeStyleboxOverride("normal", new StyleBoxFlat
+        {
+            BgColor = new Color("172331"), CornerRadiusTopLeft = 13, CornerRadiusTopRight = 13,
+            CornerRadiusBottomLeft = 13, CornerRadiusBottomRight = 13
+        });
         root.AddChild(count);
-        var repeats = MakeLabel("Repeats", new(IconWidth - 5, 16), new(32, 20), 16);
+        var repeats = MakeLabel("Repeats", new(IconWidth - 5, 16), new(36, 20), 14);
         root.AddChild(repeats);
         root.AddChild(CardInvestmentMarks.ForArrow(arrow.Card));
-        var flash = ArrowFeedback.CreateFlash(arrow.TargetsGroup ? _groupFrame : _frame, IconWidth);
+        var flash = ArrowFeedback.CreateFlash(arrow.DisplaysGroup ? _groupFrame : _frame, IconWidth);
         flash.Position = IconSize * .5f;
         frame.AddChild(flash);
         AddChild(root);
-        return new(root, frame, count, repeats, arrow.TargetsGroup ? CreateSatellites(frame) : [], flash);
+        return new(root, frame, count, repeats, border, flash)
+        {
+            Group = arrow.DisplaysGroup,
+            Satellites = arrow.DisplaysGroup ? CreateSatellites(frame) : []
+        };
     }
 
     private static Label MakeLabel(string name, Vector2 position, Vector2 size, int fontSize)

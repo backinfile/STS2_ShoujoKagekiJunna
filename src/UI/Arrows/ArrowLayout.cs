@@ -7,6 +7,9 @@ internal enum ArrowLane { FriendlyGroup, FriendlySingle, EnemyGroup, Left, Right
 /// <summary>Target regions and ordered slots, preserving existing arrows before balancing new arrows.</summary>
 internal static class ArrowLayout
 {
+    internal static int RowCapacity(float top, float bottom, float spacing)
+        => Math.Max(1, (int)MathF.Floor((bottom - top) / spacing) + 1);
+
     // Group regions stay horizontally left of every single-target region in the same faction.
     // Overflow grows down within each region, preserving that rule across multiple rows.
     internal static Vector2[] Regions(float width, float allyLeft, float allyRight,

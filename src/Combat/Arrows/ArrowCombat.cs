@@ -53,10 +53,8 @@ public static partial class ArrowCombat
         int round = player.PlayerCombatState!.TurnNumber;
         if (LastTick.TryGetValue(player.NetId, out var previous) && previous == round) return;
         LastTick[player.NetId] = round;
-        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player && a.DeployedRound < round).ToArray())
-        {
-            await Accelerate(context, arrow, 1);
-        }
+        await AccelerateBatch(context,
+            ResolutionOrder().Where(a => a.Card.Owner == player && a.DeployedRound < round), 1);
     }
 
     public static async Task ActivateHaste(PlayerChoiceContext context, Player player)
@@ -67,13 +65,12 @@ public static partial class ArrowCombat
             arrow.ExhaustAfterResolve = true;
             arrow.Card.AddKeyword(CardKeyword.Exhaust);
         }
-        foreach (var arrow in arrows) await Accelerate(context, arrow, 1);
+        await AccelerateBatch(context, arrows, 1);
     }
 
     public static async Task AccelerateAll(PlayerChoiceContext context, Player player, int turns)
     {
-        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player))
-            await Accelerate(context, arrow, turns);
+        await AccelerateBatch(context, ResolutionOrder().Where(a => a.Card.Owner == player), turns);
     }
 
     public static async Task CopyAll(PlayerChoiceContext context, Player player)
@@ -106,24 +103,44 @@ public static partial class ArrowCombat
     {
         var arrows = ResolutionOrder().Where(a => a.Card.Owner == player && !a.Resolving &&
             a.Targets.Contains(target)).ToArray();
-        foreach (var arrow in arrows) await Accelerate(context, arrow, turns);
+        await AccelerateBatch(context, arrows, turns);
     }
 
     public static async Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns)
     {
-        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player && !a.TargetsGroup &&
-                     (a.Target == player.Creature || a.Target == null)))
-            await Accelerate(context, arrow, turns);
+        await AccelerateBatch(context, ResolutionOrder().Where(a => a.Card.Owner == player && !a.TargetsGroup &&
+            (a.Target == player.Creature || a.Target == null)), turns);
     }
 
     public static async Task AccelerateEnemies(PlayerChoiceContext context, Player player, int turns)
     {
-        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player &&
-                     (a.TargetsAllEnemies || a.Target?.IsEnemy == true)))
-            await Accelerate(context, arrow, turns);
+        await AccelerateBatch(context, ResolutionOrder().Where(a => a.Card.Owner == player &&
+            (a.TargetsAllEnemies || a.Target?.IsEnemy == true)), turns);
     }
 
-    public static async Task Accelerate(PlayerChoiceContext context, ArrowDeployment arrow, int turns)
+    private static async Task AccelerateBatch(PlayerChoiceContext context,
+        IEnumerable<ArrowDeployment> source, int turns)
+    {
+        var arrows = source.ToArray();
+        int ready = arrows.Count(arrow => !arrow.Resolving && arrow.Remaining <= Math.Max(0, turns)
+            && !AwaitingReturn(arrow));
+        int released = 0;
+        foreach (var arrow in arrows)
+        {
+            bool completing = !arrow.Resolving && arrow.Remaining <= Math.Max(0, turns)
+                && !AwaitingReturn(arrow);
+            float impactTime = ArrowReleaseVfx.ImpactTime;
+            if (ready > 3 && released > 0)
+                impactTime = Math.Clamp(1.8f / (ready - 1), .045f, .16f);
+            await Accelerate(context, arrow, turns, impactTime);
+            if (completing) released++;
+        }
+    }
+
+    public static Task Accelerate(PlayerChoiceContext context, ArrowDeployment arrow, int turns)
+        => Accelerate(context, arrow, turns, ArrowReleaseVfx.ImpactTime);
+
+    private static async Task Accelerate(PlayerChoiceContext context, ArrowDeployment arrow, int turns, float impactTime)
     {
         if (arrow.Resolving || !Arrows.Contains(arrow)) return;
         if (arrow.Card.Pile?.Type != ArrowPile.PileId) { Arrows.Remove(arrow); return; }
@@ -144,7 +161,7 @@ public static partial class ArrowCombat
         {
             await using var resolutionBatch = Shine.BeginResolutionBatch();
             using var attack = ArrowAttackAnimation.Begin(arrow.Card.Owner);
-            if (hud != null) await hud.ReleaseArrow(arrow);
+            if (hud != null) await hud.ReleaseArrow(arrow, impactTime);
             for (int replay = 0; replay < arrow.PlayCount; replay++)
                 await arrow.Resolve(context, replay);
             // A resolving arrow may have deployed itself again. Keep that new deployment intact.

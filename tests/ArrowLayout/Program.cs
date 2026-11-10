@@ -165,3 +165,18 @@ static void Check(string name, int?[] oldSlots, Vector2[] slots)
         throw new Exception($"{name}: actual {actual}, optimal {best}");
     Console.WriteLine($"PASS: {name}: moved={actual.Moved}, distance={actual.Travel:0.##}");
 }
+
+// Overflow capacity must stay bounded for the narrow friendly lane as well as enemies.
+foreach (var (top, bottom, expected) in new[] { (184f, 410f, 3), (184f, 184f, 1), (184f, 100f, 1) })
+    Require(ArrowLayout.RowCapacity(top, bottom, 96) == expected, "bounded row capacity");
+var friendlyRegions = ArrowLayout.OccupiedRegions(1920, 482.5f, 482.5f, false, 80, [0, 100, 0, 0, 0]);
+var friendlyRange = friendlyRegions[(int)ArrowLane.FriendlySingle];
+int friendlyColumns = (int)MathF.Round((friendlyRange.Y - friendlyRange.X) / 80) + 1;
+int friendlyCapacity = friendlyColumns * ArrowLayout.RowCapacity(184, 410, 96);
+Require(friendlyCapacity < 50, "dense friendly arrows require overflow");
+var boundedSlots = Enumerable.Range(0, friendlyCapacity)
+    .Select(index => new Vector2(friendlyRange.X + index % friendlyColumns * 80, 184 + index / friendlyColumns * 96)).ToArray();
+Require(boundedSlots.All(point => point.Y <= 410), "overflow slots stay above creatures");
+Require(ArrowLayout.Assign(new Vector2?[friendlyCapacity - 1], boundedSlots[..^1]).Length == friendlyCapacity - 1,
+    "overflow reserves exactly one slot without collisions");
+Console.WriteLine("PASS: bounded rows and dense friendly overflow capacity");

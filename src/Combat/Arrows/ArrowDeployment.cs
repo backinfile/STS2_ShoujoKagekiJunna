@@ -20,6 +20,13 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     public IEnumerable<Creature> Targets => TargetsAllPlayers ? Card.CombatState?.PlayerCreatures ?? []
         : TargetsAllEnemies ? Card.CombatState?.GetOpponentsOf(Card.Owner.Creature) ?? []
         : Target is { } target ? [target] : [];
+    // Presentation includes attack expansion while Play.Target retains single-target side effects.
+    internal bool DisplaysAllEnemies => TargetsAllEnemies || ArrowCombat.ExpandsAttackTargets(Card)
+        && DamageCapability.CanAttack(Card);
+    internal bool DisplaysGroup => DisplaysAllEnemies || TargetsAllPlayers;
+    internal IEnumerable<Creature> DisplayTargets => DisplaysAllEnemies
+        ? Card.CombatState?.GetOpponentsOf(Card.Owner.Creature) ?? [] : Targets;
+
     internal void Retarget(Creature target) => Play = GameApi.WithTarget(Play, target);
     public int Remaining { get; internal set; } = remaining;
     public int DeployedRound { get; } = round;

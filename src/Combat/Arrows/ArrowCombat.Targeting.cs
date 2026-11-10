@@ -14,6 +14,10 @@ public static partial class ArrowCombat
 {
     private static readonly Dictionary<Creature, Creature[]> DeathOrders = [];
 
+    internal static bool ExpandsAttackTargets(CardModel card)
+        => card.TargetType == TargetType.AnyEnemy && CardCatalog.IsArrow(card)
+            && CatalogPower.Has(card.Owner, "JA205");
+
     public static void RetargetEnemies(MegaCrit.Sts2.Core.Entities.Players.Player player, Creature target)
     {
         foreach (var arrow in Arrows.Where(a => a.Card.Owner == player && !a.Resolving &&
@@ -77,8 +81,7 @@ internal static class ArrowAllEnemiesPatch
 {
     private static void Prefix(AttackCommand __instance, ref Creature? ____singleTarget)
     {
-        if (__instance.IsSingleTargeted && __instance.ModelSource is CardModel card && CardCatalog.IsArrow(card) &&
-            card.TargetType == TargetType.AnyEnemy && CatalogPower.Has(card.Owner, "JA205"))
+        if (__instance.IsSingleTargeted && __instance.ModelSource is CardModel card && ArrowCombat.ExpandsAttackTargets(card))
         {
             ____singleTarget = null;
             __instance.TargetingAllOpponents(card.Owner.Creature.CombatState!);

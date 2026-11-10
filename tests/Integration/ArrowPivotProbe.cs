@@ -56,6 +56,10 @@ public sealed class ArrowPivotProbe : AbstractConsoleCmd
         var arrow = ArrowCombat.Deployed.Single();
         await Task.Delay(1200);
         var hud = NCombatRoom.Instance!.GetNode<ArrowHud>("JunnaArrows");
+        var deployments = (IDictionary)AccessTools.Field(typeof(ArrowHud), "_deployments").GetValue(hud)!;
+        var deadline = DateTime.UtcNow.AddSeconds(5);
+        while (deployments.Contains(arrow) && DateTime.UtcNow < deadline) await Task.Delay(20);
+        Verify("deployment handoff settles before isolated pivot updates", !deployments.Contains(arrow));
         var views = (IDictionary)AccessTools.Field(typeof(ArrowHud), "_views").GetValue(hud)!;
         var view = views[arrow]!;
         var root = (Control)view.GetType().GetProperty("Root")!.GetValue(view)!;

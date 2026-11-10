@@ -175,8 +175,13 @@ public sealed class ArrowPerformanceProbe : AbstractConsoleCmd
         }));
         CoreApi.Configuration.Update(CoreApi.Configuration.Current with { VfxLevel = CoreVfxLevel.Off });
         await Frames(3);
-        bool off = !guides.IsVisibleInTree() && hud.GetChildren().OfType<Control>()
-            .Where(node => node.HasNode("TiltedFrame")).All(node => node.IsVisibleInTree());
+        var visible = (HashSet<ArrowDeployment>)AccessTools.Field(typeof(ArrowHud), "_visibleArrows").GetValue(hud)!;
+        bool off = !guides.IsVisibleInTree() && actual.All(arrow =>
+        {
+            var view = views[arrow]!;
+            var root = (Control)AccessTools.Property(view.GetType(), "Root").GetValue(view)!;
+            return root.IsVisibleInTree() == visible.Contains(arrow);
+        });
         CoreApi.Configuration.Update(CoreApi.Configuration.Current with { VfxLevel = CoreVfxLevel.Reduced });
         await Frames(5);
         bool restored = guides.IsVisibleInTree();

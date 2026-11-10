@@ -15,13 +15,14 @@ namespace ShoujoKagekiJunna.Combat;
 /// </summary>
 public static class DamageCapability
 {
-    private static readonly ConcurrentDictionary<Type, bool> Cache = new();
+    private static readonly ConcurrentDictionary<Type, bool> Cache = new(), AttackCache = new();
     private static readonly Dictionary<Type, Func<CardModel, bool>> Adapters = [];
 
     public static void Register<T>(Func<T, bool> canDealDamage) where T : CardModel
     {
         Adapters[typeof(T)] = card => canDealDamage((T)card);
         Cache.Clear();
+        AttackCache.Clear();
     }
 
     public static void Register(Type cardType, Func<CardModel, bool> canDealDamage)
@@ -29,13 +30,18 @@ public static class DamageCapability
         if (!typeof(CardModel).IsAssignableFrom(cardType)) throw new ArgumentException("Expected a card model", nameof(cardType));
         Adapters[cardType] = canDealDamage;
         Cache.Clear();
+        AttackCache.Clear();
     }
 
     public static bool CanDealDamage(CardModel card) => Adapters.TryGetValue(card.GetType(), out var adapter)
         ? adapter(card)
-        : Cache.GetOrAdd(card.GetType(), type => ScanModel(type, new HashSet<MethodBase>(), new HashSet<Type>()));
+        : Cache.GetOrAdd(card.GetType(), type => ScanModel(type, new HashSet<MethodBase>(), new HashSet<Type>(), attacksOnly: false));
 
-    private static bool ScanModel(Type type, HashSet<MethodBase> visited, HashSet<Type> models)
+    internal static bool CanAttack(CardModel card) => CanDealDamage(card)
+        && AttackCache.GetOrAdd(card.GetType(), type =>
+            ScanModel(type, new HashSet<MethodBase>(), new HashSet<Type>(), attacksOnly: true));
+
+    private static bool ScanModel(Type type, HashSet<MethodBase> visited, HashSet<Type> models, bool attacksOnly)
     {
         if (!models.Add(type)) return false;
         // Inspect overrides and helpers in the concrete model's inheritance chain, stopping at engine model bases.
@@ -43,24 +49,24 @@ public static class DamageCapability
              && current != typeof(OrbModel) && current != typeof(AbstractModel); current = current.BaseType)
             foreach (var method in current.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public |
                                                       BindingFlags.NonPublic | BindingFlags.DeclaredOnly))
-                if (!method.IsSpecialName && ScanMethod(method, type.Assembly, visited, models)) return true;
+                if (!method.IsSpecialName && ScanMethod(method, type.Assembly, visited, models, attacksOnly)) return true;
         return false;
     }
 
-    private static bool ScanMethod(MethodBase method, Assembly modelAssembly, HashSet<MethodBase> visited, HashSet<Type> models)
+    private static bool ScanMethod(MethodBase method, Assembly modelAssembly, HashSet<MethodBase> visited, HashSet<Type> models, bool attacksOnly)
     {
         if (!visited.Add(method) || visited.Count > 512 || method.GetMethodBody() == null) return false;
         var asyncType = method.GetCustomAttribute<AsyncStateMachineAttribute>()?.StateMachineType;
-        if (asyncType != null && ScanMethod(AccessTools.Method(asyncType, "MoveNext"), modelAssembly, visited, models)) return true;
+        if (asyncType != null && ScanMethod(AccessTools.Method(asyncType, "MoveNext"), modelAssembly, visited, models, attacksOnly)) return true;
         var iteratorType = method.GetCustomAttribute<IteratorStateMachineAttribute>()?.StateMachineType;
-        if (iteratorType != null && ScanMethod(AccessTools.Method(iteratorType, "MoveNext"), modelAssembly, visited, models)) return true;
+        if (iteratorType != null && ScanMethod(AccessTools.Method(iteratorType, "MoveNext"), modelAssembly, visited, models, attacksOnly)) return true;
         try
         {
             foreach (var instruction in PatchProcessor.GetOriginalInstructions(method))
             {
                 if (instruction.operand is not MethodBase called) continue;
                 var declaring = called.DeclaringType;
-                if ((declaring == typeof(CreatureCmd) && called.Name == nameof(CreatureCmd.Damage)) ||
+                if ((!attacksOnly && declaring == typeof(CreatureCmd) && called.Name == nameof(CreatureCmd.Damage)) ||
                     (declaring == typeof(AttackCommand) && called.Name == nameof(AttackCommand.Execute))) return true;
                 if (declaring == typeof(PowerCmd) || declaring == typeof(OrbCmd) || declaring == typeof(ModelDb) ||
                     declaring != null && (typeof(PowerModel).IsAssignableFrom(declaring) ||
@@ -72,7 +78,7 @@ public static class DamageCapability
                     (!declaring.Namespace?.StartsWith("MegaCrit.Sts2.Core.") == true ||
                      declaring.Namespace?.Contains(".Models.") == true);
                 if (helper && !typeof(CardModel).IsAssignableFrom(declaring) && called.Name is ".ctor" or ".cctor") continue;
-                if (helper && ScanMethod(called, modelAssembly, visited, models)) return true;
+                if (helper && ScanMethod(called, modelAssembly, visited, models, attacksOnly)) return true;
             }
         }
         catch (Exception ex) when (ex is NotSupportedException or ArgumentException or InvalidOperationException)

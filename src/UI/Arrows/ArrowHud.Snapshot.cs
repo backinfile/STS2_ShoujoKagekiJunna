@@ -23,6 +23,7 @@ public partial class ArrowHud
             if (!_live.Contains(arrow)) _removed.Add(arrow);
         foreach (var removed in _removed)
         {
+            RemovePreviewCard(removed);
             FinishDeployment(removed);
             if (!_views[removed].Releasing) _views[removed].Root.QueueFree();
             _views.Remove(removed);
@@ -47,17 +48,26 @@ public partial class ArrowHud
                 _views.Add(arrow, view);
             }
             if (view.Releasing) continue;
+            bool group = arrow.DisplaysGroup;
+            if (view.Group != group)
+            {
+                foreach (var satellite in view.Satellites) satellite.Node.QueueFree();
+                view.Satellites = group ? CreateSatellites(view.Frame) : [];
+                view.Border.Texture = view.Flash.Texture = group ? _groupFrame : _frame;
+                view.Group = group;
+                view.SatellitesVisible = null;
+            }
             view.TargetOrder = arrow.Target is { } target ? _targetOrder.GetValueOrDefault(target, -1) : 0;
             view.Targets.Clear();
             if (arrow.Card.CombatState != null)
             {
-                if (arrow.TargetsGroup)
+                if (view.Group)
                 {
                     var key = (arrow.Card.Owner.Creature, arrow.TargetsAllPlayers);
                     if (_groupTargets.TryGetValue(key, out var targets)) view.Targets.AddRange(targets);
                     else
                     {
-                        foreach (var creature in arrow.Targets) AddTargetPoint(arrow, view, creature);
+                        foreach (var creature in arrow.DisplayTargets) AddTargetPoint(arrow, view, creature);
                         view.Targets.Sort(CompareTargetX);
                         _groupTargets.Add(key, view.Targets);
                     }

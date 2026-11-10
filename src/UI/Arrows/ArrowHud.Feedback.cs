@@ -55,7 +55,7 @@ public partial class ArrowHud
         if (_views.TryGetValue(arrow, out var view) && !view.Releasing) UpdateCountdown(arrow, view);
     }
 
-    internal Task ReleaseArrow(ArrowDeployment arrow)
+    internal Task ReleaseArrow(ArrowDeployment arrow, float impactTime = ArrowReleaseVfx.ImpactTime)
     {
         if (!_views.TryGetValue(arrow, out var view))
         {
@@ -74,6 +74,7 @@ public partial class ArrowHud
         view.Flash.Restart();
         view.Flash.Emitting = CoreEffects.Enabled;
         view.Root.Scale = Vector2.One;
+        view.Root.Show();
         var origin = view.Root.Position + BodyCenter;
         var targets = TargetPoints(arrow);
         if (targets.Length == 0 && arrow.Card.TargetType == TargetType.Self &&
@@ -93,13 +94,13 @@ public partial class ArrowHud
         AddChild(effect);
         view.Root.Reparent(effect);
         view.Root.Position = -BodyCenter;
-        effect.Initialize(view.Root, targets.Select(point => point - origin).ToArray(), (direction, delta) =>
+        effect.Initialize(view.Root, targets.Select(point => point - origin).ToArray(), impactTime, (direction, delta) =>
         {
             view.Motion.Advance(origin, origin + direction, delta);
             view.Frame.Rotation = view.Motion.Angle;
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
         });
-        return Cmd.Wait(ArrowReleaseVfx.ImpactTime);
+        return Cmd.Wait(impactTime);
     }
 }
 
@@ -112,19 +113,21 @@ public partial class ArrowReleaseVfx : Node2D
     private Vector2 _rest;
     private Vector2[] _targets = [];
     private float _time;
+    private float _speed = ArrowLayoutMotion.SpeedMultiplier;
     private Action<Vector2, float>? _turn;
 
-    internal void Initialize(Control arrow, Vector2[] targets, Action<Vector2, float>? turn = null)
+    internal void Initialize(Control arrow, Vector2[] targets, float impactTime, Action<Vector2, float>? turn = null)
     {
         _arrow = arrow;
         _rest = arrow.Position;
         _targets = targets;
+        _speed = (Hold + Flight) / impactTime;
         _turn = turn;
     }
 
     public override void _Process(double delta)
     {
-        _time += (float)delta * ArrowLayoutMotion.SpeedMultiplier;
+        _time += (float)delta * _speed;
         if (_time >= Duration) { QueueFree(); return; }
         float flight = Mathf.Clamp((_time - Hold) / Flight, 0, 1);
         var aim = _targets.Length == 0 ? new Vector2(0, -110) : _targets.Aggregate(Vector2.Zero, (sum, p) => sum + p) / _targets.Length;
