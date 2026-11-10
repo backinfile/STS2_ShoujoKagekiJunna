@@ -225,7 +225,11 @@ public static class DynamicKnowledge
             var tip = new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
                 string.Join("\n", names))
                 { Id = "junna_dynamic_knowledge_group", ShouldOverrideTextOverflow = CardCatalog.DesignId(__instance) == "JK126" };
-            __result = __result.Append(tip);
+            var tips = __result.ToList();
+            string knowledgeId = HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge).Id;
+            int knowledgeIndex = tips.FindIndex(existing => existing.Id == knowledgeId);
+            tips.Insert(knowledgeIndex + 1, tip);
+            __result = tips;
         }
     }
 }

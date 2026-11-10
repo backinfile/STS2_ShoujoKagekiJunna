@@ -36,6 +36,21 @@ internal static class KnowledgeOfferHoverTipsPatch
     }
 }
 
+[HarmonyPatch(typeof(NHoverTipSet), "Init")]
+internal static class KnowledgeTipBackgroundsPatch
+{
+    private static void Postfix(NHoverTipSet __instance, IEnumerable<IHoverTip> hoverTips)
+    {
+        var tips = IHoverTip.RemoveDupes(hoverTips).OfType<HoverTip>().ToArray();
+        var container = __instance.GetNode<Control>("textHoverTipContainer");
+        for (int i = 0; i < tips.Length; i++)
+        {
+            if (tips[i].Id.StartsWith("junna_knowledge_background_"))
+                container.GetChild(i).GetNode<CanvasItem>("%Bg").SelfModulate = new Color("#c18cdd");
+        }
+    }
+}
+
 /// <summary>One preview per physical card, including repeated copies of the same model.</summary>
 public static class KnowledgePreviewCards
 {
