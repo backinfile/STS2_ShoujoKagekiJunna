@@ -113,6 +113,7 @@ public partial class ArrowHud : Control
             view.SatellitesVisible = satellitesVisible;
         }
         UpdateHoverPreview(room);
+        WarmPreviewCache();
         foreach (var arrow in arrows)
             _views[arrow].Frame.Modulate = new Color(1, 1, 1,
                 _highlightedArrows.Count == 0 || _highlightedArrows.Contains(arrow) ? 1 : .55f);

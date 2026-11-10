@@ -21,7 +21,7 @@ namespace JunnaIntegration;
 public sealed class ArrowPerformanceProbe : AbstractConsoleCmd
 {
     public override string CmdName => "junna_arrow_perf";
-    public override string Args => "prepare <count> <Full|Reduced|Off> | measure <label> | release | check | video";
+    public override string Args => "prepare <count> <Full|Reduced|Off> | measure <label> [scroll|open] | release | check | video";
     public override string Description => "Measure arrow HUD work in an isolated test game.";
     public override bool IsNetworked => false;
     private static readonly List<object> Results = [];
@@ -49,7 +49,7 @@ public sealed class ArrowPerformanceProbe : AbstractConsoleCmd
         return args.FirstOrDefault() switch
         {
             "prepare" => new(Prepare(player, int.Parse(args[1]), Enum.Parse<CoreVfxLevel>(args[2])), true, "Preparing arrows"),
-            "measure" => new(Measure(args[1]), true, "Measuring arrows"),
+            "measure" => new(Measure(args[1], args.ElementAtOrDefault(2)), true, "Measuring arrows"),
             "release" => new(Release(player), true, "Checking release ownership"),
             "check" => new(Check(player), true, "Checking snapshots and effect levels"),
             "video" => new(PrepareVideo(player), true, "Preparing normal card play"),
@@ -110,10 +110,24 @@ public sealed class ArrowPerformanceProbe : AbstractConsoleCmd
         Save();
     }
 
-    private static async Task Measure(string label)
+    private static async Task Measure(string label, string? interaction)
     {
+        var room = NCombatRoom.Instance!;
+        bool scroll = interaction == "scroll", open = interaction == "open";
+        if (open)
+        {
+            var hud = room.GetNode<ArrowHud>("JunnaArrows");
+            AccessTools.Method(typeof(ArrowHud), "ClearHoverPreview").Invoke(hud, []);
+            var cache = (System.Collections.IDictionary)AccessTools.Field(typeof(ArrowHud), "_previewCache").GetValue(hud)!;
+            foreach (var arrow in cache.Keys.Cast<ArrowDeployment>().ToArray())
+                AccessTools.Method(typeof(ArrowHud), "RemovePreviewCard").Invoke(hud, [arrow]);
+            Input.ParseInputEvent(new InputEventMouseMotion { Position = Vector2.Zero, GlobalPosition = Vector2.Zero });
+        }
+        var pointer = room.GetViewport().GetFinalTransform() * room.CreatureNodes
+            .First(node => node.Entity.IsEnemy && node.Entity.IsAlive).Hitbox.GetGlobalRect().GetCenter();
+        if (scroll) Input.ParseInputEvent(new InputEventMouseMotion { Position = pointer, GlobalPosition = pointer });
         await Frames(90);
-        const int samples = 360;
+        int samples = open ? 120 : 360;
         var frames = new double[samples];
         var draws = new double[samples];
         ProcessTimes.Clear(); DrawTimes.Clear();
@@ -122,6 +136,14 @@ public sealed class ArrowPerformanceProbe : AbstractConsoleCmd
         long previous = Stopwatch.GetTimestamp();
         for (int i = 0; i < samples; i++)
         {
+            if (open && i == 0)
+                Input.ParseInputEvent(new InputEventMouseMotion { Position = pointer, GlobalPosition = pointer });
+            if (scroll && i % 10 == 0)
+                Input.ParseInputEvent(new InputEventMouseButton
+                {
+                    Position = pointer, GlobalPosition = pointer, Pressed = true,
+                    ButtonIndex = i / 40 % 2 == 0 ? MouseButton.WheelDown : MouseButton.WheelUp
+                });
             await Frames(1);
             long now = Stopwatch.GetTimestamp();
             frames[i] = (now - previous) * 1000d / Stopwatch.Frequency;
@@ -129,7 +151,7 @@ public sealed class ArrowPerformanceProbe : AbstractConsoleCmd
             draws[i] = Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame);
         }
         _measuring = false;
-        Results.Add(new { kind = "measurement", label, arrows = ArrowCombat.Deployed.Count,
+        Results.Add(new { kind = "measurement", label, interaction, arrows = ArrowCombat.Deployed.Count,
             targets = ArrowCombat.Deployed.FirstOrDefault()?.Targets.Count() ?? 0,
             level = CoreApi.Configuration.Current.VfxLevel.ToString(),
             frame_ms = Stats(frames), hud_process_ms = Stats(ProcessTimes), hud_draw_ms = Stats(DrawTimes),

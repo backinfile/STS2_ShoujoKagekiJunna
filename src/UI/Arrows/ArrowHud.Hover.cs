@@ -33,6 +33,36 @@ public partial class ArrowHud
     private bool _previewHoverSelection = true;
     private double _lastHoverTime;
     private Tween? _previewMotion;
+    private (Vector2 Canvas, Rect2 Anchor, int Focus, int Total, int Visible)? _previewLayout;
+    private readonly List<Rect2> _previewObstacles = [];
+
+    private void WarmPreviewCache()
+    {
+        if (!IsVisibleInTree() || _hoverPreview?.Visible == true || _previewCache.Count >= PreviewCapacity * 2) return;
+        foreach (var arrow in _displayOrder)
+        {
+            if (_previewCache.ContainsKey(arrow)) continue;
+            EnsureHoverPreview();
+            CreatePreviewCard(arrow);
+            return; // Spread card construction across idle frames before the player opens a preview.
+        }
+    }
+
+    private NCard CreatePreviewCard(ArrowDeployment arrow)
+    {
+        var card = NCard.Create(arrow.Card)!;
+        _hoverPreview!.AddChild(card);
+        KnowledgePreviewCards.IgnoreMouse(card);
+        card.AddChild(new Control
+        {
+            Name = "ArrowPreviewHitbox", Position = new(-150, -211), Size = new(300, 422),
+            MouseFilter = MouseFilterEnum.Stop
+        });
+        card.Hide();
+        card.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
+        _previewCache.Add(arrow, card);
+        return card;
+    }
 
     private void UpdateHoverPreview(NCombatRoom room)
     {
@@ -121,7 +151,7 @@ public partial class ArrowHud
             if (_hoverPreview.GetIndex() != GetChildCount() - 1) MoveChild(_hoverPreview, GetChildCount() - 1);
             return;
         }
-        _hoverPreview = new Control { Name = "JunnaArrowHoverPreview", MouseFilter = MouseFilterEnum.Stop, ZIndex = 20 };
+        _hoverPreview = new Control { Name = "JunnaArrowHoverPreview", MouseFilter = MouseFilterEnum.Stop, ZIndex = 20, Visible = false };
         AddChild(_hoverPreview);
         _previewCount = MakeLabel("CardIndex", Vector2.Zero, new(110, 28), 18);
         _previewCount.AddThemeColorOverride("font_color", new Color("D0B775"));
@@ -156,23 +186,13 @@ public partial class ArrowHud
         for (int i = 0; same && i < count; i++) same = _previewCards[i].Arrow == _hoverArrows[_previewStart + i];
         if (!same)
         {
+            _previewLayout = null;
             foreach (var card in _previewCache.Values) card.Hide();
             _previewCards.Clear();
             for (int i = 0; i < count; i++)
             {
                 var arrow = _hoverArrows[_previewStart + i];
-                if (!_previewCache.TryGetValue(arrow, out var card))
-                {
-                    card = NCard.Create(arrow.Card)!;
-                    _hoverPreview!.AddChild(card);
-                    KnowledgePreviewCards.IgnoreMouse(card);
-                    card.AddChild(new Control
-                    {
-                        Name = "ArrowPreviewHitbox", Position = new(-150, -211), Size = new(300, 422),
-                        MouseFilter = MouseFilterEnum.Stop
-                    });
-                    _previewCache.Add(arrow, card);
-                }
+                if (!_previewCache.TryGetValue(arrow, out var card)) card = CreatePreviewCard(arrow);
                 card.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
                 card.Show();
                 _previewCards.Add((arrow, card));
@@ -199,8 +219,34 @@ public partial class ArrowHud
     private void LayoutHoverPreview(Control anchor, bool animate = false)
     {
         var canvas = GetViewportRect().Size;
-        float scale = Math.Min(PreviewScale, (canvas.Y * .8f - 96 - PreviewMargin * 2) / 470);
+        var anchorRect = anchor.GetGlobalRect();
         int focus = _previewIndex - _previewStart;
+        var layout = (canvas, anchorRect, focus, _hoverArrows.Count, _previewCards.Count);
+        bool obstaclesChanged = false;
+        int obstacleCount = 0;
+        foreach (var creature in NCombatRoom.Instance!.CreatureNodes)
+        {
+            if (!creature.Entity.IsAlive) continue;
+            var rect = creature.Hitbox.GetGlobalRect().GrowIndividual(24, 110, 24, 12);
+            if (obstacleCount == _previewObstacles.Count)
+            {
+                _previewObstacles.Add(rect);
+                obstaclesChanged = true;
+            }
+            else if (_previewObstacles[obstacleCount] != rect)
+            {
+                _previewObstacles[obstacleCount] = rect;
+                obstaclesChanged = true;
+            }
+            obstacleCount++;
+        }
+        if (obstacleCount < _previewObstacles.Count)
+        {
+            _previewObstacles.RemoveRange(obstacleCount, _previewObstacles.Count - obstacleCount);
+            obstaclesChanged = true;
+        }
+        if (!obstaclesChanged && _previewLayout == layout) return;
+        float scale = Math.Clamp((canvas.Y * .8f - 96 - PreviewMargin * 2) / 470, .1f, PreviewScale);
         Span<Vector2> positions = stackalloc Vector2[PreviewCapacity];
         Span<Vector2> scales = stackalloc Vector2[PreviewCapacity];
         Span<float> angles = stackalloc float[PreviewCapacity];
@@ -233,7 +279,6 @@ public partial class ArrowHud
         }
         float counterHeight = _hoverArrows.Count > 1 ? 36 : 0;
         var size = bounds.Size + new Vector2(PreviewMargin, PreviewMargin + counterHeight);
-        var anchorRect = anchor.GetGlobalRect();
         var available = new Rect2(new Vector2(PreviewMargin, 96),
             new Vector2(canvas.X - PreviewMargin * 2, canvas.Y * .8f - 96 - PreviewMargin));
         var maximum = (available.End - size).Max(available.Position);
@@ -254,10 +299,8 @@ public partial class ArrowHud
             var rect = new Rect2(position, size);
             var overlap = rect.Intersection(anchorRect);
             float score = overlap.Size.X * overlap.Size.Y * 3 + position.DistanceTo(candidate) * 2;
-            foreach (var creature in NCombatRoom.Instance!.CreatureNodes)
+            foreach (var protectedRect in _previewObstacles)
             {
-                if (!creature.Entity.IsAlive) continue;
-                var protectedRect = creature.Hitbox.GetGlobalRect().GrowIndividual(24, 110, 24, 12);
                 var intersection = rect.Intersection(protectedRect);
                 score += intersection.Size.X * intersection.Size.Y;
             }
@@ -295,6 +338,7 @@ public partial class ArrowHud
         _previewCount.Text = $"{_previewIndex + 1} / {_hoverArrows.Count}";
         _previewCount.Position = new(positions[focus].X - bounds.Position.X + PreviewMargin * .5f - _previewCount.Size.X * .5f,
             bounds.Size.Y + PreviewMargin * .5f + 4);
+        _previewLayout = moving && !animate ? null : layout;
     }
 
     public override void _Input(InputEvent input)
@@ -337,14 +381,21 @@ public partial class ArrowHud
     private void RemovePreviewCard(ArrowDeployment arrow)
     {
         if (!_previewCache.Remove(arrow, out var card)) return;
+        _previewMotion?.Kill();
+        _previewMotion = null;
+        _previewLayout = null;
         _previewCards.RemoveAll(pair => pair.Arrow == arrow);
         if (_inspectedArrow == arrow) _inspectedArrow = null;
-        card.GetParent().RemoveChild(card);
-        card.QueueFree();
+        var hitbox = card.GetNode<Control>("ArrowPreviewHitbox");
+        card.RemoveChild(hitbox);
+        hitbox.QueueFree();
+        card.ZIndex = 0;
+        card.QueueFreeSafely();
     }
 
     private void ClearHoverPreview()
     {
+        _previewLayout = null;
         _previewMotion?.Kill();
         _previewMotion = null;
         _hoverPreview?.Hide();

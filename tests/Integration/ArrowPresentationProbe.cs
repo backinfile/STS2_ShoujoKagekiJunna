@@ -23,7 +23,7 @@ namespace JunnaIntegration;
 public sealed class ArrowPresentationProbe : AbstractConsoleCmd
 {
     public override string CmdName => "junna_arrow_ui";
-    public override string Args => "check | prepare <enemy|friendly|group|live> <count> | hover <enemy|arrow|overflow|preview|none> <index> | page <next|previous> | key <next|previous|escape> | batch <count> | info";
+    public override string Args => "check | cache | prepare <enemy|friendly|group|live> <count> | hover <enemy|arrow|overflow|preview|none> <index> | page <next|previous> | key <next|previous|escape> | batch <count> | info";
     public override string Description => "Check and demonstrate the arrow presentation in an isolated game.";
     public override bool IsNetworked => false;
     private static readonly List<object> Results = [];
@@ -47,6 +47,7 @@ public sealed class ArrowPresentationProbe : AbstractConsoleCmd
         return args.FirstOrDefault() switch
         {
             "check" => new(Check(player), true, "Arrow presentation checks started"),
+            "cache" => new(CheckCache(player), true, "Arrow preview cache checks started"),
             "prepare" => new(Prepare(player, args[1], int.Parse(args[2])), true, "Arrow presentation prepared"),
             "hover" => new(Hover(args[1], int.TryParse(args.ElementAtOrDefault(2), out var index) ? index : 0), true, "Pointer moved"),
             "page" => new(Page(args.ElementAtOrDefault(1) != "previous"), true, "Card input sent"),
@@ -171,6 +172,26 @@ public sealed class ArrowPresentationProbe : AbstractConsoleCmd
             new { count, elapsed_ms = watch.Elapsed.TotalMilliseconds });
     }
 
+    private static async Task CheckCache(Player player)
+    {
+        Results.Clear();
+        await Prepare(player, "enemy", 12);
+        await Hover("enemy", 0);
+        var first = PreviewCards.Single(card => card.Model == ArrowCombat.DisplayOrder()[0].Card);
+        for (int index = 0; index < 12; index++) await Page(true);
+        Verify("evicted previews return to the native card pool", GodotObject.IsInstanceValid(first));
+        await Hover("none", 0);
+        var cached = Field<IDictionary>("_previewCache").Values.Cast<NCard>().ToArray();
+        var previous = Hud;
+        var room = NCombatRoom.Instance!;
+        room.RemoveChild(previous);
+        previous.QueueFree();
+        room.AddChild(new ArrowHud { Name = "JunnaArrows" });
+        await Task.Delay(400);
+        Verify("exiting the HUD returns every cached card", cached.All(GodotObject.IsInstanceValid));
+        Verify("complete", true);
+    }
+
     private static async Task Check(Player player)
     {
         Results.Clear();
@@ -263,10 +284,15 @@ public sealed class ArrowPresentationProbe : AbstractConsoleCmd
         Verify("escape closes the preview until pointer leaves", !Field<Control>("_hoverPreview").Visible);
         await Hover("none", 0);
         var lines = Hud.GetNode<Node2D>("ArrowGuides").GetNode<MultiMeshInstance2D>("SingleLines").Multimesh;
-        float idleAlpha = lines.GetInstanceColor(0).A;
+        // Guide instances follow the view dictionary, whose free slots may be reused after prior combats.
+        var visibleArrows = Field<HashSet<ArrowDeployment>>("_visibleArrows");
+        var drawn = Field<IDictionary>("_views").Keys.Cast<ArrowDeployment>().Where(visibleArrows.Contains).ToArray();
+        int focusedLine = Array.IndexOf(drawn, ArrowCombat.DisplayOrder()[0]);
+        int unrelatedLine = (focusedLine + 1) % drawn.Length;
+        float idleAlpha = lines.GetInstanceColor(focusedLine).A;
         await Hover("arrow", 0);
-        Verify("focused guide is stronger and unrelated guides fade", lines.GetInstanceColor(0).A > idleAlpha
-            && lines.GetInstanceColor(1).A < idleAlpha);
+        Verify("focused guide is stronger and unrelated guides fade", lines.GetInstanceColor(focusedLine).A > idleAlpha
+            && lines.GetInstanceColor(unrelatedLine).A < idleAlpha);
         await Hover("none", 0);
         await Hover("overflow", 0);
         Verify("overflow opens its hidden arrows", PreviewCards.Length > 0 && PreviewCards.All(node => !Field<HashSet<ArrowDeployment>>("_visibleArrows").Any(item => item.Card == node.Model)));
