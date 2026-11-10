@@ -67,7 +67,8 @@ const JunnaRouteStatistics = (() => {
   }
   function matchesPosition(card,routes,defaults,position=[],routeId='all',excluded=[]){
     const tags=positionTags(card,routes,defaults,routeId);
-    return normalizePositions(position).every(tag=>tags.includes(tag))&&!normalizePositions(excluded).some(tag=>tags.includes(tag));
+    const included=normalizePositions(position);
+    return (!included.length||included.some(tag=>tags.includes(tag)))&&!normalizePositions(excluded).some(tag=>tags.includes(tag));
   }
   function togglePositionFilter(included,excluded,mode,tag,checked){
     const next={included:normalizePositions(included),excluded:normalizePositions(excluded)};

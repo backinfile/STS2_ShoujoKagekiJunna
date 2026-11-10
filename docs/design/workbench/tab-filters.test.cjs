@@ -8,7 +8,7 @@ const clone=value=>JSON.parse(JSON.stringify(value));
 
 function fixture(saved={tab:'cards',pool:'pool'}){
   const storage=new Map(),cards=[{uid:'reserved',reservedAt:'today'}];
-  const context=vm.createContext({
+  const context=vm.createContext({JunnaFilters:require('./filter-state.js'),
     ui:{},storedUI:saved,clone,URLSearchParams,JunnaRouteStatistics:logic,
     state:{data:{terms:[]}},location:{hash:''},uiKey:'test',previewMode:false,
     localStorage:{setItem(key,value){storage.set(key,value);}},
@@ -92,4 +92,16 @@ test('linked cards and term drilldowns change destination filters without cleari
   context.changeTab('terms');ui.search='知识';ui.kind='关键词';
   context.routeAction('cards-by-term');assert.equal(ui.tab,'cards');assert.equal(ui.term,'keyword');
   context.changeTab('terms');assert.equal(ui.search,'知识');assert.equal(ui.kind,'关键词');
+});
+
+
+test('三态多选和排除条件在URL、刷新与切页后恢复，搜索原文保持原值',()=>{
+  const {context,ui}=fixture();
+  const selection={included:['攻击','技能'],excluded:['能力']};
+  ui.type=clone(selection);ui.cost={included:['0','1'],excluded:['X']};ui.search='{"query":"原文"}';context.saveUI();
+  const hash=context.location.hash,restored=fixture();
+  restored.context.location.hash=hash;restored.context.readHash();
+  assert.deepEqual(clone(restored.ui.type),selection);assert.equal(restored.ui.search,ui.search);
+  restored.context.changeTab('reserve');assert.equal(restored.ui.type,'all');
+  restored.context.changeTab('cards');assert.deepEqual(clone(restored.ui.type),selection);
 });

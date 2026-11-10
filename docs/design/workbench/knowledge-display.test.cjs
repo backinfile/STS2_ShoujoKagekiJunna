@@ -58,7 +58,7 @@ test('共享关联牌显示自己的列表，来源入口保持各自发放数�
   assert.match(context.knowledgeButton(fallacy,undefined,other.uid),/knowledge-size">3张/);
   assert.deepEqual(Array.from(context.knowledgeEntries(group),entry=>entry.card.id),[card.id,'FALLACY']);
   const source=fs.readFileSync(require.resolve('./app.js'),'utf8');
-  const related=source.slice(source.indexOf('  function relatedHTML('),source.indexOf('  function arrowFocusEditor('));
+  const related=source.slice(source.indexOf('  function grantOptions('),source.indexOf('  function arrowFocusEditor('));
   Object.assign(context,{cardTab:()=> 'cards',energyText:String});
   vm.runInContext(related,context);
   const html=context.relatedHTML(fallacy);

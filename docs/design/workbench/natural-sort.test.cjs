@@ -13,7 +13,7 @@ const card = (id, extra = {}) => ({
 });
 
 function fixture(cards, overrides = {}) {
-  const context = vm.createContext({
+  const context = vm.createContext({JunnaFilters:require('./filter-state.js'),
     ui: {
       tab: 'cards', sort: 'natural', descending: false, upgraded: false, search: '',
       type: 'all', rarity: 'all', cardPool:'all', pool: 'all', cost: 'all', archetype: 'all', term: 'all',
@@ -108,4 +108,13 @@ test('explicit ID sorting remains in shared URLs and natural sorting is the defa
   assert.match(source, /breakthrough:'all',sort:'natural'/);
   assert.match(fs.readFileSync(require.resolve('./build-readonly.cjs'), 'utf8'), /sort: 'natural'/);
   assert.match(fs.readFileSync(require.resolve('./deploy/build-editor.cjs'), 'utf8'), /ui:\{\.\.\.snapshot.ui,sort:'natural'\}/);
+});
+
+
+test('实际卡牌筛选组合多选、排除和不同分组，并保留X费与3费以上边界',()=>{
+  const cards=[card('attack',{type:'攻击',cost:1}),card('skill',{type:'技能',cost:3}),card('power',{type:'能力',cost:4}),card('x',{type:'技能',cost:'X'})];
+  const {context}=fixture(cards,{type:{included:['攻击','技能'],excluded:['能力']},cost:{included:['1','3+'],excluded:['X']}});
+  assert.deepEqual(Array.from(context.filteredCards(),c=>c.id),['attack','skill']);
+  context.ui.type={included:[],excluded:['攻击','能力']};context.ui.cost='all';
+  assert.deepEqual(Array.from(context.filteredCards(),c=>c.id),['skill','x']);
 });

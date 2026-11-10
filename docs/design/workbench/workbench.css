@@ -114,3 +114,6 @@ dialog.knowledge-dialog{width:min(1040px,calc(100vw - 32px));max-height:90dvh;ba
 .card-tag-picker .field-label{padding:0}
 .flow-editor-routes{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 10px}
 .flow-editor-routes .filter-option{padding-inline:8px}
+
+.filter-option[data-filter-state=exclude],.side-item[data-filter-state=exclude]{border-color:var(--red);background:#e8a49712;color:var(--red);text-decoration:line-through;text-decoration-thickness:1px}
+.side-item[data-filter-state=include]{color:var(--gold);background:#85cad710}

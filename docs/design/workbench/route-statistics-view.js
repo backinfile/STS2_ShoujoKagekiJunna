@@ -4,8 +4,8 @@ function createJunnaRouteStatisticsView(deps) {
   const logic=JunnaRouteStatistics;
   const scopes={cards:'卡池',reserve:'备用',trash:'垃圾桶'};
   const stats=(scope=ui().flowScope)=>logic.compute(data(),defaults,{scope,onlyRewards:ui().flowOnlyRewards,position:ui().routePositions,excludedPositions:ui().routeExcludedPositions});
-  const selectedRoutes=value=>ui().flowRoute==='all'?value.routes:value.routes.filter(route=>route.uid===ui().flowRoute);
-  const selectedCards=value=>ui().flowRoute==='all'?value.cards:selectedRoutes(value).flatMap(route=>route.members);
+  const selectedRoutes=value=>value.routes.filter(route=>JunnaFilters.matches(ui().flowRoute,route.uid));
+  const selectedCards=value=>{const selection=JunnaFilters.read(ui().flowRoute);return selection.included.length||selection.excluded.length?value.cards.filter(card=>selectedRoutes(value).some(route=>route.members.some(member=>member.uid===card.uid))):value.cards;};
   const focus=value=>value.routes.find(route=>route.uid===ui().flowDrill?.route);
   function label(key) {
     if(key.startsWith('effect:')){
@@ -29,9 +29,17 @@ function createJunnaRouteStatisticsView(deps) {
   }
   const nameCell=route=>'<th scope="row"><button type="button" class="flow-route-name" data-flow-route="'+escape(route.uid)+'" data-flow-key="all">'+escape(route.name)+'</button></th>';
   function positionFilters() {
-    return [['include','流派定位',ui().routePositions],['exclude','排除定位',ui().routeExcludedPositions]].map(([mode,title,selected])=>
-      '<fieldset class="field filter-group position-filter" data-position-group="'+mode+'"><legend class="field-label">'+title+'</legend><div class="position-options">'+Object.entries(logic.positions).map(([tag,name])=>
-        '<label class="position-tag"><input type="checkbox" data-position-mode="'+mode+'" data-position-tag="'+tag+'"'+(logic.normalizePositions(selected).includes(tag)?' checked':'')+'><span>'+name+'</span></label>').join('')+'</div></fieldset>').join('');
+    const selected={included:logic.normalizePositions(ui().routePositions),excluded:logic.normalizePositions(ui().routeExcludedPositions)};
+    return '<fieldset class="field filter-group position-filter"><legend class="field-label">流派定位</legend><div class="filter-options">'+Object.entries(logic.positions).map(([tag,name])=>
+      '<button type="button" class="filter-option" data-position-tag="'+tag+'" '+JunnaFilters.attributes(selected,tag,name)+'>'+name+'</button>').join('')+'</div></fieldset>';
+  }
+  function positionClick(event){
+    const button=event.target.closest('button[data-position-tag]');if(!button)return false;
+    flush();
+    const next=JunnaFilters.read(JunnaFilters.cycle({included:ui().routePositions,excluded:ui().routeExcludedPositions},button.dataset.positionTag));
+    ui().routePositions=next.included;ui().routeExcludedPositions=next.excluded;ui().flowDrill=null;ui().selected=null;
+    const sidebar=dom('sidebar'),scroll=sidebar.scrollTop;
+    render();sidebar.scrollTop=scroll;sidebar.querySelector('[data-position-tag="'+button.dataset.positionTag+'"]')?.focus({preventScroll:true});return true;
   }
   function positionChange(event) {
     const input=event.target;if(!input.matches('[data-position-tag]'))return false;
@@ -46,10 +54,10 @@ function createJunnaRouteStatisticsView(deps) {
   }
   function sidebar() {
     const value=stats();
-    if(ui().flowRoute!=='all'&&!value.routes.some(route=>route.uid===ui().flowRoute))ui().flowRoute='all';
-    const routeButton=route=>'<button type="button" class="side-item '+(ui().flowRoute===route.uid?'active':'')+'" data-flow-select="'+escape(route.uid)+'" aria-pressed="'+(ui().flowRoute===route.uid)+'"><span>'+escape(route.name)+'</span><span>'+route.members.length+'</span></button>';
+    ui().flowRoute=JunnaFilters.prune(ui().flowRoute,value.routes.map(route=>route.uid));
+    const routeButton=route=>'<button type="button" class="side-item '+(JunnaFilters.state(ui().flowRoute,route.uid)==='include'?'active':'')+'" data-flow-select="'+escape(route.uid)+'" '+JunnaFilters.attributes(ui().flowRoute,route.uid,route.name)+'><span>'+escape(route.name)+'</span><span>'+route.members.length+'</span></button>';
     const main=value.routes.filter(route=>route.level!=='小体系'),minor=value.routes.filter(route=>route.level==='小体系');
-    return '<div class="sidebar-section"><p class="sidebar-title">统计范围</p>'+Object.entries(scopes).map(([scope,name])=>'<button type="button" class="side-item '+(ui().flowScope===scope?'active':'')+'" data-flow-scope="'+scope+'" aria-pressed="'+(ui().flowScope===scope)+'"><span>'+name+'</span><span>'+(scope===ui().flowScope?value.cards.length:stats(scope).cards.length)+'</span></button>').join('')+'<label class="check overview-check"><input type="checkbox" data-flow-rewards'+(ui().flowOnlyRewards?' checked':'')+'>仅奖励入口</label>'+positionFilters()+'</div><div class="sidebar-section"><p class="sidebar-title">流派</p><button type="button" class="side-item '+(ui().flowRoute==='all'?'active':'')+'" data-flow-select="all" aria-pressed="'+(ui().flowRoute==='all')+'"><span>全部</span><span>'+value.routes.length+'</span></button>'+main.map(routeButton).join('')+'</div>'+(minor.length?'<div class="sidebar-section"><p class="sidebar-title">小体系</p>'+minor.map(routeButton).join('')+'</div>':'');
+    return '<div class="sidebar-section"><p class="sidebar-title">统计范围</p>'+Object.entries(scopes).map(([scope,name])=>'<button type="button" class="side-item '+(ui().flowScope===scope?'active':'')+'" data-flow-scope="'+scope+'" aria-pressed="'+(ui().flowScope===scope)+'"><span>'+name+'</span><span>'+(scope===ui().flowScope?value.cards.length:stats(scope).cards.length)+'</span></button>').join('')+'<label class="check overview-check"><input type="checkbox" data-flow-rewards'+(ui().flowOnlyRewards?' checked':'')+'>仅奖励入口</label>'+positionFilters()+'</div><div class="sidebar-section"><p class="sidebar-title">流派</p><button type="button" class="side-item '+(ui().flowRoute==='all'?'active':'')+'" data-flow-select="all" '+JunnaFilters.attributes(ui().flowRoute,'all','全部')+'><span>全部</span><span>'+value.routes.length+'</span></button>'+main.map(routeButton).join('')+'</div>'+(minor.length?'<div class="sidebar-section"><p class="sidebar-title">小体系</p>'+minor.map(routeButton).join('')+'</div>':'');
   }
   function cardList(value) {
     const route=focus(value);if(!route)return '';
@@ -122,7 +130,7 @@ function createJunnaRouteStatisticsView(deps) {
     const scope=event.target.closest('[data-flow-scope]'),route=event.target.closest('[data-flow-select]');if(!scope&&!route)return false;
     flush();ui().selected=null;ui().flowDrill=null;
     if(scope)ui().flowScope=scope.dataset.flowScope;
-    if(route)ui().flowRoute=route.dataset.flowSelect;
+    if(route)ui().flowRoute=JunnaFilters.cycle(ui().flowRoute,route.dataset.flowSelect);
     render();return true;
   }
   function sidebarChange(event) {
@@ -147,5 +155,5 @@ function createJunnaRouteStatisticsView(deps) {
       entry.design={...entry.design,...(tag==='breakthrough'?{breakthrough:input.checked}:{}),...(route?{routeRoles:{...entry.design?.routeRoles,[route.uid]:next}}:{})};
     });return true;
   }
-  return {positionFilters,positionChange,sidebar,workspace,inspector,fields,sidebarClick,sidebarChange,workClick,editorClick,editorChange};
+  return {positionFilters,positionClick,positionChange,sidebar,workspace,inspector,fields,sidebarClick,sidebarChange,workClick,editorClick,editorChange};
 }

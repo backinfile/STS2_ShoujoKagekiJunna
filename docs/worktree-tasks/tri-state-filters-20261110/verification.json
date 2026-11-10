@@ -1,0 +1,67 @@
+{
+  "release": "20261110-tri-state-filters",
+  "previousRelease": "20261110-shared-knowledge-lifecycle",
+  "service": "active",
+  "editorRuntime": "0eaffdd2f3142b764e0dcb0a.js",
+  "publicRuntime": "ad0df92ac62106cdd494f44c.js",
+  "editorStyle": "39e8c92bb98af4644599aa66.css",
+  "publicStyle": "d452d335a8b046e42da47150.css",
+  "sourceCommit": "364490c",
+  "targetedTests": 39,
+  "designDetectorFindings": 0,
+  "browser": {
+    "local": {
+      "includedTypes": [
+        "技能",
+        "箭矢"
+      ],
+      "excludedTypes": [
+        "能力"
+      ],
+      "resultCount": 69,
+      "refreshAndTabStateRetained": true,
+      "thirdClickClears": true,
+      "grantSearchByName": [
+        "谬误 · JK122B"
+      ],
+      "grantSearchById": [
+        "谬误 · JK122B"
+      ],
+      "searchEditHistory": 0
+    },
+    "production": {
+      "includedTypes": [
+        "技能",
+        "箭矢"
+      ],
+      "excludedTypes": [
+        "能力"
+      ],
+      "resultCount": 69,
+      "excludedColor": "rgb(232, 164, 151)"
+    }
+  },
+  "sameNameRule": {
+    "requestId": "048c3b9b-9985-4574-8849-ecc9c2ab142c",
+    "revision": 4526,
+    "storage": "runCardName",
+    "affected": [
+      {
+        "collection": "mechanisms",
+        "uid": "mechanism_partner"
+      },
+      {
+        "collection": "cards",
+        "uid": "junna-shine-reward-revision-20261106_JK126"
+      },
+      {
+        "collection": "styles",
+        "uid": "junna_style_independent_card_relations"
+      },
+      {
+        "collection": "root",
+        "uid": "meta"
+      }
+    ]
+  }
+}

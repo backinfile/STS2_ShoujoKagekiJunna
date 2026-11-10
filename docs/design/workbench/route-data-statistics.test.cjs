@@ -7,7 +7,7 @@ function fixture(){
   const data={cards:[card('source','trigger'),card('payoff','payoff'),card('both','both'),card('companion','trigger',false)],archetypes:[route],partnerGroups:[]};
   const ui={flowScope:'cards',flowRoute:'all',flowOnlyRewards:false,routePositions:[],routeExcludedPositions:[]};
   const nodes=new Map(),dom=id=>{if(!nodes.has(id))nodes.set(id,{innerHTML:'',setAttribute(){},querySelector(){return null}});return nodes.get(id);};
-  const context=vm.createContext({JunnaRouteStatistics:logic});vm.runInContext(fs.readFileSync(require.resolve('./route-statistics-view.js'),'utf8'),context);
+  const context=vm.createContext({JunnaFilters:require('./filter-state.js'),JunnaRouteStatistics:logic});vm.runInContext(fs.readFileSync(require.resolve('./route-statistics-view.js'),'utf8'),context);
   const table=(name,headers,rows)=>'<table><caption>'+name+'</caption><thead>'+headers.map(h=>'<th>'+h+'</th>').join('')+'</thead><tbody>'+rows.join('')+'</tbody></table>';
   const view=context.createJunnaRouteStatisticsView({data:()=>data,ui:()=>ui,defaults,dom,escape:String,table,flush(){},render(){}});
   return{view,ui,dom,route};
