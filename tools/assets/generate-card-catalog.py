@@ -187,7 +187,7 @@ def main():
         base = card['text'].strip()
         upgrade = card['upgradedText'].strip()
         # Native keywords are rendered by CardModel; knowledge keeps its printed position.
-        for keyword in ('保留', '消耗', '固有'):
+        for keyword in ('保留', '消耗', '固有', '虚无'):
             base = re.sub(r'(^|[。\n])\s*' + re.escape(keyword) + r'。', r'\1', base)
             upgrade = re.sub(r'(^|[。\n])\s*' + re.escape(keyword) + r'。', r'\1', upgrade)
         # Core renders the current Shine budget, including depletion and upgrades.
@@ -196,6 +196,8 @@ def main():
         if cid == 'JK206':
             values = [{'name': 'Damage', 'base': 0}]
             upgraded_values = [{'name': 'Damage', 'base': 8}]
+        elif cid == 'JK254':
+            values, upgraded_values = [], []
         else:
             base, values = bind_numbers(base)
             upgrade, upgraded_values = bind_numbers(upgrade, values)
@@ -265,6 +267,9 @@ def main():
             'damageCapable': damage, 'portrait': portrait_name, 'values': values,
             'text': card['text'], 'upgradedText': card['upgradedText'],
         }
+        if native_keyword(card['text'], '虚无') or native_keyword(card['upgradedText'], '虚无'):
+            entry['ethereal'] = native_keyword(card['text'], '虚无')
+            entry['upgradedEthereal'] = native_keyword(card['upgradedText'], '虚无')
         if card.get('choiceOnly'):
             entry['choiceOnly'] = True
         if 'arrowFocus' in card:
@@ -344,7 +349,7 @@ def main():
                 powers[power['id'] + '.' + suffix] = text
         # Active card text takes precedence over retired power descriptions.
         current_power_text = {
-            'JA35': '回合结束时，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。',
+            'JA35': '回合开始时，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA205': '目标为单个敌人的[gold]箭矢[/gold]现在会攻击所有敌人。',
             'JK254': '每当你打出一张[gold]知识[/gold]牌，也打出[gold]手牌[/gold]中的它的关联牌。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点力量。',
@@ -355,6 +360,9 @@ def main():
             amount = next((v['base'] for d in definitions if d['id'] == cid for v in d['values']), 0)
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
+            if cid == 'JK254':
+                powers[f'JUNNA_{cid}_POWER.smartDescription'] = ('{Upgraded:每当你打出一张[gold]知识[/gold]牌，'
+                    '其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。|' + text + '}')
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         relics_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/relics.json'

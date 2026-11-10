@@ -50,7 +50,7 @@ public abstract partial class CatalogPower
         IEnumerable<string> lines = CardRules.Get(DesignId).PowerDescription switch
         {
             PowerDescriptionKind.RemainingUses => [Format(("Amount", StackAmount()))],
-            PowerDescriptionKind.Passive => [Format()],
+            PowerDescriptionKind.Passive => Groups(g => g.Card.IsUpgraded, group => Format(("Upgraded", group.Key))),
             PowerDescriptionKind.Applications => [Format(("Amount", _grants.Count))],
             PowerDescriptionKind.ThresholdSum => [Format(("Amount", Sum("DisplayedAmount")))],
             PowerDescriptionKind.BonusSum => [Format(("Amount", Bonus()))],

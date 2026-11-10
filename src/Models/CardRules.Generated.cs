@@ -268,6 +268,10 @@ internal static partial class CardRules
         },
         ["JA75"] = new()
         {
+            Fields = new Dictionary<string, string>
+            {
+                ["Bonus"] = "Bonus",
+            },
             Tips = [CardTip.DamageBonus],
             UpgradedTips = [CardTip.DamageBonus],
         },
@@ -879,7 +883,7 @@ internal static partial class CardRules
             UpgradedTips = [CardTip.Knowledge],
             PowerDescription = PowerDescriptionKind.Passive,
             PowerAmount = PowerAmountKind.Applications,
-            SinglePower = true,
+            SinglePower = false,
         },
         ["JK260"] = new()
         {
@@ -918,6 +922,18 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge, CardTip.Vulnerable],
             UpgradedTips = [CardTip.Knowledge, CardTip.Vulnerable],
+        },
+        ["JK274"] = new()
+        {
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+            Effect = SimpleCardEffect.Block,
+        },
+        ["JK275"] = new()
+        {
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+            Effect = SimpleCardEffect.Attack,
         },
         ["JK32"] = new()
         {

@@ -19,7 +19,16 @@ public abstract partial class CatalogPower
     {
         if (play.Card.Owner != Owner.Player || !play.IsFirstInSeries) return Task.CompletedTask;
         if (DesignId == "JK254" && CardCatalog.IsKnowledge(play.Card))
-            _partnerHands.AddOrUpdate(play, KnowledgeCombat.CapturePartners(play.Card));
+        {
+            var partners = KnowledgeCombat.CapturePartners(play.Card);
+            _partnerHands.AddOrUpdate(play, partners);
+            if (_grants.Any(grant => grant.Card.IsUpgraded && !ReferenceEquals(play, grant.InstalledBy)))
+                foreach (var partner in partners)
+                {
+                    partner.EnergyCost.SetUntilPlayed(0);
+                    partner.InvokeEnergyCostChanged();
+                }
+        }
         if (DesignId == "JG31")
             foreach (var grant in _grants.ToArray())
                 if (!ReferenceEquals(play, grant.InstalledBy)) DamageModifiers.Add(play.Card, grant.V("Bonus"));
@@ -78,8 +87,9 @@ public abstract partial class CatalogPower
                     break;
                 case "JK64" when CardCatalog.IsKnowledge(play.Card):
                     await AccelerateChoice(grant, context, 1, grant.V("Turns")); break;
-                case "JK254" when CardCatalog.IsKnowledge(play.Card):
-                    await KnowledgeCombat.PlayCapturedPartners(context, play.Card, partners); break;
+                case "JK254" when CardCatalog.IsKnowledge(play.Card) && !grant.Card.IsUpgraded:
+                    await KnowledgeCombat.PlayCapturedPartners(context, play.Card, partners);
+                    break;
                 case "JK260" when CardCatalog.IsKnowledge(play.Card) && grant.Take(1):
                     await PowerCmd.Apply<MegaCrit.Sts2.Core.Models.Powers.StrengthPower>(
                         context, Owner, grant.V("Amount"), Owner, grant.Card); break;

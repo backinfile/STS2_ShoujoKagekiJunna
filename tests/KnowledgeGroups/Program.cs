@@ -51,15 +51,15 @@ var relations = new List<KnowledgeRelation>
     new("X", new() { ["X"] = 1, ["Y"] = 1 })
 };
 var merged = KnowledgeRelation.Merge(relations, new("JK126", new() { ["JK126"] = 1, ["A"] = 1 }), "JK126");
-Check(relations.Count == 2, "Overlapping groups must merge transitively, leaving unrelated groups intact.");
-Check(merged.CardCounts.Keys.ToHashSet().SetEquals(["JK126", "A", "B", "C", "D"]), "All members must share one group.");
-Check(merged.EntranceId == "JK126" && merged.Members.First().Id == "JK126", "JK126 must remain the first and only entrance.");
-Check(merged.CardCounts["D"] == 2 && merged.CardCounts["C"] == 1, "Merging must preserve group multiplicities without counting physical copies.");
+Check(relations.Count == 4, "A new source must preserve every other source list.");
+Check(merged.CardCounts.Keys.ToHashSet().SetEquals(["JK126", "A"]), "Only direct associations belong to the source list.");
+Check(merged.EntranceId == "JK126" && merged.Members.First().Id == "JK126", "Source remains first in its own list.");
+Check(relations.Single(group => group.EntranceId == "C").CardCounts["D"] == 2, "Shared members preserve their own list and quantities.");
 merged = KnowledgeRelation.Merge(relations, new("X", new() { ["X"] = 1, ["D"] = 1 }), "JK126");
-Check(relations.Count == 1 && merged.EntranceId == "JK126" && merged.CardCounts.ContainsKey("Y"), "A later merge must keep JK126 as entrance and include the complete other group.");
+Check(relations.Count == 4 && merged.EntranceId == "X" && merged.CardCounts.ContainsKey("Y") && merged.CardCounts.ContainsKey("D"), "Editing X must only merge X's own associations.");
 var restored = JsonSerializer.Deserialize<List<KnowledgeRelation>>(JsonSerializer.Serialize(relations))!;
-Check(restored.Single().EntranceId == "JK126" && restored.Single().Members.SequenceEqual(merged.Members), "Run relations and counts must survive serialization.");
+Check(restored.Single(group => group.EntranceId == "X").Members.SequenceEqual(merged.Members), "Independent lists and counts must survive serialization.");
 KnowledgeRelation.Merge(restored, new("JK126", new() { ["JK126"] = 1, ["A"] = 1 }), "JK126");
-Check(restored.Count == 1 && restored.Single().CardCounts["D"] == 2, "Reacquiring an existing ID must not duplicate or shrink its group.");
+Check(restored.Count == 4 && restored.Single(group => group.EntranceId == "C").CardCounts["D"] == 2, "Reacquiring a source must preserve other lists.");
 
-Console.WriteLine($"PASS {checks} knowledge group checks, including counts, transitive ID relations, entrance priority and serialization.");
+Console.WriteLine($"PASS {checks} knowledge group checks, including quantities, one-way lists and serialization.");

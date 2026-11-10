@@ -30,6 +30,7 @@ public sealed class PartnerTimingCommand : AbstractConsoleCmd
         var target = player.Creature.CombatState!.HittableEnemies.First();
         await CreatureCmd.SetMaxHp(target, 10000);
         await CreatureCmd.SetCurrentHp(target, 10000);
+        foreach (bool upgraded in prepare ? new[] { true } : new[] { false, true })
         foreach (var location in prepare ? new[] { PileType.Draw } : new[] { PileType.Draw, PileType.Discard, PileType.Exhaust, PileType.Hand })
         {
             foreach (var power in player.Creature.Powers.ToArray()) await PowerCmd.Remove(power);
@@ -43,18 +44,43 @@ public sealed class PartnerTimingCommand : AbstractConsoleCmd
                 return card;
             }
             var fusion = await Add("JK254", PileType.Hand);
-            var argument = await Add("JK11", PileType.Hand);
-            var counter = await Add("JK11B", location);
+            if (upgraded) { fusion.UpgradeInternal(); fusion.FinalizeUpgradeInternal(); }
+            var argument = await Add("JK11B", PileType.Hand);
+            var counter = await Add("JK11", location);
             var other = await Add("JB01", PileType.Hand);
             player.PlayerCombatState!.Energy = 20;
-            if (prepare) return;
+            if (prepare) { await Add("JK11", PileType.Hand); return; }
             await CardActions.PaidPlay(context, fusion);
-            int before = target.CurrentHp;
-            await CardActions.PaidPlay(context, argument);
+            string scenario = (upgraded ? "upgraded " : "base ") + location;
             bool initiallyHeld = location == PileType.Hand;
-            Expect(location + " counterargument follows pre-play hand membership", (counter.Pile?.Type == PileType.Hand) != initiallyHeld);
-            Expect(location + " only an initially held counterargument deals damage", target.CurrentHp == before - (initiallyHeld ? 10 : 0));
-            Expect(location + " unrelated card remains held", other.Pile?.Type == PileType.Hand);
+            if (upgraded && initiallyHeld)
+            {
+                var power = player.Creature.Powers.OfType<CatalogPower>().Single(power => power.DesignId == "JK254");
+                await power.BeforeCardPlayed(new CardPlay
+                {
+                    Card = argument, Player = player, Target = target, ResultPile = PileType.Discard,
+                    Resources = new() { EnergySpent = 1, EnergyValue = 1, StarsSpent = 0, StarValue = 0 },
+                    IsAutoPlay = false, PlayIndex = 0, PlayCount = 1
+                });
+                Expect(scenario + " discount applies before the card effect", CardActions.Cost(counter) == 0);
+                Expect(scenario + " unrelated card keeps its cost before the effect", CardActions.Cost(other) == 1);
+            }
+            int before = target.CurrentHp;
+            int block = player.Creature.Block;
+            await CardActions.PaidPlay(context, argument);
+            Expect(scenario + " counterargument follows pre-play hand membership", (counter.Pile?.Type == PileType.Hand) == (upgraded || !initiallyHeld));
+            Expect(scenario + " source deals its normal damage", target.CurrentHp == before - argument.DynamicVars.Damage.IntValue);
+            Expect(scenario + " only base fusion plays an initially held partner", player.Creature.Block == block + (!upgraded && initiallyHeld ? counter.DynamicVars.Block.IntValue : 0));
+            Expect(scenario + " unrelated card remains held", other.Pile?.Type == PileType.Hand);
+            if (upgraded)
+            {
+                Expect(scenario + " only an initially held partner receives a discount", CardActions.Cost(counter) == (initiallyHeld ? 0 : 1));
+                int energy = player.PlayerCombatState!.Energy;
+                await CardActions.PaidPlay(context, counter, target);
+                Expect(scenario + " partner pays its expected cost", player.PlayerCombatState.Energy == energy - (initiallyHeld ? 0 : 1));
+                Expect(scenario + " discount expires after use", CardActions.Cost(counter) == 1);
+                Expect(scenario + " recalled argument keeps its original cost", CardActions.Cost(argument) == 1);
+            }
         }
         Save();
     }

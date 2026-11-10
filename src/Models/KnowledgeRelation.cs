@@ -1,6 +1,6 @@
 namespace ShoujoKagekiJunna.Models;
 
-/// <summary>A run-wide group of model IDs, independent of physical card instances.</summary>
+/// <summary>One source model's run-wide direct associations and quantities.</summary>
 public sealed record KnowledgeRelation(string EntranceId, Dictionary<string, int> CardCounts)
 {
     public IEnumerable<(string Id, int Count)> Members => CardCounts.OrderBy(pair => pair.Key != EntranceId)
@@ -9,23 +9,13 @@ public sealed record KnowledgeRelation(string EntranceId, Dictionary<string, int
     public static KnowledgeRelation Merge(List<KnowledgeRelation> groups, KnowledgeRelation incoming, string preferredEntrance)
     {
         var counts = new Dictionary<string, int>(incoming.CardCounts);
-        string entrance = incoming.EntranceId;
-        bool changed;
-        do
+        foreach (var group in groups.Where(group => group.EntranceId == incoming.EntranceId).ToArray())
         {
-            changed = false;
-            foreach (var group in groups.ToArray())
-            {
-                if (!group.CardCounts.Keys.Any(counts.ContainsKey)) continue;
-                if (entrance != preferredEntrance) entrance = group.EntranceId;
-                foreach (var (id, count) in group.CardCounts)
-                    counts[id] = Math.Max(counts.GetValueOrDefault(id), count);
-                groups.Remove(group);
-                changed = true;
-            }
-        } while (changed);
-        if (counts.ContainsKey(preferredEntrance)) entrance = preferredEntrance;
-        var merged = new KnowledgeRelation(entrance, counts);
+            foreach (var (id, count) in group.CardCounts)
+                counts[id] = Math.Max(counts.GetValueOrDefault(id), count);
+            groups.Remove(group);
+        }
+        var merged = new KnowledgeRelation(incoming.EntranceId, counts);
         groups.Add(merged);
         return merged;
     }

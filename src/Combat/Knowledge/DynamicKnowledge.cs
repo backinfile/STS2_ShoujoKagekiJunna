@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using BaseLib.Patches.Saves;
@@ -49,16 +48,10 @@ public static class DynamicKnowledge
         return cache.Groups;
     }
     internal static KnowledgeRelation? Group(CardModel card) => card.IsMutable && card.Owner is { } owner
-        ? Groups(owner).FirstOrDefault(group => group.CardCounts.ContainsKey(card.Id.ToString())) : null;
+        ? Groups(owner).FirstOrDefault(group => group.EntranceId == card.Id.ToString()) : null;
     public static bool IsLinked(CardModel card) => Group(card) != null;
-    private static string RewardEntranceId(Player player, CardModel card)
-    {
-        var group = Groups(player).FirstOrDefault(group => group.CardCounts.ContainsKey(card.Id.ToString()));
-        return group?.EntranceId ?? (KnowledgeCombat.Group(card) is { } original
-            ? CardCatalog.Model(original.MainCardId).Id.ToString() : card.Id.ToString());
-    }
     public static bool IsRewardEntrance(Player player, CardModel card)
-        => (card.Pool is not JunnaCardPool || CardCatalog.IsRewardCard(card)) && RewardEntranceId(player, card) == card.Id.ToString();
+        => card.Pool is not JunnaCardPool || CardCatalog.IsRewardCard(card);
     internal static IEnumerable<(CardModel Model, int Count)>? Definition(CardModel card) => Group(card)?.Members
         .Select(member => (ModelDb.GetById<CardModel>(ModelId.Deserialize(member.Id)), member.Count));
     public static IReadOnlyList<CardModel> Members(CardModel source)
@@ -83,22 +76,9 @@ public static class DynamicKnowledge
     private static void Merge(Player player, IEnumerable<CardModel> cards)
     {
         var groups = Groups(player);
-        var counts = cards.Select(card => card.Id.ToString()).Distinct().ToDictionary(id => id, _ => 1);
+        var counts = cards.GroupBy(card => card.Id.ToString()).ToDictionary(group => group.Key, group => group.Count());
         counts.TryAdd(PreferredEntrance, 1);
-        var merged = KnowledgeRelation.Merge(groups, new(PreferredEntrance, counts), PreferredEntrance);
-        bool changed;
-        do
-        {
-            changed = false;
-            foreach (var original in CardCatalog.Groups)
-            {
-                var members = original.Members.ToDictionary(member => CardCatalog.Model(member.Id).Id.ToString(), member => member.Count);
-                if (!members.Keys.Any(merged.CardCounts.ContainsKey) ||
-                    members.All(member => merged.CardCounts.GetValueOrDefault(member.Key) >= member.Value)) continue;
-                merged = KnowledgeRelation.Merge(groups, new(CardCatalog.Model(original.MainCardId).Id.ToString(), members), PreferredEntrance);
-                changed = true;
-            }
-        } while (changed);
+        KnowledgeRelation.Merge(groups, new(PreferredEntrance, counts), PreferredEntrance);
         Relations.Set(player, JsonSerializer.Serialize(groups));
     }
     internal static void Normalize(Player player)
@@ -131,12 +111,12 @@ public static class DynamicKnowledge
             Normalize(__instance);
         }
     }
-    public static async Task Prepare(PlayerChoiceContext context, CardModel selected, IEnumerable<CardModel> options)
+    public static Task Prepare(PlayerChoiceContext context, CardModel selected, IEnumerable<CardModel> options)
     {
-        if (CardCatalog.DesignId(selected) != "JK126" || IsLinked(selected)) return;
+        if (CardCatalog.DesignId(selected) != "JK126") return Task.CompletedTask;
         var others = options.Where(c => c != selected && c.Pile == null).Distinct().ToArray();
-        var partners = others.Length <= 2 ? others : await CardActions.Choose(context, selected, others, 2);
-        if (partners.Length > 0) Pending.AddOrUpdate(selected, partners);
+        if (others.Length > 0) Pending.AddOrUpdate(selected, others);
+        return Task.CompletedTask;
     }
     public static async Task<bool> Acquire(CardModel acquired, PileType destination)
     {
@@ -168,22 +148,8 @@ public static class DynamicKnowledge
     [HarmonyPatch(typeof(CardReward), "OnSelect")]
     private static class RewardOptions
     {
-        private static void Prefix(CardReward __instance, List<CardCreationResult> ____cards)
+        private static void Prefix(CardReward __instance)
         {
-            var seen = new HashSet<string>();
-            for (int index = 0; index < ____cards.Count; index++)
-            {
-                var card = ____cards[index].Card;
-                string entrance = RewardEntranceId(__instance.Player, card);
-                if (entrance != card.Id.ToString())
-                {
-                    var replacement = __instance.Player.RunState.CreateCard(ModelDb.GetById<CardModel>(ModelId.Deserialize(entrance)), __instance.Player);
-                    if (card.IsUpgraded && replacement.IsUpgradable) { replacement.UpgradeInternal(); replacement.FinalizeUpgradeInternal(); }
-                    ____cards[index] = new CardCreationResult(replacement);
-                }
-                if (Groups(__instance.Player).Any(group => group.EntranceId == entrance) || KnowledgeCombat.Group(card) != null)
-                    if (!seen.Add(entrance)) ____cards.RemoveAt(index--);
-            }
             foreach (var card in __instance.Cards.Where(c => CardCatalog.DesignId(c) == "JK126"))
                 Offers.AddOrUpdate(card, __instance);
         }
@@ -217,17 +183,6 @@ public static class DynamicKnowledge
         [HarmonyPostfix, HarmonyPriority(Priority.Last)]
         private static void Postfix(Player player, ref IEnumerable<CardModel> __result)
             => __result = __result.Where(card => IsRewardEntrance(player, card));
-    }
-    [HarmonyPatch]
-    private static class CombatEntrances
-    {
-        private static IEnumerable<MethodBase> TargetMethods()
-        {
-            yield return AccessTools.Method(typeof(CardFactory), nameof(CardFactory.GetDistinctForCombat));
-            yield return AccessTools.Method(typeof(CardFactory), nameof(CardFactory.GetForCombat));
-        }
-        private static void Prefix(Player player, ref IEnumerable<CardModel> cards)
-            => cards = cards.Where(card => IsRewardEntrance(player, card));
     }
     [HarmonyPatch(typeof(CardFactory), "GetFilteredTransformationOptions")]
     private static class TransformationEntrances

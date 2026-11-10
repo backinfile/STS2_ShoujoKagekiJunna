@@ -1185,7 +1185,10 @@
       ],
       "upgradedTips": [
         "DamageBonus"
-      ]
+      ],
+      "fields": {
+        "Bonus": "Bonus"
+      }
     },
     "JH31": {
       "fields": {
@@ -1765,7 +1768,7 @@
       "power": {
         "description": "Passive",
         "amount": "Applications",
-        "single": true
+        "single": false
       }
     },
     "JK260": {
@@ -1822,6 +1825,24 @@
       "upgradedTips": [
         "Knowledge",
         "Vulnerable"
+      ]
+    },
+    "JK274": {
+      "effect": "Block",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK275": {
+      "effect": "Attack",
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
       ]
     }
   }

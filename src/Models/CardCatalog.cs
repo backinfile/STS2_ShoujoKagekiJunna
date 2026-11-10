@@ -33,6 +33,8 @@ public sealed class CardDefinition
     public bool UpgradedRetain { get; init; }
     public bool Innate { get; init; }
     public bool UpgradedInnate { get; init; }
+    public bool Ethereal { get; init; }
+    public bool UpgradedEthereal { get; init; }
     public bool DamageCapable { get; init; }
     public string Portrait { get; init; } = "";
     public ArrowArtFocus? ArrowFocus { get; init; }

@@ -32,8 +32,7 @@ public static class KnowledgeCombat
             if (result.success && result.oldPile == null) KnowledgeProgress.Acquired(card);
             if (single || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || Copies.TryGetValue(card, out _)) continue;
             bool discovered = Discovered.Remove(card);
-            bool generated = card.Pile!.IsCombatPile && card.Pile.Type != PileType.Play && card.DeckVersion == null;
-            if (card.Pile.Type == PileType.Deck || discovered || generated)
+            if (card.Pile!.Type == PileType.Deck || discovered)
             {
                 if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type))
                     await GrantPartners(card, card.Pile!.Type);
@@ -44,7 +43,7 @@ public static class KnowledgeCombat
     public static KnowledgeGroup? Group(CardModel card)
     {
         string? id = CardCatalog.DesignId(card);
-        return id == null ? null : CardCatalog.Groups.FirstOrDefault(g => g.MainCardId == id || g.GrantedCardIds.Contains(id));
+        return id == null ? null : CardCatalog.Groups.FirstOrDefault(g => g.MainCardId == id);
     }
     public static bool HasGroup(CardModel card) => Group(card) != null || DynamicKnowledge.IsLinked(card);
     internal static CardModel[] CapturePartners(CardModel card)

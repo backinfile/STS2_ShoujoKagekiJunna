@@ -58,16 +58,16 @@ public sealed class KnowledgeAvailabilityCommand : AbstractConsoleCmd
             var partner = player.RunState.CreateCard(CardCatalog.Model("JK82"), player);
             await DynamicKnowledge.Prepare(new ThrowingPlayerChoiceContext(), source, [source, partner]);
             await CardPileCmd.Add(source, PileType.Deck, skipVisuals: true);
-            var candidates = new[] { CardCatalog.Model("JK126"), CardCatalog.Model("JK82") };
-            Expect("dynamic partner is not an entrance", !DynamicKnowledge.IsRewardEntrance(player, candidates[1]));
+            var candidates = new[] { CardCatalog.Model("JK126"), CardCatalog.Model("JK82"), CardCatalog.Model("JK184B") };
+            Expect("non-pool singing companion is not an entrance", !DynamicKnowledge.IsRewardEntrance(player, candidates[2]));
             var filtered = Hook.ModifyMerchantCardPool(player.RunState, player, candidates).ToArray();
-            Expect("merchant pool excludes dynamic non-entrances", filtered.All(card => card.Id == source.Id));
-            Expect("merchant pool retains its entrance", filtered.Any(card => card.Id == source.Id));
-            Expect("typed merchant generation only offers the entrance", Enumerable.Range(0, 16).All(_ =>
-                CardFactory.CreateForMerchant(player, candidates, CardType.Skill).Card.Id == source.Id));
-            Expect("rarity merchant generation only offers the entrance", Enumerable.Range(0, 16).All(_ =>
-                CardFactory.CreateForMerchant(player, candidates, CardRarity.Rare).Card.Id == source.Id));
-            Expect("caller candidates are preserved", candidates.Length == 2 && candidates[1].Id == partner.Id);
+            Expect("merchant pool excludes non-pool cards", filtered.All(card => card.Id != candidates[2].Id));
+            Expect("merchant pool preserves independently pooled related cards", filtered.Any(card => card.Id == source.Id) && filtered.Any(card => card.Id == partner.Id));
+            Expect("typed merchant generation excludes the singing companion", Enumerable.Range(0, 16).All(_ =>
+                CardFactory.CreateForMerchant(player, candidates, CardType.Skill).Card.Id != candidates[2].Id));
+            Expect("rarity merchant generation excludes the singing companion", Enumerable.Range(0, 16).All(_ =>
+                CardFactory.CreateForMerchant(player, candidates, CardRarity.Rare).Card.Id != candidates[2].Id));
+            Expect("caller candidates are preserved", candidates.Length == 3 && candidates[1].Id == partner.Id);
         }
         catch (Exception error) { checks.Add(new { pass = false, error = error.ToString() }); Save("merchant.json", checks); }
     }

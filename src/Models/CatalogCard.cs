@@ -21,7 +21,8 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     public override int MaxUpgradeLevel => DesignId == "JK82" ? int.MaxValue : 1;
     public override HashSet<CardKeyword> CanonicalKeywords =>
         [..base.CanonicalKeywords, ..(Definition.Exhaust ? new[] { CardKeyword.Exhaust } : []), ..(Definition.Retain ? new[] { CardKeyword.Retain } : []),
-         ..(Definition.Innate ? new[] { CardKeyword.Innate } : [])];
+         ..(Definition.Innate ? new[] { CardKeyword.Innate } : []),
+         ..(Definition.Ethereal ? new[] { CardKeyword.Ethereal } : [])];
     protected override IEnumerable<DynamicVar> CanonicalVars => Definition.Values.Select(n => n.Name switch
     {
         "Damage" => (DynamicVar)new DamageVar(n.Base, ValueProp.Move),
@@ -77,5 +78,6 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         if (Definition.UpgradedExhaust) AddKeyword(CardKeyword.Exhaust); else RemoveKeyword(CardKeyword.Exhaust);
         if (Definition.UpgradedRetain) AddKeyword(CardKeyword.Retain); else RemoveKeyword(CardKeyword.Retain);
         if (Definition.UpgradedInnate) AddKeyword(CardKeyword.Innate); else RemoveKeyword(CardKeyword.Innate);
+        if (Definition.UpgradedEthereal) AddKeyword(CardKeyword.Ethereal); else RemoveKeyword(CardKeyword.Ethereal);
     }
 }

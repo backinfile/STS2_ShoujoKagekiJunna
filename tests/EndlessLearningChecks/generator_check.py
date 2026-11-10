@@ -24,3 +24,17 @@ for language in ('zhs', 'eng'):
     localized = json.loads((root / f'ShoujoKagekiJunna/localization/{language}/cards.json').read_text(encoding='utf-8'))
     assert localized['JUNNA_JK82.description'] == description, language
 print('PASS: generated learning description retains its live energy value in both languages.')
+
+for card_id in ('JK48', 'JK48B', 'JK184', 'JA82', 'JK206'):
+    entry = next(card for card in catalog['cards'] if card['id'] == card_id)
+    for field in ('text', 'upgradedText'):
+        wording, numbers = generator.bind_numbers(entry[field])
+        for value in numbers:
+            value['upgraded'] = value['base']
+        rendered = generator.display_description(entry, wording, names, numbers)
+        assert '（' not in rendered, f'Generator added an inline counter to {card_id}: {rendered}'
+    for language in ('zhs', 'eng'):
+        localized = json.loads((root / f'ShoujoKagekiJunna/localization/{language}/cards.json').read_text(encoding='utf-8'))
+        description = localized[f'JUNNA_{card_id}.description']
+        assert '（' not in description, f'Added parentheses remain on {card_id}/{language}'
+print('PASS: five affected card descriptions and their generator omit added inline counters.')

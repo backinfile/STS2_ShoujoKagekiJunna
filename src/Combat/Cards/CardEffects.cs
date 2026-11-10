@@ -187,7 +187,7 @@ public static class CardEffects
             case "JK81B":
                 await Block(V("Block") + hand.Cards.Count(c => c != card) * V("Count")); break;
             case "JA75":
-                await Improve(hand.Cards, V("Bonus")); break;
+                await Improve(All(), V("Bonus")); break;
             case "JA76":
                 var swept = await DealDamage(card, context, play, V("Damage"), 1);
                 foreach (var group in swept.GroupBy(r => r.Receiver))

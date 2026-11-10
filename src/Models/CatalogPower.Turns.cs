@@ -22,6 +22,7 @@ public abstract partial class CatalogPower
         {
             switch (DesignId)
             {
+                case "JA35": await ArrowCombat.AccelerateAll(context, player, grant.V("Turns")); break;
                 case "JA144": await CardActions.Generate(player, "JA119", grant.V("Cards"), PileType.Hand); break;
                 case "JH59": case "JK139": await PlayerCmd.GainEnergy(grant.V("Energy"), player); break;
                 case "JK32": await CardPileCmd.Draw(context, grant.V("DrawCount"), player); break;
@@ -52,7 +53,6 @@ public abstract partial class CatalogPower
         {
             switch (DesignId)
             {
-                case "JA35": await ArrowCombat.AccelerateAll(context, Owner.Player!, grant.V("Turns")); break;
                 case "A": await CardActions.Generate(Owner.Player!, "B", grant.V("Cards"), PileType.Draw); break;
                 case "JK67":
                     DamageModifiers.AddMany(ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card), grant.V("Bonus"));
