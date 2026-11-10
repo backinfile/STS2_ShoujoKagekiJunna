@@ -1,0 +1,76 @@
+{
+  "recoveryRequestId": "02ef970a-63ae-4ca1-b0cd-04eec7e2662d",
+  "recoveryRevision": 4473,
+  "verifiedRevision": 4475,
+  "rootCauseRecord": {
+    "revision": 4467,
+    "label": "删除一组 · 辨误",
+    "source": "JK273",
+    "sharedTarget": "JK122B",
+    "trashedAt": "2026-11-10T01:19:13.626Z"
+  },
+  "recoveredFields": {
+    "uid": "junna-shine-reward-revision-20261106_JK122B",
+    "unset": [
+      "trashedAt"
+    ]
+  },
+  "references": [
+    {
+      "main": "JK122",
+      "count": 1,
+      "ownerTrashed": false
+    },
+    {
+      "main": "JK273",
+      "count": 1,
+      "ownerTrashed": true
+    },
+    {
+      "main": "JK275",
+      "count": 2,
+      "ownerTrashed": false
+    },
+    {
+      "main": "JK276",
+      "count": 1,
+      "ownerTrashed": false
+    },
+    {
+      "main": "JK277",
+      "count": 1,
+      "ownerTrashed": false
+    },
+    {
+      "main": "JK278",
+      "count": 2,
+      "ownerTrashed": false
+    }
+  ],
+  "sourceRelease": "20261110-shared-knowledge-lifecycle",
+  "previousRelease": "20261110-independent-card-relations",
+  "editorRuntime": "c2e3b1846788597b821744dd.js",
+  "publicRuntime": "58c027287414c2de8db1dee5.js",
+  "domainSha256": "eea777dc12043310422cf393a118a7eb904e9f5501fe29260d6e9b3f309a55aa",
+  "regression": {
+    "before": {
+      "failed": 4,
+      "passed": 0
+    },
+    "after": {
+      "failed": 0,
+      "passed": 15
+    },
+    "minimalOriginalReproduction": "passed"
+  },
+  "browserVerification": {
+    "page": "公开工作台备用区",
+    "group": "证伪",
+    "visibleCards": [
+      "证伪",
+      "谬误 1/2",
+      "谬误 2/2"
+    ]
+  },
+  "cardModelRestored": true
+}

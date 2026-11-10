@@ -273,3 +273,38 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 发布与验证记录保存在 deployment-verification.json，备用区创建回执保存在 workbench-reserve-receipt.json。六张新增候选使用默认占位图。
 - 原目录仍为 main 的 4c8b1f37b11e185faf9034f1b5a2c0f70b701a9c，工作区干净。审阅源码提交为6556a97，最终代码与记录整理为单个任务提交，以已同步的本地 main 为父提交，按用户授权快进整合。
 - 清理许可覆盖本次 ../worktrees/STS2_ShoujoKagekiJunna/independent-card-relations-20261110 工作树、codex/independent-card-relations-20261110 分支和工作树中的临时文件。任务记录、两份MCP/发布回执随整合代码保留。
+
+
+## 用户回归反馈与修复计划
+
+### 用户消息 9
+
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+### 用户消息 10
+
+<external_codex_apps_selected_page_part_1_of_1>Companion Page snapshot part 1 of 1:
+{"page_id":null,"document_view":null}</external_codex_apps_selected_page_part_1_of_1>
+
+### 用户消息 11
+
+出问题了，谬误怎么一下子全没了？
+
+### 复现与计划
+
+- 当前 main 为4142bed，原目录干净。沿用已获批准的同名工作树、任务分支、部署与清理范围继续修复。
+- MCP历史r4467显示“删除一组 · 辨误”同时给JK273与共享JK122B写入相同trashedAt，其他组继续引用JK122B。公开预览会过滤已删除成员，因此谬误在其他组也消失。
+- 三张牌、两组共用成员的最小复现直接调用domain.moveCards，断言“删除A组必须保留C组仍在引用的共享牌B”失败。历史补丁与最小复现一致，直接定位整组生命周期操作遗漏共享成员保护。
+- 已通过MCP只移除JK122B误写的trashedAt，提交02ef970a-63ae-4ca1-b0cd-04eec7e2662d，revision为r4473。其他卡牌及用户后续修改保持原值。
+- 修复删除、备用与移回整组的目标选择。操作所属入口及独有成员，共享成员与独立入池牌保留自身状态。新增定向回归验证红绿结果，发布后核对数据与前端，再按既有授权合入main并清理。
+
+
+## 共享牌整组操作修复结果
+
+- 根因为原“整组删除”按全组成员直接写入全局trashedAt。关联列表改为独立后，生命周期操作仍沿用旧行为，遗漏其他入口对同一模型的引用。
+- domain.moveCards在整组删除、备用和移回时，保留其他未删除入口仍引用的成员，以及具有独立入口或入池身份的牌。当前入口与独有成员继续沿用既有整组操作。
+- 共享成员删除、备用、移回和独立入口四项回归先全部失败，修复后连同相关领域、展示测试共15项通过，原始三牌两组最小复现也通过。
+- 已发布20261110-shared-knowledge-lifecycle，后端、编辑页和公开页的模块摘要一致，服务为active。保留上一发布版本。
+- 已通过MCP只恢复共享JK122B的trashedAt，原r4467对JK273的删除和用户对JK274等条目的后续修改保持原值。回执为shared-knowledge-recovery.json。
+- 浏览器打开公开工作台的备用区，证伪知识组中实际显示证伪、谬误第1张和谬误第2张，共3张。原始“其他组中谬误也消失”的症状已恢复。
+- 本次沿用同一任务已批准的发布、合入main与清理范围，源码与回执形成一个修复提交。

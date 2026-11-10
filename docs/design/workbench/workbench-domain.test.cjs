@@ -137,3 +137,32 @@ test('移除关联保留目标的知识身份和入池状态',()=>{
   assert.ok(after.cards[0].keywords.includes('知识'));
   assert.deepEqual(after.cards[0].partnerCardIds,[]);
 });
+
+
+for(const action of ['trash','reserve','pool']){
+  test('整组'+action+'保留其他入口仍在引用的共享成员',()=>{
+    const data={cards:[makeCard('A',true),makeCard('B',false),makeCard('C',true)],partnerGroups:[
+      {uid:'group_A',mainCardId:'A',grantedCardIds:['B']},
+      {uid:'group_C',mainCardId:'C',grantedCardIds:['B']}
+    ]};
+    if(action==='pool')for(const card of data.cards)card.reservedAt='before';
+    const shared=structuredClone(data.cards[1]),other=structuredClone(data.cards[2]);
+    const changed=domain.moveCards(data,'card_A',action,{group:true,at:'after'});
+    assert.deepEqual(changed,['card_A']);
+    assert.deepEqual(data.cards[1],shared);
+    assert.deepEqual(data.cards[2],other);
+  });
+}
+
+test('整组操作保留关联牌自己的入口与入池身份，仍处理独有成员',()=>{
+  const data=fixture();
+  data.cards.push(makeCard('D',false));
+  data.cards[1].pool=true;
+  data.partnerGroups.push({uid:'group_C',mainCardId:'C',grantedCardIds:['D']});
+  const before=structuredClone(data);
+  assert.deepEqual(domain.moveCards(data,'card_A','trash',{group:true,at:'after'}),['card_A']);
+  for(const id of ['B','C','D'])assert.deepEqual(data.cards.find(c=>c.id===id),before.cards.find(c=>c.id===id));
+  const exclusive=fixture();
+  assert.deepEqual(domain.moveCards(exclusive,'card_A','trash',{group:true,at:'after'}),['card_A','card_B','card_C']);
+  assert.ok(exclusive.cards.every(c=>c.trashedAt==='after'));
+});

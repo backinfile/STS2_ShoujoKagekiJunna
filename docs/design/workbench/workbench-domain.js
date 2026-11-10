@@ -41,7 +41,15 @@
   function moveCards(data,cardUid,action,{group=false,originUid=cardUid,at=new Date().toISOString()}={}){
     if(!['trash','reserve','pool'].includes(action))throw Error('未知卡牌操作');
     const selected=data.cards.find(entry=>entry.uid===cardUid);if(!selected||selected.trashedAt)return [];
-    const cards=group?cardGroup(data,cardUid,originUid)?.cards||[]:[selected],changed=[];
+    let cards=[selected];
+    if(group){
+      const context=cardGroup(data,cardUid,originUid);
+      if(!context)return [];
+      const otherGroups=data.partnerGroups.filter(other=>other!==context.group&&data.cards.some(card=>card.id===other.mainCardId&&!card.trashedAt));
+      const sharedIds=new Set(otherGroups.flatMap(other=>[other.mainCardId,...other.grantedCardIds]));
+      cards=context.cards.filter(card=>card.id===context.group.mainCardId||!card.pool&&!sharedIds.has(card.id));
+    }
+    const changed=[];
     for(const card of cards){
       if(card.trashedAt)continue;
       if(action==='trash')card.trashedAt=at;
