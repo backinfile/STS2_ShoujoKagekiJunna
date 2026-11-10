@@ -35,10 +35,23 @@ public sealed class KnowledgeInitializationCommand : AbstractConsoleCmd
         var checks = new List<object>();
         try
         {
+            foreach (string id in new[] { "JK32", "JK32B", "JK133", "JK137" })
+            {
+                foreach (var card in new[] { CardCatalog.Model(id), player.RunState.CreateCard(CardCatalog.Model(id), player) })
+                {
+                    var expectedNames = CardCatalog.Groups.Single(group => group.MainCardId == id).Members
+                        .SelectMany(member => Enumerable.Repeat($"[gold]{CardCatalog.Model(member.Id).Title}[/gold]", member.Count));
+                    var actualNames = card.HoverTips.OfType<HoverTip>().Single(tip => tip.Title == "关联牌").Description.Split('\n');
+                    checks.Add(new { name = id + (card.IsMutable ? " owned" : " canonical") + " tip includes every copy including itself",
+                        pass = actualNames.SequenceEqual(expectedNames), actualNames });
+                }
+            }
             var tips = CardCatalog.Model("JK126").HoverTips.OfType<HoverTip>().ToArray();
             checks.Add(new { name = "reward entrance explains associated reward cards", pass = tips.Any(tip =>
                 tip.Title == "关联牌" && tip.Description.Contains("同一奖励页面的其他卡牌")),
                 tips = tips.Select(tip => new { tip.Title, tip.Description }) });
+            checks.Add(new { name = "unacquired reward entrance includes itself", pass = tips.Single(tip => tip.Title == "关联牌")
+                .Description.Split('\n').Last() == $"[gold]{CardCatalog.Model("JK126").Title}[/gold]" });
             var source = player.RunState.CreateCard(CardCatalog.Model("JK32"), player);
             var before = player.Deck.Cards.ToHashSet();
             await CardPileCmd.Add(source, PileType.Deck, skipVisuals: true);
@@ -54,8 +67,8 @@ public sealed class KnowledgeInitializationCommand : AbstractConsoleCmd
             {
                 string self = "[gold]" + CardCatalog.Model(((JunnaCard)card).DesignId).Title + "[/gold]";
                 var relationTips = card.HoverTips.OfType<HoverTip>().Where(tip => tip.Title == "关联牌").ToArray();
-                checks.Add(new { name = card.Id.Entry + " tip omits itself", pass = relationTips.Length == 1 &&
-                    !relationTips[0].Description.Contains(self) });
+                checks.Add(new { name = card.Id.Entry + " tip includes itself", pass = relationTips.Length == 1 &&
+                    relationTips[0].Description.Split('\n').Count(line => line == self) == 1 });
             }
             var curse = player.RunState.CreateCard(CardCatalog.Model("JK122B"), player);
             var referrers = CardCatalog.Groups.Where(group => group.GrantedCardIds.Contains("JK122B"))
@@ -77,22 +90,28 @@ public sealed class KnowledgeInitializationCommand : AbstractConsoleCmd
             var sameName = player.RunState.CreateCard(CardCatalog.Model("JK32"), player);
             checks.Add(new { name = "same-name instances use their updated source list", pass =
                 DynamicKnowledge.Members(sameName).Any(card => card.Id.Entry == "JUNNA_JA105") });
+            sourceRelation.CardCounts[source.Id.ToString()] = 3;
+            field.Set(player, JsonSerializer.Serialize(relations));
             var restored = Player.FromSerializable(player.ToSerializable());
             foreach (var card in restored.Deck.Cards) card.Owner = restored;
             var restoredSibling = restored.Deck.Cards.First(card => card.Id == sibling.Id);
             checks.Add(new { name = "independent native lists survive save restoration", pass =
                 DynamicKnowledge.Members(restoredSibling).All(card => card.Id.Entry != "JUNNA_JA105") });
+            var restoredSource = restored.Deck.Cards.First(card => card.Id == source.Id);
+            string ownName = $"[gold]{CardCatalog.Model("JK32").Title}[/gold]";
+            checks.Add(new { name = "restored source tip retains three same-name copies", pass = restoredSource.HoverTips
+                .OfType<HoverTip>().Single(tip => tip.Title == "关联牌").Description.Split('\n').Count(line => line == ownName) == 3 });
             sourceRelation.CardCounts.Clear();
             sourceRelation.CardCounts[source.Id.ToString()] = 1;
             field.Set(player, JsonSerializer.Serialize(relations));
-            checks.Add(new { name = "reduced list keeps only its source preview", pass =
+            checks.Add(new { name = "source-only list shows its source in preview and tip", pass =
                 KnowledgePreviewCards.Create(source).Count == 1 &&
-                !source.HoverTips.OfType<HoverTip>().Any(tip => tip.Title == "关联牌") });
+                source.HoverTips.OfType<HoverTip>().Single(tip => tip.Title == "关联牌").Description == ownName });
             sourceRelation.CardCounts.Clear();
             field.Set(player, JsonSerializer.Serialize(relations));
-            checks.Add(new { name = "empty list keeps the physical source and hides empty tips", pass =
+            checks.Add(new { name = "empty list retains the physical source in preview and tip", pass =
                 KnowledgePreviewCards.Create(source).Count == 1 &&
-                !source.HoverTips.OfType<HoverTip>().Any(tip => tip.Title == "关联牌") });
+                source.HoverTips.OfType<HoverTip>().Single(tip => tip.Title == "关联牌").Description == ownName });
             field.Set(player, original);
             var matchingSource = CardCatalog.Create("JK32", player);
             var matchingPartner = CardCatalog.Create("JK32B", player);

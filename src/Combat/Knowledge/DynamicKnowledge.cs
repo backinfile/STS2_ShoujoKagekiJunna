@@ -216,7 +216,7 @@ public static class DynamicKnowledge
             if (!IsLinked(__instance)) return;
             __result = __result.Where(t => t is not HoverTip existing ||
                 existing.Id?.StartsWith("junna_knowledge_group_") != true && existing.Id != "junna_dynamic_knowledge_group");
-            var names = Members(__instance).Where(member => member.Id != __instance.Id)
+            var names = Members(__instance)
                 .Select(card => "[gold]" + (card is JunnaCard junna
                     ? CardCatalog.Model(junna.DesignId).Title : ((CardModel)card.CanonicalInstance).Title) + "[/gold]").ToList();
             if (CardCatalog.DesignId(__instance) == "JK126")

@@ -35,12 +35,12 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge);
             if (DesignId == "JK126" && !DynamicKnowledge.IsLinked(this))
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
-                    new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_REWARD_OTHERS"))
+                    new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_REWARD_OTHERS").GetFormattedText() + $"\n[gold]{CardCatalog.Model(DesignId).Title}[/gold]")
                     { Id = "junna_knowledge_reward_others", ShouldOverrideTextOverflow = true };
             var group = KnowledgeCombat.Group(this);
             if (group != null && !DynamicKnowledge.IsLinked(this))
             {
-                var members = group.Members.Where(member => member.Id != DesignId).SelectMany(member =>
+                var members = group.Members.SelectMany(member =>
                     Enumerable.Repeat($"[gold]{CardCatalog.Model(member.Id).Title}[/gold]", member.Count)).ToArray();
                 if (members.Length > 0)
                     yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
