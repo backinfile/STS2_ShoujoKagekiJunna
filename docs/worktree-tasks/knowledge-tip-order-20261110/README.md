@@ -27,7 +27,7 @@
 - Beta与Stable构建、加载器构建和PCK资源打包通过。
 - 12.13秒效果录像为1280×720 H.264，含AAC引擎混音，文件为`artifacts/task-deliverables/knowledge-tip-order-20261110/knowledge-tips.mp4`。
 - 同目录保留`associations.png`、`knowledge-background.png`、`knowledge-tips-frames.png`、修改前后检查结果及7文件发行包。
-- 用户已确认合并、安装和清理。最终集成状态、安装哈希及清理结果记录到`artifacts/task-deliverables/knowledge-tip-order-20261110/integration.json`。
+- 已完成合并和安装，7个发行文件的SHA-256与验证包一致。最终集成状态、安装哈希及授权清理结果记录到`artifacts/task-deliverables/knowledge-tip-order-20261110/integration.json`。
 
 ## 后续用户输入
 
@@ -100,7 +100,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## 用户合并安装与清理确认
 
-用户回复的提问为“修订 `2624704` 已恢复关联牌提示原色，保留紧接‘知识’的顺序及暗紫知识背景。15项定向实机检查、Beta/Stable构建通过，main 当前干净。按 `$worktree-task` 第6步，是否合入 main、更新 Steam 安装并清理本次分支 `codex/knowledge-tip-order-20261110` 和工作树 `../worktrees/STS2_ShoujoKagekiJunna/knowledge-tip-order-20261110`？”
+用户回复的提问为“修订 `2624704` 已恢复关联牌提示原色，保留紧接“知识”的顺序及暗紫知识背景。15项定向实机检查、Beta/Stable构建通过，main 当前干净。按 `$worktree-task` 第6步，是否合入 main、更新 Steam 安装并清理本次分支 `codex/knowledge-tip-order-20261110` 和工作树 `../worktrees/STS2_ShoujoKagekiJunna/knowledge-tip-order-20261110`？”
 
 合并安装并清理（推荐）
 
@@ -156,3 +156,9 @@ Before each commit, check the input record against the user messages, finalize t
 Report the resulting branch, commit, verification, cleanup state, and task document path.
 
 </skill>
+
+## 安装执行记录
+
+- 安装前的完整目录已保存在`artifacts/task-deliverables/knowledge-tip-order-20261110/installed-before-update-605ff49826ac41aa95397b0d9fd8279e/`。
+- 新包将在下次启动游戏时加载。
+- 录制视频、截图、15项实机检查结果及发行包已保留在主目录的任务交付文件夹中。
