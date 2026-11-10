@@ -49,7 +49,7 @@ public static class CardEffects
             case "JA04": case "JK10": case "JA22": case "JK15": case "A": case "JK27":
             case "JA35": case "JA205": case "JK254": case "JK260": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":
             case "JG31": case "JH21": case "JG34": case "JK75": case "JH23": case "JA70":
-            case "JK235": case "JH59": case "JA144": case "JA118": case "JA105": case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31":
+            case "JK235": case "JH59": case "JA144": case "JA118": case "JA105": case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31": case "U_CARD_008":
                 await CatalogPower.Install(card, context, play);
                 if (card.DesignId == "JA105") await ArrowCombat.ActivateHaste(context, player);
                 if (card.DesignId == "JK32") SetNamedFree(player, "JK32B", "JK32C");
@@ -102,7 +102,6 @@ public static class CardEffects
                 await Improve(Arrows(), V("Bonus")); await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
             case "JK206":
             case "JK48":
-            case "JK314":
                 await Attack((int)card.DynamicVars.CalculatedDamage.Calculate(play.Target)); break;
             case "JK48B":
                 await Block((int)card.DynamicVars.CalculatedBlock.Calculate(play.Target)); break;

@@ -357,18 +357,16 @@ def main():
         current_power_text = {
             'JA35': '回合开始时，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA205': '目标为单个敌人的[gold]箭矢[/gold]现在会攻击所有敌人。',
-            'JK254': '每当你打出一张[gold]知识[/gold]牌，也打出[gold]手牌[/gold]中的它的关联牌。',
+            'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点力量。',
+            'U_CARD_008': '战斗结束后，向牌组中添加[blue]{Amount}[/blue]张[gold]故事[/gold]。',
         }
         for cid, text in current_power_text.items():
             if cid not in ids:
                 continue
-            amount = power_amounts[cid]
+            amount = 1 if cid == 'U_CARD_008' else power_amounts[cid]
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
-            if cid == 'JK254':
-                powers[f'JUNNA_{cid}_POWER.smartDescription'] = ('{Upgraded:每当你打出一张[gold]知识[/gold]牌，'
-                    '其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。|' + text + '}')
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

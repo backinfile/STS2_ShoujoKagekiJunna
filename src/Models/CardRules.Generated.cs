@@ -939,6 +939,7 @@ internal static partial class CardRules
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
+            Effect = SimpleCardEffect.Attack,
         },
         ["JK32"] = new()
         {
@@ -1322,6 +1323,21 @@ internal static partial class CardRules
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
             RelatedCards = ["U_CARD_005"],
+        },
+        ["U_CARD_008"] = new()
+        {
+            RelatedCards = ["U_CARD_008B"],
+            PowerDescription = PowerDescriptionKind.RepeatedApplications,
+            PowerAmount = PowerAmountKind.Applications,
+            SinglePower = false,
+        },
+        ["U_CARD_008B"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N0",
+            },
+            Effect = SimpleCardEffect.Draw,
         },
     };
 }

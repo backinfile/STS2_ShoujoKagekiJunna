@@ -1837,8 +1837,13 @@
       ]
     },
     "JK314": {
-      "tips": ["Knowledge"],
-      "upgradedTips": ["Knowledge"]
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ],
+      "effect": "Attack"
     },
     "JK275": {
       "effect": "Attack",
@@ -1848,6 +1853,22 @@
       "upgradedTips": [
         "Knowledge"
       ]
+    },
+    "U_CARD_008": {
+      "relatedCards": [
+        "U_CARD_008B"
+      ],
+      "power": {
+        "description": "RepeatedApplications",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "U_CARD_008B": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "effect": "Draw"
     }
   }
 }

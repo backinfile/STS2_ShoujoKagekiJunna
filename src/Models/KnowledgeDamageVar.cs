@@ -11,15 +11,12 @@ namespace ShoujoKagekiJunna.Models;
 internal sealed class KnowledgeDamageVar() : CalculatedDamageVar(ValueProp.Move)
 {
     protected override DynamicVar GetBaseVar() => ((CardModel)_owner!).DynamicVars.Damage;
-    protected override DynamicVar GetExtraVar() => _owner is CatalogCard { DesignId: "JK314" } card
-        ? card.DynamicVars["N2"] : base.GetExtraVar();
 
     public override void UpdateCardPreview(CardModel card, CardPreviewMode previewMode, Creature? target, bool runGlobalHooks)
     {
         if (card.CombatState == null && card.IsMutable && card.Owner != null)
         {
             int count = card is CatalogCard { DesignId: "JK206" } ? card.Owner.Deck.Cards.Count
-                : card is CatalogCard { DesignId: "JK314" } ? KnowledgeProgress.DepletedPartners(card)
                 : CatalogCard.CountDeckKnowledge(card);
             var damage = new DamageVar(card.DynamicVars.Damage.BaseValue + count * GetExtraVar().BaseValue, Props);
             damage.UpdateCardPreview(card, previewMode, target, runGlobalHooks);
