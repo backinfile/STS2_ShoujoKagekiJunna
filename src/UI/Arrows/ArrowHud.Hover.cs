@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.HoverTips;
@@ -13,6 +14,11 @@ namespace ShoujoKagekiJunna.Combat;
 
 public partial class ArrowHud
 {
+    internal IEnumerable<(CardModel Card, Control Frame)> CardAnchors => _views
+        .Where(pair => pair.Key.Card.Pile?.Type == ArrowPile.PileId && !pair.Key.Resolving
+            && !pair.Value.Releasing && pair.Value.Frame.IsVisibleInTree())
+        .Select(pair => (pair.Key.Card, pair.Value.Frame));
+
     private const int PreviewCapacity = 5;
     private const float PreviewScale = .9f, PreviewMargin = 24;
     private Control? _hoverPreview, _hoverAnchor, _dismissedAnchor;

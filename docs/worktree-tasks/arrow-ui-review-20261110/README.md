@@ -299,4 +299,10 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 新录制正常出牌与悬停视频 13.97 秒，包含单张、三张异种箭矢的邻牌抬起、四张箭矢的滚轮和键盘浏览。密集悬停视频 5.77 秒，包含五十张中的连续浏览、超量入口及 Esc。
 - 新证据位于 `out/tmp/arrow-hover-native/`，包括 `presentation-results.json`、`recording-results.json`、`normal/` 与 `dense/` 下的有声 MP4、`single.png`、`three-focus.png`、`four-focus.png`、`dense-focus.png`、`overflow.png` 和两张录像拼接图。首轮网格录像作为历史对照保留。
 
-本轮修正将与既有箭矢修复重新整理为一个任务提交，随后同步本地 main。原检出的其他任务改动按状态和文件哈希核对保留，合入和清理继续等待用户确认。
+本轮修正已与既有箭矢修复重新整理。同步本地 main 至 `eb020c1311fa90e366a1bd1bec369bdb1dc9340d`，包含工作台 r4816 及知识连线。悬停文件出现两处同一声明区的冲突，保留原生手牌式预览与 main 新增 `CardAnchors` 只读接口，未改变知识连线的查询语义。
+
+同步后从 `build.ps1` 正常入口重新构建 Beta、Stable、加载器及资源包，均通过。集成探针零警告、零错误，三十三项箭矢展示断言再次全部通过。额外正常打出星坠，验证箭矢预览与一条知识关联同时显示、连线几何通过、移出后清零。最终启动焦点采样为零／一百二十，游戏日志无错误或异常，测试游戏已关闭。
+
+最终证据补充 `final-build.log`、`final-presentation-results.json`、`knowledge-coexistence.json`、`knowledge-coexistence.png`、程序集及资源哈希和最终运行日志。新悬停录像对应同步前的相同预览实现，首轮网格录像保留为历史对照。
+
+原检出的四项工作台未提交改动保留，合入与清理继续等待用户确认。清理前将三轮录像、截图、检查结果、日志及构建包保留到主仓库 `artifacts/task-deliverables/arrow-ui-review-20261110/`。清理范围为本任务工作树、任务分支、工作树内隔离游戏和临时文件。
