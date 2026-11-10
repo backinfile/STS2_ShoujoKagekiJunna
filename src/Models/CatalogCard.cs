@@ -39,9 +39,6 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     } : []).Concat(DesignId == "JK48B" ? new DynamicVar[]
     {
         new KnowledgeBlockVar().WithMultiplier(static (card, _) => CountDeckKnowledge(card))
-    } : []).Concat(DesignId == "JK314" ? new DynamicVar[]
-    {
-        new KnowledgeDamageVar().WithMultiplier(static (card, _) => KnowledgeProgress.DepletedPartners(card))
     } : []);
 
     protected override void AddExtraArgsToDescription(LocString description)

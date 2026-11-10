@@ -20,8 +20,10 @@ public static partial class KnowledgeProgress
     private static readonly SavedSpireField<Player, int> OpeningInsights = new(() => 0, "JunnaOpeningInsights");
     private static readonly HashSet<Player> Opened = [];
     private static readonly Dictionary<Player, int> CopyRewards = [];
+    private static readonly Dictionary<Player, int> StoryRewards = [];
     public static void Initialize() { }
-    public static int PermanentHits(CardModel card) => card is CatalogCard catalog ? ExtraHits.Get(catalog) : 0;
+    public static int PermanentHits(CardModel card) => card is CatalogCard catalog
+        ? checked(ExtraHits.Get(catalog) + (catalog.DesignId == "JK314" ? DepletedPartners(catalog) : 0)) : 0;
 
     public static async Task Revise(PlayerChoiceContext context, CatalogCard source)
     {
@@ -65,10 +67,17 @@ public static partial class KnowledgeProgress
             Shine.SetState(card, state.Remaining, state.Maximum);
     }
     public static void RegisterCopy(Player player) => CopyRewards[player] = CopyRewards.GetValueOrDefault(player) + 1;
+    public static void RegisterStory(Player player) => StoryRewards[player] = checked(StoryRewards.GetValueOrDefault(player) + 1);
     public static async Task WonCombat()
     {
         var rewards = CopyRewards.ToArray();
         CopyRewards.Clear();
+        var stories = StoryRewards.ToArray();
+        StoryRewards.Clear();
+        using (KnowledgeCombat.SingleCard())
+            foreach (var (player, count) in stories)
+                for (int i = 0; i < count; i++)
+                    await CardPileCmd.Add(player.RunState.CreateCard(CardCatalog.Model("U_CARD_008B"), player), PileType.Deck);
         foreach (var (player, count) in rewards)
             for (int i = 0; i < count; i++) await CopyDeckCard(player);
     }
@@ -76,6 +85,7 @@ public static partial class KnowledgeProgress
     {
         Opened.Clear();
         CopyRewards.Clear();
+        StoryRewards.Clear();
     }
     public static async Task OpenCombat(Player player, PlayerChoiceContext context)
     {
