@@ -23,10 +23,10 @@ public abstract partial class CatalogPower
             switch (DesignId)
             {
                 case "JA35": await ArrowCombat.AccelerateAll(context, player, grant.V("Turns")); break;
-                case "JA144": await CardActions.Generate(player, "JA119", grant.V("Cards"), PileType.Hand); break;
+                case "JA144": await CardActions.Generate(player, "JA119", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom); break;
                 case "JH59": case "JK139": await PlayerCmd.GainEnergy(grant.V("Energy"), player); break;
                 case "JK32": await CardPileCmd.Draw(context, grant.V("DrawCount"), player); break;
-                case "JK46": await CardActions.Generate(player, "JK46B", grant.V("Cards"), PileType.Hand, grant.Card.IsUpgraded); break;
+                case "JK46": await CardActions.Generate(player, "JK46B", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom, grant.Card.IsUpgraded); break;
                 case "JG34":
                     using (DamageExecution.BeginCardResolution(grant.Card))
                         await CardEffects.DealDamage(grant.Card, context, grant.Play, grant.V("Damage"), grant.BaseHits);
@@ -54,7 +54,7 @@ public abstract partial class CatalogPower
         {
             switch (DesignId)
             {
-                case "A": await CardActions.Generate(Owner.Player!, "B", grant.V("Cards"), PileType.Draw); break;
+                case "A": await CardActions.Generate(Owner.Player!, "B", grant.V("Cards"), PileType.Draw, position: CardPilePosition.Random); break;
                 case "JK67":
                     DamageModifiers.AddMany(ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card), grant.V("Bonus"));
                     break;

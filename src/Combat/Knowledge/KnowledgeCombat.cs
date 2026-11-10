@@ -110,7 +110,8 @@ public static class KnowledgeCombat
                 }
                 else
                 {
-                    await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner);
+                    await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner,
+                        destination == PileType.Draw ? CardPilePosition.Random : CardPilePosition.Bottom);
                     if (card.Pile?.Type == destination) gained.Add(card);
                 }
             }
@@ -197,7 +198,7 @@ public static class KnowledgeCombat
             if (card.Pile?.Type == PileType.Deck)
                 await CardPileCmd.Add(card.Owner.RunState.CreateCard(CardCatalog.Model("JK82B"), card.Owner), PileType.Deck);
             else if (card.Owner.PlayerCombatState != null && !card.HasBeenRemovedFromState)
-                await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw);
+                await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw, CardPilePosition.Random);
         }
     }
 }

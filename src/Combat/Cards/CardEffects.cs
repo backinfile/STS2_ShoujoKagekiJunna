@@ -238,7 +238,7 @@ public static class CardEffects
             case "JA104":
                 await Block(); await CardChoices.AccelerateTargets(context, card); break;
             case "JA145":
-                await Attack(); await CardActions.Generate(player, "JA119", V("Cards"), PileType.Hand); break;
+                await Attack(); await CardActions.Generate(player, "JA119", V("Cards"), PileType.Hand, CardPilePosition.Bottom); break;
             case "JK184B":
                 await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
             case "JH60":

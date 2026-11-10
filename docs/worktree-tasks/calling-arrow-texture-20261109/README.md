@@ -299,6 +299,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 ### 后续完成结果
 
 - 抽牌堆位置排查发现，除埋头学习生成的心得，战斗内升级学无止境生成的新知、知识组向抽牌堆派发关联牌，以及退役反复研习生成的复制均省略位置参数，使用原生 Bottom。Core 的洗牌补丁保留调用方位置，现有自定义出牌去向未发现额外的抽牌堆放底来源。
+- 2026-11-10 已对上述四类入口完成显式随机位置修复，保留失败基线并通过 11 项定向回归。实现约定及入口清单见[卡牌入堆位置约定](../../implementation/card-pile-placement.md)。
 - 群体伤害加成在 DamageModifiers.AddMany 统一排除原始类型为 Status 或 Curse 的牌，也覆盖状态、诅咒转化为箭矢的形态。定向适配器模拟联用 Mod 中能造成伤害的状态和诅咒，通过共用入口、疑问、引言和挥刃练习实际结算验证。修复前 20 项中 12 项失败，修复后 20 项全部通过。
 - 建筑师原生事件未包含纯那对话。首次和后续到访的有效候选均为 0，进入后缺少对应对话，继续时 TheArchitect.WinRun 读取空 Dialogue，发生 NullReferenceException，选项消失。新增 JunnaArchitectDialogue，在原生本地化键填充后沿用纯那占位角色 Silent 的建筑师对话，保留其原始文本与已存在的纯那对话配置。
 - 建筑师修复后，0、1、2、10 次既往胜利分别有 1、1、1、4 条有效候选，正常进入房间，经原生继续和结局动画抵达 game_over、victory=true，并出现可用的 continue。未修改用户当前游戏现场；复现在独立实例完成。

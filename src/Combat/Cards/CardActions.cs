@@ -168,14 +168,15 @@ public static class CardActions
         finally { await context.SignalPlayerChoiceEnded(); }
     }
 
-    public static async Task Generate(Player player, string id, int count, PileType pile, bool upgraded = false)
+    public static async Task Generate(Player player, string id, int count, PileType pile,
+        CardPilePosition position, bool upgraded = false)
     {
         using var single = KnowledgeCombat.SingleCard();
         for (int i = 0; i < count; i++)
         {
             var card = CardCatalog.Create(id, player);
             if (upgraded) { card.UpgradeInternal(); card.FinalizeUpgradeInternal(); }
-            await CardPileCmd.AddGeneratedCardToCombat(card, pile, player);
+            await CardPileCmd.AddGeneratedCardToCombat(card, pile, player, position);
         }
     }
 
