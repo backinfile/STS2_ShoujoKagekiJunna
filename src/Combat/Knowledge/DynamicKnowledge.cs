@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using BaseLib.Patches.Saves;
@@ -56,7 +57,8 @@ public static class DynamicKnowledge
         return group?.EntranceId ?? (KnowledgeCombat.Group(card) is { } original
             ? CardCatalog.Model(original.MainCardId).Id.ToString() : card.Id.ToString());
     }
-    public static bool IsRewardEntrance(Player player, CardModel card) => RewardEntranceId(player, card) == card.Id.ToString();
+    public static bool IsRewardEntrance(Player player, CardModel card)
+        => (card.Pool is not JunnaCardPool || CardCatalog.IsRewardCard(card)) && RewardEntranceId(player, card) == card.Id.ToString();
     internal static IEnumerable<(CardModel Model, int Count)>? Definition(CardModel card) => Group(card)?.Members
         .Select(member => (ModelDb.GetById<CardModel>(ModelId.Deserialize(member.Id)), member.Count));
     public static IReadOnlyList<CardModel> Members(CardModel source)
@@ -215,6 +217,23 @@ public static class DynamicKnowledge
         [HarmonyPostfix, HarmonyPriority(Priority.Last)]
         private static void Postfix(Player player, ref IEnumerable<CardModel> __result)
             => __result = __result.Where(card => IsRewardEntrance(player, card));
+    }
+    [HarmonyPatch]
+    private static class CombatEntrances
+    {
+        private static IEnumerable<MethodBase> TargetMethods()
+        {
+            yield return AccessTools.Method(typeof(CardFactory), nameof(CardFactory.GetDistinctForCombat));
+            yield return AccessTools.Method(typeof(CardFactory), nameof(CardFactory.GetForCombat));
+        }
+        private static void Prefix(Player player, ref IEnumerable<CardModel> cards)
+            => cards = cards.Where(card => IsRewardEntrance(player, card));
+    }
+    [HarmonyPatch(typeof(CardFactory), "GetFilteredTransformationOptions")]
+    private static class TransformationEntrances
+    {
+        private static void Prefix(CardModel original, ref IEnumerable<CardModel> originalOptions)
+            => originalOptions = originalOptions.Where(card => IsRewardEntrance(original.Owner, card));
     }
     [HarmonyPatch(typeof(CardModel), "get_HoverTips")]
     private static class RelationTip

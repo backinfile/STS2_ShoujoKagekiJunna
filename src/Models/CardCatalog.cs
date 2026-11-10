@@ -72,6 +72,11 @@ public static class CardCatalog
     public static IEnumerable<CardModel> StartingDeck => Data.StartingDeck.SelectMany(c => Enumerable.Repeat(Model(c.CardId), c.Count));
     public static CardDefinition Get(string id) => ById[id];
     public static string? DesignId(CardModel card) => (card as JunnaCard)?.DesignId;
+    public static bool IsRewardCard(CardModel card)
+    {
+        if (card.Rarity is not (CardRarity.Common or CardRarity.Uncommon or CardRarity.Rare)) return false;
+        return card is not JunnaCard junna || Get(junna.DesignId) is { Pool: true, ChoiceOnly: false };
+    }
     public static bool IsKnowledge(CardModel card) => (card is JunnaCard junna && Get(junna.DesignId).Knowledge) || DynamicKnowledge.IsLinked(card);
     public static bool IsArrow(CardModel card) => HandArrow.IsArrow(card) || card.Type == ArrowPile.ArrowType;
     public static CardModel Model(string id)

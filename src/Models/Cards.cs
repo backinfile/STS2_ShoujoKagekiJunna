@@ -20,6 +20,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
     : CustomCardModel(cost, type, rarity, target, showInCardLibrary: CardCatalog.Cards.Any(c => c.Id == designId && !c.ChoiceOnly))
 {
     public virtual string DesignId => designId;
+    public override bool CanBeGeneratedInCombat => CardCatalog.IsRewardCard(this);
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get(DesignId).Portrait;
     public override HashSet<CardKeyword> CanonicalKeywords =>
         [..(CardCatalog.IsKnowledge(this) ? new[] { JunnaKeywords.Knowledge } : []),

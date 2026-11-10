@@ -9,6 +9,7 @@ namespace ShoujoKagekiJunna.Models;
 [Pool(typeof(JunnaCardPool))]
 public abstract class JunnaNotesChoice() : CustomCardModel(0, CardType.Skill, CardRarity.Token, TargetType.Self, showInCardLibrary: false)
 {
+    public override bool CanBeGeneratedInCombat => false;
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JK137").Portrait;
     protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Amount", 2)];
 }

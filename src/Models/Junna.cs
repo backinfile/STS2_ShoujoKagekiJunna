@@ -54,9 +54,7 @@ public sealed class JunnaCardPool : CustomCardPoolModel
     public override string BigEnergyIconPath => JunnaMod.ResourceRoot + "images/energy_counter/energy_icon.png";
     public override string TextEnergyIconPath => JunnaMod.ResourceRoot + "images/energy_counter/energy_icon_small.png";
     protected override IEnumerable<CardModel> FilterThroughEpochs(MegaCrit.Sts2.Core.Unlocks.UnlockState unlockState, IEnumerable<CardModel> cards)
-        => base.FilterThroughEpochs(unlockState, cards).Where(c => c is not JunnaCard junna ||
-            (CardCatalog.Get(junna.DesignId).Pool && c.Rarity is MegaCrit.Sts2.Core.Entities.Cards.CardRarity.Common
-                or MegaCrit.Sts2.Core.Entities.Cards.CardRarity.Uncommon or MegaCrit.Sts2.Core.Entities.Cards.CardRarity.Rare));
+        => base.FilterThroughEpochs(unlockState, cards).Where(CardCatalog.IsRewardCard);
 }
 
 [CustomID("JUNNA_RELIC_POOL")]
