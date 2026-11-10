@@ -1,0 +1,147 @@
+{
+  "requestId": "0dd9d4b3-c88d-4797-8d4f-43578330cda4",
+  "clientId": "codex-independent-card-relations-20261110",
+  "revision": 4460,
+  "saved": true,
+  "recordId": "0dd9d4b3-c88d-4797-8d4f-43578330cda4",
+  "entries": [
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK273",
+      "id": "JK273",
+      "name": "辨误",
+      "reservedAt": "2026-11-10T01:09:41.856Z",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "version": "1:7829f955f59755ca891063c039d8fc310780f98035ca23fea3d090fdaadb9a36"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK273",
+      "id": "GROUP_JK273",
+      "grantedCardCounts": {
+        "JK122B": 1
+      },
+      "version": "1:03f9eabceeb81c07fdc768f84b681d119ad4069c07c4efe82d6931829da34aea"
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK274",
+      "id": "JK274",
+      "name": "审辩",
+      "reservedAt": "2026-11-10T01:09:41.859Z",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "version": "1:300cde772c408c7c36cfbda803afd1bb3c178345c7eb9eeadd0643ef79f7250b"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK274",
+      "id": "GROUP_JK274",
+      "grantedCardCounts": {
+        "JK122B": 1
+      },
+      "version": "1:01631a7f2d939d34dc98864514847b00a5635ef3afedc69c26be4c62c9fdd66a"
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK275",
+      "id": "JK275",
+      "name": "证伪",
+      "reservedAt": "2026-11-10T01:09:41.859Z",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "version": "1:6ac244b2e0297c0223bae146b9cfdea6cd8de69eaa4687271a364731c09b0139"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK275",
+      "id": "GROUP_JK275",
+      "grantedCardCounts": {
+        "JK122B": 2
+      },
+      "version": "1:a32c5bd04a0ce08361e6d755f3bfa442880d99e6ce0de24ba7bbee8eb11ba2f1"
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK276",
+      "id": "JK276",
+      "name": "明察",
+      "reservedAt": "2026-11-10T01:09:41.859Z",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "version": "1:629bd9ad96ec3e914f99294eb0cb0121f7333616caa3acbc9ce6cc1b35e32ed3"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK276",
+      "id": "GROUP_JK276",
+      "grantedCardCounts": {
+        "JK122B": 1
+      },
+      "version": "1:64e393cfc0274d406e2e1ed2c6f9da205e6426bbec6d91b17a43f9d95fcf0116"
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK277",
+      "id": "JK277",
+      "name": "逻辑训练",
+      "reservedAt": "2026-11-10T01:09:41.859Z",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "version": "1:fd4ed160f42dd1326dc069618ed503aa75e17f5c913d19ce5ba676f194c28cfb"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK277",
+      "id": "GROUP_JK277",
+      "grantedCardCounts": {
+        "JK122B": 1
+      },
+      "version": "1:9f9c289f84b445c24afd4f055534a754decbc4d91da19e7ba29959fc8528a75f"
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK278",
+      "id": "JK278",
+      "name": "纠错",
+      "reservedAt": "2026-11-10T01:09:41.859Z",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "version": "1:2481dbf7069aa4b5ac5a19e0b799bfba0cf8513735afc3fd8aee511e72f75b70"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK278",
+      "id": "GROUP_JK278",
+      "grantedCardCounts": {
+        "JK122B": 2
+      },
+      "version": "1:f1cdfb47c25f45bb3b1067a68337b60c253893eda32a0b98c18442f9cf02f670"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-reward-revision-20261106_JK122B",
+      "id": "JK122B",
+      "name": "谬误",
+      "partnerCardIds": [
+        "JK122",
+        "JK273",
+        "JK274",
+        "JK275",
+        "JK276",
+        "JK277",
+        "JK278"
+      ],
+      "version": "17:09f742dc461e1c9077f9cfe717af215f388a393445364718c70d7ef2e236dee7"
+    }
+  ],
+  "programDeployment": "pending",
+  "oldNormalizerChangedFallacyList": true
+}

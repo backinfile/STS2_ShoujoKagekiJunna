@@ -43,3 +43,27 @@ test('同模型三张保留牌面知识关键词，仅在知识入口显示知�
   assert.doesNotMatch(context.cardHTML(card),/知识×/);
   assert.match(context.knowledgeButton(card),/knowledge-size">3张/);
 });
+
+
+test('共享关联牌显示自己的列表，来源入口保持各自发放数量',()=>{
+  const {context,card,group,state}=renderContext();
+  const fallacy={...card,uid:'fallacy',id:'FALLACY',name:'谬误',pool:false};
+  const other={...card,uid:'other',id:'OTHER',name:'另一入口',pool:true};
+  state.data.cards.push(fallacy,other);
+  Object.assign(group,{mainCardCount:1,grantedCardIds:['FALLACY'],grantedCardCounts:{FALLACY:1}});
+  state.data.partnerGroups.push({mainCardId:'OTHER',grantedCardIds:['FALLACY'],grantedCardCounts:{FALLACY:2}});
+  assert.equal(context.groupsFor(fallacy).length,0);
+  assert.equal(context.knowledgeButton(fallacy),'');
+  assert.match(context.knowledgeButton(fallacy,undefined,card.uid),/knowledge-size">2张/);
+  assert.match(context.knowledgeButton(fallacy,undefined,other.uid),/knowledge-size">3张/);
+  assert.deepEqual(Array.from(context.knowledgeEntries(group),entry=>entry.card.id),[card.id,'FALLACY']);
+  const source=fs.readFileSync(require.resolve('./app.js'),'utf8');
+  const related=source.slice(source.indexOf('  function relatedHTML('),source.indexOf('  function arrowFocusEditor('));
+  Object.assign(context,{cardTab:()=> 'cards',energyText:String});
+  vm.runInContext(related,context);
+  const html=context.relatedHTML(fallacy);
+  assert.match(html,/data-add-grant/);
+  assert.match(html,/value="OTHER"/);
+  assert.match(html,/value="CLAUSE"/);
+  assert.doesNotMatch(html,/data-remove-grant/);
+});

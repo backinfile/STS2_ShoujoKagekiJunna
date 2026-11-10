@@ -1,0 +1,615 @@
+{
+  "rules": [
+    "每张牌独立保存自己的关联牌列表和发放数量。",
+    "关联为单向关系。A关联B时，B的列表保持原值；同一张牌可被多张牌关联，也可拥有自己的列表。",
+    "卡池归属、稀有度和入池状态由每张牌各自保存。",
+    "通过卡牌奖励、发现等获得知识牌时，只按本次取得牌自己的列表附带发放，进入相同去处。本次附带发放一次，附带牌的列表留待它自身作为取得入口时使用。",
+    "所有知识牌及其同名临时生成、复制的牌共用“知识”关键词，具名效果按牌名限定。",
+    "每张牌各自计算牌组占位、升级、费用、伤害加成与闪耀进度。",
+    "知识预览以当前入口及其直接关联牌展示；共享关联牌分别按各入口的数量展示。",
+    "战斗中生成或复制单张知识牌时，只处理牌面指定的对象与数量；升级与重放沿用各自动作。"
+  ],
+  "rootFields": {
+    "partnerDefinition": {
+      "keyword": "知识",
+      "rule": "获得此牌时，同时获得关联的知识牌。",
+      "entry": "每张牌独立保存关联牌列表；卡池归属与入池状态各自保存。",
+      "granted": "取得入口与其直接关联牌一并获得，种类和数量按该入口自己的列表配置。",
+      "display": "知识牌保留各自关键词、卡池状态和关联列表，预览按当前入口展示。",
+      "acquisition": "通过卡牌奖励、发现等获得知识牌时，只按本次取得牌自己的列表附带发放，进入相同去处。本次附带发放一次，附带牌的列表留待它自身作为取得入口时使用。",
+      "generation": "战斗中生成或复制单张知识牌时，只处理牌面指定的对象与数量；升级与重放沿用各自动作。",
+      "relation": "关联为单向关系。A关联B时，B的列表保持原值；同一张牌可被多张牌关联，也可拥有自己的列表。"
+    },
+    "ruleConventions": [
+      "战斗中由原生遗物或随机生成流程获得知识牌，以及变化为知识牌时，按本次取得牌自己的直接列表发放关联牌并进入同一去处，本次附带发放一次；明确单张生成与复制仍按牌面数量处理。",
+      "每张知识牌分别计算牌组占位与升级；获得已升级知识牌时，附带牌按该入口列表发放基础版本，牌面明确改写时按效果处理。",
+      "所有知识牌及其同名临时生成、复制的牌共用“知识”关键词，具名效果按牌名限定。 通过卡牌奖励、发现等获得知识牌时，只按本次取得牌自己的列表附带发放，进入相同去处。本次附带发放一次，附带牌的列表留待它自身作为取得入口时使用。 生成与复制单张知识牌按牌面指定数量处理。",
+      "通过卡牌奖励、发现等获得知识牌时，只按本次取得牌自己的列表附带发放，进入相同去处。本次附带发放一次，附带牌的列表留待它自身作为取得入口时使用。",
+      "知识牌右键查看默认平铺，布局按可用空间排列；只展示当前牌自己的直接关联列表，各入口的动态关联独立保存。"
+    ]
+  },
+  "entries": [
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK273",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_JK273",
+        "id": "JK273",
+        "name": "辨误",
+        "type": "攻击",
+        "rarity": "普通",
+        "cardPool": "角色",
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "任意敌人",
+        "pool": true,
+        "reservedAt": "2026-11-10T00:00:00+08:00",
+        "system": "partner",
+        "text": "知识。造成9点伤害2次。",
+        "upgradedText": "知识。造成12点伤害2次。",
+        "keywords": [
+          "知识"
+        ],
+        "termIds": [
+          "KW_PARTNER",
+          "EF02"
+        ],
+        "archetypeIds": [
+          "SYS_partner"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [
+          "JK122B"
+        ],
+        "art": "defaultPortrait",
+        "character": "星见纯那",
+        "role": "知识关联候选",
+        "direction": "将同一观点拆成两次核对，以逐条反驳表现两段攻击。",
+        "draftStatus": "谬误关联候选",
+        "draftBatch": "independent-card-relations-20261110",
+        "naming": {
+          "original": "",
+          "kind": "常用概念、动作或物件名",
+          "work": "",
+          "url": "",
+          "adaptation": "将同一观点拆成两次核对，以逐条反驳表现两段攻击。"
+        },
+        "design": {
+          "classification": "知识取得代价",
+          "rules": "获得辨误时，按该牌自己的列表附带获得1张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+          "balance": "用1张谬误承担取得代价，提供多段攻击与伤害加成接口。",
+          "upgrade": "知识。造成12点伤害2次。",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "output"
+              ]
+            }
+          }
+        },
+        "notes": "获得辨误时，按该牌自己的列表附带获得1张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+        "extraHoverTips": []
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK273",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_GROUP_JK273",
+        "id": "GROUP_JK273",
+        "title": "辨误／谬误",
+        "mainCardId": "JK273",
+        "grantedCardIds": [
+          "JK122B"
+        ],
+        "grantedCardCounts": {
+          "JK122B": 1
+        }
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK274",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_JK274",
+        "id": "JK274",
+        "name": "审辩",
+        "type": "技能",
+        "rarity": "普通",
+        "cardPool": "角色",
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "pool": true,
+        "reservedAt": "2026-11-10T00:00:00+08:00",
+        "system": "partner",
+        "text": "知识。获得15点格挡。",
+        "upgradedText": "知识。获得20点格挡。",
+        "keywords": [
+          "知识"
+        ],
+        "termIds": [
+          "KW_PARTNER",
+          "EF05"
+        ],
+        "archetypeIds": [
+          "SYS_partner"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [
+          "JK122B"
+        ],
+        "art": "defaultPortrait",
+        "character": "星见纯那",
+        "role": "知识关联候选",
+        "direction": "审查论点、辨明理由，以谨慎判断形成防护。",
+        "draftStatus": "谬误关联候选",
+        "draftBatch": "independent-card-relations-20261110",
+        "naming": {
+          "original": "",
+          "kind": "常用概念、动作或物件名",
+          "work": "",
+          "url": "",
+          "adaptation": "审查论点、辨明理由，以谨慎判断形成防护。"
+        },
+        "design": {
+          "classification": "知识取得代价",
+          "rules": "获得审辩时，按该牌自己的列表附带获得1张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+          "balance": "较高格挡的取得代价为1张谬误，逐次清理后保留防御牌。",
+          "upgrade": "知识。获得20点格挡。",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "defense"
+              ]
+            }
+          }
+        },
+        "notes": "获得审辩时，按该牌自己的列表附带获得1张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+        "extraHoverTips": []
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK274",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_GROUP_JK274",
+        "id": "GROUP_JK274",
+        "title": "审辩／谬误",
+        "mainCardId": "JK274",
+        "grantedCardIds": [
+          "JK122B"
+        ],
+        "grantedCardCounts": {
+          "JK122B": 1
+        }
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK275",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_JK275",
+        "id": "JK275",
+        "name": "证伪",
+        "type": "攻击",
+        "rarity": "罕见",
+        "cardPool": "角色",
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "所有敌人",
+        "pool": true,
+        "reservedAt": "2026-11-10T00:00:00+08:00",
+        "system": "partner",
+        "text": "知识。对所有敌人造成18点伤害。",
+        "upgradedText": "知识。对所有敌人造成24点伤害。",
+        "keywords": [
+          "知识"
+        ],
+        "termIds": [
+          "KW_PARTNER",
+          "EF03"
+        ],
+        "archetypeIds": [
+          "SYS_partner"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [
+          "JK122B"
+        ],
+        "art": "defaultPortrait",
+        "character": "星见纯那",
+        "role": "知识关联候选",
+        "direction": "对多个错误主张逐一寻找反例，以全面反驳表现群体攻击。",
+        "draftStatus": "谬误关联候选",
+        "draftBatch": "independent-card-relations-20261110",
+        "naming": {
+          "original": "",
+          "kind": "常用概念、动作或物件名",
+          "work": "",
+          "url": "",
+          "adaptation": "对多个错误主张逐一寻找反例，以全面反驳表现群体攻击。"
+        },
+        "design": {
+          "classification": "知识取得代价",
+          "rules": "获得证伪时，按该牌自己的列表附带获得2张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+          "balance": "2张谬误增加整局牌组负担，换取2费群体输出。",
+          "upgrade": "知识。对所有敌人造成24点伤害。",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "output"
+              ]
+            }
+          }
+        },
+        "notes": "获得证伪时，按该牌自己的列表附带获得2张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+        "extraHoverTips": []
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK275",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_GROUP_JK275",
+        "id": "GROUP_JK275",
+        "title": "证伪／谬误×2",
+        "mainCardId": "JK275",
+        "grantedCardIds": [
+          "JK122B"
+        ],
+        "grantedCardCounts": {
+          "JK122B": 2
+        }
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK276",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_JK276",
+        "id": "JK276",
+        "name": "明察",
+        "type": "技能",
+        "rarity": "罕见",
+        "cardPool": "角色",
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "pool": true,
+        "reservedAt": "2026-11-10T00:00:00+08:00",
+        "system": "partner",
+        "text": "知识。抽4张牌。消耗。",
+        "upgradedText": "知识。抽5张牌。消耗。",
+        "keywords": [
+          "知识",
+          "消耗"
+        ],
+        "termIds": [
+          "KW_PARTNER",
+          "EF06",
+          "KW_EXHAUST"
+        ],
+        "archetypeIds": [
+          "SYS_partner"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [
+          "JK122B"
+        ],
+        "art": "defaultPortrait",
+        "character": "星见纯那",
+        "role": "知识关联候选",
+        "direction": "观察细节、核对材料并发现错误，以获取更多信息表现抽牌。",
+        "draftStatus": "谬误关联候选",
+        "draftBatch": "independent-card-relations-20261110",
+        "naming": {
+          "original": "",
+          "kind": "常用概念、动作或物件名",
+          "work": "",
+          "url": "",
+          "adaptation": "观察细节、核对材料并发现错误，以获取更多信息表现抽牌。"
+        },
+        "design": {
+          "classification": "知识取得代价",
+          "rules": "获得明察时，按该牌自己的列表附带获得1张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+          "balance": "1张谬误与本场消耗共同承担高抽牌量的代价。",
+          "upgrade": "知识。抽5张牌。消耗。",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "operation"
+              ]
+            }
+          }
+        },
+        "notes": "获得明察时，按该牌自己的列表附带获得1张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+        "extraHoverTips": []
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK276",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_GROUP_JK276",
+        "id": "GROUP_JK276",
+        "title": "明察／谬误",
+        "mainCardId": "JK276",
+        "grantedCardIds": [
+          "JK122B"
+        ],
+        "grantedCardCounts": {
+          "JK122B": 1
+        }
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK277",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_JK277",
+        "id": "JK277",
+        "name": "逻辑训练",
+        "type": "技能",
+        "rarity": "罕见",
+        "cardPool": "角色",
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "pool": true,
+        "reservedAt": "2026-11-10T00:00:00+08:00",
+        "system": "partner",
+        "text": "知识。选择1张手牌，获得8点伤害加成。",
+        "upgradedText": "知识。选择1张手牌，获得12点伤害加成。",
+        "keywords": [
+          "知识"
+        ],
+        "termIds": [
+          "KW_PARTNER",
+          "EF39",
+          "KW_BONUS"
+        ],
+        "archetypeIds": [
+          "SYS_partner",
+          "SYS_growth"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [
+          "JK122B"
+        ],
+        "art": "defaultPortrait",
+        "character": "星见纯那",
+        "role": "知识关联候选",
+        "direction": "通过查错与论证练习提高表达的准确度，训练成果转为所选攻击的伤害加成。",
+        "draftStatus": "谬误关联候选",
+        "draftBatch": "independent-card-relations-20261110",
+        "naming": {
+          "original": "",
+          "kind": "常用概念、动作或物件名",
+          "work": "",
+          "url": "",
+          "adaptation": "通过查错与论证练习提高表达的准确度，训练成果转为所选攻击的伤害加成。"
+        },
+        "design": {
+          "classification": "知识取得代价",
+          "rules": "获得逻辑训练时，按该牌自己的列表附带获得1张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+          "balance": "用1张谬误承担长期取得代价，连接知识与伤害加成。",
+          "upgrade": "知识。选择1张手牌，获得12点伤害加成。",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_growth": {
+              "role": "payoff",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            }
+          }
+        },
+        "notes": "获得逻辑训练时，按该牌自己的列表附带获得1张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+        "extraHoverTips": []
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK277",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_GROUP_JK277",
+        "id": "GROUP_JK277",
+        "title": "逻辑训练／谬误",
+        "mainCardId": "JK277",
+        "grantedCardIds": [
+          "JK122B"
+        ],
+        "grantedCardCounts": {
+          "JK122B": 1
+        }
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "independent-card-relations-20261110_JK278",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_JK278",
+        "id": "JK278",
+        "name": "纠错",
+        "type": "技能",
+        "rarity": "罕见",
+        "cardPool": "角色",
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "pool": true,
+        "reservedAt": "2026-11-10T00:00:00+08:00",
+        "system": "partner",
+        "text": "知识。所有箭矢加速3回合。消耗。",
+        "upgradedText": "知识。所有箭矢加速4回合。消耗。",
+        "keywords": [
+          "知识",
+          "消耗"
+        ],
+        "termIds": [
+          "KW_PARTNER",
+          "EF29",
+          "KW_ACCEL",
+          "KW_EXHAUST"
+        ],
+        "archetypeIds": [
+          "SYS_partner",
+          "SYS_stage"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [
+          "JK122B"
+        ],
+        "art": "defaultPortrait",
+        "character": "星见纯那",
+        "role": "知识关联候选",
+        "direction": "从射击记录中发现误差并修正瞄准与轨迹，将知识应用表现为箭矢更快抵达。",
+        "draftStatus": "谬误关联候选",
+        "draftBatch": "independent-card-relations-20261110",
+        "naming": {
+          "original": "",
+          "kind": "常用概念、动作或物件名",
+          "work": "",
+          "url": "",
+          "adaptation": "从射击记录中发现误差并修正瞄准与轨迹，将知识应用表现为箭矢更快抵达。"
+        },
+        "design": {
+          "classification": "知识取得代价",
+          "rules": "获得纠错时，按该牌自己的列表附带获得2张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+          "balance": "2张谬误与本场消耗共同承担群体加速的代价。",
+          "upgrade": "知识。所有箭矢加速4回合。消耗。",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "operation"
+              ]
+            },
+            "archetype_SYS_stage": {
+              "role": "payoff",
+              "cross": true,
+              "ports": [
+                "operation"
+              ]
+            }
+          }
+        },
+        "notes": "获得纠错时，按该牌自己的列表附带获得2张谬误，进入相同去处。本次附带发放一次。每张谬误各自记录闪耀3，基础1费、升级0费，实际使用后消耗。",
+        "extraHoverTips": []
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "independent-card-relations-20261110_GROUP_JK278",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "independent-card-relations-20261110_GROUP_JK278",
+        "id": "GROUP_JK278",
+        "title": "纠错／谬误×2",
+        "mainCardId": "JK278",
+        "grantedCardIds": [
+          "JK122B"
+        ],
+        "grantedCardCounts": {
+          "JK122B": 2
+        }
+      }
+    },
+    {
+      "collection": "mechanisms",
+      "uid": "mechanism_partner",
+      "expectedVersion": "8:2e30946dbc7b2869706c75a2c248378ba762bd19129cafb6b8771cbe8e718012",
+      "expectedFields": {
+        "rules": [
+          "每组知识牌保留一个常规奖励入口，组内所有牌共用“知识”关键词。",
+          "同组牌一并获得；可配置不同种类和数量。",
+          "获取关联牌按组配置处理，本次附带发放只执行一次。",
+          "泛指知识牌的触发与收益覆盖组内所有牌及其同名临时生成与复制的牌；指定牌名的效果按牌名限定。",
+          "同组知识牌各自计算牌组占位、升级、费用与伤害加成；牌面明确扩展到整组时按效果处理。",
+          "卡牌奖励，战斗内发现效果等，都会同时获取关联的牌（与主牌有相同的去处，比如都进入手牌，都进入牌组等）。",
+          "ui：ui参考《LOR》游戏中展示关联牌的ui，一组知识牌并列成扇形同时展示出来。知识关联牌不进入卡池，但是仍使用职业卡牌框，稀有度与主牌相同。",
+          "战斗中生成或复制单张知识牌时，只处理牌面指定的对象与数量；升级与重放沿用各自动作。"
+        ],
+        "notes": "同组关系显示在卡面之外；通用效果使用“知识牌”，引用自身关联牌的效果使用《牌名》。"
+      },
+      "updates": {
+        "rules": [
+          "每张牌独立保存自己的关联牌列表和发放数量。",
+          "关联为单向关系。A关联B时，B的列表保持原值；同一张牌可被多张牌关联，也可拥有自己的列表。",
+          "卡池归属、稀有度和入池状态由每张牌各自保存。",
+          "通过卡牌奖励、发现等获得知识牌时，只按本次取得牌自己的列表附带发放，进入相同去处。本次附带发放一次，附带牌的列表留待它自身作为取得入口时使用。",
+          "所有知识牌及其同名临时生成、复制的牌共用“知识”关键词，具名效果按牌名限定。",
+          "每张牌各自计算牌组占位、升级、费用、伤害加成与闪耀进度。",
+          "知识预览以当前入口及其直接关联牌展示；共享关联牌分别按各入口的数量展示。",
+          "战斗中生成或复制单张知识牌时，只处理牌面指定的对象与数量；升级与重放沿用各自动作。"
+        ],
+        "notes": "关联列表显示在卡面之外。每张牌独立编辑；通用效果使用“知识牌”，具名效果使用完整牌名。"
+      }
+    },
+    {
+      "collection": "styles",
+      "uid": "junna_style_independent_card_relations",
+      "expectedVersion": "0:missing",
+      "before": null,
+      "after": {
+        "uid": "junna_style_independent_card_relations",
+        "id": "STYLE_INDEPENDENT_CARD_RELATIONS",
+        "name": "关联牌独立列表",
+        "category": "卡牌设计",
+        "content": "每张牌独立配置关联牌列表和数量。关联为单向关系，编辑一张牌的列表保留其他牌的列表。同一张牌可被多张牌关联，也可拥有自己的关联牌。卡池归属、稀有度和入池状态各自保存。获得知识牌时只读取本次取得牌的直接列表，附带发放一次。"
+      }
+    }
+  ]
+}

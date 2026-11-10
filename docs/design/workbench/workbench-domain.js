@@ -20,7 +20,7 @@
     if(!group.grantedCardIds.includes(card.id))throw Error('此牌不属于该知识组');
     const oldMain=data.cards.find(entry=>entry.id===group.mainCardId);
     if(!oldMain)throw Error('知识组缺少主牌');
-    if(data.partnerGroups.some(entry=>entry.uid!==group.uid&&(entry.mainCardId===oldMain.id||entry.mainCardId===card.id||entry.grantedCardIds.includes(card.id))))throw Error('此牌同时属于其他知识组，请先调整关联');
+    if(data.partnerGroups.some(entry=>entry.uid!==group.uid&&entry.mainCardId===card.id))throw Error('此牌已有自己的关联牌列表');
     const ids=[group.mainCardId,...group.grantedCardIds],counts=Object.fromEntries(ids.map(id=>[id,groupCardCount(group,id)]));
     group.mainCardId=card.id;group.grantedCardIds=ids.filter(id=>id!==card.id);
     group.grantedCardCounts=Object.fromEntries(group.grantedCardIds.map(id=>[id,counts[id]]));
@@ -31,8 +31,10 @@
   }
   function cardGroup(data,cardUid,originUid=cardUid){
     const card=data.cards.find(entry=>entry.uid===cardUid),origin=data.cards.find(entry=>entry.uid===originUid);if(!card)return null;
-    const groups=data.partnerGroups.filter(group=>group.mainCardId===card.id||group.grantedCardIds.includes(card.id));
-    const group=groups.find(group=>group.mainCardId===card.id)||groups.find(group=>group.mainCardId===origin?.id)||groups[0];if(!group)return null;
+    const sourceGroup=data.partnerGroups.find(group=>group.mainCardId===origin?.id);
+    const fromSource=sourceGroup&&(sourceGroup.mainCardId===card.id||sourceGroup.grantedCardIds.includes(card.id));
+    const group=fromSource?sourceGroup:data.partnerGroups.find(group=>group.mainCardId===card.id);
+    if(!group)return null;
     const ids=new Set([group.mainCardId,...group.grantedCardIds]);
     return {group,cards:data.cards.filter(entry=>ids.has(entry.id))};
   }
@@ -59,7 +61,7 @@
     const cardIds=new Set(d.cards.map(c=>c.id)),termIds=new Set(d.terms.map(t=>t.id)),archetypeIds=new Set(d.archetypes.map(a=>a.id)),knowledgeTerm=d.terms.find(t=>t.kind==='关键词'&&t.name==='知识'),oldWordIds=new Set(d.terms.filter(t=>t.kind==='关键词'&&t.name==='言葉').map(t=>t.id));
     d.partnerGroups=d.partnerGroups.filter(g=>cardIds.has(g.mainCardId)).map(g=>({...g,grantedCardIds:[...new Set(Array.isArray(g.grantedCardIds)?g.grantedCardIds:[g.grantedCardId].filter(Boolean))].filter(id=>cardIds.has(id)&&id!==g.mainCardId)})).filter(g=>g.grantedCardIds.length||groupCardCount(g,g.mainCardId)>1);
     const mains=new Set(d.partnerGroups.map(g=>g.mainCardId)),grants=new Set(d.partnerGroups.flatMap(g=>g.grantedCardIds));
-    for(const id of mains)if(grants.has(id))throw Error('知识牌的奖励入口重复：'+id);
+    if(mains.size!==d.partnerGroups.length)throw Error('关联牌列表重复');
     for(const g of d.partnerGroups){g.grantedCardCounts=Object.fromEntries(g.grantedCardIds.map(id=>[id,groupCardCount(g,id)]));if(Object.hasOwn(g,'mainCardCount')){const count=groupCardCount(g,g.mainCardId);if(count>1)g.mainCardCount=count;else delete g.mainCardCount;}}
     for(const c of d.cards){
       if(c.arrowFocus!==undefined){
@@ -72,14 +74,11 @@
       c.name=String(c.name||'未命名');c.text=String(c.text??'');c.upgradedText=String(c.upgradedText??c.text);c.type=TYPES.includes(c.type)?c.type:'技能';c.cost=String(c.cost).toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.cost)||0));c.upgradedCost=String(c.upgradedCost??c.cost).toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.upgradedCost??c.cost)||0));c.turns=c.type==='箭矢'?(String(c.turns).trim().toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.turns)||0))):null;c.upgradedTurns=c.type==='箭矢'?(String(c.upgradedTurns??c.turns).trim().toUpperCase()==='X'?'X':Math.max(0,Math.floor(Number(c.upgradedTurns??c.turns)||0))):null;
       if(c.type==='箭矢'){const subtype=c.arrowSubtype??seed.data.cards.find(entry=>entry.id===c.id)?.arrowSubtype??'技能';if(!['攻击','技能','能力'].includes(subtype))throw Error('箭矢子类型无效：'+c.id);c.arrowSubtype=subtype;}
       c.pool=typeof c.pool==='boolean'?c.pool:true;c.rarity=RARITIES.includes(c.rarity)?c.rarity:'普通';c.system=c.system||'stage';c.keywords=[...new Set(Array.isArray(c.keywords)?c.keywords:[])];c.termIds=[...new Set(c.termIds||[])].filter(id=>termIds.has(id));c.archetypeIds=[...new Set(c.archetypeIds||[])].filter(id=>archetypeIds.has(id));c.breakthroughIds=c.termIds.filter(id=>d.terms.some(t=>t.id===id&&t.kind==='突破'));c.naming=c.naming&&typeof c.naming==='object'?c.naming:{};c.art=c.art||'defaultPortrait';
-      const wasKnowledge=c.keywords.some(k=>['知识','言葉'].includes(k))&&(c.partnerCardIds||[]).length>0;c.partnerCardIds=[];
+      c.partnerCardIds=[];
       c.keywords=c.keywords.filter(k=>!['言葉','知识牌'].includes(k));c.termIds=c.termIds.filter(id=>!oldWordIds.has(id));
       if(mains.has(c.id)||grants.has(c.id)){c.keywords=[...new Set([...c.keywords,'知识'])];if(knowledgeTerm)c.termIds=[...new Set([...c.termIds,knowledgeTerm.id])];if(!c.text.startsWith('知识。'))c.text='知识。'+c.text;if(!c.upgradedText.startsWith('知识。'))c.upgradedText='知识。'+c.upgradedText;}
-      else if(wasKnowledge){c.keywords=c.keywords.filter(k=>k!=='知识');if(knowledgeTerm)c.termIds=c.termIds.filter(id=>id!==knowledgeTerm.id);c.text=c.text.replace(/^知识。/,'');c.upgradedText=c.upgradedText.replace(/^知识。/,'');}
-      if(mains.has(c.id))c.pool=c.rarity!=='基础';
-      if(grants.has(c.id))c.pool=false;
     }
-    for(const g of d.partnerGroups){const main=d.cards.find(c=>c.id===g.mainCardId);for(const id of g.grantedCardIds){const card=d.cards.find(c=>c.id===id);main.partnerCardIds.push(id);card.partnerCardIds.push(g.mainCardId);}}
+    for(const g of d.partnerGroups)d.cards.find(c=>c.id===g.mainCardId).partnerCardIds=[...g.grantedCardIds];
     if(Array.isArray(d.meta.startingDeck))d.meta.startingDeck=d.meta.startingDeck.filter(e=>cardIds.has(e.cardId));
     for(const t of d.terms){t.name=String(t.name||'未命名词条');t.kind=String(t.kind||'效果');t.template=String(t.template??'');t.definition=String(t.definition??'');t.systems=Array.isArray(t.systems)?t.systems:[];}
     for(const m of d.mechanisms){m.name=String(m.name||'未命名机制');m.rules=Array.isArray(m.rules)?m.rules:[];m.templates=Array.isArray(m.templates)?m.templates:[];}

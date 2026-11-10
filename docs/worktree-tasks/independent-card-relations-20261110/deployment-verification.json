@@ -1,0 +1,84 @@
+{
+  "release": "20261110-independent-card-relations",
+  "previousRelease": "20261108-initial-config",
+  "service": "active",
+  "editorRuntime": "5b577b0e5a38a560fb69d404.js",
+  "publicRuntime": "b96ba6ca282903fd74ef0813.js",
+  "domainSha256": "6a327e405c87634eadd19f294a0451a2779c900273a2fef79258e5007d498ebe",
+  "revision": 4461,
+  "requestId": "7c761b58-97e4-49aa-bb0a-15b6e0f6290d",
+  "cardsVerified": 972,
+  "directedListsChanged": 231,
+  "otherCardFieldsPreserved": true,
+  "groupsPreserved": 171,
+  "reserveCards": [
+    {
+      "id": "JK273",
+      "name": "辨误",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "reservedAt": "2026-11-10T01:09:41.856Z"
+    },
+    {
+      "id": "JK274",
+      "name": "审辩",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "reservedAt": "2026-11-10T01:09:41.859Z"
+    },
+    {
+      "id": "JK275",
+      "name": "证伪",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "reservedAt": "2026-11-10T01:09:41.859Z"
+    },
+    {
+      "id": "JK276",
+      "name": "明察",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "reservedAt": "2026-11-10T01:09:41.859Z"
+    },
+    {
+      "id": "JK277",
+      "name": "逻辑训练",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "reservedAt": "2026-11-10T01:09:41.859Z"
+    },
+    {
+      "id": "JK278",
+      "name": "纠错",
+      "partnerCardIds": [
+        "JK122B"
+      ],
+      "reservedAt": "2026-11-10T01:09:41.859Z"
+    }
+  ],
+  "fallacyPartnerCardIds": [],
+  "rulesTargets": [
+    {
+      "collection": "mechanisms",
+      "uid": "mechanism_partner"
+    },
+    {
+      "collection": "styles",
+      "uid": "junna_style_independent_card_relations"
+    },
+    {
+      "collection": "root",
+      "uid": "meta"
+    }
+  ],
+  "tests": {
+    "domainDisplayStatistics": 17,
+    "mcpTargeted": 8
+  },
+  "sourceCommit": "6556a97"
+}

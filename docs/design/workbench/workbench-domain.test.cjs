@@ -86,7 +86,7 @@ test('切换主牌保留备用与删除状态及自定义组名',()=>{
   assert.deepEqual(data,before);
 });
 
-test('不修改其他知识组；无效成员与共享关联在变更前返回错误',()=>{
+test('切换主牌保留其他列表，允许共享关联，已有列表的牌返回错误',()=>{
   const data=fixture();data.cards.push(makeCard('D',true),makeCard('E',false));
   data.partnerGroups.push({uid:'group_D',id:'GROUP_D',mainCardId:'D',grantedCardIds:['E'],grantedCardCounts:{E:1}});
   const other=structuredClone(data.partnerGroups[1]);
@@ -95,6 +95,45 @@ test('不修改其他知识组；无效成员与共享关联在变更前返回�
   assert.throws(()=>domain.setGroupMain(data,'group_A','card_E'),/不属于/);
   data.partnerGroups[1].grantedCardIds.push('C');data.partnerGroups[1].grantedCardCounts.C=1;
   const before=structuredClone(data);
-  assert.throws(()=>domain.setGroupMain(data,'group_A','card_C'),/其他知识组/);
-  assert.deepEqual(data,before);
+  assert.equal(domain.setGroupMain(data,'group_A','card_C'),true);
+  assert.deepEqual(data.partnerGroups[1],before.partnerGroups[1]);
+  data.partnerGroups[0].grantedCardIds.push('D');
+  const owned=structuredClone(data);
+  assert.throws(()=>domain.setGroupMain(data,'group_A','card_D'),/已有自己的关联牌列表/);
+  assert.deepEqual(data,owned);
+});
+
+
+test('每张牌的关联列表独立，允许多入口共享和互相引用，卡池身份独立',()=>{
+  const data=fixture();
+  data.cards.push(makeCard('D',true));
+  data.partnerGroups.push(
+    {uid:'group_D',id:'GROUP_D',mainCardId:'D',grantedCardIds:['B'],grantedCardCounts:{B:3}},
+    {uid:'group_B',id:'GROUP_B',mainCardId:'B',grantedCardIds:['A'],grantedCardCounts:{A:1}}
+  );
+  const normalize=domain.create({seed:{data:structuredClone(data)},uid:()=>assert.fail('缺少编号'),JunnaFitPool:{normalizeEntry:entry=>entry}});
+  const before=normalize(data);
+  assert.deepEqual(before.cards.map(c=>[c.id,c.partnerCardIds,c.pool]),[
+    ['A',['B','C'],true],['B',['A'],false],['C',[],false],['D',['B'],true]
+  ]);
+  const changed=structuredClone(before);
+  changed.partnerGroups[0].grantedCardIds=['C'];
+  changed.partnerGroups[0].grantedCardCounts={C:4};
+  const after=normalize(changed);
+  for(const id of ['B','C','D'])assert.deepEqual(after.cards.find(c=>c.id===id),before.cards.find(c=>c.id===id));
+  assert.deepEqual(after.partnerGroups.slice(1),before.partnerGroups.slice(1));
+  assert.deepEqual(normalize(JSON.parse(JSON.stringify(after))),after);
+  assert.equal(domain.cardGroup(after,'card_C'),null);
+  assert.equal(domain.cardGroup(after,'card_B','card_D').group.mainCardId,'D');
+});
+
+test('移除关联保留目标的知识身份和入池状态',()=>{
+  const data=fixture();data.cards[1].pool=true;
+  const normalize=domain.create({seed:{data:structuredClone(data)},uid:()=>assert.fail('缺少编号'),JunnaFitPool:{normalizeEntry:entry=>entry}});
+  const before=normalize(data),changed=structuredClone(before);
+  changed.partnerGroups=[];
+  const after=normalize(changed);
+  assert.deepEqual(after.cards[1],before.cards[1]);
+  assert.ok(after.cards[0].keywords.includes('知识'));
+  assert.deepEqual(after.cards[0].partnerCardIds,[]);
 });

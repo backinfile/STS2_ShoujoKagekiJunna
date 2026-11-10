@@ -85,3 +85,11 @@ test('overview type groups merge arrows into attack and skill across scopes and 
   }
   assert.equal(JSON.stringify(cards),before);
 });
+
+
+test('全部牌面沿入池牌的直接关联统计，共用成员不会引入其他入口',()=>{
+  const data={cards:[card('A',{pool:false}),card('B',{pool:true}),card('C',{pool:false})],partnerGroups:[
+    {mainCardId:'A',grantedCardIds:['B','C']},{mainCardId:'B',grantedCardIds:['C']}
+  ]};
+  assert.deepEqual(reference.poolFaces(data).map(c=>c.id),['B','C']);
+});

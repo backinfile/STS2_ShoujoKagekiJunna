@@ -29,7 +29,7 @@ const JunnaPoolReference = (() => {
     const cards=data.cards.filter(card=>(card.trashedAt?'trash':card.reservedAt?'reserve':'cards')===scope);
     const roots=cards.filter(card=>card.pool),poolIds=new Set(roots.map(card=>card.id)),ids=new Set(poolIds);
     for(const card of roots)for(const id of card.partnerCardIds||[])ids.add(id);
-    for(const group of data.partnerGroups||[]){const members=[group.mainCardId,...group.grantedCardIds||[]];if(members.some(id=>poolIds.has(id)))for(const id of members)ids.add(id);}
+    for(const group of data.partnerGroups||[]){const members=[group.mainCardId,...group.grantedCardIds||[]];if(poolIds.has(group.mainCardId))for(const id of members)ids.add(id);}
     return cards.filter(card=>ids.has(card.id));
   }
   function range(row) {

@@ -60,3 +60,5 @@ await callTool('workbench_commit',{
 `native-card-pools.js` 是本体职业牌池的静态快照，记录提取日期与 C# 源码摘要。通过 `node docs/design/workbench/import-native-card-pools.cjs <spire-codex目录>` 从 `extraction/raw/src/Core/Models/CardPools` 与 `Cards` 重新生成，中文名来自同目录的 `data/cards.json`。费用读取构造函数，X 费依据 `HasEnergyCostX`，升级费用依据 `OnUpgrade` 中的费用调整；按不同牌面计数，排除战斗中的临时费用变化。
 
 卡牌分类依据本体 `Core/Entities/Cards/CardRarity.cs`、`CardType.cs` 和 `localization/zhs/gameplay_ui.json`：稀有度支持基础、普通、罕见、稀有、远古（本体译作先古）、事件、衍生（Token）、状态、诅咒、任务；类型支持攻击、技能、能力、状态、诅咒、任务，并保留 Mod 的箭矢类型。`None` 是未指定值，不作为编辑选项。卡池归属 `cardPool` 支持角色、无色、事件、衍生、状态、诅咒、任务；“入池／不入池”由 `pool` 独立保存。知识关联牌分别保存稀有度与卡池，允许主牌附带诅咒等特殊分类；Token 是稀有度，可以是攻击或技能等类型。常规奖励统计仍只计普通、罕见、稀有的入池牌，特殊分类按实际数量统计。
+
+每张卡牌独立配置关联牌列表和发放数量。关联为单向关系，多张牌可共用同一张关联牌，入池状态独立保存。取得知识牌时只读取该牌自己的列表，本次附带发放一次。编辑栏的“关联牌”可为任意卡牌添加已有牌或新牌，卡牌预览沿当前来源显示。
