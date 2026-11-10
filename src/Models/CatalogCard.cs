@@ -1,12 +1,10 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShoujoKagekiJunna.Combat;
-using ShoujoKageki.Core.V1;
 
 namespace ShoujoKagekiJunna.Models;
 
@@ -44,20 +42,6 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     internal static int CountDeckKnowledge(CardModel card) => card.IsMutable
         ? card.Owner?.Deck.Cards.Count(CardCatalog.IsKnowledge) ?? 0 : 0;
 
-    protected override void AddExtraArgsToDescription(LocString description)
-    {
-        base.AddExtraArgsToDescription(description);
-        switch (DesignId)
-        {
-            case "JK48": case "JK48B": description.Add("KnowledgeCount", CountDeckKnowledge(this)); break;
-            case "JK206": description.Add("DeckCount", IsMutable ? Owner?.Deck.Cards.Count ?? 0 : 0); break;
-            case "JK184": description.Add("HitCount", 1 + (IsMutable ? DamageModifiers.ExtraHits(DamageModifiers.CaptureDamageModifierSnapshot(this)) : 0)); break;
-            case "JA82":
-                description.Add("EnergyCount", !IsMutable ? 0 : Pile?.Type == PileType.Play || Pile?.Type == ArrowPile.PileId
-                    ? this.ResolveEnergyXValue() : Owner?.PlayerCombatState?.Energy ?? 0);
-                break;
-        }
-    }
     public int Number(int index) => DynamicVars[Definition.Values[index].Name].IntValue;
     public int Value(string name, int fallback = 0)
     {
