@@ -33,13 +33,18 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             // Extra tips precede native keyword tips; adding this first also fixes the group ordering.
             if (CardCatalog.IsKnowledge(this) || rules.HasTip(CardTip.Knowledge, IsUpgraded))
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge);
+            if (DesignId == "JK126" && !DynamicKnowledge.IsLinked(this))
+                yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
+                    new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_REWARD_OTHERS"))
+                    { Id = "junna_knowledge_reward_others", ShouldOverrideTextOverflow = true };
             var group = KnowledgeCombat.Group(this);
-            if (group != null)
+            if (group != null && !DynamicKnowledge.IsLinked(this))
             {
-                var members = group.Members.SelectMany(member =>
-                    Enumerable.Repeat($"[gold]{CardCatalog.Model(member.Id).Title}[/gold]", member.Count));
-                yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
-                    { Id = "junna_knowledge_group_" + group.MainCardId };
+                var members = group.Members.Where(member => member.Id != DesignId).SelectMany(member =>
+                    Enumerable.Repeat($"[gold]{CardCatalog.Model(member.Id).Title}[/gold]", member.Count)).ToArray();
+                if (members.Length > 0)
+                    yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
+                        { Id = "junna_knowledge_group_" + group.MainCardId };
             }
             var background = LocString.GetIfExists("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND." + DesignId);
             if (background != null)

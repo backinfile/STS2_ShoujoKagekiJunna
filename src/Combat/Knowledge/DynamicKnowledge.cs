@@ -29,7 +29,7 @@ public static class DynamicKnowledge
     private sealed class RelationCache
     {
         public string? Serialized;
-        public List<KnowledgeRelation> Groups = [];
+        public List<KnowledgeRelation>? Groups;
     }
     private static readonly ConditionalWeakTable<Player, RelationCache> Cache = new();
     private static readonly ConditionalWeakTable<CardModel, CardModel[]> Pending = new();
@@ -40,10 +40,25 @@ public static class DynamicKnowledge
     {
         var cache = Cache.GetOrCreateValue(player);
         string? serialized = Relations.Get(player);
-        if (cache.Serialized != serialized)
+        if (cache.Groups == null || cache.Serialized != serialized)
         {
             cache.Groups = string.IsNullOrEmpty(serialized) ? [] : JsonSerializer.Deserialize<List<KnowledgeRelation>>(serialized)!;
             cache.Serialized = serialized;
+            bool initialized = false;
+            foreach (var group in CardCatalog.Groups)
+            {
+                string entrance = CardCatalog.Model(group.MainCardId).Id.ToString();
+                if (cache.Groups.Any(existing => existing.EntranceId == entrance)) continue;
+                var counts = group.Members.ToDictionary(member => CardCatalog.Model(member.Id).Id.ToString(),
+                    member => member.Count);
+                cache.Groups.Add(new(entrance, counts));
+                initialized = true;
+            }
+            if (initialized)
+            {
+                cache.Serialized = JsonSerializer.Serialize(cache.Groups);
+                Relations.Set(player, cache.Serialized);
+            }
         }
         return cache.Groups;
     }
@@ -61,7 +76,10 @@ public static class DynamicKnowledge
         var cards = source.Pile?.IsCombatPile == true && source.Owner.PlayerCombatState != null
             ? source.Owner.PlayerCombatState.AllCards : source.Owner.Deck.Cards;
         var available = cards.Where(card => card != source).Prepend(source).ToLookup(card => card.Id.ToString());
-        return group.Members.SelectMany(member =>
+        var members = group.Members;
+        if (group.CardCounts.GetValueOrDefault(source.Id.ToString()) == 0)
+            members = members.Prepend((source.Id.ToString(), 1));
+        return members.SelectMany(member =>
         {
             var existing = available[member.Id].Take(member.Count).ToList();
             while (existing.Count < member.Count)
@@ -195,15 +213,19 @@ public static class DynamicKnowledge
     {
         private static void Postfix(CardModel __instance, ref IEnumerable<IHoverTip> __result)
         {
-            var members = Members(__instance);
-            if (members.Count <= 1) return;
-            var names = members.Select(card => "[gold]" + (card is JunnaCard junna
-                ? CardCatalog.Model(junna.DesignId).Title : ((CardModel)card.CanonicalInstance).Title) + "[/gold]");
+            if (!IsLinked(__instance)) return;
+            __result = __result.Where(t => t is not HoverTip existing ||
+                existing.Id?.StartsWith("junna_knowledge_group_") != true && existing.Id != "junna_dynamic_knowledge_group");
+            var names = Members(__instance).Where(member => member.Id != __instance.Id)
+                .Select(card => "[gold]" + (card is JunnaCard junna
+                    ? CardCatalog.Model(junna.DesignId).Title : ((CardModel)card.CanonicalInstance).Title) + "[/gold]").ToList();
+            if (CardCatalog.DesignId(__instance) == "JK126")
+                names.Insert(0, new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_REWARD_OTHERS").GetFormattedText());
+            if (names.Count == 0) return;
             var tip = new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
                 string.Join("\n", names))
-                { Id = "junna_dynamic_knowledge_group" };
-            __result = __result.Where(t => t is not HoverTip existing ||
-                existing.Id?.StartsWith("junna_knowledge_group_") != true && existing.Id != "junna_dynamic_knowledge_group").Append(tip);
+                { Id = "junna_dynamic_knowledge_group", ShouldOverrideTextOverflow = CardCatalog.DesignId(__instance) == "JK126" };
+            __result = __result.Append(tip);
         }
     }
 }

@@ -50,7 +50,9 @@ public static class KnowledgeCombat
     {
         var relation = DynamicKnowledge.Group(card);
         var group = relation == null ? Group(card) : null;
-        var ids = relation?.CardCounts.Keys.ToHashSet() ?? group?.Members
+        var ids = relation?.Members
+            .Where(member => member.Id != card.Id.ToString() || member.Count > 1)
+            .Select(member => member.Id).ToHashSet() ?? group?.Members
             .Where(member => member.Id != CardCatalog.DesignId(card) || member.Count > 1)
             .Select(member => CardCatalog.Model(member.Id).Id.ToString()).ToHashSet() ?? [];
         var hand = card.Owner.PlayerCombatState!.Hand;
@@ -74,7 +76,9 @@ public static class KnowledgeCombat
         if (!active.Add(key)) return;
         try
         {
-            var ids = relation?.CardCounts.Keys.ToHashSet() ?? group!.Members
+            var ids = relation?.Members
+            .Where(member => member.Id != card.Id.ToString() || member.Count > 1)
+            .Select(member => member.Id).ToHashSet() ?? group!.Members
                 .Where(member => member.Id != CardCatalog.DesignId(card) || member.Count > 1)
                 .Select(member => CardCatalog.Model(member.Id).Id.ToString()).ToHashSet();
             await CardActions.DrawMatching(context, card.Owner,

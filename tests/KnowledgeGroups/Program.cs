@@ -62,4 +62,22 @@ Check(restored.Single(group => group.EntranceId == "X").Members.SequenceEqual(me
 KnowledgeRelation.Merge(restored, new("JK126", new() { ["JK126"] = 1, ["A"] = 1 }), "JK126");
 Check(restored.Count == 4 && restored.Single(group => group.EntranceId == "C").CardCounts["D"] == 2, "Reacquiring a source must preserve other lists.");
 
+var initial = KnowledgeGroup.Initialize([
+    new("A", ["B", "C"], new() { ["B"] = 2, ["C"] = 1 }),
+    new("D", ["C"], new() { ["C"] = 1 })]);
+var initialA = initial.Single(group => group.MainCardId == "A");
+var initialB = initial.Single(group => group.MainCardId == "B");
+var initialC = initial.Single(group => group.MainCardId == "C");
+CheckMembers(initialB, ("B", 2), ("A", 1), ("C", 1));
+CheckMembers(initialC, ("C", 1), ("A", 1), ("D", 1));
+Check(!ReferenceEquals(initialA.GrantedCardCounts, initialB.GrantedCardCounts), "Native member lists have independent storage.");
+initialB.GrantedCardCounts["A"] = 4;
+Check(initialA.MainCardCount == 1 && initialC.GrantedCardCounts["A"] == 1, "Editing a member preserves other native lists.");
+var independent = KnowledgeGroup.Initialize([
+    new("A", ["B"], new() { ["B"] = 1 }),
+    new("B", ["X"], new() { ["X"] = 2 })]);
+CheckMembers(independent.Single(group => group.MainCardId == "B"), ("B", 1), ("X", 2));
+var nativeRestored = JsonSerializer.Deserialize<KnowledgeGroup[]>(JsonSerializer.Serialize(initial), options)!;
+CheckMembers(nativeRestored.Single(group => group.MainCardId == "B"), ("B", 2), ("A", 4), ("C", 1));
+
 Console.WriteLine($"PASS {checks} knowledge group checks, including quantities, one-way lists and serialization.");

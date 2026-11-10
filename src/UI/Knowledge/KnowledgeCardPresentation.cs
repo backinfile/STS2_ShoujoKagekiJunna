@@ -43,7 +43,7 @@ public static class KnowledgePreviewCards
     public static IReadOnlyList<CardModel> Create(CardModel source, bool upgradeAll = false)
     {
         var dynamicMembers = DynamicKnowledge.Members(source);
-        if (dynamicMembers.Count > 1)
+        if (DynamicKnowledge.IsLinked(source))
             return dynamicMembers.Select(member =>
             {
                 var copy = ShoujoKageki.Core.V1.CardCopies.Snapshot(member);

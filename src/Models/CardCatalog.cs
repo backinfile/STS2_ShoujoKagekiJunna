@@ -63,6 +63,7 @@ public static class CardCatalog
 {
     private sealed record Catalog(int Revision, CardDefinition[] Cards, KnowledgeGroup[] Groups, StartingCard[] StartingDeck, CardDefinition[] RetiredCards, int StartingHp = 70, int StartingGold = 99, string[]? StartingRelics = null);
     private static readonly Catalog Data = Load();
+    private static readonly KnowledgeGroup[] InitialGroups = KnowledgeGroup.Initialize(Data.Groups);
     private static readonly Dictionary<string, CardDefinition> ById = Data.Cards.Concat(Data.RetiredCards).ToDictionary(c => c.Id);
     public static int Revision => Data.Revision;
     public static int StartingHp => Data.StartingHp;
@@ -70,7 +71,7 @@ public static class CardCatalog
     public static IReadOnlyList<RelicModel> StartingRelics => (Data.StartingRelics ?? ["JUNNA_GREEN_GEM"])
         .Select(id => ModelDb.GetById<RelicModel>(new ModelId("RELIC", id))).ToArray();
     public static IReadOnlyList<CardDefinition> Cards => Data.Cards;
-    public static IReadOnlyList<KnowledgeGroup> Groups => Data.Groups;
+    public static IReadOnlyList<KnowledgeGroup> Groups => InitialGroups;
     public static IEnumerable<CardModel> StartingDeck => Data.StartingDeck.SelectMany(c => Enumerable.Repeat(Model(c.CardId), c.Count));
     public static CardDefinition Get(string id) => ById[id];
     public static string? DesignId(CardModel card) => (card as JunnaCard)?.DesignId;
