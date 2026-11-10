@@ -1,5 +1,5 @@
+using ShoujoKageki.Core.V1.Presentation;
 using Godot;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using ShoujoKagekiJunna.Models;
@@ -42,11 +42,18 @@ public partial class ArrowHud : Control
         internal Tween? CountTween;
         internal bool Releasing;
         internal Vector2? ExitPosition;
+        internal List<Vector2> Targets { get; } = [];
+        internal Vector2 TargetCenter;
+        internal int TargetOrder;
+        internal int Remaining = int.MinValue;
+        internal int PlayCount = int.MinValue;
+        internal bool? SatellitesVisible;
     }
     private readonly Dictionary<ArrowDeployment, ArrowView> _views = [];
     private Texture2D _frame = null!;
     private Texture2D _groupFrame = null!;
     private double _elapsed;
+    private ArrowGuides _guides = null!;
 
     public override void _Ready()
     {
@@ -56,38 +63,28 @@ public partial class ArrowHud : Control
         var groupPath = JunnaMod.ResourceRoot + "images/floating_arrow_group_a.svg";
         _groupFrame = ResourceLoader.Exists(groupPath) ? GD.Load<Texture2D>(groupPath) : _frame;
         ArrowDeploymentVfx.PreloadTextures();
+        _guides = new ArrowGuides { Name = "ArrowGuides", Hud = this, ShowBehindParent = true };
+        AddChild(_guides);
     }
 
     public override void _Process(double delta)
     {
         _elapsed += delta;
-        foreach (var removed in _views.Keys.Where(a => !ArrowCombat.Deployed.Contains(a)).ToArray())
-        {
-            FinishDeployment(removed);
-            if (!_views[removed].Releasing) _views[removed].Root.QueueFree();
-            _views.Remove(removed);
-        }
         var room = NCombatRoom.Instance;
         if (room == null) return;
+        RefreshArrowSnapshots(room);
         var canvas = GetViewportRect().Size;
         // Use the second relic row, reserving exactly one row above the arrows.
         float rowY = SecondRelicRowY();
-        IReadOnlyList<ArrowDeployment> arrows = ArrowCombat.DisplayOrder().Where(a => !a.Resolving).ToArray();
+        var arrows = _displayOrder;
         UpdateLayout(arrows, canvas, rowY);
         for (int index = 0; index < arrows.Count; index++)
         {
             var arrow = arrows[index];
-            if (!_views.TryGetValue(arrow, out var view))
-            {
-                view = CreateArrow(arrow);
-                _views.Add(arrow, view);
-            }
-            if (view.Releasing) continue;
+            var view = _views[arrow];
             var center = _slots[arrow];
-            float bob = Mathf.Sin((float)_elapsed * 1.8f + arrow.Sequence * .8f) * 2;
-            var targets = TargetPoints(arrow);
-            var aim = targets.Length == 0 ? center + new Vector2(400, 400)
-                : targets.Aggregate(Vector2.Zero, (sum, p) => sum + p) / targets.Length;
+            float bob = CoreEffects.AmbientEffects ? Mathf.Sin((float)_elapsed * 1.8f + arrow.Sequence * .8f) * 2 : 0;
+            var aim = view.Targets.Count == 0 ? center + new Vector2(400, 400) : view.TargetCenter;
             // Aim the lower point directly at the target, including the current floating offset.
             // Countdown numerals remain upright as the frame rotates.
             view.Motion.Advance(center + Vector2.Down * bob, aim, (float)delta);
@@ -96,17 +93,22 @@ public partial class ArrowHud : Control
             UpdateDeployment(arrow, view, aim);
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
             UpdateCountdown(arrow, view);
-            view.Count.AddThemeColorOverride("font_color", arrow.Remaining <= 1 ? new Color("FFE3A0") : Colors.White);
-            view.Repeats.Visible = arrow.PlayCount > 1;
-            view.Repeats.Text = $"×{arrow.PlayCount}";
+            if (view.PlayCount != arrow.PlayCount)
+            {
+                view.PlayCount = arrow.PlayCount;
+                view.Repeats.Visible = arrow.PlayCount > 1;
+                view.Repeats.Text = $"×{arrow.PlayCount}";
+            }
+            bool satellitesVisible = CoreEffects.AmbientEffects && view.Targets.Count > 0;
             foreach (var satellite in view.Satellites)
             {
-                satellite.Node.Visible = targets.Length > 0;
-                UpdateSatellite(satellite);
+                if (view.SatellitesVisible != satellitesVisible) satellite.Node.Visible = satellitesVisible;
+                if (satellitesVisible) UpdateSatellite(satellite);
             }
+            view.SatellitesVisible = satellitesVisible;
         }
         UpdateHoverPreview(room);
-        QueueRedraw();
+        CoreEffects.Redraw(_guides);
     }
 
     private float SecondRelicRowY()
@@ -131,44 +133,6 @@ public partial class ArrowHud : Control
         return arrow.Targets.Where(t => t.IsAlive || ArrowCombat.AwaitingReturn(arrow))
             .Select(room.GetCreatureNode).Where(n => n != null)
             .Select(n => LocalPoint(n!.VfxSpawnPosition)).OrderBy(p => p.X).ToArray();
-    }
-
-    public override void _Draw()
-    {
-        // Draw behind the portrait children. Dead or removed targets have no guide.
-        foreach (var (arrow, view) in _views)
-        {
-            if (view.Releasing) continue;
-            var targets = TargetPoints(arrow);
-            if (targets.Length == 0) continue;
-            var tip = LocalPoint(view.Frame.GetGlobalTransform() * Tip);
-            var start = _deployments.TryGetValue(arrow, out var deployment)
-                ? deployment.CurrentPosition.Lerp(tip, deployment.ArrowAlpha) : tip;
-            float guideProgress = deployment?.DrawProgress ?? 1;
-            if (guideProgress <= 0) continue;
-            if (arrow.TargetsGroup)
-            {
-                var left = targets[0] + new Vector2(-55, 25);
-                var right = targets[^1] + new Vector2(55, 25);
-                var midpoint = (left + right) * .5f;
-                left = midpoint + (left - midpoint) * 1.25f;
-                right = midpoint + (right - midpoint) * 1.25f;
-                left = start.Lerp(left, guideProgress);
-                right = start.Lerp(right, guideProgress);
-                var fanStart = start.MoveToward(midpoint, 18 * guideProgress);
-                DrawSoftFan(fanStart, left, right);
-                DrawSoftGroupGuide(fanStart, left, .2f);
-                DrawSoftGroupGuide(fanStart, right, .2f);
-                foreach (var end in targets)
-                    DrawSoftGroupGuide(fanStart, start.Lerp(end, guideProgress), .13f);
-            }
-            else
-            {
-                var end = start.Lerp(targets[0], guideProgress);
-                DrawFadingGuide(start, end, .08f, 6);
-                DrawFadingGuide(start, end, .42f, 1.3f);
-            }
-        }
     }
 
     private static SatelliteMotion[] CreateSatellites(Control frame)
@@ -210,65 +174,6 @@ public partial class ArrowHud : Control
         satellite.Node.Modulate = new Color(1, 1, 1, .8f + depth * .2f);
         // Behind the portrait on the far side, over it on the near side; tips stay behind the main point.
         satellite.Node.ShowBehindParent = depth < 0;
-    }
-
-    private static float GroupGuideFade(float progress)
-        => Mathf.SmoothStep(0, .18f, progress) * Mathf.Pow(1 - progress, 1.6f);
-
-    private void DrawSoftFan(Vector2 start, Vector2 left, Vector2 right)
-    {
-        // The first frames of a growing fan can be too small to triangulate reliably.
-        if (Mathf.Abs((left - start).Cross(right - start)) < 64) return;
-        const int segments = 10;
-        ReadOnlySpan<float> across = [0, .22f, .78f, 1];
-        ReadOnlySpan<float> edgeAlpha = [0, 1, 1, 0];
-        for (int i = 0; i < segments; i++)
-        {
-            float near = (float)i / segments;
-            float far = (float)(i + 1) / segments;
-            var nearLeft = start.Lerp(left, near * .7f);
-            var nearRight = start.Lerp(right, near * .7f);
-            var farLeft = start.Lerp(left, far * .7f);
-            var farRight = start.Lerp(right, far * .7f);
-            float nearAlpha = .045f * GroupGuideFade(near);
-            float farAlpha = .045f * GroupGuideFade(far);
-            for (int band = 0; band < across.Length - 1; band++)
-            {
-                var a = nearLeft.Lerp(nearRight, across[band]);
-                var b = nearLeft.Lerp(nearRight, across[band + 1]);
-                var c = farLeft.Lerp(farRight, across[band + 1]);
-                var d = farLeft.Lerp(farRight, across[band]);
-                var ca = new Color(.48f, .8f, .95f, nearAlpha * edgeAlpha[band]);
-                var cb = new Color(.48f, .8f, .95f, nearAlpha * edgeAlpha[band + 1]);
-                var cc = new Color(.48f, .8f, .95f, farAlpha * edgeAlpha[band + 1]);
-                var cd = new Color(.48f, .8f, .95f, farAlpha * edgeAlpha[band]);
-                // Feather both side edges and both ends instead of leaving a hard cone apex.
-                if (i == 0) DrawPolygon([start, c, d], [ca, cc, cd]);
-                else DrawPolygon([a, b, c, d], [ca, cb, cc, cd]);
-            }
-        }
-    }
-
-    private void DrawSoftGroupGuide(Vector2 start, Vector2 target, float alpha)
-    {
-        DrawFadingGuide(start, target, alpha * .18f, 6, true);
-        DrawFadingGuide(start, target, alpha * .28f, 3, true);
-        DrawFadingGuide(start, target, alpha * .54f, 1.5f, true);
-    }
-
-    private void DrawFadingGuide(Vector2 start, Vector2 target, float alpha, float width = 1, bool fadeStart = false)
-    {
-        const int segments = 16;
-        var points = new Vector2[segments + 1];
-        var colors = new Color[segments + 1];
-        for (int i = 0; i <= segments; i++)
-        {
-            float progress = (float)i / segments;
-            points[i] = start.Lerp(target, progress * .7f);
-            float fade = fadeStart ? GroupGuideFade(progress) : Mathf.Pow(1 - progress, 1.6f);
-            colors[i] = new Color(.6f, .86f, 1, alpha * fade);
-        }
-        DrawPolylineColors(points, colors, width, true);
     }
 
     private ArrowView CreateArrow(ArrowDeployment arrow)

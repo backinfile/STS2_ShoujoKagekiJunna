@@ -13,6 +13,7 @@ public partial class ArrowHud
 {
     private Control? _hoverPreview;
     private readonly List<(ArrowDeployment Arrow, NCard Card)> _previewCards = [];
+    private readonly List<ArrowDeployment> _hoverArrows = [];
 
     private void UpdateHoverPreview(NCombatRoom room)
     {
@@ -26,19 +27,24 @@ public partial class ArrowHud
             (pair.Value.Frame == hovered || pair.Value.Frame.IsAncestorOf(hovered)));
         var creature = room.CreatureNodes.FirstOrDefault(node => node.Entity.IsAlive &&
             (node.Hitbox == hovered || node.Hitbox.IsAncestorOf(hovered)));
-        ArrowDeployment[] arrows = direct.Key != null ? [direct.Key] : creature == null ? [] :
-            ArrowCombat.DisplayOrder().Where(arrow => !arrow.Resolving && arrow.Targets.Contains(creature.Entity)).ToArray();
-        if (arrows.Length == 0)
+        _hoverArrows.Clear();
+        if (direct.Key != null) _hoverArrows.Add(direct.Key);
+        else if (creature != null)
+            foreach (var arrow in _displayOrder)
+                if (arrow.Targets.Contains(creature.Entity)) _hoverArrows.Add(arrow);
+        if (_hoverArrows.Count == 0)
         {
             ClearHoverPreview();
             return;
         }
-        if (!_previewCards.Select(pair => pair.Arrow).SequenceEqual(arrows))
+        bool same = _previewCards.Count == _hoverArrows.Count;
+        for (int i = 0; same && i < _hoverArrows.Count; i++) same = _previewCards[i].Arrow == _hoverArrows[i];
+        if (!same)
         {
             ClearHoverPreview();
             _hoverPreview = new Control { Name = "JunnaArrowHoverPreview", MouseFilter = MouseFilterEnum.Ignore };
             AddChild(_hoverPreview);
-            foreach (var arrow in arrows)
+            foreach (var arrow in _hoverArrows)
             {
                 // Keep physical copies and their combat modifications, even when their card IDs match.
                 var card = NCard.Create(arrow.Card)!;
