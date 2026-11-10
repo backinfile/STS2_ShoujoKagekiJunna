@@ -34,6 +34,7 @@ public abstract partial class CatalogPower
                 case "JZ06": await PlayerCmd.GainEnergy(player.PlayerCombatState!.Hand.Cards.Where(CardActions.HasNumericCost).Select(CardActions.Cost).DefaultIfEmpty().Max(), player); break;
             }
         }
+        if (DesignId is "JZ05" or "JK260") Synchronize();
     }
 
     public override async Task BeforeFlush(PlayerChoiceContext context, Player player)

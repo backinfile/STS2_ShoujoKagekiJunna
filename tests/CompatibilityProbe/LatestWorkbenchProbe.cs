@@ -67,7 +67,7 @@ public sealed class LatestWorkbenchCommand : AbstractConsoleCmd
                 player.PlayerCombatState!.Energy = 10;
                 return;
             }
-            Check("r4616 catalog includes 108 cards and 22 independent lists", CardCatalog.Revision == 4616 && CardCatalog.Cards.Count == 108 && CardCatalog.Groups.Count == 22);
+            Check("r4685 catalog includes 107 cards and 23 independent lists", CardCatalog.Revision == 4685 && CardCatalog.Cards.Count == 107 && CardCatalog.Groups.Count == 23);
             foreach (var definition in CardCatalog.Cards)
             {
                 foreach (bool upgraded in new[] { false, true })
@@ -161,7 +161,8 @@ public sealed class LatestWorkbenchCommand : AbstractConsoleCmd
             count = player.Deck.Cards.Count;
             await CardPileCmd.Add(singing, PileType.Deck, skipVisuals: true);
             Check("acquiring singing still grants all six companions", player.Deck.Cards.Count == count + 7);
-            Check("all descriptions omit added parentheses", CardCatalog.Cards.All(definition =>
+            Check("only formula and research progress descriptions use parentheses", CardCatalog.Cards.All(definition =>
+                definition.Id is "JK206" or "JK184" or "JK314" ||
                 !player.RunState.CreateCard(CardCatalog.Model(definition.Id), player).GetDescriptionForPile(PileType.Deck).Contains('（')));
         }
         catch (Exception error) { checks.Add(new { name = "probe exception", pass = false, error = error.ToString() }); Save(); }

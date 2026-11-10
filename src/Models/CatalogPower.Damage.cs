@@ -20,6 +20,7 @@ public abstract partial class CatalogPower
     {
         if (DesignId != "JZ05" || dealer != Owner || target.Side == Owner.Side || result.TotalDamage <= 0 || !props.IsPoweredAttack()) return;
         int ordinal = AttackEventHistory.Ordinal(result);
+        Synchronize();
         if (ordinal > 0 && ordinal <= _grants.Sum(grant => grant.V("Limit")))
             await CardActions.Fly(context, Owner.Player!, result.TotalDamage, target);
     }

@@ -1836,6 +1836,10 @@
         "Knowledge"
       ]
     },
+    "JK314": {
+      "tips": ["Knowledge"],
+      "upgradedTips": ["Knowledge"]
+    },
     "JK275": {
       "effect": "Attack",
       "tips": [

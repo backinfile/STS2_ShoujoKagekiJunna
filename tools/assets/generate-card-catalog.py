@@ -84,6 +84,10 @@ def display_description(card, text, card_names, values, upgraded=False):
     highlighted.update(name + '+' for name in card_names)
     pattern = '|'.join(re.escape(word) for word in sorted(highlighted, key=len, reverse=True))
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
+    if card['id'] == 'JK206':
+        text += '{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}'
+    elif card['id'] in ('JK184', 'JK314'):
+        text += '{DepletedPartners:choose(0):|\n（已耗尽{DepletedPartners}张）}'
     return text
 
 
@@ -180,6 +184,7 @@ def main():
     definitions = []
     wrappers = []
     localization = {}
+    power_amounts = {}
     card_names = {c['name'] for c in cards}
     for card in cards:
         cid = card['id']
@@ -229,6 +234,7 @@ def main():
         normal = display_description(card, base, card_names, values)
         improved = display_description(card, upgrade, card_names, values, upgraded=True)
         localization[model_id + '.description'] = upgrade_description(normal, improved)
+        power_amounts[cid] = next((value['base'] for value in values), 0)
         if args.text_only:
             continue
         if args.rules_only:
@@ -357,13 +363,14 @@ def main():
         for cid, text in current_power_text.items():
             if cid not in ids:
                 continue
-            amount = next((v['base'] for d in definitions if d['id'] == cid for v in d['values']), 0)
+            amount = power_amounts[cid]
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
             if cid == 'JK254':
                 powers[f'JUNNA_{cid}_POWER.smartDescription'] = ('{Upgraded:每当你打出一张[gold]知识[/gold]牌，'
                     '其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。|' + text + '}')
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
+        powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         relics_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/relics.json'
         relics = json.loads(relics_path.read_text(encoding='utf-8'))

@@ -935,6 +935,11 @@ internal static partial class CardRules
             UpgradedTips = [CardTip.Knowledge],
             Effect = SimpleCardEffect.Attack,
         },
+        ["JK314"] = new()
+        {
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
         ["JK32"] = new()
         {
             Fields = new Dictionary<string, string>

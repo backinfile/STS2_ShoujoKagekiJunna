@@ -69,6 +69,15 @@ public abstract partial class CatalogPower
                 group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => g.BaseHits * (1 + DamageModifiers.ExtraHits(DamageModifiers.CaptureDamageModifierSnapshot(g.Card))))))),
             _ => throw new InvalidOperationException("Missing power description: " + DesignId)
         };
+        if (DesignId is "JZ05" or "JK260")
+        {
+            int remaining = DesignId == "JZ05"
+                ? Math.Max(0, Sum("Limit") - AttackEventHistory.Count(Owner.Player!))
+                : _grants.Count(grant => grant.Turn != Owner.Player!.PlayerCombatState!.TurnNumber || grant.Used == 0);
+            var progress = new LocString("powers", "JUNNA_CATALOG.remainingTriggers");
+            progress.Add("Amount", remaining);
+            lines = lines.Append(progress.GetFormattedText());
+        }
         return string.Join("\n", lines);
     }
 }

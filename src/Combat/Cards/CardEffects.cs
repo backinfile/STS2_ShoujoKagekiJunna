@@ -102,6 +102,7 @@ public static class CardEffects
                 await Improve(Arrows(), V("Bonus")); await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
             case "JK206":
             case "JK48":
+            case "JK314":
                 await Attack((int)card.DynamicVars.CalculatedDamage.Calculate(play.Target)); break;
             case "JK48B":
                 await Block((int)card.DynamicVars.CalculatedBlock.Calculate(play.Target)); break;

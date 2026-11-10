@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShoujoKagekiJunna.Combat;
@@ -38,7 +39,17 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     } : []).Concat(DesignId == "JK48B" ? new DynamicVar[]
     {
         new KnowledgeBlockVar().WithMultiplier(static (card, _) => CountDeckKnowledge(card))
+    } : []).Concat(DesignId == "JK314" ? new DynamicVar[]
+    {
+        new KnowledgeDamageVar().WithMultiplier(static (card, _) => KnowledgeProgress.DepletedPartners(card))
     } : []);
+
+    protected override void AddExtraArgsToDescription(LocString description)
+    {
+        base.AddExtraArgsToDescription(description);
+        if (DesignId is "JK184" or "JK314")
+            description.Add("DepletedPartners", KnowledgeProgress.DepletedPartners(this));
+    }
 
     internal static int CountDeckKnowledge(CardModel card) => card.IsMutable
         ? card.Owner?.Deck.Cards.Count(CardCatalog.IsKnowledge) ?? 0 : 0;

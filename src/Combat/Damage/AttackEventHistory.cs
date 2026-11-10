@@ -18,6 +18,8 @@ internal static class AttackEventHistory
     private static readonly ConditionalWeakTable<PlayerCombatState, Counter> Players = new();
     private static readonly ConditionalWeakTable<DamageResult, Event> Events = new();
     public static int Ordinal(DamageResult result) => Events.TryGetValue(result, out var entry) ? entry.Ordinal : 0;
+    public static int Count(Player player) => player.PlayerCombatState is { } state &&
+        Players.TryGetValue(state, out var counter) && counter.Turn == state.TurnNumber ? counter.Count : 0;
 
     [HarmonyPatch(typeof(Hook), nameof(Hook.AfterDamageGiven))]
     private static class RecordDamage
