@@ -326,3 +326,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - Steam游戏在安装时处于运行状态，本次更新将在下次启动游戏时加载。
 - 用户确认记录并入本次单个任务提交，已审阅的实现内容保持对应提交的版本。
 - 集成校验及清理结果回执为`artifacts/task-deliverables/ancient-card-art-fix-20261110/integration.json`。
+
+### main同步与最终安装
+
+- 用户确认期间，main新增`1fb5d8d`箭矢性能优化。本任务完成单个整理提交`33081e0`后，以同步合并方式纳入该本地main提交。
+- 已逐文件核对，用户批准的实现内容与`de21108`一致，新增代码来自本地main的并行工作。
+- 同步后重新通过Beta与Stable正式构建、资源打包、40项模型检查和37项实机定向检查，刷新15.20秒效果录像。
+- 同步后的发行包再次安装到Steam的Junna目录，7个发行文件SHA-256校验通过。安装前目录分别保留在交付目录的备份文件夹中。
+- 原检出目录在集成前保持干净。最终集成提交、目录树校验、安装哈希和授权清理结果记录到`integration.json`回执。

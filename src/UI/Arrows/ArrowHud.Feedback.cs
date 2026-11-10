@@ -39,10 +39,11 @@ public partial class ArrowHud
 {
     private static void UpdateCountdown(ArrowDeployment arrow, ArrowView view)
     {
-        string remaining = arrow.Remaining.ToString();
-        if (view.Count.Text == remaining) return;
-        bool changed = view.Count.Text.Length > 0;
-        view.Count.Text = remaining;
+        if (view.Remaining == arrow.Remaining) return;
+        bool changed = view.Remaining != int.MinValue;
+        view.Remaining = arrow.Remaining;
+        view.Count.Text = arrow.Remaining.ToString();
+        view.Count.AddThemeColorOverride("font_color", arrow.Remaining <= 1 ? new Color("FFE3A0") : Colors.White);
         if (!changed || !CoreEffects.Enabled) return;
         ArrowFeedback.PulseCounter(view.Count, ref view.CountTween);
         view.Flash.Restart();
@@ -82,7 +83,12 @@ public partial class ArrowHud
             : targets.Aggregate(Vector2.Zero, (sum, point) => sum + point) / targets.Length);
         view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
         view.Root.PivotOffset = BodyCenter;
-        if (!CoreEffects.Enabled) { view.Root.Hide(); return Task.CompletedTask; }
+        if (!CoreEffects.Enabled)
+        {
+            view.Root.Hide();
+            view.Root.QueueFree();
+            return Task.CompletedTask;
+        }
         var effect = new ArrowReleaseVfx { Name = "ArrowRelease", Position = origin, ZIndex = 0 };
         AddChild(effect);
         view.Root.Reparent(effect);

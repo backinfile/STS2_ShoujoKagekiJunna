@@ -1,5 +1,4 @@
 using Godot;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -12,23 +11,48 @@ public partial class ArrowHud
     private ArrowLane[] _layoutLanes = [];
     private Vector2[] _layoutRegions = [];
     private Vector2[] _layoutFormation = [];
+    private readonly List<ArrowLane> _laneBuffer = [];
+    private float _layoutAllyLeft, _layoutAllyRight;
+    private bool _layoutEnemiesLeft;
 
     private void UpdateLayout(IReadOnlyList<ArrowDeployment> arrows, Vector2 canvas, float rowY)
     {
-        foreach (var removed in _slots.Keys.Where(a => !arrows.Contains(a)).ToArray()) _slots.Remove(removed);
-        var creatures = NCombatRoom.Instance!.CreatureNodes.Where(n => n.Entity.IsAlive).ToArray();
-        var allies = creatures.Where(n => !n.Entity.IsEnemy).Select(n => LocalPoint(n.VfxSpawnPosition).X).ToArray();
-        var enemies = creatures.Where(n => n.Entity.IsEnemy).Select(n => LocalPoint(n.VfxSpawnPosition).X).ToArray();
-        float allyLeft = allies.Length == 0 ? canvas.X * .25f : allies.Min();
-        float allyRight = allies.Length == 0 ? allyLeft : allies.Max();
-        float allyCenter = (allyLeft + allyRight) * .5f;
-        var lanes = arrows.Select(arrow =>
+        float allyLeft = float.PositiveInfinity, allyRight = float.NegativeInfinity;
+        float enemyLeft = float.PositiveInfinity, enemySum = 0;
+        int enemyCount = 0;
+        foreach (var (creature, point) in _targetPositions)
         {
-            var targets = TargetPoints(arrow);
-            float targetX = targets.Length == 0 ? enemies.DefaultIfEmpty(canvas.X).Average() : targets[0].X;
-            return ArrowLayout.Lane(arrow.TargetCategory <= 1, arrow.TargetsGroup, targetX, allyCenter);
-        }).ToArray();
-        bool enemiesLeft = enemies.Any(x => x < allyCenter) || lanes.Contains(ArrowLane.Left);
+            if (!creature.IsAlive) continue;
+            if (creature.IsEnemy)
+            {
+                enemyLeft = Math.Min(enemyLeft, point.X);
+                enemySum += point.X;
+                enemyCount++;
+            }
+            else
+            {
+                allyLeft = Math.Min(allyLeft, point.X);
+                allyRight = Math.Max(allyRight, point.X);
+            }
+        }
+        if (float.IsPositiveInfinity(allyLeft)) allyLeft = allyRight = canvas.X * .25f;
+        float allyCenter = (allyLeft + allyRight) * .5f;
+        _laneBuffer.Clear();
+        bool same = arrows.Count == _layoutOrder.Length;
+        for (int i = 0; i < arrows.Count; i++)
+        {
+            var arrow = arrows[i];
+            var targets = _views[arrow].Targets;
+            float targetX = targets.Count > 0 ? targets[0].X : enemyCount == 0 ? canvas.X : enemySum / enemyCount;
+            var lane = ArrowLayout.Lane(arrow.TargetCategory <= 1, arrow.TargetsGroup, targetX, allyCenter);
+            _laneBuffer.Add(lane);
+            same = same && arrow == _layoutOrder[i] && lane == _layoutLanes[i];
+        }
+        bool enemiesLeft = enemyLeft < allyCenter || _laneBuffer.Contains(ArrowLane.Left);
+        if (same && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)
+            && allyLeft == _layoutAllyLeft && allyRight == _layoutAllyRight && enemiesLeft == _layoutEnemiesLeft) return;
+        var lanes = _laneBuffer.ToArray();
+        foreach (var removed in _slots.Keys.Where(a => !_live.Contains(a) || a.Resolving).ToArray()) _slots.Remove(removed);
         var formation = ArrowLayout.Regions(canvas.X, allyLeft, allyRight, enemiesLeft, SlotSpacing);
         var counts = Enum.GetValues<ArrowLane>().Select(lane => lanes.Count(value => value == lane)).ToArray();
         var regions = ArrowLayout.OccupiedRegions(canvas.X, allyLeft, allyRight,
@@ -43,6 +67,9 @@ public partial class ArrowHud
             }).All(same => same)
             && _layoutRegions.Length == regions.Length)
             regions = _layoutRegions;
+        _layoutAllyLeft = allyLeft;
+        _layoutAllyRight = allyRight;
+        _layoutEnemiesLeft = enemiesLeft;
         // Cache the target regions as well as order: a side change can leave display order unchanged.
         if (arrows.SequenceEqual(_layoutOrder) && lanes.SequenceEqual(_layoutLanes)
             && regions.SequenceEqual(_layoutRegions) && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)) return;
