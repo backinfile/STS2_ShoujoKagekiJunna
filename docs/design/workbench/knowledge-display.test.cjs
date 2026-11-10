@@ -67,3 +67,26 @@ test('共享关联牌显示自己的列表，来源入口保持各自发放数�
   assert.match(html,/value="CLAUSE"/);
   assert.doesNotMatch(html,/data-remove-grant/);
 });
+
+test('查看关联牌显示其入池状态，离开条目后恢复入口牌面',()=>{
+  const {context,card,group,state}=renderContext();
+  card.pool=true;
+  const companion={...card,uid:'score',id:'SCORE',name:'乐谱',pool:false,partnerCardIds:[]};
+  state.data.cards.push(companion);
+  Object.assign(group,{mainCardCount:1,grantedCardIds:['SCORE'],grantedCardCounts:{SCORE:2}});
+  const entry=context.knowledgeEntries(group).find(item=>item.card.uid===companion.uid);
+  Object.assign(context,{
+    knowledgeFaces:new Map([[card.uid,entry.key]]),
+    cardStackHTML:face=>'<span>'+face.name+'</span>'
+  });
+  const source=fs.readFileSync(require.resolve('./app.js'),'utf8');
+  vm.runInContext(source.slice(source.indexOf('  function cardEntryHTML('),source.indexOf('  function cycleKnowledgeEntry(')),context);
+  context.ui.selected={collection:'cards',uid:companion.uid,cardOrigin:card.uid};
+  const selected=context.cardEntryHTML(card,false);
+  assert.match(selected,/不入池/);
+  assert.match(selected,new RegExp(card.name));
+  context.ui.selected=null;
+  const restored=context.cardEntryHTML(card,false);
+  assert.match(restored,/data-card-face="clause"/);
+  assert.doesNotMatch(restored,/data-card-face="score"/);
+});
