@@ -42,7 +42,7 @@ test('card and reserve tabs independently retain every shared filter and sorting
 
 test('all tabs retain their own searches, term categories and position filters',()=>{
   const{context,ui}=fixture();
-  const tabs=['cards','reserve','trash','terms','mechanisms','powers','relics','fits','flows','models','styles','overview','initial'];
+  const tabs=['cards','reserve','trash','terms','mechanisms','powers','relics','fits','events','flows','models','styles','overview','initial'];
   for(const tab of tabs){context.changeTab(tab);assert.equal(ui.search,'');ui.search=tab;ui.kind=tab;ui.routeExcludedPositions=[tab];context.saveUI();}
   for(const tab of tabs){context.changeTab(tab);assert.equal(ui.search,tab);assert.equal(ui.kind,tab);assert.deepEqual(clone(ui.routeExcludedPositions),[tab]);}
 });
@@ -82,6 +82,7 @@ test('hash navigation applies only the target tab and omitted fields restore lin
   context.location.hash='#tab=reserve';context.readHash();
   assert.equal(ui.search,'');assert.equal(ui.sort,'natural');assert.equal(ui.descending,false);assert.equal(ui.routePositions.length,0);
   context.changeTab('cards');assert.equal(ui.search,'卡池');assert.equal(ui.type,'箭矢');assert.equal(ui.sort,'cost');
+  context.location.hash='#tab=events';context.readHash();assert.equal(ui.tab,'events');
 });
 
 test('linked cards and term drilldowns change destination filters without clearing the source tab',()=>{
