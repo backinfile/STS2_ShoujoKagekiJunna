@@ -1157,5 +1157,22 @@
       }
     ]
   },
-  "workbench_revision": 4873
+  "workbench_revision": 4873,
+  "integration": {
+    "target_branch": "main",
+    "approved_head": "e8a153f9561d326723bd3db9136639c4a59aa16e",
+    "task_commit": "0820511f4b20f734f25345094793760690067b37",
+    "method": "fast-forward",
+    "committed_trees_match": true,
+    "protected_dirty_files": 4,
+    "delivery_files": 5,
+    "delivery_hashes_match": true,
+    "cleanup_approval": "合并并清理（推荐）",
+    "cleanup_scope": [
+      "task worktree",
+      "task branch",
+      "temporary build and test files within task worktree"
+    ],
+    "completion_receipt": "artifacts/task-deliverables/act2-knowledge-event-20261111/completion.json"
+  }
 }

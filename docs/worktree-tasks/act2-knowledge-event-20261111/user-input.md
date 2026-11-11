@@ -202,3 +202,9 @@ $worktree-task
 ## 消息 28
 
 或者你按参考图的画风结构，绘制一个新的？
+
+## 消息 29
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_f244d52cd9a849efa5ddbdbbe52e2493\",0]","question":"是否将同步结果 e8a153f 合并到 main？若选择清理，会先将 Mod 包、录像、截图保存到主目录 artifacts/task-deliverables/act2-knowledge-event-20261111，再删除本任务工作树、分支及其中的临时构建和测试文件。","answer":"合并并清理（推荐）"}]
+</send_user_message_question_reply>

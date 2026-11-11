@@ -20,7 +20,7 @@
 5. 事件完成后记录玩家结果，移出本幕事件池，并使用原生完成房间存档入口。重启后恢复同一事件结果页，奖励数量保持一致。
 6. 九张知识牌均为0费、1回合事件箭矢，各自指向其余八张，沿用工作台当前牌面，并从普通奖励、商店和战斗随机生成中排除。定向抽取包含同名实际牌，从当前抽牌堆逐张抽取。
 7. 卡图采用工作台选定的同系列官方ReLIVE卡面。事件插图参考KINEMA CITRUS公开的纯那书桌设定，使用内置imagegen重绘为全屏书桌场景。Artifact Cleaner 0.25清理后输出3440×1616，使用原版事件默认布局。原图、最终提示词、来源和参数保存在 [source.json](source.json)、[official-art-source.json](official-art-source.json) 与 [desk-art-cleanup.json](desk-art-cleanup.json)。
-8. 工作台已同步最终选项文案、知识筛选和重绘配图，状态为已实现待合并。
+8. 工作台已同步最终选项文案、知识筛选和重绘配图，已完成合并。
 
 ## 验证
 
@@ -41,4 +41,6 @@
 - 游戏源码及资源随任务提交保存。
 - `artifacts/task-deliverables/act2-knowledge-event-20261111/ShoujoKagekiJunna-event.zip` 包含构建后的Junna Mod，依赖项目现行Core与BaseLib版本。
 - 同目录 `knowledge-event.mp4` 为整组知识取得演示，`upgrade-knowledge.mp4` 为知识升级选择演示，`event.png` 为最终事件界面。测试使用独立满解锁存档、随机端口、静音内部混音录制。
-- 合并及工作树清理由用户确认执行，合并清理时将上述交付目录保存在原项目的同名目录。
+- 用户已明确批准合并并清理。已将同步结果 `e8a153f` 快进合并到 `main`，提交树一致，原有4项未提交修改的SHA-256保持一致。
+- 5份交付文件及摘要清单已保存到主目录同名交付目录，逐份SHA-256一致。
+- 清理范围为本任务工作树、任务分支及其中临时构建、测试文件；完成回执保存在交付目录的 `completion.json`。
