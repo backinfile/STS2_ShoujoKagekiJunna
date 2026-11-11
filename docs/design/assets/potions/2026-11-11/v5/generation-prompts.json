@@ -1,0 +1,12 @@
+{
+  "tool": "built-in image_gen",
+  "useCase": "precise-object-edit",
+  "name": "箭雨药水",
+  "previousName": "齐射药剂",
+  "editTarget": "docs/design/assets/potions/2026-11-11/v4/cleaned-native/salvo_potion.png",
+  "requestedRotationDegreesClockwise": 25,
+  "prompt": "Use case: precise-object-edit.\nImage 1 is the edit target: the finished violet arrow-shaped potion icon.\nMake exactly one visual change: rotate the entire bottle design about 25 degrees CLOCKWISE in the image plane, so the cork points toward the upper right and the long lower tip points toward the lower left. The diagonal pose should be clearly visible, like the official inventory potion icons.\nKeep the same elongated kite silhouette, short upper section and long lower point, narrow neck, cork shape, violet liquid, lavender glass edge, dark contour, highlights, two bubbles, proportions and flat 2D shading. Preserve the existing design, not a new bottle design. Do not add decorations.\nCenter the rotated full bottle in a SQUARE transparent canvas, keep every part visible with comfortable padding. One isolated icon only. Genuinely transparent background, no ground, no cast shadow, no aura, no text, no border.",
+  "output": {
+    "original": "docs/design/assets/potions/2026-11-11/v5/originals/arrow_rain_potion.png"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "originals_preserved": true,
+  "dimensionsPreservedDuringCleanup": true,
+  "vae": "Flux2 VAE",
+  "residual": "LatentR R_ema",
+  "assets": [
+    {
+      "key": "salvo_potion",
+      "source": "docs/design/assets/potions/2026-11-11/shape-drafts/originals/salvo_potion.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/shape-drafts/cleaned-native/salvo_potion.png",
+      "file": "docs/design/assets/potions/2026-11-11/shape-drafts/icons/salvo_potion.png",
+      "originalSize": [
+        1024,
+        1024
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "b8bc7849001109877af25bff83cc7d24ca420e03c4667ec82a737cd58d6c73a9",
+      "cleaned_sha256": "f3095cd7ee9adb3d703f67365f35fee3e8e9dbcfcb991f2b8cda7e30873d3df3",
+      "sha256": "bafdc3683e67892baa06495449e09cf87658e7d21cdb31d7530fdb8a7f93b6e4",
+      "visibleRgbMeanAbsoluteChange": 0.3906,
+      "seconds": 2.032
+    },
+    {
+      "key": "sports_drink",
+      "source": "docs/design/assets/potions/2026-11-11/shape-drafts/originals/sports_drink.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/shape-drafts/cleaned-native/sports_drink.png",
+      "file": "docs/design/assets/potions/2026-11-11/shape-drafts/icons/sports_drink.png",
+      "originalSize": [
+        1024,
+        1024
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "cae7fee960e498f2023eddbd0b2c30807714eb615129f954267de46c90d87f00",
+      "cleaned_sha256": "1405388abb2efe6a6d4868f2fa7d50f9b17a46f9c27e359c4b27ede5b3c5335a",
+      "sha256": "6543e563c063662d65e3bb630bfe92ede989d0343a6d9578d97cc62146a07d76",
+      "visibleRgbMeanAbsoluteChange": 0.3754,
+      "seconds": 1.609
+    }
+  ]
+}

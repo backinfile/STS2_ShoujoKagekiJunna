@@ -9,6 +9,7 @@
   const order=['物理箭矢','言叶','星星','引文与剧目','舞台技法','日常锻炼','日常生活','学习与记录','舞台与伙伴'];
   const sourceURL=value=>/^https?:\/\//i.test(String(value||'').trim())?String(value).trim():'';
   const isEventEntry=entry=>Boolean(entry?.eventDesign&&typeof entry.eventDesign==='object'&&!Array.isArray(entry.eventDesign));
+  const isPotionEntry=entry=>Boolean(entry?.potionDesign&&typeof entry.potionDesign==='object'&&!Array.isArray(entry.potionDesign));
   const linkedCards=(entry,cards)=>(entry.cardIds||[]).map(id=>cards.find(card=>card.id===id)).filter(card=>card&&!card.trashedAt&&!card.reservedAt);
   function normalizeEntry(entry){
     for(const field of ['name','theme','text','original','source','sourceUrl','notes','art'])entry[field]=String(entry[field]||'');
@@ -18,7 +19,7 @@
   function themes(entries){const rank=name=>order.includes(name)?order.indexOf(name):order.length;return [...new Set(entries.map(entry=>entry.theme))].sort((a,b)=>rank(a)-rank(b)||a.localeCompare(b,'zh-CN'));}
   function filterEntries(entries,cards,ui){const query=String(ui.search||'').trim().toLowerCase();return entries.filter(entry=>{const linked=linkedCards(entry,cards),used=linked.length>0;return filters.matches(ui.fitTheme,entry.theme)&&filters.matches(ui.fitStatus,used?'used':'candidate')&&(!query||[entry.name,entry.theme,entry.text,entry.original,entry.source,...linked.map(card=>card.name)].join(' ').toLowerCase().includes(query));});}
   function create({data,ui:getUI,dom,escape,assetURL,field,area,checkedPicker,render,flush}){
-    const entries=()=>(data().fitPool||[]).filter(entry=>!isEventEntry(entry));
+    const entries=()=>(data().fitPool||[]).filter(entry=>!isEventEntry(entry)&&!isPotionEntry(entry));
     function sidebar(){const ui=getUI(),all=entries();ui.fitTheme=filters.prune(ui.fitTheme,themes(all));
       const button=(name,count,value=name)=>'<button type="button" class="side-item '+(filters.state(ui.fitTheme,value)==='include'?'active':'')+'" data-fit-theme="'+escape(value)+'" '+filters.attributes(ui.fitTheme,value,name)+'><span>'+escape(name)+'</span><span>'+count+'</span></button>';
       return '<label class="field"><span class="field-label">搜索</span><input id="filter-search" type="search" value="'+escape(ui.search)+'" placeholder="名称、文本、卡牌" autocomplete="off"></label><fieldset class="field filter-group"><legend class="field-label">实装</legend><div class="filter-options">'+[['all','全部'],['candidate','待实装'],['used','已实装']].map(([value,label])=>'<button type="button" class="filter-option" data-fit-status="'+value+'" '+filters.attributes(ui.fitStatus,value,label)+'>'+label+'</button>').join('')+'</div></fieldset><div class="sidebar-section"><p class="sidebar-title">主题</p>'+button('全部主题',all.length,'all')+themes(all).map(name=>button(name,all.filter(e=>e.theme===name).length)).join('')+'</div>';
@@ -30,5 +31,5 @@
     function sidebarClick(event){const button=event.target.closest('[data-fit-theme],[data-fit-status]');if(!button)return false;flush();const ui=getUI();if(button.hasAttribute('data-fit-theme'))ui.fitTheme=filters.cycle(ui.fitTheme,button.dataset.fitTheme);else ui.fitStatus=filters.cycle(ui.fitStatus,button.dataset.fitStatus);render();return true;}
     return{sidebar,workspace,editor,sidebarClick};
   }
-  const api={create,normalizeEntry,linkedCards,filterEntries,themes,sourceURL,isEventEntry};if(typeof module==='object'&&module.exports)module.exports=api;else root.JunnaFitPool=api;
+  const api={create,normalizeEntry,linkedCards,filterEntries,themes,sourceURL,isEventEntry,isPotionEntry};if(typeof module==='object'&&module.exports)module.exports=api;else root.JunnaFitPool=api;
 })(typeof globalThis==='object'?globalThis:this);

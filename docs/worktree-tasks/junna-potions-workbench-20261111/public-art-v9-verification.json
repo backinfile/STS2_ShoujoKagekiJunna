@@ -1,0 +1,26 @@
+{
+  "revision": 4998,
+  "name": "箭雨药水",
+  "text": "打出你的所有箭矢。",
+  "art": "potion-arrow-rain-20261111-v9",
+  "assetURL": "https://junna.17181718.xyz/assets/b44a10d24648df20d9d30c12.png",
+  "sha256": "b44a10d24648df20d9d30c12694fac632c1ee2612e601eef6f1c0c6ba9e583a0",
+  "dimensions": [
+    256,
+    256
+  ],
+  "publicEntryMatchesMCP": true,
+  "matchesLocalIcon": true,
+  "generationMode": "upright-then-rigid-rotation",
+  "uprightGenerationInputImages": 0,
+  "rotationDegreesClockwise": 25,
+  "rigidTransformVerified": true,
+  "uprightSourceUnchanged": true,
+  "regeneratedAfterRotation": false,
+  "alphaPreservedDuringCleanup": true,
+  "rotatedSubjectNotClipped": true,
+  "sizeReview": [
+    32,
+    64
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "icons": [
+    {
+      "key": "sports_drink",
+      "name": "运动饮料",
+      "assetId": "potion-sports-drink-20261111-v10",
+      "file": "docs/design/assets/potions/2026-11-11/v10/icons/sports_drink.png"
+    }
+  ]
+}

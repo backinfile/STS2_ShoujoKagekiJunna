@@ -1,0 +1,28 @@
+{
+  "tool": "System.Drawing GDI+",
+  "operation": "rigid whole-image rotation",
+  "degreesClockwise": -18.0,
+  "source": "docs/design/assets/potions/2026-11-11/v10/cleaned-native/sports_drink_upright.png",
+  "source_sha256": "34492e494f425d68cf2addaecff70e3c4ae7ce237fb85cbc29b22e9b006ca530",
+  "output": "docs/design/assets/potions/2026-11-11/v10/cleaned-native/sports_drink.png",
+  "output_sha256": "c7ad049ed1a1ee0f4291c563bed13e9a0264b9d81cc814212bde24f1ce935e35",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "outputSize": [
+    1589,
+    1589
+  ],
+  "affineMatrix": [
+    0.9510565,
+    -0.30901703,
+    0.30901703,
+    0.9510565,
+    4.433838,
+    391.94122
+  ],
+  "transparentBackground": true,
+  "regenerated": false,
+  "cleanupAppliedBeforeRotation": true
+}

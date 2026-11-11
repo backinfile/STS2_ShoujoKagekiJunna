@@ -1,0 +1,218 @@
+{
+  "layout": "Three vanilla potions and one Junna potion per rarity row",
+  "sourceCanvas": [
+    256,
+    256
+  ],
+  "displayCanvas": [
+    216,
+    216
+  ],
+  "nativePixelsPreserved": true,
+  "entries": [
+    {
+      "row": "普通",
+      "column": 1,
+      "origin": "vanilla",
+      "key": "attack_potion",
+      "name": "攻击药水",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/attack_potion.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "721a2b27353ec82ff67f8e7c6d84d3dc2f956cdd6fe0dc424e1a1a9b8c8b74fd"
+    },
+    {
+      "row": "普通",
+      "column": 2,
+      "origin": "vanilla",
+      "key": "strength_potion",
+      "name": "力量药水",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/strength_potion.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "8f5b2999287301821614ae8f04c79288cb650b1d5b275ce15387b2493c0be48b"
+    },
+    {
+      "row": "普通",
+      "column": 3,
+      "origin": "vanilla",
+      "key": "star_potion",
+      "name": "星星药水",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/star_potion.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "01cb7be9afbb6ee6fc5128f89b7557089e961cf6be5623066ee52da0091f5c81"
+    },
+    {
+      "row": "普通",
+      "column": 4,
+      "origin": "Junna",
+      "key": "knowledge_potion",
+      "name": "知识药水",
+      "source": "docs/design/assets/potions/2026-11-11/v2/icons/knowledge_potion.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "d93590eb26f44750a5c65e538b2cb2f837fd8e1ec6f0d5aeeeb7785cac115e17"
+    },
+    {
+      "row": "罕见",
+      "column": 1,
+      "origin": "vanilla",
+      "key": "kings_courage",
+      "name": "王之勇气",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/kings_courage.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "c9153a65a83256ae8f237ecf6407efae70915e53c0c0192e808a6d88565ecb97"
+    },
+    {
+      "row": "罕见",
+      "column": 2,
+      "origin": "vanilla",
+      "key": "clarity",
+      "name": "明晰提取物",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/clarity.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "101f07ace4679a3a589f75fa7b06692dd1761c219eb1762881cac5248133ddd8"
+    },
+    {
+      "row": "罕见",
+      "column": 3,
+      "origin": "vanilla",
+      "key": "bone_brew",
+      "name": "骨头酿",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/bone_brew.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "16fdf415f587ff73c02a6776108ebb664aa068364930b06e776bb7d6b1d8ef09"
+    },
+    {
+      "row": "罕见",
+      "column": 4,
+      "origin": "Junna",
+      "key": "sports_drink",
+      "name": "运动饮料",
+      "source": "docs/design/assets/potions/2026-11-11/v2/icons/sports_drink.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "4db2749cfbd811d0b3d6e190de1cef6cf2c6bb99f61e8d28bc44b6590234a266"
+    },
+    {
+      "row": "稀有",
+      "column": 1,
+      "origin": "vanilla",
+      "key": "ship_in_a_bottle",
+      "name": "瓶中船",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/ship_in_a_bottle.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "60c73067c0f97c1049f54bb77f7f249ca4217775849ce3aa7a2eb6c650f76e90"
+    },
+    {
+      "row": "稀有",
+      "column": 2,
+      "origin": "vanilla",
+      "key": "ghost_in_a_jar",
+      "name": "罐装幽灵",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/ghost_in_a_jar.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "65fe7819f4535be1d8eef77dc09643caa16a5dc8e50e02ae13ee072248b29dc2"
+    },
+    {
+      "row": "稀有",
+      "column": 3,
+      "origin": "vanilla",
+      "key": "essence_of_darkness",
+      "name": "黑暗精华",
+      "source": "<vanilla-extraction>/extraction/raw/images/potions/essence_of_darkness.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "6ae003bb97bc95999fbecd2b9b892990ce5244bf2570a4d48448f7ca0442f0d1"
+    },
+    {
+      "row": "稀有",
+      "column": 4,
+      "origin": "Junna",
+      "key": "bottled_arrow_rain",
+      "name": "瓶装箭雨",
+      "source": "docs/design/assets/potions/2026-11-11/v2/icons/bottled_arrow_rain.png",
+      "sourceSize": [
+        256,
+        256
+      ],
+      "displaySize": [
+        216,
+        216
+      ],
+      "sha256": "5da4d598433ab43f5964b19c5c346f0bd4d418e9adc3f5ef03c060f93c36b161"
+    }
+  ]
+}

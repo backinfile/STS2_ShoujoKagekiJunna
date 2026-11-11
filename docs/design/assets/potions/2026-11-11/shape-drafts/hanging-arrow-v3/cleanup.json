@@ -1,0 +1,36 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "originals_preserved": true,
+  "dimensionsPreservedDuringCleanup": true,
+  "vae": "Flux2 VAE",
+  "residual": "LatentR R_ema",
+  "assets": [
+    {
+      "key": "salvo_potion",
+      "source": "docs/design/assets/potions/2026-11-11/shape-drafts/hanging-arrow-v3/originals/salvo_potion.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/shape-drafts/hanging-arrow-v3/cleaned-native/salvo_potion.png",
+      "file": "docs/design/assets/potions/2026-11-11/shape-drafts/hanging-arrow-v3/icons/salvo_potion.png",
+      "originalSize": [
+        1024,
+        1024
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "23fd5282a57c5025678c733c538ea80c70ec6023275fae67968e3d85da8214bd",
+      "cleaned_sha256": "5d050491eae73463ada861234c6261de6c5b6d8ae6af559e47af52fdb67ee2c1",
+      "sha256": "b3c0084683ffc293ed4e36536468c2a71ee6e7c50caa771a162708cc4941b9d9",
+      "visibleRgbMeanAbsoluteChange": 0.4172,
+      "seconds": 1.375
+    }
+  ]
+}

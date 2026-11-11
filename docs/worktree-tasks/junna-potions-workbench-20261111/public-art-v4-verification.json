@@ -1,0 +1,22 @@
+{
+  "revision": 4952,
+  "mcpRevision": 4952,
+  "name": "齐射药剂",
+  "text": "打出你的所有箭矢。",
+  "art": "potion-salvo-20261111-v4",
+  "assetURL": "https://junna.17181718.xyz/assets/73c33f9a69d6e6a30ee995de.png",
+  "sha256": "73c33f9a69d6e6a30ee995de9ebf923d6d309db2f51f64c5aabd4ce1e19bb13e",
+  "dimensions": [
+    256,
+    256
+  ],
+  "publicEntryMatchesMCP": true,
+  "matchesLocalIcon": true,
+  "all63NativeSourceHashesMatch": true,
+  "alphaPreservedDuringCleanup": true,
+  "darkContoursPreservedDuringCleanup": true,
+  "sizeReview": [
+    32,
+    64
+  ]
+}

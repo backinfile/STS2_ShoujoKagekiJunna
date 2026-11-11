@@ -1,0 +1,111 @@
+[
+  {
+    "collection": "fitPool",
+    "uid": "junna_potion_common_knowledge_20261111",
+    "entity": {
+      "uid": "junna_potion_common_knowledge_20261111",
+      "id": "FIT_POTION_JP01",
+      "name": "普通职业药水",
+      "theme": "职业药水",
+      "text": "从3组随机知识牌中选择1组加入你的手牌。这些牌在本回合可以免费打出。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "",
+      "cardIds": [],
+      "notes": "用户已给定效果。名称与配图待定。知识组包含所选入口及其直接关联牌，沿用当前知识关系与发放数量；整组获得的牌在本回合免费。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP01",
+        "rarity": "普通",
+        "rarityValue": "Common",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "知识",
+        "status": "draft",
+        "nameStatus": "待定",
+        "artStatus": "待定",
+        "artDirection": "以书本或纸页作为药瓶中的主物件，采用清楚的瓶形和单一主色；从三组知识中选一组的流程由效果表达。"
+      }
+    },
+    "version": "2:054de50f11f4708a2065b6b5eabddb14a41e500039e42fc0584aac771d4715bd",
+    "revision": 4888
+  },
+  {
+    "collection": "fitPool",
+    "uid": "junna_potion_uncommon_damage_bonus_20261111",
+    "entity": {
+      "uid": "junna_potion_uncommon_damage_bonus_20261111",
+      "id": "FIT_POTION_JP02",
+      "name": "罕见职业药水",
+      "theme": "职业药水",
+      "text": "所有手牌获得9点伤害加成。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "",
+      "cardIds": [],
+      "notes": "用户已给定效果和9点数值。名称与配图待定。伤害加成沿用工作台现有机制约定。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP02",
+        "rarity": "罕见",
+        "rarityValue": "Uncommon",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "伤害加成",
+        "status": "draft",
+        "nameStatus": "待定",
+        "artStatus": "待定",
+        "artDirection": "以训练补给的瓶或壶表现日常锻炼，可使用一处运动器材或训练用品特征；瓶内液体与轮廓保持简洁。"
+      }
+    },
+    "version": "2:33f68bb5648d808e3b6fa91843332f3e06f1c7e55348c614e2fb135ed8e8431e",
+    "revision": 4888
+  },
+  {
+    "collection": "fitPool",
+    "uid": "junna_potion_rare_arrows_20261111",
+    "entity": {
+      "uid": "junna_potion_rare_arrows_20261111",
+      "id": "FIT_POTION_JP03",
+      "name": "稀有职业药水",
+      "theme": "职业药水",
+      "text": "打出你的所有箭矢。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "",
+      "cardIds": [],
+      "notes": "用户已给定效果。名称与配图待定。“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP03",
+        "rarity": "稀有",
+        "rarityValue": "Rare",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "箭矢",
+        "status": "draft",
+        "nameStatus": "待定",
+        "artStatus": "待定",
+        "artDirection": "采用能够看清箭束或箭头的容器，主轮廓与前两瓶区分；以少量明确的箭矢元素表达成批出手。"
+      }
+    },
+    "version": "2:f79a8da18157a1d61c6ecf377764e2ad91d8ce58a80a49ceeff6fea86a5db277",
+    "revision": 4888
+  },
+  {
+    "collection": "styles",
+    "uid": "junna_style_native_potion_naming_art",
+    "entity": {
+      "uid": "junna_style_native_potion_naming_art",
+      "id": "STYLE_NATIVE_POTION_NAMING_ART",
+      "name": "本体药水命名与图标特点",
+      "category": "药水设计",
+      "content": "依据 2026-11-11 检查的本体本地提取快照：63种药水，常规普通、罕见、稀有各20种，另有2种事件药水和1种衍生物。以“药水”结尾的名称在普通、罕见、稀有中分别为19/20、8/20、3/20。此比例描述当前样本。\n\n命名\n1. 常见基础收益直接用“效果或资源名＋药水”：攻击药水、格挡药水、力量药水、集中药水、星星药水。名称短，便于使用时辨认收益。\n2. 具体材料、制剂和容器也可承担名字：灰水、骨头酿、明晰提取物、稳定血清、士兵炖汤、尸鬼瓮、罐装幽灵、瓶中船。名称指向玩家能想象的物件。\n3. 可用与机制有联系的简短意象：液态记忆、瓶装潜能、精炼混沌、预知之滴、王之勇气。药水并不统一采用台词或歌词命名。\n4. 本体五职业在此快照中各有普通、罕见、稀有各一瓶专属药水。职业辨识来自资源、材料和器物：铁甲的鲜血、灰、炖汤，静默的毒、狡诈与幽灵，故障的集中、扩容与黑暗，亡灵的灾厄、骨头与尸鬼，储君的星星、王与宇宙。\n5. 普通名称多直述功能，罕见和稀有名称更常使用具体材料或意象；稀有度与某个后缀没有固定对应。\n\n图标\n1. 本体药水使用透明背景的独立物件图标。检查的63张提取图均为256×256；实际设计面向药水栏中的小尺寸识别。\n2. 轮廓粗而清楚，色块简化，玻璃高光、瓶内液面和少量阴影表现体积。主体通常占据图像大部，少用细碎纹理。\n3. 通过整体瓶形、瓶塞、颜色和一个主符号区分物件。攻击／技能／能力药水采用近似的扁瓶及不同颜色；肌肉药水像屈臂，能量药水像闪电，星星药水使用四角星瓶形。\n4. 名称中的材料或实体可以成为实物：骨头酿的骨形瓶塞、士兵炖汤的锅、尸鬼瓮的罐与符纸、瓶中船的船、罐装幽灵的幽灵。物件本身承担主题。\n5. 瓶形和液体颜色不由稀有度统一规定。职业识别可以由器物语言和专属资源表现；同组三瓶应有不同的主轮廓与瓶内物。\n6. 为纯那药水选图时，优先明确的药瓶或容器，再以瓶内物、外形和少量符号表达学习、训练、箭矢。缩小后检查轮廓与主物件是否仍清楚。\n\n来源：<vanilla-extraction>/data/potions.json、extraction/raw/localization/zhs/potions.json、backend/static/images/potions/*.png、extraction/raw/src/Core/Models/PotionPools/、Core/Models/PotionModel.cs。图标接触表及63条名称清单保存在 docs/worktree-tasks/junna-potions-workbench-20261111/。"
+    },
+    "version": "1:2359f88d5635c03eac190814db67ce289a120353e2b9097cba533d2e74a71e55",
+    "revision": 4888
+  }
+]

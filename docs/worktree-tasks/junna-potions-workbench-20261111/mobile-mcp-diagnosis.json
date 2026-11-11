@@ -1,0 +1,33 @@
+{
+  "userSymptom": "手机mcp无连接",
+  "status": "not reproduced; awaiting phone-specific error and whether it is the web editor or ChatGPT mobile MCP connection",
+  "http": {
+    "public": 200,
+    "snapshot": 200,
+    "editor": 200
+  },
+  "service": {
+    "active": true,
+    "substate": "running",
+    "restarts": 0,
+    "exitStatus": 0
+  },
+  "sdkMcp": {
+    "connected": true,
+    "revision": 4986
+  },
+  "servedBrowserTransport": {
+    "asset": "/assets/5ddbd1c43c1b0e6a7ea54897.js",
+    "sha256": "d3b30b87ae56ad3f2437e2dbace3357d62a9d7b746b851a8ff7fba72f323c335",
+    "usesAbortSignalTimeout": false,
+    "profileWithoutStaticTimeoutConnected": true,
+    "liveMobileHeadersConnected": true,
+    "ready": true,
+    "revision": 4989,
+    "snapshotReceived": true,
+    "cards": 1070,
+    "connectionMilliseconds": 434
+  },
+  "serviceChangesMade": false,
+  "dataChangesMade": false
+}

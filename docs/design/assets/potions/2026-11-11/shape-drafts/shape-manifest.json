@@ -1,0 +1,35 @@
+{
+  "format": "editable SVG",
+  "drafts": [
+    {
+      "key": "sports_drink",
+      "name": "运动饮料",
+      "svg": "sports_drink.svg",
+      "viewBox": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "transparentBackground": true,
+      "alphaPreserved": true,
+      "fullyInsideCanvas": true,
+      "stage": "bottle-shape-draft"
+    },
+    {
+      "key": "salvo_potion",
+      "name": "齐射药剂",
+      "svg": "salvo_potion.svg",
+      "viewBox": [
+        0,
+        0,
+        256,
+        256
+      ],
+      "transparentBackground": true,
+      "alphaPreserved": true,
+      "fullyInsideCanvas": true,
+      "stage": "bottle-shape-draft"
+    }
+  ]
+}

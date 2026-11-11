@@ -1,0 +1,24 @@
+{
+  "tool": "built-in image_gen",
+  "useCase": "style-transfer / sketch-to-render",
+  "scope": "齐射药剂",
+  "analysis": "docs/worktree-tasks/junna-potions-workbench-20261111/native-potion-icon-design.md",
+  "images": [
+    {
+      "role": "approved shape",
+      "file": "docs/design/assets/potions/2026-11-11/shape-drafts/hanging-arrow-v3/originals/salvo_potion.png"
+    },
+    {
+      "role": "official style",
+      "file": "docs/design/assets/potions/2026-11-11/native-style-reference.png"
+    }
+  ],
+  "prompt": "Use case: style-transfer / sketch-to-render.\nAsset type: one finished 2D inventory potion icon for Slay the Spire 2.\nInput image 1 is the APPROVED SHAPE reference: preserve its bottle outline and proportions very closely. Input image 2 is an official potion-icon style reference sheet, not objects to copy into the new icon.\nPrimary request: turn the approved long kite-shaped bottle sketch into a finished native-style \"Salvo Potion\" icon.\nShape invariants: a short narrow neck with a simple warm brown cork at the TOP; shoulders widen into two angular corners relatively high on the body; from those corners two long straight sides converge to one long sharp BOTTOM point. The upper portion of the kite is short and the lower portion is elongated. No curved belly, no arrow barbs, no three-arrow cursor shape. Keep the silhouette as the main arrow cue. Show the full bottle, centered, with generous transparent margin; it may lean very slightly, with the cork toward the upper right, without changing the approved proportions.\nColor and materials: cool pale lavender-gray glass rim around saturated violet potion, a dark plum shadow block and one lighter violet block. The liquid fills about the lower two thirds of the body with a clear visible liquid surface and some empty glass above. A warm tan cork with a simple flat darker side. Use large flat painted color shapes.\nStyle: match the official sheet's small inventory-item language: bold slightly irregular near-black contour, thick pale colored glass edge, a few broad angular reflection strokes, compact hard-edged cel shading. A hand-painted 2D game icon, NOT a glossy 3D rendering. Preserve readability at 32 pixels.\nDecoration: only two or three small simple bubbles and a few glass reflections. The arrow-shaped bottle is already the identifying motif. No physical arrows inside, no attached arrows, no label, no bow, no cords, no metal armor, no gem, no stars, no magical aura.\nComposition: one single isolated bottle, no scene, no ground, no cast shadow, no border, no text, no contact sheet. Genuinely transparent background.",
+  "output": {
+    "original": "docs/design/assets/potions/2026-11-11/v4/originals/salvo_potion.png",
+    "nativeSize": [
+      1024,
+      1536
+    ]
+  }
+}

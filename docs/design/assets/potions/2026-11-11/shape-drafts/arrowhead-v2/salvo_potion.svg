@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title"><title id="title">齐射药剂箭头瓶形草图</title>
+<g transform="rotate(24 128 128)" stroke="#151b20" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+  <path id="arrowhead-bottle-body" d="M128 20 L218 143 L163 126 L163 190 L93 190 L93 126 L38 143 Z" fill="#b8c8cd"/>
+  <path id="glass-inner-edge" d="M128 37 L198 129 L155 115 L155 182 L101 182 L101 115 L58 129 Z" fill="none" stroke="#e5eceb" stroke-width="2"/>
+  <path id="tail-mouth-cork" d="M97 190 L159 190 L158 220 L99 222 Z" fill="#a69a85"/>
+  <path d="M108 202 L146 202" fill="none" stroke="#d3c8b3" stroke-width="2"/>
+</g></svg>

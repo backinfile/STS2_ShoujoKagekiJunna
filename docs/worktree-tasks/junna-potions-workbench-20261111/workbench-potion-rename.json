@@ -1,0 +1,45 @@
+{
+  "requestId": "17781f0e-0caf-4444-b4db-d7231f323fbe",
+  "clientId": "codex-junna-potions-workbench-20261111",
+  "label": "将稀有职业药水改名为齐射药剂",
+  "kind": "设计",
+  "changes": [
+    {
+      "collection": "fitPool",
+      "uid": "junna_potion_rare_arrows_20261111",
+      "expectedVersion": "5:a14d96a0a9d5528ba096b65f2bf7ea2626bf9172ad107c9e5478ffb0e6a67d12",
+      "expectedFields": {
+        "name": "瓶装箭雨",
+        "potionDesign": {
+          "id": "JP03",
+          "rarity": "稀有",
+          "rarityValue": "Rare",
+          "character": "星见纯那",
+          "characterId": "ShoujoKagekiJunna",
+          "system": "箭矢",
+          "status": "draft",
+          "nameStatus": "已命名",
+          "artStatus": "已绘制",
+          "artDirection": "一曲一直的箭筒形紫色玻璃瓶，三支带木杆和箭羽的箭矢以不同角度朝瓶颈汇聚。",
+          "namingRationale": "沿用本体瓶装潜能、瓶中船等容器与内容相连的命名方式；瓶内箭束对应一次打出所有箭矢。"
+        }
+      },
+      "updates": {
+        "name": "齐射药剂",
+        "potionDesign": {
+          "id": "JP03",
+          "rarity": "稀有",
+          "rarityValue": "Rare",
+          "character": "星见纯那",
+          "characterId": "ShoujoKagekiJunna",
+          "system": "箭矢",
+          "status": "draft",
+          "nameStatus": "已命名",
+          "artStatus": "已绘制",
+          "artDirection": "一曲一直的箭筒形紫色玻璃瓶，三支带木杆和箭羽的箭矢以不同角度朝瓶颈汇聚。",
+          "namingRationale": "采用常用动作名“齐射”，直接对应一次打出所有箭矢；“药剂”表明消耗品身份。"
+        }
+      }
+    }
+  ]
+}

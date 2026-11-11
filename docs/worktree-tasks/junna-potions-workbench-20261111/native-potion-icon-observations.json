@@ -1,0 +1,573 @@
+{
+  "scope": "63 icons in the inspected vanilla extraction snapshot",
+  "method": "Visual inspection at original 256px size; shape/color/decoration descriptions are inferred from the finished artwork.",
+  "potions": [
+    {
+      "name": "集中药水",
+      "shape": "硬折角框架，中央露出药液",
+      "color": "金黄外壳、青蓝液体",
+      "decoration": "粗框、简化气泡",
+      "id": "FOCUS_POTION",
+      "image": "focus_potion.png",
+      "sha256": "8bf20c553e49c101c3572858d01320dddd1c95af8d28e320b6cf3826b4f31edd"
+    },
+    {
+      "name": "鲜血药水",
+      "shape": "圆腹小瓶，上端大金属盖与拉环",
+      "color": "血红、铜褐",
+      "decoration": "铆钉状孔点、拉环",
+      "id": "BLOOD_POTION",
+      "image": "blood_potion.png",
+      "sha256": "ace16e5c5f1f45acd895ad12f0777193c09bc17ec88031624ca237568e387c6d"
+    },
+    {
+      "name": "灾厄药水",
+      "shape": "瓶身下部直接构成骷髅脸",
+      "color": "紫、浅紫边",
+      "decoration": "眼眶和鼻孔的大块负形",
+      "id": "POTION_OF_DOOM",
+      "image": "potion_of_doom.png",
+      "sha256": "7dcdc442415b53fb6105d446c0509c1a012d383704a3fa90aa505dcc2818d932"
+    },
+    {
+      "name": "星星药水",
+      "shape": "四角内凹星形瓶",
+      "color": "青蓝、深蓝",
+      "decoration": "同心边线、少量气泡",
+      "id": "STAR_POTION",
+      "image": "star_potion.png",
+      "sha256": "01cb7be9afbb6ee6fc5128f89b7557089e961cf6be5623066ee52da0091f5c81"
+    },
+    {
+      "name": "攻击药水",
+      "shape": "斜置扁方瓶，短颈旋盖",
+      "color": "红橙、浅青边",
+      "decoration": "大块多边形标记、横向瓶肩高光",
+      "id": "ATTACK_POTION",
+      "image": "attack_potion.png",
+      "sha256": "721a2b27353ec82ff67f8e7c6d84d3dc2f956cdd6fe0dc424e1a1a9b8c8b74fd"
+    },
+    {
+      "name": "格挡药水",
+      "shape": "上宽下收的盾形腹",
+      "color": "蓝、浅蓝灰边",
+      "decoration": "液面、圆气泡",
+      "id": "BLOCK_POTION",
+      "image": "block_potion.png",
+      "sha256": "a25df964d02ab443400fa8e9ec011cc6adbc9238ba50da4d7f87847266426544"
+    },
+    {
+      "name": "无色药水",
+      "shape": "与攻击药水同族的扁方瓶",
+      "color": "灰、黑、浅青边",
+      "decoration": "椭圆标记",
+      "id": "COLORLESS_POTION",
+      "image": "colorless_potion.png",
+      "sha256": "b7f2b5d791d9778c5347685461080e2132d8e85d3b09575650217ec2a2d83989"
+    },
+    {
+      "name": "敏捷药水",
+      "shape": "圆腹瓶，长而斜的木质塞杆",
+      "color": "绿、棕",
+      "decoration": "长塞杆成为轮廓差异",
+      "id": "DEXTERITY_POTION",
+      "image": "dexterity_potion.png",
+      "sha256": "508705b2ffebe9f3051ba7f6bc89be00ca0190da59f923fb616ac7d00b1c5980"
+    },
+    {
+      "name": "能量药水",
+      "shape": "瓶身直接折成闪电",
+      "color": "黄橙、米黄边",
+      "decoration": "液体中的白色折线",
+      "id": "ENERGY_POTION",
+      "image": "energy_potion.png",
+      "sha256": "8546383bce5906ef34964d3343e792bb631b659b457762631f27dd0109bc313b"
+    },
+    {
+      "name": "爆炸安瓿",
+      "shape": "两端拉尖的玻璃安瓿",
+      "color": "橙红、灰青边",
+      "decoration": "中央白色爆闪、少量火星形点",
+      "id": "EXPLOSIVE_AMPOULE",
+      "image": "explosive_ampoule.png",
+      "sha256": "da875f8fb08484d8b8b0c9d18b7b30cf26e60350733c14903af772807d4b37a6"
+    },
+    {
+      "name": "火焰药水",
+      "shape": "近圆扁瓶",
+      "color": "红橙",
+      "decoration": "一枚大火焰形色块",
+      "id": "FIRE_POTION",
+      "image": "fire_potion.png",
+      "sha256": "62b2258f24195cc55c631dac914df07baec9e0f31f9abf9fee9b13214fb9e9d0"
+    },
+    {
+      "name": "肌肉药水",
+      "shape": "双臂屈起的躯干轮廓",
+      "color": "金黄、米白边",
+      "decoration": "胸腹明暗与气泡",
+      "id": "FLEX_POTION",
+      "image": "flex_potion.png",
+      "sha256": "cb0adad9b51134500ea7937be7e93be5587c2aa6d85df8d9a8a158a64505856e"
+    },
+    {
+      "name": "能力药水",
+      "shape": "与攻击药水同族的扁方瓶",
+      "color": "蓝、青白边",
+      "decoration": "浅色多边形标记",
+      "id": "POWER_POTION",
+      "image": "power_potion.png",
+      "sha256": "10d2f896377ded75fffc6359c12d151df51407fe91ce368aea9070341a232275"
+    },
+    {
+      "name": "技能药水",
+      "shape": "与攻击药水同族的扁方瓶",
+      "color": "绿、青白边",
+      "decoration": "浅色多边形标记",
+      "id": "SKILL_POTION",
+      "image": "skill_potion.png",
+      "sha256": "256bd12d6cc0ac25809eea2f59c32c4cd07c5139c5f210cd233f54f1cdfbe0de"
+    },
+    {
+      "name": "速度药水",
+      "shape": "圆腹细颈，底部短凸角",
+      "color": "青蓝、浅青边",
+      "decoration": "几枚大气泡、细颈亮点",
+      "id": "SPEED_POTION",
+      "image": "speed_potion.png",
+      "sha256": "d440134662ee63611c69c1d0746a4869c296dc3ddf75bd67a93810bfb5a399a7"
+    },
+    {
+      "name": "力量药水",
+      "shape": "斜置方腹玻璃瓶，大木塞",
+      "color": "红、橙黄气泡",
+      "decoration": "清晰液面、木塞孔点",
+      "id": "STRENGTH_POTION",
+      "image": "strength_potion.png",
+      "sha256": "8f5b2999287301821614ae8f04c79288cb650b1d5b275ce15387b2493c0be48b"
+    },
+    {
+      "name": "迅捷药水",
+      "shape": "多面方瓶，瓶口有翻盖结构",
+      "color": "蓝绿、浅青边",
+      "decoration": "铰接盖与大块面分割",
+      "id": "SWIFT_POTION",
+      "image": "swift_potion.png",
+      "sha256": "ea6515d46e398b41d4b0d90167c44461b4dc23fa3e77b53fc56119adece05a98"
+    },
+    {
+      "name": "易伤药水",
+      "shape": "心形瓶身，瓶口偏一侧",
+      "color": "玫红、浅粉边",
+      "decoration": "贯穿心形的单条裂缝",
+      "id": "VULNERABLE_POTION",
+      "image": "vulnerable_potion.png",
+      "sha256": "ff29e25384fe91a6cfd9899e20689f41704995f49dcb81c09e745f3e445524bd"
+    },
+    {
+      "name": "虚弱药水",
+      "shape": "两侧内凹的拼片式轮廓",
+      "color": "浅绿、灰绿边",
+      "decoration": "分层液体色带、尖木塞",
+      "id": "WEAK_POTION",
+      "image": "weak_potion.png",
+      "sha256": "5fc0352a74a6fdac350ca4b4e042f2767a5e20cd7aa316ccbec7ad9272f341da"
+    },
+    {
+      "name": "毒药水",
+      "shape": "细长药囊连接尖锥形外壳",
+      "color": "黄绿、金属灰",
+      "decoration": "尖锥大开口、绿色气泡",
+      "id": "POISON_POTION",
+      "image": "poison_potion.png",
+      "sha256": "a97f4f94bfb39318ef4c4b7e5c9217315e49c8949eda4d6adce0ecb9aee4e18c"
+    },
+    {
+      "name": "扩容药水",
+      "shape": "上下相连的双圆腹",
+      "color": "青蓝、灰蓝",
+      "decoration": "绕颈金属片、旋涡色块",
+      "id": "POTION_OF_CAPACITY",
+      "image": "potion_of_capacity.png",
+      "sha256": "228dfdfaacc647d40d0f7e1237db6c8910a04ed34169645ee08dec913ed64ff1"
+    },
+    {
+      "name": "灰水",
+      "shape": "面具状瓶体，上部绕布和绳",
+      "color": "灰蓝、米褐",
+      "decoration": "面部凹凸、布结",
+      "id": "ASHWATER",
+      "image": "ashwater.png",
+      "sha256": "e60742f6b67d877cc3fda25703b2b35e5e18cf84670285cdbcae3300c2a7580b"
+    },
+    {
+      "name": "骨头酿",
+      "shape": "短而不规则的瓶身，巨骨作塞",
+      "color": "深蓝、淡紫边、骨灰黄",
+      "decoration": "骨头占据上半轮廓",
+      "id": "BONE_BREW",
+      "image": "bone_brew.png",
+      "sha256": "16fdf415f587ff73c02a6776108ebb664aa068364930b06e776bb7d6b1d8ef09"
+    },
+    {
+      "name": "王之勇气",
+      "shape": "斜置方腹、短颈金属盖",
+      "color": "橙金、米黄边、蓝绿盖",
+      "decoration": "大块斜向亮暗面",
+      "id": "KINGS_COURAGE",
+      "image": "kings_courage.png",
+      "sha256": "c9153a65a83256ae8f237ecf6407efae70915e53c0c0192e808a6d88565ecb97"
+    },
+    {
+      "name": "熔炉的祝福",
+      "shape": "瓶体直接采用铁砧轮廓",
+      "color": "红、粉灰边",
+      "decoration": "铁砧凹口、圆气泡",
+      "id": "BLESSING_OF_THE_FORGE",
+      "image": "blessing_of_the_forge.png",
+      "sha256": "e37da7974205d7d7547f852f64c68d4c34b66c246eaf1581aafa47194ae0addd"
+    },
+    {
+      "name": "明晰提取物",
+      "shape": "被斜边分开的球形容器",
+      "color": "紫、浅紫边",
+      "decoration": "脑形或神经状浅色主体",
+      "id": "CLARITY",
+      "image": "clarity.png",
+      "sha256": "101f07ace4679a3a589f75fa7b06692dd1761c219eb1762881cac5248133ddd8"
+    },
+    {
+      "name": "痊愈药水",
+      "shape": "圆腹连接长弯嘴",
+      "color": "浅蓝、灰绿边、橙盖",
+      "decoration": "一团浅色云状液体",
+      "id": "CURE_ALL",
+      "image": "cure_all.png",
+      "sha256": "726452233615089498e18ddc0da29ec70da4f19ff93e2b7863df58b2e19b3b70"
+    },
+    {
+      "name": "复制药水",
+      "shape": "沙漏形两端鼓起、中腰收窄",
+      "color": "蓝、淡黄边",
+      "decoration": "上下两枚同色圆体",
+      "id": "DUPLICATOR",
+      "image": "duplicator.png",
+      "sha256": "8ffd24bbdb9f0f07f3c9979d6089e2715a20da14f58fee570280346b81e6ec61"
+    },
+    {
+      "name": "固化药水",
+      "shape": "砖块逐层堆叠的阶梯瓶",
+      "color": "钢蓝、灰白边",
+      "decoration": "砖缝与块面",
+      "id": "FORTIFIER",
+      "image": "fortifier.png",
+      "sha256": "442ebf141860e0cfbbbd2562f51e9d8be6588e550d6112a3daab07c6bb929433"
+    },
+    {
+      "name": "异鱼之油",
+      "shape": "歪向一侧的豆形圆腹",
+      "color": "灰青蓝、浅灰边",
+      "decoration": "朴素木塞、少量液体斑点",
+      "id": "FYSH_OIL",
+      "image": "fysh_oil.png",
+      "sha256": "c71992e02dde7f8c5e03c8490d1f9d51fa19dce3327d20bbae67d4b71bdb1718"
+    },
+    {
+      "name": "赌徒特酿",
+      "shape": "立方骰子形玻璃瓶",
+      "color": "灰、白、浅蓝",
+      "decoration": "白色骰点",
+      "id": "GAMBLERS_BREW",
+      "image": "gamblers_brew.png",
+      "sha256": "e0c648cb73fbd6ff67454804340f05ca5baf302e5f2bca3197818a496c5ba1ec"
+    },
+    {
+      "name": "铁心药水",
+      "shape": "屈臂形厚重瓶体",
+      "color": "金属灰、蓝",
+      "decoration": "宽金属切面、内部蓝色块",
+      "id": "HEART_OF_IRON",
+      "image": "heart_of_iron.png",
+      "sha256": "30a990b019db750d3d3866aca2c9aa432235c812d52a1fd2b73dc9f0b5d74802"
+    },
+    {
+      "name": "流动铜液",
+      "shape": "多尖角放射轮廓",
+      "color": "铜橙、淡黄边",
+      "decoration": "小气泡、明确液面",
+      "id": "LIQUID_BRONZE",
+      "image": "liquid_bronze.png",
+      "sha256": "e8ae15cb3896a27d046a4e2c381e5299198981c0c5e633de3aeb3c0c2f4962f6"
+    },
+    {
+      "name": "缚魂药水",
+      "shape": "普通扁方瓶被布带包裹",
+      "color": "灰、米白",
+      "decoration": "几道大宽布带",
+      "id": "POTION_OF_BINDING",
+      "image": "potion_of_binding.png",
+      "sha256": "5045b0eeb346e99018bd642333eb03b15553f53f4391e7bc414b5cef5da47e7f"
+    },
+    {
+      "name": "消亡粉末",
+      "shape": "细长圆筒瓶，底部套木壳",
+      "color": "灰黑、棕",
+      "decoration": "颗粒状粉末、木壳箍环",
+      "id": "POWDERED_DEMISE",
+      "image": "powdered_demise.png",
+      "sha256": "3a79d459bc720b43bf1e7b6294d3a8109a7922279075a7b3f46ec89436fb708a"
+    },
+    {
+      "name": "明耀酊剂",
+      "shape": "细长尖腹，厚外套包住瓶身",
+      "color": "黄、薄荷绿、蓝紫塞",
+      "decoration": "黄色内窗、孔点瓶塞",
+      "id": "RADIANT_TINCTURE",
+      "image": "radiant_tincture.png",
+      "sha256": "cc6f83428ae1344f97224ced9995aea69a581fa6700dfbb5f7601c294c46595a"
+    },
+    {
+      "name": "再生药水",
+      "shape": "弯曲宽刃式轮廓接窄瓶管",
+      "color": "骨白、荧绿",
+      "decoration": "宽刃负形、窄绿药液窗",
+      "id": "REGEN_POTION",
+      "image": "regen_potion.png",
+      "sha256": "c31c934c70f25ba1729b9fe0f27cb2fa089f896f696f45be52964c1100ed8c81"
+    },
+    {
+      "name": "稳定血清",
+      "shape": "竹节或卷叶式长筒",
+      "color": "淡绿、橙",
+      "decoration": "一根系绳、几道节纹",
+      "id": "STABLE_SERUM",
+      "image": "stable_serum.png",
+      "sha256": "99482a35bb36f045f183af8ec7731586ac6e235547020d349e1087c95b5c7d71"
+    },
+    {
+      "name": "癫狂之触",
+      "shape": "细长管瓶配夸张长塞",
+      "color": "紫、棕橙",
+      "decoration": "顶部圆端、简化液体波纹",
+      "id": "TOUCH_OF_INSANITY",
+      "image": "touch_of_insanity.png",
+      "sha256": "2f4280d0ba96bd379c694f983e9cef991c31aa902851459dbe4cd23739bd7ad1"
+    },
+    {
+      "name": "狡诈药水",
+      "shape": "匕首式长尖塞与三角瓶腹",
+      "color": "冷灰、浅蓝灰",
+      "decoration": "尖刃、少量气泡",
+      "id": "CUNNING_POTION",
+      "image": "cunning_potion.png",
+      "sha256": "e158aa98dda9e720c2bc6b79748eddddcd4c62ef16177fd1e71d1b6886d35783"
+    },
+    {
+      "name": "黑暗精华",
+      "shape": "扁腹香水瓶，带挤压球",
+      "color": "紫、绿、黄褐",
+      "decoration": "一枚骷髅形内容、挤压球",
+      "id": "ESSENCE_OF_DARKNESS",
+      "image": "essence_of_darkness.png",
+      "sha256": "6ae003bb97bc95999fbecd2b9b892990ce5244bf2570a4d48448f7ca0442f0d1"
+    },
+    {
+      "name": "士兵炖汤",
+      "shape": "有盖的金属饭锅",
+      "color": "金褐、红",
+      "decoration": "侧挂勺子、锅盖大纹样",
+      "id": "SOLDIERS_STEW",
+      "image": "soldiers_stew.png",
+      "sha256": "c0d68775343ad15b1a417f16a9f57aa7d312d759d5e96c17f78596b166124b86"
+    },
+    {
+      "name": "尸鬼瓮",
+      "shape": "宽腹陶瓮",
+      "color": "灰蓝、米白、红",
+      "decoration": "封口布、绳结与符纸",
+      "id": "POT_OF_GHOULS",
+      "image": "pot_of_ghouls.png",
+      "sha256": "b2e87cfa31b598ff458af8dda08811d75dee74ab4d116659bceaa75651c97f5d"
+    },
+    {
+      "name": "宇宙药剂",
+      "shape": "细长瓶身穿过环形结构",
+      "color": "蓝、灰蓝、黄",
+      "decoration": "轨道环、少量星点连线",
+      "id": "COSMIC_CONCOCTION",
+      "image": "cosmic_concoction.png",
+      "sha256": "78fd78145732622486a5cab821af9af32cb2aa6dfb3847b40dcd5b372d3d5424"
+    },
+    {
+      "name": "甲虫汁",
+      "shape": "带吸管的纸盒",
+      "color": "浅绿、黑、白",
+      "decoration": "一枚黑色甲虫剪影",
+      "id": "BEETLE_JUICE",
+      "image": "beetle_juice.png",
+      "sha256": "0ba52d9a6a71225a24bef8c31d64047f2c8c5b38d6284ef3377737ec4b8a0573"
+    },
+    {
+      "name": "瓶装潜能",
+      "shape": "短颈泪滴瓶",
+      "color": "亮青蓝、白",
+      "decoration": "中央发亮圆核与环形色块",
+      "id": "BOTTLED_POTENTIAL",
+      "image": "bottled_potential.png",
+      "sha256": "3115abae8267527906609db3aa1853c1890c939acba2154ae5576a2d60c9562e"
+    },
+    {
+      "name": "精炼混沌",
+      "shape": "宽口直壁玻璃罐",
+      "color": "灰绿、灰白、亮粉",
+      "decoration": "一枚粉色主体、几团灰色块",
+      "id": "DISTILLED_CHAOS",
+      "image": "distilled_chaos.png",
+      "sha256": "d83001f0ca6a8b6b276bfca0d19e37c709b16e45397120714f93faa9f990b05d"
+    },
+    {
+      "name": "预知之滴",
+      "shape": "滴管形细尖端连接眼形头",
+      "color": "深青绿、金黄",
+      "decoration": "一枚大眼睛、滴管尖端",
+      "id": "DROPLET_OF_PRECOGNITION",
+      "image": "droplet_of_precognition.png",
+      "sha256": "e005acf592fdd85ae4551bf1c282042d35878f06610cb7c57672197fc054d72c"
+    },
+    {
+      "name": "混沌药水",
+      "shape": "扭曲折返的异形瓶",
+      "color": "彩虹、棕",
+      "decoration": "大块彩色液体、卷曲瓶口",
+      "id": "ENTROPIC_BREW",
+      "image": "entropic_brew.png",
+      "sha256": "e89881f1998f9794e27efad45251862ac9ca7e845f20fb73a911a360dd6993ce"
+    },
+    {
+      "name": "瓶中精灵",
+      "shape": "多瓣花形瓶",
+      "color": "黄绿、黑灰",
+      "decoration": "中央一只简化带翅精灵",
+      "id": "FAIRY_IN_A_BOTTLE",
+      "image": "fairy_in_a_bottle.png",
+      "sha256": "38ffd255cb6c6cde6fe3f3e57e816bc33af05e1b0f0604242b5ac034706857e6"
+    },
+    {
+      "name": "果汁",
+      "shape": "宽腹窄口饮料瓶",
+      "color": "浅绿、橙、褐",
+      "decoration": "几片果实切面",
+      "id": "FRUIT_JUICE",
+      "image": "fruit_juice.png",
+      "sha256": "22c03a21bd453884bf9b378fc7fec7a58844ecdd3fb03907c44a2e27d169548c"
+    },
+    {
+      "name": "超巨化药水",
+      "shape": "锥形实验烧瓶",
+      "color": "红、粉白边",
+      "decoration": "几条粗白刻度",
+      "id": "GIGANTIFICATION_POTION",
+      "image": "gigantification_potion.png",
+      "sha256": "3ee6b797251a099fd947411909f4ee8e92ab6ee00a80b192c214d3cfd940c644"
+    },
+    {
+      "name": "液态记忆",
+      "shape": "侧偏瓶口的心形瓶",
+      "color": "紫、粉白、金褐",
+      "decoration": "螺纹尖塞、少量气泡",
+      "id": "LIQUID_MEMORIES",
+      "image": "liquid_memories.png",
+      "sha256": "992a67000f89169b4f45bb7136ae8551868b166995feba63c7329247b2b21b83"
+    },
+    {
+      "name": "幸运补剂",
+      "shape": "四叶草形瓶",
+      "color": "绿、浅黄边",
+      "decoration": "叶片大色块、少量气泡",
+      "id": "LUCKY_TONIC",
+      "image": "lucky_tonic.png",
+      "sha256": "687bc6a0e08c2df71271726324276ac00d2eb3156f35d3cf6a851ec1a2c5fdd6"
+    },
+    {
+      "name": "马萨雷斯的赠礼",
+      "shape": "方腹旋颈瓶",
+      "color": "浅青白、蓝",
+      "decoration": "几根蓝色羽毛",
+      "id": "MAZALETHS_GIFT",
+      "image": "mazaleths_gift.png",
+      "sha256": "4c8f6af81e7a3695cc13b2649a5be6476d322beb964b199bd90258b369eb1522"
+    },
+    {
+      "name": "欧洛巴斯之酸",
+      "shape": "横向弯曲的长管瓶",
+      "color": "淡粉、淡紫、浅灰边",
+      "decoration": "少量圆泡、两端渐变色区",
+      "id": "OROBIC_ACID",
+      "image": "orobic_acid.png",
+      "sha256": "5592b6fa8cc087bdf6326a8ed98f8c2ec4a4ed635449ea49324af34f6d28cf01"
+    },
+    {
+      "name": "镣铐药水",
+      "shape": "宽肩方腹壶",
+      "color": "蓝、灰青边",
+      "decoration": "两道醒目的金属链",
+      "id": "SHACKLING_POTION",
+      "image": "shackling_potion.png",
+      "sha256": "218c97ef9e90749d8f73ed7cef236936c3721e4eb53b01c7687f4b0fa52f47f8"
+    },
+    {
+      "name": "瓶中船",
+      "shape": "上窄下宽的斜方腹瓶",
+      "color": "蓝、白、木褐",
+      "decoration": "一艘有帆小船",
+      "id": "SHIP_IN_A_BOTTLE",
+      "image": "ship_in_a_bottle.png",
+      "sha256": "60c73067c0f97c1049f54bb77f7f249ca4217775849ce3aa7a2eb6c650f76e90"
+    },
+    {
+      "name": "异蛇之油",
+      "shape": "蛇形回弯瓶身",
+      "color": "浅绿、深绿、橙塞",
+      "decoration": "蛇形轮廓与斑点",
+      "id": "SNECKO_OIL",
+      "image": "snecko_oil.png",
+      "sha256": "d0cbf337895874bb6cd3c15fbf914a06c768dfce4c903529143c163e8aeeec7a"
+    },
+    {
+      "name": "罐装幽灵",
+      "shape": "歪置宽口罐",
+      "color": "灰绿、灰白、黑",
+      "decoration": "一张大幽灵脸",
+      "id": "GHOST_IN_A_JAR",
+      "image": "ghost_in_a_jar.png",
+      "sha256": "65fe7819f4535be1d8eef77dc09643caa16a5dc8e50e02ae13ee072248b29dc2"
+    },
+    {
+      "name": "污浊药水",
+      "shape": "双腹葫芦形容器",
+      "color": "淡紫、暗红、蓝白",
+      "decoration": "软管或角形塞、瓶身标签",
+      "id": "FOUL_POTION",
+      "image": "foul_potion.png",
+      "sha256": "13ffb8b6e798c4b076f53e961cf302b884cfbd058a83be6fd21cae9927006e07"
+    },
+    {
+      "name": "发光水",
+      "shape": "削角短颈扁瓶",
+      "color": "青蓝、荧黄绿",
+      "decoration": "中央一枚亮色放射斑",
+      "id": "GLOWWATER_POTION",
+      "image": "glowwater_potion.png",
+      "sha256": "a4b23d66576427a8e1d095cf7e26536b257490c563718219e68569c4b0b50113"
+    },
+    {
+      "name": "药水形状的石头",
+      "shape": "带瓶口的多面石块",
+      "color": "灰",
+      "decoration": "宽大石面与少量斑点",
+      "id": "POTION_SHAPED_ROCK",
+      "image": "potion_shaped_rock.png",
+      "sha256": "15a7824cdda8799bf9ecbcdb8e3a1d64fe7eab1410d9646ad6e8e68d9ca5482d"
+    }
+  ]
+}

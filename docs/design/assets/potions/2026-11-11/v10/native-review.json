@@ -1,0 +1,17 @@
+{
+  "reviewedCount": 63,
+  "allDirectNativePngsCovered": true,
+  "allNativeHashesMatch": true,
+  "observationRecords": "docs/worktree-tasks/junna-potions-workbench-20261111/native-potion-icon-observations.json",
+  "contactSheets": [
+    "docs/worktree-tasks/junna-potions-workbench-20261111/native-detail-1.png",
+    "docs/worktree-tasks/junna-potions-workbench-20261111/native-detail-2.png",
+    "docs/worktree-tasks/junna-potions-workbench-20261111/native-detail-3.png"
+  ],
+  "design": {
+    "shape": "单个连续的透明运动瓶，上下饱满、腰部收窄，便于握持；短颈、同轴旋盖与推拉壶嘴。",
+    "color": "橙金饮料为主色，深橙阴影、浅色玻璃边与蓝绿色瓶盖形成对比。",
+    "decoration": "壶嘴和收腰是功能结构，仅保留少量气泡和宽反光。",
+    "process": "内置image_gen从零生成正立图，原尺寸清理后整体旋转18度，倾斜阶段不重绘。"
+  }
+}

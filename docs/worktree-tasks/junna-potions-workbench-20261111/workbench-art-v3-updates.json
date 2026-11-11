@@ -1,0 +1,130 @@
+{
+  "requestId": "66fa3066-312c-4c3d-976a-a984104c2ede",
+  "clientId": "codex-junna-potions-workbench-20261111",
+  "label": "再次重绘运动饮料与瓶装箭雨",
+  "kind": "设计",
+  "changes": [
+    {
+      "collection": "fitPool",
+      "uid": "junna_potion_uncommon_damage_bonus_20261111",
+      "expectedVersion": "4:7d92f1891f3ffd76f996d2b3ccf5d3701a013a959e57e225735dcbc50d3df7ce",
+      "expectedFields": {
+        "art": "potion-sports-drink-20261111-v2",
+        "potionDesign": {
+          "id": "JP02",
+          "rarity": "罕见",
+          "rarityValue": "Uncommon",
+          "character": "星见纯那",
+          "characterId": "ShoujoKagekiJunna",
+          "system": "伤害加成",
+          "status": "draft",
+          "nameStatus": "已命名",
+          "artStatus": "已绘制",
+          "artDirection": "对照本体橙色药液与玻璃边线重绘：带红色拉式壶嘴的橙红运动水壶、硬边色块、浅色握带和少量气泡。",
+          "namingRationale": "采用现成的训练补给物件名，对应伤害加成体系的日常锻炼和训练成果；与本体士兵炖汤等具体补给品的命名方式一致。"
+        },
+        "artSource": {
+          "kind": "generated",
+          "tool": "built-in image_gen",
+          "date": "2026-11-11",
+          "iteration": 2,
+          "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+          "promptPath": "docs/design/assets/potions/2026-11-11/v2/generation-prompts.json",
+          "originalPath": "docs/design/assets/potions/2026-11-11/v2/originals/sports_drink.png",
+          "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v2/cleaned-native/sports_drink.png",
+          "file": "docs/design/assets/potions/2026-11-11/v2/icons/sports_drink.png",
+          "cleanupPath": "docs/design/assets/potions/2026-11-11/v2/cleanup.json"
+        }
+      },
+      "updates": {
+        "art": "potion-sports-drink-20261111-v3",
+        "potionDesign": {
+          "id": "JP02",
+          "rarity": "罕见",
+          "rarityValue": "Uncommon",
+          "character": "星见纯那",
+          "characterId": "ShoujoKagekiJunna",
+          "system": "伤害加成",
+          "status": "draft",
+          "nameStatus": "已命名",
+          "artStatus": "已绘制",
+          "artDirection": "短而宽的不对称训练水壶，灰色旋盖、橙色布环、橙红药液与少量黄色气泡。",
+          "namingRationale": "采用现成的训练补给物件名，对应伤害加成体系的日常锻炼和训练成果；与本体士兵炖汤等具体补给品的命名方式一致。"
+        },
+        "artSource": {
+          "kind": "generated",
+          "tool": "built-in image_gen",
+          "date": "2026-11-11",
+          "iteration": 3,
+          "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+          "promptPath": "docs/design/assets/potions/2026-11-11/v3/generation-prompts.json",
+          "originalPath": "docs/design/assets/potions/2026-11-11/v3/originals/sports_drink.png",
+          "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v3/cleaned-native/sports_drink.png",
+          "file": "docs/design/assets/potions/2026-11-11/v3/icons/sports_drink.png",
+          "cleanupPath": "docs/design/assets/potions/2026-11-11/v3/cleanup.json"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna_potion_rare_arrows_20261111",
+      "expectedVersion": "4:1dc2ae9f7e575ded0df364b4985d4e00a788fea3a0be920ec8ee5cc389dc1eeb",
+      "expectedFields": {
+        "art": "potion-bottled-arrow-rain-20261111-v2",
+        "potionDesign": {
+          "id": "JP03",
+          "rarity": "稀有",
+          "rarityValue": "Rare",
+          "character": "星见纯那",
+          "characterId": "ShoujoKagekiJunna",
+          "system": "箭矢",
+          "status": "draft",
+          "nameStatus": "已命名",
+          "artStatus": "已绘制",
+          "artDirection": "对照本体瓶中船与金属刃面重绘：紫色广腹瓶内有三支完整木杆箭矢，银色箭头与米白箭羽清楚可见。",
+          "namingRationale": "沿用本体瓶装潜能、瓶中船等容器与内容相连的命名方式；瓶内箭束对应一次打出所有箭矢。"
+        },
+        "artSource": {
+          "kind": "generated",
+          "tool": "built-in image_gen",
+          "date": "2026-11-11",
+          "iteration": 2,
+          "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+          "promptPath": "docs/design/assets/potions/2026-11-11/v2/generation-prompts.json",
+          "originalPath": "docs/design/assets/potions/2026-11-11/v2/originals/bottled_arrow_rain.png",
+          "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v2/cleaned-native/bottled_arrow_rain.png",
+          "file": "docs/design/assets/potions/2026-11-11/v2/icons/bottled_arrow_rain.png",
+          "cleanupPath": "docs/design/assets/potions/2026-11-11/v2/cleanup.json"
+        }
+      },
+      "updates": {
+        "art": "potion-bottled-arrow-rain-20261111-v3",
+        "potionDesign": {
+          "id": "JP03",
+          "rarity": "稀有",
+          "rarityValue": "Rare",
+          "character": "星见纯那",
+          "characterId": "ShoujoKagekiJunna",
+          "system": "箭矢",
+          "status": "draft",
+          "nameStatus": "已命名",
+          "artStatus": "已绘制",
+          "artDirection": "一曲一直的箭筒形紫色玻璃瓶，三支带木杆和箭羽的箭矢以不同角度朝瓶颈汇聚。",
+          "namingRationale": "沿用本体瓶装潜能、瓶中船等容器与内容相连的命名方式；瓶内箭束对应一次打出所有箭矢。"
+        },
+        "artSource": {
+          "kind": "generated",
+          "tool": "built-in image_gen",
+          "date": "2026-11-11",
+          "iteration": 3,
+          "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+          "promptPath": "docs/design/assets/potions/2026-11-11/v3/generation-prompts.json",
+          "originalPath": "docs/design/assets/potions/2026-11-11/v3/originals/bottled_arrow_rain.png",
+          "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v3/cleaned-native/bottled_arrow_rain.png",
+          "file": "docs/design/assets/potions/2026-11-11/v3/icons/bottled_arrow_rain.png",
+          "cleanupPath": "docs/design/assets/potions/2026-11-11/v3/cleanup.json"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title"><title id="title">齐射药剂瓶形草图</title>
+<g transform="rotate(18 128 128)" stroke="#151b20" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+  <path id="bottle-body" d="M108 62 L108 79 L70 104 L45 177 Q43 187 55 193 L124 225 Q131 228 139 222 L209 183 Q217 178 211 165 L174 105 L145 80 L145 62 Z" fill="#b8c8cd"/>
+  <path id="glass-inner-edge" d="M115 70 L115 84 L77 110 L54 176 Q52 181 60 185 L128 215 Q132 217 136 214 L201 177 Q206 174 202 169 L168 111 L138 85 L138 70" fill="none" stroke="#e5eceb" stroke-width="2"/>
+  <path id="bottle-cork" d="M108 35 L151 38 L148 63 L111 61 Z" fill="#a69a85"/>
+  <path d="M118 44 L138 46" fill="none" stroke="#d3c8b3" stroke-width="2"/>
+</g></svg>

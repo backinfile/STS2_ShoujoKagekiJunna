@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title" data-reference-resource="ShoujoKagekiJunna/images/floating_arrow_c1.svg">
+<title id="title">齐射药剂：悬挂箭矢轮廓瓶形草图</title>
+<g stroke="#151b20" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+  <!-- Runtime kite: (120,2), (238,134), (120,413), (2,134).
+       Scale 0.44; center x=128; theoretical upper point y=50.
+       The narrow upper point is opened into a short bottle neck. -->
+  <path id="hanging-arrow-bottle-body" d="M116.38 36 L139.62 36 L139.62 63 L179.92 108.08 L128 230.84 L76.08 108.08 L116.38 63 Z" fill="#b8c8cd"/>
+  <!-- The inset follows the actual portrait window from the hanging arrow. -->
+  <path id="glass-inner-edge" d="M128 62.32 L170.24 109.84 L128 209.28 L85.76 109.84 Z" fill="none" stroke="#e5eceb" stroke-width="2"/>
+  <path d="M122 43 L122 56 M134 43 L134 56" fill="none" stroke="#e5eceb" stroke-width="2"/>
+  <path id="upper-mouth-cork" d="M111 18 L145 18 L144 38 L112 38 Z" fill="#a69a85"/>
+  <path d="M118 26 L137 26" fill="none" stroke="#d3c8b3" stroke-width="2"/>
+</g></svg>

@@ -1,0 +1,57 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "originals_preserved": true,
+  "dimensionsPreservedDuringCleanup": true,
+  "vae": "Flux2 VAE",
+  "residual": "LatentR R_ema",
+  "assets": [
+    {
+      "key": "sports_drink_upright",
+      "source": "docs/design/assets/potions/2026-11-11/v10/originals/sports_drink_upright.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/v10/cleaned-native/sports_drink_upright.png",
+      "file": "docs/design/assets/potions/2026-11-11/v10/icons/sports_drink_upright.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "eligibleAlphaMinimum": 250,
+      "source_sha256": "40732405bf45835910c219996d4b9b7c2245ba67b80a565af3e6695eafefbd69",
+      "cleaned_sha256": "34492e494f425d68cf2addaecff70e3c4ae7ce237fb85cbc29b22e9b006ca530",
+      "sha256": "43ad8bb03436e2601e2f6c6c7c90d8dac5bf5fad9050b3f5433be3f10b2e1d5a",
+      "visibleRgbMeanAbsoluteChange": 0.4097,
+      "seconds": 3.203
+    },
+    {
+      "key": "sports_drink",
+      "derivedFromKey": "sports_drink_upright",
+      "source": "docs/design/assets/potions/2026-11-11/v10/cleaned-native/sports_drink_upright.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/v10/cleaned-native/sports_drink.png",
+      "file": "docs/design/assets/potions/2026-11-11/v10/icons/sports_drink.png",
+      "source_sha256": "34492e494f425d68cf2addaecff70e3c4ae7ce237fb85cbc29b22e9b006ca530",
+      "cleaned_sha256": "c7ad049ed1a1ee0f4291c563bed13e9a0264b9d81cc814212bde24f1ce935e35",
+      "sha256": "4141b3d44d90908be9f21644ec44e4c9933394e2cbc63fb93ad9dd0326f6da03",
+      "rotationDegreesClockwise": -18,
+      "rigidTransformVerified": true,
+      "alphaAreaRatio": 0.999552,
+      "transparentBackgroundPreserved": true,
+      "cleanupAppliedBeforeRotation": true,
+      "regeneratedAfterRotation": false,
+      "iconSize": [
+        256,
+        256
+      ]
+    }
+  ]
+}

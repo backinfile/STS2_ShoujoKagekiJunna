@@ -1,0 +1,10 @@
+{
+  "icons": [
+    {
+      "key": "arrow_rain_potion",
+      "name": "箭雨药水",
+      "assetId": "potion-arrow-rain-20261111-v6",
+      "file": "docs/design/assets/potions/2026-11-11/v6/icons/arrow_rain_potion.png"
+    }
+  ]
+}

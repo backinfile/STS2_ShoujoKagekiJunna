@@ -1,0 +1,951 @@
+{
+  "scope": "Local extracted vanilla potion snapshot inspected 2026-11-11",
+  "count": 63,
+  "potions": [
+    {
+      "id": "FOCUS_POTION",
+      "name": "集中药水",
+      "rarity": "Common",
+      "pool": "defect",
+      "image": "focus_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 1,
+      "sha256": "8bf20c553e49c101c3572858d01320dddd1c95af8d28e320b6cf3826b4f31edd",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "BLOOD_POTION",
+      "name": "鲜血药水",
+      "rarity": "Common",
+      "pool": "ironclad",
+      "image": "blood_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 2,
+      "sha256": "ace16e5c5f1f45acd895ad12f0777193c09bc17ec88031624ca237568e387c6d",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "POTION_OF_DOOM",
+      "name": "灾厄药水",
+      "rarity": "Common",
+      "pool": "necrobinder",
+      "image": "potion_of_doom.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 3,
+      "sha256": "7dcdc442415b53fb6105d446c0509c1a012d383704a3fa90aa505dcc2818d932",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "STAR_POTION",
+      "name": "星星药水",
+      "rarity": "Common",
+      "pool": "regent",
+      "image": "star_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 4,
+      "sha256": "01cb7be9afbb6ee6fc5128f89b7557089e961cf6be5623066ee52da0091f5c81",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "ATTACK_POTION",
+      "name": "攻击药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "attack_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 5,
+      "sha256": "721a2b27353ec82ff67f8e7c6d84d3dc2f956cdd6fe0dc424e1a1a9b8c8b74fd",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "BLOCK_POTION",
+      "name": "格挡药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "block_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 6,
+      "sha256": "a25df964d02ab443400fa8e9ec011cc6adbc9238ba50da4d7f87847266426544",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "COLORLESS_POTION",
+      "name": "无色药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "colorless_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 7,
+      "sha256": "b7f2b5d791d9778c5347685461080e2132d8e85d3b09575650217ec2a2d83989",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "DEXTERITY_POTION",
+      "name": "敏捷药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "dexterity_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 8,
+      "sha256": "508705b2ffebe9f3051ba7f6bc89be00ca0190da59f923fb616ac7d00b1c5980",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "ENERGY_POTION",
+      "name": "能量药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "energy_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 9,
+      "sha256": "8546383bce5906ef34964d3343e792bb631b659b457762631f27dd0109bc313b",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "EXPLOSIVE_AMPOULE",
+      "name": "爆炸安瓿",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "explosive_ampoule.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 10,
+      "sha256": "da875f8fb08484d8b8b0c9d18b7b30cf26e60350733c14903af772807d4b37a6",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "FIRE_POTION",
+      "name": "火焰药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "fire_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 11,
+      "sha256": "62b2258f24195cc55c631dac914df07baec9e0f31f9abf9fee9b13214fb9e9d0",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "FLEX_POTION",
+      "name": "肌肉药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "flex_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 12,
+      "sha256": "cb0adad9b51134500ea7937be7e93be5587c2aa6d85df8d9a8a158a64505856e",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "POWER_POTION",
+      "name": "能力药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "power_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 13,
+      "sha256": "10d2f896377ded75fffc6359c12d151df51407fe91ce368aea9070341a232275",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "SKILL_POTION",
+      "name": "技能药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "skill_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 14,
+      "sha256": "256bd12d6cc0ac25809eea2f59c32c4cd07c5139c5f210cd233f54f1cdfbe0de",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "SPEED_POTION",
+      "name": "速度药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "speed_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 15,
+      "sha256": "d440134662ee63611c69c1d0746a4869c296dc3ddf75bd67a93810bfb5a399a7",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "STRENGTH_POTION",
+      "name": "力量药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "strength_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 16,
+      "sha256": "8f5b2999287301821614ae8f04c79288cb650b1d5b275ce15387b2493c0be48b",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "SWIFT_POTION",
+      "name": "迅捷药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "swift_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 17,
+      "sha256": "ea6515d46e398b41d4b0d90167c44461b4dc23fa3e77b53fc56119adece05a98",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "VULNERABLE_POTION",
+      "name": "易伤药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "vulnerable_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 18,
+      "sha256": "ff29e25384fe91a6cfd9899e20689f41704995f49dcb81c09e745f3e445524bd",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "WEAK_POTION",
+      "name": "虚弱药水",
+      "rarity": "Common",
+      "pool": "shared",
+      "image": "weak_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 19,
+      "sha256": "5fc0352a74a6fdac350ca4b4e042f2767a5e20cd7aa316ccbec7ad9272f341da",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "POISON_POTION",
+      "name": "毒药水",
+      "rarity": "Common",
+      "pool": "silent",
+      "image": "poison_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 20,
+      "sha256": "a97f4f94bfb39318ef4c4b7e5c9217315e49c8949eda4d6adce0ecb9aee4e18c",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "POTION_OF_CAPACITY",
+      "name": "扩容药水",
+      "rarity": "Uncommon",
+      "pool": "defect",
+      "image": "potion_of_capacity.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 21,
+      "sha256": "228dfdfaacc647d40d0f7e1237db6c8910a04ed34169645ee08dec913ed64ff1",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "ASHWATER",
+      "name": "灰水",
+      "rarity": "Uncommon",
+      "pool": "ironclad",
+      "image": "ashwater.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 22,
+      "sha256": "e60742f6b67d877cc3fda25703b2b35e5e18cf84670285cdbcae3300c2a7580b",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "BONE_BREW",
+      "name": "骨头酿",
+      "rarity": "Uncommon",
+      "pool": "necrobinder",
+      "image": "bone_brew.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 23,
+      "sha256": "16fdf415f587ff73c02a6776108ebb664aa068364930b06e776bb7d6b1d8ef09",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "KINGS_COURAGE",
+      "name": "王之勇气",
+      "rarity": "Uncommon",
+      "pool": "regent",
+      "image": "kings_courage.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 24,
+      "sha256": "c9153a65a83256ae8f237ecf6407efae70915e53c0c0192e808a6d88565ecb97",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "BLESSING_OF_THE_FORGE",
+      "name": "熔炉的祝福",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "blessing_of_the_forge.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 25,
+      "sha256": "e37da7974205d7d7547f852f64c68d4c34b66c246eaf1581aafa47194ae0addd",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "CLARITY",
+      "name": "明晰提取物",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "clarity.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 26,
+      "sha256": "101f07ace4679a3a589f75fa7b06692dd1761c219eb1762881cac5248133ddd8",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "CURE_ALL",
+      "name": "痊愈药水",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "cure_all.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 27,
+      "sha256": "726452233615089498e18ddc0da29ec70da4f19ff93e2b7863df58b2e19b3b70",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "DUPLICATOR",
+      "name": "复制药水",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "duplicator.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 28,
+      "sha256": "8ffd24bbdb9f0f07f3c9979d6089e2715a20da14f58fee570280346b81e6ec61",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "FORTIFIER",
+      "name": "固化药水",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "fortifier.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 29,
+      "sha256": "442ebf141860e0cfbbbd2562f51e9d8be6588e550d6112a3daab07c6bb929433",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "FYSH_OIL",
+      "name": "异鱼之油",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "fysh_oil.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 30,
+      "sha256": "c71992e02dde7f8c5e03c8490d1f9d51fa19dce3327d20bbae67d4b71bdb1718",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "GAMBLERS_BREW",
+      "name": "赌徒特酿",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "gamblers_brew.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 31,
+      "sha256": "e0c648cb73fbd6ff67454804340f05ca5baf302e5f2bca3197818a496c5ba1ec",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "HEART_OF_IRON",
+      "name": "铁心药水",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "heart_of_iron.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 32,
+      "sha256": "30a990b019db750d3d3866aca2c9aa432235c812d52a1fd2b73dc9f0b5d74802",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "LIQUID_BRONZE",
+      "name": "流动铜液",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "liquid_bronze.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 33,
+      "sha256": "e8ae15cb3896a27d046a4e2c381e5299198981c0c5e633de3aeb3c0c2f4962f6",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "POTION_OF_BINDING",
+      "name": "缚魂药水",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "potion_of_binding.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 34,
+      "sha256": "5045b0eeb346e99018bd642333eb03b15553f53f4391e7bc414b5cef5da47e7f",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "POWDERED_DEMISE",
+      "name": "消亡粉末",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "powdered_demise.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 35,
+      "sha256": "3a79d459bc720b43bf1e7b6294d3a8109a7922279075a7b3f46ec89436fb708a",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "RADIANT_TINCTURE",
+      "name": "明耀酊剂",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "radiant_tincture.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 36,
+      "sha256": "cc6f83428ae1344f97224ced9995aea69a581fa6700dfbb5f7601c294c46595a",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "REGEN_POTION",
+      "name": "再生药水",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "regen_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 37,
+      "sha256": "c31c934c70f25ba1729b9fe0f27cb2fa089f896f696f45be52964c1100ed8c81",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "STABLE_SERUM",
+      "name": "稳定血清",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "stable_serum.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 38,
+      "sha256": "99482a35bb36f045f183af8ec7731586ac6e235547020d349e1087c95b5c7d71",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "TOUCH_OF_INSANITY",
+      "name": "癫狂之触",
+      "rarity": "Uncommon",
+      "pool": "shared",
+      "image": "touch_of_insanity.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 39,
+      "sha256": "2f4280d0ba96bd379c694f983e9cef991c31aa902851459dbe4cd23739bd7ad1",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "CUNNING_POTION",
+      "name": "狡诈药水",
+      "rarity": "Uncommon",
+      "pool": "silent",
+      "image": "cunning_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 40,
+      "sha256": "e158aa98dda9e720c2bc6b79748eddddcd4c62ef16177fd1e71d1b6886d35783",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "ESSENCE_OF_DARKNESS",
+      "name": "黑暗精华",
+      "rarity": "Rare",
+      "pool": "defect",
+      "image": "essence_of_darkness.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 41,
+      "sha256": "6ae003bb97bc95999fbecd2b9b892990ce5244bf2570a4d48448f7ca0442f0d1",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "SOLDIERS_STEW",
+      "name": "士兵炖汤",
+      "rarity": "Rare",
+      "pool": "ironclad",
+      "image": "soldiers_stew.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 42,
+      "sha256": "c0d68775343ad15b1a417f16a9f57aa7d312d759d5e96c17f78596b166124b86",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "POT_OF_GHOULS",
+      "name": "尸鬼瓮",
+      "rarity": "Rare",
+      "pool": "necrobinder",
+      "image": "pot_of_ghouls.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 43,
+      "sha256": "b2e87cfa31b598ff458af8dda08811d75dee74ab4d116659bceaa75651c97f5d",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "COSMIC_CONCOCTION",
+      "name": "宇宙药剂",
+      "rarity": "Rare",
+      "pool": "regent",
+      "image": "cosmic_concoction.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 44,
+      "sha256": "78fd78145732622486a5cab821af9af32cb2aa6dfb3847b40dcd5b372d3d5424",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "BEETLE_JUICE",
+      "name": "甲虫汁",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "beetle_juice.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 45,
+      "sha256": "0ba52d9a6a71225a24bef8c31d64047f2c8c5b38d6284ef3377737ec4b8a0573",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "BOTTLED_POTENTIAL",
+      "name": "瓶装潜能",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "bottled_potential.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 46,
+      "sha256": "3115abae8267527906609db3aa1853c1890c939acba2154ae5576a2d60c9562e",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "DISTILLED_CHAOS",
+      "name": "精炼混沌",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "distilled_chaos.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 47,
+      "sha256": "d83001f0ca6a8b6b276bfca0d19e37c709b16e45397120714f93faa9f990b05d",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "DROPLET_OF_PRECOGNITION",
+      "name": "预知之滴",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "droplet_of_precognition.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 48,
+      "sha256": "e005acf592fdd85ae4551bf1c282042d35878f06610cb7c57672197fc054d72c",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "ENTROPIC_BREW",
+      "name": "混沌药水",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "entropic_brew.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 49,
+      "sha256": "e89881f1998f9794e27efad45251862ac9ca7e845f20fb73a911a360dd6993ce",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "FAIRY_IN_A_BOTTLE",
+      "name": "瓶中精灵",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "fairy_in_a_bottle.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 50,
+      "sha256": "38ffd255cb6c6cde6fe3f3e57e816bc33af05e1b0f0604242b5ac034706857e6",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "FRUIT_JUICE",
+      "name": "果汁",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "fruit_juice.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 51,
+      "sha256": "22c03a21bd453884bf9b378fc7fec7a58844ecdd3fb03907c44a2e27d169548c",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "GIGANTIFICATION_POTION",
+      "name": "超巨化药水",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "gigantification_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 52,
+      "sha256": "3ee6b797251a099fd947411909f4ee8e92ab6ee00a80b192c214d3cfd940c644",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "LIQUID_MEMORIES",
+      "name": "液态记忆",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "liquid_memories.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 53,
+      "sha256": "992a67000f89169b4f45bb7136ae8551868b166995feba63c7329247b2b21b83",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "LUCKY_TONIC",
+      "name": "幸运补剂",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "lucky_tonic.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 54,
+      "sha256": "687bc6a0e08c2df71271726324276ac00d2eb3156f35d3cf6a851ec1a2c5fdd6",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "MAZALETHS_GIFT",
+      "name": "马萨雷斯的赠礼",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "mazaleths_gift.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 55,
+      "sha256": "4c8f6af81e7a3695cc13b2649a5be6476d322beb964b199bd90258b369eb1522",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "OROBIC_ACID",
+      "name": "欧洛巴斯之酸",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "orobic_acid.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 56,
+      "sha256": "5592b6fa8cc087bdf6326a8ed98f8c2ec4a4ed635449ea49324af34f6d28cf01",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "SHACKLING_POTION",
+      "name": "镣铐药水",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "shackling_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 57,
+      "sha256": "218c97ef9e90749d8f73ed7cef236936c3721e4eb53b01c7687f4b0fa52f47f8",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "SHIP_IN_A_BOTTLE",
+      "name": "瓶中船",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "ship_in_a_bottle.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 58,
+      "sha256": "60c73067c0f97c1049f54bb77f7f249ca4217775849ce3aa7a2eb6c650f76e90",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "SNECKO_OIL",
+      "name": "异蛇之油",
+      "rarity": "Rare",
+      "pool": "shared",
+      "image": "snecko_oil.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 59,
+      "sha256": "d0cbf337895874bb6cd3c15fbf914a06c768dfce4c903529143c163e8aeeec7a",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "GHOST_IN_A_JAR",
+      "name": "罐装幽灵",
+      "rarity": "Rare",
+      "pool": "silent",
+      "image": "ghost_in_a_jar.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 60,
+      "sha256": "65fe7819f4535be1d8eef77dc09643caa16a5dc8e50e02ae13ee072248b29dc2",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "FOUL_POTION",
+      "name": "污浊药水",
+      "rarity": "Event",
+      "pool": "event",
+      "image": "foul_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 61,
+      "sha256": "13ffb8b6e798c4b076f53e961cf302b884cfbd058a83be6fd21cae9927006e07",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "GLOWWATER_POTION",
+      "name": "发光水",
+      "rarity": "Event",
+      "pool": "event",
+      "image": "glowwater_potion.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 62,
+      "sha256": "a4b23d66576427a8e1d095cf7e26536b257490c563718219e68569c4b0b50113",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    },
+    {
+      "id": "POTION_SHAPED_ROCK",
+      "name": "药水形状的石头",
+      "rarity": "Token",
+      "pool": "shared",
+      "image": "potion_shaped_rock.png",
+      "size": [
+        256,
+        256
+      ],
+      "cell": 63,
+      "sha256": "15a7824cdda8799bf9ecbcdb8e3a1d64fe7eab1410d9646ad6e8e68d9ca5482d",
+      "matchesExtractedOriginal": true,
+      "transparentBackground": true
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "tool": "built-in image_gen",
+  "mode": "style-transfer edit",
+  "transparent_background": true,
+  "assets": [
+    {
+      "key": "sports_drink",
+      "name": "运动饮料",
+      "prompt": "Use case: style-transfer. Image 1 is the previous potion icon to REPLACE with a genuinely new drawing and silhouette. Image 2 contains ACTUAL Slay the Spire 2 potion icons and is the authoritative visual reference. Draw ONE isolated potion item on real transparent RGBA, entire silhouette visible, centered with padding. The final must belong among image 2: simple crooked hand-drawn shapes, strong uneven near-black outer ink silhouette, narrow pale colored glass rim, bold flat color patches, two or three material tones, tiny sharply shaped white reflections, a few round bubbles. Native potion icons are compact little objects, not polished product illustrations. Avoid smooth gradients, bevelled white borders, inflated volumes, perfect symmetric geometry, metallic 3D shine, realistic lighting, intricate ornament, cast shadows, text, logos, labels, sparkle effects or background. Readable at 32 px. Make the object fill about 80% of a square canvas. All coloring should be deliberately economical and locally hand painted.\nSubject redesign: replace the tall modern plastic bottle and blank paper band with a SQUAT WIDE TRAINING CANTEEN. The flask has a short grey screw cap, one flattened shoulder, a rounded opposite shoulder and a broad slightly uneven base. Lightly tinted warm clear glass, filled with coral-orange training drink. One small simple orange cloth loop is attached at the neck, like a practical reusable bottle carried to archery practice; no handle frame or extra equipment. Slight diagonal lean similar to native Attack Potion and King's Courage. Orange-red flat liquid and 2 or 3 simple yellow bubbles. Only a short pale peach glass edge and one white scratch-shaped reflection. Strong clear object silhouette and no label.",
+      "references": [
+        {
+          "role": "edit target",
+          "path": "docs/design/assets/potions/2026-11-11/v2/cleaned-native/sports_drink.png"
+        },
+        {
+          "role": "style reference",
+          "path": "docs/design/assets/potions/2026-11-11/native-style-reference.png"
+        }
+      ]
+    },
+    {
+      "key": "bottled_arrow_rain",
+      "name": "瓶装箭雨",
+      "prompt": "Use case: style-transfer. Image 1 is the previous potion icon to REPLACE with a genuinely new drawing and silhouette. Image 2 contains ACTUAL Slay the Spire 2 potion icons and is the authoritative visual reference. Draw ONE isolated potion item on real transparent RGBA, entire silhouette visible, centered with padding. The final must belong among image 2: simple crooked hand-drawn shapes, strong uneven near-black outer ink silhouette, narrow pale colored glass rim, bold flat color patches, two or three material tones, tiny sharply shaped white reflections, a few round bubbles. Native potion icons are compact little objects, not polished product illustrations. Avoid smooth gradients, bevelled white borders, inflated volumes, perfect symmetric geometry, metallic 3D shine, realistic lighting, intricate ornament, cast shadows, text, logos, labels, sparkle effects or background. Readable at 32 px. Make the object fill about 80% of a square canvas. All coloring should be deliberately economical and locally hand painted.\nSubject redesign: replace the broad symmetric bulb-shaped bottle with an ASYMMETRIC QUIVER-SHAPED GLASS FLASK, a short corked neck, one curved edge and one straighter edge, tilted diagonally like native Ship in a Bottle. Dark violet potion fills the bottom. Inside the bottle, THREE miniature complete ARCHERY ARROWS fan upward toward the neck at slightly different angles: dull grey steel arrowheads, warm brown wooden shafts, broad simple ivory feather tails. Arrows must be recognizable physical arrows, fully enclosed in the bottle. They should form a lively converging volley, rather than three perfectly parallel decorative stripes. Simplify shafts and feather tails enough for 32px. Thin muted lavender glass rim, near-black outer ink contour, a single white reflection stroke and at most 2 bubbles. No decorative border, bow, stars, mouse-pointer symbols or floating arrows outside the bottle.",
+      "references": [
+        {
+          "role": "edit target",
+          "path": "docs/design/assets/potions/2026-11-11/v2/cleaned-native/bottled_arrow_rain.png"
+        },
+        {
+          "role": "style reference",
+          "path": "docs/design/assets/potions/2026-11-11/native-style-reference.png"
+        }
+      ]
+    }
+  ]
+}

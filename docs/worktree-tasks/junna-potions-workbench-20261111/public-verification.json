@@ -1,0 +1,30 @@
+{
+  "revision": 4888,
+  "entries": [
+    {
+      "uid": "junna_potion_common_knowledge_20261111",
+      "name": "普通职业药水",
+      "theme": "职业药水",
+      "text": "从3组随机知识牌中选择1组加入你的手牌。这些牌在本回合可以免费打出。",
+      "rarity": "普通"
+    },
+    {
+      "uid": "junna_potion_uncommon_damage_bonus_20261111",
+      "name": "罕见职业药水",
+      "theme": "职业药水",
+      "text": "所有手牌获得9点伤害加成。",
+      "rarity": "罕见"
+    },
+    {
+      "uid": "junna_potion_rare_arrows_20261111",
+      "name": "稀有职业药水",
+      "theme": "职业药水",
+      "text": "打出你的所有箭矢。",
+      "rarity": "稀有"
+    }
+  ],
+  "style": {
+    "uid": "junna_style_native_potion_naming_art",
+    "name": "本体药水命名与图标特点"
+  }
+}

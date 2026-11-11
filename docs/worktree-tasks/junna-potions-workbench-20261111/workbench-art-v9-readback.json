@@ -1,0 +1,58 @@
+{
+  "entity": {
+    "collection": "fitPool",
+    "uid": "junna_potion_rare_arrows_20261111",
+    "entity": {
+      "uid": "junna_potion_rare_arrows_20261111",
+      "id": "FIT_POTION_JP03",
+      "name": "箭雨药水",
+      "theme": "职业药水",
+      "text": "打出你的所有箭矢。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "potion-arrow-rain-20261111-v9",
+      "cardIds": [],
+      "notes": "“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP03",
+        "rarity": "稀有",
+        "rarityValue": "Rare",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "箭矢",
+        "status": "draft",
+        "nameStatus": "已命名",
+        "artStatus": "已绘制",
+        "artDirection": "先从零绘制正立实体药瓶：瓶口水平，瓶颈、木塞和箭头式瓶身共用垂直轴线；清理并核对后将同一张图整体顺时针旋转25度，保留各部件的相对位置、厚玻璃壁与紫色药液。",
+        "namingRationale": "采用常用名词“箭雨”，对应一次打出所有箭矢；“药水”沿用本体常见的消耗品命名。"
+      },
+      "artSource": {
+        "kind": "generated",
+        "tool": "built-in image_gen",
+        "date": "2026-11-11",
+        "iteration": 9,
+        "generationMode": "upright-then-rigid-rotation",
+        "inputImages": [],
+        "transformationTool": "System.Drawing GDI+",
+        "rotationDegreesClockwise": 25,
+        "analysisPath": "docs/worktree-tasks/junna-potions-workbench-20261111/native-potion-icon-design.md",
+        "promptPath": "docs/design/assets/potions/2026-11-11/v9/generation-prompts.json",
+        "originalPath": "docs/design/assets/potions/2026-11-11/v9/originals/arrow_rain_potion_upright.png",
+        "uprightCleanedPath": "docs/design/assets/potions/2026-11-11/v9/cleaned-native/arrow_rain_potion_upright.png",
+        "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v9/cleaned-native/arrow_rain_potion.png",
+        "rotationPath": "docs/design/assets/potions/2026-11-11/v9/rotation.json",
+        "file": "docs/design/assets/potions/2026-11-11/v9/icons/arrow_rain_potion.png",
+        "cleanupPath": "docs/design/assets/potions/2026-11-11/v9/cleanup.json"
+      }
+    },
+    "version": "11:8e21bc0b99ab07b68c9296125203aa72d0ea992b9c976cc6cb0cf3bb2b3b0d48",
+    "revision": 4998
+  },
+  "assets": {
+    "assets": {
+      "potion-arrow-rain-20261111-v9": "/assets/b44a10d24648df20d9d30c12.png"
+    }
+  }
+}

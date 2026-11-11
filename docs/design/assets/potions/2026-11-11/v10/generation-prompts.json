@@ -1,0 +1,25 @@
+{
+  "tool": "built-in image_gen",
+  "generationMode": "from-scratch-upright-then-rigid-rotation",
+  "name": "运动饮料",
+  "inputImages": [],
+  "analysisPath": "docs/worktree-tasks/junna-potions-workbench-20261111/sports-drink-redesign.md",
+  "nativeReviewPath": "docs/design/assets/potions/2026-11-11/v10/native-review.json",
+  "prompt": "Use case: stylized-concept.\nCreate one completely NEW hand-drawn fantasy game inventory item from a blank canvas: a Sports Drink bottle for a Slay the Spire 2 character mod.\n\nDesign learned from the game's potion artwork:\nOne strong physical silhouette carries the idea, one dominant liquid color with simple light/dark planes, an irregular dark contour and pale tinted glass edge, a clear liquid level, a few broad highlights. Functional object details carry identity, like the bone stopper of Bone Brew or the cooking vessel of Soldier's Stew. Small readable painted color blocks, not a sleek UI glyph or polished advertising render.\n\nA NEW athletic bottle:\nA single continuous TRANSPARENT SPORTS BOTTLE with an ergonomic waisted body. Its upper body and lower base are pleasantly broad and rounded, and its middle narrows noticeably into a hand grip. This broad–narrow–broad profile gently recalls a small training weight while remaining clearly one hollow drink container. A stable thick rounded base, tangible glass wall, visible inner cavity and one narrow shaded side plane.\nAt the top, a short straight neck supports a modest BLUE-GREEN screw lid and a short IVORY push-pull drinking spout. Make the lid, spout and neck correctly joined, concentric and coaxial. A few broad lid grooves only. It must be immediately recognizable as a bottle used during training.\nThe contents are ORANGE-GOLD drink, about three quarters full, with a dark burnt-orange shadow, a lighter golden plane, a visible liquid surface and two or three simple small bubbles. Empty space above the drink. The glass edge is pale warm gray/ivory; the cap provides one restrained blue-green color accent.\nDecorations are limited to the functional grip and sports spout. No label, brand, words, lightning symbol, numbers, hanging strap, ribbon, bow, handle or separate exercise equipment. No arrows or books inside.\n\nDraw UPRIGHT first:\nThe bottle stands perfectly vertical and centered. Front view with a slightly elevated eye level and modest depth. Body center, neck center, lid center and spout center are all on the same vertical line. Lid ellipses are horizontal. No diagonal pose or leaning spout.\nUse compact Slay the Spire 2 style inventory painting: dark slightly uneven outline, broad hard-edged color areas, a few assertive glass reflections, restrained brush texture, clear physical volume. No excessive scratchy paint, soft cinematic lighting, neon glow or photorealistic 3D.\nOne full bottle only, genuinely transparent SQUARE canvas with padding. No scene, ground, cast shadow, border or extra props.",
+  "steps": [
+    {
+      "operation": "Generate new upright sports drink",
+      "output": "originals/sports_drink_upright.png"
+    },
+    {
+      "operation": "Local Artifact Cleaner at original resolution",
+      "output": "cleaned-native/sports_drink_upright.png"
+    },
+    {
+      "operation": "Rigid whole-image rotation",
+      "tool": "System.Drawing GDI+",
+      "degreesClockwise": -18,
+      "output": "cleaned-native/sports_drink.png"
+    }
+  ]
+}

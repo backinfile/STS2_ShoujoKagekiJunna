@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title"><title id="title">运动饮料瓶形草图</title>
+<g transform="rotate(-13 128 128)" stroke="#151b20" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+  <path id="bottle-body" d="M98 52 L98 68 C80 75 69 87 69 105 L72 207 Q73 224 91 225 L162 222 Q179 221 181 204 L184 104 C182 86 170 76 154 68 L154 52 Z" fill="#b8c8cd"/>
+  <path id="glass-inner-edge" d="M100 63 L100 74 C84 81 78 90 78 106 L81 204 Q81 215 94 215 L159 212 Q171 211 172 201 L175 105 C172 90 164 83 148 75 L148 63" fill="none" stroke="#e5eceb" stroke-width="2"/>
+  <path id="bottle-cap" d="M95 30 Q95 26 100 26 L153 28 Q158 28 158 33 L158 53 L94 53 Z" fill="#7d8589"/>
+  <path d="M105 34 L105 46 M118 34 L118 46 M131 35 L131 47 M144 35 L144 47" stroke="#c8cece" stroke-width="2"/>
+</g></svg>

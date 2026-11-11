@@ -1,0 +1,58 @@
+{
+  "tool": "built-in image_gen",
+  "mode": "style-transfer edit",
+  "transparent_background": true,
+  "assets": [
+    {
+      "key": "knowledge_potion",
+      "name": "知识药水",
+      "prompt": "Use case: style-transfer. Redraw the single potion item from image 1 from scratch so it belongs beside the ACTUAL Slay the Spire 2 potion icons in image 2. Image 1 is the edit target and gives only the item identity; image 2 is the authoritative style reference, not an object to copy. Study the actual shapes and painting in image 2 carefully. The final is ONE small inventory item, not a sheet.\nMatch image 2: an uneven near-black ink outer contour, THINNER than image 1 (about 4 px when reduced to 256); angular imperfect glass edge, narrow light colored rim, flat locally painted color patches with hard shape boundaries. Use 2 or 3 tones for each material. Small sharply shaped white reflection strokes, sparse simple bubbles. Deliberately modest and a little rough, with the same drawing economy as Attack Potion, Strength Potion, Bone Brew and Ship in a Bottle. Native icons feel drawn, not beveled or inflated.\nRemove image 1's smooth airbrushed gradients, pillowy volumes, huge polished highlights, glossy mobile-game finish and overly even wide outlines. NOT a 3D render, not a glossy product illustration. No dark cast shadow. No soft lighting gradients, texture noise, bloom, sparkles, labels, numerals, letters, border, or text. Draw on genuinely transparent RGBA. Keep the entire bottle, stopper and item outline visible with some transparent padding. One clear silhouette, slightly tilted. It must read at 32 pixels. Redraw every line and all shading; do not just adjust image 1's colors.\nSubject instructions: Keep the concept of a knowledge potion: a squat slightly irregular rectangular blue glass bottle with a small cork, cool light rim, saturated medium-blue potion, and ONE cream paper scroll inside. Make the scroll a blunt simple rolled paper with two visible curls and one or two irregular brown crease lines, more like a real paper object and less like a glossy noodle. Make the glass bottle lopsided in the same appealing way as the native Strength Potion, with only 2 broad translucent panels and small white reflection lines. Use the native Ship in a Bottle as a reference for showing a clearly readable object inside a bottle. No book icon or decoration on the outside.",
+      "references": [
+        {
+          "role": "edit target",
+          "path": "docs/design/assets/potions/2026-11-11/cleaned-native/knowledge_potion.png"
+        },
+        {
+          "role": "native style authority",
+          "path": "docs/design/assets/potions/2026-11-11/native-style-reference.png"
+        }
+      ],
+      "original": "docs/design/assets/potions/2026-11-11/v2/originals/knowledge_potion.png",
+      "final": "docs/design/assets/potions/2026-11-11/v2/icons/knowledge_potion.png"
+    },
+    {
+      "key": "sports_drink",
+      "name": "运动饮料",
+      "prompt": "Use case: style-transfer. Redraw the single potion item from image 1 from scratch so it belongs beside the ACTUAL Slay the Spire 2 potion icons in image 2. Image 1 is the edit target and gives only the item identity; image 2 is the authoritative style reference, not an object to copy. Study the actual shapes and painting in image 2 carefully. The final is ONE small inventory item, not a sheet.\nMatch image 2: an uneven near-black ink outer contour, THINNER than image 1 (about 4 px when reduced to 256); angular imperfect glass edge, narrow light colored rim, flat locally painted color patches with hard shape boundaries. Use 2 or 3 tones for each material. Small sharply shaped white reflection strokes, sparse simple bubbles. Deliberately modest and a little rough, with the same drawing economy as Attack Potion, Strength Potion, Bone Brew and Ship in a Bottle. Native icons feel drawn, not beveled or inflated.\nRemove image 1's smooth airbrushed gradients, pillowy volumes, huge polished highlights, glossy mobile-game finish and overly even wide outlines. NOT a 3D render, not a glossy product illustration. No dark cast shadow. No soft lighting gradients, texture noise, bloom, sparkles, labels, numerals, letters, border, or text. Draw on genuinely transparent RGBA. Keep the entire bottle, stopper and item outline visible with some transparent padding. One clear silhouette, slightly tilted. It must read at 32 pixels. Redraw every line and all shading; do not just adjust image 1's colors.\nSubject instructions: Keep the concept of a training sports drink: one orange-red filled sports squeeze bottle with a simple red closed pull-spout cap and ONE blank cream grip band. Redraw its silhouette a little squarer and less hourglass-shaped, using bold straight-ish hand-drawn strokes and only a couple of angle changes. Broad flat orange-red liquid, 3 or 4 hand-drawn round bubbles, greyish edge rim. Thin black contour and a few small white reflection slashes like the native potion icons. The object should feel like a modest concrete piece of an archer's daily training kit. No writing, emblem, measurement marks, added equipment or separate props.",
+      "references": [
+        {
+          "role": "edit target",
+          "path": "docs/design/assets/potions/2026-11-11/cleaned-native/sports_drink.png"
+        },
+        {
+          "role": "native style authority",
+          "path": "docs/design/assets/potions/2026-11-11/native-style-reference.png"
+        }
+      ],
+      "original": "docs/design/assets/potions/2026-11-11/v2/originals/sports_drink.png",
+      "final": "docs/design/assets/potions/2026-11-11/v2/icons/sports_drink.png"
+    },
+    {
+      "key": "bottled_arrow_rain",
+      "name": "瓶装箭雨",
+      "prompt": "Use case: style-transfer. Redraw the single potion item from image 1 from scratch so it belongs beside the ACTUAL Slay the Spire 2 potion icons in image 2. Image 1 is the edit target and gives only the item identity; image 2 is the authoritative style reference, not an object to copy. Study the actual shapes and painting in image 2 carefully. The final is ONE small inventory item, not a sheet.\nMatch image 2: an uneven near-black ink outer contour, THINNER than image 1 (about 4 px when reduced to 256); angular imperfect glass edge, narrow light colored rim, flat locally painted color patches with hard shape boundaries. Use 2 or 3 tones for each material. Small sharply shaped white reflection strokes, sparse simple bubbles. Deliberately modest and a little rough, with the same drawing economy as Attack Potion, Strength Potion, Bone Brew and Ship in a Bottle. Native icons feel drawn, not beveled or inflated.\nRemove image 1's smooth airbrushed gradients, pillowy volumes, huge polished highlights, glossy mobile-game finish and overly even wide outlines. NOT a 3D render, not a glossy product illustration. No dark cast shadow. No soft lighting gradients, texture noise, bloom, sparkles, labels, numerals, letters, border, or text. Draw on genuinely transparent RGBA. Keep the entire bottle, stopper and item outline visible with some transparent padding. One clear silhouette, slightly tilted. It must read at 32 pixels. Redraw every line and all shading; do not just adjust image 1's colors.\nSubject instructions: Redesign the bottled volley so the contents are unmistakably PHYSICAL ARCHERY ARROWS. Use one compact irregular wide-bottomed trapezoid flask with short cork neck, violet liquid and a pale grey-lavender glass edge. Inside show THREE miniature complete arrows pointing diagonally upper right together, with distinct dull steel triangular arrowheads, TAN WOODEN SHAFTS and simple paired FEATHERS at the lower left tails. The arrows are completely inside the bottle. Simplify strongly so the three wooden shafts and three sets of feathers read as arrows, never computer mouse pointers. No oversized arrowhead glyphs. Use native Ship in a Bottle for the literal object-in-bottle concept and Cunning Potion for the rough metal highlight shape. The arrow flask should be flat, slightly crooked and hand-inked with a narrower outline than image 1.",
+      "references": [
+        {
+          "role": "edit target",
+          "path": "docs/design/assets/potions/2026-11-11/cleaned-native/bottled_arrow_rain.png"
+        },
+        {
+          "role": "native style authority",
+          "path": "docs/design/assets/potions/2026-11-11/native-style-reference.png"
+        }
+      ],
+      "original": "docs/design/assets/potions/2026-11-11/v2/originals/bottled_arrow_rain.png",
+      "final": "docs/design/assets/potions/2026-11-11/v2/icons/bottled_arrow_rain.png"
+    }
+  ]
+}

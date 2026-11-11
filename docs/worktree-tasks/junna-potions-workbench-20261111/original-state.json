@@ -1,0 +1,57 @@
+{
+  "status": [
+    " M ShoujoKagekiJunna/images/character_select.png",
+    " M ShoujoKagekiJunna/scenes/junna_select.tscn",
+    " M docs/design/workbench/README.md",
+    " M docs/design/workbench/app.js",
+    " M docs/design/workbench/workbench-domain.js",
+    " M docs/design/workbench/workbench-domain.test.cjs",
+    "?? ShoujoKagekiJunna/scripts/character_select_effects.gd",
+    "?? ShoujoKagekiJunna/scripts/character_select_effects.gd.uid",
+    "?? ShoujoKagekiJunna/scripts/character_select_motion.gdshader",
+    "?? ShoujoKagekiJunna/scripts/character_select_motion.gdshader.uid"
+  ],
+  "fingerprints": [
+    {
+      "path": "ShoujoKagekiJunna/images/character_select.png",
+      "hash": "A617F6A823352D32989682FCBE18B35BA9681880750E6BE18BDFB612AE343DFC"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scenes/junna_select.tscn",
+      "hash": "E9001B74621BB7E75B8DACD9A2DDF68A799B7BEFDEC16948903609682E284439"
+    },
+    {
+      "path": "docs/design/workbench/README.md",
+      "hash": "57ADBC94CCB46CAA22D83E35A1C637E76339CAB0B5C37AFCD722397BC54BEDCF"
+    },
+    {
+      "path": "docs/design/workbench/app.js",
+      "hash": "9401F521750BFCCD519EB1CBA3CBFA7FC802454C4432AEB4156D0FD37380FD1E"
+    },
+    {
+      "path": "docs/design/workbench/workbench-domain.js",
+      "hash": "0378DC7D2F1812194A365CEAF3060232892457DC9E08977248C9957C8D57D254"
+    },
+    {
+      "path": "docs/design/workbench/workbench-domain.test.cjs",
+      "hash": "5A74EB831A3B60B8B36DBB5B8FA789E32C67E6329B823A13E747FCB428E627D1"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_effects.gd",
+      "hash": "660BE5F08027EFBEDEC71E3BC48843F553A4E07AAE40CB54039D71E69691EA32"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_effects.gd.uid",
+      "hash": "A23A6158F4CDC0B40E39E8B3C9F2ADC7B8625B1433E16608D96F8EBADC45AD46"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_motion.gdshader",
+      "hash": "E48B7B55CD9DE5F61498258618549B91DB0C53CB1BA3249234A70995F2C98EC6"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_motion.gdshader.uid",
+      "hash": "C380EC0AC4B2BC32A82294C0A6A047FDAF531F13BE19F6041FFD3B3B6071C2E9"
+    }
+  ],
+  "indexHash": "E51377BFA7518955EB7517759FADA43CFE3BAAB83C39FEC4F6EABB7EB2709E48"
+}
