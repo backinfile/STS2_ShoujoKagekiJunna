@@ -5,7 +5,7 @@
 - 原始检出：`.`，分支 `main`，起点 `29cad37e4805d6f5eafdadd6495da2140bf07ed3`。
 - 工作树：`../worktrees/STS2_ShoujoKagekiJunna/knowledge-acquisition-whitelist-20261111`。
 - 任务分支：`codex/knowledge-acquisition-whitelist-20261111`。
-- 原目录有 15 个未提交文件，已记录状态和 SHA-256；本次保留其原始内容，仅在工作树实现。
+- 原目录有 15 个未提交文件，已记录状态和 SHA-256；同步期间 main 另一任务无冲突整合了 DynamicKnowledge.cs，集成以该最新文件和其余 14 个原始文件的 SHA-256 为保留基准。
 - 基线：起点提交的测试版主模组编译通过，0 警告、0 错误。
 
 ## 简要计划
@@ -17,7 +17,7 @@
 
 ## 结果与变更
 
-实现与验证已完成，已在隔离工作树生成可安装发行包，等待用户单次确认后集成。
+实现与验证已完成，用户已明确授权合并并清理。集成前同步了 main 的知识奖励预览与箭矢结算修复；发行包随同步结果重新构建。
 
 ### 实际行为
 
@@ -26,7 +26,7 @@
 - 复制和显式单张生成按实际对象与数量执行，关联牌不递归补发。
 - `DynamicKnowledge` 保留获牌升级修饰前后的候选关系，兼收并蓄不会重复取得被替换的原候选牌。
 - `docs/implementation/knowledge-acquisition-sources.md` 逐项记录 193 处原生调用和纯那入口，包含选项、触发时机、类型方法、堆叠及补发状态。
-- 依 `$worktree-task` 要求审查 73 份既有及新增文档，19 份既有文档中的仓库外绝对路径替换为描述性占位符；未发现凭据，复查无剩余路径命中。
+- 依 `$worktree-task` 要求审查 75 份既有及新增文档，20 份既有文档中的仓库外绝对路径替换为描述性占位符；未发现凭据，复查无剩余路径命中。
 
 ### 验证结果
 
@@ -35,26 +35,27 @@
 - `tests/AcquisitionSources/JunnaAcquisitionChecks.csproj` 定向探针编译通过。
 - 白名单实机检查 14/14 通过，包括厚重石板、星盘、尘封魔典、发现、未登记奖励及毒素之卵升级后的兼收并蓄。
 - 镜中倒影「打碎」实机检查 8/8 通过：8 张实际牌逐张复制成 16 张，再增加原事件的 1 张霉运；升级和闪耀保留，缺失成员不补回。
-- 7 个发行文件的 SHA-256 与测试游戏实际加载文件完全一致，完整清单见 `out/tmp/knowledge-acquisition-whitelist-20261111/artifact-hashes.json`。
+- 同步前 7 个发行文件的 SHA-256 与测试游戏实际加载文件完全一致，完整清单见 `out/deliverables/knowledge-acquisition-whitelist-20261111/tested-artifact-hashes-before-sync.json`。
 - 最小化、静音、满解锁和随机端口隔离实例已关闭；录像包含未登记奖励、已登记奖励及复制事件的合法游戏操作。
+- 同步 main 的 `7f71ffc` 后，重新构建双版本实现、加载器及 PCK，0 警告、0 错误；同步改动与白名单修改没有重叠逻辑。
 - `git diff --check` 通过。
 - 综合探针原有 3 处旧 `CardActions.Generate` 参数调用不属于本次修改，本次采用独立定向工程验证。
 
 ### 产物和回执
 
 - Mod 目录：`dist/ShoujoKagekiJunna/`。
-- 发行 ZIP：`out/tmp/knowledge-acquisition-whitelist-20261111/ShoujoKagekiJunna-knowledge-whitelist.zip`。
-- 录像：`out/tmp/knowledge-acquisition-whitelist-20261111/verification.mp4`。
-- 白名单结果：`out/tmp/acquisition-sources-20261111/integration-results.json`。
-- 复制结果：`out/tmp/event-copies-20261110/integration-results.json`。
+- 发行 ZIP：`out/deliverables/knowledge-acquisition-whitelist-20261111/ShoujoKagekiJunna-knowledge-whitelist.zip`。
+- 录像：`out/deliverables/knowledge-acquisition-whitelist-20261111/verification.mp4`。
+- 白名单结果：`out/deliverables/knowledge-acquisition-whitelist-20261111/acquisition-results.json`。
+- 复制结果：`out/deliverables/knowledge-acquisition-whitelist-20261111/copy-results.json`。
 
-### 集成保护和拟议清理
+### 集成授权和保护
 
-- 固定集成目标是最初捕获的 `main`；原目录 15 个未提交文件已逐一校验原始 SHA-256。
+- 固定集成目标是最初捕获的 `main`；原目录 15 个未提交文件已逐一校验 SHA-256；仅 DynamicKnowledge.cs 因 main 并行任务的已提交修复改变，当前文件同时保留两组修改，并在集成前重新快照。
 - 其中 11 个文件属于本任务的既有实现；合并前只在其内容与任务提交完全一致时按明确路径暂存，使它们随任务提交进入分支，文件内容保持不变。
 - 另 4 个工作台文件保留为未提交状态，不暂存、不覆盖：`docs/design/workbench/README.md`、`docs/design/workbench/app.js`、`docs/design/workbench/workbench-domain.js`、`docs/design/workbench/workbench-domain.test.cjs`。
 - 已在工作树内的临时 Git 仓库验证上述精确路径暂存及快进合并方式，其他未提交内容和状态均保留。
-- 只有用户明确选择合并后才执行集成。若批准清理，先将发行包、录像及结果复制并校验到原检出的 `out/deliverables/knowledge-acquisition-whitelist-20261111/`，再删除本次干净工作树、任务分支及其临时缓存。其他工作树和分支保留。
+- 用户已选择「合并并清理」；先将发行包、录像及结果复制并校验到原检出的 `out/deliverables/knowledge-acquisition-whitelist-20261111/`，再删除本次干净工作树、任务分支及其临时缓存。其他工作树和分支保留。
 
 ## 完整原始用户输入
 
@@ -250,4 +251,12 @@ Before each commit, check the input record against the user messages, finalize t
 Report the resulting branch, commit, verification, cleanup state, and task document path.
 
 </skill>
+````
+
+## 输入 10
+
+````text
+<send_user_message_question_reply>
+[{"answer":"合并并清理（推荐）","question":"是否将已验证的单个提交 1c2b97f 快进合并到 main？合并只纳入内容一致的 11 个任务文件，保留另外 4 个未提交工作台文件；若清理，会先将 Mod ZIP、录像和检查结果保存到 out/deliverables/knowledge-acquisition-whitelist-20261111/，再删除本次工作树、任务分支和临时状态快照。","questionItemId":"[\"request_user_input_async\",\"call_2a3c7e129978411eb4bfe090bdf75b8f\",0]"}]
+</send_user_message_question_reply>
 ````
