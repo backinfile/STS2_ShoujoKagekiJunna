@@ -73,8 +73,10 @@ public static class DynamicKnowledge
     {
         var group = Group(source);
         if (group == null) return [];
-        var cards = source.Pile?.IsCombatPile == true && source.Owner.PlayerCombatState != null
-            ? source.Owner.PlayerCombatState.AllCards : source.Owner.Deck.Cards;
+        // Detached offers acquire fresh partners; only actual pile views borrow existing instances.
+        var cards = source.Pile == null ? Enumerable.Empty<CardModel>()
+            : source.Pile.IsCombatPile && source.Owner.PlayerCombatState != null
+                ? source.Owner.PlayerCombatState.AllCards : source.Owner.Deck.Cards;
         var available = cards.Where(card => card != source).Prepend(source).ToLookup(card => card.Id.ToString());
         var members = group.Members;
         if (group.CardCounts.GetValueOrDefault(source.Id.ToString()) == 0)

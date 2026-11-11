@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -29,6 +30,16 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     internal int[] CopyXValues() => _xValues.ToArray();
     internal async Task Resolve(PlayerChoiceContext context, int index)
     {
+        // Release animation and prior replays can end combat before this payload begins.
+        var combat = Card.Owner.Creature.CombatState;
+        if (combat == null || CombatManager.Instance.IsOverOrEnding || Card.Owner.Creature.IsDead) return;
+        if (Card.TargetType == TargetType.AnyEnemy)
+        {
+            var target = Play.Target == null ? null : ArrowCombat.ResolveEffectTarget(Play.Target, combat);
+            if (target == null) return;
+            Retarget(target);
+        }
+        else if (TargetsAllEnemies && !combat.GetOpponentsOf(Card.Owner.Creature).Any(target => target.IsAlive && target.IsHittable)) return;
         using var resolution = DamageExecution.BeginCardResolution(Card);
         if (Card.EnergyCost.CostsX && index < _xValues.Length) Card.EnergyCost.CapturedXValue = _xValues[index];
         var actualPlay = new CardPlay
