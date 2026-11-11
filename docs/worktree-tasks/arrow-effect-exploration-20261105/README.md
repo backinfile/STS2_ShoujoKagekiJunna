@@ -60,7 +60,7 @@
 
 ### 战士主动消耗其他手牌对照
 
-依据项目使用的 STS2 原始抽取卡表及反编译卡牌实现核对，共8张。资料位置：`<游戏数据仓库>/data/cards.json`、`<游戏数据仓库>/extraction/decompiled/MegaCrit.Sts2.Core.Models.Cards/`、`<卡池研究仓库>/docs/mods/sts2_character_cards_zh.md`。数值箭头表示基础到升级；费用升级前后相同。
+依据项目使用的 STS2 原始抽取卡表及反编译卡牌实现核对，共8张。资料位置：`<游戏数据仓库><external-data-directory>/cards.json`、`<游戏数据仓库>/extraction/decompiled/MegaCrit.Sts2.Core.Models.Cards/`、`<卡池研究仓库>/docs/mods/sts2_character_cards_zh.md`。数值箭头表示基础到升级；费用升级前后相同。
 
 | 卡牌 | 稀有度／费用 | 主动消耗其他手牌 | 配套收益 |
 | --- | --- | --- | --- |

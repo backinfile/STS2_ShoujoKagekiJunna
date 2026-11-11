@@ -33,7 +33,8 @@ public static class DynamicKnowledge
     }
     private static readonly ConditionalWeakTable<Player, RelationCache> Cache = new();
     private static readonly ConditionalWeakTable<CardModel, CardModel[]> Pending = new();
-    private static readonly ConditionalWeakTable<CardModel, CardReward> Offers = new();
+    private sealed record Offer(CardReward Reward, CardModel Original);
+    private static readonly ConditionalWeakTable<CardModel, Offer> Offers = new();
     public static void Initialize() { }
     private static string PreferredEntrance => CardCatalog.Model("JK126").Id.ToString();
     private static List<KnowledgeRelation> Groups(Player player)
@@ -141,7 +142,8 @@ public static class DynamicKnowledge
         if (Offers.TryGetValue(acquired, out var reward))
         {
             Offers.Remove(acquired);
-            await Prepare(new BlockingPlayerChoiceContext(), acquired, reward.Cards);
+            await Prepare(new BlockingPlayerChoiceContext(), acquired,
+                reward.Reward.Cards.Where(card => card != reward.Original).Prepend(acquired));
         }
         if (!Pending.TryGetValue(acquired, out var partners)) return false;
         Pending.Remove(acquired);
@@ -156,6 +158,12 @@ public static class DynamicKnowledge
         return true;
     }
 
+    internal static void CopyAcquisition(CardModel source, CardModel copy)
+    {
+        if (Offers.TryGetValue(source, out var offer)) Offers.AddOrUpdate(copy, offer);
+        if (Pending.TryGetValue(source, out var partners)) Pending.AddOrUpdate(copy, partners);
+    }
+
     internal static void Describe(CardModel card, Creature? target, ref string description)
     {
         if (!IsLinked(card) || card is JunnaCard junna && CardCatalog.Get(junna.DesignId).Knowledge) return;
@@ -168,8 +176,9 @@ public static class DynamicKnowledge
     {
         private static void Prefix(CardReward __instance)
         {
+            if (!KnowledgeAcquisitionSources.IsKnownReward(__instance)) return;
             foreach (var card in __instance.Cards.Where(c => CardCatalog.DesignId(c) == "JK126"))
-                Offers.AddOrUpdate(card, __instance);
+                Offers.AddOrUpdate(card, new(__instance, card));
         }
     }
     [HarmonyPatch(typeof(CardModel), nameof(CardModel.GetKeywordsWithSources))]
