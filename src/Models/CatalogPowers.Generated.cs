@@ -89,3 +89,6 @@ public sealed class JunnaPowerJZ06() : CatalogPower("JZ06");
 
 [CustomID("JUNNA_U_CARD_008_POWER")]
 public sealed class JunnaPowerU_CARD_008() : CatalogPower("U_CARD_008");
+
+[CustomID("JUNNA_U_CARD_010_POWER")]
+public sealed class JunnaPowerU_CARD_010() : CatalogPower("U_CARD_010");

@@ -1,5 +1,5 @@
 {
-  "revision": 4816,
+  "revision": 4874,
   "cards": [
     {
       "id": "JG03",
@@ -95,7 +95,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": true,
-      "portrait": "JA17.jpg",
+      "portrait": "JA17.png",
       "values": [
         {
           "name": "Damage",
@@ -2768,12 +2768,12 @@
       "values": [
         {
           "name": "Block",
-          "base": 3,
-          "upgraded": 4
+          "base": 2,
+          "upgraded": 3
         }
       ],
-      "text": "打出箭矢时，获得3点格挡。",
-      "upgradedText": "打出箭矢时，获得4点格挡。"
+      "text": "打出箭矢时，获得2点格挡。",
+      "upgradedText": "打出箭矢时，获得3点格挡。"
     },
     {
       "id": "JA119",
@@ -3484,7 +3484,7 @@
       "id": "JK274",
       "modelId": "JUNNA_JK274",
       "className": "JunnaCardJK274",
-      "name": "审辩",
+      "name": "我的舞台",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -3501,7 +3501,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JK274.svg",
+      "portrait": "JK274.png",
       "values": [
         {
           "name": "Block",
@@ -3613,9 +3613,15 @@
       "upgradedInnate": false,
       "damageCapable": false,
       "portrait": "U_CARD_008.jpg",
-      "values": [],
-      "text": "战斗结束后，向牌组中添加一张故事。",
-      "upgradedText": "战斗结束后，向牌组中添加一张故事。"
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "战斗结束时，获得1张故事。",
+      "upgradedText": "战斗结束时，获得1张故事。"
     },
     {
       "id": "U_CARD_008B",
@@ -3648,6 +3654,70 @@
       ],
       "text": "抽2张牌。消耗。闪耀3。",
       "upgradedText": "抽3张牌。消耗。闪耀3。"
+    },
+    {
+      "id": "U_CARD_009",
+      "modelId": "JUNNA_U_CARD_009",
+      "className": "JunnaCardU_CARD_009",
+      "name": "每一次相遇",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": true,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_009.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "抽取箭矢、知识、闪耀牌各1张。消耗。",
+      "upgradedText": "抽取箭矢、知识、闪耀牌各1张。"
+    },
+    {
+      "id": "U_CARD_010",
+      "modelId": "JUNNA_U_CARD_010",
+      "className": "JunnaCardU_CARD_010",
+      "name": "舞台少女心得",
+      "cost": 2,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "能力",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_010.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、箭矢牌、闪耀牌。",
+      "upgradedText": "回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、箭矢牌、闪耀牌。"
     }
   ],
   "groups": [
@@ -3915,7 +3985,7 @@
     },
     {
       "uid": "5fd8f159-b226-4d83-ab28-fb7f9d2decfa",
-      "title": "审辩",
+      "title": "我的舞台",
       "mainCardId": "JK274",
       "grantedCardIds": [
         "JK122B"
@@ -6469,5 +6539,5 @@
   "startingRelics": [
     "JUNNA_GREEN_GEM"
   ],
-  "arrowArtRevision": 4816
+  "arrowArtRevision": 4874
 }

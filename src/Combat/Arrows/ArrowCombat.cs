@@ -34,7 +34,6 @@ public static partial class ArrowCombat
         Func<PlayerChoiceContext, CardPlay, Task> resolve)
     {
         int haste = CatalogPower.ArrowHaste(card.Owner);
-        turns = Math.Max(0, turns - haste);
         if (haste > 0) card.AddKeyword(CardKeyword.Exhaust);
         if (Find(card) is { } existing && !existing.Resolving)
             existing.PlayCount += play.PlayCount;
@@ -57,17 +56,6 @@ public static partial class ArrowCombat
         {
             await Accelerate(context, arrow, 1);
         }
-    }
-
-    public static async Task ActivateHaste(PlayerChoiceContext context, Player player)
-    {
-        var arrows = ResolutionOrder().Where(a => a.Card.Owner == player).ToArray();
-        foreach (var arrow in arrows)
-        {
-            arrow.ExhaustAfterResolve = true;
-            arrow.Card.AddKeyword(CardKeyword.Exhaust);
-        }
-        foreach (var arrow in arrows) await Accelerate(context, arrow, 1);
     }
 
     public static async Task AccelerateAll(PlayerChoiceContext context, Player player, int turns)

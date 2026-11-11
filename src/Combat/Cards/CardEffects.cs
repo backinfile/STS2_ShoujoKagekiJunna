@@ -49,9 +49,8 @@ public static class CardEffects
             case "JA04": case "JK10": case "JA22": case "JK15": case "A": case "JK27":
             case "JA35": case "JA205": case "JK254": case "JK260": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":
             case "JG31": case "JH21": case "JG34": case "JK75": case "JH23": case "JA70":
-            case "JK235": case "JH59": case "JA144": case "JA118": case "JA105": case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31": case "U_CARD_008":
+            case "JK235": case "JH59": case "JA144": case "JA118": case "JA105": case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31": case "U_CARD_008": case "U_CARD_010":
                 await CatalogPower.Install(card, context, play);
-                if (card.DesignId == "JA105") await ArrowCombat.ActivateHaste(context, player);
                 if (card.DesignId == "JK32") SetNamedFree(player, "JK32B", "JK32C");
                 break;
             case "JH19": case "JK80":
@@ -272,6 +271,10 @@ public static class CardEffects
                 break;
             case "JK84B":
                 await Attack(); await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
+            case "U_CARD_009":
+                await CardTutors.DrawCategories(context, card); break;
+            case "JK314":
+                await Attack(hits: V("Repeat", 2) + KnowledgeProgress.DepletedPartners(card)); break;
             default: throw new InvalidOperationException($"Missing card effect: {card.DesignId}");
         }
     }

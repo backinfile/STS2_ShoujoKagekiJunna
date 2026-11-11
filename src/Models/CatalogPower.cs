@@ -23,6 +23,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         public int BaseHits => Card.Definition.CostsX ? XValue : 1;
         public int Turn = -1;
         public int Used;
+        public int CycleIndex;
         public int V(string name) => Card.Value(name);
         public bool Take(int limit)
         {
@@ -46,7 +47,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => CardRules.Get(DesignId).SinglePower ? PowerStackType.Single : PowerStackType.Counter;
-    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{(DesignId == "U_CARD_008" ? "JK127" : DesignId)}.png";
+    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{(DesignId is "U_CARD_008" or "U_CARD_010" ? "JK127" : DesignId)}.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     protected override void DeepCloneFields()
     {

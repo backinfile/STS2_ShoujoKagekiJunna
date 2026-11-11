@@ -51,6 +51,10 @@ internal static partial class CardRules
         },
         ["JA105"] = new()
         {
+            Fields = new Dictionary<string, string>
+            {
+                ["Turns"] = "N0",
+            },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
             PowerDescription = PowerDescriptionKind.Applications,
@@ -939,7 +943,6 @@ internal static partial class CardRules
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
         },
         ["JK32"] = new()
         {
@@ -1338,6 +1341,15 @@ internal static partial class CardRules
                 ["DrawCount"] = "N0",
             },
             Effect = SimpleCardEffect.Draw,
+        },
+        ["U_CARD_009"] = new()
+        {
+        },
+        ["U_CARD_010"] = new()
+        {
+            PowerDescription = PowerDescriptionKind.RepeatedApplications,
+            PowerAmount = PowerAmountKind.Applications,
+            SinglePower = false,
         },
     };
 }

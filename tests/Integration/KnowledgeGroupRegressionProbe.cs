@@ -54,7 +54,7 @@ public sealed class KnowledgeGroupRegressionProbe : AbstractConsoleCmd
             rows.Add(new { name = id + " keeps the generated source free this turn", pass = CardActions.Cost(card) == 0 });
         }
         await Reset();
-        await CardActions.Generate(player, "B", 1, PileType.Hand);
+        await CardActions.Generate(player, "B", 1, PileType.Hand, CardPilePosition.Bottom);
         rows.Add(new { name = "explicit single-card generation still creates exactly one card", pass = player.PlayerCombatState!.Hand.Cards.Count == 1 });
         await Reset();
         var original = CardCatalog.Create("JB01", player);

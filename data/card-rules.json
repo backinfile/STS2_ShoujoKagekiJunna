@@ -798,6 +798,9 @@
         "description": "Applications",
         "amount": "Applications",
         "single": false
+      },
+      "fields": {
+        "Turns": "N0"
       }
     },
     "JH27B": {
@@ -1842,8 +1845,7 @@
       ],
       "upgradedTips": [
         "Knowledge"
-      ],
-      "effect": "Attack"
+      ]
     },
     "JK275": {
       "effect": "Attack",
@@ -1869,6 +1871,14 @@
         "DrawCount": "N0"
       },
       "effect": "Draw"
+    },
+    "U_CARD_009": {},
+    "U_CARD_010": {
+      "power": {
+        "description": "RepeatedApplications",
+        "amount": "Applications",
+        "single": false
+      }
     }
   }
 }

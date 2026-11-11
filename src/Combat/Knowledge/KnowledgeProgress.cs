@@ -21,9 +21,8 @@ public static partial class KnowledgeProgress
     private static readonly HashSet<Player> Opened = [];
     private static readonly Dictionary<Player, int> CopyRewards = [];
     private static readonly Dictionary<Player, int> StoryRewards = [];
-    public static void Initialize() { }
-    public static int PermanentHits(CardModel card) => card is CatalogCard catalog
-        ? checked(ExtraHits.Get(catalog) + (catalog.DesignId == "JK314" ? DepletedPartners(catalog) : 0)) : 0;
+    public static void Initialize() { _ = LegacyDepletedPartners; }
+    public static int PermanentHits(CardModel card) => card is CatalogCard catalog ? ExtraHits.Get(catalog) : 0;
 
     public static async Task Revise(PlayerChoiceContext context, CatalogCard source)
     {
@@ -51,6 +50,7 @@ public static partial class KnowledgeProgress
     {
         if (context.PermanentCard == null) return;
         ResearchDepleted(card, context.PermanentCard);
+        if (card.DesignId == "JK122B") context.Player.PlayerCombatState?.RecalculateCardValues();
         if (card.DesignId == "JK139B")
         {
             OpeningInsights.Set(context.Player, checked(OpeningInsights.Get(context.Player) + 1));

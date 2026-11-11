@@ -46,6 +46,9 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         base.AddExtraArgsToDescription(description);
         if (DesignId is "JK184" or "JK314")
             description.Add("DepletedPartners", KnowledgeProgress.DepletedPartners(this));
+        if (DesignId == "JA108")
+            description.Add("ArrowCount", IsMutable && Owner?.PlayerCombatState is { } combat
+                ? combat.DrawPile.Cards.Count(CardCatalog.IsArrow) : 0);
     }
 
     internal static int CountDeckKnowledge(CardModel card) => card.IsMutable

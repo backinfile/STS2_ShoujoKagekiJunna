@@ -306,6 +306,12 @@ public sealed class JunnaCardU_CARD_008() : CatalogCard("U_CARD_008");
 [CustomID("JUNNA_U_CARD_008B")]
 public sealed class JunnaCardU_CARD_008B() : CatalogCard("U_CARD_008B");
 
+[CustomID("JUNNA_U_CARD_009")]
+public sealed class JunnaCardU_CARD_009() : CatalogCard("U_CARD_009");
+
+[CustomID("JUNNA_U_CARD_010")]
+public sealed class JunnaCardU_CARD_010() : CatalogCard("U_CARD_010");
+
 [CustomID("JUNNA_JK15")]
 public sealed class JunnaCardJK15() : CatalogCard("JK15");
 

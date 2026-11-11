@@ -580,7 +580,7 @@ public static class CardBranchesProbe
                         });
                         Add(id,up,"单张生成：只生成指定对象与版本",async()=>
                         {
-                            await CardActions.Generate(player,id,1,PileType.Hand,up);
+                            await CardActions.Generate(player,id,1,PileType.Hand,CardPilePosition.Bottom,up);
                             Check("only one generated",player.PlayerCombatState!.Hand.Cards.Count,1);
                             var generated=player.PlayerCombatState.Hand.Cards.Single();Check("selected member",CardCatalog.DesignId(generated),id);Check("generated version",generated.IsUpgraded,up);
                         });

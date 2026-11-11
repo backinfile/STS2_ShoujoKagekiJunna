@@ -45,6 +45,10 @@ public abstract partial class CatalogPower
             if (ReferenceEquals(play, grant.InstalledBy)) continue;
             switch (DesignId)
             {
+                case "JA105" when CardCatalog.IsArrow(play.Card):
+                    if (ArrowCombat.Find(play.Card) is { } accelerated)
+                        await ArrowCombat.Accelerate(context, accelerated, grant.V("Turns"));
+                    break;
                 case "JA04" when CardCatalog.IsArrow(play.Card) && !immediateConsumed:
                     immediateConsumed = true;
                     grant.Used++;

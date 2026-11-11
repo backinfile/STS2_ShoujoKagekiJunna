@@ -158,7 +158,7 @@ public static class CardPoolProbe
             await CardPileCmd.Add(acquired, PileType.Deck, skipVisuals: true);
             Check("knowledge acquisition honors configured multiplicity", player.Deck.Cards.Count - initial, 3);
             int before = CardActions.All(player).Count();
-            await CardActions.Generate(player, "A", 1, PileType.Hand);
+            await CardActions.Generate(player, "A", 1, PileType.Hand, CardPilePosition.Bottom);
             Check("single generated knowledge stays single", CardActions.All(player).Count() - before, 1);
             var study = await Card("JK82");
             await ShoujoKageki.Core.V1.CardUpgrades.Upgrade(study, CardPreviewStyle.None);
