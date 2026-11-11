@@ -22,7 +22,8 @@ public static partial class KnowledgeProgress
     internal static string? ResearchGroup(CardModel card) => card is CatalogCard catalog ? ResearchLinks.Get(catalog) : null;
 
     public static int DepletedPartners(CardModel card) => card is not CatalogCard catalog ? 0
-        : catalog.DesignId == "JK184" ? PermanentHits(catalog) : ResearchCount.Get(catalog);
+        : ResearchRules.ForMain(catalog.DesignId) is { Counter: ResearchCounter.ExtraHits, ShowDepletedPartners: true }
+            ? ExtraHits.Get(catalog) : ResearchCount.Get(catalog);
 
     internal static void PreserveFirstBonus(CardModel card, decimal amount)
     {
@@ -37,42 +38,31 @@ public static partial class KnowledgeProgress
     internal static void BindResearch(IEnumerable<CardModel> acquired)
     {
         var cards = acquired.OfType<CatalogCard>().ToArray();
-        if (!cards.Any(c => c.DesignId is "JK148" or "JK184" or "JK314")) return;
+        if (!cards.Any(card => ResearchRules.ForMain(card.DesignId) != null)) return;
         var owner = cards[0].Owner;
         int sequence = checked(ResearchSequence.Get(owner) + 1);
         ResearchSequence.Set(owner, sequence);
         string link = owner.NetId + "/" + sequence;
-        foreach (var card in cards.Where(c => c.DesignId is "JK148" or "JK148B" or "JK148C" or "JK148D" or "JK148E" or "JK148F" or "JK184" or "JK184B" or "JK184C" or "JK184D" or "JK314" or "JK122B"))
+        foreach (var card in cards.Where(card => ResearchRules.Contains(card.DesignId)))
             ResearchLinks.Set(card, link);
     }
 
     private static void ResearchDepleted(CatalogCard source, CardModel permanent)
     {
-        if (source.DesignId is not ("JK148B" or "JK148C" or "JK148D" or "JK148E" or "JK148F" or "JK184B" or "JK184C" or "JK184D" or "JK122B")
+        if (ResearchRules.ForPartner(source.DesignId) is not { } rule
             || permanent is not CatalogCard member || ResearchCompleted.Get(member)) return;
         string? link = ResearchLinks.Get(member);
         if (string.IsNullOrEmpty(link)) return;
         ResearchCompleted.Set(member, true);
-        string mainId = source.DesignId == "JK122B" ? "JK314"
-            : source.DesignId.StartsWith("JK184", StringComparison.Ordinal) ? "JK184" : "JK148";
+        var field = rule.Counter == ResearchCounter.ExtraHits ? ExtraHits : ResearchCount;
         foreach (var paper in source.Owner.Deck.Cards.OfType<CatalogCard>()
-                     .Where(c => c.DesignId == mainId && ResearchLinks.Get(c) == link))
+                     .Where(card => card.DesignId == rule.MainCardId && ResearchLinks.Get(card) == link))
         {
-            if (mainId == "JK314")
-            {
-                int count = Math.Min(3, checked(ResearchCount.Get(paper) + 1));
-                ResearchCount.Set(paper, count);
-                if (source.Owner.PlayerCombatState is { } state)
-                    foreach (var copy in state.AllCards.OfType<CatalogCard>().Where(c => c.DeckVersion == paper))
-                        ResearchCount.Set(copy, count);
-                continue;
-            }
-            int hits = checked(ExtraHits.Get(paper) + 1);
-            if (mainId == "JK184") hits = Math.Min(6, hits);
-            ExtraHits.Set(paper, hits);
+            int value = rule.Advance(field.Get(paper));
+            field.Set(paper, value);
             if (source.Owner.PlayerCombatState is { } combat)
-                foreach (var copy in combat.AllCards.OfType<CatalogCard>().Where(c => c.DeckVersion == paper))
-                    ExtraHits.Set(copy, hits);
+                foreach (var copy in combat.AllCards.OfType<CatalogCard>().Where(card => card.DeckVersion == paper))
+                    field.Set(copy, value);
         }
         source.Owner.PlayerCombatState?.RecalculateCardValues();
     }

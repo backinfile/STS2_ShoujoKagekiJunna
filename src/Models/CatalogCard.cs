@@ -44,7 +44,7 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     protected override void AddExtraArgsToDescription(LocString description)
     {
         base.AddExtraArgsToDescription(description);
-        if (DesignId is "JK184" or "JK314")
+        if (ResearchRules.ForMain(DesignId)?.ShowDepletedPartners == true)
             description.Add("DepletedPartners", KnowledgeProgress.DepletedPartners(this));
     }
 

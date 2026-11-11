@@ -32,6 +32,13 @@ public static partial class ArrowCombat
 
     public static void Deploy(CardModel card, CardPlay play, int turns,
         Func<PlayerChoiceContext, CardPlay, Task> resolve)
+        => DeployCore(card, play, turns, resolve, CoreApi.Get<ICardPayloadRouting>().Native);
+
+    internal static void Deploy(CardModel card, CardPlay play, int turns, ICardEffectPayload payload)
+        => DeployCore(card, play, turns, payload.Bind(card).Invoke, payload);
+
+    private static void DeployCore(CardModel card, CardPlay play, int turns,
+        Func<PlayerChoiceContext, CardPlay, Task> resolve, ICardEffectPayload payload)
     {
         int haste = CatalogPower.ArrowHaste(card.Owner);
         turns = Math.Max(0, turns - haste);
@@ -41,7 +48,7 @@ public static partial class ArrowCombat
         else
         {
             Arrows.RemoveAll(a => a.Card == card);
-            Arrows.Add(new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve) { Sequence = _sequence++, ExhaustAfterResolve = haste > 0 });
+            Arrows.Add(new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve) { Sequence = _sequence++, ExhaustAfterResolve = haste > 0, Payload = payload });
         }
         var room = NCombatRoom.Instance;
         if (room != null && room.GetNodeOrNull<ArrowHud>("JunnaArrows") == null)
@@ -93,10 +100,9 @@ public static partial class ArrowCombat
             };
             await CardPileCmd.AddGeneratedCardToCombat(copy, ArrowPile.PileId, player);
             Arrows.Add(new(copy, play, original.Remaining, player.PlayerCombatState!.TurnNumber,
-                (choice, payload) => (Task)HarmonyLib.AccessTools.Method(copy.GetType(), "OnPlay")
-                    .Invoke(copy, [choice, payload])!, original.CopyXValues())
+                original.Payload.Bind(copy).Invoke, original.CopyXValues())
             {
-                Sequence = _sequence++, PlayCount = original.PlayCount,
+                Sequence = _sequence++, PlayCount = original.PlayCount, Payload = original.Payload,
                 ExhaustAfterResolve = original.ExhaustAfterResolve, AttacksWhileWaiting = original.AttacksWhileWaiting
             });
         }

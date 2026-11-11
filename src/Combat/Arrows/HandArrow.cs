@@ -121,19 +121,19 @@ public static class HandArrow
         }
     }
 
-    internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, CardEffectContinuation next)
+    internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, ICardEffectPayload next)
     {
         play = CardActions.ResolveTarget(play);
         PaidReplay.PrepareEffect(card, play.PlayIndex);
         if (!CardCatalog.IsArrow(card))
         {
-            await next(context, play);
+            await next.Bind(card)(context, play);
             return;
         }
         if (!play.IsFirstInSeries) return;
         int turns = Turns(card);
         if (!IsArrow(card) && CardCatalog.DesignId(card) == "JA59") turns = Math.Max(0, turns - card.ResolveEnergyXValue());
-        ArrowCombat.Deploy(card, play, turns, (choice, payload) => next(choice, payload));
+        ArrowCombat.Deploy(card, play, turns, next);
         await CardPileCmd.Add(card, ArrowPile.PileId);
     }
 

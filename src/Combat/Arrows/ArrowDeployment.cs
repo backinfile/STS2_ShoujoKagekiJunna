@@ -11,6 +11,12 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     Func<PlayerChoiceContext, CardPlay, Task> resolve, int[]? xValues = null)
 {
     public CardModel Card { get; } = card;
+    private ICardEffectPayload? _payload;
+    internal ICardEffectPayload Payload
+    {
+        get => _payload ?? CoreApi.Get<ICardPayloadRouting>().Native;
+        init => _payload = value;
+    }
     public CardPlay Play { get; private set; } = play;
     public bool TargetsAllEnemies => Card.TargetType == TargetType.AllEnemies;
     public bool TargetsAllPlayers => Card.TargetType == TargetType.AllAllies;

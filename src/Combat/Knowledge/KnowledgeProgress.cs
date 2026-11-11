@@ -23,7 +23,7 @@ public static partial class KnowledgeProgress
     private static readonly Dictionary<Player, int> StoryRewards = [];
     public static void Initialize() { }
     public static int PermanentHits(CardModel card) => card is CatalogCard catalog
-        ? checked(ExtraHits.Get(catalog) + (catalog.DesignId == "JK314" ? DepletedPartners(catalog) : 0)) : 0;
+        ? checked(ExtraHits.Get(catalog) + (ResearchRules.ForMain(catalog.DesignId)?.Counter == ResearchCounter.DepletedPartners ? ResearchCount.Get(catalog) : 0)) : 0;
 
     public static async Task Revise(PlayerChoiceContext context, CatalogCard source)
     {
