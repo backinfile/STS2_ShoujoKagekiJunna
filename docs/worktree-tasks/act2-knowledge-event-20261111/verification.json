@@ -1,0 +1,1052 @@
+{
+  "builds": {
+    "beta": "passed",
+    "stable": "passed",
+    "resource_pack": "passed",
+    "focused_test_project": "passed",
+    "current_uncommitted_knowledge_compatibility": "passed"
+  },
+  "card_faces": 18,
+  "checks": [
+    {
+      "name": "JK359 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK359 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK359 draw count",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK359 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK359 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK359+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK359+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK359+ draw count",
+      "actual": 4,
+      "expected": 4,
+      "pass": true
+    },
+    {
+      "name": "JK359+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK359+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK360 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK360 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK360 draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK360 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK360 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK360 block",
+      "actual": 4,
+      "expected": 4,
+      "pass": true
+    },
+    {
+      "name": "JK360+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK360+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK360+ draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK360+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK360+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK360+ block",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK361 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK361 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK361 draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK361 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK361 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK361 damage",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK361 all targets",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "JK361+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK361+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK361+ draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK361+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK361+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK361+ damage",
+      "actual": 5,
+      "expected": 5,
+      "pass": true
+    },
+    {
+      "name": "JK361+ all targets",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "JK362 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK362 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK362 draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK362 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK362 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK362 haste",
+      "actual": 4,
+      "expected": 4,
+      "pass": true
+    },
+    {
+      "name": "JK362+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK362+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK362+ draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK362+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK362+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK362+ haste",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK363 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK363 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK363 draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK363 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK363 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK363 damage",
+      "actual": 4,
+      "expected": 4,
+      "pass": true
+    },
+    {
+      "name": "JK363+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK363+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK363+ draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK363+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK363+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK363+ damage",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK364 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK364 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK364 draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK364 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK364 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK364 energy",
+      "actual": 11,
+      "expected": 11,
+      "pass": true
+    },
+    {
+      "name": "JK364+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK364+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK364+ draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK364+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK364+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK364+ energy",
+      "actual": 11,
+      "expected": 11,
+      "pass": true
+    },
+    {
+      "name": "JK365 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK365 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK365 draw count",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK365 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK365 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK365+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK365+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK365+ draw count",
+      "actual": 4,
+      "expected": 4,
+      "pass": true
+    },
+    {
+      "name": "JK365+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK365+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK366 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK366 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK366 draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK366 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK366 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK366 damage",
+      "actual": 5,
+      "expected": 5,
+      "pass": true
+    },
+    {
+      "name": "JK366+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK366+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK366+ draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK366+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK366+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK366+ damage",
+      "actual": 7,
+      "expected": 7,
+      "pass": true
+    },
+    {
+      "name": "JK367 countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK367 cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK367 draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK367 same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK367 directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK367 damage bonus",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK367+ countdown",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "JK367+ cost",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "JK367+ draw count",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK367+ same-name draw",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "JK367+ directed draw does not reshuffle",
+      "actual": 3,
+      "expected": 3,
+      "pass": true
+    },
+    {
+      "name": "JK367+ damage bonus",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "event model registered",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "practice deck size",
+      "actual": 4,
+      "expected": 4,
+      "pass": true
+    },
+    {
+      "name": "practice upgraded copies",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "study deck total",
+      "actual": 10,
+      "expected": 10,
+      "pass": true
+    },
+    {
+      "name": "study JK359",
+      "actual": 2,
+      "expected": 2,
+      "pass": true
+    },
+    {
+      "name": "study JK360",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "study JK361",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "study JK362",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "study JK363",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "study JK364",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "study JK365",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "study JK366",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "study JK367",
+      "actual": 1,
+      "expected": 1,
+      "pass": true
+    },
+    {
+      "name": "existing copies preserved",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "act 1",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "act 2",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "act 3",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "visited event excluded",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK359 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK359 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK359 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "JK360 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK360 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK360 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "JK361 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK361 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK361 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "JK362 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK362 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK362 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "JK363 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK363 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK363 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "JK364 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK364 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK364 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "JK365 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK365 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK365 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "JK366 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK366 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK366 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "JK367 event rarity",
+      "actual": 6,
+      "expected": 6,
+      "pass": true
+    },
+    {
+      "name": "JK367 excluded from rewards",
+      "actual": false,
+      "expected": false,
+      "pass": true
+    },
+    {
+      "name": "JK367 direct partners",
+      "actual": 8,
+      "expected": 8,
+      "pass": true
+    },
+    {
+      "name": "practice upgrades knowledge only",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    },
+    {
+      "name": "practice preserves ordinary cards",
+      "actual": true,
+      "expected": true,
+      "pass": true
+    }
+  ],
+  "checks_total": 153,
+  "failed_checks": 0,
+  "source_art": [
+    {
+      "id": "JK359",
+      "sha256": "afbaedc24d643d781e11ee9d1b61cc1ede2b49a76afcbf835c0959029480a31d",
+      "workbench_asset_matches": true
+    },
+    {
+      "id": "JK360",
+      "sha256": "e0cb79be9dd36456b3a93d144a3e1a47238e8fa0eb0c32800eee051f26a7a00c",
+      "workbench_asset_matches": true
+    },
+    {
+      "id": "JK361",
+      "sha256": "a87d69189b118711c5c839f6a742d2cd1376a68b6d6a910c02404a1a58532599",
+      "workbench_asset_matches": true
+    },
+    {
+      "id": "JK362",
+      "sha256": "2f2bc4772307610a5bf6d667eb5a5447a3295f012d11d71ecba42f79885ee3d8",
+      "workbench_asset_matches": true
+    },
+    {
+      "id": "JK363",
+      "sha256": "4540bc0196495cce2928f5521e292482d1f363760e326a5109d2247c100fd699",
+      "workbench_asset_matches": true
+    },
+    {
+      "id": "JK364",
+      "sha256": "1490c9f3ead84867778883a5576d1a87072ccd925afb30b24851169cd57aba7c",
+      "workbench_asset_matches": true
+    },
+    {
+      "id": "JK365",
+      "sha256": "0f8abb34e138f078989aa55ad68f62617887f896d94b653d2154f84b19716ca0",
+      "workbench_asset_matches": true
+    },
+    {
+      "id": "JK366",
+      "sha256": "aba9768c7b6de73c2f39ffaa0fe5f659062f8cc4a3a4dbbbd21c3c6e3dfe42c8",
+      "workbench_asset_matches": true
+    },
+    {
+      "id": "JK367",
+      "sha256": "58cf43b62e6fee654e48c839df3470c22ad0eb979a8d10ed1d0f28a9eb073882",
+      "workbench_asset_matches": true
+    }
+  ],
+  "manual_scenarios": [
+    {
+      "case": "zero_knowledge_candidates_with_ordinary_card",
+      "disabled": true
+    },
+    {
+      "case": "one_knowledge_candidate_with_ordinary_card",
+      "upgraded": 1,
+      "ordinary_card_unchanged": true
+    },
+    {
+      "case": "two_knowledge_candidates_choose_one",
+      "visible_candidate_ids": [
+        "JUNNA_JK359",
+        "JUNNA_JK360"
+      ],
+      "upgraded": 1,
+      "ordinary_card_unchanged": true,
+      "existing_upgraded_copy_preserved": true
+    },
+    {
+      "case": "completed_room_reload",
+      "event_id": "JUNNA_STAGE_GIRL_NOTES",
+      "deck_count": 12,
+      "outcome": "STUDY",
+      "reward_repeated": false
+    }
+  ],
+  "original_checkout": {
+    "protected_files_at_start": 15,
+    "matching_original_sha256": 14,
+    "advanced_by_parallel_commits": [
+      "src/Combat/Knowledge/DynamicKnowledge.cs"
+    ],
+    "current_dirty_files": 4,
+    "branch": "main",
+    "synchronizing_head": "4addaed6010f6ffe95cd0a20b20112e666d6ceac",
+    "current_state": "docs/worktree-tasks/act2-knowledge-event-20261111/sync-original-worktree-state.json"
+  },
+  "document_audit": {
+    "tracked_text_files": 73,
+    "additional_task_documents": 7,
+    "local_paths_or_common_secret_patterns": 0
+  },
+  "recording": {
+    "video_codec": "h264",
+    "audio_codec": "aac",
+    "audio_source": "engine_mix",
+    "fps": 15,
+    "dimensions": [
+      1280,
+      720
+    ],
+    "seconds": {
+      "knowledge-event.mp4": 9.333008,
+      "upgrade-knowledge.mp4": 10.4
+    }
+  },
+  "existing_integration_project_issue": {
+    "project": "tests/Integration/JunnaIntegration.csproj",
+    "existing_signature_errors": 3,
+    "focused_project": "tests/StageGirlNotes/JunnaStageGirlNotesChecks.csproj"
+  },
+  "event_art": {
+    "canvas": [
+      3440,
+      1616
+    ],
+    "layout": "native default full-screen event layout",
+    "reference": "docs/assets/events/junna-desk-official.jpg",
+    "cleanup_report": "docs/worktree-tasks/act2-knowledge-event-20261111/desk-art-cleanup.json",
+    "final_sha256": "7c43beb5b09daacd8fea8a74ee44cd597c2650b68497a5a47cee6f4bbe6565a3"
+  }
+}

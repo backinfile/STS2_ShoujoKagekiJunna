@@ -979,6 +979,90 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
         },
+        ["JK359"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["LinkedDraw"] = "N0",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["JK360"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["LinkedDraw"] = "N1",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["JK361"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["LinkedDraw"] = "N1",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["JK362"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Haste"] = "N0",
+                ["LinkedDraw"] = "N1",
+            },
+            Tips = [CardTip.Knowledge, CardTip.Arrow],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
+        },
+        ["JK363"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["LinkedDraw"] = "N2",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["JK364"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Energy"] = "N0",
+                ["LinkedDraw"] = "N1",
+            },
+            Tips = [CardTip.Knowledge, CardTip.Energy],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Energy],
+        },
+        ["JK365"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N0",
+                ["LinkedDraw"] = "N1",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["JK366"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["LinkedDraw"] = "N1",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["JK367"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["LinkedDraw"] = "N1",
+            },
+            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
+            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
+        },
         ["JK37"] = new()
         {
             Tips = [CardTip.Knowledge],

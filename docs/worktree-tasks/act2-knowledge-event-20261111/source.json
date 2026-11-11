@@ -1,0 +1,116 @@
+{
+  "workbenchRevision": 4865,
+  "eventArtRevision": 4872,
+  "eventDesignId": "JE01",
+  "eventFitId": "FIT_EVENT_JE01",
+  "eventName": "舞台少女心得",
+  "eventImage": {
+    "tool": "imagegen",
+    "mode": "built-in",
+    "reference": "docs/assets/events/junna-desk-official.jpg",
+    "referenceSource": "https://x.com/KinemacINFO/status/1149363052682215425",
+    "prompt": "Use case: stylized-concept. Asset: a new full-bleed panoramic background for a Slay the Spire 2 event, target canvas 3440x1616 (2.129:1). Input image 1 is a STYLE AND STRUCTURE REFERENCE, not an image to display as a sheet. Create a NEW drawing expanding its studying desk into a complete edge-to-edge scene. Preserve the reference's coherent elevated three-quarter perspective, delicate gray pencil/ink contours, restrained anime production-design linework, pale blue-gray flat fills, and organized dense study objects. A desk seen from slightly above: tall books and small document drawers along the rear left, a correctly constructed open laptop on the left, tidy stacks of rehearsal scripts with colored page tabs, and an opened notebook with a few sparse pencil diagrams and highlighted notes in the front-left. Main readable study objects should be concentrated in the LEFT 45% and inset from the canvas edges, centered near x=30%, y=58%. The desk surface, subdued room wall and faint shelf contours extend naturally across the ENTIRE panoramic image to all four edges. The RIGHT 55% is naturally shaded deep muted slate/navy-gray, very quiet and low contrast, with no prominent objects or light paper behind the game's ivory text and buttons. Soft light only on the left pages; controlled hard-edged flat color shading, minimal texture. It should still look like a clean restrained anime setting drawing, not an oil painting or photorealistic rendering. No people, no invented logos, no readable words, no title, no UI, no card border, no mockup frame. CRITICAL: draw a FULL-SCREEN ENVIRONMENT, with NO surrounding white page, NO rectangular inset illustration, NO white margins, NO letterboxing. Do not reproduce the reference's printed copyright or studio captions. Preserve clear straight book edges, consistent tabletop perspective, clean laptop geometry, and distinct paper sheets.",
+    "original": "docs/assets/events/stage-girl-notes-desk-original.png",
+    "final": "ShoujoKagekiJunna/images/events/stage_girl_notes.png",
+    "cleanupReport": "docs/worktree-tasks/act2-knowledge-event-20261111/desk-art-cleanup.json"
+  },
+  "cards": [
+    {
+      "id": "JK359",
+      "name": "翡翠弓",
+      "text": "知识。抽3张关联牌。",
+      "upgradedText": "知识。抽4张关联牌。",
+      "assetId": "official-relive-seisho-jk359-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/afbaedc24d643d781e11ee9d.png",
+      "source": "https://starlight.academy/card/1060001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    },
+    {
+      "id": "JK360",
+      "name": "爱的审判",
+      "text": "知识。获得4点格挡。抽2张关联牌。",
+      "upgradedText": "知识。获得6点格挡。抽2张关联牌。",
+      "assetId": "official-relive-seisho-jk360-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/e0cb79be9dd36456b3a93d14.png",
+      "source": "https://starlight.academy/card/1030001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    },
+    {
+      "id": "JK361",
+      "name": "骄傲的火花",
+      "text": "知识。对所有敌人造成3点伤害。抽2张关联牌。",
+      "upgradedText": "知识。对所有敌人造成5点伤害。抽2张关联牌。",
+      "assetId": "official-relive-seisho-jk361-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/a87d69189b118711c5c839f6.png",
+      "source": "https://starlight.academy/card/1040001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    },
+    {
+      "id": "JK362",
+      "name": "轮舞",
+      "text": "知识。所有箭矢加速1回合。抽2张关联牌。",
+      "upgradedText": "知识。所有箭矢加速2回合。抽2张关联牌。",
+      "assetId": "official-relive-seisho-jk362-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/2f2bc4772307610a5bf6d667.png",
+      "source": "https://starlight.academy/card/1070001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    },
+    {
+      "id": "JK363",
+      "name": "决定者",
+      "text": "知识。造成2点伤害2次。抽2张关联牌。",
+      "upgradedText": "知识。造成2点伤害3次。抽2张关联牌。",
+      "assetId": "official-relive-seisho-jk363-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/4540bc0196495cce2928f552.png",
+      "source": "https://starlight.academy/card/1080001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    },
+    {
+      "id": "JK364",
+      "name": "水仙花",
+      "text": "知识。获得1点能量。抽2张关联牌。",
+      "upgradedText": "知识。获得1点能量并可保留到下回合。抽2张关联牌。",
+      "assetId": "official-relive-seisho-jk364-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/1490c9f3ead84867778883a5.png",
+      "source": "https://starlight.academy/card/1090001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    },
+    {
+      "id": "JK365",
+      "name": "花蕾的光辉",
+      "text": "知识。抽1张牌。抽2张关联牌。",
+      "upgradedText": "知识。抽2张牌。抽2张关联牌。",
+      "assetId": "official-relive-seisho-jk365-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/0f8abb34e138f078989aa55a.png",
+      "source": "https://starlight.academy/card/1020001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    },
+    {
+      "id": "JK366",
+      "name": "思春期的可能性",
+      "text": "知识。造成5点伤害。抽2张关联牌。",
+      "upgradedText": "知识。造成7点伤害。抽2张关联牌。",
+      "assetId": "official-relive-seisho-jk366-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/aba9768c7b6de73c2f39ffaa.png",
+      "source": "https://starlight.academy/card/1010001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    },
+    {
+      "id": "JK367",
+      "name": "孤高的奥黛特",
+      "text": "知识。所有牌获得2点伤害加成。抽2张关联牌。",
+      "upgradedText": "知识。所有牌获得2点伤害加成。抽2张关联牌。",
+      "assetId": "official-relive-seisho-jk367-20261110-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/58cf43b62e6fee654e48c839.png",
+      "source": "https://starlight.academy/card/1050001/",
+      "credit": "©Project Revue Starlight ©Ateam Inc. ©Tokyo Broadcasting System Television, Inc. ©bushiroad"
+    }
+  ],
+  "previousGeneratedEventImage": {
+    "tool": "imagegen",
+    "mode": "built-in",
+    "prompt": "Create an ORIGINAL game event background illustration. Use case stylized-concept. Final composition is a very wide panorama about 2.129:1 to fit a 3440x1616 event background. Hand-painted dark fantasy storybook game art, strong irregular ink contours, simple angular flat color shapes, hard-edged cel shading, restrained texture, low saturated midnight navy and dark warm brown, a small warm cream highlight. Scene: an abandoned, dusty rehearsal studio with wooden floor, a practice mirror and a curtain. MAIN FOCUS entirely in the LEFT 45 PERCENT: a worn wooden rehearsal table holding a large opened practice manual and a few loosened sketch pages. The warmly lit spread clearly shows an elegant emerald-green Japanese stage bow drawn as a weapon study, with a fine bowstring and an arrow; other visible pages show small precise sketches of a sword, short dagger, twin swords, naginata and mace, integrated as rehearsal notes. No people needed. A modest diagonal shaft of light illuminates the book and dust. Book and bow diagram must be legible at thumbnail size. Compose the tabletop centered at x=31 percent y=58 percent, with all important objects inset from image edges. The RIGHT 55 PERCENT is a very dark, quiet, low-contrast studio wall fading into midnight navy and near-black, meant to sit BEHIND WHITE EVENT TEXT AND BUTTONS rendered separately by the game. Keep the center-right blank and dark. Matte illustrative lighting, clean deliberate edges, appealing readable silhouettes. Full-bleed background. No typography, no legible letters or numbers, no captions, no title, no UI, no card frame, no watermark. This is a background illustration for the Chinese event '舞台少女心得' about learning nine stage girls' weapons, rather than a promotional poster. Do not render the event name.",
+    "original": "docs/assets/events/stage-girl-notes-original.png",
+    "final": "docs/assets/events/stage-girl-notes-generated-previous.png"
+  }
+}
