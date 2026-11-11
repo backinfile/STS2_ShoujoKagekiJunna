@@ -72,10 +72,10 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
             return new(true, "Pointer updated");
         }
         int count = int.Parse(args.ElementAtOrDefault(1) ?? "64");
-        return new(Run(player, count, args.FirstOrDefault() == "check", args.ElementAtOrDefault(2) == "player", args.ElementAtOrDefault(2) == "mixed"), true, "Hover density probe started");
+        return new(Run(player, count, args.FirstOrDefault() == "check", args.ElementAtOrDefault(2) == "player", args.ElementAtOrDefault(2) == "mixed", args.ElementAtOrDefault(2) == "interleaved"), true, "Hover density probe started");
     }
 
-    private static async Task Run(Player player, int count, bool check, bool self, bool mixed)
+    private static async Task Run(Player player, int count, bool check, bool self, bool mixed, bool interleaved)
     {
         foreach (var card in CardActions.All(player).ToArray())
         {
@@ -87,7 +87,7 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
         await CreatureCmd.SetCurrentHp(target, 100000);
         for (int i = 0; i < count + (mixed ? 1 : 0); i++)
         {
-            var card = CardCatalog.Create(i == count ? "JB03" : self ? "JH11" : "U_CARD_005", player);
+            var card = CardCatalog.Create((i == count || interleaved && (i == 1 || i == 4)) ? "JB03" : self ? "JH11" : "U_CARD_005", player);
             if (check && count > 1) DamageModifiers.Add(card, damageBonus: i + 1);
             var play = new CardPlay { Card = card, Target = target,
 #if STS2_BETA

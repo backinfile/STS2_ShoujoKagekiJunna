@@ -1,5 +1,4 @@
 using Godot;
-using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -10,6 +9,8 @@ public partial class ArrowHud
     private float _layoutRow;
     private ArrowDeployment[] _layoutOrder = [];
     private ArrowLane[] _layoutLanes = [];
+    private StardustPreviewKey?[] _layoutStardustKeys = [];
+    private readonly List<StardustPreviewKey?> _stardustKeyBuffer = [];
     private Vector2[] _layoutRegions = [];
     private Vector2[] _layoutFormation = [];
     private readonly List<ArrowLane> _laneBuffer = [];
@@ -39,6 +40,7 @@ public partial class ArrowHud
         if (float.IsPositiveInfinity(allyLeft)) allyLeft = allyRight = canvas.X * .25f;
         float allyCenter = (allyLeft + allyRight) * .5f;
         _laneBuffer.Clear();
+        _stardustKeyBuffer.Clear();
         bool same = arrows.Count == _layoutOrder.Length;
         for (int i = 0; i < arrows.Count; i++)
         {
@@ -47,7 +49,9 @@ public partial class ArrowHud
             float targetX = targets.Count > 0 ? targets[0].X : enemyCount == 0 ? canvas.X : enemySum / enemyCount;
             var lane = ArrowLayout.Lane(arrow.TargetCategory <= 1, arrow.TargetsGroup, targetX, allyCenter);
             _laneBuffer.Add(lane);
-            same = same && arrow == _layoutOrder[i] && lane == _layoutLanes[i];
+            StardustPreviewKey? key = _stardustKeys.TryGetValue(arrow, out var state) ? state : null;
+            _stardustKeyBuffer.Add(key);
+            same = same && arrow == _layoutOrder[i] && lane == _layoutLanes[i] && key == _layoutStardustKeys[i];
         }
         bool enemiesLeft = enemyLeft < allyCenter || _laneBuffer.Contains(ArrowLane.Left);
         if (same && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)
@@ -72,23 +76,24 @@ public partial class ArrowHud
         _layoutAllyRight = allyRight;
         _layoutEnemiesLeft = enemiesLeft;
         // Cache the target regions as well as order: a side change can leave display order unchanged.
-        if (arrows.SequenceEqual(_layoutOrder) && lanes.SequenceEqual(_layoutLanes)
+        if (same && arrows.SequenceEqual(_layoutOrder) && lanes.SequenceEqual(_layoutLanes)
             && regions.SequenceEqual(_layoutRegions) && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)) return;
         foreach (var lane in Enum.GetValues<ArrowLane>())
         {
             var group = arrows.Where((_, index) => lanes[index] == lane).ToArray();
             if (group.Length == 0) continue;
             var range = regions[(int)lane];
-            bool IsStardust(ArrowDeployment arrow) => CardCatalog.DesignId(arrow.Card) == "U_CARD_005";
+            bool IsStardust(ArrowDeployment arrow) => _stardustKeys.ContainsKey(arrow);
             if (group.Any(IsStardust))
             {
                 var joined = group.Select((arrow, index) => index > 0 && IsStardust(arrow)
-                    && IsStardust(group[index - 1]) && arrow.Target == group[index - 1].Target).ToArray();
+                    && IsStardust(group[index - 1]) && _stardustKeys[arrow] == _stardustKeys[group[index - 1]]).ToArray();
                 // OccupiedRegions ends on the old 80-unit grid; use the remaining width as well.
                 float endX = lane == ArrowLane.Right ? canvas.X * .9f
                     : lane == ArrowLane.Left ? formation[(int)ArrowLane.FriendlyGroup].X - SlotSpacing : range.Y;
                 var packed = ArrowLayout.Pack(Math.Max(range.Y, endX) - range.X, SlotSpacing, IconWidth * .5f,
-                    group.All(IsStardust) ? IconSize.Y * .5f : RowSpacing, joined);
+                    group.All(IsStardust) && group.All(arrow => _stardustKeys[arrow] == _stardustKeys[group[0]])
+                        ? IconSize.Y * .5f : RowSpacing, joined);
                 for (int i = 0; i < group.Length; i++) _slots[group[i]] = packed[i] + new Vector2(range.X, rowY);
                 continue;
             }
@@ -108,6 +113,7 @@ public partial class ArrowHud
         _layoutRow = rowY;
         _layoutOrder = arrows.ToArray();
         _layoutLanes = lanes;
+        _layoutStardustKeys = _stardustKeyBuffer.ToArray();
         _layoutRegions = regions;
         _layoutFormation = formation;
     }
