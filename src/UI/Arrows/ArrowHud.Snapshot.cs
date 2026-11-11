@@ -24,6 +24,7 @@ public partial class ArrowHud
         foreach (var removed in _removed)
         {
             FinishDeployment(removed);
+            RemovePreviewCard(removed);
             if (!_views[removed].Releasing) _views[removed].Root.QueueFree();
             _views.Remove(removed);
         }

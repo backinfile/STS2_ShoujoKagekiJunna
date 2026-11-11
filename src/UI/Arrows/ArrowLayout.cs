@@ -71,6 +71,24 @@ internal static class ArrowLayout
         => friendly ? group ? ArrowLane.FriendlyGroup : ArrowLane.FriendlySingle
             : group ? ArrowLane.EnemyGroup : targetX < allyCenter ? ArrowLane.Left : ArrowLane.Right;
 
+    // A new row starts only when the next arrow, at its actual spacing, no longer fits.
+    internal static Vector2[] Pack(float width, float spacing, float compactSpacing, float rowSpacing,
+        IReadOnlyList<bool> joinPrevious)
+    {
+        var result = new Vector2[joinPrevious.Count];
+        float x = 0, y = 0;
+        for (int i = 0; i < result.Length; i++)
+        {
+            float next = i == 0 ? 0 : x + (joinPrevious[i] ? compactSpacing : spacing);
+            if (next > width + .01f) { x = 0; y += rowSpacing; }
+            else x = next;
+            result[i] = new(x, y);
+        }
+        if (result.Length > 0 && y == 0)
+            for (int i = 0; i < result.Length; i++) result[i].X += (width - x) * .5f;
+        return result;
+    }
+
     private readonly record struct Cost(int Moved, double Travel, double Balance) : IComparable<Cost>
     {
         public int CompareTo(Cost other)

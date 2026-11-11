@@ -119,6 +119,26 @@ foreach (var (name, allyLeft, allyRight, left, counts) in new[]
     Console.WriteLine("PASS: " + name + " density, clearance and ordering");
 }
 
+foreach (int count in new[] { 2, 57, 58, 59, 64, 128 })
+{
+    var joined = Enumerable.Range(0, count).Select(i => i > 0).ToArray();
+    var points = ArrowLayout.Pack(1200, 80, 21, 36.4f, joined);
+    Require(points.Length == count && points.Distinct().Count() == count, "packed copies stay distinct");
+    Require(points.GroupBy(p => p.Y).Count() == (count + 57) / 58, "actual spacing determines row capacity");
+    foreach (var row in points.GroupBy(p => p.Y).SkipLast(1))
+        Require(row.Count() == 58 && row.Max(p => p.X) + 21 > 1200, "every nonfinal row is full");
+    Require(points.All(p => p.X >= 0 && p.X <= 1200), "packed arrows stay inside their region");
+    Console.WriteLine($"PASS: {count} Stardust arrows fill each row before wrapping");
+}
+var edgeFit = ArrowLayout.Pack(1225.5f, 80, 21, 36.4f, Enumerable.Range(0, 60).Select(i => i > 0).ToArray());
+Require(edgeFit.Take(59).All(p => p.Y == 0) && edgeFit[59].Y == 36.4f,
+    "reuse the fraction left beyond the old 80-unit grid");
+Console.WriteLine("PASS: leftover region width is used before wrapping");
+var mixed = ArrowLayout.Pack(200, 80, 21, 96, [false, true, true, false, false, true]);
+Require(mixed.Take(4).All(p => p.Y == 0) && mixed[3].X == 122 && mixed[4].Y == 96 && mixed[5].X == 21,
+    "mixed arrow row uses compact Stardust spacing and ordinary arrow clearance");
+Console.WriteLine("PASS: mixed Stardust and ordinary arrows wrap at their actual widths");
+
 static void Require(bool condition, string name)
 {
     if (!condition) throw new Exception(name);
