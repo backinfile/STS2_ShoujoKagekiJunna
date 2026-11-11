@@ -148,6 +148,12 @@ $worktree-task  工作台新增了一张牌，你来读取工作台所有约定�
 
 牢笼 1/0费金卡 本回合中，箭矢的目标造成伤害降低50%（不重复）。 新增这样一张卡，你来找契合图片（参考剧场版与nana的revue）
 
+### 16. 合并与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_9b1586574fff48039268f9cd1adb54a0\",0]","question":"是否将已完成的卡牌命名与配图记录（任务提交 2f1fa11，已同步 main）合并回 main？工作台 r4985 已保存；清理将移除本次任务分支、工作树及临时缓存，保留已提交的图片和记录。","answer":"合并并清理"}]
+</send_user_message_question_reply>
+
 ## 执行技能原文
 
 <skill>
@@ -241,6 +247,10 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 按 $worktree-task 检查86份既有正文文档，并扩展检查全部已跟踪的JSON等文本资料，无需额外脱敏修改。新增文档与JSON已去除本地绝对路径，保留公开来源与仓库相对路径。
 
-原始目标固定为 main，起始提交 `250546220f5e0c83fa9597e96627beeba0fef4f2`。任务分支 `codex/new-card-fit-20261111`，工作树 `../worktrees/STS2_ShoujoKagekiJunna/new-card-fit-20261111`。单一任务提交完成后同步本地 main，当前同步目标 `ded7f11c1d5d99fd4d70231367c74e7bc58a0cc8`。合并与清理等待用户确认。
+原始目标固定为 main，起始提交 `250546220f5e0c83fa9597e96627beeba0fef4f2`。任务分支 `codex/new-card-fit-20261111`，工作树 `../worktrees/STS2_ShoujoKagekiJunna/new-card-fit-20261111`。单一任务提交完成后同步本地 main，当前同步目标 `ded7f11c1d5d99fd4d70231367c74e7bc58a0cc8`。用户已明确选择“合并并清理”，批准将记录合并回 main，并移除本次任务分支、工作树与临时缓存。任务材料完整保存在提交中。
 
 原目录已有选人图、选人场景和工作台代码修改。最初记录的20份文件中18份摘要保持，另外2份选人着色器／脚本被并行工作继续修改；本任务未写入原目录这些文件。原始摘要见 `original-state.json`，同步前状态见 `original-current-state.json`。
+
+## 已批准的集成核对
+
+任务内容提交 `2f1fa11`，同步提交 `e94b930` 已包含 main 的 `ded7f11`。确认后再次检查原目录的20份既有文件摘要，全部与同步前状态一致；原目录仍在 main，无进行中的Git操作。集成采用快进合并；合并后核对提交树一致、任务提交可达及既有修改摘要，再移除本任务干净工作树、任务分支及其中的临时缓存。所有图片与设计记录均由 main 保留。
