@@ -2,7 +2,7 @@
 
 当前对照工作台 MCP r4685，共107张启用牌面、23份独立关联列表。退役模型保留存档兼容。牌面以工作台原文为基础，生成步骤处理动态数值、关键词高亮、换行、能量图标及按约定显示的动态备注。
 
-[`data/card-pool.json`](../../data/card-pool.json) 保存逐牌基础版、升级版、内部类型、奖励入口和关联数量。生成脚本只读取 MCP 导出副本；`src/Combat/Cards/CardEffects.cs` 显式实现具体指令，运行时不解析牌面文字。
+[`data/card-pool.json`](../..<external-data-directory>/card-pool.json) 保存逐牌基础版、升级版、内部类型、奖励入口和关联数量。生成脚本只读取 MCP 导出副本；`src/Combat/Cards/CardEffects.cs` 显式实现具体指令，运行时不解析牌面文字。
 
 ## 动态数值与括号提示
 

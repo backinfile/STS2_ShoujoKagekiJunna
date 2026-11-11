@@ -1016,7 +1016,7 @@
     "current_state": "docs/worktree-tasks/act2-knowledge-event-20261111/sync-original-worktree-state.json"
   },
   "document_audit": {
-    "tracked_text_files": 73,
+    "tracked_text_files": 77,
     "additional_task_documents": 7,
     "local_paths_or_common_secret_patterns": 0
   },
@@ -1048,5 +1048,114 @@
     "reference": "docs/assets/events/junna-desk-official.jpg",
     "cleanup_report": "docs/worktree-tasks/act2-knowledge-event-20261111/desk-art-cleanup.json",
     "final_sha256": "7c43beb5b09daacd8fea8a74ee44cd597c2650b68497a5a47cee6f4bbe6565a3"
-  }
+  },
+  "synchronization": {
+    "original_branch": "main",
+    "original_head": "4addaed6010f6ffe95cd0a20b20112e666d6ceac",
+    "task_commit": "0820511f4b20f734f25345094793760690067b37",
+    "conflicts": 0,
+    "beta_build": "passed",
+    "stable_build": "passed",
+    "resource_pack": "passed",
+    "focused_test_project": "passed",
+    "event_checks": [
+      {
+        "name": "event model registered",
+        "actual": true,
+        "expected": true,
+        "pass": true
+      },
+      {
+        "name": "practice deck size",
+        "actual": 4,
+        "expected": 4,
+        "pass": true
+      },
+      {
+        "name": "practice upgraded copies",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "practice upgrades knowledge only",
+        "actual": true,
+        "expected": true,
+        "pass": true
+      },
+      {
+        "name": "practice preserves ordinary cards",
+        "actual": true,
+        "expected": true,
+        "pass": true
+      },
+      {
+        "name": "study deck total",
+        "actual": 10,
+        "expected": 10,
+        "pass": true
+      },
+      {
+        "name": "study JK359",
+        "actual": 2,
+        "expected": 2,
+        "pass": true
+      },
+      {
+        "name": "study JK360",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "study JK361",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "study JK362",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "study JK363",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "study JK364",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "study JK365",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "study JK366",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "study JK367",
+        "actual": 1,
+        "expected": 1,
+        "pass": true
+      },
+      {
+        "name": "existing copies preserved",
+        "actual": true,
+        "expected": true,
+        "pass": true
+      }
+    ]
+  },
+  "workbench_revision": 4873
 }
