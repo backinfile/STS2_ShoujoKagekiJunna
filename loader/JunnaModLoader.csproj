@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>ShoujoKagekiJunna</AssemblyName>
   </PropertyGroup>
@@ -6,4 +6,13 @@
     <PackageReference Include="BSchneppe.Sts2.ReferenceAssemblies" Version="$(Sts2StableApiVersion)" PrivateAssets="All" />
     <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" Private="false" />
   </ItemGroup>
+  <PropertyGroup>
+    <CoreLoaderSource Condition="'$(CoreLoaderSource)' == '' and '$(CoreApiPath)' != ''">$([System.IO.Path]::GetDirectoryName('$(CoreApiPath)'))/../../../sdk/CharacterLoader.cs</CoreLoaderSource>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(CoreLoaderSource)" Link="CharacterLoader.cs" Condition="Exists('$(CoreLoaderSource)')" />
+  </ItemGroup>
+  <Target Name="RequireCoreLoaderSource" BeforeTargets="BeforeBuild">
+    <Error Condition="!Exists('$(CoreLoaderSource)')" Text="Set CoreLoaderSource to sdk/CharacterLoader.cs from the Core distribution." />
+  </Target>
 </Project>

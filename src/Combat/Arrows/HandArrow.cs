@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Models;
@@ -93,14 +92,8 @@ public static class HandArrow
 
     public static async Task Play(PlayerChoiceContext context, CardModel card)
     {
-        Creature? target = card.TargetType switch
-        {
-            TargetType.AnyEnemy => card.CombatState!.Enemies.FirstOrDefault(c => c.IsAlive && c.IsHittable && card.IsValidTarget(c)),
-            TargetType.Self or TargetType.AnyPlayer => card.Owner.Creature,
-            TargetType.AnyAlly => card.CombatState!.PlayerCreatures.FirstOrDefault(c => c != card.Owner.Creature && c.IsAlive),
-            _ => null
-        };
-        if (card.TargetType is TargetType.AnyEnemy or TargetType.AnyAlly && target == null) return;
+        var target = CardTargets.First(card);
+        if (!CardTargets.IsValid(card, target)) return;
         CostChanges.CaptureFreePayment(card);
         Mark(card, true);
         bool played = false;
@@ -117,7 +110,7 @@ public static class HandArrow
         finally
         {
             if (unplayable) card.AddKeyword(CardKeyword.Unplayable);
-            if (!played) Restore(card);
+            if (!played && ArrowCombat.Find(card) == null) Restore(card);
         }
     }
 
@@ -133,8 +126,7 @@ public static class HandArrow
         if (!play.IsFirstInSeries) return;
         int turns = Turns(card);
         if (!IsArrow(card) && CardCatalog.DesignId(card) == "JA59") turns = Math.Max(0, turns - card.ResolveEnergyXValue());
-        ArrowCombat.Deploy(card, play, turns, next);
-        await CardPileCmd.Add(card, ArrowPile.PileId);
+        await ArrowCombat.DeployAsync(card, play, turns, next);
     }
 
     internal static async Task<bool> Finish(PlayerChoiceContext context, CardModel card, bool forceExhaust = false)

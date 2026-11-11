@@ -83,11 +83,11 @@ public static class CardActions
             !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) return false;
         if (card.TargetType == TargetType.AnyEnemy)
         {
-            if (target?.IsAlive != true) target = await ChooseTarget(context, card);
+            if (!CardTargets.IsValid(card, target)) target = await ChooseTarget(context, card);
             if (target == null) return false;
         }
-        else target = null;
-        if (!card.Owner.PlayerCombatState.HasEnoughResourcesFor(card, out _)) return false;
+        else target = CardTargets.First(card);
+        if (!CardTargets.IsValid(card, target) || !card.Owner.PlayerCombatState.HasEnoughResourcesFor(card, out _)) return false;
         if (restartArrow) ArrowCombat.Cancel(card);
         return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, Payment = CardPayment.Paid });
     }
@@ -104,7 +104,8 @@ public static class CardActions
                 : await ChooseTarget(context, card);
             if (target == null) return;
         }
-        else target = null;
+        else target = CardTargets.First(card);
+        if (!CardTargets.IsValid(card, target)) return;
         ArrowCombat.Cancel(card);
         await CardExecution.Play(context, card, new CardExecutionRequest { Target = target });
     }
@@ -118,15 +119,8 @@ public static class CardActions
             if (CombatManager.Instance.IsOverOrEnding || player.Creature.IsDead) break;
             if (card.Pile != draw || card.Keywords.Contains(CardKeyword.Unplayable) ||
                 !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) continue;
-            var combat = player.Creature.CombatState!;
-            Creature? target = card.TargetType switch
-            {
-                TargetType.AnyEnemy => combat.HittableEnemies.FirstOrDefault(c => c.IsAlive && card.IsValidTarget(c)),
-                TargetType.Self or TargetType.AnyPlayer => player.Creature,
-                TargetType.AnyAlly => combat.PlayerCreatures.FirstOrDefault(c => c != player.Creature && c.IsAlive && card.IsValidTarget(c)),
-                _ => null
-            };
-            if (card.TargetType is TargetType.AnyEnemy or TargetType.AnyAlly && target == null) continue;
+            var target = CardTargets.First(card);
+            if (!CardTargets.IsValid(card, target)) continue;
             if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = 0;
             CostChanges.CaptureFreePayment(card);
             await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, CaptureAvailableX = false });
@@ -135,7 +129,7 @@ public static class CardActions
 
     public static async Task<Creature?> ChooseTarget(PlayerChoiceContext context, CardModel card)
     {
-        var enemies = card.Owner.Creature.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
+        var enemies = CardTargets.Enemies(card);
         if (enemies.Length <= 1) return enemies.FirstOrDefault();
         if (CardSelectCmd.Selector != null) return enemies[0];
         int selected = await PlayerChoices.ChooseIndex(context, card.Owner, enemies.Length, async () =>
@@ -146,7 +140,7 @@ public static class CardActions
             var target = await manager.SelectionFinished() as NCreature;
             return target == null ? -1 : Array.IndexOf(enemies, target.Entity);
         });
-        return selected >= 0 && enemies[selected].IsAlive ? enemies[selected] : null;
+        return selected >= 0 && CardTargets.IsValid(card, enemies[selected]) ? enemies[selected] : null;
     }
 
     public static async Task Generate(Player player, string id, int count, PileType pile,

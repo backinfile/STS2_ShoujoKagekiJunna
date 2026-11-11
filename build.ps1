@@ -39,7 +39,7 @@ try {
         if ($LASTEXITCODE) { throw "$variant C# build failed" }
         Copy-Item -LiteralPath ".godot/mono/temp/bin/Release/ShoujoKagekiJunna.$variant.dll" -Destination dist/ShoujoKagekiJunna/lib
     }
-    dotnet build loader/JunnaModLoader.csproj -c Release --nologo "-p:Sts2GameDir=$GameDir"
+    dotnet build loader/JunnaModLoader.csproj -c Release --nologo "-p:Sts2GameDir=$GameDir" "-p:CoreLoaderSource=$($core.Root)/sdk/CharacterLoader.cs"
     if ($LASTEXITCODE) { throw 'Mod loader build failed' }
     $import = Start-Process -FilePath $Godot -ArgumentList '--headless', '--editor', '--path', ('"' + $PSScriptRoot + '"'), '--import', '--quit' -WindowStyle Hidden -Wait -PassThru -RedirectStandardOutput dist/import.log -RedirectStandardError dist/import-errors.log
     if ($import.ExitCode) { throw 'Resource import failed; see dist/import.log and dist/import-errors.log' }

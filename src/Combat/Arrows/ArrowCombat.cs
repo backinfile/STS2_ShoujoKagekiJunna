@@ -32,26 +32,59 @@ public static partial class ArrowCombat
 
     public static void Deploy(CardModel card, CardPlay play, int turns,
         Func<PlayerChoiceContext, CardPlay, Task> resolve)
-        => DeployCore(card, play, turns, resolve, CoreApi.Get<ICardPayloadRouting>().Native);
+    {
+        Register(CreateDeployment(card, play, turns, resolve, CoreApi.Get<ICardPayloadRouting>().Native));
+        EnsureHud();
+    }
 
-    internal static void Deploy(CardModel card, CardPlay play, int turns, ICardEffectPayload payload)
-        => DeployCore(card, play, turns, payload.Bind(card).Invoke, payload);
+    internal static Task DeployAsync(CardModel card, CardPlay play, int turns, ICardEffectPayload payload)
+        => Place(CreateDeployment(card, play, turns, payload.Bind(card).Invoke, payload),
+            () => CardPileCmd.Add(card, ArrowPile.PileId));
 
-    private static void DeployCore(CardModel card, CardPlay play, int turns,
+    private static ArrowDeployment CreateDeployment(CardModel card, CardPlay play, int turns,
         Func<PlayerChoiceContext, CardPlay, Task> resolve, ICardEffectPayload payload)
     {
         int haste = CatalogPower.ArrowHaste(card.Owner);
         if (haste > 0) card.AddKeyword(CardKeyword.Exhaust);
-        if (Find(card) is { } existing && !existing.Resolving)
-            existing.PlayCount += play.PlayCount;
-        else
+        return new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve)
+            { Sequence = _sequence, ExhaustAfterResolve = haste > 0, Payload = payload };
+    }
+
+    private static ArrowDeployment Register(ArrowDeployment arrow)
+    {
+        if (Find(arrow.Card) is { Resolving: false } existing)
         {
-            Arrows.RemoveAll(a => a.Card == card);
-            Arrows.Add(new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve) { Sequence = _sequence++, ExhaustAfterResolve = haste > 0, Payload = payload });
+            existing.PlayCount += arrow.PlayCount;
+            return existing;
         }
+        Arrows.RemoveAll(a => a.Card == arrow.Card);
+        Arrows.Add(arrow);
+        _sequence++;
+        return arrow;
+    }
+
+    private static void EnsureHud()
+    {
         var room = NCombatRoom.Instance;
         if (room != null && room.GetNodeOrNull<ArrowHud>("JunnaArrows") == null)
             room.AddChild(new ArrowHud { Name = "JunnaArrows" });
+    }
+
+    private static async Task Place(ArrowDeployment arrow, Func<Task> move, bool generated = false)
+    {
+        arrow = Register(arrow);
+        try
+        {
+            EnsureHud();
+            await move();
+        }
+        finally
+        {
+            // Move hooks may fail after the native move has already committed.
+            if (arrow.Card.Pile?.Type != ArrowPile.PileId && ReferenceEquals(Find(arrow.Card), arrow))
+                Cancel(arrow.Card);
+            if (generated && arrow.Card.Pile == null) arrow.Card.RemoveFromState();
+        }
     }
 
     internal static async Task Advance(PlayerChoiceContext context, Player player)
@@ -86,13 +119,13 @@ public static partial class ArrowCombat
 #endif
                 Resources = original.Play.Resources, IsAutoPlay = true, PlayIndex = 0, PlayCount = original.PlayCount
             };
-            await CardPileCmd.AddGeneratedCardToCombat(copy, ArrowPile.PileId, player);
-            Arrows.Add(new(copy, play, original.Remaining, player.PlayerCombatState!.TurnNumber,
+            var deployment = new ArrowDeployment(copy, play, original.Remaining, player.PlayerCombatState!.TurnNumber,
                 original.Payload.Bind(copy).Invoke, original.CopyXValues())
             {
-                Sequence = _sequence++, PlayCount = original.PlayCount, Payload = original.Payload,
+                Sequence = _sequence, PlayCount = original.PlayCount, Payload = original.Payload,
                 ExhaustAfterResolve = original.ExhaustAfterResolve, AttacksWhileWaiting = original.AttacksWhileWaiting
-            });
+            };
+            await Place(deployment, () => CardPileCmd.AddGeneratedCardToCombat(copy, ArrowPile.PileId, player), generated: true);
         }
     }
 
@@ -120,7 +153,7 @@ public static partial class ArrowCombat
     public static async Task Accelerate(PlayerChoiceContext context, ArrowDeployment arrow, int turns)
     {
         if (arrow.Resolving || !Arrows.Contains(arrow)) return;
-        if (arrow.Card.Pile?.Type != ArrowPile.PileId) { Arrows.Remove(arrow); return; }
+        if (arrow.Card.Pile?.Type != ArrowPile.PileId) { Cancel(arrow.Card); return; }
         if (!arrow.TargetsGroup && arrow.Target is { } target && arrow.Card.CombatState is { } state)
         {
             var replacement = ResolveEffectTarget(target, state);
