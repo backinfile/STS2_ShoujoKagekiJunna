@@ -5,14 +5,16 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using ShoujoKagekiJunna.Models;
+using ShoujoKageki.Core.V1;
 
 namespace ShoujoKagekiJunna.Combat;
 
 public static partial class KnowledgeProgress
 {
+    // Historical run/replay properties still need a registered ID. Current hits use Core's archive.
+    private static readonly SavedSpireField<CatalogCard, int> LegacyDepletedPartners = new(() => 0, "JunnaDepletedPartners");
     private static readonly SavedSpireField<CatalogCard, string> ResearchLinks = new(() => null, "JunnaResearchGroup");
     private static readonly SavedSpireField<CatalogCard, bool> ResearchCompleted = new(() => false, "JunnaResearchCompleted");
-    private static readonly SavedSpireField<CatalogCard, int> ResearchCount = new(() => 0, "JunnaDepletedPartners");
     private static readonly SavedSpireField<Player, int> ResearchSequence = new(() => 0, "JunnaResearchSequence");
     private static readonly SavedSpireField<CatalogCard, string> DamageBonus = new(() => "0", "JunnaPermanentDamageBonus");
 
@@ -21,9 +23,15 @@ public static partial class KnowledgeProgress
 
     internal static string? ResearchGroup(CardModel card) => card is CatalogCard catalog ? ResearchLinks.Get(catalog) : null;
 
-    public static int DepletedPartners(CardModel card) => card is not CatalogCard catalog ? 0
-        : ResearchRules.ForMain(catalog.DesignId) is { Counter: ResearchCounter.ExtraHits, ShowDepletedPartners: true }
-            ? ExtraHits.Get(catalog) : ResearchCount.Get(catalog);
+    public static int DepletedPartners(CardModel card)
+    {
+        if (card is not CatalogCard catalog
+            || ResearchRules.ForMain(catalog.DesignId) is not { ShowDepletedPartners: true } rule) return 0;
+        if (rule.Counter == ResearchCounter.ExtraHits) return ExtraHits.Get(catalog);
+        if (!catalog.IsMutable || catalog.Owner is not { } owner) return 0;
+        var memberIds = rule.Members.Select(id => CardCatalog.Model(id).Id.ToString()).ToHashSet(StringComparer.Ordinal);
+        return Shine.GetDepletedCards(owner).Count(entry => memberIds.Contains(entry.ModelId));
+    }
 
     internal static void PreserveFirstBonus(CardModel card, decimal amount)
     {
@@ -38,31 +46,30 @@ public static partial class KnowledgeProgress
     internal static void BindResearch(IEnumerable<CardModel> acquired)
     {
         var cards = acquired.OfType<CatalogCard>().ToArray();
-        if (!cards.Any(card => ResearchRules.ForMain(card.DesignId) != null)) return;
+        if (!cards.Any(card => ResearchRules.ForMain(card.DesignId) is { Counter: ResearchCounter.ExtraHits })) return;
         var owner = cards[0].Owner;
         int sequence = checked(ResearchSequence.Get(owner) + 1);
         ResearchSequence.Set(owner, sequence);
         string link = owner.NetId + "/" + sequence;
-        foreach (var card in cards.Where(card => ResearchRules.Contains(card.DesignId)))
+        foreach (var card in cards.Where(card => ResearchRules.NeedsLink(card.DesignId)))
             ResearchLinks.Set(card, link);
     }
 
     private static void ResearchDepleted(CatalogCard source, CardModel permanent)
     {
-        if (ResearchRules.ForPartner(source.DesignId) is not { } rule
+        if (ResearchRules.ForPartner(source.DesignId) is not { Counter: ResearchCounter.ExtraHits } rule
             || permanent is not CatalogCard member || ResearchCompleted.Get(member)) return;
         string? link = ResearchLinks.Get(member);
         if (string.IsNullOrEmpty(link)) return;
         ResearchCompleted.Set(member, true);
-        var field = rule.Counter == ResearchCounter.ExtraHits ? ExtraHits : ResearchCount;
         foreach (var paper in source.Owner.Deck.Cards.OfType<CatalogCard>()
-                     .Where(card => card.DesignId == rule.MainCardId && ResearchLinks.Get(card) == link))
+                     .Where(c => c.DesignId == rule.MainCardId && ResearchLinks.Get(c) == link))
         {
-            int value = rule.Advance(field.Get(paper));
-            field.Set(paper, value);
+            int hits = rule.Advance(ExtraHits.Get(paper));
+            ExtraHits.Set(paper, hits);
             if (source.Owner.PlayerCombatState is { } combat)
-                foreach (var copy in combat.AllCards.OfType<CatalogCard>().Where(card => card.DeckVersion == paper))
-                    field.Set(copy, value);
+                foreach (var copy in combat.AllCards.OfType<CatalogCard>().Where(c => c.DeckVersion == paper))
+                    ExtraHits.Set(copy, hits);
         }
         source.Owner.PlayerCombatState?.RecalculateCardValues();
     }
@@ -72,7 +79,6 @@ public static partial class KnowledgeProgress
         DamageBonus.Set(clone, DamageBonus.Get(source));
         ResearchLinks.Set(clone, ResearchLinks.Get(source));
         ResearchCompleted.Set(clone, ResearchCompleted.Get(source));
-        ResearchCount.Set(clone, ResearchCount.Get(source));
     }
 
     private static async Task OfferKnowledgeCopy(Player player, int maximum)

@@ -29,15 +29,13 @@ public static class KnowledgeCombat
         }
     }
 
-    private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, IReadOnlyList<bool> allowed)
+    private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, IReadOnlySet<CardModel> allowed)
     {
-        int index = 0;
         foreach (var result in results)
         {
-            bool grant = allowed[index++];
             var card = result.cardAdded;
             if (result.success && result.oldPile == null) KnowledgeProgress.Acquired(card);
-            if (!grant || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card)) continue;
+            if (!allowed.Contains(card) || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card)) continue;
             if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type))
                 await GrantPartners(card, card.Pile!.Type);
         }
@@ -132,16 +130,17 @@ public static class KnowledgeCombat
              , typeof(bool)
 #endif
             ]);
-        private static void Prefix(ref IEnumerable<CardModel> cards, CardPile newPile, AbstractModel? clonedBy, out bool[] __state)
+        private static void Prefix(ref IEnumerable<CardModel> cards, CardPile newPile, AbstractModel? clonedBy, out HashSet<CardModel> __state)
         {
             var originals = cards.ToArray();
             cards = originals;
-            __state = originals.Select(card => SingleDepth.Value == 0 && clonedBy == null && card.Pile == null
-                && KnowledgeAcquisitionSources.Allows(card, newPile.Type)).ToArray();
+            // Core can defer and reorder movement results, so eligibility follows the physical card.
+            __state = originals.Where(card => SingleDepth.Value == 0 && clonedBy == null && card.Pile == null
+                && KnowledgeAcquisitionSources.Allows(card, newPile.Type)).ToHashSet();
         }
-        private static void Postfix(ref Task<IReadOnlyList<CardPileAddResult>> __result, bool[] __state)
+        private static void Postfix(ref Task<IReadOnlyList<CardPileAddResult>> __result, HashSet<CardModel> __state)
         { __result = Complete(__result, __state); }
-        private static async Task<IReadOnlyList<CardPileAddResult>> Complete(Task<IReadOnlyList<CardPileAddResult>> task, bool[] allowed)
+        private static async Task<IReadOnlyList<CardPileAddResult>> Complete(Task<IReadOnlyList<CardPileAddResult>> task, HashSet<CardModel> allowed)
         {
             var results = await task;
             await CompleteAcquisition(results, allowed);
@@ -157,8 +156,9 @@ public static class KnowledgeCombat
         private static async Task<IEnumerable<CardPileAddResult>> Complete(Task<IEnumerable<CardPileAddResult>> task, bool enabled)
         {
             var results = (await task).ToArray();
-            await CompleteAcquisition(results, results.Select(result => enabled && result.cardAdded.Pile?.Type == PileType.Deck
-                && KnowledgeAcquisitionSources.Allows(result.cardAdded, PileType.Deck, transforming: true)).ToArray());
+            await CompleteAcquisition(results, results.Where(result => enabled && result.cardAdded.Pile?.Type == PileType.Deck
+                && KnowledgeAcquisitionSources.Allows(result.cardAdded, PileType.Deck, transforming: true))
+                .Select(result => result.cardAdded).ToHashSet());
             return results;
         }
     }

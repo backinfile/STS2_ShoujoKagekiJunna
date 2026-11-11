@@ -23,6 +23,7 @@ EXISTING = {
 }
 
 SELECTION_PROMPTS = {
+    "U_CARD_010": "选择1张牌。",
     "JG03": "选择1张手牌。",
     "JG09": "选择1张手牌。",
     "JG16": "选择1张手牌。",
@@ -86,6 +87,8 @@ def display_description(card, text, card_names, values, upgraded=False):
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
     if card['id'] == 'JK206':
         text += '{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}'
+    elif card['id'] == 'JA108':
+        text += '{InCombat:\n（打出{ArrowCount}张）|}'
     elif card['id'] in ('JK184', 'JK314'):
         text += '{DepletedPartners:choose(0):|\n（已耗尽{DepletedPartners}张）}'
     return text
@@ -355,18 +358,23 @@ def main():
                 powers[power['id'] + '.' + suffix] = text
         # Active card text takes precedence over retired power descriptions.
         current_power_text = {
+            'JA105': '每当你打出一张[gold]箭矢[/gold]，使其加速[blue]{Amount}[/blue]回合，并获得[gold]消耗[/gold]。',
+            'JA118': '打出[gold]箭矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。',
             'JA35': '回合开始时，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA205': '目标为单个敌人的[gold]箭矢[/gold]现在会攻击所有敌人。',
             'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点力量。',
-            'U_CARD_008': '战斗结束后，向牌组中添加[blue]{Amount}[/blue]张[gold]故事[/gold]。',
+            'U_CARD_008': '战斗结束时，获得[blue]{Amount}[/blue]张[gold]故事[/gold]。',
+            'U_CARD_010': '回合开始时，从[gold]抽牌堆[/gold]选择[blue]1[/blue]张当前类别的牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]箭矢[/gold]牌、闪耀牌。',
         }
         for cid, text in current_power_text.items():
             if cid not in ids:
                 continue
-            amount = 1 if cid == 'U_CARD_008' else power_amounts[cid]
+            amount = 1 if cid in ('U_CARD_008', 'U_CARD_010') else power_amounts[cid]
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
+            if cid == 'U_CARD_010':
+                powers[f'JUNNA_{cid}_POWER.smartDescription'] += '{Repetition}'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

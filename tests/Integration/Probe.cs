@@ -27,6 +27,7 @@ public static class ProbeStartup
 {
     public static void Initialize()
     {
+        FullCardAuditCommand.Initialize();
         var tree = (Godot.SceneTree)Godot.Engine.GetMainLoop();
         Godot.RenderingServer.ViewportSetUpdateMode(tree.Root.GetViewportRid(), Godot.RenderingServer.ViewportUpdateMode.Always);
         tree.ProcessFrame += () => Godot.RenderingServer.ForceDraw(false);

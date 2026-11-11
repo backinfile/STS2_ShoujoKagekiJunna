@@ -22,6 +22,15 @@ public abstract partial class CatalogPower
         {
             switch (DesignId)
             {
+                case "U_CARD_010":
+                    if (!grant.Take(1)) break;
+                    int category = new[] { 1, 0, 2 }[grant.CycleIndex];
+                    grant.CycleIndex = (grant.CycleIndex + 1) % 3;
+                    if (player.PlayerCombatState!.Hand.Cards.Count >= CardPile.MaxCardsInHand) break;
+                    var candidates = player.PlayerCombatState.DrawPile.Cards.Where(c => CardTutors.Matches(c, category));
+                    foreach (var selected in await CardActions.Choose(context, grant.Card, candidates))
+                        await CardPileCmd.Add(selected, PileType.Hand);
+                    break;
                 case "JA35": await ArrowCombat.AccelerateAll(context, player, grant.V("Turns")); break;
                 case "JA144": await CardActions.Generate(player, "JA119", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom); break;
                 case "JH59": case "JK139": await PlayerCmd.GainEnergy(grant.V("Energy"), player); break;
