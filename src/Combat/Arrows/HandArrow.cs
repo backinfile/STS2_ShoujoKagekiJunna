@@ -79,9 +79,9 @@ public static class HandArrow
         var hand = combat.Hand;
         var selected = (await CardActions.Choose(context, source, hand.Cards, count, optional))
             .Where(card => card.Pile == hand).ToArray();
-        await CardPileCmd.Add(selected, combat.PlayPile);
         try
         {
+            await CardPileCmd.Add(selected, combat.PlayPile);
             foreach (var card in selected)
                 if (card.Pile == combat.PlayPile) await Play(context, card);
         }

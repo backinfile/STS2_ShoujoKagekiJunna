@@ -24,5 +24,11 @@
     "eventFieldsAndMetadata": true,
     "searchAndInvalidFields": true,
     "publicBundle": true
+  },
+  "synchronization": {
+    "mainHead": "9d6f9cd966f7bd42e33e0ca622c66b2c605df6be",
+    "workbenchFilesChangedByUpstream": false,
+    "conflicts": 0,
+    "existingChecksStillApply": true
   }
 }
