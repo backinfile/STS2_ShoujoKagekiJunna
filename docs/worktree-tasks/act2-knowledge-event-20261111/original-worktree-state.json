@@ -1,0 +1,77 @@
+[
+  {
+    "path": "docs/design/workbench/README.md",
+    "sha256": "8C4361A2769C07E62FBBA6A447B4E2A17035E29357C38FF70EF398CD44366C77",
+    "status": "modified"
+  },
+  {
+    "path": "docs/design/workbench/app.js",
+    "sha256": "6E8F6B9A7EBD486A419B41292D09920D846FA875849E321B6F71D870901176A8",
+    "status": "modified"
+  },
+  {
+    "path": "docs/design/workbench/workbench-domain.js",
+    "sha256": "0378DC7D2F1812194A365CEAF3060232892457DC9E08977248C9957C8D57D254",
+    "status": "modified"
+  },
+  {
+    "path": "docs/design/workbench/workbench-domain.test.cjs",
+    "sha256": "5A74EB831A3B60B8B36DBB5B8FA789E32C67E6329B823A13E747FCB428E627D1",
+    "status": "modified"
+  },
+  {
+    "path": "docs/implementation/runtime-compatibility.md",
+    "sha256": "433CCF549B1EB914E5535CFCC2395FF1CE62EE85F655924A453570DD8C44B36F",
+    "status": "modified"
+  },
+  {
+    "path": "src/Combat/Knowledge/DynamicKnowledge.cs",
+    "sha256": "D45DC4C298775B1CCF589C65D33BC7B892D4A9763B16EBD44E4A0B1E97ECDF9A",
+    "status": "modified"
+  },
+  {
+    "path": "src/Combat/Knowledge/KnowledgeCombat.cs",
+    "sha256": "11AB8E00FE1CDC5ACA711851BA984BB086DEB720F3A56C86A21AAE3954CCC9F3",
+    "status": "modified"
+  },
+  {
+    "path": "docs/implementation/knowledge-acquisition-sources.md",
+    "sha256": "5784156E5D2C62CE30496B46E2EEF4A86C1A09543CB05F9FF907DB2F14B71149",
+    "status": "untracked"
+  },
+  {
+    "path": "src/Combat/Knowledge/KnowledgeAcquisitionSources.cs",
+    "sha256": "8A41FE4990F367787B63B641CEE272724709B10334F3C92348460FED5E839086",
+    "status": "untracked"
+  },
+  {
+    "path": "src/Combat/Knowledge/KnowledgeAcquisitionSources.cs.uid",
+    "sha256": "6DF8C9819EECF1BC719AA9EB8433F104C3683236D7BFF3499E0FC43AB3E0C09F",
+    "status": "untracked"
+  },
+  {
+    "path": "tests/AcquisitionSources/JunnaAcquisitionChecks.csproj",
+    "sha256": "1F0BB7994D7C28B325E7462F9C7E2EC61D13E00EBA80C4CAE4C91927216A42FA",
+    "status": "untracked"
+  },
+  {
+    "path": "tests/AcquisitionSources/JunnaAcquisitionChecks.json",
+    "sha256": "0F52CDB5BDF2C5A7718973112AF79F67EA69A5A8CC8F7C507252D8FAC7CD5F2D",
+    "status": "untracked"
+  },
+  {
+    "path": "tests/AcquisitionSources/Startup.cs",
+    "sha256": "BB3775FDE05C8DA0A1F89264D19FFC1FEC86755CBF5059AC782D245F2CCFADF0",
+    "status": "untracked"
+  },
+  {
+    "path": "tests/Integration/AcquisitionSourcesProbe.cs",
+    "sha256": "8498B581AD032204A56EC2751047A9D1FAE554945523EB02271ADCDA88771CAB",
+    "status": "untracked"
+  },
+  {
+    "path": "tests/Integration/EventCopiesProbe.cs",
+    "sha256": "A19E70F0E0CBC806FA0599BDE477DCEB714958307FF671FFA16C155D0015E7A0",
+    "status": "untracked"
+  }
+]

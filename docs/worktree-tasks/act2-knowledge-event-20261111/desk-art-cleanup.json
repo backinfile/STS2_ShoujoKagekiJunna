@@ -1,0 +1,27 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "strength": 0.25,
+  "device": "cuda",
+  "source": "docs/assets/events/stage-girl-notes-desk-original.png",
+  "source_sha256": "ccd22176a1bb15890e192092647f64bf371e1f67257885eb339a0b98a0f9d51d",
+  "source_size": [
+    1828,
+    860
+  ],
+  "cleaned_size": [
+    1828,
+    860
+  ],
+  "cleaned": "out/tmp/act2-event/stage-girl-notes-desk-clean.png",
+  "alpha_identical": true,
+  "mean_absolute_rgb_change": 1.8929975997828778,
+  "final": "ShoujoKagekiJunna/images/events/stage_girl_notes.png",
+  "final_size": [
+    3440,
+    1616
+  ],
+  "final_sha256": "7c43beb5b09daacd8fea8a74ee44cd597c2650b68497a5a47cee6f4bbe6565a3",
+  "resize": "Lanczos to native canvas dimensions",
+  "seconds": 4.39
+}

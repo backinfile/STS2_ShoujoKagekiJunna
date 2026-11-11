@@ -1,0 +1,28 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "strength": 0.25,
+  "device": "cuda",
+  "source": "docs/assets/events/stage-girl-notes-original.png",
+  "source_sha256": "95eaf21b358f82cafd229b4c22bb59bd48d7c1f9d8094da8523954444fb615ce",
+  "source_size": [
+    1808,
+    870
+  ],
+  "cleaned_size": [
+    1808,
+    870
+  ],
+  "cleaned": "out/tmp/act2-event/stage-girl-notes-clean.png",
+  "alpha_identical": true,
+  "mean_absolute_rgb_change": 1.3884334842165937,
+  "final": "docs/assets/events/stage-girl-notes-generated-previous.png",
+  "final_size": [
+    3440,
+    1616
+  ],
+  "final_sha256": "eea998c7f6dfbe0dc94b665b79216658c11b1e654d0bf22714b617258d9730b2",
+  "resize": "Lanczos to native canvas dimensions",
+  "seconds": 4.36,
+  "status": "superseded"
+}

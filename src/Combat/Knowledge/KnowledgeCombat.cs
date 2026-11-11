@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Random;
+using MegaCrit.Sts2.Core.Runs;
 using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
@@ -16,27 +17,21 @@ public static class KnowledgeCombat
 {
     private static readonly AsyncLocal<int> SingleDepth = new();
     private static readonly AsyncLocal<HashSet<string>?> Drawing = new();
-    private static readonly ConditionalWeakTable<CardModel, object> Discovered = new();
-    private static readonly ConditionalWeakTable<CardModel, object> Copies = new();
     private sealed class Scope : IDisposable
     {
         public Scope() => SingleDepth.Value++;
         public void Dispose() => SingleDepth.Value--;
     }
 
-    private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, bool single)
+    private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, IReadOnlySet<CardModel> allowed)
     {
         foreach (var result in results)
         {
             var card = result.cardAdded;
             if (result.success && result.oldPile == null) KnowledgeProgress.Acquired(card);
-            if (single || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || Copies.TryGetValue(card, out _)) continue;
-            bool discovered = Discovered.Remove(card);
-            if (card.Pile!.Type == PileType.Deck || discovered)
-            {
-                if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type))
-                    await GrantPartners(card, card.Pile!.Type);
-            }
+            if (!allowed.Contains(card) || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card)) continue;
+            if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type))
+                await GrantPartners(card, card.Pile!.Type);
         }
     }
     public static IDisposable SingleCard() => new Scope();
@@ -140,26 +135,35 @@ public static class KnowledgeCombat
              , typeof(bool)
 #endif
             ]);
-        private static void Prefix(AbstractModel? clonedBy, out bool __state) => __state = SingleDepth.Value > 0 || clonedBy != null;
-        private static void Postfix(ref Task<IReadOnlyList<CardPileAddResult>> __result, bool __state)
+        private static void Prefix(ref IEnumerable<CardModel> cards, CardPile newPile, AbstractModel? clonedBy, out HashSet<CardModel> __state)
+        {
+            var originals = cards.ToArray();
+            cards = originals;
+            // Core can defer and reorder movement results, so eligibility follows the physical card.
+            __state = originals.Where(card => SingleDepth.Value == 0 && clonedBy == null && card.Pile == null
+                && KnowledgeAcquisitionSources.Allows(card, newPile.Type)).ToHashSet();
+        }
+        private static void Postfix(ref Task<IReadOnlyList<CardPileAddResult>> __result, HashSet<CardModel> __state)
         { __result = Complete(__result, __state); }
-        private static async Task<IReadOnlyList<CardPileAddResult>> Complete(Task<IReadOnlyList<CardPileAddResult>> task, bool single)
+        private static async Task<IReadOnlyList<CardPileAddResult>> Complete(Task<IReadOnlyList<CardPileAddResult>> task, HashSet<CardModel> allowed)
         {
             var results = await task;
-            await CompleteAcquisition(results, single);
+            await CompleteAcquisition(results, allowed);
             return results;
         }
     }
     [HarmonyPatch(typeof(CardCmd), nameof(CardCmd.Transform), [typeof(IEnumerable<CardTransformation>), typeof(Rng), typeof(CardPreviewStyle)])]
     private static class TransformGroup
     {
-        private static void Prefix(out bool __state) => __state = SingleDepth.Value > 0;
+        private static void Prefix(out bool __state) => __state = SingleDepth.Value == 0;
         private static void Postfix(ref Task<IEnumerable<CardPileAddResult>> __result, bool __state)
             => __result = Complete(__result, __state);
-        private static async Task<IEnumerable<CardPileAddResult>> Complete(Task<IEnumerable<CardPileAddResult>> task, bool single)
+        private static async Task<IEnumerable<CardPileAddResult>> Complete(Task<IEnumerable<CardPileAddResult>> task, bool enabled)
         {
             var results = (await task).ToArray();
-            await CompleteAcquisition(results, single);
+            await CompleteAcquisition(results, results.Where(result => enabled && result.cardAdded.Pile?.Type == PileType.Deck
+                && KnowledgeAcquisitionSources.Allows(result.cardAdded, PileType.Deck, transforming: true))
+                .Select(result => result.cardAdded).ToHashSet());
             return results;
         }
     }
@@ -171,22 +175,32 @@ public static class KnowledgeCombat
         private static async Task<CardModel?> Complete(Task<CardModel?> task, PlayerChoiceContext context, IReadOnlyList<CardModel> cards)
         {
             var card = await task;
-            if (card?.Pile == null && card != null && CardCatalog.IsKnowledge(card))
+            if (card?.Pile == null && card != null && KnowledgeAcquisitionSources.AllowsDiscovery)
             {
-                Discovered.GetOrCreateValue(card);
-                await DynamicKnowledge.Prepare(context, card, cards);
+                KnowledgeAcquisitionSources.Selected(card);
+                if (CardCatalog.IsKnowledge(card)) await DynamicKnowledge.Prepare(context, card, cards);
             }
             return card;
         }
     }
-    [HarmonyPatch(typeof(CardModel), nameof(CardModel.CreateClone))]
-    private static class MarkCopies
+    [HarmonyPatch]
+    private static class CopyAcquisitionMetadata
     {
-        private static void Postfix(CardModel __result) => Copies.GetOrCreateValue(__result);
+        private static IEnumerable<MethodBase> TargetMethods()
+        {
+            yield return AccessTools.Method(typeof(CardModel), nameof(CardModel.CreateClone));
+            yield return AccessTools.Method(typeof(RunState), nameof(RunState.CloneCard));
+        }
+        private static void Postfix(object __instance, object[] __args, CardModel __result)
+        {
+            var source = __instance as CardModel ?? (CardModel)__args[0];
+            DynamicKnowledge.CopyAcquisition(source, __result);
+        }
     }
     private static IDisposable? _upgrades;
     internal static void Initialize()
     {
+        KnowledgeAcquisitionSources.Initialize();
         _upgrades ??= ShoujoKageki.Core.V1.CoreApi.Get<ShoujoKageki.Core.V1.ICardUpgrades>().Register(
             card => CardCatalog.DesignId(card) == "JK82", GrantUpgrade);
     }

@@ -34,6 +34,14 @@ public static class CardEffects
             => await DealDamage(card, context, play, damage ?? V("Damage"), hits ?? V("Repeat", 1));
         async Task ImproveSelected(IEnumerable<CardModel> cards, int bonus, int count = 1, bool optional = false)
             => await Improve(await Choose(cards.Where(DamageModifiers.CanDealDamage), count, optional), bonus);
+        Task<CardModel[]> DrawLinked()
+        {
+            var members = DynamicKnowledge.Definition(card) ?? KnowledgeCombat.Group(card)?.Members
+                .Select(member => (Model: CardCatalog.Model(member.Id), member.Count)) ?? [];
+            var ids = members.Where(member => member.Count > 0).Select(member => member.Model.Id)
+                .Append(card.Id).ToHashSet();
+            return CardActions.DrawMatching(context, player, candidate => ids.Contains(candidate.Id), V("LinkedDraw"));
+        }
         async Task RetainedEnergy(int amount)
         {
             int before = player.PlayerCombatState.Energy;
@@ -45,6 +53,27 @@ public static class CardEffects
 
         switch (card.DesignId)
         {
+            case "JK359":
+                await DrawLinked(); break;
+            case "JK360":
+                await Block();
+                await DrawLinked(); break;
+            case "JK361": case "JK363": case "JK366":
+                await Attack();
+                await DrawLinked(); break;
+            case "JK362":
+                await ArrowCombat.AccelerateAll(context, player, V("Haste"));
+                await DrawLinked(); break;
+            case "JK364":
+                if (card.IsUpgraded) await RetainedEnergy(V("Energy"));
+                else await Energy(V("Energy"));
+                await DrawLinked(); break;
+            case "JK365":
+                await Draw(V("DrawCount"));
+                await DrawLinked(); break;
+            case "JK367":
+                await Improve(All(), V("Bonus"));
+                await DrawLinked(); break;
             // Installed rules keep an independent snapshot and per-turn counters for every application.
             case "JA04": case "JK10": case "JA22": case "JK15": case "A": case "JK27":
             case "JA35": case "JA205": case "JK254": case "JK260": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":

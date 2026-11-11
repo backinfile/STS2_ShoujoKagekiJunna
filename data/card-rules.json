@@ -1872,6 +1872,114 @@
       },
       "effect": "Draw"
     },
+    "JK359": {
+      "fields": {
+        "LinkedDraw": "N0"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK360": {
+      "fields": {
+        "LinkedDraw": "N1"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK361": {
+      "fields": {
+        "LinkedDraw": "N1"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK362": {
+      "fields": {
+        "Haste": "N0",
+        "LinkedDraw": "N1"
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ]
+    },
+    "JK363": {
+      "fields": {
+        "LinkedDraw": "N2"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK364": {
+      "fields": {
+        "Energy": "N0",
+        "LinkedDraw": "N1"
+      },
+      "tips": [
+        "Knowledge",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Energy"
+      ]
+    },
+    "JK365": {
+      "fields": {
+        "DrawCount": "N0",
+        "LinkedDraw": "N1"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK366": {
+      "fields": {
+        "LinkedDraw": "N1"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "JK367": {
+      "fields": {
+        "LinkedDraw": "N1"
+      },
+      "tips": [
+        "Knowledge",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "DamageBonus"
+      ]
+    },
     "U_CARD_009": {},
     "U_CARD_010": {
       "power": {

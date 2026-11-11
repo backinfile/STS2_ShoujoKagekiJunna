@@ -1,0 +1,26 @@
+{
+  "branch": "main",
+  "head": "4addaed6010f6ffe95cd0a20b20112e666d6ceac",
+  "files": [
+    {
+      "path": "docs/design/workbench/README.md",
+      "status": " M",
+      "sha256": "8C4361A2769C07E62FBBA6A447B4E2A17035E29357C38FF70EF398CD44366C77"
+    },
+    {
+      "path": "docs/design/workbench/app.js",
+      "status": " M",
+      "sha256": "6E8F6B9A7EBD486A419B41292D09920D846FA875849E321B6F71D870901176A8"
+    },
+    {
+      "path": "docs/design/workbench/workbench-domain.js",
+      "status": " M",
+      "sha256": "0378DC7D2F1812194A365CEAF3060232892457DC9E08977248C9957C8D57D254"
+    },
+    {
+      "path": "docs/design/workbench/workbench-domain.test.cjs",
+      "status": " M",
+      "sha256": "5A74EB831A3B60B8B36DBB5B8FA789E32C67E6329B823A13E747FCB428E627D1"
+    }
+  ]
+}

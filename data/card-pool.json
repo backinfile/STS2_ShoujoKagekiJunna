@@ -1,5 +1,5 @@
 {
-  "revision": 4874,
+  "revision": 4878,
   "cards": [
     {
       "id": "JG03",
@@ -3684,8 +3684,8 @@
           "upgraded": 1
         }
       ],
-      "text": "抽取箭矢、知识、闪耀牌各1张。消耗。",
-      "upgradedText": "抽取箭矢、知识、闪耀牌各1张。"
+      "text": "抽取箭矢牌、知识牌、闪耀牌各1张。消耗。",
+      "upgradedText": "抽取箭矢牌、知识牌、闪耀牌各1张。"
     },
     {
       "id": "U_CARD_010",
@@ -3718,6 +3718,420 @@
       ],
       "text": "回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、箭矢牌、闪耀牌。",
       "upgradedText": "回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、箭矢牌、闪耀牌。"
+    },
+    {
+      "id": "JK359",
+      "modelId": "JUNNA_JK359",
+      "className": "JunnaCardJK359",
+      "name": "翡翠弓",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK359.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 3,
+          "upgraded": 4
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。抽3张关联牌。",
+      "upgradedText": "知识。抽4张关联牌。",
+      "arrowFocus": {
+        "x": 0.45,
+        "y": 0.43
+      }
+    },
+    {
+      "id": "JK360",
+      "modelId": "JUNNA_JK360",
+      "className": "JunnaCardJK360",
+      "name": "爱的审判",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK360.png",
+      "values": [
+        {
+          "name": "Block",
+          "base": 4,
+          "upgraded": 6
+        },
+        {
+          "name": "N1",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。获得4点格挡。抽2张关联牌。",
+      "upgradedText": "知识。获得6点格挡。抽2张关联牌。",
+      "arrowFocus": {
+        "x": 0.48,
+        "y": 0.43
+      }
+    },
+    {
+      "id": "JK361",
+      "modelId": "JUNNA_JK361",
+      "className": "JunnaCardJK361",
+      "name": "骄傲的火花",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "AllEnemies",
+      "arrowSubtype": "攻击",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JK361.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 3,
+          "upgraded": 5
+        },
+        {
+          "name": "N1",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。对所有敌人造成3点伤害。抽2张关联牌。",
+      "upgradedText": "知识。对所有敌人造成5点伤害。抽2张关联牌。",
+      "arrowFocus": {
+        "x": 0.48,
+        "y": 0.43
+      }
+    },
+    {
+      "id": "JK362",
+      "modelId": "JUNNA_JK362",
+      "className": "JunnaCardJK362",
+      "name": "轮舞",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK362.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 2
+        },
+        {
+          "name": "N1",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。所有箭矢加速1回合。抽2张关联牌。",
+      "upgradedText": "知识。所有箭矢加速2回合。抽2张关联牌。",
+      "arrowFocus": {
+        "x": 0.48,
+        "y": 0.43
+      }
+    },
+    {
+      "id": "JK363",
+      "modelId": "JUNNA_JK363",
+      "className": "JunnaCardJK363",
+      "name": "决定者",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JK363.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Repeat",
+          "base": 2,
+          "upgraded": 3
+        },
+        {
+          "name": "N2",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。造成2点伤害2次。抽2张关联牌。",
+      "upgradedText": "知识。造成2点伤害3次。抽2张关联牌。",
+      "arrowFocus": {
+        "x": 0.5,
+        "y": 0.43
+      }
+    },
+    {
+      "id": "JK364",
+      "modelId": "JUNNA_JK364",
+      "className": "JunnaCardJK364",
+      "name": "水仙花",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK364.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        },
+        {
+          "name": "N1",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。获得1点能量。抽2张关联牌。",
+      "upgradedText": "知识。获得1点能量并可保留到下回合。抽2张关联牌。",
+      "arrowFocus": {
+        "x": 0.48,
+        "y": 0.43
+      }
+    },
+    {
+      "id": "JK365",
+      "modelId": "JUNNA_JK365",
+      "className": "JunnaCardJK365",
+      "name": "花蕾的光辉",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK365.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 2
+        },
+        {
+          "name": "N1",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。抽1张牌。抽2张关联牌。",
+      "upgradedText": "知识。抽2张牌。抽2张关联牌。",
+      "arrowFocus": {
+        "x": 0.5,
+        "y": 0.43
+      }
+    },
+    {
+      "id": "JK366",
+      "modelId": "JUNNA_JK366",
+      "className": "JunnaCardJK366",
+      "name": "思春期的可能性",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JK366.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 5,
+          "upgraded": 7
+        },
+        {
+          "name": "N1",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。造成5点伤害。抽2张关联牌。",
+      "upgradedText": "知识。造成7点伤害。抽2张关联牌。",
+      "arrowFocus": {
+        "x": 0.5,
+        "y": 0.43
+      }
+    },
+    {
+      "id": "JK367",
+      "modelId": "JUNNA_JK367",
+      "className": "JunnaCardJK367",
+      "name": "孤高的奥黛特",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "事件",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK367.png",
+      "values": [
+        {
+          "name": "Bonus",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "N1",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。所有牌获得2点伤害加成。抽2张关联牌。",
+      "upgradedText": "知识。所有牌获得2点伤害加成。抽2张关联牌。",
+      "arrowFocus": {
+        "x": 0.55,
+        "y": 0.43
+      }
     }
   ],
   "groups": [
@@ -4271,6 +4685,29 @@
         "JK272": 1
       },
       "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
+    },
+    {
+      "mainCardId": "JK359",
+      "grantedCardIds": [
+        "JK360",
+        "JK361",
+        "JK362",
+        "JK363",
+        "JK364",
+        "JK365",
+        "JK366",
+        "JK367"
+      ],
+      "grantedCardCounts": {
+        "JK360": 1,
+        "JK361": 1,
+        "JK362": 1,
+        "JK363": 1,
+        "JK364": 1,
+        "JK365": 1,
+        "JK366": 1,
+        "JK367": 1
+      }
     }
   ],
   "startingDeck": [

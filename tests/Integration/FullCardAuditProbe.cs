@@ -240,6 +240,9 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
         }
         if (recording && Id == "JK27") await Add("JK11B", PileType.Draw);
         if (recording && Id == "JA105") await Add("JB03");
+        if (recording && Id is "JA22" or "JK37C" or "JA118") await Add("JA38");
+        if (recording && Id == "JZ05") await Add("JB01");
+        if (recording && Id is "JK235" or "JK260") await Add("JK49B");
         if (recording && Id == "JK314")
         {
             using var single = KnowledgeCombat.SingleCard();

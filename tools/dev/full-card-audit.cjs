@@ -96,7 +96,7 @@ function plan() {
         if (card.id === 'JA105') entries.push(['加速触发时点', '安装前已有3回合满弦射击，安装后保持原计数和关键词。之后打出的满弦射击立即推进至2回合。两层加速使2回合引弦立即完成，改编箭矢同样按每次打出触发。']);
         if (card.id === 'JA108') entries.push(['战斗内备注', '显示（打出X张），读取当前抽牌堆的箭矢数量。核对基础与升级、空堆、箭矢入堆与离堆后的更新，以及战斗外隐藏。']);
         if (card.id === 'JK314') entries.push(['耗尽渴望', '直接统计耗尽牌堆中的渴望实际数量，跨获取批次并超过3张。重复回调保持数量，卡牌额外次数不产生伤害强化标记，外部额外次数强化正常叠加。']);
-        entries.push(['录像', '悬停展示牌面，合法打出并完成本牌效果，保留结算前后状态与对应MP4。']);
+        entries.push(['录像', 'Beta基础版，简短展示牌面与本牌主要结算，保留对应MP4。']);
         lines.push(`## ${card.id} ${card.name}`, '', ...entries.map(([name, text]) => `- ${name}。${text}`), '');
         rows.push({ id: card.id, name: card.name, entries });
     }
@@ -242,7 +242,7 @@ async function saveImage(endpoint, file) {
     fs.writeFileSync(file, Buffer.from(await response.arrayBuffer()));
 }
 
-async function record() {
+async function record(primary = false) {
     await ensureCombat();
     await command('junna_probe speed 1');
     const videos = path.join(output, 'videos');
@@ -275,6 +275,10 @@ async function record() {
                 await delay(250);
             }
         }
+        if (primary && card.id === 'JK314') {
+            for (let count = 0; count < 3; count++) await playModel('JUNNA_JK122B', card.id);
+            await delay(1200);
+        }
         const before = await state();
         fs.writeFileSync(path.join(directory, 'before.json'), JSON.stringify(before, null, 2));
         let started = false;
@@ -283,13 +287,13 @@ async function record() {
             const recording = await request('/recording/start', { output_dir: directory, fps: 20, width: 1280, height: 720, audio: true, max_duration_seconds: 180 });
             started = true;
             if (recording.audio_source && recording.audio_source !== 'engine_mix') throw new Error('Unexpected audio source ' + recording.audio_source);
-            await delay(700);
+            await delay(primary ? 400 : 700);
             const handCard = (await state()).player.hand.find(item => item.id === card.modelId);
             await action('hover_card', { card_index: handCard.index });
-            await delay(1400);
+            await delay(primary ? 800 : 1400);
             await saveImage('/screenshot', path.join(directory, 'card.png'));
             await action('unhover_card');
-            if (card.id === 'JK314') {
+            if (!primary && card.id === 'JK314') {
                 for (let count = 0; count < 3; count++) await playModel('JUNNA_JK122B', card.id);
                 const source = (await state()).player.hand.find(item => item.id === card.modelId);
                 await action('hover_card', { card_index: source.index });
@@ -313,21 +317,23 @@ async function record() {
                 await playModel('JUNNA_FULL_DRAW', card.id);
                 await delay(1200);
                 await saveImage('/screenshot', path.join(directory, 'new-arrow.png'));
-                await playModel('JUNNA_JA71', card.id);
+                if (!primary) await playModel('JUNNA_JA71', card.id);
             } else if (card.type === '能力') {
-                const rounds = card.id === 'U_CARD_010' ? 4 : card.id === 'JA96' ? 2 : 1;
+                const instant = ['JA22', 'JK37C', 'JZ05', 'JA118', 'JK235', 'JK254', 'JK260'].includes(card.id);
+                const rounds = primary && instant ? 0 : card.id === 'U_CARD_010' && !primary ? 4 : card.id === 'JA96' ? 2 : 1;
                 for (let turn = 0; turn < rounds; turn++) await endTurn(card.id);
                 const current = await state();
                 const triggerId = card.id === 'A' ? 'JUNNA_B' : card.id === 'JK32' ? 'JUNNA_JK32B'
                     : card.id === 'JZ05' ? 'JUNNA_STRIKE' : 'JUNNA_JA38';
                 const trigger = current.player?.hand?.find(item => item.can_play && item.id !== 'JUNNA_JA71'
                     && (['JK235', 'JK260', 'JK254'].includes(card.id) ? item.description.includes('知识') : item.id === triggerId));
-                if (trigger) await playModel(trigger.id, card.id);
-                if (card.id === 'JK254') await playModel('JUNNA_JK11B', card.id, false);
-                if (card.id === 'JA144') await playModel('JUNNA_JA119', card.id, false);
+                if (trigger && (!primary || instant)) await playModel(trigger.id, card.id);
+                if (!primary && card.id === 'JK254') await playModel('JUNNA_JK11B', card.id, false);
+                if (!primary && card.id === 'JA144') await playModel('JUNNA_JA119', card.id, false);
             }
             if ((await state()).battle) {
-                const needsCompletion = card.type === '箭矢' || ['JA84', 'JA87', 'JA88', 'JK84', 'JG37', 'JT02', 'JX01', 'JH22', 'JA104', 'JA119', 'JA108', 'JK37B', 'JK84B', 'JA22', 'JA35', 'JK37C', 'JK67', 'JA96', 'JA118', 'JK32', 'JA144', 'JZ05'].includes(card.id);
+                let needsCompletion = card.type === '箭矢' || ['JA84', 'JA87', 'JA88', 'JK84', 'JG37', 'JT02', 'JX01', 'JH22', 'JA104', 'JA119', 'JA108', 'JK37B', 'JK84B', 'JA22', 'JA35', 'JK37C', 'JK67', 'JA96', 'JA118', 'JK32', 'JA144', 'JZ05'].includes(card.id);
+                if (primary && card.type === '能力' && card.id !== 'JA22') needsCompletion = false;
                 if (needsCompletion) {
                     if (!await playModel('JUNNA_JA71', card.id, false)) {
                         await endTurn(card.id);
@@ -335,13 +341,13 @@ async function record() {
                     }
                 }
                 if (card.id === 'JA75') await playModel('JUNNA_STRIKE', card.id, false);
-                if (['JA81', 'JA76', 'JA82', 'U_CARD_005'].includes(card.id)) {
+                if (!primary && ['JA81', 'JA76', 'JA82', 'U_CARD_005'].includes(card.id)) {
                     await endTurn(card.id);
                     await endTurn(card.id);
                     if (card.id === 'U_CARD_005') await endTurn(card.id);
                 }
             }
-            await delay(1400);
+            await delay(primary ? 800 : 1400);
             fs.writeFileSync(path.join(directory, 'after.json'), JSON.stringify(await state(), null, 2));
             fs.copyFileSync(path.join(output, 'results/readiness.json'), path.join(directory, 'readiness.json'));
             await saveImage('/screenshot', path.join(directory, 'settled.png'));
@@ -353,7 +359,7 @@ async function record() {
                 const deadline = Date.now() + 60000;
                 do { await delay(250); result = await request('/recording'); } while (['recording', 'stopping'].includes(result.status) && Date.now() < deadline);
                 if (result.status !== 'completed') error = new Error(`Recording failed ${JSON.stringify(result)}`);
-                const record = { id: card.id, name: card.name, beta: true, ...result, ...(error ? { status: 'failed', action_error: error.message } : {}) };
+                const record = { id: card.id, name: card.name, beta: true, presentation: primary ? '主要结算' : '结算与触发演示', ...result, ...(error ? { status: 'failed', action_error: error.message } : {}) };
                 fs.writeFileSync(receipt, JSON.stringify(record, null, 2));
                 if (!error) await saveImage('/recording/frames?frame_count=8&columns=4&frame_width=320', path.join(directory, 'frames.png'));
             }
@@ -404,6 +410,7 @@ async function main() {
     else if (mode === 'check') await check();
     else if (mode === 'combos') await check(true);
     else if (mode === 'record') await record();
+    else if (mode === 'record-primary') await record(true);
     else if (mode === 'setup') await ensureCombat();
     else if (mode === 'summary') summarize();
     else if (mode === 'report') report();

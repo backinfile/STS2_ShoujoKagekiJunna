@@ -1,0 +1,19 @@
+{
+  "assetId": "junna-event-official-desk-20261111",
+  "kind": "official-production-design",
+  "work": "少女☆歌劇 レヴュースタァライト TV版",
+  "publisher": "KINEMA CITRUS @KinemacINFO",
+  "sourceTitle": "おしえて！スタァライト劇場 第2話：純那ちゃんの部屋①",
+  "sourceUrl": "https://x.com/KinemacINFO/status/1149363052682215425",
+  "imageUrl": "https://pbs.twimg.com/media/D_NbmlzU4AAJVsF.jpg",
+  "publishedAt": "2019-07-11",
+  "dimensions": {
+    "width": 600,
+    "height": 424
+  },
+  "original": "docs/assets/events/junna-desk-official.jpg",
+  "sha256": "5b4020cbdb4ca587c6cbd6c60d75fbc5a97dcb08d02d05e57eb7f2e793c7f2b2",
+  "adaptation": "保留完整官方JPEG及原有标注、版权署名；使用原版事件布局的左侧TextureRect缩放显示，Godot ColorRect提供右侧暗色背景。",
+  "selectedByUser": true,
+  "status": "reference-for-redraw"
+}
