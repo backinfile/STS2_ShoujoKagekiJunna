@@ -1,0 +1,263 @@
+{
+  "revision": 4983,
+  "styles": [
+    {
+      "uid": "junna_style_arrow_wording",
+      "id": "STYLE_002",
+      "title": "箭矢范围表述",
+      "sha256": "fb69dc33ce5876a86b6af75c57ab1219051574bd4b3b7dc321a40d37ef73da29"
+    },
+    {
+      "uid": "junna_style_single_player",
+      "id": "STYLE_003",
+      "title": "单人卡牌",
+      "sha256": "dd3b0fb24d49d7e03fdf4ddd7f8320b62d2d36316ce022cb4ebc431bfccccca7"
+    },
+    {
+      "uid": "junna_style_kotoba",
+      "id": "STYLE_004",
+      "title": "知识牌设计",
+      "sha256": "32fa35fbc3ae388f8b30ac919f6e24e76d7df599bc0f7f4ae70c265b74508310"
+    },
+    {
+      "uid": "4e54c303-a9bb-47ee-bdf2-2345204f8cb8",
+      "id": "STYLE_005",
+      "title": "不要写其他职业中已经有的流派牌",
+      "sha256": "edb0a63d40a77e897a5f199cbb849376ee0aa1ea19aa6465c5498507c258c82b"
+    },
+    {
+      "uid": "junna_style_concise_rules",
+      "id": "STYLE_006",
+      "title": "牌面与结算约定",
+      "sha256": "ac097d00a72e9eaa611868842e0ffa71bd4d2dbdba4212ed4ed8827f670a54d6"
+    },
+    {
+      "uid": "fbb25eb6-4ad6-4273-8ec3-c11c2b6004b8",
+      "id": "STYLE_007",
+      "title": "箭矢牌的设计倾向",
+      "sha256": "2cbceb627f59ef78c4ab9d959ea915ec0aedd72384ce85edf321a3ed9b6a2c17"
+    },
+    {
+      "uid": "junna_style_arrow_acceleration_rarity",
+      "id": "STYLE_010",
+      "title": "箭矢加速的稀有度",
+      "sha256": "58304321802369cd0573ae3be65483591c0864e6ed9e0370517af54a1a001733"
+    },
+    {
+      "uid": "5cc93fd0-d28f-41c4-b12a-6bbf6c8d6f86",
+      "id": "STYLE_008",
+      "title": "伤害加成体系的设计倾向",
+      "sha256": "9bdee7bb4d4f36ead3889fea7d100a882ba5c378d622297af2c7ca4fa35c086b"
+    },
+    {
+      "uid": "junna_style_personal_scope",
+      "id": "STYLE_PLAYER_SCOPE",
+      "title": "默认作用范围",
+      "sha256": "3a5e0afd5db90010358512172bfb23aeda82c8c775d97b4c3c69f1e7b0a22aa5"
+    },
+    {
+      "uid": "junna_style_card_reference",
+      "id": "STYLE_CARD_REFERENCE",
+      "title": "卡牌名称引用",
+      "sha256": "b5ebc9a8686224558bc9b2cc7ab618ad07cc2bf9a194260bcb4b9ba1d6a24fe3"
+    },
+    {
+      "uid": "junna_style_fit_arrow",
+      "id": "STYLE_FIT_ARROW",
+      "title": "箭矢契合：箭、言叶、星",
+      "sha256": "95db0af7ea50709a8d9e4f5705af1c21c23b584aa6a206391a1ebc4304c45de2"
+    },
+    {
+      "uid": "junna_style_fit_damage_bonus",
+      "id": "STYLE_FIT_DAMAGE_BONUS",
+      "title": "伤害加成契合：日常锻炼",
+      "sha256": "fb450d846b69998749f278ed486e55123102f97a09602cd705391458a263118c"
+    },
+    {
+      "uid": "junna_style_fit_knowledge",
+      "id": "STYLE_FIT_KNOWLEDGE",
+      "title": "知识契合与组内关联",
+      "sha256": "3ea04ee8a745a234363c1eb3773b8089be2861a2072ae059b23023c1c5bd1af0"
+    },
+    {
+      "uid": "junna_style_fit_basic_art",
+      "id": "STYLE_FIT_BASIC_ART",
+      "title": "卡牌类型与契合辨识",
+      "sha256": "efd03078ac3a48a1528517746a12a4678a33623893c9f556f8b55cb95aa7c667"
+    },
+    {
+      "uid": "junna_style_fit_sources",
+      "id": "STYLE_FIT_SOURCES",
+      "title": "卡名与原作出处",
+      "sha256": "d789176a810d771bb195869dd297f55e82830a5912cc2ab63917d471c3e21b17"
+    },
+    {
+      "uid": "junna_style_fit_energy",
+      "id": "STYLE_FIT_ENERGY",
+      "title": "能量契合：星星",
+      "sha256": "ce42adbee430191039f8899d4a1217b07dc9365beb617bf902246f483c3cf875"
+    },
+    {
+      "uid": "78d9a930-0c12-490d-afb8-644dfe826cef",
+      "id": "STYLE_009",
+      "title": "关于易伤和虚弱",
+      "sha256": "93cde6de505ece3a67df7571aabc40f94504ba10efaa77bb6b6cbf86edbb7805"
+    },
+    {
+      "uid": "junna_style_plain_card_design",
+      "id": "STYLE_011",
+      "title": "白板牌设计",
+      "sha256": "bced801b7bb6f64baf4bc9fa4e906a85f970f00dff75e38a1578dfe54fe8d6fa"
+    },
+    {
+      "uid": "7f015200-fe98-4ae0-a430-8cbd79b70a6a",
+      "id": "STYLE_012",
+      "title": "卡牌升级",
+      "sha256": "abcfe88b7de4a7e6c8f2f8e5422e654653b3e0da5eecb97e44ac1837be813e79"
+    },
+    {
+      "uid": "junna_style_knowledge_background",
+      "id": "STYLE_KNOWLEDGE_BACKGROUND",
+      "title": "知识背景提示",
+      "sha256": "3f89e27c3084f097d99730402d85b2c9b710244263ed13dcb0a8023a26fc0915"
+    },
+    {
+      "uid": "junna_style_art_review",
+      "id": "STYLE_ART_REVIEW",
+      "title": "卡图取景与重复检查",
+      "sha256": "1b7c4299817a30f59e48cfaf689eb18a9c7038426672852d39dfa20bf04eeadd"
+    },
+    {
+      "uid": "junna_style_fit_pool_maintenance",
+      "id": "STYLE_FIT_POOL_MAINTENANCE",
+      "title": "契合池维护",
+      "sha256": "850a6dced1b3c191f5a9e55d6126d03c86512d381dafe661319c3d988a28f645"
+    },
+    {
+      "uid": "junna_style_fit_review_process",
+      "id": "STYLE_FIT_REVIEW_PROCESS",
+      "title": "契合修改与全卡复核",
+      "sha256": "21b4f4af2d6ada9cb964b4eeaf0a2d8092e38331e0e3d0f4f9de23d5fe574ef5"
+    },
+    {
+      "uid": "junna_style_confirmed_names",
+      "id": "STYLE_CONFIRMED_NAMES",
+      "title": "已确认的用词与原句",
+      "sha256": "68e2ed8a52fc597c6db3e587240e314fcc46e66486f4154f7339b496d6fc2c0d"
+    },
+    {
+      "uid": "junna_style_workbench_editing",
+      "id": "STYLE_WORKBENCH_EDITING",
+      "title": "工作台编辑与版本控制",
+      "sha256": "e5044de6f9678213f513e3719ebf7202412ec49cfcc735098226a58e6130688a"
+    },
+    {
+      "uid": "junna_style_energy_payoff",
+      "id": "STYLE_ENERGY_PAYOFF",
+      "title": "能量／高费收益",
+      "sha256": "ecaa10e81007c7a096c83ecfa7bfc470d521ba931d3669378d8fc3722cd3fa24"
+    },
+    {
+      "uid": "junna_style_arrow_resolution_order",
+      "id": "STYLE_ARROW_RESOLUTION_ORDER",
+      "title": "箭矢自动结算顺序",
+      "sha256": "8c9716f0f53178ea07c59d7d7c2dd0d2722b74d0f5707450156bbd077ed6dd47"
+    },
+    {
+      "uid": "junna_style_effect_role_convention",
+      "id": "STYLE_EFFECT_ROLE_CONVENTION",
+      "title": "触发与收益定位",
+      "sha256": "e3e69ffe562f150b743f69ed0eeb50e5e94f6c47f1e62a430c4a12df3877b45d"
+    },
+    {
+      "uid": "junna_style_shine_knowledge_20261106",
+      "id": "STYLE_SHINE_KNOWLEDGE",
+      "title": "闪耀牌定位",
+      "sha256": "c9f51e208c4599b912354ed842c3852c9b41affaa9550e017021fb1763be8ac9"
+    },
+    {
+      "uid": "junna_style_design_tendencies_advice_20261106",
+      "id": "STYLE_DESIGN_TENDENCIES_ADVICE",
+      "title": "卡牌设计倾向建议",
+      "sha256": "d855054c5950e90dea1fb6a403f691bc27c4715b7d89d413bb82407629b9f4c3"
+    },
+    {
+      "uid": "junna_style_design_document_reading",
+      "id": "STYLE_DESIGN_DOCUMENTS",
+      "title": "设计前读取相关流派文档",
+      "sha256": "22086a6ecf33378cb30ee5f08f88ec019c92e8fb1063d4bcb7d5b7e4d23a4dd4"
+    },
+    {
+      "uid": "junna_style_independent_card_relations",
+      "id": "STYLE_INDEPENDENT_CARD_RELATIONS",
+      "title": "关联牌独立列表",
+      "sha256": "8c74dbbceb1e7966527841f343c67263c8eb9a9acd1e8095c39037f4c4c386ff"
+    },
+    {
+      "uid": "junna_style_fit_workflow",
+      "id": "STYLE_FIT_WORKFLOW",
+      "title": "契合设计、命名与卡图完整流程",
+      "sha256": "3b4db7d9bd9c63f73c52186c31b71d3f14dbde37fcc3e24eabbc18b9d250d52f"
+    },
+    {
+      "uid": "junna_style_fit_junna",
+      "id": "STYLE_FIT_JUNNA",
+      "title": "纯那角色契合",
+      "sha256": "db58d2fdd19c520e6d6ea91790c5e24cf375840dea064a02fd474a5a3bc35a00"
+    },
+    {
+      "uid": "junna_style_native_potion_naming_art",
+      "id": "STYLE_NATIVE_POTION_NAMING_ART",
+      "title": "本体药水命名与图标特点",
+      "sha256": "d9c5687c14fd4644c6cdc8994daff2ed3b34a5748a23978da1a8e6cc004e4286"
+    }
+  ],
+  "metaConventions": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42"
+  ],
+  "namingRequirements": true,
+  "mechanisms": true,
+  "archetypes": true
+}

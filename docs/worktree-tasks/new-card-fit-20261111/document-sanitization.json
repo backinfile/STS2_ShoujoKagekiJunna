@@ -1,0 +1,17 @@
+{
+  "documentsReviewed": 86,
+  "changes": [],
+  "credentialFindings": [],
+  "allTextDocumentsReviewed": 274,
+  "extensionsReviewed": [
+    ".md",
+    ".txt",
+    ".html",
+    ".json",
+    ".yaml",
+    ".yml",
+    ".toml",
+    ".csv"
+  ],
+  "absolutePathFindings": []
+}

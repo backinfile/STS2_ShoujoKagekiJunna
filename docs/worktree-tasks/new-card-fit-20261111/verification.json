@@ -1,0 +1,360 @@
+{
+  "revision": 4985,
+  "checked": [
+    {
+      "collection": "cards",
+      "uid": "fb3c1a0b-b5d9-4c2f-a0f3-11888ecc497e",
+      "id": "U_CARD_011",
+      "name": "撕裂黑暗",
+      "version": "13:ff2430c8b2b9f2a03fef79b9e381b487d3d7c6c22b81bd94f2152b48f27f0f8e"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_new_card_20261111_U_CARD_011",
+      "id": "FIT_CARD_U_CARD_011",
+      "name": "撕裂黑暗",
+      "version": "1:66b04abc474885afff1b188dff2f507f720e4bd4569593938ab8cfc723ac5880"
+    },
+    {
+      "collection": "cards",
+      "uid": "b7fb3b0b-ab09-43f0-a607-92a18e216b45",
+      "id": "U_CARD_012",
+      "name": "追逐着你而去",
+      "version": "30:a497069179fa15a1de55c4341c9faf4343fb4eba4b9e670e1b39f695f3bb57a0"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_new_card_20261111_U_CARD_012",
+      "id": "FIT_CARD_U_CARD_012",
+      "name": "追逐着你而去",
+      "version": "1:4913789912d91eac00571698d6d2dc5a7be1a91dcaa2eb799c9afce8b419f1c6"
+    },
+    {
+      "collection": "cards",
+      "uid": "complete_pool_JK67",
+      "id": "JK67",
+      "name": "努力下去",
+      "version": "25:c9c203d56628d11cc92309836372cc20db99860a1163aba969270a0afd9739c1"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JK67",
+      "id": "FIT_CARD_JK67",
+      "name": "努力下去",
+      "version": "5:0a8ae8c8dc16b067b6f955f56d4f1a70a565512e3dec17abf408b4e50e3fc640"
+    },
+    {
+      "collection": "cards",
+      "uid": "complete_pool_JK67B",
+      "id": "JK67B",
+      "name": "不丢掉目标",
+      "version": "21:e6ad99eec782c065976b95abf0becda3bc24d6740de5ea535ab75e6a75f9fe0a"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JK67B",
+      "id": "FIT_CARD_JK67B",
+      "name": "不丢掉目标",
+      "version": "3:da7a739a1242f01c1ceabb05daef649e4f4359040259d1b9e11a263357acee97"
+    },
+    {
+      "collection": "cards",
+      "uid": "complete_pool_JG27",
+      "id": "JG27",
+      "name": "挺直脊背",
+      "version": "21:ad42e426e2247bb83cd63da5673fe5f57dff83ade51d41be775aa1ff05b25ad5"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JG27",
+      "id": "FIT_CARD_JG27",
+      "name": "挺直脊背",
+      "version": "1:d6265c6ee77fd8fbd424b539934a03eeb6152e1d9d66af2e2072e8676fa8fd73"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-arrow-five-turn-exploration-20261105_JA96",
+      "id": "JA96",
+      "name": "绝不停步",
+      "version": "22:cf4c1a66bf3e9389d60bda7389ca21acd84dcfc7cdbc741863535574dc936008"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_x_cost_exploration_JA60",
+      "id": "FIT_CARD_JA60",
+      "name": "绝不停步",
+      "version": "5:02b426493bb2544efe90636af97022f9e518bcc70e7533c28d6d21937d3a2770"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-arrow-five-turn-exploration-20261105_JK84",
+      "id": "JK84",
+      "name": "先学会站起来",
+      "version": "46:571a97f803a53140cdde1368a074451174f4e9504fbca36a08370f4e5d33e044"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-second-ancient-candidates-20261104_FIT_JZ09",
+      "id": "FIT_CARD_JZ09",
+      "name": "先学会站起来",
+      "version": "4:487df941a56e26ca888934564d95a24fedc9fbcc8384039ab740fae441ba6cda"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-arrow-five-turn-exploration-20261105_JK84B",
+      "id": "JK84B",
+      "name": "翱翔在天际",
+      "version": "14:546b476c617b19ab09f36d0ae937b76769bb4417110e7d57373e4bcdfafa6445"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_arrow_exploration_20261106_JK84B",
+      "id": "FIT_CARD_JK84B",
+      "name": "翱翔在天际",
+      "version": "2:0199fec0dec368bf75e3d1f5538b5a0f74b894d146d80583750c2ccb61d7995f"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-reward-revision-20261106_JK126",
+      "id": "JK126",
+      "name": "全都一起带去",
+      "version": "80:6b289c2ad45c28805b0ea2c3846cfea4495e4b63ab541b2ba6ce0e10e52af0d8"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-bookmark-knowledge-and-practice-arrow-20261103_FIT_JK81B",
+      "id": "FIT_CARD_JK81B",
+      "name": "全都一起带去",
+      "version": "3:ecdb832a251a3c6ac57a5f1c7f0918fbb8f6b0d7c3861b4d03b319551ba2bcb1"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-arrow-exploration-20261106_JK131",
+      "id": "JK131",
+      "name": "永远都不嫌晚",
+      "version": "22:a72996394fc8e28e5eef928e8de1efe672d037fc8cbfee970d2fc99f8b255eed"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_fabled_knowledge_JK37C",
+      "id": "FIT_CARD_JK37C",
+      "name": "永远都不嫌晚",
+      "version": "6:fb3724c915eb5b8f6be4e0dfc7bde8090dd751e914a871b678379b4a08b77802"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna_stability_shine_20261108_JS33",
+      "id": "JS33",
+      "name": "道标",
+      "version": "17:71258493f2d79c1469f5b45518e278a504002489e281fd7afe208d022ec37f53"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_junna_stability_shine_20261108_JS33",
+      "id": "FIT_CARD_JS33",
+      "name": "道标",
+      "version": "3:ef6a7162caa6b28aa32f1c0f6c96d8cc7fdfa499b5aebf8290edbf46d355479f"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200",
+      "id": "JK200",
+      "name": "你一直在看什么",
+      "version": "11:589f3adbafdc62028b6c9413ffd97f8707342fa267e4f1bb282a3493cc9db242"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_current_audit_20261108_JK200",
+      "id": "FIT_CURRENT_AUDIT_JK200",
+      "name": "你一直在看什么",
+      "version": "2:a443164f2278ab26bb9fefb03d02fbdae72c4b2763d1ca63b3117ab98d858142"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-infinite-upgrade-knowledge-20261104_JK82",
+      "id": "JK82",
+      "name": "学无止境",
+      "version": "54:5965fe8fe125643c585a8f9a97aeb6f58a4eeafc306e2df63d9f2b3327b52e3c"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-infinite-upgrade-knowledge-20261104_FIT_JK82",
+      "id": "FIT_CARD_JK82",
+      "name": "学无止境",
+      "version": "4:af9c92916dd27c13898477010a4b7878500ab163823d666efae03e6c53c32646"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-infinite-upgrade-knowledge-20261104_JK82B",
+      "id": "JK82B",
+      "name": "新知",
+      "version": "38:36b1928f27c40b1913acdfc46d6c63d5892d4efe7f46e62aab58fa330ed5ed9c"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-infinite-upgrade-knowledge-20261104_FIT_JK82B",
+      "id": "FIT_CARD_JK82B",
+      "name": "新知",
+      "version": "5:ee712ed777ec8de1623f487943fa655351f1256475831b32b6ed486cd160f049"
+    },
+    {
+      "collection": "cards",
+      "uid": "draft_card_JA22",
+      "id": "JA22",
+      "name": "上弦",
+      "version": "12:ee148c3108998efa2a64152a60c0ff57da8180c52e1c2bc7eb1e1bfaafe8caad"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_draft_card_JA22",
+      "id": "FIT_CARD_JA22",
+      "name": "上弦",
+      "version": "5:82b38aed0d74ce09b313fa9b507cc2fa386e5761b7364893b44a26027f15b770"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-cage-request-20261111",
+      "id": "U_CARD_013",
+      "name": "牢笼",
+      "version": "1:4691d35c9056c5fa9230b3219521d5b40543dde24d96e06189e4b022f0398ee1"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_new_card_20261111_U_CARD_013",
+      "id": "FIT_CARD_U_CARD_013",
+      "name": "牢笼",
+      "version": "1:5ed422e4d28c07f862701e1ea4ec982a915dfa575877d4ac7955d688109361fa"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "complete_pool_group_JK67",
+      "id": "GROUP_JK67",
+      "name": "努力下去／不丢掉目标",
+      "version": "2:5437eb9906f6db73addc49770b0b6d28005a02051bb335e242f0e69c00409336"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "junna-arrow-five-turn-exploration-20261105_GROUP_JK84",
+      "id": "GROUP_JK84",
+      "name": "先学会站起来／翱翔在天际",
+      "version": "4:9746bff07589e4814196fcbb98890555447e8785b990110e12b148c59aa77c59"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "junna-shine-arrow-exploration-20261106_GROUP_JK131",
+      "id": "GROUP_JK131",
+      "name": "檄文／永远都不嫌晚",
+      "version": "4:ef2a4efb0c8f90f2f330f7566ae89fca71a27828b2c57cf3444b8639ef4be4ef"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "junna-common-one-cost-aoe-knowledge-20261108_GROUP_JK200",
+      "id": "GROUP_JK200",
+      "name": "你一直在看什么／疑问",
+      "version": "3:a7858ed49fd0128edbccc21e2574d13efa0ad389710f769e9dbd5d0a7160731c"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "knowledge-initial-lists-20261110_JK67B",
+      "id": "INITIAL_KNOWLEDGE_LIST_JK67B",
+      "name": "不丢掉目标",
+      "version": "2:0b164519ebcccd03672a10f9b29c526caab98fd540e51398bd276066d418be71"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "knowledge-initial-lists-20261110_JK84",
+      "id": "INITIAL_KNOWLEDGE_LIST_JK84",
+      "name": "先学会站起来",
+      "version": "2:7684d4203c0215d6145da579420269789a1bbe2c1817d75b6526706b7c886bc8"
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "knowledge-initial-lists-20261110_JK131",
+      "id": "INITIAL_KNOWLEDGE_LIST_JK131",
+      "name": "永远都不嫌晚",
+      "version": "2:b96c748d13c07c9ac366d441f25f71497d4e772c68ff34ee3d5241781b8bef95"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-arrow-exploration-20261106_JK131B",
+      "id": "JK131B",
+      "name": "檄文",
+      "version": "66:066c1b4f7d5cb71aa469cf799984bdf5f43ec64d59a0abf64cb6a48453c73754"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200B",
+      "id": "JK200B",
+      "name": "疑问",
+      "version": "17:1520abe5be90521757464391435451161fd89fe053cfae0ad5c7e6d33d1f97f1"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-knowledge-terminals-20261108_JK235",
+      "id": "JK235",
+      "name": "理想的国语教科书",
+      "version": "15:5cd577144cfe7decac9ee8b0f73ae39a0e496b33b88c74a535a69aaff21065a4"
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-arrow-exploration-20261106_JK133",
+      "id": "JK133",
+      "name": "星坠",
+      "version": "23:337bbde24797495a987c461d3e1b012050cfb7e2ad4e7a80d5fc545a2a4ae468"
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_current_audit_20261108_JK200B",
+      "id": "FIT_CURRENT_AUDIT_JK200B",
+      "name": "疑问",
+      "version": "2:51c7273161285dec821cbbdb4bc3cf64cf0978fbfbf847f7cb2b0f6a20cba601"
+    },
+    {
+      "collection": "powers",
+      "uid": "power_junna_jk67_power",
+      "id": "JUNNA_JK67_POWER",
+      "name": "努力下去",
+      "version": "6:ba4a0d2cfe77c65477d906ff97c4a900d0b882dcc98a5429515bf29be3c5f1d5"
+    },
+    {
+      "collection": "powers",
+      "uid": "power_junna_ja96_power",
+      "id": "JUNNA_JA96_POWER",
+      "name": "绝不停步",
+      "version": "3:0d7a926d4c24cba146aea112d94868ba39e5d6f09f76c81e036f1ff63f06a82d"
+    }
+  ],
+  "activeCardCount": 158,
+  "nameCollisions": [],
+  "artAssetCollisions": [],
+  "mechanicalFieldsPreserved": true,
+  "artOnlyNamesPreserved": [
+    "JK82",
+    "JK82B",
+    "JA22"
+  ],
+  "unchangedArt": "JG27",
+  "newCard": {
+    "id": "U_CARD_013",
+    "name": "牢笼",
+    "type": "技能",
+    "rarity": "稀有",
+    "cost": 1,
+    "upgradedCost": 0
+  },
+  "visualReview": {
+    "nativeBaseUpgradeFrames": 32,
+    "floatingArrowMasks": 3,
+    "subtitleAndPlayerUICheck": "通过",
+    "characterIdentityCheck": "通过",
+    "activeArtAssetCollisions": 0,
+    "karenNamesChecked": 121,
+    "karenImagesCompared": 118,
+    "sourceFrameReview": "逐图比对当前卡图及Karen实际卡图，区分不同动作与机位。",
+    "generatedImages": 0
+  },
+  "conventionRead": {
+    "styles": 35,
+    "metaRuleConventions": 43
+  }
+}

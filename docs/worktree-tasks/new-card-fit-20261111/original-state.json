@@ -1,0 +1,28 @@
+{
+  "originalBranch": "main",
+  "originalHead": "250546220f5e0c83fa9597e96627beeba0fef4f2",
+  "worktree": "../worktrees/STS2_ShoujoKagekiJunna/new-card-fit-20261111",
+  "status": "1 .M N... 100644 100644 100644 86077a4a0745ca429c12df385433f3699aa49c15 86077a4a0745ca429c12df385433f3699aa49c15 ShoujoKagekiJunna/images/character_select.png\u00001 .M N... 100644 100644 100644 4fe73cc82f5c5a0e924932e1069629017c6f9a5c 4fe73cc82f5c5a0e924932e1069629017c6f9a5c ShoujoKagekiJunna/scenes/junna_select.tscn\u00001 .M N... 100644 100644 100644 379f5e2f741f375bad304860d1cde4ee6af062cb 379f5e2f741f375bad304860d1cde4ee6af062cb docs/design/workbench/README.md\u00001 .M N... 100644 100644 100644 646167c4132574664b974981619f4a5d616011b2 646167c4132574664b974981619f4a5d616011b2 docs/design/workbench/app.js\u00001 .M N... 100644 100644 100644 9905b96a6b9d0bb1f877a892f1a1847348a8bd43 9905b96a6b9d0bb1f877a892f1a1847348a8bd43 docs/design/workbench/workbench-domain.js\u00001 .M N... 100644 100644 100644 101377141f604019869dbe892347f11e1172b149 101377141f604019869dbe892347f11e1172b149 docs/design/workbench/workbench-domain.test.cjs\u0000? ShoujoKagekiJunna/images/character_select/\u0000? ShoujoKagekiJunna/scripts/character_select_effects.gd\u0000? ShoujoKagekiJunna/scripts/character_select_effects.gd.uid\u0000? ShoujoKagekiJunna/scripts/character_select_layer.gdshader\u0000? ShoujoKagekiJunna/scripts/character_select_layer.gdshader.uid\u0000? ShoujoKagekiJunna/scripts/character_select_layers.gd\u0000? ShoujoKagekiJunna/scripts/character_select_layers.gd.uid\u0000",
+  "files": {
+    "ShoujoKagekiJunna/images/character_select/background.png": "8cb2cc40753256407b6e180fa91011a0bc4fb3a644f7d2a6c6a6a91bfb38fe04",
+    "ShoujoKagekiJunna/images/character_select/background.png.import": "f8f133a359d8f1b168c2363d6904667f9a9b2a309fe56792ec5954fac7b46b05",
+    "ShoujoKagekiJunna/images/character_select/parts.svg": "636cc5e87eb00d359282f1e5750f28c7f0694dc1943b39d3a14c1a87ba56f745",
+    "ShoujoKagekiJunna/images/character_select/parts.svg.import": "eb50e99aa0ec0522ad9fd7cca39c73bc1ef30daf7e840dcfd9eaac65192f604a",
+    "ShoujoKagekiJunna/images/character_select/subject.png": "48df1934d85c061a0b0e009f71e8e18a58a0d1dc8815c3639259c6eb41f78fd4",
+    "ShoujoKagekiJunna/images/character_select/subject.png.import": "8da9fd8234d8adda8b96f70f2578efe8be4bce5afcbb4dcc03fa3e0ef322d4b9",
+    "ShoujoKagekiJunna/images/character_select/underpaint.png": "1f175323156d77a2983e45061847a73a3e0264a0b9e2db9d0324342f0f20f978",
+    "ShoujoKagekiJunna/images/character_select/underpaint.png.import": "530fc6d60c09d526b822aa6cf7470d92dcf35d7908c1c3b2e26ac180f1b05704",
+    "ShoujoKagekiJunna/scripts/character_select_effects.gd": "c564cdb1866738bb92e397533a2dc9afa62b6c7c45810ee0f22837f56a6e1e8f",
+    "ShoujoKagekiJunna/scripts/character_select_effects.gd.uid": "a23a6158f4cdc0b40e39e8b3c9f2adc7b8625b1433e16608d96f8ebadc45ad46",
+    "ShoujoKagekiJunna/scripts/character_select_layer.gdshader": "37b7683dacde3337287ff5942d81883ebdc38d1bfed30c1d40f252ce5f25defa",
+    "ShoujoKagekiJunna/scripts/character_select_layer.gdshader.uid": "3347e90f8c9296fb410af9b58cc5983381ac212b48fc7592706a266c27682a28",
+    "ShoujoKagekiJunna/scripts/character_select_layers.gd": "9dc956ef1b8abe9272c4c031c341e6efbb4e5ed30a96bf6522b3b376c555cec8",
+    "ShoujoKagekiJunna/scripts/character_select_layers.gd.uid": "3ea495a6d9fbc7f0ae0ebb8331a2386f93f348d4903a9f79005090082483bb06",
+    "ShoujoKagekiJunna/images/character_select.png": "a617f6a823352d32989682fcbe18b35ba9681880750e6be18bdfb612ae343dfc",
+    "ShoujoKagekiJunna/scenes/junna_select.tscn": "5d9316ba6fd1933bf2a011d04a81f2028726d7d83f1ca931ca67fdd604ec4cbb",
+    "docs/design/workbench/README.md": "57adbc94ccb46caa22d83e35a1c637e76339cab0b5c37afcd722397bc54bedcf",
+    "docs/design/workbench/app.js": "9401f521750bfccd519eb1cba3cbfa7fc802454c4432aeb4156d0fd37380fd1e",
+    "docs/design/workbench/workbench-domain.js": "0378dc7d2f1812194a365ceaf3060232892457dc9e08977248c9957c8d57d254",
+    "docs/design/workbench/workbench-domain.test.cjs": "5a74eb831a3b60b8b36dbb5b8fa789e32c67e6329b823a13e747fcb428e627d1"
+  }
+}
