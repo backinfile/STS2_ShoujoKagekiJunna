@@ -2,12 +2,9 @@ using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Entities.Multiplayer;
-using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Localization;
@@ -15,7 +12,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Runs;
 using ShoujoKagekiJunna.Models;
 
 using ShoujoKageki.Core.V1;
@@ -142,30 +138,15 @@ public static class CardActions
         var enemies = card.Owner.Creature.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
         if (enemies.Length <= 1) return enemies.FirstOrDefault();
         if (CardSelectCmd.Selector != null) return enemies[0];
-        var player = card.Owner;
-        var sync = RunManager.Instance.PlayerChoiceSynchronizer;
-        uint choiceId = sync.ReserveChoiceId(player);
-#if STS2_BETA
-        await context.SignalPlayerChoiceBegun(player, PlayerChoiceOptions.None);
-#else
-        await context.SignalPlayerChoiceBegun(PlayerChoiceOptions.None);
-#endif
-        try
+        int selected = await PlayerChoices.ChooseIndex(context, card.Owner, enemies.Length, async () =>
         {
-            int selected;
-            if (LocalContext.IsMe(player) && RunManager.Instance.NetService.Type != MegaCrit.Sts2.Core.Multiplayer.Game.NetGameType.Replay)
-            {
-                var manager = NTargetManager.Instance;
-                manager.StartTargeting(TargetType.AnyEnemy, new Vector2(960, 800), TargetMode.ClickMouseToTarget,
-                    () => CombatManager.Instance.IsOverOrEnding, n => n is NCreature creature && enemies.Contains(creature.Entity));
-                var target = await manager.SelectionFinished() as NCreature;
-                selected = target == null ? -1 : Array.IndexOf(enemies, target.Entity);
-                sync.SyncLocalChoice(player, choiceId, PlayerChoiceResult.FromIndex(selected));
-            }
-            else selected = (await sync.WaitForRemoteChoice(player, choiceId)).AsIndex();
-            return selected >= 0 && selected < enemies.Length && enemies[selected].IsAlive ? enemies[selected] : null;
-        }
-        finally { await context.SignalPlayerChoiceEnded(); }
+            var manager = NTargetManager.Instance;
+            manager.StartTargeting(TargetType.AnyEnemy, new Vector2(960, 800), TargetMode.ClickMouseToTarget,
+                () => CombatManager.Instance.IsOverOrEnding, n => n is NCreature creature && enemies.Contains(creature.Entity));
+            var target = await manager.SelectionFinished() as NCreature;
+            return target == null ? -1 : Array.IndexOf(enemies, target.Entity);
+        });
+        return selected >= 0 && enemies[selected].IsAlive ? enemies[selected] : null;
     }
 
     public static async Task Generate(Player player, string id, int count, PileType pile,

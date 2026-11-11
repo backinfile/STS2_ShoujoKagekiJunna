@@ -77,7 +77,7 @@ public partial class KnowledgeHoverLinks : Control
             _origin = Point(sourceFrame, new(sourceFrame.Size.X * .5f, deployedArrow ? sourceFrame.Size.Y * 2 / 416 : 0));
             _outward = (_origin - Point(sourceFrame, new(sourceFrame.Size.X * .5f, sourceFrame.Size.Y * .5f))).Normalized();
             ReadTipBounds();
-            var ids = PartnerIds(source);
+            var ids = KnowledgeMembers.PartnerIds(source);
             bool Related(CardModel card) => card != source && card.Owner == source.Owner && ids.Contains(card.Id);
             if (LocalContext.IsMe(source.Owner))
                 foreach (var target in room.Ui.Hand.ActiveHolders)
@@ -94,15 +94,6 @@ public partial class KnowledgeHoverLinks : Control
             }
         }
         QueueRedraw();
-    }
-
-    private static HashSet<ModelId> PartnerIds(CardModel source)
-    {
-        // Definitions are directional and shared by model ID. A repeated main card explicitly links its other copies.
-        var members = DynamicKnowledge.Definition(source) ?? KnowledgeCombat.Group(source)?.Members
-            .Select(member => (Model: CardCatalog.Model(member.Id), member.Count));
-        return members?.Where(member => member.Model.Id != source.Id || member.Count > 1)
-            .Select(member => member.Model.Id).ToHashSet() ?? [];
     }
 
     private void AddPile(CardPile pile, Control button, Func<CardModel, bool> related)
