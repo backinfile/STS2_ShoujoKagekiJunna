@@ -31,7 +31,7 @@ public partial class ArrowHud
         effect.SetProgress(0);
         effect.Start(() => FinishDeployment(arrow));
         CoreEffects.Redraw(this);
-        // Release the action queue at the first bow pull. The remaining visual has its own clock.
+        // The visual owns its card node and clock, so following plays can settle during flight.
         tween.Parallel().TweenInterval(effect.InputReleaseTime);
         return true;
     }
@@ -71,6 +71,7 @@ public partial class ArrowHud
     public override void _ExitTree()
     {
         ClearHoverPreview();
+        foreach (var arrow in _previewCache.Keys.ToArray()) RemovePreviewCard(arrow);
         foreach (var arrow in _deployments.Keys.ToArray()) FinishDeployment(arrow);
     }
 }
@@ -92,7 +93,7 @@ public partial class ArrowDeploymentVfx : Control
     private float HoldEndTime => DrawEndTime + .40f;
     private float TimelineDuration => HoldEndTime + .24f;
     public double Duration => TimelineDuration / ArrowLayoutMotion.SpeedMultiplier;
-    internal double InputReleaseTime => DrawTime / ArrowLayoutMotion.SpeedMultiplier;
+    internal double InputReleaseTime => StageTime / ArrowLayoutMotion.SpeedMultiplier;
     private const float ShaftLength = 160;
     private const float BowGripOffset = 36;
     private const float BraceHeight = 10;
@@ -158,6 +159,9 @@ public partial class ArrowDeploymentVfx : Control
     {
         MouseFilter = MouseFilterEnum.Ignore;
         TextureFilter = TextureFilterEnum.LinearWithMipmaps;
+        // Detach from the native play container before releasing the action queue.
+        // Later pile transitions must not reuse or free this in-flight visual.
+        cardNode.Reparent(this);
         _cardNode = cardNode;
         _trajectory = PreviewTrajectory;
         _cardScale = cardNode.Scale;

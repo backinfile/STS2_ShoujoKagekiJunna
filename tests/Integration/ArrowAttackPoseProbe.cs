@@ -90,8 +90,13 @@ public sealed class ArrowAttackPoseProbe : AbstractConsoleCmd
         await ArrowCombat.Accelerate(context, interrupted, 99);
         node.SetAnimationTrigger("Hit");
         Verify("hit reaction interrupts the pose", animator.CurrentAnimation == "Hit");
-        await Task.Delay(300);
-        Verify("pending idle return preserves hit reaction", animator.CurrentAnimation == "Hit");
+        bool hitFinished = false;
+        void HitFinished(StringName name) { if (name == "Hit") hitFinished = true; }
+        animator.AnimationFinished += HitFinished;
+        try { await Task.Delay(300); }
+        finally { animator.AnimationFinished -= HitFinished; }
+        // Hit lasts 0.3 seconds: natural completion at this boundary is valid.
+        Verify("pending idle return preserves hit reaction", animator.CurrentAnimation == "Hit" || hitFinished);
         animator.Play("Idle");
         await CardActions.Fly(context, player, 1, target);
         await ArrowCombat.Accelerate(context, ArrowCombat.Deployed.Single(), 99);

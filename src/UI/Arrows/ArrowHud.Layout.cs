@@ -1,4 +1,5 @@
 using Godot;
+using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -78,6 +79,19 @@ public partial class ArrowHud
             var group = arrows.Where((_, index) => lanes[index] == lane).ToArray();
             if (group.Length == 0) continue;
             var range = regions[(int)lane];
+            bool IsStardust(ArrowDeployment arrow) => CardCatalog.DesignId(arrow.Card) == "U_CARD_005";
+            if (group.Any(IsStardust))
+            {
+                var joined = group.Select((arrow, index) => index > 0 && IsStardust(arrow)
+                    && IsStardust(group[index - 1]) && arrow.Target == group[index - 1].Target).ToArray();
+                // OccupiedRegions ends on the old 80-unit grid; use the remaining width as well.
+                float endX = lane == ArrowLane.Right ? canvas.X * .9f
+                    : lane == ArrowLane.Left ? formation[(int)ArrowLane.FriendlyGroup].X - SlotSpacing : range.Y;
+                var packed = ArrowLayout.Pack(Math.Max(range.Y, endX) - range.X, SlotSpacing, IconWidth * .5f,
+                    group.All(IsStardust) ? IconSize.Y * .5f : RowSpacing, joined);
+                for (int i = 0; i < group.Length; i++) _slots[group[i]] = packed[i] + new Vector2(range.X, rowY);
+                continue;
+            }
             int columns = Math.Max(1, (int)MathF.Round((range.Y - range.X) / SlotSpacing) + 1);
             var previous = group.Select(arrow => _slots.TryGetValue(arrow, out var point) ? (Vector2?)point : null).ToArray();
             float bottom = previous.Where(p => p.HasValue).Select(p => p!.Value.Y).DefaultIfEmpty(rowY).Max();

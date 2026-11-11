@@ -168,7 +168,7 @@ public static class CardActions
         var arrow = (CatalogCard)CardCatalog.Create("JA81B", player);
         if (upgraded) { arrow.UpgradeInternal(); arrow.FinalizeUpgradeInternal(); }
         arrow.SetGeneratedDamage(damage);
-        await CardPileCmd.AddGeneratedCardToCombat(arrow, PileType.Play, player);
+        using var presentation = await GeneratedArrowPresentation.Generate(arrow);
         // Generated arrows use the native automatic-play target policy, independently per card.
         // An effect may supply a target; otherwise the combat target RNG selects one.
         if (target != null)

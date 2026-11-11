@@ -5,7 +5,7 @@ namespace ShoujoKagekiJunna.Combat;
 /// <summary>Critically damped layout motion; retargeting keeps the current velocity.</summary>
 internal sealed class ArrowLayoutMotion
 {
-    internal const float SpeedMultiplier = 1.25f;
+    internal const float SpeedMultiplier = 2f;
 
     public Vector2 Center { get; private set; }
     public float Angle { get; private set; }
