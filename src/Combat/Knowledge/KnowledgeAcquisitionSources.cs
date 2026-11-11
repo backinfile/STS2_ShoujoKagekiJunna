@@ -24,6 +24,7 @@ internal static class KnowledgeAcquisitionSources
         new("Relics.MassiveScroll", "AfterObtained", Kind.DeckChoice),
         new("Relics.ScrollBoxes", "AfterObtained", Kind.DeckChoice),
         new("Relics.SeaGlass", "AfterObtained", Kind.DeckChoice),
+        new("Modifiers.SealedDeck", "ChooseCards", Kind.DeckChoice),
         new("Relics.ArchaicTooth", "AfterObtained", Kind.Transform),
         new("Relics.Astrolabe", "AfterObtained", Kind.Transform),
         new("Relics.Byrdpip", "AfterObtained", Kind.Transform),
@@ -39,6 +40,8 @@ internal static class KnowledgeAcquisitionSources
         new("Events.WhisperingHollow", "Hug", Kind.Transform),
         new("Events.WoodCarvings", "Bird", Kind.Transform),
         new("Events.WoodCarvings", "Torus", Kind.Transform),
+        new("Events.BrainLeech", "ShareKnowledge", Kind.DeckChoice),
+        new("Events.RoomFullOfCheese", "Gorge", Kind.DeckChoice),
         new("Events.BrainLeech", "Rip", Kind.Reward),
         new("Events.ColorfulPhilosophers", "OfferRewards", Kind.Reward),
         new("Events.TheFutureOfPotions", "Trade", Kind.Reward),
@@ -51,6 +54,7 @@ internal static class KnowledgeAcquisitionSources
         new("Relics.PrayerWheel", "TryModifyRewards", Kind.Reward),
         new("Relics.WhiteStar", "TryModifyRewards", Kind.Reward),
         new("Cards.TheHunt", "OnPlay", Kind.Reward),
+        new("Relics.ChoicesParadox", "AfterPlayerTurnStart", Kind.Discovery),
         new("Relics.Toolbox", "BeforeHandDraw", Kind.Discovery),
         new("Potions.AttackPotion", "OnUse", Kind.Discovery),
         new("Potions.ColorlessPotion", "OnUse", Kind.Discovery),
@@ -103,7 +107,7 @@ internal static class KnowledgeAcquisitionSources
             }
         }
         private static void Prefix(object __instance, MethodBase __originalMethod, out IDisposable __state)
-            => __state = new Scope(new(Methods[__originalMethod], __instance));
+            => __state = new Scope(new(Methods[__originalMethod], __instance ?? __originalMethod.DeclaringType!));
         private static void Finalizer(IDisposable? __state) => __state?.Dispose();
     }
     [HarmonyPatch]
@@ -139,13 +143,24 @@ internal static class KnowledgeAcquisitionSources
         {
             yield return AccessTools.Method(typeof(MegaCrit.Sts2.Core.Commands.CardSelectCmd), "FromChooseABundleScreen");
             yield return AccessTools.Method(typeof(MegaCrit.Sts2.Core.Commands.CardSelectCmd), "FromSimpleGridForRewards");
+            yield return AccessTools.Method(typeof(MegaCrit.Sts2.Core.Commands.CardSelectCmd), "FromSimpleGrid");
         }
-        private static void Postfix(ref Task<IEnumerable<CardModel>> __result) => __result = Complete(__result);
-        private static async Task<IEnumerable<CardModel>> Complete(Task<IEnumerable<CardModel>> task)
+        private static void Postfix(object[] __args, ref Task<IEnumerable<CardModel>> __result) => __result = Complete(__result, __args);
+        private static async Task<IEnumerable<CardModel>> Complete(Task<IEnumerable<CardModel>> task, object[] args)
         {
             var selected = (await task).ToArray();
-            if (Current.Value?.Entry.Kind == Kind.DeckChoice)
-                foreach (var card in selected.Where(card => card.Pile == null)) Selected(card);
+            if (Current.Value?.Entry.Kind is Kind.DeckChoice or Kind.Discovery)
+            {
+                var options = args.OfType<IReadOnlyList<CardModel>>().FirstOrDefault()
+                    ?? args.OfType<IReadOnlyList<CardCreationResult>>().FirstOrDefault()?.Select(result => result.Card).ToArray();
+                var context = args.OfType<MegaCrit.Sts2.Core.GameActions.Multiplayer.PlayerChoiceContext>().FirstOrDefault()
+                    ?? new MegaCrit.Sts2.Core.GameActions.Multiplayer.BlockingPlayerChoiceContext();
+                foreach (var card in selected.Where(card => card.Pile == null))
+                {
+                    Selected(card);
+                    if (options != null) await DynamicKnowledge.Prepare(context, card, options);
+                }
+            }
             return selected;
         }
     }

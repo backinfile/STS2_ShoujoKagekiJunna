@@ -67,7 +67,7 @@ public abstract partial class CatalogPower
                 case "JK67":
                     DamageModifiers.AddMany(ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card), grant.V("Bonus"));
                     break;
-                case "JH21" when Owner.Player!.PlayerCombatState!.Energy > 0: await Block(grant, grant.V("Block")); break;
+                case "JH21" when Owner.Player!.PlayerCombatState!.Energy > 0: await Block(grant.V("Block")); break;
             }
         }
     }

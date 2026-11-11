@@ -23,16 +23,12 @@ internal static class KnowledgeOfferHoverTipsPatch
 {
     private static bool Prefix(NCardHolder __instance)
     {
-        if (__instance.CardNode?.Model is not { } card || !KnowledgeCombat.HasGroup(card)) return true;
-        for (Node? parent = __instance.GetParent(); parent != null; parent = parent.GetParent())
-            if (parent is NCardLibraryGrid or NCardRewardSelectionScreen or NChooseACardSelectionScreen)
-            {
-                var preview = __instance.CardNode?.GetNodeOrNull<KnowledgeCardStack>("JunnaKnowledgeStack")?.PreviewModel ?? card;
-                NHoverTipSet.CreateAndShow(__instance, preview.HoverTips.Where(tip => tip is not CardHoverTip))
-                    ?.SetAlignmentForCardHolder(__instance);
-                return false;
-            }
-        return true;
+        if (__instance.CardNode is not { Model: { } card } node || card.Pile != null
+            || !KnowledgeCombat.HasGroup(card) || !KnowledgeCardStack.IsSupported(node)) return true;
+        var preview = node.GetNodeOrNull<KnowledgeCardStack>("JunnaKnowledgeStack")?.PreviewModel ?? card;
+        NHoverTipSet.CreateAndShow(__instance, preview.HoverTips.Where(tip => tip is not CardHoverTip))
+            ?.SetAlignmentForCardHolder(__instance);
+        return false;
     }
 }
 
@@ -126,7 +122,7 @@ public partial class KnowledgeCardStack : Control
         for (Node? parent = card.GetParent(); parent != null; parent = parent.GetParent())
         {
             if (parent is KnowledgeCardStack or KnowledgeGroupPreview) return false;
-            if (parent is NCardRewardSelectionScreen or NChooseACardSelectionScreen or NChooseABundleSelectionScreen or NMerchantCard or NCardLibraryGrid)
+            if (parent is NCardRewardSelectionScreen or NChooseACardSelectionScreen or NSimpleCardSelectScreen or NChooseABundleSelectionScreen or NMerchantCard or NCardLibraryGrid)
                 return true;
         }
         return false;

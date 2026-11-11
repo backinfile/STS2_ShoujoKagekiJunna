@@ -83,8 +83,8 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         power.Synchronize();
     }
 
-    private async Task Block(Grant grant, int amount)
-        => await CreatureCmd.GainBlock(Owner, amount, ValueProp.Move, grant.Play);
+    private async Task Block(int amount)
+        => await CreatureCmd.GainBlock(Owner, amount, ValueProp.Unpowered, null);
     private async Task AccelerateChoice(Grant grant, PlayerChoiceContext context, int count, int turns)
     {
         var cards = ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player && !a.Resolving).Select(a => a.Card).ToArray();

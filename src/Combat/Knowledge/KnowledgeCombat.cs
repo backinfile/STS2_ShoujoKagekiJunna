@@ -31,12 +31,14 @@ public static class KnowledgeCombat
 
     private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, IReadOnlySet<CardModel> allowed)
     {
+        // A dynamic group can already contain other selected roots from this same native batch.
+        var expanded = new HashSet<CardModel>();
         foreach (var result in results)
         {
             var card = result.cardAdded;
             if (result.success && result.oldPile == null) KnowledgeProgress.Acquired(card);
-            if (!allowed.Contains(card) || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card)) continue;
-            if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type))
+            if (!allowed.Contains(card) || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || !expanded.Add(card)) continue;
+            if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type, expanded))
                 await GrantPartners(card, card.Pile!.Type);
         }
     }

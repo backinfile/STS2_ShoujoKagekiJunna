@@ -139,7 +139,8 @@ public static class DynamicKnowledge
         if (others.Length > 0) Pending.AddOrUpdate(selected, others);
         return Task.CompletedTask;
     }
-    public static async Task<bool> Acquire(CardModel acquired, PileType destination)
+    public static Task<bool> Acquire(CardModel acquired, PileType destination) => Acquire(acquired, destination, null);
+    internal static async Task<bool> Acquire(CardModel acquired, PileType destination, ISet<CardModel>? expanded)
     {
         if (Offers.TryGetValue(acquired, out var reward))
         {
@@ -149,6 +150,7 @@ public static class DynamicKnowledge
         }
         if (!Pending.TryGetValue(acquired, out var partners)) return false;
         Pending.Remove(acquired);
+        expanded?.UnionWith(partners);
         Merge(acquired.Owner, partners.Prepend(acquired));
         foreach (var partner in partners)
         {

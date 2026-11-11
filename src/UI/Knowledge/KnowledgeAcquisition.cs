@@ -17,7 +17,7 @@ internal static class KnowledgeAcquisition
         yield return AccessTools.Method(typeof(NChooseACardSelectionScreen), "OpenPreviewScreen");
     }
 
-    private static bool Pending(Control screen)
+    internal static bool Pending(Control screen)
     {
         var completion = AccessTools.Field(screen.GetType(), "_completionSource").GetValue(screen);
         return completion switch
@@ -34,6 +34,17 @@ internal static class KnowledgeAcquisition
         if (card == null || card.Pile != null || !KnowledgeCombat.HasGroup(card)) return true;
         if (!Pending(__instance)) return false;
         KnowledgeGroupPreview.OpenForSelection(card);
+        return false;
+    }
+}
+
+[HarmonyPatch(typeof(NCardGridSelectionScreen), "ShowCardDetail")]
+internal static class KnowledgeGridAcquisition
+{
+    private static bool Prefix(NCardGridSelectionScreen __instance, CardModel card)
+    {
+        if (__instance is not NSimpleCardSelectScreen || card.Pile != null || !KnowledgeCombat.HasGroup(card)) return true;
+        if (KnowledgeAcquisition.Pending(__instance)) KnowledgeGroupPreview.OpenForSelection(card);
         return false;
     }
 }

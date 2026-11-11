@@ -13,6 +13,7 @@
 | 具体位置 | 堆叠 | 补发关联牌 | 状态 |
 | --- | --- | --- | --- |
 | 战斗卡牌奖励：`CardReward` 构造函数的 `CardCreationSource.Encounter` → `CardReward.OnSelect` | 是 | 是 | 已适配 |
+| 通用获取网格：`NSimpleCardSelectScreen`，候选卡牌尚未入堆 | 是 | 依具体来源白名单 | 堆叠、滚轮及右键详情已适配；已有牌堆中的卡牌保持实际单张显示 |
 | 商店售牌：`MerchantCardEntry.OnTryPurchase` → `CreationResult.Card` 入永久牌组 | 是 | 是 | 已适配，只处理本次购买的牌 |
 | 未登记来源创建的奖励：`CardReward.OnSelect` 的来源校验失败分支 | 是 | 否 | 未适配，默认不补发 |
 | 普通永久入牌：`CardPileCmd.Add(IEnumerable<CardModel>, CardPile, …)`，未命中来源登记 | 否 | 否 | 默认不补发 |
@@ -27,6 +28,7 @@
 | 熔合者 | 选项「融合打击」 | `Events.Amalgamator.CombineStrikes`，入牌调用第 51 行 | 否 | 否 | 未适配，默认不补发 |
 | 熔合者 | 选项「融合防御」 | `Events.Amalgamator.CombineDefends`，入牌调用第 65 行 | 否 | 否 | 未适配，默认不补发 |
 | 混沌芳香 | 选项「放任自流」 | `Events.AromaOfChaos.LetGo`，变化调用第 33 行 | 否 | 是 | 已适配，补发关联牌 |
+| 脑蛭 | 选项「分享知识」 | `Events.BrainLeech.ShareKnowledge` → `EventModel.SelectCardsToAddToDeckFromGrid` | 是 | 是 | 已适配，5 选 1，仅为选中的知识牌补发 |
 | 脑蛭 | 选项「把它扯下来」 | `Events.BrainLeech.Rip`，卡牌奖励调用第 57 行 | 是 | 是 | 已适配，补发关联牌 |
 | 害虫杀手 | 选项「学习压扁的技巧」 | `Events.Bugslayer.Squash`，入牌调用第 43 行 | 否 | 否 | 未适配，默认不补发 |
 | 多尼斯异鸟巢 | 选项「带走这颗蛋」 | `Events.ByrdonisNest.Take`，入牌调用第 48 行 | 否 | 否 | 未适配，默认不补发 |
@@ -87,7 +89,7 @@
 | 燃烧木棍 | 卡牌消耗后 | `Relics.BurningSticks.AfterCardExhausted`，入牌调用第 50 行 | 否 | 否 | 明确不补发，沿复制或原效果数量 |
 | 异鸟宝宝 | 获得遗物时 | `Relics.Byrdpip.AfterObtained`，变化调用第 56 行 | 否 | 是 | 已适配，补发关联牌 |
 | 召唤铃铛 | 获得遗物时 | `Relics.CallingBell.AfterObtained`，入牌调用第 29 行 | 否 | 否 | 未适配，默认不补发 |
-| 选择悖论 | 玩家回合开始后 | `Relics.ChoicesParadox.AfterPlayerTurnStart`，入牌调用第 48 行 | 否 | 否 | 未适配，默认不补发 |
+| 选择悖论 | 战斗首回合开始后 | `Relics.ChoicesParadox.AfterPlayerTurnStart`，入牌调用第 48 行 | 是 | 是 | 已适配，5 选 1，保留原生保留和满手牌处理 |
 | 利爪 | 获得遗物时 | `Relics.Claws.AfterObtained`，变化调用第 29 行 | 否 | 是 | 已适配，补发关联牌 |
 | 十字弓 | 阵营回合开始后 | `Relics.Crossbow.AfterSideTurnStart`，入牌调用第 36 行 | 否 | 否 | 未适配，默认不补发 |
 | 诅咒珍珠 | 获得遗物时 | `Relics.CursedPearl.AfterObtained`，入牌调用第 21 行 | 否 | 否 | 未适配，默认不补发 |
@@ -131,7 +133,7 @@
 | 腌制活雾 | 获得遗物时 | `Relics.PreservedFog.AfterObtained`，入牌调用第 26 行 | 否 | 否 | 未适配，默认不补发 |
 | 发光珍珠 | 抽取回合手牌前 | `Relics.RadiantPearl.BeforeHandDraw`，入牌调用第 41 行 | 否 | 否 | 未适配，默认不补发 |
 | 卷轴箱 | 获得遗物时 | `Relics.ScrollBoxes.AfterObtained`，入牌调用第 42 行 | 是 | 是 | 已适配，仅为选中的知识牌补发 |
-| 海玻璃 | 获得遗物时 | `Relics.SeaGlass.AfterObtained`，入牌调用第 91 行 | 否 | 是 | 已适配，仅为选中的知识牌补发 |
+| 海玻璃 | 获得遗物时 | `Relics.SeaGlass.AfterObtained`，入牌调用第 91 行 | 是 | 是 | 已适配，15 张候选可多选或全跳过，仅为选中的知识牌补发 |
 | 原初之爪 | 获得遗物时 | `Relics.SereTalon.AfterObtained`，入牌调用第 38 行 | 否 | 否 | 未适配，默认不补发 |
 | 华美发束 | 执行 TryModifyCardRewardOptionsLate 时 | `Relics.SilkenTress.TryModifyCardRewardOptionsLate`，复制调用第 67 行 | 否 | 否 | 明确不补发，沿复制或原效果数量 |
 | 白银熔炉 | 执行 TryModifyCardRewardOptionsLate 时 | `Relics.SilverCrucible.TryModifyCardRewardOptionsLate`，复制调用第 113 行 | 否 | 否 | 明确不补发，沿复制或原效果数量 |
@@ -276,3 +278,19 @@
 2026-11-11：主模组测试版和正式版编译通过，独立工程的 14 项定向检查全部通过，包含厚重石板选牌、星盘变化及毒素之卵升级后的兼收并蓄奖励。录像为 `out/tmp/acquisition-sources-20261111/acquisition-whitelist.mp4`。
 
 现有综合探针工程有三处旧 `CardActions.Generate` 调用尚未提供必填位置参数：`KnowledgeGroupRegressionProbe.cs:57`、`CardPoolProbe.cs:161`、`CardBranchesProbe.cs:583`。本次使用上述独立工程编译和执行定向检查。
+
+## 通用选牌网格的全部原生获取入口
+
+对正式版 0.107.1 和 Beta 0.111.0 的完整程序集 IL 调用扫描得到以下 5 个具体场景。两版均由 `FromSimpleGridForRewards` 或 `FromSimpleGrid` 创建 `NSimpleCardSelectScreen`；Beta 的两个事件先经过 `EventModel.SelectCardsToAddToDeckFromGrid`，正式版直接调用奖励网格。未发现其他原生调用方。
+
+| 场景 | 候选与选择 | 白名单具体方法 | 目标 |
+| --- | --- | --- | --- |
+| 脑蛭「分享知识」 | 5 选 1 | `Events.BrainLeech.ShareKnowledge` | 永久牌组 |
+| 满屋芝士「大快朵颐」 | 8 选 2 | `Events.RoomFullOfCheese.Gorge` | 永久牌组 |
+| 海玻璃 | 15 张候选，可多选或跳过 | `Relics.SeaGlass.AfterObtained` | 永久牌组 |
+| 选择悖论 | 战斗首回合 5 选 1 | `Relics.ChoicesParadox.AfterPlayerTurnStart` | 战斗手牌 |
+| SealedDeck 自定义模式 | 开局 30 选 10 | `Modifiers.SealedDeck.ChooseCards` | 初始牌组 |
+
+上述获取入口均按具体来源登记。选择完成后只标记实际选中对象，再由通用获取流程补发知识关联牌。兼收并蓄保留其他候选对象作为本次关系，在批量入牌中同一关系成员只展开一次。
+
+删牌使用 `NDeckCardSelectScreen`，升级、变化、附魔、战斗牌堆及手牌选择各有独立界面；不属于本表的通用获取网格。

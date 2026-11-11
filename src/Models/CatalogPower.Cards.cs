@@ -92,12 +92,12 @@ public abstract partial class CatalogPower
                     if (eligible.Length > 0) DamageModifiers.Add(play.Card.Owner.RunState.Rng.CombatCardSelection.NextItem(eligible)!, grant.V("Bonus"));
                     break;
                 case "JH23" when play.Resources.EnergyValue >= grant.V("EnergyThreshold2") && grant.Take(grant.V("EnergyThreshold")):
-                    await Block(grant, grant.V("Block")); break;
+                    await Block(grant.V("Block")); break;
                 case "JA118" when CardCatalog.IsArrow(play.Card):
-                case "JA70" when CardCatalog.IsArrow(play.Card): await Block(grant, grant.V("Block")); break;
+                case "JA70" when CardCatalog.IsArrow(play.Card): await Block(grant.V("Block")); break;
                 case "JK80" when CardCatalog.IsKnowledge(play.Card):
                     _grants.Remove(grant);
-                    await Block(grant, grant.V("Amount")); break;
+                    await Block(grant.V("Amount")); break;
                 case "JH31" when play.Resources.EnergyValue >= grant.V("EnergyThreshold"):
                     await CardActions.DrawMatching(context, play.Card.Owner, c => CardActions.HasNumericCost(c) && CardActions.Cost(c) == 0, grant.V("Amount")); break;
             }
