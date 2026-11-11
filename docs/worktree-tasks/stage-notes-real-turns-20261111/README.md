@@ -128,6 +128,14 @@
 
 遥远星辰的渴望 来更多测试视频我看看
 
+### 用户批准合并与清理
+
+合并 清理
+
+### 追加方法文档要求
+
+你记录下本次测试的思路到一个文档
+
 ## 起始状态
 
 从 main 的 `250546220f5e0c83fa9597e96627beeba0fef4f2` 建立 `codex/stage-notes-real-turns-20261111`，工作树位置为 `../worktrees/STS2_ShoujoKagekiJunna/stage-notes-real-turns-20261111`。原目录十二项既有改动保留，不纳入任务提交。
@@ -173,4 +181,5 @@
 - 故事证据保存于 `artifacts/task-deliverables/story-direct-deck-20261111/`；待审批的任务提交将更新，包含此前舞台少女心得修订和本轮故事验证。
 - 渴望追加录像已完成：七组Beta主要结算、118项通过，覆盖零费对照、多箭矢随机、完成回手、加速配合、双层、真实降费与真实跨回合。未改该牌运行实现。原片共46.8秒，带标题合辑46.87秒，保存在 `artifacts/task-deliverables/desire-arrow-videos-20261111/`。
 - 绝美的凋零问题仅做源码核对：首回合抽牌前走自动打出并布置9回合箭矢；真实开局不属于本轮七组录像。用户在合并确认项中提出问题，不视为合并或清理批准。
-- 交付目录为 `artifacts/task-deliverables/stage-notes-real-turns-20261111/`。任务变更已完成，按 $worktree-task 请求 main 合并和本次工作树、分支及临时测试环境清理；交付件保留。全部92份受控/新增文本类文档的敏感信息与本地绝对路径扫描无命中。
+- 用户已批准合并与清理，并要求记录本次测试思路。新增 `docs/implementation/card-effect-testing-method.md`，说明从牌效拆场景、证据分层、真实操作、失败基线、视觉验收及本次踩坑。功能提交ddfbc34保持不变，新增方法和批准记录以文档提交补充，不改运行代码。
+- 交付目录为 `artifacts/task-deliverables/stage-notes-real-turns-20261111/`。用户已授权合并到main并清理本次工作树、任务分支和临时测试环境；四个交付目录保留。实际整合与清理结果见各交付目录的 `integration.json`。全部93份受控/新增文本类文档的敏感信息与本地绝对路径扫描无命中。
