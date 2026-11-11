@@ -1,0 +1,270 @@
+[
+  {
+    "id": "U_CARD_011",
+    "file": "tv01-1928-detail.jpg",
+    "crop": [
+      930,
+      170,
+      800,
+      600
+    ],
+    "time": "19:30",
+    "work": "TV第1话",
+    "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232367?t=1170",
+    "focus": {
+      "x": 0.55,
+      "y": 0.5
+    },
+    "name": "撕裂黑暗",
+    "previousName": "新卡牌",
+    "assetId": "original-fit-u-card-011-20261111"
+  },
+  {
+    "id": "U_CARD_012",
+    "reuse": "original-scene-jk84b-argument-bow-20261106",
+    "from": "JK84B",
+    "focus": {
+      "x": 0.64,
+      "y": 0.3
+    },
+    "name": "追逐着你而去",
+    "previousName": "新卡牌",
+    "assetId": "original-scene-jk84b-argument-bow-20261106",
+    "previousArtNaming": {
+      "original": "",
+      "kind": "常用论辩行为名称",
+      "work": "2021剧场版·狩猎的Revue片段约01:50",
+      "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=110",
+      "adaptation": "纯那面向对手开口回应，同时张弓瞄准，把理解过的内容作为主动交锋的言叶。与预习构成准备和运用的知识关系，伤害体现出手，全体箭矢加速体现表达继续向前抵达。原始截图film-hunt-148.jpg，裁切650,90,800,600。",
+      "chineseOriginal": ""
+    }
+  },
+  {
+    "id": "JK67",
+    "file": "tv02-1112-study.jpg",
+    "crop": [
+      650,
+      80,
+      950,
+      712
+    ],
+    "time": "11:14",
+    "work": "TV第2话",
+    "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=674",
+    "name": "努力下去",
+    "previousName": "反复推敲",
+    "assetId": "original-fit-jk67-20261111"
+  },
+  {
+    "id": "JK67B",
+    "reuse": "original-scene-jx01-20261102",
+    "from": "JA96",
+    "focus": {
+      "x": 0.455,
+      "y": 0.32
+    },
+    "name": "不丢掉目标",
+    "previousName": "字字千钧",
+    "assetId": "original-scene-jx01-20261102",
+    "previousArtNaming": {
+      "original": "",
+      "kind": "常用姿态名称",
+      "work": "TV第2话约18:42·烟尘中的持弓迎战",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1122",
+      "adaptation": "纯那在冲击扬起的烟尘中仍握紧弓身、面向对手。受到攻击伤害后的应对推动已准备的箭矢，更早取得下一次行动。沿用已登记原作素材original-scene-jx01-20261102。",
+      "chineseOriginal": ""
+    }
+  },
+  {
+    "id": "JG27",
+    "reuse": "original-scene-jg27-20261102",
+    "keep": true,
+    "name": "挺直脊背",
+    "previousName": "腹肌训练",
+    "assetId": "original-scene-jg27-20261102",
+    "previousArtNaming": {
+      "original": "（对应译名）腹筋の稽古",
+      "work": "TV 第2话 · 约06:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=375",
+      "adaptation": "伤害加成统一契合日常锻炼与基本功练习。卡名按训练项目或训练过程拟定，日文为对应译名。通过日常腹肌训练积累身体力量，直接为选中的一张牌增加伤害加成。 卡图：日常练习或准备场景裁切，原始截图tv02-615-short.jpg。",
+      "kind": "日常训练题材拟名"
+    }
+  },
+  {
+    "id": "JA96",
+    "file": "film-hunt-614-unique.jpg",
+    "crop": [
+      730,
+      150,
+      800,
+      600
+    ],
+    "time": "06:16",
+    "work": "2021剧场版·狩猎的Revue片段",
+    "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=376",
+    "name": "绝不停步",
+    "previousName": "稳住阵脚",
+    "assetId": "original-fit-ja96-20261111"
+  },
+  {
+    "id": "JK84",
+    "file": "film-knife-class-strike-1011-20261104.png",
+    "crop": [
+      600,
+      100,
+      800,
+      600
+    ],
+    "time": "10:11",
+    "work": "2021剧场版·纯那进路面谈",
+    "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=611",
+    "name": "先学会站起来",
+    "previousName": "预习",
+    "assetId": "original-fit-jk84-20261111"
+  },
+  {
+    "id": "JK84B",
+    "file": "tv02-1924-new.jpg",
+    "crop": [
+      550,
+      70,
+      900,
+      675
+    ],
+    "time": "19:26",
+    "work": "TV第2话",
+    "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1166",
+    "name": "翱翔在天际",
+    "previousName": "论辩",
+    "assetId": "original-fit-jk84b-20261111"
+  },
+  {
+    "id": "JK126",
+    "file": "tv09-2202-new.jpg",
+    "crop": [
+      450,
+      60,
+      980,
+      735
+    ],
+    "time": "22:03",
+    "work": "TV第9话",
+    "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1323",
+    "name": "全都一起带去",
+    "previousName": "兼收并蓄",
+    "assetId": "original-fit-jk126-20261111"
+  },
+  {
+    "id": "JK131",
+    "file": "tv09-2000-proof.jpg",
+    "crop": [
+      490,
+      30,
+      1000,
+      750
+    ],
+    "time": "20:01",
+    "work": "TV第9话",
+    "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1201",
+    "name": "永远都不嫌晚",
+    "previousName": "引言",
+    "assetId": "original-fit-jk131-20261111"
+  },
+  {
+    "id": "JS33",
+    "file": "tv09-2210-new.jpg",
+    "crop": [
+      320,
+      70,
+      1000,
+      750
+    ],
+    "time": "22:11",
+    "work": "TV第9话",
+    "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1331",
+    "name": "道标",
+    "previousName": "整备",
+    "assetId": "original-fit-js33-20261111"
+  },
+  {
+    "id": "JK200",
+    "file": "film-hunt-608.jpg",
+    "crop": [
+      720,
+      140,
+      800,
+      600
+    ],
+    "time": "06:09",
+    "work": "2021剧场版·狩猎的Revue片段",
+    "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=369",
+    "name": "你一直在看什么",
+    "previousName": "质疑",
+    "assetId": "original-fit-jk200-20261111"
+  },
+  {
+    "id": "JK82",
+    "reuse": "original-scene-jk67-knowledge-fit-20261103",
+    "from": "JK67",
+    "name": "学无止境",
+    "previousName": "学无止境",
+    "assetId": "original-scene-jk67-knowledge-fit-20261103",
+    "previousArtNaming": {
+      "original": "",
+      "work": "2021 剧场版 · 全片约09:02",
+      "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+      "adaptation": "通过写作练习反复推敲表达，使言叶与箭矢逐渐有力；关联的字字千钧呈现推敲后的进攻成果。",
+      "kind": "学习过程与知识载体",
+      "chineseOriginal": ""
+    }
+  },
+  {
+    "id": "JK82B",
+    "reuse": "original-scene-jk44-knowledge-fit-20261103",
+    "from": "JK126",
+    "name": "新知",
+    "previousName": "新知",
+    "assetId": "original-scene-jk44-knowledge-fit-20261103",
+    "previousArtNaming": {
+      "original": "",
+      "kind": "常用概念、动作或物件名",
+      "work": "TV 第2话 · 约00:05",
+      "url": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+      "adaptation": "把不同书籍和资料一并纳入学习。取得时接纳同次选择中的其他候选，战斗中抽取关联内容，使多种知识形成自己的资料体系。 配图沿用原作素材 original-scene-jk44-knowledge-fit-20261103。"
+    }
+  },
+  {
+    "id": "JA22",
+    "name": "上弦",
+    "previousName": "上弦",
+    "assetId": "original-fit-ja22-20261111",
+    "file": "tv02-stage-ready-clean-20261111.png",
+    "crop": [
+      550,
+      480,
+      800,
+      600
+    ],
+    "time": "备战段",
+    "work": "TV第2话",
+    "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368",
+    "imageUrl": "https://xenodude.com/wp-content/uploads/2024/06/revue-starlight-ep.-2-21.png",
+    "sourcePage": "https://xenodude.com/2024/06/19/revue-starlight-ep-2/"
+  },
+  {
+    "id": "U_CARD_013",
+    "name": "牢笼",
+    "previousName": "（新增）",
+    "assetId": "original-fit-u-card-013-cage-20261111",
+    "file": "film-hunt-144.jpg",
+    "crop": [
+      500,
+      100,
+      840,
+      630
+    ],
+    "time": "01:46",
+    "work": "2021剧场版·狩猎的Revue片段",
+    "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=106"
+  }
+]

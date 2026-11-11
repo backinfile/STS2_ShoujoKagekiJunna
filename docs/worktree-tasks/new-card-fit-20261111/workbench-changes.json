@@ -1,0 +1,1056 @@
+{
+  "revision": 4985,
+  "requestId": "cc557e82-6cad-4191-92ba-07ce5179e326",
+  "clientId": "codex-new-card-fit-20261111",
+  "changes": [
+    {
+      "collection": "cards",
+      "uid": "fb3c1a0b-b5d9-4c2f-a0f3-11888ecc497e",
+      "expectedVersion": "12:09ed1ccaad02225c88847bbd5095be74fd620489149c18ea73ac21a0e747e025",
+      "updates": {
+        "name": "撕裂黑暗",
+        "naming": {
+          "original": "闇を裂き",
+          "work": "《世界を灰にするまで》",
+          "url": "https://www.uta-net.com/song/254335/",
+          "kind": "原作连续原词的忠实中文翻译",
+          "adaptation": "取原曲中撕裂黑暗的用词。多支箭矢从舞台上方连续落向场地，以覆盖范围表现等待后对所有敌人的伤害。",
+          "artWork": "TV第1话约19:30",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232367?t=1170",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv01-1928-detail.jpg；裁切 930,170,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/U_CARD_011.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "撕裂黑暗",
+          "chineseOriginal": ""
+        },
+        "art": "original-fit-u-card-011-20261111",
+        "arrowFocus": {
+          "x": 0.55,
+          "y": 0.5
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_new_card_20261111_U_CARD_011",
+      "expectedVersion": "0:missing",
+      "created": {
+        "uid": "fit_new_card_20261111_U_CARD_011",
+        "id": "FIT_CARD_U_CARD_011",
+        "name": "撕裂黑暗",
+        "theme": "箭矢的覆盖与抵达",
+        "text": "取原曲中撕裂黑暗的用词。多支箭矢从舞台上方连续落向场地，以覆盖范围表现等待后对所有敌人的伤害。",
+        "original": "闇を裂き",
+        "source": "《世界を灰にするまで》",
+        "sourceUrl": "https://www.uta-net.com/song/254335/",
+        "art": "original-fit-u-card-011-20261111",
+        "cardIds": [
+          "U_CARD_011"
+        ],
+        "notes": "docs/design/assets/card-sources/2026-11-02/tv01-1928-detail.jpg；裁切 930,170,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/U_CARD_011.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "b7fb3b0b-ab09-43f0-a607-92a18e216b45",
+      "expectedVersion": "29:73e2412cf5fe7b1484d475781c4255cc0a08406fb06d68ceda71ee3ac3b37229",
+      "updates": {
+        "name": "追逐着你而去",
+        "naming": {
+          "original": "追いかけて行くわ",
+          "chineseOriginal": "追逐着你而去",
+          "work": "TV第1话插曲《世界を灰にするまで》",
+          "url": "https://www.uta-net.com/song/254335/",
+          "kind": "已核对中文字幕中的连续原词",
+          "adaptation": "歌词中的流星之箭追向目标。本牌随另一张箭矢打出而从所在位置接续出发，以纯那正面张弓的主动出手承接追逐与随后抵达。复用本批论辩换图后释放的原作素材，按新牌效果重新登记。",
+          "artWork": "2021剧场版·狩猎的Revue片段约01:50",
+          "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=110",
+          "artProof": "已登记原作资产 original-scene-jk84b-argument-bow-20261106，由本批换图的 JK84B 转用",
+          "artProcessing": "复用已登记的原作裁图。",
+          "translation": "追逐着你而去"
+        },
+        "art": "original-scene-jk84b-argument-bow-20261106",
+        "arrowFocus": {
+          "x": 0.64,
+          "y": 0.3
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_new_card_20261111_U_CARD_012",
+      "expectedVersion": "0:missing",
+      "created": {
+        "uid": "fit_new_card_20261111_U_CARD_012",
+        "id": "FIT_CARD_U_CARD_012",
+        "name": "追逐着你而去",
+        "theme": "接续出发与追逐",
+        "text": "歌词中的流星之箭追向目标。本牌随另一张箭矢打出而从所在位置接续出发，以纯那正面张弓的主动出手承接追逐与随后抵达。复用本批论辩换图后释放的原作素材，按新牌效果重新登记。",
+        "original": "追いかけて行くわ",
+        "source": "TV第1话插曲《世界を灰にするまで》",
+        "sourceUrl": "https://www.uta-net.com/song/254335/",
+        "art": "original-scene-jk84b-argument-bow-20261106",
+        "cardIds": [
+          "U_CARD_012"
+        ],
+        "notes": "已登记原作资产 original-scene-jk84b-argument-bow-20261106，由本批换图的 JK84B 转用"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "complete_pool_JK67",
+      "expectedVersion": "24:7208901fc632f21c7fe4cd3f875676cd675ae66ea12a784e449ebb6dae106018",
+      "updates": {
+        "name": "努力下去",
+        "art": "original-fit-jk67-20261111",
+        "naming": {
+          "original": "",
+          "work": "2021剧场版·狩猎的Revue中纯那引用的努力与目标之语，片段约02:05",
+          "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=125",
+          "adaptation": "与不丢掉目标取自纯那在原作中引用的同一句话，以持续努力与坚持目标组成知识关系。每个回合继续积累，让已经准备的箭矢逐渐有力；配图取纯那强调自己认真对待舞台的表达近景。",
+          "kind": "已核对中文字幕中的连续原词",
+          "chineseOriginal": "努力下去",
+          "artWork": "TV第2话约11:14",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=674",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv02-1112-study.jpg；裁切 650,80,950,712；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK67.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "努力下去"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JK67",
+      "expectedVersion": "4:f4fcb75be4ec411e30d76185b52cafd11aeb1178289f421b21c212211094b08c",
+      "updates": {
+        "name": "努力下去",
+        "theme": "持续努力与坚持目标",
+        "text": "与不丢掉目标取自纯那在原作中引用的同一句话，以持续努力与坚持目标组成知识关系。每个回合继续积累，让已经准备的箭矢逐渐有力；配图取纯那强调自己认真对待舞台的表达近景。",
+        "source": "2021剧场版·狩猎的Revue中纯那引用的努力与目标之语，片段约02:05",
+        "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=125",
+        "art": "original-fit-jk67-20261111",
+        "notes": "TV第2话约11:14。docs/design/assets/card-sources/2026-11-02/tv02-1112-study.jpg；裁切 650,80,950,712；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK67.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "complete_pool_JK67B",
+      "expectedVersion": "20:dae459c46e17faedc576d6f98b0b77ad5d076ecfc7e758610faee3ef6c89f6d9",
+      "updates": {
+        "name": "不丢掉目标",
+        "art": "original-scene-jx01-20261102",
+        "naming": {
+          "original": "",
+          "work": "2021剧场版·狩猎的Revue中纯那引用的努力与目标之语，片段约02:05",
+          "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=125",
+          "adaptation": "与努力下去出自同一句原作引语。持续瞄准同一个目标，准备后连续命中三次；与主牌逐回合积累的伤害加成形成练习与兑现的关系。配图保留烟尘中纯那握弓、面向对手的姿态，复用本批稳住阵脚释放的原作素材。",
+          "kind": "已核对中文字幕中的连续原词",
+          "chineseOriginal": "不丢掉目标",
+          "artWork": "TV第2话约18:42·烟尘中的持弓迎战",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1122",
+          "artProof": "已登记原作资产 original-scene-jx01-20261102，由本批换图的 JA96 转用",
+          "artProcessing": "复用已登记的原作裁图。",
+          "translation": "不丢掉目标"
+        },
+        "arrowFocus": {
+          "x": 0.455,
+          "y": 0.32
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JK67B",
+      "expectedVersion": "2:976f0a969f44ebd9783a03d834fc0024e6a2e281bfa639d5e966b9c0d022e78d",
+      "updates": {
+        "name": "不丢掉目标",
+        "theme": "持续努力与坚持目标",
+        "text": "与努力下去出自同一句原作引语。持续瞄准同一个目标，准备后连续命中三次；与主牌逐回合积累的伤害加成形成练习与兑现的关系。配图保留烟尘中纯那握弓、面向对手的姿态，复用本批稳住阵脚释放的原作素材。",
+        "source": "2021剧场版·狩猎的Revue中纯那引用的努力与目标之语，片段约02:05",
+        "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=125",
+        "art": "original-scene-jx01-20261102",
+        "notes": "TV第2话约18:42·烟尘中的持弓迎战。已登记原作资产 original-scene-jx01-20261102，由本批换图的 JA96 转用"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "complete_pool_JG27",
+      "expectedVersion": "20:e23b4e4a5a2910b40592106081254689bb069cde7b8d830a0b679159149b47ce",
+      "updates": {
+        "name": "挺直脊背",
+        "naming": {
+          "original": "背筋を伸ばして",
+          "work": "《舞台少女心得》",
+          "url": "https://www.uta-net.com/song/236408/",
+          "adaptation": "取《舞台少女心得》中挺直脊背的原词，以日常身体训练和基本功承接伤害加成。保留体能课上纯那做核心力量训练的原卡图，训练成果用于强化所选手牌。",
+          "kind": "原作连续原词的忠实中文翻译",
+          "artWork": "TV 第2话 · 约06:15",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=375",
+          "artProof": "已登记原作资产 original-scene-jg27-20261102",
+          "artProcessing": "复用已登记的原作裁图。",
+          "translation": "挺直脊背",
+          "chineseOriginal": ""
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JG27",
+      "expectedVersion": "0:de0fce68346e9ca4a8888f033147c154f8bd913c68056f6303f2fa1f41285a87",
+      "updates": {
+        "name": "挺直脊背",
+        "theme": "日常训练与基本功",
+        "text": "取《舞台少女心得》中挺直脊背的原词，以日常身体训练和基本功承接伤害加成。保留体能课上纯那做核心力量训练的原卡图，训练成果用于强化所选手牌。",
+        "original": "背筋を伸ばして",
+        "source": "《舞台少女心得》",
+        "sourceUrl": "https://www.uta-net.com/song/236408/",
+        "notes": "TV 第2话 · 约06:15。已登记原作资产 original-scene-jg27-20261102"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-arrow-five-turn-exploration-20261105_JA96",
+      "expectedVersion": "21:5d6911a4d4737688557a61216630f56d5d38456e49fa3458b18d96ae509efd5f",
+      "updates": {
+        "name": "绝不停步",
+        "art": "original-fit-ja96-20261111",
+        "naming": {
+          "original": "歩みを止めない",
+          "kind": "原作连续原词的忠实中文翻译",
+          "work": "《ペン：力：刀》纯那声部",
+          "url": "https://www.uta-net.com/song/305229/",
+          "adaptation": "取原曲中继续前进的用词。纯那受击、眼镜落下后仍继续面对舞台；受到攻击伤害成为推进反击的时点，敌向箭矢更快抵达。配图使用受击后飞落的眼镜，直接保留这次冲击的结果。",
+          "chineseOriginal": "",
+          "artWork": "2021剧场版·狩猎的Revue片段约06:16",
+          "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=376",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/film-hunt-614-unique.jpg；裁切 730,150,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JA96.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "绝不停步"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_x_cost_exploration_JA60",
+      "expectedVersion": "4:819bb767873d685315a401376a49dd02a8b6414cb4a199565f973b25fe690901",
+      "updates": {
+        "name": "绝不停步",
+        "theme": "受击后的继续前进",
+        "text": "取原曲中继续前进的用词。纯那受击、眼镜落下后仍继续面对舞台；受到攻击伤害成为推进反击的时点，敌向箭矢更快抵达。配图使用受击后飞落的眼镜，直接保留这次冲击的结果。",
+        "original": "歩みを止めない",
+        "art": "original-fit-ja96-20261111",
+        "source": "《ペン：力：刀》纯那声部",
+        "sourceUrl": "https://www.uta-net.com/song/305229/",
+        "notes": "2021剧场版·狩猎的Revue片段约06:16。docs/design/assets/card-sources/2026-11-02/film-hunt-614-unique.jpg；裁切 730,150,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JA96.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-arrow-five-turn-exploration-20261105_JK84",
+      "expectedVersion": "45:7bf2035b63d9b535d3cec5db18aeaf47150bd35e9a7314977859551c2773ded6",
+      "updates": {
+        "name": "先学会站起来",
+        "art": "original-fit-jk84-20261111",
+        "naming": {
+          "original": "",
+          "kind": "已核对中文字幕中的连续原词",
+          "work": "2021剧场版·狩猎的Revue纯那引用尼采，片段约02:18；《查拉图斯特拉如是说》第三部〈重力之精神〉",
+          "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=138",
+          "adaptation": "与翱翔在天际取自纯那引用的同一句话，形成先学会基本动作、再将所学用于行动的知识关系。把手牌先准备为等待中的箭矢，承担学习与准备的一端；配图为纯那在进路面谈中引用文学、回答提问的原作画面。",
+          "chineseOriginal": "先学会站起来",
+          "knowledgeSource": "https://www.gutenberg.org/files/1998/1998-h/1998-h.htm#link2H_4_0061",
+          "artWork": "2021剧场版·纯那进路面谈约10:11",
+          "artSourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=611",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/film-knife-class-strike-1011-20261104.png；裁切 600,100,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK84.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "先学会站起来"
+        },
+        "extraHoverTips": [
+          {
+            "id": "junna_knowledge_background",
+            "title": "知识背景",
+            "description": "尼采《查拉图斯特拉如是说》第三部〈重力之精神〉：飞翔之前，先学习站立、行走、奔跑、攀登和舞蹈。纯那在狩猎的Revue中引用这段话。"
+          }
+        ]
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-second-ancient-candidates-20261104_FIT_JZ09",
+      "expectedVersion": "3:be464566de80de60ef2619e2a456422387f6838ac61a33a6e97acc07c47a49db",
+      "updates": {
+        "name": "先学会站起来",
+        "theme": "从学习准备到实际运用",
+        "text": "与翱翔在天际取自纯那引用的同一句话，形成先学会基本动作、再将所学用于行动的知识关系。把手牌先准备为等待中的箭矢，承担学习与准备的一端；配图为纯那在进路面谈中引用文学、回答提问的原作画面。",
+        "source": "2021剧场版·狩猎的Revue纯那引用尼采，片段约02:18；《查拉图斯特拉如是说》第三部〈重力之精神〉",
+        "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=138",
+        "art": "original-fit-jk84-20261111",
+        "notes": "2021剧场版·纯那进路面谈约10:11。docs/design/assets/card-sources/2026-11-02/film-knife-class-strike-1011-20261104.png；裁切 600,100,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK84.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-arrow-five-turn-exploration-20261105_JK84B",
+      "expectedVersion": "13:bc0ec3a4e86b66ec1a71a81e8ff169fe5d0ebd27d0e4d0ab787ee675d0e7a0d0",
+      "updates": {
+        "name": "翱翔在天际",
+        "art": "original-fit-jk84b-20261111",
+        "naming": {
+          "original": "",
+          "kind": "已核对中文字幕中的连续原词",
+          "work": "2021剧场版·狩猎的Revue纯那引用尼采，片段约02:18；《查拉图斯特拉如是说》第三部〈重力之精神〉",
+          "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=138",
+          "adaptation": "与先学会站起来承接同一句尼采引语。把学到的内容落实为主动出手，并推进已经准备的箭矢，让它们更快抵达；配图取纯那正面扣弦、对准目标的射击动作。",
+          "chineseOriginal": "翱翔在天际",
+          "knowledgeSource": "https://www.gutenberg.org/files/1998/1998-h/1998-h.htm#link2H_4_0061",
+          "artWork": "TV第2话约19:26",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1166",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv02-1924-new.jpg；裁切 550,70,900,675；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK84B.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "翱翔在天际"
+        },
+        "extraHoverTips": [
+          {
+            "id": "junna_knowledge_background",
+            "title": "知识背景",
+            "description": "尼采《查拉图斯特拉如是说》第三部〈重力之精神〉：飞翔之前，先学习站立、行走、奔跑、攀登和舞蹈。纯那在狩猎的Revue中引用这段话。"
+          }
+        ]
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_arrow_exploration_20261106_JK84B",
+      "expectedVersion": "1:82e1501a92b09790a256346365599887a50a1626f2f1397526f7db7e31209b18",
+      "updates": {
+        "name": "翱翔在天际",
+        "theme": "从学习准备到实际运用",
+        "text": "与先学会站起来承接同一句尼采引语。把学到的内容落实为主动出手，并推进已经准备的箭矢，让它们更快抵达；配图取纯那正面扣弦、对准目标的射击动作。",
+        "source": "2021剧场版·狩猎的Revue纯那引用尼采，片段约02:18；《查拉图斯特拉如是说》第三部〈重力之精神〉",
+        "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=138",
+        "art": "original-fit-jk84b-20261111",
+        "notes": "TV第2话约19:26。docs/design/assets/card-sources/2026-11-02/tv02-1924-new.jpg；裁切 550,70,900,675；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK84B.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-reward-revision-20261106_JK126",
+      "expectedVersion": "79:f82e79cc242b286ca4551cb4dff414fc9b14dad07ba9e0d53c11079e86456e15",
+      "updates": {
+        "name": "全都一起带去",
+        "art": "original-fit-jk126-20261111",
+        "direction": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+        "naming": {
+          "original": "全部持って行ってあげて",
+          "kind": "已核对原作台词的中文用词",
+          "work": "TV第9话纯那劝奈奈带着全部经历走向下一次舞台的台词，约22:25",
+          "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1345",
+          "adaptation": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+          "chineseOriginal": "全都一起带去",
+          "artWork": "TV第9话约22:03",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1323",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv09-2202-new.jpg；裁切 450,60,980,735；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK126.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "全都一起带去"
+        },
+        "design": {
+          "classification": "知识获取与整局牌组变化",
+          "roleReason": "知识兼具",
+          "rules": "在卡牌奖励页面选择全都一起带去时，同时获得该页面其余全部卡牌，并将这些卡牌及其数量记录到全都一起带去的关联牌列表中。本局所有同名全都一起带去共享这一份列表，奖励页面的获取结果记录到该共享列表中，并随存档保存。关联为单向关系，被获取的卡牌保留各自的关键词、知识属性、关联牌列表及关联提示。关联牌提示首行始终以金色加粗显示“同一奖励页面的其他卡牌”，后续行补充实际追加的卡牌名称。单独获得本牌时沿用本牌自身效果。",
+          "balance": "纸面初值。基础与升级费用保持一致。",
+          "dynamicKnowledge": {
+            "mode": "otherCardsInSameRewardPage",
+            "count": "all",
+            "scope": "本局所有同名全都一起带去",
+            "storage": "runCardName",
+            "direction": "oneWay",
+            "preserveSourceGroups": true,
+            "display": "同一奖励页面的其他卡牌"
+          },
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "both",
+              "cross": false,
+              "ports": [
+                "defense",
+                "operation"
+              ]
+            }
+          },
+          "systemRoles": {
+            "partner": {
+              "role": "兼具",
+              "port": "防御／运转"
+            }
+          },
+          "systems": [
+            "partner"
+          ],
+          "route": "知识",
+          "triggerRole": "兼具",
+          "port": "防御／运转",
+          "breakthrough": true
+        },
+        "notes": "在卡牌奖励页面选择全都一起带去时，同时获得该页面其余全部卡牌，并将这些卡牌及其数量记录到全都一起带去的关联牌列表中。本局所有同名全都一起带去共享这一份列表，奖励页面的获取结果记录到该共享列表中，并随存档保存。关联为单向关系，被获取的卡牌保留各自的关键词、知识属性、关联牌列表及关联提示。关联牌提示首行始终以金色加粗显示“同一奖励页面的其他卡牌”，后续行补充实际追加的卡牌名称。单独获得本牌时沿用本牌自身效果。"
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-bookmark-knowledge-and-practice-arrow-20261103_FIT_JK81B",
+      "expectedVersion": "2:ef901b4d8d75032e2ef583813ed9e24795cfc7b259c4eee3b39972b7c7cdf225",
+      "updates": {
+        "name": "全都一起带去",
+        "theme": "接纳全部经历",
+        "text": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+        "original": "全部持って行ってあげて",
+        "source": "TV第9话纯那劝奈奈带着全部经历走向下一次舞台的台词，约22:25",
+        "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1345",
+        "art": "original-fit-jk126-20261111",
+        "notes": "TV第9话约22:03。docs/design/assets/card-sources/2026-11-02/tv09-2202-new.jpg；裁切 450,60,980,735；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK126.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-arrow-exploration-20261106_JK131",
+      "expectedVersion": "21:3160a822ebb0a0d9434b6b681d7649f969199f83e8ab592aa1514b4ec033f0c9",
+      "updates": {
+        "name": "永远都不嫌晚",
+        "art": "original-fit-jk131-20261111",
+        "direction": "引用的话给予鼓励，强化后续所有牌的表达。",
+        "naming": {
+          "original": "",
+          "kind": "已核对中文字幕中的连续原词",
+          "work": "TV第9话纯那引用并向奈奈转述的话，约19:45",
+          "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1185",
+          "adaptation": "原作中纯那借引用的话鼓励奈奈继续成为想成为的自己。把理解化作给予同伴的鼓励，对应所有牌的伤害加成；限次使用后，关联的檄文继续把言叶用于进攻。配图取两人谈论后续舞台时的交流，保留纯那开口表达与奈奈手中的记录本。",
+          "chineseOriginal": "永远都不嫌晚",
+          "artWork": "TV第9话约20:01",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1201",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv09-2000-proof.jpg；裁切 490,30,1000,750；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK131.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "永远都不嫌晚"
+        },
+        "design": {
+          "classification": "常驻主牌附带限次抽牌",
+          "roleReason": "知识触发",
+          "rules": "常规奖励入口为檄文，一次取得本组时同时获得1张永远都不嫌晚。永远都不嫌晚为0费技能，正常执行抽牌后进入弃牌堆，每张实际牌单独保存闪耀9的余量。真实耗尽后永久移除永远都不嫌晚，檄文继续保留。",
+          "balance": "纸面初值。升级保持费用、等待和闪耀上限，按具体牌效提高数值。",
+          "shineMax": 9,
+          "upgradedShineMax": 9,
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "operation"
+              ]
+            }
+          },
+          "systemRoles": {
+            "partner": {
+              "role": "触发",
+              "port": "运转"
+            }
+          },
+          "systems": [
+            "partner"
+          ],
+          "route": "知识",
+          "triggerRole": "触发",
+          "port": "运转",
+          "upgrade": "抽牌3提高至4，闪耀上限保持9。"
+        },
+        "notes": "常规奖励入口为檄文，一次取得本组时同时获得1张永远都不嫌晚。永远都不嫌晚为0费技能，正常执行抽牌后进入弃牌堆，每张实际牌单独保存闪耀9的余量。真实耗尽后永久移除永远都不嫌晚，檄文继续保留。"
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_fabled_knowledge_JK37C",
+      "expectedVersion": "5:faafea0fe955b52249bd118bed4d621595b50c7192516166b669234ebecf56e0",
+      "updates": {
+        "name": "永远都不嫌晚",
+        "theme": "引用与鼓励",
+        "text": "原作中纯那借引用的话鼓励奈奈继续成为想成为的自己。把理解化作给予同伴的鼓励，对应所有牌的伤害加成；限次使用后，关联的檄文继续把言叶用于进攻。配图取两人谈论后续舞台时的交流，保留纯那开口表达与奈奈手中的记录本。",
+        "source": "TV第9话纯那引用并向奈奈转述的话，约19:45",
+        "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1185",
+        "art": "original-fit-jk131-20261111",
+        "notes": "TV第9话约20:01。docs/design/assets/card-sources/2026-11-02/tv09-2000-proof.jpg；裁切 490,30,1000,750；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK131.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna_stability_shine_20261108_JS33",
+      "expectedVersion": "16:2c612f12865b1e1cd5ffdccdb4aea1c0728cf2cddfccae062d25024fdcc5975e",
+      "updates": {
+        "name": "道标",
+        "art": "original-fit-js33-20261111",
+        "naming": {
+          "original": "道標",
+          "kind": "原作连续用词的忠实中文翻译",
+          "work": "《ペン：力：刀》纯那声部",
+          "url": "https://www.uta-net.com/song/305229/",
+          "adaptation": "取原曲中星星作为道标、指向舞台的用词。根据当前需要寻找箭矢或知识，表现沿指引取得接下来的行动；配图用纯那与奈奈交谈段落中的水面星光，让指引成为清楚可见的对象。",
+          "chineseOriginal": "",
+          "artWork": "TV第9话约22:11",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1331",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv09-2210-new.jpg；裁切 320,70,1000,750；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JS33.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "道标"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_junna_stability_shine_20261108_JS33",
+      "expectedVersion": "2:b2d173da95ca4d023e19b9d8bc13d952396f024cfd1bc36558ef692726c0aeed",
+      "updates": {
+        "name": "道标",
+        "theme": "星光的指引",
+        "text": "取原曲中星星作为道标、指向舞台的用词。根据当前需要寻找箭矢或知识，表现沿指引取得接下来的行动；配图用纯那与奈奈交谈段落中的水面星光，让指引成为清楚可见的对象。",
+        "original": "道標",
+        "source": "《ペン：力：刀》纯那声部",
+        "sourceUrl": "https://www.uta-net.com/song/305229/",
+        "art": "original-fit-js33-20261111",
+        "notes": "TV第9话约22:11。docs/design/assets/card-sources/2026-11-02/tv09-2210-new.jpg；裁切 320,70,1000,750；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JS33.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200",
+      "expectedVersion": "10:da53c941a6ca3ed71aa358475d2f7537b4cc88c5dda826dba1ab8a92a80a27b1",
+      "updates": {
+        "name": "你一直在看什么",
+        "art": "original-fit-jk200-20261111",
+        "naming": {
+          "original": "あなた今まで何 見てたの？",
+          "kind": "原作完整问句的忠实中文翻译",
+          "work": "《ペン：力：刀》纯那声部",
+          "url": "https://www.uta-net.com/song/305229/",
+          "adaptation": "取纯那主动追问对方究竟看见了什么的原曲问句。以连续的群体伤害表现面向多种判断的有力质问；关联的疑问将问题记录下来、整理后续回应，形成提问与追索的知识关系。配图取纯那在交锋中主动挥刀的原作动作。",
+          "chineseOriginal": "",
+          "artWork": "2021剧场版·狩猎的Revue片段约06:09",
+          "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=369",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/film-hunt-608.jpg；裁切 720,140,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK200.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "你一直在看什么"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_current_audit_20261108_JK200",
+      "expectedVersion": "1:c282ca7da8ae31d86293cb5a36a43760b04c2ba926254edb310a69e7f2215278",
+      "updates": {
+        "name": "你一直在看什么",
+        "theme": "发问与追索",
+        "text": "取纯那主动追问对方究竟看见了什么的原曲问句。以连续的群体伤害表现面向多种判断的有力质问；关联的疑问将问题记录下来、整理后续回应，形成提问与追索的知识关系。配图取纯那在交锋中主动挥刀的原作动作。",
+        "original": "あなた今まで何 見てたの？",
+        "source": "《ペン：力：刀》纯那声部",
+        "sourceUrl": "https://www.uta-net.com/song/305229/",
+        "art": "original-fit-jk200-20261111",
+        "notes": "2021剧场版·狩猎的Revue片段约06:09。docs/design/assets/card-sources/2026-11-02/film-hunt-608.jpg；裁切 720,140,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK200.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-infinite-upgrade-knowledge-20261104_JK82",
+      "expectedVersion": "53:ef89e6fd41fc1f3ed4da791c3f64b08864cfe429752eee0f711d88bc0badb823",
+      "updates": {
+        "art": "original-scene-jk67-knowledge-fit-20261103",
+        "naming": {
+          "original": "",
+          "kind": "常用学习概念",
+          "work": "2021 剧场版 · 全片约09:02",
+          "url": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+          "adaptation": "持续写作、阅读并整理书面材料，表现学习可以不断积累。与新知构成持续学习及取得新内容的关系；主牌使用书本、笔具与反复写作留下的纸团细节，复用本批反复推敲释放的原作素材。",
+          "chineseOriginal": "",
+          "artWork": "2021 剧场版 · 全片约09:02",
+          "artSourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+          "artProof": "已登记原作资产 original-scene-jk67-knowledge-fit-20261103，由本批换图的 JK67 转用",
+          "artProcessing": "复用已登记的原作裁图。"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-infinite-upgrade-knowledge-20261104_FIT_JK82",
+      "expectedVersion": "3:f756de88fb6ab32caa78f4994154363f92b6ff58106bf79d0b7c804b916dfdb8",
+      "updates": {
+        "theme": "持续学习与新知",
+        "text": "持续写作、阅读并整理书面材料，表现学习可以不断积累。与新知构成持续学习及取得新内容的关系；主牌使用书本、笔具与反复写作留下的纸团细节，复用本批反复推敲释放的原作素材。",
+        "source": "2021 剧场版 · 全片约09:02",
+        "sourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=542",
+        "art": "original-scene-jk67-knowledge-fit-20261103",
+        "notes": "2021 剧场版 · 全片约09:02。已登记原作资产 original-scene-jk67-knowledge-fit-20261103，由本批换图的 JK67 转用"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-infinite-upgrade-knowledge-20261104_JK82B",
+      "expectedVersion": "37:c6c23d04fc3c053c5e200a72a4465689326a6c911b12b9587ae0c3e2b843cd0f",
+      "updates": {
+        "art": "original-scene-jk44-knowledge-fit-20261103",
+        "naming": {
+          "original": "",
+          "kind": "常用学习概念",
+          "work": "TV 第2话 · 约00:05",
+          "url": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+          "adaptation": "书籍、便签与笔具呈现可继续阅读的新材料；抽牌带来更多可用内容，承接学无止境每次进步所得到的新知。复用本批兼收并蓄释放的原作素材，保留原作书架与资料出处。",
+          "chineseOriginal": "",
+          "artWork": "TV 第2话 · 约00:05",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+          "artProof": "已登记原作资产 original-scene-jk44-knowledge-fit-20261103，由本批换图的 JK126 转用",
+          "artProcessing": "复用已登记的原作裁图。"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-infinite-upgrade-knowledge-20261104_FIT_JK82B",
+      "expectedVersion": "4:c64fc2bc275d2d395bd10059e4bf9e1e32fc476328ce54f8c860fb2cf0acf2b8",
+      "updates": {
+        "theme": "持续学习与新知",
+        "text": "书籍、便签与笔具呈现可继续阅读的新材料；抽牌带来更多可用内容，承接学无止境每次进步所得到的新知。复用本批兼收并蓄释放的原作素材，保留原作书架与资料出处。",
+        "source": "TV 第2话 · 约00:05",
+        "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=5",
+        "art": "original-scene-jk44-knowledge-fit-20261103",
+        "notes": "TV 第2话 · 约00:05。已登记原作资产 original-scene-jk44-knowledge-fit-20261103，由本批换图的 JK126 转用"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "draft_card_JA22",
+      "expectedVersion": "11:da4d26420b7a8a7b07a5b89b091b544784e58aba577cbda010d7dcb1bc3dfd0e",
+      "updates": {
+        "art": "original-fit-ja22-20261111",
+        "naming": {
+          "original": "",
+          "work": "TV第2话约备战段",
+          "url": "https://www.bilibili.com/bangumi/play/ep232368",
+          "adaptation": "纯那在舞台上持弓备战，握弓手与重新准备的姿态表现射击可以继续。箭矢完成后回手，使下一次布置重新有牌可用；配图改为TV原作持弓画面。",
+          "kind": "常用概念、动作或物件名称",
+          "chineseOriginal": "",
+          "artWork": "TV第2话约备战段",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368",
+          "artProof": "docs/worktree-tasks/new-card-fit-20261111/tv02-stage-ready-clean-20261111.png；裁切 550,480,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JA22.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_draft_card_JA22",
+      "expectedVersion": "4:965dcfe9dd9b521b26af53e62c7e7b6833de93a40518970a504a6386eec262ab",
+      "updates": {
+        "name": "上弦",
+        "theme": "完成后重新准备",
+        "text": "纯那在舞台上持弓备战，握弓手与重新准备的姿态表现射击可以继续。箭矢完成后回手，使下一次布置重新有牌可用；配图改为TV原作持弓画面。",
+        "source": "TV第2话约备战段",
+        "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368",
+        "art": "original-fit-ja22-20261111",
+        "notes": "TV第2话约备战段。docs/worktree-tasks/new-card-fit-20261111/tv02-stage-ready-clean-20261111.png；裁切 550,480,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JA22.jpg"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-cage-request-20261111",
+      "expectedVersion": "0:missing",
+      "created": {
+        "uid": "junna-cage-request-20261111",
+        "id": "U_CARD_013",
+        "name": "牢笼",
+        "cost": 1,
+        "upgradedCost": 0,
+        "type": "技能",
+        "rarity": "稀有",
+        "cardPool": "角色",
+        "turns": null,
+        "upgradedTurns": null,
+        "text": "本回合中，箭矢的目标造成伤害降低50%（不重复）。",
+        "upgradedText": "本回合中，箭矢的目标造成伤害降低50%（不重复）。",
+        "system": "stage",
+        "pool": true,
+        "target": "自己",
+        "keywords": [],
+        "termIds": [
+          "KW_STAGE"
+        ],
+        "archetypeIds": [
+          "SYS_stage"
+        ],
+        "partnerCardIds": [],
+        "effectIds": [],
+        "ruleIds": [],
+        "breakthroughIds": [],
+        "art": "original-fit-u-card-013-cage-20261111",
+        "naming": {
+          "original": "",
+          "kind": "用户指定的常用物件名称",
+          "work": "2021剧场版·狩猎的Revue片段约01:46，奈奈被围入铁网笼中",
+          "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=106",
+          "adaptation": "纯那将奈奈围在铁网围笼中，网格与狭窄出口直接呈现牢笼。以布置的箭矢限制其目标本回合的伤害，同一目标不重复施加，承接围困与压制。",
+          "artWork": "2021剧场版·狩猎的Revue片段约01:46",
+          "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=106",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/film-hunt-144.jpg；裁切 500,100,840,630；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/U_CARD_013.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。"
+        },
+        "notes": "用户指定：1／0费金卡；同一目标的50%伤害降低不重复。",
+        "extraHoverTips": []
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_new_card_20261111_U_CARD_013",
+      "expectedVersion": "0:missing",
+      "created": {
+        "uid": "fit_new_card_20261111_U_CARD_013",
+        "id": "FIT_CARD_U_CARD_013",
+        "name": "牢笼",
+        "theme": "围困与压制",
+        "text": "纯那将奈奈围在铁网围笼中，网格与狭窄出口直接呈现牢笼。以布置的箭矢限制其目标本回合的伤害，同一目标不重复施加，承接围困与压制。",
+        "original": "",
+        "source": "2021剧场版·狩猎的Revue片段约01:46，奈奈被围入铁网笼中",
+        "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=106",
+        "art": "original-fit-u-card-013-cage-20261111",
+        "cardIds": [
+          "U_CARD_013"
+        ],
+        "notes": "docs/design/assets/card-sources/2026-11-02/film-hunt-144.jpg；裁切 500,100,840,630；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/U_CARD_013.jpg"
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "complete_pool_group_JK67",
+      "expectedVersion": "1:8147c71bc10443f61bf1c9f7b47a640fb339642d226c1acc6ce23edda017c0e5",
+      "updates": {
+        "title": "努力下去／不丢掉目标"
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "junna-arrow-five-turn-exploration-20261105_GROUP_JK84",
+      "expectedVersion": "3:db0b4efbd264d871a800224818045311c2ab7dfd2dd8f0ed528e0c2a86f7d789",
+      "updates": {
+        "title": "先学会站起来／翱翔在天际"
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "junna-shine-arrow-exploration-20261106_GROUP_JK131",
+      "expectedVersion": "3:4ee442e75b23cb0e4b2b7a130b5f99d21b93e970a6a320afc46e5c9d14e5cad7",
+      "updates": {
+        "title": "檄文／永远都不嫌晚",
+        "notes": "檄文为常驻群攻箭矢入口，附带永远都不嫌晚。关联技能用闪耀9提供限次的全牌伤害加成，耗尽后留下檄文。"
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "junna-common-one-cost-aoe-knowledge-20261108_GROUP_JK200",
+      "expectedVersion": "2:843a379689d068dcc6dcd4ad28f793f0d565bdfbf941d8ad35a7052955cac76b",
+      "updates": {
+        "title": "你一直在看什么／疑问",
+        "reference": "《ペン：力：刀》纯那声部的问句；关联的疑问表现追问与整理回应。",
+        "notes": "取得你一直在看什么时，同时获得1张疑问；两张牌独立使用和升级。你一直在看什么以连续的群体攻击提出问题，疑问用格挡与手牌伤害加成整理后续回应。组内契合按当前牌面记录，分别保留现有数值和支付。"
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "knowledge-initial-lists-20261110_JK67B",
+      "expectedVersion": "1:5e12187e725171cbd49937c5eea34bb51460b339a59d8272d8f60505535f8883",
+      "updates": {
+        "title": "不丢掉目标"
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "knowledge-initial-lists-20261110_JK84",
+      "expectedVersion": "1:bedbcb44cf94fb82966e7b8214ce251d0181460133d76c8d53e098dbac070784",
+      "updates": {
+        "title": "先学会站起来"
+      }
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "knowledge-initial-lists-20261110_JK131",
+      "expectedVersion": "1:0436782c6189e33fbe623a567b746573c4d3aaa8132996c7625d758cf5c053fd",
+      "updates": {
+        "title": "永远都不嫌晚"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-arrow-exploration-20261106_JK131B",
+      "expectedVersion": "65:5f30a9ab92dab4e5e1d7cb27e9c99ac50a1ec04ab0bd596c8aa76576f24b29ff",
+      "updates": {
+        "design": {
+          "classification": "常驻高费群攻知识箭矢",
+          "roleReason": "知识触发，箭矢触发，能量/高费触发",
+          "rules": "本组常规奖励入口为檄文，取得时同时发放1张永远都不嫌晚。檄文正常布置，等待3回合完成时对当时存活的所有敌人各造成60点或升级后的80点伤害，每名敌人结算1段。",
+          "balance": "纸面初值。升级保持费用、等待和闪耀上限，按具体牌效提高数值。",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_stage": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_energy": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "systemRoles": {
+            "partner": {
+              "role": "触发",
+              "port": "输出"
+            },
+            "stage": {
+              "role": "触发",
+              "port": "输出"
+            },
+            "energy": {
+              "role": "触发",
+              "port": "输出"
+            }
+          },
+          "systems": [
+            "partner",
+            "stage",
+            "energy"
+          ],
+          "route": "知识／箭矢／能量/高费",
+          "triggerRole": "触发",
+          "port": "输出"
+        },
+        "notes": "本组常规奖励入口为檄文，取得时同时发放1张永远都不嫌晚。檄文正常布置，等待3回合完成时对当时存活的所有敌人各造成60点或升级后的80点伤害，每名敌人结算1段。"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200B",
+      "expectedVersion": "16:f4f12868f33f4507a65d6215fedab313638b8d838e344e5432ff51e6a14dab81",
+      "updates": {
+        "naming": {
+          "original": "",
+          "kind": "常用概念、动作或物件名称",
+          "work": "TV第2话约09:42的观摩记录与笔记（配图）",
+          "url": "https://www.bilibili.com/bangumi/play/ep232368?t=582",
+          "adaptation": "把尚未理解的问题记下来，检视已有判断并整理接下来要回应的内容。格挡对应审慎应对，所有手牌获得伤害加成对应问题带动后续论证的准备；与「你一直在看什么」组成提出问题和形成回应的知识关系。配图采用手持笔记、准备记录的原作细节。",
+          "chineseOriginal": ""
+        },
+        "design": {
+          "classification": "知识关联牌",
+          "route": "知识",
+          "systems": [
+            "partner"
+          ],
+          "groupId": "GROUP_JK200",
+          "groupTheme": "保留疑问",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "ports": [
+                "operation"
+              ],
+              "cross": false
+            }
+          },
+          "systemRoles": {
+            "partner": {
+              "role": "触发",
+              "port": "运转"
+            }
+          },
+          "triggerRole": "触发",
+          "port": "运转",
+          "roleReason": "副牌在手时支撑主牌的群攻；打出副牌可以补牌，但会失去当前的持有条件。",
+          "structure": "保留疑问",
+          "similarity": "归谬／假设为单体两段，本组为单段群体固定加值，伤害加成利用方式不同；副牌要支付1费换较强过牌。",
+          "rules": "「你一直在看什么」在每份伤害批次开始时检查自己手牌是否有同名疑问；存在则本批每个目标的基础伤害增加4，再按通常流程应用伤害加成等修正。只有基础伤害增加，不修改存储的伤害加成。疑问离手后，之后批次重新检查；临时同名疑问也可满足条件。疑问自身保留，打出抽牌后消耗。",
+          "sourceRevision": 4071,
+          "sourceDocuments": [
+            "<card-research-repository>/docs/体系驱动卡池设计流程.md",
+            "<card-research-repository>/docs/体系分析流程.md",
+            "<card-research-repository>/docs/职业卡池设计要求_按五职业规律.md",
+            "<card-research-repository>/docs/卡牌分析流程.md"
+          ],
+          "balance": "备用纸面候选初值。",
+          "textComplexity": "低",
+          "namingStatus": "常用名称暂定，配图待选。",
+          "review": "主牌固定1费、普通、即时攻击、所有敌人；基础与升级费用保持，关联成员同稀有度独立升级。本批不加入2费及以上出牌扳机或普通加速。"
+        },
+        "notes": "组结构：保留疑问。\n定位：副牌在手时支撑主牌的群攻；打出副牌可以补牌，但会失去当前的持有条件。\n相近牌：归谬／假设为单体两段，本组为单段群体固定加值，伤害加成利用方式不同；副牌要支付1费换较强过牌。\n结算：「你一直在看什么」在每份伤害批次开始时检查自己手牌是否有同名疑问；存在则本批每个目标的基础伤害增加4，再按通常流程应用伤害加成等修正。只有基础伤害增加，不修改存储的伤害加成。疑问离手后，之后批次重新检查；临时同名疑问也可满足条件。疑问自身保留，打出抽牌后消耗。"
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-knowledge-terminals-20261108_JK235",
+      "expectedVersion": "14:d7d84640d9291d604c57e3a0c274717b253f3fa55a55333b1d2ae9e9d66077b9",
+      "updates": {
+        "design": {
+          "classification": "机制核心牌",
+          "route": "知识",
+          "systems": [
+            "partner",
+            "energy",
+            "growth"
+          ],
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "both",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_energy": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_growth": {
+              "role": "payoff",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "port": "输出",
+          "triggerRole": "兼具",
+          "roleReason": "运用名文学习中领会的语言力量，每次打出知识牌时将所学转为伤害。",
+          "groupId": "GROUP_JK235",
+          "similarity": "现有学以致用及努力下去把知识或时点转为伤害加成，本牌直接建立持续伤害出口，不再要求额外抽到攻击。与一锤定音分别承担即刻逐次兑现与累积后付费重击。",
+          "rules": "能力安装后，每次自己的实际知识牌出牌完成，随机选择1个存活可选敌人造成1次3／4点伤害。安装本能力的这次知识出牌完成也正常触发。知识箭矢在布置时计出牌，完成与额外触发不重复计；正常重放只执行牌效，不额外产生实际出牌事件。每份能力独立响应；无合法敌人时跳过。伤害来源为本能力，安装时沿ME_BONUS继承该来源有效的伤害加成及已有额外伤害次数，每次触发按来源修正结算，且该伤害不构成知识出牌，不自递归。",
+          "balance": "单份能力在安装后再打出10张知识牌时，连同安装本次合计造成33／44点基础伤害；目标逐次随机。2费先安装，之后靠有限能量和抽牌继续兑现。",
+          "upgrade": "每次基础伤害3→4；费用2保持。",
+          "investment": "支付2能量安装，并继续使用知识牌。",
+          "risk": "没有即时抽牌或回能；短战启动回合吃紧，多敌人时不能指定伤害落点。",
+          "sourceDocuments": [
+            "<card-research-repository>/docs/体系驱动卡池设计流程.md",
+            "<card-research-repository>/docs/体系分析流程.md",
+            "<card-research-repository>/docs/职业卡池设计要求_按五职业规律.md",
+            "<card-research-repository>/docs/卡牌分析流程.md",
+            "<card-research-repository>/docs/mods/defect_card_analysis_zh.md",
+            "<card-research-repository>/docs/mods/regent_card_analysis_zh.md"
+          ],
+          "sourceRevision": 4240,
+          "reference": "参考在用JK206旁征博引与知识成组取得；按体系驱动流程阶段4、5复核终端、关联结构及相近牌。",
+          "review": "已核对永久牌组／本场临时牌、知识组／实际张数、升级和费用阈值、重放／实际出牌计数。数值为备用区纸面初值。",
+          "namingStatus": "书名直译；书籍、纯那的阅读联系及TV第9话表达近景已核对。",
+          "textComplexity": "低"
+        }
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-shine-arrow-exploration-20261106_JK133",
+      "expectedVersion": "22:b2f30a0be320e2dfe39a17c2a0bd0d692e5f54a7553127cf367e10f135e76108",
+      "updates": {
+        "naming": {
+          "original": "",
+          "kind": "常用概念、动作或物件名称",
+          "work": "2021剧场版狩猎的Revue片段约02:14的实体文字攻击（配图）",
+          "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=134",
+          "adaptation": "笔伐是用文字批驳对方；实体字句带着冲击向前飞出，直接承担箭矢的攻击。每份笔伐分别抵达并接续后文，对应造成伤害后抽1张牌；同模型的三张实际牌独立使用。复用备用笔伐的原作裁图，保留实体字句向前飞出的构图。",
+          "chineseOriginal": ""
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_current_audit_20261108_JK200B",
+      "expectedVersion": "1:24f74ae4a9c5376e9cb5a39c9b56e03a341c332b48610d6d2ba92938733ce7d2",
+      "updates": {
+        "text": "把尚未理解的问题记下来，检视已有判断并整理接下来要回应的内容。格挡对应审慎应对，所有手牌获得伤害加成对应问题带动后续论证的准备；与「你一直在看什么」组成提出问题和形成回应的知识关系。配图采用手持笔记、准备记录的原作细节。"
+      }
+    },
+    {
+      "collection": "powers",
+      "uid": "power_junna_jk67_power",
+      "expectedVersion": "5:888282f54be00836b0b03b6104b320c6af2a66bf97cf5d355cfaf35f7cb7bb18",
+      "updates": {
+        "name": "努力下去",
+        "source": "2021剧场版·狩猎的Revue中纯那引用的努力与目标之语，片段约02:05",
+        "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=125"
+      }
+    },
+    {
+      "collection": "powers",
+      "uid": "power_junna_ja96_power",
+      "expectedVersion": "2:ff5ad2f189871defba28e27eced8a2e3498e614e37effd3c11e55d851c16b376",
+      "updates": {
+        "name": "绝不停步"
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "original-fit-u-card-011-20261111",
+      "file": "portraits/U_CARD_011.jpg",
+      "sha256": "e25ad598bd74ea28d13bb3f24754598d8448c7459cf40db1122615a0d32b60ac"
+    },
+    {
+      "id": "original-fit-jk67-20261111",
+      "file": "portraits/JK67.jpg",
+      "sha256": "8359262d78084fa1e24ade46b379382ef21ed50d188812e5a02f678322da4099"
+    },
+    {
+      "id": "original-fit-ja96-20261111",
+      "file": "portraits/JA96.jpg",
+      "sha256": "2a9e37dd337644ceb8ce3c3095e472aa0c0039057c25de0f9b1e406c106fc67e"
+    },
+    {
+      "id": "original-fit-jk84-20261111",
+      "file": "portraits/JK84.jpg",
+      "sha256": "b8f8b101b214f9d077d22ab48b076af980670cddf0896d533df96994a0bc6871"
+    },
+    {
+      "id": "original-fit-jk84b-20261111",
+      "file": "portraits/JK84B.jpg",
+      "sha256": "8e362d65ef191900f2c98881200eefe899edd2787e14f9c9c3944903ccf4bf42"
+    },
+    {
+      "id": "original-fit-jk126-20261111",
+      "file": "portraits/JK126.jpg",
+      "sha256": "3f594b2037a4a4ff07c7df9805c0cc529054e247e2350f77cff450e9611fc2bc"
+    },
+    {
+      "id": "original-fit-jk131-20261111",
+      "file": "portraits/JK131.jpg",
+      "sha256": "a26dd37441f3a663ccc85c45b0a9164089568de2d8a8b4cc4f7c5aa843e26b7f"
+    },
+    {
+      "id": "original-fit-js33-20261111",
+      "file": "portraits/JS33.jpg",
+      "sha256": "52b50b34f4bbbedb22471b25f92619eb62b950ca92645d9fcf9da5588dbfd285"
+    },
+    {
+      "id": "original-fit-jk200-20261111",
+      "file": "portraits/JK200.jpg",
+      "sha256": "b11fa392fd8803e96448840ecfaccd77a13ed9052a95e3d23c12d083cc53587f"
+    },
+    {
+      "id": "original-fit-ja22-20261111",
+      "file": "portraits/JA22.jpg",
+      "sha256": "e3c892a1402a0a426f9981f7939089a9995d10bc92e54ee8ea08f061841fa41c"
+    },
+    {
+      "id": "original-fit-u-card-013-cage-20261111",
+      "file": "portraits/U_CARD_013.jpg",
+      "sha256": "cd46a388b0366dbbf2d9987c53612e2bba0cee1548526039a38c4e5ac4ee4e58"
+    }
+  ]
+}
