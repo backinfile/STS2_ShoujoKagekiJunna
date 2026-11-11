@@ -3,11 +3,13 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using ShoujoKageki.Core.V1;
 using ShoujoKagekiJunna.Models;
 
@@ -76,8 +78,14 @@ public static partial class KnowledgeProgress
         StoryRewards.Clear();
         using (KnowledgeCombat.SingleCard())
             foreach (var (player, count) in stories)
+            {
+                var added = new List<CardPileAddResult>();
                 for (int i = 0; i < count; i++)
-                    await CardPileCmd.Add(player.RunState.CreateCard(CardCatalog.Model("U_CARD_008B"), player), PileType.Deck);
+                    added.Add(await CardPileCmd.Add(player.RunState.CreateCard(CardCatalog.Model("U_CARD_008B"), player), PileType.Deck));
+                CardCmd.PreviewCardPileAdd(added, style: added.Count > 5 ? CardPreviewStyle.MessyLayout : CardPreviewStyle.HorizontalLayout);
+                if (LocalContext.IsMe(player) && added.Any(result => result.success))
+                    await Cmd.Wait(3f, ignoreCombatEnd: true);
+            }
         foreach (var (player, count) in rewards)
             for (int i = 0; i < count; i++) await CopyDeckCard(player);
     }
