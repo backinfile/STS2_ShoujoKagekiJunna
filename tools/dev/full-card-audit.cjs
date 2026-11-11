@@ -72,7 +72,8 @@ function summarize() {
 function plan() {
     const lines = [
         `# r${catalog.revision} 逐牌测试条目`, '',
-        `本次包含 ${catalog.cards.length} 张牌。每张基础与升级均执行显示、正常、空资源和配合场景。`, '',
+        `本次包含 ${catalog.cards.length} 张牌。以下为原逐牌检查清单；通用条目须按实际牌效补齐操作、每步预期和执行证据。`,
+        '覆盖更正：旧钩子级检查与真实跨回合验收分别记录。断言数量不等于完整覆盖，见[覆盖审查](card-test-coverage-audit.md)。', '',
         '每个测试结果保存实际值、预期值与通过状态。视频在准备完成后开始录制，通过游戏的悬停、出牌、选牌和回合结束操作展示结算。', '',
     ];
     const rows = [];
@@ -91,8 +92,24 @@ function plan() {
         if (card.knowledge) entries.push(['知识配合', '核对直接关联牌与同名实际牌，抽牌堆、手牌、弃牌堆和布置区的对应实例。与关联阅读、融会贯通、理想的国语教科书和知识的力量配合，核对每回合触发与费用恢复。']);
         if (card.type === '能力') entries.push(['持续触发', '核对安装时点、当回合和次回合、同名叠加、合法与不满足条件的触发、每回合限制、战斗结束清除及来源版本快照。']);
         if (/闪耀\d/.test(card.text)) entries.push(['闪耀', '核对基础和升级的初始预算，布置时保留预算、完整结算扣减一次、最后一次结算完成后耗尽、临时复制与永久牌对应、耗尽回调去重。']);
+        if (card.id === 'U_CARD_008') entries.push(
+            ['胜利直接入牌组', '合法打出能力后牌组不立即变化。再正常击败全部敌人；领取任何掉落前，永久牌组已增加1张基础故事，目的地Deck，闪耀3/3。不创建故事掉落，普通选牌奖励仍正常出现。'],
+            ['版本与叠加', '基础与升级分别获胜各发1张基础故事；两次合法安装后获胜发2张独立故事。下一场不安装直接获胜应发0张，不重复发上场收益。'],
+            ['塞牌动画', '实际故事先展示再飞入右上角永久牌组，飞行完成并发送计数完成通知后出现普通掉落。基础/升级各1张、双层2张、六层6张散开展示；未安装不展示、不飞牌。'],
+            ['原生胜利证据', '入牌组/掉落初轮64项与动画修复后五场100项分别保留。详见[故事动画验收](story-deck-animation.md)及[直接入牌组验收](story-direct-deck-tests.md)。测试不直接调用胜利钩子。'],
+        );
         if (card.id === 'U_CARD_009') entries.push(['多标签检索', '一张三标签只抽1张。纯箭矢＋箭矢知识＋纯闪耀抽3张。两张同名双标签＋闪耀抽3张。三张三标签抽3张。只有双标签抽2张。抽牌触发改变待选对象后重新配对，保留其他牌相对顺序，使用同步随机数。']);
-        if (card.id === 'U_CARD_010') entries.push(['循环检索', '安装不立即检索。之后按知识→箭矢→闪耀→知识轮换。无对象、手牌满和移牌失败也推进。玩家选择已有实际牌，保留升级与闪耀余量，避免产生抽牌事件。重复安装独立保存循环进度。']);
+        if (card.id === 'U_CARD_010') entries.push(
+            ['真实轮换', '基础扣2、升级扣1，安装不立即检索。合法结束回合并经过敌方行动，连续6次开始回合的候选必须依次为知识、箭矢、闪耀、知识、箭矢、闪耀；每次选择原牌入手，保留升级与闪耀余量，检索不触发抽牌且其他牌相对顺序不变。'],
+            ['独立进度', '首次知识检索后合法打出第二张能力。随后3回合分别为第一张箭矢/第二张知识、第一张闪耀/第二张箭矢、第一张知识/第二张闪耀。'],
+            ['轮换边界', '知识候选缺失仍按空知识→箭矢→闪耀推进；10张保留手牌使知识回合跳过，合法打出6张腾位后，下回合取箭矢、再下回合取闪耀。'],
+            ['执行证据', '逐步准备、预期、原生操作与剩余分支见[舞台少女心得验收](stage-girl-notes-real-turn-tests.md)。旧直接调用回合钩子的通过结果单独保留。'],
+        );
+        if (card.id === 'JK37C') entries.push(
+            ['实际零费与随机对象', '安装不立即加速已有箭矢；1费防御不触发，0费戒备只随机使一支实际候选减少1。同回合连续3次各只减1，不保证轮流选择。'],
+            ['完成与配合', '上弦配合引弦2→1→0后同一原牌回手；加速与渴望各减1使新引弦立即完成并耗尽；两层渴望各触发1，伤害仅完成一次。'],
+            ['降费与跨回合', '天候使掌舵3→0后合法打出也触发；真实次回合分开核对自然倒计时与新0费牌触发。七组118项及录像见[追加录像](desire-arrow-video-tests.md)。'],
+        );
         if (card.id === 'JA105') entries.push(['加速触发时点', '安装前已有3回合满弦射击，安装后保持原计数和关键词。之后打出的满弦射击立即推进至2回合。两层加速使2回合引弦立即完成，改编箭矢同样按每次打出触发。']);
         if (card.id === 'JA108') entries.push(['战斗内备注', '显示（打出X张），读取当前抽牌堆的箭矢数量。核对基础与升级、空堆、箭矢入堆与离堆后的更新，以及战斗外隐藏。']);
         if (card.id === 'JK314') entries.push(['耗尽渴望', '直接统计耗尽牌堆中的渴望实际数量，跨获取批次并超过3张。重复回调保持数量，卡牌额外次数不产生伤害强化标记，外部额外次数强化正常叠加。']);
@@ -389,15 +406,15 @@ function report() {
         const tested = results.length === 8 && assertions.every(check => check.pass);
         const complete = video?.status === 'completed';
         const videoPath = complete ? path.relative(output, video.output_path).replaceAll('\\', '/') : '';
-        const status = tested ? `${passed}/${assertions.length} 通过` : `${passed}/${assertions.length} 待复核`;
+        const status = tested ? `${passed}/${assertions.length} 脚本通过` : `${passed}/${assertions.length} 待复核`;
         rows.push(`<tr data-name="${escape(card.id + card.name)}"><td>${escape(card.id)}</td><td><a data-video="${escape(videoPath)}" data-id="${card.id}" href="${escape(videoPath || '#')}">${escape(card.name)}</a></td><td>${status}</td><td>${complete ? '已录制' : '待录制'}</td></tr>`);
         const entries = testPlan.cards.find(entry => entry.id === card.id).entries;
         details.push(`<article id="details-${card.id}" hidden><h3>基础版</h3><p>${escape(card.text)}</p><h3>升级版</h3><p>${escape(card.upgradedText)}</p><details><summary>测试条目</summary><ul>${entries.map(([label, text]) => `<li><strong>${escape(label)}</strong> ${escape(text)}</li>`).join('')}</ul></details><details><summary>测试结果</summary><ul>${results.map(result => `<li><a href="results/${result.file}">${result.upgraded ? '升级' : '基础'} ${result.variant} ${result.checks.filter(check => check.pass).length}/${result.checks.length}</a></li>`).join('')}</ul></details></article>`);
-        manifest.push({ id: card.id, name: card.name, scenarios: results.length, passed, assertions: assertions.length, tested, video: videoPath, recorded: complete, version: 'Beta 基础版' });
+        manifest.push({ id: card.id, name: card.name, scenarios: results.length, passed, assertions: assertions.length, tested, coverage: 'script-checks-only', video: videoPath, recorded: complete, version: 'Beta 基础版' });
     }
     const html = `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>纯那 Beta 逐牌测试</title><style>
 body{margin:0;background:#f4f5f6;color:#172026;font:14px Inter,"Microsoft YaHei",sans-serif}main{max-width:1500px;margin:auto;padding:28px}h1{font-size:24px;margin:0 0 10px}p{line-height:1.65;white-space:pre-line}a{color:#126650}input{box-sizing:border-box;width:100%;padding:10px;border:1px solid #bac4c8;border-radius:4px;font:inherit;background:white}.layout{display:grid;grid-template-columns:minmax(430px,.85fr) minmax(560px,1.5fr);gap:26px}aside{height:82vh;overflow:auto}table{width:100%;border-collapse:collapse;margin-top:12px;background:white}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #e1e6e8;font-size:13px}th{position:sticky;top:0;background:#e9eeed}td:first-child{color:#647278;font-family:monospace}td:nth-child(3){white-space:nowrap}video{width:100%;max-height:61vh;background:#10191c}h2{font-size:19px;margin:0 0 12px}h3{font-size:14px;margin-bottom:0}details{margin:16px 0}summary{cursor:pointer;font-weight:600}li{margin:8px 0;line-height:1.6}.stats{color:#53646b;margin-bottom:22px}@media(max-width:1050px){.layout{display:flex;flex-direction:column-reverse}aside{height:55vh}main{padding:18px}}
-</style><main><h1>纯那 Beta 逐牌测试</h1><p class="stats">工作台 r${catalog.revision} · ${catalog.cards.length}张牌 · ${summary.completedScenarios}个场景 · ${summary.assertions}项断言</p><div class="layout"><aside><input id="search" aria-label="搜索卡名或编号" placeholder="搜索卡名或编号"><table><thead><tr><th>编号</th><th>卡名</th><th>基础与升级测试</th><th>Beta录像</th></tr></thead><tbody>${rows.join('')}</tbody></table></aside><section><h2 id="current">选择卡牌</h2><video id="player" controls preload="none"></video>${details.join('')}</section></div></main><script>
+</style><main><h1>纯那 Beta 逐牌测试</h1><p class="stats">工作台 r${catalog.revision} · ${catalog.cards.length}张牌 · ${summary.completedScenarios}个场景 · ${summary.assertions}项断言</p><p>此处统计脚本断言。真实回合及剩余场景见专项验收记录，不能由断言总数推定完整覆盖。</p><div class="layout"><aside><input id="search" aria-label="搜索卡名或编号" placeholder="搜索卡名或编号"><table><thead><tr><th>编号</th><th>卡名</th><th>基础与升级脚本断言</th><th>Beta录像</th></tr></thead><tbody>${rows.join('')}</tbody></table></aside><section><h2 id="current">选择卡牌</h2><video id="player" controls preload="none"></video>${details.join('')}</section></div></main><script>
 const player=document.getElementById('player');for(const link of document.querySelectorAll('[data-video]'))link.addEventListener('click',event=>{event.preventDefault();if(!link.dataset.video)return;player.src=link.dataset.video;document.getElementById('current').textContent=link.textContent+' · Beta基础版';for(const article of document.querySelectorAll('article'))article.hidden=article.id!=='details-'+link.dataset.id;player.play();});document.getElementById('search').addEventListener('input',event=>{const query=event.target.value.trim().toLowerCase();for(const row of document.querySelectorAll('tr[data-name]'))row.hidden=!row.dataset.name.toLowerCase().includes(query);});
 </script></html>`;
     fs.writeFileSync(path.join(output, 'index.html'), html);
