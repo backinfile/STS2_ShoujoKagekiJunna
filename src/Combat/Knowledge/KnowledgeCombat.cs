@@ -19,8 +19,14 @@ public static class KnowledgeCombat
     private static readonly AsyncLocal<HashSet<string>?> Drawing = new();
     private sealed class Scope : IDisposable
     {
+        private bool _disposed;
         public Scope() => SingleDepth.Value++;
-        public void Dispose() => SingleDepth.Value--;
+        public void Dispose()
+        {
+            if (_disposed) return;
+            _disposed = true;
+            SingleDepth.Value--;
+        }
     }
 
     private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, IReadOnlySet<CardModel> allowed)
@@ -43,15 +49,9 @@ public static class KnowledgeCombat
     public static bool HasGroup(CardModel card) => Group(card) != null || DynamicKnowledge.IsLinked(card);
     internal static CardModel[] CapturePartners(CardModel card)
     {
-        var relation = DynamicKnowledge.Group(card);
-        var group = relation == null ? Group(card) : null;
-        var ids = relation?.Members
-            .Where(member => member.Id != card.Id.ToString() || member.Count > 1)
-            .Select(member => member.Id).ToHashSet() ?? group?.Members
-            .Where(member => member.Id != CardCatalog.DesignId(card) || member.Count > 1)
-            .Select(member => CardCatalog.Model(member.Id).Id.ToString()).ToHashSet() ?? [];
+        var ids = KnowledgeMembers.PartnerIds(card);
         var hand = card.Owner.PlayerCombatState!.Hand;
-        return hand.Cards.Where(c => c != card && ids.Contains(c.Id.ToString())).ToArray();
+        return hand.Cards.Where(c => c != card && ids.Contains(c.Id)).ToArray();
     }
     public static Task PlayPartners(PlayerChoiceContext context, CardModel card)
         => PlayCapturedPartners(context, card, CapturePartners(card));
@@ -71,21 +71,16 @@ public static class KnowledgeCombat
         if (!active.Add(key)) return;
         try
         {
-            var ids = relation?.Members
-            .Where(member => member.Id != card.Id.ToString() || member.Count > 1)
-            .Select(member => member.Id).ToHashSet() ?? group!.Members
-                .Where(member => member.Id != CardCatalog.DesignId(card) || member.Count > 1)
-                .Select(member => CardCatalog.Model(member.Id).Id.ToString()).ToHashSet();
+            var ids = KnowledgeMembers.PartnerIds(card);
             await CardActions.DrawMatching(context, card.Owner,
-                c => c != card && ids.Contains(c.Id.ToString()), CardPile.MaxCardsInHand);
+                c => c != card && ids.Contains(c.Id), CardPile.MaxCardsInHand);
         }
         finally { active.Remove(key); }
     }
     internal static async Task<IReadOnlyList<CardModel>> GrantPartners(CardModel acquired, PileType destination,
         IReadOnlyList<CardModel>? selected = null)
     {
-        var members = (DynamicKnowledge.Definition(acquired) ?? Group(acquired)?.Members
-            .Select(member => (Model: CardCatalog.Model(member.Id), member.Count)))?.ToArray();
+        var members = KnowledgeMembers.Definition(acquired)?.ToArray();
         if (members == null) return [acquired];
         using var single = SingleCard();
         var gained = new List<CardModel> { acquired };

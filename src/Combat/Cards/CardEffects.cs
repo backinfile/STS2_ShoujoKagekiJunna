@@ -36,8 +36,7 @@ public static class CardEffects
             => await Improve(await Choose(cards.Where(DamageModifiers.CanDealDamage), count, optional), bonus);
         Task<CardModel[]> DrawLinked()
         {
-            var members = DynamicKnowledge.Definition(card) ?? KnowledgeCombat.Group(card)?.Members
-                .Select(member => (Model: CardCatalog.Model(member.Id), member.Count)) ?? [];
+            var members = KnowledgeMembers.Definition(card) ?? [];
             var ids = members.Where(member => member.Count > 0).Select(member => member.Model.Id)
                 .Append(card.Id).ToHashSet();
             return CardActions.DrawMatching(context, player, candidate => ids.Contains(candidate.Id), V("LinkedDraw"));

@@ -4708,6 +4708,190 @@
         "JK366": 1,
         "JK367": 1
       }
+    },
+    {
+      "mainCardId": "JK360",
+      "grantedCardIds": [
+        "JK359",
+        "JK361",
+        "JK362",
+        "JK363",
+        "JK364",
+        "JK365",
+        "JK366",
+        "JK367"
+      ],
+      "grantedCardCounts": {
+        "JK359": 1,
+        "JK361": 1,
+        "JK362": 1,
+        "JK363": 1,
+        "JK364": 1,
+        "JK365": 1,
+        "JK366": 1,
+        "JK367": 1
+      }
+    },
+    {
+      "mainCardId": "JK361",
+      "grantedCardIds": [
+        "JK359",
+        "JK360",
+        "JK362",
+        "JK363",
+        "JK364",
+        "JK365",
+        "JK366",
+        "JK367"
+      ],
+      "grantedCardCounts": {
+        "JK359": 1,
+        "JK360": 1,
+        "JK362": 1,
+        "JK363": 1,
+        "JK364": 1,
+        "JK365": 1,
+        "JK366": 1,
+        "JK367": 1
+      }
+    },
+    {
+      "mainCardId": "JK362",
+      "grantedCardIds": [
+        "JK359",
+        "JK360",
+        "JK361",
+        "JK363",
+        "JK364",
+        "JK365",
+        "JK366",
+        "JK367"
+      ],
+      "grantedCardCounts": {
+        "JK359": 1,
+        "JK360": 1,
+        "JK361": 1,
+        "JK363": 1,
+        "JK364": 1,
+        "JK365": 1,
+        "JK366": 1,
+        "JK367": 1
+      }
+    },
+    {
+      "mainCardId": "JK363",
+      "grantedCardIds": [
+        "JK359",
+        "JK360",
+        "JK361",
+        "JK362",
+        "JK364",
+        "JK365",
+        "JK366",
+        "JK367"
+      ],
+      "grantedCardCounts": {
+        "JK359": 1,
+        "JK360": 1,
+        "JK361": 1,
+        "JK362": 1,
+        "JK364": 1,
+        "JK365": 1,
+        "JK366": 1,
+        "JK367": 1
+      }
+    },
+    {
+      "mainCardId": "JK364",
+      "grantedCardIds": [
+        "JK359",
+        "JK360",
+        "JK361",
+        "JK362",
+        "JK363",
+        "JK365",
+        "JK366",
+        "JK367"
+      ],
+      "grantedCardCounts": {
+        "JK359": 1,
+        "JK360": 1,
+        "JK361": 1,
+        "JK362": 1,
+        "JK363": 1,
+        "JK365": 1,
+        "JK366": 1,
+        "JK367": 1
+      }
+    },
+    {
+      "mainCardId": "JK365",
+      "grantedCardIds": [
+        "JK359",
+        "JK360",
+        "JK361",
+        "JK362",
+        "JK363",
+        "JK364",
+        "JK366",
+        "JK367"
+      ],
+      "grantedCardCounts": {
+        "JK359": 1,
+        "JK360": 1,
+        "JK361": 1,
+        "JK362": 1,
+        "JK363": 1,
+        "JK364": 1,
+        "JK366": 1,
+        "JK367": 1
+      }
+    },
+    {
+      "mainCardId": "JK366",
+      "grantedCardIds": [
+        "JK359",
+        "JK360",
+        "JK361",
+        "JK362",
+        "JK363",
+        "JK364",
+        "JK365",
+        "JK367"
+      ],
+      "grantedCardCounts": {
+        "JK359": 1,
+        "JK360": 1,
+        "JK361": 1,
+        "JK362": 1,
+        "JK363": 1,
+        "JK364": 1,
+        "JK365": 1,
+        "JK367": 1
+      }
+    },
+    {
+      "mainCardId": "JK367",
+      "grantedCardIds": [
+        "JK359",
+        "JK360",
+        "JK361",
+        "JK362",
+        "JK363",
+        "JK364",
+        "JK365",
+        "JK366"
+      ],
+      "grantedCardCounts": {
+        "JK359": 1,
+        "JK360": 1,
+        "JK361": 1,
+        "JK362": 1,
+        "JK363": 1,
+        "JK364": 1,
+        "JK365": 1,
+        "JK366": 1
+      }
     }
   ],
   "startingDeck": [

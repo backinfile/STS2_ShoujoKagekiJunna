@@ -1,0 +1,47 @@
+{
+  "deployed": true,
+  "release": "20261111-workbench-events-b293",
+  "publicURL": "https://junna.17181718.xyz/#tab=events",
+  "mcpRevision": 4874,
+  "existingEvents": 1,
+  "associatedCards": 9,
+  "checks": {
+    "tabFilters": 8,
+    "failed": 0,
+    "eventFieldsAndMetadata": true,
+    "search": true,
+    "invalidFieldsRejected": true,
+    "browserCreateAndEdit": true,
+    "browserRefresh": true,
+    "productionImageLoaded": true
+  },
+  "existingEditsPreserved": true,
+  "screenshot": "artifacts/task-deliverables/workbench-events-20261111/events-tab.jpg",
+  "screenshotSha256": "5df760bc58bbddd7b871ad256ba1dbed415c61e01a4ff44fcfb16d75beeb18b0",
+  "isolatedChecks": {
+    "syntax": true,
+    "tabFilters": 8,
+    "eventFieldsAndMetadata": true,
+    "searchAndInvalidFields": true,
+    "publicBundle": true
+  },
+  "synchronization": {
+    "mainHead": "9d6f9cd966f7bd42e33e0ca622c66b2c605df6be",
+    "workbenchFilesChangedByUpstream": false,
+    "conflicts": 0,
+    "existingChecksStillApply": true
+  },
+  "integration": {
+    "targetBranch": "main",
+    "featureCommit": "b3ea1c8",
+    "integratedHead": "f2238d09d92ff8d005340a63dc9a57b8683e12d8",
+    "method": "fast-forward",
+    "committedTreesMatch": true,
+    "canonicalSourceFilesMatch": 12,
+    "originalModifiedFilesByteIdentical": 4,
+    "remainingOriginalChanges": 4,
+    "temporaryProtectionStashRemoved": true,
+    "cleanupAuthorized": true,
+    "completionReceipt": "artifacts/task-deliverables/workbench-events-20261111/completion.json"
+  }
+}
