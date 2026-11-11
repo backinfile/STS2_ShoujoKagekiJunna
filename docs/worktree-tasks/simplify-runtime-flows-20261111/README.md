@@ -230,3 +230,5 @@
 
 - 等待确认期间 Junna main 新增知识牌入牌组动画及相关资料记录，已在任务工作树无冲突同步；双版本重新编译，组合安装复验及最终包哈希记入 Core 项目 out/tmp/simplify-runtime-flows-20261111/validation-integrated.json。
 - 集成目标为三个项目各自 main，保留原检出的未提交内容；最终包、验证日志、截图、录像、哈希、探针与运行脚本保留到 Core 原目录同名 out/tmp 目录后，清理本任务三个工作树和分支。实际回执见同目录 integration.json。
+
+- 合并前另一任务的箭矢速度、生成箭矢表现与悬停预览优化进入 main，任务工作树继续无冲突同步并保留新增工作。使用同步后的 Runtime 复验两版组合安装；Karen 单独安装文件未变，四场景结果与最终包哈希统一记录于 validation-integrated.json。
