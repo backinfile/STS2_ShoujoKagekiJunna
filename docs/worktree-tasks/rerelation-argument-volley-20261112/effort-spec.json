@@ -1,0 +1,39 @@
+[
+  {
+    "id": "JK67",
+    "name": "磨砺身心",
+    "art": "original-scene-jg27-20261102",
+    "original": "磨き続ける心と体",
+    "work": "《プラチナ・フォルテ》；演唱：シークフェルト音楽学院；作词：中村彼方",
+    "url": "https://www.uta-net.com/song/263800/",
+    "adaptation": "用户选定的歌词译名。以持续磨炼身心的训练对应每回合对已布置箭矢增加伤害加成；所学内容是保持姿态、呼吸和核心控制的体能基本功。与白金强音组成训练积累与演出兑现的知识关系。",
+    "artWork": "TV第2话约06:15·课堂核心力量训练",
+    "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=375",
+    "artProof": "复用备用JG27释放的原作裁图 original-scene-jg27-20261102；完整源图 docs/design/assets/card-sources/2026-11-02/tv02-train-614-20261103.png。"
+  },
+  {
+    "id": "JK67B",
+    "name": "白金强音",
+    "art": "original-refit-jk67b-platinum-forte-20261112",
+    "original": "プラチナ・フォルテ",
+    "work": "《プラチナ・フォルテ》；演唱：シークフェルト音楽学院；作词：中村彼方",
+    "url": "https://www.uta-net.com/song/263800/",
+    "adaptation": "用户选定的歌名中文译名；フォルテ指音乐力度记号forte（强）。与磨砺身心共同呈现身体、意志与音乐表现的学习：持续训练使箭矢积蓄力量，等待后的三次攻击把积累转化为有力的连续表达。画面为纯那发出的多道发光箭迹，体现主动进攻和连续抵达。",
+    "artWork": "TV第2话约19:39·纯那的交错箭迹",
+    "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1179",
+    "artProof": "docs/design/assets/card-sources/2026-11-02/tv02-1937-new.jpg；裁切500,80,960,720。"
+  },
+  {
+    "id": "JA118",
+    "name": "立下誓言",
+    "art": "original-refit-ja118-vow-20261112-v2",
+    "original": "密かにたてた誓い",
+    "work": "TV第1话约19:49插曲《世界を灰にするまで》中文字幕；演唱：星见纯那、神乐光、爱城华恋；作词：中村彼方",
+    "url": "https://www.uta-net.com/song/254335/",
+    "adaptation": "名称取已核实字幕“我悄悄立下誓言”中的连续原词“立下誓言”，以持续履行守护演出的决心对应每次展开箭矢获得格挡的能力。配图为纯那握弓面向来敌的近景，突出守备姿态。",
+    "artWork": "TV第2话约21:04·纯那持弓守备近景",
+    "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1264",
+    "artProof": "docs/design/assets/card-sources/2026-11-02/tv02-2102-new.jpg；裁切380,0,1040,780。",
+    "proof": "docs/design/assets/card-sources/2026-11-02/tv01-1947-detail.jpg，播放器19:49，上方字幕“在摧残灵魂的狂风 我悄悄立下誓言”。"
+  }
+]

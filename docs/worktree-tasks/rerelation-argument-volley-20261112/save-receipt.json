@@ -1,0 +1,1114 @@
+{
+  "saved": true,
+  "revision": 5146,
+  "record": {
+    "id": "0fd080a1-23dc-43ae-8c88-698b3d5ae7e9",
+    "seq": 5146,
+    "at": "2026-11-12T07:43:09.551Z",
+    "label": "重选立论与疑问两组的典籍契合、名称和原作卡图",
+    "kind": "契合与配图",
+    "clientId": "codex-rerelation-argument-volley-20261112",
+    "patches": [
+      {
+        "collection": "cards",
+        "uid": "draft_card_JK11",
+        "before": {
+          "uid": "draft_card_JK11",
+          "id": "JK11",
+          "name": "我的话",
+          "system": "partner",
+          "rarity": "普通",
+          "type": "技能",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": null,
+          "upgradedTurns": null,
+          "target": "自己",
+          "text": "知识。获得7点格挡。无论何处，将名人名言放入手牌。",
+          "upgradedText": "知识。获得10点格挡。无论何处，将名人名言放入手牌。",
+          "pool": false,
+          "keywords": [
+            "知识"
+          ],
+          "termIds": [
+            "KW_PARTNER",
+            "EF05",
+            "EF18"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "breakthroughIds": [],
+          "partnerCardIds": [
+            "JK11B"
+          ],
+          "art": "original-refit-jk11-my-words-20261112",
+          "role": "机制引导牌",
+          "direction": "知识牌互相调度",
+          "naming": {
+            "original": "",
+            "chineseOriginal": "我的话",
+            "kind": "已核对中文字幕中的连续原词",
+            "work": "TV第9话约20:23，纯那回应奈奈“是我的话”（名称）；同话约19:09（配图）",
+            "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1223",
+            "adaptation": "纯那在引用过前人的表达后，以自己的理解回答奈奈，将读过、想过的内容变成能支撑自己的话。获得格挡体现以理解和判断稳住自己；取回名人名言，表现自己的表达仍会回到阅读与引用中寻找依据。与名人名言形成吸收、理解和表达的知识关系。配图为TV第9话纯那持书面对奈奈、准备开口的侧面镜头，保留眼镜、发辫与书脊。图片出处：https://www.bilibili.com/bangumi/play/ep232375?t=1149 。原始截图tv09-1908-proof.jpg，播放器19:09；裁切610,75,850,637。"
+          },
+          "notes": "定位：知识兼具，提供防御／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将名人名言放入手牌。",
+          "draftStatus": "候选",
+          "draftBatch": "junna-first-card-draft-20261101-v1",
+          "design": {
+            "port": "防御／运转",
+            "investment": "按当前版本支付1能量。",
+            "risk": "没有可取回对象时仍获得基础格挡。",
+            "reference": "",
+            "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+            "cardReferenceUids": [
+              "draft_card_JK11B"
+            ],
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "both",
+                "cross": false,
+                "ports": [
+                  "defense",
+                  "operation"
+                ]
+              }
+            },
+            "systems": [
+              "partner"
+            ],
+            "route": "知识",
+            "systemRoles": {
+              "partner": {
+                "role": "兼具",
+                "port": "防御／运转"
+              }
+            },
+            "triggerRole": "兼具",
+            "roleReason": "知识兼具，提供防御／运转。",
+            "upgrade": "升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将名人名言放入手牌。",
+            "classification": "机制引导牌"
+          },
+          "extraHoverTips": [],
+          "cardPool": "角色"
+        },
+        "after": {
+          "uid": "draft_card_JK11",
+          "id": "JK11",
+          "name": "言语配合动作",
+          "system": "partner",
+          "rarity": "普通",
+          "type": "技能",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": null,
+          "upgradedTurns": null,
+          "target": "自己",
+          "text": "知识。获得7点格挡。无论何处，将动作配合言语放入手牌。",
+          "upgradedText": "知识。获得10点格挡。无论何处，将动作配合言语放入手牌。",
+          "pool": false,
+          "keywords": [
+            "知识"
+          ],
+          "termIds": [
+            "KW_PARTNER",
+            "EF05",
+            "EF18"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "breakthroughIds": [],
+          "partnerCardIds": [
+            "JK11B"
+          ],
+          "art": "original-refit-jk11-word-action-20261112-v2",
+          "role": "机制引导牌",
+          "direction": "知识牌互相调度",
+          "naming": {
+            "original": "the word to the action",
+            "chineseOriginal": "",
+            "kind": "典籍连续原词的忠实中文翻译",
+            "work": "莎士比亚《哈姆雷特》第三幕第二场：哈姆雷特对演员的表演建议",
+            "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/2/",
+            "adaptation": "纯那在角色访谈中明确提到为角色准备阅读过《哈姆雷特》。本组取第三幕第二场同一句表演原则的两个对称分句：言语须配合动作，动作也须配合言语。防御牌表现收束表达、协调反应以稳住自身，进攻牌表现把说出的话落实为出手；互相召回对应两者不能割裂。配图为剧场版课堂排练中纯那在台阶上调整步态、位置的全身侧面镜头，复用已退役JG31释放的原作素材。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+            "translation": "言语配合动作",
+            "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》",
+            "artSourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+            "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11-source.png；裁切 620,85,900,675；全片09:17（现存截图播放器）",
+            "artProcessing": "原作截图裁切、等比缩放；裁去字幕、水印和播放器界面。"
+          },
+          "notes": "定位：知识兼具，提供防御／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将动作配合言语放入手牌。",
+          "draftStatus": "候选",
+          "draftBatch": "junna-first-card-draft-20261101-v1",
+          "design": {
+            "port": "防御／运转",
+            "investment": "按当前版本支付1能量。",
+            "risk": "没有可取回对象时仍获得基础格挡。",
+            "reference": "",
+            "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+            "cardReferenceUids": [
+              "draft_card_JK11B"
+            ],
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "both",
+                "cross": false,
+                "ports": [
+                  "defense",
+                  "operation"
+                ]
+              }
+            },
+            "systems": [
+              "partner"
+            ],
+            "route": "知识",
+            "systemRoles": {
+              "partner": {
+                "role": "兼具",
+                "port": "防御／运转"
+              }
+            },
+            "triggerRole": "兼具",
+            "roleReason": "知识兼具，提供防御／运转。",
+            "upgrade": "升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将动作配合言语放入手牌。",
+            "classification": "机制引导牌"
+          },
+          "extraHoverTips": [
+            {
+              "id": "junna_knowledge_background",
+              "title": "知识背景",
+              "description": "《哈姆雷特》第三幕第二场，哈姆雷特要求演员让言语与动作互相配合，保持表演自然。"
+            }
+          ],
+          "cardPool": "角色"
+        },
+        "beforeIndex": 40,
+        "afterIndex": 40,
+        "afterVersion": "18:ec557d8327ad7cd58cd96433912dde083631fa8cb48baa5f76115e29f0c51d9b"
+      },
+      {
+        "collection": "cards",
+        "uid": "draft_card_JK11B",
+        "before": {
+          "uid": "draft_card_JK11B",
+          "id": "JK11B",
+          "name": "名人名言",
+          "system": "partner",
+          "rarity": "普通",
+          "type": "攻击",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": null,
+          "upgradedTurns": null,
+          "target": "敌人",
+          "text": "知识。造成9点伤害。无论何处，将我的话放入手牌。",
+          "upgradedText": "知识。造成12点伤害。无论何处，将我的话放入手牌。",
+          "pool": true,
+          "keywords": [
+            "知识"
+          ],
+          "termIds": [
+            "KW_PARTNER",
+            "EF01",
+            "EF18"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "breakthroughIds": [],
+          "partnerCardIds": [
+            "JK11"
+          ],
+          "art": "original-refit-jk11b-maxims-20261112",
+          "role": "知识牌",
+          "direction": "",
+          "naming": {
+            "original": "",
+            "chineseOriginal": "名人名言",
+            "kind": "已核对中文字幕中的连续原词",
+            "work": "2021剧场版·狩猎的Revue，纯那引用名言化为攻击；片段02:50—02:51“名人名言在推着我前进”（名称），02:08（配图）",
+            "url": "https://www.bilibili.com/video/BV1u3411v7i7/?t=170",
+            "adaptation": "名人名言取自纯那对白字幕中的连续原词。知识内容由她实际阅读、引用的前人表达承担，原作中引语直接化为字句与箭矢进攻；造成伤害后取回我的话，表现把阅读所得带回自己的理解与表达。配图为纯那张弓瞄准时，对手身后出现实体“星”字的独立侧向机位，字句属于纯那的攻击，画中大场奈奈是承受者。与旧图俯视青绿色字句的构图区分。图片出处：https://www.bilibili.com/video/BV1u3411v7i7/?t=128 。从公开原作片段02:08提帧，原尺寸1146×478；裁切40,10,552,414，避开字幕和水印。"
+          },
+          "notes": "定位：知识兼具，提供输出／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将我的话放入手牌。",
+          "draftStatus": "候选",
+          "draftBatch": "junna-first-card-draft-20261101-v1",
+          "design": {
+            "port": "输出／运转",
+            "investment": "按当前版本支付1能量。",
+            "risk": "",
+            "reference": "",
+            "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+            "cardReferenceUids": [
+              "draft_card_JK11"
+            ],
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "both",
+                "cross": false,
+                "ports": [
+                  "output",
+                  "operation"
+                ]
+              }
+            },
+            "systems": [
+              "partner"
+            ],
+            "route": "知识",
+            "systemRoles": {
+              "partner": {
+                "role": "兼具",
+                "port": "输出／运转"
+              }
+            },
+            "triggerRole": "兼具",
+            "roleReason": "知识兼具，提供输出／运转。",
+            "upgrade": "升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将我的话放入手牌。",
+            "classification": "知识牌"
+          },
+          "extraHoverTips": [],
+          "cardPool": "角色"
+        },
+        "after": {
+          "uid": "draft_card_JK11B",
+          "id": "JK11B",
+          "name": "动作配合言语",
+          "system": "partner",
+          "rarity": "普通",
+          "type": "攻击",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": null,
+          "upgradedTurns": null,
+          "target": "敌人",
+          "text": "知识。造成9点伤害。无论何处，将言语配合动作放入手牌。",
+          "upgradedText": "知识。造成12点伤害。无论何处，将言语配合动作放入手牌。",
+          "pool": true,
+          "keywords": [
+            "知识"
+          ],
+          "termIds": [
+            "KW_PARTNER",
+            "EF01",
+            "EF18"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "breakthroughIds": [],
+          "partnerCardIds": [
+            "JK11"
+          ],
+          "art": "original-refit-jk11b-action-word-20261112-v2",
+          "role": "知识牌",
+          "direction": "",
+          "naming": {
+            "original": "Suit the action to the word",
+            "chineseOriginal": "",
+            "kind": "典籍连续原词的忠实中文翻译",
+            "work": "莎士比亚《哈姆雷特》第三幕第二场：哈姆雷特对演员的表演建议",
+            "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/2/",
+            "adaptation": "纯那在角色访谈中明确提到阅读过《哈姆雷特》。采用同一句表演建议的前半句；身体把言语落实为行动，对应攻击出手；取回言语配合动作，与另一半原则构成互相校正的知识关系。配图采用剧场版纯那背向镜头，向左前方张弓、将引语变成射击的原作画面，保留持弓手、弓身和拉弦的右臂。与化作流星的箭的正面近景使用不同机位和动作阶段。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+            "translation": "动作配合言语",
+            "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》",
+            "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=128",
+            "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11B-source.png；裁切 490,42,511,383；公开片段02:08",
+            "artProcessing": "原作截图裁切、等比缩放；裁去字幕、水印和播放器界面。"
+          },
+          "notes": "定位：知识兼具，提供输出／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将言语配合动作放入手牌。",
+          "draftStatus": "候选",
+          "draftBatch": "junna-first-card-draft-20261101-v1",
+          "design": {
+            "port": "输出／运转",
+            "investment": "按当前版本支付1能量。",
+            "risk": "",
+            "reference": "",
+            "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+            "cardReferenceUids": [
+              "draft_card_JK11"
+            ],
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "both",
+                "cross": false,
+                "ports": [
+                  "output",
+                  "operation"
+                ]
+              }
+            },
+            "systems": [
+              "partner"
+            ],
+            "route": "知识",
+            "systemRoles": {
+              "partner": {
+                "role": "兼具",
+                "port": "输出／运转"
+              }
+            },
+            "triggerRole": "兼具",
+            "roleReason": "知识兼具，提供输出／运转。",
+            "upgrade": "升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将言语配合动作放入手牌。",
+            "classification": "知识牌"
+          },
+          "extraHoverTips": [
+            {
+              "id": "junna_knowledge_background",
+              "title": "知识背景",
+              "description": "《哈姆雷特》第三幕第二场，哈姆雷特要求演员让动作与言语相合，并反过来约束言语。"
+            }
+          ],
+          "cardPool": "角色"
+        },
+        "beforeIndex": 41,
+        "afterIndex": 41,
+        "afterVersion": "20:990bc7441045ebe768c0987ceb0289a0c9e8b00894dd3952ffd4b1f1a8c375a7"
+      },
+      {
+        "collection": "cards",
+        "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200",
+        "before": {
+          "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200",
+          "id": "JK200",
+          "name": "你一直在看什么",
+          "system": "partner",
+          "rarity": "普通",
+          "type": "箭矢",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": 1,
+          "upgradedTurns": 1,
+          "target": "所有敌人",
+          "text": "知识。对所有敌人造成7点伤害2次。",
+          "upgradedText": "知识。对所有敌人造成9点伤害2次。",
+          "pool": false,
+          "cardPool": "角色",
+          "keywords": [
+            "知识"
+          ],
+          "termIds": [
+            "KW_PARTNER",
+            "EF03",
+            "EF40"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "effectIds": [],
+          "ruleIds": [],
+          "breakthroughIds": [],
+          "partnerCardIds": [
+            "JK200B"
+          ],
+          "art": "original-fit-jk200-20261111",
+          "extraHoverTips": [],
+          "character": "星见纯那",
+          "draftBatch": "junna-common-one-cost-aoe-knowledge-20261108",
+          "draftStatus": "普通1费知识群攻候选",
+          "role": "机制引导牌",
+          "direction": "带着尚未放下的疑问，针对多个观点发起质疑。",
+          "naming": {
+            "original": "あなた今まで何 見てたの？",
+            "kind": "原作完整问句的忠实中文翻译",
+            "work": "《ペン：力：刀》纯那声部",
+            "url": "https://www.uta-net.com/song/305229/",
+            "adaptation": "取纯那主动追问对方究竟看见了什么的原曲问句。以连续的群体伤害表现面向多种判断的有力质问；关联的疑问将问题记录下来、整理后续回应，形成提问与追索的知识关系。配图取纯那在交锋中主动挥刀的原作动作。",
+            "chineseOriginal": "",
+            "artWork": "2021剧场版·狩猎的Revue片段约06:09",
+            "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=369",
+            "artProof": "docs/design/assets/card-sources/2026-11-02/film-hunt-608.jpg；裁切 720,140,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK200.jpg",
+            "artProcessing": "原作截图裁切并按比例缩放。",
+            "translation": "你一直在看什么"
+          },
+          "design": {
+            "classification": "机制引导牌",
+            "route": "知识",
+            "systems": [
+              "partner"
+            ],
+            "groupId": "GROUP_JK200",
+            "groupTheme": "保留疑问",
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "both",
+                "ports": [
+                  "output"
+                ],
+                "cross": false
+              }
+            },
+            "systemRoles": {
+              "partner": {
+                "role": "兼具",
+                "port": "输出"
+              }
+            },
+            "triggerRole": "兼具",
+            "port": "输出",
+            "roleReason": "副牌在手时支撑主牌的群攻；打出副牌可以补牌，但会失去当前的持有条件。",
+            "structure": "保留疑问",
+            "similarity": "归谬／假设为单体两段，本组为单段群体固定加值，伤害加成利用方式不同；副牌要支付1费换较强过牌。",
+            "rules": "质疑在每份伤害批次开始时检查自己手牌是否有同名疑问；存在则本批每个目标的基础伤害增加4，再按通常流程应用伤害加成等修正。只有基础伤害增加，不修改存储的伤害加成。疑问离手后，之后批次重新检查；临时同名疑问也可满足条件。疑问自身保留，打出抽牌后消耗。",
+            "sourceRevision": 4071,
+            "sourceDocuments": [
+              "<local-path>",
+              "<local-path>",
+              "<local-path>",
+              "<local-path>"
+            ],
+            "balance": "备用纸面候选初值。",
+            "textComplexity": "低",
+            "namingStatus": "常用名称暂定，配图待选。",
+            "review": "主牌固定1费、普通、即时攻击、所有敌人；基础与升级费用保持，关联成员同稀有度独立升级。本批不加入2费及以上出牌扳机或普通加速。"
+          },
+          "notes": "组结构：保留疑问。\n定位：副牌在手时支撑主牌的群攻；打出副牌可以补牌，但会失去当前的持有条件。\n相近牌：归谬／假设为单体两段，本组为单段群体固定加值，伤害加成利用方式不同；副牌要支付1费换较强过牌。\n结算：质疑在每份伤害批次开始时检查自己手牌是否有同名疑问；存在则本批每个目标的基础伤害增加4，再按通常流程应用伤害加成等修正。只有基础伤害增加，不修改存储的伤害加成。疑问离手后，之后批次重新检查；临时同名疑问也可满足条件。疑问自身保留，打出抽牌后消耗。",
+          "arrowSubtype": "技能"
+        },
+        "after": {
+          "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200",
+          "id": "JK200",
+          "name": "吹吧，狂风",
+          "system": "partner",
+          "rarity": "普通",
+          "type": "箭矢",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": 1,
+          "upgradedTurns": 1,
+          "target": "所有敌人",
+          "text": "知识。对所有敌人造成7点伤害2次。",
+          "upgradedText": "知识。对所有敌人造成9点伤害2次。",
+          "pool": false,
+          "cardPool": "角色",
+          "keywords": [
+            "知识"
+          ],
+          "termIds": [
+            "KW_PARTNER",
+            "EF03",
+            "EF40"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "effectIds": [],
+          "ruleIds": [],
+          "breakthroughIds": [],
+          "partnerCardIds": [
+            "JK200B"
+          ],
+          "art": "original-refit-jk200-blow-winds-20261112-v2",
+          "extraHoverTips": [
+            {
+              "id": "junna_knowledge_background",
+              "title": "知识背景",
+              "description": "《李尔王》第三幕第二场，李尔在暴风雨中呼喊狂风、雷电与暴雨。"
+            }
+          ],
+          "character": "星见纯那",
+          "draftBatch": "junna-common-one-cost-aoe-knowledge-20261108",
+          "draftStatus": "普通1费知识群攻候选",
+          "role": "机制引导牌",
+          "direction": "以扩散的言叶呼喊对应两次群体攻击。",
+          "naming": {
+            "original": "Blow winds",
+            "kind": "典籍连续原词的忠实中文翻译",
+            "work": "莎士比亚《李尔王》第三幕第二场：暴风雨中的李尔",
+            "url": "https://www.folger.edu/explore/shakespeares-works/king-lear/read/3/2/",
+            "adaptation": "纯那在角色访谈中明确提到读过《李尔王》。名称为暴风雨场景开头呼喊的忠实中文翻译，以扩散的言叶对应箭矢完成后对所有敌人连续造成伤害；同场的忍耐的典范先承受压力、积蓄力量。配图采用纯那引语化为青绿色字句、向舞台四周铺开的原作攻击结果，裁切只保留字句与轨迹，画中攻击归属纯那。复用旧驳论释放的素材并按当前群攻箭矢重新解释。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+            "chineseOriginal": "",
+            "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》",
+            "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=138",
+            "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK200-source.png；裁切 1080,100,720,540；旧截图播放器02:18",
+            "artProcessing": "原作截图裁切、等比缩放；裁去字幕、水印和播放器界面。",
+            "translation": "吹吧，狂风"
+          },
+          "design": {
+            "classification": "机制引导牌",
+            "route": "知识",
+            "systems": [
+              "partner"
+            ],
+            "groupId": "GROUP_JK200",
+            "groupTheme": "暴风雨中的呼喊与忍耐",
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "both",
+                "ports": [
+                  "output"
+                ],
+                "cross": false
+              }
+            },
+            "systemRoles": {
+              "partner": {
+                "role": "兼具",
+                "port": "输出"
+              }
+            },
+            "triggerRole": "兼具",
+            "port": "输出",
+            "roleReason": "完成后造成两次群体伤害，利用关联牌提供的伤害加成。",
+            "structure": "风雨与忍耐",
+            "similarity": "同组以防御和伤害加成支撑两次群体伤害。",
+            "rules": "按当前牌面结算：吹吧，狂风为1回合技能箭矢，完成时对所有敌人造成7点伤害2次，升级为9点伤害2次；忍耐的典范获得5点格挡，所有手牌和箭矢获得2点伤害加成，升级为7点格挡和3点伤害加成。每张牌独立使用及升级。",
+            "sourceRevision": 4071,
+            "sourceDocuments": [
+              "<local-path>",
+              "<local-path>",
+              "<local-path>",
+              "<local-path>"
+            ],
+            "balance": "备用纸面候选初值。",
+            "textComplexity": "低",
+            "namingStatus": "已核对角色阅读联系、典籍原词与原作配图。",
+            "review": "保留当前基础及升级牌面、类型、费用、回合、入池状态和取得列表。"
+          },
+          "notes": "组结构：风雨与忍耐。\n出处：莎士比亚《李尔王》第三幕第二场：暴风雨中的李尔。\n结算：按当前牌面结算：吹吧，狂风为1回合技能箭矢，完成时对所有敌人造成7点伤害2次，升级为9点伤害2次；忍耐的典范获得5点格挡，所有手牌和箭矢获得2点伤害加成，升级为7点格挡和3点伤害加成。每张牌独立使用及升级。",
+          "arrowSubtype": "技能"
+        },
+        "beforeIndex": 847,
+        "afterIndex": 847,
+        "afterVersion": "17:e20b81fadd72ece944eb8fdde4b3e157548684424ddec4711954a370a1bfc073"
+      },
+      {
+        "collection": "cards",
+        "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200B",
+        "before": {
+          "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200B",
+          "id": "JK200B",
+          "name": "疑问",
+          "system": "partner",
+          "rarity": "普通",
+          "type": "技能",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": null,
+          "upgradedTurns": null,
+          "target": "自己",
+          "text": "知识。获得5点格挡。所有手牌和箭矢获得2点伤害加成。",
+          "upgradedText": "知识。获得7点格挡。所有手牌和箭矢获得3点伤害加成。",
+          "pool": true,
+          "cardPool": "角色",
+          "keywords": [
+            "知识",
+            "保留",
+            "消耗"
+          ],
+          "termIds": [
+            "KW_PARTNER",
+            "KW_RETAIN",
+            "EF06",
+            "EF27"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "effectIds": [],
+          "ruleIds": [],
+          "breakthroughIds": [],
+          "partnerCardIds": [
+            "JK200"
+          ],
+          "art": "original-scene-jk10-observation-note-frame-20261103",
+          "extraHoverTips": [],
+          "character": "星见纯那",
+          "draftBatch": "junna-common-one-cost-aoe-knowledge-20261108",
+          "draftStatus": "普通1费知识群攻候选",
+          "role": "知识关联牌",
+          "direction": "可以把问题保留在心中，也可以进一步追索新的内容。",
+          "naming": {
+            "original": "",
+            "kind": "常用概念、动作或物件名称",
+            "work": "TV第2话约09:42的观摩记录与笔记（配图）",
+            "url": "https://www.bilibili.com/bangumi/play/ep232368?t=582",
+            "adaptation": "把尚未理解的问题记下来，检视已有判断并整理接下来要回应的内容。格挡对应审慎应对，所有手牌获得伤害加成对应问题带动后续论证的准备；与「你一直在看什么」组成提出问题和形成回应的知识关系。配图采用手持笔记、准备记录的原作细节。",
+            "chineseOriginal": ""
+          },
+          "design": {
+            "classification": "知识关联牌",
+            "route": "知识",
+            "systems": [
+              "partner"
+            ],
+            "groupId": "GROUP_JK200",
+            "groupTheme": "保留疑问",
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "trigger",
+                "ports": [
+                  "operation"
+                ],
+                "cross": false
+              }
+            },
+            "systemRoles": {
+              "partner": {
+                "role": "触发",
+                "port": "运转"
+              }
+            },
+            "triggerRole": "触发",
+            "port": "运转",
+            "roleReason": "副牌在手时支撑主牌的群攻；打出副牌可以补牌，但会失去当前的持有条件。",
+            "structure": "保留疑问",
+            "similarity": "归谬／假设为单体两段，本组为单段群体固定加值，伤害加成利用方式不同；副牌要支付1费换较强过牌。",
+            "rules": "「你一直在看什么」在每份伤害批次开始时检查自己手牌是否有同名疑问；存在则本批每个目标的基础伤害增加4，再按通常流程应用伤害加成等修正。只有基础伤害增加，不修改存储的伤害加成。疑问离手后，之后批次重新检查；临时同名疑问也可满足条件。疑问自身保留，打出抽牌后消耗。",
+            "sourceRevision": 4071,
+            "sourceDocuments": [
+              "<local-path>",
+              "<local-path>",
+              "<local-path>",
+              "<local-path>"
+            ],
+            "balance": "备用纸面候选初值。",
+            "textComplexity": "低",
+            "namingStatus": "常用名称暂定，配图待选。",
+            "review": "主牌固定1费、普通、即时攻击、所有敌人；基础与升级费用保持，关联成员同稀有度独立升级。本批不加入2费及以上出牌扳机或普通加速。"
+          },
+          "notes": "组结构：保留疑问。\n定位：副牌在手时支撑主牌的群攻；打出副牌可以补牌，但会失去当前的持有条件。\n相近牌：归谬／假设为单体两段，本组为单段群体固定加值，伤害加成利用方式不同；副牌要支付1费换较强过牌。\n结算：「你一直在看什么」在每份伤害批次开始时检查自己手牌是否有同名疑问；存在则本批每个目标的基础伤害增加4，再按通常流程应用伤害加成等修正。只有基础伤害增加，不修改存储的伤害加成。疑问离手后，之后批次重新检查；临时同名疑问也可满足条件。疑问自身保留，打出抽牌后消耗。"
+        },
+        "after": {
+          "uid": "junna-common-one-cost-aoe-knowledge-20261108_JK200B",
+          "id": "JK200B",
+          "name": "忍耐的典范",
+          "system": "partner",
+          "rarity": "普通",
+          "type": "技能",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": null,
+          "upgradedTurns": null,
+          "target": "自己",
+          "text": "知识。获得5点格挡。所有手牌和箭矢获得2点伤害加成。",
+          "upgradedText": "知识。获得7点格挡。所有手牌和箭矢获得3点伤害加成。",
+          "pool": true,
+          "cardPool": "角色",
+          "keywords": [
+            "知识",
+            "保留",
+            "消耗"
+          ],
+          "termIds": [
+            "KW_PARTNER",
+            "KW_RETAIN",
+            "EF06",
+            "EF27"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "effectIds": [],
+          "ruleIds": [],
+          "breakthroughIds": [],
+          "partnerCardIds": [
+            "JK200"
+          ],
+          "art": "original-refit-jk200b-patience-20261112-v2",
+          "extraHoverTips": [
+            {
+              "id": "junna_knowledge_background",
+              "title": "知识背景",
+              "description": "《李尔王》第三幕第二场，李尔在风雨中宣称要成为忍耐的典范，随后又继续激烈呼喊。"
+            }
+          ],
+          "character": "星见纯那",
+          "draftBatch": "junna-common-one-cost-aoe-knowledge-20261108",
+          "draftStatus": "普通1费知识群攻候选",
+          "role": "知识关联牌",
+          "direction": "承受眼前压力，为后续手牌与箭矢积蓄反击力量。",
+          "naming": {
+            "original": "the pattern of all patience",
+            "kind": "典籍连续原词的忠实中文翻译",
+            "work": "莎士比亚《李尔王》第三幕第二场：李尔宣称要成为忍耐的典范",
+            "url": "https://www.folger.edu/explore/shakespeares-works/king-lear/read/3/2/",
+            "adaptation": "纯那在角色访谈中明确提到读过《李尔王》。名称取暴风雨场景中李尔的原话；忍耐与风雨中的激烈呼喊并置，格挡对应承受眼前压力，手牌及箭矢伤害加成对应为后续反击积蓄力量。配图为纯那正面架刀承受奈奈的压力、仍睁眼直视对手的原作近景，保留眼镜、持械手与右侧交锋刀刃。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+            "chineseOriginal": "",
+            "translation": "忍耐的典范",
+            "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》",
+            "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=427",
+            "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK200B-source.png；裁切 230,0,637,478；公开片段07:07",
+            "artProcessing": "原作截图裁切、等比缩放；裁去字幕、水印和播放器界面。"
+          },
+          "design": {
+            "classification": "知识关联牌",
+            "route": "知识",
+            "systems": [
+              "partner"
+            ],
+            "groupId": "GROUP_JK200",
+            "groupTheme": "暴风雨中的呼喊与忍耐",
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "trigger",
+                "ports": [
+                  "operation"
+                ],
+                "cross": false
+              }
+            },
+            "systemRoles": {
+              "partner": {
+                "role": "触发",
+                "port": "运转"
+              }
+            },
+            "triggerRole": "触发",
+            "port": "运转",
+            "roleReason": "获得格挡，并为所有手牌和箭矢提供伤害加成。",
+            "structure": "风雨与忍耐",
+            "similarity": "同组以防御和伤害加成支撑两次群体伤害。",
+            "rules": "按当前牌面结算：吹吧，狂风为1回合技能箭矢，完成时对所有敌人造成7点伤害2次，升级为9点伤害2次；忍耐的典范获得5点格挡，所有手牌和箭矢获得2点伤害加成，升级为7点格挡和3点伤害加成。每张牌独立使用及升级。",
+            "sourceRevision": 4071,
+            "sourceDocuments": [
+              "<local-path>",
+              "<local-path>",
+              "<local-path>",
+              "<local-path>"
+            ],
+            "balance": "备用纸面候选初值。",
+            "textComplexity": "低",
+            "namingStatus": "已核对角色阅读联系、典籍原词与原作配图。",
+            "review": "保留当前基础及升级牌面、类型、费用、回合、入池状态和取得列表。"
+          },
+          "notes": "组结构：风雨与忍耐。\n出处：莎士比亚《李尔王》第三幕第二场：李尔宣称要成为忍耐的典范。\n结算：按当前牌面结算：吹吧，狂风为1回合技能箭矢，完成时对所有敌人造成7点伤害2次，升级为9点伤害2次；忍耐的典范获得5点格挡，所有手牌和箭矢获得2点伤害加成，升级为7点格挡和3点伤害加成。每张牌独立使用及升级。"
+        },
+        "beforeIndex": 848,
+        "afterIndex": 848,
+        "afterVersion": "23:352b6adc41dece72839063e5fba71c5c2aaf870e6b983ad1864ae7a16e880a53"
+      },
+      {
+        "collection": "partnerGroups",
+        "uid": "draft_group_JK11",
+        "before": {
+          "uid": "draft_group_JK11",
+          "id": "GROUP_JK11",
+          "title": "我的话／名人名言",
+          "mainCardId": "JK11B",
+          "grantedCardIds": [
+            "JK11"
+          ],
+          "grantedCardCounts": {
+            "JK11": 1
+          }
+        },
+        "after": {
+          "uid": "draft_group_JK11",
+          "id": "GROUP_JK11",
+          "title": "言语配合动作／动作配合言语",
+          "mainCardId": "JK11B",
+          "grantedCardIds": [
+            "JK11"
+          ],
+          "grantedCardCounts": {
+            "JK11": 1
+          }
+        },
+        "beforeIndex": 5,
+        "afterIndex": 5,
+        "afterVersion": "5:57ed50181218d7cef41820cfbd0f502179741cff42147c876bc883bf10e10264"
+      },
+      {
+        "collection": "partnerGroups",
+        "uid": "junna-common-one-cost-aoe-knowledge-20261108_GROUP_JK200",
+        "before": {
+          "uid": "junna-common-one-cost-aoe-knowledge-20261108_GROUP_JK200",
+          "id": "GROUP_JK200",
+          "title": "疑问／你一直在看什么",
+          "mainCardId": "JK200B",
+          "grantedCardIds": [
+            "JK200"
+          ],
+          "grantedCardCounts": {
+            "JK200": 1
+          },
+          "structure": "质疑与辨析",
+          "draftBatch": "junna-common-one-cost-aoe-knowledge-20261108",
+          "reference": "《ペン：力：刀》纯那声部的问句；两张牌以提出问题和整理回应建立知识关系。",
+          "notes": "取得疑问时，同时获得1张你一直在看什么；两张牌独立使用和升级。疑问提供格挡，并强化所有手牌和箭矢；你一直在看什么完成后对所有敌人造成两次伤害。"
+        },
+        "after": {
+          "uid": "junna-common-one-cost-aoe-knowledge-20261108_GROUP_JK200",
+          "id": "GROUP_JK200",
+          "title": "忍耐的典范／吹吧，狂风",
+          "mainCardId": "JK200B",
+          "grantedCardIds": [
+            "JK200"
+          ],
+          "grantedCardCounts": {
+            "JK200": 1
+          },
+          "structure": "风雨与忍耐",
+          "draftBatch": "junna-common-one-cost-aoe-knowledge-20261108",
+          "reference": "《李尔王》第三幕第二场；纯那在角色访谈中明确提及阅读本作：https://hon-hikidashi.jp/event/42802/",
+          "notes": "取得忍耐的典范时，同时获得1张吹吧，狂风；两张牌独立使用和升级。忍耐的典范提供格挡，并强化所有手牌和箭矢；吹吧，狂风完成后对所有敌人造成两次伤害。"
+        },
+        "beforeIndex": 151,
+        "afterIndex": 151,
+        "afterVersion": "5:7f83185879bb4c8ac74fc82a4f5a2c2e37683724e7aa1a2e8f3c187fa5ac39a5"
+      },
+      {
+        "collection": "partnerGroups",
+        "uid": "knowledge-initial-lists-20261110_JK11",
+        "before": {
+          "uid": "knowledge-initial-lists-20261110_JK11",
+          "id": "INITIAL_KNOWLEDGE_LIST_JK11",
+          "title": "我的话",
+          "mainCardId": "JK11",
+          "grantedCardIds": [
+            "JK11B"
+          ],
+          "grantedCardCounts": {
+            "JK11B": 1
+          },
+          "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
+        },
+        "after": {
+          "uid": "knowledge-initial-lists-20261110_JK11",
+          "id": "INITIAL_KNOWLEDGE_LIST_JK11",
+          "title": "言语配合动作",
+          "mainCardId": "JK11",
+          "grantedCardIds": [
+            "JK11B"
+          ],
+          "grantedCardCounts": {
+            "JK11B": 1
+          },
+          "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
+        },
+        "beforeIndex": 230,
+        "afterIndex": 230,
+        "afterVersion": "3:8a8bda125149cadf1d03b955538370a234fa263021fb57bc3f88d83269e1f839"
+      },
+      {
+        "collection": "partnerGroups",
+        "uid": "knowledge-initial-lists-20261110_JK200B",
+        "before": {
+          "uid": "knowledge-initial-lists-20261110_JK200B",
+          "id": "INITIAL_KNOWLEDGE_LIST_JK200B",
+          "title": "你一直在看什么",
+          "mainCardId": "JK200",
+          "grantedCardIds": [
+            "JK200B"
+          ],
+          "grantedCardCounts": {
+            "JK200B": 1
+          },
+          "notes": "此列表供你一直在看什么作为取得入口时使用，关联疑问1张。每张牌独立保存自己的关联列表；原生组以疑问为入池主牌。"
+        },
+        "after": {
+          "uid": "knowledge-initial-lists-20261110_JK200B",
+          "id": "INITIAL_KNOWLEDGE_LIST_JK200B",
+          "title": "吹吧，狂风",
+          "mainCardId": "JK200",
+          "grantedCardIds": [
+            "JK200B"
+          ],
+          "grantedCardCounts": {
+            "JK200B": 1
+          },
+          "notes": "此列表供吹吧，狂风作为取得入口时使用，关联忍耐的典范1张。每张牌独立保存自己的关联列表；原生组以忍耐的典范为入池主牌。"
+        },
+        "beforeIndex": 253,
+        "afterIndex": 253,
+        "afterVersion": "3:875264eabcb1e4bcd09b77dc40eaa62bc9c2c5154e950fa099546480474bb333"
+      },
+      {
+        "collection": "styles",
+        "uid": "junna_style_confirmed_names",
+        "before": {
+          "uid": "junna_style_confirmed_names",
+          "id": "STYLE_CONFIRMED_NAMES",
+          "name": "已确认的用词与原句",
+          "content": "“要点”替代“提纲”，后者因用户指出的谐音问题弃用。巨大箭矢采用已核对的原作对白“话语就是我的力量”；“言叶之力”是自行缩写的错误用词，后续沿用原句。已被用户否定的名称与契合在重新分配时保留否定记录，重新选用已核对的原作原词。\n“掌舵”替代卡名“操船”；出处原文仍记录日文操船。\n“借星”为自造词，弃用，JH31恢复“筹备”。备用池与已删除卡牌的名称在复用时，同样核对原作出处，遵循“卡名与原作出处”约定。星星主题也采用已核对、原作特征鲜明的原作表达。\n“戏中戏”已被用户否定。JA108现用“星星指引我前行”，JA108B现用已确认原句“话语就是我的力量”。JK122现用“强于刀刃”。JK122B原名“谬误”，临时名“害怕失败”已被用户否定，现按用户确认改为“渴望”，取TV第2话原作演目“渇望のレヴュー”中的用词。“绝望的轮回”此前被用户否定用于此牌。用户后续澄清，名称可以取自所有角色的歌词和台词，只要单词与牌效契合，卡图仍使用纯那相关内容。“失去闪耀”已被用户否定，不再用于此牌。“星罪”因与Karen Mod已有卡名重名弃用。“借来的台词”因诅咒感不足被用户否定。诅咒命名须从名称本身及对应剧情体现惩罚、禁锢、损失或绝望等负面处境。\n上述记录用于保留已确认的取舍；复用名字、契合和素材时，仍按“契合设计、命名与卡图完整流程”核对当前牌效与原作出处。\nJH19由“双星”改为“烁星”，JB06由“招架”改为“想守护的天空”，均为避开Karen Mod重名而重选已核对的原作表达。通用基础牌名“打击”“防御”及牌堆功能选项按用户确认保留。主题牌定名前逐项核对Karen Mod当前中文卡名。\nKaren Mod的卡图同样纳入避重。JK122B原星形重锤击碎星石的图片与Karen的“宽恕”来自同一帧，绝望女神镜头又因属于奈奈的专属处境弃用。金色面具曾用于临时契合，现配图为TV第2话约13:17纯那在保健室皱眉沉思的近景。原21:37眼镜反光近景按用户要求替换。\nJK314“人生最大的失败”按用户确认改为“耀眼的身姿”，用于表现关联负担耗尽后保留下来的进攻成果。\nJK314“耀眼的身姿”采用TV第2话约21:40聚光灯下纯那跃起挥弓的全身镜头，由JA57“星光跃动”重新分配。JA57同步改用TV第2话约19:11纯那舞台中的蓝色发光箭阵与星光轨迹画面。\nJK275“证伪”改为纯那在狩猎的Revue中说出的原词“全部砍碎”，以对既定角色与剧本的反驳对应群体攻击。JZ03改为歌词原词“永不折断的笔”（折れないペン），以语言与意志化为箭矢的契合表现先古版更直接的出手。\nJK274“审辩”按用户确认改为“我的舞台”，取TV第2话纯那对白“私の舞台を終わらせないために”中的连续原词“私の舞台”。“知道自己的无知”因名字过长被用户否定，“聪明”也已被用户否定。卡图采用同话约21:13纯那持弓站在聚光灯下迎向华恋的画面。\nJK48／JK48B按用户确认由“引经据典／精读”改为“必须战斗的时刻／必须守护的事物”，分别取《情熱の目覚めるとき》相邻歌词中的“戦うべきとき／守るべきもの”。两名采用七字对称句式，分别突出主动战斗与守护；卡图分别表现纯那主动挥刀与架刀接剑。此前“一切知识皆有可能／知识会帮助自己”和“他人的话语／自己的话语”两组成对候选未被本组采用。JK48原约06:09的闭眼后仰构图因用户指出更像受击而弃用；随后金色前冲重构图也因用户要求不要自行绘制而停用。用户本次明确上传并确认青绿色舞台的前景挥刀图，现按该图使用，并按用户随后要求仅去除背景左右两侧的青绿色尖状物，保留所选图的主体与构图。防御图沿用确认镜头的原作裁切。",
+          "category": "契合与命名"
+        },
+        "after": {
+          "uid": "junna_style_confirmed_names",
+          "id": "STYLE_CONFIRMED_NAMES",
+          "name": "已确认的用词与原句",
+          "content": "“要点”替代“提纲”，后者因用户指出的谐音问题弃用。巨大箭矢采用已核对的原作对白“话语就是我的力量”；“言叶之力”是自行缩写的错误用词，后续沿用原句。已被用户否定的名称与契合在重新分配时保留否定记录，重新选用已核对的原作原词。\n“掌舵”替代卡名“操船”；出处原文仍记录日文操船。\n“借星”为自造词，弃用，JH31恢复“筹备”。备用池与已删除卡牌的名称在复用时，同样核对原作出处，遵循“卡名与原作出处”约定。星星主题也采用已核对、原作特征鲜明的原作表达。\n“戏中戏”已被用户否定。JA108现用“星星指引我前行”，JA108B现用已确认原句“话语就是我的力量”。JK122现用“强于刀刃”。JK122B原名“谬误”，临时名“害怕失败”已被用户否定，现按用户确认改为“渴望”，取TV第2话原作演目“渇望のレヴュー”中的用词。“绝望的轮回”此前被用户否定用于此牌。用户后续澄清，名称可以取自所有角色的歌词和台词，只要单词与牌效契合，卡图仍使用纯那相关内容。“失去闪耀”已被用户否定，不再用于此牌。“星罪”因与Karen Mod已有卡名重名弃用。“借来的台词”因诅咒感不足被用户否定。诅咒命名须从名称本身及对应剧情体现惩罚、禁锢、损失或绝望等负面处境。\n上述记录用于保留已确认的取舍；复用名字、契合和素材时，仍按“契合设计、命名与卡图完整流程”核对当前牌效与原作出处。\nJH19由“双星”改为“烁星”，JB06由“招架”改为“想守护的天空”，均为避开Karen Mod重名而重选已核对的原作表达。通用基础牌名“打击”“防御”及牌堆功能选项按用户确认保留。主题牌定名前逐项核对Karen Mod当前中文卡名。\nKaren Mod的卡图同样纳入避重。JK122B原星形重锤击碎星石的图片与Karen的“宽恕”来自同一帧，绝望女神镜头又因属于奈奈的专属处境弃用。金色面具曾用于临时契合，现配图为TV第2话约13:17纯那在保健室皱眉沉思的近景。原21:37眼镜反光近景按用户要求替换。\nJK314“人生最大的失败”按用户确认改为“耀眼的身姿”，用于表现关联负担耗尽后保留下来的进攻成果。\nJK314“耀眼的身姿”采用TV第2话约21:40聚光灯下纯那跃起挥弓的全身镜头，由JA57“星光跃动”重新分配。JA57同步改用TV第2话约19:11纯那舞台中的蓝色发光箭阵与星光轨迹画面。\nJK275“证伪”改为纯那在狩猎的Revue中说出的原词“全部砍碎”，以对既定角色与剧本的反驳对应群体攻击。JZ03改为歌词原词“永不折断的笔”（折れないペン），以语言与意志化为箭矢的契合表现先古版更直接的出手。\nJK274“审辩”按用户确认改为“我的舞台”，取TV第2话纯那对白“私の舞台を終わらせないために”中的连续原词“私の舞台”。“知道自己的无知”因名字过长被用户否定，“聪明”也已被用户否定。卡图采用同话约21:13纯那持弓站在聚光灯下迎向华恋的画面。\nJK48／JK48B按用户确认由“引经据典／精读”改为“必须战斗的时刻／必须守护的事物”，分别取《情熱の目覚めるとき》相邻歌词中的“戦うべきとき／守るべきもの”。两名采用七字对称句式，分别突出主动战斗与守护；卡图分别表现纯那主动挥刀与架刀接剑。此前“一切知识皆有可能／知识会帮助自己”和“他人的话语／自己的话语”两组成对候选未被本组采用。JK48原约06:09的闭眼后仰构图因用户指出更像受击而弃用；随后金色前冲重构图也因用户要求不要自行绘制而停用。用户本次明确上传并确认青绿色舞台的前景挥刀图，现按该图使用，并按用户随后要求仅去除背景左右两侧的青绿色尖状物，保留所选图的主体与构图。防御图沿用确认镜头的原作裁切。\nJK11／JK11B的“我的话／名人名言”成对候选及配图已被用户否定；原“立论／驳论”也按用户要求重选。本轮采用《哈姆雷特》第三幕第二场“言语配合动作／动作配合言语”，保留互相召回的牌效。JK200／JK200B原“你一直在看什么／疑问”组按用户要求整体重选，本轮采用《李尔王》第三幕第二场“吹吧，狂风／忍耐的典范”。两部典籍的直接阅读联系均见2024年8月8日角色访谈。",
+          "category": "契合与命名"
+        },
+        "beforeIndex": 23,
+        "afterIndex": 23,
+        "afterVersion": "23:04b9e9789184a293569cea4f75996a7135aef1ad694478fc096cabebc609dca7"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "fit_card_draft_card_JK11",
+        "before": {
+          "uid": "fit_card_draft_card_JK11",
+          "id": "FIT_CARD_JK11",
+          "name": "我的话",
+          "theme": "从名言到自己的表达",
+          "text": "读过、想过的话成为自己的判断，再回到前人的表达中寻找依据。",
+          "original": "",
+          "source": "TV第9话约20:23，纯那回应奈奈“是我的话”（名称）；同话约19:09（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1223",
+          "art": "original-refit-jk11-my-words-20261112",
+          "cardIds": [
+            "JK11"
+          ],
+          "notes": "纯那在引用过前人的表达后，以自己的理解回答奈奈，将读过、想过的内容变成能支撑自己的话。获得格挡体现以理解和判断稳住自己；取回名人名言，表现自己的表达仍会回到阅读与引用中寻找依据。与名人名言形成吸收、理解和表达的知识关系。配图为TV第9话纯那持书面对奈奈、准备开口的侧面镜头，保留眼镜、发辫与书脊。图片出处：https://www.bilibili.com/bangumi/play/ep232375?t=1149 。原始截图tv09-1908-proof.jpg，播放器19:09；裁切610,75,850,637。"
+        },
+        "after": {
+          "uid": "fit_card_draft_card_JK11",
+          "id": "FIT_CARD_JK11",
+          "name": "言语配合动作",
+          "theme": "言语与动作互相配合",
+          "text": "纯那在角色访谈中明确提到为角色准备阅读过《哈姆雷特》。本组取第三幕第二场同一句表演原则的两个对称分句：言语须配合动作，动作也须配合言语。防御牌表现收束表达、协调反应以稳住自身，进攻牌表现把说出的话落实为出手；互相召回对应两者不能割裂。配图为剧场版课堂排练中纯那在台阶上调整步态、位置的全身侧面镜头，复用已退役JG31释放的原作素材。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+          "original": "the word to the action",
+          "source": "莎士比亚《哈姆雷特》第三幕第二场：哈姆雷特对演员的表演建议",
+          "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/2/",
+          "art": "original-refit-jk11-word-action-20261112-v2",
+          "cardIds": [
+            "JK11"
+          ],
+          "notes": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11-source.png；裁切 620,85,900,675；全片09:17（现存截图播放器）。《哈姆雷特》第三幕第二场，哈姆雷特要求演员让言语与动作互相配合，保持表演自然。"
+        },
+        "beforeIndex": 7,
+        "afterIndex": 7,
+        "afterVersion": "5:a87ad5dd005e4363a6fe296bb6a99e3345a48c6eb23c8b8c2b2503794bea35f4"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "fit_card_draft_card_JK11B",
+        "before": {
+          "uid": "fit_card_draft_card_JK11B",
+          "id": "FIT_CARD_JK11B",
+          "name": "名人名言",
+          "theme": "从名言到自己的表达",
+          "text": "把阅读所得化为进攻的言叶，再带回自己的理解和表达。",
+          "original": "",
+          "source": "2021剧场版·狩猎的Revue，纯那引用名言化为攻击；片段02:50—02:51“名人名言在推着我前进”（名称），02:08（配图）",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=170",
+          "art": "original-refit-jk11b-maxims-20261112",
+          "cardIds": [
+            "JK11B"
+          ],
+          "notes": "名人名言取自纯那对白字幕中的连续原词。知识内容由她实际阅读、引用的前人表达承担，原作中引语直接化为字句与箭矢进攻；造成伤害后取回我的话，表现把阅读所得带回自己的理解与表达。配图为纯那张弓瞄准时，对手身后出现实体“星”字的独立侧向机位，字句属于纯那的攻击，画中大场奈奈是承受者。与旧图俯视青绿色字句的构图区分。图片出处：https://www.bilibili.com/video/BV1u3411v7i7/?t=128 。从公开原作片段02:08提帧，原尺寸1146×478；裁切40,10,552,414，避开字幕和水印。"
+        },
+        "after": {
+          "uid": "fit_card_draft_card_JK11B",
+          "id": "FIT_CARD_JK11B",
+          "name": "动作配合言语",
+          "theme": "言语与动作互相配合",
+          "text": "纯那在角色访谈中明确提到阅读过《哈姆雷特》。采用同一句表演建议的前半句；身体把言语落实为行动，对应攻击出手；取回言语配合动作，与另一半原则构成互相校正的知识关系。配图采用剧场版纯那背向镜头，向左前方张弓、将引语变成射击的原作画面，保留持弓手、弓身和拉弦的右臂。与化作流星的箭的正面近景使用不同机位和动作阶段。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+          "original": "Suit the action to the word",
+          "source": "莎士比亚《哈姆雷特》第三幕第二场：哈姆雷特对演员的表演建议",
+          "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/2/",
+          "art": "original-refit-jk11b-action-word-20261112-v2",
+          "cardIds": [
+            "JK11B"
+          ],
+          "notes": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11B-source.png；裁切 490,42,511,383；公开片段02:08。《哈姆雷特》第三幕第二场，哈姆雷特要求演员让动作与言语相合，并反过来约束言语。"
+        },
+        "beforeIndex": 8,
+        "afterIndex": 8,
+        "afterVersion": "6:bf87cf0caa55be765b742b85d44f0260a499595d901cbdbeffbaa7dd91f5638b"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "fit_current_audit_20261108_JK200",
+        "before": {
+          "uid": "fit_current_audit_20261108_JK200",
+          "id": "FIT_CURRENT_AUDIT_JK200",
+          "name": "你一直在看什么",
+          "theme": "发问与追索",
+          "text": "取纯那主动追问对方究竟看见了什么的原曲问句。以连续的群体伤害表现面向多种判断的有力质问；关联的疑问将问题记录下来、整理后续回应，形成提问与追索的知识关系。配图取纯那在交锋中主动挥刀的原作动作。",
+          "original": "あなた今まで何 見てたの？",
+          "source": "《ペン：力：刀》纯那声部",
+          "sourceUrl": "https://www.uta-net.com/song/305229/",
+          "art": "original-fit-jk200-20261111",
+          "cardIds": [
+            "JK200"
+          ],
+          "notes": "2021剧场版·狩猎的Revue片段约06:09。docs/design/assets/card-sources/2026-11-02/film-hunt-608.jpg；裁切 720,140,800,600；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JK200.jpg"
+        },
+        "after": {
+          "uid": "fit_current_audit_20261108_JK200",
+          "id": "FIT_CURRENT_AUDIT_JK200",
+          "name": "吹吧，狂风",
+          "theme": "暴风雨中的呼喊与忍耐",
+          "text": "纯那在角色访谈中明确提到读过《李尔王》。名称为暴风雨场景开头呼喊的忠实中文翻译，以扩散的言叶对应箭矢完成后对所有敌人连续造成伤害；同场的忍耐的典范先承受压力、积蓄力量。配图采用纯那引语化为青绿色字句、向舞台四周铺开的原作攻击结果，裁切只保留字句与轨迹，画中攻击归属纯那。复用旧驳论释放的素材并按当前群攻箭矢重新解释。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+          "original": "Blow winds",
+          "source": "莎士比亚《李尔王》第三幕第二场：暴风雨中的李尔",
+          "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/king-lear/read/3/2/",
+          "art": "original-refit-jk200-blow-winds-20261112-v2",
+          "cardIds": [
+            "JK200"
+          ],
+          "notes": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK200-source.png；裁切 1080,100,720,540；旧截图播放器02:18。《李尔王》第三幕第二场，李尔在暴风雨中呼喊狂风、雷电与暴雨。"
+        },
+        "beforeIndex": 374,
+        "afterIndex": 374,
+        "afterVersion": "3:d18e74623389d7d56739ae27305812ab8253e8f2ad5a65dfff2ac39ece491f2f"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "fit_current_audit_20261108_JK200B",
+        "before": {
+          "uid": "fit_current_audit_20261108_JK200B",
+          "id": "FIT_CURRENT_AUDIT_JK200B",
+          "name": "疑问",
+          "theme": "质疑与辨析",
+          "text": "把尚未理解的问题记下来，检视已有判断并整理接下来要回应的内容。格挡对应审慎应对，所有手牌获得伤害加成对应问题带动后续论证的准备；与「你一直在看什么」组成提出问题和形成回应的知识关系。配图采用手持笔记、准备记录的原作细节。",
+          "original": "",
+          "source": "TV第2话约09:42的观摩记录与笔记（配图）",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=582",
+          "art": "original-scene-jk10-observation-note-frame-20261103",
+          "cardIds": [
+            "JK200B"
+          ],
+          "notes": "本轮为当前牌效补齐配图、出处与知识关系。"
+        },
+        "after": {
+          "uid": "fit_current_audit_20261108_JK200B",
+          "id": "FIT_CURRENT_AUDIT_JK200B",
+          "name": "忍耐的典范",
+          "theme": "暴风雨中的呼喊与忍耐",
+          "text": "纯那在角色访谈中明确提到读过《李尔王》。名称取暴风雨场景中李尔的原话；忍耐与风雨中的激烈呼喊并置，格挡对应承受眼前压力，手牌及箭矢伤害加成对应为后续反击积蓄力量。配图为纯那正面架刀承受奈奈的压力、仍睁眼直视对手的原作近景，保留眼镜、持械手与右侧交锋刀刃。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+          "original": "the pattern of all patience",
+          "source": "莎士比亚《李尔王》第三幕第二场：李尔宣称要成为忍耐的典范",
+          "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/king-lear/read/3/2/",
+          "art": "original-refit-jk200b-patience-20261112-v2",
+          "cardIds": [
+            "JK200B"
+          ],
+          "notes": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK200B-source.png；裁切 230,0,637,478；公开片段07:07。《李尔王》第三幕第二场，李尔在风雨中宣称要成为忍耐的典范，随后又继续激烈呼喊。"
+        },
+        "beforeIndex": 375,
+        "afterIndex": 375,
+        "afterVersion": "3:50f629d2385905b8086e9196f531daafbbefaa903327ac0e929b3f9c49b6d680"
+      }
+    ],
+    "reference": "docs/worktree-tasks/rerelation-argument-volley-20261112/fit-spec.json"
+  },
+  "versions": {
+    "cards/draft_card_JK11": "18:ec557d8327ad7cd58cd96433912dde083631fa8cb48baa5f76115e29f0c51d9b",
+    "fitPool/fit_card_draft_card_JK11": "5:a87ad5dd005e4363a6fe296bb6a99e3345a48c6eb23c8b8c2b2503794bea35f4",
+    "cards/draft_card_JK11B": "20:990bc7441045ebe768c0987ceb0289a0c9e8b00894dd3952ffd4b1f1a8c375a7",
+    "fitPool/fit_card_draft_card_JK11B": "6:bf87cf0caa55be765b742b85d44f0260a499595d901cbdbeffbaa7dd91f5638b",
+    "cards/junna-common-one-cost-aoe-knowledge-20261108_JK200": "17:e20b81fadd72ece944eb8fdde4b3e157548684424ddec4711954a370a1bfc073",
+    "fitPool/fit_current_audit_20261108_JK200": "3:d18e74623389d7d56739ae27305812ab8253e8f2ad5a65dfff2ac39ece491f2f",
+    "cards/junna-common-one-cost-aoe-knowledge-20261108_JK200B": "23:352b6adc41dece72839063e5fba71c5c2aaf870e6b983ad1864ae7a16e880a53",
+    "fitPool/fit_current_audit_20261108_JK200B": "3:50f629d2385905b8086e9196f531daafbbefaa903327ac0e929b3f9c49b6d680",
+    "partnerGroups/draft_group_JK11": "5:57ed50181218d7cef41820cfbd0f502179741cff42147c876bc883bf10e10264",
+    "partnerGroups/knowledge-initial-lists-20261110_JK11": "3:8a8bda125149cadf1d03b955538370a234fa263021fb57bc3f88d83269e1f839",
+    "partnerGroups/junna-common-one-cost-aoe-knowledge-20261108_GROUP_JK200": "5:7f83185879bb4c8ac74fc82a4f5a2c2e37683724e7aa1a2e8f3c187fa5ac39a5",
+    "partnerGroups/knowledge-initial-lists-20261110_JK200B": "3:875264eabcb1e4bcd09b77dc40eaa62bc9c2c5154e950fa099546480474bb333",
+    "styles/junna_style_confirmed_names": "23:04b9e9789184a293569cea4f75996a7135aef1ad694478fc096cabebc609dca7"
+  },
+  "assetIds": [
+    "original-refit-jk11-word-action-20261112-v2",
+    "original-refit-jk11b-action-word-20261112-v2",
+    "original-refit-jk200-blow-winds-20261112-v2",
+    "original-refit-jk200b-patience-20261112-v2"
+  ]
+}

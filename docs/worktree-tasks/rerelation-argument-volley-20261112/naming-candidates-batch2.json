@@ -1,0 +1,79 @@
+{
+  "readRevision": 5175,
+  "status": "候选，待用户选择；保留主台当前内容",
+  "candidates": [
+    {
+      "n": 9,
+      "def": "站位",
+      "atk": "杀阵",
+      "source": "追って追われてシリウス",
+      "url": "https://www.uta-net.com/song/275768/",
+      "relation": "舞台格斗的站位与实演；先守住位置，再运用编排出手，知识主题具体。"
+    },
+    {
+      "n": 10,
+      "def": "全力接招",
+      "atk": "全力相搏",
+      "source": "ゼウスの仲裁",
+      "url": "https://www.uta-net.com/song/275767/",
+      "relation": "同段全力承接与全力交锋；对应彼此回应、攻守轮换。"
+    },
+    {
+      "n": 11,
+      "def": "那日的誓言",
+      "atk": "复仇之剑",
+      "source": "復讐の剣",
+      "url": "https://www.uta-net.com/song/360240/",
+      "relation": "剧目中守住誓言、以剑回应的关系；偏戏剧与故事知识。"
+    },
+    {
+      "n": 12,
+      "def": "心中的地图",
+      "atk": "撬开那扇门",
+      "source": "約束タワー",
+      "url": "https://www.uta-net.com/song/261293/",
+      "relation": "用已有经历辨明方向，再主动打开阻碍；偏认知与突破。"
+    },
+    {
+      "n": 13,
+      "def": "翻开的书页",
+      "atk": "刺入胸口",
+      "source": "星のダイアローグ",
+      "url": "https://www.uta-net.com/song/252413/",
+      "relation": "书页承载所学，言叶带来冲击；偏阅读与言叶攻击。"
+    },
+    {
+      "n": 14,
+      "def": "舞台准备",
+      "atk": "尽情大闹",
+      "source": "舞台プレパレイション",
+      "url": "https://www.uta-net.com/song/261292/",
+      "relation": "排练中做足准备、登台后尽情发挥；偏排练知识与应用。"
+    },
+    {
+      "n": 15,
+      "def": "灵感之源",
+      "atk": "为你创造",
+      "source": "ハローミューズ",
+      "url": "https://www.uta-net.com/song/383608/",
+      "relation": "从灵感到创作，再回到灵感；偏创作与表达。"
+    },
+    {
+      "n": 16,
+      "def": "美丽的心",
+      "atk": "野兽的躯体",
+      "source": "Rose Poems",
+      "url": "https://utaten.com/lyric/ac19021410/",
+      "relation": "同曲的内心与外形对照；以保护内心、释放力量作攻防解释，偏角色理解。"
+    }
+  ],
+  "duplicateReview": {
+    "currentKarenDuplicates": [],
+    "activeJunnaDuplicates": [],
+    "retiredNameReuse": {
+      "name": "杀阵",
+      "cardId": "JK10B",
+      "status": "已退役，可在按新牌效重写契合后复用"
+    }
+  }
+}

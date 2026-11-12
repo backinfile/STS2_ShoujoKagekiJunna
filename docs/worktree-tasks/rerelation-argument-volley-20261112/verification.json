@@ -1,0 +1,176 @@
+{
+  "revision": 5269,
+  "stage": {
+    "exact": 32,
+    "total": 32,
+    "mechanicsPreserved": true
+  },
+  "effort": {
+    "exact": 8,
+    "total": 8
+  },
+  "rules": {
+    "arrowStageControl": true,
+    "fiveTurnPriority": true,
+    "namingNegation": true,
+    "workflowStage": true,
+    "workflowNaming": true,
+    "currentArtMetadata": true
+  },
+  "render": {
+    "faces": 42,
+    "allFit": true,
+    "arrows": 4
+  },
+  "names": [
+    {
+      "id": "JA84",
+      "name": "大道具",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "JA87",
+      "name": "布置舞台",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "JA88",
+      "name": "让观众着迷",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "JG37",
+      "name": "舞台准备",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "JK84",
+      "name": "站位",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "JK84B",
+      "name": "尽情大闹",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "JT02",
+      "name": "角色分配",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "U_CARD_015",
+      "name": "在舞台上变强",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "U_CARD_016",
+      "name": "呼喊与回应",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "U_CARD_017",
+      "name": "猛烈闪耀",
+      "karen": false,
+      "junna": []
+    },
+    {
+      "id": "JK37B",
+      "name": "囚禁",
+      "karen": false,
+      "junna": []
+    }
+  ],
+  "classificationStrikeExamples": [
+    {
+      "classes": 0,
+      "hits": 1,
+      "total": 6
+    },
+    {
+      "classes": 1,
+      "hits": 2,
+      "total": 12
+    },
+    {
+      "classes": 2,
+      "hits": 3,
+      "total": 18
+    },
+    {
+      "classes": 3,
+      "hits": 4,
+      "total": 24
+    },
+    {
+      "sameClassCopies": 3,
+      "hits": 2,
+      "total": 12
+    },
+    {
+      "oneCardWithThreeClasses": true,
+      "hits": 4,
+      "total": 24
+    }
+  ],
+  "artReview": {
+    "karenTitles": 119,
+    "karenPackImages": 118,
+    "reference": "当前卡图联系表逐张对照；同时核对同帧换裁切和相邻同动作。",
+    "reassigned": [
+      {
+        "from": "JG37",
+        "to": "JA58",
+        "why": "区分牵制与尽情大闹的正面瞄准画面"
+      },
+      {
+        "from": "JK84",
+        "to": "U_CARD_016",
+        "why": "站位改为实际排练台步；原面谈回答图用于呼应能力"
+      }
+    ],
+    "replaced": "全力相搏改用背面张弓，释放与当前JG33及Karen课堂武器镜头相近的旧图。"
+  },
+  "scope": "MCP字段复读、原牌效与状态保护、当前命名避重、配图及实际卡框检查。",
+  "stageCoverage": [
+    {
+      "id": "JT02",
+      "name": "角色分配",
+      "stageControl": true
+    },
+    {
+      "id": "JA84",
+      "name": "大道具",
+      "stageControl": true
+    },
+    {
+      "id": "JA87",
+      "name": "布置舞台",
+      "stageControl": true
+    },
+    {
+      "id": "JA88",
+      "name": "让观众着迷",
+      "stageControl": true
+    },
+    {
+      "id": "JK84",
+      "name": "站位",
+      "stageControl": true
+    },
+    {
+      "id": "JG37",
+      "name": "舞台准备",
+      "stageControl": true
+    }
+  ]
+}

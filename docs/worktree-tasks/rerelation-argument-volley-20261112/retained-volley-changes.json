@@ -1,0 +1,301 @@
+{
+  "requestId": "9ccdd9c1-7540-4bca-a754-2bd92ea41192",
+  "revision": 5123,
+  "changes": [
+    {
+      "collection": "cards",
+      "uid": "junna-echo-arrow-20261104_JA81",
+      "expectedVersion": "25:cacd7aa8ca8c824c10a7d032cd44b841847af46ff374a1c3e14fc035c92e169d",
+      "updates": {
+        "name": "化作流星的箭",
+        "art": "original-refit-ja81-meteor-arrow-20261112",
+        "naming": {
+          "original": "流星を象った矢",
+          "chineseOriginal": "化作流星的箭",
+          "kind": "原作连续原词的忠实中文翻译",
+          "work": "TV第1话插曲《世界を灰にするまで》；演唱：星见纯那（佐藤日向）、神乐光（三森铃子）、爱城华恋（小山百代）；作词：中村彼方（名称）；2021剧场版·狩猎的Revue片段02:53（配图）",
+          "url": "https://www.uta-net.com/song/254335/",
+          "adaptation": "取原曲描写流星形箭矢的连续原词，与衍生牌流星共用同一原作表达。先主动射击造成伤害，再把这一击的实际伤害记录为随后抵达的流星，形成出手与在途箭矢的关系。配图采用纯那坐在圆环上正面向外张弓、箭头朝向对手的原作剧情镜头，保留双眼、握弓手、拉弦手及箭头，替换手游独立插图。图片出处：https://www.bilibili.com/video/BV1u3411v7i7/?t=173 。从公开片段02:53提帧，原尺寸1146×478；裁切180,0,638,478。"
+        },
+        "notes": "结算约定：先完整结算化作流星的箭本次伤害指令，再以该指令实际造成的伤害合计D生成并立即打出1张基础流星。追加伤害次数计入该次指令的合计，重放的每份完整牌效分别记录自己的D。没有有效伤害结果时D为0。将生成流星的基础伤害设为D，不另行复制来源的伤害加成或额外伤害次数。化作流星的箭与化作流星的箭+均生成等待2回合的基础流星，生成后按正常打出流程处理合法目标，完成后消耗。\n升级：化作流星的箭自身伤害由10提高到14，流星记录本次实际伤害合计，生成版本为基础版。",
+        "design": {
+          "classification": "机制中坚牌",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "port": "输出／运转",
+          "triggerRole": "触发",
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "output",
+                "operation"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "触发",
+              "port": "输出／运转"
+            }
+          },
+          "roleReason": "箭矢触发。",
+          "cardReferenceUids": [
+            "junna-echo-arrow-20261104_JA81B"
+          ],
+          "generatedCardIds": [
+            "JA81B"
+          ],
+          "rules": "先完整结算化作流星的箭本次伤害指令，再以该指令实际造成的伤害合计D生成并立即打出1张基础流星。追加伤害次数计入该次指令的合计，重放的每份完整牌效分别记录自己的D。没有有效伤害结果时D为0。将生成流星的基础伤害设为D，不另行复制来源的伤害加成或额外伤害次数。化作流星的箭与化作流星的箭+均生成等待2回合的基础流星，生成后按正常打出流程处理合法目标，完成后消耗。",
+          "upgrade": "化作流星的箭自身伤害由10提高到14，流星记录本次实际伤害合计，生成版本为基础版。",
+          "investment": "支付1点能量，立即打出生成的0费流星，流星等待2回合。",
+          "generatedCard": {
+            "cardId": "JA81B",
+            "count": 1,
+            "destination": "play",
+            "upgradePolicy": "base",
+            "autoPlay": true,
+            "damageSnapshot": {
+              "source": "immediatelyPrecedingDamageInstructionResults",
+              "scope": "currentEffectExecution",
+              "aggregation": "sum(actualDamageDealt)",
+              "destination": "currentBaseDamage",
+              "copySourceDamageBonus": false,
+              "copySourceExtraHits": false
+            },
+            "targetPolicy": "normalPlayLegalTarget"
+          },
+          "reference": "用户指定：即时伤害后生成造成等量伤害的2回合箭矢。实际伤害结果口径参照KarenConsciousness。",
+          "referenceFiles": [
+            "<local-path>"
+          ]
+        }
+      },
+      "expectedFields": {
+        "name": "连射",
+        "art": "original-game-ja81-drawn-arrow-1060025-20261104",
+        "naming": {
+          "original": "",
+          "kind": "常用动作名称",
+          "work": "《少女☆歌剧 Re LIVE》纯那原作卡图 CG1060025（配图）",
+          "url": "https://relive-assets.qwewqa.xyz/jp_ja/dlc/res/dress/cg/1060025/image.png",
+          "adaptation": "连射的即时伤害接续一张随后抵达的流星，名称与当前效果保持一致。卡图改用纯那拉满弓弦、箭尖朝外的原作卡图，保留拉弦手、弓身、箭杆和双眼，使当下出手可辨。与生成牌流星的飞行光迹形成射出与抵达的关系。原始图片game-relive-junna-1060025-20261104.png，使用完整原作插图。",
+          "chineseOriginal": ""
+        },
+        "notes": "结算约定：先完整结算连射本次伤害指令，再以该指令实际造成的伤害合计D生成并立即打出1张基础流星。追加伤害次数计入该次指令的合计，重放的每份完整牌效分别记录自己的D。没有有效伤害结果时D为0。将生成流星的基础伤害设为D，不另行复制来源的伤害加成或额外伤害次数。连射与连射+均生成等待2回合的基础流星，生成后按正常打出流程处理合法目标，完成后消耗。\n升级：连射自身伤害由10提高到14，流星记录本次实际伤害合计，生成版本为基础版。",
+        "design": {
+          "classification": "机制中坚牌",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "port": "输出／运转",
+          "triggerRole": "触发",
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "output",
+                "operation"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "触发",
+              "port": "输出／运转"
+            }
+          },
+          "roleReason": "箭矢触发。",
+          "cardReferenceUids": [
+            "junna-echo-arrow-20261104_JA81B"
+          ],
+          "generatedCardIds": [
+            "JA81B"
+          ],
+          "rules": "先完整结算连射本次伤害指令，再以该指令实际造成的伤害合计D生成并立即打出1张基础流星。追加伤害次数计入该次指令的合计，重放的每份完整牌效分别记录自己的D。没有有效伤害结果时D为0。将生成流星的基础伤害设为D，不另行复制来源的伤害加成或额外伤害次数。连射与连射+均生成等待2回合的基础流星，生成后按正常打出流程处理合法目标，完成后消耗。",
+          "upgrade": "连射自身伤害由10提高到14，流星记录本次实际伤害合计，生成版本为基础版。",
+          "investment": "支付1点能量，立即打出生成的0费流星，流星等待2回合。",
+          "generatedCard": {
+            "cardId": "JA81B",
+            "count": 1,
+            "destination": "play",
+            "upgradePolicy": "base",
+            "autoPlay": true,
+            "damageSnapshot": {
+              "source": "immediatelyPrecedingDamageInstructionResults",
+              "scope": "currentEffectExecution",
+              "aggregation": "sum(actualDamageDealt)",
+              "destination": "currentBaseDamage",
+              "copySourceDamageBonus": false,
+              "copySourceExtraHits": false
+            },
+            "targetPolicy": "normalPlayLegalTarget"
+          },
+          "reference": "用户指定：即时伤害后生成造成等量伤害的2回合箭矢。实际伤害结果口径参照KarenConsciousness。",
+          "referenceFiles": [
+            "<local-path>"
+          ]
+        }
+      }
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-echo-arrow-20261104_JA81B",
+      "expectedVersion": "12:bceb55b760784ca4721d782e08838a2d0f6c97e5a248c16e27d290ba9e084bad",
+      "updates": {
+        "notes": "结算约定：X为生成者为这张流星传入的伤害D，每张流星独立保存。化作流星的箭读取刚刚一次伤害指令的实际伤害合计，横扫分别读取对应敌人的实际伤害合计，即兴读取当前触发事件的实际伤害，箭雨按当前牌面传入14或18。上述生成者的基础与升级版均生成基础流星，初始等待2回合，升级状态不随生成者传递。将流星当前基础伤害设为D，不另加固定伤害，也不复制来源的伤害加成或额外伤害次数。流星自身单独升级时等待由2减至1。流星属于攻击子类型箭矢，完成后按记录伤害及自身后续有效修正结算并消耗，其攻击伤害参与即兴当回合的统一事件计数。\n升级：伤害读取生成时记录的D，升级不另加固定伤害；初始回合数由2减为1，费用0及消耗保持不变。",
+        "design": {
+          "classification": "生成牌",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "port": "输出",
+          "triggerRole": "触发",
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "触发",
+              "port": "输出"
+            }
+          },
+          "roleReason": "作为独立0费攻击子类型箭矢打出并布置，基础2回合、升级1回合后完成。",
+          "generatedByCardIds": [
+            "JA81",
+            "JA76",
+            "JZ05",
+            "JA82"
+          ],
+          "tokenOnly": true,
+          "randomGeneration": false,
+          "rules": "X为生成者为这张流星传入的伤害D，每张流星独立保存。化作流星的箭读取刚刚一次伤害指令的实际伤害合计，横扫分别读取对应敌人的实际伤害合计，即兴读取当前触发事件的实际伤害，箭雨按当前牌面传入14或18。上述生成者的基础与升级版均生成基础流星，初始等待2回合，升级状态不随生成者传递。将流星当前基础伤害设为D，不另加固定伤害，也不复制来源的伤害加成或额外伤害次数。流星自身单独升级时等待由2减至1。流星属于攻击子类型箭矢，完成后按记录伤害及自身后续有效修正结算并消耗，其攻击伤害参与即兴当回合的统一事件计数。",
+          "upgrade": "伤害读取生成时记录的D，升级不另加固定伤害；初始回合数由2减为1，费用0及消耗保持不变。",
+          "investment": "支付0能量，初始计数按当前版本为2／1。",
+          "damageSnapshot": {
+            "parameter": "D",
+            "displayVariable": "X",
+            "initializedBy": [
+              "JA81",
+              "JA76",
+              "JZ05",
+              "JA82"
+            ],
+            "source": "creatorProvidedDamageValue",
+            "scope": "perGeneratedInstance",
+            "currentBaseDamage": "D",
+            "fixedDamage": null,
+            "upgradedDamage": "D",
+            "upgradeDelta": 0,
+            "sourcesByCreator": {
+              "JA81": "immediatelyPrecedingDamageInstructionResults",
+              "JZ05": "triggeringAttackDamageResult",
+              "JA82": "generatedCard.damageByUpgrade",
+              "JA76": "perTargetDamageInstructionResults"
+            }
+          },
+          "reference": "流星以生成效果指定的伤害值初始化，生成者升级不额外升级流星。"
+        }
+      },
+      "expectedFields": {
+        "notes": "结算约定：X为生成者为这张流星传入的伤害D，每张流星独立保存。连射读取刚刚一次伤害指令的实际伤害合计，横扫分别读取对应敌人的实际伤害合计，即兴读取当前触发事件的实际伤害，箭雨按当前牌面传入14或18。上述生成者的基础与升级版均生成基础流星，初始等待2回合，升级状态不随生成者传递。将流星当前基础伤害设为D，不另加固定伤害，也不复制来源的伤害加成或额外伤害次数。流星自身单独升级时等待由2减至1。流星属于攻击子类型箭矢，完成后按记录伤害及自身后续有效修正结算并消耗，其攻击伤害参与即兴当回合的统一事件计数。\n升级：伤害读取生成时记录的D，升级不另加固定伤害；初始回合数由2减为1，费用0及消耗保持不变。",
+        "design": {
+          "classification": "生成牌",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "port": "输出",
+          "triggerRole": "触发",
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "trigger",
+              "cross": false,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "触发",
+              "port": "输出"
+            }
+          },
+          "roleReason": "作为独立0费攻击子类型箭矢打出并布置，基础2回合、升级1回合后完成。",
+          "generatedByCardIds": [
+            "JA81",
+            "JA76",
+            "JZ05",
+            "JA82"
+          ],
+          "tokenOnly": true,
+          "randomGeneration": false,
+          "rules": "X为生成者为这张流星传入的伤害D，每张流星独立保存。连射读取刚刚一次伤害指令的实际伤害合计，横扫分别读取对应敌人的实际伤害合计，即兴读取当前触发事件的实际伤害，箭雨按当前牌面传入14或18。上述生成者的基础与升级版均生成基础流星，初始等待2回合，升级状态不随生成者传递。将流星当前基础伤害设为D，不另加固定伤害，也不复制来源的伤害加成或额外伤害次数。流星自身单独升级时等待由2减至1。流星属于攻击子类型箭矢，完成后按记录伤害及自身后续有效修正结算并消耗，其攻击伤害参与即兴当回合的统一事件计数。",
+          "upgrade": "伤害读取生成时记录的D，升级不另加固定伤害；初始回合数由2减为1，费用0及消耗保持不变。",
+          "investment": "支付0能量，初始计数按当前版本为2／1。",
+          "damageSnapshot": {
+            "parameter": "D",
+            "displayVariable": "X",
+            "initializedBy": [
+              "JA81",
+              "JA76",
+              "JZ05",
+              "JA82"
+            ],
+            "source": "creatorProvidedDamageValue",
+            "scope": "perGeneratedInstance",
+            "currentBaseDamage": "D",
+            "fixedDamage": null,
+            "upgradedDamage": "D",
+            "upgradeDelta": 0,
+            "sourcesByCreator": {
+              "JA81": "immediatelyPrecedingDamageInstructionResults",
+              "JZ05": "triggeringAttackDamageResult",
+              "JA82": "generatedCard.damageByUpgrade",
+              "JA76": "perTargetDamageInstructionResults"
+            }
+          },
+          "reference": "流星以生成效果指定的伤害值初始化，生成者升级不额外升级流星。"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna-echo-arrow-20261104_FIT_JA81",
+      "expectedVersion": "6:8c88df2722a57a16c8f04232a6b898610f45d08ece74c8e2d08ec7092fe20088",
+      "updates": {
+        "name": "化作流星的箭",
+        "theme": "流星形的箭矢",
+        "text": "纯那主动射出一箭，这一击随后以流星继续抵达。",
+        "original": "流星を象った矢",
+        "source": "TV第1话插曲《世界を灰にするまで》；演唱：星见纯那（佐藤日向）、神乐光（三森铃子）、爱城华恋（小山百代）；作词：中村彼方（名称）；2021剧场版·狩猎的Revue片段02:53（配图）",
+        "sourceUrl": "https://www.uta-net.com/song/254335/",
+        "art": "original-refit-ja81-meteor-arrow-20261112",
+        "notes": "取原曲描写流星形箭矢的连续原词，与衍生牌流星共用同一原作表达。先主动射击造成伤害，再把这一击的实际伤害记录为随后抵达的流星，形成出手与在途箭矢的关系。配图采用纯那坐在圆环上正面向外张弓、箭头朝向对手的原作剧情镜头，保留双眼、握弓手、拉弦手及箭头，替换手游独立插图。图片出处：https://www.bilibili.com/video/BV1u3411v7i7/?t=173 。从公开片段02:53提帧，原尺寸1146×478；裁切180,0,638,478。"
+      },
+      "expectedFields": {
+        "name": "连射",
+        "theme": "物理箭矢",
+        "text": "主动射出一箭，再以流星接续这一击。",
+        "original": "",
+        "source": "《少女☆歌剧 Re LIVE》纯那原作卡图 CG1060025（配图）",
+        "sourceUrl": "https://relive-assets.qwewqa.xyz/jp_ja/dlc/res/dress/cg/1060025/image.png",
+        "art": "original-game-ja81-drawn-arrow-1060025-20261104",
+        "notes": "连射的即时伤害接续一张随后抵达的流星，名称与当前效果保持一致。卡图改用纯那拉满弓弦、箭尖朝外的原作卡图，保留拉弦手、弓身、箭杆和双眼，使当下出手可辨。与生成牌流星的飞行光迹形成射出与抵达的关系。原始图片game-relive-junna-1060025-20261104.png，使用完整原作插图。"
+      }
+    }
+  ]
+}

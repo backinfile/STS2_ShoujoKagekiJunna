@@ -1,0 +1,551 @@
+{
+  "total": 1,
+  "records": [
+    {
+      "id": "de8f0468-de99-4e6f-8e7b-81ecf832351b",
+      "seq": 5195,
+      "at": "2026-11-12T08:23:58.636Z",
+      "label": "按用户选择确定全力接招／全力相搏并同步卡图与引用",
+      "kind": "契合与配图",
+      "clientId": "codex-rerelation-argument-volley-20261112",
+      "patches": [
+        {
+          "collection": "cards",
+          "uid": "draft_card_JK11",
+          "before": {
+            "uid": "draft_card_JK11",
+            "id": "JK11",
+            "name": "言语配合动作",
+            "system": "partner",
+            "rarity": "普通",
+            "type": "技能",
+            "cost": 1,
+            "upgradedCost": 1,
+            "turns": null,
+            "upgradedTurns": null,
+            "target": "自己",
+            "text": "知识。获得7点格挡。无论何处，将动作配合言语放入手牌。",
+            "upgradedText": "知识。获得10点格挡。无论何处，将动作配合言语放入手牌。",
+            "pool": false,
+            "keywords": [
+              "知识"
+            ],
+            "termIds": [
+              "KW_PARTNER",
+              "EF05",
+              "EF18"
+            ],
+            "archetypeIds": [
+              "SYS_partner"
+            ],
+            "breakthroughIds": [],
+            "partnerCardIds": [
+              "JK11B"
+            ],
+            "art": "original-refit-jk11-word-action-20261112-v2",
+            "role": "机制引导牌",
+            "direction": "知识牌互相调度",
+            "naming": {
+              "original": "the word to the action",
+              "chineseOriginal": "",
+              "kind": "典籍连续原词的忠实中文翻译",
+              "work": "莎士比亚《哈姆雷特》第三幕第二场：哈姆雷特对演员的表演建议",
+              "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/2/",
+              "adaptation": "纯那在角色访谈中明确提到为角色准备阅读过《哈姆雷特》。本组取第三幕第二场同一句表演原则的两个对称分句：言语须配合动作，动作也须配合言语。防御牌表现收束表达、协调反应以稳住自身，进攻牌表现把说出的话落实为出手；互相召回对应两者不能割裂。配图为剧场版课堂排练中纯那在台阶上调整步态、位置的全身侧面镜头，复用已退役JG31释放的原作素材。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+              "translation": "言语配合动作",
+              "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》",
+              "artSourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=557",
+              "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11-source.png；裁切 620,85,900,675；全片09:17（现存截图播放器）",
+              "artProcessing": "原作截图裁切、等比缩放；裁去字幕、水印和播放器界面。"
+            },
+            "notes": "定位：知识兼具，提供防御／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将动作配合言语放入手牌。",
+            "draftStatus": "候选",
+            "draftBatch": "junna-first-card-draft-20261101-v1",
+            "design": {
+              "port": "防御／运转",
+              "investment": "按当前版本支付1能量。",
+              "risk": "没有可取回对象时仍获得基础格挡。",
+              "reference": "",
+              "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+              "cardReferenceUids": [
+                "draft_card_JK11B"
+              ],
+              "routeRoles": {
+                "archetype_SYS_partner": {
+                  "role": "both",
+                  "cross": false,
+                  "ports": [
+                    "defense",
+                    "operation"
+                  ]
+                }
+              },
+              "systems": [
+                "partner"
+              ],
+              "route": "知识",
+              "systemRoles": {
+                "partner": {
+                  "role": "兼具",
+                  "port": "防御／运转"
+                }
+              },
+              "triggerRole": "兼具",
+              "roleReason": "知识兼具，提供防御／运转。",
+              "upgrade": "升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将动作配合言语放入手牌。",
+              "classification": "机制引导牌"
+            },
+            "extraHoverTips": [
+              {
+                "id": "junna_knowledge_background",
+                "title": "知识背景",
+                "description": "《哈姆雷特》第三幕第二场，哈姆雷特要求演员让言语与动作互相配合，保持表演自然。"
+              }
+            ],
+            "cardPool": "角色"
+          },
+          "after": {
+            "uid": "draft_card_JK11",
+            "id": "JK11",
+            "name": "全力接招",
+            "system": "partner",
+            "rarity": "普通",
+            "type": "技能",
+            "cost": 1,
+            "upgradedCost": 1,
+            "turns": null,
+            "upgradedTurns": null,
+            "target": "自己",
+            "text": "知识。获得7点格挡。无论何处，将全力相搏放入手牌。",
+            "upgradedText": "知识。获得10点格挡。无论何处，将全力相搏放入手牌。",
+            "pool": false,
+            "keywords": [
+              "知识"
+            ],
+            "termIds": [
+              "KW_PARTNER",
+              "EF05",
+              "EF18"
+            ],
+            "archetypeIds": [
+              "SYS_partner"
+            ],
+            "breakthroughIds": [],
+            "partnerCardIds": [
+              "JK11B"
+            ],
+            "art": "original-film-jk48b-guard-20261111-v1",
+            "role": "机制引导牌",
+            "direction": "知识牌互相调度",
+            "naming": {
+              "original": "全力で受け止めてみせる",
+              "chineseOriginal": "",
+              "kind": "用户确认的原作歌词中文译名",
+              "work": "《ゼウスの仲裁》（宙斯的仲裁）／西条克洛迪娜、梦大路栞、梦大路文；作词：中村彼方",
+              "url": "https://www.uta-net.com/song/275767/",
+              "adaptation": "知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。 配图：纯那在左侧背对镜头，以刀刃接住右侧奈奈的来剑；交叉刀刃、持械手与身体支撑方向共同表现接招。完整复用已登记原作裁图。 素材由备用JK48B重新分配；按本牌当前效果更新契合。",
+              "translation": "全力接招",
+              "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》·公开片段06:53.2",
+              "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=413.2",
+              "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11-source.png；登记资源 original-film-jk48b-guard-20261111-v1；原作裁图完整复用。",
+              "artProcessing": "复用已登记原作截图裁切，保留主体与构图，裁去画外字幕、水印及播放器界面。",
+              "knowledgeWork": "TV第2话约09:42的观摩记录；2021剧场版课堂对手戏排练。",
+              "knowledgeSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=582"
+            },
+            "notes": "定位：知识兼具，提供防御／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将全力相搏放入手牌。\n知识契合：知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。",
+            "draftStatus": "候选",
+            "draftBatch": "junna-first-card-draft-20261101-v1",
+            "design": {
+              "port": "防御／运转",
+              "investment": "按当前版本支付1能量。",
+              "risk": "没有可取回对象时仍获得基础格挡。",
+              "reference": "",
+              "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+              "cardReferenceUids": [
+                "draft_card_JK11B"
+              ],
+              "routeRoles": {
+                "archetype_SYS_partner": {
+                  "role": "both",
+                  "cross": false,
+                  "ports": [
+                    "defense",
+                    "operation"
+                  ]
+                }
+              },
+              "systems": [
+                "partner"
+              ],
+              "route": "知识",
+              "systemRoles": {
+                "partner": {
+                  "role": "兼具",
+                  "port": "防御／运转"
+                }
+              },
+              "triggerRole": "兼具",
+              "roleReason": "知识兼具，提供防御／运转。",
+              "upgrade": "升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将全力相搏放入手牌。",
+              "classification": "机制引导牌"
+            },
+            "extraHoverTips": [],
+            "cardPool": "角色"
+          },
+          "beforeIndex": 40,
+          "afterIndex": 40,
+          "afterVersion": "19:8fe8c129ce8534bec250ce6879478be535d21adf9542f00551f24a84e2402746"
+        },
+        {
+          "collection": "cards",
+          "uid": "draft_card_JK11B",
+          "before": {
+            "uid": "draft_card_JK11B",
+            "id": "JK11B",
+            "name": "动作配合言语",
+            "system": "partner",
+            "rarity": "普通",
+            "type": "攻击",
+            "cost": 1,
+            "upgradedCost": 1,
+            "turns": null,
+            "upgradedTurns": null,
+            "target": "敌人",
+            "text": "知识。造成9点伤害。无论何处，将言语配合动作放入手牌。",
+            "upgradedText": "知识。造成12点伤害。无论何处，将言语配合动作放入手牌。",
+            "pool": true,
+            "keywords": [
+              "知识"
+            ],
+            "termIds": [
+              "KW_PARTNER",
+              "EF01",
+              "EF18"
+            ],
+            "archetypeIds": [
+              "SYS_partner"
+            ],
+            "breakthroughIds": [],
+            "partnerCardIds": [
+              "JK11"
+            ],
+            "art": "original-refit-jk11b-action-word-20261112-v2",
+            "role": "知识牌",
+            "direction": "",
+            "naming": {
+              "original": "Suit the action to the word",
+              "chineseOriginal": "",
+              "kind": "典籍连续原词的忠实中文翻译",
+              "work": "莎士比亚《哈姆雷特》第三幕第二场：哈姆雷特对演员的表演建议",
+              "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/2/",
+              "adaptation": "纯那在角色访谈中明确提到阅读过《哈姆雷特》。采用同一句表演建议的前半句；身体把言语落实为行动，对应攻击出手；取回言语配合动作，与另一半原则构成互相校正的知识关系。配图采用剧场版纯那背向镜头，向左前方张弓、将引语变成射击的原作画面，保留持弓手、弓身和拉弦的右臂。与化作流星的箭的正面近景使用不同机位和动作阶段。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+              "translation": "动作配合言语",
+              "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》",
+              "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=128",
+              "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11B-source.png；裁切 490,42,511,383；公开片段02:08",
+              "artProcessing": "原作截图裁切、等比缩放；裁去字幕、水印和播放器界面。"
+            },
+            "notes": "定位：知识兼具，提供输出／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将言语配合动作放入手牌。",
+            "draftStatus": "候选",
+            "draftBatch": "junna-first-card-draft-20261101-v1",
+            "design": {
+              "port": "输出／运转",
+              "investment": "按当前版本支付1能量。",
+              "risk": "",
+              "reference": "",
+              "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+              "cardReferenceUids": [
+                "draft_card_JK11"
+              ],
+              "routeRoles": {
+                "archetype_SYS_partner": {
+                  "role": "both",
+                  "cross": false,
+                  "ports": [
+                    "output",
+                    "operation"
+                  ]
+                }
+              },
+              "systems": [
+                "partner"
+              ],
+              "route": "知识",
+              "systemRoles": {
+                "partner": {
+                  "role": "兼具",
+                  "port": "输出／运转"
+                }
+              },
+              "triggerRole": "兼具",
+              "roleReason": "知识兼具，提供输出／运转。",
+              "upgrade": "升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将言语配合动作放入手牌。",
+              "classification": "知识牌"
+            },
+            "extraHoverTips": [
+              {
+                "id": "junna_knowledge_background",
+                "title": "知识背景",
+                "description": "《哈姆雷特》第三幕第二场，哈姆雷特要求演员让动作与言语相合，并反过来约束言语。"
+              }
+            ],
+            "cardPool": "角色"
+          },
+          "after": {
+            "uid": "draft_card_JK11B",
+            "id": "JK11B",
+            "name": "全力相搏",
+            "system": "partner",
+            "rarity": "普通",
+            "type": "攻击",
+            "cost": 1,
+            "upgradedCost": 1,
+            "turns": null,
+            "upgradedTurns": null,
+            "target": "敌人",
+            "text": "知识。造成9点伤害。无论何处，将全力接招放入手牌。",
+            "upgradedText": "知识。造成12点伤害。无论何处，将全力接招放入手牌。",
+            "pool": true,
+            "keywords": [
+              "知识"
+            ],
+            "termIds": [
+              "KW_PARTNER",
+              "EF01",
+              "EF18"
+            ],
+            "archetypeIds": [
+              "SYS_partner"
+            ],
+            "breakthroughIds": [],
+            "partnerCardIds": [
+              "JK11"
+            ],
+            "art": "original-scene-jg33-all-card-review-20261104",
+            "role": "知识牌",
+            "direction": "",
+            "naming": {
+              "original": "全力でぶつかりたい",
+              "chineseOriginal": "",
+              "kind": "用户确认的原作歌词中文译名",
+              "work": "《ゼウスの仲裁》（宙斯的仲裁）／西条克洛迪娜、梦大路栞、梦大路文；作词：中村彼方",
+              "url": "https://www.uta-net.com/song/275767/",
+              "adaptation": "知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。 配图：纯那在课堂对手戏中跨步上阶，持短刃向前上方指向对手，将所学动作投入排练；保留眼镜、持刀手、刀尖及前跨的膝部。完整复用已登记原作裁图。 素材由备用JG33重新分配；按本牌当前效果更新契合。",
+              "translation": "全力相搏",
+              "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》·剧场版课堂排练约10:32",
+              "artSourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=632",
+              "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11B-source.png；登记资源 original-scene-jg33-all-card-review-20261104；原作裁图完整复用。",
+              "artProcessing": "复用已登记原作截图裁切，保留主体与构图，裁去画外字幕、水印及播放器界面。",
+              "knowledgeWork": "TV第2话约09:42的观摩记录；2021剧场版课堂对手戏排练。",
+              "knowledgeSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=582"
+            },
+            "notes": "定位：知识兼具，提供输出／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将全力接招放入手牌。\n知识契合：知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。",
+            "draftStatus": "候选",
+            "draftBatch": "junna-first-card-draft-20261101-v1",
+            "design": {
+              "port": "输出／运转",
+              "investment": "按当前版本支付1能量。",
+              "risk": "",
+              "reference": "",
+              "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+              "cardReferenceUids": [
+                "draft_card_JK11"
+              ],
+              "routeRoles": {
+                "archetype_SYS_partner": {
+                  "role": "both",
+                  "cross": false,
+                  "ports": [
+                    "output",
+                    "operation"
+                  ]
+                }
+              },
+              "systems": [
+                "partner"
+              ],
+              "route": "知识",
+              "systemRoles": {
+                "partner": {
+                  "role": "兼具",
+                  "port": "输出／运转"
+                }
+              },
+              "triggerRole": "兼具",
+              "roleReason": "知识兼具，提供输出／运转。",
+              "upgrade": "升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将全力接招放入手牌。",
+              "classification": "知识牌"
+            },
+            "extraHoverTips": [],
+            "cardPool": "角色"
+          },
+          "beforeIndex": 41,
+          "afterIndex": 41,
+          "afterVersion": "21:1a54150f6cb2515f96110d483d51ba5a9fc64b89ec48711e7fdedf72c56f4e9c"
+        },
+        {
+          "collection": "partnerGroups",
+          "uid": "draft_group_JK11",
+          "before": {
+            "uid": "draft_group_JK11",
+            "id": "GROUP_JK11",
+            "title": "言语配合动作／动作配合言语",
+            "mainCardId": "JK11B",
+            "grantedCardIds": [
+              "JK11"
+            ],
+            "grantedCardCounts": {
+              "JK11": 1
+            }
+          },
+          "after": {
+            "uid": "draft_group_JK11",
+            "id": "GROUP_JK11",
+            "title": "全力接招／全力相搏",
+            "mainCardId": "JK11B",
+            "grantedCardIds": [
+              "JK11"
+            ],
+            "grantedCardCounts": {
+              "JK11": 1
+            },
+            "reference": "《ゼウスの仲裁》澄清误解后的承接与交锋；知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。"
+          },
+          "beforeIndex": 5,
+          "afterIndex": 5,
+          "afterVersion": "6:53e5f5d5a6f0a81223caea4f0c64a3e84d2d7d91a159ac840356b193e85027f2"
+        },
+        {
+          "collection": "partnerGroups",
+          "uid": "knowledge-initial-lists-20261110_JK11",
+          "before": {
+            "uid": "knowledge-initial-lists-20261110_JK11",
+            "id": "INITIAL_KNOWLEDGE_LIST_JK11",
+            "title": "言语配合动作",
+            "mainCardId": "JK11",
+            "grantedCardIds": [
+              "JK11B"
+            ],
+            "grantedCardCounts": {
+              "JK11B": 1
+            },
+            "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
+          },
+          "after": {
+            "uid": "knowledge-initial-lists-20261110_JK11",
+            "id": "INITIAL_KNOWLEDGE_LIST_JK11",
+            "title": "全力接招",
+            "mainCardId": "JK11",
+            "grantedCardIds": [
+              "JK11B"
+            ],
+            "grantedCardCounts": {
+              "JK11B": 1
+            },
+            "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
+          },
+          "beforeIndex": 230,
+          "afterIndex": 230,
+          "afterVersion": "4:b866b54a597ca8a4d19c20a7cff90b17b487219274366f250b5ba3b9f8614d98"
+        },
+        {
+          "collection": "styles",
+          "uid": "junna_style_confirmed_names",
+          "before": {
+            "uid": "junna_style_confirmed_names",
+            "id": "STYLE_CONFIRMED_NAMES",
+            "name": "已确认的用词与原句",
+            "content": "“要点”替代“提纲”，后者因用户指出的谐音问题弃用。巨大箭矢采用已核对的原作对白“话语就是我的力量”；“言叶之力”是自行缩写的错误用词，后续沿用原句。已被用户否定的名称与契合在重新分配时保留否定记录，重新选用已核对的原作原词。\n“掌舵”替代卡名“操船”；出处原文仍记录日文操船。\n“借星”为自造词，弃用，JH31恢复“筹备”。备用池与已删除卡牌的名称在复用时，同样核对原作出处，遵循“卡名与原作出处”约定。星星主题也采用已核对、原作特征鲜明的原作表达。\n“戏中戏”已被用户否定。JA108现用“星星指引我前行”，JA108B现用已确认原句“话语就是我的力量”。JK122现用“强于刀刃”。JK122B原名“谬误”，临时名“害怕失败”已被用户否定，现按用户确认改为“渴望”，取TV第2话原作演目“渇望のレヴュー”中的用词。“绝望的轮回”此前被用户否定用于此牌。用户后续澄清，名称可以取自所有角色的歌词和台词，只要单词与牌效契合，卡图仍使用纯那相关内容。“失去闪耀”已被用户否定，不再用于此牌。“星罪”因与Karen Mod已有卡名重名弃用。“借来的台词”因诅咒感不足被用户否定。诅咒命名须从名称本身及对应剧情体现惩罚、禁锢、损失或绝望等负面处境。\n上述记录用于保留已确认的取舍；复用名字、契合和素材时，仍按“契合设计、命名与卡图完整流程”核对当前牌效与原作出处。\nJH19由“双星”改为“烁星”，JB06由“招架”改为“想守护的天空”，均为避开Karen Mod重名而重选已核对的原作表达。通用基础牌名“打击”“防御”及牌堆功能选项按用户确认保留。主题牌定名前逐项核对Karen Mod当前中文卡名。\nKaren Mod的卡图同样纳入避重。JK122B原星形重锤击碎星石的图片与Karen的“宽恕”来自同一帧，绝望女神镜头又因属于奈奈的专属处境弃用。金色面具曾用于临时契合，现配图为TV第2话约13:17纯那在保健室皱眉沉思的近景。原21:37眼镜反光近景按用户要求替换。\nJK314“人生最大的失败”按用户确认改为“耀眼的身姿”，用于表现关联负担耗尽后保留下来的进攻成果。\nJK314“耀眼的身姿”采用TV第2话约21:40聚光灯下纯那跃起挥弓的全身镜头，由JA57“星光跃动”重新分配。JA57同步改用TV第2话约19:11纯那舞台中的蓝色发光箭阵与星光轨迹画面。\nJK275“证伪”改为纯那在狩猎的Revue中说出的原词“全部砍碎”，以对既定角色与剧本的反驳对应群体攻击。JZ03改为歌词原词“永不折断的笔”（折れないペン），以语言与意志化为箭矢的契合表现先古版更直接的出手。\nJK274“审辩”按用户确认改为“我的舞台”，取TV第2话纯那对白“私の舞台を終わらせないために”中的连续原词“私の舞台”。“知道自己的无知”因名字过长被用户否定，“聪明”也已被用户否定。卡图采用同话约21:13纯那持弓站在聚光灯下迎向华恋的画面。\nJK48／JK48B按用户确认由“引经据典／精读”改为“必须战斗的时刻／必须守护的事物”，分别取《情熱の目覚めるとき》相邻歌词中的“戦うべきとき／守るべきもの”。两名采用七字对称句式，分别突出主动战斗与守护；卡图分别表现纯那主动挥刀与架刀接剑。此前“一切知识皆有可能／知识会帮助自己”和“他人的话语／自己的话语”两组成对候选未被本组采用。JK48原约06:09的闭眼后仰构图因用户指出更像受击而弃用；随后金色前冲重构图也因用户要求不要自行绘制而停用。用户本次明确上传并确认青绿色舞台的前景挥刀图，现按该图使用，并按用户随后要求仅去除背景左右两侧的青绿色尖状物，保留所选图的主体与构图。防御图沿用确认镜头的原作裁切。\nJK11／JK11B的“我的话／名人名言”成对候选及配图已被用户否定；原“立论／驳论”也按用户要求重选。本轮采用《哈姆雷特》第三幕第二场“言语配合动作／动作配合言语”，保留互相召回的牌效。JK200／JK200B原“你一直在看什么／疑问”组按用户要求整体重选，本轮采用《李尔王》第三幕第二场“吹吧，狂风／忍耐的典范”。两部典籍的直接阅读联系均见2024年8月8日角色访谈。",
+            "category": "契合与命名"
+          },
+          "after": {
+            "uid": "junna_style_confirmed_names",
+            "id": "STYLE_CONFIRMED_NAMES",
+            "name": "已确认的用词与原句",
+            "content": "“要点”替代“提纲”，后者因用户指出的谐音问题弃用。巨大箭矢采用已核对的原作对白“话语就是我的力量”；“言叶之力”是自行缩写的错误用词，后续沿用原句。已被用户否定的名称与契合在重新分配时保留否定记录，重新选用已核对的原作原词。\n“掌舵”替代卡名“操船”；出处原文仍记录日文操船。\n“借星”为自造词，弃用，JH31恢复“筹备”。备用池与已删除卡牌的名称在复用时，同样核对原作出处，遵循“卡名与原作出处”约定。星星主题也采用已核对、原作特征鲜明的原作表达。\n“戏中戏”已被用户否定。JA108现用“星星指引我前行”，JA108B现用已确认原句“话语就是我的力量”。JK122现用“强于刀刃”。JK122B原名“谬误”，临时名“害怕失败”已被用户否定，现按用户确认改为“渴望”，取TV第2话原作演目“渇望のレヴュー”中的用词。“绝望的轮回”此前被用户否定用于此牌。用户后续澄清，名称可以取自所有角色的歌词和台词，只要单词与牌效契合，卡图仍使用纯那相关内容。“失去闪耀”已被用户否定，不再用于此牌。“星罪”因与Karen Mod已有卡名重名弃用。“借来的台词”因诅咒感不足被用户否定。诅咒命名须从名称本身及对应剧情体现惩罚、禁锢、损失或绝望等负面处境。\n上述记录用于保留已确认的取舍；复用名字、契合和素材时，仍按“契合设计、命名与卡图完整流程”核对当前牌效与原作出处。\nJH19由“双星”改为“烁星”，JB06由“招架”改为“想守护的天空”，均为避开Karen Mod重名而重选已核对的原作表达。通用基础牌名“打击”“防御”及牌堆功能选项按用户确认保留。主题牌定名前逐项核对Karen Mod当前中文卡名。\nKaren Mod的卡图同样纳入避重。JK122B原星形重锤击碎星石的图片与Karen的“宽恕”来自同一帧，绝望女神镜头又因属于奈奈的专属处境弃用。金色面具曾用于临时契合，现配图为TV第2话约13:17纯那在保健室皱眉沉思的近景。原21:37眼镜反光近景按用户要求替换。\nJK314“人生最大的失败”按用户确认改为“耀眼的身姿”，用于表现关联负担耗尽后保留下来的进攻成果。\nJK314“耀眼的身姿”采用TV第2话约21:40聚光灯下纯那跃起挥弓的全身镜头，由JA57“星光跃动”重新分配。JA57同步改用TV第2话约19:11纯那舞台中的蓝色发光箭阵与星光轨迹画面。\nJK275“证伪”改为纯那在狩猎的Revue中说出的原词“全部砍碎”，以对既定角色与剧本的反驳对应群体攻击。JZ03改为歌词原词“永不折断的笔”（折れないペン），以语言与意志化为箭矢的契合表现先古版更直接的出手。\nJK274“审辩”按用户确认改为“我的舞台”，取TV第2话纯那对白“私の舞台を終わらせないために”中的连续原词“私の舞台”。“知道自己的无知”因名字过长被用户否定，“聪明”也已被用户否定。卡图采用同话约21:13纯那持弓站在聚光灯下迎向华恋的画面。\nJK48／JK48B按用户确认由“引经据典／精读”改为“必须战斗的时刻／必须守护的事物”，分别取《情熱の目覚めるとき》相邻歌词中的“戦うべきとき／守るべきもの”。两名采用七字对称句式，分别突出主动战斗与守护；卡图分别表现纯那主动挥刀与架刀接剑。此前“一切知识皆有可能／知识会帮助自己”和“他人的话语／自己的话语”两组成对候选未被本组采用。JK48原约06:09的闭眼后仰构图因用户指出更像受击而弃用；随后金色前冲重构图也因用户要求不要自行绘制而停用。用户本次明确上传并确认青绿色舞台的前景挥刀图，现按该图使用，并按用户随后要求仅去除背景左右两侧的青绿色尖状物，保留所选图的主体与构图。防御图沿用确认镜头的原作裁切。\nJK11／JK11B的“我的话／名人名言”成对候选及配图已被用户否定；原“立论／驳论”也按用户要求重选。随后“言语配合动作／动作配合言语”亦因用户否定“动作配合言语”而撤换。2026年11月12日，用户从成对候选中确认“全力接招／全力相搏”，取《ゼウスの仲裁》同段承接与交锋的歌词，保留互相召回的牌效；卡图分别使用纯那架刀接剑与课堂持刃前跨的原作画面。JK200／JK200B原“你一直在看什么／疑问”组按用户要求整体重选，本轮采用《李尔王》第三幕第二场“吹吧，狂风／忍耐的典范”。两部典籍的直接阅读联系均见2024年8月8日角色访谈。",
+            "category": "契合与命名"
+          },
+          "beforeIndex": 23,
+          "afterIndex": 23,
+          "afterVersion": "24:ac3a3c9b899d9649849b49a944145eda3a868538a968df70ad0b798c65535eb6"
+        },
+        {
+          "collection": "fitPool",
+          "uid": "fit_card_draft_card_JK11",
+          "before": {
+            "uid": "fit_card_draft_card_JK11",
+            "id": "FIT_CARD_JK11",
+            "name": "言语配合动作",
+            "theme": "言语与动作互相配合",
+            "text": "纯那在角色访谈中明确提到为角色准备阅读过《哈姆雷特》。本组取第三幕第二场同一句表演原则的两个对称分句：言语须配合动作，动作也须配合言语。防御牌表现收束表达、协调反应以稳住自身，进攻牌表现把说出的话落实为出手；互相召回对应两者不能割裂。配图为剧场版课堂排练中纯那在台阶上调整步态、位置的全身侧面镜头，复用已退役JG31释放的原作素材。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+            "original": "the word to the action",
+            "source": "莎士比亚《哈姆雷特》第三幕第二场：哈姆雷特对演员的表演建议",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/2/",
+            "art": "original-refit-jk11-word-action-20261112-v2",
+            "cardIds": [
+              "JK11"
+            ],
+            "notes": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11-source.png；裁切 620,85,900,675；全片09:17（现存截图播放器）。《哈姆雷特》第三幕第二场，哈姆雷特要求演员让言语与动作互相配合，保持表演自然。"
+          },
+          "after": {
+            "uid": "fit_card_draft_card_JK11",
+            "id": "FIT_CARD_JK11",
+            "name": "全力接招",
+            "theme": "读懂意图与攻防应答",
+            "text": "知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。",
+            "original": "全力で受け止めてみせる",
+            "source": "《ゼウスの仲裁》（宙斯的仲裁）／西条克洛迪娜、梦大路栞、梦大路文；作词：中村彼方",
+            "sourceUrl": "https://www.uta-net.com/song/275767/",
+            "art": "original-film-jk48b-guard-20261111-v1",
+            "cardIds": [
+              "JK11"
+            ],
+            "notes": "纯那在左侧背对镜头，以刀刃接住右侧奈奈的来剑；交叉刀刃、持械手与身体支撑方向共同表现接招。完整复用已登记原作裁图。 来源：https://www.bilibili.com/video/BV1u3411v7i7/?t=413.2；由备用JK48B重新分配。"
+          },
+          "beforeIndex": 7,
+          "afterIndex": 7,
+          "afterVersion": "6:1193de23adaf46ef5eb0d3bf467be5790003b013c7eac6587f1d61f5ec869c9e"
+        },
+        {
+          "collection": "fitPool",
+          "uid": "fit_card_draft_card_JK11B",
+          "before": {
+            "uid": "fit_card_draft_card_JK11B",
+            "id": "FIT_CARD_JK11B",
+            "name": "动作配合言语",
+            "theme": "言语与动作互相配合",
+            "text": "纯那在角色访谈中明确提到阅读过《哈姆雷特》。采用同一句表演建议的前半句；身体把言语落实为行动，对应攻击出手；取回言语配合动作，与另一半原则构成互相校正的知识关系。配图采用剧场版纯那背向镜头，向左前方张弓、将引语变成射击的原作画面，保留持弓手、弓身和拉弦的右臂。与化作流星的箭的正面近景使用不同机位和动作阶段。角色阅读依据：https://hon-hikidashi.jp/event/42802/",
+            "original": "Suit the action to the word",
+            "source": "莎士比亚《哈姆雷特》第三幕第二场：哈姆雷特对演员的表演建议",
+            "sourceUrl": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/3/2/",
+            "art": "original-refit-jk11b-action-word-20261112-v2",
+            "cardIds": [
+              "JK11B"
+            ],
+            "notes": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11B-source.png；裁切 490,42,511,383；公开片段02:08。《哈姆雷特》第三幕第二场，哈姆雷特要求演员让动作与言语相合，并反过来约束言语。"
+          },
+          "after": {
+            "uid": "fit_card_draft_card_JK11B",
+            "id": "FIT_CARD_JK11B",
+            "name": "全力相搏",
+            "theme": "读懂意图与攻防应答",
+            "text": "知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。",
+            "original": "全力でぶつかりたい",
+            "source": "《ゼウスの仲裁》（宙斯的仲裁）／西条克洛迪娜、梦大路栞、梦大路文；作词：中村彼方",
+            "sourceUrl": "https://www.uta-net.com/song/275767/",
+            "art": "original-scene-jg33-all-card-review-20261104",
+            "cardIds": [
+              "JK11B"
+            ],
+            "notes": "纯那在课堂对手戏中跨步上阶，持短刃向前上方指向对手，将所学动作投入排练；保留眼镜、持刀手、刀尖及前跨的膝部。完整复用已登记原作裁图。 来源：https://www.bilibili.com/video/BV1owfMBFEY3/?t=632；由备用JG33重新分配。"
+          },
+          "beforeIndex": 8,
+          "afterIndex": 8,
+          "afterVersion": "7:a436cb67de969bf734aa64c5c0f265e79924d801c3293623bbc9cba08efc1ec2"
+        }
+      ],
+      "reference": "docs/worktree-tasks/rerelation-argument-volley-20261112/fit-spec.json"
+    }
+  ],
+  "revision": 5216
+}

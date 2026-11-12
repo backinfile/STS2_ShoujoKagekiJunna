@@ -1,0 +1,70 @@
+{
+  "readRevision": 5151,
+  "status": "候选，等待用户选择；不修改主台牌名或配图",
+  "candidates": [
+    {
+      "n": 1,
+      "def": "折过角的剧本",
+      "atk": "熟悉的台词",
+      "source": "私たちはもう舞台の上",
+      "url": "https://www.uta-net.com/song/304084/",
+      "relation": "查阅剧本稳住应对，再用熟记的台词展开言叶攻击；两张牌互相取回，对应从文本到运用、再回到文本。"
+    },
+    {
+      "n": 2,
+      "def": "危机时刻",
+      "atk": "舞台之乱",
+      "source": "御してぎょしゃ座",
+      "url": "https://www.uta-net.com/song/275766/",
+      "relation": "以知识应对危机，再把临场应变转为进攻；同曲明确呈现知识的运用。"
+    },
+    {
+      "n": 3,
+      "def": "颤抖的歌声",
+      "atk": "狂舞的剑尖",
+      "source": "Star Diamond",
+      "url": "https://www.uta-net.com/song/271934/",
+      "relation": "同段并置歌声与剑尖，以承接心意、交锋回应组成一对；偏抒情表达。"
+    },
+    {
+      "n": 4,
+      "def": "不要动摇",
+      "atk": "向前迈步",
+      "source": "舞台少女心得",
+      "url": "https://www.uta-net.com/song/236408/",
+      "relation": "以具体舞台心得的守稳与迈步分别承担防御和行动，读起来简短直接。"
+    },
+    {
+      "n": 5,
+      "def": "守护重要的人",
+      "atk": "不会再输",
+      "source": "RE:CREATE",
+      "url": "https://utaten.com/lyric/mi18100415/",
+      "relation": "同曲守护与重新挑战的表达，防御和进攻立场清楚；更偏决意。"
+    },
+    {
+      "n": 6,
+      "def": "切莫放弃",
+      "atk": "跨越极限",
+      "source": "ペン：力：刀",
+      "url": "https://www.uta-net.com/song/305229/",
+      "relation": "坚持自身判断，再将学到的话转为突破；与纯那自身的表达贴近。"
+    },
+    {
+      "n": 7,
+      "def": "知晓软弱",
+      "atk": "遇见强大",
+      "source": "プラチナ・フォルテ",
+      "url": "https://www.uta-net.com/song/263800/",
+      "relation": "在交锋中认识弱点与力量，以认识自我、应用所得承担知识关系。"
+    },
+    {
+      "n": 8,
+      "def": "我的自豪",
+      "atk": "展露怒火",
+      "source": "誇りと驕り",
+      "url": "https://www.uta-net.com/movie/254333/",
+      "relation": "自豪支撑自身、怒火用于挑战；取华恋与真矢的曲中表达，偏昂扬。"
+    }
+  ]
+}
