@@ -134,13 +134,8 @@ public static class HandArrow
         return false;
     }
 
-    [HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
-    private static class CloneForm
+    internal static void Copy(CardModel source, CardModel copy)
     {
-        private static void Postfix(AbstractModel __instance, AbstractModel __result)
-        {
-            if (__instance is CardModel card && __result is CardModel copy && Forms.TryGetValue(card, out var form))
-                Forms.Add(copy, form);
-        }
+        if (Forms.TryGetValue(source, out var form)) Forms.AddOrUpdate(copy, form);
     }
 }

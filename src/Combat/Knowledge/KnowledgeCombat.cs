@@ -48,7 +48,7 @@ public static class KnowledgeCombat
         string? id = CardCatalog.DesignId(card);
         return id == null ? null : CardCatalog.Groups.FirstOrDefault(g => g.MainCardId == id);
     }
-    public static bool HasGroup(CardModel card) => Group(card) != null || DynamicKnowledge.IsLinked(card);
+    public static bool HasGroup(CardModel card) => KnowledgeMembers.Definition(card) != null;
     internal static CardModel[] CapturePartners(CardModel card)
     {
         var ids = KnowledgeMembers.PartnerIds(card);
@@ -65,11 +65,9 @@ public static class KnowledgeCombat
     }
     public static async Task DrawPartners(PlayerChoiceContext context, CardModel card)
     {
-        var relation = DynamicKnowledge.Group(card);
-        var group = relation == null ? Group(card) : null;
-        if (group == null && relation == null) return;
+        if (!HasGroup(card)) return;
         var active = Drawing.Value ??= [];
-        string key = card.Owner.NetId + ":" + (relation?.EntranceId ?? group!.MainCardId);
+        string key = card.Owner.NetId + ":" + card.Id;
         if (!active.Add(key)) return;
         try
         {

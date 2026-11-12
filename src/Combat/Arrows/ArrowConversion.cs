@@ -22,13 +22,8 @@ public static class ArrowConversion
         }
         card.InvokeEnergyCostChanged();
     }
-    [HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
-    private static class CloneConversion
+    internal static void Copy(CardModel source, CardModel copy)
     {
-        private static void Postfix(AbstractModel __instance, AbstractModel __result)
-        {
-            if (__instance is CardModel card && __result is CardModel copied && IsConverted(card))
-                Converted.GetOrCreateValue(copied);
-        }
+        if (IsConverted(source)) Converted.GetOrCreateValue(copy);
     }
 }

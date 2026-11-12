@@ -1,13 +1,10 @@
-using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShoujoKagekiJunna.Combat;
 
@@ -15,81 +12,24 @@ namespace ShoujoKagekiJunna.Models;
 
 public abstract partial class CatalogPower
 {
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
-    {
-        if (player != Owner.Player || DesignId != "JA144") return;
-        foreach (var grant in _grants.ToArray())
-            await CardActions.Generate(player, "JA119", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom);
-    }
-
+    protected virtual Task TurnStarted(Grant grant, PlayerChoiceContext context) => Task.CompletedTask;
+    protected virtual Task TurnEnding(Grant grant, PlayerChoiceContext context) => Task.CompletedTask;
+    protected virtual Task BeforeHandFlush(PlayerChoiceContext context, Player player) => Task.CompletedTask;
+    protected virtual bool EndsWithTurn => false;
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext context, Player player)
     {
         if (player != Owner.Player) return;
-        foreach (var grant in _grants.ToArray())
-        {
-            switch (DesignId)
-            {
-                case "U_CARD_010":
-                    if (!grant.Take(1)) break;
-                    int category = new[] { 1, 0, 2 }[grant.CycleIndex];
-                    grant.CycleIndex = (grant.CycleIndex + 1) % 3;
-                    if (player.PlayerCombatState!.Hand.Cards.Count >= CardPile.MaxCardsInHand) break;
-                    var candidates = player.PlayerCombatState.DrawPile.Cards.Where(c => CardTutors.Matches(c, category));
-                    foreach (var selected in await CardActions.Choose(context, grant.Card, candidates))
-                        await CardPileCmd.Add(selected, PileType.Hand);
-                    break;
-                case "JA35": await ArrowCombat.AccelerateAll(context, player, grant.V("Turns")); break;
-                case "JH59": case "JK139": await PlayerCmd.GainEnergy(grant.V("Energy"), player); break;
-                case "JK32": await CardPileCmd.Draw(context, grant.V("DrawCount"), player); break;
-                case "JK46": await CardActions.Generate(player, "JK46B", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom, grant.Card.IsUpgraded); break;
-                case "JG34":
-                    using (DamageExecution.BeginCardResolution(grant.Card))
-                        for (int hit = 0; hit < grant.BaseHits; hit++)
-                        {
-                            var targets = player.Creature.CombatState!.HittableEnemies.Where(target => target.IsAlive).ToArray();
-                            if (targets.Length == 0) break;
-                            await GameApi.Damage(context, targets, grant.V("Damage"), ValueProp.Unpowered, Owner, grant.Card, grant.Play);
-                        }
-                    break;
-                case "JZ06": await PlayerCmd.GainEnergy(player.PlayerCombatState!.Hand.Cards.Where(CardActions.HasNumericCost).Select(CardActions.Cost).DefaultIfEmpty().Max(), player); break;
-            }
-        }
-        if (DesignId is "JZ05" or "JK260") Synchronize();
+        foreach (var grant in _grants.ToArray()) await TurnStarted(grant, context);
+        if (RemainingTriggers != null) Synchronize();
     }
-
-    public override async Task BeforeFlush(PlayerChoiceContext context, Player player)
-    {
-        if (DesignId == "JK81" && player == Owner.Player)
-            foreach (var card in player.PlayerCombatState!.Hand.Cards)
-                if (_grants.Any(g => CardActions.Cost(card) >= g.V("Threshold"))) card.GiveSingleTurnRetain();
-        if (DesignId == "JA87" && player == Owner.Player)
-            foreach (var grant in _grants.ToArray())
-                await HandArrow.Select(context, grant.Card, grant.V("Cards"), optional: true);
-    }
-
+    public override Task BeforeFlush(PlayerChoiceContext context, Player player)
+        => player == Owner.Player ? BeforeHandFlush(context, player) : Task.CompletedTask;
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext context, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side != CombatSide.Player || !participants.Contains(Owner)) return;
-        foreach (var grant in _grants.ToArray())
-        {
-            switch (DesignId)
-            {
-                case "A":
-                    using (KnowledgeCombat.SingleCard())
-                        await CardPileCmd.AddToCombatAndPreview<JunnaCardB>(Owner, PileType.Draw, grant.V("Cards"), Owner.Player, CardPilePosition.Random);
-                    break;
-                case "JK67":
-                    DamageModifiers.AddMany(ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card), grant.V("Bonus"));
-                    break;
-                case "JH21" when Owner.Player!.PlayerCombatState!.Energy > 0: await Block(grant.V("Block")); break;
-            }
-        }
+        foreach (var grant in _grants.ToArray()) await TurnEnding(grant, context);
     }
-    public override async Task AfterSideTurnEnd(PlayerChoiceContext context, CombatSide side, IEnumerable<Creature> participants)
-    {
-        if (side == CombatSide.Player && participants.Contains(Owner) && DesignId is "JK64" or "JG31" or "JH19")
-            await PowerCmd.Remove(this);
-    }
-
-
+    public override Task AfterSideTurnEnd(PlayerChoiceContext context, CombatSide side, IEnumerable<Creature> participants)
+        => EndsWithTurn && side == CombatSide.Player && participants.Contains(Owner)
+            ? PowerCmd.Remove(this) : Task.CompletedTask;
 }

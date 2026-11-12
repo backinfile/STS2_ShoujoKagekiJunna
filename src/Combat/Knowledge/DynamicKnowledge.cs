@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using BaseLib.Patches.Saves;
 using BaseLib.Utils;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
@@ -64,23 +63,22 @@ public static class DynamicKnowledge
         .Select(member => (ModelDb.GetById<CardModel>(ModelId.Deserialize(member.Id)), member.Count));
     public static IReadOnlyList<CardModel> Members(CardModel source)
     {
-        var group = Group(source);
-        if (group == null) return [];
-        // Detached offers acquire fresh partners; only actual pile views borrow existing instances.
-        var cards = source.Pile == null ? Enumerable.Empty<CardModel>()
+        var definition = KnowledgeMembers.Definition(source)?.ToArray();
+        if (definition == null) return [];
+        var cards = !source.IsMutable || source.Pile == null ? Enumerable.Empty<CardModel>()
             : source.Pile.IsCombatPile && source.Owner.PlayerCombatState != null
                 ? source.Owner.PlayerCombatState.AllCards : source.Owner.Deck.Cards;
-        var available = cards.Where(card => card != source).Prepend(source).ToLookup(card => card.Id.ToString());
-        var members = group.Members;
-        if (group.CardCounts.GetValueOrDefault(source.Id.ToString()) == 0)
-            members = members.Prepend((source.Id.ToString(), 1));
+        var available = cards.Where(card => card != source).Prepend(source).ToLookup(card => card.Id);
+        IEnumerable<(CardModel Model, int Count)> members = definition;
+        if (Group(source) is { } relation && relation.CardCounts.GetValueOrDefault(source.Id.ToString()) == 0)
+            members = members.Prepend((source, 1));
         return members.SelectMany(member =>
         {
-            var existing = available[member.Id].Take(member.Count).ToList();
+            var existing = available[member.Model.Id].Take(member.Count).ToList();
             while (existing.Count < member.Count)
             {
-                var preview = (CardModel)ModelDb.GetById<CardModel>(ModelId.Deserialize(member.Id)).MutableClone();
-                preview.Owner = source.Owner;
+                var preview = (CardModel)member.Model.MutableClone();
+                if (source.IsMutable) preview.Owner = source.Owner;
                 existing.Add(preview);
             }
             return existing;
@@ -113,24 +111,6 @@ public static class DynamicKnowledge
         {
             if (!string.IsNullOrEmpty(Links.Get(card))) Links.Set(card, null!);
             if (IsLinked(card)) card.AddKeyword(JunnaKeywords.Knowledge);
-        }
-    }
-    [HarmonyPatch(typeof(Player), nameof(Player.FromSerializable))]
-    private static class RestoreGroups
-    {
-        [HarmonyPostfix, HarmonyPriority(Priority.Last)]
-        private static void Postfix(Player __result) => Normalize(__result);
-    }
-    [HarmonyPatch(typeof(Player), nameof(Player.SyncWithSerializedPlayer))]
-    private static class SyncGroups
-    {
-        [HarmonyPostfix, HarmonyPriority(Priority.Last)]
-        private static void Postfix(Player __instance, SerializablePlayer player)
-        {
-            // Native player synchronization does not import BaseLib's extended player fields.
-            var saved = ExtendedSaveHandlers<Player, SerializablePlayer>.ExtendedData.Get(player).DictForType<string>();
-            Relations.Set(__instance, saved.GetValueOrDefault("spirefield_" + Relations.Name)!);
-            Normalize(__instance);
         }
     }
     public static Task Prepare(PlayerChoiceContext context, CardModel selected, IEnumerable<CardModel> options)

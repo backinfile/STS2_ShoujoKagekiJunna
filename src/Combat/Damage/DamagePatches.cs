@@ -141,10 +141,3 @@ internal static class AttackBatchPatch
         if (replacements != 1) throw new InvalidOperationException($"Junna: expected one AttackCommand damage boundary, found {replacements}.");
     }
 }
-
-[HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
-internal static class DamageClonePatch
-{
-    static void Postfix(AbstractModel __instance, AbstractModel __result) => DamageModifiers.Copy(__instance, __result);
-}
-

@@ -33,7 +33,7 @@ public sealed class MeteorPileProbe : AbstractConsoleCmd
             foreach (var card in player.PlayerCombatState!.AllCards.ToArray())
             {
                 ArrowCombat.Cancel(card);
-                await CardPileCmd.RemoveFromCombat(card, skipVisuals: true);
+                await CardPileCmd.RemoveFromCombat(card);
             }
         }
         try
