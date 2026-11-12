@@ -1,0 +1,30 @@
+[
+  {
+    "name": "live target: Meteor deploys for two turns",
+    "pass": true,
+    "actual": 2
+  },
+  {
+    "name": "live target: completed Meteor exhausts",
+    "pass": true,
+    "actual": "Exhaust"
+  },
+  {
+    "name": "missing target: both generated Meteors exhaust",
+    "pass": true,
+    "actual": [
+      "Exhaust",
+      "Exhaust"
+    ]
+  },
+  {
+    "name": "reshuffle: no Meteor enters draw pile",
+    "pass": true,
+    "actual": []
+  },
+  {
+    "name": "draw: no Meteor enters hand",
+    "pass": true,
+    "actual": []
+  }
+]
