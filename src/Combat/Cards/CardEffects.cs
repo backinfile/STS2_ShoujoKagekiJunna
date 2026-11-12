@@ -237,7 +237,7 @@ public static class CardEffects
                 if (!CombatManager.Instance.IsOverOrEnding) await HandArrow.Select(context, card, CardPile.MaxCardsInHand, optional: true);
                 break;
             case "JK84":
-                await HandArrow.Select(context, card, V("Cards")); break;
+                await HandArrow.Select(context, card, V("Cards"), optional: true); break;
             case "JG37":
                 await Draw(V("DrawCount")); await HandArrow.Select(context, card, V("Cards")); break;
             case "JA94":

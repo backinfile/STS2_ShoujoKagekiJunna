@@ -169,6 +169,14 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 查查类似问题，都处理下
 ```
 
+### Message 5
+
+```text
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_5afc6a3d88624de4902f123f91196e29\",0]","question":"是否将本次动画修复合并到 main，并清理临时工作树和分支？录像与验证证据会保留。","answer":"合并并清理"}]
+</send_user_message_question_reply>
+```
+
 ## Brief task plan
 
 - 原始分支 main，起点 3285a6c8b2111cd5a172eb72d4d4eb2ce5639ca9；原始工作区干净。
@@ -179,7 +187,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-实现与定向验证完成，等待同步 main 和合并确认。
+实现、同步与定向验证完成；用户已批准合并至 main，并清理本次工作树与分支。
 
 ### 原因与改动
 
@@ -224,8 +232,19 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 回归源：`tests/WorkbenchFitSync/StudyAnimationProbe.cs`、`PileAnimationProbe.cs`、`verify-study-animation.py`、`verify-pile-animation.py`。
 - 本工作树证据：`out/tmp/study-animation/`，包含基线、最终 JSON、原始 MP4、关键帧和正常操作前后快照。
 - 编译产物：`dist/ShoujoKagekiJunna/lib/`；隔离游戏：`artifacts/study-animation/`。
-- 批准清理时，先将必要录像、结果、运行包和校验清单复制到原仓库 `out/tmp/studious-end-turn-animation-20261112/` 并核对哈希。
+- 按已获批准的清理流程，先将必要录像、结果、验证程序集和校验清单复制到原仓库 `out/tmp/studious-end-turn-animation-20261112/` 并核对哈希。
 
 ### 同步与集成
 
-原分支 main 已由其他任务推进至 eb1422abbaebbfb00ac8a67f901a2d714a7ceac5；原工作区仍干净。本任务先提交自身改动，再将最新本地 main 同步到任务分支并做定向验证。合并与清理尚未批准。
+- 任务提交 588db7acab62d79638bf7f1d1ce3190949691972。
+- 已同步本地 main 的 eb1422abbaebbfb00ac8a67f901a2d714a7ceac5，无冲突；本次六个核心实现文件与任务提交一致。
+- 同步后重新通过双版本及探针编译、11 个同类入口场景、4 个真实回合；四个最终 MP4 均 completed、engine_mix、零掉帧。隔离实例已关闭。
+- 用户已明确选择“合并并清理”。执行前再次核对原检出仍位于 main 的 eb1422abbaebbfb00ac8a67f901a2d714a7ceac5，工作区干净；将以快进合并保存任务提交。
+- 审阅合辑：`out/tmp/study-animation/delivery/demo.mp4`，串联升级埋头学习与知识升级/复制两个独立原片，无效果顺序重排。原始录像、15 个场景结果、基线、程序集与相对路径哈希清单均在 delivery 中。
+- 最终 Beta 程序集 SHA-256：ecc42d45e0a1283229b3c603f076a6d0b17666b1c9e4778256ea83185640e6c0。
+- 最终 Stable 程序集 SHA-256：691b5cb74f07971b48dfe59b2a0b34c37b2f204dba30027253abf9489f7733f7。
+### 已批准的证据保留与清理
+
+- 证据保留位置：原仓库 `out/tmp/studious-end-turn-animation-20261112/`。包含原始录像、演示合辑、失败基线、读档准备时序失败及最终通过结果、双版本验证程序集和 SHA-256 清单。
+- 合并后核对 main 与任务分支提交树一致、main 包含任务提交、原工作区仍干净，并验证保留文件哈希；结果写入上述目录的 `integration.json`。
+- 批准的清理项目仅为本次 `../worktrees/STS2_ShoujoKagekiJunna/studious-end-turn-animation-20261112`、`codex/studious-end-turn-animation-20261112` 及其中的隔离测试临时文件。其他工作树与分支保留。
