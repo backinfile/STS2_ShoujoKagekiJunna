@@ -188,10 +188,10 @@ public sealed class StageGirlNotesProbe : AbstractConsoleCmd
                     {
                         waiting = await Card("JA38", PileType.Hand);
                         waiting.DynamicVars["Turns"].BaseValue = 5;
-                        await CardActions.PaidPlay(context, waiting, enemies[0]);
+                        await TestGameApi.PaidPlay(context, waiting, enemies[0]);
                     }
                     int beforeEnergy = player.PlayerCombatState.Energy;
-                    await CardActions.PaidPlay(context, source, enemies[0]);
+                    await TestGameApi.PaidPlay(context, source, enemies[0]);
                     Check(label + " countdown", ArrowCombat.Find(source)?.Remaining, 1);
                     Check(label + " cost", player.PlayerCombatState.Energy, beforeEnergy);
                     await ArrowCombat.Accelerate(context, ArrowCombat.Find(source)!, 100);

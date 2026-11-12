@@ -139,7 +139,7 @@ public sealed class CycleCommand : AbstractConsoleCmd
         {
             var card = player.Creature.CombatState!.CreateCard(CardCatalog.Model(id), player);
             if (upgrade) card.UpgradeInternal();
-            if (role == "shine") Shine.SetState(card, 2, 9);
+            if (role == "shine") Shine.SetState(card, 2, 6);
             active.Roles[card] = role; active.Initial[card] = (card.CurrentUpgradeLevel, Shine.GetState(card)?.Remaining);
             return card;
         }
@@ -156,7 +156,7 @@ public sealed class CycleCommand : AbstractConsoleCmd
         await CardPileCmd.Add(draw, player.PlayerCombatState.DrawPile, CardPilePosition.Bottom, skipVisuals: true);
         if (mode == "capacity")
         {
-            await CardActions.PaidPlay(context, source);
+            await JunnaIntegration.TestGameApi.PaidPlay(context, source);
             for (int i = 0; i < 10; i++)
             {
                 var filler = Create("JB02", "retainedFiller"); filler.AddKeyword(CardKeyword.Retain); filler.EnergyCost.SetThisCombat(0);

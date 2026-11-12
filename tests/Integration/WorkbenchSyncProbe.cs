@@ -64,7 +64,7 @@ public static class WorkbenchSyncProbe
         await CardPileCmd.Add(card, pile, skipVisuals: true);
         return card;
     }
-    private static Task<bool> Play(CardModel card) => CardActions.PaidPlay(Context, card, card.CombatState!.Enemies.First());
+    private static Task<bool> Play(CardModel card) => TestGameApi.PaidPlay(Context, card, card.CombatState!.Enemies.First());
     private static Task Finish(CardModel card) => ArrowCombat.Find(card) is { } a ? ArrowCombat.Accelerate(Context, a, int.MaxValue) : Task.CompletedTask;
     private static decimal Bonus(CardModel card) => DamageModifiers.CaptureDamageModifierSnapshot(card).DamageBonus;
 

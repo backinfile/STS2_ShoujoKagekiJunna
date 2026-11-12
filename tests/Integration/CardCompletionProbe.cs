@@ -62,7 +62,7 @@ public static class CardCompletionProbe
             await CardPileCmd.Add(c, pile, skipVisuals: true);
             return c;
         }
-        Task<bool> Play(CardModel c) => CardActions.PaidPlay(context, c, target);
+        Task<bool> Play(CardModel c) => TestGameApi.PaidPlay(context, c, target);
         async Task Finish(CardModel c)
         { if (ArrowCombat.Find(c) is { } arrow) await ArrowCombat.Accelerate(context, arrow, 100); }
         async Task Scenario(string name, Func<Task> action)

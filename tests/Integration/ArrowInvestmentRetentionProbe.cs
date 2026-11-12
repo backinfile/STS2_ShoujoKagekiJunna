@@ -58,10 +58,10 @@ public sealed class ArrowInvestmentRetentionProbe : AbstractConsoleCmd
                 await TestGameApi.LoseBlock(context, target, target.Block, null);
                 player.PlayerCombatState!.Energy = 30;
                 var deliberation = await Add("JK67", upgraded);
-                await CardActions.PaidPlay(context, deliberation, target);
+                await TestGameApi.PaidPlay(context, deliberation, target);
                 var arrow = await Add(adapted ? "JB01" : "JB03");
                 int printed = (int)arrow.DynamicVars.Damage.BaseValue;
-                if (adapted) await HandArrow.Play(context, arrow); else await CardActions.PaidPlay(context, arrow, target);
+                if (adapted) await HandArrow.Play(context, arrow); else await TestGameApi.PaidPlay(context, arrow, target);
                 var powerModel = player.Creature.Powers.OfType<CatalogPower>().Single(power => power.DesignId == "JK67");
                 await powerModel.BeforeSideTurnEnd(context, CombatSide.Player, [player.Creature]);
                 decimal bonus = upgraded ? 3m : 2m;
@@ -74,7 +74,7 @@ public sealed class ArrowInvestmentRetentionProbe : AbstractConsoleCmd
                 Expect(tag + " original object in discard", arrow.Pile?.Type == PileType.Discard, true);
                 await CardPileCmd.Add(arrow, PileType.Hand);
                 hp = target.CurrentHp;
-                await CardActions.PaidPlay(context, arrow, target);
+                await TestGameApi.PaidPlay(context, arrow, target);
                 Expect(tag + " bonus retained after replay", DamageModifiers.CaptureDamageModifierSnapshot(arrow).DamageBonus, bonus);
                 if (ArrowCombat.Find(arrow) is { } replay) await ArrowCombat.Accelerate(context, replay, 1000);
                 Expect(tag + " second resolution damage includes bonus", hp - target.CurrentHp, printed + (int)bonus);

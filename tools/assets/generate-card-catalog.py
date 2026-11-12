@@ -327,6 +327,8 @@ def main():
         'JUNNA_PREPARE_ARROWS.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]箭矢[/gold]牌。',
         'JUNNA_PREPARE_KNOWLEDGE.title': '知识',
         'JUNNA_PREPARE_KNOWLEDGE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]知识[/gold]牌。',
+        'JUNNA_PREPARE_SHINE.title': '闪耀',
+        'JUNNA_PREPARE_SHINE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张闪耀牌。',
         'JUNNA_NOTES_DRAW.title': '抽牌',
         'JUNNA_NOTES_DRAW.description': '抽{Amount:diff()}张牌。',
         'JUNNA_NOTES_ENERGY.title': '能量',
@@ -363,7 +365,8 @@ def main():
             'JA205': '目标为单个敌人的[gold]箭矢[/gold]现在会攻击所有敌人。',
             'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点力量。',
-            'U_CARD_008': '战斗结束时，获得[blue]{Amount}[/blue]张[gold]故事[/gold]。',
+            'U_CARD_008': '战斗结束时，向[gold]牌组[/gold]添加[blue]{Amount}[/blue]张[gold]故事[/gold]。',
+            'U_CARD_016': '打出[gold]{Category}[/gold]牌后，抽[blue]{Amount}[/blue]张牌。',
             'U_CARD_010': '回合开始时，从[gold]抽牌堆[/gold]选择[blue]1[/blue]张当前类别的牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]箭矢[/gold]牌、闪耀牌。',
         }
         for cid, text in current_power_text.items():
@@ -372,6 +375,8 @@ def main():
             amount = 1 if cid in ('U_CARD_008', 'U_CARD_010') else power_amounts[cid]
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
+            if cid == 'U_CARD_016':
+                powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]箭矢[/gold]、闪耀中轮换。'
             if cid == 'U_CARD_010':
                 powers[f'JUNNA_{cid}_POWER.smartDescription'] += '{Repetition}'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')

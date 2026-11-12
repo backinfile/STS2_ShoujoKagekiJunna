@@ -5,6 +5,7 @@
     <JunnaAssemblyPath Condition="'$(JunnaAssemblyPath)' == ''">../../dist/ShoujoKagekiJunna/lib/ShoujoKagekiJunna.Beta.dll</JunnaAssemblyPath>
   </PropertyGroup>
   <ItemGroup>
+    <EmbeddedResource Include="card-pool-expectations.json" LogicalName="JunnaTests.CardPool" />
     <Reference Include="ShoujoKagekiAijoCore.Api.V1" HintPath="$(CoreApiPath)" />
     <Reference Include="ShoujoKagekiJunna" HintPath="$(JunnaAssemblyPath)" />
     <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" />

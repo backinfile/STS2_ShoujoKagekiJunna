@@ -64,11 +64,10 @@ public sealed class FullCardAuditCommand : AbstractConsoleCmd
             return;
         }
         double speed = Engine.TimeScale;
-        Engine.TimeScale = 3;
+        Engine.TimeScale = 8;
         try
         {
-            foreach (var definition in CardCatalog.Cards
-                         .Where(card => card.Id is not ("JK359" or "JK360" or "JK361" or "JK362" or "JK363" or "JK364" or "JK365" or "JK366" or "JK367"))
+            foreach (var definition in AuditExpectations.Cards
                          .Where(card => args.Length < 2 || card.Id == args[1]))
             foreach (bool upgraded in new[] { false, true })
             foreach (string variant in args.FirstOrDefault() == "combos" ? new[] { "combo" } : new[] { "normal", "empty", "combo", "capacity" })
@@ -92,7 +91,7 @@ public sealed class FullCardAuditCommand : AbstractConsoleCmd
     }
 }
 
-internal sealed class AuditScenario(Player player, CardDefinition definition, bool upgraded, string variant)
+internal sealed partial class AuditScenario(Player player, CardDefinition definition, bool upgraded, string variant)
 {
     internal static string Output => Path.GetFullPath("../../../out/tmp/full-card-tests/results");
     private static readonly JsonSerializerOptions Json = new() { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
@@ -109,6 +108,7 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
     private int _beforeDraw;
     private int _beforeDeck;
     private int _beforeDepletedDesires;
+    private int _categoryCount;
     private bool _recording;
     private string Id => definition.Id;
     private string Text => upgraded ? definition.UpgradedText : definition.Text;
@@ -117,8 +117,9 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
     private sealed class Selector(CardModel? preferred = null) : ICardSelector
     {
         internal string? Choice;
+        internal CardModel? Preferred;
         public Task<IEnumerable<CardModel>> GetSelectedCards(IEnumerable<CardModel> options, int minimum, int maximum)
-            => Task.FromResult(options.OrderBy(card => card == preferred || card.Id.Entry == Choice ? 0 : 1).Take(maximum));
+            => Task.FromResult(options.OrderBy(card => card == preferred || card == Preferred || card.Id.Entry == Choice ? 0 : 1).Take(maximum));
         public CardRewardSelection GetSelectedCardReward(IReadOnlyList<CardCreationResult> options, IReadOnlyList<CardRewardAlternative> alternatives)
             => throw new NotSupportedException();
     }
@@ -165,7 +166,7 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
         if (_recording && pile == PileType.Hand && id != Id) card.AddKeyword(CardKeyword.Retain);
         return card;
     }
-    private Task<bool> Play(CardModel card) => CardActions.PaidPlay(_context, card, _enemies[0]);
+    private Task<bool> Play(CardModel card) => TestGameApi.PaidPlay(_context, card, _enemies[0]);
     private async Task Finish(CardModel card)
     {
         if (ArrowCombat.Find(card) is { } arrow) await ArrowCombat.Accelerate(_context, arrow, 1000);
@@ -197,16 +198,16 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
             if (Id is "JK11" or "JK11B") _selected = await Add(Id == "JK11" ? "JK11B" : "JK11", PileType.Exhaust);
             if (Id is "JK32" or "JK32B" or "JK32C")
                 foreach (string id in new[] { "JK32", "JK32B", "JK32C" }.Where(id => id != Id)) _helpers.Add(await Add(id));
-            if (Id is "JA43" or "JA71" or "JX01" or "JH22" or "JA176" or "JA177" or "JA104" or "JA119" or "JA105" or "JA35" or "JA96" or "JK67" or "JK37B" or "JK84B")
+            if (Id is "JA43" or "JA71" or "JX01" or "JH22" or "JA176" or "JA177" or "JA104" or "JA119" or "JA105" or "JA35" or "JA96" or "JK67" or "JK37B" or "JK84B" or "JK362")
             {
                 _arrow = await Add("JB03");
-                await CardActions.PaidPlay(_context, _arrow, Id == "JK37B" ? _enemies[^1] : _enemies[0]);
+                await TestGameApi.PaidPlay(_context, _arrow, Id == "JK37B" ? _enemies[^1] : _enemies[0]);
             }
             if (definition.Knowledge)
             {
                 var group = KnowledgeCombat.Group(CardCatalog.Create(Id, player));
                 if (group != null)
-                    foreach (string related in group.GrantedCardIds.Take(3)) _helpers.Add(await Add(related, PileType.Draw));
+                    foreach (string related in group.GrantedCardIds.Take(4)) _helpers.Add(await Add(related, PileType.Draw));
             }
             foreach (string id in new[] { "JB01", "JA38", "JK11", "JK133", "JB02", "JA15" })
                 _helpers.Add(await Add(id, PileType.Draw));
@@ -214,6 +215,11 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
                 for (int i = 0; i < 3; i++) foreach (string id in new[] { "JK11", "JA38", "JS35" }) _helpers.Add(await Add(id, PileType.Draw));
         }
         _source = await Add(Id, upgrade: upgraded);
+        if (Id == "U_CARD_017" && !Empty)
+        {
+            foreach (string helper in new[] { "JK49B", "JA38", "JS35" }) _helpers.Add(await Add(helper));
+            _categoryCount = 3;
+        }
         if (Id == "JK126" && !Empty)
         {
             var linked = new[] { _source, await Add("JB01", PileType.Draw), await Add("JA38", PileType.Draw) };
@@ -331,6 +337,7 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
     internal async Task Execute()
     {
         using var selector = CardSelectCmd.UseSelector(new Selector(_selected));
+        AuditObserver.Drawn.Clear();
         Check("支付并打出", await Play(_source), true);
         if (ArrowCombat.Find(_source) is { } arrow)
         {
@@ -357,6 +364,7 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
         int damage = match.Success ? int.Parse(match.Groups[1].Value) : 0;
         int hits = match.Groups[2].Success ? int.Parse(match.Groups[2].Value) : 1;
         if (Id == "JK314") hits += _beforeDepletedDesires;
+        if (Id == "U_CARD_017") hits += _categoryCount;
         if (Id == "JA81B") damage = 13;
         if (Id == "JK48") damage += player.Deck.Cards.Count(CardCatalog.IsKnowledge);
         if (Id == "JK206") damage = _beforeDeck + (upgraded ? 8 : 0);
@@ -442,6 +450,7 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
         if (definition.Type != "能力")
         {
             var draw = Regex.Match(Text, @"抽(\d+)张牌");
+            if (Id == "JK365") draw = Match.Empty; // Its ordinary draw and linked draws are checked together below.
             if (draw.Success)
                 Check("普通抽牌数量", _beforeDraw - player.PlayerCombatState!.DrawPile.Cards.Count,
                     Empty ? 0 : Math.Min(int.Parse(draw.Groups[1].Value), CardPile.MaxCardsInHand - _beforeHand + 1));
@@ -451,6 +460,60 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
                     int.Parse(energy.Groups[1].Value) - (upgraded ? definition.UpgradedCost : definition.Cost));
         }
         Check("手牌容量", player.PlayerCombatState!.Hand.Cards.Count <= CardPile.MaxCardsInHand, true);
+        if (Id == "JG33")
+            Check("超越极限按实际伤害强化自身", DamageModifiers.CaptureDamageModifierSnapshot(_source).DamageBonus,
+                (Enhanced ? 3m : 0m) + expected);
+        if (Id == "JK78")
+            foreach (var target in _helpers.Where(c => c.Pile?.Type == PileType.Draw && DamageModifiers.CanDealDamage(c)))
+                Check("专项加练实际牌 " + CardCatalog.DesignId(target), DamageModifiers.CaptureDamageModifierSnapshot(target).DamageBonus,
+                    (upgraded ? 8m : 6m) * (CardCatalog.IsArrow(target) ? 2 : 1));
+        if (Id == "JA53")
+        {
+            var drawn = AuditObserver.Drawn.ToArray();
+            Check("备箭只抽一张实际零费牌", drawn.Length, Empty ? 0 : 1);
+            Check("备箭排除正费用及X费牌", drawn.All(c => CardActions.HasNumericCost(c) && CardActions.Cost(c) == 0), true);
+        }
+        if (Id == "JA108")
+        {
+            Check("抽牌堆箭矢全部离开原牌堆", player.PlayerCombatState.DrawPile.Cards.Any(CardCatalog.IsArrow), false);
+            Check("抽牌堆实际箭矢布置", _helpers.Where(CardCatalog.IsArrow).All(c => ArrowCombat.Find(c) != null), true);
+        }
+        if (Id == "JA145")
+            Check("瞄准射击生成基础更近一步", player.PlayerCombatState.Hand.Cards.Count(c => CardCatalog.DesignId(c) == "JA119" && !c.IsUpgraded),
+                Math.Min(upgraded ? 2 : 1, CardPile.MaxCardsInHand - _beforeHand + 1));
+        if (Id is "JK206B" or "JK235B")
+        {
+            var received = player.PlayerCombatState.Hand.Cards.Except(_helpers.Where(c => c == _selected)).ToArray();
+            if (variant != "capacity") Check("知识检索限定类别", received.All(CardCatalog.IsKnowledge), true);
+            if (Id == "JK206B") Check("查阅为移牌而非抽牌", AuditObserver.Drawn.Count, 0);
+        }
+        if (Id == "JK126")
+        {
+            Check("抽取动态关联的全部同名实际牌", AuditObserver.Drawn.Count, Empty ? 0 : Math.Min(4, CardPile.MaxCardsInHand - _beforeHand + 1));
+            Check("动态关联抽牌排除无关牌", AuditObserver.Drawn.All(c => CardCatalog.DesignId(c) is "JB01" or "JA38"), true);
+        }
+        if (Id is "JK359" or "JK360" or "JK361" or "JK362" or "JK363" or "JK364" or "JK365" or "JK366" or "JK367")
+        {
+            var group = KnowledgeCombat.Group(_source)!;
+            var linked = AuditObserver.Drawn.Where(c => group.Members.Any(m => m.Id == CardCatalog.DesignId(c))).ToArray();
+            // Prepared ordinary draws also land on linked cards for 花蕾的光辉.
+            int linkedLimit = Id is "JK359" or "JK365" ? upgraded ? 4 : 3 : 2;
+            Check("事件武器抽到实际关联牌", linked.Length,
+                Empty ? 0 : Math.Min(linkedLimit, CardPile.MaxCardsInHand - _beforeHand + 1));
+            Check("事件武器正常抽牌管线", AuditObserver.Drawn.Distinct().Count(), AuditObserver.Drawn.Count);
+            if (Id == "JK365") Check("花蕾普通抽牌及关联抽牌总量", AuditObserver.Drawn.Count,
+                Empty ? 0 : Math.Min((upgraded ? 2 : 1) + 2, CardPile.MaxCardsInHand - _beforeHand + 1));
+            if (Id == "JK362" && _arrow != null)
+                Check("轮舞推进原有箭矢", ArrowCombat.Find(_arrow)?.Remaining, upgraded ? 1 : 2);
+            if (Id == "JK364")
+            {
+                Check("水仙花获得能量", player.PlayerCombatState.Energy - _beforeEnergy, 1);
+                Check("水仙花升级保留能量", player.Creature.GetPower<EnergyReserve>()?.Amount ?? 0, upgraded ? 1 : 0);
+            }
+            if (Id == "JK367")
+                foreach (var target in _helpers.Where(DamageModifiers.CanDealDamage))
+                    Check("奥黛特强化实际牌 " + CardCatalog.DesignId(target), DamageModifiers.CaptureDamageModifierSnapshot(target).DamageBonus, 2m);
+        }
         if (Shine.GetState(_source) is { } shine)
             Check("闪耀完整结算扣一次", shine.Remaining, shine.Maximum - 1);
     }
@@ -472,7 +535,9 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
                 if (Id == "JK32") Check("掌舵回合抽牌", player.PlayerCombatState.Hand.Cards.Count - hand,
                     Empty ? 0 : Math.Min(upgraded ? 2 : 1, CardPile.MaxCardsInHand - hand));
                 if (Id == "JA144") Check("稳步前进生成", player.PlayerCombatState.Hand.Cards.Count - hand, 1);
-                if (Id == "JA35" && _arrow != null) Check("回合开始箭矢加速", ArrowCombat.Find(_arrow)?.Remaining, 2);
+                if (Id == "JA35" && _arrow != null)
+                    Check("回合开始箭矢加速", ArrowCombat.Find(_arrow)?.Remaining ?? 0,
+                        Math.Max(0, 3 - Regex.Match(Text, @"加速(\d+)回合").Groups[1].ValueAsInt()));
                 if (Id == "U_CARD_010")
                 {
                     int expected = Empty ? 0 : Math.Min(1, CardPile.MaxCardsInHand - hand);
@@ -617,7 +682,7 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
             int hand = player.PlayerCombatState.Hand.Cards.Count;
             await Play(await Add(Id, upgrade: upgraded));
             Check("整备选择知识分支", player.PlayerCombatState.Hand.Cards.Count - hand,
-                Math.Min(eligible, Math.Min(2, CardPile.MaxCardsInHand - hand)));
+                Math.Min(eligible, Math.Min(upgraded ? 3 : 2, CardPile.MaxCardsInHand - hand)));
         }
         if (Id is "JA104" or "JA119" && _arrow != null)
         {
@@ -662,6 +727,7 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
             if (definition.Type == "箭矢") await CheckArrowCombination();
             if (Id == "JK314") await CheckDesirePile();
         }
+        if (variant == "normal") await CheckCurrentPoolEffects();
     }
 
     private async Task ClearCards()

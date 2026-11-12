@@ -221,7 +221,7 @@ public sealed class ArrowFollowupProbe : AbstractConsoleCmd
         player.PlayerCombatState!.Energy = 10;
         var sweep = CardCatalog.Create("JA76", player);
         await CardPileCmd.Add(sweep, PileType.Hand, skipVisuals: true);
-        await CardActions.PaidPlay(context, sweep);
+        await TestGameApi.PaidPlay(context, sweep);
         for (int i = 0; i < 4; i++) await CardActions.Fly(context, player, 4, targets[i % targets.Length]);
     }
 }
@@ -258,7 +258,7 @@ public sealed class TargetedFlyProbe : AbstractConsoleCmd
         {
             var card = CardCatalog.Create(id, player);
             await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
-            await CardActions.PaidPlay(context, card, target);
+            await TestGameApi.PaidPlay(context, card, target);
         }
         var harmony = new Harmony("junna.source-target.observer");
         harmony.Patch(AccessTools.Method(typeof(CardActions), nameof(CardActions.Fly)),

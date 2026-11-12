@@ -92,3 +92,6 @@ public sealed partial class JunnaPowerU_CARD_008() : CatalogPower("U_CARD_008");
 
 [CustomID("JUNNA_U_CARD_010_POWER")]
 public sealed partial class JunnaPowerU_CARD_010() : CatalogPower("U_CARD_010");
+
+[CustomID("JUNNA_U_CARD_016_POWER")]
+public sealed partial class JunnaPowerU_CARD_016() : CatalogPower("U_CARD_016");

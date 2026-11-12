@@ -46,7 +46,7 @@ public sealed class ArrowFormationBlockProbe : AbstractConsoleCmd
             await Reset(skipVisuals: false);
             await PowerCmd.Apply<FrailPower>(context, player.Creature, 2, target, null);
             var formation = await Add("JA118");
-            await CardActions.PaidPlay(context, formation, target);
+            await TestGameApi.PaidPlay(context, formation, target);
             await Add("JB03");
             await Add("JB03");
             player.PlayerCombatState!.Energy = 3;
@@ -58,29 +58,29 @@ public sealed class ArrowFormationBlockProbe : AbstractConsoleCmd
             {
                 await Reset();
                 var formation = await Add("JA118", upgraded);
-                await CardActions.PaidPlay(context, formation, target);
+                await TestGameApi.PaidPlay(context, formation, target);
                 if (frail) await PowerCmd.Apply<FrailPower>(context, player.Creature, 2, target, null);
                 int before = player.Creature.Block;
                 var arrow = await Add("JB03");
-                await CardActions.PaidPlay(context, arrow, target);
+                await TestGameApi.PaidPlay(context, arrow, target);
                 Expect($"Arrow Formation upgraded={upgraded} frail={frail} actual block", player.Creature.Block - before, upgraded ? 3 : 2);
                 Expect($"Arrow Formation upgraded={upgraded} frail={frail} arrow deployed", ArrowCombat.Find(arrow) != null, true);
             }
             await Reset();
             await PowerCmd.Apply<DexterityPower>(context, player.Creature, 3, player.Creature, null);
             var dexFormation = await Add("JA118");
-            await CardActions.PaidPlay(context, dexFormation, target);
+            await TestGameApi.PaidPlay(context, dexFormation, target);
             var dexArrow = await Add("JB03");
-            await CardActions.PaidPlay(context, dexArrow, target);
+            await TestGameApi.PaidPlay(context, dexArrow, target);
             Expect("Arrow Formation ignores Dexterity", player.Creature.Block, 2);
             await TestGameApi.LoseBlock(context, player.Creature, player.Creature.Block, null);
             var dexDefend = await Add("JB02");
-            await CardActions.PaidPlay(context, dexDefend, target);
+            await TestGameApi.PaidPlay(context, dexDefend, target);
             Expect("ordinary Defend still receives Dexterity", player.Creature.Block, 8);
             await Reset();
             await PowerCmd.Apply<FrailPower>(context, player.Creature, 2, target, null);
             var defend = await Add("JB02");
-            await CardActions.PaidPlay(context, defend, target);
+            await TestGameApi.PaidPlay(context, defend, target);
             Expect("ordinary Defend still receives Frail", player.Creature.Block, 3);
         }
         catch (Exception error) { rows.Add(new { name = "probe exception", pass = false, error = error.ToString() }); }

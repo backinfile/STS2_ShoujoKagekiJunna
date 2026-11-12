@@ -1,5 +1,5 @@
 {
-  "revision": 5007,
+  "revision": 5294,
   "cards": [
     {
       "id": "JG03",
@@ -7,7 +7,7 @@
       "className": "JunnaRepeatedPractice",
       "name": "练习",
       "cost": 1,
-      "upgradedCost": 1,
+      "upgradedCost": 0,
       "costsX": false,
       "type": "技能",
       "target": "Self",
@@ -16,7 +16,7 @@
       "pool": true,
       "knowledge": false,
       "exhaust": true,
-      "upgradedExhaust": false,
+      "upgradedExhaust": true,
       "retain": false,
       "upgradedRetain": false,
       "innate": false,
@@ -31,7 +31,7 @@
         }
       ],
       "text": "选择一张手牌，使其额外造成1次伤害。 \n消耗。",
-      "upgradedText": "选择一张手牌，使其额外造成1次伤害。"
+      "upgradedText": "选择一张手牌，使其额外造成1次伤害。 \n消耗。"
     },
     {
       "id": "JA15",
@@ -75,47 +75,10 @@
       }
     },
     {
-      "id": "JA17",
-      "modelId": "JUNNA_BREAK_ENCIRCLEMENT",
-      "className": "JunnaBreakEncirclement",
-      "name": "破围",
-      "cost": 2,
-      "upgradedCost": 2,
-      "costsX": false,
-      "type": "攻击",
-      "target": "AllEnemies",
-      "arrowSubtype": "技能",
-      "rarity": "普通",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": true,
-      "portrait": "JA17.png",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 9,
-          "upgraded": 12
-        },
-        {
-          "name": "N1",
-          "base": 2,
-          "upgraded": 2
-        }
-      ],
-      "text": "对所有敌人造成9点伤害。下回合获得2点能量。",
-      "upgradedText": "对所有敌人造成12点伤害。下回合获得2点能量。"
-    },
-    {
       "id": "JK11",
       "modelId": "JUNNA_JK11",
       "className": "JunnaCardJK11",
-      "name": "立论",
+      "name": "全力接招",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -132,7 +95,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JK11.jpg",
+      "portrait": "JK11.png",
       "values": [
         {
           "name": "Block",
@@ -140,14 +103,14 @@
           "upgraded": 10
         }
       ],
-      "text": "知识。获得7点格挡。无论何处，将驳论放入手牌。",
-      "upgradedText": "知识。获得10点格挡。无论何处，将驳论放入手牌。"
+      "text": "知识。获得7点格挡。无论何处，将全力相搏放入手牌。",
+      "upgradedText": "知识。获得10点格挡。无论何处，将全力相搏放入手牌。"
     },
     {
       "id": "JK11B",
       "modelId": "JUNNA_JK11B",
       "className": "JunnaCardJK11B",
-      "name": "驳论",
+      "name": "全力相搏",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -164,7 +127,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": true,
-      "portrait": "JK11B.jpg",
+      "portrait": "JK11B.png",
       "values": [
         {
           "name": "Damage",
@@ -172,14 +135,14 @@
           "upgraded": 12
         }
       ],
-      "text": "知识。造成9点伤害。无论何处，将立论放入手牌。",
-      "upgradedText": "知识。造成12点伤害。无论何处，将立论放入手牌。"
+      "text": "知识。造成9点伤害。无论何处，将全力接招放入手牌。",
+      "upgradedText": "知识。造成12点伤害。无论何处，将全力接招放入手牌。"
     },
     {
       "id": "JA22",
       "modelId": "JUNNA_JA22",
       "className": "JunnaCardJA22",
-      "name": "上弦",
+      "name": "安可",
       "cost": 1,
       "upgradedCost": 0,
       "costsX": false,
@@ -196,7 +159,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JA22.jpg",
+      "portrait": "JA22.png",
       "values": [],
       "text": "箭矢完成后放回手牌。",
       "upgradedText": "箭矢完成后放回手牌。"
@@ -205,7 +168,7 @@
       "id": "JK15",
       "modelId": "JUNNA_JK15",
       "className": "JunnaCardJK15",
-      "name": "反复研习",
+      "name": "回到那一页",
       "cost": 1,
       "upgradedCost": 0,
       "costsX": false,
@@ -264,43 +227,6 @@
       ],
       "text": "知识。获得8点格挡。消耗。",
       "upgradedText": "知识。获得12点格挡。消耗。"
-    },
-    {
-      "id": "JT02",
-      "modelId": "JUNNA_JT02",
-      "className": "JunnaCardJT02",
-      "name": "改编",
-      "cost": 1,
-      "upgradedCost": 0,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "罕见",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JT02.jpg",
-      "values": [
-        {
-          "name": "N0",
-          "base": 5,
-          "upgraded": 5
-        },
-        {
-          "name": "N1",
-          "base": 0,
-          "upgraded": 0
-        }
-      ],
-      "text": "选择一张手牌，将其变为5回合的箭矢牌，并且耗能为0。",
-      "upgradedText": "选择一张手牌，将其变为5回合的箭矢牌，并且耗能为0。"
     },
     {
       "id": "A",
@@ -596,7 +522,7 @@
       "id": "JK37B",
       "modelId": "JUNNA_JK37B",
       "className": "JunnaCardJK37B",
-      "name": "命中注定",
+      "name": "囚禁",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
@@ -613,7 +539,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": true,
-      "portrait": "JK37B.jpg",
+      "portrait": "JK37B.png",
       "values": [
         {
           "name": "Damage",
@@ -791,7 +717,7 @@
       "values": [
         {
           "name": "Block",
-          "base": 9,
+          "base": 10,
           "upgraded": 12
         },
         {
@@ -800,7 +726,7 @@
           "upgraded": 2
         }
       ],
-      "text": "获得9点格挡。所有箭矢加速1回合。",
+      "text": "获得10点格挡。所有箭矢加速1回合。",
       "upgradedText": "获得12点格挡。所有箭矢加速2回合。"
     },
     {
@@ -808,8 +734,8 @@
       "modelId": "JUNNA_JA53",
       "className": "JunnaCardJA53",
       "name": "备箭",
-      "cost": 1,
-      "upgradedCost": 1,
+      "cost": 2,
+      "upgradedCost": 2,
       "costsX": false,
       "type": "技能",
       "target": "Self",
@@ -828,17 +754,22 @@
       "values": [
         {
           "name": "Block",
-          "base": 8,
-          "upgraded": 10
+          "base": 14,
+          "upgraded": 18
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 1
+        },
+        {
+          "name": "N2",
+          "base": 0,
+          "upgraded": 0
         }
       ],
-      "text": "获得8点格挡。抽取1张箭矢牌。",
-      "upgradedText": "获得10点格挡。抽取2张箭矢牌。"
+      "text": "获得14点格挡。抽1张耗能为0的牌。",
+      "upgradedText": "获得18点格挡。抽1张耗能为0的牌。"
     },
     {
       "id": "JA57",
@@ -890,7 +821,7 @@
       "id": "JK67",
       "modelId": "JUNNA_JK67",
       "className": "JunnaCardJK67",
-      "name": "努力下去",
+      "name": "磨砺身心",
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
@@ -915,14 +846,14 @@
           "upgraded": 3
         }
       ],
-      "text": "知识。回合结束时，所有布置中的箭矢获得2点伤害加成。",
-      "upgradedText": "知识。回合结束时，所有布置中的箭矢获得3点伤害加成。"
+      "text": "知识。回合结束时，所有布置的箭矢获得2点伤害加成。",
+      "upgradedText": "知识。回合结束时，所有布置的箭矢获得3点伤害加成。"
     },
     {
       "id": "JK67B",
       "modelId": "JUNNA_JK67B",
       "className": "JunnaCardJK67B",
-      "name": "不丢掉目标",
+      "name": "白金强音",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
@@ -939,12 +870,12 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": true,
-      "portrait": "JK67B.jpg",
+      "portrait": "JK67B.png",
       "values": [
         {
           "name": "Damage",
           "base": 7,
-          "upgraded": 7
+          "upgraded": 9
         },
         {
           "name": "Repeat",
@@ -958,130 +889,10 @@
         }
       ],
       "text": "知识。造成7点伤害3次。",
-      "upgradedText": "知识。造成7点伤害3次。",
+      "upgradedText": "知识。造成9点伤害3次。",
       "arrowFocus": {
-        "x": 0.455,
-        "y": 0.32
-      }
-    },
-    {
-      "id": "JG27",
-      "modelId": "JUNNA_JG27",
-      "className": "JunnaCardJG27",
-      "name": "挺直脊背",
-      "cost": 1,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "普通",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JG27.jpg",
-      "values": [
-        {
-          "name": "N0",
-          "base": 1,
-          "upgraded": 1
-        },
-        {
-          "name": "Bonus",
-          "base": 5,
-          "upgraded": 7
-        }
-      ],
-      "text": "选择1张手牌获得5点伤害加成。",
-      "upgradedText": "选择1张手牌获得7点伤害加成。"
-    },
-    {
-      "id": "JX01",
-      "modelId": "JUNNA_JX01",
-      "className": "JunnaCardJX01",
-      "name": "基本功",
-      "cost": 1,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "罕见",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JX01.jpg",
-      "values": [
-        {
-          "name": "Block",
-          "base": 6,
-          "upgraded": 6
-        },
-        {
-          "name": "Bonus",
-          "base": 2,
-          "upgraded": 3
-        }
-      ],
-      "text": "获得6点格挡。所有箭矢获得2点伤害加成。",
-      "upgradedText": "获得6点格挡。所有箭矢获得3点伤害加成。"
-    },
-    {
-      "id": "JH11",
-      "modelId": "JUNNA_JH11",
-      "className": "JunnaCardJH11",
-      "name": "微光",
-      "cost": 0,
-      "upgradedCost": 0,
-      "costsX": false,
-      "type": "箭矢",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "普通",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JH11.jpg",
-      "values": [
-        {
-          "name": "Block",
-          "base": 4,
-          "upgraded": 6
-        },
-        {
-          "name": "N1",
-          "base": 1,
-          "upgraded": 1
-        },
-        {
-          "name": "Turns",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "获得4点格挡。获得1点能量。",
-      "upgradedText": "获得6点格挡。获得1点能量。",
-      "arrowFocus": {
-        "x": 0.34,
-        "y": 0.25
+        "x": 0.5,
+        "y": 0.38
       }
     },
     {
@@ -1210,7 +1021,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JA58.jpg",
+      "portrait": "JA58.png",
       "values": [
         {
           "name": "N0",
@@ -1241,7 +1052,7 @@
       "type": "技能",
       "target": "Self",
       "arrowSubtype": "技能",
-      "rarity": "罕见",
+      "rarity": "普通",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -1296,8 +1107,8 @@
           "upgraded": 12
         }
       ],
-      "text": "造成10点伤害。布置的箭矢获得等同于造成伤害点数的伤害加成。",
-      "upgradedText": "造成12点伤害。布置的箭矢获得等同于造成伤害点数的伤害加成。"
+      "text": "造成10点伤害。布置的箭矢获得等量的伤害加成。",
+      "upgradedText": "造成12点伤害。布置的箭矢获得等量的伤害加成。"
     },
     {
       "id": "JA64",
@@ -1356,7 +1167,7 @@
       "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
-      "rarity": "罕见",
+      "rarity": "普通",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -1385,6 +1196,38 @@
         "x": 0.42,
         "y": 0.8
       }
+    },
+    {
+      "id": "JG33",
+      "modelId": "JUNNA_JG33",
+      "className": "JunnaCardJG33",
+      "name": "超越极限",
+      "cost": 3,
+      "upgradedCost": 3,
+      "costsX": false,
+      "type": "攻击",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JG33.jpg",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 25,
+          "upgraded": 30
+        }
+      ],
+      "text": "造成25点伤害。获得等量伤害加成。",
+      "upgradedText": "造成30点伤害。获得等量伤害加成。"
     },
     {
       "id": "JA67",
@@ -1548,7 +1391,7 @@
       "type": "技能",
       "target": "Self",
       "arrowSubtype": "技能",
-      "rarity": "稀有",
+      "rarity": "罕见",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -1566,8 +1409,8 @@
           "upgraded": 8
         }
       ],
-      "text": "抽牌堆的所有牌获得6点伤害加成。",
-      "upgradedText": "抽牌堆的所有牌获得8点伤害加成。"
+      "text": "抽牌堆的所有牌获得6点伤害加成。（箭矢获得两倍）",
+      "upgradedText": "抽牌堆的所有牌获得8点伤害加成。（箭矢获得两倍）"
     },
     {
       "id": "JH27",
@@ -1602,84 +1445,6 @@
       "upgradedText": "知识。获得28点格挡。"
     },
     {
-      "id": "JG36",
-      "modelId": "JUNNA_JG36",
-      "className": "JunnaCardJG36",
-      "name": "挥刃练习",
-      "cost": 2,
-      "upgradedCost": 2,
-      "costsX": false,
-      "type": "攻击",
-      "target": "AnyEnemy",
-      "arrowSubtype": "攻击",
-      "rarity": "普通",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": true,
-      "portrait": "JG36.jpg",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 14,
-          "upgraded": 18
-        },
-        {
-          "name": "Bonus",
-          "base": 2,
-          "upgraded": 3
-        }
-      ],
-      "text": "造成14点伤害。所有牌获得2点伤害加成。",
-      "upgradedText": "造成18点伤害。所有牌获得3点伤害加成。"
-    },
-    {
-      "id": "JA75",
-      "modelId": "JUNNA_JA75",
-      "className": "JunnaCardJA75",
-      "name": "射箭练习",
-      "cost": 0,
-      "upgradedCost": 0,
-      "costsX": false,
-      "type": "箭矢",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "普通",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JA75.jpg",
-      "values": [
-        {
-          "name": "Bonus",
-          "base": 3,
-          "upgraded": 4
-        },
-        {
-          "name": "Turns",
-          "base": 2,
-          "upgraded": 2
-        }
-      ],
-      "text": "所有牌获得3点伤害加成。",
-      "upgradedText": "所有牌获得4点伤害加成。",
-      "arrowFocus": {
-        "x": 0.2,
-        "y": 0.27
-      }
-    },
-    {
       "id": "JK82",
       "modelId": "JUNNA_JK82",
       "className": "JunnaCardJK82",
@@ -1700,7 +1465,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JK82.jpg",
+      "portrait": "JK82.png",
       "values": [
         {
           "name": "N0",
@@ -1832,13 +1597,13 @@
       "values": [
         {
           "name": "Damage",
-          "base": 8,
+          "base": 6,
           "upgraded": 8
         },
         {
           "name": "Repeat",
-          "base": 3,
-          "upgraded": 4
+          "base": 5,
+          "upgraded": 5
         },
         {
           "name": "Turns",
@@ -1846,8 +1611,8 @@
           "upgraded": 1
         }
       ],
-      "text": "对所有敌人造成8点伤害3次。",
-      "upgradedText": "对所有敌人造成8点伤害4次。",
+      "text": "对所有敌人造成6点伤害5次。",
+      "upgradedText": "对所有敌人造成8点伤害5次。",
       "arrowFocus": {
         "x": 0.23,
         "y": 0.49
@@ -1864,7 +1629,7 @@
       "type": "箭矢",
       "target": "Self",
       "arrowSubtype": "技能",
-      "rarity": "罕见",
+      "rarity": "普通",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -1898,7 +1663,7 @@
       "id": "JA81",
       "modelId": "JUNNA_JA81",
       "className": "JunnaCardJA81",
-      "name": "连射",
+      "name": "化作流星的箭",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -2003,14 +1768,14 @@
       "id": "JA84",
       "modelId": "JUNNA_JA84",
       "className": "JunnaCardJA84",
-      "name": "举弓",
+      "name": "舞台幕后",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
       "type": "技能",
       "target": "Self",
       "arrowSubtype": "技能",
-      "rarity": "罕见",
+      "rarity": "普通",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -2049,9 +1814,9 @@
       "id": "JA87",
       "modelId": "JUNNA_JA87",
       "className": "JunnaCardJA87",
-      "name": "布阵",
-      "cost": 2,
-      "upgradedCost": 1,
+      "name": "布置舞台",
+      "cost": 1,
+      "upgradedCost": 0,
       "costsX": false,
       "type": "能力",
       "target": "Self",
@@ -2090,7 +1855,7 @@
       "id": "JA88",
       "modelId": "JUNNA_JA88",
       "className": "JunnaCardJA88",
-      "name": "迎击",
+      "name": "这就是舞台",
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
@@ -2131,7 +1896,7 @@
       "id": "JA96",
       "modelId": "JUNNA_JA96",
       "className": "JunnaCardJA96",
-      "name": "绝不停步",
+      "name": "站起来",
       "cost": 1,
       "upgradedCost": 0,
       "costsX": false,
@@ -2167,7 +1932,7 @@
       "id": "JK84",
       "modelId": "JUNNA_JK84",
       "className": "JunnaCardJK84",
-      "name": "先学会站起来",
+      "name": "最棒的导演",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
@@ -2184,7 +1949,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JK84.jpg",
+      "portrait": "JK84.png",
       "values": [
         {
           "name": "N0",
@@ -2208,7 +1973,7 @@
       "id": "JK84B",
       "modelId": "JUNNA_JK84B",
       "className": "JunnaCardJK84B",
-      "name": "翱翔在天际",
+      "name": "尽情大闹",
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
@@ -2249,7 +2014,7 @@
       "id": "JG37",
       "modelId": "JUNNA_JG37",
       "className": "JunnaCardJG37",
-      "name": "搭箭",
+      "name": "舞台准备",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -2451,84 +2216,6 @@
       "upgradedText": "战斗结束后，可以单独复制牌组中的1张知识牌。"
     },
     {
-      "id": "JK131",
-      "modelId": "JUNNA_JK131",
-      "className": "JunnaCardJK131",
-      "name": "永远都不嫌晚",
-      "cost": 0,
-      "upgradedCost": 0,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "普通",
-      "pool": false,
-      "knowledge": true,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JK131.jpg",
-      "values": [
-        {
-          "name": "Bonus",
-          "base": 3,
-          "upgraded": 4
-        }
-      ],
-      "text": "知识。所有牌获得3点伤害加成。闪耀9。",
-      "upgradedText": "知识。所有牌获得4点伤害加成。闪耀9。"
-    },
-    {
-      "id": "JK131B",
-      "modelId": "JUNNA_JK131B",
-      "className": "JunnaCardJK131B",
-      "name": "檄文",
-      "cost": 3,
-      "upgradedCost": 3,
-      "costsX": false,
-      "type": "箭矢",
-      "target": "AnyEnemy",
-      "arrowSubtype": "攻击",
-      "rarity": "普通",
-      "pool": true,
-      "knowledge": true,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": true,
-      "portrait": "JK131B.png",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 24,
-          "upgraded": 32
-        },
-        {
-          "name": "Repeat",
-          "base": 2,
-          "upgraded": 2
-        },
-        {
-          "name": "Turns",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "知识。造成24点伤害2次。",
-      "upgradedText": "知识。造成32点伤害2次。",
-      "arrowFocus": {
-        "x": 0.5,
-        "y": 0.5
-      }
-    },
-    {
       "id": "JK133",
       "modelId": "JUNNA_JK133",
       "className": "JunnaCardJK133",
@@ -2539,7 +2226,7 @@
       "type": "箭矢",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
-      "rarity": "罕见",
+      "rarity": "普通",
       "pool": true,
       "knowledge": true,
       "exhaust": false,
@@ -2815,7 +2502,7 @@
       "id": "JA118",
       "modelId": "JUNNA_JA118",
       "className": "JunnaCardJA118",
-      "name": "箭阵",
+      "name": "立下誓言",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -2832,7 +2519,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JA118.jpg",
+      "portrait": "JA118.png",
       "values": [
         {
           "name": "Block",
@@ -2955,7 +2642,7 @@
       "type": "攻击",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
-      "rarity": "罕见",
+      "rarity": "普通",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -3012,11 +2699,16 @@
         {
           "name": "N1",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 3
+        },
+        {
+          "name": "N2",
+          "base": 2,
+          "upgraded": 3
         }
       ],
-      "text": "选择：从抽牌堆抽取2张箭矢牌或者2张知识牌。消耗。闪耀9。",
-      "upgradedText": "选择：从抽牌堆抽取3张箭矢牌或者2张知识牌。消耗。闪耀9。"
+      "text": "选择：从抽牌堆抽取2张箭矢牌，2张知识牌，或者2张闪耀牌。消耗。",
+      "upgradedText": "选择：从抽牌堆抽取3张箭矢牌，3张知识牌，或者3张闪耀牌。消耗。"
     },
     {
       "id": "JS34",
@@ -3055,8 +2747,8 @@
       "modelId": "JUNNA_JS35",
       "className": "JunnaCardJS35",
       "name": "戒备",
-      "cost": 0,
-      "upgradedCost": 0,
+      "cost": 1,
+      "upgradedCost": 1,
       "costsX": false,
       "type": "技能",
       "target": "Self",
@@ -3068,19 +2760,19 @@
       "upgradedExhaust": false,
       "retain": false,
       "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
+      "innate": true,
+      "upgradedInnate": true,
       "damageCapable": false,
       "portrait": "JS35.jpg",
       "values": [
         {
           "name": "Block",
-          "base": 6,
-          "upgraded": 9
+          "base": 10,
+          "upgraded": 15
         }
       ],
-      "text": "获得6点格挡。闪耀9。",
-      "upgradedText": "获得9点格挡。闪耀9。"
+      "text": "固有。获得10点格挡。闪耀6。",
+      "upgradedText": "固有。获得15点格挡。闪耀6。"
     },
     {
       "id": "JH59",
@@ -3111,8 +2803,8 @@
           "upgraded": 1
         }
       ],
-      "text": "回合开始时，获得1点能量。\n闪耀9。",
-      "upgradedText": "回合开始时，获得1点能量。\n闪耀9。"
+      "text": "回合开始时，获得1点能量。\n闪耀6。",
+      "upgradedText": "回合开始时，获得1点能量。\n闪耀6。"
     },
     {
       "id": "JA176",
@@ -3181,49 +2873,12 @@
       "id": "JK200",
       "modelId": "JUNNA_JK200",
       "className": "JunnaCardJK200",
-      "name": "你一直在看什么",
+      "name": "吹吧，狂风",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
-      "type": "攻击",
+      "type": "箭矢",
       "target": "AllEnemies",
-      "arrowSubtype": "攻击",
-      "rarity": "普通",
-      "pool": true,
-      "knowledge": true,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": true,
-      "portrait": "JK200.jpg",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 4,
-          "upgraded": 6
-        },
-        {
-          "name": "Repeat",
-          "base": 2,
-          "upgraded": 2
-        }
-      ],
-      "text": "知识。对所有敌人造成4点伤害2次。",
-      "upgradedText": "知识。对所有敌人造成6点伤害2次。"
-    },
-    {
-      "id": "JK200B",
-      "modelId": "JUNNA_JK200B",
-      "className": "JunnaCardJK200B",
-      "name": "疑问",
-      "cost": 1,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "普通",
       "pool": false,
@@ -3234,8 +2889,50 @@
       "upgradedRetain": false,
       "innate": false,
       "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JK200.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 7,
+          "upgraded": 9
+        },
+        {
+          "name": "Repeat",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。对所有敌人造成7点伤害2次。",
+      "upgradedText": "知识。对所有敌人造成9点伤害2次。"
+    },
+    {
+      "id": "JK200B",
+      "modelId": "JUNNA_JK200B",
+      "className": "JunnaCardJK200B",
+      "name": "忍耐的典范",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": true,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JK200B.jpg",
+      "portrait": "JK200B.png",
       "values": [
         {
           "name": "Block",
@@ -3248,8 +2945,8 @@
           "upgraded": 3
         }
       ],
-      "text": "知识。获得5点格挡。所有手牌获得2点伤害加成。",
-      "upgradedText": "知识。获得7点格挡。所有手牌获得3点伤害加成。"
+      "text": "知识。获得5点格挡。所有手牌和箭矢获得2点伤害加成。",
+      "upgradedText": "知识。获得7点格挡。所有手牌和箭矢获得3点伤害加成。"
     },
     {
       "id": "JK206",
@@ -3688,8 +3385,8 @@
           "upgraded": 1
         }
       ],
-      "text": "战斗结束时，获得1张故事。",
-      "upgradedText": "战斗结束时，获得1张故事。"
+      "text": "战斗结束时，向牌组中添加1张故事。",
+      "upgradedText": "战斗结束时，向牌组中添加1张故事。"
     },
     {
       "id": "U_CARD_008B",
@@ -3705,8 +3402,8 @@
       "rarity": "衍生",
       "pool": false,
       "knowledge": false,
-      "exhaust": true,
-      "upgradedExhaust": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
       "retain": false,
       "upgradedRetain": false,
       "innate": false,
@@ -3715,13 +3412,18 @@
       "portrait": "U_CARD_008B.jpg",
       "values": [
         {
-          "name": "N0",
-          "base": 2,
-          "upgraded": 3
+          "name": "Block",
+          "base": 4,
+          "upgraded": 8
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
         }
       ],
-      "text": "抽2张牌。消耗。闪耀3。",
-      "upgradedText": "抽3张牌。消耗。闪耀3。"
+      "text": "获得4点格挡。抽1张牌。闪耀6。",
+      "upgradedText": "获得8点格挡。抽1张牌。闪耀6。"
     },
     {
       "id": "JK359",
@@ -4312,27 +4014,97 @@
           "upgraded": 50
         }
       ],
-      "text": "本回合中，箭矢的目标造成伤害降低50%（不重复）。",
-      "upgradedText": "本回合中，箭矢的目标造成伤害降低50%（不重复）。"
+      "text": "本回合中，箭矢的目标敌人造成伤害降低50%（不重复计算）。",
+      "upgradedText": "本回合中，箭矢的目标敌人造成伤害降低50%（不重复计算）。"
+    },
+    {
+      "id": "U_CARD_016",
+      "modelId": "JUNNA_U_CARD_016",
+      "className": "JunnaCardU_CARD_016",
+      "name": "呼喊与回应",
+      "cost": 2,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "能力",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_016.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "打出知识牌后，抽1张牌。（每次在知识、箭矢、闪耀中轮换）",
+      "upgradedText": "打出知识牌后，抽1张牌。（每次在知识、箭矢、闪耀中轮换）"
+    },
+    {
+      "id": "U_CARD_017",
+      "modelId": "JUNNA_U_CARD_017",
+      "className": "JunnaCardU_CARD_017",
+      "name": "猛烈闪耀",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "攻击",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "U_CARD_017.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 6,
+          "upgraded": 6
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "造成6点伤害。手牌中知识、箭矢、闪耀每有一类，额外造成1次伤害。",
+      "upgradedText": "造成6点伤害。手牌中知识、箭矢、闪耀每有一类，额外造成1次伤害。"
     }
   ],
   "groups": [
     {
       "uid": "draft_group_JK11",
       "id": "GROUP_JK11",
-      "title": "立论／驳论",
+      "title": "全力接招／全力相搏",
       "mainCardId": "JK11B",
       "grantedCardIds": [
         "JK11"
       ],
       "grantedCardCounts": {
         "JK11": 1
-      }
+      },
+      "reference": "《ゼウスの仲裁》澄清误解后的承接与交锋；知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。"
     },
     {
       "uid": "draft_group_JK15",
       "id": "GROUP_JK15",
-      "title": "JK15",
+      "title": "回到那一页／废稿",
       "mainCardId": "JK15",
       "grantedCardIds": [
         "JK15B"
@@ -4370,7 +4142,7 @@
     {
       "uid": "fabled_group_JK37",
       "id": "GROUP_JK37",
-      "title": "绝美的凋零／遥远星辰的渴望／命中注定",
+      "title": "绝美的凋零／遥远星辰的渴望／囚禁",
       "mainCardId": "JK37",
       "grantedCardIds": [
         "JK37C",
@@ -4396,7 +4168,7 @@
     {
       "uid": "complete_pool_group_JK67",
       "id": "GROUP_JK67",
-      "title": "努力下去／不丢掉目标",
+      "title": "磨砺身心／白金强音",
       "mainCardId": "JK67",
       "grantedCardIds": [
         "JK67B"
@@ -4420,7 +4192,7 @@
     {
       "uid": "junna-arrow-five-turn-exploration-20261105_GROUP_JK84",
       "id": "GROUP_JK84",
-      "title": "先学会站起来／翱翔在天际",
+      "title": "最棒的导演／尽情大闹",
       "mainCardId": "JK84B",
       "grantedCardIds": [
         "JK84"
@@ -4441,19 +4213,6 @@
         "JK122B": 1
       },
       "notes": "取得常驻主牌时同时获得1张闪耀关联牌，关联牌耗尽后主牌继续保留。"
-    },
-    {
-      "uid": "junna-shine-arrow-exploration-20261106_GROUP_JK131",
-      "id": "GROUP_JK131",
-      "title": "檄文／永远都不嫌晚",
-      "mainCardId": "JK131B",
-      "grantedCardIds": [
-        "JK131"
-      ],
-      "grantedCardCounts": {
-        "JK131": 1
-      },
-      "notes": "檄文为常驻群攻箭矢入口，附带永远都不嫌晚。关联技能用闪耀9提供限次的全牌伤害加成，耗尽后留下檄文。"
     },
     {
       "uid": "junna-shine-arrow-exploration-20261106_GROUP_JK133",
@@ -4509,18 +4268,18 @@
     {
       "uid": "junna-common-one-cost-aoe-knowledge-20261108_GROUP_JK200",
       "id": "GROUP_JK200",
-      "title": "你一直在看什么／疑问",
-      "mainCardId": "JK200",
+      "title": "忍耐的典范／吹吧，狂风",
+      "mainCardId": "JK200B",
       "grantedCardIds": [
-        "JK200B"
+        "JK200"
       ],
       "grantedCardCounts": {
-        "JK200B": 1
+        "JK200": 1
       },
-      "structure": "质疑与辨析",
+      "structure": "风雨与忍耐",
       "draftBatch": "junna-common-one-cost-aoe-knowledge-20261108",
-      "reference": "《ペン：力：刀》纯那声部的问句；关联的疑问表现追问与整理回应。",
-      "notes": "取得你一直在看什么时，同时获得1张疑问；两张牌独立使用和升级。你一直在看什么以连续的群体攻击提出问题，疑问用格挡与手牌伤害加成整理后续回应。组内契合按当前牌面记录，分别保留现有数值和支付。"
+      "reference": "《李尔王》第三幕第二场；纯那在角色访谈中明确提及阅读本作：https://hon-hikidashi.jp/event/42802/",
+      "notes": "取得忍耐的典范时，同时获得1张吹吧，狂风；两张牌独立使用和升级。忍耐的典范提供格挡，并强化所有手牌和箭矢；吹吧，狂风完成后对所有敌人造成两次伤害。"
     },
     {
       "uid": "junna_deck_size_knowledge_20261108_GROUP_JK206",
@@ -4607,7 +4366,7 @@
     {
       "uid": "knowledge-initial-lists-20261110_JK11",
       "id": "INITIAL_KNOWLEDGE_LIST_JK11",
-      "title": "立论",
+      "title": "全力接招",
       "mainCardId": "JK11",
       "grantedCardIds": [
         "JK11B"
@@ -4692,7 +4451,7 @@
     {
       "uid": "knowledge-initial-lists-20261110_JK37B",
       "id": "INITIAL_KNOWLEDGE_LIST_JK37B",
-      "title": "命中注定",
+      "title": "囚禁",
       "mainCardId": "JK37B",
       "grantedCardIds": [
         "JK37",
@@ -4720,7 +4479,7 @@
     {
       "uid": "knowledge-initial-lists-20261110_JK67B",
       "id": "INITIAL_KNOWLEDGE_LIST_JK67B",
-      "title": "不丢掉目标",
+      "title": "白金强音",
       "mainCardId": "JK67B",
       "grantedCardIds": [
         "JK67"
@@ -4747,7 +4506,7 @@
     {
       "uid": "knowledge-initial-lists-20261110_JK84",
       "id": "INITIAL_KNOWLEDGE_LIST_JK84",
-      "title": "先学会站起来",
+      "title": "最棒的导演",
       "mainCardId": "JK84",
       "grantedCardIds": [
         "JK84B"
@@ -4773,19 +4532,6 @@
         "JK275": 1,
         "JK274": 1,
         "JK314": 1
-      },
-      "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
-    },
-    {
-      "uid": "knowledge-initial-lists-20261110_JK131",
-      "id": "INITIAL_KNOWLEDGE_LIST_JK131",
-      "title": "永远都不嫌晚",
-      "mainCardId": "JK131",
-      "grantedCardIds": [
-        "JK131B"
-      ],
-      "grantedCardCounts": {
-        "JK131B": 1
       },
       "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
     },
@@ -4818,15 +4564,15 @@
     {
       "uid": "knowledge-initial-lists-20261110_JK200B",
       "id": "INITIAL_KNOWLEDGE_LIST_JK200B",
-      "title": "疑问",
-      "mainCardId": "JK200B",
+      "title": "吹吧，狂风",
+      "mainCardId": "JK200",
       "grantedCardIds": [
-        "JK200"
+        "JK200B"
       ],
       "grantedCardCounts": {
-        "JK200": 1
+        "JK200B": 1
       },
-      "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
+      "notes": "此列表供吹吧，狂风作为取得入口时使用，关联忍耐的典范1张。每张牌独立保存自己的关联列表；原生组以忍耐的典范为入池主牌。"
     },
     {
       "uid": "knowledge-initial-lists-20261110_JK206B",
@@ -7123,43 +6869,6 @@
       "upgradedText": "选择：获得3点能量或下回合获得4点能量。\n消耗。闪耀6。"
     },
     {
-      "id": "JG33",
-      "modelId": "JUNNA_JG33",
-      "className": "JunnaCardJG33",
-      "name": "超越极限",
-      "cost": 3,
-      "upgradedCost": 3,
-      "costsX": false,
-      "type": "攻击",
-      "target": "AnyEnemy",
-      "arrowSubtype": "攻击",
-      "rarity": "普通",
-      "pool": false,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": true,
-      "portrait": "JG33.jpg",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 24,
-          "upgraded": 32
-        },
-        {
-          "name": "Bonus",
-          "base": 8,
-          "upgraded": 8
-        }
-      ],
-      "text": "造成24点伤害。获得8点伤害加成。",
-      "upgradedText": "造成32点伤害。获得8点伤害加成。"
-    },
-    {
       "id": "JA72",
       "modelId": "JUNNA_JA72",
       "className": "JunnaCardJA72",
@@ -7518,6 +7227,356 @@
       ],
       "text": "知识。获得4点格挡。牌组中每有一张知识牌，格挡增加1。",
       "upgradedText": "知识。获得7点格挡。牌组中每有一张知识牌，格挡增加1。"
+    },
+    {
+      "id": "JA17",
+      "modelId": "JUNNA_BREAK_ENCIRCLEMENT",
+      "className": "JunnaBreakEncirclement",
+      "name": "破围",
+      "cost": 2,
+      "upgradedCost": 2,
+      "costsX": false,
+      "type": "攻击",
+      "target": "AllEnemies",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JA17.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 9,
+          "upgraded": 12
+        },
+        {
+          "name": "N1",
+          "base": 2,
+          "upgraded": 2
+        }
+      ],
+      "text": "对所有敌人造成9点伤害。下回合获得2点能量。",
+      "upgradedText": "对所有敌人造成12点伤害。下回合获得2点能量。"
+    },
+    {
+      "id": "JT02",
+      "modelId": "JUNNA_JT02",
+      "className": "JunnaCardJT02",
+      "name": "改编",
+      "cost": 1,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JT02.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 5,
+          "upgraded": 5
+        },
+        {
+          "name": "N1",
+          "base": 0,
+          "upgraded": 0
+        }
+      ],
+      "text": "选择一张手牌，将其变为5回合的箭矢牌，并且耗能为0。",
+      "upgradedText": "选择一张手牌，将其变为5回合的箭矢牌，并且耗能为0。"
+    },
+    {
+      "id": "JG27",
+      "modelId": "JUNNA_JG27",
+      "className": "JunnaCardJG27",
+      "name": "挺直脊背",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JG27.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        },
+        {
+          "name": "Bonus",
+          "base": 5,
+          "upgraded": 7
+        }
+      ],
+      "text": "选择1张手牌获得5点伤害加成。",
+      "upgradedText": "选择1张手牌获得7点伤害加成。"
+    },
+    {
+      "id": "JX01",
+      "modelId": "JUNNA_JX01",
+      "className": "JunnaCardJX01",
+      "name": "基本功",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JX01.jpg",
+      "values": [
+        {
+          "name": "Block",
+          "base": 6,
+          "upgraded": 6
+        },
+        {
+          "name": "Bonus",
+          "base": 2,
+          "upgraded": 3
+        }
+      ],
+      "text": "获得6点格挡。所有箭矢获得2点伤害加成。",
+      "upgradedText": "获得6点格挡。所有箭矢获得3点伤害加成。"
+    },
+    {
+      "id": "JH11",
+      "modelId": "JUNNA_JH11",
+      "className": "JunnaCardJH11",
+      "name": "微光",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JH11.jpg",
+      "values": [
+        {
+          "name": "Block",
+          "base": 4,
+          "upgraded": 6
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "获得4点格挡。获得1点能量。",
+      "upgradedText": "获得6点格挡。获得1点能量。",
+      "arrowFocus": {
+        "x": 0.34,
+        "y": 0.25
+      }
+    },
+    {
+      "id": "JG36",
+      "modelId": "JUNNA_JG36",
+      "className": "JunnaCardJG36",
+      "name": "挥刃练习",
+      "cost": 2,
+      "upgradedCost": 2,
+      "costsX": false,
+      "type": "攻击",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JG36.jpg",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 14,
+          "upgraded": 18
+        },
+        {
+          "name": "Bonus",
+          "base": 2,
+          "upgraded": 3
+        }
+      ],
+      "text": "造成14点伤害。所有牌获得2点伤害加成。",
+      "upgradedText": "造成18点伤害。所有牌获得3点伤害加成。"
+    },
+    {
+      "id": "JA75",
+      "modelId": "JUNNA_JA75",
+      "className": "JunnaCardJA75",
+      "name": "射箭练习",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JA75.jpg",
+      "values": [
+        {
+          "name": "Bonus",
+          "base": 3,
+          "upgraded": 4
+        },
+        {
+          "name": "Turns",
+          "base": 2,
+          "upgraded": 2
+        }
+      ],
+      "text": "所有牌获得3点伤害加成。",
+      "upgradedText": "所有牌获得4点伤害加成。",
+      "arrowFocus": {
+        "x": 0.2,
+        "y": 0.27
+      }
+    },
+    {
+      "id": "JK131",
+      "modelId": "JUNNA_JK131",
+      "className": "JunnaCardJK131",
+      "name": "永远都不嫌晚",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK131.jpg",
+      "values": [
+        {
+          "name": "Bonus",
+          "base": 3,
+          "upgraded": 4
+        }
+      ],
+      "text": "知识。所有牌获得3点伤害加成。闪耀9。",
+      "upgradedText": "知识。所有牌获得4点伤害加成。闪耀9。"
+    },
+    {
+      "id": "JK131B",
+      "modelId": "JUNNA_JK131B",
+      "className": "JunnaCardJK131B",
+      "name": "檄文",
+      "cost": 3,
+      "upgradedCost": 3,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "普通",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JK131B.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 24,
+          "upgraded": 32
+        },
+        {
+          "name": "Repeat",
+          "base": 2,
+          "upgraded": 2
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。造成24点伤害2次。",
+      "upgradedText": "知识。造成32点伤害2次。",
+      "arrowFocus": {
+        "x": 0.5,
+        "y": 0.5
+      }
     }
   ],
   "startingHp": 70,
@@ -7525,5 +7584,5 @@
   "startingRelics": [
     "JUNNA_GREEN_GEM"
   ],
-  "arrowArtRevision": 5007
+  "arrowArtRevision": 5294
 }

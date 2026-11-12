@@ -117,7 +117,7 @@ public sealed class JunnaRepeatedPractice() : JunnaCard(1, CardType.Skill, CardR
 {
     public override HashSet<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play) => await ImproveHand(context, 0, 1);
-    protected override void OnUpgrade() => RemoveKeyword(CardKeyword.Exhaust);
+    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }
 
 [CustomID("JUNNA_GUIDING_STAR")]

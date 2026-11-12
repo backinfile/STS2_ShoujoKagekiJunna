@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.DevConsole;
@@ -49,9 +49,9 @@ public sealed class ArrowBatchBlockProbe : AbstractConsoleCmd
             var selected = new[] { CardCatalog.Create("JB01", player), CardCatalog.Create("JB02", player), CardCatalog.Create("JB03", player) };
             await CardPileCmd.Add(selected.Append(source).Append(formation), PileType.Hand, skipVisuals: true);
             player.PlayerCombatState!.Energy = 20;
-            await CardActions.PaidPlay(context, formation);
+            await TestGameApi.PaidPlay(context, formation);
             using var selector = CardSelectCmd.UseSelector(new Selector(selected));
-            await CardActions.PaidPlay(context, source);
+            await TestGameApi.PaidPlay(context, source);
             int amount = upgraded ? 4 : 3;
             Expect($"upgraded={upgraded} selected arrows deploy", selected.Count(c => ArrowCombat.Find(c)?.Remaining == 5), 3);
             Expect($"upgraded={upgraded} three plays each grant block", player.Creature.Block, 3 * amount);

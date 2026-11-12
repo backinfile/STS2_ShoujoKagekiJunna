@@ -2,6 +2,7 @@ using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using ShoujoKagekiJunna.Models;
@@ -84,7 +85,12 @@ public static partial class KnowledgeProgress
     private static async Task OfferKnowledgeCopy(Player player, int maximum)
     {
         var reward = new KnowledgeCopyReward(player, maximum);
-        if (player.RunState.CurrentRoom is CombatRoom room) room.AddExtraReward(player, reward);
+        if (player.RunState.CurrentRoom is CombatRoom room)
+        {
+            room.AddExtraReward(player, reward);
+            await PowerCmd.Apply<JunnaKnowledgeCopyRewardPower>(new ThrowingPlayerChoiceContext(),
+                player.Creature, 1, player.Creature, null);
+        }
         else await RewardsCmd.OfferCustom(player, [reward]);
     }
 
@@ -97,6 +103,6 @@ public static partial class KnowledgeProgress
             var copy = ShoujoKageki.Core.V1.CardCopies.ForDeck(original, player, ShoujoKageki.Core.V1.CardCopyPurpose.Transfer);
             added.Add(await CardPileCmd.Add(copy, PileType.Deck));
         }
-        await CardActions.PreviewAdded(added, PileType.Deck);
+        await CardActions.PreviewAdded(added, PileType.Deck, waitForCompletion: true);
     }
 }

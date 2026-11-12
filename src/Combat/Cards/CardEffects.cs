@@ -139,7 +139,9 @@ public static class CardEffects
             case "JA43":
                 await Block(); await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
             case "JA53":
-                await Block(); await CardActions.DrawMatching(context, player, CardCatalog.IsArrow, V("Cards")); break;
+                await Block();
+                await CardActions.DrawMatching(context, player, c => CardActions.HasNumericCost(c) && CardActions.Cost(c) == 0, V("Cards"));
+                break;
             case "JG27":
                 await ImproveSelected(hand.Cards, V("Bonus")); break;
             case "JX01":
@@ -175,7 +177,9 @@ public static class CardEffects
                     await CardActions.FreePlay(context, selected);
                 break;
             case "JG33":
-                await Attack(); DamageModifiers.Add(card, V("Bonus")); break;
+                var limitDamage = await DealDamage(card, context, play, V("Damage"), 1);
+                DamageModifiers.Add(card, limitDamage.Sum(result => result.TotalDamage));
+                break;
             case "JA66":
                 foreach (var selected in await Choose(player.PlayerCombatState.DiscardPile.Cards, V("Cards"), true))
                     await CardPileCmd.Add(selected, PileType.Hand);
@@ -196,7 +200,10 @@ public static class CardEffects
             case "JA71":
                 await Block(); await ArrowCombat.AccelerateAll(context, player, int.MaxValue); break;
             case "JK78":
-                await Improve(player.PlayerCombatState.DrawPile.Cards, V("Bonus")); break;
+                var practiceCards = player.PlayerCombatState.DrawPile.Cards.ToArray();
+                await Improve(practiceCards.Where(c => !CardCatalog.IsArrow(c)), V("Bonus"));
+                await Improve(practiceCards.Where(CardCatalog.IsArrow), V("Bonus") * 2);
+                break;
             case "JK78D":
                 await ImproveSelected(player.PlayerCombatState.DrawPile.Cards, V("Bonus"), V("Amount"), true); break;
             case "JK78E":
@@ -246,7 +253,7 @@ public static class CardEffects
             case "JK131":
                 await Improve(All(), V("Bonus")); break;
             case "JK200B":
-                await Block(); await Improve(hand.Cards, V("Bonus")); break;
+                await Block(); await Improve(hand.Cards.Concat(Arrows()).Distinct(), V("Bonus")); break;
             case "JK235B":
                 await Block(); await CardActions.DrawMatching(context, player, CardCatalog.IsKnowledge, V("DrawCount")); break;
             case "JS33":
@@ -302,6 +309,11 @@ public static class CardEffects
                 await CardTutors.DrawCategories(context, card); break;
             case "JK314":
                 await Attack(hits: card.HitsWithDepletedPartners); break;
+            case "U_CARD_017":
+                int categoryHits = 1 + Enumerable.Range(0, 3)
+                    .Count(category => hand.Cards.Any(candidate => candidate != card && CardTutors.Matches(candidate, category)));
+                await Attack(hits: categoryHits);
+                break;
             default: throw new InvalidOperationException($"Missing card effect: {card.DesignId}");
         }
     }

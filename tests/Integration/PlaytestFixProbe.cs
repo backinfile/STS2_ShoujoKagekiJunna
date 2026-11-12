@@ -71,7 +71,7 @@ public sealed class PlaytestFixProbe : AbstractConsoleCmd
             strike.UpdateDynamicVarPreview(CardPreviewMode.Normal, target, strike.DynamicVars);
             Expect("pending and stored bonuses combine in preview", strike.DynamicVars.Damage.PreviewValue, 11m);
             int hp = target.CurrentHp;
-            await CardActions.PaidPlay(context, strike, target);
+            await TestGameApi.PaidPlay(context, strike, target);
             Expect("actual damage counts each bonus once", hp - target.CurrentHp, 11);
             Expect("playing consumes pending bonus", player.Creature.GetPower<JunnaNextCardBonus>() == null, true);
         });
@@ -99,16 +99,16 @@ public sealed class PlaytestFixProbe : AbstractConsoleCmd
             if (school.TargetType == TargetType.Self)
             {
                 player.PlayerCombatState!.Energy = 4;
-                await CardActions.PaidPlay(context, school);
+                await TestGameApi.PaidPlay(context, school);
                 Expect("learning grants energy without enemy selection", player.PlayerCombatState.Energy, 6);
             }
             var star = await Card("JA57");
             Expect("starlight jump base countdown", HandArrow.Turns(star), 3);
             star.UpgradeInternal(); star.FinalizeUpgradeInternal();
             Expect("starlight jump upgraded countdown", HandArrow.Turns(star), 3);
-            await CardActions.PaidPlay(context, star);
+            await TestGameApi.PaidPlay(context, star);
             Expect("starlight jump deploys with three turns", ArrowCombat.Find(star)?.Remaining, 3);
-            await CardActions.PaidPlay(context, await Card("JA105"));
+            await TestGameApi.PaidPlay(context, await Card("JA105"));
             var permanent = player.RunState.CreateCard(CardCatalog.Model("JA57"), player);
             await CardPileCmd.Add(permanent, PileType.Deck, skipVisuals: true);
             string Counter(CardModel model, PileType pile)
@@ -142,7 +142,7 @@ public sealed class PlaytestFixProbe : AbstractConsoleCmd
                 if (arrow.Pile?.Type != ArrowPile.PileId) await CardPileCmd.Add(arrow, ArrowPile.PileId);
                 var formation = await Card("JA71");
                 if (upgraded) { formation.UpgradeInternal(); formation.FinalizeUpgradeInternal(); }
-                await CardActions.PaidPlay(context, formation);
+                await TestGameApi.PaidPlay(context, formation);
                 Expect("formation accelerates its printed turns upgraded=" + upgraded, ArrowCombat.Find(arrow)?.Remaining, upgraded ? 1 : 2);
             }
         });
@@ -154,8 +154,8 @@ public sealed class PlaytestFixProbe : AbstractConsoleCmd
             await CreatureCmd.SetCurrentHp(target, damage);
             await CreatureCmd.SetCurrentHp(enemies[1], 100);
             player.PlayerCombatState!.Energy = 3;
-            await CardActions.PaidPlay(context, await Card("JH19"));
-            await CardActions.PaidPlay(context, practice, target);
+            await TestGameApi.PaidPlay(context, await Card("JH19"));
+            await TestGameApi.PaidPlay(context, practice, target);
             Expect("first payload kills its original target", target.IsAlive, false);
             Expect("paid replay hits the remaining enemy exactly once", enemies[1].CurrentHp, 100 - damage);
             Expect("explicit paid replay keeps its energy cost", player.PlayerCombatState.Energy, 0);

@@ -247,12 +247,8 @@
       "fields": {
         "Cards": "N1"
       },
-      "tips": [
-        "Arrow"
-      ],
-      "upgradedTips": [
-        "Arrow"
-      ]
+      "tips": [],
+      "upgradedTips": []
     },
     "JA57": {
       "fields": {
@@ -1655,7 +1651,8 @@
     "JS33": {
       "fields": {
         "ArrowCount": "N0",
-        "KnowledgeCount": "N1"
+        "KnowledgeCount": "N1",
+        "ShineCount": "N2"
       },
       "tips": [
         "Arrow",
@@ -1867,9 +1864,9 @@
     },
     "U_CARD_008B": {
       "fields": {
-        "DrawCount": "N0"
+        "DrawCount": "N1"
       },
-      "effect": "Draw"
+      "effect": "BlockAndDraw"
     },
     "JK359": {
       "fields": {
@@ -2010,6 +2007,34 @@
         "Arrow"
       ],
       "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "U_CARD_016": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "power": {
+        "description": "CategoryGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "U_CARD_017": {
+      "tips": [
+        "Knowledge",
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Knowledge",
         "Arrow"
       ]
     }

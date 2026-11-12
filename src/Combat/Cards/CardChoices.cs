@@ -45,11 +45,14 @@ public static class CardChoices
     {
         var arrows = (JunnaPrepareArrows)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaPrepareArrows>(ModelDb.GetId<JunnaPrepareArrows>()), source.Owner);
         var knowledge = (JunnaPrepareKnowledge)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaPrepareKnowledge>(ModelDb.GetId<JunnaPrepareKnowledge>()), source.Owner);
+        var shine = (JunnaPrepareShine)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaPrepareShine>(ModelDb.GetId<JunnaPrepareShine>()), source.Owner);
         arrows.DynamicVars["Amount"].BaseValue = source.Value("ArrowCount");
         knowledge.DynamicVars["Amount"].BaseValue = source.Value("KnowledgeCount");
-        var selected = await ShoujoKageki.Core.V1.CardOptions.Choose(context, [arrows, knowledge], source.Owner);
+        shine.DynamicVars["Amount"].BaseValue = source.Value("ShineCount");
+        var selected = await ShoujoKageki.Core.V1.CardOptions.Choose(context, [arrows, knowledge, shine], source.Owner);
         if (selected == arrows) await CardActions.DrawMatching(context, source.Owner, CardCatalog.IsArrow, source.Value("ArrowCount"));
         else if (selected == knowledge) await CardActions.DrawMatching(context, source.Owner, CardCatalog.IsKnowledge, source.Value("KnowledgeCount"));
+        else if (selected == shine) await CardActions.DrawMatching(context, source.Owner, ShoujoKageki.Core.V1.Shine.IsShineCard, source.Value("ShineCount"));
     }
 
     public static async Task EnergyTiming(PlayerChoiceContext context, CatalogCard source)

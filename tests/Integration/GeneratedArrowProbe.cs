@@ -74,14 +74,14 @@ public sealed class GeneratedArrowProbe : AbstractConsoleCmd
 
             await CardPileCmd.Add(meteor.Card, PileType.Hand, skipVisuals: true);
             watch.Restart();
-            await CardActions.PaidPlay(context, meteor.Card, target);
+            await TestGameApi.PaidPlay(context, meteor.Card, target);
             Verify("a reused Meteor no longer has the generated-only fast flag", watch.Elapsed.TotalSeconds > .5, watch.Elapsed.TotalSeconds);
             await ArrowCombat.Accelerate(context, ArrowCombat.Find(meteor.Card)!, 99);
 
             var star = CardCatalog.Create("U_CARD_005", player);
             await CardPileCmd.Add(star, PileType.Hand, skipVisuals: true);
             watch.Restart();
-            await CardActions.PaidPlay(context, star, target);
+            await TestGameApi.PaidPlay(context, star, target);
             double handPlaySeconds = watch.Elapsed.TotalSeconds;
             Verify("hand-played Stardust retains its ordinary presentation", handPlaySeconds > .5, handPlaySeconds);
             ResetEvents();

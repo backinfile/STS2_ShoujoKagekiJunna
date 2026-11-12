@@ -78,14 +78,14 @@ public sealed class PowerDamageProbe : AbstractConsoleCmd
             decimal? preview = ability == "legacy-energy" ? null : book.DynamicVars.Damage.PreviewValue;
             int expectedDamage = (ability == "legacy-energy" ? 2 : 3) + (scenario == "investment" ? 2 : 0);
             var context = new ThrowingPlayerChoiceContext();
-            await CardActions.PaidPlay(context, book, player.Creature);
+            await TestGameApi.PaidPlay(context, book, player.Creature);
             int before = target.CurrentHp;
             int attacks = Attacks();
             var power = player.Creature.Powers.OfType<CatalogPower>().Single(p => p.DesignId == book.DesignId);
             if (ability == "JG34") await power.AfterPlayerTurnStart(context, player);
             else if (ability == "legacy-energy")
                 await (Task)AccessTools.Method(typeof(CatalogPower), "EnergyDamage").Invoke(power, [context, 2])!;
-            else await CardActions.PaidPlay(context, trigger, player.Creature);
+            else await TestGameApi.PaidPlay(context, trigger, player.Creature);
             int hpLoss = before - target.CurrentHp;
             int expectedLoss = scenario == "block" ? Math.Max(0, expectedDamage - 2) : expectedDamage;
             int attackEvents = Attacks() - attacks;
@@ -103,7 +103,7 @@ public sealed class PowerDamageProbe : AbstractConsoleCmd
             await CardPileCmd.AddGeneratedCardToCombat(attack, PileType.Hand, player);
             int hp = target.CurrentHp, attacks = Attacks();
             var context = new ThrowingPlayerChoiceContext();
-            await CardActions.PaidPlay(context, attack, target);
+            await TestGameApi.PaidPlay(context, attack, target);
             if (ArrowCombat.Find(attack) is { } arrow) await ArrowCombat.Accelerate(context, arrow, int.MaxValue);
             int hpLoss = hp - target.CurrentHp;
             int expected = cardId == "JB01" ? 16 : 38;

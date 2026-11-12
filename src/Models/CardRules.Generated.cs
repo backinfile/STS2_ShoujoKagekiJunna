@@ -204,8 +204,6 @@ internal static partial class CardRules
             {
                 ["Cards"] = "N1",
             },
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
         },
         ["JA57"] = new()
         {
@@ -1331,6 +1329,7 @@ internal static partial class CardRules
             {
                 ["ArrowCount"] = "N0",
                 ["KnowledgeCount"] = "N1",
+                ["ShineCount"] = "N2",
             },
             Tips = [CardTip.Arrow, CardTip.Knowledge],
             UpgradedTips = [CardTip.Arrow, CardTip.Knowledge],
@@ -1421,9 +1420,9 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
-                ["DrawCount"] = "N0",
+                ["DrawCount"] = "N1",
             },
-            Effect = SimpleCardEffect.Draw,
+            Effect = SimpleCardEffect.BlockAndDraw,
         },
         ["U_CARD_009"] = new()
         {
@@ -1450,6 +1449,23 @@ internal static partial class CardRules
         {
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
+        },
+        ["U_CARD_016"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N0",
+            },
+            Tips = [CardTip.Knowledge, CardTip.Arrow],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
+            PowerDescription = PowerDescriptionKind.CategoryGroups,
+            PowerAmount = PowerAmountKind.Applications,
+            SinglePower = false,
+        },
+        ["U_CARD_017"] = new()
+        {
+            Tips = [CardTip.Knowledge, CardTip.Arrow],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
         },
     };
 }

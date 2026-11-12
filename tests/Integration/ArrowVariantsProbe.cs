@@ -169,7 +169,7 @@ public sealed class ArrowVariantsProbe : AbstractConsoleCmd
                 };
                 var card = CardCatalog.Create(id, player);
                 await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
-                await CardActions.PaidPlay(context, card, card.TargetType == TargetType.AnyEnemy ? targets[scenario == "linked-shot" ? 1 : 0] : null);
+                await TestGameApi.PaidPlay(context, card, card.TargetType == TargetType.AnyEnemy ? targets[scenario == "linked-shot" ? 1 : 0] : null);
             }
         }
         Write();

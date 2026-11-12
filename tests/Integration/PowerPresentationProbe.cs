@@ -126,7 +126,7 @@ public sealed class PowerPresentationCommand : AbstractConsoleCmd
                 card.FinalizeUpgradeInternal();
             }
             await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
-            await CardActions.PaidPlay(context, card, state.HittableEnemies.First());
+            await TestGameApi.PaidPlay(context, card, state.HittableEnemies.First());
             return card;
         }
         var report = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..", "power-presentation-results.json"));

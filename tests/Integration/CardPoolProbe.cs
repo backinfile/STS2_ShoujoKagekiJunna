@@ -61,7 +61,7 @@ public static class CardPoolProbe
             await CardPileCmd.Add(card, pile, skipVisuals: true);
             return card;
         }
-        Task<bool> Play(CardModel card) => CardActions.PaidPlay(context, card, target);
+        Task<bool> Play(CardModel card) => TestGameApi.PaidPlay(context, card, target);
         async Task Scenario(string name, Func<Task> run)
         {
             if (only != null && only != name) return;

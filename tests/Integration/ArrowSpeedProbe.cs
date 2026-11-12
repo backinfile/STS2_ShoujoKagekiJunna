@@ -57,7 +57,7 @@ public sealed class ArrowSpeedProbe : AbstractConsoleCmd
         var star = CardCatalog.Create("U_CARD_005", player);
         await CardPileCmd.Add(star, PileType.Hand, skipVisuals: true);
         var watch = Stopwatch.StartNew();
-        await CardActions.PaidPlay(context, star, target);
+        await TestGameApi.PaidPlay(context, star, target);
         double deploymentSeconds = watch.Elapsed.TotalSeconds;
         var hud = NCombatRoom.Instance!.GetNode<ArrowHud>("JunnaArrows");
         var effects = hud.GetChildren().OfType<ArrowDeploymentVfx>().ToArray();

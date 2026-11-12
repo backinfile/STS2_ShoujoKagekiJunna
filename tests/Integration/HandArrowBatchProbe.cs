@@ -97,7 +97,7 @@ public sealed class HandArrowBatchProbe : AbstractConsoleCmd
         var target = state.HittableEnemies.First();
         int beforeHp = target.CurrentHp;
         int beforeBlock = player.Creature.Block;
-        Expect("ordinary play still rejects unplayable material", !await CardActions.PaidPlay(context, selected[0], target));
+        Expect("ordinary play still rejects unplayable material", !await TestGameApi.PaidPlay(context, selected[0], target));
         using var selectorScope = CardSelectCmd.UseSelector(new Selector(selected));
         var harmony = new Harmony("JunnaIntegration.HandArrowBatch");
         int started = 0;
@@ -109,7 +109,7 @@ public sealed class HandArrowBatchProbe : AbstractConsoleCmd
         try
         {
             harmony.Patch(AccessTools.Method(typeof(HandArrow), nameof(HandArrow.Play)), prefix: new HarmonyMethod(typeof(HandArrowBatchProbe), nameof(BeforePlay)));
-            await CardActions.PaidPlay(context, source);
+            await TestGameApi.PaidPlay(context, source);
             Expect("each chosen card plays exactly once", started == selected.Length);
             Expect("all chosen cards deploy", selected.All(card => ArrowCombat.Find(card)?.Remaining == 5));
             Expect("unchosen card stays in hand", unselected.Pile?.Type == PileType.Hand);
@@ -137,7 +137,7 @@ public sealed class HandArrowBatchProbe : AbstractConsoleCmd
                 if (upgraded) { starfall.UpgradeInternal(); starfall.FinalizeUpgradeInternal(); }
                 await CardPileCmd.Add(starfall, PileType.Hand, skipVisuals: true);
                 Expect($"starfall upgraded={upgraded} starts at shine six", Shine.GetState(starfall) is { Maximum: 6, Remaining: 6 });
-                await CardActions.PaidPlay(context, starfall, target);
+                await TestGameApi.PaidPlay(context, starfall, target);
                 Expect($"starfall upgraded={upgraded} deploy preserves shine", Shine.GetState(starfall)?.Remaining == 6);
                 if (ArrowCombat.Find(starfall) is { } arrow) await ArrowCombat.Accelerate(context, arrow, 1);
                 Expect($"starfall upgraded={upgraded} resolution spends one shine", Shine.GetState(starfall)?.Remaining == 5);

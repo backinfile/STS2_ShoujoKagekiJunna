@@ -78,7 +78,7 @@ public static partial class Workbench3650Probe
         await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
         return card;
     }
-    private static Task<bool> Play(CardModel card) => CardActions.PaidPlay(Context, card, card.Owner.Creature.CombatState!.Enemies.First());
+    private static Task<bool> Play(CardModel card) => TestGameApi.PaidPlay(Context, card, card.Owner.Creature.CombatState!.Enemies.First());
     private static Task Finish(CardModel card) => ArrowCombat.Find(card) is { } arrow
         ? ArrowCombat.Accelerate(Context, arrow, int.MaxValue) : Task.CompletedTask;
 

@@ -73,7 +73,7 @@ public static class CardTriggerFixProbe
             await CardPileCmd.Add(c, pile, skipVisuals: true);
             return c;
         }
-        Task<bool> Play(CardModel card) => CardActions.PaidPlay(context, card, target);
+        Task<bool> Play(CardModel card) => TestGameApi.PaidPlay(context, card, target);
         async Task Case(string name, Func<Task> test)
         {
             try { await Reset(); await test(); rows.Add(new { name, pass = true }); }
@@ -107,7 +107,7 @@ public static class CardTriggerFixProbe
             await Case("retarget attack " + up, async () =>
             {
                 var other = player.Creature.CombatState!.HittableEnemies.First(e => e != target);
-                var arrow = await Card("JK37"); await CardActions.PaidPlay(context, arrow, other);
+                var arrow = await Card("JK37"); await TestGameApi.PaidPlay(context, arrow, other);
                 var self = await Card("JH11"); await Play(self);
                 var group = await Card("JA77"); await Play(group);
                 var attack = await Card("JK37B", upgraded: up);

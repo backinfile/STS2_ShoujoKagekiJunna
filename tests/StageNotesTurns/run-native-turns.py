@@ -40,7 +40,7 @@ if s['state_type']=='menu':
         act('menu_select',option='singleplayer');time.sleep(.3);dismiss();act('menu_select',option='JUNNA');dismiss();act('menu_select',option='confirm')
     for _ in range(150):
         time.sleep(.15);dismiss();s=state()
-        if s.get('player') and s['state_type']!='menu':break
+        if s.get('player') and s['state_type'] in ['map','combat','event']:break
     else:raise RuntimeError('Run did not initialize')
     cmd('unlock all')
 s=state()

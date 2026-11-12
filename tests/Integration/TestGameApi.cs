@@ -12,6 +12,18 @@ namespace JunnaIntegration;
 // Native API differences only; rule assertions remain in the probes.
 internal static class TestGameApi
 {
+    internal static Task<bool> PaidPlay(PlayerChoiceContext context, CardModel card, Creature? target = null)
+    {
+        target = card.TargetType switch
+        {
+            TargetType.AnyEnemy => target ?? card.CombatState!.HittableEnemies.FirstOrDefault(card.IsValidTarget),
+            TargetType.Self or TargetType.AnyPlayer => card.Owner.Creature,
+            TargetType.AnyAlly => target ?? card.CombatState!.PlayerCreatures.FirstOrDefault(c => c != card.Owner.Creature),
+            _ => null
+        };
+        return ShoujoKageki.Core.V1.CardExecution.Play(context, card,
+            new ShoujoKageki.Core.V1.CardExecutionRequest { Target = target, Payment = ShoujoKageki.Core.V1.CardPayment.Paid });
+    }
     internal static Task LoseBlock(PlayerChoiceContext context, Creature creature, decimal amount, Creature? dealer) =>
 #if STS2_BETA
         CreatureCmd.LoseBlock(context, creature, amount, dealer);

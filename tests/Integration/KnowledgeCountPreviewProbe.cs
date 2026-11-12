@@ -93,7 +93,7 @@ public sealed class KnowledgeCountPreviewProbe : AbstractConsoleCmd
         Expect("frail applies after full conditional block", predicted, (9 + count) * 0.75m);
         int beforeBlock = player.Creature.Block;
         player.PlayerCombatState!.Energy = 20;
-        await CardActions.PaidPlay(context, reading);
+        await TestGameApi.PaidPlay(context, reading);
         Expect("played block matches preview and permanent deck count", player.Creature.Block - beforeBlock, Math.Floor(predicted));
         foreach (var power in player.Creature.Powers.ToArray()) await PowerCmd.Remove(power);
         var citation = CardCatalog.Create("JK48", player);
@@ -134,7 +134,7 @@ public sealed class KnowledgeCountPreviewProbe : AbstractConsoleCmd
             Expect($"inclusive upgraded={upgraded} block preview", inclusive.DynamicVars.Block.PreviewValue, upgraded ? 12m : 8m);
             int before = player.Creature.Block;
             player.PlayerCombatState!.Energy = 20;
-            await CardActions.PaidPlay(context, inclusive);
+            await TestGameApi.PaidPlay(context, inclusive);
             Expect($"inclusive upgraded={upgraded} grants correct block", player.Creature.Block - before, upgraded ? 12m : 8m);
         }
         string report = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "..", "knowledge-count-preview-results.json"));

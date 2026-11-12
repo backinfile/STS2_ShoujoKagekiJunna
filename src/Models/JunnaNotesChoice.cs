@@ -28,6 +28,11 @@ public sealed class JunnaPrepareKnowledge : JunnaNotesChoice
 {
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JS33").Portrait;
 }
+[CustomID("JUNNA_PREPARE_SHINE")]
+public sealed class JunnaPrepareShine : JunnaNotesChoice
+{
+    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JS33").Portrait;
+}
 
 [CustomID("JUNNA_ENERGY_NOW")]
 public sealed class JunnaEnergyNow : JunnaNotesChoice

@@ -69,7 +69,7 @@ public sealed class EffectReplayProbe : AbstractConsoleCmd
         var source = CardCatalog.Create("JA96", player);
         using (KnowledgeCombat.SingleCard()) await CardPileCmd.Add(source, PileType.Hand, skipVisuals: true);
         player.PlayerCombatState!.Energy = 9;
-        await CardActions.PaidPlay(context, source);
+        await TestGameApi.PaidPlay(context, source);
         var arrows = new[] { CardCatalog.Create("JB03", player), CardCatalog.Create("JA80", player), CardCatalog.Create("JA77", player) };
         foreach (var arrow in arrows)
         {
@@ -113,7 +113,7 @@ public sealed class EffectReplayProbe : AbstractConsoleCmd
             var target = player.Creature.CombatState.HittableEnemies.First(c => c.IsAlive);
             await CreatureCmd.SetMaxHp(target, 10000);
             await CreatureCmd.SetCurrentHp(target, 10000);
-            await CardActions.PaidPlay(context, card, target);
+            await TestGameApi.PaidPlay(context, card, target);
             Check(id + " deployment preserves combat shine", Shine.GetState(card)!.Remaining, remaining);
             Check(id + " deployment preserves permanent shine", Shine.GetState(permanent)!.Remaining, remaining);
             var arrow = ArrowCombat.Find(card)!;
@@ -161,7 +161,7 @@ public sealed class EffectReplayProbe : AbstractConsoleCmd
             await CardPileCmd.Add(card, pile, skipVisuals: true);
             return card;
         }
-        Task<bool> Play(CardModel card) => CardActions.PaidPlay(context, card, target);
+        Task<bool> Play(CardModel card) => TestGameApi.PaidPlay(context, card, target);
         try
         {
             var chain = await Card("JA67", PileType.Hand);

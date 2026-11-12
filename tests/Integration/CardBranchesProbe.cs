@@ -80,12 +80,12 @@ public static class CardBranchesProbe
                 if(item.Upgraded){card.UpgradeInternal();card.FinalizeUpgradeInternal();}
                 await CardPileCmd.Add(card,PileType.Hand,skipVisuals:true);
                 player.PlayerCombatState!.Energy=card.EnergyCost.CostsX?0:99;
-                await CardActions.PaidPlay(context,card,original);
+                await TestGameApi.PaidPlay(context,card,original);
                 cards.Add((item.Id,item.Upgraded,card));
             }
             await CreatureCmd.SetCurrentHp(original,1);player.PlayerCombatState!.Energy=1;
             var strike=CardCatalog.Create("JB01",player);await CardPileCmd.Add(strike,PileType.Hand,skipVisuals:true);
-            await CardActions.PaidPlay(context,strike,original);
+            await TestGameApi.PaidPlay(context,strike,original);
             foreach(var item in cards)
             {
                 var checks=new List<CheckResult>();var arrow=ArrowCombat.Find(item.Card);
@@ -163,7 +163,7 @@ public static class CardBranchesProbe
             await CardPileCmd.Add(c, pile, skipVisuals: true);
             return c;
         }
-        Task<bool> Play(CardModel c) => CardActions.PaidPlay(context, c, target);
+        Task<bool> Play(CardModel c) => TestGameApi.PaidPlay(context, c, target);
         async Task Finish(CardModel c)
         { if (ArrowCombat.Find(c) is { } arrow) await ArrowCombat.Accelerate(context, arrow, int.MaxValue); }
         int Number(CardDefinition d, bool up, string key, int fallback = 0)

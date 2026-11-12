@@ -81,6 +81,9 @@ public abstract partial class CatalogPower
             PowerDescriptionKind.GeneratedCardGroups => Groups(g => g.Card.IsUpgraded, group => Format(("Amount", group.Count()), ("Card", CardCatalog.Get("JK46B").Name + (group.Key ? "+" : "")))),
             PowerDescriptionKind.DamageGroups => Groups(g => DamagePayload(g).Damage,
                 group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => DamagePayload(g).Hits)))),
+            PowerDescriptionKind.CategoryGroups => Groups(g => g.CycleIndex, group => Format(
+                ("Category", new LocString("cards", new[] { "JUNNA_PREPARE_KNOWLEDGE.title", "JUNNA_PREPARE_ARROWS.title", "JUNNA_PREPARE_SHINE.title" }[group.Key]).GetFormattedText()),
+                ("Amount", group.Sum(g => g.V("DrawCount"))))),
             _ => throw new InvalidOperationException("Missing power description: " + DesignId)
         };
         if (RemainingTriggers is { } remaining)
