@@ -180,6 +180,29 @@ function sevenNotesFixture(){
   };
 }
 
+test('设置主牌允许成员相同的独立关联列表，保留各入口数量并可切回',()=>{
+  const data={cards:[makeCard('A',true),makeCard('B',false)],partnerGroups:[
+    {uid:'group_A',id:'GROUP_A',title:'学习组',mainCardId:'A',mainCardCount:2,grantedCardIds:['B'],grantedCardCounts:{B:3}},
+    {uid:'group_B',id:'GROUP_B',title:'心得组',mainCardId:'B',mainCardCount:4,grantedCardIds:['A'],grantedCardCounts:{A:5}}
+  ],meta:{startingDeck:[{cardId:'A',count:1}]}};
+  const normalize=domain.create({seed:{data:structuredClone(data)},uid:()=>assert.fail('缺少编号'),JunnaFitPool:{normalizeEntry:entry=>entry}});
+  const before=normalize(data),changed=structuredClone(before);
+  assert.equal(domain.setGroupMain(changed,'group_A','card_B'),true);
+  assert.deepEqual(normalize(JSON.parse(JSON.stringify(changed))),{...before,cards:before.cards.map(card=>({...card,pool:card.id==='B'}))});
+  assert.equal(domain.cardGroup(changed,'card_B').group.uid,'group_B');
+  assert.equal(domain.setGroupMain(changed,'group_B','card_A'),true);
+  assert.deepEqual(normalize(changed),before);
+});
+
+test('设置主牌允许七音完整互相关联，保留全部列表和组外引用',()=>{
+  const data=sevenNotesFixture();
+  data.cards.push(makeCard('Other',true));
+  data.partnerGroups.push({uid:'group_Other',mainCardId:'Other',grantedCardIds:['Fa'],grantedCardCounts:{Fa:2}});
+  const before=structuredClone(data);
+  assert.equal(domain.setGroupMain(data,'group_Do','card_Fa'),true);
+  assert.deepEqual(data,{...before,cards:before.cards.map(card=>({...card,pool:['Fa','Other'].includes(card.id)}))});
+});
+
 for(const action of ['trash','reserve','pool']){
   test('七音完整关联列表整组'+action+'处理全部成员，保留列表与入池身份',()=>{
     for(const selectedId of ['Do','Fa']){

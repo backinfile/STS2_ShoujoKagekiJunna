@@ -20,12 +20,17 @@
     if(!group.grantedCardIds.includes(card.id))throw Error('此牌不属于该知识组');
     const oldMain=data.cards.find(entry=>entry.id===group.mainCardId);
     if(!oldMain)throw Error('知识组缺少主牌');
-    if(data.partnerGroups.some(entry=>entry.uid!==group.uid&&entry.mainCardId===card.id))throw Error('此牌已有自己的关联牌列表');
-    const ids=[group.mainCardId,...group.grantedCardIds],counts=Object.fromEntries(ids.map(id=>[id,groupCardCount(group,id)]));
-    group.mainCardId=card.id;group.grantedCardIds=ids.filter(id=>id!==card.id);
-    group.grantedCardCounts=Object.fromEntries(group.grantedCardIds.map(id=>[id,counts[id]]));
-    if(counts[card.id]>1)group.mainCardCount=counts[card.id];else delete group.mainCardCount;
-    if(!group.title||[oldMain.id,oldMain.name].includes(group.title))group.title=card.name;
+    const targetGroup=data.partnerGroups.find(entry=>entry.mainCardId===card.id),ids=[group.mainCardId,...group.grantedCardIds];
+    if(targetGroup){
+      const targetIds=new Set([targetGroup.mainCardId,...targetGroup.grantedCardIds]);
+      if(targetIds.size!==ids.length||ids.some(id=>!targetIds.has(id)))throw Error('此牌已有自己的关联牌列表');
+    }else{
+      const counts=Object.fromEntries(ids.map(id=>[id,groupCardCount(group,id)]));
+      group.mainCardId=card.id;group.grantedCardIds=ids.filter(id=>id!==card.id);
+      group.grantedCardCounts=Object.fromEntries(group.grantedCardIds.map(id=>[id,counts[id]]));
+      if(counts[card.id]>1)group.mainCardCount=counts[card.id];else delete group.mainCardCount;
+      if(!group.title||[oldMain.id,oldMain.name].includes(group.title))group.title=card.name;
+    }
     oldMain.pool=false;card.pool=card.rarity!=='基础';
     return true;
   }
