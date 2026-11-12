@@ -4,7 +4,6 @@ using BaseLib.Utils.Attributes;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.PotionPools;
 
 namespace ShoujoKagekiJunna.Models;
 
@@ -23,7 +22,7 @@ public sealed class Junna : PlaceholderCharacterModel
     public override Color RemoteTargetingLineOutline => new("234B75");
     public override CardPoolModel CardPool => ModelDb.CardPool<JunnaCardPool>();
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<JunnaRelicPool>();
-    public override PotionPoolModel PotionPool => ModelDb.PotionPool<SilentPotionPool>();
+    public override PotionPoolModel PotionPool => ModelDb.PotionPool<JunnaPotionPool>();
     public override IEnumerable<CardModel> StartingDeck => CardCatalog.StartingDeck;
     public override IReadOnlyList<RelicModel> StartingRelics => CardCatalog.StartingRelics;
     public override RelicIconData CustomYummyCookie => new(
