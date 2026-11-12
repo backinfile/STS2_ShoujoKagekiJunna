@@ -245,3 +245,5 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 答复：这次对话开始前，项目原有的版本
 
 本轮结果：停止重绘并恢复对话开始前的绿色宝石与燃烧宝石。原有SVG及轮廓文件保持起点提交原值，游戏引用恢复SVG，移除本轮新增的活动PNG及导入配置。工作台通过MCP恢复relic-green-gem-vector-v2-20261105与relic-burning-gem-vector-v2-20261105，两个契合池的绘图说明恢复旧版并沿用当前效果文本。恢复预览、请求回执与最小资源验证保存于rollback-original/。所有后续生成稿保留为过程记录。
+
+撤回提交为ae40c8b。随后仅在工作树内同步main@6e7c31d6311c5b1d2376c6cb1e4d62d8fd74dfb5，无冲突，保留主分支同期更新的遗物效果；同步后遗物模型、全部活动图标及实现文档均与main一致。主目录仍为main且干净，本任务从未合并回主分支。工作树与过程资料保留，未执行清理。
