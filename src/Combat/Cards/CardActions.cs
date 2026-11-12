@@ -1,6 +1,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -159,12 +160,23 @@ public static class CardActions
         CardPilePosition position, bool upgraded = false)
     {
         using var single = KnowledgeCombat.SingleCard();
+        var added = new List<CardPileAddResult>();
         for (int i = 0; i < count; i++)
         {
             var card = CardCatalog.Create(id, player);
             if (upgraded) { card.UpgradeInternal(); card.FinalizeUpgradeInternal(); }
-            await CardPileCmd.AddGeneratedCardToCombat(card, pile, player, position);
+            added.Add(await CardPileCmd.AddGeneratedCardToCombat(card, pile, player, position));
         }
+        await PreviewAdded(added, pile);
+    }
+
+    internal static async Task PreviewAdded(IReadOnlyList<CardPileAddResult> results, PileType destination)
+    {
+        if (destination is not (PileType.Draw or PileType.Discard or PileType.Exhaust or PileType.Deck)) return;
+        var added = results.Where(result => result.success && LocalContext.IsMine(result.cardAdded)).ToArray();
+        if (added.Length == 0) return;
+        CardCmd.PreviewCardPileAdd(added, style: added.Length > 5 ? CardPreviewStyle.MessyLayout : CardPreviewStyle.HorizontalLayout);
+        await Cmd.Wait(1f, ignoreCombatEnd: true);
     }
 
     public static async Task Fly(PlayerChoiceContext context, Player player, int damage, Creature? target = null, bool upgraded = false)

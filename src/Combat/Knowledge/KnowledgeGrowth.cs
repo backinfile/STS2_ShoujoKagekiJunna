@@ -91,10 +91,12 @@ public static partial class KnowledgeProgress
     public static async Task CopySingleCards(Player player, IEnumerable<CardModel> selected)
     {
         using var single = KnowledgeCombat.SingleCard();
+        var added = new List<CardPileAddResult>();
         foreach (var original in selected.Distinct().Where(player.Deck.Cards.Contains).ToArray())
         {
             var copy = ShoujoKageki.Core.V1.CardCopies.ForDeck(original, player, ShoujoKageki.Core.V1.CardCopyPurpose.Transfer);
-            await CardPileCmd.Add(copy, PileType.Deck);
+            added.Add(await CardPileCmd.Add(copy, PileType.Deck));
         }
+        await CardActions.PreviewAdded(added, PileType.Deck);
     }
 }

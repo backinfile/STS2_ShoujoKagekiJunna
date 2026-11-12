@@ -62,7 +62,8 @@ public abstract partial class CatalogPower
                     using (KnowledgeCombat.SingleCard())
                     {
                         var clone = play.Card.CreateCloneForPlayer(play.Card.Owner);
-                        await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, play.Card.Owner, CardPilePosition.Random);
+                        var result = await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, play.Card.Owner, CardPilePosition.Random);
+                        await CardActions.PreviewAdded([result], PileType.Draw);
                     }
                     break;
                 case "JK37C" when play.Resources.EnergyValue == 0:

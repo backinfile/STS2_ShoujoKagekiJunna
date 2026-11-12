@@ -119,14 +119,7 @@ public static partial class KnowledgeProgress
         var prompt = new LocString("cards", "JUNNA_JK127.selectionScreenPrompt");
         var selected = await CardSelectCmd.FromSimpleGrid(new BlockingPlayerChoiceContext(), candidates, player,
             new CardSelectorPrefs(prompt, 0, 1));
-        using var single = KnowledgeCombat.SingleCard();
-        foreach (var original in selected.Where(player.Deck.Cards.Contains))
-        {
-            // Transfer serialization keeps permanent modifications and the current Shine budget.
-            // The new physical card receives an independent depletion lifecycle from Core.
-            var copy = ShoujoKageki.Core.V1.CardCopies.ForDeck(original, player, ShoujoKageki.Core.V1.CardCopyPurpose.Transfer);
-            await CardPileCmd.Add(copy, PileType.Deck);
-        }
+        await CopySingleCards(player, selected);
     }
 
     [HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
