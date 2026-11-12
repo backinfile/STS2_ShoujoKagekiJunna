@@ -46,7 +46,13 @@ public static partial class ArrowCombat
         // Keep that target until the normal death handler can retarget the deployment.
         if (!DeathOrders.TryGetValue(target, out var order)) return state.Enemies.FirstOrDefault(Available);
         int index = Array.IndexOf(order, target);
-        return index < 0 ? null : order.Skip(index + 1).FirstOrDefault(Available)
+        return index < 0 ? null : NextTarget(state, order, index);
+    }
+
+    private static Creature? NextTarget(ICombatState state, Creature[] order, int index)
+    {
+        bool Available(Creature target) => state.ContainsCreature(target) && target.IsAlive && target.IsHittable;
+        return order.Skip(index + 1).FirstOrDefault(Available)
             ?? order.Take(index).Reverse().FirstOrDefault(Available)
             ?? state.Enemies.FirstOrDefault(Available);
     }
@@ -61,10 +67,7 @@ public static partial class ArrowCombat
         order ??= state.Enemies.ToArray();
         int index = Array.IndexOf(order, creature);
         if (index < 0) return Task.CompletedTask;
-        bool Available(Creature target) => state.ContainsCreature(target) && target.IsAlive && target.IsHittable;
-        var replacement = order.Skip(index + 1).FirstOrDefault(Available)
-            ?? order.Take(index).Reverse().FirstOrDefault(Available)
-            ?? state.Enemies.FirstOrDefault(Available);
+        var replacement = NextTarget(state, order, index);
         foreach (var arrow in Arrows.Where(a => !a.TargetsGroup && a.Target == creature).ToArray())
             if (replacement != null) arrow.Retarget(replacement);
         // A later death listener or wave transition may still create enemies. Combat end owns cleanup.

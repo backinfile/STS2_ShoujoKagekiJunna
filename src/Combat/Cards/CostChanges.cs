@@ -40,16 +40,12 @@ public static class CostChanges
             return false;
         }
     }
-    [HarmonyPatch(typeof(CardEnergyCost), nameof(CardEnergyCost.Clone))]
-    private static class CloneFixedX
+    internal static void Copy(CardModel source, CardModel copy)
     {
-        private static void Postfix(CardModel ____card, CardModel newCard, ref CardEnergyCost __result)
-        {
-            if (!FixedX.TryGetValue(____card, out var state)) return;
-            FixedX.GetOrCreateValue(newCard).Captured = state.Captured;
-            var fixedCost = new CardEnergyCost(newCard, __result.Canonical, false);
-            fixedCost.SetThisCombat(____card.EnergyCost.GetWithModifiers(CostModifiers.Local));
-            __result = fixedCost;
-        }
+        if (!FixedX.TryGetValue(source, out var state)) return;
+        FixedX.GetOrCreateValue(copy).Captured = state.Captured;
+        var cost = new CardEnergyCost(copy, copy.EnergyCost.Canonical, false);
+        cost.SetThisCombat(source.EnergyCost.GetWithModifiers(CostModifiers.Local));
+        AccessTools.Field(typeof(CardModel), "_energyCost").SetValue(copy, cost);
     }
 }

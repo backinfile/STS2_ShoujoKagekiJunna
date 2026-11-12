@@ -4,7 +4,7 @@
 
 `loader/Bootstrap.cs` 按游戏版本加载实现程序集。`src/JunnaMod.cs` 注册公共出牌中间件、存档字段、伤害资格、Core 延迟结算及 Harmony 补丁；BaseLib 在自定义枚举分配后自动登记 ArrowPile。`src/Combat/JunnaCombatHooks.cs` 连接回合、战斗、出牌与死亡事件。
 
-角色通过 Core V1 接口接入闪耀，运行依赖为 Core 1.7.0。`build.ps1` 先校验官方发行包及角色要求的最低版本，再编译正式版、测试版和加载器，导入资源并生成 Core 需求与构建锁文件。Junna 通过独立 Core 工坊条目取得运行依赖；`tools/prepare-workshop.ps1` 生成仅含 Junna 的上传内容和 BaseLib、Core 必需物品配置。
+角色通过 Core V1 接口接入闪耀，运行依赖为 Core 1.9.0。`build.ps1` 先校验官方发行包及角色要求的最低版本，再编译正式版、测试版和加载器，导入资源并生成 Core 需求与构建锁文件。Junna 通过独立 Core 工坊条目取得运行依赖；`tools/prepare-workshop.ps1` 生成仅含 Junna 的上传内容和 BaseLib、Core 必需物品配置。
 
 ## 模块分工
 
@@ -30,7 +30,7 @@
 
 `data/card-pool.json` 是编译输入，通过 `Junna.CardPool` 嵌入角色程序集。`docs/implementation/` 保存实现说明。工作台内容通过 MCP 维护，`tools/assets/generate-card-catalog.py` 读取 MCP 导出快照，生成运行卡池、模型声明、本地化和配图。
 
-卡牌类名与模型 ID 保存在卡池定义中，运行时通过 `CardCatalog` 查找。`CardEffects` 显式分派牌效，`CatalogPower` 按游戏钩子分派持续效果。两处使用相同卡池 ID，修改对应牌效时同时核对其能力、描述及事件。
+卡牌类名与模型 ID 保存在卡池定义中，运行时通过 `CardCatalog` 查找。`CardEffects` 显式分派牌效，`CatalogPower` 统一施加快照与原生事件，具体持续效果由既有能力模型的 partial 实现提供。两处使用相同卡池 ID，修改对应牌效时同时核对其能力、描述及事件。
 
 ## 构建与定向检查
 
@@ -52,3 +52,5 @@ dotnet build tests/Integration/JunnaIntegration.csproj -c Release -p:CoreApiPath
 2026-11-08 共享底座重构将模型方法挂钩、出牌边界、复制及表现预算接入 Core V1 增量接口。箭矢结算和死亡转向按战斗模型顺序、目标类别与部署序号处理。CardValueNames 将规则中的语义名称绑定到稳定存储字段，CatalogPower 按 Cards、Turns、Damage、Description 分组，卡池与本地化字段保持原值。角色需求和构建锁统一由 Core SDK 生成。
 
 2026-11-12 将临时 Play 暂存与恢复接入 Core `card-staging@1`。免费和付费出牌共享执行流程；目标选择后保留会变化的支付检查。知识关系查询仅建立内存快照，由规范化及实际修改保存关系。持续能力克隆独立复制施加计数和来源快照；生成箭矢统一完成准备、执行和实际模型回收。
+
+2026-11-12 生命周期收口：玩家状态规范化订阅 Core 恢复完成通知；投入、研究、箭矢形态及固定 X 费用在 CardStateCopies 统一复制；获取来源作用域复用 Core 模型方法挂钩。知识预览读取同一成员解析，持续能力的规则集中在 CatalogPower.Rules.cs，模型生成器输出 partial 声明。角色要求 Core 1.9.0。
