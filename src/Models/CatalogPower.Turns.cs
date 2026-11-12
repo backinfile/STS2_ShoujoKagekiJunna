@@ -38,7 +38,12 @@ public abstract partial class CatalogPower
                 case "JK46": await CardActions.Generate(player, "JK46B", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom, grant.Card.IsUpgraded); break;
                 case "JG34":
                     using (DamageExecution.BeginCardResolution(grant.Card))
-                        await CardEffects.DealDamage(grant.Card, context, grant.Play, grant.V("Damage"), grant.BaseHits);
+                        for (int hit = 0; hit < grant.BaseHits; hit++)
+                        {
+                            var targets = player.Creature.CombatState!.HittableEnemies.Where(target => target.IsAlive).ToArray();
+                            if (targets.Length == 0) break;
+                            await GameApi.Damage(context, targets, grant.V("Damage"), ValueProp.Unpowered, Owner, grant.Card, grant.Play);
+                        }
                     break;
                 case "JZ06": await PlayerCmd.GainEnergy(player.PlayerCombatState!.Hand.Cards.Where(CardActions.HasNumericCost).Select(CardActions.Cost).DefaultIfEmpty().Max(), player); break;
             }

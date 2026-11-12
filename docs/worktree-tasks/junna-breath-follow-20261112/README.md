@@ -197,6 +197,8 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 独立、满解锁、随机端口的游戏实例通过静默与原生窗口最小化检查；录像 23.05 秒，1600×900，H.264 / AAC，内部混音。标称 20fps，实际采集约 17.91fps，补帧 49，丢弃 0。
 - 全部 Git 文档及本任务新增文档已检查敏感信息和本地绝对路径；示例连接配置中的占位值按示例保留。`git diff --check` 通过。
 
+- 同步本地 `main`（`74cc7f5`）后，三份动画运行脚本与已验收资源包的 SHA-256 一致；同步改动未涉及选角资源和 UI，本次采样、渲染与实机验收结论继续适用。
+
 ### 证据
 
 - [实机录像](../../../out/tmp/junna-breath-follow-20261112/junna-breath-follow-game.mp4)

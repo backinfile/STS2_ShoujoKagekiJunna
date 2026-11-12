@@ -49,7 +49,8 @@ public abstract partial class CatalogPower
             if (targets.Length == 0) return;
             var target = Owner.Player!.RunState.Rng.CombatTargets.NextItem(targets);
             using (DamageExecution.BeginCardResolution(grant.Card))
-                await GameApi.Damage(context, [target!], amount, ValueProp.Move, Owner, grant.Card, grant.Play);
+                await GameApi.Damage(context, [target!], amount, ValueProp.Unpowered, Owner, grant.Card, grant.Play);
         }
     }
+
 }
