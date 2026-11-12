@@ -1,0 +1,42 @@
+{
+  "sourceKind": "local native game extraction",
+  "references": [
+    {
+      "name": "burning_blood",
+      "file": "references/native-burning_blood.png",
+      "source": "<vanilla-extraction>/extraction/raw/images/relics/burning_blood.png",
+      "sha256": "9071a1f2d4cfdc6e4b90c59d5b5cc65e2ca7e1b6da902d275804d5a31f188fc2",
+      "usedForGeneration": true
+    },
+    {
+      "name": "charons_ashes",
+      "file": "references/native-charons_ashes.png",
+      "source": "<vanilla-extraction>/extraction/raw/images/relics/charons_ashes.png",
+      "sha256": "4b28055c754fa85cb36dca7ca55f3d184300745410fe3c09b6bff5f1371da2d1",
+      "usedForGeneration": true
+    },
+    {
+      "name": "brimstone",
+      "file": "references/native-brimstone.png",
+      "source": "<vanilla-extraction>/extraction/raw/images/relics/brimstone.png",
+      "sha256": "2e70030a49e1ad87f70c3ec87ce6ce6982f5035542276006690a58acb00eb1b0",
+      "usedForGeneration": true
+    },
+    {
+      "name": "philosophers_stone",
+      "file": "references/native-philosophers_stone.png",
+      "source": "<vanilla-extraction>/extraction/raw/images/relics/philosophers_stone.png",
+      "sha256": "3d64e5ad996424388cb66a3a7b6796c1f49bf4d0506642b70b31b58cdbbafda4",
+      "usedForGeneration": true
+    },
+    {
+      "name": "prismatic_gem",
+      "file": "references/native-prismatic_gem.png",
+      "source": "<vanilla-extraction>/extraction/raw/images/relics/prismatic_gem.png",
+      "sha256": "c224a79f644e4f6a2f135ab51e16823e8b1369bac3b588321692b6f5b6024d8d",
+      "usedForGeneration": false
+    }
+  ],
+  "comparison": "native-style-comparison.png",
+  "comparisonIconSize": 128
+}
