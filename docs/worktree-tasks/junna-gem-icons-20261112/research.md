@@ -2,9 +2,9 @@
 
 2026-11-12重新检索并直接查看了两本设定集的公开预览。
 
-当前成品为 `art-v3/` 的初始版和 `art-v5/` 的本体画风升级版。v5按照用户最新要求，直接参照本机原版提取图从零重画整张燃烧宝石：燃烧之血、卡戎之灰提供红橙火舌、少量黄芯和粗暗轮廓；硫磺、贤者之石提供哑光大色块、有限明暗与轻微笔触。火焰集中在宝石上缘后方，物件仍以纯那短刃不规则宝石为来源。v4的金黄色辉光版本已被用户否定，保留作过程记录。
+用户最终要求恢复对话开始前的项目原图。活动资源已恢复原SVG及原工作台assetId，恢复记录与预览见 `rollback-original/`。所有重新生成版本均为历史草稿。
 
-原版图标副本及SHA-256来源记录为 `art-v5/native-references.json`，来源根目录记为 `<vanilla-extraction>/extraction/raw/images/relics/`；同尺寸对照为 `art-v5/native-style-comparison.png`。提示词与输入记录见 `art-v5/prompts.json`，生成时没有输入此前生成图。原尺寸Artifact Cleaner采用strength=0.25、interior_blend=0.25，原图alpha和深色轮廓保持。小尺寸及Godot资源检查位于同目录，工作台r5008已同步；初始版主图和轮廓哈希保持v3原值。下文保留参考核对与此前草稿过程。
+原版画风参考副本及SHA-256来源记录为 `art-v5/native-references.json`，来源根目录记为 `<vanilla-extraction>/extraction/raw/images/relics/`。v6的原作局部放大、可见边界描线与提示词保留于 `art-v6/`，未同步工作台。下文保留参考核对与此前草稿过程。
 
 ## 九人武器
 

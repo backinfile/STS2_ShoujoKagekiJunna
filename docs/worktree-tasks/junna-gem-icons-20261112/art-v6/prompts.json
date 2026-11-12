@@ -1,0 +1,25 @@
+{
+  "useCase": "stylized-concept",
+  "mode": "built-in image_gen",
+  "transparentBackground": true,
+  "prompt": "Use case: stylized-concept. Asset type: a single transparent PNG relic icon for Slay the Spire 2, Burning Gem.\nCreate a completely new painted icon. The gemstone's outline is the MOST IMPORTANT constraint: reproduce the exact asymmetric contour and diagonal orientation in reference image 1. Image 1 is a black silhouette traced from the EXPOSED GEM in the original anime movie weapon setting; black means gemstone, white means empty. This is a compact faceted endcap-like gemstone with an off-center apex at upper right, sloped upper-left edge, a short angular right shoulder, a small notch midway on the left edge, a distinctive chipped two-tab lower-left corner and a long diagonal lower-right boundary. Preserve that silhouette's proportions, corners, notches and leaning pose. Do not substitute a generic mineral chunk, upright crystal or symmetrical diamond. Do not invent extra gem mass beneath or to the right of the contour.\nReference image 2 is the original setting close-up for the gemstone's sparse large facet arrangement. Only the exposed jewel inside the supplied contour is the subject. The wrapped cylindrical gray grip at lower right is NOT part of the jewel and must be entirely absent. The jewel face has a large central angular panel, small inset triangular planes and a narrow bright rim on upper-left. Translate the blue-gray/yellow setting color-coding into saturated emerald green, pale yellow-green highlight planes and deep forest-green shadow planes. Keep the exact source geometry, not the literal annotation colors.\nReferences 3 and 4 supply only the Slay the Spire relic painting STYLE: chunky nearly black outline, 4-6 broad flat painted color planes, a few rough brush accents, readable at 48 pixels. The gemstone should look cut and faceted, not like a craggy rock or a glossy 3D render. Add two or three SMALL stylized red-orange flame tongues with short golden-yellow centers BEHIND the side edges of the gemstone, so the original gem boundary stays clearly readable. Compact flat painted fire in the manner of reference 4; no glow, bloom, mist, light rays, rings, sparks, smoke or particles. Do not cover the source's apex or lower-left chips. Gemstone dominates the silhouette and occupies at least 80% of the visible area.\nComposition: one centered complete object, same diagonally leaning view as the black silhouette; square canvas, generous transparent margin. No text, annotations, red guide lines, circle, handle, mounting, base, cylinder, metal, cloth, background or ground shadow. True transparent alpha.",
+  "referenceRoles": [
+    {
+      "path": "references/gem-visible-contour.png",
+      "role": "hard visible-outline guide traced from original, not an official hidden-shape reconstruction"
+    },
+    {
+      "path": "references/short-blade-detail-4x.png",
+      "role": "original exposed gem geometry and facet reference, grip excluded"
+    },
+    {
+      "path": "../art-v5/references/native-philosophers_stone.png",
+      "role": "native relic painted gem style only"
+    },
+    {
+      "path": "../art-v5/references/native-burning_blood.png",
+      "role": "native flat painted fire style only"
+    }
+  ],
+  "output": "originals/burning_gem.png"
+}

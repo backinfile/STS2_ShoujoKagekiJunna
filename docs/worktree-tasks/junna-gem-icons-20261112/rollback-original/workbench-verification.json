@@ -1,0 +1,37 @@
+{
+  "revision": 5009,
+  "entries": [
+    {
+      "collection": "relics",
+      "uid": "relic_junna_green_gem",
+      "version": "6:f39684db93e8cc7632c4f4139dd3abd57db43830110f46a8b118997572e7e609",
+      "art": "relic-green-gem-vector-v2-20261105",
+      "text": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+      "revision": 5009
+    },
+    {
+      "collection": "relics",
+      "uid": "relic_junna_burning_gem",
+      "version": "10:111b6d5bb75f4a4db53d03b7326c3779881e0a848bfce15ec24377b66a652a11",
+      "art": "relic-burning-gem-vector-v2-20261105",
+      "text": "每当牌组中增加或者失去卡牌时，回复3点生命。",
+      "revision": 5009
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_relic_junna_green_gem",
+      "version": "10:72c4b153d8b27c5e35c1a8af79a698afabc6ca2936644f7bcde14546cf8be26a",
+      "art": "relic-green-gem-vector-v2-20261105",
+      "text": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+      "revision": 5009
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_relic_junna_burning_gem",
+      "version": "14:0b56d2888688de654c53849fb480b5bff920c673bca0bd9f48c22f3a9ed2e634",
+      "art": "relic-burning-gem-vector-v2-20261105",
+      "text": "每当牌组中增加或者失去卡牌时，回复3点生命。",
+      "revision": 5009
+    }
+  ]
+}

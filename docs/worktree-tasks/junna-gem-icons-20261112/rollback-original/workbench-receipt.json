@@ -1,0 +1,162 @@
+{
+  "saved": true,
+  "revision": 5009,
+  "record": {
+    "id": "90d3fa5d-ce8f-49e6-8bcd-2ae4c9b6c000",
+    "seq": 5009,
+    "at": "2026-11-12T04:38:46.022Z",
+    "label": "按用户要求恢复对话开始前的原版遗物配图",
+    "kind": "编辑",
+    "clientId": "codex-junna-gem-icons-20261112",
+    "patches": [
+      {
+        "collection": "fitPool",
+        "uid": "fit_relic_junna_green_gem",
+        "before": {
+          "uid": "fit_relic_junna_green_gem",
+          "id": "FIT_RELIC_JUNNA_GREEN_GEM",
+          "name": "绿色宝石",
+          "theme": "星星",
+          "text": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+          "original": "",
+          "source": "TV第2话约17:05—17:12，纯那弓端发光的绿色宝石。",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1025",
+          "art": "relic-green-gem-from-zero-v3-20261112",
+          "cardIds": [],
+          "relicIds": [
+            "JUNNA_GREEN_GEM"
+          ],
+          "notes": "纯那弓端完整的绿色宝石。造型依据《少女☆歌劇 レヴュースタァライト 設定資料集》“翡翠弓”页的“宝石のUP”（公开预览第32张），配色参考剧场版角色彩图及TV第2话近景，采用圆润完整外轮廓与放射三角切面。每当牌组中增加或者失去卡牌时，回复1点生命。当同时获得或者失去多张时，按张数计算回复值。按用户要求只保留宝石，去掉包托、底座与刀柄。两图均由内置image_gen仅使用原作参考从零独立生成，采用各自的造型与悬停轮廓，经本地Artifact Cleaner原尺寸处理后导出128像素透明PNG。"
+        },
+        "after": {
+          "uid": "fit_relic_junna_green_gem",
+          "id": "FIT_RELIC_JUNNA_GREEN_GEM",
+          "name": "绿色宝石",
+          "theme": "星星",
+          "text": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+          "original": "",
+          "source": "TV第2话约17:05—17:12，纯那弓端发光的绿色宝石。",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1025",
+          "art": "relic-green-gem-vector-v2-20261105",
+          "cardIds": [],
+          "relicIds": [
+            "JUNNA_GREEN_GEM"
+          ],
+          "notes": "纯那弓端发光的绿色宝石。每当牌组中增加或者失去卡牌时，回复1点生命。（当同时获得或者失去多张时，按张数计算回复值。）升级为燃烧宝石，两版沿用相同的多面切割主体与羽叶状金色包托，基础版保留深绿色切面，升级版增强内部白光和向外溢出的绿光。名称采用物件概括。造型核对TV第2话17:07近景tv02-1705-action.jpg，配合tv02-energy-gem-1710-20261103.png；SVG为依据原作近景重新绘制的游戏图标。Memory of Revue读者记录提到材质为祖母绿，原设定页尚待核对；显示名沿用用户选择的绿色宝石。"
+        },
+        "beforeIndex": 207,
+        "afterIndex": 207,
+        "afterVersion": "10:72c4b153d8b27c5e35c1a8af79a698afabc6ca2936644f7bcde14546cf8be26a"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "fit_relic_junna_burning_gem",
+        "before": {
+          "uid": "fit_relic_junna_burning_gem",
+          "id": "FIT_RELIC_JUNNA_BURNING_GEM",
+          "name": "燃烧宝石",
+          "theme": "星星",
+          "text": "每当牌组中增加或者失去卡牌时，回复3点生命。",
+          "original": "燃える宝石のようなキラめき",
+          "source": "2021剧场版·狩猎的Revue结尾，奈奈对纯那光芒的评价“燃える宝石のようなキラめき”。",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/",
+          "art": "relic-burning-gem-native-v5-20261112",
+          "cardIds": [],
+          "relicIds": [
+            "JUNNA_BURNING_GEM"
+          ],
+          "notes": "初始遗物绿色宝石的升级版，名称取自“燃える宝石のようなキラめき”。物件依据《Memory of Revue》书内119页纯那脇差柄端的不规则凸起宝石，去掉包托、底座和刀柄。用户否定发光特效画法后，整张图按尖塔本体遗物画风从零重画：火焰直接参照燃烧之血与卡戎之灰，采用红橙色火舌、少量黄芯和粗暗轮廓；矿石参照硫磺与贤者之石，采用有限的大色块、哑光明暗与轻微干笔笔触。宝石为主，火焰集中在上缘后方。每当牌组中增加或者失去卡牌时，回复3点生命。当同时获得或者失去多张时，按张数计算回复值。内置image_gen仅输入原版图标和原作形状参考生成，经本地Artifact Cleaner原尺寸清理，导出128像素透明PNG及独立悬停轮廓。"
+        },
+        "after": {
+          "uid": "fit_relic_junna_burning_gem",
+          "id": "FIT_RELIC_JUNNA_BURNING_GEM",
+          "name": "燃烧宝石",
+          "theme": "星星",
+          "text": "每当牌组中增加或者失去卡牌时，回复3点生命。",
+          "original": "燃える宝石のようなキラめき",
+          "source": "2021剧场版·狩猎的Revue结尾，奈奈对纯那光芒的评价“燃える宝石のようなキラめき”。",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/",
+          "art": "relic-burning-gem-vector-v2-20261105",
+          "cardIds": [],
+          "relicIds": [
+            "JUNNA_BURNING_GEM"
+          ],
+          "notes": "初始遗物绿色宝石的升级版。每当牌组中增加或者失去卡牌时，回复3点生命。（当同时获得或者失去多张时，按张数计算回复值。）名称对应原作“燃える宝石”，中文名按用户选择采用燃烧宝石。两版保留完全相同的宝石切面轮廓与羽叶状金色包托；升级版通过内部泛白、青绿色溢光与放射光芒表现增强。光效参考剧场版狩猎的Revue重新持刀的近景film-hunt-528.jpg（片段05:29）。图标为SVG矢量重绘，采用原作发光表现调整，替换此前的外圈实体火焰设计。"
+        },
+        "beforeIndex": 208,
+        "afterIndex": 208,
+        "afterVersion": "14:0b56d2888688de654c53849fb480b5bff920c673bca0bd9f48c22f3a9ed2e634"
+      },
+      {
+        "collection": "relics",
+        "uid": "relic_junna_green_gem",
+        "before": {
+          "uid": "relic_junna_green_gem",
+          "id": "JUNNA_GREEN_GEM",
+          "name": "绿色宝石",
+          "rarity": "初始",
+          "text": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+          "upgradeTo": "JUNNA_BURNING_GEM",
+          "art": "relic-green-gem-from-zero-v3-20261112",
+          "source": "TV第2话约17:05—17:12，纯那弓端发光的绿色宝石。",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1025",
+          "notes": "当同时获得或者失去多张时，按张数计算回复值。"
+        },
+        "after": {
+          "uid": "relic_junna_green_gem",
+          "id": "JUNNA_GREEN_GEM",
+          "name": "绿色宝石",
+          "rarity": "初始",
+          "text": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+          "upgradeTo": "JUNNA_BURNING_GEM",
+          "art": "relic-green-gem-vector-v2-20261105",
+          "source": "TV第2话约17:05—17:12，纯那弓端发光的绿色宝石。",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1025",
+          "notes": "当同时获得或者失去多张时，按张数计算回复值。"
+        },
+        "beforeIndex": 0,
+        "afterIndex": 0,
+        "afterVersion": "6:f39684db93e8cc7632c4f4139dd3abd57db43830110f46a8b118997572e7e609"
+      },
+      {
+        "collection": "relics",
+        "uid": "relic_junna_burning_gem",
+        "before": {
+          "uid": "relic_junna_burning_gem",
+          "id": "JUNNA_BURNING_GEM",
+          "name": "燃烧宝石",
+          "rarity": "初始升级",
+          "text": "每当牌组中增加或者失去卡牌时，回复3点生命。",
+          "upgradeFrom": "JUNNA_GREEN_GEM",
+          "art": "relic-burning-gem-native-v5-20261112",
+          "source": "2021剧场版·狩猎的Revue结尾，奈奈对纯那光芒的评价“燃える宝石のようなキラめき”。",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/",
+          "notes": "当同时获得或者失去多张时，按张数计算回复值。"
+        },
+        "after": {
+          "uid": "relic_junna_burning_gem",
+          "id": "JUNNA_BURNING_GEM",
+          "name": "燃烧宝石",
+          "rarity": "初始升级",
+          "text": "每当牌组中增加或者失去卡牌时，回复3点生命。",
+          "upgradeFrom": "JUNNA_GREEN_GEM",
+          "art": "relic-burning-gem-vector-v2-20261105",
+          "source": "2021剧场版·狩猎的Revue结尾，奈奈对纯那光芒的评价“燃える宝石のようなキラめき”。",
+          "sourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/",
+          "notes": "当同时获得或者失去多张时，按张数计算回复值。"
+        },
+        "beforeIndex": 1,
+        "afterIndex": 1,
+        "afterVersion": "10:111b6d5bb75f4a4db53d03b7326c3779881e0a848bfce15ec24377b66a652a11"
+      }
+    ],
+    "reference": null
+  },
+  "versions": {
+    "relics/relic_junna_green_gem": "6:f39684db93e8cc7632c4f4139dd3abd57db43830110f46a8b118997572e7e609",
+    "fitPool/fit_relic_junna_green_gem": "10:72c4b153d8b27c5e35c1a8af79a698afabc6ca2936644f7bcde14546cf8be26a",
+    "relics/relic_junna_burning_gem": "10:111b6d5bb75f4a4db53d03b7326c3779881e0a848bfce15ec24377b66a652a11",
+    "fitPool/fit_relic_junna_burning_gem": "14:0b56d2888688de654c53849fb480b5bff920c673bca0bd9f48c22f3a9ed2e634"
+  },
+  "assetIds": []
+}
