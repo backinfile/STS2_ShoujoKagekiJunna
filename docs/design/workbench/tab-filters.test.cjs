@@ -42,7 +42,7 @@ test('card and reserve tabs independently retain every shared filter and sorting
 
 test('all tabs retain their own searches, term categories and position filters',()=>{
   const{context,ui}=fixture();
-  const tabs=['cards','reserve','trash','terms','mechanisms','powers','relics','fits','events','flows','models','styles','overview','initial'];
+  const tabs=['cards','reserve','trash','terms','mechanisms','powers','relics','potions','fits','events','flows','models','styles','overview','initial'];
   for(const tab of tabs){context.changeTab(tab);assert.equal(ui.search,'');ui.search=tab;ui.kind=tab;ui.routeExcludedPositions=[tab];context.saveUI();}
   for(const tab of tabs){context.changeTab(tab);assert.equal(ui.search,tab);assert.equal(ui.kind,tab);assert.deepEqual(clone(ui.routeExcludedPositions),[tab]);}
 });
@@ -56,13 +56,14 @@ test('clicking the current tab and clearing its filters preserve other tabs',()=
   context.changeTab('reserve');assert.equal(ui.search,'备用');assert.equal(ui.sort,'cost');
 });
 
-test('saved browser state restores each tab after a reload, including arrays and sort direction',()=>{
+test('saved category filters survive while the unlinked default opens the card pool',()=>{
   const{context,ui,storage}=fixture();
   ui.search='卡池';ui.sort='cost';ui.descending=true;ui.routePositions=['trigger'];
   context.changeTab('reserve');ui.search='备用';ui.pool='granted';context.saveUI();
   const restored=fixture(JSON.parse(storage.get('test')));
   restored.context.readHash();
-  assert.equal(restored.ui.search,'备用');assert.equal(restored.ui.pool,'granted');
+  assert.equal(restored.ui.tab,'cards');assert.equal(restored.ui.search,'卡池');assert.equal(restored.ui.pool,'pool');
+  restored.context.changeTab('reserve');assert.equal(restored.ui.search,'备用');assert.equal(restored.ui.pool,'granted');
   restored.context.changeTab('cards');
   assert.equal(restored.ui.search,'卡池');assert.equal(restored.ui.sort,'cost');assert.equal(restored.ui.descending,true);assert.deepEqual(clone(restored.ui.routePositions),['trigger']);
 });
@@ -105,4 +106,22 @@ test('三态多选和排除条件在URL、刷新与切页后恢复，搜索原�
   assert.deepEqual(clone(restored.ui.type),selection);assert.equal(restored.ui.search,ui.search);
   restored.context.changeTab('reserve');assert.equal(restored.ui.type,'all');
   restored.context.changeTab('cards');assert.deepEqual(clone(restored.ui.type),selection);
+});
+
+test('卡池分类链接使用一个顶层页签，并恢复各分类筛选',()=>{
+  const {context,ui}=fixture();
+  context.changeTab('reserve');ui.search='备用搜索';ui.type='技能';context.saveUI();
+  const hash=context.location.hash,params=new URLSearchParams(hash.slice(1));
+  assert.equal(params.get('tab'),'cards');assert.equal(params.get('cardCategory'),'reserve');
+  const restored=fixture();restored.context.location.hash=hash;restored.context.readHash();
+  assert.equal(restored.ui.tab,'reserve');assert.equal(restored.ui.search,'备用搜索');assert.equal(restored.ui.type,'技能');
+  restored.context.location.hash='#tab=trash';restored.context.readHash();restored.context.saveUI();
+  assert.equal(restored.ui.tab,'trash');assert.equal(new URLSearchParams(restored.context.location.hash.slice(1)).get('cardCategory'),'trash');
+});
+test('无链接时默认打开卡池，旧药水入口转到独立药水页',()=>{
+  const {context,ui}=fixture({tab:'styles',search:'风格搜索'});
+  context.readHash();assert.equal(ui.tab,'cards');assert.equal(ui.pool,'pool');
+  context.location.hash='#tab=fits&fitTheme=%E8%81%8C%E4%B8%9A%E8%8D%AF%E6%B0%B4';context.readHash();
+  assert.equal(ui.tab,'potions');
+  context.location.hash='#tab=potions&rarity=稀有';context.readHash();assert.equal(ui.tab,'potions');assert.equal(ui.rarity,'稀有');
 });

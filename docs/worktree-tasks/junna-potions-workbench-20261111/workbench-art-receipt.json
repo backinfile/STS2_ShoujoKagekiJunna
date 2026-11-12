@@ -1,0 +1,235 @@
+{
+  "saved": true,
+  "revision": 4891,
+  "record": {
+    "id": "1c79d911-83f2-430d-83a3-bdc9e2ab728e",
+    "seq": 4891,
+    "at": "2026-11-11T07:05:04.884Z",
+    "label": "为三瓶职业药水命名并配置本体风格图标",
+    "kind": "设计",
+    "clientId": "codex-junna-potions-workbench-20261111",
+    "patches": [
+      {
+        "collection": "fitPool",
+        "uid": "junna_potion_common_knowledge_20261111",
+        "before": {
+          "uid": "junna_potion_common_knowledge_20261111",
+          "id": "FIT_POTION_JP01",
+          "name": "普通职业药水",
+          "theme": "职业药水",
+          "text": "从3组随机知识牌中选择1组加入你的手牌。这些牌在本回合可以免费打出。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "",
+          "cardIds": [],
+          "notes": "用户已给定效果。名称与配图待定。知识组包含所选入口及其直接关联牌，沿用当前知识关系与发放数量；整组获得的牌在本回合免费。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP01",
+            "rarity": "普通",
+            "rarityValue": "Common",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "知识",
+            "status": "draft",
+            "nameStatus": "待定",
+            "artStatus": "待定",
+            "artDirection": "以书本或纸页作为药瓶中的主物件，采用清楚的瓶形和单一主色；从三组知识中选一组的流程由效果表达。"
+          }
+        },
+        "after": {
+          "uid": "junna_potion_common_knowledge_20261111",
+          "id": "FIT_POTION_JP01",
+          "name": "知识药水",
+          "theme": "职业药水",
+          "text": "从3组随机知识牌中选择1组加入你的手牌。这些牌在本回合可以免费打出。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "potion-knowledge-20261111-v1",
+          "cardIds": [],
+          "notes": "知识组包含所选入口及其直接关联牌，沿用当前知识关系与发放数量；整组获得的牌在本回合免费。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP01",
+            "rarity": "普通",
+            "rarityValue": "Common",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "知识",
+            "status": "draft",
+            "nameStatus": "已命名",
+            "artStatus": "已绘制",
+            "artDirection": "书形轮廓的短颈扁瓶，蓝色液体中有一枚米白卷轴。",
+            "namingRationale": "沿用本体“效果或资源名＋药水”的直接命名，知识是本职业明确的卡牌机制。"
+          },
+          "artSource": {
+            "kind": "generated",
+            "tool": "built-in image_gen",
+            "date": "2026-11-11",
+            "promptPath": "docs/design/assets/potions/2026-11-11/generation-prompts.json",
+            "originalPath": "docs/design/assets/potions/2026-11-11/originals/knowledge_potion.png",
+            "cleanedNativePath": "docs/design/assets/potions/2026-11-11/cleaned-native/knowledge_potion.png",
+            "file": "docs/design/assets/potions/2026-11-11/icons/knowledge_potion.png",
+            "cleanupPath": "docs/design/assets/potions/2026-11-11/cleanup.json"
+          }
+        },
+        "beforeIndex": 398,
+        "afterIndex": 398,
+        "afterVersion": "3:0d58e956453bf9b22fe7169b247617b87c245f2e50eaf10aaa89a58683514326"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "junna_potion_uncommon_damage_bonus_20261111",
+        "before": {
+          "uid": "junna_potion_uncommon_damage_bonus_20261111",
+          "id": "FIT_POTION_JP02",
+          "name": "罕见职业药水",
+          "theme": "职业药水",
+          "text": "所有手牌获得9点伤害加成。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "",
+          "cardIds": [],
+          "notes": "用户已给定效果和9点数值。名称与配图待定。伤害加成沿用工作台现有机制约定。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP02",
+            "rarity": "罕见",
+            "rarityValue": "Uncommon",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "伤害加成",
+            "status": "draft",
+            "nameStatus": "待定",
+            "artStatus": "待定",
+            "artDirection": "以训练补给的瓶或壶表现日常锻炼，可使用一处运动器材或训练用品特征；瓶内液体与轮廓保持简洁。"
+          }
+        },
+        "after": {
+          "uid": "junna_potion_uncommon_damage_bonus_20261111",
+          "id": "FIT_POTION_JP02",
+          "name": "运动饮料",
+          "theme": "职业药水",
+          "text": "所有手牌获得9点伤害加成。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "potion-sports-drink-20261111-v1",
+          "cardIds": [],
+          "notes": "保留所有手牌获得9点伤害加成的效果；伤害加成沿用工作台现有机制约定。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP02",
+            "rarity": "罕见",
+            "rarityValue": "Uncommon",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "伤害加成",
+            "status": "draft",
+            "nameStatus": "已命名",
+            "artStatus": "已绘制",
+            "artDirection": "橙红饮料装在带拉式壶嘴的运动水壶中，以浅色握带和高瓶身区分轮廓。",
+            "namingRationale": "采用现成的训练补给物件名，对应伤害加成体系的日常锻炼和训练成果；与本体士兵炖汤等具体补给品的命名方式一致。"
+          },
+          "artSource": {
+            "kind": "generated",
+            "tool": "built-in image_gen",
+            "date": "2026-11-11",
+            "promptPath": "docs/design/assets/potions/2026-11-11/generation-prompts.json",
+            "originalPath": "docs/design/assets/potions/2026-11-11/originals/sports_drink.png",
+            "cleanedNativePath": "docs/design/assets/potions/2026-11-11/cleaned-native/sports_drink.png",
+            "file": "docs/design/assets/potions/2026-11-11/icons/sports_drink.png",
+            "cleanupPath": "docs/design/assets/potions/2026-11-11/cleanup.json"
+          }
+        },
+        "beforeIndex": 399,
+        "afterIndex": 399,
+        "afterVersion": "3:7b147676b10c6ca793a6360dbbdaeec5e7399ff42eebd577d7382483c18a0017"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "junna_potion_rare_arrows_20261111",
+        "before": {
+          "uid": "junna_potion_rare_arrows_20261111",
+          "id": "FIT_POTION_JP03",
+          "name": "稀有职业药水",
+          "theme": "职业药水",
+          "text": "打出你的所有箭矢。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "",
+          "cardIds": [],
+          "notes": "用户已给定效果。名称与配图待定。“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP03",
+            "rarity": "稀有",
+            "rarityValue": "Rare",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "箭矢",
+            "status": "draft",
+            "nameStatus": "待定",
+            "artStatus": "待定",
+            "artDirection": "采用能够看清箭束或箭头的容器，主轮廓与前两瓶区分；以少量明确的箭矢元素表达成批出手。"
+          }
+        },
+        "after": {
+          "uid": "junna_potion_rare_arrows_20261111",
+          "id": "FIT_POTION_JP03",
+          "name": "瓶装箭雨",
+          "theme": "职业药水",
+          "text": "打出你的所有箭矢。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "potion-bottled-arrow-rain-20261111-v1",
+          "cardIds": [],
+          "notes": "“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP03",
+            "rarity": "稀有",
+            "rarityValue": "Rare",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "箭矢",
+            "status": "draft",
+            "nameStatus": "已命名",
+            "artStatus": "已绘制",
+            "artDirection": "紫色扇形广腹瓶中装有五枚并发的银色箭头，箭束朝向右上。",
+            "namingRationale": "沿用本体瓶装潜能、瓶中船等容器与内容相连的命名方式；瓶内箭束对应一次打出所有箭矢。"
+          },
+          "artSource": {
+            "kind": "generated",
+            "tool": "built-in image_gen",
+            "date": "2026-11-11",
+            "promptPath": "docs/design/assets/potions/2026-11-11/generation-prompts.json",
+            "originalPath": "docs/design/assets/potions/2026-11-11/originals/bottled_arrow_rain.png",
+            "cleanedNativePath": "docs/design/assets/potions/2026-11-11/cleaned-native/bottled_arrow_rain.png",
+            "file": "docs/design/assets/potions/2026-11-11/icons/bottled_arrow_rain.png",
+            "cleanupPath": "docs/design/assets/potions/2026-11-11/cleanup.json"
+          }
+        },
+        "beforeIndex": 400,
+        "afterIndex": 400,
+        "afterVersion": "3:5c603a4fd313aba56c84686e281cee9448195e1aace60aeac2c7954d1735a087"
+      }
+    ],
+    "reference": null
+  },
+  "versions": {
+    "fitPool/junna_potion_common_knowledge_20261111": "3:0d58e956453bf9b22fe7169b247617b87c245f2e50eaf10aaa89a58683514326",
+    "fitPool/junna_potion_uncommon_damage_bonus_20261111": "3:7b147676b10c6ca793a6360dbbdaeec5e7399ff42eebd577d7382483c18a0017",
+    "fitPool/junna_potion_rare_arrows_20261111": "3:5c603a4fd313aba56c84686e281cee9448195e1aace60aeac2c7954d1735a087"
+  },
+  "assetIds": [
+    "potion-knowledge-20261111-v1",
+    "potion-sports-drink-20261111-v1",
+    "potion-bottled-arrow-rain-20261111-v1"
+  ]
+}

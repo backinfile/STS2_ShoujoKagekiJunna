@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "generationMode": "from-scratch",
+  "name": "箭雨药水",
+  "inputImages": [],
+  "styleStudy": {
+    "nativeIcons": [
+      "cunning_potion.png",
+      "bone_brew.png",
+      "block_potion.png",
+      "bottled_potential.png"
+    ],
+    "usage": "Visual study of physical assembly, material planes, rim, walls and liquid volume; not supplied as generation input."
+  },
+  "prompt": "Use case: stylized-concept.\nGenerate a completely new hand-painted 2D game inventory illustration of a tangible fantasy potion bottle, \"Arrow Rain Potion\". Start from a blank canvas; no previous image is being edited or traced.\n\nSubject and construction:\nA small, substantial arrowhead-shaped GLASS FLASK with violet potion inside. The bottle's broad kite-like body ends in a pointed lower end; a point is welcome. Crucially, it must be a constructed hollow glass vessel with visible volume, NOT a flat arrow symbol.\nShow it in a three-quarter view, tilted diagonally: the corked neck is toward the upper right and the lower point toward the lower left. The broad front face, a narrow receding sidewall, and the thick glass at the lower end must all be visible. Give the body enough depth to hold liquid. The inner cavity stops before the outer pointed tip, leaving a solid thick-glass end.\nAt the upper end, a short cylindrical neck connects naturally to the body. A real elliptical glass mouth and rolled lip wrap around the neck. A small cylindrical brown cork fits INTO the mouth: visible elliptical top, side face, a couple of simple cork pores. Overlap and occlusion must explain how the parts fit together.\nThe liquid occupies roughly two thirds of the cavity. Its surface is a nearly horizontal ellipse despite the tilted vessel; show a darker empty cavity above it, a meniscus, the liquid behind the front glass, and two modest bubbles. Keep the neck empty.\n\nGame-art language:\nMatch the material storytelling of Slay the Spire 2 potion inventory artwork, especially the Cunning Potion: recognizable physical parts, chunky dimensional facets, a few assertive painted highlights, irregular hand-drawn dark contour and overlapping material planes. A pointed part can have its own facets, glass thickness and attachment structure. Shape comes from the object and its construction.\nUse broad, economical painted color blocks rather than photorealism. Muted pale blue-gray glass edges, medium violet liquid with a dark plum shadow, lavender reflections and warm brown cork. Small differences in stroke width and slightly uneven edges. Two or three compact shading planes create volume. No uniform neon perimeter, no perfectly offset double outline, no CAD geometry.\n\nComposition:\nONE isolated finished potion bottle, complete and centered on a genuinely TRANSPARENT square canvas. Fill most of the frame while leaving margin.\nNo UI panel, arrow glyph, logo, label, typography, scene, ground, cast shadow, glow aura or added decorations. No metal weapon and no arrows inside the bottle.\nIt must read first as a real drinkable fantasy potion vessel, rendered in compact painted game-item style.",
+  "output": {
+    "original": "docs/design/assets/potions/2026-11-11/v7/originals/arrow_rain_potion.png"
+  }
+}

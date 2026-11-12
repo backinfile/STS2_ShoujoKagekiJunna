@@ -1,0 +1,137 @@
+[
+  {
+    "collection": "fitPool",
+    "uid": "junna_potion_common_knowledge_20261111",
+    "entity": {
+      "uid": "junna_potion_common_knowledge_20261111",
+      "id": "FIT_POTION_JP01",
+      "name": "知识药水",
+      "theme": "职业药水",
+      "text": "从3组随机知识牌中选择1组加入你的手牌。这些牌在本回合可以免费打出。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "potion-knowledge-20261111-v2",
+      "cardIds": [],
+      "notes": "知识组包含所选入口及其直接关联牌，沿用当前知识关系与发放数量；整组获得的牌在本回合免费。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP01",
+        "rarity": "普通",
+        "rarityValue": "Common",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "知识",
+        "status": "draft",
+        "nameStatus": "已命名",
+        "artStatus": "已绘制",
+        "artDirection": "对照本体扁瓶与瓶中船重绘：略不规则的浅蓝玻璃扁瓶、硬边蓝色液体与米白卷轴，收窄轮廓和高光。",
+        "namingRationale": "沿用本体“效果或资源名＋药水”的直接命名，知识是本职业明确的卡牌机制。"
+      },
+      "artSource": {
+        "kind": "generated",
+        "tool": "built-in image_gen",
+        "date": "2026-11-11",
+        "iteration": 2,
+        "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+        "promptPath": "docs/design/assets/potions/2026-11-11/v2/generation-prompts.json",
+        "originalPath": "docs/design/assets/potions/2026-11-11/v2/originals/knowledge_potion.png",
+        "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v2/cleaned-native/knowledge_potion.png",
+        "file": "docs/design/assets/potions/2026-11-11/v2/icons/knowledge_potion.png",
+        "cleanupPath": "docs/design/assets/potions/2026-11-11/v2/cleanup.json"
+      }
+    },
+    "version": "4:7ee3ada02e411c9e2b5674d92df39ab52de4214069ee47010f40673f2782a22d",
+    "revision": 4892
+  },
+  {
+    "collection": "fitPool",
+    "uid": "junna_potion_uncommon_damage_bonus_20261111",
+    "entity": {
+      "uid": "junna_potion_uncommon_damage_bonus_20261111",
+      "id": "FIT_POTION_JP02",
+      "name": "运动饮料",
+      "theme": "职业药水",
+      "text": "所有手牌获得9点伤害加成。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "potion-sports-drink-20261111-v2",
+      "cardIds": [],
+      "notes": "保留所有手牌获得9点伤害加成的效果；伤害加成沿用工作台现有机制约定。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP02",
+        "rarity": "罕见",
+        "rarityValue": "Uncommon",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "伤害加成",
+        "status": "draft",
+        "nameStatus": "已命名",
+        "artStatus": "已绘制",
+        "artDirection": "对照本体橙色药液与玻璃边线重绘：带红色拉式壶嘴的橙红运动水壶、硬边色块、浅色握带和少量气泡。",
+        "namingRationale": "采用现成的训练补给物件名，对应伤害加成体系的日常锻炼和训练成果；与本体士兵炖汤等具体补给品的命名方式一致。"
+      },
+      "artSource": {
+        "kind": "generated",
+        "tool": "built-in image_gen",
+        "date": "2026-11-11",
+        "iteration": 2,
+        "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+        "promptPath": "docs/design/assets/potions/2026-11-11/v2/generation-prompts.json",
+        "originalPath": "docs/design/assets/potions/2026-11-11/v2/originals/sports_drink.png",
+        "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v2/cleaned-native/sports_drink.png",
+        "file": "docs/design/assets/potions/2026-11-11/v2/icons/sports_drink.png",
+        "cleanupPath": "docs/design/assets/potions/2026-11-11/v2/cleanup.json"
+      }
+    },
+    "version": "4:7d92f1891f3ffd76f996d2b3ccf5d3701a013a959e57e225735dcbc50d3df7ce",
+    "revision": 4892
+  },
+  {
+    "collection": "fitPool",
+    "uid": "junna_potion_rare_arrows_20261111",
+    "entity": {
+      "uid": "junna_potion_rare_arrows_20261111",
+      "id": "FIT_POTION_JP03",
+      "name": "瓶装箭雨",
+      "theme": "职业药水",
+      "text": "打出你的所有箭矢。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "potion-bottled-arrow-rain-20261111-v2",
+      "cardIds": [],
+      "notes": "“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP03",
+        "rarity": "稀有",
+        "rarityValue": "Rare",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "箭矢",
+        "status": "draft",
+        "nameStatus": "已命名",
+        "artStatus": "已绘制",
+        "artDirection": "对照本体瓶中船与金属刃面重绘：紫色广腹瓶内有三支完整木杆箭矢，银色箭头与米白箭羽清楚可见。",
+        "namingRationale": "沿用本体瓶装潜能、瓶中船等容器与内容相连的命名方式；瓶内箭束对应一次打出所有箭矢。"
+      },
+      "artSource": {
+        "kind": "generated",
+        "tool": "built-in image_gen",
+        "date": "2026-11-11",
+        "iteration": 2,
+        "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+        "promptPath": "docs/design/assets/potions/2026-11-11/v2/generation-prompts.json",
+        "originalPath": "docs/design/assets/potions/2026-11-11/v2/originals/bottled_arrow_rain.png",
+        "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v2/cleaned-native/bottled_arrow_rain.png",
+        "file": "docs/design/assets/potions/2026-11-11/v2/icons/bottled_arrow_rain.png",
+        "cleanupPath": "docs/design/assets/potions/2026-11-11/v2/cleanup.json"
+      }
+    },
+    "version": "4:1dc2ae9f7e575ded0df364b4985d4e00a788fea3a0be920ec8ee5cc389dc1eeb",
+    "revision": 4892
+  }
+]

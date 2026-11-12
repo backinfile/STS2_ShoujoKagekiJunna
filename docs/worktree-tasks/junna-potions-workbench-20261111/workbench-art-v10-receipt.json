@@ -1,0 +1,135 @@
+{
+  "saved": true,
+  "revision": 4999,
+  "record": {
+    "id": "aef5cdfb-3b49-4936-9847-b3cbf9dc7ee5",
+    "seq": 4999,
+    "at": "2026-11-11T14:41:55.904Z",
+    "label": "复核63张本体药水后从零重做运动饮料",
+    "kind": "设计",
+    "clientId": "codex-junna-potions-workbench-20261111",
+    "patches": [
+      {
+        "collection": "styles",
+        "uid": "junna_style_native_potion_naming_art",
+        "before": {
+          "uid": "junna_style_native_potion_naming_art",
+          "id": "STYLE_NATIVE_POTION_NAMING_ART",
+          "name": "本体药水命名与图标特点",
+          "category": "药水设计",
+          "content": "依据 2026-11-11 检查的本体本地提取快照：63种药水，常规普通、罕见、稀有各20种，另有2种事件药水和1种衍生物。以“药水”结尾的名称在普通、罕见、稀有中分别为19/20、8/20、3/20。此比例描述当前样本。\n\n命名\n1. 常见基础收益直接用“效果或资源名＋药水”：攻击药水、格挡药水、力量药水、集中药水、星星药水。名称短，便于使用时辨认收益。\n2. 具体材料、制剂和容器也可承担名字：灰水、骨头酿、明晰提取物、稳定血清、士兵炖汤、尸鬼瓮、罐装幽灵、瓶中船。名称指向玩家能想象的物件。\n3. 可用与机制有联系的简短意象：液态记忆、瓶装潜能、精炼混沌、预知之滴、王之勇气。药水并不统一采用台词或歌词命名。\n4. 本体五职业在此快照中各有普通、罕见、稀有各一瓶专属药水。职业辨识来自资源、材料和器物：铁甲的鲜血、灰、炖汤，静默的毒、狡诈与幽灵，故障的集中、扩容与黑暗，亡灵的灾厄、骨头与尸鬼，储君的星星、王与宇宙。\n5. 普通名称多直述功能，罕见和稀有名称更常使用具体材料或意象；稀有度与某个后缀没有固定对应。\n\n图标（对全部63张原尺寸图逐项观察后归纳）\n1. 以一个主要识别点组织图标。主题可以进入整个瓶形（星星、闪电、屈臂、铁砧、四叶草），也可以由瓶塞、内容物或容器材质承担（骨塞、船、精灵、饭锅、陶瓮、纸盒）。不要求每瓶同时叠加特殊瓶形、符号、内容物和挂件。\n2. 形状优先考虑小尺寸识别：长宽比、内凹和凸角、瓶口、尖端及斜向摆放形成差异。同族功能可共享轮廓，例如攻击、技能、能力和无色药水使用相近扁瓶，再由颜色与标记区分。\n3. 颜色通常围绕一个主色系，以较亮和较暗的大色块分层；玻璃边线可用浅青、粉紫、米白或淡黄，瓶塞、金属、木壳和布带采用清楚的材质色。稀有度不规定统一液体颜色。\n4. 深色外轮廓包住浅色玻璃边，短而宽的高光、液面和硬边明暗表现材质；保留轻微手绘不规则感。避免碎纹理与大面积柔光影响轮廓。\n5. 装饰服务于主题辨认。骰点、链条、布带、符纸等都应成为醒目的具体物件；气泡与反光只补充药液和玻璃质感。主题已经由瓶形表达时，可以只保留药液、瓶塞和少量气泡。\n6. 简单或复杂取决于主题。普通中已有骷髅、双臂和翻盖结构；稀有中也有简单的四叶草瓶和刻度烧瓶。设计不按稀有度机械增加装饰。\n7. 检查的63张原图均为256×256透明PNG。先检查主体整体轮廓，再在32和64像素下核对主题、瓶颈、液面与主色块。\n8. 纯那药水中，知识可由学习物件承担，训练可由补给容器承担；箭雨药水以箭头式瓶身表达箭矢主题，配紫色药液与少量气泡；瓶口、玻璃壁厚、侧面和液面构成可信的盛装容器，尖角可以保留。同组三瓶保持不同主轮廓。\n9. 瓶口、瓶颈和木塞保持同轴；瓶沿截面垂直于瓶颈轴线，木塞顶面与瓶口的透视方向一致。先制作正立图，再整体旋转；倾斜阶段不重绘各部件，保持瓶口、瓶颈和木塞的相对位置。\n\n来源：<vanilla-extraction>/data/potions.json、extraction/raw/localization/zhs/potions.json、backend/static/images/potions/*.png、extraction/raw/src/Core/Models/PotionPools/、Core/Models/PotionModel.cs。图标接触表及63条名称清单保存在 docs/worktree-tasks/junna-potions-workbench-20261111/。"
+        },
+        "after": {
+          "uid": "junna_style_native_potion_naming_art",
+          "id": "STYLE_NATIVE_POTION_NAMING_ART",
+          "name": "本体药水命名与图标特点",
+          "category": "药水设计",
+          "content": "依据 2026-11-11 检查的本体本地提取快照：63种药水，常规普通、罕见、稀有各20种，另有2种事件药水和1种衍生物。以“药水”结尾的名称在普通、罕见、稀有中分别为19/20、8/20、3/20。此比例描述当前样本。\n\n命名\n1. 常见基础收益直接用“效果或资源名＋药水”：攻击药水、格挡药水、力量药水、集中药水、星星药水。名称短，便于使用时辨认收益。\n2. 具体材料、制剂和容器也可承担名字：灰水、骨头酿、明晰提取物、稳定血清、士兵炖汤、尸鬼瓮、罐装幽灵、瓶中船。名称指向玩家能想象的物件。\n3. 可用与机制有联系的简短意象：液态记忆、瓶装潜能、精炼混沌、预知之滴、王之勇气。药水并不统一采用台词或歌词命名。\n4. 本体五职业在此快照中各有普通、罕见、稀有各一瓶专属药水。职业辨识来自资源、材料和器物：铁甲的鲜血、灰、炖汤，静默的毒、狡诈与幽灵，故障的集中、扩容与黑暗，亡灵的灾厄、骨头与尸鬼，储君的星星、王与宇宙。\n5. 普通名称多直述功能，罕见和稀有名称更常使用具体材料或意象；稀有度与某个后缀没有固定对应。\n\n图标（对全部63张原尺寸图逐项观察后归纳）\n1. 以一个主要识别点组织图标。主题可以进入整个瓶形（星星、闪电、屈臂、铁砧、四叶草），也可以由瓶塞、内容物或容器材质承担（骨塞、船、精灵、饭锅、陶瓮、纸盒）。不要求每瓶同时叠加特殊瓶形、符号、内容物和挂件。\n2. 形状优先考虑小尺寸识别：长宽比、内凹和凸角、瓶口、尖端及斜向摆放形成差异。同族功能可共享轮廓，例如攻击、技能、能力和无色药水使用相近扁瓶，再由颜色与标记区分。\n3. 颜色通常围绕一个主色系，以较亮和较暗的大色块分层；玻璃边线可用浅青、粉紫、米白或淡黄，瓶塞、金属、木壳和布带采用清楚的材质色。稀有度不规定统一液体颜色。\n4. 深色外轮廓包住浅色玻璃边，短而宽的高光、液面和硬边明暗表现材质；保留轻微手绘不规则感。避免碎纹理与大面积柔光影响轮廓。\n5. 装饰服务于主题辨认。骰点、链条、布带、符纸等都应成为醒目的具体物件；气泡与反光只补充药液和玻璃质感。主题已经由瓶形表达时，可以只保留药液、瓶塞和少量气泡。\n6. 简单或复杂取决于主题。普通中已有骷髅、双臂和翻盖结构；稀有中也有简单的四叶草瓶和刻度烧瓶。设计不按稀有度机械增加装饰。\n7. 检查的63张原图均为256×256透明PNG。先检查主体整体轮廓，再在32和64像素下核对主题、瓶颈、液面与主色块。\n8. 纯那药水中，知识可由学习物件承担，运动饮料以收腰握持的运动瓶和推拉壶嘴表现训练补给，配橙金色饮料；箭雨药水以箭头式瓶身表达箭矢主题，配紫色药液与少量气泡；瓶口、玻璃壁厚、侧面和液面构成可信的盛装容器，尖角可以保留。同组三瓶保持不同主轮廓。\n9. 瓶口、瓶颈和木塞保持同轴；瓶沿截面垂直于瓶颈轴线，木塞顶面与瓶口的透视方向一致。先制作正立图，再整体旋转；倾斜阶段不重绘各部件，保持瓶口、瓶颈和木塞的相对位置。\n\n来源：<vanilla-extraction>/data/potions.json、extraction/raw/localization/zhs/potions.json、backend/static/images/potions/*.png、extraction/raw/src/Core/Models/PotionPools/、Core/Models/PotionModel.cs。图标接触表及63条名称清单保存在 docs/worktree-tasks/junna-potions-workbench-20261111/。"
+        },
+        "beforeIndex": 34,
+        "afterIndex": 34,
+        "afterVersion": "7:409eaa71d6ffd5dd65e5c262ad29ccc48419b32a7880a64923b452e14af633fb"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "junna_potion_uncommon_damage_bonus_20261111",
+        "before": {
+          "uid": "junna_potion_uncommon_damage_bonus_20261111",
+          "id": "FIT_POTION_JP02",
+          "name": "运动饮料",
+          "theme": "职业药水",
+          "text": "所有手牌获得9点伤害加成。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "potion-sports-drink-20261111-v3",
+          "cardIds": [],
+          "notes": "保留所有手牌获得9点伤害加成的效果；伤害加成沿用工作台现有机制约定。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP02",
+            "rarity": "罕见",
+            "rarityValue": "Uncommon",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "伤害加成",
+            "status": "draft",
+            "nameStatus": "已命名",
+            "artStatus": "已绘制",
+            "artDirection": "短而宽的不对称训练水壶，灰色旋盖、橙色布环、橙红药液与少量黄色气泡。",
+            "namingRationale": "采用现成的训练补给物件名，对应伤害加成体系的日常锻炼和训练成果；与本体士兵炖汤等具体补给品的命名方式一致。"
+          },
+          "artSource": {
+            "kind": "generated",
+            "tool": "built-in image_gen",
+            "date": "2026-11-11",
+            "iteration": 3,
+            "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+            "promptPath": "docs/design/assets/potions/2026-11-11/v3/generation-prompts.json",
+            "originalPath": "docs/design/assets/potions/2026-11-11/v3/originals/sports_drink.png",
+            "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v3/cleaned-native/sports_drink.png",
+            "file": "docs/design/assets/potions/2026-11-11/v3/icons/sports_drink.png",
+            "cleanupPath": "docs/design/assets/potions/2026-11-11/v3/cleanup.json"
+          }
+        },
+        "after": {
+          "uid": "junna_potion_uncommon_damage_bonus_20261111",
+          "id": "FIT_POTION_JP02",
+          "name": "运动饮料",
+          "theme": "职业药水",
+          "text": "所有手牌获得9点伤害加成。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "potion-sports-drink-20261111-v10",
+          "cardIds": [],
+          "notes": "保留所有手牌获得9点伤害加成的效果；伤害加成沿用工作台现有机制约定。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP02",
+            "rarity": "罕见",
+            "rarityValue": "Uncommon",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "伤害加成",
+            "status": "draft",
+            "nameStatus": "已命名",
+            "artStatus": "已绘制",
+            "artDirection": "从零重做收腰握持的实体运动瓶：上下饱满、中部握持凹槽，蓝绿色旋盖与同轴推拉壶嘴，橙金色饮料、深橙阴影与浅色玻璃壁。先画正立稿，清理后整体向左倾斜18度。",
+            "namingRationale": "采用现成的训练补给物件名，对应伤害加成体系的日常锻炼和训练成果；与本体士兵炖汤等具体补给品的命名方式一致。"
+          },
+          "artSource": {
+            "kind": "generated",
+            "tool": "built-in image_gen",
+            "date": "2026-11-11",
+            "iteration": 10,
+            "generationMode": "upright-then-rigid-rotation",
+            "inputImages": [],
+            "transformationTool": "System.Drawing GDI+",
+            "rotationDegreesClockwise": -18,
+            "analysisPath": "docs/worktree-tasks/junna-potions-workbench-20261111/sports-drink-redesign.md",
+            "nativeReviewPath": "docs/design/assets/potions/2026-11-11/v10/native-review.json",
+            "promptPath": "docs/design/assets/potions/2026-11-11/v10/generation-prompts.json",
+            "originalPath": "docs/design/assets/potions/2026-11-11/v10/originals/sports_drink_upright.png",
+            "uprightCleanedPath": "docs/design/assets/potions/2026-11-11/v10/cleaned-native/sports_drink_upright.png",
+            "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v10/cleaned-native/sports_drink.png",
+            "rotationPath": "docs/design/assets/potions/2026-11-11/v10/rotation.json",
+            "file": "docs/design/assets/potions/2026-11-11/v10/icons/sports_drink.png",
+            "cleanupPath": "docs/design/assets/potions/2026-11-11/v10/cleanup.json"
+          }
+        },
+        "beforeIndex": 399,
+        "afterIndex": 399,
+        "afterVersion": "6:af2ffd979e215507f5abde8a54f1a14e44e79bddbed1d4cc483fc999b48bda9e"
+      }
+    ],
+    "reference": null
+  },
+  "versions": {
+    "fitPool/junna_potion_uncommon_damage_bonus_20261111": "6:af2ffd979e215507f5abde8a54f1a14e44e79bddbed1d4cc483fc999b48bda9e",
+    "styles/junna_style_native_potion_naming_art": "7:409eaa71d6ffd5dd65e5c262ad29ccc48419b32a7880a64923b452e14af633fb"
+  },
+  "assetIds": [
+    "potion-sports-drink-20261111-v10"
+  ]
+}

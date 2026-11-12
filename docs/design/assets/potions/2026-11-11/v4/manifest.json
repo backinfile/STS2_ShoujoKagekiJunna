@@ -1,0 +1,10 @@
+{
+  "icons": [
+    {
+      "key": "salvo_potion",
+      "name": "齐射药剂",
+      "assetId": "potion-salvo-20261111-v4",
+      "file": "docs/design/assets/potions/2026-11-11/v4/icons/salvo_potion.png"
+    }
+  ]
+}

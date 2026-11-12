@@ -1,0 +1,41 @@
+{
+  "requestId": "73c8eeac-f65a-4d2a-9c45-3c0e57e579bc",
+  "clientId": "codex-junna-potions-workbench-20261111",
+  "label": "精简药水列表出处展示",
+  "kind": "设计",
+  "changes": [
+    {
+      "collection": "fitPool",
+      "uid": "junna_potion_common_knowledge_20261111",
+      "expectedVersion": "1:b6a6e90ab854b6fe23fffbdb471f5e011b3b675f482159e36db8be5a66ec4968",
+      "expectedFields": {
+        "source": "用户提供药水设计；本体命名与图标参考 STYLE_NATIVE_POTION_NAMING_ART"
+      },
+      "updates": {
+        "source": ""
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna_potion_uncommon_damage_bonus_20261111",
+      "expectedVersion": "1:af0e4e34bc6958ed51aa7d00e3cc3b9042110fa3db6d5d2cb8917b02c0a9b573",
+      "expectedFields": {
+        "source": "用户提供药水设计；本体命名与图标参考 STYLE_NATIVE_POTION_NAMING_ART"
+      },
+      "updates": {
+        "source": ""
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "junna_potion_rare_arrows_20261111",
+      "expectedVersion": "1:787b6df38f06c5abd6929cd3c3f97d6a14dd6a53472ea4a09951391f5597dd29",
+      "expectedFields": {
+        "source": "用户提供药水设计；本体命名与图标参考 STYLE_NATIVE_POTION_NAMING_ART"
+      },
+      "updates": {
+        "source": ""
+      }
+    }
+  ]
+}

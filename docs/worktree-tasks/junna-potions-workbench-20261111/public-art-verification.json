@@ -1,0 +1,49 @@
+{
+  "revision": 4891,
+  "allEffectsUnchanged": true,
+  "allUpdatedFieldsMatch": true,
+  "icons": [
+    {
+      "uid": "junna_potion_common_knowledge_20261111",
+      "name": "知识药水",
+      "text": "从3组随机知识牌中选择1组加入你的手牌。这些牌在本回合可以免费打出。",
+      "rarity": "普通",
+      "art": "potion-knowledge-20261111-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/c7305bc7dc0e2b55076c413d.png",
+      "sha256": "c7305bc7dc0e2b55076c413d5b224ff74a1ebd851318835fecb5ed3d13c605c0",
+      "dimensions": [
+        256,
+        256
+      ],
+      "matchesLocalIcon": true
+    },
+    {
+      "uid": "junna_potion_uncommon_damage_bonus_20261111",
+      "name": "运动饮料",
+      "text": "所有手牌获得9点伤害加成。",
+      "rarity": "罕见",
+      "art": "potion-sports-drink-20261111-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/7dac29c7b6a5108adec6fc31.png",
+      "sha256": "7dac29c7b6a5108adec6fc31b9273f152149cd8460fe6ee705b82dc709bea98b",
+      "dimensions": [
+        256,
+        256
+      ],
+      "matchesLocalIcon": true
+    },
+    {
+      "uid": "junna_potion_rare_arrows_20261111",
+      "name": "瓶装箭雨",
+      "text": "打出你的所有箭矢。",
+      "rarity": "稀有",
+      "art": "potion-bottled-arrow-rain-20261111-v1",
+      "assetURL": "https://junna.17181718.xyz/assets/bb193f24eb8a56708f5086d4.png",
+      "sha256": "bb193f24eb8a56708f5086d4c98b6ae8f71055e42a843de3f3891cd0eec66238",
+      "dimensions": [
+        256,
+        256
+      ],
+      "matchesLocalIcon": true
+    }
+  ]
+}

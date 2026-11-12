@@ -1,0 +1,104 @@
+{
+  "saved": true,
+  "revision": 4894,
+  "record": {
+    "id": "17781f0e-0caf-4444-b4db-d7231f323fbe",
+    "seq": 4894,
+    "at": "2026-11-11T08:01:50.639Z",
+    "label": "将稀有职业药水改名为齐射药剂",
+    "kind": "设计",
+    "clientId": "codex-junna-potions-workbench-20261111",
+    "patches": [
+      {
+        "collection": "fitPool",
+        "uid": "junna_potion_rare_arrows_20261111",
+        "before": {
+          "uid": "junna_potion_rare_arrows_20261111",
+          "id": "FIT_POTION_JP03",
+          "name": "瓶装箭雨",
+          "theme": "职业药水",
+          "text": "打出你的所有箭矢。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "potion-bottled-arrow-rain-20261111-v3",
+          "cardIds": [],
+          "notes": "“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP03",
+            "rarity": "稀有",
+            "rarityValue": "Rare",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "箭矢",
+            "status": "draft",
+            "nameStatus": "已命名",
+            "artStatus": "已绘制",
+            "artDirection": "一曲一直的箭筒形紫色玻璃瓶，三支带木杆和箭羽的箭矢以不同角度朝瓶颈汇聚。",
+            "namingRationale": "沿用本体瓶装潜能、瓶中船等容器与内容相连的命名方式；瓶内箭束对应一次打出所有箭矢。"
+          },
+          "artSource": {
+            "kind": "generated",
+            "tool": "built-in image_gen",
+            "date": "2026-11-11",
+            "iteration": 3,
+            "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+            "promptPath": "docs/design/assets/potions/2026-11-11/v3/generation-prompts.json",
+            "originalPath": "docs/design/assets/potions/2026-11-11/v3/originals/bottled_arrow_rain.png",
+            "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v3/cleaned-native/bottled_arrow_rain.png",
+            "file": "docs/design/assets/potions/2026-11-11/v3/icons/bottled_arrow_rain.png",
+            "cleanupPath": "docs/design/assets/potions/2026-11-11/v3/cleanup.json"
+          }
+        },
+        "after": {
+          "uid": "junna_potion_rare_arrows_20261111",
+          "id": "FIT_POTION_JP03",
+          "name": "齐射药剂",
+          "theme": "职业药水",
+          "text": "打出你的所有箭矢。",
+          "original": "",
+          "source": "",
+          "sourceUrl": "",
+          "art": "potion-bottled-arrow-rain-20261111-v3",
+          "cardIds": [],
+          "notes": "“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+          "draftStatus": "草稿",
+          "potionDesign": {
+            "id": "JP03",
+            "rarity": "稀有",
+            "rarityValue": "Rare",
+            "character": "星见纯那",
+            "characterId": "ShoujoKagekiJunna",
+            "system": "箭矢",
+            "status": "draft",
+            "nameStatus": "已命名",
+            "artStatus": "已绘制",
+            "artDirection": "一曲一直的箭筒形紫色玻璃瓶，三支带木杆和箭羽的箭矢以不同角度朝瓶颈汇聚。",
+            "namingRationale": "采用常用动作名“齐射”，直接对应一次打出所有箭矢；“药剂”表明消耗品身份。"
+          },
+          "artSource": {
+            "kind": "generated",
+            "tool": "built-in image_gen",
+            "date": "2026-11-11",
+            "iteration": 3,
+            "styleReferencePath": "docs/design/assets/potions/2026-11-11/native-style-reference.png",
+            "promptPath": "docs/design/assets/potions/2026-11-11/v3/generation-prompts.json",
+            "originalPath": "docs/design/assets/potions/2026-11-11/v3/originals/bottled_arrow_rain.png",
+            "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v3/cleaned-native/bottled_arrow_rain.png",
+            "file": "docs/design/assets/potions/2026-11-11/v3/icons/bottled_arrow_rain.png",
+            "cleanupPath": "docs/design/assets/potions/2026-11-11/v3/cleanup.json"
+          }
+        },
+        "beforeIndex": 400,
+        "afterIndex": 400,
+        "afterVersion": "6:4c73cfe8eb1e8b89a3d25e638007ad3c875eeda5bf1b90a4428ad3b58a60354a"
+      }
+    ],
+    "reference": null
+  },
+  "versions": {
+    "fitPool/junna_potion_rare_arrows_20261111": "6:4c73cfe8eb1e8b89a3d25e638007ad3c875eeda5bf1b90a4428ad3b58a60354a"
+  },
+  "assetIds": []
+}

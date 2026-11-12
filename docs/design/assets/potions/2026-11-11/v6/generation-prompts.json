@@ -1,0 +1,22 @@
+{
+  "tool": "built-in image_gen",
+  "generationMode": "from-scratch",
+  "name": "箭雨药水",
+  "inputImages": [],
+  "styleStudy": {
+    "file": "docs/design/assets/potions/2026-11-11/v6/native-rounded-style-reference.png",
+    "usage": "Visual study only; no image supplied to generation tool.",
+    "nativeIcons": [
+      "block_potion.png",
+      "liquid_memories.png",
+      "strength_potion.png",
+      "bottled_potential.png",
+      "lucky_tonic.png",
+      "potion_of_doom.png"
+    ]
+  },
+  "prompt": "Use case: stylized-concept.\nCreate one completely NEW 2D inventory icon from a blank canvas: \"Arrow Rain Potion\" for a Slay the Spire 2 character mod. No source image is being edited or traced.\nArt direction learned from the game's potion icons: small hand-painted fantasy consumable, a slightly irregular dark outer contour, a pale tinted glass rim, large flat liquid-color areas, two or three compact hard-edged shadow shapes, a few short broad reflections and simple round bubbles. Friendly, tactile blown glass. No sleek computer-vector finish, no realistic 3D gloss.\nBottle design: a plump, compact glass flask whose overall body gently suggests an arrowhead or kite. Broad softly curved shoulders, subtly unequal sides, all corners generously rounded. The lower end tapers into a SHORT, BROAD, ROUNDED teardrop end; it must be blunt, never needle-like or knife-like. The body is about three quarters as wide as it is long, with a full belly. A short rounded neck, a clearly rounded glass lip, and a modest warm brown cork. Avoid long straight razor edges or faceted gemstone geometry.\nPose: lean the bottle about 25 degrees clockwise, cork toward the upper right and rounded tapered base toward the lower left.\nColor: rich medium violet potion, a darker muted plum shadow and a lighter lavender color block; pale lilac-gray glass edge; simple tan cork. Show a clear liquid surface and an empty glass area above it. Use a few varied circular bubbles. Keep all shading broad and restrained, like a readable painted game icon.\nThe bottle silhouette itself carries the arrow theme. No physical arrows, blades, spikes, labels, ribbons, gems, decorative metal, letters, stars or extra props.\nComposition: one complete isolated bottle, square canvas, full object visible with padding, icon fills most of the frame. Genuinely transparent background. No contact sheet, no scene, no cast shadow, no glow aura, no border, no text.\nPrioritize the rounded potion-bottle character and readability at 32 pixels.",
+  "output": {
+    "original": "docs/design/assets/potions/2026-11-11/v6/originals/arrow_rain_potion.png"
+  }
+}

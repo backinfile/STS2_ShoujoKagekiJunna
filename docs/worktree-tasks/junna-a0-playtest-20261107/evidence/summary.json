@@ -1,0 +1,199 @@
+{
+  "date": "2026-11-07",
+  "baseline": {
+    "branch": "main",
+    "commit": "e785c3815c8a0417a55bc3ae53f539a5ff5018e4",
+    "cardPoolRevision": 3725,
+    "gameBuild": "v0.111.0",
+    "coreVersion": "1.0.1",
+    "baseLibVersion": "3.4.7",
+    "runtime": "beta"
+  },
+  "run": {
+    "seed": "GJ7HM87FYBLK",
+    "ascension": 0,
+    "mode": "standard",
+    "win": false,
+    "wasAbandoned": false,
+    "seconds": 2141,
+    "floors": 17,
+    "killedBy": "ENCOUNTER.WATERFALL_GIANT_BOSS",
+    "deckCount": 23,
+    "relicCount": 4,
+    "shineDepletedCount": 2,
+    "gold": {
+      "start": 99,
+      "gained": 182,
+      "spent": 199,
+      "stolen": 20,
+      "lost": 0,
+      "final": 62
+    },
+    "route": [
+      {
+        "floor": 1,
+        "type": "ancient",
+        "encounter": "EVENT.NEOW",
+        "rounds": 0,
+        "hp": 70,
+        "gold": 99
+      },
+      {
+        "floor": 2,
+        "type": "monster",
+        "encounter": "ENCOUNTER.TOADPOLES_WEAK",
+        "rounds": 4,
+        "hp": 61,
+        "gold": 112
+      },
+      {
+        "floor": 3,
+        "type": "monster",
+        "encounter": "ENCOUNTER.CORPSE_SLUGS_WEAK",
+        "rounds": 5,
+        "hp": 59,
+        "gold": 125
+      },
+      {
+        "floor": 4,
+        "type": "unknown",
+        "encounter": "EVENT.DROWNING_BEACON",
+        "rounds": 0,
+        "hp": 59,
+        "gold": 125
+      },
+      {
+        "floor": 5,
+        "type": "monster",
+        "encounter": "ENCOUNTER.SLUDGE_SPINNER_WEAK",
+        "rounds": 4,
+        "hp": 56,
+        "gold": 141
+      },
+      {
+        "floor": 6,
+        "type": "monster",
+        "encounter": "ENCOUNTER.CULTISTS_NORMAL",
+        "rounds": 5,
+        "hp": 50,
+        "gold": 153
+      },
+      {
+        "floor": 7,
+        "type": "rest_site",
+        "rounds": 0,
+        "hp": 50,
+        "gold": 153
+      },
+      {
+        "floor": 8,
+        "type": "unknown",
+        "encounter": "ENCOUNTER.SEWER_CLAM_NORMAL",
+        "rounds": 3,
+        "hp": 35,
+        "gold": 166
+      },
+      {
+        "floor": 9,
+        "type": "unknown",
+        "encounter": "EVENT.SELF_HELP_BOOK",
+        "rounds": 0,
+        "hp": 35,
+        "gold": 166
+      },
+      {
+        "floor": 10,
+        "type": "treasure",
+        "rounds": 0,
+        "hp": 35,
+        "gold": 217
+      },
+      {
+        "floor": 11,
+        "type": "monster",
+        "encounter": "ENCOUNTER.PUNCH_CONSTRUCT_NORMAL",
+        "rounds": 4,
+        "hp": 21,
+        "gold": 227
+      },
+      {
+        "floor": 12,
+        "type": "monster",
+        "encounter": "ENCOUNTER.TWO_TAILED_RATS_NORMAL",
+        "rounds": 3,
+        "hp": 20,
+        "gold": 239
+      },
+      {
+        "floor": 13,
+        "type": "monster",
+        "encounter": "ENCOUNTER.GREMLIN_MERC_NORMAL",
+        "rounds": 4,
+        "hp": 19,
+        "gold": 219
+      },
+      {
+        "floor": 14,
+        "type": "shop",
+        "rounds": 0,
+        "hp": 19,
+        "gold": 20
+      },
+      {
+        "floor": 15,
+        "type": "elite",
+        "encounter": "ENCOUNTER.PHANTASMAL_GARDENERS_ELITE",
+        "rounds": 2,
+        "hp": 19,
+        "gold": 62
+      },
+      {
+        "floor": 16,
+        "type": "rest_site",
+        "rounds": 0,
+        "hp": 40,
+        "gold": 62
+      },
+      {
+        "floor": 17,
+        "type": "boss",
+        "encounter": "ENCOUNTER.WATERFALL_GIANT_BOSS",
+        "rounds": 8,
+        "hp": 0,
+        "gold": 62
+      }
+    ]
+  },
+  "recording": {
+    "status": "completed",
+    "fps": 15,
+    "max_duration_seconds": 3600,
+    "width": 1280,
+    "height": 720,
+    "frames_written": 33534,
+    "video_duration_seconds": 2235.6,
+    "frames_captured": 33306,
+    "frames_repeated": 228,
+    "frames_dropped": 0,
+    "encoder": "h264_nvenc",
+    "capture_fps": 14.89841781999743,
+    "capture_average_ms": 17.04061385936467,
+    "capture_max_ms": 1519.8652,
+    "encode_write_average_ms": 0.4514975755949202,
+    "encode_write_max_ms": 132.9078,
+    "elapsed_seconds": 2265.6559942,
+    "audio": true,
+    "audio_source": "engine_mix"
+  },
+  "videoFiles": {
+    "highlights": "out/tmp/junna-a0-playtest-20261107/junna-a0-issues.mp4",
+    "fullRun": "out/tmp/junna-a0-playtest-20261107/junna-a0-full-run.mp4"
+  },
+  "buildHashes": {
+    "dist/ShoujoKagekiJunna/lib/ShoujoKagekiJunna.Beta.dll": "57a148348def3862b380a6df7a5fd0059effb47e3532840cfcf3c9cbe3de859f",
+    "artifacts/a0-playtest/game/mods/ShoujoKagekiJunna/lib/ShoujoKagekiJunna.Beta.dll": "57a148348def3862b380a6df7a5fd0059effb47e3532840cfcf3c9cbe3de859f",
+    "dist/ShoujoKagekiJunna/ShoujoKagekiJunna.pck": "c5066b602f5589fd5daf2579afa76bbaf8a4193b416b469458ccf8001fa76258",
+    "artifacts/a0-playtest/game/mods/ShoujoKagekiJunna/ShoujoKagekiJunna.pck": "c5066b602f5589fd5daf2579afa76bbaf8a4193b416b469458ccf8001fa76258",
+    "artifacts/a0-playtest/game/mods/KarenSTS2MCP.dll": "6a7932761a12980551295887fbcd50d1b4139236f7ee45a5928d72353a4d2f4d"
+  }
+}

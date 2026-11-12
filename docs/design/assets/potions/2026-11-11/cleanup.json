@@ -1,0 +1,82 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "originals_preserved": true,
+  "dimensionsPreservedDuringCleanup": true,
+  "vae": "Flux2 VAE",
+  "residual": "LatentR R_ema",
+  "assets": [
+    {
+      "key": "bottled_arrow_rain",
+      "source": "docs/design/assets/potions/2026-11-11/originals/bottled_arrow_rain.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/cleaned-native/bottled_arrow_rain.png",
+      "file": "docs/design/assets/potions/2026-11-11/icons/bottled_arrow_rain.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "73c5ef4abeaf702ce3ef1199d55cc8b0c445ebecbc2e96ce6fbf7a3cbae65b5f",
+      "cleaned_sha256": "52e898546e4fabc6391c87bdb5630e3b97f7c723f593a208ec812e88e2d819c7",
+      "sha256": "bb193f24eb8a56708f5086d4c98b6ae8f71055e42a843de3f3891cd0eec66238",
+      "visibleRgbMeanAbsoluteChange": 0.0,
+      "seconds": 3.11
+    },
+    {
+      "key": "knowledge_potion",
+      "source": "docs/design/assets/potions/2026-11-11/originals/knowledge_potion.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/cleaned-native/knowledge_potion.png",
+      "file": "docs/design/assets/potions/2026-11-11/icons/knowledge_potion.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "7fbac6b87526af4c1bef6587ef70f60af142448a7ae351c28628fb599a99630c",
+      "cleaned_sha256": "938b48a74c1ef1cef19df56e7d9af2513c533f6e3d66b3d836f4582f84ca6632",
+      "sha256": "c7305bc7dc0e2b55076c413d5b224ff74a1ebd851318835fecb5ed3d13c605c0",
+      "visibleRgbMeanAbsoluteChange": 0.0,
+      "seconds": 2.657
+    },
+    {
+      "key": "sports_drink",
+      "source": "docs/design/assets/potions/2026-11-11/originals/sports_drink.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/cleaned-native/sports_drink.png",
+      "file": "docs/design/assets/potions/2026-11-11/icons/sports_drink.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "7290388913f03457a3c04f92d6c27f32a2300c7b15c5c53299b5f996d8284c69",
+      "cleaned_sha256": "53c61545eb5672b2dca8512d1f7e986ee1ba8ef96488d10ee85569727d441a4c",
+      "sha256": "7dac29c7b6a5108adec6fc31b9273f152149cd8460fe6ee705b82dc709bea98b",
+      "visibleRgbMeanAbsoluteChange": 0.0,
+      "seconds": 2.657
+    }
+  ]
+}

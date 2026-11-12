@@ -1,0 +1,14 @@
+{
+  "name": "齐射药剂",
+  "shape": "arrowhead with barbs and a tail bottle mouth",
+  "viewBox": [
+    0,
+    0,
+    256,
+    256
+  ],
+  "alphaPreserved": true,
+  "fullyInsideCanvas": true,
+  "svg": "salvo_potion.svg",
+  "stage": "bottle-shape-draft"
+}

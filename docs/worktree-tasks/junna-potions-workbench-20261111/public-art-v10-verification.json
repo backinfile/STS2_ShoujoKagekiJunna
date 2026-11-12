@@ -1,0 +1,27 @@
+{
+  "revision": 4999,
+  "name": "运动饮料",
+  "text": "所有手牌获得9点伤害加成。",
+  "art": "potion-sports-drink-20261111-v10",
+  "assetURL": "https://junna.17181718.xyz/assets/4141b3d44d90908be9f21644.png",
+  "sha256": "4141b3d44d90908be9f21644ec44e4c9933394e2cbc63fb93ad9dd0326f6da03",
+  "dimensions": [
+    256,
+    256
+  ],
+  "publicEntryMatchesMCP": true,
+  "matchesLocalIcon": true,
+  "generationMode": "from-scratch-upright-then-rigid-rotation",
+  "uprightGenerationInputImages": 0,
+  "nativeIconsReviewed": 63,
+  "allNativeSourceHashesMatch": true,
+  "rotationDegreesClockwise": -18,
+  "rigidTransformVerified": true,
+  "uprightSourceUnchanged": true,
+  "alphaPreservedDuringCleanup": true,
+  "rotatedSubjectNotClipped": true,
+  "sizeReview": [
+    32,
+    64
+  ]
+}

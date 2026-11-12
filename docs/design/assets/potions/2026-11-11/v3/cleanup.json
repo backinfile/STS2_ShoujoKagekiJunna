@@ -1,0 +1,59 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "originals_preserved": true,
+  "dimensionsPreservedDuringCleanup": true,
+  "vae": "Flux2 VAE",
+  "residual": "LatentR R_ema",
+  "assets": [
+    {
+      "key": "bottled_arrow_rain",
+      "source": "docs/design/assets/potions/2026-11-11/v3/originals/bottled_arrow_rain.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/v3/cleaned-native/bottled_arrow_rain.png",
+      "file": "docs/design/assets/potions/2026-11-11/v3/icons/bottled_arrow_rain.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "3e75f6bd8b79d42603fdd41787e6bfe160e0712979958ddc4b404fdf3c0f0625",
+      "cleaned_sha256": "88fd9bfa352f40de3c1092760f0e0a3375ce61ec2f4f4ea77705d5d57e3913b3",
+      "sha256": "98a1ff7accbd44c0f23baf72184ad83ec4277ba08c128a3cc0937810c8e7a626",
+      "visibleRgbMeanAbsoluteChange": 0.0,
+      "seconds": 3.656
+    },
+    {
+      "key": "sports_drink",
+      "source": "docs/design/assets/potions/2026-11-11/v3/originals/sports_drink.png",
+      "cleanedNative": "docs/design/assets/potions/2026-11-11/v3/cleaned-native/sports_drink.png",
+      "file": "docs/design/assets/potions/2026-11-11/v3/icons/sports_drink.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "source_sha256": "5d4bcbf5c9262d5ecb1743d1a841a09016840e2391b30b906b134dae8007d97c",
+      "cleaned_sha256": "08ecc865ba8201c5744de31973c60080572094a90f2fb81b3cc9c231809f09b3",
+      "sha256": "df56ef22cc2d34bb333beb900cc33134edf02cdca61eb7bccc995222519af765",
+      "visibleRgbMeanAbsoluteChange": 0.0,
+      "seconds": 3.047
+    }
+  ]
+}

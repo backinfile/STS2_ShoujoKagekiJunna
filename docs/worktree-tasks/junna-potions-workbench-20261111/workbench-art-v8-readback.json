@@ -1,0 +1,54 @@
+{
+  "entity": {
+    "collection": "fitPool",
+    "uid": "junna_potion_rare_arrows_20261111",
+    "entity": {
+      "uid": "junna_potion_rare_arrows_20261111",
+      "id": "FIT_POTION_JP03",
+      "name": "箭雨药水",
+      "theme": "职业药水",
+      "text": "打出你的所有箭矢。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "potion-arrow-rain-20261111-v8",
+      "cardIds": [],
+      "notes": "“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP03",
+        "rarity": "稀有",
+        "rarityValue": "Rare",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "箭矢",
+        "status": "draft",
+        "nameStatus": "已命名",
+        "artStatus": "已绘制",
+        "artDirection": "从零生成实体箭头形玻璃药瓶，瓶口、瓶颈与短木塞保持同轴，瓶沿与木塞顶面的透视方向一致；整瓶向右倾斜，保留尖角、侧壁、厚玻璃底、紫色药液、水平液面与上方空腔。",
+        "namingRationale": "采用常用名词“箭雨”，对应一次打出所有箭矢；“药水”沿用本体常见的消耗品命名。"
+      },
+      "artSource": {
+        "kind": "generated",
+        "tool": "built-in image_gen",
+        "date": "2026-11-11",
+        "iteration": 8,
+        "generationMode": "from-scratch",
+        "inputImages": [],
+        "analysisPath": "docs/worktree-tasks/junna-potions-workbench-20261111/native-potion-icon-design.md",
+        "promptPath": "docs/design/assets/potions/2026-11-11/v8/generation-prompts.json",
+        "originalPath": "docs/design/assets/potions/2026-11-11/v8/originals/arrow_rain_potion.png",
+        "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v8/cleaned-native/arrow_rain_potion.png",
+        "file": "docs/design/assets/potions/2026-11-11/v8/icons/arrow_rain_potion.png",
+        "cleanupPath": "docs/design/assets/potions/2026-11-11/v8/cleanup.json"
+      }
+    },
+    "version": "10:439c3b3ed433f551d3a36e0bf375894bf89c4ea461fd2b75d7b2ed002f70e820",
+    "revision": 4984
+  },
+  "assets": {
+    "assets": {
+      "potion-arrow-rain-20261111-v8": "/assets/128095cac5ad964199b69c0a.png"
+    }
+  }
+}

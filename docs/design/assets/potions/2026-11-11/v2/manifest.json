@@ -1,0 +1,22 @@
+{
+  "icons": [
+    {
+      "key": "knowledge_potion",
+      "name": "知识药水",
+      "assetId": "potion-knowledge-20261111-v2",
+      "file": "docs/design/assets/potions/2026-11-11/v2/icons/knowledge_potion.png"
+    },
+    {
+      "key": "sports_drink",
+      "name": "运动饮料",
+      "assetId": "potion-sports-drink-20261111-v2",
+      "file": "docs/design/assets/potions/2026-11-11/v2/icons/sports_drink.png"
+    },
+    {
+      "key": "bottled_arrow_rain",
+      "name": "瓶装箭雨",
+      "assetId": "potion-bottled-arrow-rain-20261111-v2",
+      "file": "docs/design/assets/potions/2026-11-11/v2/icons/bottled_arrow_rain.png"
+    }
+  ]
+}

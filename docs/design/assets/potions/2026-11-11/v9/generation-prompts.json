@@ -1,0 +1,26 @@
+{
+  "tool": "built-in image_gen",
+  "generationMode": "from-scratch-upright-then-rigid-rotation",
+  "name": "箭雨药水",
+  "inputImages": [],
+  "prompt": "Use case: stylized-concept.\nGenerate one completely new hand-painted 2D fantasy potion inventory item from a blank canvas: an arrowhead-shaped glass flask filled with violet potion.\n\nPOSE IS STRICTLY UPRIGHT:\nThe bottle stands perfectly vertical in the center of the canvas. No leaning, no diagonal composition.\nUse a straight-on front view with a slightly elevated eye level just enough to see the opening ellipse. The pointed bottom, center of the body, center of the neck, center of the mouth and center of the cork all lie on the SAME VERTICAL CENTERLINE.\nThe left and right neck edges are VERTICAL. The long axes of the mouth ellipse, glass lip ellipse and cork top ellipse are HORIZONTAL and parallel. Cork sides are vertical. No bent neck, angled opening, tilted cork or off-center spout.\nThe body has approximately balanced shoulders and a centered lower point. Keep the entire bottle's vertical axis easy to verify.\n\nPhysical object:\nA substantial broad kite/arrowhead glass bottle, with recognizable pointed lower end, thick glass walls and a solid glass tip. This is a hollow vessel that can hold liquid. It has a short cylindrical neck, a thick rolled glass lip and a modest short brown cork inserted straight into the mouth.\nShow physical volume through the thick side edges, inner cavity, glass bottom, cork overlapping the rim and a few compact shading planes. Keep the front-view structure simple and coherent.\nMedium violet liquid fills roughly two thirds of the body, with a horizontal liquid surface, an empty cavity above and two small bubbles. Pale blue-gray glass, lavender reflections, dark plum liquid shadow, natural brown cork.\n\nStyle:\nCompact painted game-item artwork in the visual language of Slay the Spire 2 potions. Slightly irregular dark contour, broad economical color shapes, a few firm painted highlights and restrained texture. Material planes create depth. Not a flat arrow glyph, vector UI symbol, logo or photorealistic product render.\n\nOutput:\nOne full UPRIGHT bottle only, isolated on a genuinely TRANSPARENT SQUARE canvas with padding. No ground, cast shadow, glow, label, text, frame, contact sheet, arrows inside or other props.",
+  "steps": [
+    {
+      "step": 1,
+      "operation": "Generate upright bottle",
+      "output": "originals/arrow_rain_potion_upright.png"
+    },
+    {
+      "step": 2,
+      "operation": "Local Artifact Cleaner at original resolution",
+      "output": "cleaned-native/arrow_rain_potion_upright.png"
+    },
+    {
+      "step": 3,
+      "operation": "Rigid whole-image rotation, no regeneration",
+      "tool": "System.Drawing GDI+",
+      "degreesClockwise": 25,
+      "output": "cleaned-native/arrow_rain_potion.png"
+    }
+  ]
+}

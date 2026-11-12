@@ -1,0 +1,55 @@
+{
+  "entity": {
+    "collection": "fitPool",
+    "uid": "junna_potion_rare_arrows_20261111",
+    "entity": {
+      "uid": "junna_potion_rare_arrows_20261111",
+      "id": "FIT_POTION_JP03",
+      "name": "箭雨药水",
+      "theme": "职业药水",
+      "text": "打出你的所有箭矢。",
+      "original": "",
+      "source": "",
+      "sourceUrl": "",
+      "art": "potion-arrow-rain-20261111-v7",
+      "cardIds": [],
+      "notes": "“所有箭矢”按当前箭矢范围约定包含自己的箭矢牌与布置的箭矢，保留用户的“打出”表述。",
+      "draftStatus": "草稿",
+      "potionDesign": {
+        "id": "JP03",
+        "rarity": "稀有",
+        "rarityValue": "Rare",
+        "character": "星见纯那",
+        "characterId": "ShoujoKagekiJunna",
+        "system": "箭矢",
+        "status": "draft",
+        "nameStatus": "已命名",
+        "artStatus": "已绘制",
+        "artDirection": "从零生成具有实体容积的箭头形玻璃药瓶：保留尖角，三分之四视角展示正面、侧壁和厚玻璃底；圆筒瓶颈、环形瓶沿及嵌入的木塞，紫色药液具有水平液面和上部空腔，整体向右倾斜。",
+        "namingRationale": "采用常用名词“箭雨”，对应一次打出所有箭矢；“药水”沿用本体常见的消耗品命名。"
+      },
+      "artSource": {
+        "kind": "generated",
+        "tool": "built-in image_gen",
+        "date": "2026-11-11",
+        "iteration": 7,
+        "generationMode": "from-scratch",
+        "inputImages": [],
+        "styleStudyPath": "docs/design/assets/potions/2026-11-11/v7/native-material-study.png",
+        "analysisPath": "docs/worktree-tasks/junna-potions-workbench-20261111/native-potion-icon-design.md",
+        "promptPath": "docs/design/assets/potions/2026-11-11/v7/generation-prompts.json",
+        "originalPath": "docs/design/assets/potions/2026-11-11/v7/originals/arrow_rain_potion.png",
+        "cleanedNativePath": "docs/design/assets/potions/2026-11-11/v7/cleaned-native/arrow_rain_potion.png",
+        "file": "docs/design/assets/potions/2026-11-11/v7/icons/arrow_rain_potion.png",
+        "cleanupPath": "docs/design/assets/potions/2026-11-11/v7/cleanup.json"
+      }
+    },
+    "version": "9:781cacacb341b06d5694bbe375c09d03014ff9f378bcb09be14695d683fa3a85",
+    "revision": 4983
+  },
+  "assets": {
+    "assets": {
+      "potion-arrow-rain-20261111-v7": "/assets/94c8e67227b6e363bae82d70.png"
+    }
+  }
+}

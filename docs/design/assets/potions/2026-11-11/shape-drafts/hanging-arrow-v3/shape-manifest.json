@@ -1,0 +1,54 @@
+{
+  "name": "齐射药剂",
+  "stage": "bottle-shape-draft",
+  "runtimeResource": "ShoujoKagekiJunna/images/floating_arrow_c1.svg",
+  "runtimeLoader": "src/UI/Arrows/ArrowHud.cs",
+  "runtimeOutline": [
+    [
+      120,
+      2
+    ],
+    [
+      238,
+      134
+    ],
+    [
+      120,
+      413
+    ],
+    [
+      2,
+      134
+    ]
+  ],
+  "portraitWindow": [
+    [
+      120,
+      30
+    ],
+    [
+      216,
+      138
+    ],
+    [
+      120,
+      364
+    ],
+    [
+      24,
+      138
+    ]
+  ],
+  "scale": 0.44,
+  "theoreticalUpperPoint": [
+    128,
+    50
+  ],
+  "shoulderY": 108.08,
+  "lowerPoint": [
+    128,
+    230.84
+  ],
+  "mouth": "upper end",
+  "referenceSha256": "e97e7783cdae1b5b81af28b2f28d4e5cf271d9b174da92f2636843bb5003d3e2"
+}

@@ -1,0 +1,28 @@
+{
+  "tool": "System.Drawing GDI+",
+  "operation": "rigid whole-image rotation",
+  "degreesClockwise": 25.0,
+  "source": "docs/design/assets/potions/2026-11-11/v9/cleaned-native/arrow_rain_potion_upright.png",
+  "source_sha256": "bb0421aa5dbae220b5d4491cebd88460ceeeccd5e49fd8d8b7f8657bfae517af",
+  "output": "docs/design/assets/potions/2026-11-11/v9/cleaned-native/arrow_rain_potion.png",
+  "output_sha256": "252e3f505c1b761d31b4db044be84ce6675401daf92648df86e095fcc97ad631",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "outputSize": [
+    1675,
+    1675
+  ],
+  "affineMatrix": [
+    0.90630776,
+    0.4226182,
+    -0.4226182,
+    0.90630776,
+    534.22656,
+    4.2633667
+  ],
+  "transparentBackground": true,
+  "regenerated": false,
+  "cleanupAppliedBeforeRotation": true
+}

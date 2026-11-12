@@ -1,0 +1,540 @@
+{
+  "B01": [
+    {
+      "at": "2026-11-07T14:36:44.996Z",
+      "state": {
+        "run": {
+          "act": 1,
+          "floor": 8,
+          "ascension": 0
+        },
+        "round": 1,
+        "isPlayPhase": true,
+        "player": {
+          "hp": 50,
+          "block": 4,
+          "energy": 3,
+          "hand": [
+            {
+              "id": "JUNNA_FULL_DRAW",
+              "index": 0,
+              "name": "满弦射击+",
+              "cost": "1",
+              "description": "造成32点伤害。",
+              "targetType": "AnyEnemy"
+            },
+            {
+              "id": "JUNNA_STRIKE",
+              "index": 1,
+              "name": "打击",
+              "cost": "1",
+              "description": "造成6点伤害。",
+              "targetType": "AnyEnemy"
+            },
+            {
+              "id": "JUNNA_JA96",
+              "index": 2,
+              "name": "稳住阵脚",
+              "cost": "1",
+              "description": "受到攻击伤害后，所有箭矢加速1回合。",
+              "targetType": "Self"
+            }
+          ],
+          "status": [
+            {
+              "id": "JUNNA_ENERGY_RESERVE",
+              "name": "能量保留",
+              "amount": 2
+            },
+            {
+              "id": "JUNNA_NEXT_CARD_BONUS",
+              "name": "练习成果",
+              "amount": 2
+            }
+          ]
+        },
+        "enemies": [
+          {
+            "entityId": "SEWER_CLAM_0",
+            "combatId": 1,
+            "name": "下水道蚌",
+            "hp": 54,
+            "block": 0
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-11-07T14:36:46.362Z",
+      "state": {
+        "run": {
+          "act": 1,
+          "floor": 8,
+          "ascension": 0
+        },
+        "round": 1,
+        "isPlayPhase": true,
+        "player": {
+          "hp": 50,
+          "block": 4,
+          "energy": 2,
+          "hand": [
+            {
+              "id": "JUNNA_FULL_DRAW",
+              "index": 0,
+              "name": "满弦射击+",
+              "cost": "1",
+              "description": "造成32点伤害。",
+              "targetType": "AnyEnemy"
+            },
+            {
+              "id": "JUNNA_JA96",
+              "index": 1,
+              "name": "稳住阵脚",
+              "cost": "1",
+              "description": "受到攻击伤害后，所有箭矢加速1回合。",
+              "targetType": "Self"
+            }
+          ],
+          "status": [
+            {
+              "id": "JUNNA_ENERGY_RESERVE",
+              "name": "能量保留",
+              "amount": 2
+            }
+          ]
+        },
+        "enemies": [
+          {
+            "entityId": "SEWER_CLAM_0",
+            "combatId": 1,
+            "name": "下水道蚌",
+            "hp": 46,
+            "block": 0
+          }
+        ]
+      }
+    }
+  ],
+  "B02": [
+    {
+      "at": "2026-11-07T14:42:25.780Z",
+      "state": {
+        "run": {
+          "act": 1,
+          "floor": 12,
+          "ascension": 0
+        },
+        "round": 2,
+        "isPlayPhase": true,
+        "player": {
+          "hp": 20,
+          "block": 0,
+          "energy": 3,
+          "hand": [
+            {
+              "id": "JUNNA_JG36",
+              "index": 0,
+              "name": "挥刃练习",
+              "cost": "1",
+              "description": "造成10点伤害。 你打出的下一张牌获得2点伤害加成。",
+              "targetType": "AnyEnemy"
+            },
+            {
+              "id": "JUNNA_DEFEND",
+              "index": 1,
+              "name": "防御",
+              "cost": "1",
+              "description": "获得3点格挡。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JH19",
+              "index": 2,
+              "name": "双星",
+              "cost": "1",
+              "description": "获得3点格挡。 本回合下一张非能力牌会消耗能量再打出1次。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_FULL_DRAW",
+              "index": 3,
+              "name": "满弦射击+",
+              "cost": "1",
+              "description": "造成32点伤害。",
+              "targetType": "AnyEnemy"
+            },
+            {
+              "id": "JUNNA_JA96",
+              "index": 4,
+              "name": "稳住阵脚",
+              "cost": "1",
+              "description": "受到攻击伤害后，所有箭矢加速1回合。",
+              "targetType": "Self"
+            }
+          ],
+          "status": [
+            {
+              "id": "FRAIL_POWER",
+              "name": "脆弱",
+              "amount": 1
+            }
+          ]
+        },
+        "enemies": [
+          {
+            "entityId": "TWO_TAILED_RAT_0",
+            "combatId": 1,
+            "name": "双尾鼠",
+            "hp": 7,
+            "block": 0
+          },
+          {
+            "entityId": "TWO_TAILED_RAT_1",
+            "combatId": 2,
+            "name": "双尾鼠",
+            "hp": 4,
+            "block": 0
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-11-07T14:42:50.678Z",
+      "state": {
+        "run": {
+          "act": 1,
+          "floor": 12,
+          "ascension": 0
+        },
+        "round": 2,
+        "isPlayPhase": true,
+        "player": {
+          "hp": 20,
+          "block": 3,
+          "energy": 0,
+          "hand": [
+            {
+              "id": "JUNNA_DEFEND",
+              "index": 0,
+              "name": "防御",
+              "cost": "1",
+              "description": "获得3点格挡。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_FULL_DRAW",
+              "index": 1,
+              "name": "满弦射击+",
+              "cost": "1",
+              "description": "造成32点伤害。",
+              "targetType": "AnyEnemy"
+            },
+            {
+              "id": "JUNNA_JA96",
+              "index": 2,
+              "name": "稳住阵脚",
+              "cost": "1",
+              "description": "受到攻击伤害后，所有箭矢加速1回合。",
+              "targetType": "Self"
+            }
+          ],
+          "status": [
+            {
+              "id": "FRAIL_POWER",
+              "name": "脆弱",
+              "amount": 1
+            },
+            {
+              "id": "JUNNA_NEXT_CARD_BONUS",
+              "name": "练习成果",
+              "amount": 4
+            }
+          ]
+        },
+        "enemies": [
+          {
+            "entityId": "TWO_TAILED_RAT_0",
+            "combatId": 2,
+            "name": "双尾鼠",
+            "hp": 4,
+            "block": 0
+          }
+        ]
+      }
+    }
+  ],
+  "B04": [
+    {
+      "at": "2026-11-07T14:49:43.068Z",
+      "state": {
+        "run": {
+          "act": 1,
+          "floor": 15,
+          "ascension": 0
+        },
+        "round": 1,
+        "isPlayPhase": true,
+        "player": {
+          "hp": 19,
+          "block": 0,
+          "energy": 4,
+          "hand": [
+            {
+              "id": "JUNNA_DEFEND",
+              "index": 0,
+              "name": "防御",
+              "cost": "1",
+              "description": "获得5点格挡。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JA96",
+              "index": 1,
+              "name": "稳住阵脚",
+              "cost": "1",
+              "description": "受到攻击伤害后，所有箭矢加速1回合。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JH19",
+              "index": 2,
+              "name": "双星",
+              "cost": "1",
+              "description": "获得4点格挡。 本回合下一张非能力牌会消耗能量再打出1次。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JK82B",
+              "index": 3,
+              "name": "新知",
+              "cost": "0",
+              "description": "知识。 抽2张牌。 消耗。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JH26",
+              "index": 4,
+              "name": "余星",
+              "cost": "0",
+              "description": "获得4点格挡。 可保留1[energy_icon_small.png]到下回合。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JK82",
+              "index": 5,
+              "name": "学无止境",
+              "cost": "0",
+              "description": "知识。 获得[energy_icon_small.png][energy_icon_small.png]。 升级时单独获得一张新知。 可多次升级。 消耗。",
+              "targetType": "AnyEnemy"
+            }
+          ],
+          "status": [
+            {
+              "id": "JUNNA_ENERGY_RESERVE",
+              "name": "能量保留",
+              "amount": 1
+            }
+          ]
+        },
+        "enemies": [
+          {
+            "entityId": "PHANTASMAL_GARDENER_0",
+            "combatId": 1,
+            "name": "花园幽灵鳗",
+            "hp": 28,
+            "block": 0
+          },
+          {
+            "entityId": "PHANTASMAL_GARDENER_1",
+            "combatId": 2,
+            "name": "花园幽灵鳗",
+            "hp": 29,
+            "block": 0
+          },
+          {
+            "entityId": "PHANTASMAL_GARDENER_2",
+            "combatId": 3,
+            "name": "花园幽灵鳗",
+            "hp": 27,
+            "block": 0
+          },
+          {
+            "entityId": "PHANTASMAL_GARDENER_3",
+            "combatId": 4,
+            "name": "花园幽灵鳗",
+            "hp": 31,
+            "block": 0
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-11-07T14:50:14.758Z",
+      "state": {
+        "run": {
+          "act": 1,
+          "floor": 15,
+          "ascension": 0
+        },
+        "round": 1,
+        "isPlayPhase": true,
+        "player": {
+          "hp": 19,
+          "block": 0,
+          "energy": 6,
+          "hand": [
+            {
+              "id": "JUNNA_DEFEND",
+              "index": 0,
+              "name": "防御",
+              "cost": "1",
+              "description": "获得5点格挡。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JA96",
+              "index": 1,
+              "name": "稳住阵脚",
+              "cost": "1",
+              "description": "受到攻击伤害后，所有箭矢加速1回合。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JH19",
+              "index": 2,
+              "name": "双星",
+              "cost": "1",
+              "description": "获得4点格挡。 本回合下一张非能力牌会消耗能量再打出1次。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_JH26",
+              "index": 3,
+              "name": "余星",
+              "cost": "0",
+              "description": "获得4点格挡。 可保留1[energy_icon_small.png]到下回合。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_WARM_UP",
+              "index": 4,
+              "name": "准备活动",
+              "cost": "1",
+              "description": "获得7点格挡。 你打出的下一张牌获得2点伤害加成。",
+              "targetType": "Self"
+            },
+            {
+              "id": "JUNNA_DEFEND",
+              "index": 5,
+              "name": "防御",
+              "cost": "1",
+              "description": "获得5点格挡。",
+              "targetType": "Self"
+            }
+          ],
+          "status": [
+            {
+              "id": "JUNNA_ENERGY_RESERVE",
+              "name": "能量保留",
+              "amount": 1
+            }
+          ]
+        },
+        "enemies": [
+          {
+            "entityId": "PHANTASMAL_GARDENER_0",
+            "combatId": 1,
+            "name": "花园幽灵鳗",
+            "hp": 28,
+            "block": 0
+          },
+          {
+            "entityId": "PHANTASMAL_GARDENER_1",
+            "combatId": 2,
+            "name": "花园幽灵鳗",
+            "hp": 29,
+            "block": 0
+          },
+          {
+            "entityId": "PHANTASMAL_GARDENER_2",
+            "combatId": 3,
+            "name": "花园幽灵鳗",
+            "hp": 27,
+            "block": 0
+          },
+          {
+            "entityId": "PHANTASMAL_GARDENER_3",
+            "combatId": 4,
+            "name": "花园幽灵鳗",
+            "hp": 31,
+            "block": 0
+          }
+        ]
+      }
+    }
+  ],
+  "definitions": [
+    {
+      "id": "JK82",
+      "name": "学无止境",
+      "target": "AnyEnemy",
+      "damageCapable": false,
+      "text": "知识。获得2点能量。升级时单独获得一张新知。可多次升级。消耗。",
+      "values": [
+        {
+          "name": "N0",
+          "base": 2,
+          "upgraded": 3
+        }
+      ]
+    },
+    {
+      "id": "JA76",
+      "name": "横扫",
+      "target": "AllEnemies",
+      "damageCapable": true,
+      "text": "对所有敌人造成12点伤害。分别打出一张造成等量伤害的流星。",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 12,
+          "upgraded": 16
+        }
+      ]
+    },
+    {
+      "id": "JA81",
+      "name": "连射",
+      "target": "AnyEnemy",
+      "damageCapable": true,
+      "text": "造成10点伤害。打出一张造成等量伤害的流星。",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 10,
+          "upgraded": 14
+        }
+      ]
+    },
+    {
+      "id": "JA81B",
+      "name": "流星",
+      "target": "AnyEnemy",
+      "damageCapable": true,
+      "text": "造成X点伤害。消耗。",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 0,
+          "upgraded": 0
+        },
+        {
+          "name": "Turns",
+          "base": 2,
+          "upgraded": 1
+        }
+      ]
+    }
+  ]
+}

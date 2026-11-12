@@ -1,0 +1,109 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "mode": "local-only",
+  "model": "LatentR + FLUX.2-VAE",
+  "weights_sha256": "d28ef8792fc1ab5ba68f0d2ef9968378d98faa4c71e127c4124c68bb5c61d309",
+  "strength": 0.25,
+  "precision": "torch.bfloat16",
+  "device": "cuda",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.39.0",
+  "original_reference": "ShoujoKagekiJunna/images/character_select.png",
+  "reference_sha256": "9246307ce958a993af2d882fc7752b539c59373bc6f16fa49a8903cb33aecfd1",
+  "generation_mode": "built-in imagegen",
+  "assets": [
+    {
+      "id": "01-full-draw",
+      "name": "满弓瞄准",
+      "source": "docs/worktree-tasks/character-select-cool-variants-20261105/originals/01-full-draw.png",
+      "file": "docs/worktree-tasks/character-select-cool-variants-20261105/cleaned/01-full-draw.png",
+      "comparison": "docs/worktree-tasks/character-select-cool-variants-20261105/comparisons/01-full-draw.png",
+      "size": [
+        1672,
+        941
+      ],
+      "source_sha256": "2a64e37eb551203401748e4d95081b4ebaf25b8e4d20cdb3a7b4dff04fed9da0",
+      "sha256": "ab069170865e84322e8effb7782d7a6e48e6b04603a4e9eb062736ad785df669",
+      "strength": 0.25,
+      "dimensions_unchanged": true,
+      "alpha_identical": true,
+      "originals_preserved": true,
+      "rgb_mean_absolute_change": 1.9557,
+      "seconds": 3.8
+    },
+    {
+      "id": "02-aerial-shot",
+      "name": "凌空放箭",
+      "source": "docs/worktree-tasks/character-select-cool-variants-20261105/originals/02-aerial-shot.png",
+      "file": "docs/worktree-tasks/character-select-cool-variants-20261105/cleaned/02-aerial-shot.png",
+      "comparison": "docs/worktree-tasks/character-select-cool-variants-20261105/comparisons/02-aerial-shot.png",
+      "size": [
+        1672,
+        941
+      ],
+      "source_sha256": "a2b93e47ef033d4a32d3e85e6fe6a5ff6fddb941301098869e1bb85ba26a9860",
+      "sha256": "9d5be39d0239b59a6d90b999bc82db90e9b49183970ce116d350f6a47b4f4981",
+      "strength": 0.25,
+      "dimensions_unchanged": true,
+      "alpha_identical": true,
+      "originals_preserved": true,
+      "rgb_mean_absolute_change": 1.7857,
+      "seconds": 3.27
+    },
+    {
+      "id": "03-star-orbit",
+      "name": "星轨环绕",
+      "source": "docs/worktree-tasks/character-select-cool-variants-20261105/originals/03-star-orbit.png",
+      "file": "docs/worktree-tasks/character-select-cool-variants-20261105/cleaned/03-star-orbit.png",
+      "comparison": "docs/worktree-tasks/character-select-cool-variants-20261105/comparisons/03-star-orbit.png",
+      "size": [
+        1672,
+        941
+      ],
+      "source_sha256": "8ce64e0178cb8b077fab32568788a49c12ff712b2682b07b8535e4af6f3509a7",
+      "sha256": "565cdac6f91ad3d3f7c6300a4e526ef164084909af53c089e5f72c9fde5f9d93",
+      "strength": 0.25,
+      "dimensions_unchanged": true,
+      "alpha_identical": true,
+      "originals_preserved": true,
+      "rgb_mean_absolute_change": 2.0343,
+      "seconds": 3.25
+    },
+    {
+      "id": "04-stage-backlight",
+      "name": "舞台逆光",
+      "source": "docs/worktree-tasks/character-select-cool-variants-20261105/originals/04-stage-backlight.png",
+      "file": "docs/worktree-tasks/character-select-cool-variants-20261105/cleaned/04-stage-backlight.png",
+      "comparison": "docs/worktree-tasks/character-select-cool-variants-20261105/comparisons/04-stage-backlight.png",
+      "size": [
+        1672,
+        941
+      ],
+      "source_sha256": "dd2fc17b6eb6cd880657d64d348ed0af69e4139c629c12e86b7f29fe670548fb",
+      "sha256": "29cf4ad40d6a8f6263442524da6944486afe6cd8f69b03f243872235aae78ab2",
+      "strength": 0.25,
+      "dimensions_unchanged": true,
+      "alpha_identical": true,
+      "originals_preserved": true,
+      "rgb_mean_absolute_change": 1.869,
+      "seconds": 3.25
+    }
+  ],
+  "visual_review": {
+    "status": "passed",
+    "scope": [
+      "face and glasses",
+      "hair and bell",
+      "hands and bow grip",
+      "continuous bowstring",
+      "costume and cape edges",
+      "dark left-side UI space"
+    ],
+    "review_scale": "native pixels via comparisons plus complete pictures",
+    "aerial_arrow_direction": "revised to upper right with continuous bowstring restored"
+  },
+  "tiling": true,
+  "compile": false,
+  "resize": false
+}

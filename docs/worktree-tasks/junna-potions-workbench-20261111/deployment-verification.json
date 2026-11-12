@@ -1,0 +1,28 @@
+{
+  "publicNavigation": true,
+  "editorNavigation": true,
+  "removedReserveAndTrashTabs": true,
+  "cardCategorySelector": true,
+  "existingGroupReserveFixPreserved": true,
+  "revision": 4894,
+  "potions": [
+    {
+      "uid": "junna_potion_common_knowledge_20261111",
+      "name": "知识药水",
+      "text": "从3组随机知识牌中选择1组加入你的手牌。这些牌在本回合可以免费打出。",
+      "art": "potion-knowledge-20261111-v2"
+    },
+    {
+      "uid": "junna_potion_uncommon_damage_bonus_20261111",
+      "name": "运动饮料",
+      "text": "所有手牌获得9点伤害加成。",
+      "art": "potion-sports-drink-20261111-v3"
+    },
+    {
+      "uid": "junna_potion_rare_arrows_20261111",
+      "name": "齐射药剂",
+      "text": "打出你的所有箭矢。",
+      "art": "potion-bottled-arrow-rain-20261111-v3"
+    }
+  ]
+}
