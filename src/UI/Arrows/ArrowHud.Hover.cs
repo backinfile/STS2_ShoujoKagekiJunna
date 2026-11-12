@@ -231,7 +231,7 @@ public partial class ArrowHud
             AddObstacle(creature.Hitbox.GetGlobalRect().GrowIndividual(24, 110, 24, 12));
         }
         int creatureObstacles = obstacleCount;
-        foreach (var set in NGame.Instance!.HoverTipsContainer.GetChildren().OfType<NHoverTipSet>())
+        foreach (var set in NGame.Instance?.HoverTipsContainer?.GetChildren().OfType<NHoverTipSet>() ?? [])
             if (set.IsVisibleInTree())
                 foreach (var tip in set.GetChildren().OfType<Control>())
                     if (tip.IsVisibleInTree() && tip.Size.X > 0 && tip.Size.Y > 0)
