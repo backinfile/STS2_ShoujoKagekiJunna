@@ -11,8 +11,8 @@ namespace ShoujoKagekiJunna.Models;
 public abstract class JunnaGem(int healing, string icon) : CustomRelicModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
-    public override string PackedIconPath => JunnaMod.ResourceRoot + $"images/relics/{icon}.svg";
-    protected override string PackedIconOutlinePath => JunnaMod.ResourceRoot + $"images/relics/{icon}_outline.svg";
+    public override string PackedIconPath => JunnaMod.ResourceRoot + $"images/relics/{icon}.png";
+    protected override string PackedIconOutlinePath => JunnaMod.ResourceRoot + $"images/relics/{icon}_outline.png";
     protected override string BigIconPath => PackedIconPath;
 
     public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)

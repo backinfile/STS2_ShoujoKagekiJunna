@@ -1,0 +1,30 @@
+{
+  "godot": "4.5.1-m.12 (custom_build)",
+  "importedTextures": [
+    {
+      "height": 128,
+      "path": "res://ShoujoKagekiJunna/images/relics/green_gem.png",
+      "transparentCorner": true,
+      "width": 128
+    },
+    {
+      "height": 128,
+      "path": "res://ShoujoKagekiJunna/images/relics/burning_gem.png",
+      "transparentCorner": true,
+      "width": 128
+    },
+    {
+      "height": 128,
+      "path": "res://ShoujoKagekiJunna/images/relics/green_gem_outline.png",
+      "transparentCorner": true,
+      "width": 128
+    },
+    {
+      "height": 128,
+      "path": "res://ShoujoKagekiJunna/images/relics/burning_gem_outline.png",
+      "transparentCorner": true,
+      "width": 128
+    }
+  ],
+  "pckRoundTrip": true
+}
