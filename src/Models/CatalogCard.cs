@@ -26,7 +26,8 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
          ..(Definition.Ethereal ? new[] { CardKeyword.Ethereal } : [])];
     protected override IEnumerable<DynamicVar> CanonicalVars => Definition.Values.Select(n => n.Name switch
     {
-        "Damage" => (DynamicVar)new DamageVar(n.Base, ValueProp.Move),
+        "Damage" => (DynamicVar)new DamageVar(n.Base,
+            Definition.CardType == CardType.Power ? ValueProp.Unpowered : ValueProp.Move),
         "Block" => new BlockVar(n.Base, ValueProp.Move),
         "Repeat" => new RepeatVar(n.Base),
         _ => new DynamicVar(n.Name, n.Base)
