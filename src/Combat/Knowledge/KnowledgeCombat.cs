@@ -86,6 +86,7 @@ public static class KnowledgeCombat
         if (members == null) return [acquired];
         using var single = SingleCard();
         var gained = new List<CardModel> { acquired };
+        var added = new List<CardPileAddResult>();
         var offered = (selected ?? []).ToList();
         foreach (var (model, count) in members)
             for (int i = model.Id == acquired.Id ? 1 : 0; i < count; i++)
@@ -98,12 +99,13 @@ public static class KnowledgeCombat
                 if (destination == PileType.Deck)
                 {
                     var result = await CardPileCmd.Add(card, PileType.Deck);
+                    added.Add(result);
                     if (result.success && result.cardAdded.Pile == acquired.Pile) gained.Add(result.cardAdded);
                 }
                 else
                 {
-                    await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner,
-                        destination == PileType.Draw ? CardPilePosition.Random : CardPilePosition.Bottom);
+                    added.Add(await CardPileCmd.AddGeneratedCardToCombat(card, destination, acquired.Owner,
+                        destination == PileType.Draw ? CardPilePosition.Random : CardPilePosition.Bottom));
                     if (card.Pile?.Type == destination) gained.Add(card);
                 }
             }
@@ -120,6 +122,7 @@ public static class KnowledgeCombat
             foreach (var card in ordered) deck.AddInternal(card, index++, silent: true);
             deck.InvokeContentsChanged();
         }
+        await CardActions.PreviewAdded(added, destination);
         return gained;
     }
 
@@ -204,12 +207,14 @@ public static class KnowledgeCombat
     private static async Task GrantUpgrade(CardModel card, int previous, int current)
     {
         using var single = SingleCard();
+        var added = new List<CardPileAddResult>();
         for (int i = previous; i < current; i++)
         {
             if (card.Pile?.Type == PileType.Deck)
-                await CardPileCmd.Add(card.Owner.RunState.CreateCard(CardCatalog.Model("JK82B"), card.Owner), PileType.Deck);
+                added.Add(await CardPileCmd.Add(card.Owner.RunState.CreateCard(CardCatalog.Model("JK82B"), card.Owner), PileType.Deck));
             else if (card.Owner.PlayerCombatState != null && !card.HasBeenRemovedFromState)
                 await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw, CardPilePosition.Random);
         }
+        await CardActions.PreviewAdded(added, PileType.Deck);
     }
 }

@@ -22,7 +22,7 @@ public partial class ArrowHud
         .Select(pair => (pair.Key.Card, pair.Value.Frame));
 
     private const int PreviewCapacity = 5;
-    private const float PreviewScale = .9f, PreviewMargin = 24;
+    private const float PreviewScale = .9f, MinimumPreviewScale = .75f, PreviewMargin = 24;
     private Control? _hoverPreview, _hoverAnchor, _dismissedAnchor;
     private Label? _previewCount;
     private Creature? _previewTarget;
@@ -148,7 +148,7 @@ public partial class ArrowHud
         }
         _hoverPreview = new Control { Name = "JunnaArrowHoverPreview", MouseFilter = MouseFilterEnum.Stop, ZIndex = 20, Visible = false };
         AddChild(_hoverPreview);
-        _previewCount = MakeLabel("CardIndex", Vector2.Zero, new(110, 28), 18);
+        _previewCount = MakeLabel("CardIndex", Vector2.Zero, new(110, 28), 22);
         _previewCount.AddThemeColorOverride("font_color", new Color("D0B775"));
         _previewCount.ZIndex = 30;
         _hoverPreview.AddChild(_previewCount);
@@ -277,9 +277,10 @@ public partial class ArrowHud
         var available = new Rect2(new Vector2(PreviewMargin, 96),
             new Vector2(canvas.X - PreviewMargin * 2, canvas.Y * .8f - 96 - PreviewMargin));
         float overheadBottom = anchorRect.Position.Y - 110 - PreviewMargin;
+        bool fitsOverhead = false;
         if (_previewTarget != null)
         {
-            // Creature previews belong above the intent, even when the fan needs to shrink to fit.
+            // Prefer the space above the intent only while the cards remain readable.
             float left = anchorRect.GetCenter().X - (bounds.Size.X + PreviewMargin) * .5f;
             float right = left + bounds.Size.X + PreviewMargin;
             for (int i = creatureObstacles; i < obstacleCount; i++)
@@ -290,11 +291,15 @@ public partial class ArrowHud
             }
             float fit = Math.Min(1, Math.Min((available.Size.X - PreviewMargin) / bounds.Size.X,
                 Math.Max(1, overheadBottom - available.Position.Y - PreviewMargin - counterHeight) / bounds.Size.Y));
-            bounds = new(bounds.Position * fit, bounds.Size * fit);
-            for (int i = 0; i < _previewCards.Count; i++)
+            fitsOverhead = scale * fit >= Math.Min(scale, MinimumPreviewScale);
+            if (fitsOverhead)
             {
-                positions[i] *= fit;
-                scales[i] *= fit;
+                bounds = new(bounds.Position * fit, bounds.Size * fit);
+                for (int i = 0; i < _previewCards.Count; i++)
+                {
+                    positions[i] *= fit;
+                    scales[i] *= fit;
+                }
             }
         }
         var size = bounds.Size + new Vector2(PreviewMargin, PreviewMargin + counterHeight);
@@ -306,14 +311,16 @@ public partial class ArrowHud
             new(center.X - size.X * .5f, anchorRect.End.Y + 24),
             new(anchorRect.Position.X - size.X - 24, center.Y - size.Y * .5f),
             new(anchorRect.End.X + 24, center.Y - size.Y * .5f),
-            new(center.X - size.X * .5f, available.Position.Y)
+            new(center.X - size.X * .5f, available.Position.Y),
+            new(available.Position.X, available.Position.Y),
+            new(available.End.X - size.X, available.Position.Y)
         ];
         float bestScore = float.PositiveInfinity;
         var best = available.Position;
         foreach (var candidate in candidates)
         {
             var position = candidate.Clamp(available.Position, maximum);
-            if (_previewTarget != null && position.Y + size.Y > overheadBottom + 1) continue;
+            if (fitsOverhead && position.Y + size.Y > overheadBottom + 1) continue;
             var rect = new Rect2(position, size);
             var overlap = rect.Intersection(anchorRect);
             float score = overlap.Size.X * overlap.Size.Y * 3 + position.DistanceTo(candidate) * 2;

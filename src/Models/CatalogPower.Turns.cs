@@ -68,7 +68,10 @@ public abstract partial class CatalogPower
         {
             switch (DesignId)
             {
-                case "A": await CardActions.Generate(Owner.Player!, "B", grant.V("Cards"), PileType.Draw, position: CardPilePosition.Random); break;
+                case "A":
+                    using (KnowledgeCombat.SingleCard())
+                        await CardPileCmd.AddToCombatAndPreview<JunnaCardB>(Owner, PileType.Draw, grant.V("Cards"), Owner.Player, CardPilePosition.Random);
+                    break;
                 case "JK67":
                     DamageModifiers.AddMany(ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card), grant.V("Bonus"));
                     break;

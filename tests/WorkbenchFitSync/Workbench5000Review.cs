@@ -108,7 +108,7 @@ public sealed partial class Workbench5000Command
                 await Play(await Card(player, "JA38"));
                 Expect(follower.Pile?.Type == PileType.Discard && ArrowCombat.Find(follower) == null, "Native blocked auto play moves to result pile");
             });
-            await Case("burning gem three healing", async () =>
+            await Case("burning gem max hp growth", async () =>
             {
                 var originals = player.Relics.OfType<JunnaGem>().ToArray();
                 var deck = player.Deck.Cards.ToHashSet();
@@ -116,21 +116,22 @@ public sealed partial class Workbench5000Command
                 var gem = await RelicCmd.Obtain(ModelDb.Relic<JunnaBurningGem>().ToMutable(), player);
                 try
                 {
-                    Expect(gem.DynamicDescription.GetFormattedText().Contains("回复3点生命"), "Localization matches three");
+                    Expect(gem.DynamicDescription.GetFormattedText().Contains("最大生命值提升2"), "Localization matches max hp growth");
+                    int originalMax = player.Creature.MaxHp;
                     await CreatureCmd.SetCurrentHp(player.Creature, 20);
                     var card = player.RunState.CreateCard(CardCatalog.Model("JB01"), player);
                     await CardPileCmd.Add(card, PileType.Deck, skipVisuals: true);
-                    Expect(player.Creature.CurrentHp == 23, "Single gain heals three");
+                    Expect(player.Creature.CurrentHp == 22 && player.Creature.MaxHp == originalMax + 2, "Single gain increases max hp by two");
                     await CardPileCmd.RemoveFromDeck(card, showPreview: false);
-                    Expect(player.Creature.CurrentHp == 26, "Single loss heals three");
+                    Expect(player.Creature.CurrentHp == 24 && player.Creature.MaxHp == originalMax + 4, "Single loss increases max hp by two");
                     var batch = Enumerable.Range(0, 3).Select(_ => player.RunState.CreateCard(CardCatalog.Model("JB01"), player)).ToArray();
                     await CardPileCmd.Add(batch, player.Deck, skipVisuals: true);
-                    Expect(player.Creature.CurrentHp == 35, "Three gains heal nine");
+                    Expect(player.Creature.CurrentHp == 30 && player.Creature.MaxHp == originalMax + 10, "Three gains increase max hp by six");
                     await CardPileCmd.RemoveFromDeck(batch, showPreview: false);
-                    Expect(player.Creature.CurrentHp == 44, "Three losses heal nine");
-                    await CreatureCmd.SetCurrentHp(player.Creature, player.Creature.MaxHp - 1);
+                    Expect(player.Creature.CurrentHp == 36 && player.Creature.MaxHp == originalMax + 16, "Three losses increase max hp by six");
+                    await CreatureCmd.SetCurrentHp(player.Creature, player.Creature.MaxHp);
                     await CardPileCmd.Add(player.RunState.CreateCard(CardCatalog.Model("JB01"), player), PileType.Deck, skipVisuals: true);
-                    Expect(player.Creature.CurrentHp == player.Creature.MaxHp, "Native healing clamps to max hp");
+                    Expect(player.Creature.CurrentHp == player.Creature.MaxHp, "Native max hp gain also heals at full health");
                 }
                 finally
                 {
