@@ -276,3 +276,8 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 尚未合并 main，三个任务提交准备完成后统一请求确认。
 - 若批准清理，先将本次构建包、摘要、哈希、录像、截图和定向报告保留到 Core 原检出的 artifacts/task-deliverables/simplify-runtime-20261112/，再删除本次三个工作树、任务分支及临时游戏目录。
 - 若仅批准合并，则保留工作树、任务分支和验证产物。
+
+
+## 同步本地 main
+
+提交后发现原 main 前进到 708cf7e（独立关联列表切换主牌修复），已在任务分支合并。新增内容只涉及工作台领域源码、对应测试与该任务记录；运行库、资源和已验证包保持一致。工作台领域定向测试 24 项通过。集成目标仍为开始时捕获的 main，原起点 c4750a8 保留。
