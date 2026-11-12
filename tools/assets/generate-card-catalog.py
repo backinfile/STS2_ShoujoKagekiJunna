@@ -376,6 +376,7 @@ def main():
             if cid == 'U_CARD_010':
                 powers[f'JUNNA_{cid}_POWER.smartDescription'] += '{Repetition}'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
+        powers['JUNNA_JK235_POWER.smartDescription'] = '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害。'
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         relics_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/relics.json'

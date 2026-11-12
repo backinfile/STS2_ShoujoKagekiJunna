@@ -22,6 +22,7 @@ public partial class KnowledgeHoverLinks : Control
     private const float ReceiverGap = 14;
     private readonly record struct LinkTarget(Vector2 Point, Vector2 CountPosition, int Count, bool Highlight, Vector2 Normal);
     private readonly List<Rect2> _tipBounds = [];
+    private readonly Dictionary<Texture2D, Vector2[]> _iconBorders = [];
     private CardModel? _source;
     private Vector2[] _border = [];
     private float _frameWidth;
@@ -101,7 +102,7 @@ public partial class KnowledgeHoverLinks : Control
         if (!button.IsVisibleInTree()) return;
         int count = pile.Cards.Count(related);
         if (count == 0) return;
-        AddTarget(button, count: count);
+        AddTarget(button.GetNode<TextureRect>("Icon"), count: count);
     }
 
     private Vector2 Point(Control control, Vector2 local)
@@ -129,6 +130,39 @@ public partial class KnowledgeHoverLinks : Control
         return closest;
     }
 
+    private Vector2[] IconBorder(TextureRect icon)
+    {
+        if (icon.Texture is { } texture)
+        {
+            if (!_iconBorders.TryGetValue(texture, out var contour))
+            {
+                // Pile sprites have transparent corners outside the visible card stack.
+                using var image = texture.GetImage();
+                if (image.IsCompressed()) image.Decompress();
+                using var bitmap = new Bitmap();
+                bitmap.CreateFromImageAlpha(image, .5f);
+                static float Area(Vector2[] points) => Enumerable.Range(0, points.Length)
+                    .Sum(i => points[i].Cross(points[(i + 1) % points.Length]));
+                contour = bitmap.OpaqueToPolygons(new Rect2I(Vector2I.Zero, image.GetSize()), 1)
+                    .MaxBy(points => Math.Abs(Area(points))) ?? [];
+                if (Area(contour) < 0) Array.Reverse(contour);
+                _iconBorders.Add(texture, contour);
+            }
+            if (contour.Length > 2)
+            {
+                var scale = icon.Size / texture.GetSize();
+                var offset = Vector2.Zero;
+                if (icon.StretchMode == TextureRect.StretchModeEnum.KeepAspectCentered)
+                {
+                    scale = Vector2.One * Math.Min(scale.X, scale.Y);
+                    offset = (icon.Size - texture.GetSize() * scale) * .5f;
+                }
+                return contour.Select(point => Point(icon, offset + point * scale)).ToArray();
+            }
+        }
+        return FrameBorder(icon);
+    }
+
     private Vector2[] FrameBorder(Control frame, bool arrow = false)
     {
         Vector2[] outline = arrow
@@ -139,7 +173,8 @@ public partial class KnowledgeHoverLinks : Control
 
     private void AddTarget(Control frame, bool arrow = false, int count = 0)
     {
-        var point = ReceivingPoint(FrameBorder(frame, arrow), out var normal, out bool visible);
+        var border = count > 0 && frame is TextureRect icon ? IconBorder(icon) : FrameBorder(frame, arrow);
+        var point = ReceivingPoint(border, out var normal, out bool visible);
         _targets.Add(new(point, point + Vector2.Up * 28, count, visible, normal));
     }
 

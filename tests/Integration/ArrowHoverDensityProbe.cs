@@ -207,7 +207,7 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
         var preview = (Control)AccessTools.Field(typeof(ArrowHud), "_hoverPreview").GetValue(hud)!;
         var enemy = room.GetCreatureNode(player.Creature.CombatState!.HittableEnemies.First())!.Hitbox.GetGlobalRect();
         var rect = preview.GetGlobalRect();
-        var tips = NGame.Instance!.HoverTipsContainer.FindChildren("*", "", true, false).OfType<NHoverTipSet>()
+        var tips = NGame.Instance!.HoverTipsContainer!.FindChildren("*", "", true, false).OfType<NHoverTipSet>()
             .Where(set => set.IsVisibleInTree()).SelectMany(set => set.GetChildren().OfType<Control>())
             .Where(control => control.IsVisibleInTree() && control.Size.X > 0 && control.Size.Y > 0)
             .Select(control => control.GetGlobalRect()).ToArray();

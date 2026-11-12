@@ -120,9 +120,11 @@ public sealed class KnowledgeLinksProbe : AbstractConsoleCmd
         var frames = room.Ui.Hand.ActiveHolders
             .Where(holder => holder.CardNode is { Visibility: ModelVisibility.Visible })
             .Select(holder => (Frame: holder.CardNode!.GetNode<Control>("%Frame"), Arrow: false)).ToList();
-        frames.AddRange(room.GetNode<ArrowHud>("JunnaArrows").FindChildren("TiltedFrame", "", true, false)
-            .OfType<Control>().Where(frame => frame.IsVisibleInTree()).Select(frame => (frame, true)));
-        frames.AddRange(new Control[] { room.Ui.DrawPile, room.Ui.DiscardPile, room.Ui.ExhaustPile }.Select(frame => (frame, false)));
+        if (room.GetNodeOrNull<ArrowHud>("JunnaArrows") is { } arrowHud)
+            frames.AddRange(arrowHud.FindChildren("TiltedFrame", "", true, false)
+                .OfType<Control>().Where(frame => frame.IsVisibleInTree()).Select(frame => (frame, true)));
+        var pileIcons = new[] { room.Ui.DrawPile.GetNode<TextureRect>("Icon"),
+            room.Ui.DiscardPile.GetNode<TextureRect>("Icon"), room.Ui.ExhaustPile.GetNode<TextureRect>("Icon") };
         var transform = effect.GetGlobalTransformWithCanvas().AffineInverse();
         var outlines = frames.Select(pair =>
         {
@@ -132,6 +134,26 @@ public sealed class KnowledgeLinksProbe : AbstractConsoleCmd
             return corners.Select(point => transform * (pair.Frame.GetGlobalTransformWithCanvas() * (point * pair.Frame.Size))).ToArray();
         }).ToArray();
         float gap = (float)AccessTools.Field(typeof(KnowledgeHoverLinks), "ReceiverGap").GetRawConstantValue()!;
+        bool OnPileBorder(Vector2 anchor, Vector2 normal)
+        {
+            foreach (var icon in pileIcons)
+            {
+                using var image = icon.Texture.GetImage();
+                if (image.IsCompressed()) image.Decompress();
+                var size = icon.Texture.GetSize();
+                float scale = Math.Min(icon.Size.X / size.X, icon.Size.Y / size.Y);
+                var offset = (icon.Size - size * scale) * .5f;
+                var toIcon = icon.GetGlobalTransformWithCanvas().AffineInverse() * effect.GetGlobalTransformWithCanvas();
+                float Alpha(Vector2 point)
+                {
+                    var pixel = (toIcon * point - offset) / scale;
+                    return pixel.X >= 0 && pixel.Y >= 0 && pixel.X < image.GetWidth() && pixel.Y < image.GetHeight()
+                        ? image.GetPixel((int)pixel.X, (int)pixel.Y).A : 0;
+                }
+                if (Alpha(anchor - normal * 3) >= .5f && Alpha(anchor + normal * 3) < .5f) return true;
+            }
+            return false;
+        }
         for (int index = 0; index < endpoints.Length; index++)
         {
             var point = endpoints[index];
@@ -142,6 +164,7 @@ public sealed class KnowledgeLinksProbe : AbstractConsoleCmd
             bool attached = outlines.Any(outline => !Geometry2D.IsPointInPolygon(point, outline)
                 && Enumerable.Range(0, outline.Length).Any(edge => Geometry2D.GetClosestPointToSegment(anchor,
                     outline[edge], outline[(edge + 1) % outline.Length]).DistanceTo(anchor) < .05f));
+            attached |= OnPileBorder(anchor, normal);
             if (!attached || normal.Dot((origin - anchor).Normalized()) < .99f)
                 throw new InvalidOperationException("Receiving point is not outside a target on its source-facing side");
         }
