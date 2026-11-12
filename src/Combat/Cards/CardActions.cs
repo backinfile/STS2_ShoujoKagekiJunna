@@ -127,6 +127,25 @@ public static class CardActions
         }
     }
 
+    public static async Task PlayAllArrows(PlayerChoiceContext context, Player player)
+    {
+        // Snapshot actual cards once, including deployed arrows, before effects create more arrows.
+        var arrows = Available(player).Where(card => card.Pile != null && CardCatalog.IsArrow(card)).ToArray();
+        foreach (var card in arrows)
+        {
+            if (CombatManager.Instance.IsOverOrEnding || player.Creature.IsDead) break;
+            if (card.HasBeenRemovedFromState || card.Pile == null || card.Pile.Type == PileType.Play ||
+                ArrowCombat.Find(card)?.Resolving == true || card.Keywords.Contains(CardKeyword.Unplayable) ||
+                !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) continue;
+            var target = CardTargets.First(card);
+            if (!CardTargets.IsValid(card, target)) continue;
+            ArrowCombat.Cancel(card);
+            if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = 0;
+            CostChanges.CaptureFreePayment(card);
+            await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, CaptureAvailableX = false });
+        }
+    }
+
     public static async Task<Creature?> ChooseTarget(PlayerChoiceContext context, CardModel card)
     {
         var enemies = CardTargets.Enemies(card);

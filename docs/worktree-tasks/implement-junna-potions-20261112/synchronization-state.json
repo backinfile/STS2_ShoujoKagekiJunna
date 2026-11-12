@@ -1,0 +1,14 @@
+{
+  "branch": "main",
+  "head": "2448cfeab38010b3693a5c9cc9875c3d45d0cc20",
+  "status": [],
+  "files": [],
+  "syncSourceChanged": [
+    "src/UI/Arrows/ArrowHud.Hover.cs"
+  ],
+  "potionRuntimeChanged": false,
+  "lastSynchronizedMain": "2448cfeab38010b3693a5c9cc9875c3d45d0cc20",
+  "latestMain": "2448cfeab38010b3693a5c9cc9875c3d45d0cc20",
+  "integrationRaces": 3,
+  "integrationStatus": "explicit continuation, merge and cleanup approved; latest main synchronized"
+}

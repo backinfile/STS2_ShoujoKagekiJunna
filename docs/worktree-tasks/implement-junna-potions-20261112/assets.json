@@ -1,0 +1,32 @@
+[
+  {
+    "assetId": "potion-knowledge-20261111-v2",
+    "file": "ShoujoKagekiJunna/images/potions/knowledge_potion.png",
+    "sha256": "d93590eb26f44750a5c65e538b2cb2f837fd8e1ec6f0d5aeeeb7785cac115e17",
+    "size": [
+      256,
+      256
+    ],
+    "processing": "复用工作台定稿；已由 Artifact Cleaner 按原尺寸清理；轮廓图由透明通道外扩2像素生成。"
+  },
+  {
+    "assetId": "potion-sports-drink-20261111-v10",
+    "file": "ShoujoKagekiJunna/images/potions/sports_drink.png",
+    "sha256": "4141b3d44d90908be9f21644ec44e4c9933394e2cbc63fb93ad9dd0326f6da03",
+    "size": [
+      256,
+      256
+    ],
+    "processing": "复用工作台定稿；已由 Artifact Cleaner 按原尺寸清理；轮廓图由透明通道外扩2像素生成。"
+  },
+  {
+    "assetId": "potion-arrow-rain-20261111-v9",
+    "file": "ShoujoKagekiJunna/images/potions/arrow_rain_potion.png",
+    "sha256": "b44a10d24648df20d9d30c12694fac632c1ee2612e601eef6f1c0c6ba9e583a0",
+    "size": [
+      256,
+      256
+    ],
+    "processing": "复用工作台定稿；已由 Artifact Cleaner 按原尺寸清理；轮廓图由透明通道外扩2像素生成。"
+  }
+]

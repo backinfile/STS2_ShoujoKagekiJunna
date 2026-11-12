@@ -1,0 +1,800 @@
+{
+  "workbenchRevision": 5000,
+  "baseline": "Beta compilation passed before changes",
+  "build": {
+    "beta": "passed, zero warnings/errors",
+    "stable": "passed, zero warnings/errors, reference API 0.107.1",
+    "loader": "passed",
+    "resources": "Godot import and PCK passed",
+    "coreSdk": "1.6.0",
+    "sourceBaseline": "2448cfeab38010b3693a5c9cc9875c3d45d0cc20"
+  },
+  "game": {
+    "startup": "minimized, silent_test, isolated profile, random port",
+    "unlocks": "unlock all",
+    "cases": [
+      "knowledge",
+      "capacity",
+      "dynamic",
+      "sports",
+      "arrows"
+    ],
+    "assertions": [
+      {
+        "name": "knowledge registered class pool",
+        "actual": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "expected": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "knowledge class potion rarities",
+        "actual": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "expected": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "knowledge offer count",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "knowledge distinct groups",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "knowledge reuses existing knowledge stacks",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "knowledge no native bundle screen",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "knowledge one click closes choice",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "knowledge deck unchanged",
+        "actual": 10,
+        "expected": 10,
+        "pass_": true
+      },
+      {
+        "name": "knowledge no flight into deck",
+        "actual": false,
+        "expected": false,
+        "pass_": true
+      },
+      {
+        "name": "knowledge selected group identity",
+        "actual": 34,
+        "expected": 34,
+        "pass_": true
+      },
+      {
+        "name": "knowledge selected quantity and IDs",
+        "actual": {
+          "JUNNA_JK235": 1,
+          "JUNNA_JK235B": 2
+        },
+        "expected": {
+          "JUNNA_JK235": 1,
+          "JUNNA_JK235B": 2
+        },
+        "pass_": true
+      },
+      {
+        "name": "knowledge all selected free",
+        "actual": [
+          0,
+          0,
+          0
+        ],
+        "expected": [
+          0,
+          0,
+          0
+        ],
+        "pass_": true
+      },
+      {
+        "name": "knowledge unselected removed",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "knowledge generated destination",
+        "actual": [
+          "Hand",
+          "Hand",
+          "Hand"
+        ],
+        "expected": [
+          "Hand",
+          "Hand",
+          "Hand"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "knowledge original hand preserved",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "knowledge potion spends no energy",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "knowledge free modifier expires",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "knowledge potion consumed",
+        "actual": 1,
+        "expected": 1,
+        "pass_": true
+      },
+      {
+        "name": "capacity registered class pool",
+        "actual": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "expected": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "capacity class potion rarities",
+        "actual": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "expected": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "capacity offer count",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "capacity distinct groups",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "capacity reuses existing knowledge stacks",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "capacity no native bundle screen",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "capacity one click closes choice",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "capacity deck unchanged",
+        "actual": 10,
+        "expected": 10,
+        "pass_": true
+      },
+      {
+        "name": "capacity no flight into deck",
+        "actual": false,
+        "expected": false,
+        "pass_": true
+      },
+      {
+        "name": "capacity selected group identity",
+        "actual": 40,
+        "expected": 40,
+        "pass_": true
+      },
+      {
+        "name": "capacity selected quantity and IDs",
+        "actual": {
+          "JUNNA_JK126": 1
+        },
+        "expected": {
+          "JUNNA_JK126": 1
+        },
+        "pass_": true
+      },
+      {
+        "name": "capacity all selected free",
+        "actual": [
+          0
+        ],
+        "expected": [
+          0
+        ],
+        "pass_": true
+      },
+      {
+        "name": "capacity unselected removed",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "capacity generated destination",
+        "actual": [
+          "Discard"
+        ],
+        "expected": [
+          "Discard"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "capacity original hand preserved",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "capacity potion spends no energy",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "capacity potion consumed",
+        "actual": 1,
+        "expected": 1,
+        "pass_": true
+      },
+      {
+        "name": "dynamic registered class pool",
+        "actual": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "expected": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "dynamic class potion rarities",
+        "actual": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "expected": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "dynamic offer count",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "dynamic distinct groups",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "dynamic reuses existing knowledge stacks",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "dynamic no native bundle screen",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "dynamic current relation groups",
+        "actual": [
+          [
+            "JUNNA_A",
+            "JUNNA_JH27",
+            "JUNNA_JK122",
+            "JUNNA_JK133",
+            "JUNNA_JK200",
+            "JUNNA_JK272",
+            "JUNNA_JK314",
+            "JUNNA_JK48"
+          ],
+          [
+            "JUNNA_JA108",
+            "JUNNA_JA38",
+            "JUNNA_JK11B",
+            "JUNNA_JK131B",
+            "JUNNA_JK235",
+            "JUNNA_JK275",
+            "JUNNA_JK37",
+            "JUNNA_JK67",
+            "JUNNA_JK84B"
+          ],
+          [
+            "JUNNA_JK126",
+            "JUNNA_JK137",
+            "JUNNA_JK206",
+            "JUNNA_JK274",
+            "JUNNA_JK32",
+            "JUNNA_JK49",
+            "JUNNA_JK82",
+            "JUNNA_JS35"
+          ]
+        ],
+        "expected": [
+          [
+            "JUNNA_A",
+            "JUNNA_JH27",
+            "JUNNA_JK122",
+            "JUNNA_JK133",
+            "JUNNA_JK200",
+            "JUNNA_JK272",
+            "JUNNA_JK314",
+            "JUNNA_JK48"
+          ],
+          [
+            "JUNNA_JA108",
+            "JUNNA_JA38",
+            "JUNNA_JK11B",
+            "JUNNA_JK131B",
+            "JUNNA_JK235",
+            "JUNNA_JK275",
+            "JUNNA_JK37",
+            "JUNNA_JK67",
+            "JUNNA_JK84B"
+          ],
+          [
+            "JUNNA_JK126",
+            "JUNNA_JK137",
+            "JUNNA_JK206",
+            "JUNNA_JK274",
+            "JUNNA_JK32",
+            "JUNNA_JK49",
+            "JUNNA_JK82",
+            "JUNNA_JS35"
+          ]
+        ],
+        "pass_": true
+      },
+      {
+        "name": "dynamic one click closes choice",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "dynamic deck unchanged",
+        "actual": 10,
+        "expected": 10,
+        "pass_": true
+      },
+      {
+        "name": "dynamic no flight into deck",
+        "actual": false,
+        "expected": false,
+        "pass_": true
+      },
+      {
+        "name": "dynamic selected group identity",
+        "actual": 31,
+        "expected": 31,
+        "pass_": true
+      },
+      {
+        "name": "dynamic selected quantity and IDs",
+        "actual": {
+          "JUNNA_JK11B": 1,
+          "JUNNA_JK37": 1,
+          "JUNNA_JK67": 1,
+          "JUNNA_JK84B": 1,
+          "JUNNA_JK131B": 1,
+          "JUNNA_JA108": 1,
+          "JUNNA_JK235": 1,
+          "JUNNA_JK275": 1,
+          "JUNNA_JA38": 1
+        },
+        "expected": {
+          "JUNNA_JK11B": 1,
+          "JUNNA_JK37": 1,
+          "JUNNA_JK67": 1,
+          "JUNNA_JK84B": 1,
+          "JUNNA_JK131B": 1,
+          "JUNNA_JA108": 1,
+          "JUNNA_JK235": 1,
+          "JUNNA_JK275": 1,
+          "JUNNA_JA38": 1
+        },
+        "pass_": true
+      },
+      {
+        "name": "dynamic all selected free",
+        "actual": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "expected": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "pass_": true
+      },
+      {
+        "name": "dynamic unselected removed",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "dynamic generated destination",
+        "actual": [
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand"
+        ],
+        "expected": [
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand",
+          "Hand"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "dynamic original hand preserved",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "dynamic potion spends no energy",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "dynamic potion consumed",
+        "actual": 1,
+        "expected": 1,
+        "pass_": true
+      },
+      {
+        "name": "sports registered class pool",
+        "actual": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "expected": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "sports class potion rarities",
+        "actual": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "expected": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "sports +9 handAttack",
+        "actual": 9,
+        "expected": 9,
+        "pass_": true
+      },
+      {
+        "name": "sports +9 handArrow",
+        "actual": 9,
+        "expected": 9,
+        "pass_": true
+      },
+      {
+        "name": "sports excludes handSkill",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "sports excludes handStatus",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "sports excludes drawAttack",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "sports excludes discardAttack",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "sports excludes exhaustAttack",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "sports excludes deployedArrow",
+        "actual": 0,
+        "expected": 0,
+        "pass_": true
+      },
+      {
+        "name": "sports potion spends no energy",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "sports persists next turn",
+        "actual": [
+          9,
+          9
+        ],
+        "expected": [
+          9,
+          9
+        ],
+        "pass_": true
+      },
+      {
+        "name": "sports potion consumed",
+        "actual": 1,
+        "expected": 1,
+        "pass_": true
+      },
+      {
+        "name": "arrows registered class pool",
+        "actual": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "expected": [
+          "JUNNA_ARROW_RAIN_POTION",
+          "JUNNA_KNOWLEDGE_POTION",
+          "JUNNA_SPORTS_DRINK"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "arrows class potion rarities",
+        "actual": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "expected": [
+          "Common",
+          "Rare",
+          "Uncommon"
+        ],
+        "pass_": true
+      },
+      {
+        "name": "arrows plays each pile and deployed once",
+        "actual": {
+          "0": 1,
+          "32": 1,
+          "33": 1,
+          "34": 1,
+          "35": 1
+        },
+        "expected": {
+          "0": 1,
+          "32": 1,
+          "33": 1,
+          "34": 1,
+          "35": 1
+        },
+        "pass_": true
+      },
+      {
+        "name": "arrows no energy spent",
+        "actual": 3,
+        "expected": 3,
+        "pass_": true
+      },
+      {
+        "name": "arrows all deployed",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "arrows leaves non-arrow untouched",
+        "actual": "Hand",
+        "expected": "Hand",
+        "pass_": true
+      },
+      {
+        "name": "arrows replays deployed card",
+        "actual": true,
+        "expected": true,
+        "pass_": true
+      },
+      {
+        "name": "arrows potion consumed",
+        "actual": 1,
+        "expected": 1,
+        "pass_": true
+      }
+    ],
+    "recordings": [
+      {
+        "case": "knowledge",
+        "path": "out/tmp/implement-junna-potions-20261112/knowledge-potion-existing-stack-1080p.mp4",
+        "duration": 22.9,
+        "audio": true,
+        "sha256": "6676fb57a1093cece9bbf047d8af61c7b1d08527257440ac9691e5587c56e1e5",
+        "width": 1920,
+        "height": 1080,
+        "fps": 20,
+        "nativeScreenshotSize": [
+          1920,
+          1080
+        ],
+        "screenshot": "out/tmp/implement-junna-potions-20261112/knowledge-existing-stack-1080p.png",
+        "encodedFrameInspected": true
+      },
+      {
+        "case": "sports",
+        "path": "out/tmp/implement-junna-potions-20261112/sports/sts2-20261112-010817-bbd96dc9eb72444f91583dcfe4198a02.mp4",
+        "duration": 11.666666666666666,
+        "audio": true,
+        "sha256": "0cceb3b1a66b4b82128bea6ddc27ccdb3fb5a856e2abe4074c72d4ad33b6cadb"
+      },
+      {
+        "case": "arrows",
+        "path": "out/tmp/implement-junna-potions-20261112/arrows/sts2-20261112-010831-24d87f89525d4451bc8402332bfeb100.mp4",
+        "duration": 8.866666666666667,
+        "audio": true,
+        "sha256": "8643af975a1a143057d12fbd0e341bad0c415bf8cad263ebb75f88b8b6035adf"
+      }
+    ]
+  },
+  "scope": "Only builds and targeted potion tests were run.",
+  "synchronization": {
+    "main": "2448cfeab38010b3693a5c9cc9875c3d45d0cc20",
+    "build": "Beta, Stable, loader, Godot import and PCK passed; zero warnings/errors",
+    "warnings": [],
+    "runtimeChange": "Main hover initialization guard included; potion single-click UI verified with native gameplay.",
+    "latestMain": "2448cfeab38010b3693a5c9cc9875c3d45d0cc20",
+    "status": "User explicitly approved continuation, integration and cleanup. Latest main synchronized and built successfully.",
+    "sourceChanges": [
+      "ShoujoKagekiJunna/scripts/character_select_layer.gdshader",
+      "ShoujoKagekiJunna/scripts/character_select_layers.gd"
+    ],
+    "potionSourceUnchanged": true
+  },
+  "singleClickSelection": {
+    "cases": [
+      "knowledge",
+      "capacity",
+      "dynamic"
+    ],
+    "interface": "CardSelectCmd.FromChooseACardScreen",
+    "stack": "existing KnowledgeCardStack",
+    "extraUiAdapter": false,
+    "existingStackNodes": 3,
+    "nativeBundleNodes": 0,
+    "deckCountUnchanged": true,
+    "deckFlightAbsent": true,
+    "secondConfirmation": false
+  },
+  "highResolutionKnowledgeRecording": {
+    "path": "out/tmp/implement-junna-potions-20261112/knowledge-potion-existing-stack-1080p.mp4",
+    "width": 1920,
+    "height": 1080,
+    "fps": 20,
+    "duration": 22.9,
+    "audio": true,
+    "nativeScreenshotSize": [
+      1920,
+      1080
+    ],
+    "sha256": "6676fb57a1093cece9bbf047d8af61c7b1d08527257440ac9691e5587c56e1e5",
+    "screenshot": "out/tmp/implement-junna-potions-20261112/knowledge-existing-stack-1080p.png"
+  }
+}

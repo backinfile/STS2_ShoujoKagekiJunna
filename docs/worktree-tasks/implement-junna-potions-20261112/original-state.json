@@ -1,0 +1,155 @@
+{
+  "branch": "main",
+  "head": "dc66cd5f323724a62a48b422dbc647212edd83b1",
+  "status": [
+    " M ShoujoKagekiJunna/images/character_select.png",
+    " M ShoujoKagekiJunna/scenes/junna_select.tscn",
+    " M docs/design/workbench/README.md",
+    " M docs/design/workbench/app.js",
+    " M docs/design/workbench/workbench-domain.js",
+    " M docs/design/workbench/workbench-domain.test.cjs",
+    "?? ShoujoKagekiJunna/images/character_select/arm_backing.png",
+    "?? ShoujoKagekiJunna/images/character_select/arm_backing.png.import",
+    "?? ShoujoKagekiJunna/images/character_select/arm_backing_color.png",
+    "?? ShoujoKagekiJunna/images/character_select/arm_backing_color.png.import",
+    "?? ShoujoKagekiJunna/images/character_select/arm_bow.png",
+    "?? ShoujoKagekiJunna/images/character_select/arm_bow.png.import",
+    "?? ShoujoKagekiJunna/images/character_select/background.png",
+    "?? ShoujoKagekiJunna/images/character_select/background.png.import",
+    "?? ShoujoKagekiJunna/images/character_select/parts.svg",
+    "?? ShoujoKagekiJunna/images/character_select/parts.svg.import",
+    "?? ShoujoKagekiJunna/images/character_select/subject.png",
+    "?? ShoujoKagekiJunna/images/character_select/subject.png.import",
+    "?? ShoujoKagekiJunna/images/character_select/underpaint.png",
+    "?? ShoujoKagekiJunna/images/character_select/underpaint.png.import",
+    "?? ShoujoKagekiJunna/scripts/character_select_bow_string.gdshader",
+    "?? ShoujoKagekiJunna/scripts/character_select_bow_string.gdshader.uid",
+    "?? ShoujoKagekiJunna/scripts/character_select_effects.gd",
+    "?? ShoujoKagekiJunna/scripts/character_select_effects.gd.uid",
+    "?? ShoujoKagekiJunna/scripts/character_select_layer.gdshader",
+    "?? ShoujoKagekiJunna/scripts/character_select_layer.gdshader.uid",
+    "?? ShoujoKagekiJunna/scripts/character_select_layers.gd",
+    "?? ShoujoKagekiJunna/scripts/character_select_layers.gd.uid",
+    "?? docs/implementation/character-select-arm-separation.json"
+  ],
+  "files": [
+    {
+      "path": "ShoujoKagekiJunna/images/character_select.png",
+      "sha256": "a617f6a823352d32989682fcbe18b35ba9681880750e6be18bdfb612ae343dfc"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scenes/junna_select.tscn",
+      "sha256": "5d9316ba6fd1933bf2a011d04a81f2028726d7d83f1ca931ca67fdd604ec4cbb"
+    },
+    {
+      "path": "docs/design/workbench/README.md",
+      "sha256": "57adbc94ccb46caa22d83e35a1c637e76339cab0b5c37afcd722397bc54bedcf"
+    },
+    {
+      "path": "docs/design/workbench/app.js",
+      "sha256": "9401f521750bfccd519eb1cba3cbfa7fc802454c4432aeb4156d0fd37380fd1e"
+    },
+    {
+      "path": "docs/design/workbench/workbench-domain.js",
+      "sha256": "0378dc7d2f1812194a365ceaf3060232892457dc9e08977248c9957c8d57d254"
+    },
+    {
+      "path": "docs/design/workbench/workbench-domain.test.cjs",
+      "sha256": "5a74eb831a3b60b8b36dbb5b8fa789e32c67e6329b823a13e747fcb428e627d1"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/arm_backing.png",
+      "sha256": "1b8fbe12a27ab9364c2b35577d9d7483ee1bf705fe4a3ffaa19e539d39d587fb"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/arm_backing.png.import",
+      "sha256": "4843d1e6e4e4da15eb5c302318f8f0f48e539113f764316c1348485be004afd1"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/arm_backing_color.png",
+      "sha256": "34fb24cecbcdea0466dff8142a31af5ddaf34b7ae852c65b2227e47f289b0b48"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/arm_backing_color.png.import",
+      "sha256": "5e0c575bde32cf259ee405c0d9b40def36b34356fde5e03a3d2fe08c566edf76"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/arm_bow.png",
+      "sha256": "5190e774b03a2b36124888cd5151fa9468abaf4ee23a663773fe902bf60ede83"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/arm_bow.png.import",
+      "sha256": "f4270cc257866fb03ec220874c8d12d3d38561fa0dd7824908ccd8e56f3fa0ad"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/background.png",
+      "sha256": "8cb2cc40753256407b6e180fa91011a0bc4fb3a644f7d2a6c6a6a91bfb38fe04"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/background.png.import",
+      "sha256": "f8f133a359d8f1b168c2363d6904667f9a9b2a309fe56792ec5954fac7b46b05"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/parts.svg",
+      "sha256": "636cc5e87eb00d359282f1e5750f28c7f0694dc1943b39d3a14c1a87ba56f745"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/parts.svg.import",
+      "sha256": "eb50e99aa0ec0522ad9fd7cca39c73bc1ef30daf7e840dcfd9eaac65192f604a"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/subject.png",
+      "sha256": "48df1934d85c061a0b0e009f71e8e18a58a0d1dc8815c3639259c6eb41f78fd4"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/subject.png.import",
+      "sha256": "8da9fd8234d8adda8b96f70f2578efe8be4bce5afcbb4dcc03fa3e0ef322d4b9"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/underpaint.png",
+      "sha256": "1f175323156d77a2983e45061847a73a3e0264a0b9e2db9d0324342f0f20f978"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/character_select/underpaint.png.import",
+      "sha256": "530fc6d60c09d526b822aa6cf7470d92dcf35d7908c1c3b2e26ac180f1b05704"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_bow_string.gdshader",
+      "sha256": "a7f217eb728558d27f762354d28a7f0ad1dbec2987ddecf033b3280389d9d81f"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_bow_string.gdshader.uid",
+      "sha256": "e31a0a1dff6885ad6ed2d406d3fc9d0cebeb403aa90d2a89e4345477b03dde80"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_effects.gd",
+      "sha256": "c564cdb1866738bb92e397533a2dc9afa62b6c7c45810ee0f22837f56a6e1e8f"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_effects.gd.uid",
+      "sha256": "a23a6158f4cdc0b40e39e8b3c9f2adc7b8625b1433e16608d96f8ebadc45ad46"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_layer.gdshader",
+      "sha256": "610e9ab659e087a765f44e0407a47c90491fc2ccf954cf38c3cfb9ad43a1b1ca"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_layer.gdshader.uid",
+      "sha256": "3347e90f8c9296fb410af9b58cc5983381ac212b48fc7592706a266c27682a28"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_layers.gd",
+      "sha256": "8c0b12c3c7b54bdaa0128d7764c8f874c98be9f27112cffb950a28497fac6db0"
+    },
+    {
+      "path": "ShoujoKagekiJunna/scripts/character_select_layers.gd.uid",
+      "sha256": "3ea495a6d9fbc7f0ae0ebb8331a2386f93f348d4903a9f79005090082483bb06"
+    },
+    {
+      "path": "docs/implementation/character-select-arm-separation.json",
+      "sha256": "f6bdba61b6393d05f29419a738f84d8840eb2f8cbe8227f2a4ad0877323dea20"
+    }
+  ],
+  "taskBranch": "codex/implement-junna-potions-20261112",
+  "worktree": "../worktrees/STS2_ShoujoKagekiJunna/implement-junna-potions-20261112"
+}
