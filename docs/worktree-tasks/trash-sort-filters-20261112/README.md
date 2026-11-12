@@ -149,13 +149,23 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 </skill>
 
+### 4. 合并与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_9cc6825d44a34baca397167b0ff242e9\",0]","question":"是否将已验证的垃圾桶排序与筛选改动合并到 main，并清理本次工作树、任务分支和临时预览文件？","answer":"合并并清理"}]
+</send_user_message_question_reply>
+
+### 5. 重新部署
+
+重新部署吧
+
 ## Brief task plan
 
 - 原始分支：`main`；起点：`e1a0314b73d73e8852767aa246d54436eaa4f278`；原工作区干净。
 - 任务分支：`codex/trash-sort-filters-20261112`；工作树：`../worktrees/STS2_ShoujoKagekiJunna/trash-sort-filters-20261112`。
 - 复用卡池筛选与排序，保持垃圾桶分页、恢复入口和分类独立状态。
 - 完成针对排序、筛选、分页和状态保存的必要验证；整理为一个任务提交并同步本地 `main`。
-- 按 `$worktree-task` 等待合并和清理确认。
+- 用户已确认合并与清理，并要求重新部署；基于当前线上前端应用垃圾桶最小增量，核对公开页、编辑页与持久化数据，再合入 `main` 并清理。
 
 ## Result and changes
 
@@ -166,4 +176,9 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 必要验证：上述三份测试加 `mobile-sort.test.cjs`，共 31 项通过；`node --check`、只读页面构建及界面检测器通过。
 - 本地只读浏览器验证：149 张删除牌分页至第二页后，选择技能得到 49 张并回第一页；费用降序、分类往返和刷新恢复均通过。使用仓库 seed 构建的独立预览，页面截图由交付附件保存。
 - 已审阅全部跟踪文档及新增任务记录，未检出私密信息或本地绝对路径；`out/tmp/` 等仓库相对路径保留。
-- 任务提交：`d21cc29`；已同步本地 `main` 的 `89d332b`，同步只涉及另一任务的记录，工作台源码与已验证版本一致。等待合并和清理确认。
+- 任务提交：`d21cc29`；已同步本地 `main` 的 `89d332b`，同步只涉及另一任务的记录，工作台源码与已验证版本一致。用户已确认合并和清理，并追加重新部署要求。
+- 线上发布：`20261112-trash-sort-filters-d21cc29`；基于原线上发布对公开与编辑运行脚本各替换 5 个完整匹配的代码段，其余源码与后端保持既有版本。服务已正常运行，旧发布保留供回退。
+- 线上数据核对：部署前后均为 r5238、1136 张卡牌、981 张垃圾桶卡牌；完整数据无差异，数据库文件保持原 inode。
+- 线上交互：公开页与编辑页均可由全部 981 张筛选至 455 张技能牌，排序为费用降序，共 19 页；筛选后回到第一页，刷新后保留，两个页面均无脚本错误。
+- 验证回执保留于主目录 `artifacts/task-deliverables/trash-sort-filters-20261112/verification.json`；线上截图同目录 `trash-sort-filters-live.jpg`。
+- 用户已批准快进合入 `main`，随后删除本次工作树、任务分支及其中临时预览和部署文件。最终合并、树一致性与清理回执保存到同目录 `cleanup-verification.json`；任务源码、本文与交付附件保留在主目录。
