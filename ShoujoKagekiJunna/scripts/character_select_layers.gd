@@ -17,6 +17,10 @@ const BREATH_PERIOD = 5.6
 const BREATH_INHALE = 1.9
 const BREATH_EXHALE = 3.3
 const BREATH_ANCHOR = Vector2(1165.0, 900.0)
+const CURTAIN_OUTLINE = [Vector2(1205, 0), Vector2(1240, 28), Vector2(1280, 55),
+	Vector2(1320, 88), Vector2(1360, 106), Vector2(1400, 133), Vector2(1440, 159),
+	Vector2(1480, 185), Vector2(1520, 209), Vector2(1560, 234), Vector2(1600, 257),
+	Vector2(1640, 283), Vector2(1672, 303), Vector2(1672, 0)]
 const ARM_PIVOT = Vector2(1060.0, 685.0)
 const ARM_SWAY_DEGREES = 0.225
 const ARM_REST_DEGREES = 0.06
@@ -55,6 +59,14 @@ func _ready():
 	stars.name = "Stars"
 	stars.set_script(STAR_SCRIPT)
 	add_child(stars)
+	# The curtain is opaque scenery in front of every part of a star light.
+	var curtain = Polygon2D.new()
+	curtain.name = "CurtainForeground"
+	curtain.texture = BACKGROUND
+	curtain.polygon = PackedVector2Array(CURTAIN_OUTLINE)
+	curtain.uv = curtain.polygon
+	curtain.antialiased = true
+	add_child(curtain)
 	_character = Node2D.new()
 	_character.name = "Character"
 	add_child(_character)

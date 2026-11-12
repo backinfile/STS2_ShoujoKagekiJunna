@@ -81,6 +81,30 @@
         "FurHem"
       ],
       "behavior": "人物图层共享腰部起伏，头部、胸口、手弓和披风同步呼吸；袖口渐变保持，手弓独立摆幅约减半，舞台与星空保持原位置。"
+    },
+    "cuff_join": {
+      "date": "2026-11-12",
+      "cause": "宽擦除遮罩覆盖可见上臂，颜色筛选遗漏深色袖口包边，短弓弦遮罩切到袖口金边。",
+      "behavior": "可见上臂保留原图RGB，补画用于手弓遮挡区；轮廓蒙版保留深色包边，弓弦移除避开实心袖口。",
+      "native_mask": "ShoujoKagekiJunna/images/character_select/forearm_detail.svg",
+      "native_mask_sha256": "ab7bd1eaad7f9f1372033ab641da80ec658a4fa00d661508d1e12fdec7dabb00",
+      "mask_source": "原立绘袖口轮廓的SVG蒙版，RGB沿用原立绘",
+      "left_string_repair": "以弓弦两侧4像素的原衣料修补窄线，保留周围可见衣料"
+    },
+    "curtain_occlusion": {
+      "date": "2026-11-12",
+      "cause": "星星绘制在整张背景上方，右上角帷幕原先没有前景遮挡。",
+      "behavior": "帷幕以相同背景纹理的Polygon2D置于星星前方、人物后方，遮挡星核、光晕和光芒。",
+      "source_texture": "ShoujoKagekiJunna/images/character_select/background.png",
+      "source_texture_sha256": "8cb2cc40753256407b6e180fa91011a0bc4fb3a644f7d2a6c6a6a91bfb38fe04",
+      "layer_order": [
+        "Background",
+        "Stars",
+        "CurtainForeground",
+        "Character",
+        "StageForeground"
+      ],
+      "source": "ShoujoKagekiJunna/scripts/character_select_layers.gd"
     }
   },
   "generation": {
@@ -583,6 +607,280 @@
         "encode_write_average_ms": 1.0270480725623587,
         "encode_write_max_ms": 101.2872,
         "elapsed_seconds": 22.6168104,
+        "audio": true,
+        "audio_source": "engine_mix"
+      }
+    },
+    "cuff_join": {
+      "date": "2026-11-12",
+      "static_visible_sleeve_before_max_rgb_delta": 56,
+      "static_visible_sleeve_after_max_rgb_delta": 1,
+      "static_visible_sleeve_regions": [
+        {
+          "point": [
+            1010,
+            655
+          ],
+          "original": [
+            78,
+            71,
+            118
+          ],
+          "rendered": [
+            78,
+            71,
+            118
+          ],
+          "max_rgb_delta": 0
+        },
+        {
+          "point": [
+            1050,
+            650
+          ],
+          "original": [
+            42,
+            47,
+            94
+          ],
+          "rendered": [
+            42,
+            47,
+            94
+          ],
+          "max_rgb_delta": 0
+        },
+        {
+          "point": [
+            1090,
+            650
+          ],
+          "original": [
+            41,
+            45,
+            92
+          ],
+          "rendered": [
+            41,
+            45,
+            92
+          ],
+          "max_rgb_delta": 0
+        },
+        {
+          "point": [
+            985,
+            690
+          ],
+          "original": [
+            47,
+            50,
+            96
+          ],
+          "rendered": [
+            47,
+            50,
+            96
+          ],
+          "max_rgb_delta": 0
+        },
+        {
+          "point": [
+            970,
+            705
+          ],
+          "original": [
+            58,
+            62,
+            106
+          ],
+          "rendered": [
+            59,
+            62,
+            106
+          ],
+          "max_rgb_delta": 1
+        },
+        {
+          "point": [
+            950,
+            730
+          ],
+          "original": [
+            54,
+            56,
+            109
+          ],
+          "rendered": [
+            54,
+            56,
+            109
+          ],
+          "max_rgb_delta": 0
+        },
+        {
+          "point": [
+            1106,
+            721
+          ],
+          "original": [
+            130,
+            86,
+            53
+          ],
+          "rendered": [
+            130,
+            86,
+            53
+          ],
+          "max_rgb_delta": 0
+        }
+      ],
+      "moving_wrist_lining": [
+        {
+          "point": [
+            1025,
+            795
+          ],
+          "alpha": 255
+        },
+        {
+          "point": [
+            1030,
+            800
+          ],
+          "alpha": 255
+        }
+      ],
+      "motion": {
+        "arm_amplitude_ratio": 1.0,
+        "arm_span_after_px": 7.97772216796875,
+        "arm_span_before_px": 7.97772216796875,
+        "breath_samples": [
+          {
+            "chest_shift": [
+              0.0,
+              0.0
+            ],
+            "head_shift": [
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "time": 0.0
+          },
+          {
+            "chest_shift": [
+              -0.0224609375,
+              -4.4412841796875
+            ],
+            "head_shift": [
+              -0.06494140625,
+              -3.47499084472656
+            ],
+            "scale": [
+              1.00100004673004,
+              1.00349998474121
+            ],
+            "time": 1.9
+          },
+          {
+            "chest_shift": [
+              0.0,
+              0.0
+            ],
+            "head_shift": [
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "time": 5.6
+          }
+        ]
+      },
+      "video": "out/tmp/junna-select-cuff-join-20261112/junna-cuff-join-fixed-game.mp4",
+      "recording": {
+        "status": "completed",
+        "output_path": "out/tmp/junna-select-cuff-join-20261112/sts2-20261112-010215-7270f2374b284662ae43b2274ee1a355.mp4",
+        "fps": 20,
+        "max_duration_seconds": 45,
+        "width": 1600,
+        "height": 900,
+        "frames_written": 440,
+        "video_duration_seconds": 22,
+        "frames_captured": 361,
+        "frames_repeated": 79,
+        "frames_dropped": 0,
+        "encoder": "h264_nvenc",
+        "capture_fps": 16.419505054806034,
+        "capture_average_ms": 40.555940720221585,
+        "capture_max_ms": 673.6315,
+        "encode_write_average_ms": 1.008343409090908,
+        "encode_write_max_ms": 71.5084,
+        "elapsed_seconds": 22.6103894,
+        "audio": true,
+        "audio_source": "engine_mix"
+      },
+      "probe": "out/tmp/junna-select-cuff-join-20261112/project/render_cuff.gd",
+      "regression": "out/tmp/junna-select-cuff-join-20261112/verify_cuff.py"
+    },
+    "curtain_occlusion": {
+      "date": "2026-11-12",
+      "curtain_before_star_max_rgb_delta": 236,
+      "rendered_probe": {
+        "curtain": {
+          "point": [
+            1560,
+            80
+          ],
+          "max_rgb_delta": 0
+        },
+        "air": {
+          "point": [
+            700,
+            180
+          ],
+          "max_rgb_delta": 218
+        },
+        "edge": {
+          "point": [
+            1560,
+            230
+          ],
+          "max_rgb_delta": 0
+        },
+        "edge_core_max_rgb_delta": 220,
+        "edge_ray_before_max_rgb_delta": 11,
+        "unlit_artwork_max_rgb_delta": 0
+      },
+      "probe": "out/tmp/junna-select-curtain-stars-20261112/project/probe_star_occlusion.gd",
+      "regression": "out/tmp/junna-select-curtain-stars-20261112/verify_occlusion.py",
+      "video": "out/tmp/junna-select-curtain-stars-20261112/junna-curtain-stars-fixed-game.mp4",
+      "recording": {
+        "status": "completed",
+        "output_path": "out/tmp/junna-select-curtain-stars-20261112/sts2-20261112-011601-b706df6125164393b5b26f3f3ba6b8a5.mp4",
+        "fps": 20,
+        "max_duration_seconds": 45,
+        "width": 1600,
+        "height": 900,
+        "frames_written": 440,
+        "video_duration_seconds": 22,
+        "frames_captured": 358,
+        "frames_repeated": 82,
+        "frames_dropped": 0,
+        "encoder": "h264_nvenc",
+        "capture_fps": 16.2794887363809,
+        "capture_average_ms": 40.92111536312851,
+        "capture_max_ms": 702.3441,
+        "encode_write_average_ms": 1.083953409090909,
+        "encode_write_max_ms": 75.5594,
+        "elapsed_seconds": 22.5842462,
         "audio": true,
         "audio_source": "engine_mix"
       }

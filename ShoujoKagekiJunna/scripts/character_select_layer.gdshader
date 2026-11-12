@@ -34,7 +34,12 @@ float arm_coverage(vec2 uv, vec2 pixel_size) {
 	edge = max(edge, texture(forearm_detail, uv - margin * 0.75).a);
 	edge = max(edge, texture(forearm_detail, uv + vec2(margin.x, -margin.y) * 0.75).a);
 	edge = max(edge, texture(forearm_detail, uv - vec2(margin.x, -margin.y) * 0.75).a);
-	return max(texture(arm_cutout, uv).a * max(warm, jewel), max(lining, edge * warm));
+	float coverage = max(texture(arm_cutout, uv).a * max(warm, jewel), max(lining, edge * warm));
+	// Preserve the solid cuff edge while removing the separately drawn cord.
+	float distance = abs(point.y + point.x * 0.2517857 - 1002.3) / 1.03121;
+	float string_mask = (1.0 - smoothstep(3.0, 5.0, distance)) * (1.0 - lining)
+		* smoothstep(1105.0, 1111.0, point.x) * (1.0 - smoothstep(1253.0, 1260.0, point.x));
+	return coverage * (1.0 - string_mask);
 }
 
 void fragment() {
@@ -132,12 +137,6 @@ void fragment() {
 		painted.a *= coverage;
 		if (layer_kind == 6) {
 			painted.a = min(silhouette, smoothstep(0.04, 0.96, arm_coverage(UV, TEXTURE_PIXEL_SIZE)));
-			// The short right string is drawn separately with fixed-fur occlusion.
-			vec2 point = UV / TEXTURE_PIXEL_SIZE;
-			float distance = abs(point.y + point.x * 0.2517857 - 1002.3) / 1.03121;
-			float string_mask = (1.0 - smoothstep(3.0, 5.0, distance))
-				* smoothstep(1105.0, 1111.0, point.x) * (1.0 - smoothstep(1253.0, 1260.0, point.x));
-			painted.a *= 1.0 - string_mask;
 		}
 		// The ponytail end overlaps the red cape. Keep its original red backing
 		// on the repaired static layer instead of moving it with the hair.
