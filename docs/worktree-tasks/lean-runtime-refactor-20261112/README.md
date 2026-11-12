@@ -21,7 +21,7 @@
 
 ## 结果与验证
 
-重构与定向验证完成，等待合并和清理确认。
+重构与定向验证完成，用户已批准合并和清理。
 
 - 知识关系查询仅生成内存快照，由规范化和实际变更保存；保存字段与旧数据迁移保留。
 - 持续能力克隆独立复制来源快照及回合、次数、循环位置。
@@ -37,19 +37,25 @@
 - 两版真实游戏分别通过 43 项定向断言，覆盖模型与图片身份、原生转换升级及附魔继承、知识查询无保存副作用、能力克隆隔离、生成牌回收、双异常保留、选择同步及移牌异常恢复。
 - 两版手牌模型/可见节点均为 5/5 → 0/0，无缺失和额外节点；已查看前后截图与真实绘制录像帧。
 - 两版全程最小化，0 次抢焦点，`silent_test=true`、`muted=false`，录像音源为 `engine_mix`。
-- 最终 25 个包内文件与两版实测安装目录逐项核对 SHA-256，一致；角色图片与音频未改动，测试复用已有资源 PCK。
+- 最终 25 个包内文件与两版实测安装目录逐项核对 SHA-256，一致；Core、Karen 复用已有资源 PCK，Junna 同步最新 main 后重新构建完整资源包。
 - 测试准备阶段的探针注册与取消重试断言已修正，失败记录与最终通过记录分别保留；最终断言全部通过。
-- Core 工作树 `out/tmp/lean-runtime-refactor-20261112/` 保存最终包、逐文件哈希、规则结果、截图、录像与隔离日志。未执行完整多人矩阵和性能专项。
+- 证据清理前保留至 Core 原检出的 `out/tmp/lean-runtime-refactor-20261112/`，包含最终包、逐文件哈希、规则结果、截图、录像与隔离日志。未执行完整多人矩阵和性能专项。
 - 三项目所有已跟踪文档及提交索引在提交前进行隐私审查，任务记录只使用相对路径和用途占位符。
+
+## 合并前同步
+
+- 已取得用户合并与清理授权；清理仅限本次三个工作树及同名任务分支。
+- Junna 同步 main 的 `6e7c31d`，保留 r5007 卡池及最新牌效；自动合并无冲突。重新完成双版本构建与各 43 项游戏定向断言。
+- 同步前后的包与验证记录分别保留；清理前逐文件核对保留证据哈希。
 
 ## 本项目最终测试包 SHA-256
 
 | 文件 | SHA-256 |
 | --- | --- |
 | `core.package.lock` | `0f390df8a2eec3bac4f7228775922f9de46edae91770364e0eb5b09f9cb3e4e1` |
-| `core.requirements` | `d14adff0a39e60e195fb39b21861fefc8804daa479a532d8db19acfb9ba54050` |
-| `lib/ShoujoKagekiJunna.Beta.dll` | `01da2f37033d670e819641041dc08536e0514ff460dc7e55eeb6f4fbe304f3b9` |
-| `lib/ShoujoKagekiJunna.Stable.dll` | `01edcd3bcd529790818d32843e3105c59866af47bbe4a2caca408638ef33dc2b` |
-| `ShoujoKagekiJunna.dll` | `2d26185ffcde88712fa9b758f1deae3e59db98778be380f203ac1c91e762569b` |
+| `core.requirements` | `7b9cee5da54f049a8300e612d64a55db7c92213a00329589786108345e0f3323` |
+| `lib/ShoujoKagekiJunna.Beta.dll` | `e00714eccf1d4b18963cbc103f36c510e990c3a43410c7aae2fb654574fadc3e` |
+| `lib/ShoujoKagekiJunna.Stable.dll` | `ecea697e886d5babe6a7beb5bc5597c1859d5e7b98060d03c08cb90e96727dfc` |
+| `ShoujoKagekiJunna.dll` | `7d69fc613450bd623ac735249dee8368572ee312c7c4f70c012671635e818ba4` |
 | `ShoujoKagekiJunna.json` | `d8a9894602e91c0e9b2ac57be898711ea88b3f9d13a31e1b3c00624fe0fba755` |
-| `ShoujoKagekiJunna.pck` | `4b3b714930cf1398c2293791cf7fe8e3958edec0e116a7c22fc103cc7cbe657b` |
+| `ShoujoKagekiJunna.pck` | `7ab6c558b177f43892ee0df075f48389409ec9c93bb12124a759c322f6de9c2b` |

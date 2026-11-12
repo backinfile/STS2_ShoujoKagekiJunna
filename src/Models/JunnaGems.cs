@@ -40,4 +40,4 @@ public sealed class JunnaGreenGem() : JunnaGem(1, "green_gem")
 
 [CustomID("JUNNA_BURNING_GEM")]
 [Pool(typeof(JunnaRelicPool))]
-public sealed class JunnaBurningGem() : JunnaGem(2, "burning_gem");
+public sealed class JunnaBurningGem() : JunnaGem(3, "burning_gem");
