@@ -15,6 +15,13 @@ namespace ShoujoKagekiJunna.Models;
 
 public abstract partial class CatalogPower
 {
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+    {
+        if (player != Owner.Player || DesignId != "JA144") return;
+        foreach (var grant in _grants.ToArray())
+            await CardActions.Generate(player, "JA119", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom);
+    }
+
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext context, Player player)
     {
         if (player != Owner.Player) return;
@@ -32,7 +39,6 @@ public abstract partial class CatalogPower
                         await CardPileCmd.Add(selected, PileType.Hand);
                     break;
                 case "JA35": await ArrowCombat.AccelerateAll(context, player, grant.V("Turns")); break;
-                case "JA144": await CardActions.Generate(player, "JA119", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom); break;
                 case "JH59": case "JK139": await PlayerCmd.GainEnergy(grant.V("Energy"), player); break;
                 case "JK32": await CardPileCmd.Draw(context, grant.V("DrawCount"), player); break;
                 case "JK46": await CardActions.Generate(player, "JK46B", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom, grant.Card.IsUpgraded); break;

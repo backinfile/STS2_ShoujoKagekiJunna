@@ -1,0 +1,1 @@
+{"id":"SteadyProgress","name":"Steady Progress Checks","author":"Junna Tests","description":"Native turn generation order checks","version":"1.0.0","has_dll":true,"has_pck":false,"affects_gameplay":true,"dependencies":[{"id":"ShoujoKagekiJunna"}]}
