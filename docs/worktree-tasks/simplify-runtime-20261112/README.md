@@ -239,6 +239,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 [{"questionItemId":"<问题条目标识>","question":"Junna main 第三次前进，新增了无目标流星回收修复。是否继续同步这项修复，定向验证后合并并清理？","answer":"继续同步、验证后合并并清理"}]
 </send_user_message_question_reply>
 
+## 文档同步、合并与清理的再次确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"<问题条目标识>","question":"Junna main 本轮第三次前进，最新仅新增 8 行验证记录。是否继续同步这份文档，然后合并并清理？","answer":"继续同步文档、合并并清理"}]
+</send_user_message_question_reply>
+
 # 简要计划
 
 - 三项目使用同名隔离工作树，位置为 ../worktrees/STS2_ShoujoKagekiJunna/simplify-runtime-20261112；目标分支固定为 main。
@@ -317,3 +323,9 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 ## 本轮集成状态
 
 Core 与 Karen 已分别合入 main 的 5be6fbe、cd7c352，并完成本次工作树和任务分支清理；Karen 原有 5 项未提交修改保持原差异。Junna 在继续授权后第三次并发前进到 89d332b，仅为数量编辑任务补充 8 行验证记录。按 worktree-task 的三次并发上限停止同步，已向用户请求继续确认；本任务分支及工作树保留，运行库与已通过的 206 项分阶段游戏断言和 32 项工作台定向测试保持一致。最新文档同步、合并及清理等待该确认。完整构建包、旧验证运行库、6 份有声录像及报告已保留到 Core 原检出的 artifacts/task-deliverables/simplify-runtime-20261112/，354 个保留文件已核对 SHA-256。
+
+## 文档同步后的最终集成
+
+用户已再次明确批准继续同步文档、合并并清理。已同步 Junna main 的 89d332b；本轮仅纳入数量编辑的验证记录，并追加本任务授权与结果记录。运行源码、资源、测试实现和构建配置均与前轮已验证提交一致，沿用 206 项分阶段游戏断言、32 项工作台定向检查及双版本编译结果。
+
+合并前核对 main 与同步目标一致、原检出干净，最终包 25 个文件 SHA-256 与已保留清单一致。按授权快进合并后核对提交树、任务提交包含关系及原检出状态，再清理本任务工作树和任务分支；其他工作树保留。完整产物与 6 份有声录像继续保留在 Core 原检出的 artifacts/task-deliverables/simplify-runtime-20261112/，实际集成与清理状态记录于该目录 integration.json。
