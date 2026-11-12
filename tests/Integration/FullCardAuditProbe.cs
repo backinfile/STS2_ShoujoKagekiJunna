@@ -466,7 +466,8 @@ internal sealed class AuditScenario(Player player, CardDefinition definition, bo
                 int hand = player.PlayerCombatState!.Hand.Cards.Count;
                 int energy = player.PlayerCombatState.Energy;
                 player.PlayerCombatState.IncrementTurnNumber();
-                await power.AfterPlayerTurnStart(_context, player);
+                if (Id == "JA144") await power.BeforeHandDraw(player, _context, player.Creature.CombatState!);
+                else await power.AfterPlayerTurnStart(_context, player);
                 if (Id == "JH59") Check("北极星回合触发", player.PlayerCombatState.Energy - energy, 1);
                 if (Id == "JK32") Check("掌舵回合抽牌", player.PlayerCombatState.Hand.Cards.Count - hand,
                     Empty ? 0 : Math.Min(upgraded ? 2 : 1, CardPile.MaxCardsInHand - hand));
