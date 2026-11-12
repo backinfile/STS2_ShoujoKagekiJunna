@@ -17,10 +17,11 @@ internal static class GeneratedArrowPresentation
 {
     private static readonly ConditionalWeakTable<CardModel, object> Cards = new();
 
-    internal static async Task<IDisposable> Generate(CardModel card)
+    internal static async Task Play(CardModel card, Func<Task> play)
     {
         Cards.Add(card, new object());
         var scope = new Scope(card);
+        Exception? failure = null;
         try
         {
             await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Play, card.Owner);
@@ -42,23 +43,28 @@ internal static class GeneratedArrowPresentation
                         - frame.GetGlobalTransform() * (frame.Size * .5f);
                 }
             }
-            return scope;
+            await play();
         }
-        catch { scope.Dispose(); throw; }
+        catch (Exception error) { failure = error; }
+        try { await scope.DisposeAsync(); }
+        catch (Exception error) { failure = failure == null ? error : new AggregateException(failure, error); }
+        if (failure != null) System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(failure).Throw();
     }
 
-    private sealed class Scope(CardModel card) : IDisposable
+    private sealed class Scope(CardModel card) : IAsyncDisposable
     {
         internal NCard? View;
         internal Node? Container;
 
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
             Cards.Remove(card);
             // Successful deployment reparents the visual into its independent animation.
             // Rejected or interrupted plays must not leave a card in the native container.
             if (View != null && GodotObject.IsInstanceValid(View) && View.GetParent() == Container)
                 View.QueueFreeSafely();
+            if (card.Pile?.Type == PileType.Play) await CardPileCmd.RemoveFromCombat(card);
+            else if (card.Pile == null && !card.HasBeenRemovedFromState) card.RemoveFromState();
         }
     }
 

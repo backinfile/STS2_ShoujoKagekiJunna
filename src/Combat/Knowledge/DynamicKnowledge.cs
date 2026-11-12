@@ -35,7 +35,6 @@ public static class DynamicKnowledge
     private static readonly ConditionalWeakTable<CardModel, CardModel[]> Pending = new();
     private sealed record Offer(CardReward Reward, CardModel Original);
     private static readonly ConditionalWeakTable<CardModel, Offer> Offers = new();
-    public static void Initialize() { }
     private static string PreferredEntrance => CardCatalog.Model("JK126").Id.ToString();
     private static List<KnowledgeRelation> Groups(Player player)
     {
@@ -45,7 +44,6 @@ public static class DynamicKnowledge
         {
             cache.Groups = string.IsNullOrEmpty(serialized) ? [] : JsonSerializer.Deserialize<List<KnowledgeRelation>>(serialized)!;
             cache.Serialized = serialized;
-            bool initialized = false;
             foreach (var group in CardCatalog.Groups)
             {
                 string entrance = CardCatalog.Model(group.MainCardId).Id.ToString();
@@ -53,12 +51,6 @@ public static class DynamicKnowledge
                 var counts = group.Members.ToDictionary(member => CardCatalog.Model(member.Id).Id.ToString(),
                     member => member.Count);
                 cache.Groups.Add(new(entrance, counts));
-                initialized = true;
-            }
-            if (initialized)
-            {
-                cache.Serialized = JsonSerializer.Serialize(cache.Groups);
-                Relations.Set(player, cache.Serialized);
             }
         }
         return cache.Groups;
@@ -100,10 +92,19 @@ public static class DynamicKnowledge
         var counts = cards.GroupBy(card => card.Id.ToString()).ToDictionary(group => group.Key, group => group.Count());
         counts.TryAdd(PreferredEntrance, 1);
         KnowledgeRelation.Merge(groups, new(PreferredEntrance, counts), PreferredEntrance);
-        Relations.Set(player, JsonSerializer.Serialize(groups));
+        Save(player);
+    }
+    private static void Save(Player player)
+    {
+        var groups = Groups(player);
+        var cache = Cache.GetOrCreateValue(player);
+        string serialized = JsonSerializer.Serialize(groups);
+        if (cache.Serialized == serialized) return;
+        Relations.Set(player, cache.Serialized = serialized);
     }
     internal static void Normalize(Player player)
     {
+        Save(player);
         var cards = player.Deck.Cards.Concat(player.PlayerCombatState?.AllCards ?? []).Distinct().ToArray();
         var legacy = cards.SelectMany(card => (Links.Get(card)?.Split('\n', StringSplitOptions.RemoveEmptyEntries) ?? [])
             .Select(link => (Card: card, Link: link))).GroupBy(pair => pair.Link);

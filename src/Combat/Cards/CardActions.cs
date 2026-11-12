@@ -75,39 +75,32 @@ public static class CardActions
         }
     }
 
-    public static async Task<bool> PaidPlay(PlayerChoiceContext context, CardModel card, Creature? target = null,
-        bool restartArrow = true)
+    public static Task<bool> PaidPlay(PlayerChoiceContext context, CardModel card, Creature? target = null,
+        bool restartArrow = true) => Play(context, card, target, CardPayment.Paid, false, restartArrow);
+
+    public static Task FreePlay(PlayerChoiceContext context, CardModel card, Creature? target = null,
+        bool keepTarget = false) => Play(context, card, target, CardPayment.Free, keepTarget, true);
+
+    private static async Task<bool> Play(PlayerChoiceContext context, CardModel card, Creature? target,
+        CardPayment payment, bool keepTarget, bool restartArrow)
     {
+        bool CanPay() => payment == CardPayment.Free || card.Owner.PlayerCombatState!.HasEnoughResourcesFor(card, out _);
         if (CombatManager.Instance.IsOverOrEnding || card.Owner.Creature.IsDead ||
-            card.Keywords.Contains(CardKeyword.Unplayable) || !card.Owner.PlayerCombatState!.HasEnoughResourcesFor(card, out _) ||
+            card.Keywords.Contains(CardKeyword.Unplayable) || !CanPay() ||
             !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) return false;
         if (card.TargetType == TargetType.AnyEnemy)
         {
-            if (!CardTargets.IsValid(card, target)) target = await ChooseTarget(context, card);
+            if (keepTarget)
+                target = target == null ? null : ArrowCombat.ResolveEffectTarget(target, card.Owner.Creature.CombatState!);
+            else if (payment == CardPayment.Free || !CardTargets.IsValid(card, target))
+                target = await ChooseTarget(context, card);
             if (target == null) return false;
         }
         else target = CardTargets.First(card);
-        if (!CardTargets.IsValid(card, target) || !card.Owner.PlayerCombatState.HasEnoughResourcesFor(card, out _)) return false;
+        // Target selection can change resources. Reject before cancelling a deployed arrow.
+        if (!CardTargets.IsValid(card, target) || !CanPay()) return false;
         if (restartArrow) ArrowCombat.Cancel(card);
-        return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, Payment = CardPayment.Paid });
-    }
-
-    public static async Task FreePlay(PlayerChoiceContext context, CardModel card, Creature? target = null,
-        bool keepTarget = false)
-    {
-        if (CombatManager.Instance.IsOverOrEnding || card.Owner.Creature.IsDead ||
-            card.Keywords.Contains(CardKeyword.Unplayable) ||
-            !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) return;
-        if (card.TargetType == TargetType.AnyEnemy)
-        {
-            target = keepTarget ? target == null ? null : ArrowCombat.ResolveEffectTarget(target, card.Owner.Creature.CombatState!)
-                : await ChooseTarget(context, card);
-            if (target == null) return;
-        }
-        else target = CardTargets.First(card);
-        if (!CardTargets.IsValid(card, target)) return;
-        ArrowCombat.Cancel(card);
-        await CardExecution.Play(context, card, new CardExecutionRequest { Target = target });
+        return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, Payment = payment });
     }
 
     public static async Task PlayDrawPileArrows(PlayerChoiceContext context, Player player)
@@ -181,19 +174,20 @@ public static class CardActions
         var arrow = (CatalogCard)CardCatalog.Create("JA81B", player);
         if (upgraded) { arrow.UpgradeInternal(); arrow.FinalizeUpgradeInternal(); }
         arrow.SetGeneratedDamage(damage);
-        using var presentation = await GeneratedArrowPresentation.Generate(arrow);
-        // Generated arrows use the native automatic-play target policy, independently per card.
-        // An effect may supply a target; otherwise the combat target RNG selects one.
-        if (target != null)
+        await GeneratedArrowPresentation.Play(arrow, async () =>
         {
-            target = ArrowCombat.ResolveEffectTarget(target, player.Creature.CombatState!);
-            if (target == null)
+            // Generated arrows retain the native automatic-play target policy.
+            if (target != null)
             {
-                await CardPileCmd.Add(arrow, PileType.Discard);
-                return;
+                target = ArrowCombat.ResolveEffectTarget(target, player.Creature.CombatState!);
+                if (target == null)
+                {
+                    await CardPileCmd.Add(arrow, PileType.Discard);
+                    return;
+                }
             }
-        }
-        await CardCmd.AutoPlay(context, arrow, target);
+            await CardCmd.AutoPlay(context, arrow, target);
+        });
     }
 
 }

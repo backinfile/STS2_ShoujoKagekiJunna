@@ -294,8 +294,8 @@ public static class CardEffects
                 {
                     using var single = KnowledgeCombat.SingleCard();
                     var stardust = CardCatalog.Create("U_CARD_005", player);
-                    using var presentation = await GeneratedArrowPresentation.Generate(stardust);
-                    await CardActions.FreePlay(context, stardust, play.Target, keepTarget: true);
+                    await GeneratedArrowPresentation.Play(stardust,
+                        () => CardActions.FreePlay(context, stardust, play.Target, keepTarget: true));
                 }
                 break;
             case "JK84B":

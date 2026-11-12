@@ -78,16 +78,8 @@ public static class HandArrow
         var hand = combat.Hand;
         var selected = (await CardActions.Choose(context, source, hand.Cards, count, optional))
             .Where(card => card.Pile == hand).ToArray();
-        try
-        {
-            await CardPileCmd.Add(selected, combat.PlayPile);
-            foreach (var card in selected)
-                if (card.Pile == combat.PlayPile) await Play(context, card);
-        }
-        finally
-        {
-            await CardPileCmd.Add(selected.Where(card => card.Pile == combat.PlayPile).ToArray(), hand);
-        }
+        await CardExecution.PlayStaged(selected, card => Play(context, card),
+            unplayed => CardPileCmd.Add(unplayed, hand));
     }
 
     public static async Task Play(PlayerChoiceContext context, CardModel card)
