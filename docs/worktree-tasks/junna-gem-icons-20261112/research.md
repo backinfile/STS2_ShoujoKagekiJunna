@@ -26,6 +26,12 @@
 
 ## 纯那宝石
 
+2026-11-12用户复核后补充：弓端完整宝石与纯那短刃柄端的造型应分别核对。原升级草稿沿用完整弓端轮廓并加强亮光，未体现短刃设定的形状差异，暂缓合并。
+
+- [原设定局部对照](research/crops/setting-comparison.png)：弓端为完整圆润切面；《Memory of Revue》书内119页的纯那脇差放大图标注“イビツ”（不规则）及“盛り上がり”（凸起），柄底另有强调粗糙、不规则外形的备注。不能将该细节简化为完整弓端宝石的同轮廓发光版。
+- 奈奈原本刀柄的宝石另列：[TV设定预览33的局部](research/crops/nana-original-topaz.png)，原图标注“トパーズです”（托帕石）。该参考与剧场版纯那脇差的改造后外观分开记录。
+- [弓端彩图及TV截图局部](research/crops/bow-color-references.png)；[纯那短刃刀柄、破碎宝石及光效局部](research/crops/short-blade-context.png)。独立裁切共11张，来源与原图矩形见 `research/crops/manifest.json`，保留原有绘画与文字。拼图只排版和放大显示，没有生成或补绘原图细节。
+
 - 直接造型依据：第32张“宝石のUP”放大图。主体为圆润多边形的立体切面宝石，内部以不规则三角切面向中心聚拢。按用户要求最终图标提取完整宝石，移除弓身、包托和底座。
 - 色彩依据：[TV第2话17:07近景](https://www.bilibili.com/bangumi/play/ep232368?t=1025)，项目已有截图 `docs/design/assets/card-sources/2026-11-02/tv02-1705-action.jpg`；其绿色大切面、青白反光与深绿阴影共同决定两版配色。
 - 剧场版直接补充：[《Memory of Revue》公开预览](https://artsee.cc/collection/326)第115张有纯那弓与宝石的彩色角色页，[第122张、书内标示119页](research/weapons/movie-preview-122.webp)有纯那脇差及宝石嵌入柄底的细节。[第115张](research/weapons/movie-preview-115.webp)亦已保存。

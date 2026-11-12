@@ -1,0 +1,94 @@
+{
+  "cropCount": 11,
+  "expectedDimensionsVerified": true,
+  "files": [
+    {
+      "file": "bow-setting.png",
+      "dimensions": [
+        360,
+        500
+      ],
+      "sha256": "90f27a73a33b367dad4abb9e0e569d40e9e081eb14da784aed1bb40eb571326d"
+    },
+    {
+      "file": "bow-movie-color.png",
+      "dimensions": [
+        175,
+        130
+      ],
+      "sha256": "aab85267edd4fae132916d69a69cc47d54ad274e3fdfa72992d9c6e6a1ab4c9f"
+    },
+    {
+      "file": "bow-movie-setting.png",
+      "dimensions": [
+        135,
+        180
+      ],
+      "sha256": "8e27b58a40cc1b2a1d32c85794fe4bc2c70b7bc7d1de49be0a04caec5ea0272f"
+    },
+    {
+      "file": "nana-original-topaz.png",
+      "dimensions": [
+        340,
+        355
+      ],
+      "sha256": "d373cb5355c551ba760fecc7c212290ff1522f6c4fcf53ffb3251bb6813c669a"
+    },
+    {
+      "file": "junna-short-blade-gem.png",
+      "dimensions": [
+        450,
+        275
+      ],
+      "sha256": "aa146f68b3f0e98f9b27f0272cde14b75bb9a81422c4353b0783e6d93eb39ecd"
+    },
+    {
+      "file": "junna-short-blade-bottom.png",
+      "dimensions": [
+        240,
+        320
+      ],
+      "sha256": "41f0de05f3aae5d90d27ed4158b44fa301c4ab48f4eb39a9fe4fa07c8c82c717"
+    },
+    {
+      "file": "junna-short-blade-handle.png",
+      "dimensions": [
+        245,
+        235
+      ],
+      "sha256": "1fd1a3b6499834d30944f88bf764e9626c75e0b639e8df03dcb376fd9bd177c9"
+    },
+    {
+      "file": "bow-tv-closeup.png",
+      "dimensions": [
+        480,
+        490
+      ],
+      "sha256": "4e8e8236273475c627d58e8fac87e0e9011a3c6d02ada48af4b99f5a4e5a9074"
+    },
+    {
+      "file": "bow-tv-whole.png",
+      "dimensions": [
+        220,
+        180
+      ],
+      "sha256": "4b58d1e412a714826c5675c61250dd53affac66365613c1918c5fbaff3a7e87a"
+    },
+    {
+      "file": "movie-broken-gem.png",
+      "dimensions": [
+        580,
+        400
+      ],
+      "sha256": "2c473e401b88fd63fe2a193a85c61985f44b80e7e37a965c41222f989fe5d560"
+    },
+    {
+      "file": "movie-short-blade-light.png",
+      "dimensions": [
+        455,
+        225
+      ],
+      "sha256": "f991f238a1d985fb873ac2c0e6d23bb4ebfbf458bbfa2d6ac655b579f510260e"
+    }
+  ]
+}
