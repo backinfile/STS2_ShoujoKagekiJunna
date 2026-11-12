@@ -48,19 +48,9 @@ public abstract partial class CatalogPower
             var targets = Owner.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
             if (targets.Length == 0) return;
             var target = Owner.Player!.RunState.Rng.CombatTargets.NextItem(targets);
-            await DealTriggeredDamage(context, grant, [target!], amount);
+            using (DamageExecution.BeginCardResolution(grant.Card))
+                await GameApi.Damage(context, [target!], amount, ValueProp.Unpowered, Owner, grant.Card, grant.Play);
         }
     }
 
-    private async Task DealTriggeredDamage(PlayerChoiceContext context, Grant grant,
-        IEnumerable<Creature> targets, int amount, int hits = 1)
-    {
-        using var resolution = DamageExecution.BeginCardResolution(grant.Card);
-        for (int hit = 0; hit < hits; hit++)
-        {
-            var living = targets.Where(target => target.IsAlive).ToArray();
-            if (living.Length == 0) break;
-            await GameApi.Damage(context, living, amount, ValueProp.Unpowered, Owner, grant.Card, grant.Play);
-        }
-    }
 }

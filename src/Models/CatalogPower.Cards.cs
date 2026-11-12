@@ -78,7 +78,8 @@ public abstract partial class CatalogPower
                     if (targets.Length > 0)
                     {
                         var target = play.Card.Owner.RunState.Rng.CombatTargets.NextItem(targets)!;
-                        await DealTriggeredDamage(context, grant, [target], grant.V("Damage"));
+                        using (DamageExecution.BeginCardResolution(grant.Card))
+                            await GameApi.Damage(context, [target], grant.V("Damage"), ValueProp.Unpowered, Owner, grant.Card, grant.Play);
                     }
                     break;
                 case "JK64" when CardCatalog.IsKnowledge(play.Card):
