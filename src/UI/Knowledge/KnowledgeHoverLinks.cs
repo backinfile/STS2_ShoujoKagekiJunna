@@ -174,11 +174,11 @@ public partial class KnowledgeHoverLinks : Control
     private void AddTarget(Control frame, bool arrow = false, int count = 0)
     {
         var border = count > 0 && frame is TextureRect icon ? IconBorder(icon) : FrameBorder(frame, arrow);
-        var point = ReceivingPoint(border, out var normal, out bool visible);
+        var point = ReceivingPoint(border, out var normal, out bool visible, pile: count > 0);
         _targets.Add(new(point, point + Vector2.Up * 28, count, visible, normal));
     }
 
-    private Vector2 ReceivingPoint(Vector2[] border, out Vector2 normal, out bool visible)
+    private Vector2 ReceivingPoint(Vector2[] border, out Vector2 normal, out bool visible, bool pile = false)
     {
         var closest = border[0];
         normal = Vector2.Up;
@@ -186,6 +186,9 @@ public partial class KnowledgeHoverLinks : Control
         float nearest = float.PositiveInfinity;
         var viewport = GetViewportRect().Grow(-8);
         bool inside = Geometry2D.IsPointInPolygon(_origin, border);
+        // Leaning pile sprites must receive links on their upper silhouette, not a low side corner.
+        float maxAnchorY = pile ? Mathf.Lerp(border.Min(point => point.Y), border.Max(point => point.Y), .25f)
+            : float.PositiveInfinity;
         for (int edge = 0; edge < border.Length; edge++)
         {
             var start = border[edge];
@@ -197,6 +200,7 @@ public partial class KnowledgeHoverLinks : Control
             for (int sample = -1; sample <= 32; sample++)
             {
                 var anchor = sample < 0 ? projected : start.Lerp(end, sample / 32f);
+                if (anchor.Y > maxAnchorY) continue;
                 var toward = inside ? outward : (_origin - anchor).Normalized();
                 if (!inside && outward.Dot(toward) <= 0) continue;
                 var point = anchor + toward * ReceiverGap;
