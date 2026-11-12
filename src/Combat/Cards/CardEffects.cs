@@ -341,7 +341,7 @@ public static class CardEffects
     {
         if (hits <= 0 || (card.TargetType == TargetType.AnyEnemy && play.Target?.IsAlive != true)) return [];
         var attack = DamageCmd.Attack(damage).FromCard(card, play).WithHitCount(hits).WithHitFx(VfxCmd.slashPath);
-        if (card.TargetType == TargetType.AllEnemies || card.DesignId == "JG34") attack.TargetingAllOpponents(card.Owner.Creature.CombatState!);
+        if (card.TargetType == TargetType.AllEnemies) attack.TargetingAllOpponents(card.Owner.Creature.CombatState!);
         else attack.Targeting(play.Target!);
         await attack.Execute(context);
         return attack.Results.SelectMany(r => r).ToArray();

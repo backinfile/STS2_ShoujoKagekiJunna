@@ -165,6 +165,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 工作台MCP r5001更新两个遗物及两个契合池的图标与相关绘图说明，重新读取确认名称、效果、数值与新assetId一致。
 - 全部Git跟踪及新增文本资料执行凭据与本地绝对路径审查，结果见 `document-sanitization.json`。
 - 本轮使用图标资源的最小验证，未启动游戏或执行全面测试。
+- 单一任务提交为 `e705e7d`。随后在工作树中同步 `main@7880a48141e8950008e80273c2397b07d1798a5e`，无冲突；四张成品哈希与验证结果一致，游戏引用仍指向新PNG。同步时主目录为main且干净；当前待用户确认合并及清理工作树、任务分支和工作树内可丢弃验证/缩略图缓存。
 
 ## Follow-up user input
 
