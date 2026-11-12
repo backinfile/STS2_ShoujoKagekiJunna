@@ -1,5 +1,5 @@
 {
-  "revision": 5002,
+  "revision": 5007,
   "cards": [
     {
       "id": "JG03",
@@ -1817,7 +1817,7 @@
       "costsX": false,
       "type": "箭矢",
       "target": "AllEnemies",
-      "arrowSubtype": "技能",
+      "arrowSubtype": "攻击",
       "rarity": "稀有",
       "pool": true,
       "knowledge": false,
@@ -4211,7 +4211,7 @@
       "costsX": false,
       "type": "箭矢",
       "target": "AllEnemies",
-      "arrowSubtype": "技能",
+      "arrowSubtype": "攻击",
       "rarity": "普通",
       "pool": true,
       "knowledge": false,
@@ -4252,7 +4252,7 @@
       "costsX": false,
       "type": "箭矢",
       "target": "AnyEnemy",
-      "arrowSubtype": "技能",
+      "arrowSubtype": "攻击",
       "rarity": "稀有",
       "pool": true,
       "knowledge": false,
@@ -7525,5 +7525,5 @@
   "startingRelics": [
     "JUNNA_GREEN_GEM"
   ],
-  "arrowArtRevision": 5002
+  "arrowArtRevision": 5007
 }

@@ -301,10 +301,7 @@ public static class CardEffects
             case "JK84B":
                 await Attack(); await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
             case "U_CARD_013":
-                foreach (var target in ArrowCombat.Deployed.Where(a => a.Card.Owner == player)
-                    .SelectMany(a => a.Targets).Where(target => target.IsAlive && target.IsEnemy).Distinct().ToArray())
-                    if (!target.HasPower<JunnaCagedPower>())
-                        await PowerCmd.Apply<JunnaCagedPower>(context, target, 1, player.Creature, card);
+                await PowerCmd.Apply<JunnaCagedPower>(context, player.Creature, 1, player.Creature, card);
                 break;
             case "U_CARD_009":
                 await CardTutors.DrawCategories(context, card); break;

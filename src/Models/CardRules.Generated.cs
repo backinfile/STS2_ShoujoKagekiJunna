@@ -1448,6 +1448,8 @@ internal static partial class CardRules
         },
         ["U_CARD_013"] = new()
         {
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
         },
     };
 }

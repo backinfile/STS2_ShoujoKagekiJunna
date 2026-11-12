@@ -14,17 +14,17 @@ using ShoujoKagekiJunna.Models;
 
 namespace JunnaWorkbenchFitSync;
 
-public sealed class Workbench5000Command : AbstractConsoleCmd
+public sealed partial class Workbench5000Command : AbstractConsoleCmd
 {
     public override string CmdName => "junna_r5000";
-    public override string Args => "check | prepare";
+    public override string Args => "check | review | prepare | prepare-review";
     public override string Description => "Checks the latest card pool delta.";
     public override bool IsNetworked => false;
     private static readonly PlayerChoiceContext Context = new ThrowingPlayerChoiceContext();
     private static readonly string ResultPath = Path.GetFullPath("../../../out/tmp/workbench-r5000/results.json", Environment.CurrentDirectory);
     private static readonly List<(CardModel Card, CardPilePosition Position)> Generated = [];
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
-        ? new(false, "Combat required") : new(args.FirstOrDefault() == "prepare" ? Prepare(player) : Check(player), true, "Started");
+        ? new(false, "Combat required") : new(args.FirstOrDefault() switch { "prepare" => Prepare(player), "prepare-review" => PrepareReview(player), "review" => Review(player), _ => Check(player) }, true, "Started");
     private static void Capture(CardModel card, PileType newPileType, CardPilePosition position)
     { if (newPileType == PileType.Draw) Generated.Add((card, position)); }
     private static async Task Reset(Player player, bool visualize = false)
@@ -129,15 +129,15 @@ public sealed class Workbench5000Command : AbstractConsoleCmd
                     var cage = await Card(player, "U_CARD_013", upgraded);
                     Expect(cage.EnergyCost.GetWithModifiers(CostModifiers.All) == (upgraded ? 0 : 1), "Correct cost");
                     await Play(cage); await Play(await Card(player, "U_CARD_013"));
-                    Expect(enemies.All(e => e.Powers.Count(p => p is JunnaCagedPower) == 1), "Each target receives one nonstacking reduction");
-                    var foe = enemies[0]; var power = foe.GetPower<JunnaCagedPower>()!;
+                    Expect(player.Creature.Powers.Count(p => p is JunnaCagedPower) == 1 && enemies.All(e => !e.HasPower<JunnaCagedPower>()), "Player has one dynamic nonstacking reduction");
+                    var foe = enemies[0]; var power = player.Creature.GetPower<JunnaCagedPower>()!;
                     int hp = player.Creature.CurrentHp;
                     await CreatureCmd.Damage(Context, [player.Creature], 20, MegaCrit.Sts2.Core.ValueProps.ValueProp.Move, foe, null, null);
                     Expect(player.Creature.CurrentHp == hp - 10, "Actual outgoing damage halved once");
                     await power.AfterSideTurnEnd(Context, CombatSide.Player, [player.Creature]);
-                    Expect(foe.HasPower<JunnaCagedPower>(), "Persists through player turn end");
+                    Expect(player.Creature.HasPower<JunnaCagedPower>(), "Persists through player turn end");
                     await power.AfterSideTurnEnd(Context, CombatSide.Enemy, enemies);
-                    Expect(!foe.HasPower<JunnaCagedPower>(), "Expires after enemy response");
+                    Expect(!player.Creature.HasPower<JunnaCagedPower>(), "Expires after enemy response");
                 });
                 await Case("research copy position and limit " + upgraded, async () =>
                 {

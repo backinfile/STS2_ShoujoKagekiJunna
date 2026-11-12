@@ -1,5 +1,6 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils.Attributes;
+using ShoujoKagekiJunna.Combat;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -14,7 +15,7 @@ namespace ShoujoKagekiJunna.Models;
 [CustomID("JUNNA_CAGED_POWER")]
 public sealed class JunnaCagedPower : CustomPowerModel
 {
-    public override PowerType Type => PowerType.Debuff;
+    public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
     public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/powers/JA205.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
@@ -23,7 +24,12 @@ public sealed class JunnaCagedPower : CustomPowerModel
 #if STS2_BETA
         , CardPlay? cardPlay
 #endif
-        ) => dealer == Owner ? 0.5m : 1m;
+        )
+    {
+        // ColossusPower checks the current attack and attacker at damage resolution.
+        if (target != Owner || !props.IsPoweredAttack() || dealer == null) return 1m;
+        return ArrowCombat.Deployed.Any(arrow => arrow.Card.Owner == Owner.Player && arrow.Targets.Contains(dealer)) ? 0.5m : 1m;
+    }
     public override Task AfterSideTurnEnd(PlayerChoiceContext context, CombatSide side, IEnumerable<Creature> participants)
         => side == CombatSide.Enemy ? PowerCmd.Remove(this) : Task.CompletedTask;
 }
