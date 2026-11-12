@@ -127,7 +127,7 @@
   "JUNNA_JA96.title": "绝不停步",
   "JUNNA_JA96.description": "受到攻击伤害后，所有目标为敌人的[gold]箭矢[/gold][gold]加速[/gold]{N0:diff()}回合。",
   "JUNNA_JK84.title": "先学会站起来",
-  "JUNNA_JK84.selectionScreenPrompt": "选择{Cards}张手牌。",
+  "JUNNA_JK84.selectionScreenPrompt": "选择至多{Cards}张手牌。",
   "JUNNA_JK84.description": "[gold]知识[/gold]。\n将至多{N0:diff()}张[gold]手牌[/gold]作为{N1:diff()}回合的[gold]箭矢[/gold]打出。",
   "JUNNA_JK84B.title": "翱翔在天际",
   "JUNNA_JK84B.description": "[gold]知识[/gold]。\n造成{Damage:diff()}点伤害。\n所有[gold]箭矢[/gold][gold]加速[/gold]{N1:diff()}回合。",
