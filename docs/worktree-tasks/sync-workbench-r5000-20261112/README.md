@@ -176,6 +176,13 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 你看看战士有一张根据易伤来减伤害的牌
 
+### 实现说明追问
+
+修正三张箭矢的内部类型，追随出牌改走原生流程。   这是啥意思
+
+### 合并批准与后续校对
+
+合并 然后 校对下现在所有卡牌
 ## Brief task plan
 
 - 原始分支 `main`，原始提交 `e5bc4fa16f2e0adbcf02bdc46f298d5fd26e762a`，原始工作区干净，无进行中的 Git 操作。
@@ -197,7 +204,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 1454 项工作台数据、内部类型、本地化和配图字节核对通过。388 份跟踪及新增文档的凭据与本地绝对路径审查通过。
 - 隔离游戏使用随机端口、独立满解锁档案、最小化与静默播放，启动焦点采样 0／120 次前台占用。最终实机录像 38.33 秒、575 帧、15 fps、H.264 与内部混音 AAC，无重复帧或丢帧；已检查帧图，演示手牌布局与实际牌堆一致。
 - 快照及来源核对保存于 `artifacts/sync-workbench-r5000-20261112/`，测试报告和录像保存于 `out/tmp/workbench-r5000/`，构建包位于 `dist/ShoujoKagekiJunna/`。
-- 原始 main 工作区保持干净。任务提交为 `933b38b`，已在任务分支同步本地 main `74cc7f59d1f56c06701d74a301b43796af25b8bb`，自动合并成功；同步后的 Beta／Stable、打包及 23 个定向场景再次通过。合入 main 与清理等待用户确认。
+- 原始 main 工作区保持干净。任务提交为 `933b38b`，已在任务分支同步本地 main `74cc7f59d1f56c06701d74a301b43796af25b8bb`，自动合并成功；同步后的 Beta／Stable、打包及 23 个定向场景再次通过。用户已批准合入 main，保留本次任务工作树和分支。
 
 - 最终 Mod ZIP、MCP 快照、验证报告、启动焦点记录、38.33 秒录像及帧图集中保存于 `artifacts/task-deliverables/sync-workbench-r5000-20261112/`。合并并清理时先将此目录保存到主目录同一路径，逐文件校验 SHA-256 后再移除工作树。
 
@@ -210,3 +217,5 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 - 复核提交为 `a5de127`，同步本地 main `cff07e2d6278e5410304eafc420c36794efce8fc` 后双版本构建、资源导入与打包通过；main 新增内容为知识弃牌堆连线，卡牌与遗物规则保持一致。
 - 最新交付包为 `artifacts/task-deliverables/sync-workbench-r5000-20261112/Junna-r5007.zip`，新增快照为同目录 `workbench-r5007.json`；demo.mp4 与帧图已刷新为本轮38.33秒录像。录像通过合法领取单张卡牌使生命40→43，先牢笼后箭矢使敌人预览9／1→4／0，正常结束回合实际受到4点伤害，随后牢笼移除。
+
+- 用户批准本轮合并；保存交付物至主目录同一路径，保留工作树及任务分支。接下来在新的独立工作树校对当前全部卡牌。
