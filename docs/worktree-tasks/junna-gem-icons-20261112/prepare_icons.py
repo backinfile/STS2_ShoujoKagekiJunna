@@ -9,11 +9,19 @@ ROOT=TASK.parents[2]
 parser=argparse.ArgumentParser()
 parser.add_argument('--base',default='art-v2')
 parser.add_argument('--independent',action='store_true')
+parser.add_argument('--only',default='green_gem,burning_gem')
+parser.add_argument('--reuse-base')
 args=parser.parse_args()
 BASE=TASK/args.base
 OUT=ROOT/'ShoujoKagekiJunna/images/relics'
 keys=['green_gem','burning_gem']
-native=[Image.open(BASE/'cleaned-native'/f'{key}.png').convert('RGBA') for key in keys]
+selected=set(args.only.split(','))
+assert selected and selected<=set(keys)
+def source_path(key,folder):
+    base=BASE if key in selected else TASK/args.reuse_base
+    return base/folder/f'{key}.png'
+unchanged={p:hashlib.sha256(p.read_bytes()).hexdigest() for key in keys if key not in selected for p in [OUT/f'{key}.png',OUT/f'{key}_outline.png']}
+native=[Image.open(source_path(key,'cleaned-native')).convert('RGBA') for key in keys]
 boxes=[im.getchannel('A').point(lambda a:255 if a>8 else 0).getbbox() for im in native]
 if not args.independent:
     assert native[0].size==native[1].size
@@ -21,6 +29,10 @@ if not args.independent:
     boxes=[box,box]
 icons=[];transforms={}
 for key,im,box in zip(keys,native,boxes):
+    if key not in selected:
+        icons.append(Image.open(OUT/f'{key}.png').convert('RGBA'))
+        transforms[key]={'mode':'reused unchanged','sourceBase':args.reuse_base}
+        continue
     scale=112/max(box[2]-box[0],box[3]-box[1])
     size=tuple(round(v*scale) for v in (box[2]-box[0],box[3]-box[1]))
     offset=((128-size[0])//2,(128-size[1])//2)
@@ -30,6 +42,7 @@ for key,im,box in zip(keys,native,boxes):
     transforms[key]={'crop':box,'scale':scale,'offset':offset}
 # Independently drawn gems need their own physical hover silhouettes.
 for key,icon in zip(keys,icons):
+    if key not in selected:continue
     outline=Image.new('RGBA',(128,128),'white')
     outline.putalpha((icon if args.independent else icons[0]).getchannel('A'))
     outline.save(OUT/f'{key}_outline.png')
@@ -51,7 +64,7 @@ board.save(BASE/'preview.png')
 native_board=Image.new('RGB',(1200,700),'#172020');d=ImageDraw.Draw(native_board)
 for row,key in enumerate(keys):
     for col,folder in enumerate(['originals','cleaned-native']):
-        im=Image.open(BASE/folder/f'{key}.png').convert('RGBA')
+        im=Image.open(source_path(key,folder)).convert('RGBA')
         cx,cy=im.width//2,im.height//2
         crop=im.crop((cx-280,cy-145,cx+280,cy+145))
         native_board.paste(crop,(col*600+20,row*350+45),crop)
@@ -71,6 +84,8 @@ sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 report={'dimensions':[128,128],'format':'RGBA PNG','transforms':transforms,
         'outline':'individual gemstone alpha' if args.independent else 'shared physical gemstone alpha',
         'checks':{},'files':[]}
+for p,expected in unchanged.items():assert sha(p)==expected
+report['reusedUnchanged']=[{'path':p.relative_to(ROOT).as_posix(),'sha256':value} for p,value in unchanged.items()]
 for key in keys:
     for suffix in ['', '_outline']:
         p=OUT/f'{key}{suffix}.png';im=Image.open(p).convert('RGBA');a=np.array(im)[...,3]
