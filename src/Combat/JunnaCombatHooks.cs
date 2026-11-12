@@ -43,7 +43,22 @@ public sealed class JunnaCombatHooks : SingletonModel
                 arrow.AttacksWhileWaiting++;
         return Task.CompletedTask;
     }
-    public override Task AfterCardPlayedLate(PlayerChoiceContext context, CardPlay play) => ArrowCombat.AfterPlayed(context, play);
+    private static readonly HashSet<Player> FollowingPlayers = [];
+    public override async Task AfterCardPlayedLate(PlayerChoiceContext context, CardPlay play)
+    {
+        await ArrowCombat.AfterPlayed(context, play);
+        if (!play.IsFirstInSeries || !CardCatalog.IsArrow(play.Card) || !FollowingPlayers.Add(play.Card.Owner)) return;
+        try
+        {
+            var followers = CardActions.Named(play.Card.Owner, "U_CARD_012").Where(card => card != play.Card).ToArray();
+            foreach (var follower in followers)
+            {
+                var target = CardTargets.IsValid(follower, play.Target) ? play.Target : CardTargets.First(follower);
+                await CardActions.FreePlay(context, follower, target, keepTarget: true);
+            }
+        }
+        finally { FollowingPlayers.Remove(play.Card.Owner); }
+    }
     public override bool TryModifyEnergyCostInCombat(CardModel card, decimal originalCost, out decimal modifiedCost)
     {
         bool free = CardCatalog.DesignId(card) == "JK45B" && ArrowCombat.Deployed.Any(a => a.Card.Owner == card.Owner && CardCatalog.DesignId(a.Card) == "JK45");

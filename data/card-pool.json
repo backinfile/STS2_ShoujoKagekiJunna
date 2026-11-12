@@ -1,5 +1,5 @@
 {
-  "revision": 4878,
+  "revision": 5002,
   "cards": [
     {
       "id": "JG03",
@@ -202,6 +202,70 @@
       "upgradedText": "箭矢完成后放回手牌。"
     },
     {
+      "id": "JK15",
+      "modelId": "JUNNA_JK15",
+      "className": "JunnaCardJK15",
+      "name": "反复研习",
+      "cost": 1,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "能力",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK15.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。",
+      "upgradedText": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。"
+    },
+    {
+      "id": "JK15B",
+      "modelId": "JUNNA_JK15B",
+      "className": "JunnaCardJK15B",
+      "name": "废稿",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": true,
+      "upgradedExhaust": true,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK15B.jpg",
+      "values": [
+        {
+          "name": "Block",
+          "base": 8,
+          "upgraded": 12
+        }
+      ],
+      "text": "知识。获得8点格挡。消耗。",
+      "upgradedText": "知识。获得12点格挡。消耗。"
+    },
+    {
       "id": "JT02",
       "modelId": "JUNNA_JT02",
       "className": "JunnaCardJT02",
@@ -358,12 +422,12 @@
       "values": [
         {
           "name": "N0",
-          "base": 1,
-          "upgraded": 1
+          "base": 2,
+          "upgraded": 3
         }
       ],
-      "text": "虚无。回合开始时，所有箭矢加速1回合。",
-      "upgradedText": "回合开始时，所有箭矢加速1回合。",
+      "text": "虚无。回合开始时，所有箭矢加速2回合。",
+      "upgradedText": "回合开始时，所有箭矢加速3回合。",
       "ethereal": true,
       "upgradedEthereal": false
     },
@@ -598,80 +662,6 @@
       "upgradedText": "知识。打出0费牌后，随机一个箭矢加速1回合。"
     },
     {
-      "id": "JK48",
-      "modelId": "JUNNA_JK48",
-      "className": "JunnaCardJK48",
-      "name": "引经据典",
-      "cost": 1,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "攻击",
-      "target": "AnyEnemy",
-      "arrowSubtype": "攻击",
-      "rarity": "稀有",
-      "pool": true,
-      "knowledge": true,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": true,
-      "portrait": "JK48.jpg",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 6,
-          "upgraded": 10
-        },
-        {
-          "name": "N1",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "知识。造成6点伤害。牌组中每有一张知识牌，伤害增加1。",
-      "upgradedText": "知识。造成10点伤害。牌组中每有一张知识牌，伤害增加1。"
-    },
-    {
-      "id": "JK48B",
-      "modelId": "JUNNA_JK48B",
-      "className": "JunnaCardJK48B",
-      "name": "精读",
-      "cost": 1,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "稀有",
-      "pool": false,
-      "knowledge": true,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JK48B.jpg",
-      "values": [
-        {
-          "name": "Block",
-          "base": 4,
-          "upgraded": 7
-        },
-        {
-          "name": "N1",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "知识。获得4点格挡。牌组中每有一张知识牌，格挡增加1。",
-      "upgradedText": "知识。获得7点格挡。牌组中每有一张知识牌，格挡增加1。"
-    },
-    {
       "id": "JK49",
       "modelId": "JUNNA_JK49",
       "className": "JunnaCardJK49",
@@ -900,7 +890,7 @@
       "id": "JK67",
       "modelId": "JUNNA_JK67",
       "className": "JunnaCardJK67",
-      "name": "反复推敲",
+      "name": "努力下去",
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
@@ -932,7 +922,7 @@
       "id": "JK67B",
       "modelId": "JUNNA_JK67B",
       "className": "JunnaCardJK67B",
-      "name": "字字千钧",
+      "name": "不丢掉目标",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
@@ -970,15 +960,15 @@
       "text": "知识。造成7点伤害3次。",
       "upgradedText": "知识。造成7点伤害3次。",
       "arrowFocus": {
-        "x": 0.22,
-        "y": 0.26
+        "x": 0.455,
+        "y": 0.32
       }
     },
     {
       "id": "JG27",
       "modelId": "JUNNA_JG27",
       "className": "JunnaCardJG27",
-      "name": "腹肌训练",
+      "name": "挺直脊背",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -1359,7 +1349,7 @@
       "id": "JA65",
       "modelId": "JUNNA_JA65",
       "className": "JunnaCardJA65",
-      "name": "伏击箭",
+      "name": "伏击",
       "cost": 1,
       "upgradedCost": 0,
       "costsX": false,
@@ -1548,6 +1538,38 @@
       "upgradedText": "获得20点格挡。每回合开始时获得1点能量。"
     },
     {
+      "id": "JK78",
+      "modelId": "JUNNA_JK78",
+      "className": "JunnaCardJK78",
+      "name": "专项加练",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK78.jpg",
+      "values": [
+        {
+          "name": "Bonus",
+          "base": 6,
+          "upgraded": 8
+        }
+      ],
+      "text": "抽牌堆的所有牌获得6点伤害加成。",
+      "upgradedText": "抽牌堆的所有牌获得8点伤害加成。"
+    },
+    {
       "id": "JH27",
       "modelId": "JUNNA_JH27",
       "className": "JunnaCardJH27",
@@ -1678,7 +1700,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JK82.png",
+      "portrait": "JK82.jpg",
       "values": [
         {
           "name": "N0",
@@ -1784,6 +1806,52 @@
       ],
       "text": "对所有敌人造成12点伤害。分别打出一张造成等量伤害的流星。",
       "upgradedText": "对所有敌人造成16点伤害。分别打出一张造成等量伤害的流星。"
+    },
+    {
+      "id": "JA77",
+      "modelId": "JUNNA_JA77",
+      "className": "JunnaCardJA77",
+      "name": "齐射",
+      "cost": 2,
+      "upgradedCost": 2,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "AllEnemies",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JA77.jpg",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 8,
+          "upgraded": 8
+        },
+        {
+          "name": "Repeat",
+          "base": 3,
+          "upgraded": 4
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "对所有敌人造成8点伤害3次。",
+      "upgradedText": "对所有敌人造成8点伤害4次。",
+      "arrowFocus": {
+        "x": 0.23,
+        "y": 0.49
+      }
     },
     {
       "id": "JA80",
@@ -2063,7 +2131,7 @@
       "id": "JA96",
       "modelId": "JUNNA_JA96",
       "className": "JunnaCardJA96",
-      "name": "稳住阵脚",
+      "name": "绝不停步",
       "cost": 1,
       "upgradedCost": 0,
       "costsX": false,
@@ -2099,8 +2167,8 @@
       "id": "JK84",
       "modelId": "JUNNA_JK84",
       "className": "JunnaCardJK84",
-      "name": "预习",
-      "cost": 1,
+      "name": "先学会站起来",
+      "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
       "type": "技能",
@@ -2109,7 +2177,7 @@
       "rarity": "罕见",
       "pool": false,
       "knowledge": true,
-      "exhaust": false,
+      "exhaust": true,
       "upgradedExhaust": false,
       "retain": false,
       "upgradedRetain": false,
@@ -2129,7 +2197,7 @@
           "upgraded": 5
         }
       ],
-      "text": "知识。将至多2张手牌作为5回合的箭矢打出。",
+      "text": "知识。将至多2张手牌作为5回合的箭矢打出。消耗。",
       "upgradedText": "知识。将至多2张手牌作为5回合的箭矢打出。",
       "arrowFocus": {
         "x": 0.5,
@@ -2140,7 +2208,7 @@
       "id": "JK84B",
       "modelId": "JUNNA_JK84B",
       "className": "JunnaCardJK84B",
-      "name": "论辩",
+      "name": "翱翔在天际",
       "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
@@ -2157,12 +2225,12 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": true,
-      "portrait": "JK84B.png",
+      "portrait": "JK84B.jpg",
       "values": [
         {
           "name": "Damage",
-          "base": 12,
-          "upgraded": 16
+          "base": 14,
+          "upgraded": 18
         },
         {
           "name": "N1",
@@ -2170,8 +2238,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。造成12点伤害。所有箭矢加速1回合。",
-      "upgradedText": "知识。造成16点伤害。所有箭矢加速1回合。",
+      "text": "知识。造成14点伤害。所有箭矢加速1回合。",
+      "upgradedText": "知识。造成18点伤害。所有箭矢加速1回合。",
       "arrowFocus": {
         "x": 0.64,
         "y": 0.3
@@ -2322,7 +2390,7 @@
       "id": "JK126",
       "modelId": "JUNNA_JK126",
       "className": "JunnaCardJK126",
-      "name": "兼收并蓄",
+      "name": "全都一起带去",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -2386,7 +2454,7 @@
       "id": "JK131",
       "modelId": "JUNNA_JK131",
       "className": "JunnaCardJK131",
-      "name": "引言",
+      "name": "永远都不嫌晚",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
@@ -2439,7 +2507,7 @@
       "values": [
         {
           "name": "Damage",
-          "base": 26,
+          "base": 24,
           "upgraded": 32
         },
         {
@@ -2453,7 +2521,7 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。造成26点伤害2次。",
+      "text": "知识。造成24点伤害2次。",
       "upgradedText": "知识。造成32点伤害2次。",
       "arrowFocus": {
         "x": 0.5,
@@ -2917,7 +2985,7 @@
       "id": "JS33",
       "modelId": "JUNNA_JS33",
       "className": "JunnaCardJS33",
-      "name": "整备",
+      "name": "道标",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
@@ -3113,7 +3181,7 @@
       "id": "JK200",
       "modelId": "JUNNA_JK200",
       "className": "JunnaCardJK200",
-      "name": "质疑",
+      "name": "你一直在看什么",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -3656,70 +3724,6 @@
       "upgradedText": "抽3张牌。消耗。闪耀3。"
     },
     {
-      "id": "U_CARD_009",
-      "modelId": "JUNNA_U_CARD_009",
-      "className": "JunnaCardU_CARD_009",
-      "name": "每一次相遇",
-      "cost": 1,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "罕见",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": true,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "U_CARD_009.png",
-      "values": [
-        {
-          "name": "N0",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "抽取箭矢牌、知识牌、闪耀牌各1张。消耗。",
-      "upgradedText": "抽取箭矢牌、知识牌、闪耀牌各1张。"
-    },
-    {
-      "id": "U_CARD_010",
-      "modelId": "JUNNA_U_CARD_010",
-      "className": "JunnaCardU_CARD_010",
-      "name": "舞台少女心得",
-      "cost": 2,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "能力",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "稀有",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "U_CARD_010.png",
-      "values": [
-        {
-          "name": "N0",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、箭矢牌、闪耀牌。",
-      "upgradedText": "回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、箭矢牌、闪耀牌。"
-    },
-    {
       "id": "JK359",
       "modelId": "JUNNA_JK359",
       "className": "JunnaCardJK359",
@@ -4132,6 +4136,184 @@
         "x": 0.55,
         "y": 0.43
       }
+    },
+    {
+      "id": "U_CARD_009",
+      "modelId": "JUNNA_U_CARD_009",
+      "className": "JunnaCardU_CARD_009",
+      "name": "每一次相遇",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": true,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_009.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "抽取箭矢牌、知识牌、闪耀牌各1张。消耗。",
+      "upgradedText": "抽取箭矢牌、知识牌、闪耀牌各1张。"
+    },
+    {
+      "id": "U_CARD_010",
+      "modelId": "JUNNA_U_CARD_010",
+      "className": "JunnaCardU_CARD_010",
+      "name": "舞台少女心得",
+      "cost": 2,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "能力",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_010.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "回合开始时，从抽牌堆选择1张知识牌放入手牌。（在知识、箭矢和闪耀中轮换）",
+      "upgradedText": "回合开始时，从抽牌堆选择1张知识牌放入手牌。（在知识、箭矢和闪耀中轮换）"
+    },
+    {
+      "id": "U_CARD_011",
+      "modelId": "JUNNA_U_CARD_011",
+      "className": "JunnaCardU_CARD_011",
+      "name": "撕裂黑暗",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "AllEnemies",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "U_CARD_011.jpg",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 12,
+          "upgraded": 16
+        },
+        {
+          "name": "Turns",
+          "base": 2,
+          "upgraded": 2
+        }
+      ],
+      "text": "对所有敌人造成12点伤害。",
+      "upgradedText": "对所有敌人造成16点伤害。",
+      "arrowFocus": {
+        "x": 0.55,
+        "y": 0.5
+      }
+    },
+    {
+      "id": "U_CARD_012",
+      "modelId": "JUNNA_U_CARD_012",
+      "className": "JunnaCardU_CARD_012",
+      "name": "追逐着你而去",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "箭矢",
+      "target": "AnyEnemy",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "U_CARD_012.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 16,
+          "upgraded": 20
+        },
+        {
+          "name": "Turns",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "造成16点伤害。当你打出箭矢时，打出此牌（无论何处）。",
+      "upgradedText": "造成20点伤害。当你打出箭矢时，打出此牌（无论何处）。",
+      "arrowFocus": {
+        "x": 0.64,
+        "y": 0.3
+      }
+    },
+    {
+      "id": "U_CARD_013",
+      "modelId": "JUNNA_U_CARD_013",
+      "className": "JunnaCardU_CARD_013",
+      "name": "牢笼",
+      "cost": 1,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_013.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 50,
+          "upgraded": 50
+        }
+      ],
+      "text": "本回合中，箭矢的目标造成伤害降低50%（不重复）。",
+      "upgradedText": "本回合中，箭矢的目标造成伤害降低50%（不重复）。"
     }
   ],
   "groups": [
@@ -4145,6 +4327,18 @@
       ],
       "grantedCardCounts": {
         "JK11": 1
+      }
+    },
+    {
+      "uid": "draft_group_JK15",
+      "id": "GROUP_JK15",
+      "title": "JK15",
+      "mainCardId": "JK15",
+      "grantedCardIds": [
+        "JK15B"
+      ],
+      "grantedCardCounts": {
+        "JK15B": 1
       }
     },
     {
@@ -4188,18 +4382,6 @@
       }
     },
     {
-      "uid": "knowledge_structure_group_JK48",
-      "id": "GROUP_JK48",
-      "title": "引经据典／精读",
-      "mainCardId": "JK48",
-      "grantedCardIds": [
-        "JK48B"
-      ],
-      "grantedCardCounts": {
-        "JK48B": 1
-      }
-    },
-    {
       "uid": "knowledge_structure_group_JK49",
       "id": "GROUP_JK49",
       "title": "挺身反抗／默然忍受",
@@ -4214,7 +4396,7 @@
     {
       "uid": "complete_pool_group_JK67",
       "id": "GROUP_JK67",
-      "title": "反复推敲／字字千钧",
+      "title": "努力下去／不丢掉目标",
       "mainCardId": "JK67",
       "grantedCardIds": [
         "JK67B"
@@ -4238,7 +4420,7 @@
     {
       "uid": "junna-arrow-five-turn-exploration-20261105_GROUP_JK84",
       "id": "GROUP_JK84",
-      "title": "预习／论辩",
+      "title": "先学会站起来／翱翔在天际",
       "mainCardId": "JK84B",
       "grantedCardIds": [
         "JK84"
@@ -4263,7 +4445,7 @@
     {
       "uid": "junna-shine-arrow-exploration-20261106_GROUP_JK131",
       "id": "GROUP_JK131",
-      "title": "檄文／引言",
+      "title": "檄文／永远都不嫌晚",
       "mainCardId": "JK131B",
       "grantedCardIds": [
         "JK131"
@@ -4271,7 +4453,7 @@
       "grantedCardCounts": {
         "JK131": 1
       },
-      "notes": "檄文为常驻高费群攻箭矢入口，附带0费技能引言。引言以闪耀9提供限次抽牌，耗尽后留下檄文。"
+      "notes": "檄文为常驻群攻箭矢入口，附带永远都不嫌晚。关联技能用闪耀9提供限次的全牌伤害加成，耗尽后留下檄文。"
     },
     {
       "uid": "junna-shine-arrow-exploration-20261106_GROUP_JK133",
@@ -4327,7 +4509,7 @@
     {
       "uid": "junna-common-one-cost-aoe-knowledge-20261108_GROUP_JK200",
       "id": "GROUP_JK200",
-      "title": "质疑／疑问",
+      "title": "你一直在看什么／疑问",
       "mainCardId": "JK200",
       "grantedCardIds": [
         "JK200B"
@@ -4337,8 +4519,8 @@
       },
       "structure": "质疑与辨析",
       "draftBatch": "junna-common-one-cost-aoe-knowledge-20261108",
-      "reference": "一般论辩、学习与练习行为；未指定文学引文。",
-      "notes": "取得质疑时，同时获得1张疑问；两张牌独立使用和升级。质疑以连续的群体攻击提出问题，疑问用格挡与手牌伤害加成整理后续回应。组内契合按当前牌面记录，分别保留现有数值和支付。"
+      "reference": "《ペン：力：刀》纯那声部的问句；关联的疑问表现追问与整理回应。",
+      "notes": "取得你一直在看什么时，同时获得1张疑问；两张牌独立使用和升级。你一直在看什么以连续的群体攻击提出问题，疑问用格挡与手牌伤害加成整理后续回应。组内契合按当前牌面记录，分别保留现有数值和支付。"
     },
     {
       "uid": "junna_deck_size_knowledge_20261108_GROUP_JK206",
@@ -4436,6 +4618,19 @@
       "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
     },
     {
+      "uid": "knowledge-initial-lists-20261110_JK15B",
+      "id": "INITIAL_KNOWLEDGE_LIST_JK15B",
+      "title": "废稿",
+      "mainCardId": "JK15B",
+      "grantedCardIds": [
+        "JK15"
+      ],
+      "grantedCardCounts": {
+        "JK15": 1
+      },
+      "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
+    },
+    {
       "uid": "knowledge-initial-lists-20261110_B",
       "id": "INITIAL_KNOWLEDGE_LIST_B",
       "title": "心得",
@@ -4510,19 +4705,6 @@
       "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
     },
     {
-      "uid": "knowledge-initial-lists-20261110_JK48B",
-      "id": "INITIAL_KNOWLEDGE_LIST_JK48B",
-      "title": "精读",
-      "mainCardId": "JK48B",
-      "grantedCardIds": [
-        "JK48"
-      ],
-      "grantedCardCounts": {
-        "JK48": 1
-      },
-      "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
-    },
-    {
       "uid": "knowledge-initial-lists-20261110_JK49B",
       "id": "INITIAL_KNOWLEDGE_LIST_JK49B",
       "title": "默然忍受",
@@ -4538,7 +4720,7 @@
     {
       "uid": "knowledge-initial-lists-20261110_JK67B",
       "id": "INITIAL_KNOWLEDGE_LIST_JK67B",
-      "title": "字字千钧",
+      "title": "不丢掉目标",
       "mainCardId": "JK67B",
       "grantedCardIds": [
         "JK67"
@@ -4565,7 +4747,7 @@
     {
       "uid": "knowledge-initial-lists-20261110_JK84",
       "id": "INITIAL_KNOWLEDGE_LIST_JK84",
-      "title": "预习",
+      "title": "先学会站起来",
       "mainCardId": "JK84",
       "grantedCardIds": [
         "JK84B"
@@ -4597,7 +4779,7 @@
     {
       "uid": "knowledge-initial-lists-20261110_JK131",
       "id": "INITIAL_KNOWLEDGE_LIST_JK131",
-      "title": "引言",
+      "title": "永远都不嫌晚",
       "mainCardId": "JK131",
       "grantedCardIds": [
         "JK131B"
@@ -4687,6 +4869,9 @@
       "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
     },
     {
+      "uid": "junna-seven-notes-20261110_relations_JK359",
+      "id": "GROUP_SEVEN_NOTES_JK359",
+      "title": "舞台少女的武器",
       "mainCardId": "JK359",
       "grantedCardIds": [
         "JK360",
@@ -4707,9 +4892,37 @@
         "JK365": 1,
         "JK366": 1,
         "JK367": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应翡翠弓。九张均为事件专用且不入池，完整取得共9张，附带发放一次。"
     },
     {
+      "uid": "junna-seven-notes-20261110_relations_JK360",
+      "id": "GROUP_SEVEN_NOTES_JK360",
+      "title": "舞台少女的武器",
       "mainCardId": "JK360",
       "grantedCardIds": [
         "JK359",
@@ -4730,9 +4943,37 @@
         "JK365": 1,
         "JK366": 1,
         "JK367": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应爱的审判。九张均为事件专用且不入池，完整取得共9张，附带发放一次。"
     },
     {
+      "uid": "junna-seven-notes-20261110_relations_JK361",
+      "id": "GROUP_SEVEN_NOTES_JK361",
+      "title": "舞台少女的武器",
       "mainCardId": "JK361",
       "grantedCardIds": [
         "JK359",
@@ -4753,9 +4994,37 @@
         "JK365": 1,
         "JK366": 1,
         "JK367": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应骄傲的火花。九张均为事件专用且不入池，完整取得共9张，附带发放一次。"
     },
     {
+      "uid": "junna-seven-notes-20261110_relations_JK362",
+      "id": "GROUP_SEVEN_NOTES_JK362",
+      "title": "舞台少女的武器",
       "mainCardId": "JK362",
       "grantedCardIds": [
         "JK359",
@@ -4776,9 +5045,37 @@
         "JK365": 1,
         "JK366": 1,
         "JK367": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应轮舞。九张均为事件专用且不入池，完整取得共9张，附带发放一次。"
     },
     {
+      "uid": "junna-seven-notes-20261110_relations_JK363",
+      "id": "GROUP_SEVEN_NOTES_JK363",
+      "title": "舞台少女的武器",
       "mainCardId": "JK363",
       "grantedCardIds": [
         "JK359",
@@ -4799,9 +5096,37 @@
         "JK365": 1,
         "JK366": 1,
         "JK367": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应决定者。九张均为事件专用且不入池，完整取得共9张，附带发放一次。"
     },
     {
+      "uid": "junna-seven-notes-20261110_relations_JK364",
+      "id": "GROUP_SEVEN_NOTES_JK364",
+      "title": "舞台少女的武器",
       "mainCardId": "JK364",
       "grantedCardIds": [
         "JK359",
@@ -4822,9 +5147,37 @@
         "JK365": 1,
         "JK366": 1,
         "JK367": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应水仙花。九张均为事件专用且不入池，完整取得共9张，附带发放一次。"
     },
     {
+      "uid": "junna-seven-notes-20261110_relations_JK365",
+      "id": "GROUP_SEVEN_NOTES_JK365",
+      "title": "舞台少女的武器",
       "mainCardId": "JK365",
       "grantedCardIds": [
         "JK359",
@@ -4845,9 +5198,37 @@
         "JK364": 1,
         "JK366": 1,
         "JK367": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应花蕾的光辉。九张均为事件专用且不入池，完整取得共9张，附带发放一次。"
     },
     {
+      "uid": "junna-nine-members-20261110_relations_JK366",
+      "id": "GROUP_NINE_MEMBERS_JK366",
+      "title": "舞台少女的武器",
       "mainCardId": "JK366",
       "grantedCardIds": [
         "JK359",
@@ -4868,9 +5249,37 @@
         "JK364": 1,
         "JK365": 1,
         "JK367": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应思春期的可能性。九张均为事件专用且不入池，完整取得共9张，附带发放一次。",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble"
     },
     {
+      "uid": "junna-nine-members-20261110_relations_JK367",
+      "id": "GROUP_NINE_MEMBERS_JK367",
+      "title": "舞台少女的武器",
       "mainCardId": "JK367",
       "grantedCardIds": [
         "JK359",
@@ -4891,7 +5300,32 @@
         "JK364": 1,
         "JK365": 1,
         "JK366": 1
-      }
+      },
+      "structure": "九张平等事件专用武器知识牌的独立关联列表",
+      "design": {
+        "equalMembers": true,
+        "memberIds": [
+          "JK359",
+          "JK360",
+          "JK361",
+          "JK362",
+          "JK363",
+          "JK364",
+          "JK365",
+          "JK366",
+          "JK367"
+        ],
+        "structure": "九名舞台少女各一张的平等武器知识箭矢",
+        "rules": "九个不同牌名各1张，九张地位平等。每张各自保存指向其余八张的直接关联列表，八张各发放1份。九张均为事件专用牌，卡池和稀有度设为事件，入池标记均为否。由事件取得时，按ME_PARTNER规则连同本次取得共获得9张实际永久牌，附带发放一次。单张生成、复制、重放和升级沿ME_PARTNER处理。各张分别占位、升级。\n九张基础与升级均为0费、1回合箭矢。每份牌效先执行本张独立效果，再抽2张关联牌。未带限定的“关联牌”按当前机制包含本张同名与直接关联列表中的牌名，原生完整组共九个可匹配牌名。当前结算中的实际箭矢不在抽牌堆，其他同名实际牌仍可命中。定向抽牌只从当前抽牌堆抽取，不因不足而洗入弃牌堆；符合牌不足2张时抽取实际可抽数量。普通抽牌沿既有洗牌及手牌上限规则。\n翡翠弓先普通抽1／2张，再抽2张关联牌，合计最多3／4张。花蕾的光辉由玩家选择弃牌堆中的关联实际牌并置顶，升级最多2张并由玩家确定顶端先后，再抽2张关联牌；因此基础最多立即回收所选1张，升级最多立即回收所选2张。没有回收对象时仍执行共同抽牌。孤高的奥黛特在结算时选择手牌中1张能造成伤害的关联实际牌，按既有伤害加成规则强化至本场战斗结束，再执行共同抽牌。没有合法对象时仍抽牌。\n轮舞在结算时登记本回合末的一次保留，回合末才选择手牌，上限为1／2张；登记在本回合末处理后消失。重复触发分别登记，已保留的实际牌不占重复选择。水仙花升级只获得1点能量，结转容量按本效果实际获得量增加，并在下一次能量刷新时按既有规则处理。重放及额外触发按每份牌效执行，箭矢计时、完成、知识打出计数与去向沿ME_STAGE及ME_PARTNER处理。",
+        "playPattern": "按敌人意图布置输出或格挡，利用翡翠弓补充手牌、花蕾的光辉回收所需成员、轮舞保存后续手牌。孤高的奥黛特强化已在手牌中的关联伤害牌，水仙花支持能量安排。",
+        "balance": "按用户要求，共同效果提高为抽2张关联牌，并将九张整体设为事件专用。独立效果为单体5／7、群伤3／5、两段2×2／3×2、格挡4／6、普通抽牌1／2、回合末一次保留最多1／2张、弃牌置顶最多1／2张、单张手牌中的关联牌伤害加成2／3、能量1／1且升级可结转1点。共享抽牌计入总量，翡翠弓最多抽3／4张，花蕾的光辉升级最多即时取回2张选中的关联牌。",
+        "review": "已核对九人一人一张、无统一前缀的武器专名、基础与升级均抽2张关联牌、0费1回合，以及九张完整互相关联。九张均设为事件卡池、事件稀有度和不入池。英文及法文武器名采用中文暂译，原名与展示来源分别记录。九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。",
+        "knowledgeRelation": "九张分别记录九名舞台少女的武器专名、武器种类与使用者对应关系，构成一组武器资料。每张有独立用途并抽2张关联牌，九张互相关联，按当前牌堆现状衔接。",
+        "artReview": "九张配图统一为《少女☆歌剧 Re LIVE》初始“圣翔音乐学园”系列官方卡面，素材由Starlight Academy资料站镜像保存。已按工作台实际卡框和箭矢遮罩检查人物身份、脸、手、主要武器、原卡UI遮挡及聚焦。"
+      },
+      "notes": "九个不同牌名各1张，每张直接关联其余八张，各发放1份。本列表对应孤高的奥黛特。九张均为事件专用且不入池，完整取得共9张，附带发放一次。",
+      "draftBatch": "junna-seven-notes-20261110",
+      "candidateSetId": "junna-seven-notes-20261110_ensemble"
     }
   ],
   "startingDeck": [
@@ -4913,66 +5347,6 @@
     }
   ],
   "retiredCards": [
-    {
-      "id": "JK15",
-      "modelId": "JUNNA_JK15",
-      "className": "JunnaCardJK15",
-      "name": "反复研习",
-      "cost": 1,
-      "upgradedCost": 0,
-      "costsX": false,
-      "type": "能力",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "稀有",
-      "pool": false,
-      "knowledge": true,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "damageCapable": false,
-      "portrait": "JK15.jpg",
-      "values": [
-        {
-          "name": "N0",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。",
-      "upgradedText": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。"
-    },
-    {
-      "id": "JK15B",
-      "modelId": "JUNNA_JK15B",
-      "className": "JunnaCardJK15B",
-      "name": "废稿",
-      "cost": 0,
-      "upgradedCost": 0,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "稀有",
-      "pool": false,
-      "knowledge": true,
-      "exhaust": true,
-      "upgradedExhaust": true,
-      "retain": false,
-      "upgradedRetain": false,
-      "damageCapable": false,
-      "portrait": "JK15B.jpg",
-      "values": [
-        {
-          "name": "Block",
-          "base": 8,
-          "upgraded": 12
-        }
-      ],
-      "text": "知识。获得8点格挡。消耗。",
-      "upgradedText": "知识。获得12点格挡。消耗。"
-    },
     {
       "id": "JK44",
       "modelId": "JUNNA_JK44",
@@ -6908,89 +7282,6 @@
       "choiceOnly": true
     },
     {
-      "id": "JK78",
-      "modelId": "JUNNA_JK78",
-      "className": "JunnaCardJK78",
-      "name": "专项加练",
-      "cost": 1,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "技能",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "稀有",
-      "pool": false,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JK78.jpg",
-      "values": [
-        {
-          "name": "N0",
-          "base": 3,
-          "upgraded": 3
-        },
-        {
-          "name": "Bonus",
-          "base": 6,
-          "upgraded": 8
-        }
-      ],
-      "text": "选择抽牌堆至多3张牌，使它们获得6点伤害加成。",
-      "upgradedText": "选择抽牌堆至多3张牌，使它们获得8点伤害加成。"
-    },
-    {
-      "id": "JA77",
-      "modelId": "JUNNA_JA77",
-      "className": "JunnaCardJA77",
-      "name": "齐射",
-      "cost": 2,
-      "upgradedCost": 2,
-      "costsX": false,
-      "type": "箭矢",
-      "target": "AllEnemies",
-      "arrowSubtype": "技能",
-      "rarity": "稀有",
-      "pool": false,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": true,
-      "portrait": "JA77.jpg",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 8,
-          "upgraded": 8
-        },
-        {
-          "name": "Repeat",
-          "base": 3,
-          "upgraded": 4
-        },
-        {
-          "name": "Turns",
-          "base": 1,
-          "upgraded": 1
-        }
-      ],
-      "text": "对所有敌人造成8点伤害3次。",
-      "upgradedText": "对所有敌人造成8点伤害4次。",
-      "arrowFocus": {
-        "x": 0.23,
-        "y": 0.49
-      }
-    },
-    {
       "id": "JK184",
       "modelId": "JUNNA_JK184",
       "className": "JunnaCardJK184",
@@ -7153,6 +7444,80 @@
       "values": [],
       "text": "目标为单个敌人的箭矢现在会攻击所有敌人。",
       "upgradedText": "目标为单个敌人的箭矢现在会攻击所有敌人。"
+    },
+    {
+      "id": "JK48",
+      "modelId": "JUNNA_JK48",
+      "className": "JunnaCardJK48",
+      "name": "引经据典",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "攻击",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "稀有",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "JK48.jpg",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 6,
+          "upgraded": 10
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。造成6点伤害。牌组中每有一张知识牌，伤害增加1。",
+      "upgradedText": "知识。造成10点伤害。牌组中每有一张知识牌，伤害增加1。"
+    },
+    {
+      "id": "JK48B",
+      "modelId": "JUNNA_JK48B",
+      "className": "JunnaCardJK48B",
+      "name": "精读",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "稀有",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK48B.jpg",
+      "values": [
+        {
+          "name": "Block",
+          "base": 4,
+          "upgraded": 7
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "知识。获得4点格挡。牌组中每有一张知识牌，格挡增加1。",
+      "upgradedText": "知识。获得7点格挡。牌组中每有一张知识牌，格挡增加1。"
     }
   ],
   "startingHp": 70,
@@ -7160,5 +7525,5 @@
   "startingRelics": [
     "JUNNA_GREEN_GEM"
   ],
-  "arrowArtRevision": 4874
+  "arrowArtRevision": 5002
 }

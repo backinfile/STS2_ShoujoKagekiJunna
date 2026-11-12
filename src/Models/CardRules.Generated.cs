@@ -1228,8 +1228,7 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
-                ["Amount"] = "N0",
-                ["Cards"] = "N0",
+                ["Bonus"] = "Bonus",
             },
             Tips = [CardTip.DamageBonus],
             UpgradedTips = [CardTip.DamageBonus],
@@ -1434,6 +1433,21 @@ internal static partial class CardRules
             PowerDescription = PowerDescriptionKind.RepeatedApplications,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
+        },
+        ["U_CARD_011"] = new()
+        {
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            Effect = SimpleCardEffect.Attack,
+        },
+        ["U_CARD_012"] = new()
+        {
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            Effect = SimpleCardEffect.Attack,
+        },
+        ["U_CARD_013"] = new()
+        {
         },
     };
 }

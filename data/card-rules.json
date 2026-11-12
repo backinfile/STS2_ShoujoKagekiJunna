@@ -444,8 +444,7 @@
     },
     "JK78": {
       "fields": {
-        "Amount": "N0",
-        "Cards": "N0"
+        "Bonus": "Bonus"
       },
       "tips": [
         "DamageBonus"
@@ -1987,6 +1986,25 @@
         "amount": "Applications",
         "single": false
       }
-    }
+    },
+    "U_CARD_011": {
+      "effect": "Attack",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "U_CARD_012": {
+      "effect": "Attack",
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "U_CARD_013": {}
   }
 }

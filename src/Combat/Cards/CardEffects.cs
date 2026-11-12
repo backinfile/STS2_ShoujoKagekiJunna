@@ -201,6 +201,7 @@ public static class CardEffects
             case "JA71":
                 await Block(); await ArrowCombat.AccelerateAll(context, player, int.MaxValue); break;
             case "JK78":
+                await Improve(player.PlayerCombatState.DrawPile.Cards, V("Bonus")); break;
             case "JK78D":
                 await ImproveSelected(player.PlayerCombatState.DrawPile.Cards, V("Bonus"), V("Amount"), true); break;
             case "JK78E":
@@ -299,6 +300,12 @@ public static class CardEffects
                 break;
             case "JK84B":
                 await Attack(); await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
+            case "U_CARD_013":
+                foreach (var target in ArrowCombat.Deployed.Where(a => a.Card.Owner == player)
+                    .SelectMany(a => a.Targets).Where(target => target.IsAlive && target.IsEnemy).Distinct().ToArray())
+                    if (!target.HasPower<JunnaCagedPower>())
+                        await PowerCmd.Apply<JunnaCagedPower>(context, target, 1, player.Creature, card);
+                break;
             case "U_CARD_009":
                 await CardTutors.DrawCategories(context, card); break;
             case "JK314":
