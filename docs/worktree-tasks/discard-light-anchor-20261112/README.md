@@ -30,4 +30,8 @@
 
 Beta、Stable、定向测试模组以-warnaserror编译通过，零警告、零错误。独立随机端口8853、满解锁、最小化静默；启动前台命中0/120。录制前完成环境准备，录制中仅正常悬停。录像discard-light-fixed.mp4为9.53秒、1280×720、30FPS、H.264/AAC、engine_mix音源，完成封装，完整解码和画面抽查通过。
 
-450份跟踪及新增文档完成本地绝对路径及敏感字段检查，无发现。基线、修复后截图、几何结果、录像和最终构建归档至主目录artifacts/task-deliverables/discard-light-anchor-20261112/。最终合入及清理以同目录integration-receipt.json为回执。
+451份跟踪及新增文档完成本地绝对路径及敏感字段检查，无发现。基线、修复后截图、几何结果、录像和最终构建归档至主目录artifacts/task-deliverables/discard-light-anchor-20261112/。最终合入及清理以同目录integration-receipt.json为回执。
+
+## 最新主干同步
+
+合入前main更新为f8e383ca3dde4c99700e3e0ab85f8b913e56bab8，新增角色选择呼吸与弓弦跟随效果、对应裁切元数据及记录。本工作树通过f924314合并保留全部更新，光点战斗源码与实机验证版本一致。同步后重新执行完整build.ps1，Beta、Stable和加载器C#构建零警告、零错误，资源导入和PCK打包成功；最终包同时包含最新选角资源与本次光点修复。
