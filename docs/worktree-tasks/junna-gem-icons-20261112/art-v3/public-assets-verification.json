@@ -1,0 +1,17 @@
+{
+  "revision": 5003,
+  "assets": [
+    {
+      "key": "green_gem",
+      "url": "https://junna.17181718.xyz/assets/9ec40bef69dbd4944390a86f.png",
+      "sha256": "9ec40bef69dbd4944390a86f22223d7e064308517be8411af3d49707840642b7",
+      "matchesLocal": true
+    },
+    {
+      "key": "burning_gem",
+      "url": "https://junna.17181718.xyz/assets/922ed8ccc492524d4b1f63fe.png",
+      "sha256": "922ed8ccc492524d4b1f63fe36c86981c35a76633722cf9c21193cdf3bcbb6d8",
+      "matchesLocal": true
+    }
+  ]
+}

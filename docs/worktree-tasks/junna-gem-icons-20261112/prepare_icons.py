@@ -1,29 +1,38 @@
 """Pack cleaned relics with a shared transform; inspect native and small-size output."""
-import hashlib, json
+import argparse, hashlib, json
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 
 TASK=Path(__file__).resolve().parent
 ROOT=TASK.parents[2]
-BASE=TASK/'art-v2'
+parser=argparse.ArgumentParser()
+parser.add_argument('--base',default='art-v2')
+parser.add_argument('--independent',action='store_true')
+args=parser.parse_args()
+BASE=TASK/args.base
 OUT=ROOT/'ShoujoKagekiJunna/images/relics'
 keys=['green_gem','burning_gem']
 native=[Image.open(BASE/'cleaned-native'/f'{key}.png').convert('RGBA') for key in keys]
-assert native[0].size==native[1].size
 boxes=[im.getchannel('A').point(lambda a:255 if a>8 else 0).getbbox() for im in native]
-box=(min(b[0] for b in boxes),min(b[1] for b in boxes),max(b[2] for b in boxes),max(b[3] for b in boxes))
-scale=112/max(box[2]-box[0],box[3]-box[1])
-size=tuple(round(v*scale) for v in (box[2]-box[0],box[3]-box[1]))
-offset=((128-size[0])//2,(128-size[1])//2)
-icons=[]
-for key,im in zip(keys,native):
+if not args.independent:
+    assert native[0].size==native[1].size
+    box=(min(b[0] for b in boxes),min(b[1] for b in boxes),max(b[2] for b in boxes),max(b[3] for b in boxes))
+    boxes=[box,box]
+icons=[];transforms={}
+for key,im,box in zip(keys,native,boxes):
+    scale=112/max(box[2]-box[0],box[3]-box[1])
+    size=tuple(round(v*scale) for v in (box[2]-box[0],box[3]-box[1]))
+    offset=((128-size[0])//2,(128-size[1])//2)
     icon=Image.new('RGBA',(128,128))
     icon.alpha_composite(im.crop(box).resize(size,Image.Resampling.LANCZOS),offset)
     icon.save(OUT/f'{key}.png');icons.append(icon)
-# Both hover outlines follow the starter's physical solid silhouette, excluding upgrade glow.
-outline=Image.new('RGBA',(128,128),'white');outline.putalpha(icons[0].getchannel('A'))
-for key in keys:outline.save(OUT/f'{key}_outline.png')
+    transforms[key]={'crop':box,'scale':scale,'offset':offset}
+# Independently drawn gems need their own physical hover silhouettes.
+for key,icon in zip(keys,icons):
+    outline=Image.new('RGBA',(128,128),'white')
+    outline.putalpha((icon if args.independent else icons[0]).getchannel('A'))
+    outline.save(OUT/f'{key}_outline.png')
 font=ImageFont.truetype('C:/Windows/Fonts/msyh.ttc',22)
 board=Image.new('RGB',(840,530),'#172020');draw=ImageDraw.Draw(board)
 for col,(key,title,im) in enumerate(zip(keys,['绿色宝石','燃烧宝石'],icons)):
@@ -59,14 +68,19 @@ for n,name in enumerate(names):
     d.text((x+20,y+8),f'{name} · {page}',font=font,fill='#172020')
 weapons.save(refs/'all-nine-weapons.jpg',quality=93)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-report={'dimensions':[128,128],'format':'RGBA PNG','sharedCrop':box,'sharedScale':scale,'sharedOffset':offset,
-        'outline':'shared physical gemstone alpha, excludes upgraded glow','checks':{},'files':[]}
+report={'dimensions':[128,128],'format':'RGBA PNG','transforms':transforms,
+        'outline':'individual gemstone alpha' if args.independent else 'shared physical gemstone alpha',
+        'checks':{},'files':[]}
 for key in keys:
     for suffix in ['', '_outline']:
         p=OUT/f'{key}{suffix}.png';im=Image.open(p).convert('RGBA');a=np.array(im)[...,3]
         assert im.size==(128,128) and a.max()==255 and a.min()==0
         assert a[0].max()==0 and a[-1].max()==0 and a[:,0].max()==0 and a[:,-1].max()==0
         report['files'].append({'path':p.relative_to(ROOT).as_posix(),'sha256':sha(p),'bbox':im.getbbox()})
-report['checks']={'transparentMargins':True,'sharedCoordinateTransform':True,'sharedOutline':True,'onlyGemstone':True}
+if args.independent:
+    assert not np.array_equal(np.array(icons[0])[...,3],np.array(icons[1])[...,3])
+    for key,icon in zip(keys,icons):
+        assert np.array_equal(np.array(icon)[...,3],np.array(Image.open(OUT/f'{key}_outline.png'))[...,3])
+report['checks']={'transparentMargins':True,'independentSilhouettes':args.independent,'eachOutlineMatchesGem':True,'onlyGemstone':True}
 (BASE/'validation.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print(json.dumps(report['checks']))
