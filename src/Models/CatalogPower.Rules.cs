@@ -40,9 +40,11 @@ public sealed partial class JunnaPowerJA118
 
 public sealed partial class JunnaPowerJA144
 {
-    protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
-        await CardActions.Generate(Owner.Player!, "JA119", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom);
+        if (player != Owner.Player) return;
+        foreach (var grant in _grants.ToArray())
+            await CardActions.Generate(player, "JA119", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom);
     }
 }
 

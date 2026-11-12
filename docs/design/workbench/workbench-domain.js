@@ -16,11 +16,21 @@
   function setGroupMain(data,groupUid,cardUid){
     const group=data.partnerGroups.find(entry=>entry.uid===groupUid),card=data.cards.find(entry=>entry.uid===cardUid);
     if(!group||!card||card.trashedAt)throw Error('请选择组内的知识牌');
-    if(group.mainCardId===card.id)return false;
+    const ids=[group.mainCardId,...group.grantedCardIds];
+    if(group.mainCardId===card.id){
+      if(card.pool)return false;
+      const sourceGroup=data.partnerGroups.find(entry=>{
+        const source=data.cards.find(candidate=>candidate.id===entry.mainCardId);
+        return source?.pool&&!source.trashedAt&&entry.grantedCardIds.length+1===ids.length&&[entry.mainCardId,...entry.grantedCardIds].every(id=>ids.includes(id));
+      });
+      if(sourceGroup)return setGroupMain(data,sourceGroup.uid,cardUid);
+      card.pool=card.rarity!=='基础';
+      return card.pool;
+    }
     if(!group.grantedCardIds.includes(card.id))throw Error('此牌不属于该知识组');
     const oldMain=data.cards.find(entry=>entry.id===group.mainCardId);
     if(!oldMain)throw Error('知识组缺少主牌');
-    const targetGroup=data.partnerGroups.find(entry=>entry.mainCardId===card.id),ids=[group.mainCardId,...group.grantedCardIds];
+    const targetGroup=data.partnerGroups.find(entry=>entry.mainCardId===card.id);
     if(targetGroup){
       const targetIds=new Set([targetGroup.mainCardId,...targetGroup.grantedCardIds]);
       if(targetIds.size!==ids.length||ids.some(id=>!targetIds.has(id)))throw Error('此牌已有自己的关联牌列表');
