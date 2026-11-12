@@ -150,7 +150,14 @@ public sealed class KnowledgeLinksProbe : AbstractConsoleCmd
                     return pixel.X >= 0 && pixel.Y >= 0 && pixel.X < image.GetWidth() && pixel.Y < image.GetHeight()
                         ? image.GetPixel((int)pixel.X, (int)pixel.Y).A : 0;
                 }
-                if (Alpha(anchor - normal * 3) >= .5f && Alpha(anchor + normal * 3) < .5f) return true;
+                if (Alpha(anchor - normal * 3) >= .5f && Alpha(anchor + normal * 3) < .5f)
+                {
+                    var pixel = (toIcon * anchor - offset) / scale;
+                    var visible = image.GetUsedRect();
+                    if (pixel.Y > visible.Position.Y + visible.Size.Y * .35f)
+                        throw new InvalidOperationException($"Pile light is too low: {icon.GetParent().Name}, anchor {pixel}, visible {visible}");
+                    return true;
+                }
             }
             return false;
         }
