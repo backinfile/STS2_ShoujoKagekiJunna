@@ -125,3 +125,17 @@ test('无链接时默认打开卡池，旧药水入口转到独立药水页',()=
   assert.equal(ui.tab,'potions');
   context.location.hash='#tab=potions&rarity=稀有';context.readHash();assert.equal(ui.tab,'potions');assert.equal(ui.rarity,'稀有');
 });
+
+
+test('trash retains its own complete filters and sorting through tabs, reloads and category links',()=>{
+  const {context,ui,storage}=fixture();ui.search='卡池';ui.sort='type';
+  context.changeTab('trash');
+  const choices={search:'旧牌',type:{included:['攻击','技能'],excluded:['箭矢']},rarity:'稀有',cardPool:'无色',pool:'granted',cost:'3+',archetype:'knowledge',term:'keyword',routePositions:['trigger'],routeExcludedPositions:['cross'],sort:'cost',descending:true,upgraded:true};
+  Object.assign(ui,clone(choices));context.saveUI();
+  const hash=context.location.hash,saved=JSON.parse(storage.get('test'));
+  context.changeTab('cards');assert.equal(ui.search,'卡池');assert.equal(ui.sort,'type');
+  context.changeTab('trash');for(const [key,value]of Object.entries(choices))assert.deepEqual(clone(ui[key]),value,key);
+  const restored=fixture(saved);restored.context.readHash();restored.context.changeTab('trash');
+  const linked=fixture();linked.context.location.hash=hash;linked.context.readHash();
+  for(const [key,value]of Object.entries(choices))for(const f of [restored,linked])assert.deepEqual(clone(f.ui[key]),value,key);
+});
