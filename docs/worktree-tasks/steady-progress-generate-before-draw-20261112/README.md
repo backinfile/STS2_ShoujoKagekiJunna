@@ -213,3 +213,8 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 同步后 Beta SHA-256：1cd5851014a3d8e3758d60bf5155aac08234f930193d4ef8c85647eb52737b5f。
 - 同步后 Stable SHA-256：f5ce4438715b609ede0141d9191abfef4aa96cd83ce5cfa7a31db393ed3e372d。
 - 用户明确选择“合并并清理”。执行前核对原检出仍在 main 的 cf653a10c831983418efce54379aff5741b219e8，工作区干净。保存证据并核对哈希后，按快进方式集成；最终检查提交树一致、main 包含任务提交及原工作区干净。
+### 批准后的再次同步
+
+- 第一次集成安全检查发现 main 已前进至 d56bc90bd378cf213a825c03aca6ecfe19db4b42，尚未向原分支写入时即停止。
+- 在任务工作树再次同步该提交。新增内容仅为工作台主牌入口修复及其测试、任务记录；运行源码、资源、卡池及本牌测试源码未变化，沿用已通过的 23 项真实回合检查及双版本编译结果。
+- 用户已有“合并并清理”批准继续有效；再次核对 main 干净且 HEAD 稳定后执行快进集成。

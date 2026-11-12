@@ -444,7 +444,7 @@
     $('inspector').hidden=false;$('preview').innerHTML='';$('preview').removeAttribute('tabindex');$('preview').removeAttribute('aria-label');$('editor-form').innerHTML='';$('close-inspector').hidden=!selected;$('inspector-footer').hidden=!selected||root;
     if(!selected||(!root&&!e)){$('inspector-title').textContent='编辑';$('close-inspector').hidden=true;$('inspector-footer').hidden=true;return;}
     $('duplicate-entity').hidden=root||trash;$('delete-entity').hidden=root||trash;$('restore-entity').hidden=!trash;$('reserve-entity').hidden=root||trash||selected.collection!=='cards';$('reserve-entity').textContent=e?.reservedAt?'移回卡池':'移入备用';
-    const groupContext=!root&&!trash&&selected.collection==='cards'?JunnaWorkbenchDomain.cardGroup(state.data,e.uid,selected.cardOrigin):null,isMain=Boolean(groupContext&&groupContext.group.mainCardId===e.id);
+    const groupContext=!root&&!trash&&selected.collection==='cards'?JunnaWorkbenchDomain.cardGroup(state.data,e.uid,selected.cardOrigin):null,isMain=Boolean(groupContext&&e.pool);
     $('card-group-actions').hidden=!groupContext;$('reserve-group').textContent=groupContext?.reserveAction==='pool'?'移回一组':'备用一组';
     $('set-group-main').textContent=isMain?'当前主牌':'设置为主牌';$('set-group-main').disabled=!groupContext||isMain;$('set-group-main').dataset.groupUid=groupContext?.group.uid||'';
     $('inspector-title').textContent=trash?'已删除卡牌':root?(selected.uid==='title'?'制作台名称':'规则数据'):'编辑'+LABELS[selected.collection];
