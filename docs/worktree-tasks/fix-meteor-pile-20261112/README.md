@@ -160,6 +160,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 <send_user_message_question_reply>
 [{"questionItemId":"[\"request_user_input_async\",\"call_c080fb8658594d908aa521325e6e0e3e\",0]","question":"你看到流星进入抽牌堆或手牌时，前一步做了什么？例如刚打出连射／横扫／箭雨、用了随机生成或抽取箭矢的牌，或是结束回合后出现。记得任意一处即可。","answer":"忘了"}]
 </send_user_message_question_reply>
+### 5. 合并与清理授权
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_4210dfe3db4f4d708ec182da90a2fbbc\",0]","question":"是否将流星修复合并到 main，并按上述范围清理？","answer":"合并并清理，保留录像"}]
+</send_user_message_question_reply>
 ## Brief task plan
 
 - 起始分支：`main`；起始提交：`c4750a80f99e98097dbefd0a89806f17b5cf93f6`；起始工作区干净。
@@ -181,4 +186,4 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 独立游戏满解锁、随机端口、最小化静默运行；启动采样 120 次，抢占前台 0 次，接口确认 `silent_test=true`、`minimized_startup_guard=true`。任务测试进程已关闭，其他实例保留。
 - 完整录像：`out/tmp/meteor-pile/video/full/sts2-20261112-082603-d6b482b8b1cb4bd89f8d7ac7affd459a.mp4`，20.73 秒，1280×720／15 fps，内部有声混音，零丢帧，状态 `completed`。录像前准备环境，录制中仅正常打出连射、横扫及结束两次回合；新生成的 10／12 伤害流星最终均消耗。截图与最终状态保存在同目录。
 - 全部已跟踪文档及新增文档执行凭据、私人邮箱与本机绝对路径审查，未发现实际敏感信息；任务输入中的本机路径已替换为占位符。
-- 集成目标固定为最初捕获的 `main`，起始工作区干净。排查期间主分支前进到 `9375c34`，新增工作台主卡切换修复及部署记录；已同步这些本地提交。同步没有修改本次已验证的运行代码、数据、测试或构建配置。合并和清理等待用户确认。
+- 集成目标固定为最初捕获的 `main`，起始工作区干净。排查期间主分支前进到 `9375c34`，新增工作台主卡切换修复及部署记录；已同步这些本地提交。同步没有修改本次已验证的运行代码、数据、测试或构建配置。用户已明确批准合并并清理，保留录像。集成时保留任务记录及修复前后结果，将完整录像、帧图、最终状态和构建日志保存至原仓库的 `artifacts/task-deliverables/fix-meteor-pile-20261112/`，之后核对提交包含关系、提交树及工作区状态，再清理本次任务分支、工作树和临时测试产物。
