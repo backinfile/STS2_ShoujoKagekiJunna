@@ -233,6 +233,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 [{"questionItemId":"<问题条目标识>","question":"是否将 Core、Karen、Junna 本次重构分别合并回各自的 main，并按上述范围处理工作树？","answer":"合并并清理（先保留构建包和验证证据）"}]
 </send_user_message_question_reply>
 
+## 继续同步、验证与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"<问题条目标识>","question":"Junna main 第三次前进，新增了无目标流星回收修复。是否继续同步这项修复，定向验证后合并并清理？","answer":"继续同步、验证后合并并清理"}]
+</send_user_message_question_reply>
+
 # 简要计划
 
 - 三项目使用同名隔离工作树，位置为 ../worktrees/STS2_ShoujoKagekiJunna/simplify-runtime-20261112；目标分支固定为 main。
@@ -289,3 +295,9 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 提交后发现原 main 前进到 708cf7e（独立关联列表切换主牌修复），已在任务分支合并。新增内容只涉及工作台领域源码、对应测试与该任务记录；运行库、资源和已验证包保持一致。工作台领域定向测试 24 项通过。集成目标仍为开始时捕获的 main，原起点 c4750a8 保留。
 
 随后 main 补入 9375c34，仅更新该修复的部署与验证记录，已再次同步；执行源码无变化，沿用上述 24 项工作台领域验证及双版本运行库验证。
+
+## 继续同步流星修复
+
+用户在第三次主分支前进后明确授权继续。已同步 Junna main 的 cf653a1，保留无可命中目标时通过原生结果牌堆规则消耗流星的修复。Junna 双版本重新编译通过；三项目共存实机各通过 7 项流星断言，共 14 项，覆盖正常部署、替代目标、无目标消耗、洗牌与抽牌；与此前 146 项重构断言分开记录。探针清牌改为原生视觉清理，复验两版手牌模型与可见节点一致。最小化运行无焦点抢占，两版内部有声录像已归档并查看帧图；正式版录像复制时补建目标目录后恢复归档。
+
+构建包及新增证据继续保留于 Core 原检出的 artifacts/task-deliverables/simplify-runtime-20261112/。此前 Core 与 Karen 重构已合入各自 main；本次授权及后续同步记录使用追加提交保留。
