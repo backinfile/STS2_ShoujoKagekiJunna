@@ -18,6 +18,16 @@ void vertex() {
 	layer_modulate = COLOR;
 }
 
+float left_cord_mask(vec2 uv, vec2 pixel_size) {
+	vec2 point = uv / pixel_size;
+	float distance = abs(point.y + point.x * 0.29726316 - 989.6) / 1.043249;
+	vec3 color = texture(original_art, uv).rgb;
+	// Preserve the warm wooden bow and gold cuff where the cord crosses them.
+	float cord_color = 1.0 - smoothstep(0.04, 0.08, color.g - color.b);
+	return (1.0 - smoothstep(5.0, 8.0, distance)) * cord_color
+		* (1.0 - smoothstep(982.0, 990.0, point.x));
+}
+
 float arm_coverage(vec2 uv, vec2 pixel_size) {
 	vec3 color = texture(original_art, uv).rgb;
 	vec2 point = uv / pixel_size;
@@ -39,7 +49,7 @@ float arm_coverage(vec2 uv, vec2 pixel_size) {
 	float distance = abs(point.y + point.x * 0.2517857 - 1002.3) / 1.03121;
 	float string_mask = (1.0 - smoothstep(3.0, 5.0, distance)) * (1.0 - lining)
 		* smoothstep(1105.0, 1111.0, point.x) * (1.0 - smoothstep(1253.0, 1260.0, point.x));
-	return coverage * (1.0 - string_mask);
+	return coverage * (1.0 - string_mask) * (1.0 - left_cord_mask(uv, pixel_size));
 }
 
 void fragment() {
@@ -108,12 +118,13 @@ void fragment() {
 			// bow footprint can reveal the generated hidden-cloth backing here.
 			float moving = smoothstep(0.04, 0.96, arm_coverage(UV, TEXTURE_PIXEL_SIZE));
 			painted = mix(painted, vec4(original.rgb, silhouette), sleeve * (1.0 - moving));
-			// The old left string crosses this sleeve. Repair its narrow stroke
-			// from adjacent original fabric rather than cutting a wide notch.
-			float distance = abs(point.y + point.x * 0.286 - 980.45) / 1.04009;
-			float string_mask = (1.0 - smoothstep(0.9, 2.7, distance)) * sleeve
-				* (1.0 - smoothstep(983.0, 990.0, point.x));
-			vec2 normal = normalize(vec2(0.286, 1.0)) * 4.0 * TEXTURE_PIXEL_SIZE;
+		}
+		if (separate_arm_layer && UV.x > 350.0 * TEXTURE_PIXEL_SIZE.x && UV.x < 990.0 * TEXTURE_PIXEL_SIZE.x
+				&& UV.y > 600.0 * TEXTURE_PIXEL_SIZE.y) {
+			// Remove the resting cord from both the silhouette and the sleeve.
+			// Neighbour alpha distinguishes empty background from solid cloth.
+			float string_mask = left_cord_mask(UV, TEXTURE_PIXEL_SIZE);
+			vec2 normal = normalize(vec2(0.29726316, 1.0)) * 10.0 * TEXTURE_PIXEL_SIZE;
 			vec3 above = texture(TEXTURE, UV - normal).rgb;
 			vec3 below = texture(TEXTURE, UV + normal).rgb;
 			float above_alpha = texture(subject_alpha, UV - normal).a;
