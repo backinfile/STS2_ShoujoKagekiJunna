@@ -1713,7 +1713,7 @@
       ],
       "power": {
         "description": "DamageGroups",
-        "amount": "Applications",
+        "amount": "Damage",
         "single": false
       }
     },

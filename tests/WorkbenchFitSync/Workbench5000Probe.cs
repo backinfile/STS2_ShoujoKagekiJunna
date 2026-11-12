@@ -17,14 +17,14 @@ namespace JunnaWorkbenchFitSync;
 public sealed partial class Workbench5000Command : AbstractConsoleCmd
 {
     public override string CmdName => "junna_r5000";
-    public override string Args => "check | review | proofread | prepare | prepare-review | prepare-proofread";
+    public override string Args => "check | review | proofread | textbook | prepare-textbook | prepare | prepare-review | prepare-proofread";
     public override string Description => "Checks the latest card pool delta.";
     public override bool IsNetworked => false;
     private static readonly PlayerChoiceContext Context = new ThrowingPlayerChoiceContext();
     private static readonly string ResultPath = Path.GetFullPath("../../../out/tmp/workbench-r5000/results.json", Environment.CurrentDirectory);
     private static readonly List<(CardModel Card, CardPilePosition Position)> Generated = [];
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
-        ? new(false, "Combat required") : new(args.FirstOrDefault() switch { "prepare" => Prepare(player), "prepare-review" => PrepareReview(player), "review" => Review(player), "proofread" => Proofread(player), "prepare-proofread" => PrepareProofread(player), _ => Check(player) }, true, "Started");
+        ? new(false, "Combat required") : new(args.FirstOrDefault() switch { "prepare" => Prepare(player), "prepare-review" => PrepareReview(player), "review" => Review(player), "proofread" => Proofread(player), "textbook" => TextbookAmount(player), "prepare-textbook" => PrepareTextbook(player), "prepare-proofread" => PrepareProofread(player), _ => Check(player) }, true, "Started");
     private static void Capture(CardModel card, PileType newPileType, CardPilePosition position)
     { if (newPileType == PileType.Draw) Generated.Add((card, position)); }
     private static async Task Reset(Player player, bool visualize = false)

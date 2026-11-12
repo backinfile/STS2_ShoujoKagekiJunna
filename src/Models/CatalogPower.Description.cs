@@ -17,8 +17,20 @@ public abstract partial class CatalogPower
         PowerAmountKind.Bonus => _grants.Sum(g => g.V("Bonus")),
         PowerAmountKind.Block => _grants.Sum(g => g.V("Block")),
         PowerAmountKind.Amount => _grants.Sum(g => g.V("Amount")),
+        PowerAmountKind.Damage => _grants.Sum(g =>
+        {
+            var (damage, hits) = DamagePayload(g);
+            return checked((int)Math.Floor(damage) * hits);
+        }),
         _ => _grants.Count
     };
+
+    private static (decimal Damage, int Hits) DamagePayload(Grant grant)
+    {
+        var modifiers = DamageModifiers.CaptureDamageModifierSnapshot(grant.Card);
+        return (Math.Max(0, grant.V("Damage") + modifiers.DamageBonus),
+            grant.BaseHits * (1 + DamageModifiers.ExtraHits(modifiers)));
+    }
 
     private void Synchronize()
     {
@@ -65,8 +77,8 @@ public abstract partial class CatalogPower
             PowerDescriptionKind.BonusGroups => Groups(g => g.V("Bonus"), group => Format(("Bonus", group.Key), ("Repetition", Repetition(group.Count())))),
             PowerDescriptionKind.LimitGroups => Groups(g => g.V("Limit"), group => Format(("Limit", group.Key), ("Amount", group.Count()))),
             PowerDescriptionKind.GeneratedCardGroups => Groups(g => g.Card.IsUpgraded, group => Format(("Amount", group.Count()), ("Card", CardCatalog.Get("JK46B").Name + (group.Key ? "+" : "")))),
-            PowerDescriptionKind.DamageGroups => Groups(g => g.V("Damage") + DamageModifiers.CaptureDamageModifierSnapshot(g.Card).DamageBonus,
-                group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => g.BaseHits * (1 + DamageModifiers.ExtraHits(DamageModifiers.CaptureDamageModifierSnapshot(g.Card))))))),
+            PowerDescriptionKind.DamageGroups => Groups(g => DamagePayload(g).Damage,
+                group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => DamagePayload(g).Hits)))),
             _ => throw new InvalidOperationException("Missing power description: " + DesignId)
         };
         if (DesignId is "JZ05" or "JK260")

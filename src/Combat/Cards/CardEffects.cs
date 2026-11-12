@@ -306,7 +306,7 @@ public static class CardEffects
             case "U_CARD_009":
                 await CardTutors.DrawCategories(context, card); break;
             case "JK314":
-                await Attack(hits: V("Repeat", 2) + KnowledgeProgress.DepletedPartners(card)); break;
+                await Attack(hits: card.HitsWithDepletedPartners); break;
             default: throw new InvalidOperationException($"Missing card effect: {card.DesignId}");
         }
     }

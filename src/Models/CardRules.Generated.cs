@@ -869,7 +869,7 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
             PowerDescription = PowerDescriptionKind.DamageGroups,
-            PowerAmount = PowerAmountKind.Applications,
+            PowerAmount = PowerAmountKind.Damage,
             SinglePower = false,
         },
         ["JK235B"] = new()

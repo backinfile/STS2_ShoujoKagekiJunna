@@ -42,9 +42,17 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         new KnowledgeBlockVar().WithMultiplier(static (card, _) => CountDeckKnowledge(card))
     } : []);
 
+    internal int HitsWithDepletedPartners => Value("Repeat", 2) + KnowledgeProgress.DepletedPartners(this);
+
     protected override void AddExtraArgsToDescription(LocString description)
     {
         base.AddExtraArgsToDescription(description);
+        if (DesignId == "JK314")
+        {
+            var repeat = new RepeatVar(HitsWithDepletedPartners);
+            repeat.SetOwner(this);
+            description.AddObj("Repeat", repeat);
+        }
         if (ResearchRules.ForMain(DesignId)?.ShowDepletedPartners == true)
             description.Add("DepletedPartners", KnowledgeProgress.DepletedPartners(this));
         if (DesignId == "JA108")
