@@ -122,16 +122,12 @@ public static partial class KnowledgeProgress
         await CopySingleCards(player, selected);
     }
 
-    [HarmonyPatch(typeof(AbstractModel), nameof(AbstractModel.MutableClone))]
-    private static class CopyProgress
+    internal static void Copy(CardModel source, CardModel copy)
     {
-        private static void Postfix(AbstractModel __instance, AbstractModel __result)
+        if (source is CatalogCard original && copy is CatalogCard clone)
         {
-            if (__instance is CatalogCard source && __result is CatalogCard clone)
-            {
-                ExtraHits.Set(clone, ExtraHits.Get(source));
-                CopyGrowth(source, clone);
-            }
+            ExtraHits.Set(clone, ExtraHits.Get(original));
+            CopyGrowth(original, clone);
         }
     }
 }

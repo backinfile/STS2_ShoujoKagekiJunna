@@ -49,6 +49,11 @@ public static class CardEffects
         }
 
         if (await ResolveCommon(card, context, play)) return;
+        if (CardRules.Get(card.DesignId).PowerDescription != PowerDescriptionKind.None)
+        {
+            await CatalogPower.Install(card, context, play);
+            return;
+        }
 
         switch (card.DesignId)
         {
@@ -73,16 +78,6 @@ public static class CardEffects
             case "JK367":
                 await Improve(All(), V("Bonus"));
                 await DrawLinked(); break;
-            // Installed rules keep an independent snapshot and per-turn counters for every application.
-            case "JA04": case "JK10": case "JA22": case "JK15": case "A": case "JK27":
-            case "JA35": case "JA205": case "JK254": case "JK260": case "JK32": case "JK37C": case "JA45": case "JK64": case "JK67":
-            case "JG31": case "JH21": case "JG34": case "JK75": case "JH23": case "JA70":
-            case "JK235": case "JH59": case "JA144": case "JA118": case "JA105": case "JK127": case "JK139": case "JK81": case "JZ05": case "JZ06": case "JH30": case "JK46": case "JA87": case "JA96": case "JH31": case "U_CARD_008": case "U_CARD_010":
-                await CatalogPower.Install(card, context, play);
-                if (card.DesignId == "JK32") SetNamedFree(player, "JK32B", "JK32C");
-                break;
-            case "JH19": case "JK80":
-                await Block(); await CatalogPower.Install(card, context, play); break;
             case "JH24":
                 await Block(); JunnaCombatHooks.AddMaxEnergy(player.PlayerCombatState, V("Count")); break;
             case "JK05":

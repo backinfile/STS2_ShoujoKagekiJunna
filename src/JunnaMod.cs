@@ -22,6 +22,8 @@ public static class JunnaMod
         Godot.Bridge.ScriptManagerBridge.LookupScriptsInAssembly(Assembly.GetExecutingAssembly());
         CoreApi.Get<ICardPayloadRouting>().Register(HandArrow.Dispatch, card => Models.CardCatalog.IsArrow(card) ? ArrowPile.PileId : null);
         DamageSourceScopes.Install();
+        CardStateCopies.Initialize();
+        CoreApi.Get<IPlayerStateEvents>().Restored += DynamicKnowledge.Normalize;
         KnowledgeCombat.Initialize();
         KnowledgeProgress.Initialize();
         Models.CardCatalog.RegisterDamageCapabilities();

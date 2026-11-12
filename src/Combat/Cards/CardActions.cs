@@ -76,32 +76,27 @@ public static class CardActions
         }
     }
 
-    public static Task<bool> PaidPlay(PlayerChoiceContext context, CardModel card, Creature? target = null,
-        bool restartArrow = true) => Play(context, card, target, CardPayment.Paid, false, restartArrow);
-
     public static Task FreePlay(PlayerChoiceContext context, CardModel card, Creature? target = null,
-        bool keepTarget = false) => Play(context, card, target, CardPayment.Free, keepTarget, true);
+        bool keepTarget = false) => Play(context, card, target, keepTarget);
 
     private static async Task<bool> Play(PlayerChoiceContext context, CardModel card, Creature? target,
-        CardPayment payment, bool keepTarget, bool restartArrow)
+        bool keepTarget)
     {
-        bool CanPay() => payment == CardPayment.Free || card.Owner.PlayerCombatState!.HasEnoughResourcesFor(card, out _);
         if (CombatManager.Instance.IsOverOrEnding || card.Owner.Creature.IsDead ||
-            card.Keywords.Contains(CardKeyword.Unplayable) || !CanPay() ||
+            card.Keywords.Contains(CardKeyword.Unplayable) ||
             !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) return false;
         if (card.TargetType == TargetType.AnyEnemy)
         {
             if (keepTarget)
                 target = target == null ? null : ArrowCombat.ResolveEffectTarget(target, card.Owner.Creature.CombatState!);
-            else if (payment == CardPayment.Free || !CardTargets.IsValid(card, target))
+            else
                 target = await ChooseTarget(context, card);
             if (target == null) return false;
         }
         else target = CardTargets.First(card);
-        // Target selection can change resources. Reject before cancelling a deployed arrow.
-        if (!CardTargets.IsValid(card, target) || !CanPay()) return false;
-        if (restartArrow) ArrowCombat.Cancel(card);
-        return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, Payment = payment });
+        if (!CardTargets.IsValid(card, target)) return false;
+        ArrowCombat.Cancel(card);
+        return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target });
     }
 
     public static async Task PlayDrawPileArrows(PlayerChoiceContext context, Player player)
@@ -194,7 +189,7 @@ public static class CardActions
                 target = ArrowCombat.ResolveEffectTarget(target, player.Creature.CombatState!);
                 if (target == null)
                 {
-                    await CardPileCmd.Add(arrow, PileType.Discard);
+                    await arrow.MoveToResultPileWithoutPlaying(context);
                     return;
                 }
             }

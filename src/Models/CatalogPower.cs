@@ -15,7 +15,7 @@ namespace ShoujoKagekiJunna.Models;
 
 public abstract partial class CatalogPower(string designId) : CustomPowerModel
 {
-    private sealed class Grant(CatalogCard card, CardPlay installedBy, int xValue)
+    protected sealed class Grant(CatalogCard card, CardPlay installedBy, int xValue)
     {
         public readonly CatalogCard Card = card;
         public readonly CardPlay InstalledBy = installedBy;
@@ -37,19 +37,25 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         }
         public CardPlay Play => new()
         {
-            Card = Card, Target = null, ResultPile = PileType.None,
+            Card = Card,
+            Target = null,
+            ResultPile = PileType.None,
 #if STS2_BETA
             Player = Card.Owner,
 #endif
-            Resources = InstalledBy.Resources, IsAutoPlay = true, PlayIndex = 0, PlayCount = 1
+            Resources = InstalledBy.Resources,
+            IsAutoPlay = true,
+            PlayIndex = 0,
+            PlayCount = 1
         };
     }
-    private List<Grant> _grants = [];
+    protected List<Grant> _grants = [];
     internal int ReplayGrants => _grants.Count;
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => CardRules.Get(DesignId).SinglePower ? PowerStackType.Single : PowerStackType.Counter;
-    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{(DesignId is "U_CARD_008" or "U_CARD_010" ? "JK127" : DesignId)}.png";
+    protected virtual string IconId => DesignId;
+    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + $"images/powers/{IconId}.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     protected override void DeepCloneFields()
     {
@@ -57,37 +63,42 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         _grants = _grants.Select(grant => grant.Copy()).ToList();
     }
 
-    public static int ArrowHaste(Player player) => player.Creature.Powers.OfType<CatalogPower>()
-        .Where(p => p.DesignId == "JA105").Sum(p => p._grants.Count);
+    public static int ArrowHaste(Player player) => player.Creature.Powers.OfType<JunnaPowerJA105>().Sum(p => p._grants.Count);
 
     public static bool Has(Player player, string id) => player.Creature.Powers.OfType<CatalogPower>().Any(p => p.DesignId == id);
     public static async Task Install(CatalogCard card, PlayerChoiceContext context, CardPlay play)
     {
         var canonical = ModelDb.AllPowers.OfType<CatalogPower>().Single(p => p.DesignId == card.DesignId);
-        var existing = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
-        if (canonical.StackType == PowerStackType.Single && existing != null)
-        {
-            if (card.DesignId == "JK81" && card.Value("Threshold") < existing._grants.Min(g => g.V("Threshold")))
-            {
-                existing._grants = [new(ShoujoKageki.Core.V1.CardCopies.Snapshot(card), play, 0)];
-                existing.Synchronize();
-            }
-            return;
-        }
-        await PowerCmd.Apply(context, canonical.ToMutable(), card.Owner.Creature, 1, card.Owner.Creature, card);
-        var power = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
-        if (power == null) return;
-        int xValue = card.Definition.CostsX ? card.ResolveEnergyXValue() : 0;
-        var snapshot = ShoujoKageki.Core.V1.CardCopies.Snapshot(card);
-        power._grants.Add(new(snapshot, play, xValue));
-        if (card.DesignId == "JK127") KnowledgeProgress.RegisterCopy(card.Owner);
-        if (card.DesignId == "U_CARD_008") KnowledgeProgress.RegisterStory(card.Owner);
-        power.Synchronize();
-    }
+        await canonical.BeforeInstall(card, context, play);
+        await Apply();
+        canonical.AfterInstallAttempt(card);
 
-    private async Task Block(int amount)
+        async Task Apply()
+        {
+            var existing = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
+            if (canonical.StackType == PowerStackType.Single && existing != null)
+            {
+                existing.MergeSingle(card, play);
+                return;
+            }
+            await PowerCmd.Apply(context, canonical.ToMutable(), card.Owner.Creature, 1, card.Owner.Creature, card);
+            var power = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
+            if (power == null) return;
+            int xValue = card.Definition.CostsX ? card.ResolveEnergyXValue() : 0;
+            var snapshot = ShoujoKageki.Core.V1.CardCopies.Snapshot(card);
+            power._grants.Add(new(snapshot, play, xValue));
+            power.Installed(card);
+            power.Synchronize();
+        }
+    }
+    protected virtual Task BeforeInstall(CatalogCard card, PlayerChoiceContext context, CardPlay play) => Task.CompletedTask;
+    protected virtual void MergeSingle(CatalogCard card, CardPlay play) { }
+    protected virtual void Installed(CatalogCard card) { }
+    protected virtual void AfterInstallAttempt(CatalogCard card) { }
+
+    protected async Task Block(int amount)
         => await CreatureCmd.GainBlock(Owner, amount, ValueProp.Unpowered, null);
-    private async Task AccelerateChoice(Grant grant, PlayerChoiceContext context, int count, int turns)
+    protected async Task AccelerateChoice(Grant grant, PlayerChoiceContext context, int count, int turns)
     {
         var cards = ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player && !a.Resolving).Select(a => a.Card).ToArray();
         foreach (var card in await CardActions.Choose(context, grant.Card, cards, count))

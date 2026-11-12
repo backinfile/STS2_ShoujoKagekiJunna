@@ -396,7 +396,7 @@ def main():
         ui_path.write_text(json.dumps(ui, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     if not args.text_only and not args.rules_only:
         (ROOT / 'src/Models/CatalogPowers.Generated.cs').write_text(header + '\n'.join(
-            f'[CustomID("JUNNA_{cid}_POWER")]\npublic sealed class JunnaPower{cid}() : CatalogPower("{cid}");\n'
+            f'[CustomID("JUNNA_{cid}_POWER")]\npublic sealed partial class JunnaPower{cid}() : CatalogPower("{cid}");\n'
             for cid in sorted(power_ids)), encoding='utf-8')
     if args.text_only:
         print(f'Updated display text for {len(cards)} cards; runtime values, models and portraits unchanged.')

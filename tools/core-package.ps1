@@ -22,5 +22,5 @@ function Write-CoreRoleMetadata($Core, [string]$RoleDirectory, [string]$PackageR
         $Core.Root.StartsWith($destination + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) {
         throw 'The source Core package must be separate from the build destination.'
     }
-    & (Join-Path $Core.Root 'sdk/pack-character.ps1') -CorePackage $Core.Root -CharacterDirectory $RoleDirectory -OutputDirectory $packageRootPath -ModId $RoleId -RequiredFeatures @('card-staging@1', 'card-payloads@1', 'player-choices@1', 'card-picking@1', 'card-upgrades@1', 'shine@1', 'card-effects@1', 'card-execution@1', 'card-options@1', 'card-snapshots@1', 'card-play-routing@1', 'model-execution@1', 'card-copies@1', 'presentation@1')
+    & (Join-Path $Core.Root 'sdk/pack-character.ps1') -CorePackage $Core.Root -CharacterDirectory $RoleDirectory -OutputDirectory $packageRootPath -ModId $RoleId -RequiredFeatures @('player-state-events@1', 'card-clone-events@1', 'model-method-scopes@1', 'card-staging@1', 'card-payloads@1', 'player-choices@1', 'card-picking@1', 'card-upgrades@1', 'shine@1', 'card-effects@1', 'card-execution@1', 'card-options@1', 'card-snapshots@1', 'card-play-routing@1', 'model-execution@1', 'card-copies@1', 'presentation@1')
 }

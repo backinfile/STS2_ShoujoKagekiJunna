@@ -53,32 +53,12 @@ public static class KnowledgePreviewCards
     private static readonly ConditionalWeakTable<NCard, List<(Control Control, Control.MouseFilterEnum Filter)>> MouseFilters = new();
     public static IReadOnlyList<CardModel> Create(CardModel source, bool upgradeAll = false)
     {
-        var dynamicMembers = DynamicKnowledge.Members(source);
-        if (DynamicKnowledge.IsLinked(source))
-            return dynamicMembers.Select(member =>
-            {
-                var copy = ShoujoKageki.Core.V1.CardCopies.Snapshot(member);
-                if (upgradeAll && !copy.IsUpgraded && copy.IsUpgradable) copy.UpgradeInternal();
-                return copy;
-            }).ToArray();
-        var group = KnowledgeCombat.Group(source);
-        if (group == null)
-            return DynamicKnowledge.Members(source).Select(c => ShoujoKageki.Core.V1.CardCopies.Snapshot(c)).ToArray();
-        var cards = new List<CardModel>();
-        bool usedSource = false;
-        foreach (var (id, count) in group.Members)
+        return DynamicKnowledge.Members(source).Select(member =>
         {
-            for (int copy = 0; copy < count; copy++)
-            {
-                // Keep the offered card's modifications; companion copies are independent, as when acquired.
-                bool isSource = !usedSource && id == CardCatalog.DesignId(source);
-                var card = ShoujoKageki.Core.V1.CardCopies.Snapshot(isSource ? source : CardCatalog.Model(id));
-                usedSource |= isSource;
-                if (upgradeAll && !card.IsUpgraded && card.IsUpgradable) card.UpgradeInternal();
-                cards.Add(card);
-            }
-        }
-        return cards;
+            var copy = ShoujoKageki.Core.V1.CardCopies.Snapshot(member);
+            if (upgradeAll && !copy.IsUpgraded && copy.IsUpgradable) copy.UpgradeInternal();
+            return copy;
+        }).ToArray();
     }
 
     internal static void IgnoreMouse(NCard card)

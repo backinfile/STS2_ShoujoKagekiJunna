@@ -118,3 +118,43 @@ test('实际卡牌筛选组合多选、排除和不同分组，并保留X费与3
   context.ui.type={included:[],excluded:['攻击','能力']};context.ui.cost='all';
   assert.deepEqual(Array.from(context.filteredCards(),c=>c.id),['skill','x']);
 });
+
+
+test('trash uses every shared sort mode and direction instead of deletion time',()=>{
+  const {context,ids}=fixture([
+    card('C10',{name:'Zulu',type:'技能',rarity:'稀有',cost:3,turns:4,trashedAt:'2026-11-12'}),
+    card('C2',{name:'Alpha',cost:1,turns:2,trashedAt:'2026-11-10'}),
+    card('C1',{name:'Mike',type:'箭矢',cost:0,turns:1,trashedAt:'2026-11-11'}),
+    card('active'),card('reserve',{reservedAt:'today'})
+  ],{tab:'trash'});
+  context.state.cardUpdatedAt={C1:30,C10:20};
+  context.state.history=[{seq:40,patches:[{collection:'cards',uid:'C2'}]}];
+  const expected={natural:['C1','C2','C10'],id:['C1','C2','C10'],name:['C2','C1','C10'],cost:['C1','C2','C10'],rarity:['C1','C2','C10'],type:['C2','C10','C1'],turns:['C1','C2','C10'],updated:['C2','C1','C10']};
+  for(const [sort,order] of Object.entries(expected)){
+    context.ui.sort=sort;context.ui.descending=false;assert.deepEqual(ids(),order,sort);
+    context.ui.descending=true;assert.deepEqual(ids(),order.slice().reverse(),sort+' descending');
+  }
+});
+
+test('trash applies every shared filter, combined exclusions, search and upgraded costs',()=>{
+  const {context,ids}=fixture([
+    card('C10',{name:'训练',text:'抽牌',type:'技能',rarity:'稀有',cost:3,upgradedCost:1,cardPool:'无色',archetypeIds:['a'],termIds:['k'],trashedAt:'today'}),
+    card('C2',{cost:1,pool:false,archetypeIds:['b'],termIds:['l'],trashedAt:'today'}),
+    card('C1',{type:'箭矢',cost:'X',cardPool:'衍生',archetypeIds:['a','b'],termIds:['k'],trashedAt:'today',design:{breakthrough:true}}),
+    card('active',{name:'训练',type:'技能',rarity:'稀有',cost:3})
+  ],{tab:'trash'});
+  context.state.data.archetypes=[{id:'a'},{id:'b'}];
+  for(const [key,value,expected] of [
+    ['type','技能',['C10']],['rarity','稀有',['C10']],['cardPool','无色',['C10']],
+    ['pool','granted',['C2']],['cost','3+',['C10']],['cost','X',['C1']],
+    ['archetype','b',['C2','C1']],['term','l',['C2']],['search','训练',['C10']]
+  ]){context.ui[key]=value;assert.deepEqual(ids(),expected,key);context.ui[key]=key==='search'?'':'all';}
+  context.ui.type={included:['攻击','技能'],excluded:['箭矢']};
+  context.ui.rarity={excluded:['普通']};context.ui.cost='3+';assert.deepEqual(ids(),['C10']);
+  context.ui.upgraded=true;assert.deepEqual(ids(),[]);context.ui.cost='1';assert.deepEqual(ids(),['C10']);
+  context.ui.type=context.ui.rarity=context.ui.cost='all';
+  context.state.data.archetypes=[];
+  context.JunnaRouteStatistics=require('./route-statistics.js');context.flowDefaults={routes:[]};
+  context.ui.routePositions=['breakthrough'];assert.deepEqual(ids(),['C1']);
+  context.ui.routePositions=[];context.ui.routeExcludedPositions=['breakthrough'];assert.deepEqual(ids(),['C2','C10']);
+});

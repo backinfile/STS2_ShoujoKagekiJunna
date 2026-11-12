@@ -260,7 +260,7 @@
 | 连射（JA81） | `src/Combat/Cards/CardEffects.cs:200`，`Resolve` 的 `JA81` 分支 | 否 | 否 |
 | 箭雨（JA82） | `src/Combat/Cards/CardEffects.cs:203`，`Resolve` 的 `JA82` 分支 | 否 | 否 |
 | 瞄准射击（JA145） | `src/Combat/Cards/CardEffects.cs:241`，`Resolve` 的 `JA145` 分支 | 否 | 否 |
-| 稳步前进（JA144） | `src/Models/CatalogPower.Turns.cs:26`，`AfterPlayerTurnStart` 的 `JA144` 分支 | 否 | 否 |
+| 稳步前进（JA144） | `src/Models/CatalogPower.Turns.cs:18`，`BeforeHandDraw` 的 `JA144` 生成 | 否 | 否 |
 | 持续阅读（JK46） | `src/Models/CatalogPower.Turns.cs:29`，`AfterPlayerTurnStart` 的 `JK46` 分支 | 否 | 否 |
 | 埋头学习（A） | `src/Models/CatalogPower.Turns.cs:57`，`BeforeSideTurnEnd` 的 `A` 分支 | 否 | 否 |
 

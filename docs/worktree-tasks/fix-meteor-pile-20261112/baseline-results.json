@@ -1,0 +1,34 @@
+[
+  {
+    "name": "live target: Meteor deploys for two turns",
+    "pass": true,
+    "actual": 2
+  },
+  {
+    "name": "live target: completed Meteor exhausts",
+    "pass": true,
+    "actual": "Exhaust"
+  },
+  {
+    "name": "missing target: both generated Meteors exhaust",
+    "pass": false,
+    "actual": [
+      "Discard",
+      "Discard"
+    ]
+  },
+  {
+    "name": "reshuffle: no Meteor enters draw pile",
+    "pass": false,
+    "actual": [
+      "JUNNA_JA81B"
+    ]
+  },
+  {
+    "name": "draw: no Meteor enters hand",
+    "pass": false,
+    "actual": [
+      "JUNNA_JA81B"
+    ]
+  }
+]

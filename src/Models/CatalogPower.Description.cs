@@ -32,12 +32,14 @@ public abstract partial class CatalogPower
             grant.BaseHits * (1 + DamageModifiers.ExtraHits(modifiers)));
     }
 
-    private void Synchronize()
+    protected void Synchronize()
     {
         SetAmount(StackType == PowerStackType.Single ? 1 : StackAmount());
         ((StringVar)DynamicVars["Effects"]).StringValue = RenderEffects();
         InvokeDisplayAmountChanged();
     }
+
+    protected virtual int? RemainingTriggers => null;
 
     private string RenderEffects()
     {
@@ -81,11 +83,8 @@ public abstract partial class CatalogPower
                 group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => DamagePayload(g).Hits)))),
             _ => throw new InvalidOperationException("Missing power description: " + DesignId)
         };
-        if (DesignId is "JZ05" or "JK260")
+        if (RemainingTriggers is { } remaining)
         {
-            int remaining = DesignId == "JZ05"
-                ? Math.Max(0, Sum("Limit") - AttackEventHistory.Count(Owner.Player!))
-                : _grants.Count(grant => grant.Turn != Owner.Player!.PlayerCombatState!.TurnNumber || grant.Used == 0);
             var progress = new LocString("powers", "JUNNA_CATALOG.remainingTriggers");
             progress.Add("Amount", remaining);
             lines = lines.Append(progress.GetFormattedText());

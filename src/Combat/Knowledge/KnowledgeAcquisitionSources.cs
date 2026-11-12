@@ -71,7 +71,6 @@ internal static class KnowledgeAcquisitionSources
     }
     private static readonly AsyncLocal<Context?> Current = new();
     private static readonly ConditionalWeakTable<CardReward, Entry> RewardOrigins = new();
-    private static readonly Dictionary<MethodBase, Entry> Methods = [];
     private static IDisposable? _models;
     private sealed class Scope(Context? context) : IDisposable
     {
@@ -80,8 +79,19 @@ internal static class KnowledgeAcquisitionSources
         private static Context? Set(Context? value) { var previous = Current.Value; Current.Value = value; return previous; }
         public void Dispose() { if (_disposed) return; _disposed = true; Current.Value = _previous; }
     }
-    internal static void Initialize() => _models ??= CoreApi.Get<IModelExecutionScopes>().Register((model, _) =>
-        new Scope(ReferenceEquals(Current.Value?.Owner, model) ? Current.Value : null));
+    internal static void Initialize()
+    {
+        if (_models != null) return;
+        _models = CoreApi.Get<IModelExecutionScopes>().Register((model, _) =>
+            new Scope(ReferenceEquals(Current.Value?.Owner, model) ? Current.Value : null));
+        var methods = CoreApi.Get<IModelMethodScopes>();
+        foreach (var entry in Entries)
+        {
+            var type = typeof(CardModel).Assembly.GetType("MegaCrit.Sts2.Core.Models." + entry.Type);
+            if (type != null && AccessTools.DeclaredMethod(type, entry.Method) is { } method)
+                methods.Register(method, owner => new Scope(new(entry, owner ?? type)));
+        }
+    }
     internal static bool Allows(CardModel card, PileType destination, bool transforming = false) => Current.Value is { } context
         && (context.Entry.Kind == Kind.Deck && destination == PileType.Deck
             || context.Entry.Kind == Kind.DeckChoice && destination == PileType.Deck && context.Selected.Contains(card)
@@ -92,24 +102,6 @@ internal static class KnowledgeAcquisitionSources
     internal static void Selected(CardModel card) => Current.Value?.Selected.Add(card);
     internal static bool IsKnownReward(CardReward reward) => RewardOrigins.TryGetValue(reward, out _);
 
-    [HarmonyPatch]
-    private static class ModelSources
-    {
-        private static IEnumerable<MethodBase> TargetMethods()
-        {
-            foreach (var entry in Entries)
-            {
-                var type = typeof(CardModel).Assembly.GetType("MegaCrit.Sts2.Core.Models." + entry.Type);
-                var method = type == null ? null : AccessTools.DeclaredMethod(type, entry.Method);
-                if (method == null) continue; // A source absent from this game version is not enabled.
-                Methods[method] = entry;
-                yield return method;
-            }
-        }
-        private static void Prefix(object __instance, MethodBase __originalMethod, out IDisposable __state)
-            => __state = new Scope(new(Methods[__originalMethod], __instance ?? __originalMethod.DeclaringType!));
-        private static void Finalizer(IDisposable? __state) => __state?.Dispose();
-    }
     [HarmonyPatch]
     private static class RewardCreation
     {
