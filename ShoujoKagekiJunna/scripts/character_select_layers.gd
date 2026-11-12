@@ -17,18 +17,24 @@ const BREATH_PERIOD = 5.6
 const BREATH_INHALE = 1.9
 const BREATH_EXHALE = 3.3
 const BREATH_ANCHOR = Vector2(1165.0, 900.0)
+const SHOULDER_DELAY = 0.07
+const HEAD_DELAY = 0.18
+const ARM_FOLLOW_DELAY = 0.14
+const HEAD_PIVOT = Vector2(1180.0, 350.0)
 const CURTAIN_OUTLINE = [Vector2(1205, 0), Vector2(1240, 28), Vector2(1280, 55),
 	Vector2(1320, 88), Vector2(1360, 106), Vector2(1400, 133), Vector2(1440, 159),
 	Vector2(1480, 185), Vector2(1520, 209), Vector2(1560, 234), Vector2(1600, 257),
 	Vector2(1640, 283), Vector2(1672, 303), Vector2(1672, 0)]
 const ARM_PIVOT = Vector2(1060.0, 685.0)
-const ARM_SWAY_DEGREES = 0.225
-const ARM_REST_DEGREES = 0.06
-const ARM_SWAY_OFFSET = Vector2(-1.0, -4.5)
+const ARM_SWAY_DEGREES = 0.14
+const ARM_REST_DEGREES = 0.04
+const ARM_SWAY_OFFSET = Vector2(-0.55, -2.4)
 const ARM_ATTACHMENT = [Vector2(980, 715), Vector2(1000, 686), Vector2(1030, 671),
 	Vector2(1060, 663), Vector2(1090, 661), Vector2(1100, 678), Vector2(1108, 710), Vector2(1106, 739)]
 const RIGHT_STRING_START = Vector2(1110.0, 722.2)
 const RIGHT_STRING_END = Vector2(1300.0, 674.36)
+const LEFT_STRING_START = Vector2(374.0, 878.4236)
+const LEFT_STRING_END = Vector2(1037.0, 681.3381)
 const BOW_POINTS = [Vector2(337, 906), Vector2(416, 871), Vector2(600, 871),
 	Vector2(800, 870), Vector2(930, 844), Vector2(1120, 779), Vector2(1290, 736)]
 const PIECES = [
@@ -48,6 +54,7 @@ var _body: Dictionary = {}
 var _arm_layer: Dictionary = {}
 var _arm_weights = PackedFloat32Array()
 var _right_string: Polygon2D
+var _left_string: Polygon2D
 var _character: Node2D
 
 func _ready():
@@ -114,11 +121,15 @@ func _grid_patch(node_name: String, x_cuts: PackedFloat32Array, y_cuts: PackedFl
 	var rows = y_cuts.size() - 1
 	var rest = PackedVector2Array()
 	var breath = PackedVector2Array()
+	var shoulders = PackedVector2Array()
+	var head_weights = PackedFloat32Array()
 	for y in y_cuts:
 		for x in x_cuts:
 			var point = Vector2(x, y)
 			rest.append(point)
 			breath.append(_breath_vector(point))
+			shoulders.append(_shoulder_vector(point))
+			head_weights.append(_head_weight(point))
 	var cells: Array[PackedInt32Array] = []
 	for row in range(rows):
 		for column in range(columns):
@@ -128,7 +139,8 @@ func _grid_patch(node_name: String, x_cuts: PackedFloat32Array, y_cuts: PackedFl
 	patch.uv = rest
 	patch.polygons = cells
 	_character.add_child(patch)
-	return {"node": patch, "rest": rest, "breath": breath}
+	return {"node": patch, "rest": rest, "breath": breath,
+		"shoulders": shoulders, "head_weights": head_weights}
 
 func _add_body():
 	# This mesh carries breathing only. The outfit never receives arm weights.
@@ -138,16 +150,24 @@ func _add_body():
 		x_cuts.append(x)
 	for y in range(330, 931, 20):
 		y_cuts.append(y)
+		if y < 410:
+			y_cuts.append(y + 10)
 	x_cuts.append(ART_SIZE.x)
 	y_cuts.append(ART_SIZE.y)
 	_body = _grid_patch("Actor", x_cuts, y_cuts)
 	_body.node.material = _layer_material(0)
-	_right_string = Polygon2D.new()
-	_right_string.name = "RightBowString"
-	_right_string.color = Color(0.48, 0.36, 0.39, 1.0)
-	_right_string.material = ShaderMaterial.new()
-	_right_string.material.shader = STRING_SHADER
-	_character.add_child(_right_string)
+	_left_string = _add_bow_string("LeftBowString", true)
+	_right_string = _add_bow_string("RightBowString", false)
+
+func _add_bow_string(node_name: String, left: bool) -> Polygon2D:
+	var cord = Polygon2D.new()
+	cord.name = node_name
+	cord.color = Color(0.68, 0.50, 0.55, 1.0) if left else Color(0.48, 0.36, 0.39, 1.0)
+	cord.material = ShaderMaterial.new()
+	cord.material.shader = STRING_SHADER
+	cord.material.set_shader_parameter("left_string", left)
+	_character.add_child(cord)
+	return cord
 
 func _add_arm_layer():
 	# A cutout has no skirt pixels: shared vertices cannot pull the outfit.
@@ -177,8 +197,10 @@ func _arm_weight(point: Vector2) -> float:
 		return 0.0
 	var weight = _segment_weight(point, ARM_PIVOT, Vector2(972, 769), 75.0, 105.0)
 	weight = maxf(weight, _segment_weight(point, Vector2(972, 769), Vector2(900, 850), 85.0, 112.0))
+	var bow_weight = 0.0
 	for index in range(BOW_POINTS.size() - 1):
-		weight = maxf(weight, _segment_weight(point, BOW_POINTS[index], BOW_POINTS[index + 1], 70.0, 100.0))
+		bow_weight = maxf(bow_weight, _segment_weight(point, BOW_POINTS[index], BOW_POINTS[index + 1], 70.0, 100.0))
+	weight = maxf(weight, bow_weight)
 	# Both visible string sections share the bow's rigid rotation.
 	weight = maxf(weight, _segment_weight(point, Vector2(374, 864), Vector2(1037, 683), 36.0, 64.0))
 	weight = maxf(weight, _segment_weight(point, Vector2(1112, 722), Vector2(1250, 686), 36.0, 64.0))
@@ -189,15 +211,24 @@ func _arm_weight(point: Vector2) -> float:
 		weight *= 1.0 - smoothstep(904.0, 926.0, point.y)
 	weight *= smoothstep(12.0, 60.0, point.distance_to(ARM_PIVOT))
 	weight *= _arm_attachment_weight(point)
-	return weight * smoothstep(610.0, 650.0, point.y)
+	# The wooden bow keeps the grip's full transform up to the fur occlusion.
+	# Limit this override to the bow's strip, clear of the pinned cuff above it.
+	var bow_top = 820.0 - (point.x - 930.0) * 0.342
+	bow_weight *= smoothstep(bow_top - 20.0, bow_top, point.y)
+	bow_weight *= smoothstep(6.0, 24.0, _arm_attachment_distance(point))
+	return maxf(weight * smoothstep(610.0, 650.0, point.y), bow_weight)
 
-func _arm_attachment_weight(point: Vector2) -> float:
-	# Anchor the whole curved cuff seam, then spread the motion through the
-	# forearm. The hand and bow keep their full amplitude past this blend.
+func _arm_attachment_distance(point: Vector2) -> float:
 	var distance = INF
 	for index in range(ARM_ATTACHMENT.size() - 1):
 		var closest = Geometry2D.get_closest_point_to_segment(point, ARM_ATTACHMENT[index], ARM_ATTACHMENT[index + 1])
 		distance = minf(distance, point.distance_to(closest))
+	return distance
+
+func _arm_attachment_weight(point: Vector2) -> float:
+	# Anchor the whole curved cuff seam, then spread the motion through the
+	# forearm. The hand and bow keep their full amplitude past this blend.
+	var distance = _arm_attachment_distance(point)
 	var amount = clampf((distance - 6.0) / 100.0, 0.0, 1.0)
 	var eased = amount * amount * amount * (amount * (amount * 6.0 - 15.0) + 10.0)
 	# End the blend at the forearm's outer side; the nearby wooden bow
@@ -215,6 +246,30 @@ func _arm_transform(seconds: float) -> Transform2D:
 	var shift = ARM_SWAY_OFFSET * wave * arm_sway_strength
 	return Transform2D(angle, ARM_PIVOT - ARM_PIVOT.rotated(angle) + shift)
 
+func _arm_breath_transform(seconds: float) -> Transform2D:
+	var amount = _breath_amount(seconds - ARM_FOLLOW_DELAY)
+	var angle = deg_to_rad(-0.02) * amount
+	var shift = Vector2(0.15, -1.8) * amount
+	return Transform2D(angle, ARM_PIVOT - ARM_PIVOT.rotated(angle) + shift)
+
+func _head_transform(seconds: float) -> Transform2D:
+	var amount = _breath_amount(seconds - HEAD_DELAY)
+	var angle = deg_to_rad(0.045) * amount
+	var shift = Vector2(-0.2, -2.2) * amount
+	return Transform2D(angle, HEAD_PIVOT - HEAD_PIVOT.rotated(angle) + shift)
+
+func _update_bow_string(cord: Polygon2D, start: Vector2, finish: Vector2, motion: Transform2D, breath: float):
+	var string_start = motion * start
+	var string_end = motion * finish
+	var tangent = (string_end - string_start).normalized()
+	var normal = Vector2(-tangent.y, tangent.x) * 3.0
+	cord.polygon = PackedVector2Array([string_start - tangent * 2.0 - normal,
+		string_end + tangent * 2.0 - normal, string_end + tangent * 2.0 + normal,
+		string_start - tangent * 2.0 + normal])
+	cord.material.set_shader_parameter("string_start", string_start)
+	cord.material.set_shader_parameter("string_end", string_end)
+	cord.material.set_shader_parameter("breath_amount", breath)
+
 func _add_piece(definition: Dictionary):
 	var bounds: Rect2 = definition.rect
 	var columns = ceili(bounds.size.x / 10.0)
@@ -226,6 +281,11 @@ func _add_piece(definition: Dictionary):
 	for row in range(rows + 1):
 		y_cuts.append((bounds.position + bounds.size * Vector2(0.0, float(row) / rows)).y)
 	var piece = _grid_patch(definition.name, x_cuts, y_cuts)
+	if definition.kind == 1 or definition.kind == 2:
+		# Hair follows the head before its independent tip motion is added.
+		piece.breath.fill(Vector2.ZERO)
+		piece.shoulders.fill(Vector2.ZERO)
+		piece.head_weights.fill(1.0)
 	piece.node.material = _layer_material(definition.kind)
 	var weights = PackedFloat32Array()
 	for point in piece.rest:
@@ -235,9 +295,33 @@ func _add_piece(definition: Dictionary):
 	_pieces.append(piece)
 
 func _breath_vector(point: Vector2) -> Vector2:
-	var weight = smoothstep(960.0, 1080.0, point.x) * (1.0 - smoothstep(1340.0, 1450.0, point.x))
-	weight *= smoothstep(350.0, 420.0, point.y) * (1.0 - smoothstep(540.0, 640.0, point.y))
-	return Vector2((point.x - 1165.0) * 0.0035, -1.8) * weight
+	var weight = _torso_weight(point) * smoothstep(410.0, 490.0, point.y)
+	return Vector2((point.x - BREATH_ANCHOR.x) * 0.0022, -3.4) * weight
+
+func _shoulder_vector(point: Vector2) -> Vector2:
+	var weight = _torso_weight(point) * (1.0 - smoothstep(410.0, 490.0, point.y))
+	return Vector2(0.15, -3.0) * weight
+
+func _torso_weight(point: Vector2) -> float:
+	var weight = smoothstep(890.0, 1040.0, point.x) * (1.0 - smoothstep(1380.0, 1500.0, point.x))
+	weight *= smoothstep(330.0, 390.0, point.y) * (1.0 - smoothstep(580.0, 820.0, point.y))
+	return weight * (1.0 - _head_weight(point))
+
+func _head_weight(point: Vector2) -> float:
+	return (1.0 - smoothstep(360.0, 400.0, point.y)) * (1.0 - smoothstep(1450.0, 1550.0, point.x))
+
+func _breathing_points(patch: Dictionary, chest: float, shoulders: float, head: Transform2D) -> PackedVector2Array:
+	var rest: PackedVector2Array = patch.rest
+	var chest_vectors: PackedVector2Array = patch.breath
+	var shoulder_vectors: PackedVector2Array = patch.shoulders
+	var head_weights: PackedFloat32Array = patch.head_weights
+	var points = rest.duplicate()
+	for index in range(points.size()):
+		points[index] += chest_vectors[index] * chest + shoulder_vectors[index] * shoulders
+		var weight = head_weights[index]
+		if weight > 0.0:
+			points[index] += (head * rest[index] - rest[index]) * weight
+	return points
 
 func _breath_amount(seconds: float) -> float:
 	var time = fposmod(seconds, BREATH_PERIOD)
@@ -268,38 +352,29 @@ func _process(delta):
 	_elapsed += delta
 	_fit_to_viewport()
 	var breath_amount = _breath_amount(_elapsed)
-	# One shared transform keeps the face, arm, bow and cape together.
-	# Breathing grows gently from the waist; the stage and stars stay fixed.
-	_character.scale = Vector2.ONE + Vector2(0.001, 0.0035) * breath_amount
-	_character.position = BREATH_ANCHOR * (Vector2.ONE - _character.scale) + Vector2(0.0, -1.2) * breath_amount
-	var arm_transform = _arm_transform(_elapsed)
-	var string_start = arm_transform * RIGHT_STRING_START
-	var string_end = arm_transform * RIGHT_STRING_END
-	var tangent = (string_end - string_start).normalized()
-	var normal = Vector2(-tangent.y, tangent.x) * 3.0
-	_right_string.polygon = PackedVector2Array([string_start - tangent * 2.0 - normal,
-		string_end + tangent * 2.0 - normal, string_end + tangent * 2.0 + normal,
-		string_start - tangent * 2.0 + normal])
-	_right_string.material.set_shader_parameter("string_start", string_start)
-	_right_string.material.set_shader_parameter("string_end", string_end)
-	var body_points: PackedVector2Array = _body.rest.duplicate()
-	for index in range(body_points.size()):
-		body_points[index] += _body.breath[index] * breath_amount
-	(_body.node as Polygon2D).polygon = body_points
-	var arm_points: PackedVector2Array = _arm_layer.rest.duplicate()
+	var shoulder_amount = _breath_amount(_elapsed - SHOULDER_DELAY)
+	var head_transform = _head_transform(_elapsed)
+	# A small shared lift keeps every attachment together without stretching
+	# the face or bow. Chest, shoulders and head supply the remaining motion.
+	_character.position = Vector2(0.0, -1.0) * breath_amount
+	var arm_transform = _arm_breath_transform(_elapsed) * _arm_transform(_elapsed)
+	_update_bow_string(_left_string, LEFT_STRING_START, LEFT_STRING_END, arm_transform, breath_amount)
+	_update_bow_string(_right_string, RIGHT_STRING_START, RIGHT_STRING_END, arm_transform, breath_amount)
+	(_body.node as Polygon2D).polygon = _breathing_points(_body, breath_amount, shoulder_amount, head_transform)
+	var arm_points = _breathing_points(_arm_layer, breath_amount, shoulder_amount, head_transform)
 	for index in range(arm_points.size()):
-		arm_points[index] += _arm_layer.breath[index] * breath_amount
-		arm_points[index] += (arm_transform * _arm_layer.rest[index] - _arm_layer.rest[index]) * _arm_weights[index]
+		# At the cuff this is the exact same breathing field as the sleeve.
+		# Release it smoothly into the rigid hand/bow follow and residual idle.
+		arm_points[index] = arm_points[index].lerp(arm_transform * _arm_layer.rest[index], _arm_weights[index])
 	(_arm_layer.node as Polygon2D).polygon = arm_points
 	for piece in _pieces:
 		var definition: Dictionary = piece.definition
-		var points: PackedVector2Array = piece.rest.duplicate()
+		var points = _breathing_points(piece, breath_amount, shoulder_amount, head_transform)
 		var phase = _elapsed * TAU / definition.period + definition.phase
 		for index in range(points.size()):
-			var wave = phase - (points[index].x - definition.rect.position.x) / definition.rect.size.x * 0.65
+			var wave = phase - (piece.rest[index].x - definition.rect.position.x) / definition.rect.size.x * 0.65
 			points[index] += Vector2(sin(wave) * definition.amplitude.x,
 				sin(wave - 0.35) * definition.amplitude.y) * piece.weights[index]
-			points[index] += piece.breath[index] * breath_amount
 		(piece.node as Polygon2D).polygon = points
 
 func _fit_to_viewport():
