@@ -194,7 +194,7 @@ public static class CardActions
                 target = ArrowCombat.ResolveEffectTarget(target, player.Creature.CombatState!);
                 if (target == null)
                 {
-                    await CardPileCmd.Add(arrow, PileType.Discard);
+                    await arrow.MoveToResultPileWithoutPlaying(context);
                     return;
                 }
             }
