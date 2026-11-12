@@ -166,3 +166,77 @@ test('整组操作保留关联牌自己的入口与入池身份，仍处理独�
   assert.deepEqual(domain.moveCards(exclusive,'card_A','trash',{group:true,at:'after'}),['card_A','card_B','card_C']);
   assert.ok(exclusive.cards.every(c=>c.trashedAt==='after'));
 });
+
+function sevenNotesFixture(){
+  const ids=['Do','Re','Mi','Fa','Sol','La','Si'];
+  return {
+    cards:ids.map((id,index)=>makeCard(id,index===0)),
+    partnerGroups:ids.map(id=>({
+      uid:'group_'+id,
+      mainCardId:id,
+      grantedCardIds:ids.filter(other=>other!==id),
+      grantedCardCounts:Object.fromEntries(ids.filter(other=>other!==id).map(other=>[other,1]))
+    }))
+  };
+}
+
+for(const action of ['trash','reserve','pool']){
+  test('七音完整关联列表整组'+action+'处理全部成员，保留列表与入池身份',()=>{
+    for(const selectedId of ['Do','Fa']){
+      const data=sevenNotesFixture();
+      if(action==='pool')for(const card of data.cards)card.reservedAt='before';
+      const before=structuredClone(data);
+      const changed=domain.moveCards(data,'card_'+selectedId,action,{group:true,at:'after'});
+      assert.deepEqual(changed,data.cards.map(card=>card.uid));
+      assert.deepEqual(data.partnerGroups,before.partnerGroups);
+      for(const card of data.cards){
+        const original=before.cards.find(entry=>entry.uid===card.uid);
+        const expected={...original};
+        if(action==='trash')expected.trashedAt='after';
+        else if(action==='reserve')expected.reservedAt='after';
+        else delete expected.reservedAt;
+        assert.deepEqual(card,expected);
+      }
+    }
+  });
+
+  test('七音整组'+action+'继续保留组外入口引用的成员',()=>{
+    const data=sevenNotesFixture();
+    data.cards.push(makeCard('Other',true));
+    data.partnerGroups.push({uid:'group_Other',mainCardId:'Other',grantedCardIds:['Si']});
+    if(action==='pool')for(const card of data.cards)card.reservedAt='before';
+    const before=structuredClone(data);
+    assert.deepEqual(
+      domain.moveCards(data,'card_Do',action,{group:true,at:'after'}),
+      data.cards.filter(card=>!['Si','Other'].includes(card.id)).map(card=>card.uid)
+    );
+    for(const id of ['Si','Other'])assert.deepEqual(data.cards.find(card=>card.id===id),before.cards.find(card=>card.id===id));
+  });
+}
+
+test('主牌已移回时，整组操作仍选择移回剩余备用成员',()=>{
+  const data=sevenNotesFixture();
+  for(const card of data.cards.slice(1))card.reservedAt='before';
+  const context=domain.cardGroup(data,'card_Do');
+  assert.equal(context.reserveAction,'pool');
+  assert.deepEqual(domain.moveCards(data,'card_Do',context.reserveAction,{group:true}),data.cards.slice(1).map(card=>card.uid));
+  assert.ok(data.cards.every(card=>!card.reservedAt));
+  assert.equal(domain.cardGroup(data,'card_Do').reserveAction,'reserve');
+});
+
+test('整组备用按钮忽略已删除和组外共享成员的备用状态',()=>{
+  const data=fixture();
+  data.cards[1].reservedAt='before';
+  data.cards[2].reservedAt='before';
+  data.cards[2].trashedAt='before';
+  data.cards.push(makeCard('D',true));
+  data.partnerGroups.push({uid:'group_D',mainCardId:'D',grantedCardIds:['B']});
+  assert.equal(domain.cardGroup(data,'card_A').reserveAction,'reserve');
+});
+
+test('完整互相关联的单张操作仍只处理当前牌',()=>{
+  const data=sevenNotesFixture();
+  for(const card of data.cards)card.reservedAt='before';
+  assert.deepEqual(domain.moveCards(data,'card_Do','pool'),['card_Do']);
+  assert.ok(data.cards.slice(1).every(card=>card.reservedAt==='before'));
+});

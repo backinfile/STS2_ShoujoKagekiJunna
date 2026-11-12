@@ -36,7 +36,19 @@
     const group=fromSource?sourceGroup:data.partnerGroups.find(group=>group.mainCardId===card.id);
     if(!group)return null;
     const ids=new Set([group.mainCardId,...group.grantedCardIds]);
-    return {group,cards:data.cards.filter(entry=>ids.has(entry.id))};
+    const cards=data.cards.filter(entry=>ids.has(entry.id));
+    const memberGroups=data.partnerGroups.filter(other=>
+      ids.has(other.mainCardId)&&other.grantedCardIds.length+1===ids.size&&other.grantedCardIds.every(id=>ids.has(id))
+    );
+    const memberMainIds=new Set(memberGroups.map(other=>other.mainCardId));
+    const otherGroups=data.partnerGroups.filter(other=>
+      !memberGroups.includes(other)&&data.cards.some(entry=>entry.id===other.mainCardId&&!entry.trashedAt)
+    );
+    const sharedIds=new Set(otherGroups.flatMap(other=>[other.mainCardId,...other.grantedCardIds]));
+    const movableCards=cards.filter(entry=>!entry.trashedAt&&(
+      entry.id===group.mainCardId||!sharedIds.has(entry.id)&&(!entry.pool||memberMainIds.has(entry.id))
+    ));
+    return {group,cards,movableCards,reserveAction:movableCards.some(entry=>entry.reservedAt)?'pool':'reserve'};
   }
   function moveCards(data,cardUid,action,{group=false,originUid=cardUid,at=new Date().toISOString()}={}){
     if(!['trash','reserve','pool'].includes(action))throw Error('未知卡牌操作');
@@ -45,9 +57,7 @@
     if(group){
       const context=cardGroup(data,cardUid,originUid);
       if(!context)return [];
-      const otherGroups=data.partnerGroups.filter(other=>other!==context.group&&data.cards.some(card=>card.id===other.mainCardId&&!card.trashedAt));
-      const sharedIds=new Set(otherGroups.flatMap(other=>[other.mainCardId,...other.grantedCardIds]));
-      cards=context.cards.filter(card=>card.id===context.group.mainCardId||!card.pool&&!sharedIds.has(card.id));
+      cards=context.movableCards;
     }
     const changed=[];
     for(const card of cards){

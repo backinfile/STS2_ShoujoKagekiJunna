@@ -441,7 +441,7 @@
     if(!selected||(!root&&!e)){$('inspector-title').textContent='编辑';$('close-inspector').hidden=true;$('inspector-footer').hidden=true;return;}
     $('duplicate-entity').hidden=root||trash;$('delete-entity').hidden=root||trash;$('restore-entity').hidden=!trash;$('reserve-entity').hidden=root||trash||selected.collection!=='cards';$('reserve-entity').textContent=e?.reservedAt?'移回卡池':'移入备用';
     const groupContext=!root&&!trash&&selected.collection==='cards'?JunnaWorkbenchDomain.cardGroup(state.data,e.uid,selected.cardOrigin):null,isMain=Boolean(groupContext&&groupContext.group.mainCardId===e.id);
-    $('card-group-actions').hidden=!groupContext;$('reserve-group').textContent=e?.reservedAt?'移回一组':'备用一组';
+    $('card-group-actions').hidden=!groupContext;$('reserve-group').textContent=groupContext?.reserveAction==='pool'?'移回一组':'备用一组';
     $('set-group-main').textContent=isMain?'当前主牌':'设置为主牌';$('set-group-main').disabled=!groupContext||isMain;$('set-group-main').dataset.groupUid=groupContext?.group.uid||'';
     $('inspector-title').textContent=trash?'已删除卡牌':root?(selected.uid==='title'?'制作台名称':'规则数据'):'编辑'+LABELS[selected.collection];
     let html='';
@@ -517,6 +517,7 @@
   function moveCardGroup(action){
     const card=current(),selected=ui.selected;if(selected?.collection!=='cards'||!card||card.trashedAt)return;
     const group=JunnaWorkbenchDomain.cardGroup(state.data,card.uid,selected.cardOrigin);if(!group)return;
+    action=action||group.reserveAction;
     const main=state.data.cards.find(entry=>entry.id===group.group.mainCardId),label={trash:'删除一组',reserve:'备用一组',pool:'移回一组'}[action];let count=0;
     const result=transact(label+' · '+(main?.name||card.name),d=>{count=JunnaWorkbenchDomain.moveCards(d,card.uid,action,{group:true,originUid:selected.cardOrigin}).length;ui.selected=null;},action==='trash'?'删除':'编辑');
     if(result)toast(action==='trash'?'已将'+count+'张牌移入垃圾桶':action==='reserve'?'已将'+count+'张牌移入备用':'已将'+count+'张牌移回卡池');
@@ -694,7 +695,7 @@
   $('knowledge-edit').addEventListener('click',()=>{const {card,origin,slot}=knowledgeView;ui.upgraded=knowledgeView.upgraded;$('knowledge-dialog').close();openEditor('cards',card,origin,slot);});
   $('knowledge-dialog').addEventListener('click',event=>{if(event.target!==$('knowledge-dialog'))return;const rect=event.target.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)event.target.close();});
   $('work-area').addEventListener('keydown',event=>{if(event.key==='Enter'&&event.target.matches('[data-term]'))openEditor('terms',event.target.dataset.term);});
-  $('close-inspector').addEventListener('click',closeEditor);$('duplicate-entity').addEventListener('click',duplicateEntity);$('delete-entity').addEventListener('click',deleteEntity);$('reserve-entity').addEventListener('click',()=>moveCardReserve(ui.selected?.uid,!current()?.reservedAt));$('delete-group').addEventListener('click',()=>moveCardGroup('trash'));$('reserve-group').addEventListener('click',()=>moveCardGroup(current()?.reservedAt?'pool':'reserve'));$('restore-entity').addEventListener('click',()=>restoreCard(ui.selected?.uid));$('edit-title').addEventListener('click',()=>openEditor('root','title'));
+  $('close-inspector').addEventListener('click',closeEditor);$('duplicate-entity').addEventListener('click',duplicateEntity);$('delete-entity').addEventListener('click',deleteEntity);$('reserve-entity').addEventListener('click',()=>moveCardReserve(ui.selected?.uid,!current()?.reservedAt));$('delete-group').addEventListener('click',()=>moveCardGroup('trash'));$('reserve-group').addEventListener('click',()=>moveCardGroup());$('restore-entity').addEventListener('click',()=>restoreCard(ui.selected?.uid));$('edit-title').addEventListener('click',()=>openEditor('root','title'));
   $('editor-form').addEventListener('load',event=>{if(event.target.matches('[data-arrow-focus-source]'))refreshArrowFocus();},true);
   $('editor-form').addEventListener('submit',event=>event.preventDefault());
   $('editor-form').addEventListener('toggle',event=>{if(event.target.open){const raw=event.target.querySelector('[data-raw-entity]'),entity=current();if(raw&&entity){const value=clone(entity);delete value.uid;raw.value=JSON.stringify(value,null,2);}}},true);

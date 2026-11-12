@@ -1,0 +1,591 @@
+{
+  "date": "2026-11-11",
+  "purpose": "修复选角手弓摆动牵拉裙子的共享网格问题",
+  "cause": "手弓权重原先施加到主体网格，覆盖了蓝色裙面。",
+  "implementation": {
+    "body": "Actor 承担局部胸口呼吸，Character 同步全部人物图层的整体呼吸；裙子不接收手弓权重。",
+    "arm": "ArmAndBow 独立网格，使用原立绘 RGB、生成的独立 alpha，并排除蓝色衣裙边缘。",
+    "backing": "固定底图只补齐手弓遮挡区域，外缘柔和衔接原纹理。",
+    "asset_roles": {
+      "01-arm-bow": "alpha only",
+      "02-arm-backing": "alpha only",
+      "03-backing-color": "hidden-clothing RGB only"
+    },
+    "grip_vertical_span_px": 7.97772216796875,
+    "attachment_blend": {
+      "date": "2026-11-12",
+      "seam": [
+        [
+          980,
+          715
+        ],
+        [
+          1000,
+          686
+        ],
+        [
+          1030,
+          671
+        ],
+        [
+          1060,
+          663
+        ],
+        [
+          1090,
+          661
+        ],
+        [
+          1100,
+          678
+        ],
+        [
+          1108,
+          710
+        ],
+        [
+          1106,
+          739
+        ]
+      ],
+      "pinned_distance_px": 6,
+      "blend_distance_px": 100,
+      "interpolation": "quintic smootherstep",
+      "mesh_spacing_at_forearm_px": 10,
+      "behavior": "沿完整袖口连接曲线固定，幅度向前臂、手腕平滑增加；木弓外侧退出连接权重，手掌保持原摆幅。"
+    },
+    "overall_breath": {
+      "date": "2026-11-12",
+      "arm_amplitude_ratio": 0.500084171863642,
+      "period_seconds": 5.6,
+      "inhale_seconds": 1.9,
+      "exhale_seconds": 3.3,
+      "rest_seconds": 0.4,
+      "anchor": [
+        1165,
+        900
+      ],
+      "peak_scale": [
+        1.001,
+        1.0035
+      ],
+      "peak_lift_px": 1.2,
+      "shared_layers": [
+        "Actor",
+        "ArmAndBow",
+        "RightBowString",
+        "Fringe",
+        "Ponytail",
+        "CapeRim",
+        "LowerCape",
+        "FurHem"
+      ],
+      "behavior": "人物图层共享腰部起伏，头部、胸口、手弓和披风同步呼吸；袖口渐变保持，手弓独立摆幅约减半，舞台与星空保持原位置。"
+    }
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "purpose": "Separate arm/bow from fixed outfit; repair hidden cloth",
+    "assets": [
+      {
+        "id": "01-arm-bow",
+        "sourcePath": "C:\\Users\\17575\\.codex\\generated_images\\01a1c8e5-082d-77a3-88b8-3d9cfd463704\\exec-806c00b4-7be5-41e6-b39b-34ec84c6b395.png",
+        "rawPath": "D:/Github/STS2_ShoujoKagekiJunna/output/imagegen/junna-select-arm-separation-20261111/raw/01-arm-bow.png",
+        "cleanPath": "D:/Github/STS2_ShoujoKagekiJunna/output/imagegen/junna-select-arm-separation-20261111/clean/01-arm-bow.png",
+        "productionPath": "D:/Github/STS2_ShoujoKagekiJunna/ShoujoKagekiJunna/images/character_select/arm_bow.png",
+        "review_regions": [
+          [
+            800,
+            680,
+            1100,
+            900
+          ],
+          [
+            280,
+            750,
+            650,
+            941
+          ],
+          [
+            1060,
+            675,
+            1360,
+            860
+          ],
+          [
+            950,
+            120,
+            1250,
+            350
+          ]
+        ],
+        "prompt": "Use case: background-extraction. Production animation cutout from the supplied illustration. Edit target: image 1. Extract ONLY the visible red-sleeved forearm from its gold elbow band down, the complete bare gripping hand and fingers, the entire wooden bow with its green gem and grip wrapping, and the long thin LEFT bowstring. Everything else must be truly transparent. Keep the EXACT 1672 by 941 canvas, original framing and original pixel positions: forearm approx x935-1105 y655-790; hand x825-1015 y750-900; bow x293-1310 y725-938; left cord from approx (374,864) toward (1000,693). Do NOT center, enlarge, rotate, redraw, restyle or change this arm or bow. No head, face, hair, torso, blue upper arm, skirt, cape, white fur, stage rail, background or stars. In particular the blue skirt at (1000,890), (1080,850) and (1160,810) must be fully transparent, with no cloth fragments attached to the cutout. Exclude the SHORT RIGHT bowstring around (1110,722)-(1250,686); this is separately animated. Preserve finger shapes, red cuff, gold trim, bow silhouette, wrapping, green jewel, and thin left cord exactly. Transparent PNG with crisp original painterly edges, no shadows added, no labels, no text.",
+        "references": [
+          "D:/Github/STS2_ShoujoKagekiJunna/ShoujoKagekiJunna/images/character_select.png"
+        ],
+        "production_sha256": "5190e774b03a2b36124888cd5151fa9468abaf4ee23a663773fe902bf60ede83"
+      },
+      {
+        "id": "02-arm-backing",
+        "sourcePath": "C:\\Users\\17575\\.codex\\generated_images\\01a1c8e5-082d-77a3-88b8-3d9cfd463704\\exec-43fd01a4-722e-4aeb-a7fd-73db33e04391.png",
+        "rawPath": "D:/Github/STS2_ShoujoKagekiJunna/output/imagegen/junna-select-arm-separation-20261111/raw/02-arm-backing.png",
+        "cleanPath": "D:/Github/STS2_ShoujoKagekiJunna/output/imagegen/junna-select-arm-separation-20261111/clean/02-arm-backing.png",
+        "productionPath": "D:/Github/STS2_ShoujoKagekiJunna/ShoujoKagekiJunna/images/character_select/arm_backing.png",
+        "review_regions": [
+          [
+            850,
+            680,
+            1150,
+            900
+          ],
+          [
+            950,
+            150,
+            1250,
+            350
+          ],
+          [
+            1060,
+            675,
+            1360,
+            860
+          ],
+          [
+            720,
+            750,
+            1020,
+            941
+          ]
+        ],
+        "prompt": "Use case: precise-object-edit. Production animation underpainting. Image 1 is the exact edit target: the full character already on a transparent canvas. Image 2 is a color/detail reference only. Preserve the EXACT original 1672 by 941 canvas, framing, scale and all character positions. Remove the red-sleeved forearm from the gold elbow band down, the entire bare gripping hand and fingers, the whole wooden bow including green gem and wrapping, and BOTH thin bowstrings. The removed area is approximately x293-1310 y655-941. Reveal and carefully inpaint the existing blue jacket/pleated blue skirt that was hidden behind the forearm, hand and bow; maintain its original folds, blue palette and the skirt's diagonal left silhouette. Leave open air around that silhouette genuinely transparent. Leave the blue upper arm above the elbow in place. Preserve the head, face, glasses, hair, torso, cape, fur collar and the rest of the outfit EXACTLY as in image 1. No new arm, hand or weapon. No background or stage rail. Do not change the pose, camera, canvas size, clothing style, or visible skirt geometry. This is a stationary clean layer behind a separately moving arm, so the uncovered cloth must look naturally continuous. Transparent PNG, no labels or text.",
+        "references": [
+          "D:/Github/STS2_ShoujoKagekiJunna/ShoujoKagekiJunna/images/character_select/subject.png",
+          "D:/Github/STS2_ShoujoKagekiJunna/ShoujoKagekiJunna/images/character_select.png"
+        ],
+        "production_sha256": "1b8fbe12a27ab9364c2b35577d9d7483ee1bf705fe4a3ffaa19e539d39d587fb"
+      },
+      {
+        "id": "03-backing-color",
+        "sourcePath": "C:/Users/17575/.codex/generated_images/01a1c8e5-082d-77a3-88b8-3d9cfd463704/exec-f95c8f32-ae61-4f4f-aa5a-11238ac64338.png",
+        "rawPath": "D:/Github/STS2_ShoujoKagekiJunna/output/imagegen/junna-select-arm-separation-20261111/raw/03-backing-color.png",
+        "cleanPath": "D:/Github/STS2_ShoujoKagekiJunna/output/imagegen/junna-select-arm-separation-20261111/clean/03-backing-color.png",
+        "productionPath": "D:/Github/STS2_ShoujoKagekiJunna/ShoujoKagekiJunna/images/character_select/arm_backing_color.png",
+        "review_regions": [
+          [
+            850,
+            680,
+            1150,
+            900
+          ],
+          [
+            950,
+            150,
+            1250,
+            350
+          ],
+          [
+            1060,
+            675,
+            1360,
+            860
+          ],
+          [
+            720,
+            750,
+            1020,
+            941
+          ]
+        ],
+        "prompt": "Use case: precise-object-edit. This exact 1672x941 original illustration is the edit target. Create a clean underpainting plate for a separately animated forearm and bow. Remove ONLY the visible red forearm sleeve from its gold elbow cuff down (roughly x935-1105 y655-790), the bare gripping hand/fingers (x825-1015 y750-910), the entire wooden bow and green gem (x293-1310 y725-940), and both thin strings. Fill the hidden blue clothing under those objects by continuing the EXACT ORIGINAL surrounding blue skirt folds, shadows, and original visible trim at their current coordinates. Very important: DO NOT invent a horizontal gold waistband across the left torso; under the removed hand and red sleeve the replacement should be continuous dark/mid BLUE fabric that follows the existing adjacent visible folds. Preserve the exact visible skirt pleat pattern, visible waist trim, visible blue upper arm, silhouette, cape, head, face, glasses, hair, background, and stage rail. Do not re-pose the body, shift the waist, move folds, change the camera, center or resize. Keep the original canvas 1672x941 and original pixel alignment. No new arm or hand or weapon. Retain the opaque original purple background and stage. Only reconstruct what was occluded by the removed objects. No text, marks or guides.",
+        "references": [
+          "D:/Github/STS2_ShoujoKagekiJunna/ShoujoKagekiJunna/images/character_select.png"
+        ],
+        "production_sha256": "34fb24cecbcdea0466dff8142a31af5ddaf34b7ae852c65b2227e47f289b0b48"
+      }
+    ]
+  },
+  "cleanup": {
+    "tool": "GPT Image 2 Artifact Cleaner",
+    "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+    "local_only": true,
+    "strength": 0.25,
+    "device": "cuda",
+    "originals_preserved": true,
+    "assets": [
+      {
+        "id": "01-arm-bow",
+        "source": "D:\\Github\\STS2_ShoujoKagekiJunna\\output\\imagegen\\junna-select-arm-separation-20261111\\raw\\01-arm-bow.png",
+        "source_sha256": "5850f0d93371d00ccc8b7e7e5e34d77015712a3badd2b208510bca3711dde7a2",
+        "file": "D:\\Github\\STS2_ShoujoKagekiJunna\\output\\imagegen\\junna-select-arm-separation-20261111\\clean\\01-arm-bow.png",
+        "sha256": "5190e774b03a2b36124888cd5151fa9468abaf4ee23a663773fe902bf60ede83",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "alpha_identical": true,
+        "mean_rgb_change": 1.5639,
+        "seconds": 3.22,
+        "review_regions": [
+          [
+            800,
+            680,
+            1100,
+            900
+          ],
+          [
+            280,
+            750,
+            650,
+            941
+          ],
+          [
+            1060,
+            675,
+            1360,
+            860
+          ],
+          [
+            950,
+            120,
+            1250,
+            350
+          ]
+        ]
+      },
+      {
+        "id": "02-arm-backing",
+        "source": "D:\\Github\\STS2_ShoujoKagekiJunna\\output\\imagegen\\junna-select-arm-separation-20261111\\raw\\02-arm-backing.png",
+        "source_sha256": "a1c7d4dcf3f331ba4708e0ab4020778e89a96d75f8a69c7e0ccb35674dce0b25",
+        "file": "D:\\Github\\STS2_ShoujoKagekiJunna\\output\\imagegen\\junna-select-arm-separation-20261111\\clean\\02-arm-backing.png",
+        "sha256": "1b8fbe12a27ab9364c2b35577d9d7483ee1bf705fe4a3ffaa19e539d39d587fb",
+        "dimensions": [
+          1671,
+          941
+        ],
+        "alpha_identical": true,
+        "mean_rgb_change": 1.9225,
+        "seconds": 2.73,
+        "review_regions": [
+          [
+            850,
+            680,
+            1150,
+            900
+          ],
+          [
+            950,
+            150,
+            1250,
+            350
+          ],
+          [
+            1060,
+            675,
+            1360,
+            860
+          ],
+          [
+            720,
+            750,
+            1020,
+            941
+          ]
+        ]
+      },
+      {
+        "id": "03-backing-color",
+        "source": "D:\\Github\\STS2_ShoujoKagekiJunna\\output\\imagegen\\junna-select-arm-separation-20261111\\raw\\03-backing-color.png",
+        "source_sha256": "8dba3c4a8842b703ba4a4c3a317592bb9b398922f2709ad5be823c98969c88e1",
+        "file": "D:\\Github\\STS2_ShoujoKagekiJunna\\output\\imagegen\\junna-select-arm-separation-20261111\\clean\\03-backing-color.png",
+        "sha256": "34fb24cecbcdea0466dff8142a31af5ddaf34b7ae852c65b2227e47f289b0b48",
+        "dimensions": [
+          1672,
+          941
+        ],
+        "alpha_identical": true,
+        "mean_rgb_change": 1.8702,
+        "seconds": 3.06,
+        "review_regions": [
+          [
+            850,
+            680,
+            1150,
+            900
+          ],
+          [
+            950,
+            150,
+            1250,
+            350
+          ],
+          [
+            1060,
+            675,
+            1360,
+            860
+          ],
+          [
+            720,
+            750,
+            1020,
+            941
+          ]
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "godot": "4.5.1 OpenGL Compatibility",
+    "skirt_vertex_before_max_px": 10.016,
+    "skirt_vertex_after_max_px": 0.0,
+    "visible_skirt_regions": [
+      {
+        "point": [
+          1000,
+          890
+        ],
+        "region": "5x5",
+        "max_rgb_delta": 0
+      },
+      {
+        "point": [
+          1080,
+          875
+        ],
+        "region": "5x5",
+        "max_rgb_delta": 0
+      },
+      {
+        "point": [
+          1160,
+          840
+        ],
+        "region": "5x5",
+        "max_rgb_delta": 0
+      }
+    ],
+    "runtime": "隔离满解锁档案，随机端口，最小化和 silent_test，选角实机录制 22 秒。",
+    "video": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-arm-separated-20261111\\junna-skirt-fixed-game.mp4",
+    "recording": {
+      "status": "completed",
+      "output_path": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-arm-separated-20261111\\sts2-20261111-144113-a7c22aef3c8041599c244d66d8c1235a.mp4",
+      "fps": 20,
+      "max_duration_seconds": 45,
+      "width": 1600,
+      "height": 900,
+      "frames_written": 440,
+      "video_duration_seconds": 22,
+      "frames_captured": 362,
+      "frames_repeated": 78,
+      "frames_dropped": 0,
+      "encoder": "h264_nvenc",
+      "capture_fps": 16.46386946767539,
+      "capture_average_ms": 42.364958839778986,
+      "capture_max_ms": 668.9036,
+      "encode_write_average_ms": 1.0047270454545452,
+      "encode_write_max_ms": 65.7866,
+      "elapsed_seconds": 22.637922,
+      "audio": true,
+      "audio_source": "engine_mix"
+    },
+    "regression": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-arm-separated-20261111\\project\\verify_skirt.gd",
+    "attachment_gradient": {
+      "date": "2026-11-12",
+      "seam_before_max_span_px": 18.9840526580811,
+      "seam_after_max_span_px": 0.0,
+      "grip_vertical_span_px": 15.9527587890625,
+      "forearm_samples": [
+        {
+          "weight": 0.0,
+          "x": 1060.0,
+          "y": 685.0
+        },
+        {
+          "weight": 0.0791660374229161,
+          "x": 1040.0,
+          "y": 710.0
+        },
+        {
+          "weight": 0.28821933861914,
+          "x": 1020.0,
+          "y": 735.0
+        },
+        {
+          "weight": 0.374863623545793,
+          "x": 1000.0,
+          "y": 760.0
+        },
+        {
+          "weight": 0.7491026944,
+          "x": 980.0,
+          "y": 785.0
+        },
+        {
+          "weight": 1.0,
+          "x": 950.0,
+          "y": 820.0
+        },
+        {
+          "weight": 1.0,
+          "x": 930.0,
+          "y": 844.0
+        }
+      ],
+      "visible_skirt_regions": [
+        {
+          "point": [
+            1000,
+            890
+          ],
+          "region": "5x5",
+          "max_rgb_delta": 0
+        },
+        {
+          "point": [
+            1080,
+            875
+          ],
+          "region": "5x5",
+          "max_rgb_delta": 0
+        },
+        {
+          "point": [
+            1160,
+            840
+          ],
+          "region": "5x5",
+          "max_rgb_delta": 0
+        }
+      ],
+      "probe": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-arm-gradient-20261112\\project\\probe_attachment.gd",
+      "video": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-arm-gradient-20261112\\junna-arm-gradient-game.mp4",
+      "recording": {
+        "status": "completed",
+        "output_path": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-arm-gradient-20261112\\sts2-20261112-003120-c7a336ac5a4d4517aa989dee6b292c55.mp4",
+        "fps": 20,
+        "max_duration_seconds": 45,
+        "width": 1600,
+        "height": 900,
+        "frames_written": 440,
+        "video_duration_seconds": 22,
+        "frames_captured": 364,
+        "frames_repeated": 76,
+        "frames_dropped": 0,
+        "encoder": "h264_nvenc",
+        "capture_fps": 16.553182775041773,
+        "capture_average_ms": 37.570038186813164,
+        "capture_max_ms": 653.7207,
+        "encode_write_average_ms": 0.9046259090909093,
+        "encode_write_max_ms": 65.5627,
+        "elapsed_seconds": 22.5830174,
+        "audio": true,
+        "audio_source": "engine_mix"
+      }
+    },
+    "overall_breath": {
+      "date": "2026-11-12",
+      "motion": {
+        "arm_amplitude_ratio": 0.500084171863642,
+        "arm_span_after_px": 7.97772216796875,
+        "arm_span_before_px": 15.9527587890625,
+        "breath_samples": [
+          {
+            "chest_shift": [
+              0.0,
+              0.0
+            ],
+            "head_shift": [
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "time": 0.0
+          },
+          {
+            "chest_shift": [
+              -0.0224609375,
+              -4.4412841796875
+            ],
+            "head_shift": [
+              -0.06494140625,
+              -3.47499084472656
+            ],
+            "scale": [
+              1.00100004673004,
+              1.00349998474121
+            ],
+            "time": 1.9
+          },
+          {
+            "chest_shift": [
+              0.0,
+              0.0
+            ],
+            "head_shift": [
+              0.0,
+              0.0
+            ],
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "time": 5.6
+          }
+        ]
+      },
+      "arm_only_skirt_regions": [
+        {
+          "point": [
+            1000,
+            890
+          ],
+          "region": "5x5",
+          "arm_only_max_rgb_delta": 0
+        },
+        {
+          "point": [
+            1080,
+            875
+          ],
+          "region": "5x5",
+          "arm_only_max_rgb_delta": 0
+        },
+        {
+          "point": [
+            1160,
+            840
+          ],
+          "region": "5x5",
+          "arm_only_max_rgb_delta": 0
+        }
+      ],
+      "probe": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-soft-breath-20261112\\project\\probe_soft_breath.gd",
+      "video": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-soft-breath-20261112\\junna-soft-breath-game.mp4",
+      "recording": {
+        "status": "completed",
+        "output_path": "D:\\Github\\STS2_ShoujoKagekiJunna\\out\\tmp\\junna-select-soft-breath-20261112\\sts2-20261112-004028-acdb4fe9157f4c8f833e8e6590105179.mp4",
+        "fps": 20,
+        "max_duration_seconds": 45,
+        "width": 1600,
+        "height": 900,
+        "frames_written": 441,
+        "video_duration_seconds": 22.05,
+        "frames_captured": 356,
+        "frames_repeated": 85,
+        "frames_dropped": 0,
+        "encoder": "h264_nvenc",
+        "capture_fps": 16.181790525667104,
+        "capture_average_ms": 38.54235084269663,
+        "capture_max_ms": 701.9179,
+        "encode_write_average_ms": 1.0270480725623587,
+        "encode_write_max_ms": 101.2872,
+        "elapsed_seconds": 22.6168104,
+        "audio": true,
+        "audio_source": "engine_mix"
+      }
+    }
+  }
+}

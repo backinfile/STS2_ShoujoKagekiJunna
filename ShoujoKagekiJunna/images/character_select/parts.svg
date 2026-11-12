@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941" viewBox="0 0 1672 941">
+  <!-- R fringe, G ponytail, B upper cape; opaque black is the fur hem. Empty is transparent. -->
+  <path fill="red" d="M922 358 L999 358 L1002 434 L938 434 L918 389 Z"/>
+  <path fill="lime" d="M1390 354 L1438 354 L1453 365 L1461 379 L1457 394 L1447 409 L1433 418 L1412 420 L1390 420 Z"/>
+  <path fill="blue" d="M1470 350 L1672 350 L1672 445 L1470 445 Z"/>
+  <path fill="black" d="M1465 745 L1636 745 L1636 840 L1465 840 Z"/>
+</svg>
