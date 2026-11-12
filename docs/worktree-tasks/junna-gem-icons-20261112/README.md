@@ -155,7 +155,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-用户最终要求撤回到对话开始前项目原有的版本。两枚遗物已恢复原有SVG及SVG轮廓引用；本次新增的活动PNG和导入配置已撤销。原有四张SVG与捕获的对话起点提交逐字节一致。工作台也已恢复原assetId与原图说明，保留当前回复1／3点生命的效果。原图的Godot导入与PCK读取检查通过，见rollback-original/。本任务从未合并main，保留工作树与全部过程资料。
+用户最终要求撤回到对话开始前项目原有的版本。两枚遗物已恢复原有SVG及SVG轮廓引用；本次新增的活动PNG和导入配置已撤销。原有四张SVG与捕获的对话起点提交逐字节一致。工作台旧assetId实际仍为带金色包托版，现已将当前SVG的Godot原尺寸导出图重新上传并替换四处配图，保留当前回复1／3点生命的效果。原图的Godot导入与PCK读取检查通过，见rollback-original/。本任务从未合并main，保留工作树与全部过程资料。
 
 撤回前的v3初始版、v4火效版、v5本体画风版及v6轮廓重绘均保留为历史草稿。以下为此前过程记录，当前活动资源以rollback-original/的恢复验证为准。
 
@@ -247,3 +247,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 本轮结果：停止重绘并恢复对话开始前的绿色宝石与燃烧宝石。原有SVG及轮廓文件保持起点提交原值，游戏引用恢复SVG，移除本轮新增的活动PNG及导入配置。工作台通过MCP恢复relic-green-gem-vector-v2-20261105与relic-burning-gem-vector-v2-20261105，两个契合池的绘图说明恢复旧版并沿用当前效果文本。恢复预览、请求回执与最小资源验证保存于rollback-original/。所有后续生成稿保留为过程记录。
 
 撤回提交为ae40c8b。随后仅在工作树内同步main@6e7c31d6311c5b1d2376c6cb1e4d62d8fd74dfb5，无冲突，保留主分支同期更新的遗物效果；同步后遗物模型、全部活动图标及实现文档均与main一致。主目录仍为main且干净，本任务从未合并回主分支。工作树与过程资料保留，未执行清理。
+
+### 用户消息 14
+
+工作台上的不太对，更新上去吧
+
+本轮修正：读取工作台原assetId中的实际图片后发现，两个vector-v2素材仍含金色包托，与项目原有的裸宝石SVG不一致。使用rollback-original/中已验证的Godot原尺寸导出PNG重新上传，分别使用relic-green-gem-project-original-20261112与relic-burning-gem-project-original-20261112。MCP r5010原子更新两个遗物及两个契合池的配图，并只修正契合池说明中有关金色包托的描述，保留当前效果与其余字段。回执、导出图片SHA-256和公开资源一致性记录保存在rollback-original/workbench-upload/。
+
+验证：MCP重新读取的两张图片均为当前裸宝石；两个公开图片的SHA-256与本地Godot导出图一致；公开snapshot.json已发布至r5010，四个条目的配图及效果均与提交后的工作台一致。仅执行工作台图片和公开发布检查，游戏资源未发生修改。

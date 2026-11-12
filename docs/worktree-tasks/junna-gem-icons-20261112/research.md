@@ -2,7 +2,7 @@
 
 2026-11-12重新检索并直接查看了两本设定集的公开预览。
 
-用户最终要求恢复对话开始前的项目原图。活动资源已恢复原SVG及原工作台assetId，恢复记录与预览见 `rollback-original/`。所有重新生成版本均为历史草稿。
+用户最终要求恢复对话开始前的项目原图。活动资源已恢复原SVG，恢复记录与预览见 `rollback-original/`。原工作台assetId实际仍含金色包托，已将当前SVG的Godot导出PNG重新上传并替换工作台四处配图，记录见 `rollback-original/workbench-upload/`。所有重新生成版本均为历史草稿。
 
 原版画风参考副本及SHA-256来源记录为 `art-v5/native-references.json`，来源根目录记为 `<vanilla-extraction>/extraction/raw/images/relics/`。v6的原作局部放大、可见边界描线与提示词保留于 `art-v6/`，未同步工作台。下文保留参考核对与此前草稿过程。
 
