@@ -161,6 +161,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 [{"questionItemId":"[\"request_user_input_async\",\"call_43cbfabd8a36440f9f3ec12eb9dd4d30\",0]","question":"你当时点“设置为主牌”的是哪张牌（牌名或编号）？我已修复同组互相关联时的误拦截，可以再核对你遇到的具体条目。","answer":"吹吧狂风"}]
 </send_user_message_question_reply>
 
+### 用户消息 5
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_ebefbeda408a40a5ad1ee133d7ce95c3\",0]","question":"是否将 708cf7e 合并到 main、部署工作台，并清理本次工作树和分支？","answer":"合并、部署并清理（推荐）"}]
+</send_user_message_question_reply>
+
 ## Brief task plan
 
 1. 捕获原始分支、提交与工作区状态，在独立工作树复现“设置主牌”错误。
@@ -183,4 +189,10 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 部署准备：通过 MCP 只读获取 r5181 快照，在 `artifacts/package/` 生成完整编辑页、公开页和服务包；构建通过。私有连接配置和快照在 Git 忽略目录中。
 - 产物核对：公开页与编辑页的两个 JavaScript 资产均包含已审阅的完整领域源码。
 - 文档审查：扫描全部 130 份既有受版本控制文档及新增任务记录，私密数据和本地绝对路径检查无命中。
-- 云端牌面和关联内容保持原值。修复已完成，等待合并、部署及清理确认。
+- 用户已确认合并到 `main`、部署工作台并清理本次任务工作树与分支。实施提交为 `708cf7e`，云端牌面与关联内容保持原值。
+- 合并：原始 `main` 干净且仍在预期初始提交，以快进方式合入 `708cf7e`，核对两端提交树完全一致。
+- 上线：读取线上当前版本，校验三个源文件 SHA-256，仅替换主牌切换函数，并为编辑页与公开页生成新哈希脚本。新发布版本为 `20261112-main-card-switch-708cf7e`，服务运行正常，旧发布版本保留供回退。
+- 按钮验证：在隔离预览中实际点击“吹吧，狂风”的“设置为主牌”并撤销，全部通过；各入口、数量及其他字段保持不变，页面无脚本错误。
+- 线上验证：编辑页与公开页均已加载新运行脚本；“吹吧，狂风”按钮可用，线上领域函数在当前数据副本上的切换与切回均通过，未产生云端写入。
+- 数据核对：部署前后均为 r5196，完整数据与全部条目版本完全相同。
+- 验证报告保留于 `artifacts/task-deliverables/fix-workbench-main-card-20261112/`。本次任务工作树、任务分支及其私有部署配置和临时文件按用户批准清理；本任务记录与修复保留在 `main`。

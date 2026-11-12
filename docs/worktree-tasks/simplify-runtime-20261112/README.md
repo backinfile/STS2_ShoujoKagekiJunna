@@ -227,6 +227,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 </skill>
 
+## 合并与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"<问题条目标识>","question":"是否将 Core、Karen、Junna 本次重构分别合并回各自的 main，并按上述范围处理工作树？","answer":"合并并清理（先保留构建包和验证证据）"}]
+</send_user_message_question_reply>
+
 # 简要计划
 
 - 三项目使用同名隔离工作树，位置为 ../worktrees/STS2_ShoujoKagekiJunna/simplify-runtime-20261112；目标分支固定为 main。
@@ -240,7 +246,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 # 结果与变更
 
-实现与定向验证完成；等待将任务分支合并回 main 以及清理工作树的确认。
+实现与定向验证完成；用户已批准合入 main，并在保留构建包和验证证据后清理本次工作树。
 
 ## 起点与状态保护
 
@@ -273,11 +279,13 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## 集成与清理
 
-- 尚未合并 main，三个任务提交准备完成后统一请求确认。
-- 若批准清理，先将本次构建包、摘要、哈希、录像、截图和定向报告保留到 Core 原检出的 artifacts/task-deliverables/simplify-runtime-20261112/，再删除本次三个工作树、任务分支及临时游戏目录。
-- 若仅批准合并，则保留工作树、任务分支和验证产物。
+- 用户已批准将三个任务分支合并回各自 main，并清理本次工作树与任务分支。
+- 按授权先将本次构建包、摘要、哈希、录像、截图和定向报告保留到 Core 原检出的 artifacts/task-deliverables/simplify-runtime-20261112/，再删除本次三个工作树、任务分支及临时游戏目录。
+- 本次授权包含清理；其他工作树、分支和原有未提交文件保留。
 
 
 ## 同步本地 main
 
 提交后发现原 main 前进到 708cf7e（独立关联列表切换主牌修复），已在任务分支合并。新增内容只涉及工作台领域源码、对应测试与该任务记录；运行库、资源和已验证包保持一致。工作台领域定向测试 24 项通过。集成目标仍为开始时捕获的 main，原起点 c4750a8 保留。
+
+随后 main 补入 9375c34，仅更新该修复的部署与验证记录，已再次同步；执行源码无变化，沿用上述 24 项工作台领域验证及双版本运行库验证。
