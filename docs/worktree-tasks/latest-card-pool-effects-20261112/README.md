@@ -138,6 +138,14 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 耗尽时，应该类似闪耀牌奖励一样加一个power到玩家身上，然后玩家选择复制卡牌后，卡牌确实添加了但是缺少卡牌进入牌组的动画
 
+### 合并与清理授权
+
+提问：是否将任务提交 7c17365（同步提交 ba67ac7）快进合并回 main，并清理本次工作树、任务分支及临时构建、游戏和快照？安装包、录像、测试证据和任务记录会保留。
+
+用户回复：
+
+合并并清理（推荐）
+
 ## Brief task plan
 
 - 原始 checkout 为 <repository-root>，分支 main，提交 c89474e9f2f9be98724e6415f89e94840c506b9d；初始工作区干净，无进行中的 Git 操作。
@@ -160,4 +168,4 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 只读观察器与合法操作录像验证呼喊与回应、猛烈闪耀、道标、舞台少女心得及学有所成复制。最终录像保留内部游戏音轨，掉帧0，已查看帧图；录像准备阶段清理旧节点，实际手牌与画面一致。
 - 逐牌观测表：`docs/implementation/card-tests-r5294.md`。构建包、原始896份结果、首轮失败、定向重跑、原生回合记录与最终视频保存于 `artifacts/task-deliverables/latest-card-pool-effects-20261112/`。
 - 原始检出开始时为main/c89474e，工作区干净。任务期间main前进到50f679b，只新增契合设计任务记录与素材。合并前同步该本地分支，保护其内容；不进行远程操作。
-- 实现与验证已完成；任务提交和同步提交整理后，按 `$worktree-task` 请求合并与清理确认。拟清理本次工作树、任务分支及内部临时构建、游戏和快照；交付目录与已跟踪任务记录保留。
+- 实现与验证已完成，任务提交7c17365、同步提交ba67ac7。用户已批准快进合并回main并清理本次工作树、任务分支及内部临时构建、游戏和快照；交付目录与已跟踪任务记录保留。授权与最终清理状态记录于交付目录integration.json。
