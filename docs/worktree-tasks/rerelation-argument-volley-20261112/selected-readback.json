@@ -1,0 +1,269 @@
+[
+  {
+    "collection": "cards",
+    "uid": "draft_card_JK11",
+    "entity": {
+      "uid": "draft_card_JK11",
+      "id": "JK11",
+      "name": "全力接招",
+      "system": "partner",
+      "rarity": "普通",
+      "type": "技能",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "知识。获得7点格挡。无论何处，将全力相搏放入手牌。",
+      "upgradedText": "知识。获得10点格挡。无论何处，将全力相搏放入手牌。",
+      "pool": false,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "EF05",
+        "EF18"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK11B"
+      ],
+      "art": "original-film-jk48b-guard-20261111-v1",
+      "role": "机制引导牌",
+      "direction": "知识牌互相调度",
+      "naming": {
+        "original": "全力で受け止めてみせる",
+        "chineseOriginal": "",
+        "kind": "用户确认的原作歌词中文译名",
+        "work": "《ゼウスの仲裁》（宙斯的仲裁）／西条克洛迪娜、梦大路栞、梦大路文；作词：中村彼方",
+        "url": "https://www.uta-net.com/song/275767/",
+        "adaptation": "知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。 配图：纯那在左侧背对镜头，以刀刃接住右侧奈奈的来剑；交叉刀刃、持械手与身体支撑方向共同表现接招。完整复用已登记原作裁图。 素材由备用JK48B重新分配；按本牌当前效果更新契合。",
+        "translation": "全力接招",
+        "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》·公开片段06:53.2",
+        "artSourceUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=413.2",
+        "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11-source.png；登记资源 original-film-jk48b-guard-20261111-v1；原作裁图完整复用。",
+        "artProcessing": "复用已登记原作截图裁切，保留主体与构图，裁去画外字幕、水印及播放器界面。",
+        "knowledgeWork": "TV第2话约09:42的观摩记录；2021剧场版课堂对手戏排练。",
+        "knowledgeSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=582"
+      },
+      "notes": "定位：知识兼具，提供防御／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将全力相搏放入手牌。\n知识契合：知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "防御／运转",
+        "investment": "按当前版本支付1能量。",
+        "risk": "没有可取回对象时仍获得基础格挡。",
+        "reference": "",
+        "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+        "cardReferenceUids": [
+          "draft_card_JK11B"
+        ],
+        "routeRoles": {
+          "archetype_SYS_partner": {
+            "role": "both",
+            "cross": false,
+            "ports": [
+              "defense",
+              "operation"
+            ]
+          }
+        },
+        "systems": [
+          "partner"
+        ],
+        "route": "知识",
+        "systemRoles": {
+          "partner": {
+            "role": "兼具",
+            "port": "防御／运转"
+          }
+        },
+        "triggerRole": "兼具",
+        "roleReason": "知识兼具，提供防御／运转。",
+        "upgrade": "升级牌效按当前升级牌面：知识。获得10点格挡。无论何处，将全力相搏放入手牌。",
+        "classification": "机制引导牌"
+      },
+      "extraHoverTips": [],
+      "cardPool": "角色"
+    },
+    "version": "19:8fe8c129ce8534bec250ce6879478be535d21adf9542f00551f24a84e2402746",
+    "revision": 5216
+  },
+  {
+    "collection": "cards",
+    "uid": "draft_card_JK11B",
+    "entity": {
+      "uid": "draft_card_JK11B",
+      "id": "JK11B",
+      "name": "全力相搏",
+      "system": "partner",
+      "rarity": "普通",
+      "type": "攻击",
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "敌人",
+      "text": "知识。造成9点伤害。无论何处，将全力接招放入手牌。",
+      "upgradedText": "知识。造成12点伤害。无论何处，将全力接招放入手牌。",
+      "pool": true,
+      "keywords": [
+        "知识"
+      ],
+      "termIds": [
+        "KW_PARTNER",
+        "EF01",
+        "EF18"
+      ],
+      "archetypeIds": [
+        "SYS_partner"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [
+        "JK11"
+      ],
+      "art": "original-scene-jg33-all-card-review-20261104",
+      "role": "知识牌",
+      "direction": "",
+      "naming": {
+        "original": "全力でぶつかりたい",
+        "chineseOriginal": "",
+        "kind": "用户确认的原作歌词中文译名",
+        "work": "《ゼウスの仲裁》（宙斯的仲裁）／西条克洛迪娜、梦大路栞、梦大路文；作词：中村彼方",
+        "url": "https://www.uta-net.com/song/275767/",
+        "adaptation": "知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。 配图：纯那在课堂对手戏中跨步上阶，持短刃向前上方指向对手，将所学动作投入排练；保留眼镜、持刀手、刀尖及前跨的膝部。完整复用已登记原作裁图。 素材由备用JG33重新分配；按本牌当前效果更新契合。",
+        "translation": "全力相搏",
+        "artWork": "2021剧场版《少女☆歌剧 Revue Starlight》·剧场版课堂排练约10:32",
+        "artSourceUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=632",
+        "artProof": "docs/worktree-tasks/rerelation-argument-volley-20261112/sources/JK11B-source.png；登记资源 original-scene-jg33-all-card-review-20261104；原作裁图完整复用。",
+        "artProcessing": "复用已登记原作截图裁切，保留主体与构图，裁去画外字幕、水印及播放器界面。",
+        "knowledgeWork": "TV第2话约09:42的观摩记录；2021剧场版课堂对手戏排练。",
+        "knowledgeSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=582"
+      },
+      "notes": "定位：知识兼具，提供输出／运转。\n结算约定：按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。\n升级：升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将全力接招放入手牌。\n知识契合：知识内容为观摩和对手戏排练中对动作、意图的理解与攻防应答。全力接招先判断来招并稳住应对，所得判断帮助下一次出手；全力相搏把理解落实为进攻，再从对手反馈回到接招。互相召回表现观察、理解、应用和再判断的循环。名称取同曲澄清误解后全力承接与交锋的相邻表达，纯那的学习与实践由她本人的观摩记录和课堂排练建立。",
+      "draftStatus": "候选",
+      "draftBatch": "junna-first-card-draft-20261101-v1",
+      "design": {
+        "port": "输出／运转",
+        "investment": "按当前版本支付1能量。",
+        "risk": "",
+        "reference": "",
+        "rules": "按当前版本支付费用，按牌面顺序执行效果；目标、数值与自身关键词读取本次实际版本。 按牌名召回本场全部对应实际对象，覆盖牌面所指合法牌区；已在手牌时保持原位，执行中的牌沿现有排除规则。无可召回对象时，其余牌效照常。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。",
+        "cardReferenceUids": [
+          "draft_card_JK11"
+        ],
+        "routeRoles": {
+          "archetype_SYS_partner": {
+            "role": "both",
+            "cross": false,
+            "ports": [
+              "output",
+              "operation"
+            ]
+          }
+        },
+        "systems": [
+          "partner"
+        ],
+        "route": "知识",
+        "systemRoles": {
+          "partner": {
+            "role": "兼具",
+            "port": "输出／运转"
+          }
+        },
+        "triggerRole": "兼具",
+        "roleReason": "知识兼具，提供输出／运转。",
+        "upgrade": "升级牌效按当前升级牌面：知识。造成12点伤害。无论何处，将全力接招放入手牌。",
+        "classification": "知识牌"
+      },
+      "extraHoverTips": [],
+      "cardPool": "角色"
+    },
+    "version": "21:1a54150f6cb2515f96110d483d51ba5a9fc64b89ec48711e7fdedf72c56f4e9c",
+    "revision": 5216
+  },
+  {
+    "collection": "cards",
+    "uid": "junna-arrow-guard-20261108_JA118",
+    "entity": {
+      "uid": "junna-arrow-guard-20261108_JA118",
+      "id": "JA118",
+      "name": "不让舞台落幕",
+      "type": "能力",
+      "system": "stage",
+      "rarity": "罕见",
+      "pool": true,
+      "cost": 1,
+      "upgradedCost": 1,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "打出箭矢时，获得2点格挡。",
+      "upgradedText": "打出箭矢时，获得3点格挡。",
+      "keywords": [],
+      "termIds": [
+        "EF05",
+        "KW_STAGE"
+      ],
+      "archetypeIds": [
+        "SYS_stage"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "original-refit-ja118-stage-continue-20261112",
+      "character": "星见纯那",
+      "role": "箭矢防御收益",
+      "direction": "持续打出箭矢，获得防护以守住自己的舞台。",
+      "naming": {
+        "original": "舞台を終わらせない",
+        "kind": "原作对白中连续表达的忠实中文翻译",
+        "work": "TV第2话「命运的舞台」·渴望的Revue，纯那约21:05—21:12的对白",
+        "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1265",
+        "adaptation": "取纯那在渴望的Revue中守住自己舞台的宣言。能力持续响应每次箭矢打出，格挡对应展开箭矢时获得的防护，帮助她继续应对下一次交锋。箭矢本身的布置与持续防守一起表现不让自己的舞台结束。配图为纯那持弓面向来敌的独立近景，保留眼镜、目光、弓身、弓弦与部分绿色宝石；与我的舞台的聚光灯全身镜头区分。",
+        "chineseOriginal": "",
+        "translation": "不让舞台落幕",
+        "quote": "私の舞台を終わらせないために",
+        "proof": "docs/design/assets/card-sources/2026-11-02/tv02-2110-action.jpg，播放器21:12中文字幕“为了我的『舞台』不被结束”。",
+        "artWork": "TV第2话约21:02 · 纯那持弓守备近景",
+        "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1262",
+        "artProof": "docs/design/assets/card-sources/2026-11-02/tv02-2100-action.jpg；裁切380,0,1040,780；成品 docs/worktree-tasks/rerelation-argument-volley-20261112/portraits/JA118.png",
+        "artProcessing": "原作截图裁切，去除画外字幕、水印与播放界面。"
+      },
+      "design": {
+        "rules": "仅响应自己的实际箭矢打出，每次获得2／3点格挡；箭矢完成或额外执行牌效不重复计作打出。",
+        "upgrade": "每次获得的格挡2→3。",
+        "route": "箭矢",
+        "systems": [
+          "stage"
+        ],
+        "routeRoles": {
+          "archetype_SYS_stage": {
+            "role": "payoff",
+            "cross": false,
+            "ports": [
+              "defense"
+            ]
+          }
+        },
+        "systemRoles": {
+          "stage": {
+            "role": "收益",
+            "port": "防御"
+          }
+        },
+        "triggerRole": "收益",
+        "port": "防御",
+        "roleReason": "打出箭矢提供即时防护。"
+      },
+      "notes": "取纯那在渴望的Revue中守住自己舞台的宣言。能力持续响应每次箭矢打出，格挡对应展开箭矢时获得的防护，帮助她继续应对下一次交锋。箭矢本身的布置与持续防守一起表现不让自己的舞台结束。配图为纯那持弓面向来敌的独立近景，保留眼镜、目光、弓身、弓弦与部分绿色宝石；与我的舞台的聚光灯全身镜头区分。",
+      "cardPool": "角色"
+    },
+    "version": "6:973510361e05d9bf85dc5f97f5f6dda48b42699aeb66578019db91722ea32169",
+    "revision": 5216
+  }
+]

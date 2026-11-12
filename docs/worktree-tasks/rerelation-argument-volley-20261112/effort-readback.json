@@ -1,0 +1,476 @@
+{
+  "readbacks": [
+    {
+      "collection": "cards",
+      "uid": "complete_pool_JK67",
+      "entity": {
+        "uid": "complete_pool_JK67",
+        "id": "JK67",
+        "name": "磨砺身心",
+        "type": "能力",
+        "system": "partner",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 2,
+        "upgradedCost": 2,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "text": "知识。回合结束时，所有布置的箭矢获得2点伤害加成。",
+        "upgradedText": "知识。回合结束时，所有布置的箭矢获得3点伤害加成。",
+        "keywords": [
+          "知识"
+        ],
+        "termIds": [
+          "KW_PARTNER",
+          "KW_STAGE",
+          "KW_BONUS",
+          "EF39",
+          "TR03"
+        ],
+        "archetypeIds": [
+          "SYS_partner",
+          "SYS_stage",
+          "SYS_energy",
+          "SYS_growth"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [
+          "JK67B"
+        ],
+        "art": "original-scene-jg27-20261102",
+        "character": "星见纯那",
+        "role": "机制中坚牌",
+        "direction": "在回合结束时持续强化已布置的箭矢。",
+        "draftStatus": "完整卡池初稿",
+        "draftBatch": "junna-complete-pool-draft-20261102-v1",
+        "naming": {
+          "original": "磨き続ける心と体",
+          "translation": "磨砺身心",
+          "chineseOriginal": "",
+          "kind": "用户确认的歌词或曲名译名",
+          "work": "《プラチナ・フォルテ》；演唱：シークフェルト音楽学院；作词：中村彼方",
+          "url": "https://www.uta-net.com/song/263800/",
+          "adaptation": "用户选定的歌词译名。以持续磨炼身心的训练对应每回合对已布置箭矢增加伤害加成；所学内容是保持姿态、呼吸和核心控制的体能基本功。与白金强音组成训练积累与演出兑现的知识关系。",
+          "artWork": "TV第2话约06:15·课堂核心力量训练",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=375",
+          "artProof": "复用备用JG27释放的原作裁图 original-scene-jg27-20261102；完整源图 docs/design/assets/card-sources/2026-11-02/tv02-train-614-20261103.png。",
+          "artProcessing": "原作截图裁切；未绘制或重构画面。"
+        },
+        "design": {
+          "classification": "机制中坚牌",
+          "triggerRole": "触发",
+          "systems": [
+            "partner",
+            "stage",
+            "energy",
+            "growth"
+          ],
+          "systemRoles": {
+            "partner": {
+              "role": "触发",
+              "port": "输出"
+            },
+            "stage": {
+              "role": "收益",
+              "port": "输出"
+            },
+            "energy": {
+              "role": "触发",
+              "port": "输出"
+            },
+            "growth": {
+              "role": "触发",
+              "port": "输出"
+            }
+          },
+          "port": "输出",
+          "roleReason": "在回合结束时持续强化已布置的箭矢。",
+          "rules": "每份有效能力在自己的回合结束时，对当时有效布置中的箭矢实际对象去重，给能够承载伤害加成的对象赋予当前版本的2点或3点伤害加成。后续新布置从之后的回合结束时响应。知识牌按实际对象独立升级与打出，获得主牌时按知识组配置同时获得关联牌。",
+          "independence": "有独立基础效果；相关构筑提高收益。",
+          "risk": "费用与数值在实战阶段复核。",
+          "upgrade": "知识。回合结束时，所有布置中的箭矢获得3点伤害加成。",
+          "textComplexity": "低",
+          "reference": "体系分析流程：来源、收益、端口和连接分别记录。",
+          "damageModifierRule": "damageModifierRules",
+          "routeRoles": {
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_stage": {
+              "role": "payoff",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_energy": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_growth": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "route": "知识／箭矢／能量/高费／伤害加成",
+          "investment": "支付本牌当前费用，基础为2，升级为2。",
+          "fit": "用户选定的歌词译名。以持续磨炼身心的训练对应每回合对已布置箭矢增加伤害加成；所学内容是保持姿态、呼吸和核心控制的体能基本功。与白金强音组成训练积累与演出兑现的知识关系。"
+        },
+        "notes": "用户选定的歌词译名。以持续磨炼身心的训练对应每回合对已布置箭矢增加伤害加成；所学内容是保持姿态、呼吸和核心控制的体能基本功。与白金强音组成训练积累与演出兑现的知识关系。",
+        "extraHoverTips": [],
+        "cardPool": "角色"
+      },
+      "version": "34:9d902676fd3cbd3d7b49567755ecba12b7c65114dff0d3a5f2901169af59b5a6",
+      "revision": 5236
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JK67",
+      "entity": {
+        "uid": "fit_card_complete_pool_JK67",
+        "id": "FIT_CARD_JK67",
+        "name": "磨砺身心",
+        "theme": "身心磨炼与有力的演出",
+        "text": "用户选定的歌词译名。以持续磨炼身心的训练对应每回合对已布置箭矢增加伤害加成；所学内容是保持姿态、呼吸和核心控制的体能基本功。与白金强音组成训练积累与演出兑现的知识关系。",
+        "original": "磨き続ける心と体",
+        "source": "《プラチナ・フォルテ》；演唱：シークフェルト音楽学院；作词：中村彼方",
+        "sourceUrl": "https://www.uta-net.com/song/263800/",
+        "art": "original-scene-jg27-20261102",
+        "cardIds": [
+          "JK67"
+        ],
+        "notes": "TV第2话约06:15·课堂核心力量训练；复用备用JG27释放的原作裁图 original-scene-jg27-20261102；完整源图 docs/design/assets/card-sources/2026-11-02/tv02-train-614-20261103.png。"
+      },
+      "version": "6:ace41fcba911b32d338bd7b204de192ec23660c09e1f117ea2eb9751bd42c787",
+      "revision": 5236
+    },
+    {
+      "collection": "cards",
+      "uid": "complete_pool_JK67B",
+      "entity": {
+        "uid": "complete_pool_JK67B",
+        "id": "JK67B",
+        "name": "白金强音",
+        "type": "箭矢",
+        "system": "partner",
+        "rarity": "罕见",
+        "pool": false,
+        "cost": 0,
+        "upgradedCost": 0,
+        "turns": 3,
+        "upgradedTurns": 3,
+        "arrowSubtype": "攻击",
+        "target": "敌人",
+        "text": "知识。造成7点伤害3次。",
+        "upgradedText": "知识。造成9点伤害3次。",
+        "keywords": [
+          "知识"
+        ],
+        "termIds": [
+          "KW_PARTNER",
+          "KW_STAGE",
+          "EF02",
+          "EF28",
+          "NV26"
+        ],
+        "archetypeIds": [
+          "SYS_stage",
+          "SYS_partner",
+          "SYS_growth"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [
+          "JK67"
+        ],
+        "art": "original-refit-jk67b-platinum-forte-20261112",
+        "character": "星见纯那",
+        "role": "机制核心牌",
+        "direction": "知识",
+        "draftStatus": "完整卡池初稿",
+        "draftBatch": "junna-complete-pool-draft-20261102-v1",
+        "naming": {
+          "original": "プラチナ・フォルテ",
+          "translation": "白金强音",
+          "chineseOriginal": "",
+          "kind": "用户确认的歌词或曲名译名",
+          "work": "《プラチナ・フォルテ》；演唱：シークフェルト音楽学院；作词：中村彼方",
+          "url": "https://www.uta-net.com/song/263800/",
+          "adaptation": "用户选定的歌名中文译名；フォルテ指音乐力度记号forte（强）。与磨砺身心共同呈现身体、意志与音乐表现的学习：持续训练使箭矢积蓄力量，等待后的三次攻击把积累转化为有力的连续表达。画面为纯那发出的多道发光箭迹，体现主动进攻和连续抵达。",
+          "artWork": "TV第2话约19:39·纯那的交错箭迹",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1179",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv02-1937-new.jpg；裁切500,80,960,720。",
+          "artProcessing": "原作截图裁切；未绘制或重构画面。"
+        },
+        "design": {
+          "classification": "机制核心牌",
+          "triggerRole": "触发",
+          "systems": [
+            "stage",
+            "partner",
+            "growth"
+          ],
+          "systemRoles": {
+            "stage": {
+              "role": "触发",
+              "port": "输出"
+            },
+            "partner": {
+              "role": "触发",
+              "port": "输出"
+            },
+            "growth": {
+              "role": "收益",
+              "port": "输出"
+            }
+          },
+          "port": "输出",
+          "roleReason": "箭矢触发；知识触发；伤害加成收益，提供输出。",
+          "rules": "按当前版本支付费用并记录牌面目标，以当前版本初始回合数建立布置；计数归0后依序执行当前牌面，完整结算后处理一次去向。 知识组获取、发放数量、单张生成与复制沿统一知识规则，各张牌独立升级。 伤害加成及额外伤害次数沿damageModifierRules判定资格、保存来源并结算。",
+          "independence": "有独立基础效果；相关构筑提高收益。",
+          "risk": "费用与数值在实战阶段复核。",
+          "upgrade": "伤害7×3→9×3。",
+          "textComplexity": "低",
+          "reference": "体系分析流程：来源、收益、端口和连接分别记录。",
+          "investment": "费用0，布置初始计数3。",
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_partner": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            },
+            "archetype_SYS_growth": {
+              "role": "payoff",
+              "cross": true,
+              "ports": [
+                "output"
+              ]
+            }
+          },
+          "route": "知识",
+          "fit": "用户选定的歌名中文译名；フォルテ指音乐力度记号forte（强）。与磨砺身心共同呈现身体、意志与音乐表现的学习：持续训练使箭矢积蓄力量，等待后的三次攻击把积累转化为有力的连续表达。画面为纯那发出的多道发光箭迹，体现主动进攻和连续抵达。"
+        },
+        "notes": "用户选定的歌名中文译名；フォルテ指音乐力度记号forte（强）。与磨砺身心共同呈现身体、意志与音乐表现的学习：持续训练使箭矢积蓄力量，等待后的三次攻击把积累转化为有力的连续表达。画面为纯那发出的多道发光箭迹，体现主动进攻和连续抵达。",
+        "extraHoverTips": [],
+        "arrowFocus": {
+          "x": 0.5,
+          "y": 0.38
+        },
+        "cardPool": "角色"
+      },
+      "version": "23:b8de2e00adc5efb4631e23904bd18a8fbcec9969ee20df505b4b7b708d05b6d9",
+      "revision": 5236
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_card_complete_pool_JK67B",
+      "entity": {
+        "uid": "fit_card_complete_pool_JK67B",
+        "id": "FIT_CARD_JK67B",
+        "name": "白金强音",
+        "theme": "身心磨炼与有力的演出",
+        "text": "用户选定的歌名中文译名；フォルテ指音乐力度记号forte（强）。与磨砺身心共同呈现身体、意志与音乐表现的学习：持续训练使箭矢积蓄力量，等待后的三次攻击把积累转化为有力的连续表达。画面为纯那发出的多道发光箭迹，体现主动进攻和连续抵达。",
+        "original": "プラチナ・フォルテ",
+        "source": "《プラチナ・フォルテ》；演唱：シークフェルト音楽学院；作词：中村彼方",
+        "sourceUrl": "https://www.uta-net.com/song/263800/",
+        "art": "original-refit-jk67b-platinum-forte-20261112",
+        "cardIds": [
+          "JK67B"
+        ],
+        "notes": "TV第2话约19:39·纯那的交错箭迹；docs/design/assets/card-sources/2026-11-02/tv02-1937-new.jpg；裁切500,80,960,720。"
+      },
+      "version": "4:3dc7d319f8d6d93d09bb5b224c821a9ce3cd1cf66f5d13b6e358a3277f4c2b48",
+      "revision": 5236
+    },
+    {
+      "collection": "cards",
+      "uid": "junna-arrow-guard-20261108_JA118",
+      "entity": {
+        "uid": "junna-arrow-guard-20261108_JA118",
+        "id": "JA118",
+        "name": "立下誓言",
+        "type": "能力",
+        "system": "stage",
+        "rarity": "罕见",
+        "pool": true,
+        "cost": 1,
+        "upgradedCost": 1,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "text": "打出箭矢时，获得2点格挡。",
+        "upgradedText": "打出箭矢时，获得3点格挡。",
+        "keywords": [],
+        "termIds": [
+          "EF05",
+          "KW_STAGE"
+        ],
+        "archetypeIds": [
+          "SYS_stage"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [],
+        "art": "original-refit-ja118-vow-20261112-v2",
+        "character": "星见纯那",
+        "role": "箭矢防御收益",
+        "direction": "以持续展开箭矢取得防护，履行守护舞台的誓言。",
+        "naming": {
+          "original": "密かにたてた誓い",
+          "translation": "立下誓言",
+          "chineseOriginal": "立下誓言",
+          "kind": "已核对中文字幕中的连续原词",
+          "work": "TV第1话约19:49插曲《世界を灰にするまで》中文字幕；演唱：星见纯那、神乐光、爱城华恋；作词：中村彼方",
+          "url": "https://www.uta-net.com/song/254335/",
+          "adaptation": "名称取已核实字幕“我悄悄立下誓言”中的连续原词“立下誓言”，以持续履行守护演出的决心对应每次展开箭矢获得格挡的能力。配图为纯那握弓面向来敌的近景，突出守备姿态。",
+          "artWork": "TV第2话约21:04·纯那持弓守备近景",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1264",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv02-2102-new.jpg；裁切380,0,1040,780。",
+          "artProcessing": "原作截图裁切；未绘制或重构画面。",
+          "proof": "docs/design/assets/card-sources/2026-11-02/tv01-1947-detail.jpg，播放器19:49，上方字幕“在摧残灵魂的狂风 我悄悄立下誓言”。"
+        },
+        "design": {
+          "rules": "仅响应自己的实际箭矢打出，每次获得2／3点格挡；箭矢完成或额外执行牌效不重复计作打出。",
+          "upgrade": "每次获得的格挡2→3。",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "payoff",
+              "cross": false,
+              "ports": [
+                "defense"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "收益",
+              "port": "防御"
+            }
+          },
+          "triggerRole": "收益",
+          "port": "防御",
+          "roleReason": "打出箭矢提供即时防护。",
+          "fit": "名称取已核实字幕“我悄悄立下誓言”中的连续原词“立下誓言”，以持续履行守护演出的决心对应每次展开箭矢获得格挡的能力。配图为纯那握弓面向来敌的近景，突出守备姿态。"
+        },
+        "notes": "名称取已核实字幕“我悄悄立下誓言”中的连续原词“立下誓言”，以持续履行守护演出的决心对应每次展开箭矢获得格挡的能力。配图为纯那握弓面向来敌的近景，突出守备姿态。",
+        "cardPool": "角色"
+      },
+      "version": "8:e408085bd34c752a3a3849c90634e04f85d06449b2a5f79eb408c2bdd794890e",
+      "revision": 5236
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_junna-arrow-guard-20261108_JA118",
+      "entity": {
+        "uid": "fit_junna-arrow-guard-20261108_JA118",
+        "id": "FIT_CARD_JA118",
+        "name": "立下誓言",
+        "theme": "誓言与箭矢守备",
+        "text": "名称取已核实字幕“我悄悄立下誓言”中的连续原词“立下誓言”，以持续履行守护演出的决心对应每次展开箭矢获得格挡的能力。配图为纯那握弓面向来敌的近景，突出守备姿态。",
+        "original": "密かにたてた誓い",
+        "source": "TV第1话约19:49插曲《世界を灰にするまで》中文字幕；演唱：星见纯那、神乐光、爱城华恋；作词：中村彼方",
+        "sourceUrl": "https://www.uta-net.com/song/254335/",
+        "art": "original-refit-ja118-vow-20261112-v2",
+        "cardIds": [
+          "JA118"
+        ],
+        "notes": "docs/design/assets/card-sources/2026-11-02/tv01-1947-detail.jpg，播放器19:49，上方字幕“在摧残灵魂的狂风 我悄悄立下誓言”。；TV第2话约21:04·纯那持弓守备近景；docs/design/assets/card-sources/2026-11-02/tv02-2102-new.jpg；裁切380,0,1040,780。"
+      },
+      "version": "4:71374618f0eabc7445dc8689485032caf7ac5d1e3156efe98548102f8677f197",
+      "revision": 5236
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "complete_pool_group_JK67",
+      "entity": {
+        "uid": "complete_pool_group_JK67",
+        "id": "GROUP_JK67",
+        "title": "磨砺身心／白金强音",
+        "mainCardId": "JK67",
+        "grantedCardIds": [
+          "JK67B"
+        ],
+        "grantedCardCounts": {
+          "JK67B": 1
+        }
+      },
+      "version": "3:e34c9e75bdad3c3b2143e3d147a9ec7b972cea4d4290c33ff6f877a26072f6db",
+      "revision": 5236
+    },
+    {
+      "collection": "partnerGroups",
+      "uid": "knowledge-initial-lists-20261110_JK67B",
+      "entity": {
+        "uid": "knowledge-initial-lists-20261110_JK67B",
+        "id": "INITIAL_KNOWLEDGE_LIST_JK67B",
+        "title": "白金强音",
+        "mainCardId": "JK67B",
+        "grantedCardIds": [
+          "JK67"
+        ],
+        "grantedCardCounts": {
+          "JK67": 1
+        },
+        "notes": "按现有原生组初始化完整成员及数量，当前牌的自身份数单独记录，各牌名后续独立编辑。"
+      },
+      "version": "3:20844285c3690d568f3218266d0fe81af6c4c0867fb0cfd69bed94dc2680d479",
+      "revision": 5236
+    }
+  ],
+  "check": [
+    {
+      "uid": "complete_pool_JK67",
+      "ok": true
+    },
+    {
+      "uid": "fit_card_complete_pool_JK67",
+      "ok": true
+    },
+    {
+      "uid": "complete_pool_JK67B",
+      "ok": true
+    },
+    {
+      "uid": "fit_card_complete_pool_JK67B",
+      "ok": true
+    },
+    {
+      "uid": "junna-arrow-guard-20261108_JA118",
+      "ok": true
+    },
+    {
+      "uid": "fit_junna-arrow-guard-20261108_JA118",
+      "ok": true
+    },
+    {
+      "uid": "complete_pool_group_JK67",
+      "ok": true
+    },
+    {
+      "uid": "knowledge-initial-lists-20261110_JK67B",
+      "ok": true
+    }
+  ]
+}

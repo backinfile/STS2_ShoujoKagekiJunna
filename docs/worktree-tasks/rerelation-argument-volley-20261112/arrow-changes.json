@@ -1,0 +1,125 @@
+{
+  "clientId": "codex-rerelation-argument-volley-20261112",
+  "requestId": "d22b85f8-4e53-4fc3-ad62-42d2670da858",
+  "label": "重选箭阵为不让舞台落幕并替换纯那持弓守备原作卡图",
+  "kind": "契合与配图",
+  "reference": "docs/worktree-tasks/rerelation-argument-volley-20261112/fit-spec.json",
+  "changes": [
+    {
+      "collection": "cards",
+      "uid": "junna-arrow-guard-20261108_JA118",
+      "expectedVersion": "5:aa6ed95a814eed047ed2aed03a2067aca4c3f562cd494d5e91aedd932c4a0ee4",
+      "updates": {
+        "name": "不让舞台落幕",
+        "art": "original-refit-ja118-stage-continue-20261112",
+        "naming": {
+          "original": "舞台を終わらせない",
+          "kind": "原作对白中连续表达的忠实中文翻译",
+          "work": "TV第2话「命运的舞台」·渴望的Revue，纯那约21:05—21:12的对白",
+          "url": "https://www.bilibili.com/bangumi/play/ep232368?t=1265",
+          "adaptation": "取纯那在渴望的Revue中守住自己舞台的宣言。能力持续响应每次箭矢打出，格挡对应展开箭矢时获得的防护，帮助她继续应对下一次交锋。箭矢本身的布置与持续防守一起表现不让自己的舞台结束。配图为纯那持弓面向来敌的独立近景，保留眼镜、目光、弓身、弓弦与部分绿色宝石；与我的舞台的聚光灯全身镜头区分。",
+          "chineseOriginal": "",
+          "translation": "不让舞台落幕",
+          "quote": "私の舞台を終わらせないために",
+          "proof": "docs/design/assets/card-sources/2026-11-02/tv02-2110-action.jpg，播放器21:12中文字幕“为了我的『舞台』不被结束”。",
+          "artWork": "TV第2话约21:02 · 纯那持弓守备近景",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1262",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv02-2100-action.jpg；裁切380,0,1040,780；成品 docs/worktree-tasks/rerelation-argument-volley-20261112/portraits/JA118.png",
+          "artProcessing": "原作截图裁切，去除画外字幕、水印与播放界面。"
+        },
+        "direction": "持续打出箭矢，获得防护以守住自己的舞台。",
+        "notes": "取纯那在渴望的Revue中守住自己舞台的宣言。能力持续响应每次箭矢打出，格挡对应展开箭矢时获得的防护，帮助她继续应对下一次交锋。箭矢本身的布置与持续防守一起表现不让自己的舞台结束。配图为纯那持弓面向来敌的独立近景，保留眼镜、目光、弓身、弓弦与部分绿色宝石；与我的舞台的聚光灯全身镜头区分。",
+        "design": {
+          "rules": "仅响应自己的实际箭矢打出，每次获得2／3点格挡；箭矢完成或额外执行牌效不重复计作打出。",
+          "upgrade": "每次获得的格挡2→3。",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "payoff",
+              "cross": false,
+              "ports": [
+                "defense"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "收益",
+              "port": "防御"
+            }
+          },
+          "triggerRole": "收益",
+          "port": "防御",
+          "roleReason": "打出箭矢提供即时防护。"
+        }
+      },
+      "expectedFields": {
+        "name": "箭阵",
+        "art": "original-scene-ja118-arrow-array-20261108",
+        "naming": {
+          "original": "",
+          "kind": "常用动作或概念名",
+          "work": "TV第1话约19:36 · 舞台地面上的实箭",
+          "url": "https://www.bilibili.com/bangumi/play/ep232367?t=1176",
+          "adaptation": "以已经落在舞台上的实箭组成阵前防护，每次布置箭矢便增加守备。名称采用常用军事概念“箭阵”。配图只保留实箭与场地；原始截图tv01-1934-detail.jpg，裁切1000,150,800,600。"
+        },
+        "direction": "以已经落在舞台上的实箭组成阵前防护，每次布置箭矢便增加守备。名称采用常用军事概念“箭阵”。配图只保留实箭与场地；原始截图tv01-1934-detail.jpg，裁切1000,150,800,600。",
+        "notes": "以已经落在舞台上的实箭组成阵前防护，每次布置箭矢便增加守备。名称采用常用军事概念“箭阵”。配图只保留实箭与场地；原始截图tv01-1934-detail.jpg，裁切1000,150,800,600。",
+        "design": {
+          "rules": "仅响应自己的实际箭矢打出，每次获得3／4点格挡；箭矢完成或额外执行牌效不重复计作打出。",
+          "upgrade": "每次获得的格挡3→4。",
+          "route": "箭矢",
+          "systems": [
+            "stage"
+          ],
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "payoff",
+              "cross": false,
+              "ports": [
+                "defense"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "收益",
+              "port": "防御"
+            }
+          },
+          "triggerRole": "收益",
+          "port": "防御",
+          "roleReason": "打出箭矢提供即时防护。"
+        }
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_junna-arrow-guard-20261108_JA118",
+      "expectedVersion": "1:40995ec873285e1d85068711cf112dfe24250b81224b0527aec03c29d2f5d8eb",
+      "updates": {
+        "name": "不让舞台落幕",
+        "theme": "箭矢展开与舞台防护",
+        "text": "取纯那在渴望的Revue中守住自己舞台的宣言。能力持续响应每次箭矢打出，格挡对应展开箭矢时获得的防护，帮助她继续应对下一次交锋。箭矢本身的布置与持续防守一起表现不让自己的舞台结束。配图为纯那持弓面向来敌的独立近景，保留眼镜、目光、弓身、弓弦与部分绿色宝石；与我的舞台的聚光灯全身镜头区分。",
+        "original": "舞台を終わらせない",
+        "source": "TV第2话「命运的舞台」·渴望的Revue，纯那约21:05—21:12的对白",
+        "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232368?t=1265",
+        "art": "original-refit-ja118-stage-continue-20261112",
+        "notes": "docs/design/assets/card-sources/2026-11-02/tv02-2100-action.jpg；裁切380,0,1040,780；成品 docs/worktree-tasks/rerelation-argument-volley-20261112/portraits/JA118.png"
+      },
+      "expectedFields": {
+        "name": "箭阵",
+        "theme": "箭矢与防护",
+        "text": "以已经落在舞台上的实箭组成阵前防护，每次布置箭矢便增加守备。名称采用常用军事概念“箭阵”。配图只保留实箭与场地；原始截图tv01-1934-detail.jpg，裁切1000,150,800,600。",
+        "original": "",
+        "source": "TV第1话约19:36 · 舞台地面上的实箭",
+        "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232367?t=1176",
+        "art": "original-scene-ja118-arrow-array-20261108",
+        "notes": "以已经落在舞台上的实箭组成阵前防护，每次布置箭矢便增加守备。名称采用常用军事概念“箭阵”。配图只保留实箭与场地；原始截图tv01-1934-detail.jpg，裁切1000,150,800,600。"
+      }
+    }
+  ]
+}
