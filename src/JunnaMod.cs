@@ -24,7 +24,6 @@ public static class JunnaMod
         DamageSourceScopes.Install();
         KnowledgeCombat.Initialize();
         KnowledgeProgress.Initialize();
-        DynamicKnowledge.Initialize();
         Models.CardCatalog.RegisterDamageCapabilities();
         Shine.RegisterDeferredResolutionPredicate(Models.CardCatalog.IsArrow);
         new Harmony(Id).PatchAll(Assembly.GetExecutingAssembly());

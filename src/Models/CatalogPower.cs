@@ -24,6 +24,8 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         public int Turn = -1;
         public int Used;
         public int CycleIndex;
+        internal Grant Copy() => new(ShoujoKageki.Core.V1.CardCopies.Snapshot(Card), InstalledBy, XValue)
+        { Turn = Turn, Used = Used, CycleIndex = CycleIndex };
         public int V(string name) => Card.Value(name);
         public bool Take(int limit)
         {
@@ -52,7 +54,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
     protected override void DeepCloneFields()
     {
         base.DeepCloneFields();
-        _grants = new(_grants);
+        _grants = _grants.Select(grant => grant.Copy()).ToList();
     }
 
     public static int ArrowHaste(Player player) => player.Creature.Powers.OfType<CatalogPower>()
