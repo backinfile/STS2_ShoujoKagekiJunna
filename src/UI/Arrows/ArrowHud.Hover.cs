@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.HoverTips;
@@ -210,10 +211,8 @@ public partial class ArrowHud
         var layout = (canvas, anchorRect, focus, _hoverArrows.Count, _previewCards.Count);
         bool obstaclesChanged = false;
         int obstacleCount = 0;
-        foreach (var creature in NCombatRoom.Instance!.CreatureNodes)
+        void AddObstacle(Rect2 rect)
         {
-            if (!creature.Entity.IsAlive) continue;
-            var rect = creature.Hitbox.GetGlobalRect().GrowIndividual(24, 110, 24, 12);
             if (obstacleCount == _previewObstacles.Count)
             {
                 _previewObstacles.Add(rect);
@@ -226,6 +225,17 @@ public partial class ArrowHud
             }
             obstacleCount++;
         }
+        foreach (var creature in NCombatRoom.Instance!.CreatureNodes)
+        {
+            if (!creature.Entity.IsAlive) continue;
+            AddObstacle(creature.Hitbox.GetGlobalRect().GrowIndividual(24, 110, 24, 12));
+        }
+        int creatureObstacles = obstacleCount;
+        foreach (var set in NGame.Instance!.HoverTipsContainer.GetChildren().OfType<NHoverTipSet>())
+            if (set.IsVisibleInTree())
+                foreach (var tip in set.GetChildren().OfType<Control>())
+                    if (tip.IsVisibleInTree() && tip.Size.X > 0 && tip.Size.Y > 0)
+                        AddObstacle(tip.GetGlobalRect().Grow(12));
         if (obstacleCount < _previewObstacles.Count)
         {
             _previewObstacles.RemoveRange(obstacleCount, _previewObstacles.Count - obstacleCount);
@@ -264,14 +274,35 @@ public partial class ArrowHud
             }
         }
         float counterHeight = _hoverArrows.Count > 1 ? 36 : 0;
-        var size = bounds.Size + new Vector2(PreviewMargin, PreviewMargin + counterHeight);
         var available = new Rect2(new Vector2(PreviewMargin, 96),
             new Vector2(canvas.X - PreviewMargin * 2, canvas.Y * .8f - 96 - PreviewMargin));
+        float overheadBottom = anchorRect.Position.Y - 110 - PreviewMargin;
+        if (_previewTarget != null)
+        {
+            // Creature previews belong above the intent, even when the fan needs to shrink to fit.
+            float left = anchorRect.GetCenter().X - (bounds.Size.X + PreviewMargin) * .5f;
+            float right = left + bounds.Size.X + PreviewMargin;
+            for (int i = creatureObstacles; i < obstacleCount; i++)
+            {
+                var tip = _previewObstacles[i];
+                if (tip.Position.X < right && tip.End.X > left)
+                    overheadBottom = Math.Min(overheadBottom, tip.Position.Y - PreviewMargin);
+            }
+            float fit = Math.Min(1, Math.Min((available.Size.X - PreviewMargin) / bounds.Size.X,
+                Math.Max(1, overheadBottom - available.Position.Y - PreviewMargin - counterHeight) / bounds.Size.Y));
+            bounds = new(bounds.Position * fit, bounds.Size * fit);
+            for (int i = 0; i < _previewCards.Count; i++)
+            {
+                positions[i] *= fit;
+                scales[i] *= fit;
+            }
+        }
+        var size = bounds.Size + new Vector2(PreviewMargin, PreviewMargin + counterHeight);
         var maximum = (available.End - size).Max(available.Position);
         var center = anchorRect.GetCenter();
         ReadOnlySpan<Vector2> candidates =
         [
-            new(center.X - size.X * .5f, anchorRect.Position.Y - size.Y - 24),
+            new(center.X - size.X * .5f, (_previewTarget != null ? overheadBottom : anchorRect.Position.Y - 24) - size.Y),
             new(center.X - size.X * .5f, anchorRect.End.Y + 24),
             new(anchorRect.Position.X - size.X - 24, center.Y - size.Y * .5f),
             new(anchorRect.End.X + 24, center.Y - size.Y * .5f),
@@ -282,6 +313,7 @@ public partial class ArrowHud
         foreach (var candidate in candidates)
         {
             var position = candidate.Clamp(available.Position, maximum);
+            if (_previewTarget != null && position.Y + size.Y > overheadBottom + 1) continue;
             var rect = new Rect2(position, size);
             var overlap = rect.Intersection(anchorRect);
             float score = overlap.Size.X * overlap.Size.Y * 3 + position.DistanceTo(candidate) * 2;

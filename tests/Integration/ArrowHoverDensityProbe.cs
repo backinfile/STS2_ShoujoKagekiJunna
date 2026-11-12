@@ -9,7 +9,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
+using MegaCrit.Sts2.Core.Nodes.HoverTips;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
@@ -20,12 +22,14 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
 {
     private static Vector2 _pointer;
     public override string CmdName => "junna_hover_density";
-    public override string Args => "check <count> | prepare <count> | hover <enemy|player|arrow|clear> | info";
+    public override string Args => "check <count> | prepare <count> | hover <enemy|player|arrow|clear> | placement | info";
     public override string Description => "Check actual card visibility for dense arrow hover previews.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args)
     {
         if (player?.PlayerCombatState == null) return new(false, "Combat required");
+        if (args.FirstOrDefault() == "placement")
+            return new(CheckPlacement(player), true, "Hover placement check started");
         if (args.FirstOrDefault() == "states")
             return new(true, JsonSerializer.Serialize(ArrowCombat.Deployed.Select(arrow => new {
                 arrow.Sequence,
@@ -190,6 +194,34 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
         File.WriteAllText(Path.Combine(directory, "result-" + count + (self ? "-player" : "") + ".json"),
             JsonSerializer.Serialize(new { count, actual = cards.Length, visible, inside, distinct, countdown, fan, paging, cacheBound, keyboard, keyboardIndex, neighbourFocus, escape, arrowHits, single, cleared, removed, pass }, new JsonSerializerOptions { WriteIndented = true }));
         if (check && !pass) throw new InvalidOperationException("Arrow hover preview regression failed");
+    }
+
+    private static async Task CheckPlacement(Player player)
+    {
+        Hover(player, "clear");
+        await Task.Delay(350);
+        Hover(player, "enemy");
+        await Task.Delay(700);
+        var room = NCombatRoom.Instance!;
+        var hud = room.GetNode<ArrowHud>("JunnaArrows");
+        var preview = (Control)AccessTools.Field(typeof(ArrowHud), "_hoverPreview").GetValue(hud)!;
+        var enemy = room.GetCreatureNode(player.Creature.CombatState!.HittableEnemies.First())!.Hitbox.GetGlobalRect();
+        var rect = preview.GetGlobalRect();
+        var tips = NGame.Instance!.HoverTipsContainer.FindChildren("*", "", true, false).OfType<NHoverTipSet>()
+            .Where(set => set.IsVisibleInTree()).SelectMany(set => set.GetChildren().OfType<Control>())
+            .Where(control => control.IsVisibleInTree() && control.Size.X > 0 && control.Size.Y > 0)
+            .Select(control => control.GetGlobalRect()).ToArray();
+        bool visible = preview.IsVisibleInTree();
+        bool aboveHead = rect.End.Y <= enemy.Position.Y - 8;
+        bool centered = Math.Abs(rect.GetCenter().X - enemy.GetCenter().X) < 1;
+        bool avoidsTips = tips.All(tip => !rect.Intersects(tip));
+        bool inside = hud.GetViewportRect().Encloses(rect);
+        var result = new { visible, aboveHead, centered, avoidsTips, inside, tipsCount = tips.Length,
+            preview = rect.ToString(), enemy = enemy.ToString(), tips = tips.Select(tip => tip.ToString()),
+            pass = visible && aboveHead && centered && avoidsTips && inside && tips.Length > 0 };
+        string file = Path.GetFullPath("../../../out/tmp/main-consolidation-hover/placement.json");
+        Directory.CreateDirectory(Path.GetDirectoryName(file)!);
+        File.WriteAllText(file, JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }));
     }
 
     private static void Hover(Player player, string mode)
