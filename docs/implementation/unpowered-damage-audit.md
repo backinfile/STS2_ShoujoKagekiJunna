@@ -12,9 +12,9 @@
 
 | 入口 | 原行为 | 修正与结论 |
 | --- | --- | --- |
-| JK235 理想的国语教科书，打出知识牌后 | GameApi.Damage传Move | 改走统一DealTriggeredDamage，传Unpowered |
-| JG34 合唱练习，回合开始时 | CardEffects.DealDamage创建AttackCommand | 改走统一能力伤害入口，对所有存活敌人结算；移除普通攻击入口中的JG34特例 |
-| JH30 星芒，能量变化的保留兼容逻辑 | EnergyDamage传Move | 改走统一能力伤害入口；当前卡池及生成模型不存在该牌，保留处理器也修正 |
+| JK235 理想的国语教科书，打出知识牌后 | GameApi.Damage传Move | 直接调用原生CreatureCmd.Damage（经GameApi适配），传Unpowered |
+| JG34 合唱练习，回合开始时 | CardEffects.DealDamage创建AttackCommand | 按原生水银沙漏的写法调用CreatureCmd.Damage，传Unpowered，对所有存活敌人结算；移除普通攻击入口中的JG34特例 |
+| JH30 星芒，能量变化的保留兼容逻辑 | EnergyDamage传Move | 直接调用原生CreatureCmd.Damage（经GameApi适配），传Unpowered；当前卡池及生成模型不存在该牌，保留处理器也修正 |
 | CatalogCard能力牌Damage预览 | 全部DamageVar传Move | 能力牌改为Unpowered，预览与触发结算一致 |
 | 普通攻击、已布置攻击箭矢及生成流星 | AttackCommand、Move | 属于实际卡牌攻击，保留原生攻击修正 |
 | JA82 箭雨及保留JA77 齐射 | 名义为技能或技能箭矢，实际生成攻击或直接攻击 | 保留Move，避免按技能类型误改实际攻击 |
@@ -37,3 +37,17 @@
 - Beta、Stable及定向测试模组以-warnaserror构建通过，零警告、零错误。
 
 教科书力量／虚弱／易伤同时存在时的正常打牌录像及前后状态归档至artifacts/task-deliverables/knowledge-pile-anchor-20261112/。此前知识光点及buff文案修复证据也保存在该目录。
+
+## 游戏本体同类效果对照
+
+2026-11-12直接检查当前安装游戏的sts2.dll：
+
+| 原生模型及处理器 | 调用方式 | 对应纯那效果 |
+| --- | --- | --- |
+| JuggernautPower.AfterBlockGained（势不可挡） | CombatTargets随机选敌人，CreatureCmd.Damage传ValueProp.Unpowered | 教科书及保留能量触发的随机伤害 |
+| FlameBarrierPower.AfterDamageReceived（火焰屏障） | CreatureCmd.Damage传ValueProp.Unpowered | 能力附带伤害的原生属性依据 |
+| MercuryHourglass.AfterPlayerTurnStart（水银沙漏） | DamageVar(3, Unpowered)，CreatureCmd.Damage对HittableEnemies结算 | 合唱练习的回合开始全体伤害及能力伤害预览 |
+
+删除上次新增的DealTriggeredDamage私有封装，三个效果直接写明伤害属性和原生命令。GameApi.Damage仅适配Beta七参数／Stable六参数签名，直接转发给CreatureCmd.Damage；没有另建伤害算法。既有DamageExecution.BeginCardResolution用于读取能力安装时保存的卡牌伤害投入，保留纯那伤害加成和额外次数；原生力量、虚弱、易伤由本体依据Unpowered排除。
+
+原生代码及指纹证据：artifacts/task-deliverables/native-power-damage-20261112/中的native-source.json与native-power-reference-20261112/。后续验证见[本体对照任务记录](../worktree-tasks/native-power-damage-20261112/README.md)。

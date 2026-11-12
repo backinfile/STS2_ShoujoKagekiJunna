@@ -80,7 +80,8 @@
         "LowerCape",
         "FurHem"
       ],
-      "behavior": "人物图层共享腰部起伏，头部、胸口、手弓和披风同步呼吸；袖口渐变保持，手弓独立摆幅约减半，舞台与星空保持原位置。"
+      "behavior": "人物图层共享腰部起伏，头部、胸口、手弓和披风同步呼吸；袖口渐变保持，手弓独立摆幅约减半，舞台与星空保持原位置。",
+      "superseded_by": "layered_breath_follow"
     },
     "cuff_join": {
       "date": "2026-11-12",
@@ -105,6 +106,68 @@
         "StageForeground"
       ],
       "source": "ShoujoKagekiJunna/scripts/character_select_layers.gd"
+    },
+    "layered_breath_follow": {
+      "date": "2026-11-12",
+      "period_seconds": 5.6,
+      "inhale_seconds": 1.9,
+      "exhale_seconds": 3.3,
+      "rest_seconds": 0.4,
+      "shared_scale": [
+        1,
+        1
+      ],
+      "shared_lift_px": 1,
+      "driver_delays_seconds": {
+        "shoulder": 0.07,
+        "head": 0.18,
+        "arm": 0.14
+      },
+      "measured_peak_times_seconds": {
+        "chest": 1.9,
+        "shoulder": 1.98,
+        "head": 2.06,
+        "hand": 2.06
+      },
+      "measured_vertical_span_px": {
+        "head": 3.25639343261719,
+        "chest": 4.39999389648438,
+        "shoulder": 3.87359619140625,
+        "hand": 6.8441162109375
+      },
+      "maximum_mesh_join_error_px": 0.0265769381076097,
+      "bow_distance_span_px": {
+        "near": 0.0003967285159660605,
+        "right": 0.00036621093795474735
+      },
+      "face_distance_span_px": 0.00033569335938921085,
+      "string_length_span_px": {
+        "left": 0.00048828125,
+        "right": 0.0003509521484375
+      },
+      "cycle_join_error_px": 0,
+      "behavior": "胸肩先动，头部与手弓轻微滞后；人物整体仅平移，脸和眼镜保持刚性。袖口两侧共用呼吸场，手弓平滑退出连接区并叠加小幅独立待机。",
+      "strings": "左右弓弦统一跟随手弓刚性变换；按原图轨迹清理静止细线，并用呼吸后的袖口、毛领位置计算遮挡。",
+      "wind": "发尾先跟随头部，披风先跟随躯干，再叠加原有独立风动；右下披风反向摆动保留。",
+      "skirt_independent": true,
+      "local_probe_update_median_usec": {
+        "before": 1271,
+        "after": 1204
+      },
+      "verification": "out/tmp/junna-breath-follow-20261112/verification.json",
+      "measurements": "out/tmp/junna-breath-follow-20261112/after/measurements.json",
+      "comparison": "out/tmp/junna-breath-follow-20261112/still-comparison.png",
+      "video": "out/tmp/junna-breath-follow-20261112/junna-breath-follow-game.mp4",
+      "recording": {
+        "status": "completed",
+        "fps": 20,
+        "video_duration_seconds": 23.05,
+        "capture_fps": 17.912703292660947,
+        "frames_repeated": 49,
+        "frames_dropped": 0,
+        "audio": true,
+        "audio_source": "engine_mix"
+      }
     }
   },
   "generation": {
