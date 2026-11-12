@@ -1,0 +1,226 @@
+{
+  "character": "JUNNA",
+  "mode": "standard",
+  "ascension": 0,
+  "win": true,
+  "was_abandoned": false,
+  "seed": "ZLGZ36WECZF5",
+  "build_id": "v0.111.0",
+  "floors": 48,
+  "run_time_seconds": 4904,
+  "history_entries": 1,
+  "profile_wins": 1,
+  "score": 1296,
+  "score_parts": [
+    940,
+    6,
+    50,
+    300
+  ],
+  "pre_architect_hp": 76,
+  "pre_architect_max_hp": 120,
+  "gold": {
+    "starting": 99,
+    "earned": 658,
+    "spent": 713,
+    "remaining": 44
+  },
+  "checks": {
+    "junna_generation_pool check": [
+      {
+        "pass": false,
+        "result": {
+          "pass": false,
+          "candidates": 78,
+          "skills": 32,
+          "leaked": [
+            "JUNNA_ARROW_TARGET_SELF",
+            "JUNNA_ARROW_TARGET_ENEMY",
+            "JUNNA_NOTES_DRAW",
+            "JUNNA_NOTES_ENERGY",
+            "JUNNA_PREPARE_ARROWS",
+            "JUNNA_PREPARE_KNOWLEDGE",
+            "JUNNA_ENERGY_NOW",
+            "JUNNA_ENERGY_LATER"
+          ],
+          "nonReward": [
+            "JUNNA_ARROW_TARGET_SELF",
+            "JUNNA_ARROW_TARGET_ENEMY",
+            "JUNNA_NOTES_DRAW",
+            "JUNNA_NOTES_ENERGY",
+            "JUNNA_PREPARE_ARROWS",
+            "JUNNA_PREPARE_KNOWLEDGE",
+            "JUNNA_ENERGY_NOW",
+            "JUNNA_ENERGY_LATER"
+          ],
+          "legitimateSkills": true,
+          "choicesRegistered": true
+        }
+      },
+      {
+        "pass": true,
+        "result": {
+          "pass": true,
+          "candidates": 70,
+          "skills": 24,
+          "leaked": [],
+          "nonReward": [],
+          "legitimateSkills": true,
+          "choicesRegistered": true
+        }
+      }
+    ],
+    "junna_deck_count_preview check": [
+      {
+        "pass": false,
+        "result": {
+          "pass": false,
+          "rows": [
+            {
+              "upgraded": false,
+              "text": "知识。\n造成等同于牌组中卡牌数量的伤害（0）。",
+              "expected": 10,
+              "pass": false
+            },
+            {
+              "upgraded": true,
+              "text": "知识。\n造成等同于牌组中卡牌数量+8的伤害（8）。",
+              "expected": 18,
+              "pass": false
+            }
+          ]
+        }
+      },
+      {
+        "pass": true,
+        "result": {
+          "pass": true,
+          "rows": [
+            {
+              "upgraded": false,
+              "text": "知识。\n造成等同于牌组中卡牌数量的伤害（10）。",
+              "expected": 10,
+              "pass": true
+            },
+            {
+              "upgraded": true,
+              "text": "知识。\n造成等同于牌组中卡牌数量+8的伤害（18）。",
+              "expected": 18,
+              "pass": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "native_queue_comparison": {
+    "fast": {
+      "before": 70,
+      "actions": [
+        {
+          "status": "ok",
+          "message": "Playing '防御'"
+        },
+        {
+          "status": "ok",
+          "message": "Playing '防御'"
+        },
+        {
+          "status": "ok",
+          "message": "Playing '防御'"
+        },
+        {
+          "status": "ok",
+          "message": "Ending turn"
+        }
+      ],
+      "after": 63,
+      "energy": 3,
+      "round": 2
+    },
+    "waited": {
+      "before": 63,
+      "actions": [
+        {
+          "status": "ok",
+          "message": "Playing '防御'"
+        },
+        {
+          "status": "ok",
+          "message": "Playing '防御'"
+        },
+        {
+          "status": "ok",
+          "message": "Playing '防御'"
+        }
+      ],
+      "after": 63,
+      "round": 3
+    }
+  },
+  "recordings": {
+    "sts2-20261109-101713-5212ad277e344a64a59614ace38672af.mp4": {
+      "fps": 15,
+      "video_duration_seconds": 861.1333333333333,
+      "audio": true,
+      "audio_source": "engine_mix",
+      "capture_fps": 14.964289627887412,
+      "frames_dropped": 0,
+      "capture_max_ms": 345.7769
+    },
+    "sts2-20261109-103748-96c6970bf5004e48b0c59efb51fbfeb0.mp4": {
+      "fps": 15,
+      "video_duration_seconds": 1968.4666666666667,
+      "audio": true,
+      "audio_source": "engine_mix",
+      "capture_fps": 14.947618472244008,
+      "frames_dropped": 0,
+      "capture_max_ms": 477.9753
+    },
+    "sts2-20261109-111216-9bbd4f224a764ba681e2300168ea4492.mp4": {
+      "fps": 15,
+      "video_duration_seconds": 2117.733333333333,
+      "audio": true,
+      "audio_source": "engine_mix",
+      "capture_fps": 14.945644725856372,
+      "frames_dropped": 0,
+      "capture_max_ms": 419.1295
+    },
+    "sts2-20261109-115223-67dedd74bcb145528e5b13c1010968cb.mp4": {
+      "fps": 15,
+      "video_duration_seconds": 76.13333333333334,
+      "audio": true,
+      "audio_source": "engine_mix",
+      "capture_fps": 14.8192703275064,
+      "frames_dropped": 0,
+      "capture_max_ms": 659.0549
+    },
+    "sts2-20261109-115424-e3e928b5df0240e593cbf2c9c43d8153.mp4": {
+      "fps": 15,
+      "video_duration_seconds": 114.46666666666667,
+      "audio": true,
+      "audio_source": "engine_mix",
+      "capture_fps": 14.844852592361239,
+      "frames_dropped": 0,
+      "capture_max_ms": 714.3621
+    },
+    "sts2-20261109-120406-a35a589c12ee4558be310816661d893f.mp4": {
+      "fps": 15,
+      "video_duration_seconds": 5.666666666666667,
+      "audio": true,
+      "audio_source": "engine_mix",
+      "capture_fps": 15.010723130814425,
+      "frames_dropped": 0,
+      "capture_max_ms": 53.8308
+    },
+    "sts2-20261109-120524-a47f3397ef674f26bb030671d3c36911.mp4": {
+      "fps": 15,
+      "video_duration_seconds": 12.666666666666666,
+      "audio": true,
+      "audio_source": "engine_mix",
+      "capture_fps": 15.009083497332586,
+      "frames_dropped": 0,
+      "capture_max_ms": 53.3089
+    }
+  }
+}
