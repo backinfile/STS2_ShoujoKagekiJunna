@@ -229,6 +229,14 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 两个遗物的效果修改了，你再同步下
 
+### 本轮合并及清理批准
+
+提问：本轮修复已提交为 a88d291，16 项定向场景通过，是否合入当前干净的 main（c653df8）？若清理，会先将最终包、报告、快照和录像保存到主目录 artifacts/task-deliverables/textbook-power-amount-20261112/，再删除本次工作树、codex/textbook-power-amount-20261112 分支及其中的隔离游戏和中间产物。
+
+用户回复：
+
+合并并清理本次工作树
+
 ## Brief task plan
 
 - 原检出 main，起点 `eb1422abbaebbfb00ac8a67f901a2d714a7ceac5`，工作区干净，无进行中的 Git 操作。
@@ -262,5 +270,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 - 起点 main 为 `eb1422a`；初始实现提交 `febc39b` 后同步 main 的生成牌动画修复 `c653df8`，自动合并无冲突，随后完成追加的两件遗物和预览修改。
 - 同步后重新构建并复验13项；新增遗物效果以工作台r5014复验。原有知识发牌、生成动画和入堆位置实现保留。
-- 主目录保持 main 和干净工作区。任务完成提交后请求合并确认，工作树和分支按用户所选保留或清理。
-- 若批准清理，将先保存最终包、报告、快照和录像到主目录 `artifacts/task-deliverables/textbook-power-amount-20261112/`，再移除本次工作树、任务分支及其中的隔离游戏和中间产物。
+- 用户已批准将 `a88d291` 合入 main 并清理本次工作树。批准时 main 仍为 `c653df8`，两个工作区均干净。追加提交仅记录授权和交付位置，运行代码相对已验证版本保持一致。
+- 按批准范围先将最终包、报告、快照、录像和验证基线保存到主目录 `artifacts/task-deliverables/textbook-power-amount-20261112/`，逐文件校验SHA-256；然后由 main 快进接收本任务，核对批准提交与两端提交树，再移除本次工作树、任务分支及其中的隔离游戏和中间产物。先前任务工作树与其他并行任务保留。
+
+## 交付保存位置
+
+- 任务记录和验证说明随 Git 提交保留于本目录。
+- 主目录交付目录：`artifacts/task-deliverables/textbook-power-amount-20261112/`；包含 `Junna-fixes-r5014.zip`、四段效果录像、前后截图、工作台快照、验证报告、批注回执及保存清单。
+- 旧r5012包及 Godot 导入缓存属于中间产物；保留必要失败基线和旧版本对照录像。
