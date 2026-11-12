@@ -159,6 +159,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 </skill>
 
+### 消息 4：用户批准合并与清理
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_81bdfb500e0942f981286e5a744f7c9a\",0]","question":"是否将本次修复合并到 main，并按上述范围清理？","answer":"合并并清理"}]
+</send_user_message_question_reply>
 ## 简要计划
 
 1. 从捕获的 main 提交创建独立工作树，记录原检出状态。
@@ -173,7 +178,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 原检出工作区：干净；未进行中的 Git 操作。
 - 任务分支：codex/steady-progress-generate-before-draw-20261112。
 - 工作树：../worktrees/STS2_ShoujoKagekiJunna/steady-progress-generate-before-draw-20261112。
-- 当前状态：实现与定向验证完成，等待用户批准合并及清理。
+- 当前状态：实现与定向验证完成；用户已批准合并与清理。最终集成校验结果保存在证据目录的 `integration.json`。
 
 ### 实现
 
@@ -197,8 +202,8 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 ### 同步、合并与清理
 
 - 将全部任务改动合并成一个提交，再同步最新本地 main。原检出始终保留。
-- 待批准的清理项：本任务工作树、任务分支及该工作树中的隔离游戏和临时文件。
-- 如批准合并并清理，先把必要最终录像、关键帧、基线、回归结果、验证 DLL 和相对路径哈希清单保存到原仓库 `out/tmp/steady-progress-generate-before-draw-20261112/`，核对后再清理本工作树。
+- 已批准的清理项：本任务工作树、任务分支及该工作树中的隔离游戏和临时文件。
+- 必要最终录像、关键帧、基线、回归结果、验证 DLL 和相对路径哈希清单保存到原仓库 `out/tmp/steady-progress-generate-before-draw-20261112/`，核对后再清理本工作树。
 ### 本地同步结果
 
 - 单一任务提交：a0b76cfc2cdbbda8128b42c5b654ce9f8e75bcc1。
@@ -207,4 +212,4 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 同步后 Beta、Stable 及集成项目再次编译通过，均 0 警告、0 错误。本任务隔离游戏已退出。
 - 同步后 Beta SHA-256：1cd5851014a3d8e3758d60bf5155aac08234f930193d4ef8c85647eb52737b5f。
 - 同步后 Stable SHA-256：f5ce4438715b609ede0141d9191abfef4aa96cd83ce5cfa7a31db393ed3e372d。
-- 合并与清理待用户选择；批准后应先保留证据并核对原 main 的 HEAD、分支及干净状态，再快进集成。
+- 用户明确选择“合并并清理”。执行前核对原检出仍在 main 的 cf653a10c831983418efce54379aff5741b219e8，工作区干净。保存证据并核对哈希后，按快进方式集成；最终检查提交树一致、main 包含任务提交及原工作区干净。
