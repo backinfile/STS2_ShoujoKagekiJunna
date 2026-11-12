@@ -4,7 +4,8 @@
   const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
   function create({connection,initialSnapshot,clientId,uuid,getAssets,onSnapshot,onCommit,onStatus,onDraft}){
     let versions={},knownAssets=new Set(),outbox=[],revision=-1,ready=false,error=null,conflict=null,initialized=false,busy=null,rpcId=0;
-    let snapshotRequest=0,editGeneration=0,resolving=false,snapshotBundle=null,uploading=0;
+    let snapshotRequest=0,editGeneration=0,resolving=false,snapshotBundle=null,uploading=0,syncing=null;
+    if(initialSnapshot){versions=clone(initialSnapshot.versions);snapshotBundle=clone(initialSnapshot.bundle);revision=snapshotBundle.revision;knownAssets=new Set(Object.keys(snapshotBundle.assets||{}));}
     const invalidateSnapshots=()=>{editGeneration++;};
     const status=()=>({ready,error,conflict,busy:!!busy||resolving||uploading>0,resolving,pending:outbox.length,revision});
     const draft=()=>({clientId,versions:clone(versions),outbox:clone(outbox)});
@@ -24,13 +25,19 @@
       }
     }
     async function call(name,args={}){if(!initialized){await rpc('initialize',{protocolVersion:'2025-03-26',capabilities:{},clientInfo:{name:'junna-workbench-web',version:'1.0.0'}});initialized=true;}const result=await rpc('tools/call',{name,arguments:args}),value=result.structuredContent||JSON.parse(result.content[0].text);if(result.isError){const e=Error(value.message);Object.assign(e,value);throw e;}return value;}
-    async function snapshot({initial=false}={}){
+    function snapshot(options={}){
+      if(syncing?.generation===editGeneration)return syncing.promise;
+      const operation={generation:editGeneration};
+      operation.promise=readSnapshot(options).finally(()=>{if(syncing===operation)syncing=null;});
+      syncing=operation;return operation.promise;
+    }
+    async function readSnapshot({initial=false}={}){
       const request=++snapshotRequest,generation=editGeneration;
       const stale=()=>request!==snapshotRequest||generation!==editGeneration;
       try{
-        const result=await call('workbench_get_state',{includeHistory:false,includeAssets:initial,assetURLs:!!connection.assetURLs,incremental:!initial,...(initial&&initialSnapshot?{knownRevision:initialSnapshot.bundle.revision}:!initial?{knownRevision:revision}:{})});
+        const result=await call('workbench_get_state',{includeHistory:false,includeAssets:initial,assetURLs:!!connection.assetURLs,incremental:!!snapshotBundle,...(snapshotBundle?{knownRevision:revision}:{})});
         if(stale())return false;
-        if(result.unchanged){if(initial&&initialSnapshot){versions=clone(initialSnapshot.versions);snapshotBundle=clone(initialSnapshot.bundle);knownAssets=new Set(Object.keys(snapshotBundle.assets));revision=result.revision;onSnapshot(clone(snapshotBundle));return true;}return false;}
+        if(result.unchanged){if(initial&&snapshotBundle){onSnapshot(clone(snapshotBundle));return true;}return false;}
         if(result.delta){
           if(!snapshotBundle)throw Error('缺少同步基线');
           for(const change of result.changes.filter(change=>change.collection==='root')){
@@ -56,7 +63,7 @@
         versions=result.versions;knownAssets=new Set(result.assetIds);revision=result.revision;snapshotBundle=clone(result.bundle);onSnapshot(result.bundle);return true;
       }catch(e){if(stale())return false;throw e;}
     }
-    async function start(recovered){if(recovered?.outbox?.length){versions=clone(recovered.versions);outbox=clone(recovered.outbox);for(const item of outbox){item.assets=uploadedAssets(item.assets);if(item.payload)item.payload.assets=uploadedAssets(item.payload.assets);}}try{await snapshot({initial:true});ready=true;error=null;for(const entry of outbox)for(const [id]of Object.entries(entry.assets||{}))knownAssets.delete(id);changed();if(outbox.length)flush();return true;}catch(e){error=e;ready=false;changed();return false;}}
+    async function start(recovered){if(recovered?.outbox?.length){if(!snapshotBundle)versions=clone(recovered.versions);outbox=clone(recovered.outbox);for(const item of outbox){item.assets=uploadedAssets(item.assets);if(item.payload)item.payload.assets=uploadedAssets(item.payload.assets);}}try{await snapshot({initial:true});ready=true;error=null;for(const entry of outbox)for(const [id]of Object.entries(entry.assets||{}))knownAssets.delete(id);changed();if(outbox.length)flush();return true;}catch(e){error=e;ready=false;changed();return false;}}
     function enqueue(record){invalidateSnapshots();const assets=Object.fromEntries(Object.entries(uploadedAssets(getAssets())).filter(([id])=>!knownAssets.has(id)));outbox.push({record:clone(record),assets});changed();flush();}
     function changePayload(p){
       const change={collection:p.collection,uid:p.uid,expectedVersion:p.expectedVersion||versions[p.collection+'/'+p.uid]||'0:missing'};

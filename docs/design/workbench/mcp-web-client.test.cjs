@@ -8,12 +8,13 @@ const {randomUUID}=require('node:crypto');
 const {WorkbenchStore}=require('./mcp-store.cjs');
 const web=require('./mcp-web-client.js');
 
-function fixture(t){
+function fixture(t,{withSnapshot=false}={}){
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'junna-web-race-')),file=path.join(dir,'state.json');
   const seed={schemaVersion:1,workspaceId:'race-test',revision:1,history:[],assets:{},data:{title:'测试',meta:{},cards:[{uid:'a',id:'A',name:'原名',text:'原文',cost:1,type:'技能'}],terms:[],mechanisms:[],partnerGroups:[],archetypes:[],styles:[],fitPool:[]}};
   fs.writeFileSync(file,JSON.stringify(seed));t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));
   const store=new WorkbenchStore({file,seed,workspaceId:seed.workspaceId});
-  let hold=null,bundle;const requests=[];
+  const initialSnapshot=withSnapshot?store.state({includeAssets:true}):null;
+  let hold=null,bundle=initialSnapshot?.bundle;const requests=[];
   const originalFetch=global.fetch;
   global.fetch=async(_url,options)=>{
     const request=JSON.parse(options.body);
@@ -32,7 +33,7 @@ function fixture(t){
     }catch(error){return {ok:true,json:async()=>({result:{isError:true,structuredContent:{code:error.code,message:error.message,...error.details}}})};}
   };
   t.after(()=>{global.fetch=originalFetch;});
-  const controller=web.create({connection:{baseURL:'http://127.0.0.1:1',token:'test'},clientId:'web',uuid:randomUUID,getAssets:()=>bundle.assets,onSnapshot:value=>{bundle=value;},onCommit:()=>{},onStatus:()=>{},onDraft:()=>{}});
+  const controller=web.create({connection:{baseURL:'http://127.0.0.1:1',token:'test'},initialSnapshot,clientId:'web',uuid:randomUUID,getAssets:()=>bundle.assets,onSnapshot:value=>{bundle=value;},onCommit:()=>{},onStatus:()=>{},onDraft:()=>{}});
   async function remote(collection,uid,updates){const current=store.get({collection,uid});return store.commit({requestId:randomUUID(),clientId:'other',label:'其他条目修改',changes:[{collection,uid,expectedVersion:current.version,before:current.entity,after:{...current.entity,...updates}}]});}
   async function edit(updates,base){const before=base||structuredClone(bundle.data.cards[0]),after={...before,...updates};bundle.data.cards[0]=after;controller.enqueue({id:randomUUID(),kind:'编辑',label:'卡牌编辑',patches:[{collection:'cards',uid:'a',before,after}]});await controller.flush();}
   async function delayedPull(){let release,captured;const wait=new Promise(resolve=>{release=resolve;}),started=new Promise(resolve=>{captured=resolve;});hold={wait,captured};const pending=controller.pull();await started;return {release,done:pending};}
@@ -164,4 +165,46 @@ test('starting a field edit protects its unsubmitted draft from an earlier sync'
   sync.release();await sync.done;
   assert.equal(f.bundle.data.cards[0].text,'尚未到自动保存时点的输入');
   await f.edit({text:'完成输入'},base);assert.equal(f.controller.status().conflict,null);
+});
+
+
+test('slow polling shares the in-flight snapshot instead of starting another download',async t=>{
+  const f=fixture(t);await f.controller.start();
+  await f.remote('cards','a',{name:'服务器更新'});
+  const before=f.requests.filter(r=>r.name==='workbench_get_state').length;
+  const slow=await f.delayedPull(),second=f.controller.pull();
+  try{
+    assert.equal(f.requests.filter(r=>r.name==='workbench_get_state').length-before,1,'5秒轮询不能重开尚未完成的慢请求');
+  }finally{slow.release();await Promise.all([slow.done,second]);}
+  assert.equal(f.controller.status().ready,true);assert.equal(f.bundle.data.cards[0].name,'服务器更新');
+});
+
+test('first connection uses the downloaded snapshot as an incremental baseline',async t=>{
+  const f=fixture(t,{withSnapshot:true});
+  await f.remote('cards','a',{name:'下载快照后的新内容'});
+  const current=f.store.get({collection:'cards',uid:'a'}),originalFetch=global.fetch;
+  let incremental=false;
+  global.fetch=async(url,options)=>{
+    const request=JSON.parse(options.body),args=request.params?.arguments;
+    if(request.params?.name==='workbench_get_state'&&args.incremental&&args.knownRevision===1){
+      incremental=true;
+      return {ok:true,json:async()=>({result:{structuredContent:{delta:true,changes:[{collection:'cards',uid:'a',after:current.entity,afterIndex:0}],versions:{'cards/a':current.version},assetIds:[],assets:{},historyTotal:1,cardUpdatedAt:{a:current.revision},revision:current.revision}}})};
+    }
+    return originalFetch(url,options);
+  };
+  assert.equal(await f.controller.start(),true);
+  assert.equal(incremental,true,'首次连接应复用已下载的快照，避免再下载完整内容');
+  assert.equal(f.bundle.data.cards[0].name,'下载快照后的新内容');
+  assert.equal(f.controller.status().revision,current.revision);
+  await f.edit({text:'增量同步后继续编辑'});assert.equal(f.controller.status().conflict,null);
+});
+
+test('reconnecting after a failed startup retains the downloaded snapshot baseline',async t=>{
+  const f=fixture(t,{withSnapshot:true}),onlineFetch=global.fetch;
+  global.fetch=async()=>{throw Error('offline');};assert.equal(await f.controller.start(),false);
+  global.fetch=onlineFetch;await f.controller.pull();
+  const request=f.requests.find(r=>r.name==='workbench_get_state');
+  assert.equal(request.args.knownRevision,1,'重连应沿用本地已下载版本');
+  assert.equal(request.args.incremental,true);
+  assert.equal(f.controller.status().ready,true);assert.equal(f.bundle.data.cards[0].name,'原名');
 });

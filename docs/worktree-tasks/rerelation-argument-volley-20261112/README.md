@@ -218,6 +218,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 新增 罕见 1费 打6。手牌中如果有知识牌，额外造成1次伤害。（箭矢，闪耀同样处理）  你看看能不能换一个更简单并且易懂的描述。 也为这张牌找契合名字和卡图
 
+### 20. 用户确认合并并清理
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_d1ad6bd4be1a4b009eb9e9f00dcf94cb\",0]","question":"是否将已核对的任务分支（1b75b1d，含卡牌契合记录与素材证据）合并到main，并清理本次工作树、任务分支和缓存？","answer":"合并并清理"}]
+</send_user_message_question_reply>
+
 ## Brief task plan
 
 1. 读取工作台当前约定、牌效、知识关联、契合池及角色素材。
@@ -228,7 +234,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-工作台已保存并完成必要复核。Git记录待用户确认后合并至main。
+工作台已保存并完成必要复核。用户已确认将Git记录合并至main并清理本次工作树、任务分支和缓存。
 
 - 原分支：main；起始提交：c4750a80f99e98097dbefd0a89806f17b5cf93f6。起始工作区干净，无Git操作进行中。
 - 任务分支：codex/rerelation-argument-volley-20261112。
@@ -271,8 +277,10 @@ MCP保存记录见revision-history.json。5123、5146、5216、5221包含已撤�
 证据包含MCP请求回执、逐字段复读、命名出处、完整原作截图、裁切成品、card-review.webp及arrow-review.png。
 本轮只改任务记录与证据文件，工作台内容由MCP持久化。用户输入完整保留在上文；路径与连接信息按技能要求脱敏。
 
-合并目标为main。待确认清理范围为本次工作树、任务分支及其中的可丢弃缓存；已提交的任务文档、来源和卡面证据随main保留。
+合并目标为main。用户已确认合并并清理本次工作树、任务分支及其中的可丢弃缓存；已提交的任务文档、来源和卡面证据保留在main。
 
 ## Synchronization
 
 任务内容已整合为提交4194fb7；已将本地main的e180f8876bc23580a16880ea41e430dee9811d8d合入任务分支，无冲突。同步带入其他任务既有提交，本任务相对main仍仅新增设计记录及证据。卡框CSS、模板及静态资源未因本次同步改变，既有42面卡框检查继续适用。同步后复查全部受Git跟踪的文档及当前差异。
+
+用户确认后，本地main已前进至c89474e9f2f9be98724e6415f89e94840c506b9d；该版本已再次合入任务分支，无冲突。新增改动为另一任务的MCP重连更新，卡框CSS、模板及资源未变，42个卡面检查继续适用。完成全文档脱敏与差异检查后，按已取得的确认执行快进合并、内容保留核对和本任务清理。
