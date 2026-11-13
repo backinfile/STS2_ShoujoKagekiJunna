@@ -50,7 +50,7 @@ public sealed class ArrowBatchBlockProbe : AbstractConsoleCmd
             await CardPileCmd.Add(selected.Append(source).Append(formation), PileType.Hand, skipVisuals: true);
             player.PlayerCombatState!.Energy = 20;
             await TestGameApi.PaidPlay(context, formation);
-            using var selector = CardSelectCmd.UseSelector(new Selector(selected));
+            using var selector = TestGameApi.UseSelector(new Selector(selected));
             await TestGameApi.PaidPlay(context, source);
             int amount = upgraded ? 4 : 3;
             Expect($"upgraded={upgraded} selected arrows deploy", selected.Count(c => ArrowCombat.Find(c)?.Remaining == 5), 3);

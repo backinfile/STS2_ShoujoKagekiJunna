@@ -98,7 +98,7 @@ public sealed class HandArrowBatchProbe : AbstractConsoleCmd
         int beforeHp = target.CurrentHp;
         int beforeBlock = player.Creature.Block;
         Expect("ordinary play still rejects unplayable material", !await TestGameApi.PaidPlay(context, selected[0], target));
-        using var selectorScope = CardSelectCmd.UseSelector(new Selector(selected));
+        using var selectorScope = TestGameApi.UseSelector(new Selector(selected));
         var harmony = new Harmony("JunnaIntegration.HandArrowBatch");
         int started = 0;
         _observePlay = _ =>

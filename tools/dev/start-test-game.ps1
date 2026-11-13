@@ -1,7 +1,8 @@
 param([ValidateRange(0, 65535)][int]$Port = 15727, [switch]$UseInstalledMod,
     [ValidatePattern('^[a-z0-9-]+$')][string]$Instance = 'dev-game',
     [switch]$Playable,
-    [string]$CorePackage = $env:SHOUJO_CORE_PACKAGE)
+    [string]$CorePackage = $env:SHOUJO_CORE_PACKAGE,
+    [string]$BaseLibPackage = $env:SHOUJO_BASELIB_PACKAGE)
 $ErrorActionPreference = 'Stop'
 $junnaRoot = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $junnaArtifacts = Join-Path $junnaRoot "artifacts/$Instance"
@@ -53,8 +54,15 @@ if (!(Test-Path -LiteralPath $dataLink)) {
 }
 $mods = Join-Path $junnaGame 'mods'
 New-Item -ItemType Directory -Force $mods, "$mods/BaseLib", "$mods/ShoujoKagekiJunna" | Out-Null
-$basePackage = Join-Path ([Environment]::GetFolderPath('UserProfile')) '.nuget/packages/alchyr.sts2.baselib/3.4.7'
-Copy-Item -LiteralPath "$basePackage/lib/net9.0/BaseLib.dll", "$basePackage/Content/BaseLib.json", "$basePackage/Content/BaseLib.pck" -Destination "$mods/BaseLib"
+if (!$BaseLibPackage) { $BaseLibPackage = Join-Path $sourceGame 'mods/BaseLib' }
+$baseFiles = @('BaseLib.dll', 'BaseLib.json', 'BaseLib.pck', 'BaseLibCompatibilityHelper.dll', 'BaseLibCompatibilityHelper.json')
+foreach ($name in $baseFiles) {
+    $file = Join-Path $BaseLibPackage $name
+    if (!(Test-Path -LiteralPath $file -PathType Leaf)) {
+        throw "BaseLib 3.4.8 requires its full official release. Set -BaseLibPackage to the extracted release directory; missing $name."
+    }
+    Copy-Item -LiteralPath $file -Destination "$mods/BaseLib"
+}
 if (!$UseInstalledMod) {
     . (Join-Path $junnaRoot 'tools/core-package.ps1')
     $manifest = Get-Content -LiteralPath (Join-Path $junnaRoot 'ShoujoKagekiJunna.json') -Raw -Encoding utf8 | ConvertFrom-Json

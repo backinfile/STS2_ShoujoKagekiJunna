@@ -31,7 +31,7 @@ public static class CardCompletionProbe
         var context = new ThrowingPlayerChoiceContext();
         var state = player.Creature.CombatState!;
         var target = state.GetOpponentsOf(player.Creature).First();
-        using var selector = CardSelectCmd.UseSelector(new Selector());
+        using var selector = TestGameApi.UseSelector(new Selector());
         void Save() => File.WriteAllText(report, JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
         string current = "";
         void Check(string label, object actual, object expected)

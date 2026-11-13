@@ -37,26 +37,42 @@ internal static class DamagePatches
 {
     internal static readonly AsyncLocal<bool> Bypass = new();
     internal static MethodInfo CanonicalDamage => AccessTools.Method(typeof(CreatureCmd), nameof(CreatureCmd.Damage),
-        [typeof(PlayerChoiceContext), typeof(IEnumerable<Creature>), typeof(decimal), typeof(ValueProp),
-         typeof(Creature), typeof(CardModel)
+        [typeof(PlayerChoiceContext),
 #if STS2_BETA
-         , typeof(CardPlay)
+         typeof(IEnumerable<DamageTargetData>),
+#else
+         typeof(IEnumerable<Creature>),
+#endif
+         typeof(decimal), typeof(ValueProp), typeof(Creature), typeof(CardModel)
+#if STS2_BETA
+         , typeof(CardPlay), typeof(ModifyDamageHookType)
 #endif
         ]);
     static MethodBase TargetMethod() => CanonicalDamage;
 
     [HarmonyPrefix]
-    static bool Prefix(PlayerChoiceContext choiceContext, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
-        Creature? dealer, CardModel? cardSource,
+    static bool Prefix(PlayerChoiceContext choiceContext,
 #if STS2_BETA
-        CardPlay? cardPlay,
+        IEnumerable<DamageTargetData>? targetData,
+#else
+        IEnumerable<Creature>? targets,
+#endif
+        decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource,
+#if STS2_BETA
+        CardPlay? cardPlay, ModifyDamageHookType modifyDamageHookType,
 #endif
         ref Task<IEnumerable<DamageResult>> __result)
     {
         if (Bypass.Value) { Bypass.Value = false; return true; }
-        __result = DamageExecution.Resolve(choiceContext, targets, amount, props, dealer, cardSource,
+        __result = DamageExecution.Resolve(choiceContext,
 #if STS2_BETA
-            cardPlay
+            targetData,
+#else
+            targets,
+#endif
+            amount, props, dealer, cardSource,
+#if STS2_BETA
+            cardPlay, modifyDamageHookType
 #else
             null
 #endif

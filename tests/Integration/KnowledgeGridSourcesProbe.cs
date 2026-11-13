@@ -83,7 +83,7 @@ public sealed class KnowledgeGridSourcesProbe : AbstractConsoleCmd
         var combatPatch = AccessTools.Method(typeof(KnowledgeGridSourcesProbe), nameof(CombatCards));
         harmony.Patch(factory, prefix: new HarmonyMethod(rewardPatch));
         harmony.Patch(combatFactory, prefix: new HarmonyMethod(combatPatch));
-        using var selector = CardSelectCmd.UseSelector(new Selector());
+        using var selector = TestGameApi.UseSelector(new Selector());
         try
         {
             foreach (string source in new[] { "BrainLeech", "RoomFullOfCheese", "SeaGlass", "SeaGlassSkip", "ChoicesParadox", "SealedDeck", "BrainLeechDynamic", "ChoicesParadoxDynamic", "SealedDeckDynamic" })

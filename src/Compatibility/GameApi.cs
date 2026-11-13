@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Hooks;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
@@ -31,6 +32,11 @@ internal static class GameApi
         attack.CardPlay;
 #else
         null;
+#endif
+#if STS2_BETA
+    internal static Task<IEnumerable<DamageResult>> DamageTargets(PlayerChoiceContext context, IEnumerable<DamageTargetData>? targets,
+        decimal amount, ValueProp props, Creature? dealer, CardModel? card, CardPlay? play, ModifyDamageHookType hookType) =>
+        CreatureCmd.Damage(context, targets, amount, props, dealer, card, play, hookType);
 #endif
     internal static Task<IEnumerable<DamageResult>> Damage(PlayerChoiceContext context, IEnumerable<Creature>? targets,
         decimal amount, ValueProp props, Creature? dealer, CardModel? card, CardPlay? play) =>

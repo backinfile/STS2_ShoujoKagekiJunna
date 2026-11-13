@@ -6,12 +6,37 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using MegaCrit.Sts2.Core.TestSupport;
+using MegaCrit.Sts2.Core.Entities.Merchant;
 
 namespace JunnaIntegration;
 
 // Native API differences only; rule assertions remain in the probes.
 internal static class TestGameApi
 {
+    internal static IDisposable UseSelector(ICardSelector selector) =>
+#if STS2_BETA
+        MegaCrit.Sts2.Core.CardSelection.CardSelectorStack.SetTestSelector(selector);
+#else
+        CardSelectCmd.UseSelector(selector);
+#endif
+    internal static ICardSelector? GetSelector(Player player) =>
+#if STS2_BETA
+        MegaCrit.Sts2.Core.Runs.RunManager.Instance.CardSelectorStack.GetSelector(player);
+#else
+        CardSelectCmd.Selector;
+#endif
+    internal static MerchantCardEntry MerchantCard(Player player, IEnumerable<CardModel> cards, CardType type)
+    {
+#if STS2_BETA
+        var entry = new MerchantCardEntry(player, cards, type);
+        entry.Populate(null);
+#else
+        var entry = new MerchantCardEntry(player, null, cards, type);
+        entry.Populate();
+#endif
+        return entry;
+    }
     internal static Task<bool> PaidPlay(PlayerChoiceContext context, CardModel card, Creature? target = null)
     {
         target = card.TargetType switch

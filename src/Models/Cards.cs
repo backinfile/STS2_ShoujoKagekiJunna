@@ -36,7 +36,12 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             if (DesignId == "JK126" && !DynamicKnowledge.IsLinked(this))
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
                     new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_REWARD_OTHERS").GetFormattedText() + $"\n[gold]{CardCatalog.Model(DesignId).Title}[/gold]")
-                    { Id = "junna_knowledge_reward_others", ShouldOverrideTextOverflow = true };
+                    {
+#if !STS2_BETA
+                        Id = "junna_knowledge_reward_others",
+#endif
+                        ShouldOverrideTextOverflow = true
+                    };
             var group = KnowledgeCombat.Group(this);
             if (group != null && !DynamicKnowledge.IsLinked(this))
             {
@@ -44,12 +49,20 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
                     Enumerable.Repeat($"[gold]{CardCatalog.Model(member.Id).Title}[/gold]", member.Count)).ToArray();
                 if (members.Length > 0)
                     yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
-                        { Id = "junna_knowledge_group_" + group.MainCardId };
+                        {
+#if !STS2_BETA
+                            Id = "junna_knowledge_group_" + group.MainCardId,
+#endif
+                        };
             }
             var background = LocString.GetIfExists("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND." + DesignId);
             if (background != null)
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND"), background)
-                    { Id = "junna_knowledge_background_" + DesignId };
+                    {
+#if !STS2_BETA
+                        Id = "junna_knowledge_background_" + DesignId,
+#endif
+                    };
             foreach (var related in rules.RelatedCards) yield return new CardHoverTip(CardCatalog.Model(related));
             if (rules.HasTip(CardTip.Meteor, IsUpgraded))
             {

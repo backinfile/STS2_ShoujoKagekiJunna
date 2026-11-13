@@ -72,7 +72,7 @@ public static class CardBranchesProbe
         double speed=Godot.Engine.TimeScale;Godot.Engine.TimeScale=20;
         try
         {
-            using var selector=CardSelectCmd.UseSelector(new Selector());
+            using var selector=TestGameApi.UseSelector(new Selector());
             using var single=KnowledgeCombat.SingleCard();
             foreach(var item in plan)
             {
@@ -730,7 +730,7 @@ public static class CardBranchesProbe
         Godot.Engine.TimeScale = 20;
         try
         {
-            using var selectorScope = CardSelectCmd.UseSelector(selection);
+            using var selectorScope = TestGameApi.UseSelector(selection);
             foreach (var c in cases)
             {
                 checks.Clear(); string? error = null;

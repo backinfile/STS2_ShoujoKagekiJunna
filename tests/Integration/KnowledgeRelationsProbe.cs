@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Localization;
 using System.Text.Json;
 using BaseLib.Utils;
 using HarmonyLib;
@@ -61,7 +62,7 @@ public sealed class KnowledgeRelationsProbe : AbstractConsoleCmd
         {
             int actual = DynamicKnowledge.Members(card).Count;
             Expect(card.Id + $" shares the full group ({actual}/{count})", actual == count);
-            var tips = card.HoverTips.OfType<HoverTip>().Where(tip => tip.Id == "junna_dynamic_knowledge_group").ToArray();
+            var tips = card.HoverTips.OfType<HoverTip>().Where(tip => tip.Title == new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP").GetFormattedText()).ToArray();
             Expect(card.Id + " has one complete relation tip", tips.Length == 1 && tips[0].Description.Split('\n').Length == count);
         }
         try

@@ -89,7 +89,7 @@ public static class Workbench3366Probe
         Directory.CreateDirectory(DirectoryPath);
         var results = new List<object>();
         var selector = new Selector();
-        using var choices = CardSelectCmd.UseSelector(selector);
+        using var choices = TestGameApi.UseSelector(selector);
         double speed = Godot.Engine.TimeScale;
         Godot.Engine.TimeScale = 1;
         void Save() => File.WriteAllText(Path.Combine(DirectoryPath, string.IsNullOrEmpty(only) ? "results.json" : "targeted-results.json"),

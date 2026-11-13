@@ -73,7 +73,7 @@ public static class WorkbenchSyncProbe
         var results = new List<Result>(); var selector = new Selector();
         var enemy = player.Creature.CombatState!.Enemies.First();
         double speed = Godot.Engine.TimeScale; Godot.Engine.TimeScale = 25;
-        using var choices = CardSelectCmd.UseSelector(selector);
+        using var choices = TestGameApi.UseSelector(selector);
         async Task Case(string name, Func<Task> test)
         {
             try { selector.Count = null; await Reset(player); await test(); results.Add(new(name, true, null)); }

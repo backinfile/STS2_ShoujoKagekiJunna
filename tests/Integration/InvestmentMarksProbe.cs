@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Localization;
 using System.Text.Json;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
@@ -99,7 +100,7 @@ public sealed class InvestmentMarksProbe : AbstractConsoleCmd
             backHolder.ZIndex = 0; frontHolder.Visible = false;
             Verify("uncovered bonus and hit badges remain visible", await Difference("uncovered") > 30, true);
             Verify("damage bonus value is retained", label.Text, "+6");
-            HoverTip[] Tips(CardModel card) => card.HoverTips.OfType<HoverTip>().Where(tip => tip.Id == "junna_investment").ToArray();
+            HoverTip[] Tips(CardModel card) => card.HoverTips.OfType<HoverTip>().Where(tip => tip.Title == new LocString("gameplay_ui", "JUNNA.INVESTMENT").GetFormattedText()).ToArray();
             var both = Tips(model);
             Verify("boosted card has one concise extra tip", both.Length, 1);
             Verify("combined tip describes both current values", both.Single().Description!, "造成伤害增加6点。\n额外造成2次伤害。");

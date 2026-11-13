@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Localization;
 using System.Text.Json;
 using Godot;
 using HarmonyLib;
@@ -86,7 +87,7 @@ public sealed class KnowledgeGroupRegressionProbe : AbstractConsoleCmd
         {
             Check(member.Title + " shares the complete group", DynamicKnowledge.Members(member).Count, 8);
             Check(member.Title + " has one relation tooltip", member.HoverTips.OfType<HoverTip>().Count(tip =>
-                tip.Id?.StartsWith("junna_knowledge_group") == true || tip.Id == "junna_dynamic_knowledge_group"), 1);
+                tip.Title == new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP").GetFormattedText()), 1);
         }
         var copy = (CardModel)paper.MutableClone();
         Check("preview clone does not duplicate its source in members", DynamicKnowledge.Members(copy).Count, 8);

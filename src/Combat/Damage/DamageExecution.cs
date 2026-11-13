@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -6,6 +7,12 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Runtime.CompilerServices;
+
+#if STS2_BETA
+using DamageTarget = MegaCrit.Sts2.Core.Entities.Creatures.DamageTargetData;
+#else
+using DamageTarget = MegaCrit.Sts2.Core.Entities.Creatures.Creature;
+#endif
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -99,9 +106,20 @@ public static class DamageExecution
         }
     }
 
+    private static Creature TargetCreature(DamageTarget target) =>
+#if STS2_BETA
+        target.target;
+#else
+        target;
+#endif
+
     internal static async Task<IEnumerable<DamageResult>> Resolve(
-        PlayerChoiceContext context, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
-        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
+        PlayerChoiceContext context, IEnumerable<DamageTarget>? targets, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay
+#if STS2_BETA
+        , ModifyDamageHookType modifyDamageHookType
+#endif
+        )
     {
         var list = targets?.ToList();
         var (source, snapshot) = DamageModifiers.Resolve(context, cardSource);
@@ -109,7 +127,7 @@ public static class DamageExecution
         var batch = BatchContext.Value;
         bool countHandled = batch is { Claimed: false, CountHandled: true } && ReferenceEquals(batch.Source, source);
         if (batch != null && ReferenceEquals(batch.Source, source)) batch.Claimed = true;
-        bool hasOpponent = snapshot.Owner != null && list?.Any(t => t.IsAlive && t.Side != snapshot.Owner.Creature.Side) == true;
+        bool hasOpponent = snapshot.Owner != null && list?.Any(t => TargetCreature(t).IsAlive && TargetCreature(t).Side != snapshot.Owner.Creature.Side) == true;
         int extra = !countHandled && hasOpponent && source is CardModel card
             ? ClaimExtraHits(card, cardPlay, snapshot) : 0;
         var results = new List<DamageResult>();
@@ -117,12 +135,16 @@ public static class DamageExecution
         for (int hit = 0; hit <= extra; hit++)
         {
             // The first pass retains all vanilla targets, including self-damage. Only hostile damage is repeated.
-            var hitTargets = hit == 0 ? list : list?.Where(t => t.IsAlive && t.Side != snapshot.Owner!.Creature.Side).ToList();
+            var hitTargets = hit == 0 ? list : list?.Where(t => TargetCreature(t).IsAlive && TargetCreature(t).Side != snapshot.Owner!.Creature.Side).ToList();
             if (hit > 0 && (hitTargets?.Count == 0 || dealer?.IsDead == true)) break;
             DamagePatches.Bypass.Value = true;
             try
             {
+#if STS2_BETA
+                results.AddRange(await GameApi.DamageTargets(context, hitTargets, amount, props, dealer, cardSource, cardPlay, modifyDamageHookType));
+#else
                 results.AddRange(await GameApi.Damage(context, hitTargets, amount, props, dealer, cardSource, cardPlay));
+#endif
             }
             finally { DamagePatches.Bypass.Value = false; }
         }
@@ -160,21 +182,22 @@ public static class DamageExecution
 
     /// <summary>Only the canonical damage call inside AttackCommand uses this gate. Nested effects create new batches.</summary>
     public static async Task<IEnumerable<DamageResult>> FromAttack(
-        PlayerChoiceContext context, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
+        PlayerChoiceContext context, IEnumerable<DamageTarget>? targets, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource,
 #if STS2_BETA
-        CardPlay? cardPlay,
+        CardPlay? cardPlay, ModifyDamageHookType modifyDamageHookType,
 #endif
         AttackCommand attack)
     {
         using var batch = BeginDamageBatch(attack.ModelSource, countHandled: true);
-        try { return await GameApi.Damage(context, targets, amount, props, dealer, cardSource,
+        try
+        {
 #if STS2_BETA
-            cardPlay
+            return await GameApi.DamageTargets(context, targets, amount, props, dealer, cardSource, cardPlay, modifyDamageHookType);
 #else
-            null
+            return await GameApi.Damage(context, targets, amount, props, dealer, cardSource, null);
 #endif
-        ); }
+        }
         finally
         {
             if (AttackProgressByCommand.TryGetValue(attack, out var progress)) progress.CompletedHits++;

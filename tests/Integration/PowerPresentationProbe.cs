@@ -50,8 +50,7 @@ public sealed class PowerPresentationCommand : AbstractConsoleCmd
         var slot = Descendants(NGame.Instance!).OfType<NMerchantCard>().First(node => node.IsVisibleInTree());
         foreach (var id in new[] { "JK67", "A" })
         {
-            var entry = new MerchantCardEntry(player, null, [CardCatalog.Model(id)], CardCatalog.Model(id).Type);
-            entry.Populate();
+            var entry = TestGameApi.MerchantCard(player, [CardCatalog.Model(id)], CardCatalog.Model(id).Type);
             slot.FillSlot(entry);
             await Task.Delay(350);
             var source = (NCard)AccessTools.Field(typeof(NMerchantCard), "_cardNode").GetValue(slot)!;

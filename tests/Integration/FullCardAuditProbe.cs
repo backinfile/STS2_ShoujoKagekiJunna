@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Localization;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -336,7 +337,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
     }
     internal async Task Execute()
     {
-        using var selector = CardSelectCmd.UseSelector(new Selector(_selected));
+        using var selector = TestGameApi.UseSelector(new Selector(_selected));
         AuditObserver.Drawn.Clear();
         Check("支付并打出", await Play(_source), true);
         if (ArrowCombat.Find(_source) is { } arrow)
@@ -520,7 +521,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
     internal async Task CheckAdditional()
     {
         var selection = new Selector(_selected);
-        using var selector = CardSelectCmd.UseSelector(selection);
+        using var selector = TestGameApi.UseSelector(selection);
         if (definition.Type == "能力")
         {
             var power = player.Creature.Powers.OfType<CatalogPower>().First(p => p.DesignId == Id);
@@ -813,7 +814,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Check("重复回调不会改变耗尽牌堆数量 " + (index + 1), KnowledgeProgress.DepletedPartners(active), before + index + 1);
         }
         Check("自身牌效次数不属于强化", DamageModifiers.CaptureDamageModifierSnapshot(active).ExtraHits, 0);
-        Check("自身牌效不产生伤害强化提示", active.HoverTips.OfType<MegaCrit.Sts2.Core.HoverTips.HoverTip>().Any(tip => tip.Id == "junna_investment"), false);
+        Check("自身牌效不产生伤害强化提示", active.HoverTips.OfType<MegaCrit.Sts2.Core.HoverTips.HoverTip>().Any(tip => tip.Title == new LocString("gameplay_ui", "JUNNA.INVESTMENT").GetFormattedText()), false);
         DamageModifiers.Add(active, extraHits: 1);
         Check("练习给予的强化次数单独保留", DamageModifiers.CaptureDamageModifierSnapshot(active).ExtraHits, 1);
         int hp = _enemies[0].CurrentHp;
@@ -952,7 +953,11 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
 }
 
 [CustomID("JUNNA_AUDIT_OBSERVER")]
+#if STS2_BETA
+public sealed class AuditObserver : AbstractModel
+#else
 public sealed class AuditObserver : SingletonModel
+#endif
 {
     internal static readonly List<CardModel> Drawn = [];
     public override bool ShouldReceiveCombatHooks => true;

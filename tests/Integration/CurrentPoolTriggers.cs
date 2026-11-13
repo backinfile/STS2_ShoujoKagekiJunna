@@ -81,7 +81,7 @@ internal sealed partial class AuditScenario
             target.UpgradeInternal(); target.FinalizeUpgradeInternal();
             using var single = KnowledgeCombat.SingleCard();
             await CardPileCmd.Add(target, PileType.Deck, skipVisuals: true);
-            var selection = (Selector)CardSelectCmd.Selector!;
+            var selection = (Selector)TestGameApi.GetSelector(player)!;
             selection.Preferred = target;
             var beforeCards = player.Deck.Cards.ToHashSet();
             int before = beforeCards.Count;

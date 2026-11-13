@@ -121,11 +121,16 @@ internal static class KnowledgeAcquisitionSources
             ? new(new("Rewards.CardReward", "OnSelect", Kind.Deck), __instance, card => __instance.Cards.Contains(card)) : null);
         private static void Finalizer(IDisposable? __state) => __state?.Dispose();
     }
-    [HarmonyPatch(typeof(MerchantCardEntry), "OnTryPurchase")]
+#if STS2_BETA
+    private const string MerchantPurchaseMethod = "OnTryPurchaseInternal";
+#else
+    private const string MerchantPurchaseMethod = "OnTryPurchase";
+#endif
+    [HarmonyPatch(typeof(MerchantCardEntry), MerchantPurchaseMethod)]
     private static class MerchantPurchase
     {
         private static void Prefix(MerchantCardEntry __instance, out IDisposable __state) => __state = new Scope(
-            new(new("Merchant.MerchantCardEntry", "OnTryPurchase", Kind.Deck), __instance, card => __instance.CreationResult?.Card == card));
+            new(new("Merchant.MerchantCardEntry", MerchantPurchaseMethod, Kind.Deck), __instance, card => __instance.CreationResult?.Card == card));
         private static void Finalizer(IDisposable? __state) => __state?.Dispose();
     }
     [HarmonyPatch]

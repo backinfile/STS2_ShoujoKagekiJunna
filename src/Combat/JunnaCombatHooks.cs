@@ -12,7 +12,11 @@ using ShoujoKagekiJunna.Models;
 namespace ShoujoKagekiJunna.Combat;
 
 [CustomID("JUNNA_COMBAT_HOOKS")]
+#if STS2_BETA
+public sealed class JunnaCombatHooks : AbstractModel
+#else
 public sealed class JunnaCombatHooks : SingletonModel
+#endif
 {
     private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> MaxEnergyBonuses = new();
     public static void AddMaxEnergy(PlayerCombatState combat, int amount) => MaxEnergyBonuses.GetOrCreateValue(combat).Value += amount;

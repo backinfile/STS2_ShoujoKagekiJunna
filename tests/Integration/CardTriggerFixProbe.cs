@@ -89,7 +89,7 @@ public static class CardTriggerFixProbe
             Expect(character.StartingRelics.Single().Id.Entry == "JUNNA_GREEN_GEM", "Starting relic configuration");
             return Task.CompletedTask;
         });
-        using var selector = CardSelectCmd.UseSelector(new NoSelection());
+        using var selector = TestGameApi.UseSelector(new NoSelection());
         foreach (bool up in new[] { false, true })
         {
             await Case("opening arrow " + up, async () =>

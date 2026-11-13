@@ -142,7 +142,7 @@ public sealed class EffectReplayProbe : AbstractConsoleCmd
     }
     private static async Task Check(Player player, bool prepare)
     {
-        using var selector = CardSelectCmd.UseSelector(new Selector());
+        using var selector = TestGameApi.UseSelector(new Selector());
         var context = new ThrowingPlayerChoiceContext();
         var target = player.Creature.CombatState!.HittableEnemies.First(c => c.IsAlive);
         await CreatureCmd.SetMaxHp(target, 10000);

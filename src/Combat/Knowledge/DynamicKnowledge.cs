@@ -208,8 +208,15 @@ public static class DynamicKnowledge
         private static void Postfix(CardModel __instance, ref IEnumerable<IHoverTip> __result)
         {
             if (!IsLinked(__instance)) return;
+#if STS2_BETA
+            string groupTipId = new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), "").Id;
+#endif
             __result = __result.Where(t => t is not HoverTip existing ||
+#if STS2_BETA
+                existing.Id != groupTipId);
+#else
                 existing.Id?.StartsWith("junna_knowledge_group_") != true && existing.Id != "junna_dynamic_knowledge_group");
+#endif
             var names = Members(__instance)
                 .Select(card => "[gold]" + (card is JunnaCard junna
                     ? CardCatalog.Model(junna.DesignId).Title : ((CardModel)card.CanonicalInstance).Title) + "[/gold]").ToList();
@@ -218,7 +225,12 @@ public static class DynamicKnowledge
             if (names.Count == 0) return;
             var tip = new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
                 string.Join("\n", names))
-                { Id = "junna_dynamic_knowledge_group", ShouldOverrideTextOverflow = CardCatalog.DesignId(__instance) == "JK126" };
+                {
+#if !STS2_BETA
+                    Id = "junna_dynamic_knowledge_group",
+#endif
+                    ShouldOverrideTextOverflow = CardCatalog.DesignId(__instance) == "JK126"
+                };
             var tips = __result.ToList();
             string knowledgeId = HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge).Id;
             int knowledgeIndex = tips.FindIndex(existing => existing.Id == knowledgeId);

@@ -140,7 +140,12 @@ public static class CardActions
     {
         var enemies = CardTargets.Enemies(card);
         if (enemies.Length <= 1) return enemies.FirstOrDefault();
+#if STS2_BETA
+        if (MegaCrit.Sts2.Core.Runs.RunManager.Instance.CardSelectorStack.GetSelector(card.Owner) != null ||
+            MegaCrit.Sts2.Core.Runs.RunManager.Instance.CardSelectorStack.LocalSelector != null) return enemies[0];
+#else
         if (CardSelectCmd.Selector != null) return enemies[0];
+#endif
         int selected = await PlayerChoices.ChooseIndex(context, card.Owner, enemies.Length, async () =>
         {
             var manager = NTargetManager.Instance;

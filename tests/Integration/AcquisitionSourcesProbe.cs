@@ -100,7 +100,7 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
             before = player.Deck.Cards.Count;
             await CardPileCmd.Add(Create("JK314"), PileType.Deck, skipVisuals: true);
             Expect("registered source does not leak into later Add", player.Deck.Cards.Count - before, 1);
-            using (CardSelectCmd.UseSelector(new Selector()))
+            using (TestGameApi.UseSelector(new Selector()))
             {
                 var patcher = new Harmony("Junna.AcquisitionChecks.Factory");
                 var factory = AccessTools.Method(typeof(CardFactory), "CreateForReward", [typeof(Player), typeof(int), typeof(CardCreationOptions)]);
@@ -128,7 +128,7 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
             await CardCmd.AutoPlay(new ThrowingPlayerChoiceContext(), discovery, null);
             Expect("Discovery.OnPlay grants the selected knowledge group in combat",
                 player.PlayerCombatState.AllCards.Count(card => !oldCards.Contains(card)), 4);
-            using var selector = CardSelectCmd.UseSelector(new Selector());
+            using var selector = TestGameApi.UseSelector(new Selector());
             var chosen = await CardSelectCmd.FromChooseACardScreen(new ThrowingPlayerChoiceContext(),
                 new[] { combat.CreateCard(CardCatalog.Model("JK314"), player) }, player);
             oldCards = player.PlayerCombatState.AllCards.ToHashSet();

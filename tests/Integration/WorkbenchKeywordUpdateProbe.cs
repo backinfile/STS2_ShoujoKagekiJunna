@@ -16,7 +16,7 @@ public static partial class Workbench3650Probe
         Directory.CreateDirectory(FormalDirectory);
         var results = new List<object>();
         var selector = new Selector();
-        using var choices = CardSelectCmd.UseSelector(selector);
+        using var choices = TestGameApi.UseSelector(selector);
         double speed = Godot.Engine.TimeScale;
         Godot.Engine.TimeScale = 2;
         async Task Case(string name, Func<Task> test)

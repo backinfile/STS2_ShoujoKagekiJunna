@@ -4,6 +4,8 @@ using System.Runtime.Loader;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
 
+bool nativeOnly = args.Length == 5 && args[0] == "--native-only";
+if (nativeOnly) args = args[1..];
 if (args.Length != 4)
     throw new ArgumentException("Usage: CompatibilityChecks <Junna DLL> <RitsuLib directory> <Core API DLL> <Core runtime DLL>");
 
@@ -19,6 +21,25 @@ AssemblyLoadContext.Default.Resolving += (context, name) =>
 
 var junna = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.GetFullPath(args[0]));
 var core = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.GetFullPath(args[3]));
+if (nativeOnly)
+{
+    var attackMethod = MoveNext(AccessTools.Method(typeof(MegaCrit.Sts2.Core.Commands.Builders.AttackCommand), "Execute"));
+    var original = PatchProcessor.GetOriginalInstructions(attackMethod);
+    var rewritten = Rewrite(junna, "ShoujoKagekiJunna.Combat.AttackBatchPatch", original, attackMethod);
+    Expect("native AttackCommand retains exactly one Junna damage boundary", Calls(rewritten, "ShoujoKagekiJunna.Combat.DamageExecution", "FromAttack") == 1);
+    var patchType = junna.GetType("ShoujoKagekiJunna.Combat.DamagePatches", true)!;
+    var damage = (MethodInfo)AccessTools.Property(patchType, "CanonicalDamage").GetValue(null)!;
+    Expect("canonical damage method exists in the installed game", damage != null);
+    var harmony = new Harmony("Junna.NativeDamageCompatibilityChecks");
+    try
+    {
+        harmony.Patch(damage!, prefix: new HarmonyMethod(AccessTools.Method(patchType, "Prefix")));
+        harmony.Patch(attackMethod, transpiler: new HarmonyMethod(AccessTools.Method(junna.GetType("ShoujoKagekiJunna.Combat.AttackBatchPatch", true)!, "Transpiler")));
+        Expect("damage prefix and attack transpiler install against the real game", true);
+    }
+    finally { harmony.UnpatchAll(harmony.Id); }
+    return;
+}
 var ritsu = Assembly.Load("STS2-RitsuLib.Runtime");
 var cardWrapper = MoveNext(AccessTools.Method(typeof(CardModel), nameof(CardModel.OnPlayWrapper)));
 var vanilla = PatchProcessor.GetOriginalInstructions(cardWrapper);
@@ -64,7 +85,7 @@ static void Expect(string name, bool pass)
 
 static string GameVersion() =>
 #if STS2_BETA
-    "0.111.0";
+    "0.113.0";
 #else
     "0.107.1";
 #endif

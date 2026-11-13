@@ -32,6 +32,11 @@ internal static class InvestmentHoverTipPatch
             text.Add("Amount", hits);
             lines.Add(text.GetFormattedText());
         }
-        return new HoverTip(new LocString("gameplay_ui", "JUNNA.INVESTMENT"), string.Join("\n", lines)) { Id = "junna_investment" };
+        return new HoverTip(new LocString("gameplay_ui", "JUNNA.INVESTMENT"), string.Join("\n", lines))
+        {
+#if !STS2_BETA
+            Id = "junna_investment",
+#endif
+        };
     }
 }
