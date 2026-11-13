@@ -51,7 +51,7 @@ src/Compatibility/     正式版与测试版 API 适配
 loader/                双版本程序集加载入口
 data/                  编译时嵌入的运行卡池
 ShoujoKagekiJunna/      游戏图片、场景与本地化资源
-docs/design/           工作台源码、设计数据与素材来源
+docs/design/           角色设计数据、素材来源与工作台历史基线
 docs/implementation/   实现记录与兼容说明
 tools/assets/          素材提取、场景生成与图像处理脚本
 tools/dev/             独立测试环境与录像脚本
@@ -65,7 +65,7 @@ Directory.Build.props  .NET、游戏路径与依赖版本
 
 Git 保存源码、运行资源、工作台初始数据与当前设计数据。构建输出 `dist/`、验证产物 `artifacts/`、素材处理中间文件 `output/`、下载工具 `.tools/`、依赖缓存、工作台预览与历史备份保留在本地。工作台生成页面包含本机连接信息，也由 `.gitignore` 排除。
 
-模块分工与维护入口见 [代码结构](docs/implementation/architecture.md)。工具依赖与入口见 [tools/README.md](tools/README.md)，工作台启动与编辑流程见 [工作台说明](docs/design/workbench/README.md)。
+模块分工与维护入口见 [代码结构](docs/implementation/architecture.md)。工具依赖与入口见 [tools/README.md](tools/README.md)，工作台程序与部署由 [Core 少女歌剧工作台](https://github.com/backinfile/STS2_ShoujoKagekiAijoCore/blob/main/tools/workbench/README.md) 维护，本仓库保留 [设计与兼容客户端说明](docs/design/workbench/README.md)。
 
 ## 本轮验证
 

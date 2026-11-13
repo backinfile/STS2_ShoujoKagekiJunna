@@ -1,3 +1,9 @@
+# 维护入口已迁入 Core
+
+[少女歌剧工作台](https://github.com/backinfile/STS2_ShoujoKagekiAijoCore/blob/main/tools/workbench/README.md) 统一维护前端、MCP、存储与部署，可切换 Core、华恋和纯那。本目录保留旧客户端、初始资料与历史实现；后续程序改动和部署从 Core 进行。公开地址、私有编辑长链接和纯那主台保持原入口。
+
+以下为迁移前使用说明。
+
 # 纯那工作台
 
 各页签独立保存搜索、筛选和排序选择，切换页签与刷新后恢复。卡牌自然排序依次比较稀有度、基础费用、类型、编号。

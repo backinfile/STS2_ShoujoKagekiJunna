@@ -1,5 +1,8 @@
 # 工作台内容编辑
 
+- 工作台程序与部署已迁入 [Core 仓库](https://github.com/backinfile/STS2_ShoujoKagekiAijoCore/blob/main/tools/workbench/README.md)。修改前端、MCP、存储和部署时到 Core 的 tools/workbench 操作；本目录保留角色设计约定及旧客户端。
+- 使用 Core 的 shoujo_workbench MCP 时，每次调用指定 modId: "junna"；原 junna_workbench 客户端省略此字段时仍进入纯那。
+
 - 卡牌、词条、机制、知识组、流派、风格约定、契合池及配图统一通过 `junna_workbench` MCP 读取和修改。网页编辑也使用同一服务。
 - 先 `workbench_get_entity` 取得内容及 `version`，再以 `expectedVersion` 提交 `workbench_commit`。每次提交使用新的 UUID `requestId`；网络重试沿用原请求及编号。
 - 更新已有条目优先使用 `updates` / `unset`，并用 `expectedFields` 提供所改字段的读取时原值，原先缺失的字段列入 `expectedAbsent`。同一条目的不同字段可以自动合并；同一字段发生不同修改时返回冲突。创建、删除和整体替换继续使用 `before` / `after`。

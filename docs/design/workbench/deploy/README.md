@@ -1,3 +1,7 @@
+# 部署由 Core 维护
+
+当前部署与构建流程见 [Core 工作台部署说明](https://github.com/backinfile/STS2_ShoujoKagekiAijoCore/blob/main/tools/workbench/deploy/README.md)。请从 Core 构建与发布；下文保留为迁移前历史记录。
+
 # 云端工作台部署
 
 `vipcloud` 运行 `junna-workbench.service`，Nginx 为 `https://junna.17181718.xyz/` 提供只读页面，独立长链接转发到服务器回环地址 `127.0.0.1:54828`。编辑入口、MCP 和公开快照均使用服务器的同一份数据。运行所需的源码在此目录及上级工作台目录；生成包将后端模块与这三个运行脚本放在同一目录。
