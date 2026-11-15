@@ -242,7 +242,7 @@
 | `KnowledgeCombat.GrantPartners`：发放当前知识牌的关联牌 | 否 | 否 | 关联牌自身不递归补发 |
 | `KnowledgeCombat.GrantUpgrade`：学无止境每次实际升级产生新知 | 否 | 否 | 只生成升级效果要求的张数 |
 | `CatalogPower.AfterCardPlayed` 的 `JK15` 分支：反复研习复制已打出的知识牌 | 否 | 否 | 单张复制 |
-| `ArrowCombat.CopyAll` 的 `JA176` 入口：复制已有箭矢布置 | 否 | 否 | 按已有实际箭矢逐张复制 |
+| `ArrowCombat.CopyAll` 的 `JA176` 入口：复制已有流星布置 | 否 | 否 | 按已有实际流星逐张复制 |
 | `KnowledgeProgress.CopyDeckCard`：战后选择永久知识牌复制 | 否 | 否 | 单张永久复制 |
 | `KnowledgeProgress.CopySingleCards`：闪耀复制奖励的每张选中牌 | 否 | 否 | 按选中的实际牌逐张复制 |
 | `KnowledgeProgress.WonCombat` 的故事奖励循环：发放 `U_CARD_008B` | 否 | 否 | 按累计奖励次数发放指定牌 |

@@ -33,15 +33,15 @@ const report={
   ],
   setup:{player:E.config.player,deckSize:17,probeCounts:[2,5],mainSeeds:main.samplesPerCell,validationSeeds:mixed.samples,
     baseDeckFixed:true,onlyProbeUpgraded:true,policy:'当前手牌两步搜索；抽牌前只估计抽牌收益，揭示后重新决策。',
-    rules:['能量正常支付，回合开始刷新。','箭矢按自己的回合开始递减，结算前离开正常抽弃牌循环。','单体加速、同目标加速、群体加速、速射按当前工作台快照处理。','箭矢锁定目标，目标死亡后该伤害落空；记录溢出伤害。','保留牌占用真实手牌，抽牌上限为10。'],
+    rules:['能量正常支付，回合开始刷新。','流星按自己的回合开始递减，结算前离开正常抽弃牌循环。','单体加速、同目标加速、群体加速、速射按当前工作台快照处理。','流星锁定目标，目标死亡后该伤害落空；记录溢出伤害。','保留牌占用真实手牌，抽牌上限为10。'],
     metric:'同费用即时攻击为参照，承伤差与击杀回合差分别比较。压力场景单列。',
-    scope:['伤害','格挡','抽牌','保留','消耗工具','箭矢等待','加速','速射'],
+    scope:['伤害','格挡','抽牌','保留','消耗工具','流星等待','加速','速射'],
     extensions:['知识组获得与连锁','伤害加成成长','额外触发与重放','遗物、药水及多人结算']
   },
   encounters:E.config.encounters,sources:main.sources,
   programs:['engine.cjs','run.cjs','validate.cjs','scenarios.json'].map(file=>({file:'tools/balance-sim/'+file,sha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(__dirname,file))).digest('hex')}))
 };
-const reportPath=path.join(root,'docs/design/data/纯那箭矢等待补偿战斗模拟_20261103.json');
+const reportPath=path.join(root,'docs/design/data/纯那流星等待补偿战斗模拟_20261103.json');
 fs.writeFileSync(reportPath,JSON.stringify(report,null,2)+'\n');
 const auditPath=path.join(root,'docs/design/data/纯那全卡牌数值校验_20261103.json'),audit=read(auditPath);
 audit.policy.model='普通非消耗、单体单段纯伤：0费即时6／9，每回合+2／3；1费即时10／14，每回合+3／5；2费即时20／28，每回合+5／7。适用等待0—3回合。';

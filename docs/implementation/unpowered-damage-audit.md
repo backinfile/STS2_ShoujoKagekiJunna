@@ -16,11 +16,11 @@
 | JG34 合唱练习，回合开始时 | CardEffects.DealDamage创建AttackCommand | 按原生水银沙漏的写法调用CreatureCmd.Damage，传Unpowered，对所有存活敌人结算；移除普通攻击入口中的JG34特例 |
 | JH30 星芒，能量变化的保留兼容逻辑 | EnergyDamage传Move | 直接调用原生CreatureCmd.Damage（经GameApi适配），传Unpowered；当前卡池及生成模型不存在该牌，保留处理器也修正 |
 | CatalogCard能力牌Damage预览 | 全部DamageVar传Move | 能力牌改为Unpowered，预览与触发结算一致 |
-| 普通攻击、已布置攻击箭矢及生成流星 | AttackCommand、Move | 属于实际卡牌攻击，保留原生攻击修正 |
-| JA82 箭雨及保留JA77 齐射 | 名义为技能或技能箭矢，实际生成攻击或直接攻击 | 保留Move，避免按技能类型误改实际攻击 |
+| 普通攻击、已布置攻击流星及生成流星 | AttackCommand、Move | 属于实际卡牌攻击，保留原生攻击修正 |
+| JA82 箭雨及保留JA77 齐射 | 名义为技能或技能流星，实际生成攻击或直接攻击 | 保留Move，避免按技能类型误改实际攻击 |
 | KnowledgeDamageVar | 用于JK48、JK206的实际攻击 | 保留Move |
 | CatalogPower.Block | 已使用Unpowered | 无同类问题 |
-| 遗物、耐力标记、职业药水 | 未发现独立直接伤害入口 | 运动饮料投入伤害加成；箭雨药水打出箭矢，箭矢沿用各自攻击规则 |
+| 遗物、耐力标记、职业药水 | 未发现独立直接伤害入口 | 运动饮料投入伤害加成；箭雨药水打出流星，流星沿用各自攻击规则 |
 | GameApi、DamageExecution | 转发调用方伤害属性 | 保留转发规则，避免全局改变普通攻击 |
 
 代码审查覆盖src中的DamageCmd、GameApi.Damage、CreatureCmd.Damage、ValueProp.Move及伤害预览创建处。

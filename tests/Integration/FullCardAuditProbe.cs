@@ -306,14 +306,14 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "JA108")
         {
             int count = player.PlayerCombatState!.DrawPile.Cards.Count(CardCatalog.IsArrow);
-            Check("战斗内动态箭矢张数", description.Contains($"（打出{count}张）"), true);
+            Check("战斗内动态流星张数", description.Contains($"（打出{count}张）"), true);
             Check("战斗外隐藏动态备注", CardCatalog.Model(Id).GetDescriptionForPile(PileType.Deck).Contains("（打出"), false);
             if (Enhanced)
             {
                 var added = await Add("JB03", PileType.Draw);
-                Check("箭矢入堆后更新备注", _source.GetDescriptionForPile(PileType.Hand).Contains($"（打出{count + 1}张）"), true);
+                Check("流星入堆后更新备注", _source.GetDescriptionForPile(PileType.Hand).Contains($"（打出{count + 1}张）"), true);
                 await CardPileCmd.Add(added, PileType.Discard, skipVisuals: true);
-                Check("箭矢离开抽牌堆更新备注", _source.GetDescriptionForPile(PileType.Hand).Contains($"（打出{count}张）"), true);
+                Check("流星离开抽牌堆更新备注", _source.GetDescriptionForPile(PileType.Hand).Contains($"（打出{count}张）"), true);
             }
         }
         foreach (var value in definition.Values)
@@ -398,8 +398,8 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id is "JA81" or "JA76" or "JA82")
         {
             var generated = ArrowCombat.Deployed.Where(arrow => CardCatalog.DesignId(arrow.Card) == "JA81B").ToArray();
-            Check("流星数量", generated.Length, Id == "JA82" ? _beforeEnergy : Id == "JA76" ? _enemies.Length : 1);
-            Check("流星版本", generated.All(arrow => !arrow.Card.IsUpgraded && arrow.Remaining == 2), true);
+            Check("星屑数量", generated.Length, Id == "JA82" ? _beforeEnergy : Id == "JA76" ? _enemies.Length : 1);
+            Check("星屑版本", generated.All(arrow => !arrow.Card.IsUpgraded && arrow.Remaining == 2), true);
         }
         if (Id is "JK272" or "JK272B" or "JA58")
             foreach (var enemy in _enemies)
@@ -413,7 +413,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 Check("实际目标伤害加成", DamageModifiers.CaptureDamageModifierSnapshot(_selected).DamageBonus,
                     (decimal)Regex.Match(Text, @"(\d+)点伤害加成").Groups[1].ValueAsInt());
             if (Id == "JG03") Check("实际目标额外伤害次数", DamageModifiers.CaptureDamageModifierSnapshot(_selected).ExtraHits, 1);
-            if (Id == "JT02") { Check("改编后箭矢", CardCatalog.IsArrow(_selected), true); Check("改编后费用", CardActions.Cost(_selected), 0); }
+            if (Id == "JT02") { Check("改编后流星", CardCatalog.IsArrow(_selected), true); Check("改编后费用", CardActions.Cost(_selected), 0); }
             if (Id is "JK11" or "JK11B") Check("关联牌移入手牌或原生满手牌去向", _selected.Pile?.Type,
                 variant == "capacity" ? PileType.Discard : PileType.Hand);
         }
@@ -423,29 +423,29 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 Check("三联牌费用归零 " + CardCatalog.DesignId(partner), CardActions.Cost(partner), 0);
         if (Id is "JA84" or "JA88" or "JK84" or "JG37")
         {
-            if (_selected != null) Check("手牌作为五回合箭矢", ArrowCombat.Find(_selected)?.Remaining, 5);
+            if (_selected != null) Check("手牌作为五回合流星", ArrowCombat.Find(_selected)?.Remaining, 5);
         }
         if (Id == "JA65")
-            Check("抽牌堆箭矢免费打出", ArrowCombat.Deployed.Count, Empty ? 0 : 1);
+            Check("抽牌堆流星免费打出", ArrowCombat.Deployed.Count, Empty ? 0 : 1);
         if (Id == "JX01" && _arrow != null)
-            Check("已布置箭矢伤害加成", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, upgraded ? 3m : 2m);
+            Check("已布置流星伤害加成", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, upgraded ? 3m : 2m);
         if (Id == "JH22" && _arrow != null)
-            Check("实际伤害传入已布置箭矢", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, (decimal)expected);
+            Check("实际伤害传入已布置流星", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, (decimal)expected);
         if (Id == "JA67") Check("连珠箭重新布置", ArrowCombat.Find(_source)?.Remaining, 2);
         if (Id == "JA17") Check("下回合能量登记", player.Creature.GetPower<EnergyNextTurnPower>()?.Amount, 2);
-        if (Id == "JK37B" && _arrow != null) Check("命中注定转移已有箭矢目标", ArrowCombat.Find(_arrow)?.Target == _enemies[0], true);
+        if (Id == "JK37B" && _arrow != null) Check("命中注定转移已有流星目标", ArrowCombat.Find(_arrow)?.Target == _enemies[0], true);
         if (Id == "JK84B" && _arrow != null) Check("论辩伤害后的加速仅一次", ArrowCombat.Find(_arrow)?.Remaining, 2);
         if (Id == "JH24") Check("最大能量增加", player.PlayerCombatState!.MaxEnergy, 4);
         if (Id == "JA105" && _arrow != null)
         {
-            Check("安装时已有箭矢保持三回合", ArrowCombat.Find(_arrow)?.Remaining, 3);
-            Check("安装时已有箭矢保留关键词", _arrow.Keywords.Contains(CardKeyword.Exhaust), false);
+            Check("安装时已有流星保持三回合", ArrowCombat.Find(_arrow)?.Remaining, 3);
+            Check("安装时已有流星保留关键词", _arrow.Keywords.Contains(CardKeyword.Exhaust), false);
         }
-        if (Id == "U_CARD_005") Check("星屑衍生布置", ArrowCombat.Deployed.Count, 2);
+        if (Id == "U_CARD_005") Check("宇宙之沙衍生布置", ArrowCombat.Deployed.Count, 2);
         if (Id is "JA43" or "JA177")
         {
             int acceleration = Id == "JA43" ? upgraded ? 2 : 1 : upgraded ? 2 : 1;
-            if (_arrow != null) Check("原箭矢加速", ArrowCombat.Find(_arrow)?.Remaining, 3 - acceleration);
+            if (_arrow != null) Check("原流星加速", ArrowCombat.Find(_arrow)?.Remaining, 3 - acceleration);
         }
         if (Id == "U_CARD_009") Check("三类别最大配对数量", player.PlayerCombatState!.Hand.Cards.Count - (_beforeHand - 1), Empty ? 0 : Math.Min(3, CardPile.MaxCardsInHand - _beforeHand + 1));
         if (definition.Type != "能力")
@@ -476,8 +476,8 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         }
         if (Id == "JA108")
         {
-            Check("抽牌堆箭矢全部离开原牌堆", player.PlayerCombatState.DrawPile.Cards.Any(CardCatalog.IsArrow), false);
-            Check("抽牌堆实际箭矢布置", _helpers.Where(CardCatalog.IsArrow).All(c => ArrowCombat.Find(c) != null), true);
+            Check("抽牌堆流星全部离开原牌堆", player.PlayerCombatState.DrawPile.Cards.Any(CardCatalog.IsArrow), false);
+            Check("抽牌堆实际流星布置", _helpers.Where(CardCatalog.IsArrow).All(c => ArrowCombat.Find(c) != null), true);
         }
         if (Id == "JA145")
             Check("瞄准射击生成基础更近一步", player.PlayerCombatState.Hand.Cards.Count(c => CardCatalog.DesignId(c) == "JA119" && !c.IsUpgraded),
@@ -505,7 +505,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             if (Id == "JK365") Check("花蕾普通抽牌及关联抽牌总量", AuditObserver.Drawn.Count,
                 Empty ? 0 : Math.Min((upgraded ? 2 : 1) + 2, CardPile.MaxCardsInHand - _beforeHand + 1));
             if (Id == "JK362" && _arrow != null)
-                Check("轮舞推进原有箭矢", ArrowCombat.Find(_arrow)?.Remaining, upgraded ? 1 : 2);
+                Check("轮舞推进原有流星", ArrowCombat.Find(_arrow)?.Remaining, upgraded ? 1 : 2);
             if (Id == "JK364")
             {
                 Check("水仙花获得能量", player.PlayerCombatState.Energy - _beforeEnergy, 1);
@@ -537,7 +537,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                     Empty ? 0 : Math.Min(upgraded ? 2 : 1, CardPile.MaxCardsInHand - hand));
                 if (Id == "JA144") Check("稳步前进生成", player.PlayerCombatState.Hand.Cards.Count - hand, 1);
                 if (Id == "JA35" && _arrow != null)
-                    Check("回合开始箭矢加速", ArrowCombat.Find(_arrow)?.Remaining ?? 0,
+                    Check("回合开始流星加速", ArrowCombat.Find(_arrow)?.Remaining ?? 0,
                         Math.Max(0, 3 - Regex.Match(Text, @"加速(\d+)回合").Groups[1].ValueAsInt()));
                 if (Id == "U_CARD_010")
                 {
@@ -565,7 +565,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 if (Id == "JK260") Check("每回合首次知识力量", player.Creature.GetPower<StrengthPower>()?.Amount, upgraded ? 3 : 2);
                 if (Id == "JA118")
                 {
-                    Check("箭阵打出箭矢格挡", player.Creature.Block - block, upgraded ? 3 : 2);
+                    Check("箭阵打出流星格挡", player.Creature.Block - block, upgraded ? 3 : 2);
                     var description = new MegaCrit.Sts2.Core.Localization.LocString("powers", "JUNNA_CATALOG.smartDescription");
                     power.DynamicVars.AddTo(description);
                     string powerText = Regex.Replace(description.GetFormattedText(), @"\[[^\]]+\]", "");
@@ -583,7 +583,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             if (Id == "JK67" && _arrow != null)
             {
                 await power.BeforeSideTurnEnd(_context, MegaCrit.Sts2.Core.Combat.CombatSide.Player, [player.Creature]);
-                Check("回合末布置箭矢强化", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, upgraded ? 3m : 2m);
+                Check("回合末布置流星强化", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, upgraded ? 3m : 2m);
             }
             if (Id == "JA87" && _selected != null)
             {
@@ -594,7 +594,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             {
                 var arrow = await Add("JA38");
                 await Play(arrow); await Finish(arrow);
-                Check("箭矢完成返回同一手牌", arrow.Pile?.Type, PileType.Hand);
+                Check("流星完成返回同一手牌", arrow.Pile?.Type, PileType.Hand);
                 var exhausted = await Add("JA81B");
                 await Play(exhausted); await Finish(exhausted);
                 Check("消耗优先于返回手牌", exhausted.Pile?.Type, PileType.Exhaust);
@@ -604,25 +604,25 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 Check("加速能力说明的触发时点", power.Description.GetFormattedText().Contains("打出"), true);
                 var arrow = await Add("JB03");
                 await Play(arrow);
-                Check("新箭矢初始加速", ArrowCombat.Find(arrow)?.Remaining, 2);
+                Check("新流星初始加速", ArrowCombat.Find(arrow)?.Remaining, 2);
                 await Finish(arrow);
                 Check("加速赋予消耗", arrow.Pile?.Type, PileType.Exhaust);
                 if (Enhanced)
                 {
                     await Play(await Add("JA105", upgrade: !upgraded));
-                    if (_arrow != null) Check("再次安装保持旧箭矢计数", ArrowCombat.Find(_arrow)?.Remaining, 3);
+                    if (_arrow != null) Check("再次安装保持旧流星计数", ArrowCombat.Find(_arrow)?.Remaining, 3);
                     int hp = _enemies[0].CurrentHp;
                     var shortArrow = await Add("JA38");
                     await Play(shortArrow);
-                    Check("多层加速使新箭矢立即完成", ArrowCombat.Find(shortArrow) == null, true);
+                    Check("多层加速使新流星立即完成", ArrowCombat.Find(shortArrow) == null, true);
                     Check("立即完成的伤害", hp - _enemies[0].CurrentHp, 18);
                     Check("立即完成后消耗", shortArrow.Pile?.Type, PileType.Exhaust);
                     var material = await Add("JB01");
                     HandArrow.Adapt(material);
                     await Play(material);
-                    Check("改编箭矢按后续打出加速", ArrowCombat.Find(material)?.Remaining, 3);
+                    Check("改编流星按后续打出加速", ArrowCombat.Find(material)?.Remaining, 3);
                     await Finish(material);
-                    Check("改编箭矢完成后消耗", material.Pile?.Type, PileType.Exhaust);
+                    Check("改编流星完成后消耗", material.Pile?.Type, PileType.Exhaust);
                 }
             }
             if (Id == "U_CARD_008")
@@ -654,7 +654,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             if (Id == "JA96" && _arrow != null)
             {
                 await TestGameApi.Damage(_context, player.Creature, 1, ValueProp.Move, _enemies[0]);
-                Check("受到攻击后敌人箭矢加速", ArrowCombat.Find(_arrow)?.Remaining, 2);
+                Check("受到攻击后敌人流星加速", ArrowCombat.Find(_arrow)?.Remaining, 2);
             }
         }
         if (Id == "JH19")
@@ -690,7 +690,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             selection.Choice = "JUNNA_ARROW_TARGET_ENEMY";
             int remaining = ArrowCombat.Find(_arrow)!.Remaining;
             await Play(await Add(Id, upgrade: upgraded));
-            Check("选择敌人箭矢分支", ArrowCombat.Find(_arrow)?.Remaining, remaining - 1);
+            Check("选择敌人流星分支", ArrowCombat.Find(_arrow)?.Remaining, remaining - 1);
         }
         if (Enhanced && definition.Knowledge)
         {
@@ -706,7 +706,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             var one = await Add(Id, upgrade: upgraded);
             player.PlayerCombatState!.Energy = 1;
             await Play(one);
-            Check("X等于一的流星数量", ArrowCombat.Deployed.Count, 1);
+            Check("X等于一的星屑数量", ArrowCombat.Deployed.Count, 1);
             Check("X等于一恰好支付", player.PlayerCombatState.Energy, 0);
         }
         if (Enhanced && Id == "JK82")
@@ -725,7 +725,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Enhanced)
         {
             await CheckAdaptedCard();
-            if (definition.Type == "箭矢") await CheckArrowCombination();
+            if (definition.Type == "流星") await CheckArrowCombination();
             if (Id == "JK314") await CheckDesirePile();
         }
         if (variant == "normal") await CheckCurrentPoolEffects();
@@ -785,7 +785,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Check("星群复制保持消耗去向", copy.ExhaustAfterResolve, true);
             await Finish(card);
         }
-        Check("加速箭矢完成时消耗优先于上弦", card.Pile?.Type, PileType.Exhaust);
+        Check("加速流星完成时消耗优先于上弦", card.Pile?.Type, PileType.Exhaust);
     }
 
     private async Task CheckDesirePile()
@@ -897,7 +897,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         var knowledge = await Add("JK11", PileType.Draw);
         player.PlayerCombatState.IncrementTurnNumber();
         await cycle.AfterPlayerTurnStart(_context, player);
-        Check("空知识阶段仍推进到箭矢", arrow.Pile?.Type, PileType.Hand);
+        Check("空知识阶段仍推进到流星", arrow.Pile?.Type, PileType.Hand);
         Check("取牌保留升级", arrow.IsUpgraded, true);
         Check("非当前类别保持抽牌堆", knowledge.Pile?.Type, PileType.Draw);
         await Play(await Add(Id));

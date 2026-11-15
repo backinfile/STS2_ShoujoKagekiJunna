@@ -40,12 +40,12 @@ SELECTION_PROMPTS = {
     "JK50B": "选择1张雄辩。",
     "JK53": "选择1张知识牌。",
     "JG27": "选择1张牌。",
-    "JA65": "选择1张箭矢。",
+    "JA65": "选择1张流星。",
     "JA66": "选择至多{Cards}张牌。",
     "JK73B": "选择1张反证。",
     "JK78D": "选择至多{Cards}张牌。",
     "JK78E": "选择至多{Cards}张牌。",
-    "JK64": "选择1张箭矢。",
+    "JK64": "选择1张流星。",
     "JK112": "选择1张舌战。",
     "JK126": "选择2张关联牌。",
     "JK127": "选择至多1张牌。",
@@ -78,7 +78,7 @@ def display_description(card, text, card_names, values, upgraded=False):
     # Arrow countdowns are rendered on their existing plaque.
     text = re.sub(r'^\[blue\][^\n]*\n', '', text)
     text = re.sub(r'。\s*', '。\n', text).strip()
-    highlighted = {'格挡', '易伤', '虚弱', '知识', '箭矢', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
+    highlighted = {'格挡', '易伤', '虚弱', '知识', '流星', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
     # Only actual named references need emphasis; all replacements run once to avoid nested tags.
     highlighted.update(card_names)
     highlighted.update(name + '+' for name in card_names)
@@ -137,7 +137,7 @@ def arrow_portraits_only(bundle):
     """Sync arrow art and focal points while preserving all runtime game rules."""
     catalog = json.loads(CATALOG_PATH.read_text(encoding='utf-8'))
     source = {c['id']: c for c in bundle['data']['cards']
-              if c['type'] == '箭矢' and not c.get('trashedAt') and not c.get('reservedAt')}
+              if c['type'] == '流星' and not c.get('trashedAt') and not c.get('reservedAt')}
     count = 0
     for entry in catalog['cards']:
         card = source.get(entry['id'])
@@ -217,7 +217,7 @@ def main():
             values.append({'name': 'Damage', 'base': 0, 'upgraded': 0})
             base = base.replace('X', '{Damage:diff()}')
             upgrade = upgrade.replace('X', '{Damage:diff()}')
-        if card['type'] == '箭矢':
+        if card['type'] == '流星':
             values.append({'name': 'Turns', 'base': card['turns'], 'upgraded': card['upgradedTurns']})
         # Existing implementations use their established variable names.
         if cid == 'JA16':
@@ -316,15 +316,15 @@ def main():
         (ROOT / 'src/Models/CardCatalog.Generated.cs').write_text(header + '\n'.join(wrappers), encoding='utf-8')
     localization.update({
         'JUNNA_ARROW_TARGET_SELF.title': '自己',
-        'JUNNA_ARROW_TARGET_SELF.description': '目标为自己的箭矢加速1回合。',
+        'JUNNA_ARROW_TARGET_SELF.description': '目标为自己的流星加速1回合。',
         'JUNNA_ARROW_TARGET_ENEMY.title': '敌人',
-        'JUNNA_ARROW_TARGET_ENEMY.description': '目标为敌人的箭矢加速1回合。',
+        'JUNNA_ARROW_TARGET_ENEMY.description': '目标为敌人的流星加速1回合。',
         'JUNNA_ENERGY_NOW.title': '现在',
         'JUNNA_ENERGY_NOW.description': '获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
         'JUNNA_ENERGY_LATER.title': '下回合',
         'JUNNA_ENERGY_LATER.description': '下回合获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
-        'JUNNA_PREPARE_ARROWS.title': '箭矢',
-        'JUNNA_PREPARE_ARROWS.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]箭矢[/gold]牌。',
+        'JUNNA_PREPARE_ARROWS.title': '流星',
+        'JUNNA_PREPARE_ARROWS.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]流星[/gold]牌。',
         'JUNNA_PREPARE_KNOWLEDGE.title': '知识',
         'JUNNA_PREPARE_KNOWLEDGE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]知识[/gold]牌。',
         'JUNNA_PREPARE_SHINE.title': '闪耀',
@@ -359,15 +359,15 @@ def main():
                 powers[power['id'] + '.' + suffix] = text
         # Active card text takes precedence over retired power descriptions.
         current_power_text = {
-            'JA105': '每当你打出一张[gold]箭矢[/gold]，使其加速[blue]{Amount}[/blue]回合，并获得[gold]消耗[/gold]。',
-            'JA118': '打出[gold]箭矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。',
-            'JA35': '回合开始时，所有[gold]箭矢[/gold]加速[blue]{Amount}[/blue]回合。',
-            'JA205': '目标为单个敌人的[gold]箭矢[/gold]现在会攻击所有敌人。',
+            'JA105': '每当你打出一张[gold]流星[/gold]，使其加速[blue]{Amount}[/blue]回合，并获得[gold]消耗[/gold]。',
+            'JA118': '打出[gold]流星[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。',
+            'JA35': '回合开始时，所有[gold]流星[/gold]加速[blue]{Amount}[/blue]回合。',
+            'JA205': '目标为单个敌人的[gold]流星[/gold]现在会攻击所有敌人。',
             'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点力量。',
             'U_CARD_008': '战斗结束时，向[gold]牌组[/gold]添加[blue]{Amount}[/blue]张[gold]故事[/gold]。',
             'U_CARD_016': '打出[gold]{Category}[/gold]牌后，抽[blue]{Amount}[/blue]张牌。',
-            'U_CARD_010': '回合开始时，从[gold]抽牌堆[/gold]选择[blue]1[/blue]张当前类别的牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]箭矢[/gold]牌、闪耀牌。',
+            'U_CARD_010': '回合开始时，从[gold]抽牌堆[/gold]选择[blue]1[/blue]张当前类别的牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]流星[/gold]牌、闪耀牌。',
         }
         for cid, text in current_power_text.items():
             if cid not in ids:
@@ -376,7 +376,7 @@ def main():
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
             if cid == 'U_CARD_016':
-                powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]箭矢[/gold]、闪耀中轮换。'
+                powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]流星[/gold]、闪耀中轮换。'
             if cid == 'U_CARD_010':
                 powers[f'JUNNA_{cid}_POWER.smartDescription'] += '{Repetition}'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')

@@ -43,7 +43,7 @@ public sealed class CompatibilityCommand : AbstractConsoleCmd
             catch (Exception error) { passed = false; checks.Add(new { name, pass = false, error = error.ToString() }); }
         }
         Check("arrow localization patch installed", () => Harmony.GetPatchInfo(AccessTools.Method(typeof(CardTypeExtensions), nameof(CardTypeExtensions.ToLocString)))?.Prefixes.Any(patch => patch.owner == "ShoujoKagekiJunna") == true);
-        Check("custom arrow name", () => ArrowPile.ArrowType.ToLocString().GetFormattedText() == "箭矢");
+        Check("custom arrow name", () => ArrowPile.ArrowType.ToLocString().GetFormattedText() == "流星");
         var state = player.Creature.CombatState!;
         var arrow = state.CreateCard(ModelDb.Card<JunnaFullDraw>(), player);
         var converted = state.CreateCard(ModelDb.Card<JunnaStrike>(), player);

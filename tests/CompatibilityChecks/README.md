@@ -6,4 +6,4 @@
 dotnet run --project tests/CompatibilityChecks -c Release -- <Junna-Beta-DLL> <RitsuLib-directory> <Core-API-DLL>
 ```
 
-实机卡面检查位于 `tests/CompatibilityProbe`，编译时提供 `-p:CoreApiPath=<Core-API-DLL>`。将探针 DLL 与依赖 Junna 的测试清单放入隔离游戏，进入战斗后通过 MCP 执行 `junna_compatibility check`。命令返回 JSON，检查真实原生/转化箭矢及普通卡的 NCard 预览、类型名称和知识获得补丁目标。测试产物位于隔离工作树。
+实机卡面检查位于 `tests/CompatibilityProbe`，编译时提供 `-p:CoreApiPath=<Core-API-DLL>`。将探针 DLL 与依赖 Junna 的测试清单放入隔离游戏，进入战斗后通过 MCP 执行 `junna_compatibility check`。命令返回 JSON，检查真实原生/转化流星及普通卡的 NCard 预览、类型名称和知识获得补丁目标。测试产物位于隔离工作树。
