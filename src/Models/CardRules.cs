@@ -16,6 +16,7 @@ internal sealed class CardRuleDefinition
     internal CardTip[] UpgradedTips { get; init; } = [];
     internal string[] RelatedCards { get; init; } = [];
     internal SimpleCardEffect Effect { get; init; }
+    internal bool LoopAsArrow { get; init; }
     internal PowerAmountKind PowerAmount { get; init; }
     internal PowerDescriptionKind PowerDescription { get; init; }
     internal bool SinglePower { get; init; }

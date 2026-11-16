@@ -31,7 +31,7 @@ def generate(root=ROOT, check=False):
     for key, rule in sorted(rules.items()):
         if key not in cards and not rule.get('legacy'):
             raise ValueError(f'Unknown card rule {key}')
-        allowed = {'fields', 'tips', 'upgradedTips', 'effect', 'power', 'relatedCards', 'legacy'}
+        allowed = {'fields', 'tips', 'upgradedTips', 'effect', 'power', 'relatedCards', 'loopAsArrow', 'legacy'}
         if set(rule) - allowed:
             raise ValueError(f'Unknown properties for {key}')
         lines += ['        [' + quoted(key) + '] = new()', '        {']
@@ -53,6 +53,10 @@ def generate(root=ROOT, check=False):
                 lines += ['            ' + target + ' = [' + ', '.join(member('CardTip', value) for value in values) + '],']
         if 'effect' in rule:
             lines += ['            Effect = ' + member('SimpleCardEffect', rule['effect']) + ',']
+        if 'loopAsArrow' in rule:
+            if not isinstance(rule['loopAsArrow'], bool):
+                raise ValueError(f'Invalid loopAsArrow for {key}')
+            lines += ['            LoopAsArrow = ' + str(rule['loopAsArrow']).lower() + ',']
         if 'relatedCards' in rule:
             if set(rule['relatedCards']) - set(cards):
                 raise ValueError(f'Unknown card reference for {key}')

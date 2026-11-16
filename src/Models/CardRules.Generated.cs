@@ -1467,5 +1467,52 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge, CardTip.Arrow],
             UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
         },
+        ["U_CARD_018"] = new()
+        {
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            Effect = SimpleCardEffect.Attack,
+            LoopAsArrow = true,
+        },
+        ["U_CARD_021"] = new()
+        {
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            Effect = SimpleCardEffect.Attack,
+            LoopAsArrow = true,
+        },
+        ["U_CARD_023"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            Effect = SimpleCardEffect.BlockAndDraw,
+            LoopAsArrow = true,
+        },
+        ["U_CARD_024"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N0",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            Effect = SimpleCardEffect.Draw,
+            LoopAsArrow = true,
+        },
+        ["U_CARD_025"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Energy"] = "N0",
+            },
+            Tips = [CardTip.Arrow, CardTip.Energy],
+            UpgradedTips = [CardTip.Arrow, CardTip.Energy],
+            Effect = SimpleCardEffect.Energy,
+            LoopAsArrow = true,
+        },
     };
 }

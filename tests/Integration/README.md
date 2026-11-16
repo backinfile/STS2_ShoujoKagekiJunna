@@ -35,3 +35,7 @@ python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --o
 - 当前逐牌观测表见 `docs/implementation/card-tests-r5294.md`。
 
 测试失败时先核对固定牌效、准备对象与实际事件，保留失败文件，再修复实现或具体预期。禁止通过跳过卡牌、删除失败断言或把当前输出直接复制为预期来消除失败。
+
+## 工作台 r5324 定向检查
+
+在独立双敌人战斗中执行 `junna_loop_sync check`，验证五张新循环牌、备箭、齐射及宝石数值；结果写入 `artifacts/task-deliverables/sync-workbench-latest-20261116/targeted-results.json`。`junna_loop_sync prepare` 准备五张循环牌和弦声齐鸣，供正常出牌录像使用。

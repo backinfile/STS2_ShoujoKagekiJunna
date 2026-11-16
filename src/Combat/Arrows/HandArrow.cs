@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Models;
@@ -82,10 +83,16 @@ public static class HandArrow
             unplayed => CardPileCmd.Add(unplayed, hand));
     }
 
-    public static async Task Play(PlayerChoiceContext context, CardModel card)
+    internal static bool Loops(CardModel card) => card is CatalogCard catalog && CardRules.Get(catalog.DesignId).LoopAsArrow;
+
+    public static Task Play(PlayerChoiceContext context, CardModel card) => Play(context, card, CardTargets.First(card));
+
+    internal static async Task<bool> Play(PlayerChoiceContext context, CardModel card, Creature? target)
     {
-        var target = CardTargets.First(card);
-        if (!CardTargets.IsValid(card, target)) return;
+        if (card.TargetType == TargetType.AnyEnemy && target != null && card.CombatState is { } combat)
+            target = ArrowCombat.ResolveEffectTarget(target, combat);
+        else target = CardTargets.First(card);
+        if (!CardTargets.IsValid(card, target)) return false;
         CostChanges.CaptureFreePayment(card);
         Mark(card, true);
         bool played = false;
@@ -104,6 +111,7 @@ public static class HandArrow
             if (unplayable) card.AddKeyword(CardKeyword.Unplayable);
             if (!played && ArrowCombat.Find(card) == null) Restore(card);
         }
+        return played;
     }
 
     internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, ICardEffectPayload next)
