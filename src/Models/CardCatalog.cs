@@ -54,7 +54,7 @@ public sealed class CardDefinition
     };
     private static CardType ToType(string value) => value switch
     {
-        "流星" or "\u7bad\u77e2" => ArrowPile.ArrowType, "攻击" => CardType.Attack, "能力" => CardType.Power,
+        "飞矢" or "流星" or "\u7bad\u77e2" or "\u661f\u77e2" => ArrowPile.ArrowType, "攻击" => CardType.Attack, "能力" => CardType.Power,
         "状态" => CardType.Status, "诅咒" => CardType.Curse, "任务" => CardType.Quest, _ => CardType.Skill
     };
 }

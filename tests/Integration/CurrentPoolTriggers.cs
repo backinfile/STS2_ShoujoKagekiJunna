@@ -27,16 +27,16 @@ internal sealed partial class AuditScenario
                 // A hook-level opening fixture; native-turn evidence is recorded separately.
                 turnProperty.SetValue(state, 1);
                 await hooks.BeforeHandDraw(player, _context, player.Creature.CombatState!);
-                Check("开局钩子自动布置实际流星", ArrowCombat.Find(source)?.Card == source, true);
+                Check("开局钩子自动布置实际飞矢", ArrowCombat.Find(source)?.Card == source, true);
                 Check("开局布置保留完整倒计时", ArrowCombat.Find(source)?.Remaining,
                     upgraded ? definition.Values.Single(v => v.Name == "Turns").Upgraded : definition.Values.Single(v => v.Name == "Turns").Base);
-                Check("开局流星等待完成才造成伤害", hp - _enemies[0].CurrentHp, 0);
+                Check("开局飞矢等待完成才造成伤害", hp - _enemies[0].CurrentHp, 0);
                 Check("开局自动打出不支付能量", state.Energy, energy);
                 await hooks.BeforeHandDraw(player, _context, player.Creature.CombatState!);
                 Check("开局钩子重复调用只布置一次", ArrowCombat.Deployed.Count, 1);
                 await Finish(source);
-                Check("开局流星完成伤害", hp - _enemies[0].CurrentHp, upgraded ? 60 : 50);
-                Check("开局流星结算后弃置实际牌", source.Pile?.Type, PileType.Discard);
+                Check("开局飞矢完成伤害", hp - _enemies[0].CurrentHp, upgraded ? 60 : 50);
+                Check("开局飞矢结算后弃置实际牌", source.Pile?.Type, PileType.Discard);
             }
             finally { turnProperty.SetValue(state, turn); }
         }
@@ -121,14 +121,14 @@ internal sealed partial class AuditScenario
                 await TestGameApi.Damage(_context, player.Creature, 10, MegaCrit.Sts2.Core.ValueProps.ValueProp.Move, _enemies[0]);
                 return hp - player.Creature.CurrentHp;
             }
-            Check("牢笼没有流星目标时无减伤", await Damage(), 10);
+            Check("牢笼没有飞矢目标时无减伤", await Damage(), 10);
             var first = await Add("JA38"); await Play(first);
-            Check("牢笼动态接纳新流星目标", await Damage(), 5);
+            Check("牢笼动态接纳新飞矢目标", await Damage(), 5);
             var second = await Add("JA38"); await Play(second);
             await Play(await Add(Id, upgrade: upgraded));
-            Check("同目标流星及重复牢笼不重复减伤", await Damage(), 5);
+            Check("同目标飞矢及重复牢笼不重复减伤", await Damage(), 5);
             ArrowCombat.Cancel(first); ArrowCombat.Cancel(second);
-            Check("流星离场动态解除减伤", await Damage(), 10);
+            Check("飞矢离场动态解除减伤", await Damage(), 10);
             var power = player.Creature.GetPower<JunnaCagedPower>()!;
             await power.AfterSideTurnEnd(_context, CombatSide.Enemy, _enemies);
             Check("敌方回合结束移除牢笼", player.Creature.GetPower<JunnaCagedPower>() == null, true);

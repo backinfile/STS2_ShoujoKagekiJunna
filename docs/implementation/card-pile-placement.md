@@ -8,7 +8,7 @@
 - 随机插入使用原生 `CardPileCmd.AddGeneratedCardToCombat` 及 `RunState.Rng.Shuffle`。原生随机位置包含抽牌堆两端，单次落在底部属于合法结果。
 - 定向抽取已有实际牌时，先用 `CardPilePosition.Top` 移动所选牌，再调用正常抽牌管线，保留抽牌钩子和牌主。
 - 永久牌组发放使用 `PileType.Deck`。永久升级和战斗内升级分别沿各自的去处执行，知识组在永久牌组中按既有顺序相邻放置。
-- 加入手牌、弃牌堆、消耗牌堆、出牌区或流星区时，按对应效果的实际去向处理。
+- 加入手牌、弃牌堆、消耗牌堆、出牌区或飞矢区时，按对应效果的实际去向处理。
 
 原生 `AddGeneratedCardToCombat`、`AddGeneratedCardsToCombat` 和 `Add` 的位置参数默认为 `Bottom`。修改调用前核对当前游戏 API，不能用参数省略表达随机。
 
@@ -25,9 +25,9 @@
 | `KnowledgeCombat.GrantPartners` | 知识附带牌，沿入口目的牌堆 | 目的地为 Draw 时 Random，数量和单次附带发放沿知识规则 | `junna_study_placement related` | 2 张关联牌发放通过 |
 | `CatalogPower.AfterCardPlayed`，退役 JK15 反复研习 | 本场复制，抽牌堆 | 显式 Random，复制保留当前版本，单张生成 | `junna_study_placement related` | 随机位置与复制版本通过 |
 | `CardActions.DrawMatching` | 已存在的指定实际牌，抽牌堆到手牌 | 明确 Top 后正常 Draw，其他牌序保留 | `junna_study_placement related` | 指定实际牌和原牌序通过 |
-| `CardActions.PlayDrawPileArrows` | 已有抽牌堆流星，进入正常出牌与布置流程 | 读取当时快照，沿实际出牌目标及去向规则处理 | 源码对照 | 已核对调用与去向 |
+| `CardActions.PlayDrawPileArrows` | 已有抽牌堆飞矢，进入正常出牌与布置流程 | 读取当时快照，沿实际出牌目标及去向规则处理 | 源码对照 | 已核对调用与去向 |
 | 永久升级、知识取得、单张复制和故事奖励 | 永久牌组 | Deck 发放及既有组内相邻顺序 | 本次永久升级控制项及既有知识回归 | 永久升级控制项通过，其余源码对照 |
-| `CardActions.Fly`、星屑生成和流星复制 | 出牌区或独立流星区 | 沿各自出牌、布置和布局顺序处理 | 源码对照 | 已核对调用与去向 |
+| `CardActions.Fly`、星屑生成和飞矢复制 | 出牌区或独立飞矢区 | 沿各自出牌、布置和布局顺序处理 | 源码对照 | 已核对调用与去向 |
 | Core `ShuffleMoveOrderPatch.AddWithVisuals` | 原生洗牌批次 | 原样传递调用方的 position | 源码对照 | 已核对调用与去向 |
 
 退役牌模型仍可被旧存档使用，因此也纳入调用检查。
@@ -56,6 +56,6 @@
 
 ## 2026-11-12 发牌动画专项
 
-生成历史、随机入堆与可见动画分别核对。新模型加入隐藏牌堆后，使用原生 `CardCmd.PreviewCardPileAdd` 展示实际成功结果，再飞入牌堆；手牌和流星沿各自原有展示流程。
+生成历史、随机入堆与可见动画分别核对。新模型加入隐藏牌堆后，使用原生 `CardCmd.PreviewCardPileAdd` 展示实际成功结果，再飞入牌堆；手牌和飞矢沿各自原有展示流程。
 
 本次补齐埋头学习、学无止境的战斗/永久升级、反复研习复制、知识附带牌和永久单张复制的展示。随机位置、数量、基础/升级版本和永久组内排序保留。埋头学习四个真实回合及同类入口十一项定向回归通过，包含预览、飞牌和飞牌完成断言。详见 [发牌动画任务记录](../worktree-tasks/studious-end-turn-animation-20261112/README.md)。

@@ -35,7 +35,7 @@ public sealed class LibraryOptionsCommand : AbstractConsoleCmd
             var misc = (NCardPoolFilter)AccessTools.Field(typeof(NCardLibrary), "_miscPoolFilter").GetValue(library)!;
             misc.IsSelected = true;
             var search = (MegaCrit.Sts2.Core.Nodes.CommonUi.NSearchBar)AccessTools.Field(typeof(NCardLibrary), "_searchBar").GetValue(library)!;
-            search.TextArea.Text = args.ElementAtOrDefault(1) ?? "星屑";
+            search.TextArea.Text = args.ElementAtOrDefault(1) ?? "流星";
             AccessTools.Method(typeof(NCardLibrary), "UpdateCardPoolFilter").Invoke(library, [misc]);
             return new(true, "Opened native library");
         }
