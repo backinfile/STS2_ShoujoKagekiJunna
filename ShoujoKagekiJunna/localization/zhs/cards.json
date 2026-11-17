@@ -129,7 +129,7 @@
   "JUNNA_JK122B.description": "[gold]知识[/gold]。",
   "JUNNA_JK126.title": "全都一起带去",
   "JUNNA_JK126.selectionScreenPrompt": "选择2张关联牌。",
-  "JUNNA_JK126.description": "[gold]知识[/gold]。\n获得{Block:diff()}点[gold]格挡[/gold]。\n抽取所有关联牌。",
+  "JUNNA_JK126.description": "[gold]连锁知识[/gold]。\n获得{Block:diff()}点[gold]格挡[/gold]。\n抽取所有关联牌。",
   "JUNNA_JK127.title": "誊写",
   "JUNNA_JK127.selectionScreenPrompt": "选择至多1张牌。",
   "JUNNA_JK127.description": "战斗结束后，可以单独复制牌组中的{N0:diff()}张[gold]知识[/gold]牌。",
