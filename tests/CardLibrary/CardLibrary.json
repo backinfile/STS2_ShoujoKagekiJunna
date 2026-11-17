@@ -1,0 +1,10 @@
+{
+  "id": "CardLibrary",
+  "name": "Junna Card Library Regression",
+  "author": "Local",
+  "version": "1.0.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [{ "id": "ShoujoKagekiJunna", "min_version": "0.1.0" }]
+}
