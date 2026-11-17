@@ -171,6 +171,17 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 “心得”的展示也有同样的问题
 
 
+
+### 6. 合并确认前的实现询问
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_c34ad5156bcf4dfb8094d2937721f1d5\",0]","question":"是否将修复合并到 main，并清理本次任务分支、工作树和临时测试环境？录像及验证产物已保留。","answer":"这个是怎么修改和实现的？和游戏本体的卡牌一样吗"}]
+</send_user_message_question_reply>
+
+### 7. 合并与清理批准
+
+合并 清理分支
+
 ## Brief task plan
 
 - 起点：`main`，`f273561e06c80ad579697ed408e44737f0efc856`；原工作区干净。
@@ -181,7 +192,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-修复及定向验证完成；已核对本地main新增提交，准备同步。合并和清理由用户确认。
+修复、同步及定向验证完成；用户已批准合并到main并清理本次任务分支和工作树。
 
 ### 原因与实现
 
@@ -216,8 +227,13 @@ python tests/WorkbenchFitSync/verify-study-animation.py --port <port> --scenario
 
 - 工作树证据：`out/tmp/story-hang/` 与 `out/tmp/study-animation/`，包含失败基线、通过JSON、录像、抽帧和隔离环境。
 - 双版本验证产物：`dist/ShoujoKagekiJunna/lib/`。
-- 合并后拟保留报告、双版本程序集和故事/心得原始录像到原仓库 `out/tmp/fix-story-acquisition-hang-20261117/`；清理仅覆盖本次工作树、任务分支及其余临时构建与隔离环境。
+- 报告、双版本程序集和故事/心得原始录像已复制并逐文件核对SHA-256，保留于原仓库 `out/tmp/fix-story-acquisition-hang-20261117/`；清理仅覆盖本次工作树、任务分支及其余临时构建与隔离环境。
 
 ### 同步与集成
 
-本地main已从起始提交前进至 `f1583f5d72b22920b303a221c946af4e62a7704a`；原工作区仍为main且干净。先提交本任务，再将该本地main同步到任务分支。隔离测试进程已关闭，待用户确认合并和清理。
+- 任务提交：`b33e2f0`；同步目标：本地main的 `f1583f5d72b22920b303a221c946af4e62a7704a`，已在任务工作树内无冲突合并。
+- 同步后双版本再次编译通过；故事基础场景22项、心得叠加场景8项均通过。结算耗时分别为11.22ms和9.90ms；新录像均completed、engine_mix、零掉帧，已抽帧复核。
+- 同步后554份文本类文档复审，无本地绝对路径，凭据命中仍仅为示例占位符。
+- 实机验证均已关闭本次隔离进程；最终原始录像与双版本程序集已保留到原仓库 `out/tmp/fix-story-acquisition-hang-20261117/`，33份交付文件已逐文件核对SHA-256。
+- 用户询问实现与本体的关系后，明确回复“合并 清理分支”。展示使用本体PreviewCardPileAdd及其Tween/飞牌完成回调；心得拆开本体AddToCombatAndPreview包装器，保留生成和预览，省去等待。原生预览时长保持，后续流程可并行推进。
+- 集成前原检出仍为main的 `f1583f5d72b22920b303a221c946af4e62a7704a` 且干净，与同步时一致。执行快进合并；随后核对提交树、任务提交可达性、工作区状态和交付文件哈希，再移除本次工作树、任务分支及其中临时构建和隔离环境。集成与清理结果另存上述交付目录的 `integration.json`。

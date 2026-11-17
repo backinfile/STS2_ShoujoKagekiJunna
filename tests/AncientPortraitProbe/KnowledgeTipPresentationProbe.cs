@@ -19,7 +19,7 @@ public sealed class KnowledgeTipPresentationCommand : AbstractConsoleCmd
 {
     public override string CmdName => "junna_knowledge_tip_presentation";
     public override string Args => "check";
-    public override string Description => "Check merged knowledge tips and native rendered background colors.";
+    public override string Description => "Check merged knowledge tips, background ordering and native styling.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args)
     {
@@ -57,14 +57,17 @@ public sealed class KnowledgeTipPresentationCommand : AbstractConsoleCmd
                 string knowledgeId = HoverTipFactory.FromKeyword(chain ? JunnaKeywords.ChainKnowledge : JunnaKeywords.Knowledge).Id;
                 int knowledgeIndex = Array.FindIndex(tips, tip => tip.Id == knowledgeId);
                 int relationIndex = Array.FindIndex(tips, tip => tip.Title == "关联牌");
-                var set = NHoverTipSet.CreateAndShow(owner, tips.Cast<IHoverTip>())!;
+                // Later-added mechanical tips must still precede the knowledge background.
+                var trailing = HoverTipFactory.FromKeyword(MegaCrit.Sts2.Core.Entities.Cards.CardKeyword.Retain);
+                var set = NHoverTipSet.CreateAndShow(owner, tips.Cast<IHoverTip>().Append(trailing))!;
                 for (int frame = 0; frame < 2; frame++) await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
                 var nodes = set.GetNode<Control>("textHoverTipContainer").GetChildren();
                 string[] titles = nodes.Select(node => node.GetNode<MegaLabel>("%Title").Text).ToArray();
                 int mergedIndex = Array.IndexOf(titles, title);
                 Expect(name + " merges associations into one knowledge tip", titles.Count(value => value == title) == 1 &&
                     !titles.Contains("关联牌") && (!chain || !titles.Contains("知识")) &&
-                    nodes.Count == tips.Length - (chain ? 2 : 1), string.Join(" / ", titles));
+                    nodes.Count == IHoverTip.RemoveDupes(tips.Cast<IHoverTip>().Append(trailing)).Count() - (chain ? 2 : 1),
+                    string.Join(" / ", titles));
                 string description = nodes[mergedIndex].GetNode<MegaRichTextLabel>("%Description").Text;
                 Expect(name + " retains the complete rule and association list", description ==
                     tips[knowledgeIndex].Description + "\n关联牌：\n" + tips[relationIndex].Description, description);
@@ -89,7 +92,14 @@ public sealed class KnowledgeTipPresentationCommand : AbstractConsoleCmd
                 {
                     int backgroundIndex = Array.IndexOf(titles, "知识背景");
                     string backgroundColor = nodes[backgroundIndex].GetNode<CanvasItem>("%Bg").SelfModulate.ToHtml(false);
-                    Expect(name + " renders a purple knowledge background", backgroundColor == "c18cdd", backgroundColor);
+                    Expect(name + " renders the knowledge background last", backgroundIndex == titles.Length - 1,
+                        string.Join(" / ", titles));
+                    Expect(name + " uses the native neutral background", backgroundColor == "ffffff", backgroundColor);
+                    Expect(name + " preserves the order of other mechanical tips",
+                        titles.Where(value => value != "知识背景").SequenceEqual(
+                            IHoverTip.RemoveDupes(tips.Cast<IHoverTip>().Append(trailing)).OfType<HoverTip>()
+                                .Where(tip => tip.Title != "关联牌" && tip.Title != "知识背景")
+                                .Select(tip => tip.Title)), string.Join(" / ", titles));
                 }
                 NHoverTipSet.Remove(owner);
             }
@@ -102,6 +112,19 @@ public sealed class KnowledgeTipPresentationCommand : AbstractConsoleCmd
             var keywordNodes = keywordSet.GetNode<Control>("textHoverTipContainer").GetChildren();
             Expect("standalone knowledge keyword keeps its rule", keywordNodes.Count == 1 &&
                 keywordNodes[0].GetNode<MegaRichTextLabel>("%Description").Text == keyword.Description, keyword.Description);
+            NHoverTipSet.Remove(owner);
+            var backgroundOnly = CardCatalog.Model("JK49").HoverTips.OfType<HoverTip>()
+                .Single(tip => tip.Title == "知识背景");
+            var standaloneSet = NHoverTipSet.CreateAndShow(owner, new IHoverTip[] { backgroundOnly, keyword })!;
+            for (int frame = 0; frame < 2; frame++) await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+            var standaloneNodes = standaloneSet.GetNode<Control>("textHoverTipContainer").GetChildren();
+            string[] standaloneTitles = standaloneNodes.Select(node => node.GetNode<MegaLabel>("%Title").Text).ToArray();
+            Expect("standalone background follows the keyword without associations",
+                standaloneTitles.SequenceEqual(new[] { "知识", "知识背景" }), string.Join(" / ", standaloneTitles));
+            Expect("standalone background preserves its content and native styling",
+                standaloneNodes[1].GetNode<MegaRichTextLabel>("%Description").Text == backgroundOnly.Description &&
+                standaloneNodes[1].GetNode<CanvasItem>("%Bg").SelfModulate.ToHtml(false) == "ffffff",
+                standaloneNodes[1].GetNode<MegaRichTextLabel>("%Description").Text);
         }
         catch (Exception error) { checks.Add(new { name = "knowledge tip presentation checks", pass = false, actual = error.ToString() }); }
         finally

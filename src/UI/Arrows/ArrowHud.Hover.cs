@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.HoverTips;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
@@ -22,7 +23,7 @@ public partial class ArrowHud
         .Select(pair => (pair.Key.Card, pair.Value.Frame));
 
     private const int PreviewCapacity = 5;
-    private const float PreviewScale = .9f, MinimumPreviewScale = .75f, PreviewMargin = 24;
+    private const float PreviewScale = .7f, PreviewMargin = 24;
     private Control? _hoverPreview, _hoverAnchor, _dismissedAnchor;
     private Label? _previewCount;
     private Creature? _previewTarget;
@@ -38,9 +39,12 @@ public partial class ArrowHud
     private (Vector2 Canvas, Rect2 Anchor, int Focus, int Total, int Visible)? _previewLayout;
     private readonly List<Rect2> _previewObstacles = [];
 
-    private void WarmPreviewCache()
+    private bool HoverPreviewBlocked(NCombatRoom room) => !IsVisibleInTree()
+        || NHoverTipSet.shouldBlockHoverTips || room.Ui.Hand.InCardPlay || NTargetManager.Instance.IsInSelection;
+
+    private void WarmPreviewCache(NCombatRoom room)
     {
-        if (!IsVisibleInTree() || _hoverPreview?.Visible == true || _previewCache.Count >= PreviewCapacity * 2) return;
+        if (HoverPreviewBlocked(room) || _hoverPreview?.Visible == true || _previewCache.Count >= PreviewCapacity * 2) return;
         foreach (var arrow in _displayOrder)
         {
             if (_previewCache.ContainsKey(arrow)) continue;
@@ -69,7 +73,7 @@ public partial class ArrowHud
 
     private void UpdateHoverPreview(NCombatRoom room)
     {
-        if (!IsVisibleInTree() || NHoverTipSet.shouldBlockHoverTips || room.Ui.Hand.InCardPlay)
+        if (HoverPreviewBlocked(room))
         {
             ClearHoverPreview();
             return;
@@ -182,7 +186,7 @@ public partial class ArrowHud
         if (_inspectedArrow != inspected || !same)
         {
             _inspectedArrow = inspected;
-            // Match native hand focus: the readable card is above the smaller neighbouring cards.
+            // Keep the focused card above its neighbours.
             for (int depth = PreviewCapacity - 1; depth >= 0; depth--)
                 for (int i = 0; i < _previewCards.Count; i++)
                     if (Math.Abs(_previewStart + i - _previewIndex) == depth)
@@ -242,7 +246,6 @@ public partial class ArrowHud
             obstaclesChanged = true;
         }
         if (!obstaclesChanged && _previewLayout == layout) return;
-        float scale = Math.Clamp((canvas.Y * .8f - 96 - PreviewMargin * 2) / 504, .1f, PreviewScale);
         Span<Vector2> positions = stackalloc Vector2[PreviewCapacity];
         Span<Vector2> scales = stackalloc Vector2[PreviewCapacity];
         Span<float> angles = stackalloc float[PreviewCapacity];
@@ -258,7 +261,7 @@ public partial class ArrowHud
                 float separation = MathF.Sign(i - possibleFocus) * Math.Max(0, 45 - distance * 10);
                 var position = new Vector2(native.X * .35f + separation,
                     distance == 0 ? 0 : 26 + Math.Abs(native.Y - nativeFocus.Y) * .4f);
-                var cardScale = Vector2.One * scale * (distance == 0 ? 1 : .78f);
+                var cardScale = Vector2.One * PreviewScale;
                 float angle = distance == 0 ? 0 : Mathf.DegToRad(HandPosHelper.GetAngle(_previewCards.Count, i));
                 if (possibleFocus == focus)
                 {
@@ -280,7 +283,7 @@ public partial class ArrowHud
         bool fitsOverhead = false;
         if (_previewTarget != null)
         {
-            // Prefer the space above the intent only while the cards remain readable.
+            // Prefer the space above the intent when the fixed-size fan fits.
             float left = anchorRect.GetCenter().X - (bounds.Size.X + PreviewMargin) * .5f;
             float right = left + bounds.Size.X + PreviewMargin;
             for (int i = creatureObstacles; i < obstacleCount; i++)
@@ -289,18 +292,8 @@ public partial class ArrowHud
                 if (tip.Position.X < right && tip.End.X > left)
                     overheadBottom = Math.Min(overheadBottom, tip.Position.Y - PreviewMargin);
             }
-            float fit = Math.Min(1, Math.Min((available.Size.X - PreviewMargin) / bounds.Size.X,
-                Math.Max(1, overheadBottom - available.Position.Y - PreviewMargin - counterHeight) / bounds.Size.Y));
-            fitsOverhead = scale * fit >= Math.Min(scale, MinimumPreviewScale);
-            if (fitsOverhead)
-            {
-                bounds = new(bounds.Position * fit, bounds.Size * fit);
-                for (int i = 0; i < _previewCards.Count; i++)
-                {
-                    positions[i] *= fit;
-                    scales[i] *= fit;
-                }
-            }
+            fitsOverhead = bounds.Size.X + PreviewMargin <= available.Size.X
+                && bounds.Size.Y + PreviewMargin + counterHeight <= overheadBottom - available.Position.Y;
         }
         var size = bounds.Size + new Vector2(PreviewMargin, PreviewMargin + counterHeight);
         var maximum = (available.End - size).Max(available.Position);
@@ -323,7 +316,9 @@ public partial class ArrowHud
             if (fitsOverhead && position.Y + size.Y > overheadBottom + 1) continue;
             var rect = new Rect2(position, size);
             var overlap = rect.Intersection(anchorRect);
-            float score = overlap.Size.X * overlap.Size.Y * 3 + position.DistanceTo(candidate) * 2;
+            // Keep fallback placements near this anchor instead of preferring an empty screen corner.
+            float score = overlap.Size.X * overlap.Size.Y * 3 + position.DistanceTo(candidate) * 2
+                + position.DistanceSquaredTo(candidates[0]);
             foreach (var protectedRect in _previewObstacles)
             {
                 var intersection = rect.Intersection(protectedRect);

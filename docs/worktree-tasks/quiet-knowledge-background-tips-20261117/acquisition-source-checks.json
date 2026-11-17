@@ -1,0 +1,68 @@
+[
+  {
+    "name": "unadapted Add grants one card",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "unadapted batch adds only its two cards",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "native copy remains one physical card",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "unadapted Transform does not grant companions",
+    "actual": 0,
+    "expected": 0,
+    "pass": true
+  },
+  {
+    "name": "DustyTome.AfterObtained grants its complete knowledge group",
+    "actual": 4,
+    "expected": 4,
+    "pass": true
+  },
+  {
+    "name": "single-card scope overrides a registered source",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "registered source does not leak into later Add",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "HeftyTablet.AfterObtained grants the selected group plus one Injury",
+    "actual": 5,
+    "expected": 5,
+    "pass": true
+  },
+  {
+    "name": "Astrolabe.AfterObtained replaces one card with its knowledge group",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "Discovery.OnPlay grants the selected knowledge group in combat",
+    "actual": 4,
+    "expected": 4,
+    "pass": true
+  },
+  {
+    "name": "unadapted use of the discovery screen grants only one card",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  }
+]
