@@ -172,6 +172,16 @@ hover展示的卡牌大小不要太大
 
 固定大小，比手牌中的略小即可
 
+### 7. 录像查看请求
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_bcaf4cb49fc84dd89fd55089129ebc63\",0]","question":"将 fb81a03 合入 main，并清理本次工作树、临时分支和隔离游戏？录像、报告及 DLL 会保留。","answer":"录制视频我看看效果"}]
+</send_user_message_question_reply>
+
+### 8. 滚动预览
+
+滚动看看
+
 ## Brief task plan
 
 - 原检出为 main，起始提交 30285c2c19f27cdf9e4ffd3460ca27d736ad9188，原工作区干净。
@@ -184,7 +194,7 @@ hover展示的卡牌大小不要太大
 
 ## Result and changes
 
-- 已完成实现与定向验证，待同步 main 后提交用户确认合并及清理。
+- 已完成实现与定向验证，已同步 main，待用户确认合并及清理。
 - 根因：备用位置只按遮挡面积和候选位置的截断距离评分，远离目标的空角落容易胜出；补入相对头顶候选位置的距离平方，保留原有屏幕边界与提示避让。
 - 预览卡统一固定为 0.7 缩放；原生普通手牌为 0.8，因此宽高均小 12.5%。移除随可用空间和焦点变化的缩放，保留扇形、抬升与分页。
 - 显示预览与预创建缓存共用拖牌、目标选择及原生提示阻挡判断；这些阶段不显示预览，也不构建新的缓存卡面。
@@ -196,3 +206,12 @@ hover展示的卡牌大小不要太大
 - 命令：node tests/Integration/verify_arrow_preview.cjs <port> <result.json>；复用 tests/Integration/verify_hover_placement.cjs，并运行 junna_hover_density check 5。
 - 录像前准备五张不同状态箭矢和攻击手牌；录像中仅鼠标移动、拖牌和取消。随机端口、独立满解锁存档、最小化及 silent_test；声音来源 engine_mix。
 - 结果和失败基线位于 out/tmp/；最终录像与帧图位于 out/tmp/arrow-preview-final-video/；9 秒交付录像与报告为 out/tmp/deliverables/。隔离游戏将在确认合并清理后删除。
+- 追加录制八种不同状态箭矢的滚轮往返预览，序号 1/8→8/8→1/8；15 次观察的位置相同，所有可见卡面均为 0.7 缩放，处于视口内。录制约 11.6 秒，H.264/AAC，文件为 out/tmp/deliverables/scroll-demo.mp4，明细为 scroll-check.json，帧图为 scroll-frames.png；录制期间仅滚轮输入和只读观察。
+- 用户要求先查看录像，尚未批准合并及清理；任务分支与工作树继续保留。
+
+## Synchronization
+
+- 任务实现提交 eddf2f9；同步的 main 为 f273561，无冲突。
+- 主分支新增卡图研究与命名记录，运行源码、运行数据及测试没有变化；已验证的实现和编译产物继续适用。
+- 原检出仍为 main，工作区干净；原有其他工作树保留。
+- 合并清理获准后，将录像、报告及两版 DLL 保存到主目录 artifacts/task-deliverables/arrow-preview-position-20261117/，然后清理本任务工作树、目录联接、隔离游戏和临时任务分支。

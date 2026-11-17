@@ -1,0 +1,126 @@
+{
+  "card": {
+    "collection": "cards",
+    "uid": "junna-pool-gap-fill-20261103_JA71",
+    "entity": {
+      "uid": "junna-pool-gap-fill-20261103_JA71",
+      "id": "JA71",
+      "name": "开演",
+      "type": "技能",
+      "system": "stage",
+      "rarity": "稀有",
+      "pool": true,
+      "cost": 3,
+      "upgradedCost": 3,
+      "turns": null,
+      "upgradedTurns": null,
+      "target": "自己",
+      "text": "获得12点格挡。所有飞矢加速到完成。",
+      "upgradedText": "获得16点格挡。所有飞矢加速到完成。",
+      "keywords": [],
+      "termIds": [
+        "KW_STAGE",
+        "EF05",
+        "EF32"
+      ],
+      "archetypeIds": [
+        "SYS_stage",
+        "SYS_energy"
+      ],
+      "breakthroughIds": [],
+      "partnerCardIds": [],
+      "art": "original-tv-ja71-kaien-window-lights-20261117",
+      "character": "星见纯那",
+      "role": "机制中坚牌",
+      "direction": "飞矢",
+      "draftStatus": "补位候选",
+      "draftBatch": "junna-pool-gap-fill-20261103",
+      "design": {
+        "classification": "机制中坚牌",
+        "textComplexity": "低",
+        "reference": "体系驱动卡池设计流程：低稀有入口、核心收益、中坚连接与端口补洞。",
+        "route": "飞矢",
+        "systems": [
+          "stage",
+          "energy"
+        ],
+        "routeRoles": {
+          "archetype_SYS_stage": {
+            "role": "payoff",
+            "cross": true,
+            "ports": [
+              "defense",
+              "operation"
+            ]
+          },
+          "archetype_SYS_energy": {
+            "role": "trigger",
+            "cross": true,
+            "ports": [
+              "defense",
+              "operation"
+            ]
+          }
+        },
+        "systemRoles": {
+          "stage": {
+            "role": "收益",
+            "port": "防御／运转"
+          },
+          "energy": {
+            "role": "触发",
+            "port": "防御／运转"
+          }
+        },
+        "triggerRole": "收益",
+        "port": "防御／运转",
+        "roleReason": "飞矢收益；能量/高费触发，提供防御／运转。",
+        "rules": "先获得当前版本12/16点格挡，再对当时有效的己方布置建立快照，按布置顺序逐张将剩余回合数加速到0并完成。未布置的飞矢牌保持印刷等待，过程中新增的布置留给后续动作。本牌按当前有效关键词正常处理，当前基础与升级牌面均正常弃置。",
+        "upgrade": "格挡12→16。",
+        "investment": "按当前版本支付3能量。",
+        "contractRevision": 3724
+      },
+      "extraHoverTips": [],
+      "notes": "先获得格挡，再使当前布置中的全部飞矢立即完成。\n先获得当前版本12/16点格挡，再对当时有效的己方布置建立快照，按布置顺序逐张将剩余回合数加速到0并完成。未布置的飞矢牌保持印刷等待，过程中新增的布置留给后续动作。本牌按当前有效关键词正常处理，当前基础与升级牌面均正常弃置。\n升级：格挡12→16。",
+      "naming": {
+        "original": "始まりました",
+        "translation": "开演了",
+        "chineseOriginal": "",
+        "kind": "用户指定中文名；原作歌词舞台语境",
+        "work": "《舞台プレパレイション》；演唱：スタァライト九九組；作词：中村彼方",
+        "url": "https://www.uta-net.com/song/261292/",
+        "adaptation": "纯那掌控的舞台圆窗同时亮起，表示此前安排的行动正式进入演出。所有已经布置的飞矢按结算顺序立即完成，格挡承接舞台装置对当前站位的保护。",
+        "verification": "2026-11-17用户选定卡名“开演”。原词在曲末由准备转入实际开场的段落出现。",
+        "artWork": "TV第2话·渴望的Revue，纯那掌控的舞台圆窗发出紫色光芒",
+        "artSourceUrl": "https://xenodude.com/2024/06/19/revue-starlight-ep-2/",
+        "artProof": "docs/worktree-tasks/xiansheng-qiming-fit-20261117/sources/xenodude-tv02-21.png；原图1920×1080，裁切200,0,920,690，输出960×720；精确播放秒数未定位。",
+        "artOriginalUrl": "https://xenodude.com/wp-content/uploads/2024/06/revue-starlight-ep.-2-21.png",
+        "artProcessing": "无字幕原帧裁切并等比例缩放。"
+      },
+      "cardPool": "角色"
+    },
+    "version": "38:34d5f7e85e48f1f46fc843be5b8fa1b7dc0353a511a3bb3c1a8c73f44c044bfb",
+    "revision": 5333
+  },
+  "fitPool": {
+    "collection": "fitPool",
+    "uid": "junna-pool-gap-fill-20261103_FIT_JA71",
+    "entity": {
+      "uid": "junna-pool-gap-fill-20261103_FIT_JA71",
+      "id": "FIT_CARD_JA71",
+      "name": "开演",
+      "theme": "舞台掌控：开演",
+      "text": "纯那掌控的舞台圆窗同时亮起，表示此前安排的行动正式进入演出。所有已经布置的飞矢按结算顺序立即完成，格挡承接舞台装置对当前站位的保护。",
+      "original": "始まりました",
+      "source": "《舞台プレパレイション》；演唱：スタァライト九九組；作词：中村彼方",
+      "sourceUrl": "https://www.uta-net.com/song/261292/",
+      "art": "original-tv-ja71-kaien-window-lights-20261117",
+      "cardIds": [
+        "JA71"
+      ],
+      "notes": "TV第2话·渴望的Revue，纯那掌控的舞台圆窗发出紫色光芒。配图来源：https://xenodude.com/2024/06/19/revue-starlight-ep-2/；docs/worktree-tasks/xiansheng-qiming-fit-20261117/sources/xenodude-tv02-21.png；原图1920×1080，裁切200,0,920,690，输出960×720；精确播放秒数未定位。"
+    },
+    "version": "9:b40e15cbf945547063bdb58a64dd99158673105b8220517bad93e7e64440aafb",
+    "revision": 5333
+  }
+}

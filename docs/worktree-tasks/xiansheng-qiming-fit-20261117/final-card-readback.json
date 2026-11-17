@@ -1,0 +1,318 @@
+{
+  "revision": 5336,
+  "cards": [
+    {
+      "collection": "cards",
+      "uid": "junna-pool-gap-fill-20261103_JA71",
+      "entity": {
+        "uid": "junna-pool-gap-fill-20261103_JA71",
+        "id": "JA71",
+        "name": "开演",
+        "type": "技能",
+        "system": "stage",
+        "rarity": "稀有",
+        "pool": true,
+        "cost": 3,
+        "upgradedCost": 3,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "text": "获得12点格挡。所有飞矢加速到完成。",
+        "upgradedText": "获得16点格挡。所有飞矢加速到完成。",
+        "keywords": [],
+        "termIds": [
+          "KW_STAGE",
+          "EF05",
+          "EF32"
+        ],
+        "archetypeIds": [
+          "SYS_stage",
+          "SYS_energy"
+        ],
+        "breakthroughIds": [],
+        "partnerCardIds": [],
+        "art": "original-tv-ja71-kaien-window-lights-20261117",
+        "character": "星见纯那",
+        "role": "机制中坚牌",
+        "direction": "飞矢",
+        "draftStatus": "补位候选",
+        "draftBatch": "junna-pool-gap-fill-20261103",
+        "design": {
+          "classification": "机制中坚牌",
+          "textComplexity": "低",
+          "reference": "体系驱动卡池设计流程：低稀有入口、核心收益、中坚连接与端口补洞。",
+          "route": "飞矢",
+          "systems": [
+            "stage",
+            "energy"
+          ],
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "payoff",
+              "cross": true,
+              "ports": [
+                "defense",
+                "operation"
+              ]
+            },
+            "archetype_SYS_energy": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "defense",
+                "operation"
+              ]
+            }
+          },
+          "systemRoles": {
+            "stage": {
+              "role": "收益",
+              "port": "防御／运转"
+            },
+            "energy": {
+              "role": "触发",
+              "port": "防御／运转"
+            }
+          },
+          "triggerRole": "收益",
+          "port": "防御／运转",
+          "roleReason": "飞矢收益；能量/高费触发，提供防御／运转。",
+          "rules": "先获得当前版本12/16点格挡，再对当时有效的己方布置建立快照，按布置顺序逐张将剩余回合数加速到0并完成。未布置的飞矢牌保持印刷等待，过程中新增的布置留给后续动作。本牌按当前有效关键词正常处理，当前基础与升级牌面均正常弃置。",
+          "upgrade": "格挡12→16。",
+          "investment": "按当前版本支付3能量。",
+          "contractRevision": 3724
+        },
+        "extraHoverTips": [],
+        "notes": "先获得格挡，再使当前布置中的全部飞矢立即完成。\n先获得当前版本12/16点格挡，再对当时有效的己方布置建立快照，按布置顺序逐张将剩余回合数加速到0并完成。未布置的飞矢牌保持印刷等待，过程中新增的布置留给后续动作。本牌按当前有效关键词正常处理，当前基础与升级牌面均正常弃置。\n升级：格挡12→16。",
+        "naming": {
+          "original": "始まりました",
+          "translation": "开演了",
+          "chineseOriginal": "",
+          "kind": "用户指定中文名；原作歌词舞台语境",
+          "work": "《舞台プレパレイション》；演唱：スタァライト九九組；作词：中村彼方",
+          "url": "https://www.uta-net.com/song/261292/",
+          "adaptation": "纯那掌控的舞台圆窗同时亮起，表示此前安排的行动正式进入演出。所有已经布置的飞矢按结算顺序立即完成，格挡承接舞台装置对当前站位的保护。",
+          "verification": "2026-11-17用户选定卡名“开演”。原词在曲末由准备转入实际开场的段落出现。",
+          "artWork": "TV第2话·渴望的Revue，纯那掌控的舞台圆窗发出紫色光芒",
+          "artSourceUrl": "https://xenodude.com/2024/06/19/revue-starlight-ep-2/",
+          "artProof": "docs/worktree-tasks/xiansheng-qiming-fit-20261117/sources/xenodude-tv02-21.png；原图1920×1080，裁切200,0,920,690，输出960×720；精确播放秒数未定位。",
+          "artOriginalUrl": "https://xenodude.com/wp-content/uploads/2024/06/revue-starlight-ep.-2-21.png",
+          "artProcessing": "无字幕原帧裁切并等比例缩放。"
+        },
+        "cardPool": "角色"
+      },
+      "version": "38:34d5f7e85e48f1f46fc843be5b8fa1b7dc0353a511a3bb3c1a8c73f44c044bfb",
+      "revision": 5334
+    },
+    {
+      "collection": "cards",
+      "uid": "junna_stability_shine_20261108_JS33",
+      "entity": {
+        "uid": "junna_stability_shine_20261108_JS33",
+        "id": "JS33",
+        "name": "道标",
+        "type": "技能",
+        "rarity": "罕见",
+        "system": "stage",
+        "pool": true,
+        "cost": 0,
+        "upgradedCost": 0,
+        "turns": null,
+        "upgradedTurns": null,
+        "target": "自己",
+        "text": "选择：从抽牌堆抽取2张飞矢牌，2张知识牌，或者2张闪耀牌。消耗。",
+        "upgradedText": "选择：从抽牌堆抽取3张飞矢牌，3张知识牌，或者3张闪耀牌。消耗。",
+        "keywords": [
+          "消耗",
+          "闪耀"
+        ],
+        "termIds": [
+          "KW_EXHAUST",
+          "KW_SHINE",
+          "KW_STAGE",
+          "EF13",
+          "EF27"
+        ],
+        "archetypeIds": [
+          "SYS_stage"
+        ],
+        "partnerCardIds": [],
+        "breakthroughIds": [],
+        "effectIds": [],
+        "ruleIds": [],
+        "art": "original-fit-js33-20261111",
+        "character": "星见纯那",
+        "role": "稳定性闪耀候选",
+        "direction": "找到飞矢来源",
+        "draftStatus": "稳定性补件",
+        "draftBatch": "junna-stability-shine-20261108",
+        "naming": {
+          "original": "道標",
+          "kind": "原作连续用词的忠实中文翻译",
+          "work": "《ペン：力：刀》纯那声部",
+          "url": "https://www.uta-net.com/song/305229/",
+          "adaptation": "取原曲中星星作为道标、指向舞台的用词。根据当前需要寻找飞矢或知识，表现沿指引取得接下来的行动；配图用纯那与奈奈交谈段落中的水面星光，让指引成为清楚可见的对象。",
+          "chineseOriginal": "",
+          "artWork": "TV第9话约22:11",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1331",
+          "artProof": "docs/design/assets/card-sources/2026-11-02/tv09-2210-new.jpg；裁切 320,70,1000,750；成品 docs/worktree-tasks/new-card-fit-20261111/portraits/JS33.jpg",
+          "artProcessing": "原作截图裁切并按比例缩放。",
+          "translation": "道标"
+        },
+        "design": {
+          "classification": "机制中坚牌",
+          "systems": [
+            "stage"
+          ],
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "payoff",
+              "cross": false,
+              "ports": [
+                "operation"
+              ]
+            }
+          },
+          "port": "运转",
+          "roleReason": "找到飞矢来源",
+          "shineMax": 6,
+          "upgradedShineMax": 6,
+          "rules": "从当前抽牌堆按抽取规则抽取至多2／3张飞矢牌，不足时抽取全部合格对象，再消耗本牌。闪耀上限6，按统一闪耀规则计次，升级补满至6。",
+          "upgrade": "从抽牌堆抽取3张飞矢牌。消耗。闪耀6。",
+          "investment": "支付0能量。",
+          "reference": "<card-research>/docs/体系驱动卡池设计流程.md（P-03、P-06、P-09）；<card-research>/docs/体系分析流程.md（来源、收益与功能标签）；<card-research>/docs/职业卡池设计要求_按五职业规律.md（第2、4、5、7节）；<card-research>/docs/mods/defect_card_analysis_zh.md（低费回收与泛用补洞）",
+          "textComplexity": "低",
+          "review": "单一主要动作，使用已有固有、消耗和闪耀关键词；不增加历史计数、跨回合欠账或耗尽成长；普通与罕见层补起手、运转和防御。"
+        },
+        "notes": "找到飞矢来源。按角色现有闪耀规则提供有限次数的稳定补给。",
+        "extraHoverTips": []
+      },
+      "version": "30:b4c198a7c206313f0c790466e18d1c4a26d1c341d1d454af9d4de66460d7ddc7",
+      "revision": 5334
+    },
+    {
+      "collection": "cards",
+      "uid": "9d005828-cd2a-43db-84fc-a0f83d403af4",
+      "entity": {
+        "uid": "9d005828-cd2a-43db-84fc-a0f83d403af4",
+        "id": "U_CARD_025",
+        "name": "初生之光",
+        "cost": 0,
+        "upgradedCost": 0,
+        "type": "技能",
+        "rarity": "罕见",
+        "cardPool": "角色",
+        "turns": null,
+        "upgradedTurns": null,
+        "text": "获得1点能量。然后作为5回合的飞矢打出。",
+        "upgradedText": "获得2点能量。然后作为5回合的飞矢打出。",
+        "system": "stage",
+        "pool": true,
+        "target": "自己",
+        "keywords": [],
+        "termIds": [
+          "KW_STAGE",
+          "EF_SELF_AS_FIVE_TURN_METEOR",
+          "EF09"
+        ],
+        "archetypeIds": [
+          "SYS_stage",
+          "SYS_energy"
+        ],
+        "partnerCardIds": [],
+        "effectIds": [
+          "EF09",
+          "EF_SELF_AS_FIVE_TURN_METEOR"
+        ],
+        "ruleIds": [],
+        "breakthroughIds": [],
+        "character": "星见纯那",
+        "art": "original-loop-u-card-025-20261116",
+        "draftStatus": "探索候选",
+        "draftBatch": "junna-five-turn-loop-exploration-20261116",
+        "role": "机制探索牌",
+        "direction": "能量循环来源；基础首次收回2费启动投入，后续循环提供可用于加速的资源。",
+        "naming": {
+          "original": "生まれたての光",
+          "translation": "初生之光",
+          "chineseOriginal": "",
+          "kind": "原作连续歌词的忠实自然译名",
+          "work": "《Star Divine》；スタァライト九九組；作词：中村彼方",
+          "url": "https://www.uta-net.com/song/236409/",
+          "adaptation": "以新生的星光表现获得能量。配图取纯那与奈奈在夜空下谈论舞台时的星群，星光作为下一次演出的行动资源；自身预定五回合后的再次亮起，构成持续的舞台供能。",
+          "artWork": "TV第9话约20:46，纯那与奈奈交谈时仰望的星空，取左上方星群",
+          "artSourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1246",
+          "artProof": "output/new-loop-fit-20261116/originals/U_CARD_025.png；原作截图 tv09-2045-proof.jpg；裁切 190,90,500,375",
+          "artProcessing": "GPT Image 2 Artifact Cleaner；alpha 0.25；原尺寸；BF16，256像素分块；成品 output/new-loop-fit-20261116/cleaned/U_CARD_025.png",
+          "review": {
+            "nameCheck": "已核对工作台1150条卡牌及Karen当前中文title；不断进化复用退役JK386B名称。",
+            "artCheck": "已对照当前纯那132张在用及备用卡图、Karen118张实际打包图片；本组构图逐张区分。",
+            "composition": "基础版、升级版与飞矢菱形遮罩逐张复核；保留关键动作或物件。"
+          }
+        },
+        "design": {
+          "classification": "机制探索",
+          "route": "飞矢／能量/高费",
+          "systems": [
+            "stage",
+            "energy"
+          ],
+          "routeRoles": {
+            "archetype_SYS_stage": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "operation"
+              ]
+            },
+            "archetype_SYS_energy": {
+              "role": "trigger",
+              "cross": true,
+              "ports": [
+                "operation"
+              ]
+            }
+          },
+          "triggerRole": "触发",
+          "port": "运转",
+          "rules": "首次按原攻击或技能类型支付费用并立即结算前段牌效，随后免支付能量，将同一实际牌作为5回合飞矢打出并建立一个新布置。重新打出只布置，牌效等待完成时结算；完成后再次执行前段牌效并重新布置，持续循环。保留原费用属性、升级、伤害加成及其他有效修改，每次重新打出均记录一次真实飞矢打出事件。单次加速仅作用于开始时选定的旧布置，新布置从下回合起自然推进。单体攻击沿用原目标，原目标失效按现有飞矢规则选择合法目标；格挡、抽牌和能量归牌主。消耗等明确去向沿现有飞矢规则处理。",
+          "loopTurns": 5,
+          "loopTurnsUpgraded": 5,
+          "loopFreePlay": true,
+          "balance": "能量循环来源；基础首次收回2费启动投入，后续循环提供可用于加速的资源。",
+          "fit": "以新生的星光表现获得能量。配图取纯那与奈奈在夜空下谈论舞台时的星群，星光作为下一次演出的行动资源；自身预定五回合后的再次亮起，构成持续的舞台供能。",
+          "artStatus": "原作截图已完成",
+          "review": "备用探索：按当前卡池比较短战启动、常规加速与成型循环三种情况。"
+        },
+        "notes": "能量循环来源；基础首次收回2费启动投入，后续循环提供可用于加速的资源。",
+        "arrowFocus": {
+          "x": 0.5,
+          "y": 0.5
+        }
+      },
+      "version": "8:fc1a9a901d58969f7eafc4260307f67029547c5e22faece93d17e671388b7036",
+      "revision": 5334
+    }
+  ],
+  "fit": {
+    "collection": "fitPool",
+    "uid": "junna-pool-gap-fill-20261103_FIT_JA71",
+    "entity": {
+      "uid": "junna-pool-gap-fill-20261103_FIT_JA71",
+      "id": "FIT_CARD_JA71",
+      "name": "开演",
+      "theme": "舞台掌控：开演",
+      "text": "纯那掌控的舞台圆窗同时亮起，表示此前安排的行动正式进入演出。所有已经布置的飞矢按结算顺序立即完成，格挡承接舞台装置对当前站位的保护。",
+      "original": "始まりました",
+      "source": "《舞台プレパレイション》；演唱：スタァライト九九組；作词：中村彼方",
+      "sourceUrl": "https://www.uta-net.com/song/261292/",
+      "art": "original-tv-ja71-kaien-window-lights-20261117",
+      "cardIds": [
+        "JA71"
+      ],
+      "notes": "TV第2话·渴望的Revue，纯那掌控的舞台圆窗发出紫色光芒。配图来源：https://xenodude.com/2024/06/19/revue-starlight-ep-2/；docs/worktree-tasks/xiansheng-qiming-fit-20261117/sources/xenodude-tv02-21.png；原图1920×1080，裁切200,0,920,690，输出960×720；精确播放秒数未定位。"
+    },
+    "version": "9:b40e15cbf945547063bdb58a64dd99158673105b8220517bad93e7e64440aafb",
+    "revision": 5336
+  }
+}

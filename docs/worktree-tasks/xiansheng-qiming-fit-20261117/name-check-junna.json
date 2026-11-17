@@ -1,0 +1,28 @@
+{
+  "revision": 5336,
+  "junnaCards": 1150,
+  "fitPoolEntries": 458,
+  "normalization": "NFKC; remove whitespace, punctuation, symbols, upgrade suffix",
+  "candidates": {
+    "开演": {
+      "junnaMatches": [
+        "JA71"
+      ],
+      "fitPoolMatches": [
+        "FIT_CARD_JA71"
+      ]
+    },
+    "自己决定": {
+      "junnaMatches": [],
+      "fitPoolMatches": []
+    },
+    "答案就在手中": {
+      "junnaMatches": [],
+      "fitPoolMatches": []
+    },
+    "舞台还将继续": {
+      "junnaMatches": [],
+      "fitPoolMatches": []
+    }
+  }
+}

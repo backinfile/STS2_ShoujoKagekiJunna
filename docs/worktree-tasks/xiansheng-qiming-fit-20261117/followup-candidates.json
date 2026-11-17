@@ -1,0 +1,56 @@
+[
+  {
+    "id": "JS33",
+    "name": "自己决定",
+    "original": "自分で決める",
+    "work": "Regalia -継承-",
+    "url": "https://www.uta-net.com/song/326249/",
+    "artist": "シークフェルト音楽学院中等部",
+    "kind": "原作连续歌词的忠实自然译名",
+    "reason": "自己决定要哪类资源，再从抽牌堆找到这一类的2／3张牌。",
+    "art": "JS33-planning-candidate.png",
+    "artSource": "https://i.imgur.com/fzxiHGW.jpeg",
+    "sourceWork": "TV第11话，纯那持工作表向同学报告舞台创造科的安排。",
+    "crop": [
+      880,
+      140,
+      1900,
+      905
+    ],
+    "alternatives": [
+      {
+        "name": "答案就在手中",
+        "original": "答えはこの手の中に",
+        "work": "Regalia -継承-",
+        "url": "https://www.uta-net.com/song/326249/",
+        "art": "JS33-book-candidate.png",
+        "reason": "根据当前问题找到可用的资源，配纯那拿来英语参考书的原作画面。"
+      }
+    ],
+    "officialUrl": "https://bushiroad-music.com/musics/brmm-10570/"
+  },
+  {
+    "id": "U_CARD_025",
+    "name": "舞台还将继续",
+    "original": "ステージは続く",
+    "work": "私たちはもう舞台の上",
+    "url": "https://www.uta-net.com/song/304084/",
+    "artist": "スタァライト九九組",
+    "kind": "原作连续歌词的忠实自然译名",
+    "reason": "以每次完成后重新布置、五回合后继续登台表现舞台掌控的循环；每次兑现补充1／2能量，支持接下来的演出。",
+    "art": "U_CARD_025-stage-candidate.png",
+    "artSource": "https://i.imgur.com/pQyPRPI.png",
+    "sourceWork": "TV第11话《舞台少女心得 幕间》，纯那挥手相约下一次舞台。",
+    "crop": [
+      350,
+      115,
+      1430,
+      925
+    ],
+    "arrowFocus": {
+      "x": 0.37,
+      "y": 0.5
+    },
+    "alternatives": []
+  }
+]
