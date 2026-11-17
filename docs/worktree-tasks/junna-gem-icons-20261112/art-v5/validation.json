@@ -1,0 +1,85 @@
+{
+  "dimensions": [
+    128,
+    128
+  ],
+  "format": "RGBA PNG",
+  "transforms": {
+    "green_gem": {
+      "mode": "reused unchanged",
+      "sourceBase": "art-v3"
+    },
+    "burning_gem": {
+      "crop": [
+        262,
+        71,
+        989,
+        1166
+      ],
+      "scale": 0.10228310502283106,
+      "offset": [
+        27,
+        8
+      ]
+    }
+  },
+  "outline": "individual gemstone alpha",
+  "checks": {
+    "transparentMargins": true,
+    "independentSilhouettes": true,
+    "eachOutlineMatchesGem": true,
+    "onlyGemstone": true
+  },
+  "files": [
+    {
+      "path": "ShoujoKagekiJunna/images/relics/green_gem.png",
+      "sha256": "9ec40bef69dbd4944390a86f22223d7e064308517be8411af3d49707840642b7",
+      "bbox": [
+        14,
+        8,
+        113,
+        120
+      ]
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/green_gem_outline.png",
+      "sha256": "6792246adc6bd0851c0d8eef86021822e4d0bf0fe2e2f9c14cfec58d26dd2541",
+      "bbox": [
+        14,
+        8,
+        113,
+        120
+      ]
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/burning_gem.png",
+      "sha256": "748470a5e61e48bf40ae096d7f385bafa3f8e305a634551ac2ae0ecebabcf1e8",
+      "bbox": [
+        27,
+        8,
+        101,
+        120
+      ]
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/burning_gem_outline.png",
+      "sha256": "8ee9f436bbbee0dc99d0967444743c38b579f09a378e23234df7825e990b5391",
+      "bbox": [
+        27,
+        8,
+        101,
+        120
+      ]
+    }
+  ],
+  "reusedUnchanged": [
+    {
+      "path": "ShoujoKagekiJunna/images/relics/green_gem.png",
+      "sha256": "9ec40bef69dbd4944390a86f22223d7e064308517be8411af3d49707840642b7"
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/green_gem_outline.png",
+      "sha256": "6792246adc6bd0851c0d8eef86021822e4d0bf0fe2e2f9c14cfec58d26dd2541"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "originals_preserved": true,
+  "dimensionsPreservedDuringCleanup": true,
+  "vae": "Flux2 VAE",
+  "residual": "LatentR R_ema",
+  "assets": [
+    {
+      "key": "burning_gem",
+      "source": "docs/worktree-tasks/junna-gem-icons-20261112/art-v5/originals/burning_gem.png",
+      "cleanedNative": "docs/worktree-tasks/junna-gem-icons-20261112/art-v5/cleaned-native/burning_gem.png",
+      "file": "docs/worktree-tasks/junna-gem-icons-20261112/art-v5/icons/burning_gem.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "eligibleAlphaMinimum": 250,
+      "source_sha256": "c56ee0ad4ebcf7f31ddb0aceaa50724c7eaf27f84c77adb77601b44d4535a4bd",
+      "cleaned_sha256": "aa741d7fcfde5c1adf1be9b8883118b500f54b22ecf86502dceb9cdf2354d21e",
+      "sha256": "94d1052bd30409cf75da0235e6d74d4913a5663b4459a85e85e7605bc6c88894",
+      "visibleRgbMeanAbsoluteChange": 0.4015,
+      "seconds": 3.0
+    }
+  ]
+}

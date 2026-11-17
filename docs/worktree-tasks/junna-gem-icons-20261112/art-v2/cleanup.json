@@ -1,0 +1,61 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "originals_preserved": true,
+  "dimensionsPreservedDuringCleanup": true,
+  "vae": "Flux2 VAE",
+  "residual": "LatentR R_ema",
+  "assets": [
+    {
+      "key": "burning_gem",
+      "source": "docs/worktree-tasks/junna-gem-icons-20261112/art-v2/originals/burning_gem.png",
+      "cleanedNative": "docs/worktree-tasks/junna-gem-icons-20261112/art-v2/cleaned-native/burning_gem.png",
+      "file": "docs/worktree-tasks/junna-gem-icons-20261112/art-v2/icons/burning_gem.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "eligibleAlphaMinimum": 250,
+      "source_sha256": "702d1459d3fdb185100bda1825906d6146382b964d10f20efd41d641d5aaaea1",
+      "cleaned_sha256": "59ffde985da11d3dde1de4c99fc1b11a84a2a5d97c4a776be3746320b5265f83",
+      "sha256": "abd722c08ef2b7d8a2ea79b4c36a8627291bfe65ef9c4d5c0789c85d373772f4",
+      "visibleRgbMeanAbsoluteChange": 0.7264,
+      "seconds": 3.109
+    },
+    {
+      "key": "green_gem",
+      "source": "docs/worktree-tasks/junna-gem-icons-20261112/art-v2/originals/green_gem.png",
+      "cleanedNative": "docs/worktree-tasks/junna-gem-icons-20261112/art-v2/cleaned-native/green_gem.png",
+      "file": "docs/worktree-tasks/junna-gem-icons-20261112/art-v2/icons/green_gem.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "iconSize": [
+        256,
+        256
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "eligibleAlphaMinimum": 250,
+      "source_sha256": "8460922898a625e732e7eaf5f4fa34621f79df4253eb1ebe8dd977b31f006921",
+      "cleaned_sha256": "89f6dc35766fafdaf1204d79892346bedd2205884141de55441339c17015a54b",
+      "sha256": "7ff25f3372f383677c451ea77d51ee9433521d3f29fadbf5138dc3d1843b678e",
+      "visibleRgbMeanAbsoluteChange": 0.8037,
+      "seconds": 2.703
+    }
+  ]
+}

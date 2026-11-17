@@ -1,0 +1,31 @@
+{
+  "resources": [
+    {
+      "currentBlob": "73bf12d34fa2114b03c30b4a804d938278e6e023",
+      "originalBlob": "73bf12d34fa2114b03c30b4a804d938278e6e023",
+      "path": "ShoujoKagekiJunna/images/relics/green_gem.svg",
+      "identical": true
+    },
+    {
+      "currentBlob": "1f90473ebc3e92ecb94c62d9441a9366daf13529",
+      "originalBlob": "1f90473ebc3e92ecb94c62d9441a9366daf13529",
+      "path": "ShoujoKagekiJunna/images/relics/green_gem_outline.svg",
+      "identical": true
+    },
+    {
+      "currentBlob": "5f536c0139bbde0318e4bbd6516afb8a52b1d516",
+      "originalBlob": "5f536c0139bbde0318e4bbd6516afb8a52b1d516",
+      "path": "ShoujoKagekiJunna/images/relics/burning_gem.svg",
+      "identical": true
+    },
+    {
+      "currentBlob": "1f90473ebc3e92ecb94c62d9441a9366daf13529",
+      "originalBlob": "1f90473ebc3e92ecb94c62d9441a9366daf13529",
+      "path": "ShoujoKagekiJunna/images/relics/burning_gem_outline.svg",
+      "identical": true
+    }
+  ],
+  "originalCommit": "e5bc4fa16f2e0adbcf02bdc46f298d5fd26e762a",
+  "newRuntimePNGsRemoved": true,
+  "iconsUseSVG": true
+}

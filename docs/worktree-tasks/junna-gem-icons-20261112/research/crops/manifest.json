@@ -1,0 +1,20 @@
+{
+  "operation": "source crop only; comparison boards enlarge with nearest-neighbor sampling",
+  "coordinateConvention": "x, y, width, height in source pixels",
+  "settingSource": "https://artsee.cc/collection/327",
+  "movieSettingSource": "https://artsee.cc/collection/326",
+  "crops": [
+    {"file":"bow-setting.png","source":"docs/worktree-tasks/junna-gem-icons-20261112/research/weapons/tv-preview-32.webp","rectangle":[905,365,360,500]},
+    {"file":"bow-movie-color.png","source":"docs/worktree-tasks/junna-gem-icons-20261112/research/weapons/movie-preview-115.webp","rectangle":[390,1040,175,130]},
+    {"file":"bow-movie-setting.png","source":"docs/worktree-tasks/junna-gem-icons-20261112/research/weapons/movie-preview-115.webp","rectangle":[185,795,135,180]},
+    {"file":"nana-original-topaz.png","source":"docs/worktree-tasks/junna-gem-icons-20261112/research/weapons/tv-preview-33.webp","rectangle":[805,350,340,355]},
+    {"file":"junna-short-blade-gem.png","source":"docs/worktree-tasks/junna-gem-icons-20261112/research/weapons/movie-preview-122.webp","rectangle":[430,840,450,275]},
+    {"file":"junna-short-blade-bottom.png","source":"docs/worktree-tasks/junna-gem-icons-20261112/research/weapons/movie-preview-122.webp","rectangle":[640,1095,240,320]},
+    {"file":"junna-short-blade-handle.png","source":"docs/worktree-tasks/junna-gem-icons-20261112/research/weapons/movie-preview-122.webp","rectangle":[365,890,245,235]},
+    {"file":"bow-tv-closeup.png","source":"docs/design/assets/card-sources/2026-11-02/tv02-1705-action.jpg","rectangle":[420,0,480,490]},
+    {"file":"bow-tv-whole.png","source":"docs/design/assets/card-sources/2026-11-02/tv02-energy-gem-1710-20261103.png","rectangle":[1325,60,220,180]},
+    {"file":"movie-broken-gem.png","source":"docs/design/assets/card-sources/2026-11-02/film-hunt-516.jpg","rectangle":[650,340,580,400]},
+    {"file":"movie-short-blade-light.png","source":"docs/design/assets/card-sources/2026-11-02/film-hunt-528.jpg","rectangle":[720,480,455,225]}
+  ],
+  "boards": ["setting-comparison.png","bow-color-references.png","short-blade-context.png"]
+}

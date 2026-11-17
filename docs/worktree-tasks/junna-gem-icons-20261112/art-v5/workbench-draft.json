@@ -1,0 +1,34 @@
+{
+  "clientId": "codex-junna-gem-icons-20261112",
+  "requestId": "5df8d6c8-8859-47db-a646-83de5f841866",
+  "label": "按尖塔原版遗物画风从零重画燃烧宝石",
+  "changes": [
+    {
+      "collection": "relics",
+      "uid": "relic_junna_burning_gem",
+      "expectedVersion": "8:372dea2212662ba5e730d3e5fb2aa4dedfa77142688814b1e099039f11dd0f8f",
+      "expectedFields": {
+        "art": "relic-burning-gem-movie-fire-v4-20261112"
+      },
+      "updates": {
+        "art": "relic-burning-gem-native-v5-20261112"
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_relic_junna_burning_gem",
+      "expectedVersion": "12:9809fe15b1f06e26c0e768ef5fe881c1834ce00ed6b9a65baa605a74c3235c95",
+      "expectedFields": {
+        "art": "relic-burning-gem-movie-fire-v4-20261112",
+        "notes": "初始遗物绿色宝石的升级版，名称取自“燃える宝石のようなキラめき”。图标实体依据《Memory of Revue》书内119页纯那脇差柄端的不规则凸起宝石，沿用从零绘制版的绿色切面与不规则造型，去掉包托、底座和刀柄。按用户要求加入剧场版狩猎的Revue金黄色燃烧效果：片段05:45的金黄色光焰与白亮火芯、06:09纯那短刃柄端的白亮光焰。火焰沿后方和边缘上卷，绿色主体清晰，外围留透明边距；图标及悬停轮廓同步更新。每当牌组中增加或者失去卡牌时，回复3点生命。当同时获得或者失去多张时，按张数计算回复值。使用内置image_gen编辑，经本地Artifact Cleaner在原尺寸清理，导出128像素透明PNG。"
+      },
+      "updates": {
+        "art": "relic-burning-gem-native-v5-20261112",
+        "notes": "初始遗物绿色宝石的升级版，名称取自“燃える宝石のようなキラめき”。物件依据《Memory of Revue》书内119页纯那脇差柄端的不规则凸起宝石，去掉包托、底座和刀柄。用户否定发光特效画法后，整张图按尖塔本体遗物画风从零重画：火焰直接参照燃烧之血与卡戎之灰，采用红橙色火舌、少量黄芯和粗暗轮廓；矿石参照硫磺与贤者之石，采用有限的大色块、哑光明暗与轻微干笔笔触。宝石为主，火焰集中在上缘后方。每当牌组中增加或者失去卡牌时，回复3点生命。当同时获得或者失去多张时，按张数计算回复值。内置image_gen仅输入原版图标和原作形状参考生成，经本地Artifact Cleaner原尺寸清理，导出128像素透明PNG及独立悬停轮廓。"
+      }
+    }
+  ],
+  "assets": {
+    "relic-burning-gem-native-v5-20261112": "<PNG asset data>"
+  }
+}

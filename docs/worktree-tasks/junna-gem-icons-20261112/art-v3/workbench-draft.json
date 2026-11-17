@@ -1,0 +1,59 @@
+{
+  "clientId": "codex-junna-gem-icons-20261112",
+  "requestId": "dd7554aa-7210-4f53-8bb7-7622e250bff0",
+  "label": "从零独立重绘弓端完整宝石与纯那短刃不规则宝石",
+  "changes": [
+    {
+      "collection": "relics",
+      "uid": "relic_junna_green_gem",
+      "expectedVersion": "4:d455ed5a365de47989239df900b19d5a20426ef6f4fa32baa970d809d551c6f4",
+      "expectedFields": {
+        "art": "relic-green-gem-bare-20261112"
+      },
+      "updates": {
+        "art": "relic-green-gem-from-zero-v3-20261112"
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_relic_junna_green_gem",
+      "expectedVersion": "8:4f4966a8b3cec7cdadf9f7808b54ff1c0ae86df04badb3c68729f39c650757cd",
+      "expectedFields": {
+        "art": "relic-green-gem-bare-20261112",
+        "notes": "纯那弓端发光的绿色宝石。每当牌组中增加或者失去卡牌时，回复1点生命。当同时获得或者失去多张时，按张数计算回复值。图标依据《少女☆歌劇 レヴュースタァライト 設定資料集》“翡翠弓”页的“宝石のUP”（公开预览第32张）及TV第2话17:07近景重绘。按用户要求仅保留完整宝石，去掉包托和底座。两版沿用同一切面布局，升级版增强内部白光、青绿色溢光及放射光芒。透明PNG由内置image_gen生成，经本地Artifact Cleaner按原尺寸处理后导出128像素。Memory of Revue读者记录提及祖母绿，材质原文尚待直接核对。"
+      },
+      "updates": {
+        "art": "relic-green-gem-from-zero-v3-20261112",
+        "notes": "纯那弓端完整的绿色宝石。造型依据《少女☆歌劇 レヴュースタァライト 設定資料集》“翡翠弓”页的“宝石のUP”（公开预览第32张），配色参考剧场版角色彩图及TV第2话近景，采用圆润完整外轮廓与放射三角切面。每当牌组中增加或者失去卡牌时，回复1点生命。当同时获得或者失去多张时，按张数计算回复值。按用户要求只保留宝石，去掉包托、底座与刀柄。两图均由内置image_gen仅使用原作参考从零独立生成，采用各自的造型与悬停轮廓，经本地Artifact Cleaner原尺寸处理后导出128像素透明PNG。"
+      }
+    },
+    {
+      "collection": "relics",
+      "uid": "relic_junna_burning_gem",
+      "expectedVersion": "5:7eedd1b30216c69ed5fd48fd8843191ce6c743cb98ce2cce49880da8a39a9108",
+      "expectedFields": {
+        "art": "relic-burning-gem-bare-20261112"
+      },
+      "updates": {
+        "art": "relic-burning-gem-from-zero-v3-20261112"
+      }
+    },
+    {
+      "collection": "fitPool",
+      "uid": "fit_relic_junna_burning_gem",
+      "expectedVersion": "9:e334c7740f207ecfa75dc58274d74ae21fb193f1aab97bbcfe0e0aeed0fe0312",
+      "expectedFields": {
+        "art": "relic-burning-gem-bare-20261112",
+        "notes": "初始遗物绿色宝石的升级版，名称取自“燃える宝石のようなキラめき”。每当牌组中增加或者失去卡牌时，回复2点生命。当同时获得或者失去多张时，按张数计算回复值。图标依据《少女☆歌劇 レヴュースタァライト 設定資料集》“翡翠弓”页的“宝石のUP”（公开预览第32张）及TV第2话17:07近景重绘。按用户要求仅保留完整宝石，去掉包托和底座。两版沿用同一切面布局，升级版增强内部白光、青绿色溢光及放射光芒。透明PNG由内置image_gen生成，经本地Artifact Cleaner按原尺寸处理后导出128像素。Memory of Revue读者记录提及祖母绿，材质原文尚待直接核对。"
+      },
+      "updates": {
+        "art": "relic-burning-gem-from-zero-v3-20261112",
+        "notes": "初始遗物绿色宝石的升级版，名称取自“燃える宝石のようなキラめき”。图标造型依据《Memory of Revue》书内119页（公开预览第122张）纯那脇差柄端“宝石のUP”，突出不规则、非对称凸起与断面，以集中青白亮光表现燃烧般的光芒；与TV设定中奈奈原刀柄标注的托帕石分开记录。每当牌组中增加或者失去卡牌时，回复2点生命。当同时获得或者失去多张时，按张数计算回复值。按用户要求只保留宝石，去掉包托、底座与刀柄。两图均由内置image_gen仅使用原作参考从零独立生成，采用各自的造型与悬停轮廓，经本地Artifact Cleaner原尺寸处理后导出128像素透明PNG。"
+      }
+    }
+  ],
+  "assets": {
+    "relic-green-gem-from-zero-v3-20261112": "<PNG asset data>",
+    "relic-burning-gem-from-zero-v3-20261112": "<PNG asset data>"
+  }
+}

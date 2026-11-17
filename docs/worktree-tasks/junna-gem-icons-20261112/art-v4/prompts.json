@@ -1,0 +1,40 @@
+{
+  "tool": "built-in image_gen",
+  "mode": "precise-object-edit",
+  "transparent_background": true,
+  "editTarget": "art-v3/cleaned-native/burning_gem.png",
+  "prompts": [
+    {
+      "purpose": "add movie golden fire",
+      "prompt": "Use case: precise-object-edit.\nEdit target Image 1: the supplied finished irregular green gemstone game icon. This is Junna's upgraded \"燃烧宝石\" relic.\nSupporting visual references Images 2 and 3: original Revue Starlight movie Hunting Revue frames. Use ONLY their FIRE/LIGHT qualities: brilliant WHITE-YELLOW heart, saturated luminous GOLDEN-YELLOW fire and close warm AMBER glow. Do not include the sword, people, captions or scene from those references.\nUser request: ADD THE MOVIE'S BURNING EFFECT to the existing gem.\nKeep the exact recognizable jagged stone: preserve its irregular silhouette, all chips and notches, faceted geometry, orientation, dark-green side, green front faces and existing pale internal gleam. It must remain the same coherent gemstone, no redesign or new facets. Uniformly reduce the whole stone slightly if needed for effect margin; it should still occupy around 65-70% of canvas height.\nAdd a clearly visible tightly arranged wreath of stylized golden fire rising from the rear and lower side edges: about 4-6 tapering, flowing asymmetric flame tongues curling upward behind the gem and above the highest edge. The flame shapes have small near-white yellow inner tips/cores, strong lemon-gold bodies, and slender warm amber outer rims, matching the glowing golden-white movie sequence. Keep the effect crisp and anime-like, made of broad clean flame shapes that read at 32px, with a small translucent golden bloom close to the flames. A couple of tiny golden embers may rise close to the top. Let warm light lightly catch the gem's outside facets. Keep at least two-thirds of the FRONT green gemstone unobscured: flames frame the object mainly from behind and the sides; the front green facets and deep green side must stay easy to recognize.\nStyle: match the existing clean cel-shaded hand-painted roguelike inventory icon, high contrast with limited large color shapes. Intense luminous golden burning, restrained soft bloom. The fire is a magical effect around a green gem, no molten transformation.\nComposition: centered single gem and its fire, whole effect fully inside the square canvas with at least 6% clear transparent margin at all edges.\nOutput true transparent alpha including partially transparent glow. No background color, floor, shadow, frame, text, caption, sword, grip, mount, socket, stand, gold metal or other prop. No smoke cloud and no black fire."
+    },
+    {
+      "purpose": "preserve full flame tips and transparent margins",
+      "prompt": "Use case: precise-object-edit.\nKeep this exact green gemstone with its golden-white flame effect. Make ONE framing correction only: zoom the ENTIRE gemstone and fire together OUT by about 20%, centered in the same square canvas, so the COMPLETE flame tongues and translucent glow are comfortably contained and surrounded by at least 8% fully transparent space on EVERY side. Reconstruct the tiny outer tip of the uppermost flame if it was clipped at the old top edge.\nPreserve the gemstone's shape, all facet boundaries, pose, colors, green face, dark green side, and the entire existing arrangement and style of the bright yellow-white fire with golden bodies and amber rims. No redesign or additional elements. Keep the front face of the gem as readable as it currently is. Real transparent alpha with clean transparent margins; no background, shadow, border or text. Output only the corrected single icon."
+    }
+  ],
+  "references": [
+    {
+      "file": "references/movie-blade-flare-0609.png",
+      "source": "docs/design/assets/card-sources/2026-11-02/film-hunt-608.jpg",
+      "rectangle": [
+        0,
+        265,
+        330,
+        400
+      ],
+      "scene": "狩猎的Revue片段06:09，纯那短刃柄端白亮光焰"
+    },
+    {
+      "file": "references/movie-golden-fire-0545.png",
+      "source": "docs/design/assets/card-sources/2026-11-02/film-hunt-544.jpg",
+      "rectangle": [
+        605,
+        155,
+        680,
+        580
+      ],
+      "scene": "狩猎的Revue片段05:45，金黄色燃烧与白亮火芯"
+    }
+  ]
+}

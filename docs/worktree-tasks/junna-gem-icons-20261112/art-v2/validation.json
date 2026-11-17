@@ -1,0 +1,67 @@
+{
+  "dimensions": [
+    128,
+    128
+  ],
+  "format": "RGBA PNG",
+  "sharedCrop": [
+    110,
+    98,
+    1142,
+    1186
+  ],
+  "sharedScale": 0.10294117647058823,
+  "sharedOffset": [
+    11,
+    8
+  ],
+  "outline": "shared physical gemstone alpha, excludes upgraded glow",
+  "checks": {
+    "transparentMargins": true,
+    "sharedCoordinateTransform": true,
+    "sharedOutline": true,
+    "onlyGemstone": true
+  },
+  "files": [
+    {
+      "path": "ShoujoKagekiJunna/images/relics/green_gem.png",
+      "sha256": "bcf04dfb6a889a325f15e49069fb907fd5f846ec76ad1305d6dc8556d4df9d46",
+      "bbox": [
+        12,
+        8,
+        114,
+        120
+      ]
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/green_gem_outline.png",
+      "sha256": "f91586fa2f9f6d1b0c22a87f7f1cb439ebb15833c13d061485df6d2458abf699",
+      "bbox": [
+        12,
+        8,
+        114,
+        120
+      ]
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/burning_gem.png",
+      "sha256": "940e9f17cf974f31299024f3bdbc2db29f1d466c9ed7ea5cf3e57769a1172aa5",
+      "bbox": [
+        11,
+        8,
+        117,
+        120
+      ]
+    },
+    {
+      "path": "ShoujoKagekiJunna/images/relics/burning_gem_outline.png",
+      "sha256": "f91586fa2f9f6d1b0c22a87f7f1cb439ebb15833c13d061485df6d2458abf699",
+      "bbox": [
+        12,
+        8,
+        114,
+        120
+      ]
+    }
+  ]
+}
