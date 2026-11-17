@@ -134,8 +134,22 @@ internal static class AttackBatchPatch
             bool isDamage = instruction.Calls(DamagePatches.CanonicalDamage) || externalHitHook;
             if (externalHitHook)
             {
-                DamageExecution.AttackHitHooks = method!.CreateDelegate<DamageExecution.AttackHitHooksDamage>();
-                yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(DamageExecution), nameof(DamageExecution.FromAttackHitHooks)))
+                var bridge = AccessTools.Method(typeof(DamageExecution), nameof(DamageExecution.FromAttackHitHooks));
+#if STS2_BETA
+                var targetBridge = AccessTools.Method(typeof(DamageExecution), nameof(DamageExecution.FromAttackTargetHitHooks));
+                if (MatchesSignature(method!, targetBridge))
+                {
+                    DamageExecution.AttackTargetHitHooks = method!.CreateDelegate<DamageExecution.AttackTargetHitHooksDamage>();
+                    bridge = targetBridge;
+                }
+                else
+#endif
+                {
+                    if (!MatchesSignature(method!, bridge))
+                        throw new InvalidOperationException($"Junna: unsupported RitsuLib attack hit signature: {method}.");
+                    DamageExecution.AttackHitHooks = method!.CreateDelegate<DamageExecution.AttackHitHooksDamage>();
+                }
+                yield return new CodeInstruction(OpCodes.Call, bridge)
                     .WithLabels(instruction.labels);
                 replacements++;
                 continue;
@@ -156,4 +170,9 @@ internal static class AttackBatchPatch
         }
         if (replacements != 1) throw new InvalidOperationException($"Junna: expected one AttackCommand damage boundary, found {replacements}.");
     }
+
+    private static bool MatchesSignature(MethodInfo method, MethodInfo bridge) =>
+        method.IsStatic && method.ReturnType == bridge.ReturnType &&
+        method.GetParameters().Select(parameter => parameter.ParameterType)
+            .SequenceEqual(bridge.GetParameters().Select(parameter => parameter.ParameterType));
 }

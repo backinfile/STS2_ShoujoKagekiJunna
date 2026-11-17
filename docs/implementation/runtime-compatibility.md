@@ -6,6 +6,8 @@
 
 与 RitsuLib 联用时，攻击批次补丁在其命中钩子之后安装，保留并调用 `DamageWithAttackHitHooks`，再围住同一批次的伤害次数处理。原先直接替换原版伤害调用会使 RitsuLib 找不到目标，从而中断纯那的补丁安装，表现为能量保留等后续钩子失效。
 
+Beta 按实际方法的完整签名选择命中桥接，兼容旧 `IEnumerable<Creature>` 入口与新增的 `IEnumerable<DamageTargetData>`、`ModifyDamageHookType` 入口。新增入口原样传递目标伤害数据和伤害钩子标记，避免启动时因委托签名不匹配而中断纯那初始化；原有命中钩子和批次计数继续保留。
+
 Core 1.1.0 通过 ICardPlayRouting 统一处理原生与 RitsuLib 的出牌入口。Junna 注册 HandArrow 中间件与结果牌区；Core 在 ModelsReady 后安装原生适配，并在 RitsuLib 分发器内部接入，保留其打出前后监听与跳过牌效逻辑。tests/CompatibilityChecks 和 tests/CombatPatchChecks 共用同一探针源码，运行参数依次为角色实现 DLL、RitsuLib 目录、Core API DLL、Core Runtime DLL；用 -p:Sts2Api=stable 或 beta 选择对应引用与第三方 Runtime。
 
 原生变化通过 `CardCmd.Transform` 直接入牌堆。已登记事件或遗物方法内的永久变化补齐知识关联牌，未登记变化只替换指定卡牌；单张作用域仍只产生指定对象。具体来源、选项及方法见[知识牌获取来源清单](knowledge-acquisition-sources.md)。引经据典沿用本体 `CalculatedDamageVar`，预览和结算共享知识计数，伤害投资在未运行全局钩子的牌区预览中也生效。

@@ -180,6 +180,28 @@ public static class DamageExecution
         }
     }
 
+#if STS2_BETA
+    internal delegate Task<IEnumerable<DamageResult>> AttackTargetHitHooksDamage(
+        PlayerChoiceContext context, IEnumerable<DamageTargetData>? targets, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay, ModifyDamageHookType modifyDamageHookType,
+        AttackCommand attack, int hitIndex, decimal hitCount);
+    internal static AttackTargetHitHooksDamage? AttackTargetHitHooks;
+
+    public static async Task<IEnumerable<DamageResult>> FromAttackTargetHitHooks(
+        PlayerChoiceContext context, IEnumerable<DamageTargetData>? targets, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay, ModifyDamageHookType modifyDamageHookType,
+        AttackCommand attack, int hitIndex, decimal hitCount)
+    {
+        using var batch = BeginDamageBatch(attack.ModelSource, countHandled: true);
+        try { return await AttackTargetHitHooks!(context, targets, amount, props, dealer, cardSource,
+            cardPlay, modifyDamageHookType, attack, hitIndex, hitCount); }
+        finally
+        {
+            if (AttackProgressByCommand.TryGetValue(attack, out var progress)) progress.CompletedHits++;
+        }
+    }
+#endif
+
     /// <summary>Only the canonical damage call inside AttackCommand uses this gate. Nested effects create new batches.</summary>
     public static async Task<IEnumerable<DamageResult>> FromAttack(
         PlayerChoiceContext context, IEnumerable<DamageTarget>? targets, decimal amount, ValueProp props,
