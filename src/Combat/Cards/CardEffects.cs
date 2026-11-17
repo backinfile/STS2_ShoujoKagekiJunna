@@ -296,6 +296,7 @@ public static class CardEffects
                 {
                     using var single = KnowledgeCombat.SingleCard();
                     var stardust = CardCatalog.Create("U_CARD_005", player);
+                    DamageModifiers.Add(stardust, DamageModifiers.CaptureDamageModifierSnapshot(card).DamageBonus);
                     await GeneratedArrowPresentation.Play(stardust,
                         () => CardActions.FreePlay(context, stardust, play.Target, keepTarget: true));
                 }

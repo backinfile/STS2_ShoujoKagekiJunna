@@ -1,0 +1,43 @@
+{
+  "current_card_definitions": 117,
+  "retired_card_definitions": 71,
+  "current_block_fields": 24,
+  "current_damage_fields": 40,
+  "numeric_powers": [
+    {
+      "scope": "cards",
+      "id": "JA118",
+      "name": "立下誓言",
+      "fields": [
+        "Block"
+      ],
+      "preview_and_runtime_props": "Unpowered"
+    },
+    {
+      "scope": "cards",
+      "id": "JK235",
+      "name": "理想的国语教科书",
+      "fields": [
+        "Damage"
+      ],
+      "preview_and_runtime_props": "Unpowered"
+    },
+    {
+      "scope": "retiredCards",
+      "id": "JG34",
+      "name": "合唱练习",
+      "fields": [
+        "Damage"
+      ],
+      "preview_and_runtime_props": "Unpowered"
+    }
+  ],
+  "immediate_block_skill_controls": [
+    "JB02",
+    "JH19",
+    "JH24"
+  ],
+  "block_assertions": 56,
+  "power_damage_scenarios": 20,
+  "additional_production_fixes": []
+}
