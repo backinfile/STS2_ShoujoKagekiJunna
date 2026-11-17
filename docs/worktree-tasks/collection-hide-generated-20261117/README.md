@@ -160,6 +160,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 <send_user_message_question_reply>
 [{"questionItemId":"[\"request_user_input_async\",\"call_802ff5d5bd2644d89a9e1c0b9bed7fc4\",0]","question":"你希望衍生牌在收藏里怎么显示？","answer":"纯那分类只显示基础牌与卡池牌，衍生牌放在杂项"}]
 </send_user_message_question_reply>
+### Message 5
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_66c77ba81b0640808ef2970e2c5f4c16\",0]","question":"是否将已验证的收藏回归提交合入 main，并清理本次工作树、任务分支及临时测试文件？","answer":"合并并清理"}]
+</send_user_message_question_reply>
 ## Brief task plan
 
 1. 在独立工作树复现收藏筛选，核对原生与 BaseLib 的角色卡池入口。
@@ -174,7 +179,9 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 修正前的 821722c 筛选逻辑在同一网格回归中失败，报 Incorrect visible collection (Junna): JK11；当前版本的 357 项实际网格检查、119 项分类检查及 357 项解锁集合检查全部通过；纯那、杂项、纯那的显示数量依次为 86、31、86，另有 2 张远古牌保持远古分类。Release 主模组与收藏测试模组编译均为 0 警告、0 错误；最终回归没有 ObjectDisposedException。
 - 工作树为 ../worktrees/STS2_ShoujoKagekiJunna/collection-hide-generated-20261117，任务分支 codex/collection-hide-generated-20261117；原分支固定为 main，起始提交为 e19543e2abb71e44f463c65164cc9dab61e0d089。
 - 原目录的 src/Models/CatalogCard.cs、tests/Integration/PowerBlockPreviewProbe.cs 与未跟踪 knowledge-refit-20261117 目录共 543 个文件的内容哈希保持一致。任务期间其他工作已将前两个文件提交至 main，未跟踪目录仍保留。
-- 已扫描全部 584 个已跟踪文档及新增任务记录，未发现本机绝对路径、凭据、私钥或私人邮箱。
-- 本次只运行收藏专项回归与对应编译。临时环境与详细结果位于 out/tmp/collection-hide-generated-20261117/，合并与清理等待用户确认。
+- 已扫描全部已跟踪文档及新增任务记录，未发现本机绝对路径、凭据、私钥或私人邮箱。
+- 本次只运行收藏专项回归与对应编译。临时环境与详细结果位于 out/tmp/collection-hide-generated-20261117/，用户已确认合并并清理本次任务工作树、分支及临时测试文件。
 
-- 任务提交为 6d214b7；同步 main 的 e1fa4bc14b4ce2bfdaea3c20d47adb9de3f8cc73 后，重新编译主模组与收藏探针并重跑相同网格回归，全部通过。同步后的合并与临时工作树清理等待用户确认。
+- 任务提交为 6d214b7；同步 main 的 e1fa4bc14b4ce2bfdaea3c20d47adb9de3f8cc73 后，重新编译主模组与收藏探针并重跑相同网格回归，全部通过。同步提交为 d1ee2ec；用户已确认将验证后的结果快进合入 main，并清理本次任务工作树、分支及临时测试文件。
+
+- 确认期间 main 新增了文档提交，已再次同步至 bad86b088d5552a206f484b4927662f0bef1eda7。与已验证代码相比仅增加 chase-loop-20261117 任务文档，代码树未变，复用已有通过结果。
