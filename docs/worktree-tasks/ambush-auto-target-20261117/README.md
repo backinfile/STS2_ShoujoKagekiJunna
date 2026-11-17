@@ -158,6 +158,15 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 </skill>
 
+### 4. 合并与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_8400a3359487417d8278001281b622cc\",0]","question":"将已验证的伏击修复合并到 main 后，如何处理本次工作树和分支？","answer":"合并并清理（先保留录像和结果）"}]
+</send_user_message_question_reply>
+
+### 5. 清理要求补充
+
+不保留录像
 ## 简要计划
 
 - 起点：`main`，`f3ed20efc581f267e4b546ad4899164e77a88ff1`。
@@ -177,6 +186,6 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 命令：`py -3 tests/Integration/run-auto-target.py --port <test-port>`；旧版本命中 `Automatic play requested manual enemy selection`，修复后输出 `{"cases": 7, "failures": []}`。
 - 构建：Beta 与正式版角色程序集、定向测试模组均通过，0 警告、0 错误。
 - 录像：`py -3 tests/Integration/run-auto-target.py --port <test-port> --record`；准备完成后只使用正常悬停、出牌、结束回合与需要时的正常选牌。双敌人场景中蓄力箭自动部署到存活敌人，倒计时 3；录像为 H.264/AAC，内部游戏音轨来源 `engine_mix`。
-- 隔离测试使用随机空闲端口、满解锁、静默音频及最小化启动；每次启动采样均为 0/120 次抢占前台。录像、结果、拼帧保存于 `out/tmp/auto-target/`；合并并清理获准时，需先保留到主检出的 `artifacts/task-deliverables/ambush-auto-target-20261117/`。
+- 隔离测试使用随机空闲端口、满解锁、静默音频及最小化启动；每次启动采样均为 0/120 次抢占前台。录像、结果、拼帧生成于 `out/tmp/auto-target/`；用户要求不保留录像，清理前只将回归结果保留到主检出的 `artifacts/task-deliverables/ambush-auto-target-20261117/`，删除录像及拼帧。
 - 已审查全部原有 Git 跟踪文档，未发现实际本机绝对路径或常见凭据；新增文档使用占位符与仓库相对路径。
-- 提交与合并状态：实现和验证完成，待用户确认合并与清理。
+- 提交与合并状态：实现和验证完成；用户已确认合并到 `main` 并清理工作树与分支，追加要求不保留录像。初始任务提交 `98a2c0f`，同步提交 `8b65081`；同期 `main` 只增加其他任务的文档和图片，`src/`、`tests/`、`data/` 未改变。
