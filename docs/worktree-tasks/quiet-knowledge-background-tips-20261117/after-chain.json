@@ -1,0 +1,42 @@
+{
+  "name": "chain",
+  "pass": true,
+  "expected": [
+    "CARD.DEFEND_IRONCLAD",
+    "CARD.JUNNA_JK126",
+    "CARD.STRIKE_IRONCLAD"
+  ],
+  "gained": [
+    "CARD.DEFEND_IRONCLAD",
+    "CARD.JUNNA_JK126",
+    "CARD.STRIKE_IRONCLAD"
+  ],
+  "batches": [
+    [
+      "CARD.JUNNA_JK126",
+      "CARD.STRIKE_IRONCLAD",
+      "CARD.DEFEND_IRONCLAD"
+    ]
+  ],
+  "flights": [
+    {
+      "id": "CARD.JUNNA_JK126",
+      "frame": 739
+    },
+    {
+      "id": "CARD.STRIKE_IRONCLAD",
+      "frame": 739
+    },
+    {
+      "id": "CARD.DEFEND_IRONCLAD",
+      "frame": 739
+    }
+  ],
+  "checks": {
+    "exact_group_in_deck": true,
+    "one_complete_preview_batch": true,
+    "one_flight_per_card": true,
+    "simultaneous_flights": true,
+    "original_deck_order": true
+  }
+}

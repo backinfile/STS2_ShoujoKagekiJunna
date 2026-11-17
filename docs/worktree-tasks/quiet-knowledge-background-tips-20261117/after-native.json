@@ -1,0 +1,35 @@
+{
+  "name": "native",
+  "pass": true,
+  "expected": [
+    "CARD.JUNNA_JK49",
+    "CARD.JUNNA_JK49B"
+  ],
+  "gained": [
+    "CARD.JUNNA_JK49",
+    "CARD.JUNNA_JK49B"
+  ],
+  "batches": [
+    [
+      "CARD.JUNNA_JK49",
+      "CARD.JUNNA_JK49B"
+    ]
+  ],
+  "flights": [
+    {
+      "id": "CARD.JUNNA_JK49",
+      "frame": 417
+    },
+    {
+      "id": "CARD.JUNNA_JK49B",
+      "frame": 417
+    }
+  ],
+  "checks": {
+    "exact_group_in_deck": true,
+    "one_complete_preview_batch": true,
+    "one_flight_per_card": true,
+    "simultaneous_flights": true,
+    "original_deck_order": true
+  }
+}

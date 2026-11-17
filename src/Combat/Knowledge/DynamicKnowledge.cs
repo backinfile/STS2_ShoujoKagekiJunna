@@ -121,7 +121,8 @@ public static class DynamicKnowledge
         return Task.CompletedTask;
     }
     public static Task<bool> Acquire(CardModel acquired, PileType destination) => Acquire(acquired, destination, null);
-    internal static async Task<bool> Acquire(CardModel acquired, PileType destination, ISet<CardModel>? expanded)
+    internal static async Task<bool> Acquire(CardModel acquired, PileType destination, ISet<CardModel>? expanded,
+        CardPileAddResult? sourceResult = null)
     {
         if (Offers.TryGetValue(acquired, out var reward))
         {
@@ -139,7 +140,7 @@ public static class DynamicKnowledge
             Pending.Remove(partner);
         }
         Normalize(acquired.Owner);
-        await KnowledgeCombat.GrantPartners(acquired, destination, partners);
+        await KnowledgeCombat.GrantPartnersWithPreview(acquired, destination, partners, sourceResult);
         return true;
     }
 

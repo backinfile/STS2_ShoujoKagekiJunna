@@ -1,0 +1,35 @@
+{
+  "name": "repeated",
+  "pass": true,
+  "expected": [
+    "CARD.JUNNA_JK137",
+    "CARD.JUNNA_JK137"
+  ],
+  "gained": [
+    "CARD.JUNNA_JK137",
+    "CARD.JUNNA_JK137"
+  ],
+  "batches": [
+    [
+      "CARD.JUNNA_JK137",
+      "CARD.JUNNA_JK137"
+    ]
+  ],
+  "flights": [
+    {
+      "id": "CARD.JUNNA_JK137",
+      "frame": 981
+    },
+    {
+      "id": "CARD.JUNNA_JK137",
+      "frame": 981
+    }
+  ],
+  "checks": {
+    "exact_group_in_deck": true,
+    "one_complete_preview_batch": true,
+    "one_flight_per_card": true,
+    "simultaneous_flights": true,
+    "original_deck_order": true
+  }
+}
