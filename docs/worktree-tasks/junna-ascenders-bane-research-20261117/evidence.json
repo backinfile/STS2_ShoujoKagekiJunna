@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-17",
+  "workbench": {
+    "modId": "junna",
+    "styleRevision": 5385,
+    "contentRevisions": [
+      5386
+    ],
+    "cardsRead": 1153,
+    "fitPoolRead": 462,
+    "includeArchived": true,
+    "styleVersions": [
+      {
+        "id": "STYLE_FIT_DAMAGE_BONUS",
+        "version": "2:5b3f9ba567a9278156980761f4e11a04b02dc60fd196fd7ec4605e68b84a6161"
+      },
+      {
+        "id": "STYLE_FIT_SOURCES",
+        "version": "12:0950cb1d67ec5e035390053db5fdc659c6bbc3b835ecba1fed2da26c8ee1378f"
+      },
+      {
+        "id": "STYLE_FIT_JUNNA",
+        "version": "2:6db95cd09e479f85f4b0f0edb841e244ca6e7ea1e6045ab5dc781284fb752f17"
+      }
+    ]
+  },
+  "karen": {
+    "revision": "9f428c25c2e2ff7eeb032d1e544befd9da3638d0",
+    "titlesRead": 118,
+    "model": "src/Core/Models/Cards/curses/KarenSleepy.cs",
+    "patch": "src/Core/Patches/AscendersBanePatch.cs"
+  },
+  "candidates": [
+    {
+      "name": "想太多",
+      "junnaCards": [],
+      "junnaFits": [],
+      "karen": []
+    },
+    {
+      "name": "过度自主练习",
+      "junnaCards": [],
+      "junnaFits": [],
+      "karen": []
+    }
+  ],
+  "sources": {
+    "official": {
+      "url": "https://bushiroad.co.jp/media/487",
+      "quote": "判断力、分析力に優れるがそれゆえ考えすぎることも。",
+      "kind": "武士道官方角色设定新闻稿"
+    },
+    "profile": {
+      "url": "https://revuestarlight.bushimo.jp/character/junna/",
+      "kind": "Re LIVE 官方角色介绍；检索索引保留正文，直接访问当前返回404"
+    },
+    "episode": {
+      "url": "https://xenodude.com/2024/06/19/revue-starlight-ep-2/",
+      "kind": "TV第2话截图与剧情评论"
+    },
+    "dialogue": {
+      "url": "https://note.com/yons_/n/n2249f7f37d34",
+      "kind": "二级资料引用第2话结尾考えすぎ对白；正式录入前应回看原片核对完整句"
+    },
+    "ws": {
+      "url": "https://wiki.biligame.com/wstcg/RSL_S56_Cardlist",
+      "kind": "WS卡表转录；原卡RSL/S56-088「過度の自主練 星見 純那」"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "toolURL": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "alpha": 0.25,
+  "device": "cuda",
+  "size": [
+    1448,
+    1086
+  ],
+  "originalPreserved": true,
+  "alphaPreserved": true,
+  "source": "overthinking-restored-original.png",
+  "sourceSHA256": "4526bf6879028ad638a2aae4e124e7966401cb72c5d6484885b77dd8527fa072",
+  "output": "overthinking-clean.png",
+  "outputSHA256": "20f3a4f3c617a27178bcbf10bc2a1a3b283d2e887c3bef6b4d1806d5ca363888",
+  "seconds": 5.02
+}
