@@ -78,7 +78,7 @@ def display_description(card, text, card_names, values, upgraded=False):
     # Arrow countdowns are rendered on their existing plaque.
     text = re.sub(r'^\[blue\][^\n]*\n', '', text)
     text = re.sub(r'。\s*', '。\n', text).strip()
-    highlighted = {'格挡', '易伤', '虚弱', '知识', '飞矢', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
+    highlighted = {'格挡', '易伤', '虚弱', '知识', '连锁知识', '飞矢', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
     # Only actual named references need emphasis; all replacements run once to avoid nested tags.
     highlighted.update(card_names)
     highlighted.update(name + '+' for name in card_names)
@@ -268,7 +268,7 @@ def main():
             'costsX': card['cost'] == 'X', 'type': card['type'], 'target': target,
             'arrowSubtype': card.get('arrowSubtype', '攻击' if damage else '技能'),
             'rarity': card['rarity'], 'pool': bool(card.get('pool')),
-            'knowledge': '知识' in card.get('keywords', []) or '知识。' in card['text'],
+            'knowledge': any(keyword in card.get('keywords', []) for keyword in ('知识', '连锁知识')) or '知识。' in card['text'],
             'exhaust': native_keyword(card['text'], '消耗'), 'upgradedExhaust': native_keyword(card['upgradedText'], '消耗'),
             'retain': native_keyword(card['text'], '保留'), 'upgradedRetain': native_keyword(card['upgradedText'], '保留'),
             'innate': native_keyword(card['text'], '固有'), 'upgradedInnate': native_keyword(card['upgradedText'], '固有'),
@@ -345,6 +345,10 @@ def main():
         if lang == 'zhs':
             keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.title'] = knowledge['name']
             keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.description'] = knowledge['definition']
+            chain = next((item for item in bundle['data'].get('terms', []) if item['id'] == 'KW_CHAIN_KNOWLEDGE'), None)
+            if chain:
+                keywords['SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.title'] = chain['name']
+                keywords['SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.description'] = chain['definition']
         keywords_path.write_text(json.dumps(keywords, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         powers_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/powers.json'
         powers = json.loads(powers_path.read_text(encoding='utf-8'))

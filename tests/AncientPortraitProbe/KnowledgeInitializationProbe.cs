@@ -48,7 +48,7 @@ public sealed class KnowledgeInitializationCommand : AbstractConsoleCmd
             }
             var tips = CardCatalog.Model("JK126").HoverTips.OfType<HoverTip>().ToArray();
             checks.Add(new { name = "reward entrance explains associated reward cards", pass = tips.Any(tip =>
-                tip.Title == "关联牌" && tip.Description.Contains("同一奖励页面的其他卡牌")),
+                tip.Title == "连锁知识" && tip.Description.Contains("同一奖励页面的其他卡牌")),
                 tips = tips.Select(tip => new { tip.Title, tip.Description }) });
             checks.Add(new { name = "unacquired reward entrance includes itself", pass = tips.Single(tip => tip.Title == "关联牌")
                 .Description.Split('\n').Last() == $"[gold]{CardCatalog.Model("JK126").Title}[/gold]" });

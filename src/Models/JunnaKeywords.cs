@@ -9,6 +9,9 @@ public static class JunnaKeywords
     [CustomEnum]
     public static CardKeyword Knowledge;
 
+    [CustomEnum("CHAIN_KNOWLEDGE")]
+    public static CardKeyword ChainKnowledge;
+
     [CustomEnum]
     public static CardKeyword Arrow;
 
