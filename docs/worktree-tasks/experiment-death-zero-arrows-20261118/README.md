@@ -164,6 +164,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 <send_user_message_question_reply>
 [{"questionItemId":"[\"request_user_input_async\",\"call_f0533e32e22f40f1b82eefc9ec393cad\",0]","question":"已确认旧逻辑会把归零飞矢留在场上，等待实验体复活。这里你希望怎样处理？","answer":"倒计时归零就结算离场，无有效目标时跳过伤害（推荐）"}]
 </send_user_message_question_reply>
+### 消息 5：合并和清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_1f9f17a6c7a1406e960804270b84fd50\",0]","question":"是否将修复合并到 main，并清理本任务工作树、分支和隔离游戏（保留录像与验证结果）？","answer":"合并并清理（推荐）"}]
+</send_user_message_question_reply>
 ## 简要计划
 
 1. 在独立工作树内建立实验体死亡场景的最小复现。
@@ -179,7 +184,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## 结果与改动
 
-已完成修复及针对性验证，等待用户确认合并与清理。
+已完成修复及针对性验证，用户已确认合并到 main 并清理本任务工作树、分支和隔离游戏；录像、截图及结果保留在主目录 out/tmp/experiment-death-zero-arrows/。
 
 - 根因：`ArrowCombat.Accelerate` 将倒计时降到 0 后，因 `AwaitingReturn` 命中实验体濒死复活状态而提前返回，飞矢仍留在部署列表与飞矢区。修复前两支强劲的箭加速到完成，首支击倒实验体，第二支稳定残留 `remaining: 0`；两次最小复现与最终回归均失败。
 - `src/Combat/Arrows/ArrowCombat.cs`：删除归零后的等待拦截。归零飞矢进入既有发射、牌效与牌区迁移流程；`ArrowDeployment.Resolve` 继续核对有效目标，无目标时跳过伤害。未归零的飞矢继续保留原目标及剩余回合。
@@ -200,5 +205,5 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 ### 整合状态
 
 - 整合目标为任务开始时捕获的 `main`。
-- 任务期间 `main` 前进到 `d26a595`（JK314 文本调整），将在任务分支同步此提交。
-- 原目录的既有未跟踪设计资料保持原样；期间出现的工作台同步未提交改动也予以保留。
+- 任务提交：`f681614`。已将本地 `main` 的 `d26a595`（JK314 文本调整）同步到任务分支；同步后正式版与 Beta Release 重新编译通过，均为 0 警告、0 错误，最初的单体箭复现再次通过。
+- 原目录的既有未跟踪设计资料 541 个文件均与任务开始时的 SHA-256 一致；期间出现的工作台同步未提交改动也予以保留。整合前将再次核对分支、HEAD 与这些文件。
