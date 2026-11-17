@@ -24,6 +24,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get(DesignId).Portrait;
     public override HashSet<CardKeyword> CanonicalKeywords =>
         [..(CardCatalog.IsKnowledge(this) ? new[] { JunnaKeywords.Knowledge } : []),
+         ..(DesignId == "JK126" ? new[] { JunnaKeywords.ChainKnowledge } : []),
          ..(CardCatalog.IsArrow(this) ? new[] { JunnaKeywords.Arrow } : [])];
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
@@ -32,15 +33,14 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             var rules = CardRules.Get(DesignId);
             // Extra tips precede native keyword tips; adding this first also fixes the group ordering.
             if (CardCatalog.IsKnowledge(this) || rules.HasTip(CardTip.Knowledge, IsUpgraded))
-                yield return HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge);
+                yield return HoverTipFactory.FromKeyword(DesignId == "JK126" ? JunnaKeywords.ChainKnowledge : JunnaKeywords.Knowledge);
             if (DesignId == "JK126" && !DynamicKnowledge.IsLinked(this))
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
-                    new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_REWARD_OTHERS").GetFormattedText() + $"\n[gold]{CardCatalog.Model(DesignId).Title}[/gold]")
+                    $"[gold]{CardCatalog.Model(DesignId).Title}[/gold]")
                     {
 #if !STS2_BETA
                         Id = "junna_knowledge_reward_others",
 #endif
-                        ShouldOverrideTextOverflow = true
                     };
             var group = KnowledgeCombat.Group(this);
             if (group != null && !DynamicKnowledge.IsLinked(this))

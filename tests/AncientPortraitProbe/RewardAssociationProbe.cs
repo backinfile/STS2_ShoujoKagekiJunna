@@ -25,7 +25,7 @@ public sealed class RewardAssociationCommand : AbstractConsoleCmd
         "../../../out/tmp/reward-associations"));
     public override string CmdName => "junna_reward_associations";
     public override string Args => "prepare | check | showcase";
-    public override string Description => "Check the persistent acquisition heading and untouched associated cards.";
+    public override string Description => "Check Chain Knowledge and run-wide card-ID associations.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args)
     {
@@ -38,8 +38,8 @@ public sealed class RewardAssociationCommand : AbstractConsoleCmd
             _foreignTips = Tips(_foreign);
             _nativeTips = Tips(_native);
             _foreignKeywords = Keywords(_foreign);
-            var reward = new CardReward([_source, _foreign, _native], CardCreationSource.Other, player,
-                new CardCreationOptions([], CardCreationSource.Other, CardRarityOddsType.Uniform));
+            var reward = new CardReward([_source, _foreign, _native], CardCreationSource.Encounter, player,
+                new CardCreationOptions([], CardCreationSource.Encounter, CardRarityOddsType.Uniform));
             _ = reward.SelectUnsynchronized();
             return new(true, "Choose the first reward, then run check");
         }
@@ -58,10 +58,10 @@ public sealed class RewardAssociationCommand : AbstractConsoleCmd
         void Expect(string name, bool pass, string? actual = null) => checks.Add(new { name, pass, actual });
         void Heading(string name, CardModel card)
         {
-            string description = AssociationDescription(card);
-            string first = description.Split('\n')[0];
-            Expect(name + " starts with its acquisition heading", first.Contains("同一奖励页面的其他卡牌"), description);
-            Expect(name + " highlights its heading", first.Contains("[b]") && first.Contains("[gold]"), first);
+            var tip = card.HoverTips.OfType<HoverTip>().Single(tip => tip.Title == "连锁知识");
+            Expect(name + " explains Chain Knowledge", tip.Description ==
+                "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。", tip.Description);
+            Expect(name + " remains knowledge", CardCatalog.IsKnowledge(card) && card.Keywords.Contains(JunnaKeywords.Knowledge));
         }
         try
         {
@@ -75,9 +75,13 @@ public sealed class RewardAssociationCommand : AbstractConsoleCmd
             string before = AssociationDescription(_source);
             Expect("captured names follow the heading", before.Contains(_foreign.Title) && before.Contains(_native.Title), before);
             var later = player.RunState.CreateCard(CardCatalog.Model("JK126"), player);
+            var unacquiredCopy = player.RunState.CreateCard(CardCatalog.Model("JK126"), player);
+            later.UpgradeInternal();
+            later.FinalizeUpgradeInternal();
             var extra = player.RunState.CreateCard(ModelDb.Card<DefendIronclad>(), player);
             string[] extraTips = Tips(extra);
             await DynamicKnowledge.Prepare(new ThrowingPlayerChoiceContext(), later, [later, extra]);
+            await DynamicKnowledge.Acquire(later, PileType.Deck);
             await CardPileCmd.Add(later, PileType.Deck, skipVisuals: true);
             Heading("entrance after another acquisition", _source);
             string after = AssociationDescription(_source);
@@ -86,11 +90,17 @@ public sealed class RewardAssociationCommand : AbstractConsoleCmd
             Expect("later captured card keeps its knowledge classification", !CardCatalog.IsKnowledge(extra));
             Expect("later captured card keeps its hover tips", Tips(extra).SequenceEqual(extraTips));
             Expect("same-name entrance shares the updated tip", AssociationDescription(later) == after);
+            Expect("unacquired same-ID copy shares the updated tip", AssociationDescription(unacquiredCopy) == after);
+            var futureCopy = player.RunState.CreateCard(CardCatalog.Model("JK126"), player);
+            Expect("future same-ID copy reads the shared list", AssociationDescription(futureCopy) == after);
+            Expect("upgraded and base copies share a card ID", later.Id == _source.Id && later.IsUpgraded && !_source.IsUpgraded);
             var restored = Player.FromSerializable(player.ToSerializable());
             foreach (var card in restored.Deck.Cards) card.Owner = restored;
             var restoredSource = restored.Deck.Cards.First(card => card.Id == _source.Id);
             var restoredForeign = restored.Deck.Cards.First(card => card.Id == _foreign.Id);
             Expect("heading and accumulated names survive restoration", AssociationDescription(restoredSource) == after);
+            Expect("all restored same-ID copies share associations", restored.Deck.Cards.Where(card => card.Id == _source.Id)
+                .All(card => AssociationDescription(card) == after));
             Expect("restored captured card keeps its original classification and tips", !CardCatalog.IsKnowledge(restoredForeign) &&
                 Tips(restoredForeign).SequenceEqual(_foreignTips));
             var field = (SavedSpireField<Player, string>)AccessTools.Field(typeof(DynamicKnowledge), "Relations").GetValue(null)!;
@@ -115,5 +125,9 @@ public sealed class RewardAssociationCommand : AbstractConsoleCmd
         foreach (var card in new[] { CardCatalog.Model("JK126"), ModelDb.Card<StrikeIronclad>(),
                      CardCatalog.Model("JK32"), ModelDb.Card<DefendIronclad>() })
             await CardPileCmd.Add(player.Creature.CombatState!.CreateCard(card, player), PileType.Hand);
+        var upgraded = CardCatalog.Create("JK126", player);
+        upgraded.UpgradeInternal();
+        upgraded.FinalizeUpgradeInternal();
+        await CardPileCmd.Add(upgraded, PileType.Hand);
     }
 }

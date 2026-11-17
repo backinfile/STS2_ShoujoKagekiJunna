@@ -220,8 +220,6 @@ public static class DynamicKnowledge
             var names = Members(__instance)
                 .Select(card => "[gold]" + (card is JunnaCard junna
                     ? CardCatalog.Model(junna.DesignId).Title : ((CardModel)card.CanonicalInstance).Title) + "[/gold]").ToList();
-            if (CardCatalog.DesignId(__instance) == "JK126")
-                names.Insert(0, new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_REWARD_OTHERS").GetFormattedText());
             if (names.Count == 0) return;
             var tip = new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
                 string.Join("\n", names))
@@ -229,10 +227,10 @@ public static class DynamicKnowledge
 #if !STS2_BETA
                     Id = "junna_dynamic_knowledge_group",
 #endif
-                    ShouldOverrideTextOverflow = CardCatalog.DesignId(__instance) == "JK126"
                 };
             var tips = __result.ToList();
-            string knowledgeId = HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge).Id;
+            string knowledgeId = HoverTipFactory.FromKeyword(CardCatalog.DesignId(__instance) == "JK126"
+                ? JunnaKeywords.ChainKnowledge : JunnaKeywords.Knowledge).Id;
             int knowledgeIndex = tips.FindIndex(existing => existing.Id == knowledgeId);
             tips.Insert(knowledgeIndex + 1, tip);
             __result = tips;

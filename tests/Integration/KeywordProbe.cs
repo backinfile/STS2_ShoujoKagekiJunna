@@ -99,7 +99,7 @@ public sealed class KeywordProbe : AbstractConsoleCmd
         var visibleTitles = Descendants(NGame.Instance).OfType<Control>()
             .Where(node => node.IsVisibleInTree() && node.SceneFilePath == "res://scenes/ui/hover_tip.tscn")
             .Select(node => node.GetNode<MegaLabel>("%Title").Text).ToArray();
-        CheckValue("visible", "knowledge then related cards then background", string.Join("|", visibleTitles.Take(3)), "知识|关联牌|知识背景");
+        CheckValue("visible", "merged knowledge then background", string.Join("|", visibleTitles.Take(2)), "知识|知识背景");
         inspect.Close();
         await Task.Delay(400);
         string directory = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "../../..", "out/tmp/keyword-audit"));

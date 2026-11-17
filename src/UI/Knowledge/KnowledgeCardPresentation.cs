@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.UI;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
@@ -35,13 +36,41 @@ internal static class KnowledgeOfferHoverTipsPatch
 [HarmonyPatch(typeof(NHoverTipSet), "Init")]
 internal static class KnowledgeTipBackgroundsPatch
 {
+    private static void Prefix(ref IEnumerable<IHoverTip> hoverTips)
+    {
+        var tips = hoverTips.ToArray();
+        hoverTips = tips;
+        var groupTitle = new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP");
+        string groupId = new HoverTip(groupTitle, "").Id;
+        bool IsRelation(IHoverTip tip) => tip is HoverTip && (tip.Id == groupId ||
+            tip.Id.StartsWith("junna_knowledge_group_") || tip.Id == "junna_dynamic_knowledge_group" ||
+            tip.Id == "junna_knowledge_reward_others");
+        var relations = IHoverTip.RemoveDupes(tips.Where(IsRelation)).OfType<HoverTip>().ToArray();
+        if (relations.Length == 0) return;
+
+        string knowledgeId = HoverTipFactory.FromKeyword(JunnaKeywords.Knowledge).Id;
+        string chainId = HoverTipFactory.FromKeyword(JunnaKeywords.ChainKnowledge).Id;
+        bool chain = tips.Any(tip => tip.Id == chainId);
+        string selectedId = chain ? chainId : knowledgeId;
+        int knowledgeIndex = Array.FindIndex(tips, tip => tip.Id == selectedId);
+        if (knowledgeIndex < 0 || tips[knowledgeIndex] is not HoverTip knowledge) return;
+
+        var merged = new HoverTip(new LocString("card_keywords", chain
+                ? "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.title" : "SHOUJOKAGEKIJUNNA-KNOWLEDGE.title"),
+            knowledge.Description + "\n" + new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP_LABEL").GetFormattedText() + "\n" +
+            string.Join("\n", relations.Select(tip => tip.Description)), knowledge.Icon);
+        hoverTips = tips.Where(tip => !IsRelation(tip) && (!chain || tip.Id != knowledgeId))
+            .Select(tip => tip.Id == selectedId ? (IHoverTip)merged : tip).ToArray();
+    }
+
     private static void Postfix(NHoverTipSet __instance, IEnumerable<IHoverTip> hoverTips)
     {
         var tips = IHoverTip.RemoveDupes(hoverTips).OfType<HoverTip>().ToArray();
         var container = __instance.GetNode<Control>("textHoverTipContainer");
+        string backgroundTitle = new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND").GetFormattedText();
         for (int i = 0; i < tips.Length; i++)
         {
-            if (tips[i].Id.StartsWith("junna_knowledge_background_"))
+            if (tips[i].Id.StartsWith("junna_knowledge_background_") || tips[i].Title == backgroundTitle)
                 container.GetChild(i).GetNode<CanvasItem>("%Bg").SelfModulate = new Color("#c18cdd");
         }
     }
