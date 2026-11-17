@@ -165,6 +165,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 [{"questionItemId":"[\"request_user_input_async\",\"call_0a669458d299489ab77d6a2133a1ec40\",0]","question":"将修复提交 7a928ef 合入 main，并清理本次任务分支、工作树及临时文件？","answer":"也看看有没有同类问题"}]
 </send_user_message_question_reply>
 
+### 用户消息 6
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_702dd7caea8b4ba2b268addb4ddd9451\",0]","question":"同类排查已完成，是否将修复 00211dc 合入 main，并清理本次任务分支、工作树及临时文件？","answer":"合并并清理（推荐）"}]
+</send_user_message_question_reply>
+
 ## Brief task plan
 
 - 起始分支：main；起始提交：bc83134234fc859e5224701092722afbafeba7b9；原工作区干净。
@@ -173,11 +179,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 建立立下誓言基础与升级版的定向复现，区分手牌预览与实际飞矢触发收益。
 - 参考原生同类能力牌，实现最小修复并验证脆弱、敏捷及两者叠加时的行为。
 - 检查当前及退役卡牌的同类数值预览，并定向验证持续伤害能力与附带持续效果技能的即时格挡。
-- 汇总为一个任务提交，同步本地 main，等待用户明确确认后合并及清理。
+- 汇总为一个任务提交，同步本地 main，按用户确认执行快进合并及清理。
 
 ## Result and changes
 
-修复已完成，等待用户确认合并到 main 及清理工作树。
+修复与同类排查已完成，用户已确认合并到 main 并清理本次任务分支、工作树与临时文件。
 
 ### 原因与修改
 
@@ -205,4 +211,5 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 录像为 H.264 1280×720，含 AAC 游戏音轨，audio_source 为 engine_mix，封装状态 completed。录制期间只使用悬停、取消悬停和正常出牌。
 - 截图：[基础版](evidence/base-preview.png)、[升级版](evidence/upgraded-preview.png)、[触发后](evidence/triggered-block.png)。[录像验证记录](evidence/video-results.json)。
 - 提交前核对所有用户消息；全部已跟踪文档和本次新增文档进行敏感信息及本地绝对路径检查。原工作区保持干净。
-- 合并状态：已完成任务提交准备；按 $worktree-task 等待用户明确确认后合并。清理范围为本任务工作树、任务分支及树内可丢弃构建/测试文件，受 Git 跟踪的录像和任务记录随提交保留。
+- 同步记录：本地 main 新增 a0d29b1（星屑伤害加成继承），已合入任务分支；重新构建 Beta、Stable 与探针，56/56 格挡专项再次通过，结果一致。
+- 合并状态：修复已汇总为任务提交 00211dc，并完成上述本地主分支同步；用户已按 $worktree-task 明确确认合并到 main 并清理；集成采用快进合并，核对提交树、任务提交可达性与原工作区状态后执行清理。清理范围为本任务工作树、任务分支及树内可丢弃构建/测试文件，受 Git 跟踪的录像和任务记录随提交保留。
