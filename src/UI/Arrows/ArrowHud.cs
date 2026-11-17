@@ -108,7 +108,7 @@ public partial class ArrowHud : Control
             view.SatellitesVisible = satellitesVisible;
         }
         UpdateHoverPreview(room);
-        WarmPreviewCache();
+        WarmPreviewCache(room);
         CoreEffects.Redraw(_guides);
     }
 

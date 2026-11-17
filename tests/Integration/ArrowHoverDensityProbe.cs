@@ -130,7 +130,7 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
         var presentation = firstCard?.Body.GetNode<ArrowCardPresentation>("JunnaArrowCard");
         var turns = presentation == null ? null : (Label)AccessTools.Field(typeof(ArrowCardPresentation), "_turns").GetValue(presentation)!;
         bool countdown = turns?.Text == "2";
-        bool fan = cards.Length < 2 || cards.Any(card => card.Scale.X > cards.Min(c => c.Scale.X) + .05f)
+        bool fan = cards.Length < 2 || cards.All(card => Math.Abs(card.Scale.X - .7f) < .001f)
             && cards.Any(card => Math.Abs(card.Rotation) > .001f);
         var viewport = hud.GetViewport();
         void Send(InputEvent input) => Callable.From(() => { if (input is InputEventKey) Input.ParseInputEvent(input); else viewport.PushInput(input, true); }).CallDeferred();
