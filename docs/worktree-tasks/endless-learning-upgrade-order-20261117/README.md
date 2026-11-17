@@ -167,7 +167,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## 结果与改动
 
-修复与定向验证完成，等待同步 main 及用户合并确认。
+修复、定向验证和 main 同步完成，等待用户合并确认。
 
 - 根因：原生 CardCmd.Upgrade 启动特效后立即返回；Core 同步命令回调立即发放新知。休息处使用 CardPreviewStyle.None，原生锻造特效原定在 OnSelect 返回之后播放，因此新知先于锻造出现。
 - src/Combat/Knowledge/KnowledgeCombat.cs：获得升级赠牌前，等待对应卡牌的原生升级特效结束。
@@ -178,6 +178,6 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 卡牌入堆核对：GrantUpgrade 原有单卡发放、基础新知版本、永久牌组入口及战斗内 PileType.Draw + CardPilePosition.Random 调用保持原样；已对照 docs/implementation/card-pile-placement.md 的对应入口。
 - Beta 和 Stable API 的 Release 编译均通过，0 警告、0 错误；git diff --check 通过。按当前改动执行定向检查。
 - 证据：evidence/results.json 保存修复前后顺序与连续升级结果；evidence/native-rest.mp4 为已目视复核的原生休息处录像（有声、静默外放、约 7.1 秒、无丢帧）。
-- 文档审查：扫描全部 160 份已跟踪及新增文本文档；未发现需清理的本机绝对路径或实际凭据。唯一凭据格式命中为已有文档的描述性路径占位符。
-- 原目录起始干净；实现期间 main 前进到 f3ed20efc581f267e4b546ad4899164e77a88ff1，涉及其他卡牌改动。同步和集成状态待更新。
+- 文档审查：同步后审查全部 537 份已跟踪文档及文档数据（含本次新增内容），本机绝对路径与常见凭据格式命中数均为 0。
+- 原目录起始干净；实现期间 main 前进到 f3ed20efc581f267e4b546ad4899164e77a88ff1，涉及其他卡牌改动。任务实现提交为 a2c8bff；合并 main 后得到 a0f766c，无冲突。同步前后本任务的实现和定向检查文件完全一致；同步后 Beta／Stable 构建再次通过（各 0 警告、0 错误），git diff --check 通过。原目录仍在 main 且状态干净；测试专用游戏已关闭。待用户确认后快进合并并按所选方式清理。
 
