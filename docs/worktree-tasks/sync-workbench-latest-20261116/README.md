@@ -148,6 +148,10 @@ Before each commit, check the input record against the user messages, finalize t
 Report the resulting branch, commit, verification, cleanup state, and task document path.
 </skill>
 
+### 用户消息 4：合并与清理批准
+
+合并 清理分支
+
 ## Brief task plan
 
 - 原始分支 `main`，提交 `be9ae67470de2021ba25b2a1ab8a119d6d240b52`。原始未提交状态为删除历史录像 `docs/worktree-tasks/full-card-resolution-localization-20261105/selection-demo.mp4`，保持原状。
@@ -157,7 +161,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-工作台 r5324 已同步至 Mod，等待合并与清理确认。完成后通过 MCP 增量回读，工作台 revision 仍为 5324。
+工作台 r5324 已同步至 Mod，用户已批准合并与清理。2026-11-17 快进合并因 main 中三份重叠的未提交修改被 Git 拒绝，目前保留任务分支和工作树，等待安全集成。完成后通过 MCP 增量回读，工作台 revision 仍为 5324。
 
 - 运行卡池由 112 张增至 117 张，知识关联保持 48 组；同步费用、稀有度、基础／升级文本、配图与角色开局配置。
 - 新增荣光停驻剑尖、燃烧不息、系住梦想的纽扣、小道具、初生之光。首次按原类型支付并结算；随后同一实际牌免费作为 5 回合飞矢打出，完成整批牌效后再免费布置。保留原费用、升级、伤害加成与重放；每次重新布置记录真实飞矢出牌。单次加速只处理开始时的布置，新布置从下回合自然推进；明确消耗时结束循环。单体目标继承原目标，失效时复用现有死亡换目标规则。
@@ -173,3 +177,11 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 原主目录的历史录像删除保持原状。集成目标固定为最初捕获的 `main`，不影响其他任务工作树。
 
 定向测试复现：构建本 Mod 与 `tests/Integration/JunnaIntegration.csproj`，在独立双敌人战斗中运行 `junna_loop_sync check`。录像环境使用 `junna_loop_sync prepare` 在录制前准备，录制期间只进行正常游戏操作。
+
+### 2026-11-17 集成记录
+
+- 用户批准合并及清理后，先将发行包、快照、报告、录像和保留清单保存至主目录的 `artifacts/task-deliverables/sync-workbench-latest-20261116/`；原清单 24 个文件逐项通过 SHA-256 校验，新增集成记录一并保存。
+- `main` 仍为 `be9ae67470de2021ba25b2a1ab8a119d6d240b52`，出现 18 项未提交状态，其中卡池与中英卡牌文本三份文件包含 JK126 的连锁知识修改，与本任务同步文件重叠。
+- 尝试安全快进时，Git 明确拒绝覆盖 `data/card-pool.json` 和中英 `cards.json`。合并前后 HEAD、工作区状态、已暂存及未暂存差异哈希完全相同，原修改完整保留。
+- 按 $worktree-task 的 “If integration would overwrite uncommitted state, preserve the worktree and report that integration is pending instead.” 要求保留本次工作树与分支；当前不执行清理。
+- 本次仅追加批准及集成记录，代码与上一轮通过的构建、22 个定向测试及 1675 项数据核对结果保持一致。
