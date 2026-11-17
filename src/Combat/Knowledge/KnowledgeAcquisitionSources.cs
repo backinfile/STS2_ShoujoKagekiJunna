@@ -57,6 +57,7 @@ internal static class KnowledgeAcquisitionSources
         new("Cards.TheHunt", "OnPlay", Kind.Reward),
         new("Relics.ChoicesParadox", "AfterPlayerTurnStart", Kind.Discovery),
         new("Relics.Toolbox", "BeforeHandDraw", Kind.Discovery),
+        new("Relics.VexingPuzzlebox", "AfterPlayerTurnStart", Kind.Discovery),
         new("Potions.AttackPotion", "OnUse", Kind.Discovery),
         new("Potions.ColorlessPotion", "OnUse", Kind.Discovery),
         new("Potions.PowerPotion", "OnUse", Kind.Discovery),

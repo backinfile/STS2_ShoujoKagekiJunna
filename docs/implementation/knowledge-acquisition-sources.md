@@ -142,7 +142,7 @@
 | 无礼之茶 | 战斗开始前 | `Relics.TeaOfDiscourtesy.BeforeCombatStart`，入牌调用第 60 行 | 否 | 否 | 未适配，默认不补发 |
 | 工具箱 | 抽取回合手牌前 | `Relics.Toolbox.BeforeHandDraw`，入牌调用第 31 行 | 是 | 是 | 已适配，补发关联牌 |
 | 毒素之蛋 | 执行 TryModifyCardBeingAddedToDeck 时 | `Relics.ToxicEgg.TryModifyCardBeingAddedToDeck`，复制调用第 58 行 | 否 | 否 | 明确不补发，沿复制或原效果数量 |
-| 烦人机关盒 | 玩家回合开始后 | `Relics.VexingPuzzlebox.AfterPlayerTurnStart`，入牌调用第 23 行 | 否 | 否 | 未适配，默认不补发 |
+| 烦人机关盒 | 玩家首回合开始后 | `Relics.VexingPuzzlebox.AfterPlayerTurnStart`，入牌调用第 23 行 | 否 | 是 | 已适配，随机生成知识牌时补发关联牌 |
 | 白星 | 生成战斗奖励时 | `Relics.WhiteStar.TryModifyRewards`，卡牌奖励调用第 29 行 | 是 | 是 | 已适配，补发关联牌 |
 | 羽翼护符 | 执行 TryModifyCardRewardOptionsLate 时 | `Relics.WingCharm.TryModifyCardRewardOptionsLate`，复制调用第 41 行 | 否 | 否 | 明确不补发，沿复制或原效果数量 |
 
