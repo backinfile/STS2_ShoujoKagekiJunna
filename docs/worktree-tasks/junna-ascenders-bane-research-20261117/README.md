@@ -169,6 +169,14 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 **想太多**  吧，你来找卡图
 ~~~~
 
+### 5. 用户批准合并与清理
+
+~~~~text
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_da3b1b36094c4244831ed92ae60efac8\",0]","question":"是否将“想太多”的调研和卡图提交 ad6666b 合并到 main，并清理本次任务工作树、任务分支及临时核对记录？","answer":"合并并清理（推荐）"}]
+</send_user_message_question_reply>
+~~~~
+
 ## Brief task plan
 
 - 名称已由用户选定为“想太多”；续查TV第2话原作卡图并核对现有素材。
@@ -178,7 +186,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-- 状态：名称“想太多”已确认，卡图修复、去伪影、入框检查与工作台契合池保存完成；本地集成待确认。
+- 状态：名称“想太多”的调研与卡图交付完成，用户已批准将 `ad6666b` 合并到 `main`，并清理本次任务工作树、任务分支及临时核对记录。
 - 原分支：`main`；起始提交：`f3ed20efc581f267e4b546ad4899164e77a88ff1`。
 - 任务分支：`codex/junna-ascenders-bane-research-20261117`。
 - 工作树：`../worktrees/STS2_ShoujoKagekiJunna/junna-ascenders-bane-research-20261117`。
@@ -201,3 +209,10 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 交付与参数：[art-selection.md](art-selection.md)、[art-selection.json](art-selection.json)、[清理记录](art/cleanup.json)；最小检查为图片尺寸及哈希、卡框可见范围、MCP回读、文档链接和Git差异空白。
 
 - 续做集成保护：保留初轮检测到18个并行素材更新的记录；本轮对原工作区最新的541个未跟踪文件另存SHA-256保护快照，任务目录与其无路径重叠，原集成目标仍为最初捕获的 `main`。集成时保留并行更新后的现状，不回滚这些素材。
+
+### 合并与清理批准
+
+- 用户明确选择“合并并清理（推荐）”，复用该确认执行集成和所列清理，不再请求确认。
+- 调研与卡图的集中提交：`ad6666b`；本次追加提交仅记录用户批准与集成检查。
+- 集成目标沿用最初捕获的 `main`；批准后保护检查覆盖原工作区当前541个未跟踪文件及暂存、未暂存差异。
+- 合并采用快进，随后验证两工作区提交树、卡图SHA-256、任务提交可达性、文档及原有未提交状态；通过后移除本次干净工作树、任务分支及本次临时核对记录。卡图与处理原图保留于主分支，云端契合池素材保留。
