@@ -37,13 +37,13 @@ public static class CardActions
         card.EnergyCost.GetWithModifiers(CostModifiers.All) >= 0 && !card.Keywords.Contains(CardKeyword.Unplayable);
 
     public static async Task<CardModel[]> Choose(PlayerChoiceContext context, CardModel source,
-        IEnumerable<CardModel> candidates, int count = 1, bool optional = false)
+        IEnumerable<CardModel> candidates, int count = 1, bool optional = false, LocString? prompt = null)
     {
         var cards = candidates.Where(c => c != source).Distinct().ToArray();
         if (cards.Length == 0) return [];
         return (await CardPicking.Pick(context, source.Owner, cards, new CardPickRequest
         {
-            Prompt = CardChoices.Prompt(source, count), Minimum = optional ? 0 : Math.Max(0, count),
+            Prompt = prompt ?? CardChoices.Prompt(source, count), Minimum = optional ? 0 : Math.Max(0, count),
             Maximum = Math.Max(0, count), Source = source
         })).ToArray();
     }

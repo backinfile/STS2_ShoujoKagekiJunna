@@ -225,7 +225,7 @@
   "JUNNA_U_CARD_009.title": "每一次相遇",
   "JUNNA_U_CARD_009.description": "抽取[gold]飞矢[/gold]牌、[gold]知识[/gold]牌、闪耀牌各{N0:diff()}张。",
   "JUNNA_U_CARD_010.title": "舞台少女心得",
-  "JUNNA_U_CARD_010.selectionScreenPrompt": "选择1张牌。",
+  "JUNNA_U_CARD_010.selectionScreenPrompt": "选择1张{Category}牌放入手牌。",
   "JUNNA_U_CARD_010.description": "回合开始时，从[gold]抽牌堆[/gold]选择{N0:diff()}张[gold]知识[/gold]牌放入[gold]手牌[/gold]。\n（在[gold]知识[/gold]、[gold]飞矢[/gold]和闪耀中轮换）",
   "JUNNA_U_CARD_011.title": "撕裂黑暗",
   "JUNNA_U_CARD_011.description": "对所有敌人造成{Damage:diff()}点伤害。",

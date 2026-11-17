@@ -204,6 +204,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 可以这样修改吧，你看看其他获得卡牌的地方都应该不卡动画。比如“知识” 比如 “心得“
 
+### 13. 用户批准合并及清理
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_401016efd303494f95cb59f77cbd5227\",0]","question":"将 Junna bbb19af 和 MCP 1a24dc9 分别合并到各自 main，并清理这两个任务的工作树、分支及临时文件？录像和任务记录保留。","answer":"合并并清理"}]
+</send_user_message_question_reply>
+
 ## 简要计划
 
 1. 起始 main：bc83134234fc859e5224701092722afbafeba7b9，主目录干净。工作树 ../worktrees/STS2_ShoujoKagekiJunna/endless-learning-upgrade-order-20261117；分支 codex/endless-learning-upgrade-order-20261117。
@@ -213,7 +219,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## 结果与改动
 
-修复及必要定向验证完成，等待用户合并及清理确认。
+修复及必要定向验证完成；用户已批准将 Junna 与 MCP 分别合入各自 main，并清理两个任务工作树、分支及临时文件。录像与任务记录随提交保留。
 
 - 原生升级调用保留：游戏自己创建并播放锻造特效。原生 DoLocalPostSelectVfx 返回的 Task 保持同一对象，不再将新知展示包装到它的返回链中。新知在原生火花完成后独立展示，与原生剩余等待并行。
 - 普通永久升级也只把新知预览排在升级表现之后；原有升级结算任务继续执行，不等待视觉节点退出。新知仍在原来的结算内加入牌组。
@@ -242,4 +248,4 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - Beta、Stable Release 与观察模组构建均 0 警告、0 错误；git diff --check 通过。仅执行当前变更必要的定向检查。
 - evidence/results.json 保留失败基线、9 项通过、原生 Task 身份、实际出牌和三段录像数据。卡牌入堆约定已对照 docs/implementation/card-pile-placement.md。
 - MCP 关联实现为 af78d2969dcc46be1028c08350260f3bbf83fa12，生产 GPU 时钟回归已通过；此次展示等待修正未改变 MCP 实现。
-- 起始目标 main 不变，最初提交 bc83134234fc859e5224701092722afbafeba7b9。任务工作树已接入本地 main 13c8198ebc425f1a9516b05c533e93020c7205cd；新增内容为其他任务文档、美术证据及独立的自动选目标修正，当前非阻塞预览实现保持不变。同步后 Beta Release 编译为 0 警告、0 错误。主目录未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 保留。尚未获准合入 main 或清理。
+- 起始目标 main 不变，最初提交 bc83134234fc859e5224701092722afbafeba7b9。任务工作树已接入本地 main 03365bfb16722e823890ab52473b502ef4014e9f；新增内容为其他任务文档、美术证据、独立的自动选目标修正及舞台少女笔记提示修正，当前非阻塞预览实现保持不变。同步后 Beta Release 编译为 0 警告、0 错误。主目录未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 保留。用户已批准合入各自 main 并清理本任务工作树、分支和临时构建／测试文件；三段录像及本记录保留。

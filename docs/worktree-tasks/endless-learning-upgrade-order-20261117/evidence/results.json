@@ -386,11 +386,10 @@
     "totalSamples": 120
   },
   "synchronization": {
-    "main": "13c8198ebc425f1a9516b05c533e93020c7205cd",
+    "main": "03365bfb16722e823890ab52473b502ef4014e9f",
     "taskImplementation": "78282a7cd7f73ded2010fc2d0c14767809441951",
-    "result": "merged into task worktree; original main untouched",
-    "incomingRuntimeChange": "independent automatic target selection in CardActions.Play",
     "previewImplementationUnchanged": true,
+    "incomingRuntimeChange": "independent card choice prompt and Stage Girl Notes power tips",
     "betaBuild": "passed: 0 warnings, 0 errors"
   },
   "beforeTightening": {
@@ -2230,5 +2229,27 @@
     "stableBuild": "passed",
     "documentsReviewed": 537,
     "documentAuditHits": 0
+  },
+  "previousSynchronization": {
+    "main": "13c8198ebc425f1a9516b05c533e93020c7205cd",
+    "taskImplementation": "78282a7cd7f73ded2010fc2d0c14767809441951",
+    "result": "merged into task worktree; original main untouched",
+    "incomingRuntimeChange": "independent automatic target selection in CardActions.Play",
+    "previewImplementationUnchanged": true,
+    "betaBuild": "passed: 0 warnings, 0 errors"
+  },
+  "integrationApproval": {
+    "approvedTask": "bbb19af56dc6a66059ff1a0424af94dcbcd841c3",
+    "target": "main",
+    "cleanup": [
+      "this task worktree",
+      "this task branch",
+      "disposable build and test files"
+    ],
+    "retain": [
+      "task documents",
+      "three final native recordings"
+    ],
+    "answer": "合并并清理"
   }
 }
