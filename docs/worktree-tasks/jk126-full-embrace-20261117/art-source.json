@@ -1,0 +1,33 @@
+{
+  "cardId": "JK126",
+  "assetId": "original-tv-jk126-hug-closeup-wide-20261117",
+  "source": "docs/worktree-tasks/jk126-full-embrace-20261117/source-tv09-hug-closeup.jpg",
+  "sourceSize": [
+    1280,
+    720
+  ],
+  "sourcePage": "https://benigmatica.wordpress.com/2018/09/08/shoujo-kageki-revue-starlight-episode-09/",
+  "sourceImage": "https://i.imgur.com/gJDQd8J.jpg",
+  "work": "TV第9话约21:40—22:03，纯那拥住奈奈的大脸近景",
+  "sceneReference": "docs/design/assets/card-sources/2026-11-02/tv09-2140-new.jpg",
+  "crop": [
+    0,
+    0,
+    960,
+    720
+  ],
+  "outputSize": [
+    960,
+    720
+  ],
+  "resampling": "Pillow LANCZOS",
+  "encoding": {
+    "format": "JPEG",
+    "quality": 95,
+    "subsampling": 0
+  },
+  "output": "ShoujoKagekiJunna/images/cards/JK126.jpg",
+  "sourceSha256": "6a65f3524898ea1502a1fc94c5fd11fdd9ae9440fb1e88b99ef0d2b4c86fde64",
+  "outputSha256": "d71a36aa0c22bc4af5bbddcf9e1e3c7f73dedcca2a47de6304ed97bc4351bcf4",
+  "processing": "原作无字幕近景原帧，按原像素裁切为960×720。"
+}

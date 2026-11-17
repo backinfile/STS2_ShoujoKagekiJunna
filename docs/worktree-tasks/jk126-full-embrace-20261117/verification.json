@@ -1,0 +1,21 @@
+{
+  "revision": 5330,
+  "cardVersion": "83:701ee5d3d66db115823acf74edbfe4231741da270f893c637deae4ef88f57dfc",
+  "fitVersion": "5:ce7a1bfdabc39f9a111289cdba533932dfa04353e8f9709d5b5dcdb87fc282d9",
+  "assetId": "original-tv-jk126-hug-closeup-wide-20261117",
+  "sha256": "d71a36aa0c22bc4af5bbddcf9e1e3c7f73dedcca2a47de6304ed97bc4351bcf4",
+  "cardFieldsChanged": [
+    "art",
+    "naming.artWork",
+    "naming.artSourceUrl",
+    "naming.artSourcePage",
+    "naming.artProof",
+    "naming.artProcessing"
+  ],
+  "fitFieldsChanged": [
+    "art",
+    "notes"
+  ],
+  "unchangedCardFieldsVerified": true,
+  "unchangedFitFieldsVerified": true
+}

@@ -1,0 +1,246 @@
+{
+  "saved": true,
+  "revision": 5330,
+  "record": {
+    "id": "ce942810-1991-475d-8447-71c2c7079438",
+    "seq": 5330,
+    "at": "2026-11-17T02:28:03.066Z",
+    "label": "全都一起带去：保留原大脸拥抱镜头并放宽取景",
+    "kind": "编辑",
+    "clientId": "codex-jk126-full-embrace-20261117",
+    "patches": [
+      {
+        "collection": "cards",
+        "uid": "junna-shine-reward-revision-20261106_JK126",
+        "before": {
+          "uid": "junna-shine-reward-revision-20261106_JK126",
+          "id": "JK126",
+          "name": "全都一起带去",
+          "type": "技能",
+          "rarity": "稀有",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": null,
+          "upgradedTurns": null,
+          "target": "自己",
+          "pool": true,
+          "system": "partner",
+          "text": "连锁知识。获得8点格挡。抽取所有关联牌。",
+          "upgradedText": "连锁知识。获得12点格挡。抽取所有关联牌。",
+          "keywords": [
+            "连锁知识"
+          ],
+          "termIds": [
+            "KW_CHAIN_KNOWLEDGE",
+            "EF05",
+            "EF13"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "breakthroughIds": [],
+          "partnerCardIds": [],
+          "art": "original-tv-jk126-full-embrace-20261117",
+          "character": "星见纯那",
+          "role": "机制中坚牌",
+          "direction": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+          "draftStatus": "知识关联闪耀候选",
+          "draftBatch": "junna-shine-reward-revision-20261106",
+          "naming": {
+            "original": "全部持って行ってあげて",
+            "kind": "已核对原作台词的中文用词",
+            "work": "TV第9话纯那劝奈奈带着全部经历走向下一次舞台的台词，约22:25",
+            "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1345",
+            "adaptation": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+            "chineseOriginal": "全都一起带去",
+            "artWork": "TV第9话约21:36，纯那从身后拥住奈奈",
+            "artSourceUrl": "https://xenodude.com/wp-content/uploads/2018/09/revue-starlight-ep-9-6.png",
+            "artProof": "docs/worktree-tasks/jk126-full-embrace-20261117/source-tv09-hug-1080p.png；裁切 480,360,960,720；成品 ShoujoKagekiJunna/images/cards/JK126.jpg",
+            "artProcessing": "原作无字幕1920×1080原帧，按原像素裁切为960×720。",
+            "translation": "全都一起带去",
+            "artSourcePage": "https://xenodude.com/2018/09/09/revue-starlight-ep-9-original/"
+          },
+          "design": {
+            "classification": "知识获取与整局牌组变化",
+            "roleReason": "知识兼具",
+            "rules": "连锁知识也是知识牌。在卡牌奖励页面选择全都一起带去时，同时获得该页面其余全部卡牌，并按卡牌ID及数量记录为关联牌。关联列表在本局内按入口卡牌ID共享；后续获得全都一起带去时，新增关联更新到所有相同卡牌ID的全都一起带去，并随存档保存。关联为单向关系，被获取的卡牌保留各自的关键词、知识属性和关联牌列表。提示显示连锁知识规则，其下以“关联牌：”列出当前关联牌。",
+            "balance": "纸面初值。基础与升级费用保持一致。",
+            "dynamicKnowledge": {
+              "mode": "otherCardsInSameRewardPage",
+              "count": "all",
+              "scope": "本局相同卡牌ID的所有全都一起带去",
+              "storage": "runCardId",
+              "direction": "oneWay",
+              "preserveSourceGroups": true,
+              "display": "连锁知识"
+            },
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "both",
+                "cross": false,
+                "ports": [
+                  "defense",
+                  "operation"
+                ]
+              }
+            },
+            "systemRoles": {
+              "partner": {
+                "role": "兼具",
+                "port": "防御／运转"
+              }
+            },
+            "systems": [
+              "partner"
+            ],
+            "route": "知识",
+            "triggerRole": "兼具",
+            "port": "防御／运转",
+            "breakthrough": true
+          },
+          "notes": "连锁知识也是知识牌。在卡牌奖励页面选择全都一起带去时，同时获得该页面其余全部卡牌，并按卡牌ID及数量记录为关联牌。关联列表在本局内按入口卡牌ID共享；后续获得全都一起带去时，新增关联更新到所有相同卡牌ID的全都一起带去，并随存档保存。关联为单向关系，被获取的卡牌保留各自的关键词、知识属性和关联牌列表。提示显示连锁知识规则，其下以“关联牌：”列出当前关联牌。",
+          "extraHoverTips": [],
+          "cardPool": "角色"
+        },
+        "after": {
+          "uid": "junna-shine-reward-revision-20261106_JK126",
+          "id": "JK126",
+          "name": "全都一起带去",
+          "type": "技能",
+          "rarity": "稀有",
+          "cost": 1,
+          "upgradedCost": 1,
+          "turns": null,
+          "upgradedTurns": null,
+          "target": "自己",
+          "pool": true,
+          "system": "partner",
+          "text": "连锁知识。获得8点格挡。抽取所有关联牌。",
+          "upgradedText": "连锁知识。获得12点格挡。抽取所有关联牌。",
+          "keywords": [
+            "连锁知识"
+          ],
+          "termIds": [
+            "KW_CHAIN_KNOWLEDGE",
+            "EF05",
+            "EF13"
+          ],
+          "archetypeIds": [
+            "SYS_partner"
+          ],
+          "breakthroughIds": [],
+          "partnerCardIds": [],
+          "art": "original-tv-jk126-hug-closeup-wide-20261117",
+          "character": "星见纯那",
+          "role": "机制中坚牌",
+          "direction": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+          "draftStatus": "知识关联闪耀候选",
+          "draftBatch": "junna-shine-reward-revision-20261106",
+          "naming": {
+            "original": "全部持って行ってあげて",
+            "kind": "已核对原作台词的中文用词",
+            "work": "TV第9话纯那劝奈奈带着全部经历走向下一次舞台的台词，约22:25",
+            "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1345",
+            "adaptation": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+            "chineseOriginal": "全都一起带去",
+            "artWork": "TV第9话约21:40—22:03，纯那拥住奈奈的大脸近景",
+            "artSourceUrl": "https://i.imgur.com/gJDQd8J.jpg",
+            "artProof": "docs/worktree-tasks/jk126-full-embrace-20261117/source-tv09-hug-closeup.jpg；裁切 0,0,960,720；成品 ShoujoKagekiJunna/images/cards/JK126.jpg",
+            "artProcessing": "原作无字幕1280×720近景原帧，向左保留环抱手臂，按原像素裁切为960×720。",
+            "translation": "全都一起带去",
+            "artSourcePage": "https://benigmatica.wordpress.com/2018/09/08/shoujo-kageki-revue-starlight-episode-09/"
+          },
+          "design": {
+            "classification": "知识获取与整局牌组变化",
+            "roleReason": "知识兼具",
+            "rules": "连锁知识也是知识牌。在卡牌奖励页面选择全都一起带去时，同时获得该页面其余全部卡牌，并按卡牌ID及数量记录为关联牌。关联列表在本局内按入口卡牌ID共享；后续获得全都一起带去时，新增关联更新到所有相同卡牌ID的全都一起带去，并随存档保存。关联为单向关系，被获取的卡牌保留各自的关键词、知识属性和关联牌列表。提示显示连锁知识规则，其下以“关联牌：”列出当前关联牌。",
+            "balance": "纸面初值。基础与升级费用保持一致。",
+            "dynamicKnowledge": {
+              "mode": "otherCardsInSameRewardPage",
+              "count": "all",
+              "scope": "本局相同卡牌ID的所有全都一起带去",
+              "storage": "runCardId",
+              "direction": "oneWay",
+              "preserveSourceGroups": true,
+              "display": "连锁知识"
+            },
+            "routeRoles": {
+              "archetype_SYS_partner": {
+                "role": "both",
+                "cross": false,
+                "ports": [
+                  "defense",
+                  "operation"
+                ]
+              }
+            },
+            "systemRoles": {
+              "partner": {
+                "role": "兼具",
+                "port": "防御／运转"
+              }
+            },
+            "systems": [
+              "partner"
+            ],
+            "route": "知识",
+            "triggerRole": "兼具",
+            "port": "防御／运转",
+            "breakthrough": true
+          },
+          "notes": "连锁知识也是知识牌。在卡牌奖励页面选择全都一起带去时，同时获得该页面其余全部卡牌，并按卡牌ID及数量记录为关联牌。关联列表在本局内按入口卡牌ID共享；后续获得全都一起带去时，新增关联更新到所有相同卡牌ID的全都一起带去，并随存档保存。关联为单向关系，被获取的卡牌保留各自的关键词、知识属性和关联牌列表。提示显示连锁知识规则，其下以“关联牌：”列出当前关联牌。",
+          "extraHoverTips": [],
+          "cardPool": "角色"
+        },
+        "beforeIndex": 472,
+        "afterIndex": 472,
+        "afterVersion": "83:701ee5d3d66db115823acf74edbfe4231741da270f893c637deae4ef88f57dfc"
+      },
+      {
+        "collection": "fitPool",
+        "uid": "junna-bookmark-knowledge-and-practice-arrow-20261103_FIT_JK81B",
+        "before": {
+          "uid": "junna-bookmark-knowledge-and-practice-arrow-20261103_FIT_JK81B",
+          "id": "FIT_CARD_JK81B",
+          "name": "全都一起带去",
+          "theme": "接纳全部经历",
+          "text": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+          "original": "全部持って行ってあげて",
+          "source": "TV第9话纯那劝奈奈带着全部经历走向下一次舞台的台词，约22:25",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1345",
+          "art": "original-tv-jk126-full-embrace-20261117",
+          "cardIds": [
+            "JK126"
+          ],
+          "notes": "卡图：TV第9话约21:36，纯那从身后拥住奈奈。无字幕原帧来源：https://xenodude.com/wp-content/uploads/2018/09/revue-starlight-ep-9-6.png；出处页：https://xenodude.com/2018/09/09/revue-starlight-ep-9-original/；docs/worktree-tasks/jk126-full-embrace-20261117/source-tv09-hug-1080p.png；裁切 480,360,960,720；成品 ShoujoKagekiJunna/images/cards/JK126.jpg"
+        },
+        "after": {
+          "uid": "junna-bookmark-knowledge-and-practice-arrow-20261103_FIT_JK81B",
+          "id": "FIT_CARD_JK81B",
+          "name": "全都一起带去",
+          "theme": "接纳全部经历",
+          "text": "纯那劝奈奈把过往舞台中得到的经历一起带向下一场。取得时把同次奖励的其他候选全部纳入关联，使用时再取回关联内容；对演出经历的认识与吸收承担知识关系，格挡体现接纳经历后继续面对舞台。画面取纯那拥住奈奈、开口劝说的段落。",
+          "original": "全部持って行ってあげて",
+          "source": "TV第9话纯那劝奈奈带着全部经历走向下一次舞台的台词，约22:25",
+          "sourceUrl": "https://www.bilibili.com/bangumi/play/ep232375?t=1345",
+          "art": "original-tv-jk126-hug-closeup-wide-20261117",
+          "cardIds": [
+            "JK126"
+          ],
+          "notes": "卡图：TV第9话约21:40—22:03，纯那拥住奈奈的大脸近景。无字幕原帧来源：https://i.imgur.com/gJDQd8J.jpg；出处页：https://benigmatica.wordpress.com/2018/09/08/shoujo-kageki-revue-starlight-episode-09/；docs/worktree-tasks/jk126-full-embrace-20261117/source-tv09-hug-closeup.jpg；裁切 0,0,960,720；成品 ShoujoKagekiJunna/images/cards/JK126.jpg"
+        },
+        "beforeIndex": 166,
+        "afterIndex": 166,
+        "afterVersion": "5:ce7a1bfdabc39f9a111289cdba533932dfa04353e8f9709d5b5dcdb87fc282d9"
+      }
+    ],
+    "reference": null
+  },
+  "versions": {
+    "cards/junna-shine-reward-revision-20261106_JK126": "83:701ee5d3d66db115823acf74edbfe4231741da270f893c637deae4ef88f57dfc",
+    "fitPool/junna-bookmark-knowledge-and-practice-arrow-20261103_FIT_JK81B": "5:ce7a1bfdabc39f9a111289cdba533932dfa04353e8f9709d5b5dcdb87fc282d9"
+  },
+  "assetIds": [
+    "original-tv-jk126-hug-closeup-wide-20261117"
+  ]
+}
