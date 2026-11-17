@@ -17,7 +17,7 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     public bool Converted { get; private set; }
     public override CardType Type => Converted ? Definition.InternalType : Definition.CardType;
     public override TargetType TargetType => DesignId == "JA119" ? TargetType.None : Definition.TargetType;
-    public override bool GainsBlock => Definition.Values.Any(n => n.Name == "Block");
+    public override bool GainsBlock => Definition.CardType != CardType.Power && Definition.Values.Any(n => n.Name == "Block");
     protected override bool HasEnergyCostX => Definition.CostsX;
     public override int MaxUpgradeLevel => DesignId == "JK82" ? int.MaxValue : 1;
     public override HashSet<CardKeyword> CanonicalKeywords =>
