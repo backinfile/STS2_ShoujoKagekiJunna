@@ -1,0 +1,290 @@
+[
+  {
+    "name": "upgraded=False none before modifier",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none hand preview",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none printed value",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none normal block preview",
+    "actual": 5,
+    "expected": 5,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none installed power",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none triggered block",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail before modifier",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail hand preview",
+    "actual": 1.50,
+    "expected": 2,
+    "pass": false
+  },
+  {
+    "name": "upgraded=False frail printed value",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail normal block preview",
+    "actual": 3.75,
+    "expected": 3.75,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail installed power",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail triggered block",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity before modifier",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity hand preview",
+    "actual": 5,
+    "expected": 2,
+    "pass": false
+  },
+  {
+    "name": "upgraded=False dexterity printed value",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity normal block preview",
+    "actual": 8,
+    "expected": 8,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity installed power",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity triggered block",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity before modifier",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity hand preview",
+    "actual": 3.75,
+    "expected": 2,
+    "pass": false
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity printed value",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity normal block preview",
+    "actual": 6.00,
+    "expected": 6,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity installed power",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity triggered block",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none before modifier",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none hand preview",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none printed value",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none normal block preview",
+    "actual": 5,
+    "expected": 5,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none installed power",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none triggered block",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail before modifier",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail hand preview",
+    "actual": 2.25,
+    "expected": 3,
+    "pass": false
+  },
+  {
+    "name": "upgraded=True frail printed value",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail normal block preview",
+    "actual": 3.75,
+    "expected": 3.75,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail installed power",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail triggered block",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity before modifier",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity hand preview",
+    "actual": 6,
+    "expected": 3,
+    "pass": false
+  },
+  {
+    "name": "upgraded=True dexterity printed value",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity normal block preview",
+    "actual": 8,
+    "expected": 8,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity installed power",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity triggered block",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity before modifier",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity hand preview",
+    "actual": 4.50,
+    "expected": 3,
+    "pass": false
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity printed value",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity normal block preview",
+    "actual": 6.00,
+    "expected": 6,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity installed power",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity triggered block",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  }
+]

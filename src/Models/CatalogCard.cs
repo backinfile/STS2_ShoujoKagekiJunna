@@ -28,7 +28,8 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     {
         "Damage" => (DynamicVar)new DamageVar(n.Base,
             Definition.CardType == CardType.Power ? ValueProp.Unpowered : ValueProp.Move),
-        "Block" => new BlockVar(n.Base, ValueProp.Move),
+        "Block" => new BlockVar(n.Base,
+            Definition.CardType == CardType.Power ? ValueProp.Unpowered : ValueProp.Move),
         "Repeat" => new RepeatVar(n.Base),
         _ => new DynamicVar(n.Name, n.Base)
     }).Concat(DesignId is "JK48" or "JK206" ? new DynamicVar[]
