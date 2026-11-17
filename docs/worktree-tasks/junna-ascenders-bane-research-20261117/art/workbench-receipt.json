@@ -1,0 +1,42 @@
+{
+  "saved": true,
+  "revision": 5392,
+  "record": {
+    "id": "a7ba118d-0eb6-4fa3-ae41-7d3031475aa6",
+    "seq": 5392,
+    "at": "2026-11-17T07:16:34.455Z",
+    "label": "保存想太多原作卡图与出处",
+    "kind": "契合与配图",
+    "clientId": "codex-junna-overthinking-art-20261117",
+    "patches": [
+      {
+        "collection": "fitPool",
+        "uid": "fit_junna_ascenders_bane_overthinking_20261117",
+        "before": null,
+        "after": {
+          "uid": "fit_junna_ascenders_bane_overthinking_20261117",
+          "id": "FIT_JUNNA_ASCENDERS_BANE_OVERTHINKING",
+          "name": "想太多",
+          "text": "Revue结束后，纯那抱膝坐在落下的幕布里，闭目叹气、反复思量。以自身的纠结与暂时无法行动，承接进阶之灾的开局负担。",
+          "notes": "用户已选定的纯那进阶之灾替换名称。效果沿用不可打出、虚无、灵魂绑定。卡图取TV第2话约23:06抱膝反思镜头，基于原作截图清理播放界面、字幕和片尾名单，并调整为4:3；经本地GPT Image 2 Artifact Cleaner以alpha 0.25、原尺寸1448×1086处理。原始截图与生成原图均保留，详情见docs/worktree-tasks/junna-ascenders-bane-research-20261117/art-selection.md。",
+          "source": "TV第2话《命运之舞台》，本地播放器约23:06。https://www.bilibili.com/bangumi/play/ep232368 ；原始截图docs/design/assets/card-sources/2026-11-02/tv02-2305-proof.jpg。名称原词考えすぎ，另见官方角色设定https://bushiroad.co.jp/media/487。",
+          "art": "junna-overthinking-tv02-curtain-clean-20261117",
+          "cardIds": [],
+          "theme": "未分类",
+          "original": "",
+          "sourceUrl": ""
+        },
+        "beforeIndex": -1,
+        "afterIndex": 462,
+        "afterVersion": "1:efd2eb28a7435be9e39ef47809eaac0a5a7f96c6ad63ee323b63878a5ed984c1"
+      }
+    ],
+    "reference": null
+  },
+  "versions": {
+    "fitPool/fit_junna_ascenders_bane_overthinking_20261117": "1:efd2eb28a7435be9e39ef47809eaac0a5a7f96c6ad63ee323b63878a5ed984c1"
+  },
+  "assetIds": [
+    "junna-overthinking-tv02-curtain-clean-20261117"
+  ]
+}

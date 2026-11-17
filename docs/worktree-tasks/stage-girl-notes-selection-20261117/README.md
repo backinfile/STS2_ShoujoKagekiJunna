@@ -170,7 +170,7 @@ tips演示呢
 ### 用户消息 7
 
 <send_user_message_question_reply>
-[{"questionItemId":"["request_user_input_async","call_07cc8a8d625a4986a3ab4a50661a58f4",0]","question":"将提交 3753ea5 合并到 main，并清理本次任务分支、工作树及临时文件吗？任务记录和效果录像会保留。","answer":"你这个不对，每回合呢？"}]
+[{"questionItemId":"[\"request_user_input_async\",\"call_07cc8a8d625a4986a3ab4a50661a58f4\",0]","question":"将提交 3753ea5 合并到 main，并清理本次任务分支、工作树及临时文件吗？任务记录和效果录像会保留。","answer":"你这个不对，每回合呢？"}]
 </send_user_message_question_reply>
 
 ### 用户消息 8
@@ -197,3 +197,5 @@ tips演示呢
 - 原主目录的未跟踪 `docs/worktree-tasks/knowledge-refit-20261117/`（初始541文件）保持独立，不纳入本次提交。用户已确认合并及清理；在任务分支同步最新本地 main 并完成必要验证后，快进整合到 main，清理本次分支与工作树。
 - 根据追加要求，通过隔离游戏 MCP 补录 Power 原生悬浮提示，覆盖安装后知识、轮换后飞矢、两份错开安装的飞矢与知识、闪耀与飞矢、知识与闪耀，共5个状态。录像36.6秒及5张原生截图已单独保存。
 - 当前 MCP 没有 Power 悬浮动作；在本任务忽略目录的测试观察器中添加临时 `hover_power` / `unhover_power` 入口，触发原生 `NPower` 的 `MouseEntered` / `MouseExited` 信号。录像中经 MCP 执行正常出牌、结束回合、选牌与悬浮；原生提示直接读取受测 Power 的实时状态。
+
+- 整合检查：在任务工作树合入最新本地 main（13c8198ebc425f1a9516b05c533e93020c7205cd），`CardActions.cs` 自动合并成功，本次提示差异保留；同步后的 Beta、Stable 编译再次以零警告、零错误通过，元数据生成检查通过。原主目录最初541个未跟踪文件的哈希未变，两段独立保存的交付录像均与证据 SHA256 一致。用户已批准快进合并与清理，交付媒体保留。

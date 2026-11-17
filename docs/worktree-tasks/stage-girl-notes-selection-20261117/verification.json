@@ -64,7 +64,7 @@
     "sha256": "042a9d43c14394ee16b58bb5d50122d052e28252a086e4da27f93bbc31a843f3"
   },
   "documentAudit": {
-    "documentsReviewed": 522,
+    "documentsReviewed": 532,
     "findings": []
   },
   "tipsDemo": {
@@ -131,5 +131,24 @@
       "<delivery-media>/stage-girl-notes-tips-shine.png",
       "<delivery-media>/stage-girl-notes-tips-wrapped.png"
     ]
+  },
+  "integration": {
+    "targetBranch": "main",
+    "synchronizedMain": "13c8198ebc425f1a9516b05c533e93020c7205cd",
+    "mergeAndCleanupApproved": true,
+    "synchronizedBuilds": {
+      "beta": {
+        "warnings": 0,
+        "errors": 0
+      },
+      "stable": {
+        "warnings": 0,
+        "errors": 0
+      }
+    },
+    "metadataCheck": "passed",
+    "originalUntrackedFiles": 541,
+    "changedOriginalUntrackedFiles": 0,
+    "deliveryRecordingsHashCheck": "passed"
   }
 }

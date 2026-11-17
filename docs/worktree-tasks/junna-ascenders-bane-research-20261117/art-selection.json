@@ -1,0 +1,100 @@
+{
+  "title": "想太多",
+  "source": {
+    "work": "TV第2话《命运之舞台》",
+    "time": "约23:06（本地播放器时点）",
+    "episodeURL": "https://www.bilibili.com/bangumi/play/ep232368",
+    "screenshot": "docs/design/assets/card-sources/2026-11-02/tv02-2305-proof.jpg"
+  },
+  "processing": {
+    "tool": "image_gen built-in edit",
+    "operation": "保留原作抱膝反思镜头，清理播放界面、字幕及片尾名单，调整为4:3",
+    "generatedOriginal": "docs/worktree-tasks/junna-ascenders-bane-research-20261117/art/overthinking-restored-original.png",
+    "cleaned": "docs/worktree-tasks/junna-ascenders-bane-research-20261117/art/overthinking-clean.png",
+    "cleaner": {
+      "tool": "GPT Image 2 Artifact Cleaner",
+      "toolURL": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+      "alpha": 0.25,
+      "device": "cuda",
+      "size": [
+        1448,
+        1086
+      ],
+      "originalPreserved": true,
+      "alphaPreserved": true,
+      "source": "overthinking-restored-original.png",
+      "sourceSHA256": "4526bf6879028ad638a2aae4e124e7966401cb72c5d6484885b77dd8527fa072",
+      "output": "overthinking-clean.png",
+      "outputSHA256": "20f3a4f3c617a27178bcbf10bc2a1a3b283d2e887c3bef6b4d1806d5ca363888",
+      "seconds": 5.02
+    }
+  },
+  "duplicateRegistryChecks": [
+    {
+      "collection": "cards",
+      "search": "幕布",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "fitPool",
+      "search": "幕布",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "cards",
+      "search": "抱膝",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "fitPool",
+      "search": "抱膝",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "cards",
+      "search": "2305",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "fitPool",
+      "search": "2305",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "cards",
+      "search": "23:06",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "fitPool",
+      "search": "23:06",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "cards",
+      "search": "23:05",
+      "total": 0,
+      "revision": 5389
+    },
+    {
+      "collection": "fitPool",
+      "search": "23:05",
+      "total": 0,
+      "revision": 5389
+    }
+  ],
+  "workbench": {
+    "uid": "fit_junna_ascenders_bane_overthinking_20261117",
+    "version": "1:efd2eb28a7435be9e39ef47809eaac0a5a7f96c6ad63ee323b63878a5ed984c1",
+    "revision": 5392,
+    "assetId": "junna-overthinking-tv02-curtain-clean-20261117"
+  }
+}

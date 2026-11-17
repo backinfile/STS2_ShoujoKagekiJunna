@@ -39,3 +39,7 @@ python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --o
 ## 工作台 r5324 定向检查
 
 在独立双敌人战斗中执行 `junna_loop_sync check`，验证五张新循环牌、备箭、齐射及宝石数值；结果写入 `artifacts/task-deliverables/sync-workbench-latest-20261116/targeted-results.json`。`junna_loop_sync prepare` 准备五张循环牌和弦声齐鸣，供正常出牌录像使用。
+
+## 自动打牌目标定向检查
+
+双敌人环境运行 `python tests/Integration/run-auto-target.py --port <port>`，检查伏击基础及升级版、共用免费打牌、论据与知识关联打牌、保留原目标及自身目标。探针在旧手动选敌人入口直接报错，避免选牌测试替身掩盖问题。加 `--record` 准备伏击后，通过正常出牌与结束回合录制；录像和结果保存于 `out/tmp/auto-target/`。
