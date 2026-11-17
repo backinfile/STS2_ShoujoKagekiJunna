@@ -204,7 +204,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ### 集成状态
 
-- 尚未合入 main；等待按 `$worktree-task` 第 6 步确认合并与清理。
+- 用户已确认合并与清理；最终提交、树一致性与清理结果记录于 `artifacts/task-deliverables/quiet-knowledge-background-tips-20261117/integration.json`。
 - 建议清理项：本任务分支、工作树及其临时测试环境；录像、截图、回归结果与发行代码产物先保留到原检出的 `artifacts/task-deliverables/quiet-knowledge-background-tips-20261117/`。
 
 ## 补充计划
@@ -227,3 +227,14 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 已提供普通知识牌「挺身反抗」与关联牌「默然忍受」的录像及截帧。
 - `after-native.json` 记录两张牌在同一个预览批次中，均在第 417 帧飞入；牌组数量与原牌序检查通过。
 - 本次回复未收到合并或清理确认，任务分支与工作树继续保留。
+
+
+### 消息 6
+
+可以，合并 清理分支
+
+### 合并与清理授权
+
+- 用户确认将已验证修改合入 main，并清理本任务分支及对应工作树。
+- 已将普通知识、连锁知识和提示录像，三张截帧，六份回归结果、文档检查与测试使用的发行产物保留到 `artifacts/task-deliverables/quiet-knowledge-background-tips-20261117/`。
+- 交付文件使用 `files.json` 记录相对路径、长度与 SHA-256；合并后核对提交树和原工作区，再移除本次工作树与分支。
