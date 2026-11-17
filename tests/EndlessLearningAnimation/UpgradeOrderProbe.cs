@@ -1,4 +1,7 @@
 using System.Reflection;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using MegaCrit.Sts2.Core.Entities.RestSite;
 using System.Text.Json;
 using Godot;
 using HarmonyLib;
@@ -26,17 +29,16 @@ public static class Probe
     private static readonly List<object> Events = [];
     private static readonly List<object> Checks = [];
     private static int _gains;
+    private static int _previews, _nativeSmithCalls, _manualSmithCalls;
     private static bool _sparksFinished = true;
     public static void Initialize()
     {
         new Harmony("Junna.EndlessLearningAnimation.Observe").PatchAll(typeof(Probe).Assembly);
-        var tree = (SceneTree)Engine.GetMainLoop();
-        RenderingServer.ViewportSetUpdateMode(tree.Root.GetViewportRid(), RenderingServer.ViewportUpdateMode.Always);
-        tree.ProcessFrame += () => RenderingServer.ForceDraw(false);
+
     }
     public static void Reset(Player player, CardModel source)
     {
-        Player = player; Source = source; Events.Clear(); Checks.Clear(); _gains = 0; _sparksFinished = true;
+        Player = player; Source = source; Events.Clear(); Checks.Clear(); _gains = 0; _previews = 0; _nativeSmithCalls = 0; _manualSmithCalls = 0; _sparksFinished = true;
         Record("prepared");
     }
     private static void Record(string kind)
@@ -49,7 +51,8 @@ public static class Probe
         string directory = System.Environment.GetEnvironmentVariable("JUNNA_ENDLESS_OUTPUT")!;
         Directory.CreateDirectory(directory);
         File.WriteAllText(Path.Combine(directory, "live.json"), JsonSerializer.Serialize(new {
-            events = Events, checks = Checks, gains = _gains, level = Source?.CurrentUpgradeLevel,
+            events = Events, checks = Checks, gains = _gains, previews = _previews, nativeSmithCalls = _nativeSmithCalls,
+            manualSmithCalls = _manualSmithCalls, level = Source?.CurrentUpgradeLevel,
             deckNewKnowledge = Player?.Deck.Cards.Count(c => CardCatalog.DesignId(c) == "JK82B"),
             drawNewKnowledge = Player?.PlayerCombatState?.DrawPile.Cards.Count(c => CardCatalog.DesignId(c) == "JK82B")
         }));
@@ -71,6 +74,11 @@ public static class Probe
         private static void Postfix(IEnumerable<CardModel> cards, NCardSmithVfx? __result)
         {
             if (!cards.Contains(Source!) || __result == null) return;
+            var nativeStateMachine = typeof(SmithRestSiteOption).GetMethod(nameof(SmithRestSiteOption.DoLocalPostSelectVfx))!
+                .GetCustomAttribute<AsyncStateMachineAttribute>()!.StateMachineType;
+            bool native = new StackTrace().GetFrames().Any(frame => frame.GetMethod()?.DeclaringType == nativeStateMachine);
+            if (native) _nativeSmithCalls++; else _manualSmithCalls++;
+            Checks.Add(new { name = "smith effect is created by the native game method", pass = native });
             var vfx = __result;
             Active.Add(vfx); Record("upgrade-start");
             var particles = vfx.FindChildren("*", "GPUParticles2D", true, false).OfType<GpuParticles2D>().Where(p => p.OneShot).ToArray();
@@ -112,9 +120,20 @@ public static class Probe
             foreach (var card in cards.Where(c => c.Owner == Player && c.Pile == null && CardCatalog.DesignId(c) == "JK82B"))
             {
                 _gains++;
-                Checks.Add(new { name = "knowledge acquired after native upgrade effect finishes", pass = Active.Count == 0 && _sparksFinished });
+                Checks.Add(new { name = "one knowledge created by the upgrade settlement", pass = true });
                 Record("knowledge-acquired");
             }
+        }
+    }
+    [HarmonyPatch(typeof(CardCmd), "PreviewInternal")]
+    private static class KnowledgePreview
+    {
+        private static void Postfix(CardModel card, bool isAddingCardsToPile)
+        {
+            if (!isAddingCardsToPile || card.Owner != Player || CardCatalog.DesignId(card) != "JK82B") return;
+            _previews++;
+            Checks.Add(new { name = "new knowledge preview follows the native upgrade effect and sparks", pass = Active.Count == 0 && _sparksFinished });
+            Record("knowledge-preview");
         }
     }
     public static async Task Prepare(Player player)

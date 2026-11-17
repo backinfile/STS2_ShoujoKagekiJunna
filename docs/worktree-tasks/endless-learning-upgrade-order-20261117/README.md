@@ -176,28 +176,40 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 [{"questionItemId":"[\"request_user_input_async\",\"call_13d5ca9b8c2545c293ec6db3d5b69729\",0]","question":"你指的是哪部分不见了？我会同时对照原生锻造效果检查。","answer":"升级时的闪光／火花"}]
 </send_user_message_question_reply>
 
+### 7. 用户询问改法
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_81344b55daa643469cb3fd4da4a4fd90\",0]","question":"将保留完整闪光／火花后的 e5d43c8 合并到 main？清理仅涉及本任务工作树、分支和临时文件，最终录像与任务记录保留。","answer":"你是怎么改的？"}]
+</send_user_message_question_reply>
+
+### 8. 用户询问原生特效
+
+原本的升级特效呢？
+
+### 9. 用户授权与要求
+
+允许修改mcp，播放游戏的本来的内容
+
 ## 简要计划
 
 1. 起始 main：bc83134234fc859e5224701092722afbafeba7b9，主目录干净。工作树 ../worktrees/STS2_ShoujoKagekiJunna/endless-learning-upgrade-order-20261117；分支 codex/endless-learning-upgrade-order-20261117。
 2. 使用真实游戏升级命令及原生特效构建先后顺序定向检查。
-3. 最小修正升级完成到获得新知的等待关系。按反馈保留完整升级闪光和火花，等待主要升级动作及单次粒子实际完成，再紧接发牌；使用原生渲染复录并验证连续升级。
+3. 保留游戏原生升级结算与特效调用，仅把新知预览排到原生锻造及火花之后。修正 MCP 最小化捕获时间步长，使用原生渲染复录并验证连续升级。
 4. 整理单个提交、同步 main，并按 $worktree-task 请求合并及清理确认。
 
 ## 结果与改动
 
-修复、粒子时序回归和原生渲染复录完成，等待用户合并确认。
+已恢复游戏原生升级播放流程，完成定向验证与原生内容复录，等待用户合并确认。
 
-- 初始根因：原生 CardCmd.Upgrade 启动特效后立即返回；Core 同步命令回调立即发放新知。休息处使用 CardPreviewStyle.None，原生锻造特效原定在 OnSelect 返回后播放，因此新知先于锻造出现。
-- 闪光／火花反馈的原因有两处：旧录像使用 Compatibility 渲染，日志确认其不支持部分粒子子发射器和拖尾；衔接优化又将原牌开始回堆判定为全部升级效果完成，导致新知预览遮住尚在播放的火花尾段。
-- src/Combat/Knowledge/KnowledgeCombat.cs：获得升级赠牌前，等待对应卡牌的升级表现完成。
-- src/UI/Knowledge/KnowledgeUpgradeAnimation.cs：普通升级沿原生 NCardUpgradeVfx；休息处播放原生 NCardSmithVfx，等待主要升级动作和所有单次 GPU 粒子的 Finished 信号后发牌。节点退出作为取消／场景结束兜底；不插入固定延时，不等待额外回堆尾段。休息处抑制随后同张牌的重复锻造特效。
-- tools/dev/start-test-game.ps1：新增 RenderingMethod 选项，默认 forward_plus；需要兼容模式时可显式选 gl_compatibility。原生渲染保留粒子完整表现。
-- tests/EndlessLearningAnimation/：独立观察模组及脚本检查主要升级、实际粒子完成、新知入堆、完整节点退出。仅计新生成的物理新知，排除已有牌抽取；录像期间通过原生选牌与确认继续。
-- 初始顺序回归：修复前 deck 检查失败，新知在动画开始 31 毫秒后入堆，整个特效约 3 秒后才退出。修复后 deck、none、combat 三项定向检查通过。
-- 火花回归：新增粒子完成检查后，优化前版本在原生渲染下稳定失败：主动作 1235 毫秒后结束、新知 1250 毫秒时入堆，火花到 1750 毫秒才结束。修复后首次及同张牌再次升级均通过，顺序为 upgrade-start → upgrade-finished → upgrade-sparks-finished → knowledge-acquired；每次仅播放一次锻造特效并获得一张新知。
-- 最终录制数据：主动作在 1265 毫秒时结束，火花在 1750 毫秒时结束并立即发牌；整个节点在 2640 毫秒时退出。保留完整火花，同时省去额外约 890 毫秒的回堆等待。
-- 视觉验证：在 D3D12 Forward+ 渲染下逐帧检查原生金色闪光、火花尾段和新知出现时机；evidence/native-rest-full-sparks.mp4 为约 6.7 秒有声录像，已完成封装，外放静默，零丢帧。evidence/results.json 保留原始顺序失败、提前遮挡火花的失败及最终通过证据。
-- 卡牌入堆核对：GrantUpgrade 原有单卡发放、基础新知版本、永久牌组入口及战斗内 PileType.Draw + CardPilePosition.Random 调用保持原样；已对照 docs/implementation/card-pile-placement.md。
-- Beta、Stable Release 编译及观察模组编译通过，均 0 警告、0 错误；git diff --check 通过。对粒子修正只执行两次原生休息处升级及必要编译；其他三个路径的既有通过结果保留。
-- 集成：起始 main 为 bc83134234fc859e5224701092722afbafeba7b9；已同步至本地 main 的 f3ed20efc581f267e4b546ad4899164e77a88ff1，无冲突。已有实现提交 a2c8bff，衔接修正提交 54a79de；本次追加完整火花等待及准确渲染验证。main 中其他任务的未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 已记录校验值并保留。
-- 用户回复均为修改意见或澄清，未授权合并或清理。完成最终审查后等待合并及清理选择；录像、证据和任务记录随任务提交保留。
+- 原因：休息处原生 OnSelect 先结算升级，DoLocalPostSelectVfx 随后播放锻造。旧版在结算内手动创建同一特效并屏蔽原生播放；用户要求保留游戏本来的内容，最终版本已撤掉这层接管。
+- src/Combat/Knowledge/KnowledgeCombat.cs：升级赠牌仍通过原有同步结算和入堆调用生成；仅将休息处的新知预览交给原生展示完成后的步骤。永久牌组、每级一张基础新知及战斗内 PileType.Draw + CardPilePosition.Random 均沿原调用。
+- src/UI/Knowledge/KnowledgeUpgradeAnimation.cs：只观察游戏原生创建的 NCardUpgradeVfx、NCardSmithVfx；不再主动创建锻造特效，也不再过滤原生特效的卡牌。原生 DoLocalPostSelectVfx 及单次火花结束后，继续展示新知。卡牌结算边界保持在 OnSelect 内，避免把同步牌组改动移到本地视觉步骤。
+- tools/dev/start-test-game.ps1：默认原生 Forward+ 渲染，保留显式兼容模式选项。
+- tests/EndlessLearningAnimation/：移除额外 ForceDraw 驱动画面的代码；新增真实调用栈检查，确认锻造特效由游戏 DoLocalPostSelectVfx 状态机创建，并检查新知预览晚于原生动作及火花完成。
+- 失败基线：旧手动播放版本的原生创建次数为 0、手动创建次数为 1，定向检查失败。
+- 最终原生内容：首次升级原生创建 1 次、手动创建 0 次；同张牌连续两次升级累计原生创建 2 次、手动创建 0 次、获得与预览新知各 2 张。普通升级、无展示升级及战斗内升级三项定向检查通过。
+- 最终录像 evidence/native-game-playback.mp4：6.9 秒，游戏原生选牌、确认、锻造闪光与火花、之后的新知预览；有声、静默外放、零丢帧。录像和帧图已目视核对。
+- MCP 关联修复提交 af78d29，位于独立任务 native-minimized-particles-20261117：截图及录制为最小化窗口传入真实渲染时间步长。真实 GPU TIME 探针调用生产捕获代码，零步长基线比例为 0，修复后渲染时间／真实时间比例为 1.00396；不改游戏场景或特效。
+- Beta、Stable Release 与观察模组编译通过（均 0 警告、0 错误），git diff --check 通过；仅执行上述必要定向检查。
+- 卡牌入堆规则已对照 docs/implementation/card-pile-placement.md；结算数量、基础版本、永久牌组入口和战斗内 Random 位置沿原实现。
+- 集成目标仍为起始 main，起始提交 bc83134234fc859e5224701092722afbafeba7b9；已同步 f3ed20efc581f267e4b546ad4899164e77a88ff1。其他任务的未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 保留。用户授权了修改 MCP，尚未授权合并及清理。

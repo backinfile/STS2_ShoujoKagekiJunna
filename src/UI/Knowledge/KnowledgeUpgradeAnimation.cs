@@ -3,64 +3,54 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.RestSite;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes;
-using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
+using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.UI;
 
 internal static class KnowledgeUpgradeAnimation
 {
+    private sealed class SmithPresentation
+    {
+        internal readonly List<CardPileAddResult> Added = [];
+        internal readonly List<Task> Effects = [];
+    }
     private static readonly ConditionalWeakTable<CardModel, Task> Animations = new();
-    private static readonly ConditionalWeakTable<CardModel, TaskCompletionSource> Finishing = new();
-    private static readonly ConditionalWeakTable<CardModel, object> Smithed = new();
-    private static readonly AsyncLocal<bool> Smithing = new();
+    private static readonly ConditionalWeakTable<SmithRestSiteOption, SmithPresentation> Presentations = new();
+    private static readonly AsyncLocal<SmithRestSiteOption?> Selecting = new();
+    private static readonly AsyncLocal<SmithRestSiteOption?> Playing = new();
 
-    private static Task Completion(CardModel card, Godot.Node vfx)
+    private static Task Exit(Godot.Node vfx)
     {
         var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        Finishing.AddOrUpdate(card, completion);
-        vfx.TreeExited += () =>
-        {
-            if (Finishing.TryGetValue(card, out var pending) && ReferenceEquals(pending, completion)) Finishing.Remove(card);
-            completion.TrySetResult();
-        };
+        vfx.TreeExited += () => completion.TrySetResult();
         return completion.Task;
     }
 
-    private static Task SparksCompletion(NCardSmithVfx vfx)
-    {
-        var completions = vfx.FindChildren("*", "GPUParticles2D", true, false)
-            .OfType<Godot.GpuParticles2D>().Where(particle => particle.OneShot).Select(particle =>
+    private static Task SparksCompletion(NCardSmithVfx vfx) => Task.WhenAll(
+        vfx.FindChildren("*", "GPUParticles2D", true, false).OfType<Godot.GpuParticles2D>()
+            .Where(particle => particle.OneShot).Select(particle =>
             {
                 var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
                 particle.Finished += () => completion.TrySetResult();
                 vfx.TreeExited += () => completion.TrySetResult();
                 return completion.Task;
-            });
-        return Task.WhenAll(completions);
+            }));
+
+    internal static Task WaitFor(CardModel card)
+    {
+        if (!Animations.TryGetValue(card, out var animation)) return Task.CompletedTask;
+        Animations.Remove(card);
+        return animation;
     }
 
-    internal static async Task WaitFor(CardModel card)
+    internal static bool DeferSmithPreview(IReadOnlyList<CardPileAddResult> added)
     {
-        if (Animations.TryGetValue(card, out var animation))
-        {
-            Animations.Remove(card);
-            await animation;
-        }
-        else if (Smithing.Value && LocalContext.IsMine(card) && NRun.Instance?.GlobalUi is { } ui)
-        {
-            // Native smithing normally plays after OnSelect; its upgrade reward must follow that VFX.
-            var vfx = NCardSmithVfx.Create([card]);
-            if (vfx == null) return;
-            var completed = Task.WhenAll(Completion(card, vfx), SparksCompletion(vfx));
-            Smithed.AddOrUpdate(card, new object());
-            ui.CardPreviewContainer.AddChildSafely(vfx);
-            await completed;
-        }
+        if (Selecting.Value is not { } option || added.Count == 0 || !LocalContext.IsMine(added[0].cardAdded)) return false;
+        Presentations.GetValue(option, _ => new()).Added.AddRange(added);
+        return true;
     }
 
     [HarmonyPatch(typeof(NCardUpgradeVfx), nameof(NCardUpgradeVfx.Create))]
@@ -69,38 +59,51 @@ internal static class KnowledgeUpgradeAnimation
         private static void Postfix(CardModel card, NCardUpgradeVfx? __result)
         {
             if (CardCatalog.DesignId(card) == "JK82" && __result != null)
-                Animations.AddOrUpdate(card, Completion(card, __result));
-        }
-    }
-
-    // The upgrade effect has finished when its card starts flying back to the pile.
-    [HarmonyPatch(typeof(NCardFlyVfx), nameof(NCardFlyVfx.Create),
-        [typeof(NCard), typeof(PileType), typeof(bool), typeof(string)])]
-    private static class UpgradeFlight
-    {
-        private static void Postfix(NCard card, bool isAddingToPile)
-        {
-            if (isAddingToPile || card.Model is not { } model || !Finishing.TryGetValue(model, out var completion)) return;
-            Finishing.Remove(model);
-            completion.TrySetResult();
+                Animations.AddOrUpdate(card, Exit(__result));
         }
     }
 
     [HarmonyPatch(typeof(SmithRestSiteOption), nameof(SmithRestSiteOption.OnSelect))]
     private static class SmithSelection
     {
-        private static void Prefix(out bool __state) { __state = Smithing.Value; Smithing.Value = true; }
-        private static void Postfix(bool __state) => Smithing.Value = __state;
-        private static void Finalizer(bool __state) => Smithing.Value = __state;
+        private static void Prefix(SmithRestSiteOption __instance, out SmithRestSiteOption? __state)
+        { __state = Selecting.Value; Selecting.Value = __instance; }
+        private static void Postfix(SmithRestSiteOption? __state) => Selecting.Value = __state;
+        private static void Finalizer(SmithRestSiteOption? __state) => Selecting.Value = __state;
     }
 
+    // Observe the VFX created by the native post-selection method without replacing or filtering it.
     [HarmonyPatch(typeof(NCardSmithVfx), nameof(NCardSmithVfx.Create), [typeof(IEnumerable<CardModel>), typeof(bool)])]
     private static class NativeSmithPreview
     {
-        private static bool Prefix(ref IEnumerable<CardModel> cards)
+        private static void Postfix(NCardSmithVfx? __result)
         {
-            cards = cards.Where(card => !Smithed.Remove(card)).ToArray();
-            return cards.Any();
+            if (__result != null && Playing.Value is { } option && Presentations.TryGetValue(option, out var presentation))
+                presentation.Effects.Add(SparksCompletion(__result));
+        }
+    }
+
+    [HarmonyPatch(typeof(SmithRestSiteOption), nameof(SmithRestSiteOption.DoLocalPostSelectVfx))]
+    private static class SmithPresentationCompletion
+    {
+        private static void Prefix(SmithRestSiteOption __instance, out SmithRestSiteOption? __state)
+        { __state = Playing.Value; Playing.Value = __instance; }
+        private static void Postfix(SmithRestSiteOption __instance, ref Task __result, SmithRestSiteOption? __state)
+        {
+            __result = Complete(__result, __instance);
+            Playing.Value = __state;
+        }
+        private static void Finalizer(SmithRestSiteOption? __state) => Playing.Value = __state;
+        private static async Task Complete(Task task, SmithRestSiteOption option)
+        {
+            try
+            {
+                await task;
+                if (!Presentations.TryGetValue(option, out var presentation)) return;
+                await Task.WhenAll(presentation.Effects);
+                await CardActions.PreviewAdded(presentation.Added, PileType.Deck);
+            }
+            finally { Presentations.Remove(option); }
         }
     }
 }

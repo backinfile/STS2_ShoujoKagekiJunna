@@ -47,251 +47,331 @@
     "events": [
       {
         "kind": "prepared",
-        "ms": 1691295281,
+        "ms": 1693785000,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1691295281,
+        "ms": 1693785000,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-start",
-        "ms": 1691295296,
+        "ms": 1693785000,
         "activeUpgrades": 1
       },
       {
         "kind": "upgrade-finished",
-        "ms": 1691297015,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "knowledge-acquired",
-        "ms": 1691297015,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "command-completed",
-        "ms": 1691298296,
+        "ms": 1693786703,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-exited",
-        "ms": 1691298359,
+        "ms": 1693787859,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1693787859,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-preview",
+        "ms": 1693787875,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "command-completed",
+        "ms": 1693788843,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade effect finishes",
+        "name": "one knowledge created by the upgrade settlement",
+        "pass": true
+      },
+      {
+        "name": "new knowledge preview follows the native upgrade effect and sparks",
         "pass": true
       }
     ],
     "gains": 1,
+    "previews": 1,
+    "nativeSmithCalls": 0,
+    "manualSmithCalls": 0,
     "level": 1,
-    "deckNewKnowledge": 7,
-    "drawNewKnowledge": 3
+    "deckNewKnowledge": 12,
+    "drawNewKnowledge": null
   },
   "none": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1691298812,
+        "ms": 1693789031,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1691298812,
+        "ms": 1693789031,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1691298812,
+        "ms": 1693789031,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-preview",
+        "ms": 1693789031,
         "activeUpgrades": 0
       },
       {
         "kind": "command-completed",
-        "ms": 1691300093,
+        "ms": 1693790015,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade effect finishes",
+        "name": "one knowledge created by the upgrade settlement",
+        "pass": true
+      },
+      {
+        "name": "new knowledge preview follows the native upgrade effect and sparks",
         "pass": true
       }
     ],
     "gains": 1,
+    "previews": 1,
+    "nativeSmithCalls": 0,
+    "manualSmithCalls": 0,
     "level": 1,
-    "deckNewKnowledge": 8,
-    "drawNewKnowledge": 3
+    "deckNewKnowledge": 13,
+    "drawNewKnowledge": null
   },
   "combat": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1691300265,
+        "ms": 1694187421,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1691300265,
+        "ms": 1694187421,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1691300265,
+        "ms": 1694187421,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-preview",
+        "ms": 1694187421,
         "activeUpgrades": 0
       },
       {
         "kind": "command-completed",
-        "ms": 1691301265,
+        "ms": 1694188406,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade effect finishes",
+        "name": "one knowledge created by the upgrade settlement",
+        "pass": true
+      },
+      {
+        "name": "new knowledge preview follows the native upgrade effect and sparks",
         "pass": true
       }
     ],
     "gains": 1,
+    "previews": 1,
+    "nativeSmithCalls": 0,
+    "manualSmithCalls": 0,
     "level": 1,
-    "deckNewKnowledge": 8,
-    "drawNewKnowledge": 4
+    "deckNewKnowledge": 15,
+    "drawNewKnowledge": 15
   },
   "nativeRest": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1692364250,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "upgrade-start",
-        "ms": 1692367375,
-        "activeUpgrades": 1
-      },
-      {
-        "kind": "upgrade-finished",
-        "ms": 1692368640,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "upgrade-sparks-finished",
-        "ms": 1692369125,
+        "ms": 1694595578,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1692369125,
+        "ms": 1694598703,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-start",
+        "ms": 1694598703,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "upgrade-finished",
+        "ms": 1694599968,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-sparks-finished",
+        "ms": 1694600437,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-preview",
+        "ms": 1694600671,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-exited",
-        "ms": 1692370015,
+        "ms": 1694601000,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade effect finishes",
+        "name": "one knowledge created by the upgrade settlement",
+        "pass": true
+      },
+      {
+        "name": "smith effect is created by the native game method",
+        "pass": true
+      },
+      {
+        "name": "new knowledge preview follows the native upgrade effect and sparks",
         "pass": true
       }
     ],
     "gains": 1,
+    "previews": 1,
+    "nativeSmithCalls": 1,
+    "manualSmithCalls": 0,
     "level": 1,
-    "deckNewKnowledge": 11,
-    "drawNewKnowledge": null
+    "deckNewKnowledge": 16,
+    "drawNewKnowledge": 0
   },
   "nativeRestRepeat": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1692364250,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "upgrade-start",
-        "ms": 1692367375,
-        "activeUpgrades": 1
-      },
-      {
-        "kind": "upgrade-finished",
-        "ms": 1692368640,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "upgrade-sparks-finished",
-        "ms": 1692369125,
+        "ms": 1693790125,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1692369125,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "upgrade-exited",
-        "ms": 1692370015,
+        "ms": 1693793343,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-start",
-        "ms": 1692423750,
+        "ms": 1693793359,
         "activeUpgrades": 1
       },
       {
         "kind": "upgrade-finished",
-        "ms": 1692425015,
+        "ms": 1693794578,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-sparks-finished",
-        "ms": 1692425500,
+        "ms": 1693795093,
         "activeUpgrades": 0
       },
       {
-        "kind": "knowledge-acquired",
-        "ms": 1692425500,
+        "kind": "knowledge-preview",
+        "ms": 1693795328,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-exited",
-        "ms": 1692426296,
+        "ms": 1693795609,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1693969593,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-start",
+        "ms": 1693969593,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "upgrade-finished",
+        "ms": 1693970843,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-sparks-finished",
+        "ms": 1693971343,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-preview",
+        "ms": 1693971609,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-exited",
+        "ms": 1693972156,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade effect finishes",
+        "name": "one knowledge created by the upgrade settlement",
         "pass": true
       },
       {
-        "name": "knowledge acquired after native upgrade effect finishes",
+        "name": "smith effect is created by the native game method",
+        "pass": true
+      },
+      {
+        "name": "new knowledge preview follows the native upgrade effect and sparks",
+        "pass": true
+      },
+      {
+        "name": "one knowledge created by the upgrade settlement",
+        "pass": true
+      },
+      {
+        "name": "smith effect is created by the native game method",
+        "pass": true
+      },
+      {
+        "name": "new knowledge preview follows the native upgrade effect and sparks",
         "pass": true
       }
     ],
     "gains": 2,
+    "previews": 2,
+    "nativeSmithCalls": 2,
+    "manualSmithCalls": 0,
     "level": 2,
-    "deckNewKnowledge": 12,
+    "deckNewKnowledge": 15,
     "drawNewKnowledge": null
   },
   "recording": {
-    "path": "evidence/native-rest-full-sparks.mp4",
+    "path": "evidence/native-game-playback.mp4",
     "status": "completed",
-    "durationSeconds": 6.666666666666667,
+    "durationSeconds": 6.933333333333334,
     "audioSource": "engine_mix",
     "framesDropped": 0,
-    "renderer": "D3D12 Forward+",
-    "gpu": "NVIDIA GeForce RTX 4060"
+    "renderer": "D3D12 Forward+"
   },
   "builds": {
     "beta": "passed: 0 warnings, 0 errors",
     "stable": "passed: 0 warnings, 0 errors"
   },
   "startup": {
-    "randomPort": 4585,
+    "randomPort": 3152,
     "minimizedStartupGuard": true,
     "silentTest": true,
     "foregroundSamples": 0,
@@ -397,14 +477,7 @@
     },
     "completion": "entire upgrade VFX TreeExited"
   },
-  "completion": "native main upgrade effect and all one-shot smith particles Finished; return flight tail need not block acquisition",
-  "timing": {
-    "mainEffectEndMs": 1265,
-    "sparksEndMs": 1750,
-    "acquisitionMs": 1750,
-    "wholeNodeExitMs": 2640,
-    "addedFixedDelayMs": 0
-  },
+  "completion": "native upgrade settlement is unchanged; knowledge preview follows the original native SmithRestSiteOption.DoLocalPostSelectVfx and particles",
   "beforeSparkCompletionFix": {
     "nativeRest": {
       "events": [
@@ -547,5 +620,113 @@
       "deckNewKnowledge": 11,
       "drawNewKnowledge": null
     }
+  },
+  "beforeNativeFlowRestoration": {
+    "baseline": {
+      "events": [
+        {
+          "kind": "prepared",
+          "ms": 1693628921,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-start",
+          "ms": 1693632187,
+          "activeUpgrades": 1
+        },
+        {
+          "kind": "upgrade-finished",
+          "ms": 1693633437,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-sparks-finished",
+          "ms": 1693633937,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "knowledge-acquired",
+          "ms": 1693633937,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "knowledge-preview",
+          "ms": 1693633953,
+          "activeUpgrades": 0
+        }
+      ],
+      "checks": [
+        {
+          "name": "smith effect is created by the native game method",
+          "pass": false
+        },
+        {
+          "name": "one knowledge created by the upgrade settlement",
+          "pass": true
+        },
+        {
+          "name": "new knowledge preview follows the native upgrade effect and sparks",
+          "pass": true
+        }
+      ],
+      "gains": 1,
+      "previews": 1,
+      "nativeSmithCalls": 0,
+      "manualSmithCalls": 1,
+      "level": 1,
+      "deckNewKnowledge": 12,
+      "drawNewKnowledge": null
+    },
+    "previousRest": {
+      "events": [
+        {
+          "kind": "prepared",
+          "ms": 1692364250,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-start",
+          "ms": 1692367375,
+          "activeUpgrades": 1
+        },
+        {
+          "kind": "upgrade-finished",
+          "ms": 1692368640,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-sparks-finished",
+          "ms": 1692369125,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "knowledge-acquired",
+          "ms": 1692369125,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-exited",
+          "ms": 1692370015,
+          "activeUpgrades": 0
+        }
+      ],
+      "checks": [
+        {
+          "name": "knowledge acquired after native upgrade effect finishes",
+          "pass": true
+        }
+      ],
+      "gains": 1,
+      "level": 1,
+      "deckNewKnowledge": 11,
+      "drawNewKnowledge": null
+    }
+  },
+  "mcp": {
+    "repository": "<sts2-mcp-repository>",
+    "task": "native-minimized-particles-20261117",
+    "nativeRenderClockBaselineRatio": 0,
+    "nativeRenderClockFixedRatio": 1.0039621211372378,
+    "commit": "af78d2969dcc46be1028c08350260f3bbf83fa12"
   }
 }

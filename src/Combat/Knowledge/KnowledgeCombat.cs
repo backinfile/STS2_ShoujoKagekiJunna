@@ -221,6 +221,7 @@ public static class KnowledgeCombat
             else if (card.Owner.PlayerCombatState != null && !card.HasBeenRemovedFromState)
                 await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw, CardPilePosition.Random);
         }
-        await CardActions.PreviewAdded(added, PileType.Deck);
+        if (!ShoujoKagekiJunna.UI.KnowledgeUpgradeAnimation.DeferSmithPreview(added))
+            await CardActions.PreviewAdded(added, PileType.Deck);
     }
 }

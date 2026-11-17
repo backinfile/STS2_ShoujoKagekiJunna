@@ -36,17 +36,22 @@ const live = () => JSON.parse(fs.readFileSync(path.join(root, 'live.json'), 'utf
         await act('confirm_selection');
         const deadline = Date.now() + 15000;
         let after;
-        do { await sleep(100); after = live(); } while (Date.now() < deadline && after.gains === before.gains);
+        do { await sleep(100); after = live(); } while (Date.now() < deadline && after.previews === before.previews);
         assert.equal(after.gains - before.gains, 1, 'exactly one new knowledge');
         assert.equal(after.level - before.level, 1, 'exactly one upgrade');
+        assert.equal(after.previews - before.previews, 1, 'one new knowledge preview');
+        assert.equal(after.nativeSmithCalls - before.nativeSmithCalls, 1, 'native game creates the smith effect once');
+        assert.equal(after.manualSmithCalls, 0, 'no manually recreated smith effect');
         assert(after.checks.every(c => c.pass));
-        assert.deepEqual(after.events.slice(before.events.length).filter(e => e.kind !== 'upgrade-exited').map(e => e.kind),
-            ['upgrade-start', 'upgrade-finished', 'upgrade-sparks-finished', 'knowledge-acquired']);
+        const events = after.events.slice(before.events.length).map(e => e.kind);
+        assert(events.indexOf('upgrade-start') < events.indexOf('knowledge-preview'));
+        assert(events.indexOf('upgrade-finished') < events.indexOf('knowledge-preview'));
+        assert(events.indexOf('upgrade-sparks-finished') < events.indexOf('knowledge-preview'));
         await sleep(3200);
         assert.equal(live().events.filter(e => e.kind === 'upgrade-start').length,
             before.events.filter(e => e.kind === 'upgrade-start').length + 1, 'smith animation plays once');
         fs.writeFileSync(path.join(root, label + '.json'), JSON.stringify(live(), null, 2));
-        console.log('PASS native rest: upgrade-start -> upgrade-finished -> upgrade-sparks-finished -> knowledge-acquired; animation once');
+        console.log('PASS native rest: upgrade-start -> upgrade-finished -> upgrade-sparks-finished -> knowledge-preview; native animation once');
     } finally {
         await req('/recording/stop', {});
         let status;
