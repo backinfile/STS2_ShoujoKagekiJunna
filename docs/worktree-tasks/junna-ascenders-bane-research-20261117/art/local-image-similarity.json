@@ -1,0 +1,54 @@
+[
+  {
+    "modId": "karen",
+    "imagesChecked": 116,
+    "closest": [
+      {
+        "file": "karen/karen_reborn.png",
+        "distance": 18
+      },
+      {
+        "file": "karen/karen_starlight03_card.png",
+        "distance": 18
+      },
+      {
+        "file": "karen/karen_charge_strike.png",
+        "distance": 22
+      },
+      {
+        "file": "karen/karen_continue02.png",
+        "distance": 22
+      },
+      {
+        "file": "karen/karen_position0_backup.png",
+        "distance": 22
+      }
+    ]
+  },
+  {
+    "modId": "junna",
+    "imagesChecked": 225,
+    "closest": [
+      {
+        "file": "JF07.jpg",
+        "distance": 20
+      },
+      {
+        "file": "JA104.jpg",
+        "distance": 22
+      },
+      {
+        "file": "JA41.jpg",
+        "distance": 22
+      },
+      {
+        "file": "JA58.jpg",
+        "distance": 22
+      },
+      {
+        "file": "JZ05.jpg",
+        "distance": 22
+      }
+    ]
+  }
+]
