@@ -1,0 +1,95 @@
+{
+  "collection": "cards",
+  "uid": "junna-pool-gap-fill-20261103_JA71",
+  "entity": {
+    "uid": "junna-pool-gap-fill-20261103_JA71",
+    "id": "JA71",
+    "name": "弦声齐鸣",
+    "type": "技能",
+    "system": "stage",
+    "rarity": "稀有",
+    "pool": true,
+    "cost": 3,
+    "upgradedCost": 3,
+    "turns": null,
+    "upgradedTurns": null,
+    "target": "自己",
+    "text": "获得12点格挡。所有飞矢加速到完成。",
+    "upgradedText": "获得16点格挡。所有飞矢加速到完成。",
+    "keywords": [],
+    "termIds": [
+      "KW_STAGE",
+      "EF05",
+      "EF32"
+    ],
+    "archetypeIds": [
+      "SYS_stage",
+      "SYS_energy"
+    ],
+    "breakthroughIds": [],
+    "partnerCardIds": [],
+    "art": "original-scene-ja45-review-round2-20261104",
+    "character": "星见纯那",
+    "role": "机制中坚牌",
+    "direction": "飞矢",
+    "draftStatus": "补位候选",
+    "draftBatch": "junna-pool-gap-fill-20261103",
+    "design": {
+      "classification": "机制中坚牌",
+      "textComplexity": "低",
+      "reference": "体系驱动卡池设计流程：低稀有入口、核心收益、中坚连接与端口补洞。",
+      "route": "飞矢",
+      "systems": [
+        "stage",
+        "energy"
+      ],
+      "routeRoles": {
+        "archetype_SYS_stage": {
+          "role": "payoff",
+          "cross": true,
+          "ports": [
+            "defense",
+            "operation"
+          ]
+        },
+        "archetype_SYS_energy": {
+          "role": "trigger",
+          "cross": true,
+          "ports": [
+            "defense",
+            "operation"
+          ]
+        }
+      },
+      "systemRoles": {
+        "stage": {
+          "role": "收益",
+          "port": "防御／运转"
+        },
+        "energy": {
+          "role": "触发",
+          "port": "防御／运转"
+        }
+      },
+      "triggerRole": "收益",
+      "port": "防御／运转",
+      "roleReason": "飞矢收益；能量/高费触发，提供防御／运转。",
+      "rules": "先获得当前版本10/15点格挡，再对当时有效的己方布置建立快照，按布置顺序逐张将剩余回合数加速到0并完成。未布置的飞矢牌保持印刷等待，过程中新增的布置留给后续动作。本牌按当前有效关键词正常处理，当前基础与升级牌面均正常弃置。",
+      "upgrade": "格挡10→15。",
+      "investment": "按当前版本支付3能量。",
+      "contractRevision": 3724
+    },
+    "extraHoverTips": [],
+    "notes": "先获得格挡，再使当前布置中的全部飞矢立即完成。\n先获得当前版本10/15点格挡，再对当时有效的己方布置建立快照，按布置顺序逐张将剩余回合数加速到0并完成。未布置的飞矢牌保持印刷等待，过程中新增的布置留给后续动作。本牌按当前有效关键词正常处理，当前基础与升级牌面均正常弃置。\n升级：格挡10→15。",
+    "naming": {
+      "original": "",
+      "kind": "弓术场面概括",
+      "work": "《少女☆歌剧 Re LIVE》圣翔音乐学园·星见纯那（1060012）原作卡图",
+      "url": "https://starlight.academy/card/1060012/Snow-Hoshimi-Junna-Seisho-Music-Academy/",
+      "adaptation": "纯那持弓扣弦准备出箭，持弓手、箭杆与完整弓身同框可辨；以一次松弦带动已经布置的飞矢一同完成，格挡承接持弓稳住当前行动。复用备用JS21登记的原作卡图 original-scene-ja45-review-round2-20261104，采用正面持弓构图，避免与横扫的转弓镜头重复。"
+    },
+    "cardPool": "角色"
+  },
+  "version": "37:85bd093e98cd77e65cc544bfc2af9d4585c60d2d0ec399d69168d54c15bb2018",
+  "revision": 5330
+}

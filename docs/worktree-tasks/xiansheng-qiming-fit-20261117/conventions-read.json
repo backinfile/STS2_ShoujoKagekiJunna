@@ -1,0 +1,195 @@
+{
+  "revision": 5330,
+  "styleCount": 36,
+  "styles": [
+    {
+      "id": "STYLE_002",
+      "name": "飞矢范围表述",
+      "version": "8:8f875759aaaf28d129d7bfd8823f0927d4abba59ddefda80f2490e2fa69c7868"
+    },
+    {
+      "id": "STYLE_003",
+      "name": "单人卡牌",
+      "version": "1:69163c92976865b0ab9050aee5912446e41f52d4d241c0fd6813c43f7ac9e0ee"
+    },
+    {
+      "id": "STYLE_004",
+      "name": "知识牌设计",
+      "version": "1:51fd5e693d13e74d19d6482824bc451c7b1b12a4a58c95dd01b149e38b1a656c"
+    },
+    {
+      "id": "STYLE_005",
+      "name": "不要写其他职业中已经有的流派牌",
+      "version": "1:0396c354aa608d67ea235c48a872bcc33d440a2c48d3ed67a81bd988677e5193"
+    },
+    {
+      "id": "STYLE_006",
+      "name": "牌面与结算约定",
+      "version": "9:c8161992f8a9e6a1c2b962fddcdada99d02374068345fd97188ebd524e557f8e"
+    },
+    {
+      "id": "STYLE_007",
+      "name": "飞矢牌的设计倾向",
+      "version": "7:7fcdf358422566072b05511ae28591ab625ba462f32e981ed8e9fb6c47eea9e6"
+    },
+    {
+      "id": "STYLE_010",
+      "name": "飞矢加速的稀有度",
+      "version": "6:5e4ffefbbae2dbb5f97b06d4f77c29681bb9c9c65ee6b6d05f37893b848067ed"
+    },
+    {
+      "id": "STYLE_008",
+      "name": "伤害加成体系的设计倾向",
+      "version": "1:2967c12ad6c760bbeaf2dd9a7231bdf0c0deaea382fcb2e83cfffc19584e0540"
+    },
+    {
+      "id": "STYLE_PLAYER_SCOPE",
+      "name": "默认作用范围",
+      "version": "1:e8efa327034dfbb8c155e8ba09cc01a215ff28ce1c60735a35df7ebe68cf5b5d"
+    },
+    {
+      "id": "STYLE_CARD_REFERENCE",
+      "name": "卡牌名称引用",
+      "version": "1:e5732dd5bb4f15cb54e83bf080cc6b70efba9f47a995f154aa44aacc53f61845"
+    },
+    {
+      "id": "STYLE_FIT_ARROW",
+      "name": "飞矢契合：箭、言叶、星、舞台掌控",
+      "version": "8:c0a23454cd90790437e5089c8197e0612d608fc44115da0aa195ea23f3b0c0df"
+    },
+    {
+      "id": "STYLE_FIT_DAMAGE_BONUS",
+      "name": "伤害加成契合：日常锻炼",
+      "version": "2:5b3f9ba567a9278156980761f4e11a04b02dc60fd196fd7ec4605e68b84a6161"
+    },
+    {
+      "id": "STYLE_FIT_KNOWLEDGE",
+      "name": "知识契合与组内关联",
+      "version": "14:ebc0239b0f8d74e1690acf67d3fa460b344b3740a79cfa76bda9ad241a8a7e73"
+    },
+    {
+      "id": "STYLE_FIT_BASIC_ART",
+      "name": "卡牌类型与契合辨识",
+      "version": "6:dee5a68e05892751d287e2d32b328dff3384fc5f02c1fff3b7902cd343a1c98f"
+    },
+    {
+      "id": "STYLE_FIT_SOURCES",
+      "name": "卡名与原作出处",
+      "version": "12:0950cb1d67ec5e035390053db5fdc659c6bbc3b835ecba1fed2da26c8ee1378f"
+    },
+    {
+      "id": "STYLE_FIT_ENERGY",
+      "name": "能量契合：星星",
+      "version": "9:60dd9b90493e9d1c933978d154c55f26d2d05b01f23aa98772ed1bcd7c3e0f7b"
+    },
+    {
+      "id": "STYLE_009",
+      "name": "关于易伤和虚弱",
+      "version": "1:0f47fc788041f5bf10efbc6cb9187d4df34b51e979fc32370329816cd3d8d9c0"
+    },
+    {
+      "id": "STYLE_011",
+      "name": "白板牌设计",
+      "version": "2:d3f52929e69d0c96cea507fa26e81da1aa26636cb14f29ae10aa7f3ab2be891f"
+    },
+    {
+      "id": "STYLE_012",
+      "name": "卡牌升级",
+      "version": "8:f0aa34907b43fd9c1ba6b1e473c1dba3428e338a105ef93e20b90cbcd15bd4b9"
+    },
+    {
+      "id": "STYLE_KNOWLEDGE_BACKGROUND",
+      "name": "知识背景提示",
+      "version": "2:dcd011178e64293142edec60c350c18e08ac19a10a0d07e746a176e4671c11e7"
+    },
+    {
+      "id": "STYLE_ART_REVIEW",
+      "name": "卡图取景与重复检查",
+      "version": "13:e14ca92a527f326d465a14eff496d5e073fd44ab00e9b15b9b0b748481c2d1a0"
+    },
+    {
+      "id": "STYLE_FIT_POOL_MAINTENANCE",
+      "name": "契合池维护",
+      "version": "3:2675f6477188ea18293a62b95d2165559e51799f63c3942099d21c4b5cbb08b7"
+    },
+    {
+      "id": "STYLE_FIT_REVIEW_PROCESS",
+      "name": "契合修改与全卡复核",
+      "version": "9:59068e9d757afad33909a64f6286d22cdf68f40d755042a7beb17e8d24f05064"
+    },
+    {
+      "id": "STYLE_CONFIRMED_NAMES",
+      "name": "已确认的用词与原句",
+      "version": "34:a7cc462eae07506ac05bb732adc173f8eb1468f43fc3def706edf5705f9d8d34"
+    },
+    {
+      "id": "STYLE_WORKBENCH_EDITING",
+      "name": "工作台编辑与版本控制",
+      "version": "3:33c332334c6d8d99fc21402ea688dfb568c878d1386b80ec80ce0fa437ae341e"
+    },
+    {
+      "id": "STYLE_ENERGY_PAYOFF",
+      "name": "能量／高费收益",
+      "version": "3:e827e16846b31c6215a0bb9d471015c354ea6e57e2a30a73c00960a53852672d"
+    },
+    {
+      "id": "STYLE_ARROW_RESOLUTION_ORDER",
+      "name": "飞矢自动结算顺序",
+      "version": "5:12e4c3340e7f98afaf5e4f8dff6449e1bc712f53bd853b33ace2c574304014a0"
+    },
+    {
+      "id": "STYLE_EFFECT_ROLE_CONVENTION",
+      "name": "触发与收益定位",
+      "version": "4:a133cc2882a2a92b852e927c519c1aed9c449bab2925343b5d5798c703864ac0"
+    },
+    {
+      "id": "STYLE_SHINE_KNOWLEDGE",
+      "name": "闪耀牌定位",
+      "version": "5:bf1202c00a0fc88213f2bf5f73e66ba57c780e199bda0e7221352e7d1be95f71"
+    },
+    {
+      "id": "STYLE_DESIGN_TENDENCIES_ADVICE",
+      "name": "卡牌设计倾向建议",
+      "version": "7:6819499bd967f8c9c35404c4889b1d8399f55f88a5c2841af520e0094afa5737"
+    },
+    {
+      "id": "STYLE_DESIGN_DOCUMENTS",
+      "name": "设计前读取相关流派文档",
+      "version": "1:0fbcd02363f472b33cd8c3c82122939baab4382fd11ab016234572d6c987368b"
+    },
+    {
+      "id": "STYLE_INDEPENDENT_CARD_RELATIONS",
+      "name": "关联牌独立列表",
+      "version": "3:4544afdef3819c890f6c0658f3888083b8227e00fe2c19a487fd10be75627641"
+    },
+    {
+      "id": "STYLE_FIT_WORKFLOW",
+      "name": "契合设计、命名与卡图完整流程",
+      "version": "11:96d7f2fe964c8c269eaa83da828bc5f8203ebf64bc1746936c03e6919a6286bc"
+    },
+    {
+      "id": "STYLE_FIT_JUNNA",
+      "name": "纯那角色契合",
+      "version": "2:6db95cd09e479f85f4b0f0edb841e244ca6e7ea1e6045ab5dc781284fb752f17"
+    },
+    {
+      "id": "STYLE_NATIVE_POTION_NAMING_ART",
+      "name": "本体药水命名与图标特点",
+      "version": "9:6aa1f598d1d5714230a60ecdfd5fd95d5364b9a746bbad2f474f82e1896e9170"
+    },
+    {
+      "id": "STYLE_NATIVE_QUEST_WORDING",
+      "name": "任务牌的本体表述",
+      "version": "1:b6a94f6de74789470bace2d33e52336eb8101203adb2660768f347c2c3c0d80c"
+    }
+  ],
+  "collectionsRead": [
+    "styles",
+    "mechanisms",
+    "archetypes",
+    "cards",
+    "partnerGroups",
+    "fitPool"
+  ],
+  "cardVersion": "37:85bd093e98cd77e65cc544bfc2af9d4585c60d2d0ec399d69168d54c15bb2018"
+}
