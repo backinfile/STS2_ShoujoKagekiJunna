@@ -1,0 +1,119 @@
+[
+  {
+    "name": "upgraded=False bonus=0 hits=0 strength=0 parent damage",
+    "pass": true,
+    "actual": 8
+  },
+  {
+    "name": "upgraded=False bonus=0 hits=0 strength=0 two base children retain target and countdown",
+    "pass": true,
+    "actual": 2
+  },
+  {
+    "name": "upgraded=False bonus=0 hits=0 strength=0 children inherit only damage bonus",
+    "pass": true,
+    "actual": [
+      {
+        "DamageBonus": 0,
+        "ExtraHits": 0
+      },
+      {
+        "DamageBonus": 0,
+        "ExtraHits": 0
+      }
+    ]
+  },
+  {
+    "name": "upgraded=False bonus=0 hits=0 strength=0 sibling and parent investment remain independent",
+    "pass": true,
+    "actual": 0
+  },
+  {
+    "name": "upgraded=False bonus=0 hits=0 strength=0 child damage includes inherited and added bonus",
+    "pass": true,
+    "actual": 11
+  },
+  {
+    "name": "upgraded=False bonus=0 hits=0 strength=0 grandchildren inherit child investment",
+    "pass": false,
+    "actual": 2
+  },
+  {
+    "name": "upgraded=False bonus=7 hits=0 strength=0 parent damage",
+    "pass": true,
+    "actual": 15
+  },
+  {
+    "name": "upgraded=False bonus=7 hits=0 strength=0 two base children retain target and countdown",
+    "pass": true,
+    "actual": 2
+  },
+  {
+    "name": "upgraded=False bonus=7 hits=0 strength=0 children inherit only damage bonus",
+    "pass": false,
+    "actual": [
+      {
+        "DamageBonus": 0,
+        "ExtraHits": 0
+      },
+      {
+        "DamageBonus": 0,
+        "ExtraHits": 0
+      }
+    ]
+  },
+  {
+    "name": "upgraded=False bonus=7 hits=0 strength=0 sibling and parent investment remain independent",
+    "pass": false,
+    "actual": 7
+  },
+  {
+    "name": "upgraded=False bonus=7 hits=0 strength=0 child damage includes inherited and added bonus",
+    "pass": false,
+    "actual": 11
+  },
+  {
+    "name": "upgraded=False bonus=7 hits=0 strength=0 grandchildren inherit child investment",
+    "pass": false,
+    "actual": 2
+  },
+  {
+    "name": "upgraded=True bonus=7 hits=1 strength=2 parent damage",
+    "pass": true,
+    "actual": 42
+  },
+  {
+    "name": "upgraded=True bonus=7 hits=1 strength=2 two base children retain target and countdown",
+    "pass": true,
+    "actual": 2
+  },
+  {
+    "name": "upgraded=True bonus=7 hits=1 strength=2 children inherit only damage bonus",
+    "pass": false,
+    "actual": [
+      {
+        "DamageBonus": 0,
+        "ExtraHits": 0
+      },
+      {
+        "DamageBonus": 0,
+        "ExtraHits": 0
+      }
+    ]
+  },
+  {
+    "name": "upgraded=True bonus=7 hits=1 strength=2 sibling and parent investment remain independent",
+    "pass": false,
+    "actual": 7
+  },
+  {
+    "name": "upgraded=True bonus=7 hits=1 strength=2 child damage includes inherited and added bonus",
+    "pass": false,
+    "actual": 13
+  },
+  {
+    "name": "upgraded=True bonus=7 hits=1 strength=2 grandchildren inherit child investment",
+    "pass": false,
+    "actual": 2
+  }
+]

@@ -1,0 +1,216 @@
+[
+  {
+    "ability": "JK235",
+    "scenario": "none",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 3,
+    "expectedLoss": 3,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JK235",
+    "scenario": "strength",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 3,
+    "expectedLoss": 3,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JK235",
+    "scenario": "vulnerable",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 3,
+    "expectedLoss": 3,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JK235",
+    "scenario": "weak",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 3,
+    "expectedLoss": 3,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JK235",
+    "scenario": "investment",
+    "preview": 5,
+    "expectedDamage": 5,
+    "hpLoss": 5,
+    "expectedLoss": 5,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JK235",
+    "scenario": "block",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 1,
+    "expectedLoss": 1,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JG34",
+    "scenario": "none",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 3,
+    "expectedLoss": 3,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JG34",
+    "scenario": "strength",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 3,
+    "expectedLoss": 3,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JG34",
+    "scenario": "vulnerable",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 3,
+    "expectedLoss": 3,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JG34",
+    "scenario": "weak",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 3,
+    "expectedLoss": 3,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JG34",
+    "scenario": "investment",
+    "preview": 5,
+    "expectedDamage": 5,
+    "hpLoss": 5,
+    "expectedLoss": 5,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JG34",
+    "scenario": "block",
+    "preview": 3,
+    "expectedDamage": 3,
+    "hpLoss": 1,
+    "expectedLoss": 1,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "legacy-energy",
+    "scenario": "none",
+    "preview": null,
+    "expectedDamage": 2,
+    "hpLoss": 2,
+    "expectedLoss": 2,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "legacy-energy",
+    "scenario": "strength",
+    "preview": null,
+    "expectedDamage": 2,
+    "hpLoss": 2,
+    "expectedLoss": 2,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "legacy-energy",
+    "scenario": "vulnerable",
+    "preview": null,
+    "expectedDamage": 2,
+    "hpLoss": 2,
+    "expectedLoss": 2,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "legacy-energy",
+    "scenario": "weak",
+    "preview": null,
+    "expectedDamage": 2,
+    "hpLoss": 2,
+    "expectedLoss": 2,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "legacy-energy",
+    "scenario": "investment",
+    "preview": null,
+    "expectedDamage": 4,
+    "hpLoss": 4,
+    "expectedLoss": 4,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "legacy-energy",
+    "scenario": "block",
+    "preview": null,
+    "expectedDamage": 2,
+    "hpLoss": 0,
+    "expectedLoss": 0,
+    "attackEvents": 0,
+    "blockRemaining": 0,
+    "pass": true
+  },
+  {
+    "ability": "JB01",
+    "scenario": "attack-control",
+    "hpLoss": 16,
+    "expectedLoss": 16,
+    "attackEvents": 1,
+    "pass": true
+  },
+  {
+    "ability": "JB03",
+    "scenario": "attack-control",
+    "hpLoss": 38,
+    "expectedLoss": 38,
+    "attackEvents": 1,
+    "pass": true
+  }
+]

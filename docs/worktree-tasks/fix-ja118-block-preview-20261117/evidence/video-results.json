@@ -1,0 +1,31 @@
+{
+  "frail": 3,
+  "hand_before": [
+    {
+      "name": "立下誓言",
+      "description": "打出飞矢时，获得2点格挡。"
+    },
+    {
+      "name": "立下誓言+",
+      "description": "打出飞矢时，获得3点格挡。"
+    },
+    {
+      "name": "防御",
+      "description": "获得3点格挡。"
+    },
+    {
+      "name": "满弦射击",
+      "description": "造成25点伤害。"
+    }
+  ],
+  "block_after_playing_both_oaths_and_one_arrow": 5,
+  "recording": {
+    "status": "completed",
+    "audio": true,
+    "audio_source": "engine_mix",
+    "encoder": "h264_nvenc",
+    "fps": 15,
+    "frames_captured": 201,
+    "capture_fps": 14.513308754671895
+  }
+}
