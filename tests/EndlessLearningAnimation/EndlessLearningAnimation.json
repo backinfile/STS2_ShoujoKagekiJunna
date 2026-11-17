@@ -1,0 +1,15 @@
+{
+  "id": "EndlessLearningAnimation",
+  "name": "Endless Learning Animation Checks",
+  "author": "Junna Tests",
+  "description": "Native upgrade and acquisition ordering",
+  "version": "1.0.0",
+  "has_dll": true,
+  "has_pck": false,
+  "affects_gameplay": true,
+  "dependencies": [
+    {
+      "id": "ShoujoKagekiJunna"
+    }
+  ]
+}

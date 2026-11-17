@@ -1,0 +1,263 @@
+{
+  "baseline": {
+    "events": [
+      {
+        "kind": "prepared",
+        "ms": 1689976937,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "command-start",
+        "ms": 1689976953,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-start",
+        "ms": 1689976953,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1689976984,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "command-completed",
+        "ms": 1689977906,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "upgrade-finished",
+        "ms": 1689979937,
+        "activeUpgrades": 0
+      }
+    ],
+    "checks": [
+      {
+        "name": "knowledge acquired after native upgrade exits",
+        "pass": false
+      }
+    ],
+    "gains": 1,
+    "level": 1,
+    "deckNewKnowledge": 1,
+    "drawNewKnowledge": null
+  },
+  "deck": {
+    "events": [
+      {
+        "kind": "prepared",
+        "ms": 1690538546,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "command-start",
+        "ms": 1690538562,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-start",
+        "ms": 1690538562,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "upgrade-finished",
+        "ms": 1690541328,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1690541328,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "command-completed",
+        "ms": 1690542328,
+        "activeUpgrades": 0
+      }
+    ],
+    "checks": [
+      {
+        "name": "knowledge acquired after native upgrade exits",
+        "pass": true
+      }
+    ],
+    "gains": 1,
+    "level": 1,
+    "deckNewKnowledge": 3,
+    "drawNewKnowledge": null
+  },
+  "none": {
+    "events": [
+      {
+        "kind": "prepared",
+        "ms": 1690542593,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "command-start",
+        "ms": 1690542593,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1690542593,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "command-completed",
+        "ms": 1690543578,
+        "activeUpgrades": 0
+      }
+    ],
+    "checks": [
+      {
+        "name": "knowledge acquired after native upgrade exits",
+        "pass": true
+      }
+    ],
+    "gains": 1,
+    "level": 1,
+    "deckNewKnowledge": 4,
+    "drawNewKnowledge": null
+  },
+  "combat": {
+    "events": [
+      {
+        "kind": "prepared",
+        "ms": 1690649390,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "command-start",
+        "ms": 1690649406,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1690649406,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "command-completed",
+        "ms": 1690650359,
+        "activeUpgrades": 0
+      }
+    ],
+    "checks": [
+      {
+        "name": "knowledge acquired after native upgrade exits",
+        "pass": true
+      }
+    ],
+    "gains": 1,
+    "level": 1,
+    "deckNewKnowledge": 6,
+    "drawNewKnowledge": 5
+  },
+  "nativeRest": {
+    "events": [
+      {
+        "kind": "prepared",
+        "ms": 1690543796,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-start",
+        "ms": 1690577265,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "upgrade-finished",
+        "ms": 1690579453,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1690579453,
+        "activeUpgrades": 0
+      }
+    ],
+    "checks": [
+      {
+        "name": "knowledge acquired after native upgrade exits",
+        "pass": true
+      }
+    ],
+    "gains": 1,
+    "level": 1,
+    "deckNewKnowledge": 4,
+    "drawNewKnowledge": null
+  },
+  "nativeRestRepeat": {
+    "events": [
+      {
+        "kind": "prepared",
+        "ms": 1690543796,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-start",
+        "ms": 1690577265,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "upgrade-finished",
+        "ms": 1690579453,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1690579453,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-start",
+        "ms": 1690637734,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "upgrade-finished",
+        "ms": 1690640234,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1690640234,
+        "activeUpgrades": 0
+      }
+    ],
+    "checks": [
+      {
+        "name": "knowledge acquired after native upgrade exits",
+        "pass": true
+      },
+      {
+        "name": "knowledge acquired after native upgrade exits",
+        "pass": true
+      }
+    ],
+    "gains": 2,
+    "level": 2,
+    "deckNewKnowledge": 5,
+    "drawNewKnowledge": null
+  },
+  "recording": {
+    "path": "evidence/native-rest.mp4",
+    "status": "completed",
+    "durationSeconds": 7.133333333333334,
+    "audioSource": "engine_mix",
+    "framesDropped": 0
+  },
+  "builds": {
+    "beta": "passed: 0 warnings, 0 errors",
+    "stable": "passed: 0 warnings, 0 errors"
+  },
+  "startup": {
+    "randomPort": 1847,
+    "minimizedStartupGuard": true,
+    "silentTest": true,
+    "foregroundSamples": 0,
+    "totalSamples": 120
+  }
+}

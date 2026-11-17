@@ -211,6 +211,7 @@ public static class KnowledgeCombat
     }
     private static async Task GrantUpgrade(CardModel card, int previous, int current)
     {
+        await ShoujoKagekiJunna.UI.KnowledgeUpgradeAnimation.WaitFor(card);
         using var single = SingleCard();
         var added = new List<CardPileAddResult>();
         for (int i = previous; i < current; i++)
