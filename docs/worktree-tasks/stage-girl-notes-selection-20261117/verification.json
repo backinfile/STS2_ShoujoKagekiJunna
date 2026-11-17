@@ -1,0 +1,135 @@
+{
+  "builds": {
+    "beta": {
+      "warnings": 0,
+      "errors": 0
+    },
+    "stable": {
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "runtime": {
+    "game": "Beta 0.113.1",
+    "baseLib": "3.4.8",
+    "core": "1.9.5",
+    "silentTest": true,
+    "startupForegroundSamples": 0,
+    "startupSamples": 120
+  },
+  "scenarios": [
+    {
+      "case": "normal",
+      "nativeTurns": 4,
+      "checks": 55,
+      "failures": 0
+    },
+    {
+      "case": "staggered",
+      "nativeTurns": 3,
+      "checks": 59,
+      "failures": 0
+    },
+    {
+      "case": "missing",
+      "nativeTurns": 1,
+      "checks": 12,
+      "failures": 0
+    },
+    {
+      "case": "capacity",
+      "nativeTurns": 1,
+      "checks": 6,
+      "failures": 0
+    }
+  ],
+  "nativeTurns": 9,
+  "checks": 132,
+  "failures": 0,
+  "selectionPrompts": [
+    "选择1张知识牌放入手牌。",
+    "选择1张飞矢牌放入手牌。",
+    "选择1张闪耀牌放入手牌。",
+    "选择1张知识牌放入手牌。"
+  ],
+  "initialTooltip": [
+    "下回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。"
+  ],
+  "staggeredTooltip": [
+    "下回合开始时，从抽牌堆选择1张飞矢牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。\n下回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。"
+  ],
+  "recording": {
+    "delivery": "<delivery-media>/stage-girl-notes-prompts.mp4",
+    "durationSeconds": 35.13333333333333,
+    "sha256": "042a9d43c14394ee16b58bb5d50122d052e28252a086e4da27f93bbc31a843f3"
+  },
+  "documentAudit": {
+    "documentsReviewed": 522,
+    "findings": []
+  },
+  "tipsDemo": {
+    "interface": "isolated game MCP",
+    "stages": [
+      {
+        "stage": "knowledge",
+        "expectedCategories": [
+          "知识"
+        ],
+        "description": "下回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。"
+      },
+      {
+        "stage": "arrow",
+        "expectedCategories": [
+          "飞矢"
+        ],
+        "description": "下回合开始时，从抽牌堆选择1张飞矢牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。"
+      },
+      {
+        "stage": "independent",
+        "expectedCategories": [
+          "飞矢",
+          "知识"
+        ],
+        "description": "下回合开始时，从抽牌堆选择1张飞矢牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。\n下回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。"
+      },
+      {
+        "stage": "shine",
+        "expectedCategories": [
+          "闪耀",
+          "飞矢"
+        ],
+        "description": "下回合开始时，从抽牌堆选择1张闪耀牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。\n下回合开始时，从抽牌堆选择1张飞矢牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。"
+      },
+      {
+        "stage": "wrapped",
+        "expectedCategories": [
+          "知识",
+          "闪耀"
+        ],
+        "description": "下回合开始时，从抽牌堆选择1张知识牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。\n下回合开始时，从抽牌堆选择1张闪耀牌放入手牌。\n每回合依次切换为知识牌、飞矢牌、闪耀牌。"
+      }
+    ],
+    "durationSeconds": 36.6,
+    "recording": "<delivery-media>/stage-girl-notes-power-tips.mp4",
+    "sha256": "a13186f05789f1fead29c74ed7b77595f83c219ac3eba98d7893ab860f206a64",
+    "temporaryAdapter": "artifacts/stage-notes-prompt-check/probe/McpPowerTips.cs",
+    "nativeUiSignals": [
+      "NPower.MouseEntered",
+      "NPower.MouseExited"
+    ],
+    "mcpActions": [
+      "play_card",
+      "end_turn",
+      "select_card",
+      "hover_power",
+      "unhover_power"
+    ],
+    "screenshots": [
+      "<delivery-media>/stage-girl-notes-tips-knowledge.png",
+      "<delivery-media>/stage-girl-notes-tips-arrow.png",
+      "<delivery-media>/stage-girl-notes-tips-independent.png",
+      "<delivery-media>/stage-girl-notes-tips-shine.png",
+      "<delivery-media>/stage-girl-notes-tips-wrapped.png"
+    ]
+  }
+}

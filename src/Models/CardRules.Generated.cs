@@ -1429,7 +1429,11 @@ internal static partial class CardRules
         },
         ["U_CARD_010"] = new()
         {
-            PowerDescription = PowerDescriptionKind.RepeatedApplications,
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N0",
+            },
+            PowerDescription = PowerDescriptionKind.CategoryGroups,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },

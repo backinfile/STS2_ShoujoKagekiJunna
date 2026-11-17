@@ -1978,8 +1978,11 @@
     },
     "U_CARD_009": {},
     "U_CARD_010": {
+      "fields": {
+        "DrawCount": "N0"
+      },
       "power": {
-        "description": "RepeatedApplications",
+        "description": "CategoryGroups",
         "amount": "Applications",
         "single": false
       }

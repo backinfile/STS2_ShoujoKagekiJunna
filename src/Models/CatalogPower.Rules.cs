@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -290,10 +291,13 @@ public sealed partial class JunnaPowerU_CARD_010
     {
         if (!grant.Take(1)) return;
         int category = new[] { 1, 0, 2 }[grant.CycleIndex];
+        var prompt = CardChoices.Prompt(grant.Card);
+        prompt.Add("Category", new LocString("cards", new[] { "JUNNA_PREPARE_KNOWLEDGE.title", "JUNNA_PREPARE_ARROWS.title", "JUNNA_PREPARE_SHINE.title" }[grant.CycleIndex]));
         grant.CycleIndex = (grant.CycleIndex + 1) % 3;
+        Synchronize();
         if (Owner.Player!.PlayerCombatState!.Hand.Cards.Count >= CardPile.MaxCardsInHand) return;
         var candidates = Owner.Player!.PlayerCombatState.DrawPile.Cards.Where(c => CardTutors.Matches(c, category));
-        foreach (var selected in await CardActions.Choose(context, grant.Card, candidates))
+        foreach (var selected in await CardActions.Choose(context, grant.Card, candidates, prompt: prompt))
             await CardPileCmd.Add(selected, PileType.Hand);
     }
 
