@@ -1,0 +1,22 @@
+{
+  "status": "completed",
+  "output_path": "preview.mp4",
+  "fps": 15,
+  "max_duration_seconds": 60,
+  "width": 1280,
+  "height": 720,
+  "frames_written": 168,
+  "video_duration_seconds": 11.2,
+  "frames_captured": 156,
+  "frames_repeated": 12,
+  "frames_dropped": 0,
+  "encoder": "h264_nvenc",
+  "capture_fps": 14.007014838735218,
+  "capture_average_ms": 22.062074358974353,
+  "capture_max_ms": 197.096,
+  "encode_write_average_ms": 0.4573244047619048,
+  "encode_write_max_ms": 1.1621,
+  "elapsed_seconds": 11.5902392,
+  "audio": true,
+  "audio_source": "engine_mix"
+}

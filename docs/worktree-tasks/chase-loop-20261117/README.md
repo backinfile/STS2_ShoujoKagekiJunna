@@ -122,6 +122,12 @@ Before each commit, check the input record against the user messages, finalize t
 Report the resulting branch, commit, verification, cleanup state, and task document path.
 </skill>
 
+### 用户消息 4：合并与清理确认
+
+<send_user_message_question_reply>
+[{"questionItemId":"["request_user_input_async","call_0159c5e6acee4e4e84bc9ffba99b2835",0]","question":"将调查记录合并到 main，并如何处理本次工作树和任务分支？","answer":"合并并清理"}]
+</send_user_message_question_reply>
+
 ## Brief task plan
 
 1. 固定原检出 main、起始提交 9b66ca5f6e018ece4c923c2d11300f6defec46ee；保护原检出已有两处代码改动和未跟踪目录。
@@ -162,5 +168,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 核对既有回归代码 `tests/WorkbenchFitSync/Workbench5000Probe.cs:114`：包含双追逐牌防递归及再次布置。
 - 核对既有回归代码 `tests/Integration/CurrentPoolTriggers.cs:98`：包含五个牌区中的五张追逐牌、无重复布置、单次完成伤害和完成不再次触发。历史全卡池回归结果见 `docs/implementation/card-tests-r5294.md`；此处区分既有记录与本次源码核对。
 - 只新增本任务 `README.md`，游戏代码及牌面保持现状。
-- 已扫描全部 585 份 Git 跟踪及新增文本类文档，敏感信息和本机绝对路径模式检查无命中。
-- 起始检出的两处代码改动及未跟踪目录保持原位，合并和清理等待用户按 $worktree-task 确认。
+- 已扫描全部 589 份 Git 跟踪及新增文本类文档，敏感信息和本机绝对路径模式检查无命中。
+- 检查期间 main 由其他任务推进到 e1fa4bc14b4ce2bfdaea3c20d47adb9de3f8cc73，已同步进任务分支。该提交不改变追随钩子与飞矢完成路径，调查结论不变。
+- 原两处代码改动已由其他任务提交到 main；文件 SHA-256 均与起始值一致。未跟踪目录 541 个文件的路径及内容聚合 SHA-256 也与起始值一致。
+- 本任务相对当前 main 只增加本记录；用户已按 $worktree-task 明确选择“合并并清理”，批准将任务分支合并回 main，随后移除本次工作树和任务分支。

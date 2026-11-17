@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Models.Powers;
 using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
@@ -16,7 +17,7 @@ public sealed class PowerBlockPreviewProbe : AbstractConsoleCmd
 {
     public override string CmdName => "junna_power_block_preview";
     public override string Args => "check | prepare";
-    public override string Description => "Verify Oath's hand preview and triggered block under Frail.";
+    public override string Description => "Verify Oath's block classification, enchantment eligibility, preview and triggered block.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
         ? new(false, "Combat required")
@@ -63,7 +64,7 @@ public sealed class PowerBlockPreviewProbe : AbstractConsoleCmd
                 await PowerCmd.Apply<FrailPower>(context, player.Creature, 3, target, null);
                 await Add("JA118");
                 await Add("JA118", true);
-                await Add("JB02");
+                CardCmd.Enchant<Nimble>(await Add("JB02"), 2);
                 await Add("JB03");
                 return;
             }
@@ -74,6 +75,15 @@ public sealed class PowerBlockPreviewProbe : AbstractConsoleCmd
                 var oath = await Add("JA118", upgraded);
                 decimal expected = upgraded ? 3 : 2;
                 Equal($"upgraded={upgraded} {modifier} before modifier", Preview(oath), expected);
+                if (modifier == "none")
+                {
+                    Equal($"upgraded={upgraded} Oath does not directly gain block", oath.GainsBlock ? 1 : 0, 0);
+                    bool canEnchant = ModelDb.Enchantment<Nimble>().CanEnchant(oath);
+                    Equal($"upgraded={upgraded} Nimble rejects Oath", canEnchant ? 1 : 0, 0);
+                    if (canEnchant) CardCmd.Enchant<Nimble>(oath, 2);
+                    Equal($"upgraded={upgraded} Nimble cannot increase ongoing block", Preview(oath), expected);
+                    if (canEnchant) CardCmd.ClearEnchantment(oath);
+                }
                 if (modifier.Contains("frail"))
                     await PowerCmd.Apply<FrailPower>(context, player.Creature, 2, target, null);
                 if (modifier.Contains("dexterity"))
@@ -95,15 +105,19 @@ public sealed class PowerBlockPreviewProbe : AbstractConsoleCmd
             // Skills may install an ongoing effect while their immediate block remains powered.
             foreach (string id in new[] { "JH19", "JH24" })
             foreach (bool upgraded in new[] { false, true })
+            foreach (bool nimble in new[] { false, true })
             {
                 await Reset();
                 await PowerCmd.Apply<FrailPower>(context, player.Creature, 2, target, null);
                 await PowerCmd.Apply<DexterityPower>(context, player.Creature, 3, player.Creature, null);
                 var skill = await Add(id, upgraded);
-                decimal expected = (skill.DynamicVars.Block.BaseValue + 3) * .75m;
-                Equal($"{id} upgraded={upgraded} immediate block preview", Preview(skill), expected);
+                Equal($"{id} upgraded={upgraded} nimble={nimble} directly gains block", skill.GainsBlock ? 1 : 0, 1);
+                Equal($"{id} upgraded={upgraded} nimble={nimble} accepts Nimble", ModelDb.Enchantment<Nimble>().CanEnchant(skill) ? 1 : 0, 1);
+                if (nimble) CardCmd.Enchant<Nimble>(skill, 2);
+                decimal expected = (skill.DynamicVars.Block.BaseValue + 3 + (nimble ? 2 : 0)) * .75m;
+                Equal($"{id} upgraded={upgraded} nimble={nimble} immediate block preview", Preview(skill), expected);
                 await TestGameApi.PaidPlay(context, skill);
-                Equal($"{id} upgraded={upgraded} immediate block received", player.Creature.Block, Math.Floor(expected));
+                Equal($"{id} upgraded={upgraded} nimble={nimble} immediate block received", player.Creature.Block, Math.Floor(expected));
             }
         }
         catch (Exception error) { rows.Add(new { name = "probe exception", pass = false, error = error.ToString() }); }
