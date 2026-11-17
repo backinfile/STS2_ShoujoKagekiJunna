@@ -61,7 +61,7 @@ public static class Probe
             if (card != Source || __result == null) return;
             var vfx = __result;
             Active.Add(vfx); Record("upgrade-start");
-            vfx.TreeExited += () => { Active.Remove(vfx); Record("upgrade-finished"); };
+            vfx.TreeExited += () => { Active.Remove(vfx); Record("upgrade-exited"); };
         }
     }
     [HarmonyPatch(typeof(NCardSmithVfx), nameof(NCardSmithVfx.Create), [typeof(IEnumerable<CardModel>), typeof(bool)])]
@@ -72,7 +72,17 @@ public static class Probe
             if (!cards.Contains(Source!) || __result == null) return;
             var vfx = __result;
             Active.Add(vfx); Record("upgrade-start");
-            vfx.TreeExited += () => { Active.Remove(vfx); Record("upgrade-finished"); };
+            vfx.TreeExited += () => { Active.Remove(vfx); Record("upgrade-exited"); };
+        }
+    }
+    [HarmonyPatch(typeof(NCardFlyVfx), nameof(NCardFlyVfx.Create),
+        [typeof(MegaCrit.Sts2.Core.Nodes.Cards.NCard), typeof(PileType), typeof(bool), typeof(string)])]
+    private static class UpgradeFlight
+    {
+        private static void Postfix(MegaCrit.Sts2.Core.Nodes.Cards.NCard card, bool isAddingToPile)
+        {
+            if (card.Model != Source || isAddingToPile || Active.Count == 0) return;
+            Active.Clear(); Record("upgrade-finished");
         }
     }
     [HarmonyPatch]
@@ -83,10 +93,10 @@ public static class Probe
             && m.GetParameters()[1].ParameterType == typeof(CardPile));
         private static void Prefix(IEnumerable<CardModel> cards)
         {
-            foreach (var card in cards.Where(c => c.Owner == Player && CardCatalog.DesignId(c) == "JK82B"))
+            foreach (var card in cards.Where(c => c.Owner == Player && c.Pile == null && CardCatalog.DesignId(c) == "JK82B"))
             {
                 _gains++;
-                Checks.Add(new { name = "knowledge acquired after native upgrade exits", pass = Active.Count == 0 });
+                Checks.Add(new { name = "knowledge acquired after native upgrade effect finishes", pass = Active.Count == 0 });
                 Record("knowledge-acquired");
             }
         }

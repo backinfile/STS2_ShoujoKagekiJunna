@@ -47,205 +47,225 @@
     "events": [
       {
         "kind": "prepared",
-        "ms": 1690538546,
+        "ms": 1691295281,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1690538562,
+        "ms": 1691295281,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-start",
-        "ms": 1690538562,
+        "ms": 1691295296,
         "activeUpgrades": 1
       },
       {
         "kind": "upgrade-finished",
-        "ms": 1690541328,
+        "ms": 1691297015,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1690541328,
+        "ms": 1691297015,
         "activeUpgrades": 0
       },
       {
         "kind": "command-completed",
-        "ms": 1690542328,
+        "ms": 1691298296,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-exited",
+        "ms": 1691298359,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade exits",
+        "name": "knowledge acquired after native upgrade effect finishes",
         "pass": true
       }
     ],
     "gains": 1,
     "level": 1,
-    "deckNewKnowledge": 3,
-    "drawNewKnowledge": null
+    "deckNewKnowledge": 7,
+    "drawNewKnowledge": 3
   },
   "none": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1690542593,
+        "ms": 1691298812,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1690542593,
+        "ms": 1691298812,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1690542593,
+        "ms": 1691298812,
         "activeUpgrades": 0
       },
       {
         "kind": "command-completed",
-        "ms": 1690543578,
+        "ms": 1691300093,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade exits",
+        "name": "knowledge acquired after native upgrade effect finishes",
         "pass": true
       }
     ],
     "gains": 1,
     "level": 1,
-    "deckNewKnowledge": 4,
-    "drawNewKnowledge": null
+    "deckNewKnowledge": 8,
+    "drawNewKnowledge": 3
   },
   "combat": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1690649390,
+        "ms": 1691300265,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1690649406,
+        "ms": 1691300265,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1690649406,
+        "ms": 1691300265,
         "activeUpgrades": 0
       },
       {
         "kind": "command-completed",
-        "ms": 1690650359,
+        "ms": 1691301265,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade exits",
+        "name": "knowledge acquired after native upgrade effect finishes",
         "pass": true
       }
     ],
     "gains": 1,
     "level": 1,
-    "deckNewKnowledge": 6,
-    "drawNewKnowledge": 5
+    "deckNewKnowledge": 8,
+    "drawNewKnowledge": 4
   },
   "nativeRest": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1690543796,
+        "ms": 1691304250,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-start",
-        "ms": 1690577265,
+        "ms": 1691319703,
         "activeUpgrades": 1
       },
       {
         "kind": "upgrade-finished",
-        "ms": 1690579453,
+        "ms": 1691320984,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1690579453,
+        "ms": 1691321000,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-exited",
+        "ms": 1691322140,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade exits",
+        "name": "knowledge acquired after native upgrade effect finishes",
         "pass": true
       }
     ],
     "gains": 1,
     "level": 1,
-    "deckNewKnowledge": 4,
-    "drawNewKnowledge": null
+    "deckNewKnowledge": 9,
+    "drawNewKnowledge": 0
   },
   "nativeRestRepeat": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1690543796,
+        "ms": 1691304250,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-start",
-        "ms": 1690577265,
+        "ms": 1691319703,
         "activeUpgrades": 1
       },
       {
         "kind": "upgrade-finished",
-        "ms": 1690579453,
+        "ms": 1691320984,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1690579453,
+        "ms": 1691321000,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-exited",
+        "ms": 1691322140,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-start",
-        "ms": 1690637734,
+        "ms": 1691350609,
         "activeUpgrades": 1
       },
       {
         "kind": "upgrade-finished",
-        "ms": 1690640234,
+        "ms": 1691351843,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1690640234,
+        "ms": 1691351843,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "upgrade-exited",
+        "ms": 1691352921,
         "activeUpgrades": 0
       }
     ],
     "checks": [
       {
-        "name": "knowledge acquired after native upgrade exits",
+        "name": "knowledge acquired after native upgrade effect finishes",
         "pass": true
       },
       {
-        "name": "knowledge acquired after native upgrade exits",
+        "name": "knowledge acquired after native upgrade effect finishes",
         "pass": true
       }
     ],
     "gains": 2,
     "level": 2,
-    "deckNewKnowledge": 5,
-    "drawNewKnowledge": null
+    "deckNewKnowledge": 10,
+    "drawNewKnowledge": 0
   },
   "recording": {
     "path": "evidence/native-rest.mp4",
     "status": "completed",
-    "durationSeconds": 7.133333333333334,
+    "durationSeconds": 6.2,
     "audioSource": "engine_mix",
     "framesDropped": 0
   },
@@ -254,7 +274,7 @@
     "stable": "passed: 0 warnings, 0 errors"
   },
   "startup": {
-    "randomPort": 1847,
+    "randomPort": 9530,
     "minimizedStartupGuard": true,
     "silentTest": true,
     "foregroundSamples": 0,
@@ -269,5 +289,102 @@
     "stableBuild": "passed",
     "documentsReviewed": 537,
     "documentAuditHits": 0
+  },
+  "beforeTightening": {
+    "nativeRest": {
+      "events": [
+        {
+          "kind": "prepared",
+          "ms": 1690543796,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-start",
+          "ms": 1690577265,
+          "activeUpgrades": 1
+        },
+        {
+          "kind": "upgrade-finished",
+          "ms": 1690579453,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "knowledge-acquired",
+          "ms": 1690579453,
+          "activeUpgrades": 0
+        }
+      ],
+      "checks": [
+        {
+          "name": "knowledge acquired after native upgrade exits",
+          "pass": true
+        }
+      ],
+      "gains": 1,
+      "level": 1,
+      "deckNewKnowledge": 4,
+      "drawNewKnowledge": null
+    },
+    "nativeRestRepeat": {
+      "events": [
+        {
+          "kind": "prepared",
+          "ms": 1690543796,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-start",
+          "ms": 1690577265,
+          "activeUpgrades": 1
+        },
+        {
+          "kind": "upgrade-finished",
+          "ms": 1690579453,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "knowledge-acquired",
+          "ms": 1690579453,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-start",
+          "ms": 1690637734,
+          "activeUpgrades": 1
+        },
+        {
+          "kind": "upgrade-finished",
+          "ms": 1690640234,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "knowledge-acquired",
+          "ms": 1690640234,
+          "activeUpgrades": 0
+        }
+      ],
+      "checks": [
+        {
+          "name": "knowledge acquired after native upgrade exits",
+          "pass": true
+        },
+        {
+          "name": "knowledge acquired after native upgrade exits",
+          "pass": true
+        }
+      ],
+      "gains": 2,
+      "level": 2,
+      "deckNewKnowledge": 5,
+      "drawNewKnowledge": null
+    },
+    "completion": "entire upgrade VFX TreeExited"
+  },
+  "completion": "main upgrade effect finished; native card return flight can overlap the new-card preview",
+  "timing": {
+    "beforeMs": 2188,
+    "afterMs": 1297,
+    "mainEffectToAcquisitionMs": 16,
+    "returnFlightContinuesForMs": 1140
   }
 }

@@ -56,14 +56,14 @@ async function req(route, body) {
         await sleep(100);
         try { live = JSON.parse(fs.readFileSync(path.join(output, 'live.json'), 'utf8')); } catch { continue; }
         if (live.events.some(e => e.kind === 'command-completed') &&
-            (mode !== 'deck' || live.events.some(e => e.kind === 'upgrade-finished'))) break;
+            (mode !== 'deck' || live.events.some(e => e.kind === 'upgrade-exited'))) break;
     } while (Date.now() < deadline);
     assert(live?.events.some(e => e.kind === 'command-completed'), 'upgrade command completes');
     fs.writeFileSync(path.join(output, label + '.json'), JSON.stringify(live, null, 2) + '\n');
     assert.equal(live.level, 1, 'upgraded once');
     assert.equal(live.gains, 1, 'one physical new knowledge per upgrade');
     assert.equal(live.checks.length, 1);
-    assert(live.checks.every(c => c.pass), 'new knowledge waits for the native upgrade animation to exit');
+    assert(live.checks.every(c => c.pass), 'new knowledge follows the main upgrade effect');
     if (mode === 'deck') {
         const kinds = live.events.map(e => e.kind);
         assert(kinds.indexOf('upgrade-start') < kinds.indexOf('upgrade-finished'));

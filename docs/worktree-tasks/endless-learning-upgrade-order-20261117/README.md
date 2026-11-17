@@ -158,26 +158,32 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 </skill>
 
+### 4. 用户反馈
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_3019f83ba1c541d1bd0a74a3f6b60225\",0]","question":"将已验证的 720dde9 快进合并到 main，并清理本任务工作树、分支及构建／测试临时文件？录像和任务记录会随提交保留。","answer":"给牌的间隔有点长，是为啥"}]
+</send_user_message_question_reply>
+
 ## 简要计划
 
 1. 起始 main：bc83134234fc859e5224701092722afbafeba7b9，主目录干净。工作树 ../worktrees/STS2_ShoujoKagekiJunna/endless-learning-upgrade-order-20261117；分支 codex/endless-learning-upgrade-order-20261117。
 2. 使用真实游戏升级命令及原生特效构建先后顺序定向检查。
-3. 最小修正升级完成到获得新知的等待关系，构建并复核永久牌组和战斗内升级；录制原生休息处升级。
+3. 最小修正升级完成到获得新知的等待关系。按反馈将完成判定设为主要升级动作结束，让原牌回牌堆的飞行与新知预览自然衔接；构建并复核永久牌组、无展示及战斗内升级，复录原生休息处升级。
 4. 整理单个提交、同步 main，并按 $worktree-task 请求合并及清理确认。
 
 ## 结果与改动
 
-修复、定向验证和 main 同步完成，等待用户合并确认。
+首版修复后，按用户反馈收紧升级与发牌衔接；必要定向验证与复录已完成，等待用户合并确认。
 
 - 根因：原生 CardCmd.Upgrade 启动特效后立即返回；Core 同步命令回调立即发放新知。休息处使用 CardPreviewStyle.None，原生锻造特效原定在 OnSelect 返回之后播放，因此新知先于锻造出现。
 - src/Combat/Knowledge/KnowledgeCombat.cs：获得升级赠牌前，等待对应卡牌的原生升级特效结束。
-- src/UI/Knowledge/KnowledgeUpgradeAnimation.cs：普通升级跟踪 NCardUpgradeVfx 的 TreeExited；休息处在实际结算任务内播放原生 NCardSmithVfx，等待退场后继续发牌，并抑制随后同一张牌的重复锻造特效。无展示和战斗内升级沿原调用继续结算。
-- tests/EndlessLearningAnimation/：独立游戏观察模组与 Node 脚本，记录原生动画开始、退场、新知入堆与命令完成。录制期间只通过原生选牌和确认操作继续游戏。
+- src/UI/Knowledge/KnowledgeUpgradeAnimation.cs：普通升级与休息处原生 NCardSmithVfx 在主要升级动作完成、原牌开始回堆时继续发牌；TreeExited 仅作完成兜底。休息处抑制随后同一张牌的重复锻造特效。连续升级的完成状态按实际任务匹配。无展示和战斗内升级沿原调用继续结算。
+- tests/EndlessLearningAnimation/：独立游戏观察模组与 Node 脚本，记录原生主要升级动作开始与结束、完整特效退场、新知入堆与命令完成；仅计新生成的物理新知，排除已有牌的抽取。录制期间只通过原生选牌和确认操作继续游戏。
 - 修复前：node tests/EndlessLearningAnimation/run-check.cjs <random-port> deck out/tmp/endless-learning-order baseline 失败；新知在升级动画开始后 31 毫秒入堆，动画在约 3 秒后才退场。
-- 修复后：同脚本 deck、none、combat 三项通过；永久牌组的顺序为 upgrade-start → upgrade-finished → knowledge-acquired → command-completed。两次原生休息处升级均通过，每次只播放一次锻造动画并获得一张新知；同一张学无止境从等级 0 升到 2，累计获得 2 张新知。
+- 修复后：同脚本 deck、none、combat 三项通过；永久牌组的顺序为 upgrade-start → upgrade-finished → knowledge-acquired → command-completed。最终版本两次原生休息处升级均通过，每次只播放一次锻造动画并获得一张新知；同一张学无止境从等级 0 升到 2，累计获得 2 张新知。发牌从等待整个节点退场提前到主升级动作完成，本次录制开始到发牌从 2188 毫秒缩短至 1297 毫秒；主动作结束至发牌为 16 毫秒，原牌回堆飞行继续约 1140 毫秒。
 - 卡牌入堆核对：GrantUpgrade 原有单卡发放、基础新知版本、永久牌组入口及战斗内 PileType.Draw + CardPilePosition.Random 调用保持原样；已对照 docs/implementation/card-pile-placement.md 的对应入口。
 - Beta 和 Stable API 的 Release 编译均通过，0 警告、0 错误；git diff --check 通过。按当前改动执行定向检查。
-- 证据：evidence/results.json 保存修复前后顺序与连续升级结果；evidence/native-rest.mp4 为已目视复核的原生休息处录像（有声、静默外放、约 7.1 秒、无丢帧）。
+- 证据：evidence/results.json 保存修复前后顺序与连续升级结果；evidence/native-rest.mp4 为已目视复核的原生休息处录像（有声、静默外放、约 6.2 秒、无丢帧）。
 - 文档审查：同步后审查全部 537 份已跟踪文档及文档数据（含本次新增内容），本机绝对路径与常见凭据格式命中数均为 0。
-- 原目录起始干净；实现期间 main 前进到 f3ed20efc581f267e4b546ad4899164e77a88ff1，涉及其他卡牌改动。任务实现提交为 a2c8bff；合并 main 后得到 a0f766c，无冲突。同步前后本任务的实现和定向检查文件完全一致；同步后 Beta／Stable 构建再次通过（各 0 警告、0 错误），git diff --check 通过。原目录仍在 main 且状态干净；测试专用游戏已关闭。待用户确认后快进合并并按所选方式清理。
+- 原目录起始干净；实现期间 main 前进到 f3ed20efc581f267e4b546ad4899164e77a88ff1，涉及其他卡牌改动。任务实现提交为 a2c8bff；合并 main 后得到 a0f766c，无冲突。同步前后本任务的实现和定向检查文件完全一致；同步后 Beta／Stable 构建再次通过（各 0 警告、0 错误），git diff --check 通过。原目录仍在 main 且状态干净；测试专用游戏已关闭。用户反馈衔接间隔后，已追加完成主动作结束即发牌的修正，重跑 deck、none、combat 和两次原生休息处定向检查，Beta／Stable 构建通过。用户反馈属于修改意见，尚未授权合并或清理；待确认后执行。
 

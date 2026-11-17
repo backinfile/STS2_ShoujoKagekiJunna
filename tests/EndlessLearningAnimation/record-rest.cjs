@@ -40,7 +40,7 @@ const live = () => JSON.parse(fs.readFileSync(path.join(root, 'live.json'), 'utf
         assert.equal(after.gains - before.gains, 1, 'exactly one new knowledge');
         assert.equal(after.level - before.level, 1, 'exactly one upgrade');
         assert(after.checks.every(c => c.pass));
-        assert.deepEqual(after.events.slice(before.events.length).map(e => e.kind),
+        assert.deepEqual(after.events.slice(before.events.length).filter(e => e.kind !== 'upgrade-exited').map(e => e.kind),
             ['upgrade-start', 'upgrade-finished', 'knowledge-acquired']);
         await sleep(3200);
         assert.equal(live().events.filter(e => e.kind === 'upgrade-start').length,

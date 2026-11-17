@@ -1,10 +1,12 @@
 using System.Runtime.CompilerServices;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.RestSite;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using ShoujoKagekiJunna.Models;
 
@@ -13,13 +15,19 @@ namespace ShoujoKagekiJunna.UI;
 internal static class KnowledgeUpgradeAnimation
 {
     private static readonly ConditionalWeakTable<CardModel, Task> Animations = new();
+    private static readonly ConditionalWeakTable<CardModel, TaskCompletionSource> Finishing = new();
     private static readonly ConditionalWeakTable<CardModel, object> Smithed = new();
     private static readonly AsyncLocal<bool> Smithing = new();
 
-    private static Task Completion(Godot.Node vfx)
+    private static Task Completion(CardModel card, Godot.Node vfx)
     {
         var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        vfx.TreeExited += () => completion.TrySetResult();
+        Finishing.AddOrUpdate(card, completion);
+        vfx.TreeExited += () =>
+        {
+            if (Finishing.TryGetValue(card, out var pending) && ReferenceEquals(pending, completion)) Finishing.Remove(card);
+            completion.TrySetResult();
+        };
         return completion.Task;
     }
 
@@ -35,7 +43,7 @@ internal static class KnowledgeUpgradeAnimation
             // Native smithing normally plays after OnSelect; its upgrade reward must follow that VFX.
             var vfx = NCardSmithVfx.Create([card]);
             if (vfx == null) return;
-            var completed = Completion(vfx);
+            var completed = Completion(card, vfx);
             Smithed.AddOrUpdate(card, new object());
             ui.CardPreviewContainer.AddChildSafely(vfx);
             await completed;
@@ -48,7 +56,20 @@ internal static class KnowledgeUpgradeAnimation
         private static void Postfix(CardModel card, NCardUpgradeVfx? __result)
         {
             if (CardCatalog.DesignId(card) == "JK82" && __result != null)
-                Animations.AddOrUpdate(card, Completion(__result));
+                Animations.AddOrUpdate(card, Completion(card, __result));
+        }
+    }
+
+    // The upgrade effect has finished when its card starts flying back to the pile.
+    [HarmonyPatch(typeof(NCardFlyVfx), nameof(NCardFlyVfx.Create),
+        [typeof(NCard), typeof(PileType), typeof(bool), typeof(string)])]
+    private static class UpgradeFlight
+    {
+        private static void Postfix(NCard card, bool isAddingToPile)
+        {
+            if (isAddingToPile || card.Model is not { } model || !Finishing.TryGetValue(model, out var completion)) return;
+            Finishing.Remove(model);
+            completion.TrySetResult();
         }
     }
 
