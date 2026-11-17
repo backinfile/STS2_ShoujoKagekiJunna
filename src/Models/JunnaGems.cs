@@ -43,7 +43,7 @@ public abstract class JunnaGem(int healing, string icon) : CustomRelicModel, ISh
 
 [CustomID("JUNNA_GREEN_GEM")]
 [Pool(typeof(JunnaRelicPool))]
-public sealed class JunnaGreenGem() : JunnaGem(2, "green_gem")
+public sealed class JunnaGreenGem() : JunnaGem(1, "green_gem")
 {
     public override RelicModel GetUpgradeReplacement() => ModelDb.Relic<JunnaBurningGem>();
 }
@@ -52,5 +52,5 @@ public sealed class JunnaGreenGem() : JunnaGem(2, "green_gem")
 [Pool(typeof(JunnaRelicPool))]
 public sealed class JunnaBurningGem() : JunnaGem(0, "burning_gem")
 {
-    protected override Task DeckChanged(int changes) => CreatureCmd.GainMaxHp(Owner.Creature, changes * 2);
+    protected override Task DeckChanged(int changes) => CreatureCmd.GainMaxHp(Owner.Creature, changes);
 }

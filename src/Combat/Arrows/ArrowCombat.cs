@@ -179,6 +179,9 @@ public static partial class ArrowCombat
             if (Find(arrow.Card) != null) return;
             if (await HandArrow.Finish(context, arrow.Card, arrow.ExhaustAfterResolve)) return;
             if (arrow.Card.Pile?.Type != ArrowPile.PileId) return;
+            if (!arrow.ExhaustAfterResolve && !arrow.Card.ExhaustOnNextPlay &&
+                !arrow.Card.Keywords.Contains(CardKeyword.Exhaust) && HandArrow.Loops(arrow.Card) &&
+                await HandArrow.Play(context, arrow.Card, arrow.Play.Target)) return;
             using var pileExit = new ArrowPileExit(hud?.PileExitPosition(arrow.Card));
             if (arrow.Card.ExhaustOnNextPlay || arrow.Card.Keywords.Contains(CardKeyword.Exhaust))
             {
@@ -195,7 +198,10 @@ public static partial class ArrowCombat
 
     internal static async Task AfterPlayed(PlayerChoiceContext context, CardPlay play)
     {
-        if (play.IsLastInSeries && Find(play.Card) is { Remaining: 0 } ready) await Accelerate(context, ready, 0);
+        if (!play.IsLastInSeries) return;
+        if (!CardCatalog.IsArrow(play.Card) && HandArrow.Loops(play.Card))
+            await HandArrow.Play(context, play.Card, play.Target);
+        else if (Find(play.Card) is { Remaining: 0 } ready) await Accelerate(context, ready, 0);
     }
 
     internal static void Clear() { Arrows.Clear(); HandArrow.Clear(); LastTick.Clear(); DeathOrders.Clear(); _sequence = 0; }

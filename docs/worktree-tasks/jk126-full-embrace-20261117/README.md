@@ -195,7 +195,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 工作台同步卡牌 JK126 与 `FIT_CARD_JK81B` 的卡图和图片出处，读回确认其余字段保持读取时原值。提交与验证记录见本目录工作台JSON文件。
 - `AGENTS.md` 与工作台 `STYLE_ART_REVIEW` 已记录优先在 Xenodude 查找原作无字幕原帧；保存记录为工作台 r5329，简要回执见 `source-preference-receipt.json`。
 - 最小验证包括输出尺寸、近景取景、基础与升级的原生卡框合成预览、工作台读回、保存图片哈希与Git差异检查。关键词由其他对话处理。
-- 已同步本地 `main` 的 `e1a7592460b583afb8959a4658b763cfe7abdcd3`，无冲突；主分支的关键词实现与文案逐字保留。相对同步后的 `main`，本任务仍仅包含卡图、来源偏好及任务资料。工作台最终保存为 r5330，图片字节哈希与游戏资源一致。
+- 已同步本地 `main` 的 `9884c6617c0e52c4bb5113cb1ce22fb3d6f3119e`，无冲突；保留并行对话已整合的内容，包括 `e1a7592` 的关键词实现与文案。相对同步后的 `main`，本任务仍仅包含卡图、来源偏好及任务资料。工作台最终保存为 r5330，图片字节哈希与游戏资源一致。
 - 本次全部已跟踪及新增文本资料的路径和凭据审查见 `document-review.json`。
 - 起始分支为 `main`，起始提交为 `be9ae67470de2021ba25b2a1ab8a119d6d240b52`。并行对话已将代码和文案改动提交到 `e1a7592`。主目录剩余原有的 `docs/worktree-tasks/full-card-resolution-localization-20261105/selection-demo.mp4` 删除状态，合并时保留。
 - 用户已授权合并及清理本次工作树、任务分支和临时文件。最终卡图、原帧、预览、出处、回执和任务文档随提交保留。

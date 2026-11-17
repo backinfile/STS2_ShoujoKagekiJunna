@@ -50,8 +50,9 @@ public sealed class JunnaCombatHooks : SingletonModel
     private static readonly HashSet<Player> FollowingPlayers = [];
     public override async Task AfterCardPlayedLate(PlayerChoiceContext context, CardPlay play)
     {
+        bool wasArrow = CardCatalog.IsArrow(play.Card);
         await ArrowCombat.AfterPlayed(context, play);
-        if (!play.IsFirstInSeries || !CardCatalog.IsArrow(play.Card) || !FollowingPlayers.Add(play.Card.Owner)) return;
+        if (!play.IsFirstInSeries || !wasArrow || !FollowingPlayers.Add(play.Card.Owner)) return;
         try
         {
             var followers = CardActions.Named(play.Card.Owner, "U_CARD_012").Where(card => card != play.Card).ToArray();

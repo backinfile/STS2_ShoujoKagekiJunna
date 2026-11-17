@@ -337,6 +337,21 @@ public sealed class JunnaCardU_CARD_016() : CatalogCard("U_CARD_016");
 [CustomID("JUNNA_U_CARD_017")]
 public sealed class JunnaCardU_CARD_017() : CatalogCard("U_CARD_017");
 
+[CustomID("JUNNA_U_CARD_018")]
+public sealed class JunnaCardU_CARD_018() : CatalogCard("U_CARD_018");
+
+[CustomID("JUNNA_U_CARD_021")]
+public sealed class JunnaCardU_CARD_021() : CatalogCard("U_CARD_021");
+
+[CustomID("JUNNA_U_CARD_023")]
+public sealed class JunnaCardU_CARD_023() : CatalogCard("U_CARD_023");
+
+[CustomID("JUNNA_U_CARD_024")]
+public sealed class JunnaCardU_CARD_024() : CatalogCard("U_CARD_024");
+
+[CustomID("JUNNA_U_CARD_025")]
+public sealed class JunnaCardU_CARD_025() : CatalogCard("U_CARD_025");
+
 [CustomID("JUNNA_JK44")]
 public sealed class JunnaCardJK44() : CatalogCard("JK44");
 

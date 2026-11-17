@@ -27,6 +27,7 @@ public static class ProbeStartup
 {
     public static void Initialize()
     {
+        LoopSyncCommand.Initialize();
         FullCardAuditCommand.Initialize();
         KnowledgeCopyRewardCommand.Initialize();
         var tree = (Godot.SceneTree)Godot.Engine.GetMainLoop();

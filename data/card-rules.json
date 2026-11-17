@@ -2037,6 +2037,69 @@
         "Knowledge",
         "Arrow"
       ]
+    },
+    "U_CARD_018": {
+      "fields": {},
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "effect": "Attack",
+      "loopAsArrow": true
+    },
+    "U_CARD_021": {
+      "fields": {},
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "effect": "Attack",
+      "loopAsArrow": true
+    },
+    "U_CARD_023": {
+      "fields": {
+        "DrawCount": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "effect": "BlockAndDraw",
+      "loopAsArrow": true
+    },
+    "U_CARD_024": {
+      "fields": {
+        "DrawCount": "N0"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "effect": "Draw",
+      "loopAsArrow": true
+    },
+    "U_CARD_025": {
+      "fields": {
+        "Energy": "N0"
+      },
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ],
+      "effect": "Energy",
+      "loopAsArrow": true
     }
   }
 }
