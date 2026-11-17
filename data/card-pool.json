@@ -1,5 +1,5 @@
 {
-  "revision": 5409,
+  "revision": 5427,
   "cards": [
     {
       "id": "JG03",
@@ -842,12 +842,12 @@
       "values": [
         {
           "name": "Bonus",
-          "base": 2,
-          "upgraded": 3
+          "base": 3,
+          "upgraded": 4
         }
       ],
-      "text": "知识。回合结束时，所有布置的飞矢获得2点伤害加成。",
-      "upgradedText": "知识。回合结束时，所有布置的飞矢获得3点伤害加成。"
+      "text": "知识。回合结束时，所有布置的飞矢获得3点伤害加成。",
+      "upgradedText": "知识。回合结束时，所有布置的飞矢获得4点伤害加成。"
     },
     {
       "id": "JK67B",
@@ -1291,7 +1291,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": true,
-      "portrait": "JZ03.jpg",
+      "portrait": "JZ03.png",
       "values": [
         {
           "name": "Damage",
@@ -1307,8 +1307,8 @@
       "text": "对所有敌人造成25点伤害。",
       "upgradedText": "对所有敌人造成32点伤害。",
       "arrowFocus": {
-        "x": 0.35,
-        "y": 0.4
+        "x": 0.37,
+        "y": 0.35
       }
     },
     {
@@ -2176,7 +2176,7 @@
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
-      "portrait": "JK127.jpg",
+      "portrait": "JK127.png",
       "values": [
         {
           "name": "N0",
@@ -2184,8 +2184,8 @@
           "upgraded": 1
         }
       ],
-      "text": "战斗结束后，可以单独复制牌组中的1张知识牌。",
-      "upgradedText": "战斗结束后，可以单独复制牌组中的1张知识牌。"
+      "text": "战斗结束时，可以单独复制牌组中的1张知识牌。",
+      "upgradedText": "战斗结束时，可以单独复制牌组中的1张知识牌。"
     },
     {
       "id": "JK133",
@@ -2922,12 +2922,12 @@
         },
         {
           "name": "Bonus",
-          "base": 2,
-          "upgraded": 3
+          "base": 3,
+          "upgraded": 4
         }
       ],
-      "text": "知识。获得5点格挡。所有手牌和所有飞矢获得2点伤害加成。",
-      "upgradedText": "知识。获得5点格挡。所有手牌和所有飞矢获得3点伤害加成。"
+      "text": "知识。获得5点格挡。所有手牌和所有飞矢获得3点伤害加成。",
+      "upgradedText": "知识。获得5点格挡。所有手牌和所有飞矢获得4点伤害加成。"
     },
     {
       "id": "JK206",
@@ -4038,7 +4038,7 @@
       "id": "U_CARD_017",
       "modelId": "JUNNA_U_CARD_017",
       "className": "JunnaCardU_CARD_017",
-      "name": "猛烈闪耀",
+      "name": "猛烈",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -7947,5 +7947,5 @@
   "startingRelics": [
     "JUNNA_GREEN_GEM"
   ],
-  "arrowArtRevision": 5409
+  "arrowArtRevision": 5427
 }
