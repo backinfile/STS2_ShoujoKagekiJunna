@@ -83,6 +83,8 @@ def display_description(card, text, card_names, values, upgraded=False):
     highlighted.update(card_names)
     highlighted.update(name + '+' for name in card_names)
     pattern = '|'.join(re.escape(word) for word in sorted(highlighted, key=len, reverse=True))
+    # Match the Exhaust keyword and Strength stat in context.
+    pattern += r'|(?<=获得)消耗|(?<=点)力量'
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
     if card['id'] == 'JK206':
         text += '{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}'
@@ -316,9 +318,9 @@ def main():
         (ROOT / 'src/Models/CardCatalog.Generated.cs').write_text(header + '\n'.join(wrappers), encoding='utf-8')
     localization.update({
         'JUNNA_ARROW_TARGET_SELF.title': '自己',
-        'JUNNA_ARROW_TARGET_SELF.description': '目标为自己的飞矢加速1回合。',
+        'JUNNA_ARROW_TARGET_SELF.description': '目标为自己的[gold]飞矢[/gold]加速1回合。',
         'JUNNA_ARROW_TARGET_ENEMY.title': '敌人',
-        'JUNNA_ARROW_TARGET_ENEMY.description': '目标为敌人的飞矢加速1回合。',
+        'JUNNA_ARROW_TARGET_ENEMY.description': '目标为敌人的[gold]飞矢[/gold]加速1回合。',
         'JUNNA_ENERGY_NOW.title': '现在',
         'JUNNA_ENERGY_NOW.description': '获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
         'JUNNA_ENERGY_LATER.title': '下回合',
@@ -371,10 +373,10 @@ def main():
             'JA35': '回合开始时，所有[gold]飞矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA205': '目标为单个敌人的[gold]飞矢[/gold]现在会攻击所有敌人。',
             'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
-            'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点力量。',
+            'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。',
             'U_CARD_008': '战斗结束时，向[gold]牌组[/gold]添加[blue]{Amount}[/blue]张[gold]故事[/gold]。',
             'U_CARD_016': '打出[gold]{Category}[/gold]牌后，抽[blue]{Amount}[/blue]张牌。',
-            'U_CARD_010': '回合开始时，从[gold]抽牌堆[/gold]选择[blue]1[/blue]张当前类别的牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、闪耀牌。',
+            'U_CARD_010': '回合开始时，从[gold]抽牌堆[/gold]选择[blue]1[/blue]张当前类别的牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、[gold]闪耀[/gold]牌。',
         }
         for cid, text in current_power_text.items():
             if cid not in ids:
@@ -383,9 +385,9 @@ def main():
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount)).replace('{Repeat}', '1').replace('{Damage}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
             if cid == 'U_CARD_016':
-                powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]飞矢[/gold]、闪耀中轮换。'
+                powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]飞矢[/gold]、[gold]闪耀[/gold]中轮换。'
             if cid == 'U_CARD_010':
-                powers[f'JUNNA_{cid}_POWER.smartDescription'] = '下回合开始时，从[gold]抽牌堆[/gold]选择[blue]{Amount}[/blue]张[gold]{Category}[/gold]牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、闪耀牌。'
+                powers[f'JUNNA_{cid}_POWER.smartDescription'] = '下回合开始时，从[gold]抽牌堆[/gold]选择[blue]{Amount}[/blue]张[gold]{Category}[/gold]牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、[gold]闪耀[/gold]牌。'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers['JUNNA_JK235_POWER.smartDescription'] = '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{Repeat}[/blue]次}。'
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'
