@@ -1,0 +1,224 @@
+{
+  "workbenchRevision": 5336,
+  "stylesRead": 36,
+  "cardReadback": {
+    "JA71": {
+      "name": "开演",
+      "version": "38:34d5f7e85e48f1f46fc843be5b8fa1b7dc0353a511a3bb3c1a8c73f44c044bfb",
+      "contentMatchesFinalStateRevision": 5336
+    },
+    "JS33": {
+      "name": "道标",
+      "version": "30:b4c198a7c206313f0c790466e18d1c4a26d1c341d1d454af9d4de66460d7ddc7",
+      "contentMatchesFinalStateRevision": 5336
+    },
+    "U_CARD_025": {
+      "name": "初生之光",
+      "version": "8:fc1a9a901d58969f7eafc4260307f67029547c5e22faece93d17e671388b7036",
+      "contentMatchesFinalStateRevision": 5336
+    }
+  },
+  "nameCheck": {
+    "revision": 5336,
+    "junnaCards": 1150,
+    "fitPoolEntries": 458,
+    "normalization": "NFKC; remove whitespace, punctuation, symbols, upgrade suffix",
+    "candidates": {
+      "开演": {
+        "junnaMatches": [
+          "JA71"
+        ],
+        "fitPoolMatches": [
+          "FIT_CARD_JA71"
+        ],
+        "karenMatches": []
+      },
+      "自己决定": {
+        "junnaMatches": [],
+        "fitPoolMatches": [],
+        "karenMatches": []
+      },
+      "答案就在手中": {
+        "junnaMatches": [],
+        "fitPoolMatches": [],
+        "karenMatches": []
+      },
+      "舞台还将继续": {
+        "junnaMatches": [],
+        "fitPoolMatches": [],
+        "karenMatches": []
+      }
+    },
+    "karenCardTitles": 114
+  },
+  "visualReview": {
+    "junnaCardImages": 243,
+    "additionalFitImages": 18,
+    "karenPackedImages": 118,
+    "selectedCropDuplicateFound": false,
+    "method": "Read all image contact sheets and inspect selected source at original size; compare subject and action, including adjacent frames and alternate crops.",
+    "cardType": "skill",
+    "arrowMaskRequired": [
+      "U_CARD_025"
+    ],
+    "cardTypes": [
+      "skill",
+      "skill",
+      "skill"
+    ],
+    "arrowLayout": "docs/design/workbench/arrow-focus.js",
+    "arrowFocus": {
+      "x": 0.37,
+      "y": 0.5
+    },
+    "arrowReview": "Both eyes, glasses and smile identifiable; waving hand retained in full card art."
+  },
+  "images": {
+    "sources/xenodude-tv02-21.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "1d2b89fb74e7ede3cd5905bd42a75035958e729db0ebb2938596a2bb5a861bbc"
+    },
+    "sources/JS33-tv11-planning.jpg": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "c2714acccf1d3f9251468de912d342b9a52e8aa7dcef56fc1b7375f31bc2853a"
+    },
+    "sources/JS33-tv11-book.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "9d66cb5ce12d13cfbdaaf5e8f27de67e54c73b9a11ae39e460ebf7cd5f8d7a39"
+    },
+    "sources/U_CARD_025-tv11-return.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "a0832f4e67fef752b21b16473c019d04180be077bedf0424e47745656c8c904e"
+    },
+    "stage-lights-candidate.png": {
+      "size": [
+        960,
+        720
+      ],
+      "sha256": "aaa4ad9bda079ee4c4bf51c047aa1e85f074b2ae5be8d09a77c865bc78d998be"
+    },
+    "card-preview.png": {
+      "size": [
+        1300,
+        940
+      ],
+      "sha256": "4bc7f6198574d72351f34edba3e9e80d2116b8d6203284d907f58b458646d8f7"
+    },
+    "JS33-planning-candidate.png": {
+      "size": [
+        960,
+        720
+      ],
+      "sha256": "4e512dc562b6d6126daa7892c8075a028a39ffb385e97ff85b77bbd274e8ace8"
+    },
+    "JS33-book-candidate.png": {
+      "size": [
+        960,
+        720
+      ],
+      "sha256": "f2b764a07ddcb713012a9b97095c913744edb9dcdb70e1899996a7e34321bfed"
+    },
+    "U_CARD_025-stage-candidate.png": {
+      "size": [
+        960,
+        720
+      ],
+      "sha256": "7748aef6943896776632e058c1d1f0d35ee3f5c1afd60a99a445ebcd20a81e82"
+    },
+    "JS33-preview.png": {
+      "size": [
+        1300,
+        940
+      ],
+      "sha256": "5dbac7f0ac2e44dd1e5a31abe065046a44c4516422e7d9d35a2b13e0cdec919a"
+    },
+    "U_CARD_025-preview.png": {
+      "size": [
+        1300,
+        940
+      ],
+      "sha256": "18cd6507d9df553523f6aa255d1c139e0d5e7ce210c44bf92f37267096be88e7"
+    },
+    "followup-preview.png": {
+      "size": [
+        1300,
+        940
+      ],
+      "sha256": "866a304979b3dadd8c319826a9409647ae94766effc66434477486df08da74fd"
+    },
+    "U_CARD_025-arrow-preview.png": {
+      "size": [
+        480,
+        832
+      ],
+      "sha256": "2ffc7be39c3518863189d9a49dea52ff57e1eba990852ed97ba0510fabbb3486"
+    }
+  },
+  "crop": {
+    "source": "sources/xenodude-tv02-21.png",
+    "sourceUrl": "https://xenodude.com/wp-content/uploads/2024/06/revue-starlight-ep.-2-21.png",
+    "sourcePage": "https://xenodude.com/2024/06/19/revue-starlight-ep-2/",
+    "box": [
+      200,
+      0,
+      1120,
+      690
+    ],
+    "output": [
+      960,
+      720
+    ],
+    "exactEpisodeTimestamp": "not located"
+  },
+  "documents": {
+    "reviewed": 544,
+    "absolutePathFindings": [],
+    "credentialFindings": []
+  },
+  "runtimeTests": "No runtime code changed; source images, naming, cloud readback and relevant previews verified.",
+  "synchronization": {
+    "targetBranch": "main",
+    "targetRevision": "30285c2c19f27cdf9e4ffd3460ca27d736ad9188",
+    "originalCheckoutStatus": "main clean; original video deletion preserved in parallel main commit"
+  },
+  "cloudChanges": {
+    "JA71": {
+      "name": "开演",
+      "revision": 5333,
+      "unchangedBody": [
+        "获得12点格挡。所有飞矢加速到完成。",
+        "获得16点格挡。所有飞矢加速到完成。"
+      ],
+      "art": "original-tv-ja71-kaien-window-lights-20261117",
+      "fitPoolSynchronized": true
+    },
+    "confirmedNameConvention": {
+      "revision": 5334,
+      "records": [
+        "JA71开演已选定",
+        "初生之光谐音否定及旧图重复",
+        "JS33重新选名选图"
+      ]
+    }
+  },
+  "candidateStatus": {
+    "JS33": "proposal; current card version and effect retained",
+    "U_CARD_025": "proposal; current card version and effect retained"
+  },
+  "confirmedOldDuplicates": {
+    "JS33": "JA100星辉：TV9水面星光同一画面",
+    "U_CARD_025": "JH24星光结界：TV9同一星空画面"
+  }
+}
