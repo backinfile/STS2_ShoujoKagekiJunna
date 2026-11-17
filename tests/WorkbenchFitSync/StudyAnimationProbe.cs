@@ -25,7 +25,9 @@ public static class StudyAnimationObservation
     private static readonly List<(CardModel Card, CardPilePosition Position)> Generated = [];
     private static readonly List<NCardFlyVfx> Flies = [];
     private static object? _insertion;
-    private static readonly string Output = Path.GetFullPath("../../../out/tmp/study-animation/observation.json", System.Environment.CurrentDirectory);
+    private static readonly System.Diagnostics.Stopwatch SettlementTimer = new();
+    private static readonly string Output = System.Environment.GetEnvironmentVariable("JUNNA_STUDY_OUTPUT")
+        ?? Path.GetFullPath("../../../out/tmp/study-animation/observation.json", System.Environment.CurrentDirectory);
 
     public static void Initialize()
     {
@@ -37,6 +39,7 @@ public static class StudyAnimationObservation
         patch.Patch(AccessTools.Method(typeof(NCardFlyVfx), nameof(NCardFlyVfx.Create), [typeof(NCard), typeof(PileType), typeof(bool), typeof(string)]),
             postfix: new HarmonyMethod(typeof(StudyAnimationObservation), nameof(Fly)));
         patch.Patch(AccessTools.Method(typeof(CatalogPower), nameof(CatalogPower.BeforeSideTurnEnd)),
+            prefix: new HarmonyMethod(typeof(StudyAnimationObservation), nameof(Settling)),
             postfix: new HarmonyMethod(typeof(StudyAnimationObservation), nameof(Settled)));
         long previous = 0;
         ((SceneTree)Engine.GetMainLoop()).ProcessFrame += () =>
@@ -54,11 +57,14 @@ public static class StudyAnimationObservation
     { if (Matches(card) && isAddingCardsToPile && __result != null) _previews++; }
     public static void Fly(NCard card, PileType pileType, bool isAddingToPile, NCardFlyVfx? __result)
     { if (card.Model is { } model && Matches(model) && pileType == PileType.Draw && isAddingToPile && __result != null) Flies.Add(__result); }
+    public static void Settling(CatalogPower __instance, CombatSide side, IEnumerable<Creature> participants)
+    { if (_player != null && __instance.Owner == _player.Creature && __instance.DesignId == "A" && side == CombatSide.Player && participants.Contains(_player.Creature)) SettlementTimer.Restart(); }
     public static void Settled(CatalogPower __instance, CombatSide side, IEnumerable<Creature> participants, ref Task __result)
     { if (_player != null && __instance.Owner == _player.Creature && __instance.DesignId == "A" && side == CombatSide.Player && participants.Contains(_player.Creature)) __result = Complete(__result); }
     private static async Task Complete(Task task)
     {
         await task;
+        SettlementTimer.Stop();
         _settlements++;
         var draw = _player!.PlayerCombatState!.DrawPile.Cards.ToArray();
         _insertion = new { drawCount = draw.Length, originalCount = _original.Length,
@@ -71,7 +77,7 @@ public static class StudyAnimationObservation
     {
         Directory.CreateDirectory(Path.GetDirectoryName(Output)!);
         File.WriteAllText(Output, JsonSerializer.Serialize(new { scenario = _scenario, expected = _expected,
-            settlements = _settlements, previews = _previews, flies = Flies.Count,
+            settlementDurationMs = SettlementTimer.Elapsed.TotalMilliseconds, settlements = _settlements, previews = _previews, flies = Flies.Count,
             completedFlies = Flies.Count(fly => fly.SwooshAwayCompletion?.Task.IsCompletedSuccessfully == true), insertion = _insertion },
             new JsonSerializerOptions { WriteIndented = true }));
     }

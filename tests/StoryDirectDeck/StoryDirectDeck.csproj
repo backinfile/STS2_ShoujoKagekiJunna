@@ -2,6 +2,7 @@
   <PropertyGroup><DefineConstants>$(DefineConstants);STS2_BETA</DefineConstants></PropertyGroup>
   <ItemGroup>
     <Compile Include="../Integration/TestGameApi.cs" />
+    <Compile Include="../WorkbenchFitSync/StudyAnimationProbe.cs" />
     <Reference Include="ShoujoKagekiAijoCore.Api.V1" HintPath="$(CoreApiPath)" />
     <Reference Include="ShoujoKagekiJunna" HintPath="$(JunnaAssemblyPath)" />
     <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" />

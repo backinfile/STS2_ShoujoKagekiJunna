@@ -23,8 +23,10 @@ public static class Startup
 {
     public static void Initialize()
     {
+        JunnaWorkbenchFitSync.StudyAnimationObservation.Initialize();
         var harmony = new Harmony("Junna.StoryDirectDeck.Observe");
         harmony.Patch(AccessTools.Method(typeof(KnowledgeProgress), nameof(KnowledgeProgress.WonCombat)),
+            prefix: new HarmonyMethod(typeof(StoryObservation), nameof(StoryObservation.BeforeVictory)),
             postfix: new HarmonyMethod(typeof(StoryObservation), nameof(StoryObservation.AfterVictory)));
         harmony.Patch(AccessTools.Method(typeof(CombatRoom), "AddExtraReward"),
             prefix: new HarmonyMethod(typeof(StoryObservation), nameof(StoryObservation.ExtraReward)));
@@ -51,6 +53,7 @@ public static class Startup
 
 public static class StoryObservation
 {
+    public static void BeforeVictory() => StoryCase.Active?.SettlementTimer.Restart();
     public static void AfterVictory(ref Task __result)
     {
         if (StoryCase.Active is { } active) __result = Complete(__result, active);
@@ -58,6 +61,7 @@ public static class StoryObservation
     private static async Task Complete(Task task, StoryCase active)
     {
         await task;
+        active.SettlementTimer.Stop();
         active.CompletedFliesAtVictory = active.Flies.Count(fly => fly.SwooshAwayCompletion?.Task.IsCompleted == true);
         active.VictorySettlements++;
         active.Save();
@@ -93,6 +97,7 @@ public sealed class StoryCase(Player player, string caseId, int expected, bool u
     public int Expected { get; } = expected;
     public bool Upgraded { get; } = upgraded;
     public CardModel[] Before { get; } = player.Deck.Cards.ToArray();
+    public System.Diagnostics.Stopwatch SettlementTimer { get; } = new();
     public int VictorySettlements { get; set; }
     public int Previews { get; set; }
     public int PileAddFinished { get; set; }
@@ -108,7 +113,7 @@ public sealed class StoryCase(Player player, string caseId, int expected, bool u
         var added = Player.Deck.Cards.Except(Before).ToArray();
         var document = new { caseId = CaseId, expected = Expected, upgraded = Upgraded, victorySettlements = VictorySettlements,
             pileAddFinished = PileAddFinished, previews = Previews, addingFlies = Flies.Count, completedFlies = Flies.Count(fly => fly.SwooshAwayCompletion?.Task.IsCompleted == true),
-            completedFliesAtVictory = CompletedFliesAtVictory,
+            completedFliesAtVictory = CompletedFliesAtVictory, settlementDurationMs = SettlementTimer.Elapsed.TotalMilliseconds,
             beforeDeckCount = Before.Length, deckCount = Player.Deck.Cards.Count,
             beforeStoryCount = Before.Count(card => CardCatalog.DesignId(card) == "U_CARD_008B"),
             storyCount = Player.Deck.Cards.Count(card => CardCatalog.DesignId(card) == "U_CARD_008B"),

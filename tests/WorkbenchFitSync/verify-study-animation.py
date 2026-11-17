@@ -80,6 +80,7 @@ if args.record:
 insertion = data['insertion']
 expected = data['expected']
 checks = {
+    'settlement_returns_within_half_second': data['settlementDurationMs'] < 500,
     'generated_count': len(insertion['generated']) == expected,
     'base_version_random_draw': all(card['id'] == 'B' and not card['upgraded'] and card['position'] == 'Random'
                                    and card['pile'] == 'Draw' and card['index'] >= 0 for card in insertion['generated']),

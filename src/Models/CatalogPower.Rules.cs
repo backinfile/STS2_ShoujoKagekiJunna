@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShoujoKagekiJunna.Combat;
 
@@ -14,8 +15,15 @@ public sealed partial class JunnaPowerA
 {
     protected override async Task TurnEnding(Grant grant, PlayerChoiceContext context)
     {
-        using (KnowledgeCombat.SingleCard())
-            await CardPileCmd.AddToCombatAndPreview<JunnaCardB>(Owner, PileType.Draw, grant.V("Cards"), Owner.Player, CardPilePosition.Random);
+        if (Owner.IsDead) return;
+        using var single = KnowledgeCombat.SingleCard();
+        var added = new List<CardPileAddResult>();
+        for (int i = 0; i < grant.V("Cards"); i++)
+        {
+            var card = Owner.CombatState!.CreateCard<JunnaCardB>(Owner.Player!);
+            added.Add(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, Owner.Player, CardPilePosition.Random));
+        }
+        CardCmd.PreviewCardPileAdd(added, style: added.Count > 5 ? CardPreviewStyle.MessyLayout : CardPreviewStyle.HorizontalLayout);
     }
 }
 
