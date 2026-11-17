@@ -152,6 +152,16 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 合并 清理分支
 
+### 用户消息 5：暂存与恢复授权
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_dc7c74b8cfb944a081297f5e3775bab3\",0]","question":"main 的卡池和中英卡牌文本有未提交修改。是否先临时暂存这三份文件，合并后恢复，再清理本次分支？","answer":"暂存、合并后恢复修改"}]
+</send_user_message_question_reply>
+
+### 用户消息 6：一起提交
+
+这三份修改 一起提交
+
 ## Brief task plan
 
 - 原始分支 `main`，提交 `be9ae67470de2021ba25b2a1ab8a119d6d240b52`。原始未提交状态为删除历史录像 `docs/worktree-tasks/full-card-resolution-localization-20261105/selection-demo.mp4`，保持原状。
@@ -161,7 +171,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-工作台 r5324 已同步至 Mod，用户已批准合并与清理。2026-11-17 快进合并因 main 中三份重叠的未提交修改被 Git 拒绝，目前保留任务分支和工作树，等待安全集成。完成后通过 MCP 增量回读，工作台 revision 仍为 5324。
+工作台 r5324 的代码同步与验证完成，用户已批准合并、清理并保留原三份修改。重新核对时，这三份修改已随连锁知识提交 e1a7592 进入 main，本任务已自动合并并保留该提交。集成及清理结果保存于交付目录的 integration-final-20261117.json。完成后通过 MCP 增量回读，工作台 revision 仍为 5324。
 
 - 运行卡池由 112 张增至 117 张，知识关联保持 48 组；同步费用、稀有度、基础／升级文本、配图与角色开局配置。
 - 新增荣光停驻剑尖、燃烧不息、系住梦想的纽扣、小道具、初生之光。首次按原类型支付并结算；随后同一实际牌免费作为 5 回合飞矢打出，完成整批牌效后再免费布置。保留原费用、升级、伤害加成与重放；每次重新布置记录真实飞矢出牌。单次加速只处理开始时的布置，新布置从下回合自然推进；明确消耗时结束循环。单体目标继承原目标，失效时复用现有死亡换目标规则。
@@ -183,5 +193,14 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 用户批准合并及清理后，先将发行包、快照、报告、录像和保留清单保存至主目录的 `artifacts/task-deliverables/sync-workbench-latest-20261116/`；原清单 24 个文件逐项通过 SHA-256 校验，新增集成记录一并保存。
 - `main` 仍为 `be9ae67470de2021ba25b2a1ab8a119d6d240b52`，出现 18 项未提交状态，其中卡池与中英卡牌文本三份文件包含 JK126 的连锁知识修改，与本任务同步文件重叠。
 - 尝试安全快进时，Git 明确拒绝覆盖 `data/card-pool.json` 和中英 `cards.json`。合并前后 HEAD、工作区状态、已暂存及未暂存差异哈希完全相同，原修改完整保留。
-- 按 $worktree-task 的 “If integration would overwrite uncommitted state, preserve the worktree and report that integration is pending instead.” 要求保留本次工作树与分支；当前不执行清理。
+- 按 $worktree-task 的 “If integration would overwrite uncommitted state, preserve the worktree and report that integration is pending instead.” 要求，当时保留本次工作树与分支并暂停清理。
 - 本次仅追加批准及集成记录，代码与上一轮通过的构建、22 个定向测试及 1675 项数据核对结果保持一致。
+
+### 2026-11-17 恢复集成
+
+- 用户授权临时暂存、合并后恢复，并补充要求三份修改一起提交。重新核对时，原三份修改与相关连锁知识实现已在 main 的 e1a7592 中提交，主目录只剩最初的历史录像删除；无需创建新的 stash。
+- 在任务工作树将 main e1a7592 合入，生成同步提交 3a77866。三份重叠文件自动合并，连锁知识的基础／升级牌面及相关实现完整保留。
+- 同步后 Beta、Stable、加载器与 Godot 资源打包再次通过，均 0 警告、0 错误；元数据检查通过。保留 JK126 的已批准用词后，源数据与 main 改动保留核对共 1687 项通过。此前 22 个定向实机场景、275 条断言的代码规则保持一致。
+- 最新集成发行包为 `artifacts/task-deliverables/sync-workbench-latest-20261116/ShoujoKagekiJunna-r5324-integrated-20261117.zip`；原发行包、录像、快照及报告继续保留。最终状态、原始删除与既有 stash 保留核对见同目录 `integration-final-20261117.json`。
+
+- 本轮提交前重新审查 475 份跟踪文档及配置，未发现凭据与本地绝对路径。
