@@ -159,6 +159,13 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 </skill>
 
+
+### Message 4
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_f090f05271aa4d48a22764af39fbf434\",0]","question":"是否将已验证的任务合入 main，并按上述安排保留证据、清理本次工作树？","answer":"合并并清理"}]
+</send_user_message_question_reply>
+
 ## Brief task plan
 
 1. 对照原生克隆附魔及知识关联获取入口，确定最小适配点。
@@ -167,7 +174,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-- 状态：实现、定向验证与本地 main 同步完成，等待合并、清理确认。
+- 状态：实现与定向验证完成；用户已批准合并并清理。最终合并、保护核对及清理结果保存于 `artifacts/task-deliverables/cloning-linked-knowledge-20261117/integration-result.json`。
 - 原分支：main；起始提交：821722c124b27145d051f8473d5e7d8227a9d6e8。
 - 工作树：../worktrees/STS2_ShoujoKagekiJunna/cloning-linked-knowledge-20261117；分支：codex/cloning-linked-knowledge-20261117。
 - 原工作区未跟踪目录 docs/worktree-tasks/knowledge-refit-20261117/ 保留原状；541 个文件，SHA256 汇总 8E62806CA61B7281C523B99948603DF8953B5224238AAB358FA62668D72A01BE。
@@ -185,3 +192,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 任务提交：`602c8e5693c008224cb9171c3fdb86f8aec519f0`。同步目标仍为任务开始时捕获的 `main`；本地 main 已前进到 `e19543e2abb71e44f463c65164cc9dab61e0d089`，新增的图鉴分类修改已无冲突合入任务分支。
 - 同步验证：Beta/Stable 编译再次通过，均 0 警告、0 错误；克隆实现与定向探针相对任务提交无差异，因此保留已有 11/11 实机结果。`git diff --check` 通过。
 - 原工作区保护：初始未跟踪目录的 541 个文件及 SHA256 汇总保持一致；任务期间其他工作在 main 留下 `src/Models/CatalogCard.cs` 与 `tests/Integration/PowerBlockPreviewProbe.cs` 的未提交修改，本任务不改动这些文件。合并前须再次核对分支、HEAD 与这些修改。
+
+- 用户已明确选择“合并并清理”，覆盖将任务合入 main、保留证据并删除本任务工作树、分支及工作树内临时文件。
+- 交付证据已复制到 `artifacts/task-deliverables/cloning-linked-knowledge-20261117/`，逐文件 SHA256 与工作树原件一致；列表见该目录 `evidence-hashes.json`。录像、截图、11 项结果、失败基线及运行日志随证据保存。
+- 授权后复核：main 仍为 `e19543e2abb71e44f463c65164cc9dab61e0d089`，两个并行修改文件的 SHA256 及未跟踪目录的 541 文件汇总与确认前一致。
