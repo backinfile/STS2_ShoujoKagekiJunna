@@ -29,7 +29,8 @@ public static class KnowledgeCombat
         }
     }
 
-    private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, IReadOnlySet<CardModel> allowed)
+    private static async Task CompleteAcquisition(IEnumerable<CardPileAddResult> results, IReadOnlySet<CardModel> allowed,
+        bool combineDeckPreview = true)
     {
         // A dynamic group can already contain other selected roots from this same native batch.
         var expanded = new HashSet<CardModel>();
@@ -38,8 +39,9 @@ public static class KnowledgeCombat
             var card = result.cardAdded;
             if (result.success && result.oldPile == null) KnowledgeProgress.Acquired(card);
             if (!allowed.Contains(card) || !result.success || result.oldPile != null || !CardCatalog.IsKnowledge(card) || !expanded.Add(card)) continue;
-            if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type, expanded))
-                await GrantPartners(card, card.Pile!.Type);
+            CardPileAddResult? sourceResult = combineDeckPreview && card.Pile!.Type == PileType.Deck ? result : null;
+            if (!await DynamicKnowledge.Acquire(card, card.Pile!.Type, expanded, sourceResult))
+                await GrantPartnersWithPreview(card, card.Pile!.Type, null, sourceResult);
         }
     }
     public static IDisposable SingleCard() => new Scope();
@@ -77,8 +79,11 @@ public static class KnowledgeCombat
         }
         finally { active.Remove(key); }
     }
-    internal static async Task<IReadOnlyList<CardModel>> GrantPartners(CardModel acquired, PileType destination,
-        IReadOnlyList<CardModel>? selected = null)
+    internal static Task<IReadOnlyList<CardModel>> GrantPartners(CardModel acquired, PileType destination,
+        IReadOnlyList<CardModel>? selected = null) => GrantPartnersWithPreview(acquired, destination, selected, null);
+
+    internal static async Task<IReadOnlyList<CardModel>> GrantPartnersWithPreview(CardModel acquired, PileType destination,
+        IReadOnlyList<CardModel>? selected, CardPileAddResult? sourceResult)
     {
         var members = KnowledgeMembers.Definition(acquired)?.ToArray();
         if (members == null) return [acquired];
@@ -120,7 +125,9 @@ public static class KnowledgeCombat
             foreach (var card in ordered) deck.AddInternal(card, index++, silent: true);
             deck.InvokeContentsChanged();
         }
-        await CardActions.PreviewAdded(added, destination);
+        if (sourceResult is { } source && added.Any(result => result.success))
+            await ShoujoKagekiJunna.UI.KnowledgeAcquisitionPresentation.Show([source, ..added]);
+        else await CardActions.PreviewAdded(added, destination);
         return gained;
     }
 
@@ -161,7 +168,7 @@ public static class KnowledgeCombat
             var results = (await task).ToArray();
             await CompleteAcquisition(results, results.Where(result => enabled && result.cardAdded.Pile?.Type == PileType.Deck
                 && KnowledgeAcquisitionSources.Allows(result.cardAdded, PileType.Deck, transforming: true))
-                .Select(result => result.cardAdded).ToHashSet());
+                .Select(result => result.cardAdded).ToHashSet(), combineDeckPreview: false);
             return results;
         }
     }

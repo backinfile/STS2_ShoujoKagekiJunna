@@ -1,0 +1,157 @@
+[
+  {
+    "name": "unacquired reward entrance merges associations into one knowledge tip",
+    "pass": true,
+    "actual": "连锁知识 / 格挡 / 保留"
+  },
+  {
+    "name": "unacquired reward entrance retains the complete rule and association list",
+    "pass": true,
+    "actual": "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。\n关联牌：\n[gold]全都一起带去[/gold]"
+  },
+  {
+    "name": "unacquired reward entrance retains its original association background",
+    "pass": true,
+    "actual": "ffffff"
+  },
+  {
+    "name": "unacquired reward entrance remains a knowledge card",
+    "pass": true,
+    "actual": "-652574664 / -652560042"
+  },
+  {
+    "name": "unacquired reward entrance renders the exact chain knowledge rule",
+    "pass": true,
+    "actual": "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。"
+  },
+  {
+    "name": "acquired reward entrance merges associations into one knowledge tip",
+    "pass": true,
+    "actual": "连锁知识 / 格挡 / 保留"
+  },
+  {
+    "name": "acquired reward entrance retains the complete rule and association list",
+    "pass": true,
+    "actual": "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。\n关联牌：\n[gold]全都一起带去[/gold]\n[gold]打击[/gold]\n[gold]防御[/gold]"
+  },
+  {
+    "name": "acquired reward entrance retains its original association background",
+    "pass": true,
+    "actual": "ffffff"
+  },
+  {
+    "name": "acquired reward entrance remains a knowledge card",
+    "pass": true,
+    "actual": "-652574664 / -652560042"
+  },
+  {
+    "name": "acquired reward entrance renders the exact chain knowledge rule",
+    "pass": true,
+    "actual": "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。"
+  },
+  {
+    "name": "dynamic association retains its captured card",
+    "pass": true,
+    "actual": "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。\n关联牌：\n[gold]全都一起带去[/gold]\n[gold]打击[/gold]\n[gold]防御[/gold]"
+  },
+  {
+    "name": "knowledge keyword retains its original background",
+    "pass": true,
+    "actual": "ffffff"
+  },
+  {
+    "name": "unacquired native knowledge merges associations into one knowledge tip",
+    "pass": true,
+    "actual": "知识 / 保留 / 知识背景"
+  },
+  {
+    "name": "unacquired native knowledge retains the complete rule and association list",
+    "pass": true,
+    "actual": "获得知识牌时，同时获得关联的其他牌。\n关联牌：\n[gold]挺身反抗[/gold]\n[gold]默然忍受[/gold]"
+  },
+  {
+    "name": "unacquired native knowledge retains its original association background",
+    "pass": true,
+    "actual": "ffffff"
+  },
+  {
+    "name": "unacquired native knowledge renders the knowledge background last",
+    "pass": true,
+    "actual": "知识 / 保留 / 知识背景"
+  },
+  {
+    "name": "unacquired native knowledge uses the native neutral background",
+    "pass": true,
+    "actual": "ffffff"
+  },
+  {
+    "name": "unacquired native knowledge preserves the order of other mechanical tips",
+    "pass": true,
+    "actual": "知识 / 保留 / 知识背景"
+  },
+  {
+    "name": "owned native knowledge merges associations into one knowledge tip",
+    "pass": true,
+    "actual": "知识 / 保留 / 知识背景"
+  },
+  {
+    "name": "owned native knowledge retains the complete rule and association list",
+    "pass": true,
+    "actual": "获得知识牌时，同时获得关联的其他牌。\n关联牌：\n[gold]挺身反抗[/gold]\n[gold]默然忍受[/gold]"
+  },
+  {
+    "name": "owned native knowledge retains its original association background",
+    "pass": true,
+    "actual": "ffffff"
+  },
+  {
+    "name": "owned native knowledge renders the knowledge background last",
+    "pass": true,
+    "actual": "知识 / 保留 / 知识背景"
+  },
+  {
+    "name": "owned native knowledge uses the native neutral background",
+    "pass": true,
+    "actual": "ffffff"
+  },
+  {
+    "name": "owned native knowledge preserves the order of other mechanical tips",
+    "pass": true,
+    "actual": "知识 / 保留 / 知识背景"
+  },
+  {
+    "name": "repeated native members merges associations into one knowledge tip",
+    "pass": true,
+    "actual": "知识 / 能量 / 闪耀X / 保留"
+  },
+  {
+    "name": "repeated native members retains the complete rule and association list",
+    "pass": true,
+    "actual": "获得知识牌时，同时获得关联的其他牌。\n关联牌：\n[gold]手札[/gold]\n[gold]手札[/gold]"
+  },
+  {
+    "name": "repeated native members retains its original association background",
+    "pass": true,
+    "actual": "ffffff"
+  },
+  {
+    "name": "captured strike retains its original tips and keywords",
+    "pass": true,
+    "actual": ""
+  },
+  {
+    "name": "standalone knowledge keyword keeps its rule",
+    "pass": true,
+    "actual": "获得知识牌时，同时获得关联的其他牌。"
+  },
+  {
+    "name": "standalone background follows the keyword without associations",
+    "pass": true,
+    "actual": "知识 / 知识背景"
+  },
+  {
+    "name": "standalone background preserves its content and native styling",
+    "pass": true,
+    "actual": "莎士比亚《哈姆雷特》第三幕第一场：拿起武器，反抗苦难之海。"
+  }
+]

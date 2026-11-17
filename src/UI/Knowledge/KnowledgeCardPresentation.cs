@@ -38,7 +38,9 @@ internal static class KnowledgeTipBackgroundsPatch
 {
     private static void Prefix(ref IEnumerable<IHoverTip> hoverTips)
     {
-        var tips = hoverTips.ToArray();
+        string backgroundTitle = new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND").GetFormattedText();
+        var tips = hoverTips.OrderBy(tip => tip is HoverTip textTip &&
+            (tip.Id.StartsWith("junna_knowledge_background_") || textTip.Title == backgroundTitle)).ToArray();
         hoverTips = tips;
         var groupTitle = new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP");
         string groupId = new HoverTip(groupTitle, "").Id;
@@ -61,18 +63,6 @@ internal static class KnowledgeTipBackgroundsPatch
             string.Join("\n", relations.Select(tip => tip.Description)), knowledge.Icon);
         hoverTips = tips.Where(tip => !IsRelation(tip) && (!chain || tip.Id != knowledgeId))
             .Select(tip => tip.Id == selectedId ? (IHoverTip)merged : tip).ToArray();
-    }
-
-    private static void Postfix(NHoverTipSet __instance, IEnumerable<IHoverTip> hoverTips)
-    {
-        var tips = IHoverTip.RemoveDupes(hoverTips).OfType<HoverTip>().ToArray();
-        var container = __instance.GetNode<Control>("textHoverTipContainer");
-        string backgroundTitle = new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND").GetFormattedText();
-        for (int i = 0; i < tips.Length; i++)
-        {
-            if (tips[i].Id.StartsWith("junna_knowledge_background_") || tips[i].Title == backgroundTitle)
-                container.GetChild(i).GetNode<CanvasItem>("%Bg").SelfModulate = new Color("#c18cdd");
-        }
     }
 }
 

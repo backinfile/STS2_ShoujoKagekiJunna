@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <Compile Include="../Integration/TestGameApi.cs" Link="TestGameApi.cs" />
     <Compile Include="../Integration/AcquisitionSourcesProbe.cs" Link="AcquisitionSourcesProbe.cs" />
     <Compile Include="../Integration/EventCopiesProbe.cs" Link="EventCopiesProbe.cs" />
     <Reference Include="ShoujoKagekiAijoCore.Api.V1" HintPath="$(CoreApiPath)" />
