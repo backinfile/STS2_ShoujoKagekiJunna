@@ -242,4 +242,4 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - Beta、Stable Release 与观察模组构建均 0 警告、0 错误；git diff --check 通过。仅执行当前变更必要的定向检查。
 - evidence/results.json 保留失败基线、9 项通过、原生 Task 身份、实际出牌和三段录像数据。卡牌入堆约定已对照 docs/implementation/card-pile-placement.md。
 - MCP 关联实现为 af78d2969dcc46be1028c08350260f3bbf83fa12，生产 GPU 时钟回归已通过；此次展示等待修正未改变 MCP 实现。
-- 起始目标 main 不变，最初提交 bc83134234fc859e5224701092722afbafeba7b9。main 后续推进到 910512f55842909af2e06f0a950442e19f64b315，新增内容仅为其他任务文档和美术证据，待同步；其未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 保留。尚未获准合并或清理。
+- 起始目标 main 不变，最初提交 bc83134234fc859e5224701092722afbafeba7b9。任务工作树已接入本地 main 13c8198ebc425f1a9516b05c533e93020c7205cd；新增内容为其他任务文档、美术证据及独立的自动选目标修正，当前非阻塞预览实现保持不变。同步后 Beta Release 编译为 0 警告、0 错误。主目录未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 保留。尚未获准合入 main 或清理。

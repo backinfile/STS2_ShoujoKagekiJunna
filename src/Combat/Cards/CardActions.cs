@@ -90,11 +90,11 @@ public static class CardActions
             if (keepTarget)
                 target = target == null ? null : ArrowCombat.ResolveEffectTarget(target, card.Owner.Creature.CombatState!);
             else
-                target = await ChooseTarget(context, card);
-            if (target == null) return false;
+                target = null; // Native AutoPlay uses the synchronized combat-target RNG.
+            if (keepTarget && target == null) return false;
         }
         else target = CardTargets.First(card);
-        if (!CardTargets.IsValid(card, target)) return false;
+        if (target != null && !CardTargets.IsValid(card, target)) return false;
         ArrowCombat.Cancel(card);
         return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target });
     }

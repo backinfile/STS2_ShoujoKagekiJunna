@@ -386,14 +386,12 @@
     "totalSamples": 120
   },
   "synchronization": {
-    "main": "f3ed20efc581f267e4b546ad4899164e77a88ff1",
-    "taskImplementation": "a2c8bff",
-    "merged": "a0f766c",
-    "taskFilesUnchanged": true,
-    "betaBuild": "passed",
-    "stableBuild": "passed",
-    "documentsReviewed": 537,
-    "documentAuditHits": 0
+    "main": "13c8198ebc425f1a9516b05c533e93020c7205cd",
+    "taskImplementation": "78282a7cd7f73ded2010fc2d0c14767809441951",
+    "result": "merged into task worktree; original main untouched",
+    "incomingRuntimeChange": "independent automatic target selection in CardActions.Play",
+    "previewImplementationUnchanged": true,
+    "betaBuild": "passed: 0 warnings, 0 errors"
   },
   "beforeTightening": {
     "nativeRest": {
@@ -2222,5 +2220,15 @@
       "audioSource": "engine_mix",
       "framesDropped": 0
     }
-  ]
+  ],
+  "initialSynchronization": {
+    "main": "f3ed20efc581f267e4b546ad4899164e77a88ff1",
+    "taskImplementation": "a2c8bff",
+    "merged": "a0f766c",
+    "taskFilesUnchanged": true,
+    "betaBuild": "passed",
+    "stableBuild": "passed",
+    "documentsReviewed": 537,
+    "documentAuditHits": 0
+  }
 }
