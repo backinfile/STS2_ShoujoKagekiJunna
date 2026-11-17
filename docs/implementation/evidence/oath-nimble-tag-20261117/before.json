@@ -1,0 +1,518 @@
+[
+  {
+    "name": "upgraded=False none before modifier",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False Oath does not directly gain block",
+    "actual": 1,
+    "expected": 0,
+    "pass": false
+  },
+  {
+    "name": "upgraded=False Nimble rejects Oath",
+    "actual": 1,
+    "expected": 0,
+    "pass": false
+  },
+  {
+    "name": "upgraded=False Nimble cannot increase ongoing block",
+    "actual": 4,
+    "expected": 2,
+    "pass": false
+  },
+  {
+    "name": "upgraded=False none hand preview",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none printed value",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none normal block preview",
+    "actual": 5,
+    "expected": 5,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none installed power",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False none triggered block",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail before modifier",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail hand preview",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail printed value",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail normal block preview",
+    "actual": 3.75,
+    "expected": 3.75,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail installed power",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail triggered block",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity before modifier",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity hand preview",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity printed value",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity normal block preview",
+    "actual": 8,
+    "expected": 8,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity installed power",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False dexterity triggered block",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity before modifier",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity hand preview",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity printed value",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity normal block preview",
+    "actual": 6.00,
+    "expected": 6,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity installed power",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=False frail\u002Bdexterity triggered block",
+    "actual": 2,
+    "expected": 2,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none before modifier",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True Oath does not directly gain block",
+    "actual": 1,
+    "expected": 0,
+    "pass": false
+  },
+  {
+    "name": "upgraded=True Nimble rejects Oath",
+    "actual": 1,
+    "expected": 0,
+    "pass": false
+  },
+  {
+    "name": "upgraded=True Nimble cannot increase ongoing block",
+    "actual": 5,
+    "expected": 3,
+    "pass": false
+  },
+  {
+    "name": "upgraded=True none hand preview",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none printed value",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none normal block preview",
+    "actual": 5,
+    "expected": 5,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none installed power",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True none triggered block",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail before modifier",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail hand preview",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail printed value",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail normal block preview",
+    "actual": 3.75,
+    "expected": 3.75,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail installed power",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail triggered block",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity before modifier",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity hand preview",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity printed value",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity normal block preview",
+    "actual": 8,
+    "expected": 8,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity installed power",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True dexterity triggered block",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity before modifier",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity hand preview",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity printed value",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity normal block preview",
+    "actual": 6.00,
+    "expected": 6,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity installed power",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "upgraded=True frail\u002Bdexterity triggered block",
+    "actual": 3,
+    "expected": 3,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=False nimble=False directly gains block",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=False nimble=False accepts Nimble",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=False nimble=False immediate block preview",
+    "actual": 5.25,
+    "expected": 5.25,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=False nimble=False immediate block received",
+    "actual": 5,
+    "expected": 5,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=False nimble=True directly gains block",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=False nimble=True accepts Nimble",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=False nimble=True immediate block preview",
+    "actual": 6.75,
+    "expected": 6.75,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=False nimble=True immediate block received",
+    "actual": 6,
+    "expected": 6,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=True nimble=False directly gains block",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=True nimble=False accepts Nimble",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=True nimble=False immediate block preview",
+    "actual": 7.50,
+    "expected": 7.50,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=True nimble=False immediate block received",
+    "actual": 7,
+    "expected": 7,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=True nimble=True directly gains block",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=True nimble=True accepts Nimble",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=True nimble=True immediate block preview",
+    "actual": 9.00,
+    "expected": 9.00,
+    "pass": true
+  },
+  {
+    "name": "JH19 upgraded=True nimble=True immediate block received",
+    "actual": 9,
+    "expected": 9,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=False nimble=False directly gains block",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=False nimble=False accepts Nimble",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=False nimble=False immediate block preview",
+    "actual": 13.50,
+    "expected": 13.50,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=False nimble=False immediate block received",
+    "actual": 13,
+    "expected": 13,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=False nimble=True directly gains block",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=False nimble=True accepts Nimble",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=False nimble=True immediate block preview",
+    "actual": 15.00,
+    "expected": 15.00,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=False nimble=True immediate block received",
+    "actual": 15,
+    "expected": 15,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=True nimble=False directly gains block",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=True nimble=False accepts Nimble",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=True nimble=False immediate block preview",
+    "actual": 17.25,
+    "expected": 17.25,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=True nimble=False immediate block received",
+    "actual": 17,
+    "expected": 17,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=True nimble=True directly gains block",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=True nimble=True accepts Nimble",
+    "actual": 1,
+    "expected": 1,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=True nimble=True immediate block preview",
+    "actual": 18.75,
+    "expected": 18.75,
+    "pass": true
+  },
+  {
+    "name": "JH24 upgraded=True nimble=True immediate block received",
+    "actual": 18,
+    "expected": 18,
+    "pass": true
+  }
+]

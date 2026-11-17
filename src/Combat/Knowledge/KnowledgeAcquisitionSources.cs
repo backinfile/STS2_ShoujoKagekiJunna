@@ -17,6 +17,7 @@ internal static class KnowledgeAcquisitionSources
     // Each entry names the effect that was adapted; other model methods remain single-card acquisitions.
     private static readonly Entry[] Entries =
     [
+        new("Entities.RestSite.CloneRestSiteOption", "OnSelect", Kind.Deck),
         new("Relics.ArcaneScroll", "AfterObtained", Kind.Deck),
         new("Relics.DustyTome", "AfterObtained", Kind.Deck),
         new("Relics.HeftyTablet", "AfterObtained", Kind.DeckChoice),
@@ -87,7 +88,8 @@ internal static class KnowledgeAcquisitionSources
         var methods = CoreApi.Get<IModelMethodScopes>();
         foreach (var entry in Entries)
         {
-            var type = typeof(CardModel).Assembly.GetType("MegaCrit.Sts2.Core.Models." + entry.Type);
+            var type = typeof(CardModel).Assembly.GetType("MegaCrit.Sts2.Core.Models." + entry.Type)
+                ?? typeof(CardModel).Assembly.GetType("MegaCrit.Sts2.Core." + entry.Type);
             if (type != null && AccessTools.DeclaredMethod(type, entry.Method) is { } method)
                 methods.Register(method, owner => new Scope(new(entry, owner ?? type)));
         }

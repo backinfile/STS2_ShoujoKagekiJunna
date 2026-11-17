@@ -176,3 +176,5 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 原目录的 src/Models/CatalogCard.cs、tests/Integration/PowerBlockPreviewProbe.cs 与未跟踪 knowledge-refit-20261117 目录共 543 个文件的内容哈希保持一致。任务期间其他工作已将前两个文件提交至 main，未跟踪目录仍保留。
 - 已扫描全部 584 个已跟踪文档及新增任务记录，未发现本机绝对路径、凭据、私钥或私人邮箱。
 - 本次只运行收藏专项回归与对应编译。临时环境与详细结果位于 out/tmp/collection-hide-generated-20261117/，合并与清理等待用户确认。
+
+- 任务提交为 6d214b7；同步 main 的 e1fa4bc14b4ce2bfdaea3c20d47adb9de3f8cc73 后，重新编译主模组与收藏探针并重跑相同网格回归，全部通过。同步后的合并与临时工作树清理等待用户确认。
