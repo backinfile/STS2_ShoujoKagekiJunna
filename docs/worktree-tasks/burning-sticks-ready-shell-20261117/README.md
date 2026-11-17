@@ -184,3 +184,6 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 复现/回归命令：`python tests/Integration/run-burning-sticks.py --port <port> --record --output <case-output>`；非最后一次增加 `--remaining 2`，升级版增加 `--upgrade`。运行前先编译并安装 `JunnaIntegration`，在纯那战斗出牌阶段执行。
 - 交付证据保存在 Junna 仓库忽略目录 `artifacts/task-deliverables/burning-sticks-last-shine-20261117/`，包含基线失败、四组修复结果及录像。
 - 两个原检出开始时均干净，无进行中的 Git 操作。合并与清理等待用户确认。
+
+- 同步确认：任务提交后已合入本地 Junna main `0aefdac13c3dda58425c4fe95873712f2dde7503`，同步提交为 `d128373`。新增改动为星屑伤害继承和能力牌格挡预览；JF13 的技能类型与牌效保持一致。
+- 同步后重新编译 Junna 与 Integration，均 0 警告、0 错误；再次实际出牌检查最后一点闪耀，11 项断言通过并保留录像。同步后的 565 份跟踪文档审查无敏感内容或本地绝对路径。
