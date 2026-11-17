@@ -18,6 +18,8 @@ public sealed class JunnaCombatHooks : AbstractModel
 public sealed class JunnaCombatHooks : SingletonModel
 #endif
 {
+    private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> ArrowPlays = new();
+    public static int CountArrowPlays(Player player) => player.PlayerCombatState is { } state && ArrowPlays.TryGetValue(state, out var count) ? count.Value : 0;
     private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> MaxEnergyBonuses = new();
     public static void AddMaxEnergy(PlayerCombatState combat, int amount) => MaxEnergyBonuses.GetOrCreateValue(combat).Value += amount;
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
@@ -25,6 +27,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override bool ShouldReceiveCombatHooks => true;
     public override Task BeforeCombatStart()
     {
+        ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
         KnowledgeProgress.ResetCombat();
         ArrowCombat.Clear();
@@ -43,8 +46,11 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override Task BeforeCardPlayed(CardPlay play)
     {
         if (play.IsFirstInSeries && CardCatalog.IsArrow(play.Card))
+        {
+            ArrowPlays.GetOrCreateValue(play.Card.Owner.PlayerCombatState!).Value++;
             foreach (var arrow in ArrowCombat.Deployed.Where(a => a.Card.Owner == play.Card.Owner && a.Card != play.Card && !a.Resolving))
                 arrow.AttacksWhileWaiting++;
+        }
         return Task.CompletedTask;
     }
     private static readonly HashSet<Player> FollowingPlayers = [];
@@ -77,6 +83,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override Task AfterCombatVictory(CombatRoom room) => KnowledgeProgress.WonCombat();
     public override Task AfterCombatEnd(CombatRoom room)
     {
+        ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();

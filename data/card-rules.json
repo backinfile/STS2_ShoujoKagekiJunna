@@ -790,12 +790,14 @@
         "Arrow"
       ],
       "power": {
-        "description": "Applications",
-        "amount": "Applications",
+        "description": "ThresholdSum",
+        "amount": "Threshold",
         "single": false
       },
       "fields": {
-        "Turns": "N0"
+        "Turns": "N0",
+        "DisplayedAmount": "N0",
+        "Threshold": "N0"
       }
     },
     "JH27B": {
@@ -1735,7 +1737,7 @@
     },
     "JA177": {
       "fields": {
-        "Turns": "N0"
+        "Turns": "N1"
       },
       "tips": [
         "Arrow"
@@ -2103,6 +2105,50 @@
       ],
       "effect": "Energy",
       "loopAsArrow": true
+    },
+    "JK400": {
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "DamageBonus"
+      ],
+      "power": {
+        "description": "BonusSum",
+        "amount": "Bonus",
+        "single": false
+      }
+    },
+    "JK400B": {
+      "tips": [
+        "Knowledge",
+        "Arrow",
+        "Meteor"
+      ],
+      "upgradedTips": [
+        "Knowledge",
+        "Arrow",
+        "Meteor"
+      ],
+      "power": {
+        "description": "DamageGroups",
+        "amount": "Applications",
+        "single": false
+      }
+    },
+    "U_CARD_030": {
+      "tips": [
+        "Arrow",
+        "Meteor"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Meteor"
+      ]
     }
   }
 }

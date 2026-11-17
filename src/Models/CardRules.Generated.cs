@@ -53,12 +53,14 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
+                ["DisplayedAmount"] = "N0",
+                ["Threshold"] = "N0",
                 ["Turns"] = "N0",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
-            PowerDescription = PowerDescriptionKind.Applications,
-            PowerAmount = PowerAmountKind.Applications,
+            PowerDescription = PowerDescriptionKind.ThresholdSum,
+            PowerAmount = PowerAmountKind.Threshold,
             SinglePower = false,
         },
         ["JA108"] = new()
@@ -137,7 +139,7 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
-                ["Turns"] = "N0",
+                ["Turns"] = "N1",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
@@ -1087,6 +1089,22 @@ internal static partial class CardRules
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
+        ["JK400"] = new()
+        {
+            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.DamageBonus],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.DamageBonus],
+            PowerDescription = PowerDescriptionKind.BonusSum,
+            PowerAmount = PowerAmountKind.Bonus,
+            SinglePower = false,
+        },
+        ["JK400B"] = new()
+        {
+            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Meteor],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Meteor],
+            PowerDescription = PowerDescriptionKind.DamageGroups,
+            PowerAmount = PowerAmountKind.Applications,
+            SinglePower = false,
+        },
         ["JK43"] = new()
         {
             Tips = [CardTip.Knowledge],
@@ -1517,6 +1535,11 @@ internal static partial class CardRules
             UpgradedTips = [CardTip.Arrow, CardTip.Energy],
             Effect = SimpleCardEffect.Energy,
             LoopAsArrow = true,
+        },
+        ["U_CARD_030"] = new()
+        {
+            Tips = [CardTip.Arrow, CardTip.Meteor],
+            UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
         },
     };
 }

@@ -72,6 +72,12 @@ public sealed partial class JunnaPowerJK32() : CatalogPower("JK32");
 [CustomID("JUNNA_JK37C_POWER")]
 public sealed partial class JunnaPowerJK37C() : CatalogPower("JK37C");
 
+[CustomID("JUNNA_JK400_POWER")]
+public sealed partial class JunnaPowerJK400() : CatalogPower("JK400");
+
+[CustomID("JUNNA_JK400B_POWER")]
+public sealed partial class JunnaPowerJK400B() : CatalogPower("JK400B");
+
 [CustomID("JUNNA_JK46_POWER")]
 public sealed partial class JunnaPowerJK46() : CatalogPower("JK46");
 

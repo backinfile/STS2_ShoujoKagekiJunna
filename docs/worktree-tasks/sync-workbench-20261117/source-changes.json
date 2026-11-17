@@ -1,0 +1,706 @@
+{
+  "revision": 5409,
+  "previousRevision": 5324,
+  "activeCards": 119,
+  "knowledgeGroups": 50,
+  "assertions": 1804,
+  "added": [
+    "JK400",
+    "JK400B",
+    "U_CARD_030"
+  ],
+  "portraitChanges": [
+    "JB03",
+    "JZ03",
+    "JA71",
+    "JK82",
+    "JA96",
+    "JK84",
+    "JK127",
+    "JB06",
+    "JS33",
+    "JK200",
+    "JK206",
+    "JK206B",
+    "JK260",
+    "U_CARD_008",
+    "U_CARD_008B",
+    "U_CARD_018",
+    "U_CARD_021",
+    "U_CARD_025",
+    "JK400",
+    "JK400B",
+    "U_CARD_030"
+  ],
+  "changedCards": [
+    {
+      "id": "JK15",
+      "name": "再演",
+      "fields": [
+        "name"
+      ],
+      "source": {
+        "name": "再演",
+        "cost": 1,
+        "upgradedCost": 0,
+        "text": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。",
+        "upgradedText": "知识。每回合第一次打出知识牌时，将其1张复制放入抽牌堆。",
+        "art": "original-scene-jk15-knowledge-fit-20261103"
+      },
+      "imageSha256": "3ab466b5b0174d8ede63fa5896a624802a28b31e286fa35ba2ca8278d90305c0"
+    },
+    {
+      "id": "JA53",
+      "name": "备箭",
+      "fields": [
+        "values",
+        "text",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "备箭",
+        "cost": 2,
+        "upgradedCost": 2,
+        "text": "获得10点格挡。抽2张耗能为0的牌。",
+        "upgradedText": "获得14点格挡。抽2张耗能为0的牌。",
+        "art": "original-scene-ja56-20261102"
+      },
+      "imageSha256": "bb4d45f70ac78fb99c2889d9ba1925620511efed14d27a1b5aa1dc73fc927abe"
+    },
+    {
+      "id": "JB03",
+      "name": "强劲的箭",
+      "fields": [
+        "name",
+        "portrait",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "强劲的箭",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "造成25点伤害。",
+        "upgradedText": "造成32点伤害。",
+        "art": "original-tv-jb03-strong-arrow-20261117"
+      },
+      "imageSha256": "febc5e91a9d54c08187e02a0e67319801aaae639d7d578ef76958b71ed3e80ae"
+    },
+    {
+      "id": "JZ03",
+      "name": "全力释放",
+      "fields": [
+        "name",
+        "target",
+        "text",
+        "upgradedText",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "全力释放",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "对所有敌人造成25点伤害。",
+        "upgradedText": "对所有敌人造成32点伤害。",
+        "art": "original-relive-jz03-full-draw-1060025-20261117"
+      },
+      "imageSha256": "5552ce72cd904dc7c3cae0c2076c21b7f14909a0a5c94eed9b849908882c0a5e"
+    },
+    {
+      "id": "JA71",
+      "name": "开演",
+      "fields": [
+        "name",
+        "portrait",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "开演",
+        "cost": 3,
+        "upgradedCost": 3,
+        "text": "获得12点格挡。所有飞矢加速到完成。",
+        "upgradedText": "获得16点格挡。所有飞矢加速到完成。",
+        "art": "original-tv-ja71-kaien-window-lights-20261117"
+      },
+      "imageSha256": "aaa4ad9bda079ee4c4bf51c047aa1e85f074b2ae5be8d09a77c865bc78d998be"
+    },
+    {
+      "id": "JK82",
+      "name": "学无止境",
+      "fields": [
+        "portrait",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "学无止境",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "知识。获得2点能量。升级时单独获得一张新知。可多次升级。消耗。",
+        "upgradedText": "知识。获得3点能量。升级时单独获得一张新知。可多次升级。消耗。",
+        "art": "original-special-jk82-reading-discussion-20261117"
+      },
+      "imageSha256": "7b823baa13a726072b5a40dec0d12f486011dde38fa0b41895c5ba2f1a262b4c"
+    },
+    {
+      "id": "JA96",
+      "name": "刺痛",
+      "fields": [
+        "name",
+        "text",
+        "upgradedText",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "刺痛",
+        "cost": 1,
+        "upgradedCost": 0,
+        "text": "受到未被格挡的攻击伤害时，所有目标为敌人的飞矢加速1回合。",
+        "upgradedText": "受到未被格挡的攻击伤害时，所有目标为敌人的飞矢加速1回合。",
+        "art": "original-film-ja96-cut-photo-20261117"
+      },
+      "imageSha256": "c636582d1f81a64c99704a5f0ad7554f6d24c996e303e177e9416e37df65a006"
+    },
+    {
+      "id": "JK84",
+      "name": "相信我们",
+      "fields": [
+        "name",
+        "portrait",
+        "values",
+        "text",
+        "upgradedText",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "相信我们",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "知识。将至多3张手牌作为5回合的飞矢打出。消耗。",
+        "upgradedText": "知识。将至多3张手牌作为5回合的飞矢打出。",
+        "art": "original-special-jk84-backstage-support-20261117"
+      },
+      "imageSha256": "695f7ee7938bf169dd81d288c6b0b261a120eca3b5bfe87206541338429b47ef"
+    },
+    {
+      "id": "JK127",
+      "name": "铭刻",
+      "fields": [
+        "name",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "铭刻",
+        "cost": 1,
+        "upgradedCost": 0,
+        "text": "战斗结束后，可以单独复制牌组中的1张知识牌。",
+        "upgradedText": "战斗结束后，可以单独复制牌组中的1张知识牌。",
+        "art": "original-relive-jk127-jo-reading-1060013-20261117"
+      },
+      "imageSha256": "7787f045353f6ad5f2729be88256b5f1a819a8519a66ccf164a7cfc91c1e52ec"
+    },
+    {
+      "id": "JK133",
+      "name": "星坠",
+      "fields": [
+        "text",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "星坠",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "知识。造成9点伤害。抽1张牌。闪耀9。",
+        "upgradedText": "知识。造成12点伤害。抽1张牌。闪耀9。",
+        "art": "original-scene-jk45-native-frame-review-20261104"
+      },
+      "imageSha256": "7de67b9f5edc3bb1fd4a02b05f1e8c698c6c6597a7466b7497393731ce8433f9"
+    },
+    {
+      "id": "JA105",
+      "name": "加速",
+      "fields": [
+        "upgradedCost",
+        "values",
+        "text",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "加速",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "打出飞矢时使其加速1回合，并使其获得消耗。",
+        "upgradedText": "打出飞矢时使其加速2回合，并使其获得消耗。",
+        "art": "official-tv-jk32b-20261102"
+      },
+      "imageSha256": "8bde3de55059e47df50ff393b51b85836b37402b397872e6d5100a822b5e3ef9"
+    },
+    {
+      "id": "JA108B",
+      "name": "言叶就是我的力量",
+      "fields": [
+        "name",
+        "cost",
+        "upgradedCost"
+      ],
+      "source": {
+        "name": "言叶就是我的力量",
+        "cost": 3,
+        "upgradedCost": 3,
+        "text": "知识。对所有敌人造成99点伤害。",
+        "upgradedText": "知识。对所有敌人造成125点伤害。",
+        "art": "original-scene-jk73-all-card-review-20261104"
+      },
+      "imageSha256": "bc02460f217a131a25965a9c2f98c3352c92acfee80d7cadc36df7d4d0576831"
+    },
+    {
+      "id": "JB06",
+      "name": "想守护的天空",
+      "fields": [
+        "portrait",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "想守护的天空",
+        "cost": 1,
+        "upgradedCost": 0,
+        "text": "获得9点格挡。闪耀9。",
+        "upgradedText": "获得9点格挡。闪耀9。",
+        "art": "original-film-jb06-guard-closeup-20261117"
+      },
+      "imageSha256": "c51e8f5008395a014b06cbb47f2ee4b5e71d053e39abc6d478b9776fd3609760"
+    },
+    {
+      "id": "JS33",
+      "name": "自己决定",
+      "fields": [
+        "name",
+        "portrait",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "自己决定",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "选择：从抽牌堆抽取2张飞矢牌，2张知识牌，或者2张闪耀牌。消耗。",
+        "upgradedText": "选择：从抽牌堆抽取3张飞矢牌，3张知识牌，或者3张闪耀牌。消耗。",
+        "art": "original-tv-js33-self-decide-20261117"
+      },
+      "imageSha256": "4e512dc562b6d6126daa7892c8075a028a39ffb385e97ff85b77bbd274e8ace8"
+    },
+    {
+      "id": "JS35",
+      "name": "戒备",
+      "fields": [
+        "values",
+        "text"
+      ],
+      "source": {
+        "name": "戒备",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "固有。获得11点格挡。闪耀6。",
+        "upgradedText": "固有。获得15点格挡。闪耀6。",
+        "art": "original-scene-jx10-20261102"
+      },
+      "imageSha256": "a5da26126421e954351d0900e43e0ce3af47f3408a90ef1349fd126932e5e073"
+    },
+    {
+      "id": "JA177",
+      "name": "应援",
+      "fields": [
+        "values",
+        "text",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "应援",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "获得4点格挡。所有飞矢加速1回合。",
+        "upgradedText": "获得4点格挡。所有飞矢加速2回合。",
+        "art": "fit-pool-candidate-06-20261103"
+      },
+      "imageSha256": "2cc2e638367e1bcf87e36b8664f3427f5fed590050d137534e7fdb2136a93f95"
+    },
+    {
+      "id": "JK200",
+      "name": "呼喊",
+      "fields": [
+        "name",
+        "portrait",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "呼喊",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "知识。对所有敌人造成7点伤害2次。",
+        "upgradedText": "知识。对所有敌人造成9点伤害2次。",
+        "art": "original-film-jk200-spoken-attack-20261117"
+      },
+      "imageSha256": "182efb2d521b73bea2aa2125168e966d0476126fb0ed85b3767de6d95444b5dd"
+    },
+    {
+      "id": "JK200B",
+      "name": "忍耐",
+      "fields": [
+        "name",
+        "values",
+        "text",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "忍耐",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "知识。获得5点格挡。所有手牌和所有飞矢获得2点伤害加成。",
+        "upgradedText": "知识。获得5点格挡。所有手牌和所有飞矢获得3点伤害加成。",
+        "art": "original-refit-jk200b-patience-20261112-v2"
+      },
+      "imageSha256": "f66d668a2546834e5a2c6d9a4dc639c6ff9580614caf59276db1a709ce1d592c"
+    },
+    {
+      "id": "JK206",
+      "name": "文字，文字，文字",
+      "fields": [
+        "name",
+        "portrait",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "文字，文字，文字",
+        "cost": 2,
+        "upgradedCost": 2,
+        "text": "知识。造成等同于牌组中卡牌数量的伤害。",
+        "upgradedText": "知识。造成等同于牌组中卡牌数量+8的伤害。",
+        "art": "original-refit-jk200-blow-winds-20261112-v2"
+      },
+      "imageSha256": "dea48e6eca9047d06d17aab600bc50a52b9a22055bc7741acf4e254e08649cfb"
+    },
+    {
+      "id": "JK206B",
+      "name": "读些什么",
+      "fields": [
+        "name",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "读些什么",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "知识。从抽牌堆中选择1张知识牌放入手牌。消耗。",
+        "upgradedText": "知识。从抽牌堆中选择2张知识牌放入手牌。消耗。",
+        "art": "original-scene-jt01-concrete-fit-20261103"
+      },
+      "imageSha256": "5d875cd050d095c232496d01be748ead700d54da26e4eec96b10f04d3a6329de"
+    },
+    {
+      "id": "JK260",
+      "name": "知识的力量",
+      "fields": [
+        "portraitContent"
+      ],
+      "source": {
+        "name": "知识的力量",
+        "cost": 2,
+        "upgradedCost": 2,
+        "text": "每回合第一次打出知识牌后，获得2点力量。",
+        "upgradedText": "每回合第一次打出知识牌后，获得3点力量。",
+        "art": "original-tv-jk260-english-reference-20261117"
+      },
+      "imageSha256": "908318963754f5319b4a6ac5ffab7afee56c002f47bf2a7c2186a752717d9272"
+    },
+    {
+      "id": "U_CARD_008",
+      "name": "去寻找故事吧",
+      "fields": [
+        "portraitContent"
+      ],
+      "source": {
+        "name": "去寻找故事吧",
+        "cost": 1,
+        "upgradedCost": 0,
+        "text": "战斗结束时，向牌组中添加1张故事。",
+        "upgradedText": "战斗结束时，向牌组中添加1张故事。",
+        "art": "original-tv-u008-outdoor-recording-20261117"
+      },
+      "imageSha256": "57de46444fed9b50b3d8de44178cf3937d4ed10d2380e884c1f97315f76830fa"
+    },
+    {
+      "id": "U_CARD_008B",
+      "name": "故事",
+      "fields": [
+        "portraitContent"
+      ],
+      "source": {
+        "name": "故事",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "获得4点格挡。抽1张牌。闪耀6。",
+        "upgradedText": "获得8点格挡。抽1张牌。闪耀6。",
+        "art": "original-tv-story-class-photo-20261117"
+      },
+      "imageSha256": "522546df1914df95ef363f292cbb0e8ff01bdad2e2bd32a43525a2169eccc113"
+    },
+    {
+      "id": "U_CARD_016",
+      "name": "呼喊与回应",
+      "fields": [
+        "cost",
+        "values",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "呼喊与回应",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "打出知识牌后，抽1张牌。（每次在知识、飞矢、闪耀中轮换）",
+        "upgradedText": "打出知识牌后，抽2张牌。（每次在知识、飞矢、闪耀中轮换）",
+        "art": "original-fit-jk84-20261111"
+      },
+      "imageSha256": "b8f8b101b214f9d077d22ab48b076af980670cddf0896d533df96994a0bc6871"
+    },
+    {
+      "id": "U_CARD_017",
+      "name": "猛烈闪耀",
+      "fields": [
+        "values",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "猛烈闪耀",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "造成6点伤害。手牌中知识、飞矢、闪耀每有一类，额外造成1次伤害。",
+        "upgradedText": "造成8点伤害。手牌中知识、飞矢、闪耀每有一类，额外造成1次伤害。",
+        "art": "original-refit-u-card-017-stage-20261112"
+      },
+      "imageSha256": "cd3ded6de909657fb8115248ec1e8c4ff9f8024371384ad2c605d9d1539ab25a"
+    },
+    {
+      "id": "U_CARD_018",
+      "name": "荣光停驻剑尖",
+      "fields": [
+        "portrait",
+        "values",
+        "text",
+        "upgradedText",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "荣光停驻剑尖",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "造成11点伤害。将此牌作为5回合的飞矢打出。",
+        "upgradedText": "造成15点伤害。将此牌作为5回合的飞矢打出。",
+        "art": "original-film-u018-raised-blade-20261117"
+      },
+      "imageSha256": "4d16fb35020fce146c370e0e571a88eff043fed72bd82d6d8e31e7791dcb35d8"
+    },
+    {
+      "id": "U_CARD_021",
+      "name": "燃烧不息",
+      "fields": [
+        "portrait",
+        "values",
+        "text",
+        "upgradedText",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "燃烧不息",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "对所有敌人造成8点伤害。将此牌作为5回合的飞矢打出。",
+        "upgradedText": "对所有敌人造成11点伤害。将此牌作为5回合的飞矢打出。",
+        "art": "original-film-u021-golden-offensive-20261117"
+      },
+      "imageSha256": "f5481a057153df063b43f6ba309d117c780c108cb0fc7c38196c3e2e9d92069a"
+    },
+    {
+      "id": "U_CARD_023",
+      "name": "系住梦想的纽扣",
+      "fields": [
+        "values",
+        "text",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "系住梦想的纽扣",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "获得7点格挡。抽1张牌。将此牌作为5回合的飞矢打出。",
+        "upgradedText": "获得10点格挡。抽1张牌。将此牌作为5回合的飞矢打出。",
+        "art": "original-loop-u-card-023-20261116"
+      },
+      "imageSha256": "2c9985f5f30b176fd78986f583d0b8daf8c2eb7e5a46aca4010c87477665eb1a"
+    },
+    {
+      "id": "U_CARD_024",
+      "name": "小道具",
+      "fields": [
+        "text",
+        "upgradedText"
+      ],
+      "source": {
+        "name": "小道具",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "抽2张牌。将此牌作为5回合的飞矢打出。",
+        "upgradedText": "抽3张牌。将此牌作为5回合的飞矢打出。",
+        "art": "original-loop-u-card-024-20261116"
+      },
+      "imageSha256": "4c056908a56e18187be4993cd1fbfcdc40a42700cd17a66caa406d981b1cf045"
+    },
+    {
+      "id": "U_CARD_025",
+      "name": "舞台还将继续",
+      "fields": [
+        "name",
+        "text",
+        "upgradedText",
+        "arrowFocus",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "舞台还将继续",
+        "cost": 0,
+        "upgradedCost": 0,
+        "text": "获得1点能量。将此牌作为5回合的飞矢打出。",
+        "upgradedText": "获得2点能量。将此牌作为5回合的飞矢打出。",
+        "art": "original-tv-u-card-025-stage-continues-20261117"
+      },
+      "imageSha256": "7748aef6943896776632e058c1d1f0d35ee3f5c1afd60a99a445ebcd20a81e82"
+    },
+    {
+      "id": "JK400",
+      "name": "站起来奔跑",
+      "fields": [
+        "id",
+        "modelId",
+        "className",
+        "name",
+        "cost",
+        "upgradedCost",
+        "costsX",
+        "type",
+        "target",
+        "arrowSubtype",
+        "rarity",
+        "pool",
+        "knowledge",
+        "exhaust",
+        "upgradedExhaust",
+        "retain",
+        "upgradedRetain",
+        "innate",
+        "upgradedInnate",
+        "damageCapable",
+        "portrait",
+        "values",
+        "text",
+        "upgradedText",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "站起来奔跑",
+        "cost": 1,
+        "upgradedCost": 1,
+        "text": "知识。打出0费牌时，所有布置的飞矢获得1点伤害加成。",
+        "upgradedText": "知识。打出0费牌时，所有布置的飞矢获得2点伤害加成。",
+        "art": "original-tv-jk400-morning-run-20261117"
+      },
+      "imageSha256": "b4737ce1d59127828136fe8a958fbeda2e22ad0b5e0dbd9cb9425bf88600cbf9"
+    },
+    {
+      "id": "JK400B",
+      "name": "翱翔在天际",
+      "fields": [
+        "id",
+        "modelId",
+        "className",
+        "name",
+        "cost",
+        "upgradedCost",
+        "costsX",
+        "type",
+        "target",
+        "arrowSubtype",
+        "rarity",
+        "pool",
+        "knowledge",
+        "exhaust",
+        "upgradedExhaust",
+        "retain",
+        "upgradedRetain",
+        "innate",
+        "upgradedInnate",
+        "damageCapable",
+        "portrait",
+        "values",
+        "text",
+        "upgradedText",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "翱翔在天际",
+        "cost": 1,
+        "upgradedCost": 0,
+        "text": "知识。回合结束时，打出一张造成8点伤害的流星。",
+        "upgradedText": "知识。回合结束时，打出一张造成8点伤害的流星。",
+        "art": "original-film-jk400b-centered-flight-20261117"
+      },
+      "imageSha256": "41a5a14301162df3644969b56183aab598157471007ff4d8be6a502cbfbd855a"
+    },
+    {
+      "id": "U_CARD_030",
+      "name": "倾泻的星光",
+      "fields": [
+        "id",
+        "modelId",
+        "className",
+        "name",
+        "cost",
+        "upgradedCost",
+        "costsX",
+        "type",
+        "target",
+        "arrowSubtype",
+        "rarity",
+        "pool",
+        "knowledge",
+        "exhaust",
+        "upgradedExhaust",
+        "retain",
+        "upgradedRetain",
+        "innate",
+        "upgradedInnate",
+        "damageCapable",
+        "portrait",
+        "values",
+        "text",
+        "upgradedText",
+        "portraitContent"
+      ],
+      "source": {
+        "name": "倾泻的星光",
+        "cost": 2,
+        "upgradedCost": 2,
+        "text": "本次对战中每打出过1次飞矢，就打出一张造成8点伤害的流星。",
+        "upgradedText": "本次对战中每打出过1次飞矢，就打出一张造成12点伤害的流星。",
+        "art": "original-tv-u-card-030-falling-arrows-20261117"
+      },
+      "imageSha256": "93def18d8a5896ed1491e84f45bae847ad0be9c2ea6210f36ac8465233988312"
+    }
+  ],
+  "retired": [
+    "JZ05"
+  ]
+}

@@ -23,7 +23,7 @@ EXISTING = {
 }
 
 SELECTION_PROMPTS = {
-    "U_CARD_010": "选择1张牌。",
+    "U_CARD_010": "选择1张{Category}牌放入手牌。",
     "JG03": "选择1张手牌。",
     "JG09": "选择1张手牌。",
     "JG16": "选择1张手牌。",
@@ -236,7 +236,7 @@ def main():
         normal = display_description(card, base, card_names, values)
         improved = display_description(card, upgrade, card_names, values, upgraded=True)
         localization[model_id + '.description'] = upgrade_description(normal, improved)
-        power_amounts[cid] = next((value['base'] for value in values), 0)
+        power_amounts[cid] = next((value['base'] for value in values if cid != 'JK400' or value['name'] == 'Bonus'), 0)
         if args.text_only:
             continue
         if args.rules_only:
@@ -255,7 +255,7 @@ def main():
                 extension = '.jpg'
             portrait_name = cid + extension
             (ROOT / 'ShoujoKagekiJunna/images/cards' / portrait_name).write_bytes(image_bytes)
-        damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid in ('JH30', 'JK206')) and cid != 'JA82'
+        damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid in ('JH30', 'JK206')) and cid not in ('JA82', 'JK400B', 'U_CARD_030')
         target = {'自己': 'Self', '敌人': 'AnyEnemy', '任意敌人': 'AnyEnemy', '所有敌人': 'AllEnemies',
                   '无': 'None', '无需目标': 'None', '所有玩家': 'AllAllies',
                   '玩家': 'AnyPlayer', '队友': 'AnyAlly', '敌人或自己': 'AnyEnemy'}.get(card.get('target'))
@@ -363,7 +363,10 @@ def main():
                 powers[power['id'] + '.' + suffix] = text
         # Active card text takes precedence over retired power descriptions.
         current_power_text = {
-            'JA105': '每当你打出一张[gold]飞矢[/gold]，使其加速[blue]{Amount}[/blue]回合，并获得[gold]消耗[/gold]。',
+            'JK400': '打出0费牌时，所有布置的[gold]飞矢[/gold]获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。',
+            'JK400B': '回合结束时，打出[blue]{Repeat}[/blue]张造成[blue]{Damage}[/blue]点伤害的[gold]流星[/gold]。',
+            'JA96': '受到未被格挡的攻击伤害时，所有目标为敌人的[gold]飞矢[/gold]加速[blue]{Amount}[/blue]回合。',
+            'JA105': '每当你打出一张[gold]飞矢[/gold]，使其加速[blue]{Amount}[/blue]回合，并使其获得[gold]消耗[/gold]。',
             'JA118': '打出[gold]飞矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。',
             'JA35': '回合开始时，所有[gold]飞矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA205': '目标为单个敌人的[gold]飞矢[/gold]现在会攻击所有敌人。',
@@ -377,12 +380,12 @@ def main():
             if cid not in ids:
                 continue
             amount = 1 if cid in ('U_CARD_008', 'U_CARD_010') else power_amounts[cid]
-            powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount))
+            powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount)).replace('{Repeat}', '1').replace('{Damage}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
             if cid == 'U_CARD_016':
                 powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]飞矢[/gold]、闪耀中轮换。'
             if cid == 'U_CARD_010':
-                powers[f'JUNNA_{cid}_POWER.smartDescription'] += '{Repetition}'
+                powers[f'JUNNA_{cid}_POWER.smartDescription'] = '下回合开始时，从[gold]抽牌堆[/gold]选择[blue]{Amount}[/blue]张[gold]{Category}[/gold]牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、闪耀牌。'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers['JUNNA_JK235_POWER.smartDescription'] = '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{Repeat}[/blue]次}。'
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'

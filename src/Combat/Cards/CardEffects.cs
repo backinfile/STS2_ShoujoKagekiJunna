@@ -228,6 +228,11 @@ public static class CardEffects
             case "JA81":
                 var linked = await DealDamage(card, context, play, V("Damage"), 1);
                 await CardActions.Fly(context, player, linked.Sum(r => r.TotalDamage), play.Target); break;
+            case "U_CARD_030":
+                int priorArrows = JunnaCombatHooks.CountArrowPlays(player);
+                for (int i = 0; i < priorArrows && !CombatManager.Instance.IsOverOrEnding; i++)
+                    await CardActions.Fly(context, player, V("Damage"));
+                break;
             case "JA82":
                 int x = card.ResolveEnergyXValue();
                 for (int i = 0; i < x; i++) await CardActions.Fly(context, player, V("Damage"));
@@ -280,6 +285,7 @@ public static class CardEffects
                 await ArrowCombat.CopyAll(context, player);
                 break;
             case "JA177":
+                await Block();
                 await ArrowCombat.AccelerateAll(context, player, V("Turns"));
                 break;
             case "JK272":
