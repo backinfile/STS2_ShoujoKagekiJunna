@@ -160,6 +160,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 [{"questionItemId":"<clarification-question-id>","question":"你说的是“严阵以待”最后 1 点闪耀打完后，被燃烧木棍复制的情况吗？","answer":"是，最后 1 点闪耀时"}]
 </send_user_message_question_reply>
 
+### 用户消息 5
+
+<send_user_message_question_reply>
+[{"questionItemId":"<merge-confirmation-question-id>","question":"将 Core 和 Junna 的本次提交合并到各自 main，并清理上述工作树、任务分支和临时测试文件吗？","answer":"合并并清理，保留交付录像和结果"}]
+</send_user_message_question_reply>
+
 ## Brief task plan
 
 1. 用真实燃烧木棍、永久来源的严阵以待及原生出牌，复现最后一点闪耀应生成空壳的边界。
@@ -169,7 +175,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-- 状态：修复及定向验证完成，等待集成确认。
+- 状态：修复及定向验证完成，用户已确认合并及清理；交付录像和结果保留。
 - 目标分支：`main`；起始提交：`bc83134234fc859e5224701092722afbafeba7b9`。
 - 工作树：`../worktrees/STS2_ShoujoKagekiJunna/burning-sticks-ready-shell-20261117`；任务分支：`codex/burning-sticks-ready-shell-20261117`。
 - 新增 `tests/Integration/BurningSticksProbe.cs` 与 `tests/Integration/run-burning-sticks.py`。准备阶段设置固定牌局；录制期间只通过 MCP 悬停及正常出牌，结束录制后读取真实对象及遗物状态。
@@ -183,7 +189,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 测试实例独立存档、随机端口、满解锁、最小化及 `silent_test=true`；120 次启动采样均未抢前台。四段修复后录像包含内部音轨，均完成封装。
 - 复现/回归命令：`python tests/Integration/run-burning-sticks.py --port <port> --record --output <case-output>`；非最后一次增加 `--remaining 2`，升级版增加 `--upgrade`。运行前先编译并安装 `JunnaIntegration`，在纯那战斗出牌阶段执行。
 - 交付证据保存在 Junna 仓库忽略目录 `artifacts/task-deliverables/burning-sticks-last-shine-20261117/`，包含基线失败、四组修复结果及录像。
-- 两个原检出开始时均干净，无进行中的 Git 操作。合并与清理等待用户确认。
+- 两个原检出开始时均干净，无进行中的 Git 操作。用户已确认将两仓库任务分支合入各自 main，删除本次两工作树、任务分支及临时测试文件，保留交付录像和结果。
 
 - 同步确认：任务提交后已合入本地 Junna main `0aefdac13c3dda58425c4fe95873712f2dde7503`，同步提交为 `d128373`。新增改动为星屑伤害继承和能力牌格挡预览；JF13 的技能类型与牌效保持一致。
 - 同步后重新编译 Junna 与 Integration，均 0 警告、0 错误；再次实际出牌检查最后一点闪耀，11 项断言通过并保留录像。同步后的 565 份跟踪文档审查无敏感内容或本地绝对路径。
