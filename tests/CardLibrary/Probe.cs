@@ -16,11 +16,13 @@ public static class Probe
     public static void Initialize() => new Harmony("junna.card-library.regression").Patch(
         AccessTools.Method(typeof(NMainMenu), "_Ready"), postfix: new HarmonyMethod(typeof(Probe), nameof(Check)));
 
-    private static void Check()
+    private static async void Check()
     {
         bool passed = false;
         int checkedCards = 0;
         int classificationChecks = 0;
+        int visibleChecks = 0;
+        var visibleCollections = new List<object>();
         int characterCards = 0, miscellaneousCards = 0, ancientCards = 0;
         string? error = null;
         var grid = new NCardLibraryGrid();
@@ -48,6 +50,26 @@ public static class Probe
                 var characterFilter = filters[characters[ModelDb.Character<Junna>()]];
                 var misc = (NCardPoolFilter)AccessTools.Field(typeof(NCardLibrary), "_miscPoolFilter").GetValue(library)!;
                 var ancient = (NCardPoolFilter)AccessTools.Field(typeof(NCardLibrary), "_ancientsFilter").GetValue(library)!;
+                var libraryGrid = (NCardLibraryGrid)AccessTools.Field(typeof(NCardLibrary), "_grid").GetValue(library)!;
+                foreach (var selected in new[] { characters[ModelDb.Character<Junna>()], misc, characters[ModelDb.Character<Junna>()] })
+                {
+                    selected.IsSelected = true;
+                    AccessTools.Method(typeof(NCardLibrary), "UpdateCardPoolFilter").Invoke(library, [selected]);
+                    await library.ToSignal(library.GetTree(), SceneTree.SignalName.ProcessFrame);
+                    var visible = libraryGrid.VisibleCards.OfType<JunnaCard>().Select(c => c.DesignId).ToHashSet();
+                    foreach (var definition in CardCatalog.Cards.Where(c => !c.ChoiceOnly))
+                    {
+                        var card = CardCatalog.Model(definition.Id);
+                        bool expected = selected == misc
+                            ? !definition.Pool && card.Rarity is not (CardRarity.Basic or CardRarity.Ancient)
+                            : card.Rarity == CardRarity.Basic || definition.Pool &&
+                              card.Rarity is CardRarity.Common or CardRarity.Uncommon or CardRarity.Rare;
+                        if (visible.Contains(definition.Id) != expected)
+                            throw new InvalidOperationException($"Incorrect visible collection ({(selected == misc ? "misc" : "Junna")}): {definition.Id}");
+                        visibleChecks++;
+                    }
+                    visibleCollections.Add(new { collection = selected == misc ? "misc" : "Junna", count = visible.Count, cards = visible.Order().ToArray() });
+                }
                 for (int i = 0; i < CardCatalog.Cards.Count; i++)
                 {
                     var card = CardCatalog.Model(CardCatalog.Cards[i].Id);
@@ -67,14 +89,18 @@ public static class Probe
                     classificationChecks++;
                 }
             }
-            finally { library.Free(); }
+            finally
+            {
+                await library.ToSignal(library.GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
+                library.Free();
+            }
             passed = true;
         }
         catch (Exception exception) { error = exception.ToString(); }
         finally
         {
             grid.Free();
-            File.WriteAllText("card-library-regression.json", JsonSerializer.Serialize(new { passed, checkedCards, classificationChecks, characterCards, miscellaneousCards, ancientCards, error }));
+            File.WriteAllText("card-library-regression.json", JsonSerializer.Serialize(new { passed, checkedCards, classificationChecks, visibleChecks, visibleCollections, characterCards, miscellaneousCards, ancientCards, error }));
             ((SceneTree)Engine.GetMainLoop()).Quit(passed ? 0 : 1);
         }
     }
