@@ -164,7 +164,7 @@ public static partial class ArrowCombat
         var hud = NCombatRoom.Instance?.GetNodeOrNull<ArrowHud>("JunnaArrows");
         if (arrow.Remaining != previousRemaining) hud?.CountdownChanged(arrow);
         if (arrow.Remaining > 0) return;
-        if (AwaitingReturn(arrow)) return;
+        // Ready arrows complete even when their target is temporarily unavailable.
         arrow.Resolving = true;
         context.PushModel(arrow.Card);
         try
