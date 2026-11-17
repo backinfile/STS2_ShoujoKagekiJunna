@@ -31,6 +31,19 @@ internal static class KnowledgeUpgradeAnimation
         return completion.Task;
     }
 
+    private static Task SparksCompletion(NCardSmithVfx vfx)
+    {
+        var completions = vfx.FindChildren("*", "GPUParticles2D", true, false)
+            .OfType<Godot.GpuParticles2D>().Where(particle => particle.OneShot).Select(particle =>
+            {
+                var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                particle.Finished += () => completion.TrySetResult();
+                vfx.TreeExited += () => completion.TrySetResult();
+                return completion.Task;
+            });
+        return Task.WhenAll(completions);
+    }
+
     internal static async Task WaitFor(CardModel card)
     {
         if (Animations.TryGetValue(card, out var animation))
@@ -43,7 +56,7 @@ internal static class KnowledgeUpgradeAnimation
             // Native smithing normally plays after OnSelect; its upgrade reward must follow that VFX.
             var vfx = NCardSmithVfx.Create([card]);
             if (vfx == null) return;
-            var completed = Completion(card, vfx);
+            var completed = Task.WhenAll(Completion(card, vfx), SparksCompletion(vfx));
             Smithed.AddOrUpdate(card, new object());
             ui.CardPreviewContainer.AddChildSafely(vfx);
             await completed;

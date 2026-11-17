@@ -41,12 +41,12 @@ const live = () => JSON.parse(fs.readFileSync(path.join(root, 'live.json'), 'utf
         assert.equal(after.level - before.level, 1, 'exactly one upgrade');
         assert(after.checks.every(c => c.pass));
         assert.deepEqual(after.events.slice(before.events.length).filter(e => e.kind !== 'upgrade-exited').map(e => e.kind),
-            ['upgrade-start', 'upgrade-finished', 'knowledge-acquired']);
+            ['upgrade-start', 'upgrade-finished', 'upgrade-sparks-finished', 'knowledge-acquired']);
         await sleep(3200);
         assert.equal(live().events.filter(e => e.kind === 'upgrade-start').length,
             before.events.filter(e => e.kind === 'upgrade-start').length + 1, 'smith animation plays once');
         fs.writeFileSync(path.join(root, label + '.json'), JSON.stringify(live(), null, 2));
-        console.log('PASS native rest: upgrade-start -> upgrade-finished -> knowledge-acquired; animation once');
+        console.log('PASS native rest: upgrade-start -> upgrade-finished -> upgrade-sparks-finished -> knowledge-acquired; animation once');
     } finally {
         await req('/recording/stop', {});
         let status;

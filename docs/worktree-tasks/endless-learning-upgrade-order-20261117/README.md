@@ -164,26 +164,40 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 [{"questionItemId":"[\"request_user_input_async\",\"call_3019f83ba1c541d1bd0a74a3f6b60225\",0]","question":"将已验证的 720dde9 快进合并到 main，并清理本任务工作树、分支及构建／测试临时文件？录像和任务记录会随提交保留。","answer":"给牌的间隔有点长，是为啥"}]
 </send_user_message_question_reply>
 
+### 5. 用户反馈
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_47634ae5d78947b9b44ccafe3519853f\",0]","question":"将缩短发牌间隔后的 54a79de 合并到 main？清理仅涉及本任务工作树、分支和临时文件，录像及任务记录保留。","answer":"升级卡牌的特效怎么没有了"}]
+</send_user_message_question_reply>
+
+### 6. 特效反馈澄清
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_13d5ca9b8c2545c293ec6db3d5b69729\",0]","question":"你指的是哪部分不见了？我会同时对照原生锻造效果检查。","answer":"升级时的闪光／火花"}]
+</send_user_message_question_reply>
+
 ## 简要计划
 
 1. 起始 main：bc83134234fc859e5224701092722afbafeba7b9，主目录干净。工作树 ../worktrees/STS2_ShoujoKagekiJunna/endless-learning-upgrade-order-20261117；分支 codex/endless-learning-upgrade-order-20261117。
 2. 使用真实游戏升级命令及原生特效构建先后顺序定向检查。
-3. 最小修正升级完成到获得新知的等待关系。按反馈将完成判定设为主要升级动作结束，让原牌回牌堆的飞行与新知预览自然衔接；构建并复核永久牌组、无展示及战斗内升级，复录原生休息处升级。
+3. 最小修正升级完成到获得新知的等待关系。按反馈保留完整升级闪光和火花，等待主要升级动作及单次粒子实际完成，再紧接发牌；使用原生渲染复录并验证连续升级。
 4. 整理单个提交、同步 main，并按 $worktree-task 请求合并及清理确认。
 
 ## 结果与改动
 
-首版修复后，按用户反馈收紧升级与发牌衔接；必要定向验证与复录已完成，等待用户合并确认。
+修复、粒子时序回归和原生渲染复录完成，等待用户合并确认。
 
-- 根因：原生 CardCmd.Upgrade 启动特效后立即返回；Core 同步命令回调立即发放新知。休息处使用 CardPreviewStyle.None，原生锻造特效原定在 OnSelect 返回之后播放，因此新知先于锻造出现。
-- src/Combat/Knowledge/KnowledgeCombat.cs：获得升级赠牌前，等待对应卡牌的原生升级特效结束。
-- src/UI/Knowledge/KnowledgeUpgradeAnimation.cs：普通升级与休息处原生 NCardSmithVfx 在主要升级动作完成、原牌开始回堆时继续发牌；TreeExited 仅作完成兜底。休息处抑制随后同一张牌的重复锻造特效。连续升级的完成状态按实际任务匹配。无展示和战斗内升级沿原调用继续结算。
-- tests/EndlessLearningAnimation/：独立游戏观察模组与 Node 脚本，记录原生主要升级动作开始与结束、完整特效退场、新知入堆与命令完成；仅计新生成的物理新知，排除已有牌的抽取。录制期间只通过原生选牌和确认操作继续游戏。
-- 修复前：node tests/EndlessLearningAnimation/run-check.cjs <random-port> deck out/tmp/endless-learning-order baseline 失败；新知在升级动画开始后 31 毫秒入堆，动画在约 3 秒后才退场。
-- 修复后：同脚本 deck、none、combat 三项通过；永久牌组的顺序为 upgrade-start → upgrade-finished → knowledge-acquired → command-completed。最终版本两次原生休息处升级均通过，每次只播放一次锻造动画并获得一张新知；同一张学无止境从等级 0 升到 2，累计获得 2 张新知。发牌从等待整个节点退场提前到主升级动作完成，本次录制开始到发牌从 2188 毫秒缩短至 1297 毫秒；主动作结束至发牌为 16 毫秒，原牌回堆飞行继续约 1140 毫秒。
-- 卡牌入堆核对：GrantUpgrade 原有单卡发放、基础新知版本、永久牌组入口及战斗内 PileType.Draw + CardPilePosition.Random 调用保持原样；已对照 docs/implementation/card-pile-placement.md 的对应入口。
-- Beta 和 Stable API 的 Release 编译均通过，0 警告、0 错误；git diff --check 通过。按当前改动执行定向检查。
-- 证据：evidence/results.json 保存修复前后顺序与连续升级结果；evidence/native-rest.mp4 为已目视复核的原生休息处录像（有声、静默外放、约 6.2 秒、无丢帧）。
-- 文档审查：同步后审查全部 537 份已跟踪文档及文档数据（含本次新增内容），本机绝对路径与常见凭据格式命中数均为 0。
-- 原目录起始干净；实现期间 main 前进到 f3ed20efc581f267e4b546ad4899164e77a88ff1，涉及其他卡牌改动。任务实现提交为 a2c8bff；合并 main 后得到 a0f766c，无冲突。同步前后本任务的实现和定向检查文件完全一致；同步后 Beta／Stable 构建再次通过（各 0 警告、0 错误），git diff --check 通过。原目录仍在 main 且状态干净；测试专用游戏已关闭。用户反馈衔接间隔后，已追加完成主动作结束即发牌的修正，重跑 deck、none、combat 和两次原生休息处定向检查，Beta／Stable 构建通过。用户反馈属于修改意见，尚未授权合并或清理；待确认后执行。
-
+- 初始根因：原生 CardCmd.Upgrade 启动特效后立即返回；Core 同步命令回调立即发放新知。休息处使用 CardPreviewStyle.None，原生锻造特效原定在 OnSelect 返回后播放，因此新知先于锻造出现。
+- 闪光／火花反馈的原因有两处：旧录像使用 Compatibility 渲染，日志确认其不支持部分粒子子发射器和拖尾；衔接优化又将原牌开始回堆判定为全部升级效果完成，导致新知预览遮住尚在播放的火花尾段。
+- src/Combat/Knowledge/KnowledgeCombat.cs：获得升级赠牌前，等待对应卡牌的升级表现完成。
+- src/UI/Knowledge/KnowledgeUpgradeAnimation.cs：普通升级沿原生 NCardUpgradeVfx；休息处播放原生 NCardSmithVfx，等待主要升级动作和所有单次 GPU 粒子的 Finished 信号后发牌。节点退出作为取消／场景结束兜底；不插入固定延时，不等待额外回堆尾段。休息处抑制随后同张牌的重复锻造特效。
+- tools/dev/start-test-game.ps1：新增 RenderingMethod 选项，默认 forward_plus；需要兼容模式时可显式选 gl_compatibility。原生渲染保留粒子完整表现。
+- tests/EndlessLearningAnimation/：独立观察模组及脚本检查主要升级、实际粒子完成、新知入堆、完整节点退出。仅计新生成的物理新知，排除已有牌抽取；录像期间通过原生选牌与确认继续。
+- 初始顺序回归：修复前 deck 检查失败，新知在动画开始 31 毫秒后入堆，整个特效约 3 秒后才退出。修复后 deck、none、combat 三项定向检查通过。
+- 火花回归：新增粒子完成检查后，优化前版本在原生渲染下稳定失败：主动作 1235 毫秒后结束、新知 1250 毫秒时入堆，火花到 1750 毫秒才结束。修复后首次及同张牌再次升级均通过，顺序为 upgrade-start → upgrade-finished → upgrade-sparks-finished → knowledge-acquired；每次仅播放一次锻造特效并获得一张新知。
+- 最终录制数据：主动作在 1265 毫秒时结束，火花在 1750 毫秒时结束并立即发牌；整个节点在 2640 毫秒时退出。保留完整火花，同时省去额外约 890 毫秒的回堆等待。
+- 视觉验证：在 D3D12 Forward+ 渲染下逐帧检查原生金色闪光、火花尾段和新知出现时机；evidence/native-rest-full-sparks.mp4 为约 6.7 秒有声录像，已完成封装，外放静默，零丢帧。evidence/results.json 保留原始顺序失败、提前遮挡火花的失败及最终通过证据。
+- 卡牌入堆核对：GrantUpgrade 原有单卡发放、基础新知版本、永久牌组入口及战斗内 PileType.Draw + CardPilePosition.Random 调用保持原样；已对照 docs/implementation/card-pile-placement.md。
+- Beta、Stable Release 编译及观察模组编译通过，均 0 警告、0 错误；git diff --check 通过。对粒子修正只执行两次原生休息处升级及必要编译；其他三个路径的既有通过结果保留。
+- 集成：起始 main 为 bc83134234fc859e5224701092722afbafeba7b9；已同步至本地 main 的 f3ed20efc581f267e4b546ad4899164e77a88ff1，无冲突。已有实现提交 a2c8bff，衔接修正提交 54a79de；本次追加完整火花等待及准确渲染验证。main 中其他任务的未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 已记录校验值并保留。
+- 用户回复均为修改意见或澄清，未授权合并或清理。完成最终审查后等待合并及清理选择；录像、证据和任务记录随任务提交保留。

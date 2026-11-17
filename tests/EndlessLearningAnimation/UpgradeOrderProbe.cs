@@ -26,6 +26,7 @@ public static class Probe
     private static readonly List<object> Events = [];
     private static readonly List<object> Checks = [];
     private static int _gains;
+    private static bool _sparksFinished = true;
     public static void Initialize()
     {
         new Harmony("Junna.EndlessLearningAnimation.Observe").PatchAll(typeof(Probe).Assembly);
@@ -35,7 +36,7 @@ public static class Probe
     }
     public static void Reset(Player player, CardModel source)
     {
-        Player = player; Source = source; Events.Clear(); Checks.Clear(); _gains = 0;
+        Player = player; Source = source; Events.Clear(); Checks.Clear(); _gains = 0; _sparksFinished = true;
         Record("prepared");
     }
     private static void Record(string kind)
@@ -72,6 +73,21 @@ public static class Probe
             if (!cards.Contains(Source!) || __result == null) return;
             var vfx = __result;
             Active.Add(vfx); Record("upgrade-start");
+            var particles = vfx.FindChildren("*", "GPUParticles2D", true, false).OfType<GpuParticles2D>().Where(p => p.OneShot).ToArray();
+            _sparksFinished = particles.Length == 0;
+            int remaining = particles.Length;
+            foreach (var particle in particles)
+            {
+                bool done = false;
+                void Finish()
+                {
+                    if (done) return;
+                    done = true;
+                    if (--remaining == 0) { _sparksFinished = true; Record("upgrade-sparks-finished"); }
+                }
+                particle.Finished += Finish;
+                vfx.TreeExited += Finish;
+            }
             vfx.TreeExited += () => { Active.Remove(vfx); Record("upgrade-exited"); };
         }
     }
@@ -96,7 +112,7 @@ public static class Probe
             foreach (var card in cards.Where(c => c.Owner == Player && c.Pile == null && CardCatalog.DesignId(c) == "JK82B"))
             {
                 _gains++;
-                Checks.Add(new { name = "knowledge acquired after native upgrade effect finishes", pass = Active.Count == 0 });
+                Checks.Add(new { name = "knowledge acquired after native upgrade effect finishes", pass = Active.Count == 0 && _sparksFinished });
                 Record("knowledge-acquired");
             }
         }

@@ -1,6 +1,7 @@
 param([ValidateRange(0, 65535)][int]$Port = 15727, [switch]$UseInstalledMod,
     [ValidatePattern('^[a-z0-9-]+$')][string]$Instance = 'dev-game',
     [switch]$Playable,
+    [ValidateSet("forward_plus", "gl_compatibility")][string]$RenderingMethod = "forward_plus",
     [string]$CorePackage = $env:SHOUJO_CORE_PACKAGE,
     [string]$BaseLibPackage = $env:SHOUJO_BASELIB_PACKAGE)
 $ErrorActionPreference = 'Stop'
@@ -94,7 +95,7 @@ try {
     if (!$Playable) { $env:STS2_MCP_FFMPEG = (Get-Command ffmpeg).Source }
     New-Item -ItemType Directory -Force $env:APPDATA, $env:LOCALAPPDATA | Out-Null
     $junnaProcess = Start-Process -FilePath "$junnaGame/SlayTheSpire2.exe" -WorkingDirectory $junnaGame -WindowStyle $windowStyle -PassThru `
-        -ArgumentList '--force-steam=off','--rendering-method','gl_compatibility','--log-file',('"' + "$junnaArtifacts/game.log" + '"')
+        -ArgumentList '--force-steam=off','--rendering-method',$RenderingMethod,'--log-file',('"' + "$junnaArtifacts/game.log" + '"')
     $junnaProcess.Id | Set-Content -LiteralPath "$junnaArtifacts/process-id.txt"
     if ($Playable) {
         Write-Output "Junna play process=$($junnaProcess.Id) MCP port=$Port"
