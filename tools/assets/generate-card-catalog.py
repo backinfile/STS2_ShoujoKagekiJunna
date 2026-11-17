@@ -78,7 +78,7 @@ def display_description(card, text, card_names, values, upgraded=False):
     # Arrow countdowns are rendered on their existing plaque.
     text = re.sub(r'^\[blue\][^\n]*\n', '', text)
     text = re.sub(r'。\s*', '。\n', text).strip()
-    highlighted = {'格挡', '易伤', '虚弱', '知识', '连锁知识', '飞矢', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
+    highlighted = {'格挡', '易伤', '虚弱', '知识', '连锁知识', '飞矢', '闪耀', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
     # Only actual named references need emphasis; all replacements run once to avoid nested tags.
     highlighted.update(card_names)
     highlighted.update(name + '+' for name in card_names)
@@ -328,7 +328,7 @@ def main():
         'JUNNA_PREPARE_KNOWLEDGE.title': '知识',
         'JUNNA_PREPARE_KNOWLEDGE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]知识[/gold]牌。',
         'JUNNA_PREPARE_SHINE.title': '闪耀',
-        'JUNNA_PREPARE_SHINE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张闪耀牌。',
+        'JUNNA_PREPARE_SHINE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]闪耀[/gold]牌。',
         'JUNNA_NOTES_DRAW.title': '抽牌',
         'JUNNA_NOTES_DRAW.description': '抽{Amount:diff()}张牌。',
         'JUNNA_NOTES_ENERGY.title': '能量',
