@@ -47,3 +47,9 @@ python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --o
 ## 自动打牌目标定向检查
 
 双敌人环境运行 `python tests/Integration/run-auto-target.py --port <port>`，检查伏击基础及升级版、共用免费打牌、论据与知识关联打牌、保留原目标及自身目标。探针在旧手动选敌人入口直接报错，避免选牌测试替身掩盖问题。加 `--record` 准备伏击后，通过正常出牌与结束回合录制；录像和结果保存于 `out/tmp/auto-target/`。
+
+## 克隆附魔关联知识牌定向检查
+
+`junna_cloning_knowledge run` 准备固定牌组并调用原生休息处克隆，输出 `out/tmp/cloning-linked-knowledge-20261117/results.json`。11 项断言覆盖知识主牌、关联成员、后天关联与跨角色牌、数量、升级与闪耀继承、原牌顺序及单张复制控制。
+
+实机录像先取得佩尔的增生组织，运行 `junna_cloning_knowledge prepare`，进入休息处后只点击原生“克隆”；停止录像后运行 `junna_cloning_knowledge check` 核对结果。

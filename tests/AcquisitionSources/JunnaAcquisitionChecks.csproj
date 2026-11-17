@@ -3,6 +3,7 @@
     <Compile Include="../Integration/TestGameApi.cs" Link="TestGameApi.cs" />
     <Compile Include="../Integration/AcquisitionSourcesProbe.cs" Link="AcquisitionSourcesProbe.cs" />
     <Compile Include="../Integration/EventCopiesProbe.cs" Link="EventCopiesProbe.cs" />
+    <Compile Include="../Integration/CloningKnowledgeProbe.cs" Link="CloningKnowledgeProbe.cs" />
     <Reference Include="ShoujoKagekiAijoCore.Api.V1" HintPath="$(CoreApiPath)" />
     <Reference Include="ShoujoKagekiJunna" HintPath="$(JunnaAssemblyPath)" />
     <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" />
