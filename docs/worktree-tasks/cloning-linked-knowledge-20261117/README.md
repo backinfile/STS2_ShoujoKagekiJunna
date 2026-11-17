@@ -167,7 +167,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 ## Result and changes
 
-- 状态：实现与定向验证完成，等待同步 main 及合并、清理确认。
+- 状态：实现、定向验证与本地 main 同步完成，等待合并、清理确认。
 - 原分支：main；起始提交：821722c124b27145d051f8473d5e7d8227a9d6e8。
 - 工作树：../worktrees/STS2_ShoujoKagekiJunna/cloning-linked-knowledge-20261117；分支：codex/cloning-linked-knowledge-20261117。
 - 原工作区未跟踪目录 docs/worktree-tasks/knowledge-refit-20261117/ 保留原状；541 个文件，SHA256 汇总 8E62806CA61B7281C523B99948603DF8953B5224238AAB358FA62668D72A01BE。
@@ -181,3 +181,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 证据：`out/tmp/cloning-linked-knowledge-20261117/` 中保存 `baseline-results.json`、`results.json`、`document-review.json`、截图、帧图及录像状态；原始运行日志位于 `artifacts/cloning-test/game.log`。MCP 在菜单载入时记录 `InstantModeHoverTipPatch` 属性 setter 异常，克隆操作及定向断言完成；本任务自行启动的游戏已关闭。
 - 文档复核：全部 584 份已跟踪/新增文本类文档已扫描并复核，路径检测命中均为文字转义或音效资源地址，凭据命中为示例占位符；无实际本地绝对路径、私密链接、凭据或私人邮箱需要修改。
 - 交付安排：批准合并与清理后，将必要验证证据及录像保存到原仓库 `artifacts/task-deliverables/cloning-linked-knowledge-20261117/`，核对哈希，再移除本任务工作树、分支和其中可丢弃的构建/游戏临时文件。
+
+- 任务提交：`602c8e5693c008224cb9171c3fdb86f8aec519f0`。同步目标仍为任务开始时捕获的 `main`；本地 main 已前进到 `e19543e2abb71e44f463c65164cc9dab61e0d089`，新增的图鉴分类修改已无冲突合入任务分支。
+- 同步验证：Beta/Stable 编译再次通过，均 0 警告、0 错误；克隆实现与定向探针相对任务提交无差异，因此保留已有 11/11 实机结果。`git diff --check` 通过。
+- 原工作区保护：初始未跟踪目录的 541 个文件及 SHA256 汇总保持一致；任务期间其他工作在 main 留下 `src/Models/CatalogCard.cs` 与 `tests/Integration/PowerBlockPreviewProbe.cs` 的未提交修改，本任务不改动这些文件。合并前须再次核对分支、HEAD 与这些修改。
