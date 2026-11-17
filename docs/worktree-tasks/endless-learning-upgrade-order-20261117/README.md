@@ -1,4 +1,4 @@
-# 学无止境升级动画顺序
+# 学无止境与获得卡牌的非阻塞预览
 
 ## 原始用户输入
 
@@ -190,26 +190,56 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 
 允许修改mcp，播放游戏的本来的内容
 
+### 10. 用户询问最终改法
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_450345a7b2774b57a948418edb99237e\",0]","question":"将 Junna 7be0147 和 MCP af78d29 分别合并到各自 main？清理仅涉及两个任务的工作树、分支及临时文件，原生录像与任务记录保留。","answer":"你怎么改的"}]
+</send_user_message_question_reply>
+
+### 11. 用户询问并行与阻塞
+
+展示新知 和  原生 `DoLocalPostSelectVfx`   应该可以同时进行吧，展示新知会卡住后续动画吗？
+
+### 12. 用户要求统一检查获得卡牌
+
+可以这样修改吧，你看看其他获得卡牌的地方都应该不卡动画。比如“知识” 比如 “心得“
+
 ## 简要计划
 
 1. 起始 main：bc83134234fc859e5224701092722afbafeba7b9，主目录干净。工作树 ../worktrees/STS2_ShoujoKagekiJunna/endless-learning-upgrade-order-20261117；分支 codex/endless-learning-upgrade-order-20261117。
 2. 使用真实游戏升级命令及原生特效构建先后顺序定向检查。
-3. 保留游戏原生升级结算与特效调用，仅把新知预览排到原生锻造及火花之后。修正 MCP 最小化捕获时间步长，使用原生渲染复录并验证连续升级。
+3. 保留原生升级特效与返回任务。新知预览独立等待特效结束后启动；审查知识、心得、复制和通用生成入口，移除纯展示等待，验证规则结算与入堆不变。
 4. 整理单个提交、同步 main，并按 $worktree-task 请求合并及清理确认。
 
 ## 结果与改动
 
-已恢复游戏原生升级播放流程，完成定向验证与原生内容复录，等待用户合并确认。
+修复及必要定向验证完成，等待用户合并及清理确认。
 
-- 原因：休息处原生 OnSelect 先结算升级，DoLocalPostSelectVfx 随后播放锻造。旧版在结算内手动创建同一特效并屏蔽原生播放；用户要求保留游戏本来的内容，最终版本已撤掉这层接管。
-- src/Combat/Knowledge/KnowledgeCombat.cs：升级赠牌仍通过原有同步结算和入堆调用生成；仅将休息处的新知预览交给原生展示完成后的步骤。永久牌组、每级一张基础新知及战斗内 PileType.Draw + CardPilePosition.Random 均沿原调用。
-- src/UI/Knowledge/KnowledgeUpgradeAnimation.cs：只观察游戏原生创建的 NCardUpgradeVfx、NCardSmithVfx；不再主动创建锻造特效，也不再过滤原生特效的卡牌。原生 DoLocalPostSelectVfx 及单次火花结束后，继续展示新知。卡牌结算边界保持在 OnSelect 内，避免把同步牌组改动移到本地视觉步骤。
-- tools/dev/start-test-game.ps1：默认原生 Forward+ 渲染，保留显式兼容模式选项。
-- tests/EndlessLearningAnimation/：移除额外 ForceDraw 驱动画面的代码；新增真实调用栈检查，确认锻造特效由游戏 DoLocalPostSelectVfx 状态机创建，并检查新知预览晚于原生动作及火花完成。
-- 失败基线：旧手动播放版本的原生创建次数为 0、手动创建次数为 1，定向检查失败。
-- 最终原生内容：首次升级原生创建 1 次、手动创建 0 次；同张牌连续两次升级累计原生创建 2 次、手动创建 0 次、获得与预览新知各 2 张。普通升级、无展示升级及战斗内升级三项定向检查通过。
-- 最终录像 evidence/native-game-playback.mp4：6.9 秒，游戏原生选牌、确认、锻造闪光与火花、之后的新知预览；有声、静默外放、零丢帧。录像和帧图已目视核对。
-- MCP 关联修复提交 af78d29，位于独立任务 native-minimized-particles-20261117：截图及录制为最小化窗口传入真实渲染时间步长。真实 GPU TIME 探针调用生产捕获代码，零步长基线比例为 0，修复后渲染时间／真实时间比例为 1.00396；不改游戏场景或特效。
-- Beta、Stable Release 与观察模组编译通过（均 0 警告、0 错误），git diff --check 通过；仅执行上述必要定向检查。
-- 卡牌入堆规则已对照 docs/implementation/card-pile-placement.md；结算数量、基础版本、永久牌组入口和战斗内 Random 位置沿原实现。
-- 集成目标仍为起始 main，起始提交 bc83134234fc859e5224701092722afbafeba7b9；已同步 f3ed20efc581f267e4b546ad4899164e77a88ff1。其他任务的未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 保留。用户授权了修改 MCP，尚未授权合并及清理。
+- 原生升级调用保留：游戏自己创建并播放锻造特效。原生 DoLocalPostSelectVfx 返回的 Task 保持同一对象，不再将新知展示包装到它的返回链中。新知在原生火花完成后独立展示，与原生剩余等待并行。
+- 普通永久升级也只把新知预览排在升级表现之后；原有升级结算任务继续执行，不等待视觉节点退出。新知仍在原来的结算内加入牌组。
+- CardActions.PreviewAdded 启动原生 CardCmd.PreviewCardPileAdd 后立即返回完成任务；移除默认 1 秒等待、完整飞牌等待及其完成捕获补丁。KnowledgeProgress.CopySingleCards 同步移除显式等待。
+- 发牌数量、版本、目的牌堆、原生入堆／生成事件及 Random 位置保持原样；真实结算和玩家选择仍按规则等待。
+
+### 获得卡牌入口审查
+
+| 入口 | 最终展示行为 | 验证 |
+| --- | --- | --- |
+| 学无止境永久升级／休息处 | 原生特效不变，展示独立接续，原生 Task 不变 | 普通／无展示／战斗内升级及真实锻造通过 |
+| 知识关联牌 Draw／Deck | 公共预览立即返回；永久组内合并展示沿原生批次 | 同帧完成、2 张基础伙伴、位置及原牌序通过 |
+| 临时生成／反复研习知识复制 | 公共预览立即返回 | 基础心得生成与真实知识触发复制通过 |
+| 永久单张复制／知识复制奖励 | 不等待整段飞牌结束 | 独立对象、升级保留、数量及原牌序通过 |
+| 埋头学习生成心得 | 原入口已直接启动原生预览，保持其非阻塞行为 | 基础、升级、叠加、空抽牌堆及真实回合通过 |
+| 故事胜利赠牌／舞台少女笔记 | 现有直接原生预览已非阻塞，保持原调用 | 源码核对 |
+
+### 验证与证据
+
+- 失败基线：原生返回 Task 身份检查失败；9 个发牌入口中 5 个因预览等待跨帧失败，4 个心得控制场景通过；数量、版本、位置及原牌序均正确。
+- 修复后：9 个实际入口全部在预览启动的同一帧继续结算，动画任务仍未结束；公共预览立即返回。run-gain-check.cjs 保存可重复执行入口。
+- 原生锻造：原生创建 1 次、手动创建 0 次；火花先于新知展示，原生返回 Task 身份一致。录像中预览比原生方法完成早约 218 毫秒开始，后续按钮按原生时间显示。
+- 知识触发复制：真实出牌生成 1 张心得复制，约 515 毫秒后即接受下一张攻击，复制预览与攻击动画同时播放。
+- 心得：真实打出埋头学习并结束回合，生成 1 张基础心得；敌方动画及下一玩家回合继续进行。
+- 录像均为原生可操作手牌与合法游戏操作，录制前准备环境，录制中无修改命令；逐帧核对后保留 evidence/upgrade-parallel-preview.mp4、evidence/knowledge-copy-flow.mp4、evidence/study-turn-flow.mp4。均有声、静默外放、零丢帧。
+- Beta、Stable Release 与观察模组构建均 0 警告、0 错误；git diff --check 通过。仅执行当前变更必要的定向检查。
+- evidence/results.json 保留失败基线、9 项通过、原生 Task 身份、实际出牌和三段录像数据。卡牌入堆约定已对照 docs/implementation/card-pile-placement.md。
+- MCP 关联实现为 af78d2969dcc46be1028c08350260f3bbf83fa12，生产 GPU 时钟回归已通过；此次展示等待修正未改变 MCP 实现。
+- 起始目标 main 不变，最初提交 bc83134234fc859e5224701092722afbafeba7b9。main 后续推进到 910512f55842909af2e06f0a950442e19f64b315，新增内容仅为其他任务文档和美术证据，待同步；其未跟踪 docs/worktree-tasks/knowledge-refit-20261117/ 保留。尚未获准合并或清理。

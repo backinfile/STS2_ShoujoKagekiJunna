@@ -136,6 +136,31 @@ public static class Probe
             Record("knowledge-preview");
         }
     }
+    private static readonly ConditionalWeakTable<SmithRestSiteOption, Task> NativePostTasks = new();
+    [HarmonyPatch(typeof(SmithRestSiteOption), nameof(SmithRestSiteOption.DoLocalPostSelectVfx))]
+    private static class CaptureOriginalPostTask
+    {
+        [HarmonyPriority(Priority.First)]
+        private static void Postfix(SmithRestSiteOption __instance, Task __result)
+        {
+            if (AccessTools.Property(typeof(RestSiteOption), "Owner").GetValue(__instance) != Player) return;
+            NativePostTasks.AddOrUpdate(__instance, __result);
+            MegaCrit.Sts2.Core.Helpers.TaskHelper.RunSafely(Observe(__result));
+        }
+        private static async Task Observe(Task task)
+        { await task; Record("native-post-vfx-completed"); }
+    }
+    [HarmonyPatch(typeof(SmithRestSiteOption), nameof(SmithRestSiteOption.DoLocalPostSelectVfx))]
+    private static class CheckOriginalPostTask
+    {
+        [HarmonyPriority(Priority.Last)]
+        private static void Postfix(SmithRestSiteOption __instance, Task __result)
+        {
+            if (AccessTools.Property(typeof(RestSiteOption), "Owner").GetValue(__instance) != Player || !NativePostTasks.TryGetValue(__instance, out var native)) return;
+            Checks.Add(new { name = "native post-VFX task is returned unchanged", pass = ReferenceEquals(native, __result) });
+            Save();
+        }
+    }
     public static async Task Prepare(Player player)
     {
         Source = null; Player = null;

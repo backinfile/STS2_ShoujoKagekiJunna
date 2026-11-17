@@ -55,7 +55,7 @@ async function req(route, body) {
     do {
         await sleep(100);
         try { live = JSON.parse(fs.readFileSync(path.join(output, 'live.json'), 'utf8')); } catch { continue; }
-        if (live.events.some(e => e.kind === 'command-completed') &&
+        if (live.previews === 1 && live.events.some(e => e.kind === 'command-completed') &&
             (mode !== 'deck' || live.events.some(e => e.kind === 'upgrade-exited'))) break;
     } while (Date.now() < deadline);
     assert(live?.events.some(e => e.kind === 'command-completed'), 'upgrade command completes');
@@ -68,7 +68,7 @@ async function req(route, body) {
     if (mode === 'deck') {
         const kinds = live.events.map(e => e.kind);
         assert(kinds.indexOf('upgrade-start') < kinds.indexOf('upgrade-finished'));
-        assert(kinds.indexOf('upgrade-finished') < kinds.indexOf('knowledge-acquired'));
+        assert(kinds.indexOf('upgrade-finished') < kinds.indexOf('knowledge-preview'));
     }
     console.log('PASS ' + mode + ': ' + live.events.map(e => e.kind).join(' -> '));
 })().catch(error => { console.error('FAIL: ' + error.message); process.exitCode = 1; });

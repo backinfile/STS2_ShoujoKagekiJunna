@@ -3,6 +3,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.RestSite;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using ShoujoKagekiJunna.Combat;
@@ -39,18 +40,24 @@ internal static class KnowledgeUpgradeAnimation
                 return completion.Task;
             }));
 
-    internal static Task WaitFor(CardModel card)
+    internal static bool DeferPreview(CardModel card, IReadOnlyList<CardPileAddResult> added)
     {
-        if (!Animations.TryGetValue(card, out var animation)) return Task.CompletedTask;
+        if (added.Count == 0 || !LocalContext.IsMine(card)) return false;
+        if (Selecting.Value is { } option)
+        {
+            Presentations.GetValue(option, _ => new()).Added.AddRange(added);
+            return true;
+        }
+        if (!Animations.TryGetValue(card, out var animation)) return false;
         Animations.Remove(card);
-        return animation;
+        TaskHelper.RunSafely(PreviewAfter(animation, added, CancellationToken.None));
+        return true;
     }
 
-    internal static bool DeferSmithPreview(IReadOnlyList<CardPileAddResult> added)
+    private static async Task PreviewAfter(Task effect, IReadOnlyList<CardPileAddResult> added, CancellationToken token)
     {
-        if (Selecting.Value is not { } option || added.Count == 0 || !LocalContext.IsMine(added[0].cardAdded)) return false;
-        Presentations.GetValue(option, _ => new()).Added.AddRange(added);
-        return true;
+        await effect;
+        if (!token.IsCancellationRequested) await CardActions.PreviewAdded(added, PileType.Deck);
     }
 
     [HarmonyPatch(typeof(NCardUpgradeVfx), nameof(NCardUpgradeVfx.Create))]
@@ -88,22 +95,13 @@ internal static class KnowledgeUpgradeAnimation
     {
         private static void Prefix(SmithRestSiteOption __instance, out SmithRestSiteOption? __state)
         { __state = Playing.Value; Playing.Value = __instance; }
-        private static void Postfix(SmithRestSiteOption __instance, ref Task __result, SmithRestSiteOption? __state)
+        private static void Postfix(SmithRestSiteOption __instance, CancellationToken ct, SmithRestSiteOption? __state)
         {
-            __result = Complete(__result, __instance);
             Playing.Value = __state;
+            if (!Presentations.TryGetValue(__instance, out var presentation)) return;
+            Presentations.Remove(__instance);
+            TaskHelper.RunSafely(PreviewAfter(Task.WhenAll(presentation.Effects), presentation.Added, ct));
         }
         private static void Finalizer(SmithRestSiteOption? __state) => Playing.Value = __state;
-        private static async Task Complete(Task task, SmithRestSiteOption option)
-        {
-            try
-            {
-                await task;
-                if (!Presentations.TryGetValue(option, out var presentation)) return;
-                await Task.WhenAll(presentation.Effects);
-                await CardActions.PreviewAdded(presentation.Added, PileType.Deck);
-            }
-            finally { Presentations.Remove(option); }
-        }
     }
 }

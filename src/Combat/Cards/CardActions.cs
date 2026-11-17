@@ -1,5 +1,4 @@
 using Godot;
-using HarmonyLib;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Context;
@@ -171,33 +170,13 @@ public static class CardActions
         await PreviewAdded(added, pile);
     }
 
-    private static readonly AsyncLocal<List<Task>?> PreviewCompletions = new();
-
-    [HarmonyPatch(typeof(CardCmd), "PreviewInternal")]
-    private static class AddedPreviewCompletion
+    internal static Task PreviewAdded(IReadOnlyList<CardPileAddResult> results, PileType destination)
     {
-        private static void Postfix(TaskCompletionSource? __result)
-        {
-            if (__result != null) PreviewCompletions.Value?.Add(__result.Task);
-        }
-    }
-
-    internal static async Task PreviewAdded(IReadOnlyList<CardPileAddResult> results, PileType destination,
-        bool waitForCompletion = false)
-    {
-        if (destination is not (PileType.Draw or PileType.Discard or PileType.Exhaust or PileType.Deck)) return;
+        if (destination is not (PileType.Draw or PileType.Discard or PileType.Exhaust or PileType.Deck)) return Task.CompletedTask;
         var added = results.Where(result => result.success && LocalContext.IsMine(result.cardAdded)).ToArray();
-        if (added.Length == 0) return;
-        var prior = PreviewCompletions.Value;
-        List<Task>? completions = waitForCompletion ? [] : null;
-        try
-        {
-            if (completions != null) PreviewCompletions.Value = completions;
+        if (added.Length > 0)
             CardCmd.PreviewCardPileAdd(added, style: added.Length > 5 ? CardPreviewStyle.MessyLayout : CardPreviewStyle.HorizontalLayout);
-        }
-        finally { PreviewCompletions.Value = prior; }
-        if (completions != null) await Task.WhenAll(completions);
-        else await Cmd.Wait(1f, ignoreCombatEnd: true);
+        return Task.CompletedTask;
     }
 
     public static async Task Fly(PlayerChoiceContext context, Player player, int damage, Creature? target = null, bool upgraded = false)

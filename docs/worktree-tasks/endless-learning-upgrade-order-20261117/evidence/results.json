@@ -47,42 +47,42 @@
     "events": [
       {
         "kind": "prepared",
-        "ms": 1693785000,
+        "ms": 1698795156,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1693785000,
+        "ms": 1698795171,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-start",
-        "ms": 1693785000,
+        "ms": 1698795171,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "knowledge-acquired",
+        "ms": 1698795171,
+        "activeUpgrades": 1
+      },
+      {
+        "kind": "command-completed",
+        "ms": 1698795421,
         "activeUpgrades": 1
       },
       {
         "kind": "upgrade-finished",
-        "ms": 1693786703,
+        "ms": 1698796921,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-exited",
-        "ms": 1693787859,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "knowledge-acquired",
-        "ms": 1693787859,
+        "ms": 1698798125,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-preview",
-        "ms": 1693787875,
-        "activeUpgrades": 0
-      },
-      {
-        "kind": "command-completed",
-        "ms": 1693788843,
+        "ms": 1698798125,
         "activeUpgrades": 0
       }
     ],
@@ -101,34 +101,34 @@
     "nativeSmithCalls": 0,
     "manualSmithCalls": 0,
     "level": 1,
-    "deckNewKnowledge": 12,
-    "drawNewKnowledge": null
+    "deckNewKnowledge": 17,
+    "drawNewKnowledge": 0
   },
   "none": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1693789031,
+        "ms": 1698798546,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1693789031,
+        "ms": 1698798562,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1693789031,
+        "ms": 1698798562,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-preview",
-        "ms": 1693789031,
+        "ms": 1698798828,
         "activeUpgrades": 0
       },
       {
         "kind": "command-completed",
-        "ms": 1693790015,
+        "ms": 1698798828,
         "activeUpgrades": 0
       }
     ],
@@ -147,34 +147,34 @@
     "nativeSmithCalls": 0,
     "manualSmithCalls": 0,
     "level": 1,
-    "deckNewKnowledge": 13,
-    "drawNewKnowledge": null
+    "deckNewKnowledge": 18,
+    "drawNewKnowledge": 0
   },
   "combat": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1694187421,
+        "ms": 1698799046,
         "activeUpgrades": 0
       },
       {
         "kind": "command-start",
-        "ms": 1694187421,
+        "ms": 1698799046,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1694187421,
+        "ms": 1698799046,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-preview",
-        "ms": 1694187421,
+        "ms": 1698799062,
         "activeUpgrades": 0
       },
       {
         "kind": "command-completed",
-        "ms": 1694188406,
+        "ms": 1698799062,
         "activeUpgrades": 0
       }
     ],
@@ -193,44 +193,49 @@
     "nativeSmithCalls": 0,
     "manualSmithCalls": 0,
     "level": 1,
-    "deckNewKnowledge": 15,
-    "drawNewKnowledge": 15
+    "deckNewKnowledge": 18,
+    "drawNewKnowledge": 1
   },
   "nativeRest": {
     "events": [
       {
         "kind": "prepared",
-        "ms": 1694595578,
+        "ms": 1698803734,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-acquired",
-        "ms": 1694598703,
+        "ms": 1698887203,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-start",
-        "ms": 1694598703,
+        "ms": 1698887203,
         "activeUpgrades": 1
       },
       {
         "kind": "upgrade-finished",
-        "ms": 1694599968,
+        "ms": 1698888468,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-sparks-finished",
-        "ms": 1694600437,
+        "ms": 1698888984,
         "activeUpgrades": 0
       },
       {
         "kind": "knowledge-preview",
-        "ms": 1694600671,
+        "ms": 1698889000,
+        "activeUpgrades": 0
+      },
+      {
+        "kind": "native-post-vfx-completed",
+        "ms": 1698889218,
         "activeUpgrades": 0
       },
       {
         "kind": "upgrade-exited",
-        "ms": 1694601000,
+        "ms": 1698889765,
         "activeUpgrades": 0
       }
     ],
@@ -244,6 +249,10 @@
         "pass": true
       },
       {
+        "name": "native post-VFX task is returned unchanged",
+        "pass": true
+      },
+      {
         "name": "new knowledge preview follows the native upgrade effect and sparks",
         "pass": true
       }
@@ -253,7 +262,7 @@
     "nativeSmithCalls": 1,
     "manualSmithCalls": 0,
     "level": 1,
-    "deckNewKnowledge": 16,
+    "deckNewKnowledge": 19,
     "drawNewKnowledge": 0
   },
   "nativeRestRepeat": {
@@ -359,19 +368,18 @@
     "drawNewKnowledge": null
   },
   "recording": {
-    "path": "evidence/native-game-playback.mp4",
+    "path": "evidence/upgrade-parallel-preview.mp4",
     "status": "completed",
-    "durationSeconds": 6.933333333333334,
+    "durationSeconds": 6.8,
     "audioSource": "engine_mix",
-    "framesDropped": 0,
-    "renderer": "D3D12 Forward+"
+    "framesDropped": 0
   },
   "builds": {
     "beta": "passed: 0 warnings, 0 errors",
     "stable": "passed: 0 warnings, 0 errors"
   },
   "startup": {
-    "randomPort": 3152,
+    "randomPort": 1494,
     "minimizedStartupGuard": true,
     "silentTest": true,
     "foregroundSamples": 0,
@@ -477,7 +485,7 @@
     },
     "completion": "entire upgrade VFX TreeExited"
   },
-  "completion": "native upgrade settlement is unchanged; knowledge preview follows the original native SmithRestSiteOption.DoLocalPostSelectVfx and particles",
+  "completion": "native post-VFX task remains unchanged; acquisition previews are started independently without added display waits",
   "beforeSparkCompletionFix": {
     "nativeRest": {
       "events": [
@@ -728,5 +736,1491 @@
     "nativeRenderClockBaselineRatio": 0,
     "nativeRenderClockFixedRatio": 1.0039621211372378,
     "commit": "af78d2969dcc46be1028c08350260f3bbf83fa12"
-  }
+  },
+  "beforeNonblockingFix": {
+    "rest": {
+      "events": [
+        {
+          "kind": "prepared",
+          "ms": 1697418453,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "knowledge-acquired",
+          "ms": 1697421671,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-start",
+          "ms": 1697421671,
+          "activeUpgrades": 1
+        },
+        {
+          "kind": "upgrade-finished",
+          "ms": 1697422906,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-sparks-finished",
+          "ms": 1697423421,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "native-post-vfx-completed",
+          "ms": 1697423656,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "knowledge-preview",
+          "ms": 1697423671,
+          "activeUpgrades": 0
+        },
+        {
+          "kind": "upgrade-exited",
+          "ms": 1697424156,
+          "activeUpgrades": 0
+        }
+      ],
+      "checks": [
+        {
+          "name": "one knowledge created by the upgrade settlement",
+          "pass": true
+        },
+        {
+          "name": "smith effect is created by the native game method",
+          "pass": true
+        },
+        {
+          "name": "native post-VFX task is returned unchanged",
+          "pass": false
+        },
+        {
+          "name": "new knowledge preview follows the native upgrade effect and sparks",
+          "pass": true
+        }
+      ],
+      "gains": 1,
+      "previews": 1,
+      "nativeSmithCalls": 1,
+      "manualSmithCalls": 0,
+      "level": 1,
+      "deckNewKnowledge": 16,
+      "drawNewKnowledge": null
+    },
+    "gains": [
+      {
+        "name": "shared preview returns immediately",
+        "pass": false,
+        "sameFrame": false,
+        "pending": true,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": false,
+        "previews": 1,
+        "expected": 0,
+        "actual": 0,
+        "requests": [],
+        "endFrame": 3826,
+        "previewFrame": 3767
+      },
+      {
+        "name": "generated insight",
+        "pass": false,
+        "sameFrame": false,
+        "pending": true,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": null,
+        "previews": 1,
+        "expected": 1,
+        "actual": 1,
+        "requests": [
+          "Random"
+        ],
+        "endFrame": 3887,
+        "previewFrame": 3826
+      },
+      {
+        "name": "knowledge partners Draw",
+        "pass": false,
+        "sameFrame": false,
+        "pending": true,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": null,
+        "previews": 2,
+        "expected": 2,
+        "actual": 2,
+        "requests": [
+          "Random",
+          "Random"
+        ],
+        "endFrame": 3948,
+        "previewFrame": 3887
+      },
+      {
+        "name": "knowledge partners Deck",
+        "pass": false,
+        "sameFrame": false,
+        "pending": true,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": null,
+        "previews": 2,
+        "expected": 2,
+        "actual": 2,
+        "requests": [],
+        "endFrame": 4057,
+        "previewFrame": 3996
+      },
+      {
+        "name": "permanent single copy",
+        "pass": false,
+        "sameFrame": false,
+        "pending": false,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": null,
+        "previews": 1,
+        "expected": 1,
+        "actual": 1,
+        "requests": [],
+        "endFrame": 4249,
+        "previewFrame": 4089
+      },
+      {
+        "name": "study base",
+        "pass": true,
+        "sameFrame": true,
+        "pending": true,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": null,
+        "previews": 1,
+        "expected": 1,
+        "actual": 1,
+        "requests": [
+          "Random"
+        ],
+        "endFrame": 4339,
+        "previewFrame": 4339
+      },
+      {
+        "name": "study upgraded",
+        "pass": true,
+        "sameFrame": true,
+        "pending": true,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": null,
+        "previews": 2,
+        "expected": 2,
+        "actual": 2,
+        "requests": [
+          "Random",
+          "Random"
+        ],
+        "endFrame": 4453,
+        "previewFrame": 4453
+      },
+      {
+        "name": "study stacked",
+        "pass": true,
+        "sameFrame": true,
+        "pending": true,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": null,
+        "previews": 3,
+        "expected": 3,
+        "actual": 3,
+        "requests": [
+          "Random",
+          "Random",
+          "Random"
+        ],
+        "endFrame": 4656,
+        "previewFrame": 4656
+      },
+      {
+        "name": "study empty draw",
+        "pass": true,
+        "sameFrame": true,
+        "pending": true,
+        "model": true,
+        "order": true,
+        "positions": true,
+        "immediate": null,
+        "previews": 1,
+        "expected": 1,
+        "actual": 1,
+        "requests": [
+          "Random"
+        ],
+        "endFrame": 4770,
+        "previewFrame": 4770
+      }
+    ]
+  },
+  "nonblockingGains": [
+    {
+      "name": "shared preview returns immediately",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": true,
+      "previews": 1,
+      "expected": 0,
+      "actual": 0,
+      "requests": [],
+      "endFrame": 10774,
+      "previewFrame": 10774
+    },
+    {
+      "name": "generated insight",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": null,
+      "previews": 1,
+      "expected": 1,
+      "actual": 1,
+      "requests": [
+        "Random"
+      ],
+      "endFrame": 10774,
+      "previewFrame": 10774
+    },
+    {
+      "name": "knowledge partners Draw",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": null,
+      "previews": 2,
+      "expected": 2,
+      "actual": 2,
+      "requests": [
+        "Random",
+        "Random"
+      ],
+      "endFrame": 10774,
+      "previewFrame": 10774
+    },
+    {
+      "name": "knowledge partners Deck",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": null,
+      "previews": 2,
+      "expected": 2,
+      "actual": 2,
+      "requests": [],
+      "endFrame": 10820,
+      "previewFrame": 10820
+    },
+    {
+      "name": "permanent single copy",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": null,
+      "previews": 1,
+      "expected": 1,
+      "actual": 1,
+      "requests": [],
+      "endFrame": 10852,
+      "previewFrame": 10852
+    },
+    {
+      "name": "study base",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": null,
+      "previews": 1,
+      "expected": 1,
+      "actual": 1,
+      "requests": [
+        "Random"
+      ],
+      "endFrame": 10942,
+      "previewFrame": 10942
+    },
+    {
+      "name": "study upgraded",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": null,
+      "previews": 2,
+      "expected": 2,
+      "actual": 2,
+      "requests": [
+        "Random",
+        "Random"
+      ],
+      "endFrame": 11057,
+      "previewFrame": 11057
+    },
+    {
+      "name": "study stacked",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": null,
+      "previews": 3,
+      "expected": 3,
+      "actual": 3,
+      "requests": [
+        "Random",
+        "Random",
+        "Random"
+      ],
+      "endFrame": 11262,
+      "previewFrame": 11262
+    },
+    {
+      "name": "study empty draw",
+      "pass": true,
+      "sameFrame": true,
+      "pending": true,
+      "model": true,
+      "order": true,
+      "positions": true,
+      "immediate": null,
+      "previews": 1,
+      "expected": 1,
+      "actual": 1,
+      "requests": [
+        "Random"
+      ],
+      "endFrame": 11377,
+      "previewFrame": 11377
+    }
+  ],
+  "nativeStudy": {
+    "before": {
+      "state_type": "monster",
+      "battle": {
+        "round": 1,
+        "turn": "player",
+        "is_play_phase": true,
+        "enemies": [
+          {
+            "entity_id": "CALCIFIED_CULTIST_0",
+            "combat_id": 1,
+            "name": "钙化邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [],
+            "intents": [
+              {
+                "type": "Buff",
+                "label": "",
+                "title": "强化",
+                "description": "这个敌人将要使用一个强化效果。"
+              }
+            ]
+          },
+          {
+            "entity_id": "DAMP_CULTIST_0",
+            "combat_id": 2,
+            "name": "潮湿邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [],
+            "intents": [
+              {
+                "type": "Buff",
+                "label": "",
+                "title": "强化",
+                "description": "这个敌人将要使用一个强化效果。"
+              }
+            ]
+          }
+        ]
+      },
+      "run": {
+        "act": 1,
+        "floor": 14,
+        "ascension": 0
+      },
+      "player": {
+        "entity_id": "player_1",
+        "character": "星见纯那",
+        "hp": 1000,
+        "max_hp": 1000,
+        "block": 0,
+        "energy": 9,
+        "max_energy": 3,
+        "hand": [
+          {
+            "id": "JUNNA_A",
+            "name": "埋头学习",
+            "type": "Power",
+            "cost": "2",
+            "star_cost": null,
+            "description": "知识。 在你的回合结束时，将1张心得加入你的抽牌堆。",
+            "rarity": "Uncommon",
+            "is_upgraded": false,
+            "keywords": [
+              {
+                "name": "知识",
+                "description": "获得知识牌时，同时获得关联的其他牌。"
+              },
+              {
+                "name": "关联牌",
+                "description": "埋头学习\n心得\n心得"
+              }
+            ],
+            "index": 0,
+            "target_type": "Self",
+            "can_play": true,
+            "unplayable_reason": null
+          }
+        ],
+        "draw_pile_count": 8,
+        "discard_pile_count": 0,
+        "exhaust_pile_count": 0,
+        "draw_pile": [
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          }
+        ],
+        "discard_pile": [],
+        "exhaust_pile": [],
+        "gold": 99,
+        "status": [],
+        "relics": [
+          {
+            "id": "JUNNA_GREEN_GEM",
+            "name": "绿色宝石",
+            "description": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+            "counter": null,
+            "keywords": []
+          },
+          {
+            "id": "NUTRITIOUS_OYSTER",
+            "name": "营养牡蛎",
+            "description": "拾起时，将你的最大生命值提升11。",
+            "counter": null,
+            "keywords": []
+          }
+        ],
+        "potions": [],
+        "max_potion_slots": 3
+      }
+    },
+    "after": {
+      "state_type": "monster",
+      "battle": {
+        "round": 2,
+        "turn": "player",
+        "is_play_phase": true,
+        "enemies": [
+          {
+            "entity_id": "CALCIFIED_CULTIST_0",
+            "combat_id": 1,
+            "name": "钙化邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [
+              {
+                "id": "RITUAL_POWER",
+                "name": "仪式",
+                "amount": 2,
+                "type": "Buff",
+                "description": "在其回合结束时，获得2点力量。",
+                "keywords": [
+                  {
+                    "name": "力量",
+                    "description": "力量会增加攻击牌造成的伤害。"
+                  }
+                ]
+              }
+            ],
+            "intents": [
+              {
+                "type": "Attack",
+                "label": "9",
+                "title": "攻势",
+                "description": "这个敌人将要攻击造成9点伤害。"
+              }
+            ]
+          },
+          {
+            "entity_id": "DAMP_CULTIST_0",
+            "combat_id": 2,
+            "name": "潮湿邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [
+              {
+                "id": "RITUAL_POWER",
+                "name": "仪式",
+                "amount": 5,
+                "type": "Buff",
+                "description": "在其回合结束时，获得5点力量。",
+                "keywords": [
+                  {
+                    "name": "力量",
+                    "description": "力量会增加攻击牌造成的伤害。"
+                  }
+                ]
+              }
+            ],
+            "intents": [
+              {
+                "type": "Attack",
+                "label": "1",
+                "title": "攻势",
+                "description": "这个敌人将要攻击造成1点伤害。"
+              }
+            ]
+          }
+        ]
+      },
+      "run": {
+        "act": 1,
+        "floor": 14,
+        "ascension": 0
+      },
+      "player": {
+        "entity_id": "player_1",
+        "character": "星见纯那",
+        "hp": 1000,
+        "max_hp": 1000,
+        "block": 0,
+        "energy": 3,
+        "max_energy": 3,
+        "hand": [
+          {
+            "id": "JUNNA_STRIKE",
+            "name": "打击",
+            "type": "Attack",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。",
+            "rarity": "Basic",
+            "is_upgraded": false,
+            "keywords": [],
+            "index": 0,
+            "target_type": "AnyEnemy",
+            "can_play": true,
+            "unplayable_reason": null
+          },
+          {
+            "id": "JUNNA_STRIKE",
+            "name": "打击",
+            "type": "Attack",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。",
+            "rarity": "Basic",
+            "is_upgraded": false,
+            "keywords": [],
+            "index": 1,
+            "target_type": "AnyEnemy",
+            "can_play": true,
+            "unplayable_reason": null
+          },
+          {
+            "id": "JUNNA_STRIKE",
+            "name": "打击",
+            "type": "Attack",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。",
+            "rarity": "Basic",
+            "is_upgraded": false,
+            "keywords": [],
+            "index": 2,
+            "target_type": "AnyEnemy",
+            "can_play": true,
+            "unplayable_reason": null
+          },
+          {
+            "id": "JUNNA_B",
+            "name": "心得",
+            "type": "Skill",
+            "cost": "0",
+            "star_cost": null,
+            "description": "知识。 抽1张牌。 获得[energy_icon_small.png]。 消耗。",
+            "rarity": "Uncommon",
+            "is_upgraded": false,
+            "keywords": [
+              {
+                "name": "知识",
+                "description": "获得知识牌时，同时获得关联的其他牌。"
+              },
+              {
+                "name": "关联牌",
+                "description": "心得\n心得\n埋头学习"
+              },
+              {
+                "name": "能量",
+                "description": "能量用于打出你手牌中的卡牌。"
+              },
+              {
+                "name": "消耗",
+                "description": "在战斗结束前移除。"
+              }
+            ],
+            "index": 3,
+            "target_type": "Self",
+            "can_play": true,
+            "unplayable_reason": null
+          },
+          {
+            "id": "JUNNA_STRIKE",
+            "name": "打击",
+            "type": "Attack",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。",
+            "rarity": "Basic",
+            "is_upgraded": false,
+            "keywords": [],
+            "index": 4,
+            "target_type": "AnyEnemy",
+            "can_play": true,
+            "unplayable_reason": null
+          }
+        ],
+        "draw_pile_count": 4,
+        "discard_pile_count": 0,
+        "exhaust_pile_count": 0,
+        "draw_pile": [
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          }
+        ],
+        "discard_pile": [],
+        "exhaust_pile": [],
+        "gold": 99,
+        "status": [
+          {
+            "id": "JUNNA_A_POWER",
+            "name": "埋头学习",
+            "amount": 1,
+            "type": "Buff",
+            "description": "在你的回合结束时，将1张心得加入你的抽牌堆。",
+            "keywords": []
+          }
+        ],
+        "relics": [
+          {
+            "id": "JUNNA_GREEN_GEM",
+            "name": "绿色宝石",
+            "description": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+            "counter": null,
+            "keywords": []
+          },
+          {
+            "id": "NUTRITIOUS_OYSTER",
+            "name": "营养牡蛎",
+            "description": "拾起时，将你的最大生命值提升11。",
+            "counter": null,
+            "keywords": []
+          }
+        ],
+        "potions": [],
+        "max_potion_slots": 3
+      }
+    }
+  },
+  "nativeKnowledgeCopy": {
+    "before": {
+      "state_type": "monster",
+      "battle": {
+        "round": 2,
+        "turn": "player",
+        "is_play_phase": true,
+        "enemies": [
+          {
+            "entity_id": "CALCIFIED_CULTIST_0",
+            "combat_id": 1,
+            "name": "钙化邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [
+              {
+                "id": "RITUAL_POWER",
+                "name": "仪式",
+                "amount": 2,
+                "type": "Buff",
+                "description": "在其回合结束时，获得2点力量。",
+                "keywords": [
+                  {
+                    "name": "力量",
+                    "description": "力量会增加攻击牌造成的伤害。"
+                  }
+                ]
+              }
+            ],
+            "intents": [
+              {
+                "type": "Attack",
+                "label": "9",
+                "title": "攻势",
+                "description": "这个敌人将要攻击造成9点伤害。"
+              }
+            ]
+          },
+          {
+            "entity_id": "DAMP_CULTIST_0",
+            "combat_id": 2,
+            "name": "潮湿邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [
+              {
+                "id": "RITUAL_POWER",
+                "name": "仪式",
+                "amount": 5,
+                "type": "Buff",
+                "description": "在其回合结束时，获得5点力量。",
+                "keywords": [
+                  {
+                    "name": "力量",
+                    "description": "力量会增加攻击牌造成的伤害。"
+                  }
+                ]
+              }
+            ],
+            "intents": [
+              {
+                "type": "Attack",
+                "label": "1",
+                "title": "攻势",
+                "description": "这个敌人将要攻击造成1点伤害。"
+              }
+            ]
+          }
+        ]
+      },
+      "run": {
+        "act": 1,
+        "floor": 14,
+        "ascension": 0
+      },
+      "player": {
+        "entity_id": "player_1",
+        "character": "星见纯那",
+        "hp": 1000,
+        "max_hp": 1000,
+        "block": 0,
+        "energy": 9,
+        "max_energy": 3,
+        "hand": [
+          {
+            "id": "JUNNA_A",
+            "name": "埋头学习",
+            "type": "Power",
+            "cost": "2",
+            "star_cost": null,
+            "description": "知识。 在你的回合结束时，将1张心得加入你的抽牌堆。",
+            "rarity": "Uncommon",
+            "is_upgraded": false,
+            "keywords": [
+              {
+                "name": "知识",
+                "description": "获得知识牌时，同时获得关联的其他牌。"
+              },
+              {
+                "name": "关联牌",
+                "description": "埋头学习\n心得\n心得"
+              }
+            ],
+            "index": 0,
+            "target_type": "Self",
+            "can_play": true,
+            "unplayable_reason": null
+          },
+          {
+            "id": "JUNNA_JK15",
+            "name": "回到那一页",
+            "type": "Power",
+            "cost": "1",
+            "star_cost": null,
+            "description": "知识。 每回合第一次打出知识牌时，将其1张复制放入抽牌堆。",
+            "rarity": "Rare",
+            "is_upgraded": false,
+            "keywords": [
+              {
+                "name": "知识",
+                "description": "获得知识牌时，同时获得关联的其他牌。"
+              },
+              {
+                "name": "关联牌",
+                "description": "回到那一页\n废稿"
+              }
+            ],
+            "index": 1,
+            "target_type": "Self",
+            "can_play": true,
+            "unplayable_reason": null
+          },
+          {
+            "id": "JUNNA_B",
+            "name": "心得",
+            "type": "Skill",
+            "cost": "0",
+            "star_cost": null,
+            "description": "知识。 抽1张牌。 获得[energy_icon_small.png]。 消耗。",
+            "rarity": "Uncommon",
+            "is_upgraded": false,
+            "keywords": [
+              {
+                "name": "知识",
+                "description": "获得知识牌时，同时获得关联的其他牌。"
+              },
+              {
+                "name": "关联牌",
+                "description": "心得\n心得\n埋头学习"
+              },
+              {
+                "name": "能量",
+                "description": "能量用于打出你手牌中的卡牌。"
+              },
+              {
+                "name": "消耗",
+                "description": "在战斗结束前移除。"
+              }
+            ],
+            "index": 2,
+            "target_type": "Self",
+            "can_play": true,
+            "unplayable_reason": null
+          }
+        ],
+        "draw_pile_count": 8,
+        "discard_pile_count": 0,
+        "exhaust_pile_count": 0,
+        "draw_pile": [
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          }
+        ],
+        "discard_pile": [],
+        "exhaust_pile": [],
+        "gold": 99,
+        "status": [],
+        "relics": [
+          {
+            "id": "JUNNA_GREEN_GEM",
+            "name": "绿色宝石",
+            "description": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+            "counter": null,
+            "keywords": []
+          },
+          {
+            "id": "NUTRITIOUS_OYSTER",
+            "name": "营养牡蛎",
+            "description": "拾起时，将你的最大生命值提升11。",
+            "counter": null,
+            "keywords": []
+          }
+        ],
+        "potions": [],
+        "max_potion_slots": 3
+      }
+    },
+    "afterKnowledge": {
+      "state_type": "monster",
+      "battle": {
+        "round": 2,
+        "turn": "player",
+        "is_play_phase": true,
+        "enemies": [
+          {
+            "entity_id": "CALCIFIED_CULTIST_0",
+            "combat_id": 1,
+            "name": "钙化邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [
+              {
+                "id": "RITUAL_POWER",
+                "name": "仪式",
+                "amount": 2,
+                "type": "Buff",
+                "description": "在其回合结束时，获得2点力量。",
+                "keywords": [
+                  {
+                    "name": "力量",
+                    "description": "力量会增加攻击牌造成的伤害。"
+                  }
+                ]
+              }
+            ],
+            "intents": [
+              {
+                "type": "Attack",
+                "label": "9",
+                "title": "攻势",
+                "description": "这个敌人将要攻击造成9点伤害。"
+              }
+            ]
+          },
+          {
+            "entity_id": "DAMP_CULTIST_0",
+            "combat_id": 2,
+            "name": "潮湿邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [
+              {
+                "id": "RITUAL_POWER",
+                "name": "仪式",
+                "amount": 5,
+                "type": "Buff",
+                "description": "在其回合结束时，获得5点力量。",
+                "keywords": [
+                  {
+                    "name": "力量",
+                    "description": "力量会增加攻击牌造成的伤害。"
+                  }
+                ]
+              }
+            ],
+            "intents": [
+              {
+                "type": "Attack",
+                "label": "1",
+                "title": "攻势",
+                "description": "这个敌人将要攻击造成1点伤害。"
+              }
+            ]
+          }
+        ]
+      },
+      "run": {
+        "act": 1,
+        "floor": 14,
+        "ascension": 0
+      },
+      "player": {
+        "entity_id": "player_1",
+        "character": "星见纯那",
+        "hp": 1000,
+        "max_hp": 1000,
+        "block": 0,
+        "energy": 9,
+        "max_energy": 3,
+        "hand": [
+          {
+            "id": "JUNNA_A",
+            "name": "埋头学习",
+            "type": "Power",
+            "cost": "2",
+            "star_cost": null,
+            "description": "知识。 在你的回合结束时，将1张心得加入你的抽牌堆。",
+            "rarity": "Uncommon",
+            "is_upgraded": false,
+            "keywords": [
+              {
+                "name": "知识",
+                "description": "获得知识牌时，同时获得关联的其他牌。"
+              },
+              {
+                "name": "关联牌",
+                "description": "埋头学习\n心得\n心得"
+              }
+            ],
+            "index": 0,
+            "target_type": "Self",
+            "can_play": true,
+            "unplayable_reason": null
+          },
+          {
+            "id": "JUNNA_STRIKE",
+            "name": "打击",
+            "type": "Attack",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。",
+            "rarity": "Basic",
+            "is_upgraded": false,
+            "keywords": [],
+            "index": 1,
+            "target_type": "AnyEnemy",
+            "can_play": true,
+            "unplayable_reason": null
+          }
+        ],
+        "draw_pile_count": 8,
+        "discard_pile_count": 0,
+        "exhaust_pile_count": 0,
+        "draw_pile": [
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "心得",
+            "cost": "0",
+            "star_cost": null,
+            "description": "知识。 抽1张牌。 获得[energy_icon_small.png]。 消耗。"
+          }
+        ],
+        "discard_pile": [],
+        "exhaust_pile": [],
+        "gold": 99,
+        "status": [
+          {
+            "id": "JUNNA_JK15_POWER",
+            "name": "回到那一页",
+            "amount": 1,
+            "type": "Buff",
+            "description": "每回合第一次打出知识牌时，将其1张复制加入你的抽牌堆。",
+            "keywords": []
+          }
+        ],
+        "relics": [
+          {
+            "id": "JUNNA_GREEN_GEM",
+            "name": "绿色宝石",
+            "description": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+            "counter": null,
+            "keywords": []
+          },
+          {
+            "id": "NUTRITIOUS_OYSTER",
+            "name": "营养牡蛎",
+            "description": "拾起时，将你的最大生命值提升11。",
+            "counter": null,
+            "keywords": []
+          }
+        ],
+        "potions": [],
+        "max_potion_slots": 3
+      }
+    },
+    "after": {
+      "state_type": "monster",
+      "battle": {
+        "round": 2,
+        "turn": "player",
+        "is_play_phase": true,
+        "enemies": [
+          {
+            "entity_id": "CALCIFIED_CULTIST_0",
+            "combat_id": 1,
+            "name": "钙化邪教徒",
+            "hp": 994,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [
+              {
+                "id": "RITUAL_POWER",
+                "name": "仪式",
+                "amount": 2,
+                "type": "Buff",
+                "description": "在其回合结束时，获得2点力量。",
+                "keywords": [
+                  {
+                    "name": "力量",
+                    "description": "力量会增加攻击牌造成的伤害。"
+                  }
+                ]
+              }
+            ],
+            "intents": [
+              {
+                "type": "Attack",
+                "label": "9",
+                "title": "攻势",
+                "description": "这个敌人将要攻击造成9点伤害。"
+              }
+            ]
+          },
+          {
+            "entity_id": "DAMP_CULTIST_0",
+            "combat_id": 2,
+            "name": "潮湿邪教徒",
+            "hp": 1000,
+            "max_hp": 1000,
+            "block": 0,
+            "status": [
+              {
+                "id": "RITUAL_POWER",
+                "name": "仪式",
+                "amount": 5,
+                "type": "Buff",
+                "description": "在其回合结束时，获得5点力量。",
+                "keywords": [
+                  {
+                    "name": "力量",
+                    "description": "力量会增加攻击牌造成的伤害。"
+                  }
+                ]
+              }
+            ],
+            "intents": [
+              {
+                "type": "Attack",
+                "label": "1",
+                "title": "攻势",
+                "description": "这个敌人将要攻击造成1点伤害。"
+              }
+            ]
+          }
+        ]
+      },
+      "run": {
+        "act": 1,
+        "floor": 14,
+        "ascension": 0
+      },
+      "player": {
+        "entity_id": "player_1",
+        "character": "星见纯那",
+        "hp": 1000,
+        "max_hp": 1000,
+        "block": 0,
+        "energy": 8,
+        "max_energy": 3,
+        "hand": [
+          {
+            "id": "JUNNA_A",
+            "name": "埋头学习",
+            "type": "Power",
+            "cost": "2",
+            "star_cost": null,
+            "description": "知识。 在你的回合结束时，将1张心得加入你的抽牌堆。",
+            "rarity": "Uncommon",
+            "is_upgraded": false,
+            "keywords": [
+              {
+                "name": "知识",
+                "description": "获得知识牌时，同时获得关联的其他牌。"
+              },
+              {
+                "name": "关联牌",
+                "description": "埋头学习\n心得\n心得"
+              }
+            ],
+            "index": 0,
+            "target_type": "Self",
+            "can_play": true,
+            "unplayable_reason": null
+          }
+        ],
+        "draw_pile_count": 8,
+        "discard_pile_count": 1,
+        "exhaust_pile_count": 1,
+        "draw_pile": [
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          },
+          {
+            "name": "心得",
+            "cost": "0",
+            "star_cost": null,
+            "description": "知识。 抽1张牌。 获得[energy_icon_small.png]。 消耗。"
+          }
+        ],
+        "discard_pile": [
+          {
+            "name": "打击",
+            "cost": "1",
+            "star_cost": null,
+            "description": "造成6点伤害。"
+          }
+        ],
+        "exhaust_pile": [
+          {
+            "name": "心得",
+            "cost": "0",
+            "star_cost": null,
+            "description": "知识。 抽1张牌。 获得[energy_icon_small.png]。 消耗。"
+          }
+        ],
+        "gold": 99,
+        "status": [
+          {
+            "id": "JUNNA_JK15_POWER",
+            "name": "回到那一页",
+            "amount": 1,
+            "type": "Buff",
+            "description": "每回合第一次打出知识牌时，将其1张复制加入你的抽牌堆。",
+            "keywords": []
+          }
+        ],
+        "relics": [
+          {
+            "id": "JUNNA_GREEN_GEM",
+            "name": "绿色宝石",
+            "description": "每当牌组中增加或者失去卡牌时，回复1点生命。",
+            "counter": null,
+            "keywords": []
+          },
+          {
+            "id": "NUTRITIOUS_OYSTER",
+            "name": "营养牡蛎",
+            "description": "拾起时，将你的最大生命值提升11。",
+            "counter": null,
+            "keywords": []
+          }
+        ],
+        "potions": [],
+        "max_potion_slots": 3
+      }
+    },
+    "nextActionDelayMs": 515
+  },
+  "recordings": [
+    {
+      "path": "evidence/upgrade-parallel-preview.mp4",
+      "status": "completed",
+      "durationSeconds": 6.8,
+      "audioSource": "engine_mix",
+      "framesDropped": 0
+    },
+    {
+      "path": "evidence/study-turn-flow.mp4",
+      "status": "completed",
+      "durationSeconds": 10.2,
+      "audioSource": "engine_mix",
+      "framesDropped": 0
+    },
+    {
+      "path": "evidence/knowledge-copy-flow.mp4",
+      "status": "completed",
+      "durationSeconds": 4.6,
+      "audioSource": "engine_mix",
+      "framesDropped": 0
+    }
+  ]
 }

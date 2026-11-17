@@ -103,6 +103,6 @@ public static partial class KnowledgeProgress
             var copy = ShoujoKageki.Core.V1.CardCopies.ForDeck(original, player, ShoujoKageki.Core.V1.CardCopyPurpose.Transfer);
             added.Add(await CardPileCmd.Add(copy, PileType.Deck));
         }
-        await CardActions.PreviewAdded(added, PileType.Deck, waitForCompletion: true);
+        await CardActions.PreviewAdded(added, PileType.Deck);
     }
 }

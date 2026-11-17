@@ -211,7 +211,6 @@ public static class KnowledgeCombat
     }
     private static async Task GrantUpgrade(CardModel card, int previous, int current)
     {
-        await ShoujoKagekiJunna.UI.KnowledgeUpgradeAnimation.WaitFor(card);
         using var single = SingleCard();
         var added = new List<CardPileAddResult>();
         for (int i = previous; i < current; i++)
@@ -221,7 +220,7 @@ public static class KnowledgeCombat
             else if (card.Owner.PlayerCombatState != null && !card.HasBeenRemovedFromState)
                 await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw, CardPilePosition.Random);
         }
-        if (!ShoujoKagekiJunna.UI.KnowledgeUpgradeAnimation.DeferSmithPreview(added))
+        if (!ShoujoKagekiJunna.UI.KnowledgeUpgradeAnimation.DeferPreview(card, added))
             await CardActions.PreviewAdded(added, PileType.Deck);
     }
 }
