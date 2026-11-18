@@ -1,5 +1,5 @@
 {
-  "revision": 5427,
+  "revision": 5462,
   "cards": [
     {
       "id": "JG03",
@@ -234,7 +234,7 @@
       "className": "JunnaCardA",
       "name": "埋头学习",
       "cost": 2,
-      "upgradedCost": 2,
+      "upgradedCost": 1,
       "costsX": false,
       "type": "能力",
       "target": "Self",
@@ -254,11 +254,11 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 1
         }
       ],
       "text": "知识。在你的回合结束时，将1张心得加入你的抽牌堆。",
-      "upgradedText": "知识。在你的回合结束时，将2张心得加入你的抽牌堆。"
+      "upgradedText": "知识。在你的回合结束时，将1张心得加入你的抽牌堆。"
     },
     {
       "id": "B",
@@ -718,16 +718,16 @@
         {
           "name": "Block",
           "base": 10,
-          "upgraded": 12
+          "upgraded": 14
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 1
         }
       ],
       "text": "获得10点格挡。所有飞矢加速1回合。",
-      "upgradedText": "获得12点格挡。所有飞矢加速2回合。"
+      "upgradedText": "获得14点格挡。所有飞矢加速1回合。"
     },
     {
       "id": "JA53",
@@ -2090,12 +2090,12 @@
       "values": [
         {
           "name": "Damage",
-          "base": 16,
-          "upgraded": 22
+          "base": 15,
+          "upgraded": 20
         }
       ],
-      "text": "知识。造成16点伤害。",
-      "upgradedText": "知识。造成22点伤害。"
+      "text": "知识。造成15点伤害。",
+      "upgradedText": "知识。造成20点伤害。"
     },
     {
       "id": "JK122B",
@@ -2226,8 +2226,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。造成9点伤害。抽1张牌。闪耀9。",
-      "upgradedText": "知识。造成12点伤害。抽1张牌。闪耀9。",
+      "text": "知识。造成9点伤害。抽1张牌。闪耀6。",
+      "upgradedText": "知识。造成12点伤害。抽1张牌。闪耀6。",
       "arrowFocus": {
         "x": 0.5,
         "y": 0.45
@@ -2629,16 +2629,16 @@
         {
           "name": "Damage",
           "base": 8,
-          "upgraded": 10
+          "upgraded": 12
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 1
         }
       ],
       "text": "造成8点伤害。\n将1张更近一步加入手牌。",
-      "upgradedText": "造成10点伤害。\n将2张更近一步加入手牌。"
+      "upgradedText": "造成12点伤害。\n将1张更近一步加入手牌。"
     },
     {
       "id": "JS33",
@@ -2725,7 +2725,7 @@
       "type": "技能",
       "target": "Self",
       "arrowSubtype": "技能",
-      "rarity": "普通",
+      "rarity": "罕见",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -3255,12 +3255,12 @@
       "values": [
         {
           "name": "Block",
-          "base": 12,
-          "upgraded": 16
+          "base": 11,
+          "upgraded": 14
         }
       ],
-      "text": "知识。获得12点格挡。",
-      "upgradedText": "知识。获得16点格挡。"
+      "text": "知识。获得11点格挡。",
+      "upgradedText": "知识。获得14点格挡。"
     },
     {
       "id": "JK275",
@@ -3407,8 +3407,8 @@
           "upgraded": 1
         }
       ],
-      "text": "获得4点格挡。抽1张牌。闪耀6。",
-      "upgradedText": "获得8点格挡。抽1张牌。闪耀6。"
+      "text": "获得4点格挡。抽1张牌。闪耀3。",
+      "upgradedText": "获得8点格挡。抽1张牌。闪耀3。"
     },
     {
       "id": "JK359",
@@ -4008,7 +4008,7 @@
       "className": "JunnaCardU_CARD_016",
       "name": "呼喊与回应",
       "cost": 1,
-      "upgradedCost": 1,
+      "upgradedCost": 0,
       "costsX": false,
       "type": "能力",
       "target": "Self",
@@ -4028,11 +4028,11 @@
         {
           "name": "N0",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 1
         }
       ],
       "text": "打出知识牌后，抽1张牌。（每次在知识、飞矢、闪耀中轮换）",
-      "upgradedText": "打出知识牌后，抽2张牌。（每次在知识、飞矢、闪耀中轮换）"
+      "upgradedText": "打出知识牌后，抽1张牌。（每次在知识、飞矢、闪耀中轮换）"
     },
     {
       "id": "U_CARD_017",
@@ -4311,12 +4311,12 @@
         },
         {
           "name": "Bonus",
-          "base": 1,
-          "upgraded": 2
+          "base": 2,
+          "upgraded": 3
         }
       ],
-      "text": "知识。打出0费牌时，所有布置的飞矢获得1点伤害加成。",
-      "upgradedText": "知识。打出0费牌时，所有布置的飞矢获得2点伤害加成。"
+      "text": "知识。打出0费牌时，所有布置的飞矢获得2点伤害加成。",
+      "upgradedText": "知识。打出0费牌时，所有布置的飞矢获得3点伤害加成。"
     },
     {
       "id": "JK400B",
@@ -7947,5 +7947,5 @@
   "startingRelics": [
     "JUNNA_GREEN_GEM"
   ],
-  "arrowArtRevision": 5427
+  "arrowArtRevision": 5462
 }

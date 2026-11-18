@@ -173,7 +173,7 @@ public sealed class JunnaCardJK126() : CatalogCard("JK126");
 [CustomID("JUNNA_JK127")]
 public sealed class JunnaCardJK127() : CatalogCard("JK127");
 
-[ShoujoKageki.Core.V1.ShineCard(9)]
+[ShoujoKageki.Core.V1.ShineCard(6)]
 [CustomID("JUNNA_JK133")]
 public sealed class JunnaCardJK133() : CatalogCard("JK133");
 
@@ -282,7 +282,7 @@ public sealed class JunnaCardJK314() : CatalogCard("JK314");
 [CustomID("JUNNA_U_CARD_008")]
 public sealed class JunnaCardU_CARD_008() : CatalogCard("U_CARD_008");
 
-[ShoujoKageki.Core.V1.ShineCard(6)]
+[ShoujoKageki.Core.V1.ShineCard(3)]
 [CustomID("JUNNA_U_CARD_008B")]
 public sealed class JunnaCardU_CARD_008B() : CatalogCard("U_CARD_008B");
 

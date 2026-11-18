@@ -53,3 +53,7 @@ python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --o
 `junna_cloning_knowledge run` 准备固定牌组并调用原生休息处克隆，输出 `out/tmp/cloning-linked-knowledge-20261117/results.json`。11 项断言覆盖知识主牌、关联成员、后天关联与跨角色牌、数量、升级与闪耀继承、原牌顺序及单张复制控制。
 
 实机录像先取得佩尔的增生组织，运行 `junna_cloning_knowledge prepare`，进入休息处后只点击原生“克隆”；停止录像后运行 `junna_cloning_knowledge check` 核对结果。
+
+## 工作台 r5462 定向检查
+
+在隔离战斗中执行 `junna_sync_5462 check`，验证10张数值调整牌的基础与升级版，共20个场景；结果写入 `out/tmp/sync-workbench-20261118/targeted-results.json`。`junna_sync_5462 prepare` 准备正常出牌演示。同步内容见 `docs/implementation/workbench-sync-20261118.md`。
