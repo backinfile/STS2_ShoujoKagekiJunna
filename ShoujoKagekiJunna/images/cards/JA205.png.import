@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pd2swuuunxr5"
-path="res://.godot/imported/JA205.jpg-7b700c18fa4c531ad7ed7bea504f3fc5.ctex"
+path="res://.godot/imported/JA205.png-bcebc74c164e7f4bd77659678a876657.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ShoujoKagekiJunna/images/cards/JA205.jpg"
-dest_files=["res://.godot/imported/JA205.jpg-7b700c18fa4c531ad7ed7bea504f3fc5.ctex"]
+source_file="res://ShoujoKagekiJunna/images/cards/JA205.png"
+dest_files=["res://.godot/imported/JA205.png-bcebc74c164e7f4bd77659678a876657.ctex"]
 
 [params]
 

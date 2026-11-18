@@ -65,10 +65,26 @@ public sealed partial class JunnaPowerJA35
     }
 }
 
+public sealed partial class JunnaPowerJA205
+{
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource
+#if STS2_MAIN || STS2_BETA
+        , CardPlay? cardPlay
+#endif
+        )
+    {
+        if (dealer != Owner || cardSource == null || !CardCatalog.IsArrow(cardSource) || _grants.Count == 0)
+            return 1m;
+        return 1m + _grants[0].V("DamagePercent") / 100m;
+    }
+}
+
 public sealed partial class JunnaPowerJA87
 {
     protected override async Task BeforeHandFlush(PlayerChoiceContext context, Player player)
     {
+        if (player != Owner.Player) return;
         foreach (var grant in _grants.ToArray())
             await HandArrow.Select(context, grant.Card, grant.V("Cards"), optional: true);
     }

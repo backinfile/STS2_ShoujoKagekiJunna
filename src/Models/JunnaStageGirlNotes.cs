@@ -25,9 +25,8 @@ public sealed class JunnaStageGirlNotes : CustomEventModel
     public override string CustomInitialPortraitPath => JunnaMod.ResourceRoot + "images/events/stage_girl_notes.png";
     private static bool CanUpgradeKnowledge(CardModel card) => card.IsUpgradable && CardCatalog.IsKnowledge(card);
 
-    public override bool IsAllowed(IRunState runState) => runState.CurrentActIndex == 1
-        && runState.Players.All(player => player.Character is Junna)
-        && runState is RunState state && !state.VisitedEventIds.Contains(Id);
+    // Keep the event model available for existing saves while new appearances are paused.
+    public override bool IsAllowed(IRunState runState) => false;
 
     protected override void SetInitialEventState(bool isPreFinished)
     {

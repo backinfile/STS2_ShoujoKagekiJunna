@@ -587,6 +587,7 @@
     },
     "JA84": {
       "fields": {
+        "HandArrowTurns": "N2",
         "Cards": "N1"
       },
       "tips": [
@@ -598,6 +599,7 @@
     },
     "JA87": {
       "fields": {
+        "HandArrowTurns": "N1",
         "Cards": "N0",
         "DisplayedAmount": "N0",
         "Threshold": "N0"
@@ -615,6 +617,9 @@
       }
     },
     "JA88": {
+      "fields": {
+        "HandArrowTurns": "N1"
+      },
       "tips": [
         "Arrow"
       ],
@@ -642,6 +647,7 @@
     },
     "JK84": {
       "fields": {
+        "HandArrowTurns": "N1",
         "Cards": "N0"
       },
       "tips": [
@@ -668,6 +674,7 @@
     },
     "JG37": {
       "fields": {
+        "HandArrowTurns": "N2",
         "Cards": "N1",
         "DrawCount": "N0"
       },
@@ -814,11 +821,9 @@
     },
     "JA108": {
       "tips": [
-        "Knowledge",
         "Arrow"
       ],
       "upgradedTips": [
-        "Knowledge",
         "Arrow"
       ]
     },
@@ -1747,6 +1752,9 @@
       ]
     },
     "JA205": {
+      "fields": {
+        "DamagePercent": "N0"
+      },
       "tips": [
         "Arrow"
       ],
@@ -2093,6 +2101,7 @@
     },
     "U_CARD_025": {
       "fields": {
+        "HandArrowTurns": "N1",
         "Energy": "N0"
       },
       "tips": [

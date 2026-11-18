@@ -14,9 +14,11 @@ namespace ShoujoKagekiJunna.Combat;
 /// <summary>Keep the actual material card, its printed cost and its original effect.</summary>
 public static class HandArrow
 {
-    private sealed class Form(CardType originalType, bool temporary, Form? previous = null)
+    private const int DefaultTurns = 5;
+    private sealed class Form(CardType originalType, int turns, bool temporary, Form? previous = null)
     {
         public readonly CardType OriginalType = originalType;
+        public readonly int Turns = turns;
         public readonly bool Temporary = temporary;
         public readonly Form? Previous = previous;
     }
@@ -25,14 +27,17 @@ public static class HandArrow
     private static readonly Harmony Patcher = new(JunnaMod.Id + ".HandArrowTypes");
     public static bool IsArrow(CardModel card) => Forms.TryGetValue(card, out _);
     public static CardType OriginalType(CardModel card) => Forms.TryGetValue(card, out var form) ? form.OriginalType : card.Type;
-    public static int Turns(CardModel card) => IsArrow(card) ? 5 : card.DynamicVars["Turns"].IntValue;
+    public static int Turns(CardModel card) => Forms.TryGetValue(card, out var form) ? form.Turns : card.DynamicVars["Turns"].IntValue;
 
-    private static void Mark(CardModel card, bool temporary)
+    private static int ConversionTurns(CardModel source)
+        => (source as CatalogCard)?.Value("HandArrowTurns", DefaultTurns) ?? DefaultTurns;
+
+    private static void Mark(CardModel card, int turns, bool temporary)
     {
         var type = OriginalType(card);
         Forms.TryGetValue(card, out var previous);
         Forms.Remove(card);
-        Forms.Add(card, new(type, temporary, temporary ? previous : null));
+        Forms.Add(card, new(type, turns, temporary, temporary ? previous : null));
         var getter = AccessTools.PropertyGetter(card.GetType(), nameof(CardModel.Type));
         getter = getter.DeclaringType!.GetMethod(getter.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)!;
         if (!PatchedTypes.Contains(getter))
@@ -62,7 +67,7 @@ public static class HandArrow
 
     public static void Adapt(CardModel card)
     {
-        Mark(card, false);
+        Mark(card, DefaultTurns, temporary: false);
         CostChanges.SetFixed(card, 0);
     }
     internal static void Restore(CardModel card)
@@ -79,22 +84,27 @@ public static class HandArrow
         var hand = combat.Hand;
         var selected = (await CardActions.Choose(context, source, hand.Cards, count, optional))
             .Where(card => card.Pile == hand).ToArray();
-        await CardExecution.PlayStaged(selected, card => Play(context, card),
+        int turns = ConversionTurns(source);
+        await CardExecution.PlayStaged(selected, card => Play(context, card, CardTargets.First(card), turns),
             unplayed => CardPileCmd.Add(unplayed, hand));
     }
 
     internal static bool Loops(CardModel card) => card is CatalogCard catalog && CardRules.Get(catalog.DesignId).LoopAsArrow;
 
-    public static Task Play(PlayerChoiceContext context, CardModel card) => Play(context, card, CardTargets.First(card));
+    public static Task Play(PlayerChoiceContext context, CardModel card)
+        => Play(context, card, CardTargets.First(card), DefaultTurns);
 
-    internal static async Task<bool> Play(PlayerChoiceContext context, CardModel card, Creature? target)
+    internal static Task<bool> ReplayLoop(PlayerChoiceContext context, CardModel card, Creature? target)
+        => Play(context, card, target, ConversionTurns(card));
+
+    private static async Task<bool> Play(PlayerChoiceContext context, CardModel card, Creature? target, int turns)
     {
         if (card.TargetType == TargetType.AnyEnemy && target != null && card.CombatState is { } combat)
             target = ArrowCombat.ResolveEffectTarget(target, combat);
         else target = CardTargets.First(card);
         if (!CardTargets.IsValid(card, target)) return false;
         CostChanges.CaptureFreePayment(card);
-        Mark(card, true);
+        Mark(card, turns, temporary: true);
         bool played = false;
         bool unplayable = card.Keywords.Contains(CardKeyword.Unplayable);
         try

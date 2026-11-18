@@ -65,8 +65,8 @@ internal static partial class CardRules
         },
         ["JA108"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.Arrow],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
         },
         ["JA108B"] = new()
         {
@@ -146,6 +146,10 @@ internal static partial class CardRules
         },
         ["JA205"] = new()
         {
+            Fields = new Dictionary<string, string>
+            {
+                ["DamagePercent"] = "N0",
+            },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
             PowerDescription = PowerDescriptionKind.Passive,
@@ -317,6 +321,7 @@ internal static partial class CardRules
             Fields = new Dictionary<string, string>
             {
                 ["Cards"] = "N1",
+                ["HandArrowTurns"] = "N2",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
@@ -327,6 +332,7 @@ internal static partial class CardRules
             {
                 ["Cards"] = "N0",
                 ["DisplayedAmount"] = "N0",
+                ["HandArrowTurns"] = "N1",
                 ["Threshold"] = "N0",
             },
             Tips = [CardTip.Arrow],
@@ -337,6 +343,10 @@ internal static partial class CardRules
         },
         ["JA88"] = new()
         {
+            Fields = new Dictionary<string, string>
+            {
+                ["HandArrowTurns"] = "N1",
+            },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
@@ -449,6 +459,7 @@ internal static partial class CardRules
             {
                 ["Cards"] = "N1",
                 ["DrawCount"] = "N0",
+                ["HandArrowTurns"] = "N2",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
@@ -1322,6 +1333,7 @@ internal static partial class CardRules
             Fields = new Dictionary<string, string>
             {
                 ["Cards"] = "N0",
+                ["HandArrowTurns"] = "N1",
             },
             Tips = [CardTip.Knowledge, CardTip.Arrow],
             UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
@@ -1530,6 +1542,7 @@ internal static partial class CardRules
             Fields = new Dictionary<string, string>
             {
                 ["Energy"] = "N0",
+                ["HandArrowTurns"] = "N1",
             },
             Tips = [CardTip.Arrow, CardTip.Energy],
             UpgradedTips = [CardTip.Arrow, CardTip.Energy],
