@@ -51,7 +51,7 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
         var actualPlay = new CardPlay
         {
             Card = Card, Target = Play.Target, ResultPile = Play.ResultPile,
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
             Player = Card.Owner,
 #endif
             Resources = Play.Resources, IsAutoPlay = Play.IsAutoPlay,

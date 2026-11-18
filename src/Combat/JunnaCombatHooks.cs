@@ -12,7 +12,7 @@ using ShoujoKagekiJunna.Models;
 namespace ShoujoKagekiJunna.Combat;
 
 [CustomID("JUNNA_COMBAT_HOOKS")]
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
 public sealed class JunnaCombatHooks : AbstractModel
 #else
 public sealed class JunnaCombatHooks : SingletonModel

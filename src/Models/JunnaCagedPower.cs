@@ -21,7 +21,7 @@ public sealed class JunnaCagedPower : CustomPowerModel
     public override string CustomBigIconPath => CustomPackedIconPath;
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
         , CardPlay? cardPlay
 #endif
         )

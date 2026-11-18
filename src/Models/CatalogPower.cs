@@ -40,7 +40,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
             Card = Card,
             Target = null,
             ResultPile = PileType.None,
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
             Player = Card.Owner,
 #endif
             Resources = InstalledBy.Resources,

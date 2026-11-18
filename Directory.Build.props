@@ -7,5 +7,6 @@
     <GameData>$(Sts2GameDir)/data_sts2_windows_x86_64</GameData>
     <BaseLibVersion>3.4.8</BaseLibVersion>
     <Sts2StableApiVersion>0.107.1</Sts2StableApiVersion>
+    <DefineConstants Condition="'$(Sts2Api)' == 'main'">$(DefineConstants);STS2_MAIN</DefineConstants>
   </PropertyGroup>
 </Project>

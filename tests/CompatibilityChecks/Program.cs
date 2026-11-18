@@ -11,7 +11,7 @@ if (args.Length != 4)
 
 string[] dependencies = Directory.GetFiles(Path.GetFullPath(args[1]), "*.dll", SearchOption.AllDirectories)
     .Where(path => !path.Contains($"{Path.DirectorySeparatorChar}compat{Path.DirectorySeparatorChar}") ||
-                   path.Contains($"{Path.DirectorySeparatorChar}{GameVersion()}{Path.DirectorySeparatorChar}"))
+                   path.Contains($"{Path.DirectorySeparatorChar}{RitsuApiVersion()}{Path.DirectorySeparatorChar}"))
     .Append(Path.GetFullPath(args[2])).ToArray();
 AssemblyLoadContext.Default.Resolving += (context, name) =>
 {
@@ -109,9 +109,11 @@ static void Expect(string name, bool pass)
     Console.WriteLine($"PASS: {name}");
 }
 
-static string GameVersion() =>
+static string RitsuApiVersion() =>
 #if STS2_BETA
     "0.113.0";
+#elif STS2_MAIN
+    "0.111.0";
 #else
     "0.107.1";
 #endif

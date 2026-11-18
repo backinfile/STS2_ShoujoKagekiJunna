@@ -44,8 +44,11 @@ internal static class DamagePatches
          typeof(IEnumerable<Creature>),
 #endif
          typeof(decimal), typeof(ValueProp), typeof(Creature), typeof(CardModel)
+#if STS2_MAIN || STS2_BETA
+         , typeof(CardPlay)
+#endif
 #if STS2_BETA
-         , typeof(CardPlay), typeof(ModifyDamageHookType)
+         , typeof(ModifyDamageHookType)
 #endif
         ]);
     static MethodBase TargetMethod() => CanonicalDamage;
@@ -58,8 +61,11 @@ internal static class DamagePatches
         IEnumerable<Creature>? targets,
 #endif
         decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource,
+#if STS2_MAIN || STS2_BETA
+        CardPlay? cardPlay,
+#endif
 #if STS2_BETA
-        CardPlay? cardPlay, ModifyDamageHookType modifyDamageHookType,
+        ModifyDamageHookType modifyDamageHookType,
 #endif
         ref Task<IEnumerable<DamageResult>> __result)
     {
@@ -73,6 +79,8 @@ internal static class DamagePatches
             amount, props, dealer, cardSource,
 #if STS2_BETA
             cardPlay, modifyDamageHookType
+#elif STS2_MAIN
+            cardPlay
 #else
             null
 #endif

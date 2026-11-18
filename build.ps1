@@ -1,9 +1,13 @@
 param(
     [string]$CorePackage = $env:SHOUJO_CORE_PACKAGE,
-    [string]$GameDir = 'D:/App/Stream/steamapps/common/Slay the Spire 2',
-    [string]$Godot = 'D:/Godot/megadot-4.5.1-m.12-windows-x86_64-llvm-editor-csharp/MegaDot_v4.5.1-stable_mono_win64_console.exe'
+    [string]$GameDir = $env:SHOUJO_BETA_GAME,
+    [string]$Godot = 'D:/Godot/megadot-4.5.1-m.12-windows-x86_64-llvm-editor-csharp/MegaDot_v4.5.1-stable_mono_win64_console.exe',
+    [string]$MainGameDir = $env:SHOUJO_MAIN_GAME
 )
 $ErrorActionPreference = 'Stop'
+$steamGameDir = 'D:/App/Stream/steamapps/common/Slay the Spire 2'
+if (!$GameDir) { $GameDir = $steamGameDir }
+if (!$MainGameDir) { $MainGameDir = $steamGameDir }
 if ($PSVersionTable.PSVersion.Major -lt 7) {
     $powerShell7 = Get-Command pwsh.exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source
     if (!$powerShell7) {
@@ -13,7 +17,7 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
         ) | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1
     }
     if (!$powerShell7) { throw 'PowerShell 7 is required. Install it or add pwsh.exe to PATH.' }
-    $powerShell7Arguments = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $PSCommandPath, '-GameDir', $GameDir, '-Godot', $Godot)
+    $powerShell7Arguments = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $PSCommandPath, '-GameDir', $GameDir, '-Godot', $Godot, '-MainGameDir', $MainGameDir)
     if ($CorePackage) { $powerShell7Arguments += @('-CorePackage', $CorePackage) }
     & $powerShell7 @powerShell7Arguments
     if ($LASTEXITCODE) { throw "Build failed under PowerShell 7 (exit code $LASTEXITCODE)." }
@@ -30,9 +34,10 @@ $env:CoreApiPath = $core.ApiPath
 Push-Location $PSScriptRoot
 try {
     New-Item -ItemType Directory -Force dist/ShoujoKagekiJunna/lib | Out-Null
-    foreach ($variant in @('Beta', 'Stable')) {
+    $games = [ordered]@{ Beta = $GameDir; Stable = $GameDir; Main = $MainGameDir }
+    foreach ($variant in $games.Keys) {
         $arguments = @('build', 'ShoujoKagekiJunna.csproj', '-c', 'Release', '--nologo',
-            "-p:CoreApiPath=$($core.ApiPath)", "-p:Sts2GameDir=$GameDir", "-p:Sts2Api=$($variant.ToLowerInvariant())",
+            "-p:CoreApiPath=$($core.ApiPath)", "-p:Sts2GameDir=$($games[$variant])", "-p:Sts2Api=$($variant.ToLowerInvariant())",
             "-p:AssemblyName=ShoujoKagekiJunna.$variant")
         if ($variant -eq 'Stable') { $arguments += '-p:Sts2ReferenceMode=package' }
         & dotnet @arguments

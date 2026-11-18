@@ -1,4 +1,4 @@
-#if !STS2_BETA
+#if !STS2_MAIN && !STS2_BETA
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;

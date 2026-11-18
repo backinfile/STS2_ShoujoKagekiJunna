@@ -1,4 +1,4 @@
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
 using HarmonyLib;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;

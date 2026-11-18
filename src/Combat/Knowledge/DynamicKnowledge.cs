@@ -182,7 +182,7 @@ public static class DynamicKnowledge
         private static void Prefix(Player player, ref CardCreationOptions options)
         {
             options = options with { };
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
             var originalFilter = options.CardPoolFilter;
             options.WithFilter(card => (originalFilter?.Invoke(card) ?? true) && IsRewardEntrance(player, card));
 #else
@@ -209,11 +209,11 @@ public static class DynamicKnowledge
         private static void Postfix(CardModel __instance, ref IEnumerable<IHoverTip> __result)
         {
             if (!IsLinked(__instance)) return;
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
             string groupTipId = new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), "").Id;
 #endif
             __result = __result.Where(t => t is not HoverTip existing ||
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
                 existing.Id != groupTipId);
 #else
                 existing.Id?.StartsWith("junna_knowledge_group_") != true && existing.Id != "junna_dynamic_knowledge_group");
@@ -225,7 +225,7 @@ public static class DynamicKnowledge
             var tip = new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
                 string.Join("\n", names))
                 {
-#if !STS2_BETA
+#if !STS2_MAIN && !STS2_BETA
                     Id = "junna_dynamic_knowledge_group",
 #endif
                 };

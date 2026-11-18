@@ -34,7 +34,7 @@ internal static class InvestmentHoverTipPatch
         }
         return new HoverTip(new LocString("gameplay_ui", "JUNNA.INVESTMENT"), string.Join("\n", lines))
         {
-#if !STS2_BETA
+#if !STS2_MAIN && !STS2_BETA
             Id = "junna_investment",
 #endif
         };

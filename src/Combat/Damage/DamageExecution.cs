@@ -154,7 +154,7 @@ public static class DamageExecution
     internal delegate Task<IEnumerable<DamageResult>> AttackHitHooksDamage(
         PlayerChoiceContext context, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource,
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
         CardPlay? cardPlay,
 #endif
         AttackCommand attack, int hitIndex, decimal hitCount);
@@ -163,14 +163,14 @@ public static class DamageExecution
     public static async Task<IEnumerable<DamageResult>> FromAttackHitHooks(
         PlayerChoiceContext context, IEnumerable<Creature>? targets, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource,
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
         CardPlay? cardPlay,
 #endif
         AttackCommand attack, int hitIndex, decimal hitCount)
     {
         using var batch = BeginDamageBatch(attack.ModelSource, countHandled: true);
         try { return await AttackHitHooks!(context, targets, amount, props, dealer, cardSource,
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
             cardPlay,
 #endif
             attack, hitIndex, hitCount); }
@@ -206,8 +206,11 @@ public static class DamageExecution
     public static async Task<IEnumerable<DamageResult>> FromAttack(
         PlayerChoiceContext context, IEnumerable<DamageTarget>? targets, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource,
+#if STS2_MAIN || STS2_BETA
+        CardPlay? cardPlay,
+#endif
 #if STS2_BETA
-        CardPlay? cardPlay, ModifyDamageHookType modifyDamageHookType,
+        ModifyDamageHookType modifyDamageHookType,
 #endif
         AttackCommand attack)
     {
@@ -216,6 +219,8 @@ public static class DamageExecution
         {
 #if STS2_BETA
             return await GameApi.DamageTargets(context, targets, amount, props, dealer, cardSource, cardPlay, modifyDamageHookType);
+#elif STS2_MAIN
+            return await GameApi.Damage(context, targets, amount, props, dealer, cardSource, cardPlay);
 #else
             return await GameApi.Damage(context, targets, amount, props, dealer, cardSource, null);
 #endif

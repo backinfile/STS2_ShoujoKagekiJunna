@@ -136,7 +136,7 @@ public static class KnowledgeCombat
     {
         private static MethodBase TargetMethod() => AccessTools.Method(typeof(CardPileCmd), nameof(CardPileCmd.Add),
             [typeof(IEnumerable<CardModel>), typeof(CardPile), typeof(CardPilePosition), typeof(AbstractModel), typeof(bool)
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
              , typeof(bool)
 #endif
             ]);

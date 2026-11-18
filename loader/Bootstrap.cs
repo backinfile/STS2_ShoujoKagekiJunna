@@ -12,5 +12,12 @@ public static class Bootstrap
     private static readonly Logger Log = new(ModId, LogType.Generic);
     public static void Initialize() => CharacterLoader.Initialize(
         ModId, "ShoujoKagekiJunna.JunnaMod",
-        version => version.CompareTo(new SemanticVersion(0, 111, 0)) >= 0 ? "Beta" : "Stable", Log);
+        SelectVariant, Log);
+
+    private static string SelectVariant(SemanticVersion version)
+    {
+        if (version.CompareTo(new SemanticVersion(0, 113, 0)) >= 0) return "Beta";
+        if (version.CompareTo(new SemanticVersion(0, 111, 0)) >= 0) return "Main";
+        return "Stable";
+    }
 }

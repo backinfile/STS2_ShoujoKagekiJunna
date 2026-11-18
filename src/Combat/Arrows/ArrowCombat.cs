@@ -114,7 +114,7 @@ public static partial class ArrowCombat
             var play = new CardPlay
             {
                 Card = copy, Target = original.Play.Target, ResultPile = original.Play.ResultPile,
-#if STS2_BETA
+#if STS2_MAIN || STS2_BETA
                 Player = player,
 #endif
                 Resources = original.Play.Resources, IsAutoPlay = true, PlayIndex = 0, PlayCount = original.PlayCount

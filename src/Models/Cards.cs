@@ -38,7 +38,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
                     $"[gold]{CardCatalog.Model(DesignId).Title}[/gold]")
                     {
-#if !STS2_BETA
+#if !STS2_MAIN && !STS2_BETA
                         Id = "junna_knowledge_reward_others",
 #endif
                     };
@@ -50,7 +50,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
                 if (members.Length > 0)
                     yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"), string.Join("\n", members))
                         {
-#if !STS2_BETA
+#if !STS2_MAIN && !STS2_BETA
                             Id = "junna_knowledge_group_" + group.MainCardId,
 #endif
                         };
@@ -59,7 +59,7 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             if (background != null)
                 yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_BACKGROUND"), background)
                     {
-#if !STS2_BETA
+#if !STS2_MAIN && !STS2_BETA
                         Id = "junna_knowledge_background_" + DesignId,
 #endif
                     };
