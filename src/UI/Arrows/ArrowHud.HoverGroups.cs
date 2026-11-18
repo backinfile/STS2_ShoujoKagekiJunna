@@ -7,59 +7,71 @@ namespace ShoujoKagekiJunna.Combat;
 
 public partial class ArrowHud
 {
-    private readonly record struct StardustPreviewKey(object Owner, object? Target, Type PayloadType, string State);
-    private readonly Dictionary<StardustPreviewKey, ArrowDeployment> _stardustGroups = [];
-    private readonly Dictionary<ArrowDeployment, StardustPreviewKey> _stardustKeys = [];
+    private readonly record struct ArrowCluster(ArrowDeployment Leader, int Count);
+    private readonly Dictionary<ArrowDeployment, ArrowCluster> _arrowClusters = [];
     private readonly Dictionary<ArrowDeployment, ArrowDeployment> _hoverRepresentatives = [];
+    private readonly List<ArrowDeployment> _clusteredOrder = [];
     private readonly Dictionary<ArrowDeployment, int> _previewQuantities = [];
-    private readonly Dictionary<ArrowDeployment, string> _previewStates = [], _renderedPreviewStates = [];
+    private readonly Dictionary<ArrowDeployment, string> _arrowPreviewStates = [], _renderedPreviewStates = [];
 
-    private void RefreshStardustOrder()
+    private void RefreshArrowClusters()
     {
-        _stardustKeys.Clear();
+        _arrowClusters.Clear();
+        _arrowPreviewStates.Clear();
+        if (_displayOrder.Count < ArrowLayout.MinimumClusterSize) return;
+
+        var clusters = _displayOrder.GroupBy(arrow => (arrow.Card.Id, arrow.Card.Owner, arrow.Target, arrow.TargetCategory))
+            .Where(group => group.Count() >= ArrowLayout.MinimumClusterSize)
+            .SelectMany(group => group.GroupBy(arrow =>
+            {
+                var state = ArrowPreviewState(arrow);
+                _arrowPreviewStates.Add(arrow, state);
+                return (arrow.Payload.GetType(), state);
+            }))
+            .Where(group => group.Count() >= ArrowLayout.MinimumClusterSize)
+            .ToDictionary(group => group.First());
+        if (clusters.Count == 0) return;
+
+        foreach (var (leader, members) in clusters)
+        {
+            var cluster = new ArrowCluster(leader, members.Count());
+            foreach (var member in members) _arrowClusters.Add(member, cluster);
+        }
+
+        // Gather each cluster at its first member, preserving order within the cluster and among other arrows.
+        _clusteredOrder.Clear();
         foreach (var arrow in _displayOrder)
-            if (CardCatalog.DesignId(arrow.Card) == "U_CARD_005")
-                _stardustKeys.Add(arrow, new(arrow.Card.Owner, arrow.Target, arrow.Payload.GetType(), StardustPreviewState(arrow)));
-        // Replace only Stardust slots; other arrows keep their original indices and order.
-        var ordered = _displayOrder.Where(_stardustKeys.ContainsKey)
-            .GroupBy(arrow => _stardustKeys[arrow]).SelectMany(group => group).ToArray();
-        int next = 0;
-        for (int i = 0; i < _displayOrder.Count; i++)
-            if (_stardustKeys.ContainsKey(_displayOrder[i])) _displayOrder[i] = ordered[next++];
+        {
+            if (clusters.TryGetValue(arrow, out var members)) _clusteredOrder.AddRange(members);
+            else if (!_arrowClusters.ContainsKey(arrow)) _clusteredOrder.Add(arrow);
+        }
+        _displayOrder.Clear();
+        _displayOrder.AddRange(_clusteredOrder);
+        _clusteredOrder.Clear();
     }
 
     private void GroupHoverCandidates()
     {
         _hoverArrows.Clear();
-        _stardustGroups.Clear();
         _hoverRepresentatives.Clear();
         _previewQuantities.Clear();
-        _previewStates.Clear();
         foreach (var arrow in _hoverCandidates)
         {
-            var representative = arrow;
-            if (_stardustKeys.TryGetValue(arrow, out var key))
-            {
-                if (!_stardustGroups.TryGetValue(key, out representative))
-                {
-                    representative = arrow;
-                    _stardustGroups.Add(key, arrow);
-                    _previewStates.Add(arrow, key.State);
-                }
-            }
+            // Hovering an individual icon shows that copy; hovering its target includes the whole cluster.
+            var representative = _hoverCandidates.Count > 1 && _arrowClusters.TryGetValue(arrow, out var cluster)
+                ? cluster.Leader : arrow;
             _hoverRepresentatives.Add(arrow, representative);
             if (_previewQuantities.TryGetValue(representative, out int count)) _previewQuantities[representative] = count + 1;
             else { _previewQuantities.Add(representative, 1); _hoverArrows.Add(representative); }
         }
     }
 
-    private static string StardustPreviewState(ArrowDeployment arrow)
+    private static string ArrowPreviewState(ArrowDeployment arrow)
     {
         var card = arrow.Card;
         var saved = card.ToSerializable();
         saved.FloorAddedToDeck = null; // Acquisition history does not change the card's current state.
         var investment = DamageModifiers.CaptureDamageModifierSnapshot(card);
-        // AttacksWhileWaiting is bookkeeping for other arrow effects; Stardust does not use it.
         return JsonSerializer.Serialize(new {
             Saved = saved,
             Variables = card.DynamicVars.OrderBy(pair => pair.Key).Select(pair => new { pair.Key, pair.Value.BaseValue }),
@@ -72,6 +84,7 @@ public partial class ArrowHud
             investment.DamageBonus, investment.ExtraHits, ReceivedBonus = DamageModifiers.HasReceivedBonus(card),
             Shine = Shine.GetState(card),
             arrow.Remaining, arrow.PlayCount, arrow.DeployedRound, arrow.ExhaustAfterResolve,
+            WaitingHits = CardCatalog.DesignId(card) == "JT03" ? arrow.AttacksWhileWaiting : 0,
             arrow.Play.IsAutoPlay, arrow.Play.ResultPile, arrow.Play.Resources, XValues = arrow.CopyXValues()
         });
     }

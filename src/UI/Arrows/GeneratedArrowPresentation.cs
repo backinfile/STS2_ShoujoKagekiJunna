@@ -17,6 +17,8 @@ internal static class GeneratedArrowPresentation
 {
     private static readonly ConditionalWeakTable<CardModel, object> Cards = new();
 
+    internal static bool IsGenerated(CardModel card) => Cards.TryGetValue(card, out _);
+
     internal static async Task Play(CardModel card, Func<Task> play)
     {
         Cards.Add(card, new object());
@@ -35,12 +37,9 @@ internal static class GeneratedArrowPresentation
                     scope.Container = view.GetParent();
                     view.UpdateVisuals(PileType.Play, CardPreviewMode.Normal);
                     view.MouseFilter = Control.MouseFilterEnum.Ignore;
-                    view.Scale = Vector2.One * .45f;
-                    var origin = room.GetCreatureNode(card.Owner.Creature)?.VfxSpawnPosition
-                        ?? room.GetViewport().GetVisibleRect().Size * new Vector2(.3f, .6f);
-                    var frame = view.GetNode<Control>("%Frame");
-                    view.GlobalPosition += origin + new Vector2(110, -140)
-                        - frame.GetGlobalTransform() * (frame.Size * .5f);
+                    view.Scale = Vector2.One * .28f;
+                    // Show the card once its own flight origin is known.
+                    view.Hide();
                 }
             }
             await play();
@@ -74,7 +73,7 @@ internal static class GeneratedArrowPresentation
         [HarmonyPriority(Priority.First)]
         private static void Prefix(CardModel card, ref bool skipCardPileVisuals)
         {
-            if (Cards.TryGetValue(card, out _)) skipCardPileVisuals = true;
+            if (IsGenerated(card)) skipCardPileVisuals = true;
         }
     }
 }

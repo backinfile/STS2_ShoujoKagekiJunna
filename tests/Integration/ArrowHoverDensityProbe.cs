@@ -34,7 +34,7 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
             return new(true, JsonSerializer.Serialize(ArrowCombat.Deployed.Select(arrow => new {
                 arrow.Sequence,
                 payloadType = AccessTools.Property(typeof(ArrowDeployment), "Payload").GetValue(arrow)!.GetType().FullName,
-                state = JsonDocument.Parse((string)AccessTools.Method(typeof(ArrowHud), "StardustPreviewState").Invoke(null, [arrow])!).RootElement
+                state = JsonDocument.Parse((string)AccessTools.Method(typeof(ArrowHud), "ArrowPreviewState").Invoke(null, [arrow])!).RootElement
             })));
         if (args.FirstOrDefault() == "info") return new(true, JsonSerializer.Serialize(Snapshot()));
         if (args.FirstOrDefault() == "mutate")

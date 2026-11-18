@@ -71,7 +71,7 @@ public partial class ArrowHud
             _displayOrder.Add(arrow);
         }
         _displayOrder.Sort(_compareDisplayOrder ??= CompareDisplayOrder);
-        RefreshStardustOrder();
+        RefreshArrowClusters();
     }
 
     private void AddTargetPoint(ArrowDeployment arrow, ArrowView view, Creature? creature)

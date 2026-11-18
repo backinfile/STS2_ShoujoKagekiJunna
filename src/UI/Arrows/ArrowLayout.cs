@@ -7,6 +7,8 @@ internal enum ArrowLane { FriendlyGroup, FriendlySingle, EnemyGroup, Left, Right
 /// <summary>Target regions and ordered slots, preserving existing arrows before balancing new arrows.</summary>
 internal static class ArrowLayout
 {
+    internal const int MinimumClusterSize = 8;
+
     // Group regions stay horizontally left of every single-target region in the same faction.
     // Overflow grows down within each region, preserving that rule across multiple rows.
     internal static Vector2[] Regions(float width, float allyLeft, float allyRight,
@@ -71,21 +73,107 @@ internal static class ArrowLayout
         => friendly ? group ? ArrowLane.FriendlyGroup : ArrowLane.FriendlySingle
             : group ? ArrowLane.EnemyGroup : targetX < allyCenter ? ArrowLane.Left : ArrowLane.Right;
 
-    // A new row starts only when the next arrow, at its actual spacing, no longer fits.
-    internal static Vector2[] Pack(float width, float spacing, float compactSpacing, float rowSpacing,
-        IReadOnlyList<bool> joinPrevious)
+    // Blend between count breakpoints so adding one arrow does not jump to the next density.
+    internal static float ClusterGap(int count, float full, float compact)
     {
-        var result = new Vector2[joinPrevious.Count];
-        float x = 0, y = 0;
-        for (int i = 0; i < result.Length; i++)
+        float loose = full * .9f, medium = full * .7f, tight = full * .45f;
+        return count switch
         {
-            float next = i == 0 ? 0 : x + (joinPrevious[i] ? compactSpacing : spacing);
-            if (next > width + .01f) { x = 0; y += rowSpacing; }
-            else x = next;
-            result[i] = new(x, y);
+            < MinimumClusterSize => full,
+            < 12 => Mathf.Lerp(loose, medium, (count - MinimumClusterSize) / (12f - MinimumClusterSize)),
+            < 18 => Mathf.Lerp(medium, tight, (count - 12) / 6f),
+            < 28 => Mathf.Lerp(tight, compact, (count - 18) / 10f),
+            _ => compact
+        };
+    }
+
+    internal static void FitTwoRows(float width, float[] gaps, float[] minimumGaps)
+    {
+        if (Fits(1)) return;
+
+        // Use the widest gaps that fit. If even the minimum needs more rows, leave the remaining wrapping to Pack.
+        float low = 0, high = 1;
+        for (int i = 0; i < 12; i++)
+        {
+            float scale = (low + high) * .5f;
+            if (Fits(scale)) low = scale;
+            else high = scale;
         }
-        if (result.Length > 0 && y == 0)
-            for (int i = 0; i < result.Length; i++) result[i].X += (width - x) * .5f;
+        for (int i = 1; i < gaps.Length; i++)
+            gaps[i] = Mathf.Lerp(minimumGaps[i], gaps[i], low);
+
+        bool Fits(float scale)
+        {
+            float x = 0;
+            bool secondRow = false;
+            for (int i = 1; i < gaps.Length; i++)
+            {
+                float next = x + Mathf.Lerp(minimumGaps[i], gaps[i], scale);
+                if (next > width + .01f)
+                {
+                    if (secondRow) return false;
+                    secondRow = true;
+                    x = 0;
+                }
+                else x = next;
+            }
+            return true;
+        }
+    }
+
+    // A new row starts only when the next arrow, at its actual spacing, no longer fits.
+    internal static Vector2[] Pack(float width, float rowSpacing, IReadOnlyList<float> gaps,
+        IReadOnlyList<Vector2?>? previous = null)
+    {
+        var result = new Vector2[gaps.Count];
+        if (result.Length == 0) return result;
+
+        var offsets = new float[result.Length];
+        var rowStarts = new List<int> { 0 };
+        for (int i = 1; i < result.Length; i++)
+        {
+            offsets[i] = offsets[i - 1] + gaps[i];
+            if (offsets[i] - offsets[rowStarts[^1]] > width + .01f) rowStarts.Add(i);
+        }
+
+        if (rowStarts.Count == 2 && previous != null)
+        {
+            // If either row can take the newcomer, choose the split with fewer existing arrows changing rows.
+            int changes = previous.Count(point => point is { Y: <= .5f });
+            int bestChanges = int.MaxValue;
+            int lastSplit = rowStarts[1];
+            for (int split = 1; split <= lastSplit; split++)
+            {
+                if (previous[split - 1] is { } old) changes += old.Y <= .5f ? -1 : 1;
+                if (offsets[^1] - offsets[split] > width + .01f || changes > bestChanges) continue;
+                rowStarts[1] = split;
+                bestChanges = changes;
+            }
+        }
+
+        var shifts = new List<float>();
+        for (int row = 0; row < rowStarts.Count; row++)
+        {
+            int start = rowStarts[row];
+            int end = row + 1 < rowStarts.Count ? rowStarts[row + 1] : result.Length;
+            float free = Math.Max(0, width - (offsets[end - 1] - offsets[start]));
+            float shift = rowStarts.Count == 1 ? free * .5f : 0;
+            if (previous != null)
+            {
+                shifts.Clear();
+                for (int i = start; i < end; i++)
+                    if (previous[i] is { } old) shifts.Add(old.X - (offsets[i] - offsets[start]));
+                if (shifts.Count > 0)
+                {
+                    // Any median shift minimizes this row's total horizontal travel.
+                    shifts.Sort();
+                    shift = Math.Clamp(shift, shifts[(shifts.Count - 1) / 2], shifts[shifts.Count / 2]);
+                    shift = Math.Clamp(shift, 0, free);
+                }
+            }
+            for (int i = start; i < end; i++)
+                result[i] = new(offsets[i] - offsets[start] + shift, row * rowSpacing);
+        }
         return result;
     }
 

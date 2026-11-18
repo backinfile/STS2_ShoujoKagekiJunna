@@ -20,7 +20,7 @@ public partial class ArrowHud
         FinishDeployment(arrow);
         var effect = new ArrowDeploymentVfx { Name = "ArrowPaperFold", ZIndex = 0 };
         AddChild(effect);
-        effect.Initialize(cardNode);
+        effect.Initialize(cardNode, GeneratedArrowPresentation.IsGenerated(card));
         _deployments.Add(arrow, effect);
         if (!_views.TryGetValue(arrow, out var view))
         {
@@ -83,6 +83,9 @@ public partial class ArrowDeploymentVfx : Control
     internal static int PreviewTrajectory { get; set; } = 2;
     private int _trajectory;
     private const float StageTime = .14f;
+    private const float GeneratedFlightScale = .42f;
+    private float FlightScale => _generated ? GeneratedFlightScale : 1;
+    private bool _generated;
     private float FeedTime => _trajectory switch { 1 => .76f, 2 => .64f, 3 => .44f, _ => .90f };
     private float ArrowTime => FeedTime - .015f;
     private float CardGoneTime => FeedTime + .065f;
@@ -114,6 +117,7 @@ public partial class ArrowDeploymentVfx : Control
     private Curve2D _flightPath = null!;
     private Vector2 _destination;
     private Vector2 _aim;
+    private Vector2 _slotOffset;
     private bool _aimLocked;
     private float _time;
     private Action? _completed;
@@ -136,10 +140,12 @@ public partial class ArrowDeploymentVfx : Control
             return tangent.Normalized();
         }
     }
-    private Vector2 NockPosition => _destination + AimDirection * (ShaftLength - BowGripOffset - BraceHeight);
-    private Vector2 BowPosition => _destination - AimDirection * BowGripOffset;
-    private Vector2 RearPosition => BowPosition - AimDirection * 45;
-    public Vector2 CurrentPosition
+    private Vector2 NockPosition => _destination + AimDirection * ((ShaftLength - BowGripOffset - BraceHeight) * FlightScale);
+    private Vector2 BowPosition => _destination - AimDirection * (BowGripOffset * FlightScale);
+    private Vector2 RearPosition => BowPosition - AimDirection * (45 * FlightScale);
+    public Vector2 CurrentPosition => FlightPositionAtTime + _slotOffset;
+
+    private Vector2 FlightPositionAtTime
     {
         get
         {
@@ -155,7 +161,7 @@ public partial class ArrowDeploymentVfx : Control
         _foldFrames = GD.Load<Texture2D>(JunnaMod.ResourceRoot + "images/vfx/arrow_fold_frames.png");
     }
 
-    internal void Initialize(NCard cardNode)
+    internal void Initialize(NCard cardNode, bool generated)
     {
         MouseFilter = MouseFilterEnum.Ignore;
         TextureFilter = TextureFilterEnum.LinearWithMipmaps;
@@ -163,6 +169,7 @@ public partial class ArrowDeploymentVfx : Control
         // Later pile transitions must not reuse or free this in-flight visual.
         cardNode.Reparent(this);
         _cardNode = cardNode;
+        _generated = generated;
         _trajectory = PreviewTrajectory;
         _cardScale = cardNode.Scale;
         _cardRotation = cardNode.Rotation;
@@ -180,6 +187,11 @@ public partial class ArrowDeploymentVfx : Control
         // The HUD supplies the live slot and target before the first moving frame.
         _destination = _start + Vector2.Up * 400;
         _aim = _start + Vector2.Right * 400;
+        if (!_generated) CreateTrail(cardNode);
+    }
+
+    private void CreateTrail(NCard cardNode)
+    {
         _trailAnchor = new Control { MouseFilter = MouseFilterEnum.Ignore, Position = _start };
         AddChild(_trailAnchor);
         _trail = NCardTrailVfx.Create(_trailAnchor, cardNode.Model!.Owner!.Character.TrailPath);
@@ -215,6 +227,7 @@ public partial class ArrowDeploymentVfx : Control
 
     internal void SetProgress(float progress)
     {
+        if (_generated && !_aimLocked) return;
         float previousTime = _time;
         _time = progress * TimelineDuration;
         // The reload event has a short lead-in before its first string movement.
@@ -265,18 +278,35 @@ public partial class ArrowDeploymentVfx : Control
 
     internal void UpdateAim(Vector2 destination, Vector2 aim)
     {
-        // Hold the bow's world pose while the arrow draws through it.
-        if (_aimLocked) return;
+        // Keep the bow fixed for a hand play. Translate a generated flight with its slot during a reflow.
+        if (_aimLocked)
+        {
+            if (_generated) _slotOffset = destination - _destination;
+            return;
+        }
         _destination = destination;
         _aim = aim;
+        if (_generated)
+        {
+            _start = destination + new Vector2(0, 98);
+            _stage = destination + new Vector2(-15, 76);
+            CreateTrail(_cardNode!);
+        }
         BuildFlightPath();
         _aimLocked = true;
+        if (_generated)
+        {
+            SetProgress(0);
+            _cardNode?.Show();
+        }
     }
 
     private void BuildFlightPath()
     {
         var rear = RearPosition;
-        Vector2[] points = _trajectory switch
+        Vector2[] points = _generated
+            ? [_stage, _stage + new Vector2(-33, 3), rear + new Vector2(-42, 20), rear]
+            : _trajectory switch
         {
             // Two opposing sweeps give the S route a visible change of weight.
             1 => [_stage, _stage + new Vector2(125, 95), _stage + new Vector2(-240, 110),
@@ -295,7 +325,7 @@ public partial class ArrowDeploymentVfx : Control
             if (i != points.Length - 1)
                 points[i] = points[i].Clamp(new Vector2(85, 170), _canvas - new Vector2(85, 150));
             var tangent = i == 0 ? (points[1] - points[0]) * .28f
-                : i == points.Length - 1 ? AimDirection * 45
+                : i == points.Length - 1 ? AimDirection * (45 * FlightScale)
                 : (points[i + 1] - points[i - 1]) * .18f;
             _flightPath.AddPoint(points[i], -tangent, tangent);
         }
@@ -328,6 +358,7 @@ public partial class ArrowDeploymentVfx : Control
 
     public override void _Draw()
     {
+        if (_generated && !_aimLocked) return;
         float angle = AimDirection.Angle() - Mathf.Pi * .5f;
         float shaft = Mathf.SmoothStep(ArrowTime, CardGoneTime + .025f, _time);
         float shaftAlpha = shaft * (1 - Mathf.SmoothStep(HoldEndTime, TimelineDuration, _time));
@@ -336,12 +367,13 @@ public partial class ArrowDeploymentVfx : Control
             * (1 - Mathf.SmoothStep(HoldEndTime, TimelineDuration, _time));
         if (bowAlpha > 0)
         {
-            DrawSetTransform(BowPosition, angle);
+            DrawSetTransform(BowPosition + _slotOffset, angle, Vector2.One * FlightScale);
             var nock = _time < DockTime ? new Vector2(0, -BraceHeight)
-                : new Vector2(0, (CurrentPosition - BowPosition).Dot(AimDirection) - tail + 2);
+                : new Vector2(0, (FlightPositionAtTime - BowPosition).Dot(AimDirection) / FlightScale - tail + 2);
             DrawBow(nock, bowAlpha);
         }
-        DrawSetTransform(CurrentPosition, ArrowDirection.Angle() - Mathf.Pi * .5f);
+        float arrowAngle = ArrowDirection.Angle() - Mathf.Pi * .5f;
+        DrawSetTransform(CurrentPosition, arrowAngle, Vector2.One * FlightScale);
         if (shaftAlpha > 0)
         {
             var ink = new Color(.65f, .75f, .79f, .68f * shaftAlpha);
@@ -353,6 +385,7 @@ public partial class ArrowDeploymentVfx : Control
         float begin = FeedTime - .045f, end = CardGoneTime + .10f;
         if (_time >= begin && _time < end)
         {
+            DrawSetTransform(CurrentPosition, arrowAngle);
             float phase = (_time - begin) / (end - begin);
             int frame = Math.Min(7, (int)(phase * 8));
             var cell = _foldFrames.GetSize() / new Vector2(4, 2);

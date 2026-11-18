@@ -11,7 +11,6 @@ using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.HoverTips;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using ShoujoKagekiJunna.UI;
-using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -194,16 +193,19 @@ public partial class ArrowHud
         }
         foreach (var (arrow, card) in _previewCards)
         {
-            if (_previewStates.TryGetValue(arrow, out var state)
-                && (!_renderedPreviewStates.TryGetValue(arrow, out var rendered) || rendered != state))
+            string state = _arrowPreviewStates.GetValueOrDefault(arrow) ?? ArrowPreviewState(arrow);
+            if (_renderedPreviewStates.GetValueOrDefault(arrow) != state)
             {
                 card.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
                 _renderedPreviewStates[arrow] = state;
             }
             card.SetPreviewTarget(_previewTarget ?? arrow.Target);
             var quantity = card.GetNode<Label>("ArrowPreviewQuantity");
-            quantity.Visible = CardCatalog.DesignId(arrow.Card) == "U_CARD_005";
-            quantity.Text = $"×{_previewQuantities.GetValueOrDefault(arrow, 1)}";
+            int copies = _previewQuantities[arrow];
+            bool showQuantity = copies > 1;
+            if (quantity.Visible != showQuantity) _previewLayout = null;
+            quantity.Visible = showQuantity;
+            if (showQuantity) quantity.Text = $"×{copies}";
         }
     }
 
@@ -269,7 +271,7 @@ public partial class ArrowHud
                     scales[i] = cardScale;
                     angles[i] = angle;
                 }
-                var half = new Vector2(150, CardCatalog.DesignId(_previewCards[i].Arrow.Card) == "U_CARD_005" ? 245 : 211) * cardScale;
+                var half = new Vector2(150, _previewQuantities[_previewCards[i].Arrow] > 1 ? 245 : 211) * cardScale;
                 var extent = new Vector2(Math.Abs(Mathf.Cos(angle)) * half.X + Math.Abs(Mathf.Sin(angle)) * half.Y,
                     Math.Abs(Mathf.Sin(angle)) * half.X + Math.Abs(Mathf.Cos(angle)) * half.Y);
                 var rect = new Rect2(position - extent, extent * 2);
@@ -427,7 +429,6 @@ public partial class ArrowHud
         _hoverArrows.Clear();
         _hoverRepresentatives.Clear();
         _previewQuantities.Clear();
-        _previewStates.Clear();
         _highlightedArrows.Clear();
         _previewCards.Clear();
         _inspectedArrow = null;

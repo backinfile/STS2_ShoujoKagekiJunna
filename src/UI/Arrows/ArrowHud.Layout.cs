@@ -9,8 +9,8 @@ public partial class ArrowHud
     private float _layoutRow;
     private ArrowDeployment[] _layoutOrder = [];
     private ArrowLane[] _layoutLanes = [];
-    private StardustPreviewKey?[] _layoutStardustKeys = [];
-    private readonly List<StardustPreviewKey?> _stardustKeyBuffer = [];
+    private ArrowCluster?[] _layoutClusters = [];
+    private readonly List<ArrowCluster?> _clusterBuffer = [];
     private Vector2[] _layoutRegions = [];
     private Vector2[] _layoutFormation = [];
     private readonly List<ArrowLane> _laneBuffer = [];
@@ -40,7 +40,7 @@ public partial class ArrowHud
         if (float.IsPositiveInfinity(allyLeft)) allyLeft = allyRight = canvas.X * .25f;
         float allyCenter = (allyLeft + allyRight) * .5f;
         _laneBuffer.Clear();
-        _stardustKeyBuffer.Clear();
+        _clusterBuffer.Clear();
         bool same = arrows.Count == _layoutOrder.Length;
         for (int i = 0; i < arrows.Count; i++)
         {
@@ -49,9 +49,9 @@ public partial class ArrowHud
             float targetX = targets.Count > 0 ? targets[0].X : enemyCount == 0 ? canvas.X : enemySum / enemyCount;
             var lane = ArrowLayout.Lane(arrow.TargetCategory <= 1, arrow.TargetsGroup, targetX, allyCenter);
             _laneBuffer.Add(lane);
-            StardustPreviewKey? key = _stardustKeys.TryGetValue(arrow, out var state) ? state : null;
-            _stardustKeyBuffer.Add(key);
-            same = same && arrow == _layoutOrder[i] && lane == _layoutLanes[i] && key == _layoutStardustKeys[i];
+            ArrowCluster? cluster = _arrowClusters.TryGetValue(arrow, out var state) ? state : null;
+            _clusterBuffer.Add(cluster);
+            same = same && arrow == _layoutOrder[i] && lane == _layoutLanes[i] && cluster == _layoutClusters[i];
         }
         bool enemiesLeft = enemyLeft < allyCenter || _laneBuffer.Contains(ArrowLane.Left);
         if (same && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)
@@ -83,26 +83,41 @@ public partial class ArrowHud
             var group = arrows.Where((_, index) => lanes[index] == lane).ToArray();
             if (group.Length == 0) continue;
             var range = regions[(int)lane];
-            bool IsStardust(ArrowDeployment arrow) => _stardustKeys.ContainsKey(arrow);
-            if (group.Any(IsStardust))
+            int columns = Math.Max(1, (int)MathF.Round((range.Y - range.X) / SlotSpacing) + 1);
+            bool hasClusters = group.Any(_arrowClusters.ContainsKey);
+            if (hasClusters || group.Length > columns * 2)
             {
-                var joined = group.Select((arrow, index) => index > 0 && IsStardust(arrow)
-                    && IsStardust(group[index - 1]) && _stardustKeys[arrow] == _stardustKeys[group[index - 1]]).ToArray();
+                var gaps = new float[group.Length];
+                var minimumGaps = new float[group.Length];
+                bool singleCluster = hasClusters;
+                for (int i = 1; i < group.Length; i++)
+                {
+                    bool joined = _arrowClusters.TryGetValue(group[i], out var cluster)
+                        && cluster.Leader == _arrowClusters.GetValueOrDefault(group[i - 1]).Leader;
+                    gaps[i] = joined ? ArrowLayout.ClusterGap(cluster.Count, SlotSpacing, IconWidth * .5f) : SlotSpacing;
+                    minimumGaps[i] = joined ? IconWidth * .5f : IconWidth;
+                    singleCluster &= joined;
+                }
                 // OccupiedRegions ends on the old 80-unit grid; use the remaining width as well.
                 float endX = lane == ArrowLane.Right ? canvas.X * .9f
                     : lane == ArrowLane.Left ? formation[(int)ArrowLane.FriendlyGroup].X - SlotSpacing : range.Y;
-                var packed = ArrowLayout.Pack(Math.Max(range.Y, endX) - range.X, SlotSpacing, IconWidth * .5f,
-                    group.All(IsStardust) && group.All(arrow => _stardustKeys[arrow] == _stardustKeys[group[0]])
-                        ? IconSize.Y * .5f : RowSpacing, joined);
-                for (int i = 0; i < group.Length; i++) _slots[group[i]] = packed[i] + new Vector2(range.X, rowY);
+                float rowSpacing = singleCluster
+                    ? ArrowLayout.ClusterGap(_arrowClusters[group[0]].Count, RowSpacing, IconSize.Y * .5f)
+                    : RowSpacing;
+                float width = Math.Max(range.Y, endX) - range.X;
+                ArrowLayout.FitTwoRows(width, gaps, minimumGaps);
+                var origin = new Vector2(range.X, rowY);
+                var previousInRegion = group.Select(arrow => _slots.TryGetValue(arrow, out var slot)
+                    ? (Vector2?)new Vector2(slot.X - origin.X, slot.Y - _layoutRow) : null).ToArray();
+                var packed = ArrowLayout.Pack(width, rowSpacing, gaps, previousInRegion);
+                for (int i = 0; i < group.Length; i++) _slots[group[i]] = packed[i] + origin;
                 continue;
             }
-            int columns = Math.Max(1, (int)MathF.Round((range.Y - range.X) / SlotSpacing) + 1);
             var previous = group.Select(arrow => _slots.TryGetValue(arrow, out var point) ? (Vector2?)point : null).ToArray();
             float bottom = previous.Where(p => p.HasValue).Select(p => p!.Value.Y).DefaultIfEmpty(rowY).Max();
             bool retainRows = canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)
                 && _layoutRegions.Length == regions.Length && range == _layoutRegions[(int)lane];
-            int retainedRows = retainRows ? Math.Max(1, (int)MathF.Round((bottom - rowY) / RowSpacing) + 1) : 1;
+            int retainedRows = retainRows ? Math.Clamp((int)MathF.Round((bottom - rowY) / RowSpacing) + 1, 1, 2) : 1;
             int rows = Math.Max(retainedRows, (group.Length + columns - 1) / columns);
             var slots = Enumerable.Range(0, columns * rows)
                 .Select(slot => new Vector2(range.X + slot % columns * SlotSpacing, rowY + slot / columns * RowSpacing)).ToArray();
@@ -113,7 +128,7 @@ public partial class ArrowHud
         _layoutRow = rowY;
         _layoutOrder = arrows.ToArray();
         _layoutLanes = lanes;
-        _layoutStardustKeys = _stardustKeyBuffer.ToArray();
+        _layoutClusters = _clusterBuffer.ToArray();
         _layoutRegions = regions;
         _layoutFormation = formation;
     }

@@ -119,10 +119,18 @@ foreach (var (name, allyLeft, allyRight, left, counts) in new[]
     Console.WriteLine("PASS: " + name + " density, clearance and ordering");
 }
 
+foreach (var (count, expectedGap) in new[] { (7, 80f), (8, 72f), (10, 64f), (12, 56f), (18, 36f), (27, 22.5f), (28, 21f), (64, 21f) })
+{
+    Require(Math.Abs(ArrowLayout.ClusterGap(count, 80, 21) - expectedGap) < .01f, $"gap at {count} copies");
+}
+float looseRowGap = ArrowLayout.ClusterGap(8, 96, 36.4f);
+var narrow = ArrowLayout.Pack(100, looseRowGap, [0, 72, 72, 72]);
+Require(Math.Abs(narrow[2].Y - 86.4f) < .01f && narrow[3].X == 72, "loose groups keep wider row spacing");
+Console.WriteLine("PASS: cluster gap follows the member count in both directions");
+
 foreach (int count in new[] { 2, 57, 58, 59, 64, 128 })
 {
-    var joined = Enumerable.Range(0, count).Select(i => i > 0).ToArray();
-    var points = ArrowLayout.Pack(1200, 80, 21, 36.4f, joined);
+    var points = ArrowLayout.Pack(1200, 36.4f, Enumerable.Repeat(21f, count).ToArray());
     Require(points.Length == count && points.Distinct().Count() == count, "packed copies stay distinct");
     Require(points.GroupBy(p => p.Y).Count() == (count + 57) / 58, "actual spacing determines row capacity");
     foreach (var row in points.GroupBy(p => p.Y).SkipLast(1))
@@ -130,14 +138,47 @@ foreach (int count in new[] { 2, 57, 58, 59, 64, 128 })
     Require(points.All(p => p.X >= 0 && p.X <= 1200), "packed arrows stay inside their region");
     Console.WriteLine($"PASS: {count} Stardust arrows fill each row before wrapping");
 }
-var edgeFit = ArrowLayout.Pack(1225.5f, 80, 21, 36.4f, Enumerable.Range(0, 60).Select(i => i > 0).ToArray());
+var edgeFit = ArrowLayout.Pack(1225.5f, 36.4f, Enumerable.Repeat(21f, 60).ToArray());
 Require(edgeFit.Take(59).All(p => p.Y == 0) && edgeFit[59].Y == 36.4f,
     "reuse the fraction left beyond the old 80-unit grid");
 Console.WriteLine("PASS: leftover region width is used before wrapping");
-var mixed = ArrowLayout.Pack(200, 80, 21, 96, [false, true, true, false, false, true]);
-Require(mixed.Take(4).All(p => p.Y == 0) && mixed[3].X == 122 && mixed[4].Y == 96 && mixed[5].X == 21,
-    "mixed arrow row uses compact Stardust spacing and ordinary arrow clearance");
-Console.WriteLine("PASS: mixed Stardust and ordinary arrows wrap at their actual widths");
+var mixed = ArrowLayout.Pack(234, 96, [0, 21, 21, 80, 56, 56]);
+Require(mixed.Take(5).All(p => p.Y == 0) && mixed[3].X == 122 && mixed[4].X == 178 && mixed[5].X == 234,
+    "adjacent clusters use their own gap and keep ordinary clearance between them");
+var wrapped = ArrowLayout.Pack(200, 96, [0, 21, 21, 80, 56, 56, 56]);
+Require(wrapped[4].Y == 0 && wrapped[5].Y == 96 && wrapped[6].X == 56, "mixed gaps wrap at their actual widths");
+Console.WriteLine("PASS: mixed arrow groups keep their own gap and wrap at their actual widths");
+
+var ordinary = Enumerable.Repeat(80f, 27).ToArray();
+var ordinaryMinimums = Enumerable.Repeat(42f, ordinary.Length).ToArray();
+ArrowLayout.FitTwoRows(960, ordinary, ordinaryMinimums);
+Require(Math.Abs(ordinary[1] - 960f / 13) < .02f && ArrowLayout.Pack(960, 96, ordinary).Max(point => point.Y) == 96,
+    "ordinary arrows tighten just enough to stay on two rows");
+var alreadyFits = Enumerable.Repeat(80f, 26).ToArray();
+ArrowLayout.FitTwoRows(960, alreadyFits, ordinaryMinimums);
+Require(alreadyFits.All(gap => gap == 80), "two rows that already fit retain their spacing");
+var mixedPressure = Enumerable.Range(0, 14).Select(i => i <= 7 ? 72f : 80f).ToArray();
+var mixedMinimums = Enumerable.Range(0, 14).Select(i => i <= 7 ? 21f : 42f).ToArray();
+ArrowLayout.FitTwoRows(320, mixedPressure, mixedMinimums);
+Require(mixedPressure[1] < 72 && mixedPressure[8] < 80 && ArrowLayout.Pack(320, 96, mixedPressure).Max(point => point.Y) == 96,
+    "a crowded lane tightens both within clusters and between different arrows");
+var overflow = Enumerable.Repeat(80f, 49).ToArray();
+ArrowLayout.FitTwoRows(960, overflow, Enumerable.Repeat(42f, overflow.Length).ToArray());
+Require(overflow.Skip(1).All(gap => gap == 42) && ArrowLayout.Pack(960, 96, overflow).Max(point => point.Y) == 192,
+    "a third row opens once minimum spacing cannot fit the arrows");
+Console.WriteLine("PASS: two-row fitting preserves spacing until needed and respects the minimum");
+
+Vector2?[] beforeCluster = [new(560, 0), new(800, 0), new(880, 0), new(960, 0), new(1040, 0), new(1120, 0), new(1200, 0), null];
+var afterCluster = ArrowLayout.Pack(1225.5f, 86.4f, Enumerable.Repeat(72f, 8).ToArray(), beforeCluster);
+float clusterTravel = beforeCluster.Take(7).Select((old, i) => old!.Value.DistanceTo(afterCluster[i])).Sum();
+
+var twoFullRows = Enumerable.Range(0, 32).Select(i => (Vector2?)new Vector2(i % 16 * 80, i / 16 * 96)).Append(null).ToArray();
+var newcomerGaps = Enumerable.Repeat(80f, 33).ToArray();
+ArrowLayout.FitTwoRows(1225.5f, newcomerGaps, Enumerable.Repeat(42f, 33).ToArray());
+var afterNewcomer = ArrowLayout.Pack(1225.5f, 96, newcomerGaps, twoFullRows);
+int changedRows = twoFullRows.Take(32).Select((old, i) => old!.Value.Y != afterNewcomer[i].Y).Count(changed => changed);
+Console.WriteLine($"7→8 existing-arrow travel: {clusterTravel:F1}; 32→33 existing arrows changing rows: {changedRows}");
+Require(clusterTravel < 400 && changedRows == 0, "existing arrows stay close to their slots as the gaps contract");
 
 static void Require(bool condition, string name)
 {
