@@ -141,7 +141,7 @@
   "JUNNA_KNOWLEDGE_COPY_REWARD_POWER.smartDescription": "战斗结束后，可领取{Amount}次知识牌复制奖励。",
   "JUNNA_JK400_POWER.title": "站起来奔跑",
   "JUNNA_JK400B_POWER.title": "翱翔在天际",
-  "JUNNA_JK400_POWER.description": "打出0费牌时，所有布置的[gold]飞矢[/gold]获得[blue]1[/blue]点[gold]伤害加成[/gold]。",
+  "JUNNA_JK400_POWER.description": "打出0费牌时，所有布置的[gold]飞矢[/gold]获得[blue]2[/blue]点[gold]伤害加成[/gold]。",
   "JUNNA_JK400_POWER.smartDescription": "打出0费牌时，所有布置的[gold]飞矢[/gold]获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。",
   "JUNNA_JK400B_POWER.description": "回合结束时，打出[blue]1[/blue]张造成[blue]8[/blue]点伤害的[gold]流星[/gold]。",
   "JUNNA_JK400B_POWER.smartDescription": "回合结束时，打出[blue]{Repeat}[/blue]张造成[blue]{Damage}[/blue]点伤害的[gold]流星[/gold]。"
