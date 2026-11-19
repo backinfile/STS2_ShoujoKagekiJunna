@@ -20,11 +20,7 @@ __pycache__/
 venv/
 .pytest_cache/
 
-# Workbench credentials, generated page, previews and historical snapshots
-/docs/design/workbench/local-save.config.json
-/docs/design/workbench/local-save.runtime.json
-/docs/design/workbench/previews/
-/docs/design/纯那Mod设计工作台.html
+# Historical art snapshots
 /docs/design/assets/**/before-*.json
 
 # Machine settings, credentials and temporary files

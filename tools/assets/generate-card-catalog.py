@@ -7,10 +7,12 @@ import runpy
 import base64
 from difflib import SequenceMatcher
 import json
+import os
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+CORE_ROOT = Path(os.environ.get('SHOUJO_CORE_ROOT', ROOT.parent / 'STS2_ShoujoKagekiAijoCore'))
 CATALOG_PATH = ROOT / 'data/card-pool.json'
 EXISTING = {
     'JB01': ('JunnaStrike', 'JUNNA_STRIKE'), 'JB02': ('JunnaDefend', 'JUNNA_DEFEND'),
@@ -244,8 +246,12 @@ def main():
         if args.rules_only:
             portrait_name = existing_cards[cid]['portrait']
         else:
-            art = (json.loads((ROOT / 'docs/design/workbench/assets.json').read_text(encoding='utf-8'))['defaultPortrait']
-                   if card['art'] == 'defaultPortrait' else bundle['assets'][card['art']])
+            art = bundle['assets'].get(card['art'])
+            if card['art'] == 'defaultPortrait' and not art:
+                assets_path = CORE_ROOT / 'tools/workbench/assets.json'
+                art = json.loads(assets_path.read_text(encoding='utf-8'))['defaultPortrait']
+            if not art:
+                raise ValueError(f"Missing workbench portrait: {cid} ({card['art']})")
             mime, data = art.split(',', 1)
             image_bytes = base64.b64decode(data)
             # Some exported data URLs carry a stale MIME label; use the actual file signature.

@@ -5,7 +5,7 @@ const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const base = __dirname;
 const root = path.resolve(base, '../../../../..');
-const {callTool} = require(path.join(root, 'docs/design/workbench/mcp-client.cjs'));
+const {callTool} = require(path.join(root, 'tools/assets/junna-workbench-client.cjs'));
 const read = file => JSON.parse(fs.readFileSync(path.join(base, file), 'utf8'));
 const rel = file => path.relative(root, file).replaceAll('\\', '/');
 const style = '参照本体 Power 重绘：紧凑单主体、黑色粗轮廓、饱和主色与大块明暗，透明底；以32像素辨识度检查。';
