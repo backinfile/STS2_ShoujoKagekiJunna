@@ -337,7 +337,11 @@ public static class CardEffects
 
     private static async Task<bool> ResolveCommon(CatalogCard card, PlayerChoiceContext context, CardPlay play)
     {
-        Task Attack() => DealDamage(card, context, play, card.Value("Damage"), card.Value("Repeat", 1));
+        Task Attack()
+        {
+            var (damage, hits) = PrintedAttack(card);
+            return DealDamage(card, context, play, damage, hits);
+        }
         Task Block() => CreatureCmd.GainBlock(card.Owner.Creature, card.Value("Block"), ValueProp.Move, play);
         Task Draw() => CardPileCmd.Draw(context, card.Value("DrawCount"), card.Owner);
         Task Energy() => PlayerCmd.GainEnergy(card.Value("Energy"), card.Owner);
@@ -358,6 +362,9 @@ public static class CardEffects
         }
         return true;
     }
+
+    internal static (int Damage, int Hits) PrintedAttack(CatalogCard card) =>
+        (card.Value("Damage"), card.Value("Repeat", 1));
 
     public static void SetNamedFree(MegaCrit.Sts2.Core.Entities.Players.Player player, params string[] ids)
     {

@@ -14,7 +14,7 @@ public partial class ArrowHud : Control
     private const float FrameScale = IconWidth / 240;
     private const float SlotSpacing = 80;
     private const float RowSpacing = 96;
-    private static readonly Vector2 FrameSize = new(240, 416);
+    internal static readonly Vector2 FrameSize = new(240, 416);
     private static readonly Vector2 IconSize = FrameSize * FrameScale;
     // Pivot around the portrait body, above the kite's long lower point.
     private static readonly Vector2 BodyCenter = new Vector2(120, 138) * FrameScale;
@@ -29,7 +29,7 @@ public partial class ArrowHud : Control
         new(-3, -3.5f), new(0, -1.5f), new(3, -3.5f), new(0, 5.5f)
     ];
     // Matches floating_arrow_c1.svg; the frame overlays this aperture.
-    private static readonly Vector2[] PortraitWindow =
+    internal static readonly Vector2[] PortraitWindow =
     [
         new(120, 30), new(216, 138), new(120, 364), new(24, 138)
     ];
@@ -73,6 +73,7 @@ public partial class ArrowHud : Control
         var room = NCombatRoom.Instance;
         if (room == null) return;
         RefreshArrowSnapshots(room);
+        RefreshDamageForecasts(room);
         var canvas = GetViewportRect().Size;
         // Use the second relic row, reserving exactly one row above the arrows.
         float rowY = SecondRelicRowY();

@@ -71,6 +71,7 @@ public partial class ArrowHud
     public override void _ExitTree()
     {
         ClearHoverPreview();
+        ClearDamageForecasts();
         foreach (var arrow in _previewCache.Keys.ToArray()) RemovePreviewCard(arrow);
         foreach (var arrow in _deployments.Keys.ToArray()) FinishDeployment(arrow);
     }
