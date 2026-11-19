@@ -16,6 +16,6 @@
 
 图像处理脚本记录了素材制作过程，需要对应的本地输入。日常构建直接使用 `ShoujoKagekiJunna/` 中已选定的资源。
 
-`assets/generate-card-catalog.py` 从 MCP 导出快照更新 `data/card-pool.json`、模型声明、本地化和配图。运行卡池通过 `Junna.CardPool` 嵌入程序集。
+`assets/generate-card-catalog.py` 从 MCP 导出快照更新 `data/card-pool.json`、模型声明、本地化和配图。运行卡池通过 `Junna.CardPool` 嵌入程序集。工作台工具默认使用同级的 `STS2_ShoujoKagekiAijoCore` 仓库，也可通过 `SHOUJO_CORE_ROOT` 指定 Core 仓库路径。
 
 `start-test-game.ps1 -UseInstalledMod` 复用测试目录中已经安装的模组。测试环境与录像写入 `artifacts/`，素材处理结果写入 `output/`。

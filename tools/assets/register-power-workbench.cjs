@@ -3,7 +3,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
 const assert=require('node:assert/strict');
-const {callTool}=require('../../docs/design/workbench/mcp-client.cjs');
+const {callTool}=require('./junna-workbench-client.cjs');
 const root=path.resolve(__dirname,'../..');
 const read=file=>JSON.parse(fs.readFileSync(path.join(root,file),'utf8'));
 const unpack=result=>{if(result.isError)throw Error(result.content[0].text);return result.structuredContent||(result.content?JSON.parse(result.content[0].text):result);};

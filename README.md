@@ -65,7 +65,7 @@ Directory.Build.props  .NET、游戏路径与依赖版本
 
 Git 保存源码、运行资源、工作台初始数据与当前设计数据。构建输出 `dist/`、验证产物 `artifacts/`、素材处理中间文件 `output/`、下载工具 `.tools/`、依赖缓存、工作台预览与历史备份保留在本地。工作台生成页面包含本机连接信息，也由 `.gitignore` 排除。
 
-模块分工与维护入口见 [代码结构](docs/implementation/architecture.md)。工具依赖与入口见 [tools/README.md](tools/README.md)，工作台程序与部署由 [Core 少女歌剧工作台](https://github.com/backinfile/STS2_ShoujoKagekiAijoCore/blob/main/tools/workbench/README.md) 维护，本仓库保留 [设计与兼容客户端说明](docs/design/workbench/README.md)。
+模块分工与维护入口见 [代码结构](docs/implementation/architecture.md)。工具依赖与入口见 [tools/README.md](tools/README.md)，工作台程序与部署由 [Core 少女歌剧工作台](https://github.com/backinfile/STS2_ShoujoKagekiAijoCore/blob/main/tools/workbench/README.md) 维护，纯那的内容编辑约定见 [工作台内容编辑](docs/design/AGENTS.md)。
 
 ## 本轮验证
 

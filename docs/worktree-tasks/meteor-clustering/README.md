@@ -219,6 +219,12 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 流星和星屑允许进行简化飞矢的动画，正常飞矢动画还是要有的
 ~~~
 
+### 合并与清理授权
+
+~~~text
+合并 清理
+~~~
+
 ## Brief task plan
 
 - 从 `main` 的 `99ec733` 创建工作树 `../worktrees/STS2_ShoujoKagekiJunna/meteor-clustering`，分支为 `codex/meteor-clustering`。
@@ -239,4 +245,4 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 生成飞矢原先共用角色旁的开场坐标，紧凑排位又按整行重新居中。现在效果生成的流星与星屑分别在槽位附近短距离飞入，保留折纸、上弦与拉弓。正常出牌的飞矢走完整轨迹。排位优先保留两行内的原行，并在合法范围内减少横向移动。
 - 用实机坐标复现后，7→8 张时原有飞矢总位移由 2522.8 降至 320.5。32→33 张时原有 32 张飞矢均保留在原行。17 项生成飞矢实机检查通过，覆盖飞矢生成与出牌事件、伤害、消耗及动画节点清理。
 - 9.10 秒入场录像和 5.10 秒两行录像位于 `out/tmp/meteor-clustering-preview-motion/`，完整解码通过。
-- 恢复动画后，Release 构建及 17 项生成飞矢实机检查再次通过。11.07 秒的对照录像包含普通飞矢的完整轨迹、两张衍生星屑与三张衍生流星的短轨迹，位于 `out/tmp/meteor-clustering-preview-animation/`。录像完整解码，运行日志无错误。工作树保留，合并待预览确认。
+- 恢复动画后，Release 构建及 17 项生成飞矢实机检查再次通过。11.07 秒的对照录像包含普通飞矢的完整轨迹、两张衍生星屑与三张衍生流星的短轨迹，位于 `out/tmp/meteor-clustering-preview-animation/`。录像完整解码，运行日志无错误。用户已确认快进合并到本地 main，并清理本次工作树、分支及其临时文件。对照录像和截图已另存。
