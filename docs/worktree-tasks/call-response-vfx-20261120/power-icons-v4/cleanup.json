@@ -1,0 +1,78 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "device": "cuda",
+  "dtype": "torch.bfloat16",
+  "strength": 0.25,
+  "interior_blend": 0.25,
+  "vae_tiling": true,
+  "source": "echo-original.png",
+  "source_sha256": "6f6b72a2ee12d24a1c80d8d43271146311b2671f73d3641b59aaeb5aa4c818f2",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "cleaned": "echo-clean.png",
+  "cleaned_sha256": "76f4208b8a89c3315d2137ba42f8031efc747a555f1ec084201af7d72b5e99f7",
+  "alpha_identical": true,
+  "outline_identical": true,
+  "echo_origin": [
+    15,
+    17
+  ],
+  "echo_size": [
+    71,
+    117
+  ],
+  "echo_identical_across_icons": true,
+  "icons": [
+    {
+      "file": "knowledge.png",
+      "sha256": "6cc4fff52724650a5325dfc3859dc43375e1d7e71967eb83b52535471a4f09ef",
+      "size": [
+        256,
+        256
+      ],
+      "category_origin": [
+        55,
+        106
+      ],
+      "category_size": [
+        186,
+        134
+      ]
+    },
+    {
+      "file": "arrow.png",
+      "sha256": "7310cfa822cedeacfb7d0fb20824891dddb74a0d249933edddd771ca4f9f8192",
+      "size": [
+        256,
+        256
+      ],
+      "category_origin": [
+        46,
+        58
+      ],
+      "category_size": [
+        195,
+        187
+      ]
+    },
+    {
+      "file": "shine.png",
+      "sha256": "f5ef7a9ad03cbaed657d48cadb0423aa0e634472df2d2a5e33298f1b27dc5c71",
+      "size": [
+        256,
+        256
+      ],
+      "category_origin": [
+        49,
+        51
+      ],
+      "category_size": [
+        184,
+        186
+      ]
+    }
+  ]
+}

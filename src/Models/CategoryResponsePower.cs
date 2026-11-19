@@ -1,21 +1,40 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Combat;
 
 namespace ShoujoKagekiJunna.Models;
 
 public sealed partial class JunnaPowerU_CARD_016
 {
-    protected override string IconId => "JK127";
+    // CardTutors orders the categories as Arrow, Knowledge, Shine.
+    private static readonly int[] CategoryOrder = [1, 0, 2];
+    private static readonly string[] CategoryIcons =
+        ["U_CARD_016_Knowledge", "U_CARD_016_Arrow", "U_CARD_016_Shine"];
 
-    protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
+    private int _cycleIndex;
+
+    protected override string IconId => CategoryIcons[_cycleIndex];
+    protected override int CategoryCycleIndex(Grant grant) => _cycleIndex;
+    protected override int StackAmount() => _grants.Sum(grant => grant.V("DrawCount"));
+
+    internal bool Matches(CardModel card) => CardTutors.Matches(card, CategoryOrder[_cycleIndex]);
+
+    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay play)
     {
-        int category = new[] { 1, 0, 2 }[grant.CycleIndex];
-        if (!CardTutors.Matches(play.Card, category)) return;
-        // Advance once for this play, including a full hand or a blocked draw.
-        // Each installed grant retains its own position across turns.
-        grant.CycleIndex = (grant.CycleIndex + 1) % 3;
-        await CardPileCmd.Draw(context, grant.V("DrawCount"), Owner.Player!);
+        if (play.Card.Owner != Owner.Player || !play.IsFirstInSeries) return;
+        if (_grants.Count == 0)
+        {
+            await PowerCmd.Remove(this);
+            return;
+        }
+        if (!Matches(play.Card) || _grants.Any(grant => ReferenceEquals(play, grant.InstalledBy))) return;
+
+        int draw = Amount;
+        // Refresh the next category before the draw animates, even when drawing is blocked.
+        _cycleIndex = (_cycleIndex + 1) % CategoryOrder.Length;
+        Synchronize();
+        await CardPileCmd.Draw(context, draw, Owner.Player!);
     }
 }

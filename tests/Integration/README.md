@@ -20,7 +20,7 @@ python tests/Integration/run-copy-reward.py --port <port> --record --output <tas
 python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --output <task-output>
 ```
 
-- `effects`：39组最新牌效专项，包含独立版本预期、实际支付、各类牌区、三选一、重复强化、独立轮换及8种手牌类别组合。
+- `effects`：39组最新牌效专项，包含独立版本预期、实际支付、各类牌区、三选一、重复强化、共享轮换与叠加抽牌及8种手牌类别组合。
 - `full`：112张牌×基础/升级×正常/空资源/强化组合/满手牌，共896组。逐项比较伤害、格挡、抽牌、能量、实际对象、牌堆、关键词、倒计时、复制和关联状态。
 - `CurrentPoolTriggers.cs` 补充每回合首次复制、开局布置、单次降费、胜利复制、全牌区自动追随和动态减伤。
 - `run-copy-reward.py` 通过真实耗尽、胜利、领取及选牌验证待领取Power、1/2张永久副本、预览、飞入、飞完与牌组计数通知；观察器只记录原生事件。

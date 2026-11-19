@@ -18,7 +18,7 @@ namespace JunnaIntegration;
 public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
 {
     public override string CmdName => "junna_latest_effects";
-    public override string Args => "check | prepare <response|strike|practice|tutor>";
+    public override string Args => "check | prepare <response|response-stacked|strike|practice|tutor>";
     public override string Description => "Effect-specific regression cases for workbench r5294.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
@@ -196,7 +196,7 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                     Equal(source.Pile?.Type, PileType.Discard, "No exhaust");
                     Equal(Shine.GetState(source)?.Remaining, 5, "Six-use shine decremented once");
                 });
-                await Case("U_CARD_016 cycle, mismatches, multi-label, independent stacks " + upgraded, async () =>
+                await Case("U_CARD_016 cycle, mismatches, multi-label, shared stacks " + upgraded, async () =>
                 {
                     for (int n = 0; n < 12; n++) await Add(player, "JB02", pile: PileType.Draw);
                     await Play(await Add(player, "U_CARD_016", upgraded));
@@ -206,19 +206,24 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                     Equal(player.PlayerCombatState.DrawPile.Cards.Count, left, "Wrong category does not trigger or advance");
                     await Play(await Add(player, "JK49B"));
                     Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 1, "Knowledge triggers");
+                    var power = player.Creature.Powers.OfType<JunnaPowerU_CARD_016>().Single();
+                    Equal(power.DisplayAmount, 1, "Unstacked draw amount");
+                    string arrowIcon = power.IconPath;
+                    Equal(arrowIcon.EndsWith("U_CARD_016_Arrow.png"), true, "Arrow state icon");
                     await Play(await Add(player, "U_CARD_016"));
+                    Equal(power.DisplayAmount, 2, "Second copy increases the draw amount");
+                    Equal(power.IconPath, arrowIcon, "Second copy keeps the current category");
                     await Play(await Add(player, "JA38"));
-                    Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 2, "First arrow stage; second still knowledge");
+                    Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 3, "Shared arrow stage draws two");
                     var multi = await Add(player, "JK133");
                     await Play(multi);
-                    Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 4, "Multi-label triggers each grant only once");
+                    Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 5, "Multi-label play draws twice and advances once");
                     var deployment = ArrowCombat.Find(multi)!;
                     await ArrowCombat.Accelerate(Context, deployment, 1000);
-                    Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 5, "Arrow completion only draws its own one card");
-                    // First grant is knowledge; second is arrow. Both persist across turn numbers.
+                    Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 6, "Arrow completion only draws its own one card");
                     player.PlayerCombatState.IncrementTurnNumber();
                     await Play(await Add(player, "JK49B"));
-                    Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 6, "Cycle persists across turns");
+                    Equal(left - player.PlayerCombatState.DrawPile.Cards.Count, 8, "Shared cycle persists across turns");
                 });
                 foreach (int mask in Enumerable.Range(0, 8))
                     await Case("U_CARD_017 category mask " + mask + " " + upgraded, async () =>
@@ -260,9 +265,14 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
         player.PlayerCombatState!.Energy = 20;
         Task<CardModel> Visible(string id, bool upgrade = false, PileType pile = PileType.Hand)
             => Add(player, id, upgrade, pile, visuals: true);
-        if (scenario == "response")
+        if (scenario is "response" or "response-stacked")
         {
             await Visible("U_CARD_016"); await Visible("JK49B"); await Visible("JA38"); await Visible("JS35");
+            if (scenario == "response-stacked")
+            {
+                await Visible("U_CARD_016", true);
+                await Visible("JB02");
+            }
             for (int n = 0; n < 8; n++)
                 foreach (var id in new[] { "JK49B", "JA38", "JS35" }) await Visible(id, pile: PileType.Draw);
         }

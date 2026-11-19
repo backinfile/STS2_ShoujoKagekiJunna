@@ -1,0 +1,19 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "device": "cuda",
+  "dtype": "torch.bfloat16",
+  "strength": 0.25,
+  "compile": false,
+  "vae_tiling": true,
+  "original": "power-icons-original.png",
+  "original_sha256": "b711e9357c945c434872cade4c85fdc55f080761bbdea4d3138fb95398e3df66",
+  "cleaned": "power-icons.png",
+  "cleaned_sha256": "7384c1378cb5d710315b0a6d81ecb8df4400461d27b64a5477c31461a9b0e818",
+  "size": [
+    1536,
+    1024
+  ],
+  "alpha_identical": true,
+  "mean_rgb_change": 1.067
+}

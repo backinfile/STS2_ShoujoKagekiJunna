@@ -1,0 +1,63 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "device": "cuda",
+  "dtype": "torch.bfloat16",
+  "strength": 0.25,
+  "interior_blend": 0.25,
+  "vae_tiling": true,
+  "source": "power-icons-original.png",
+  "source_sha256": "3e07dbd341c8926d9632247d6059f488be4c96126361fee7e169df461c5f324c",
+  "source_size": [
+    1774,
+    887
+  ],
+  "cleaned": "power-icons-clean.png",
+  "cleaned_sha256": "0fde4008b293a1afe5e90391f4edb33a19b3d1fd2ef0e02a831f27c3848ca65a",
+  "sheet_alpha_identical": true,
+  "outlines_identical": true,
+  "icons": [
+    {
+      "file": "knowledge.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "373b27f9a078787947edf3a01be1dd19e70b365b5f5e9321807b2daf12438e98",
+      "source_bounds": [
+        115,
+        282,
+        588,
+        622
+      ]
+    },
+    {
+      "file": "arrow.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "1f3365c155e52cdde68ef5d0291ed57d41436d5318eff86c78f467bb346c80a0",
+      "source_bounds": [
+        665,
+        244,
+        1110,
+        670
+      ]
+    },
+    {
+      "file": "shine.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "275a5e3dad4b88797a67c2aacdb32227c4cb74791ef2e228fbbcbad70a0ff41e",
+      "source_bounds": [
+        1240,
+        243,
+        1651,
+        660
+      ]
+    }
+  ]
+}

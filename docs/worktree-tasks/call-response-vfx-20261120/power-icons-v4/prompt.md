@@ -1,0 +1,7 @@
+# 公共回声元素生成提示词
+
+内置 ImageGen 生成一组回声弧，叠放在三枚[第三轮类别图标](../power-icons-v3/battle-preview.png)上。
+
+```text
+Use case: stylized-concept. Generate one single tiny auxiliary sound-echo glyph as a truly transparent isolated PNG for a colorful 2D fantasy deckbuilder combat power icon. The glyph must consist of EXACTLY TWO bold nested right-facing curved sound-wave strokes, like two close right parentheses )) with the inner left arc shorter and outer right arc slightly taller. Both are detached from each other with a clear transparent gap. Warm golden yellow fill (#ffc941) and a single crisp, thick near-black cartoon outline hugging BOTH strokes individually, no external contour around the pair. Shape anatomy: each arc is a compact solid ribbon, its tip ends subtly squared or rounded, both bow toward the right, simple smooth geometry, the same x-axis centerline and identical golden fill throughout. Saturated, flat, game-art clarity prioritizing an 8–10 pixel rendered size on screen. Keep the strokes thick, strongly shaped, and visibly distinct so the silhouette still reads when tiny, with at most a subtle angular darker gold plane. Precisely two arcs ONLY in the whole canvas, both centered as one pair, in a square canvas with large completely transparent margin. No mouth, speaker, music note, trailing mark, halo, frame, badge, background, tile, text, gradients, sparkles, lights, embellishment, checkerboard artwork, or shadow.
+```

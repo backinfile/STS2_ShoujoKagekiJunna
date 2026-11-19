@@ -10,7 +10,7 @@ public abstract partial class CatalogPower
     protected override string SmartDescriptionLocKey => "JUNNA_CATALOG.smartDescription";
     protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("Effects", Description.GetFormattedText())];
 
-    private int StackAmount() => CardRules.Get(DesignId).PowerAmount switch
+    protected virtual int StackAmount() => CardRules.Get(DesignId).PowerAmount switch
     {
         PowerAmountKind.RemainingLimit => _grants.Sum(g => Math.Max(0, g.V("Limit") - g.Used)),
         PowerAmountKind.Threshold => _grants.Sum(g => g.V("Threshold")),
@@ -40,6 +40,8 @@ public abstract partial class CatalogPower
     }
 
     protected virtual int? RemainingTriggers => null;
+
+    protected virtual int CategoryCycleIndex(Grant grant) => grant.CycleIndex;
 
     private string RenderEffects()
     {
@@ -81,7 +83,7 @@ public abstract partial class CatalogPower
             PowerDescriptionKind.GeneratedCardGroups => Groups(g => g.Card.IsUpgraded, group => Format(("Amount", group.Count()), ("Card", CardCatalog.Get("JK46B").Name + (group.Key ? "+" : "")))),
             PowerDescriptionKind.DamageGroups => Groups(g => DamagePayload(g).Damage,
                 group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => DamagePayload(g).Hits)))),
-            PowerDescriptionKind.CategoryGroups => Groups(g => g.CycleIndex, group => Format(
+            PowerDescriptionKind.CategoryGroups => Groups(CategoryCycleIndex, group => Format(
                 ("Category", new LocString("cards", new[] { "JUNNA_PREPARE_KNOWLEDGE.title", "JUNNA_PREPARE_ARROWS.title", "JUNNA_PREPARE_SHINE.title" }[group.Key]).GetFormattedText()),
                 ("Amount", group.Sum(g => g.V("DrawCount"))))),
             _ => throw new InvalidOperationException("Missing power description: " + DesignId)

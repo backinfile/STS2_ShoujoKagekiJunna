@@ -1,0 +1,50 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "device": "cuda",
+  "dtype": "torch.bfloat16",
+  "strength": 0.25,
+  "compile": false,
+  "vae_tiling": true,
+  "assets": [
+    {
+      "original": "concepts/a-cue-tag-original.png",
+      "cleaned": "concepts/a-cue-tag.png",
+      "size": [
+        1672,
+        941
+      ],
+      "original_sha256": "863f41e83de49afb689a72c6c5e0ba6742098658df0b071aa8e8639ec7407ddf",
+      "cleaned_sha256": "d28f91eaa7a5a64e9e355e1a8850eab598a6862e07d15bed589e880a6579216a",
+      "alpha_identical": true,
+      "mean_rgb_change": 1.384,
+      "seconds": 3.56
+    },
+    {
+      "original": "concepts/b-stage-lights-original.png",
+      "cleaned": "concepts/b-stage-lights.png",
+      "size": [
+        1672,
+        941
+      ],
+      "original_sha256": "acdf93fe9d279d066b915c22987312982348bef9b06524fd8749a0ee46342f48",
+      "cleaned_sha256": "8a786baba329687ac997889398717a13cf395c9de64632ca8c696e0137ef3030",
+      "alpha_identical": true,
+      "mean_rgb_change": 1.617,
+      "seconds": 2.95
+    },
+    {
+      "original": "concepts/c-hand-markers-original.png",
+      "cleaned": "concepts/c-hand-markers.png",
+      "size": [
+        1672,
+        941
+      ],
+      "original_sha256": "3496c08b63b3393995e4d5fdfd2d635d8543f4feb799b4074bd684862f7576a3",
+      "cleaned_sha256": "d775868c6bfc0def17dc322d3e23e1f23eb444821f7bb44da0b06b1f9e7e3239",
+      "alpha_identical": true,
+      "mean_rgb_change": 1.624,
+      "seconds": 2.95
+    }
+  ]
+}
