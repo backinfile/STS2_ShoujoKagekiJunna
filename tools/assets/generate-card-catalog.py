@@ -26,6 +26,7 @@ EXISTING = {
 
 SELECTION_PROMPTS = {
     "U_CARD_010": "选择1张{Category}牌放入手牌。",
+    "U_CARD_023": "选择1张手牌。",
     "JG03": "选择1张手牌。",
     "JG09": "选择1张手牌。",
     "JG16": "选择1张手牌。",
@@ -86,7 +87,7 @@ def display_description(card, text, card_names, values, upgraded=False):
     highlighted.update(name + '+' for name in card_names)
     pattern = '|'.join(re.escape(word) for word in sorted(highlighted, key=len, reverse=True))
     # Match the Exhaust keyword and Strength stat in context.
-    pattern += r'|(?<=获得)消耗|(?<=点)力量'
+    pattern += r'|(?<=获得)消耗|消耗(?=复制)|(?<=点)力量'
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
     if card['id'] == 'JK206':
         text += '{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}'
@@ -304,10 +305,13 @@ def main():
         declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
         wrappers.append(declaration + f'[CustomID("{card["modelId"]}")]\npublic sealed class {card["className"]}() : CatalogCard("{card["id"]}");\n')
     ids = {c['id'] for c in cards}
+    source_ids = {card['id'] for card in bundle['data']['cards']}
     groups = [g for g in bundle['data']['partnerGroups'] if g['mainCardId'] in ids and not g.get('trashedAt') and not g.get('reservedAt')]
     for group in groups:
-        if any(cid not in ids for cid in group['grantedCardIds']):
-            raise ValueError('Inactive knowledge group member: ' + group['id'])
+        if not source_ids.issuperset(group['grantedCardIds']):
+            raise ValueError('Unknown knowledge group member: ' + group['id'])
+    # Complete groups must not grant archived or reserved cards.
+    groups = [group for group in groups if ids.issuperset(group['grantedCardIds'])]
     out = {'revision': bundle['revision'], 'cards': definitions, 'groups': groups,
            'startingDeck': bundle['data']['meta']['startingDeck'], 'retiredCards': list(retired.values()),
            'startingHp': bundle['data']['meta'].get('startingHp', 70),
@@ -379,6 +383,7 @@ def main():
             'JA35': '回合开始时，所有[gold]飞矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA205': '[gold]飞矢[/gold]造成[blue]{Amount}[/blue]%额外伤害。',
             'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
+            'JK235': '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。',
             'U_CARD_008': '战斗结束时，向[gold]牌组[/gold]添加[blue]{Amount}[/blue]张[gold]故事[/gold]。',
             'U_CARD_016': '打出[gold]{Category}[/gold]牌后，抽[blue]{Amount}[/blue]张牌。',

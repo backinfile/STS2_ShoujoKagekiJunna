@@ -104,13 +104,17 @@ public static partial class ArrowCombat
             await Accelerate(context, arrow, turns);
     }
 
-    public static async Task CopyAll(PlayerChoiceContext context, Player player)
+    public static Task CopyAll(PlayerChoiceContext context, Player player)
+        => CopyAll(context, player, exhaustCopies: false);
+
+    internal static async Task CopyAll(PlayerChoiceContext context, Player player, bool exhaustCopies)
     {
         var originals = DisplayOrder().Where(a => a.Card.Owner == player && !a.Resolving && a.Remaining > 0).ToArray();
         using var single = KnowledgeCombat.SingleCard();
         foreach (var original in originals)
         {
             var copy = CardCopies.ForCombat(original.Card, player, CardCopyPurpose.TemporaryCopy);
+            if (exhaustCopies) copy.AddKeyword(CardKeyword.Exhaust);
             var play = new CardPlay
             {
                 Card = copy, Target = original.Play.Target, ResultPile = original.Play.ResultPile,
@@ -123,7 +127,8 @@ public static partial class ArrowCombat
                 original.Payload.Bind(copy).Invoke, original.CopyXValues())
             {
                 Sequence = _sequence, PlayCount = original.PlayCount, Payload = original.Payload,
-                ExhaustAfterResolve = original.ExhaustAfterResolve, AttacksWhileWaiting = original.AttacksWhileWaiting
+                ExhaustAfterResolve = original.ExhaustAfterResolve || exhaustCopies,
+                AttacksWhileWaiting = original.AttacksWhileWaiting
             };
             await Place(deployment, () => CardPileCmd.AddGeneratedCardToCombat(copy, ArrowPile.PileId, player), generated: true);
         }
@@ -177,13 +182,12 @@ public static partial class ArrowCombat
             // A resolving arrow may have deployed itself again. Keep that new deployment intact.
             Arrows.Remove(arrow);
             if (Find(arrow.Card) != null) return;
-            if (await HandArrow.Finish(context, arrow.Card, arrow.ExhaustAfterResolve)) return;
+            if (await HandArrow.Finish(context, arrow.Card, arrow.ExhaustsWhenResolved)) return;
             if (arrow.Card.Pile?.Type != ArrowPile.PileId) return;
-            if (!arrow.ExhaustAfterResolve && !arrow.Card.ExhaustOnNextPlay &&
-                !arrow.Card.Keywords.Contains(CardKeyword.Exhaust) && HandArrow.Loops(arrow.Card) &&
+            if (!arrow.ExhaustsWhenResolved && HandArrow.Loops(arrow.Card) &&
                 await HandArrow.ReplayLoop(context, arrow.Card, arrow.Play.Target)) return;
             using var pileExit = new ArrowPileExit(hud?.PileExitPosition(arrow.Card));
-            if (arrow.Card.ExhaustOnNextPlay || arrow.Card.Keywords.Contains(CardKeyword.Exhaust))
+            if (arrow.ExhaustsWhenResolved)
             {
                 arrow.Card.ExhaustOnNextPlay = false;
                 await CardCmd.Exhaust(context, arrow.Card, skipVisuals: true);

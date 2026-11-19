@@ -190,8 +190,13 @@ public static class CardEffects
                 break;
             case "JA67":
                 await Attack();
-                if (ArrowCombat.Find(card)?.ExhaustAfterResolve != true)
+                if (ArrowCombat.Find(card)?.ExhaustsWhenResolved != true)
                     await CardActions.FreePlay(context, card, play.Target, keepTarget: true);
+                break;
+            case "U_CARD_031":
+                await Block();
+                if (ArrowCombat.Find(card) is { ExhaustsWhenResolved: false })
+                    await CardActions.FreePlay(context, card);
                 break;
             case "JK74":
                 await Attack(hits: hand.Cards.Any(c => CardCatalog.DesignId(c) == "JK74B") ? 2 : 1); break;
@@ -247,6 +252,8 @@ public static class CardEffects
                 await HandArrow.Select(context, card, V("Cards"), optional: true); break;
             case "JG37":
                 await Draw(V("DrawCount")); await HandArrow.Select(context, card, V("Cards")); break;
+            case "U_CARD_023":
+                await Block(); await Draw(V("DrawCount")); await HandArrow.Select(context, card, V("Cards")); break;
             case "JA94":
                 await Block(); await ArrowCombat.AccelerateSelf(context, player, V("Turns")); break;
             case "JK112":
@@ -271,7 +278,7 @@ public static class CardEffects
             case "JA108":
                 await CardActions.PlayDrawPileArrows(context, player); break;
             case "JA104":
-                await Block(); await CardChoices.AccelerateTargets(context, card); break;
+                await Block(); await CardActions.Generate(player, "JA119", V("Cards"), PileType.Hand, CardPilePosition.Bottom); break;
             case "JA145":
                 await Attack(); await CardActions.Generate(player, "JA119", V("Cards"), PileType.Hand, CardPilePosition.Bottom); break;
             case "JK184B":
@@ -282,7 +289,7 @@ public static class CardEffects
                 await CardChoices.AccelerateTargets(context, card);
                 break;
             case "JA176":
-                await ArrowCombat.CopyAll(context, player);
+                await ArrowCombat.CopyAll(context, player, exhaustCopies: !card.IsUpgraded);
                 break;
             case "JA177":
                 await Block();
@@ -320,6 +327,9 @@ public static class CardEffects
                 int categoryHits = 1 + Enumerable.Range(0, 3)
                     .Count(category => hand.Cards.Any(candidate => candidate != card && CardTutors.Matches(candidate, category)));
                 await Attack(hits: categoryHits);
+                break;
+            case "U_CARD_032":
+                await Energy(V("Energy")); await Attack();
                 break;
             default: throw new InvalidOperationException($"Missing card effect: {card.DesignId}");
         }

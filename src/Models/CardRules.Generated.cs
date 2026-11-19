@@ -44,10 +44,9 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
-                ["Turns"] = "N1",
+                ["Cards"] = "N1",
             },
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
+            RelatedCards = ["JA119"],
         },
         ["JA105"] = new()
         {
@@ -70,8 +69,6 @@ internal static partial class CardRules
         },
         ["JA108B"] = new()
         {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
             Effect = SimpleCardEffect.Attack,
         },
         ["JA118"] = new()
@@ -1519,12 +1516,12 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
+                ["Cards"] = "N2",
                 ["DrawCount"] = "N1",
+                ["HandArrowTurns"] = "N3",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
-            Effect = SimpleCardEffect.BlockAndDraw,
-            LoopAsArrow = true,
         },
         ["U_CARD_024"] = new()
         {
@@ -1553,6 +1550,16 @@ internal static partial class CardRules
         {
             Tips = [CardTip.Arrow, CardTip.Meteor],
             UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
+        },
+        ["U_CARD_031"] = new()
+        {
+        },
+        ["U_CARD_032"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Energy"] = "N0",
+            },
         },
     };
 }

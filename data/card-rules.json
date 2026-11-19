@@ -780,13 +780,10 @@
     },
     "JA104": {
       "fields": {
-        "Turns": "N1"
+        "Cards": "N1"
       },
-      "tips": [
-        "Arrow"
-      ],
-      "upgradedTips": [
-        "Arrow"
+      "relatedCards": [
+        "JA119"
       ]
     },
     "JA105": {
@@ -828,12 +825,6 @@
       ]
     },
     "JA108B": {
-      "tips": [
-        "Knowledge"
-      ],
-      "upgradedTips": [
-        "Knowledge"
-      ],
       "effect": "Attack"
     },
     "JB06": {
@@ -2075,16 +2066,16 @@
     },
     "U_CARD_023": {
       "fields": {
-        "DrawCount": "N1"
+        "DrawCount": "N1",
+        "Cards": "N2",
+        "HandArrowTurns": "N3"
       },
       "tips": [
         "Arrow"
       ],
       "upgradedTips": [
         "Arrow"
-      ],
-      "effect": "BlockAndDraw",
-      "loopAsArrow": true
+      ]
     },
     "U_CARD_024": {
       "fields": {
@@ -2158,6 +2149,12 @@
         "Arrow",
         "Meteor"
       ]
+    },
+    "U_CARD_031": {},
+    "U_CARD_032": {
+      "fields": {
+        "Energy": "N0"
+      }
     }
   }
 }

@@ -61,5 +61,7 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
         await ArrowNativeHooks.Complete(context, actualPlay);
     }
     public bool ExhaustAfterResolve { get; internal set; }
+    internal bool ExhaustsWhenResolved => ExhaustAfterResolve || Card.ExhaustOnNextPlay ||
+        Card.Keywords.Contains(CardKeyword.Exhaust);
     internal bool Resolving;
 }

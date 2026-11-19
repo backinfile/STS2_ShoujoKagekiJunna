@@ -108,7 +108,7 @@
   "JUNNA_JA144_POWER.description": "回合开始时，获得[blue]1[/blue]张[gold]更近一步[/gold]。",
   "JUNNA_JA144_POWER.smartDescription": "回合开始时，获得[blue]{Amount}[/blue]张[gold]更近一步[/gold]。",
   "JUNNA_JH59_POWER.title": "北极星",
-  "JUNNA_JK235_POWER.description": "每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]3[/blue]点伤害。",
+  "JUNNA_JK235_POWER.description": "每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]4[/blue]点伤害。",
   "JUNNA_JK235_POWER.smartDescription": "每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{Repeat}[/blue]次}。",
   "JUNNA_JK235_POWER.title": "理想的国语教科书",
   "JUNNA_JH59_POWER.description": "回合开始时，获得[blue]1[/blue]点[gold]能量[/gold]。",
