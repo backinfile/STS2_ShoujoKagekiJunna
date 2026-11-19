@@ -3673,38 +3673,6 @@
       }
     },
     {
-      "id": "JK400B",
-      "modelId": "JUNNA_JK400B",
-      "className": "JunnaCardJK400B",
-      "name": "翱翔在天际",
-      "cost": 1,
-      "upgradedCost": 0,
-      "costsX": false,
-      "type": "能力",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "罕见",
-      "pool": false,
-      "knowledge": true,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JK400B.png",
-      "values": [
-        {
-          "name": "Damage",
-          "base": 8,
-          "upgraded": 8
-        }
-      ],
-      "text": "知识。回合结束时，打出一张造成8点伤害的流星。",
-      "upgradedText": "知识。回合结束时，打出一张造成8点伤害的流星。"
-    },
-    {
       "id": "U_CARD_030",
       "modelId": "JUNNA_U_CARD_030",
       "className": "JunnaCardU_CARD_030",
@@ -7889,6 +7857,38 @@
         "x": 0.23,
         "y": 0.49
       }
+    },
+    {
+      "id": "JK400B",
+      "modelId": "JUNNA_JK400B",
+      "className": "JunnaCardJK400B",
+      "name": "翱翔在天际",
+      "cost": 1,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "能力",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": false,
+      "knowledge": true,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "JK400B.png",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 8,
+          "upgraded": 8
+        }
+      ],
+      "text": "知识。回合结束时，打出一张造成8点伤害的流星。",
+      "upgradedText": "知识。回合结束时，打出一张造成8点伤害的流星。"
     }
   ],
   "startingHp": 70,
