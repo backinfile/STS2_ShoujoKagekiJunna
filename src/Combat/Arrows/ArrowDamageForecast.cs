@@ -28,7 +28,6 @@ internal static class ArrowDamageForecast
     private static int? ForBatch(Creature target, ICombatState combat, IEnumerable<ArrowDeployment> due)
     {
         int hp = target.CurrentHp;
-        int block = target.Block;
         bool hasAttack = false;
         foreach (var arrow in due)
         {
@@ -52,11 +51,7 @@ internal static class ArrowDamageForecast
                 ModifyDamageHookType.All, CardPreviewMode.Normal, out _);
             for (int replay = 0; replay < arrow.PlayCount && hp > 0; replay++)
             for (int hit = 0; hit < hits && hp > 0; hit++)
-            {
-                decimal blocked = Math.Min(block, damage);
-                block -= (int)blocked;
-                hp -= Math.Clamp((int)(damage - blocked), 0, hp);
-            }
+                hp -= Math.Clamp((int)damage, 0, hp);
         }
         return hasAttack ? target.CurrentHp - hp : null;
     }
@@ -69,6 +64,8 @@ internal static class ArrowDamageForecast
                 return new(arrow.Card.DynamicVars.Damage.BaseValue, 1);
             case JunnaTurningSlash slash:
                 return new(slash.DynamicVars.Damage.BaseValue, slash.DynamicVars.Repeat.IntValue);
+            case CatalogCard { DesignId: "JK314" } spotlight:
+                return new(spotlight.Value("Damage"), spotlight.HitsWithDepletedPartners);
             case CatalogCard card:
                 var effect = CardRules.Get(card.DesignId).Effect;
                 if (effect is SimpleCardEffect.Attack or SimpleCardEffect.AttackAndBlock or SimpleCardEffect.AttackAndDraw ||

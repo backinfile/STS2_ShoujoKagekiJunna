@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using ShoujoKagekiJunna.Models;
 using ShoujoKageki.Core.V1;
 
@@ -23,6 +24,7 @@ public static class HandArrow
         public readonly Form? Previous = previous;
     }
     private static ConditionalWeakTable<CardModel, Form> Forms = new();
+    private static readonly AsyncLocal<CardModel?> ConvertingPlay = new();
     private static readonly HashSet<MethodBase> PatchedTypes = [];
     private static readonly Harmony Patcher = new(JunnaMod.Id + ".HandArrowTypes");
     public static bool IsArrow(CardModel card) => Forms.TryGetValue(card, out _);
@@ -110,6 +112,8 @@ public static class HandArrow
         Mark(card, turns, temporary: true);
         bool played = false;
         bool unplayable = card.Keywords.Contains(CardKeyword.Unplayable);
+        var previousPlay = ConvertingPlay.Value;
+        ConvertingPlay.Value = card;
         try
         {
             // Converting a card into an arrow also accepts unplayable material.
@@ -121,10 +125,34 @@ public static class HandArrow
         }
         finally
         {
+            ConvertingPlay.Value = previousPlay;
             if (unplayable) card.AddKeyword(CardKeyword.Unplayable);
             if (!played && ArrowCombat.Find(card) == null) Restore(card);
         }
         return played;
+    }
+
+    [HarmonyPatch(typeof(ChainsOfBindingPower), nameof(ChainsOfBindingPower.ShouldPlay))]
+    private static class BindingPlayCheck
+    {
+        private static bool Prefix(CardModel card, ref bool __result)
+        {
+            if (!ReferenceEquals(ConvertingPlay.Value, card)) return true;
+            __result = true;
+            return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(ChainsOfBindingPower), nameof(ChainsOfBindingPower.BeforeCardPlayed))]
+    private static class BindingPlayCount
+    {
+        private static bool Prefix(CardPlay cardPlay, ref Task __result)
+        {
+            // A converted play neither checks nor spends the native Bound allowance.
+            if (!ReferenceEquals(ConvertingPlay.Value, cardPlay.Card)) return true;
+            __result = Task.CompletedTask;
+            return false;
+        }
     }
 
     internal static async Task Dispatch(CardModel card, PlayerChoiceContext context, CardPlay play, ICardEffectPayload next)
