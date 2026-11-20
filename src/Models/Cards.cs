@@ -63,7 +63,17 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
                         Id = "junna_knowledge_background_" + DesignId,
 #endif
                     };
-            foreach (var related in rules.RelatedCards) yield return new CardHoverTip(CardCatalog.Model(related));
+            foreach (var related in rules.RelatedCards)
+            {
+                var model = CardCatalog.Model(related);
+                if (DesignId == "JA145" && related == "JA119" && IsUpgraded)
+                {
+                    model = ShoujoKageki.Core.V1.CardCopies.Snapshot(model);
+                    model.UpgradeInternal();
+                    model.FinalizeUpgradeInternal();
+                }
+                yield return new CardHoverTip(model);
+            }
             if (rules.HasTip(CardTip.Meteor, IsUpgraded))
             {
                 var meteor = (CatalogCard)ShoujoKageki.Core.V1.CardCopies.Snapshot(CardCatalog.Model("JA81B"));

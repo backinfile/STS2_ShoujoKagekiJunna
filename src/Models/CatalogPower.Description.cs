@@ -58,6 +58,8 @@ public abstract partial class CatalogPower
             text.Add("Amount", count);
             return text.GetFormattedText();
         }
+        string DescriptionFragment(bool upgraded)
+            => new LocString("powers", Id.Entry + (upgraded ? ".targetedArrow" : ".randomArrow")).GetFormattedText();
         int Sum(string field) => _grants.Sum(g => g.V(field));
         int Bonus() => _grants.Sum(g => g.V("Bonus"));
         int Block() => _grants.Sum(g => g.V("Block"));
@@ -78,6 +80,9 @@ public abstract partial class CatalogPower
             PowerDescriptionKind.ArrowLimitGroups => Groups(g => g.V("Limit"), group => Format(("Limit", group.Key), ("Turns", group.Sum(g => g.V("Turns"))))),
             PowerDescriptionKind.BlockLimitGroups => Groups(g => (Limit: g.V("EnergyThreshold"), Threshold: g.V("EnergyThreshold2")), group => Format(("Limit", group.Key.Limit), ("Threshold", group.Key.Threshold), ("Amount", group.Sum(g => g.V("Block"))))),
             PowerDescriptionKind.TurnGroups => Groups(g => g.V("Turns"), group => Format(("Turns", group.Key), ("Repetition", Repetition(group.Count())))),
+            PowerDescriptionKind.TargetedTurnGroups => Groups(g => (Turns: g.V("Turns"), Upgraded: g.Card.IsUpgraded),
+                group => Format(("Turns", group.Key.Turns), ("Target", DescriptionFragment(group.Key.Upgraded)),
+                    ("Repetition", Repetition(group.Count())))),
             PowerDescriptionKind.BonusGroups => Groups(g => g.V("Bonus"), group => Format(("Bonus", group.Key), ("Repetition", Repetition(group.Count())))),
             PowerDescriptionKind.LimitGroups => Groups(g => g.V("Limit"), group => Format(("Limit", group.Key), ("Amount", group.Count()))),
             PowerDescriptionKind.GeneratedCardGroups => Groups(g => g.Card.IsUpgraded, group => Format(("Amount", group.Count()), ("Card", CardCatalog.Get("JK46B").Name + (group.Key ? "+" : "")))),

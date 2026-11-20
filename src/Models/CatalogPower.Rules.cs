@@ -239,11 +239,20 @@ public sealed partial class JunnaPowerJK37C
 {
     protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
     {
-        if (!(play.Resources.EnergyValue == 0)) return;
-        var eligibleArrows = ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player && !a.Resolving && a.Remaining > 0).ToArray();
+        if (play.Card.EnergyCost.CostsX || play.Resources.EnergyValue != 0) return;
+        var eligibleArrows = ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player && !a.Resolving && a.Remaining > 0
+            && (!grant.Card.IsUpgraded || MatchesTarget(a, play))).ToArray();
         if (eligibleArrows.Length > 0)
             await ArrowCombat.Accelerate(context, Owner.Player!.RunState.Rng.CombatCardSelection.NextItem(eligibleArrows)!, grant.V("Turns"));
     }
+
+    private static bool MatchesTarget(ArrowDeployment arrow, CardPlay play) => play.Card.TargetType switch
+    {
+        TargetType.AllEnemies => arrow.TargetsAllEnemies,
+        TargetType.AllAllies => arrow.TargetsAllPlayers,
+        TargetType.None => false,
+        _ => !arrow.TargetsGroup && (play.Target ?? CardTargets.First(play.Card)) is { } target && arrow.Target == target
+    };
 }
 
 public sealed partial class JunnaPowerJK46

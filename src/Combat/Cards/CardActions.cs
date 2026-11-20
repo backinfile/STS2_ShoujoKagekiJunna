@@ -66,6 +66,45 @@ public static class CardActions
         return drawn.ToArray();
     }
 
+    internal static async Task DrawWithArrowOverflow(PlayerChoiceContext context, Player player, int count, int turns)
+    {
+        var hand = player.PlayerCombatState!.Hand;
+        var draw = player.PlayerCombatState.DrawPile;
+        bool startedWithRoom = hand.Cards.Count < CardPile.MaxCardsInHand;
+        if (startedWithRoom)
+            count -= (await CardPileCmd.Draw(context, count, player)).Count();
+        if (count <= 0 || hand.Cards.Count < CardPile.MaxCardsInHand || CombatManager.Instance.IsOverOrEnding)
+            return;
+        if (!Hook.ShouldDraw(player.Creature.CombatState!, player, false, out var modifier))
+        {
+            if (!startedWithRoom && modifier != null) await Hook.AfterPreventingDraw(player.Creature.CombatState!, modifier);
+            return;
+        }
+
+        // Stage the actual overflow cards in draw order before their play hooks can
+        // change either pile. Overflow itself does not emit card-drawn events.
+        var overflow = new List<CardModel>();
+        try
+        {
+            for (int i = 0; i < count && !CombatManager.Instance.IsOverOrEnding; i++)
+            {
+                await CardPileCmd.ShuffleIfNecessary(context, player);
+                if (draw.Cards.FirstOrDefault() is not { } card || CombatManager.Instance.IsOverOrEnding) break;
+                overflow.Add(card);
+                if (!(await CardPileCmd.Add(card, PileType.Play)).success) break;
+            }
+            foreach (var card in overflow)
+                if (card.Pile?.Type == PileType.Play)
+                    await HandArrow.Play(context, card, turns);
+        }
+        finally
+        {
+            foreach (var card in Enumerable.Reverse(overflow))
+                if (card.Pile?.Type == PileType.Play && !card.HasBeenRemovedFromState)
+                    await CardPileCmd.Add(card, draw, CardPilePosition.Top);
+        }
+    }
+
     public static async Task Recall(PlayerChoiceContext context, CardModel source, string id)
     {
         var candidates = Named(source.Owner, id).Where(c => c != source && c.Pile?.Type != PileType.Hand).ToArray();

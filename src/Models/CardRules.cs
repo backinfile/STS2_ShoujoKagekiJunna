@@ -7,7 +7,7 @@ internal enum PowerDescriptionKind
 {
     None, RemainingUses, Passive, Applications, ThresholdSum, BonusSum, RepeatedApplications,
     BlockSum, AmountWithThreshold, MinimumThreshold, EnergyThresholdGroups, ArrowLimitGroups,
-    BlockLimitGroups, TurnGroups, BonusGroups, LimitGroups, GeneratedCardGroups, DamageGroups, CategoryGroups
+    BlockLimitGroups, TurnGroups, TargetedTurnGroups, BonusGroups, LimitGroups, GeneratedCardGroups, DamageGroups, CategoryGroups
 }
 internal sealed class CardRuleDefinition
 {

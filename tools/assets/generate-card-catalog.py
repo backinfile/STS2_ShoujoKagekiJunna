@@ -81,7 +81,7 @@ def display_description(card, text, card_names, values, upgraded=False):
     # Arrow countdowns are rendered on their existing plaque.
     text = re.sub(r'^\[blue\][^\n]*\n', '', text)
     text = re.sub(r'。\s*', '。\n', text).strip()
-    highlighted = {'格挡', '易伤', '虚弱', '知识', '连锁知识', '飞矢', '闪耀', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
+    highlighted = {'格挡', '易伤', '虚弱', '知识', '连锁知识', '飞矢', '箭矢', '闪耀', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
     # Only actual named references need emphasis; all replacements run once to avoid nested tags.
     highlighted.update(card_names)
     highlighted.update(name + '+' for name in card_names)
@@ -138,6 +138,19 @@ def bind_numbers(text, prior=None):
     return result, values
 
 
+def portrait_extension(mime, image_bytes):
+    # Workbench data URLs can carry stale MIME labels.
+    if image_bytes.startswith(b'\x89PNG\r\n\x1a\n'):
+        return '.png'
+    if image_bytes.startswith(b'\xff\xd8\xff'):
+        return '.jpg'
+    if image_bytes[:4] == b'RIFF' and image_bytes[8:12] == b'WEBP':
+        return '.webp'
+    if mime == 'data:image/svg+xml;base64':
+        return '.svg'
+    raise ValueError('Unsupported workbench portrait format: ' + mime)
+
+
 def arrow_portraits_only(bundle):
     """Sync arrow art and focal points while preserving all runtime game rules."""
     catalog = json.loads(CATALOG_PATH.read_text(encoding='utf-8'))
@@ -155,8 +168,9 @@ def arrow_portraits_only(bundle):
             entry['arrowFocus'] = {axis: focus[axis] for axis in ('x', 'y')}
         else:
             entry.pop('arrowFocus', None)
-        image_bytes = base64.b64decode(bundle['assets'][card['art']].split(',', 1)[1])
-        extension = '.png' if image_bytes.startswith(b'\x89PNG\r\n\x1a\n') else '.jpg'
+        mime, data = bundle['assets'][card['art']].split(',', 1)
+        image_bytes = base64.b64decode(data)
+        extension = portrait_extension(mime, image_bytes)
         entry['portrait'] = card['id'] + extension
         portrait = ROOT / 'ShoujoKagekiJunna/images/cards' / entry['portrait']
         if not portrait.exists() or portrait.read_bytes() != image_bytes:
@@ -255,14 +269,7 @@ def main():
                 raise ValueError(f"Missing workbench portrait: {cid} ({card['art']})")
             mime, data = art.split(',', 1)
             image_bytes = base64.b64decode(data)
-            # Some exported data URLs carry a stale MIME label; use the actual file signature.
-            if mime == 'data:image/svg+xml;base64':
-                extension = '.svg'
-            elif image_bytes.startswith(b'\x89PNG\r\n\x1a\n'):
-                extension = '.png'
-            else:
-                extension = '.jpg'
-            portrait_name = cid + extension
+            portrait_name = cid + portrait_extension(mime, image_bytes)
             (ROOT / 'ShoujoKagekiJunna/images/cards' / portrait_name).write_bytes(image_bytes)
         damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid in ('JH30', 'JK206')) and cid not in ('JA82', 'JK400B', 'U_CARD_030')
         target = {'自己': 'Self', '敌人': 'AnyEnemy', '任意敌人': 'AnyEnemy', '所有敌人': 'AllEnemies',
@@ -364,12 +371,13 @@ def main():
         keywords_path.write_text(json.dumps(keywords, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         powers_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/powers.json'
         powers = json.loads(powers_path.read_text(encoding='utf-8'))
-        power_ids = {c['id'] for c in cards if c['type'] == '能力' and c['id'] != 'JG23'} | ({'JH19', 'JK80', 'JG31'} & ids)
+        power_ids = {c['id'] for c in cards if c['type'] == '能力' and c['id'] not in ('JG23', 'U_CARD_047')} | ({'JH19', 'JK80', 'JG31'} & ids)
         power_ids.update(card['id'] for card in retired.values() if card['type'] == '能力')
         for cid in sorted(power_ids):
             powers[f'JUNNA_{cid}_POWER.title'] = next(c['name'] for c in cards + list(retired.values()) if c['id'] == cid)
+        retired_power_ids = {f'JUNNA_{card["id"]}_POWER' for card in retired.values() if card['type'] == '能力'}
         for power in bundle['data']['meta'].get('powers', []):
-            if power.get('trashedAt'):
+            if power.get('trashedAt') or power['id'] in retired_power_ids:
                 continue
             for suffix, text in power.get('localization', {}).items():
                 powers[power['id'] + '.' + suffix] = text
@@ -399,6 +407,10 @@ def main():
                 powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]飞矢[/gold]、[gold]闪耀[/gold]中轮换。'
             if cid == 'U_CARD_010':
                 powers[f'JUNNA_{cid}_POWER.smartDescription'] = '下回合开始时，从[gold]抽牌堆[/gold]选择[blue]{Amount}[/blue]张[gold]{Category}[/gold]牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、[gold]闪耀[/gold]牌。'
+        if 'JK37C' in ids:
+            powers['JUNNA_JK37C_POWER.smartDescription'] = '每当你打出[blue]0[/blue]费牌后，{Target}加速[blue]{Turns}[/blue]回合。{Repetition}'
+            powers['JUNNA_JK37C_POWER.randomArrow'] = '随机一个[gold]飞矢[/gold]'
+            powers['JUNNA_JK37C_POWER.targetedArrow'] = '相同目标的一个[gold]飞矢[/gold]'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers['JUNNA_JK235_POWER.smartDescription'] = '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{Repeat}[/blue]次}。'
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'
@@ -413,7 +425,8 @@ def main():
         relics_path.write_text(json.dumps(relics, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         ui_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/gameplay_ui.json'
         ui = json.loads(ui_path.read_text(encoding='utf-8'))
-        ui = {k: v for k, v in ui.items() if not k.startswith('JUNNA.KNOWLEDGE_BACKGROUND.')}
+        ui = {k: v for k, v in ui.items() if not k.startswith('JUNNA.KNOWLEDGE_BACKGROUND.')
+              or k.rsplit('.', 1)[-1] in retired}
         for card in cards:
             tips = [t for t in card.get('extraHoverTips', []) if t.get('id') == 'junna_knowledge_background']
             if tips:

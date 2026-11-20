@@ -256,6 +256,8 @@ public static class CardEffects
                 await Block(); await Draw(V("DrawCount")); await HandArrow.Select(context, card, V("Cards")); break;
             case "JA94":
                 await Block(); await ArrowCombat.AccelerateSelf(context, player, V("Turns")); break;
+            case "U_CARD_063":
+                await Block(); await ArrowCombat.AccelerateSelf(context, player, V("Turns"), includeUntargeted: false); break;
             case "JK112":
                 await Block(); await KnowledgeProgress.Revise(context, card); break;
             case "JK126":
@@ -280,7 +282,9 @@ public static class CardEffects
             case "JA104":
                 await Block(); await CardActions.Generate(player, "JA119", V("Cards"), PileType.Hand, CardPilePosition.Bottom); break;
             case "JA145":
-                await Attack(); await CardActions.Generate(player, "JA119", V("Cards"), PileType.Hand, CardPilePosition.Bottom); break;
+                await Attack();
+                await CardActions.Generate(player, "JA119", V("Cards"), PileType.Hand, CardPilePosition.Bottom, card.IsUpgraded);
+                break;
             case "JK184B":
                 await ArrowCombat.AccelerateAll(context, player, V("Turns")); break;
             case "JH60":
@@ -289,7 +293,7 @@ public static class CardEffects
                 await CardChoices.AccelerateTargets(context, card);
                 break;
             case "JA176":
-                await ArrowCombat.CopyAll(context, player, exhaustCopies: !card.IsUpgraded);
+                await ArrowCombat.CopyAll(context, player, exhaustCopies: true);
                 break;
             case "JA177":
                 await Block();
@@ -330,6 +334,46 @@ public static class CardEffects
                 break;
             case "U_CARD_032":
                 await Energy(V("Energy")); await Attack();
+                break;
+            case "U_CARD_033":
+                // Native double damage lasts for one turn per stack. Replaying this card
+                // during the same turn leaves the current duration in place.
+                if (player.Creature.GetPower<DoubleDamagePower>() == null)
+                    await PowerCmd.Apply<DoubleDamagePower>(context, player.Creature, 1, player.Creature, card);
+                break;
+            case "U_CARD_034":
+                await CardActions.DrawWithArrowOverflow(context, player, V("DrawCount"), V("HandArrowTurns"));
+                break;
+            case "U_CARD_035":
+                await Energy(V("Energy")); await Draw(V("DrawCount"));
+                break;
+            case "U_CARD_036":
+                if (play.Target is { IsAlive: true } debuffTarget)
+                {
+                    await PowerCmd.Apply<VulnerablePower>(context, debuffTarget, V("Vulnerable"), player.Creature, card);
+                    await PowerCmd.Apply<WeakPower>(context, debuffTarget, V("Weak"), player.Creature, card);
+                }
+                break;
+            case "U_CARD_045":
+                await Block();
+                if (JunnaCombatHooks.TakeFirstPlayEnergy(card)) await Energy(V("Energy"));
+                break;
+            case "U_CARD_047":
+                await PowerCmd.Apply<StrengthPower>(context, player.Creature, V("Amount"), player.Creature, card);
+                break;
+            case "U_CARD_052":
+                var results = await DealDamage(card, context, play, V("Damage"), 1);
+                if (results.Any(result => result.Receiver == play.Target && result.WasTargetKilled))
+                    await Energy(V("Energy"));
+                break;
+            case "U_CARD_074":
+                await Block();
+                await CardActions.DrawMatching(context, player, CardCatalog.IsArrow, V("DrawCount"));
+                break;
+            case "U_CARD_079":
+                await Attack();
+                if (play.Target is { } arrowTarget)
+                    await ArrowCombat.AccelerateTarget(context, player, arrowTarget, V("Turns"));
                 break;
             default: throw new InvalidOperationException($"Missing card effect: {card.DesignId}");
         }

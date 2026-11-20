@@ -1093,7 +1093,7 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Energy],
             UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Energy],
-            PowerDescription = PowerDescriptionKind.TurnGroups,
+            PowerDescription = PowerDescriptionKind.TargetedTurnGroups,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
@@ -1107,8 +1107,8 @@ internal static partial class CardRules
         },
         ["JK400B"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Meteor],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Meteor],
+            Tips = [CardTip.Arrow, CardTip.Meteor],
+            UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
             PowerDescription = PowerDescriptionKind.DamageGroups,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
@@ -1560,6 +1560,101 @@ internal static partial class CardRules
             {
                 ["Energy"] = "N0",
             },
+        },
+        ["U_CARD_033"] = new()
+        {
+        },
+        ["U_CARD_034"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N0",
+                ["HandArrowTurns"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+        },
+        ["U_CARD_035"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N1",
+                ["Energy"] = "N0",
+            },
+            Tips = [CardTip.Arrow, CardTip.Energy],
+            UpgradedTips = [CardTip.Arrow, CardTip.Energy],
+        },
+        ["U_CARD_036"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Vulnerable"] = "N0",
+                ["Weak"] = "N1",
+            },
+            Tips = [CardTip.Vulnerable, CardTip.Weak],
+            UpgradedTips = [CardTip.Vulnerable, CardTip.Weak],
+        },
+        ["U_CARD_044"] = new()
+        {
+            Effect = SimpleCardEffect.AttackAndBlock,
+        },
+        ["U_CARD_045"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Energy"] = "N1",
+            },
+            Tips = [CardTip.Energy],
+            UpgradedTips = [CardTip.Energy],
+        },
+        ["U_CARD_047"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Amount"] = "N0",
+            },
+        },
+        ["U_CARD_051"] = new()
+        {
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            Effect = SimpleCardEffect.Attack,
+        },
+        ["U_CARD_052"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Energy"] = "N1",
+            },
+            Tips = [CardTip.Energy],
+            UpgradedTips = [CardTip.Energy],
+        },
+        ["U_CARD_063"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Turns"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+        },
+        ["U_CARD_074"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["DrawCount"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+        },
+        ["U_CARD_079"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Turns"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
         },
     };
 }

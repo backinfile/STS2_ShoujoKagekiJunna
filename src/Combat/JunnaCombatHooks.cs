@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.ValueProps;
 using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
@@ -18,6 +19,20 @@ public sealed class JunnaCombatHooks : AbstractModel
 public sealed class JunnaCombatHooks : SingletonModel
 #endif
 {
+    private sealed class FirstPlayEnergy
+    {
+        public int Turn = -1;
+        public bool Pending;
+    }
+    private static readonly ConditionalWeakTable<CardModel, FirstPlayEnergy> GentleStarlightPlays = new();
+
+    internal static bool TakeFirstPlayEnergy(CardModel card)
+    {
+        if (!GentleStarlightPlays.TryGetValue(card, out var play) || !play.Pending) return false;
+        play.Pending = false;
+        return true;
+    }
+
     private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> ArrowPlays = new();
     public static int CountArrowPlays(Player player) => player.PlayerCombatState is { } state && ArrowPlays.TryGetValue(state, out var count) ? count.Value : 0;
     private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> MaxEnergyBonuses = new();
@@ -29,6 +44,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     {
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
+        GentleStarlightPlays.Clear();
         KnowledgeProgress.ResetCombat();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
@@ -45,7 +61,15 @@ public sealed class JunnaCombatHooks : SingletonModel
     }
     public override Task BeforeCardPlayed(CardPlay play)
     {
-        if (play.IsFirstInSeries && CardCatalog.IsArrow(play.Card))
+        if (!play.IsFirstInSeries) return Task.CompletedTask;
+        if (CardCatalog.DesignId(play.Card) == "U_CARD_045")
+        {
+            var first = GentleStarlightPlays.GetOrCreateValue(play.Card);
+            int turn = play.Card.Owner.PlayerCombatState!.TurnNumber;
+            first.Pending = first.Turn != turn;
+            first.Turn = turn;
+        }
+        if (CardCatalog.IsArrow(play.Card))
         {
             ArrowPlays.GetOrCreateValue(play.Card.Owner.PlayerCombatState!).Value++;
             foreach (var arrow in ArrowCombat.Deployed.Where(a => a.Card.Owner == play.Card.Owner && a.Card != play.Card && !a.Resolving))
@@ -80,11 +104,26 @@ public sealed class JunnaCombatHooks : SingletonModel
         modifiedCost = free ? 0 : originalCost;
         return free;
     }
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource
+#if STS2_MAIN || STS2_BETA
+        , CardPlay? cardPlay
+#endif
+        )
+    {
+        if (target == null || !props.IsPoweredAttack() ||
+            cardSource is not CatalogCard { DesignId: "U_CARD_051", IsMutable: true } card)
+            return 1m;
+        return ArrowCombat.Deployed.Any(arrow => arrow.Card.Owner == card.Owner && arrow.Targets.Contains(target))
+            ? 2m : 1m;
+    }
+
     public override Task AfterCombatVictory(CombatRoom room) => KnowledgeProgress.WonCombat();
     public override Task AfterCombatEnd(CombatRoom room)
     {
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
+        GentleStarlightPlays.Clear();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
         foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);

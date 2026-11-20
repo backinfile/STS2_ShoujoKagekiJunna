@@ -141,10 +141,13 @@ public static partial class ArrowCombat
         foreach (var arrow in arrows) await Accelerate(context, arrow, turns);
     }
 
-    public static async Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns)
+    public static Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns)
+        => AccelerateSelf(context, player, turns, includeUntargeted: true);
+
+    internal static async Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns, bool includeUntargeted)
     {
         foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player && !a.TargetsGroup &&
-                     (a.Target == player.Creature || a.Target == null)))
+                     (a.Target == player.Creature || (includeUntargeted && a.Target == null))))
             await Accelerate(context, arrow, turns);
     }
 

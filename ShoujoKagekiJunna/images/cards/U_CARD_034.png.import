@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3g5rho74nbj5"
-path="res://.godot/imported/JA108.jpg-2dd2932fa58b20c9a502d0b074d71434.ctex"
+uid="uid://cxp73p05ff6bq"
+path="res://.godot/imported/U_CARD_034.png-010e542d1629e52c3e0e62110c64a075.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ShoujoKagekiJunna/images/cards/JA108.jpg"
-dest_files=["res://.godot/imported/JA108.jpg-2dd2932fa58b20c9a502d0b074d71434.ctex"]
+source_file="res://ShoujoKagekiJunna/images/cards/U_CARD_034.png"
+dest_files=["res://.godot/imported/U_CARD_034.png-010e542d1629e52c3e0e62110c64a075.ctex"]
 
 [params]
 

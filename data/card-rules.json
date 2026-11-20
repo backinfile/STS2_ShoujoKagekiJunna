@@ -188,7 +188,7 @@
         "Energy"
       ],
       "power": {
-        "description": "TurnGroups",
+        "description": "TargetedTurnGroups",
         "amount": "Applications",
         "single": false
       }
@@ -2125,12 +2125,10 @@
     },
     "JK400B": {
       "tips": [
-        "Knowledge",
         "Arrow",
         "Meteor"
       ],
       "upgradedTips": [
-        "Knowledge",
         "Arrow",
         "Meteor"
       ],
@@ -2155,6 +2153,119 @@
       "fields": {
         "Energy": "N0"
       }
+    },
+    "U_CARD_033": {},
+    "U_CARD_034": {
+      "fields": {
+        "DrawCount": "N0",
+        "HandArrowTurns": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "U_CARD_035": {
+      "fields": {
+        "Energy": "N0",
+        "DrawCount": "N1"
+      },
+      "tips": [
+        "Arrow",
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Energy"
+      ]
+    },
+    "U_CARD_036": {
+      "fields": {
+        "Vulnerable": "N0",
+        "Weak": "N1"
+      },
+      "tips": [
+        "Vulnerable",
+        "Weak"
+      ],
+      "upgradedTips": [
+        "Vulnerable",
+        "Weak"
+      ]
+    },
+    "U_CARD_044": {
+      "effect": "AttackAndBlock"
+    },
+    "U_CARD_045": {
+      "fields": {
+        "Energy": "N1"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "U_CARD_047": {
+      "fields": {
+        "Amount": "N0"
+      }
+    },
+    "U_CARD_051": {
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "effect": "Attack"
+    },
+    "U_CARD_052": {
+      "fields": {
+        "Energy": "N1"
+      },
+      "tips": [
+        "Energy"
+      ],
+      "upgradedTips": [
+        "Energy"
+      ]
+    },
+    "U_CARD_063": {
+      "fields": {
+        "Turns": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "U_CARD_074": {
+      "fields": {
+        "DrawCount": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "U_CARD_079": {
+      "fields": {
+        "Turns": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     }
   }
 }

@@ -94,6 +94,9 @@ public static class HandArrow
     public static Task Play(PlayerChoiceContext context, CardModel card)
         => Play(context, card, CardTargets.First(card), DefaultTurns);
 
+    internal static Task<bool> Play(PlayerChoiceContext context, CardModel card, int turns)
+        => Play(context, card, CardTargets.First(card), turns);
+
     internal static Task<bool> ReplayLoop(PlayerChoiceContext context, CardModel card, Creature? target)
         => Play(context, card, target, ConversionTurns(card));
 
