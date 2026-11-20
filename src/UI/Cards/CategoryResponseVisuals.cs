@@ -63,8 +63,11 @@ internal static class CategoryResponseVisuals
 
         if (marker == null)
         {
-            var portrait = node.GetNode<Control>("%Portrait");
-            var anchor = portrait.GetGlobalTransform() * new Vector2(18f, 12f);
+            var banner = node.GetNode<Control>("%TitleBanner");
+            var bannerTop = banner.GetGlobalTransform() * new Vector2(banner.Size.X * .5f, 0f);
+            var anchor = node.Body.GetGlobalTransform().AffineInverse() * bannerTop;
+            // Reserve the derived-card label row even when its text is hidden.
+            float labelTop = node.Body.GetNodeOrNull<Control>("DerivedLabel")?.Position.Y ?? anchor.Y;
             marker = new TextureRect
             {
                 Name = MarkerName,
@@ -72,7 +75,7 @@ internal static class CategoryResponseVisuals
                 ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
                 StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
                 Size = Vector2.One * MarkerSize,
-                Position = node.Body.GetGlobalTransform().AffineInverse() * anchor,
+                Position = new Vector2(anchor.X - MarkerSize * .5f, Math.Min(anchor.Y, labelTop) - MarkerSize - 4f),
                 Texture = GD.Load<Texture2D>(JunnaMod.ResourceRoot + "images/response_echo.png"),
             };
             node.Body.AddChild(marker);
