@@ -53,6 +53,8 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         if (DesignId == "JA108")
             description.Add("ArrowCount", IsMutable && Owner?.PlayerCombatState is { } combat
                 ? combat.DrawPile.Cards.Count(CardCatalog.IsArrow) : 0);
+        if (DesignId == "U_CARD_017")
+            description.Add("SatisfiedCategories", CardTutors.CountHandCategories(this));
     }
 
     internal static int CountDeckKnowledge(CardModel card) => card.IsMutable

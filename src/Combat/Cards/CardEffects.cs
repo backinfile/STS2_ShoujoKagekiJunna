@@ -328,10 +328,7 @@ public static class CardEffects
             case "JK314":
                 await Attack(hits: card.HitsWithDepletedPartners); break;
             case "U_CARD_017":
-                int categoryHits = 1 + Enumerable.Range(0, 3)
-                    .Count(category => hand.Cards.Any(candidate => candidate != card && CardTutors.Matches(candidate, category)));
-                await Attack(hits: categoryHits);
-                break;
+                await Attack(hits: 1 + CardTutors.CountHandCategories(card)); break;
             case "U_CARD_032":
                 await Energy(V("Energy")); await Attack();
                 break;

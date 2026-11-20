@@ -1,7 +1,10 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.UI;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardLibrary;
+using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.UI;
@@ -23,6 +26,23 @@ internal static class CardLibraryVisibility
     }
 }
 
+[HarmonyPatch(typeof(NCardLibraryGrid), nameof(NCardLibraryGrid._Ready))]
+internal static class CardLibraryStarterSort
+{
+    private static void Postfix(NCardLibraryGrid __instance)
+    {
+        var sort = (Dictionary<SortingOrders, Func<CardModel, CardModel, int>>)AccessTools
+            .PropertyGetter(typeof(NCardGrid), "SortingAlgorithms").Invoke(__instance, null)!;
+        sort[SortingOrders.TypeAscending] = (a, b) => SortType(a).CompareTo(SortType(b));
+        sort[SortingOrders.TypeDescending] = (a, b) => SortType(b).CompareTo(SortType(a));
+    }
+
+    private static CardType SortType(CardModel card) =>
+        card is JunnaCard junna && card.Rarity == CardRarity.Basic && CardCatalog.IsArrow(card)
+            ? CardCatalog.Get(junna.DesignId).InternalType
+            : card.Type;
+}
+
 [HarmonyPatch(typeof(NCardLibrary), nameof(NCardLibrary._Ready))]
 internal static class CardLibraryCharacterFilter
 {
@@ -36,7 +56,7 @@ internal static class CardLibraryCharacterFilter
         var belongsToCharacter = ____poolFilters[filter];
         // Collection categories follow the runtime pool; model ownership and card styling stay intact.
         ____poolFilters[filter] = card => belongsToCharacter(card) &&
-            (card.Rarity == CardRarity.Basic ||
+            (card.Rarity is CardRarity.Basic or CardRarity.Ancient ||
              card is JunnaCard junna && CardCatalog.Get(junna.DesignId).Pool &&
              card.Rarity is CardRarity.Common or CardRarity.Uncommon or CardRarity.Rare);
         var belongsToMiscellaneous = ____poolFilters[____miscPoolFilter];

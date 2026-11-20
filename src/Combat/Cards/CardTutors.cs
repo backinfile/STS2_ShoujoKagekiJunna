@@ -19,6 +19,12 @@ public static class CardTutors
         _ => false
     };
 
+    internal static int CountHandCategories(CardModel source)
+        => source.IsMutable && source.Owner?.PlayerCombatState is { } combat
+            ? Enumerable.Range(0, 3).Count(category =>
+                combat.Hand.Cards.Any(card => card != source && Matches(card, category)))
+            : 0;
+
     public static async Task DrawCategories(PlayerChoiceContext context, CardModel source)
     {
         var player = source.Owner;

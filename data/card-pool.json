@@ -3644,16 +3644,16 @@
         {
           "name": "Damage",
           "base": 15,
-          "upgraded": 15
+          "upgraded": 18
         },
         {
           "name": "Block",
           "base": 15,
-          "upgraded": 15
+          "upgraded": 18
         }
       ],
       "text": "造成15点伤害。获得15点格挡。",
-      "upgradedText": "造成15点伤害。获得15点格挡。"
+      "upgradedText": "造成18点伤害。获得18点格挡。"
     },
     {
       "id": "U_CARD_045",

@@ -93,7 +93,11 @@ def display_description(card, text, card_names, values, upgraded=False):
         text += '{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}'
     elif card['id'] == 'JA108':
         text += '{InCombat:\n（打出{ArrowCount}张）|}'
-    elif card['id'] in ('JK184', 'JK314'):
+    elif card['id'] == 'U_CARD_017':
+        text += '{InCombat:\n（已满足{SatisfiedCategories}类）|}'
+    elif card['id'] == 'JK314':
+        text += '{InCombat:\n（已耗尽{DepletedPartners}张）|}'
+    elif card['id'] == 'JK184':
         text += '{DepletedPartners:choose(0):|\n（已耗尽{DepletedPartners}张）}'
     return text
 

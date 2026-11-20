@@ -62,7 +62,7 @@ public static class Probe
                         var card = CardCatalog.Model(definition.Id);
                         bool expected = selected == misc
                             ? !definition.Pool && card.Rarity is not (CardRarity.Basic or CardRarity.Ancient)
-                            : card.Rarity == CardRarity.Basic || definition.Pool &&
+                            : card.Rarity is CardRarity.Basic or CardRarity.Ancient || definition.Pool &&
                               card.Rarity is CardRarity.Common or CardRarity.Uncommon or CardRarity.Rare;
                         if (visible.Contains(definition.Id) != expected)
                             throw new InvalidOperationException($"Incorrect visible collection ({(selected == misc ? "misc" : "Junna")}): {definition.Id}");
@@ -73,7 +73,7 @@ public static class Probe
                 for (int i = 0; i < CardCatalog.Cards.Count; i++)
                 {
                     var card = CardCatalog.Model(CardCatalog.Cards[i].Id);
-                    bool characterCard = card.Rarity == CardRarity.Basic || CardCatalog.Cards[i].Pool &&
+                    bool characterCard = card.Rarity is CardRarity.Basic or CardRarity.Ancient || CardCatalog.Cards[i].Pool &&
                         card.Rarity is CardRarity.Common or CardRarity.Uncommon or CardRarity.Rare;
                     if (characterFilter(card) != characterCard) throw new InvalidOperationException("Incorrect character collection classification: " + card.Id);
                     if (card.Rarity is CardRarity.Token or CardRarity.Event && !filters[misc](card))

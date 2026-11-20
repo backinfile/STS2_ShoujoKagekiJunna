@@ -191,7 +191,8 @@ public partial class KnowledgeGroupPreview : Control
                 slot.MouseExited += () =>
                 {
                     hoverTween?.Kill();
-                    hoverTween = card.CreateTween();
+                    // The slot owns the animation; the card can be recycled as soon as the preview closes.
+                    hoverTween = slot.CreateTween();
                     hoverTween.TweenProperty(card, "scale", slot.CustomMinimumSize.X / 300 * Vector2.One, .5)
                         .SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
                     card.ZIndex = 0;
@@ -227,7 +228,7 @@ public partial class KnowledgeGroupPreview : Control
         float availableWidth = Math.Max(300, Size.X - 200);
         float availableHeight = Math.Max(422, Size.Y - 180);
         int maxColumns = Math.Clamp((int)((availableWidth - 160 + 28) / (300 * .75f + 28)), 1, 5);
-        int columns = Math.Min(maxColumns, count <= 3 ? count : (count + 1) / 2);
+        int columns = count == 4 ? 4 : Math.Min(maxColumns, count <= 3 ? count : (count + 1) / 2);
         int rows = (count + columns - 1) / columns;
         float scale = rows == 1 ? Math.Clamp(Size.Y / 800, .9f, 1.35f)
             : Math.Clamp((availableHeight - 160 - (rows - 1) * 28 - 2) / (rows * 422), .75f, 1.15f);
@@ -260,6 +261,7 @@ public partial class KnowledgeGroupPreview : Control
         foreach (var (slot, card) in _gridCards)
         {
             NHoverTipSet.Remove(slot);
+            card.ZIndex = 0;
             slot.RemoveChild(card);
             card.QueueFreeSafely();
             _grid.RemoveChild(slot);
