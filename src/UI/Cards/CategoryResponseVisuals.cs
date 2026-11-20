@@ -14,7 +14,7 @@ namespace ShoujoKagekiJunna.Combat;
 internal static class CategoryResponseVisuals
 {
     private const string MarkerName = "JunnaCategoryResponse";
-    private const float MarkerSize = 52f;
+    private const float MarkerSize = 36f;
 
     [HarmonyPatch(typeof(NCard), nameof(NCard.UpdateVisuals))]
     private static class CardPatch
@@ -63,8 +63,8 @@ internal static class CategoryResponseVisuals
 
         if (marker == null)
         {
-            var banner = node.GetNode<Control>("%TitleBanner");
-            var anchor = banner.GetGlobalTransform() * new Vector2(banner.Size.X * .56f, 0f);
+            var portrait = node.GetNode<Control>("%Portrait");
+            var anchor = portrait.GetGlobalTransform() * new Vector2(18f, 12f);
             marker = new TextureRect
             {
                 Name = MarkerName,
@@ -72,12 +72,11 @@ internal static class CategoryResponseVisuals
                 ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
                 StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
                 Size = Vector2.One * MarkerSize,
-                Position = node.Body.GetGlobalTransform().AffineInverse() * anchor
-                    - new Vector2(MarkerSize * .5f, MarkerSize * .99f),
+                Position = node.Body.GetGlobalTransform().AffineInverse() * anchor,
+                Texture = GD.Load<Texture2D>(JunnaMod.ResourceRoot + "images/response_echo.png"),
             };
             node.Body.AddChild(marker);
         }
-        marker.Texture = power.Icon;
         marker.Show();
         if (pulse && CoreEffects.Enabled)
         {
