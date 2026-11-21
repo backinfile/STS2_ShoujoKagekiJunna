@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using BaseLib.Utils.Attributes;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -19,19 +20,7 @@ public sealed class JunnaCombatHooks : AbstractModel
 public sealed class JunnaCombatHooks : SingletonModel
 #endif
 {
-    private sealed class FirstPlayEnergy
-    {
-        public int Turn = -1;
-        public bool Pending;
-    }
-    private static readonly ConditionalWeakTable<CardModel, FirstPlayEnergy> GentleStarlightPlays = new();
-
-    internal static bool TakeFirstPlayEnergy(CardModel card)
-    {
-        if (!GentleStarlightPlays.TryGetValue(card, out var play) || !play.Pending) return false;
-        play.Pending = false;
-        return true;
-    }
+    private static readonly ConditionalWeakTable<CardModel, StrongBox<int>> GentleStarlightPlayTurns = new();
 
     private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> ArrowPlays = new();
     public static int CountArrowPlays(Player player) => player.PlayerCombatState is { } state && ArrowPlays.TryGetValue(state, out var count) ? count.Value : 0;
@@ -44,7 +33,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     {
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
-        GentleStarlightPlays.Clear();
+        GentleStarlightPlayTurns.Clear();
         KnowledgeProgress.ResetCombat();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
@@ -62,20 +51,19 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override Task BeforeCardPlayed(CardPlay play)
     {
         if (!play.IsFirstInSeries) return Task.CompletedTask;
-        if (CardCatalog.DesignId(play.Card) == "U_CARD_045")
-        {
-            var first = GentleStarlightPlays.GetOrCreateValue(play.Card);
-            int turn = play.Card.Owner.PlayerCombatState!.TurnNumber;
-            first.Pending = first.Turn != turn;
-            first.Turn = turn;
-        }
         if (CardCatalog.IsArrow(play.Card))
         {
             ArrowPlays.GetOrCreateValue(play.Card.Owner.PlayerCombatState!).Value++;
             foreach (var arrow in ArrowCombat.Deployed.Where(a => a.Card.Owner == play.Card.Owner && a.Card != play.Card && !a.Resolving))
                 arrow.AttacksWhileWaiting++;
         }
-        return Task.CompletedTask;
+        if (play.Card is not CatalogCard { DesignId: "U_CARD_045" } starlight ||
+            starlight.Owner.PlayerCombatState is not { } combat) return Task.CompletedTask;
+
+        var lastPlayTurn = GentleStarlightPlayTurns.GetValue(starlight, static _ => new(-1));
+        if (lastPlayTurn.Value == combat.TurnNumber) return Task.CompletedTask;
+        lastPlayTurn.Value = combat.TurnNumber;
+        return PlayerCmd.GainEnergy(starlight.Value("Energy"), starlight.Owner);
     }
     private static readonly HashSet<Player> FollowingPlayers = [];
     public override async Task AfterCardPlayedLate(PlayerChoiceContext context, CardPlay play)
@@ -123,7 +111,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     {
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
-        GentleStarlightPlays.Clear();
+        GentleStarlightPlayTurns.Clear();
         ArrowCombat.Clear();
         DamageModifiers.ClearCombat();
         foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);

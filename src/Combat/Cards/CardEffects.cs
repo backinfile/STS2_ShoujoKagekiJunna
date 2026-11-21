@@ -352,9 +352,7 @@ public static class CardEffects
                 }
                 break;
             case "U_CARD_045":
-                await Block();
-                if (JunnaCombatHooks.TakeFirstPlayEnergy(card)) await Energy(V("Energy"));
-                break;
+                await Block(); break;
             case "U_CARD_047":
                 await PowerCmd.Apply<StrengthPower>(context, player.Creature, V("Amount"), player.Creature, card);
                 break;
