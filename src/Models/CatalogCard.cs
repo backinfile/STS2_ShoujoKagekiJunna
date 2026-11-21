@@ -43,7 +43,7 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         new KnowledgeBlockVar().WithMultiplier(static (card, _) => CountDeckKnowledge(card))
     } : []);
 
-    internal int HitsWithDepletedPartners => Value("Repeat", 2) + KnowledgeProgress.DepletedPartners(this);
+    internal int HitsWithDepletedPartners => Value("Repeat", 1) + KnowledgeProgress.DepletedPartners(this);
 
     protected override void AddExtraArgsToDescription(LocString description)
     {

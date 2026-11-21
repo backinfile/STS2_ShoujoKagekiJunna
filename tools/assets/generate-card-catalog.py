@@ -386,6 +386,7 @@ def main():
             for suffix, text in power.get('localization', {}).items():
                 powers[power['id'] + '.' + suffix] = text
         # Active card text takes precedence over retired power descriptions.
+        friend_title = localization.get('JUNNA_U_CARD_008B.title', '朋友！')
         current_power_text = {
             'JK400': '打出0费牌时，所有布置的[gold]飞矢[/gold]获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。',
             'JK400B': '回合结束时，打出[blue]{Repeat}[/blue]张造成[blue]{Damage}[/blue]点伤害的[gold]流星[/gold]。',
@@ -397,7 +398,7 @@ def main():
             'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
             'JK235': '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。',
-            'U_CARD_008': '战斗结束时，向[gold]牌组[/gold]添加[blue]{Amount}[/blue]张[gold]故事[/gold]。',
+            'U_CARD_008': '战斗结束时，向[gold]牌组[/gold]添加[blue]{Amount}[/blue]张[gold]' + friend_title + '[/gold]。',
             'U_CARD_016': '打出[gold]{Category}[/gold]牌后，抽[blue]{Amount}[/blue]张牌。',
             'U_CARD_010': '回合开始时，从[gold]抽牌堆[/gold]选择[blue]1[/blue]张当前类别的牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、[gold]闪耀[/gold]牌。',
         }

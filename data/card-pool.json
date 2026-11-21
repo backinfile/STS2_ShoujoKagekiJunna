@@ -1,5 +1,5 @@
 {
-  "revision": 5906,
+  "revision": 5929,
   "cards": [
     {
       "id": "JA15",
@@ -850,12 +850,12 @@
         {
           "name": "Damage",
           "base": 6,
-          "upgraded": 8
+          "upgraded": 7
         },
         {
           "name": "Repeat",
           "base": 6,
-          "upgraded": 6
+          "upgraded": 7
         },
         {
           "name": "Turns",
@@ -864,7 +864,7 @@
         }
       ],
       "text": "造成6点伤害6次。",
-      "upgradedText": "造成8点伤害6次。",
+      "upgradedText": "造成7点伤害7次。",
       "arrowFocus": {
         "x": 0.25,
         "y": 0.58
@@ -997,7 +997,7 @@
       "id": "JA71",
       "modelId": "JUNNA_JA71",
       "className": "JunnaCardJA71",
-      "name": "开演",
+      "name": "开幕",
       "cost": 3,
       "upgradedCost": 3,
       "costsX": false,
@@ -2025,8 +2025,10 @@
           "upgraded": 1
         }
       ],
-      "text": "选择：所有目标为自己或者敌人的飞矢加速1回合。消耗。",
-      "upgradedText": "保留。选择：所有目标为自己或者敌人的飞矢加速1回合。消耗。"
+      "text": "虚无。选择：所有目标为自己或者敌人的飞矢加速1回合。消耗。",
+      "upgradedText": "保留。选择：所有目标为自己或者敌人的飞矢加速1回合。消耗。",
+      "ethereal": true,
+      "upgradedEthereal": false
     },
     {
       "id": "JF13",
@@ -2186,12 +2188,12 @@
         {
           "name": "Block",
           "base": 4,
-          "upgraded": 4
+          "upgraded": 6
         },
         {
           "name": "N1",
           "base": 1,
-          "upgraded": 2
+          "upgraded": 1
         },
         {
           "name": "Turns",
@@ -2200,7 +2202,7 @@
         }
       ],
       "text": "获得4点格挡。所有飞矢加速1回合。",
-      "upgradedText": "获得4点格挡。所有飞矢加速2回合。"
+      "upgradedText": "获得6点格挡。所有飞矢加速1回合。"
     },
     {
       "id": "JK206",
@@ -2602,23 +2604,18 @@
           "upgraded": 12
         },
         {
-          "name": "Repeat",
-          "base": 2,
-          "upgraded": 2
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
         },
         {
           "name": "N2",
           "base": 1,
           "upgraded": 1
-        },
-        {
-          "name": "N3",
-          "base": 1,
-          "upgraded": 1
         }
       ],
-      "text": "知识。造成8点伤害2次。每耗尽过1张渴望，额外造成1次伤害。",
-      "upgradedText": "知识。造成12点伤害2次。每耗尽过1张渴望，额外造成1次伤害。"
+      "text": "知识。造成8点伤害。每耗尽过1张渴望，额外造成1次伤害。",
+      "upgradedText": "知识。造成12点伤害。每耗尽过1张渴望，额外造成1次伤害。"
     },
     {
       "id": "U_CARD_008",
@@ -2649,14 +2646,14 @@
           "upgraded": 1
         }
       ],
-      "text": "战斗结束时，向牌组中添加1张故事。",
-      "upgradedText": "战斗结束时，向牌组中添加1张故事。"
+      "text": "战斗结束时，向牌组中添加1张朋友！。",
+      "upgradedText": "战斗结束时，向牌组中添加1张朋友！。"
     },
     {
       "id": "U_CARD_008B",
       "modelId": "JUNNA_U_CARD_008B",
       "className": "JunnaCardU_CARD_008B",
-      "name": "故事",
+      "name": "朋友！",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": false,
@@ -3247,7 +3244,7 @@
         }
       ],
       "text": "本回合中，作为飞矢目标的敌人对你造成伤害降低50%。",
-      "upgradedText": "本回合中，飞矢的目标敌人造成伤害降低50%（不重复计算）。"
+      "upgradedText": "本回合中，作为飞矢目标的敌人对你造成伤害降低50%。"
     },
     {
       "id": "U_CARD_016",
@@ -3375,7 +3372,7 @@
       "className": "JunnaCardJK400B",
       "name": "翱翔在天际",
       "cost": 1,
-      "upgradedCost": 0,
+      "upgradedCost": 1,
       "costsX": false,
       "type": "能力",
       "target": "Self",
@@ -3388,7 +3385,7 @@
       "retain": false,
       "upgradedRetain": false,
       "innate": false,
-      "upgradedInnate": false,
+      "upgradedInnate": true,
       "damageCapable": false,
       "portrait": "JK400B.png",
       "values": [
@@ -3399,7 +3396,7 @@
         }
       ],
       "text": "回合结束时，打出一张造成8点伤害的流星。",
-      "upgradedText": "回合结束时，打出一张造成8点伤害的流星。"
+      "upgradedText": "固有。回合结束时，打出一张造成8点伤害的流星。"
     },
     {
       "id": "U_CARD_030",
@@ -3681,7 +3678,7 @@
         {
           "name": "Block",
           "base": 2,
-          "upgraded": 2
+          "upgraded": 4
         },
         {
           "name": "N1",
@@ -3690,7 +3687,7 @@
         }
       ],
       "text": "获得2点格挡。每回合你第一次打出这张牌时，获得1点能量。",
-      "upgradedText": "获得2点格挡。每回合你第一次打出这张牌时，获得1点能量。"
+      "upgradedText": "获得4点格挡。每回合你第一次打出这张牌时，获得1点能量。"
     },
     {
       "id": "U_CARD_047",
@@ -3717,12 +3714,12 @@
       "values": [
         {
           "name": "N0",
-          "base": 10,
-          "upgraded": 12
+          "base": 6,
+          "upgraded": 8
         }
       ],
-      "text": "获得10点力量。",
-      "upgradedText": "获得12点力量。"
+      "text": "获得6点力量。",
+      "upgradedText": "获得8点力量。"
     },
     {
       "id": "U_CARD_051",
