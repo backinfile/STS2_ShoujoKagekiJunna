@@ -14,7 +14,7 @@ if ($runningGame) {
 if ([string]::IsNullOrWhiteSpace($CorePackage)) {
     $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'ShoujoKagekiJunna.json') -Raw -Encoding utf8 | ConvertFrom-Json
     $coreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiAijoCore' }).min_version
-    $CorePackage = Join-Path $PSScriptRoot "../STS2_ShoujoKagekiAijoCore/dist/ShoujoKagekiAijoCore-$coreVersion"
+    $CorePackage = Join-Path $PSScriptRoot "../STS2_ShoujoKagekiCore/dist/ShoujoKagekiAijoCore-$coreVersion"
 }
 if (!$SkipBuild) {
     $buildArguments = @{ CorePackage = $CorePackage }

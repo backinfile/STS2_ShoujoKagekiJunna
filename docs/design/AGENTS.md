@@ -1,6 +1,6 @@
 # 工作台内容编辑
 
-- 工作台程序与部署已迁入 [Core 仓库](https://github.com/backinfile/STS2_ShoujoKagekiAijoCore/blob/main/tools/workbench/README.md)。前端、MCP、存储和部署均在 Core 的 `tools/workbench` 维护。
+- 工作台程序与部署已迁入 [Core 仓库](https://github.com/backinfile/STS2_ShoujoKagekiCore/blob/main/tools/workbench/README.md)。前端、MCP、存储和部署均在 Core 的 `tools/workbench` 维护。
 - 使用 Core 的 shoujo_workbench MCP 时，每次调用指定 modId: "junna"；原 junna_workbench 客户端省略此字段时仍进入纯那。
 
 - 卡牌、词条、机制、知识组、流派、风格约定、契合池及配图统一通过 Core 工作台 MCP 读取和修改。网页编辑也使用同一服务。

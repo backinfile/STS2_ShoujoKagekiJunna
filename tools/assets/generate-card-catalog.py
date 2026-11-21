@@ -12,7 +12,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-CORE_ROOT = Path(os.environ.get('SHOUJO_CORE_ROOT', ROOT.parent / 'STS2_ShoujoKagekiAijoCore'))
+CORE_ROOT = Path(os.environ.get('SHOUJO_CORE_ROOT', ROOT.parent / 'STS2_ShoujoKagekiCore'))
 CATALOG_PATH = ROOT / 'data/card-pool.json'
 EXISTING = {
     'JB01': ('JunnaStrike', 'JUNNA_STRIKE'), 'JB02': ('JunnaDefend', 'JUNNA_DEFEND'),

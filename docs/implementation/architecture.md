@@ -47,7 +47,7 @@ dotnet build tests/Integration/JunnaIntegration.csproj -c Release -p:CoreApiPath
 
 `tests/Integration/` 使用 SDK 默认源码发现，新增探针直接放入该目录。测试模组与角色发布程序集分别构建。
 
-2026-11-06 结构审查将战斗规则与表现文件归类，拆开飞矢文件中的多项职责，集中知识组数量规则和公共构建配置，并移除了闲置的伤害描述拼接方法。工作台的领域、统计、预览与 MCP 模块由 [Core 工作台](https://github.com/backinfile/STS2_ShoujoKagekiAijoCore/tree/main/tools/workbench) 维护。
+2026-11-06 结构审查将战斗规则与表现文件归类，拆开飞矢文件中的多项职责，集中知识组数量规则和公共构建配置，并移除了闲置的伤害描述拼接方法。工作台的领域、统计、预览与 MCP 模块由 [Core 工作台](https://github.com/backinfile/STS2_ShoujoKagekiCore/tree/main/tools/workbench) 维护。
 
 2026-11-08 共享底座重构将模型方法挂钩、出牌边界、复制及表现预算接入 Core V1 增量接口。飞矢结算和死亡转向按战斗模型顺序、目标类别与部署序号处理。CardValueNames 将规则中的语义名称绑定到稳定存储字段，CatalogPower 按 Cards、Turns、Damage、Description 分组，卡池与本地化字段保持原值。角色需求和构建锁统一由 Core SDK 生成。
 
