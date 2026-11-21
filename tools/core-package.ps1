@@ -4,7 +4,7 @@ function Get-CorePackage([string]$Path, [string]$MinimumVersion) {
     }
     $root = (Resolve-Path -LiteralPath $Path).Path
     if (-not (Test-Path -LiteralPath (Join-Path $root 'ShoujoKagekiCore.json') -PathType Leaf)) {
-        throw 'Select a ShoujoKagekiCore 2.0.0 or newer distribution directory.'
+        throw "Select a ShoujoKagekiCore $MinimumVersion or newer distribution directory."
     }
     $checked = & (Join-Path $root 'sdk/validate-package.ps1') -CorePackage $root
     if ([Version]($checked.Bundle.releaseVersion.Split('-')[0]) -lt [Version]($MinimumVersion.Split('-')[0])) {
