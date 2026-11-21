@@ -7,6 +7,7 @@ namespace ShoujoKagekiJunna.Models;
 
 public abstract partial class CatalogPower
 {
+    public override int DisplayAmount => _grants.Count == 0 ? Amount : StackAmount();
     protected override string SmartDescriptionLocKey => "JUNNA_CATALOG.smartDescription";
     protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("Effects", Description.GetFormattedText())];
 
@@ -27,15 +28,14 @@ public abstract partial class CatalogPower
 
     private static (decimal Damage, int Hits) DamagePayload(Grant grant)
     {
-        var modifiers = DamageModifiers.CaptureDamageModifierSnapshot(grant.Card);
-        return (Math.Max(0, grant.V("Damage") + modifiers.DamageBonus),
-            grant.BaseHits * (1 + DamageModifiers.ExtraHits(modifiers)));
+        return (Math.Max(0, grant.V("Damage")), grant.BaseHits);
     }
+
+    private void RefreshDescription() => ((StringVar)DynamicVars["Effects"]).StringValue = RenderEffects();
 
     protected void Synchronize()
     {
-        SetAmount(StackType == PowerStackType.Single ? 1 : StackAmount());
-        ((StringVar)DynamicVars["Effects"]).StringValue = RenderEffects();
+        RefreshDescription();
         InvokeDisplayAmountChanged();
     }
 
@@ -61,7 +61,6 @@ public abstract partial class CatalogPower
         string DescriptionFragment(bool upgraded)
             => new LocString("powers", Id.Entry + (upgraded ? ".targetedArrow" : ".randomArrow")).GetFormattedText();
         int Sum(string field) => _grants.Sum(g => g.V(field));
-        int Bonus() => _grants.Sum(g => g.V("Bonus"));
         int Block() => _grants.Sum(g => g.V("Block"));
         IEnumerable<string> Groups<TKey>(Func<Grant, TKey> key, Func<IGrouping<TKey, Grant>, string> render)
             => _grants.GroupBy(key).Select(render);
@@ -71,7 +70,6 @@ public abstract partial class CatalogPower
             PowerDescriptionKind.Passive => Groups(g => g.Card.IsUpgraded, group => Format(("Upgraded", group.Key))),
             PowerDescriptionKind.Applications => [Format(("Amount", _grants.Count))],
             PowerDescriptionKind.ThresholdSum => [Format(("Amount", Sum("DisplayedAmount")))],
-            PowerDescriptionKind.BonusSum => [Format(("Amount", Bonus()))],
             PowerDescriptionKind.RepeatedApplications => [Format(("Amount", _grants.Count), ("Repetition", Repetition(_grants.Count)))],
             PowerDescriptionKind.BlockSum => [Format(("Amount", Block()))],
             PowerDescriptionKind.AmountWithThreshold => [Format(("Amount", Sum("Amount")), ("Threshold", _grants[0].V("Threshold")))],
@@ -83,7 +81,6 @@ public abstract partial class CatalogPower
             PowerDescriptionKind.TargetedTurnGroups => Groups(g => (Turns: g.V("Turns"), Upgraded: g.Card.IsUpgraded),
                 group => Format(("Turns", group.Key.Turns), ("Target", DescriptionFragment(group.Key.Upgraded)),
                     ("Repetition", Repetition(group.Count())))),
-            PowerDescriptionKind.BonusGroups => Groups(g => g.V("Bonus"), group => Format(("Bonus", group.Key), ("Repetition", Repetition(group.Count())))),
             PowerDescriptionKind.LimitGroups => Groups(g => g.V("Limit"), group => Format(("Limit", group.Key), ("Amount", group.Count()))),
             PowerDescriptionKind.GeneratedCardGroups => Groups(g => g.Card.IsUpgraded, group => Format(("Amount", group.Count()), ("Card", CardCatalog.Get("JK46B").Name + (group.Key ? "+" : "")))),
             PowerDescriptionKind.DamageGroups => Groups(g => DamagePayload(g).Damage,

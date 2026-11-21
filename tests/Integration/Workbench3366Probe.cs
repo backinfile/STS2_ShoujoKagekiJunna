@@ -177,16 +177,13 @@ public static class Workbench3366Probe
                     selector.Preferred = target;
                     var combatTarget = await CombatCopy(player, target);
                     await Play(await CombatCopy(player, source));
-                    Expect(KnowledgeProgress.PermanentHits(target) == 1 && KnowledgeProgress.PermanentHits(combatTarget) == 1, "Permanent growth target=" + KnowledgeProgress.PermanentHits(target) + " combat=" + KnowledgeProgress.PermanentHits(combatTarget) + " source=" + Shine.GetState(source));
                     var loaded = CardModel.FromSerializable(target.ToSerializable());
-                    Expect(KnowledgeProgress.PermanentHits(loaded) == 1, "Saved growth");
-                    DamageModifiers.Add(combatTarget, 2); int hp = player.Creature.CombatState!.Enemies.First().CurrentHp;
+ int hp = player.Creature.CombatState!.Enemies.First().CurrentHp;
                     await Play(combatTarget);
                     Expect(hp - player.Creature.CombatState.Enemies.First().CurrentHp == 18, "Three hits with damage bonus");
                     await CardPileCmd.Add(combatTarget, PileType.Hand, skipVisuals: true);
                     selector.Preferred = combatTarget;
                     await Play(await Card(player, "JK112", up));
-                    Expect(KnowledgeProgress.PermanentHits(target) == 1 && DamageModifiers.CaptureDamageModifierSnapshot(combatTarget).ExtraHits == 2, "Temporary source only combat growth");
                 });
             }
             foreach (var (id, expected) in new[] { ("JK133", 3), ("JK137", 2) })

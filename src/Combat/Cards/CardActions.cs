@@ -57,13 +57,21 @@ public static class CardActions
             var card = player.PlayerCombatState!.DrawPile.Cards.FirstOrDefault(predicate);
             if (card == null || player.PlayerCombatState.Hand.Cards.Count >= CardPile.MaxCardsInHand || CombatManager.Instance.IsOverOrEnding) break;
             // Move the chosen actual card to the top, then use the normal draw pipeline. No reshuffle is requested.
-            if (!Hook.ShouldDraw(player.Creature.CombatState!, player, false, out _)) break;
+            if (!await CanDrawDirected(player)) break;
             await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Top, skipVisuals: true);
             var result = await CardPileCmd.Draw(context, player);
             if (result == null) break;
             drawn.Add(result);
         }
         return drawn.ToArray();
+    }
+
+    internal static async Task<bool> CanDrawDirected(Player player)
+    {
+        var combat = player.Creature.CombatState!;
+        if (Hook.ShouldDraw(combat, player, false, out var modifier)) return true;
+        if (modifier != null) await Hook.AfterPreventingDraw(combat, modifier);
+        return false;
     }
 
     internal static async Task DrawWithArrowOverflow(PlayerChoiceContext context, Player player, int count, int turns)
@@ -147,11 +155,7 @@ public static class CardActions
             if (CombatManager.Instance.IsOverOrEnding || player.Creature.IsDead) break;
             if (card.Pile != draw || card.Keywords.Contains(CardKeyword.Unplayable) ||
                 !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) continue;
-            var target = CardTargets.First(card);
-            if (!CardTargets.IsValid(card, target)) continue;
-            if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = 0;
-            CostChanges.CaptureFreePayment(card);
-            await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, CaptureAvailableX = false });
+            await FreePlay(context, card);
         }
     }
 
@@ -165,12 +169,7 @@ public static class CardActions
             if (card.HasBeenRemovedFromState || card.Pile == null || card.Pile.Type == PileType.Play ||
                 ArrowCombat.Find(card)?.Resolving == true || card.Keywords.Contains(CardKeyword.Unplayable) ||
                 !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) continue;
-            var target = CardTargets.First(card);
-            if (!CardTargets.IsValid(card, target)) continue;
-            ArrowCombat.Cancel(card);
-            if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = 0;
-            CostChanges.CaptureFreePayment(card);
-            await CardExecution.Play(context, card, new CardExecutionRequest { Target = target, CaptureAvailableX = false });
+            await FreePlay(context, card);
         }
     }
 
@@ -178,12 +177,7 @@ public static class CardActions
     {
         var enemies = CardTargets.Enemies(card);
         if (enemies.Length <= 1) return enemies.FirstOrDefault();
-#if STS2_BETA
-        if (MegaCrit.Sts2.Core.Runs.RunManager.Instance.CardSelectorStack.GetSelector(card.Owner) != null ||
-            MegaCrit.Sts2.Core.Runs.RunManager.Instance.CardSelectorStack.LocalSelector != null) return enemies[0];
-#else
-        if (CardSelectCmd.Selector != null) return enemies[0];
-#endif
+        if (GameApi.HasCardSelector(card.Owner)) return enemies[0];
         int selected = await PlayerChoices.ChooseIndex(context, card.Owner, enemies.Length, async () =>
         {
             var manager = NTargetManager.Instance;

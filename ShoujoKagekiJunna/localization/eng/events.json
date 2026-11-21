@@ -1,8 +1,6 @@
 {
   "JUNNA_STAGE_GIRL_NOTES.title": "舞台少女心得",
   "JUNNA_STAGE_GIRL_NOTES.pages.INITIAL.description": "一扇半掩的门后，是间落满灰尘的排练室。桌上摊着一本手册，书页里画着九人的兵器，熟悉的笔迹在页边挤作一团。\n\n你翻到自己的弓那一页。那些练习时没能说清的话，如今似乎都能读懂了。",
-  "JUNNA_STAGE_GIRL_NOTES.pages.INITIAL.options.STUDY.title": "研读手册",
-  "JUNNA_STAGE_GIRL_NOTES.pages.INITIAL.options.STUDY.description": "获得这组[blue]9[/blue]张[gold]知识[/gold]牌。",
   "JUNNA_STAGE_GIRL_NOTES.pages.INITIAL.options.PRACTICE.title": "反复推敲",
   "JUNNA_STAGE_GIRL_NOTES.pages.INITIAL.options.PRACTICE.description": "[gold]升级[/gold][blue]1[/blue]张[gold]知识[/gold]牌。",
   "JUNNA_STAGE_GIRL_NOTES.pages.INITIAL.options.PRACTICE_LOCKED.title": "反复推敲",

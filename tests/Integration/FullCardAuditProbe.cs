@@ -229,7 +229,6 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (variant == "capacity")
             while (player.PlayerCombatState.Hand.Cards.Count < CardPile.MaxCardsInHand) await Add("JB02");
         if (Id == "JA81B") ((CatalogCard)_source).SetGeneratedDamage(13);
-        if (Enhanced && definition.DamageCapable) DamageModifiers.Add(_source, 3, 1);
         if (Enhanced && definition.DamageCapable && definition.Type != "能力" && Id != "JA82")
             await CreatureCmd.GainBlock(_enemies[0], 7, ValueProp.Unpowered, null);
         if (definition.CostsX) player.PlayerCombatState.Energy = Empty ? 0 : 3;
@@ -371,7 +370,6 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "JK206") damage = _beforeDeck + (upgraded ? 8 : 0);
         if (Id == "JA82") damage = 0;
         if (definition.Type == "能力") damage = 0;
-        if (Enhanced && definition.DamageCapable && Id != "JA82" && definition.Type != "能力") { damage += 3; hits++; }
         int expected = damage * hits;
         if (Id is not ("U_CARD_005" or "JZ05"))
         {
@@ -409,10 +407,6 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             }
         if (_selected != null)
         {
-            if (Id is "JG27" or "JG36" or "JK200B" or "JK131" or "JA75")
-                Check("实际目标伤害加成", DamageModifiers.CaptureDamageModifierSnapshot(_selected).DamageBonus,
-                    (decimal)Regex.Match(Text, @"(\d+)点伤害加成").Groups[1].ValueAsInt());
-            if (Id == "JG03") Check("实际目标额外伤害次数", DamageModifiers.CaptureDamageModifierSnapshot(_selected).ExtraHits, 1);
             if (Id == "JT02") { Check("改编后飞矢", CardCatalog.IsArrow(_selected), true); Check("改编后费用", CardActions.Cost(_selected), 0); }
             if (Id is "JK11" or "JK11B") Check("关联牌移入手牌或原生满手牌去向", _selected.Pile?.Type,
                 variant == "capacity" ? PileType.Discard : PileType.Hand);
@@ -427,10 +421,6 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         }
         if (Id == "JA65")
             Check("抽牌堆飞矢免费打出", ArrowCombat.Deployed.Count, Empty ? 0 : 1);
-        if (Id == "JX01" && _arrow != null)
-            Check("已布置飞矢伤害加成", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, upgraded ? 3m : 2m);
-        if (Id == "JH22" && _arrow != null)
-            Check("实际伤害传入已布置飞矢", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, (decimal)expected);
         if (Id == "JA67") Check("连珠箭重新布置", ArrowCombat.Find(_source)?.Remaining, 2);
         if (Id == "JA17") Check("下回合能量登记", player.Creature.GetPower<EnergyNextTurnPower>()?.Amount, 2);
         if (Id == "JK37B" && _arrow != null) Check("命中注定转移已有飞矢目标", ArrowCombat.Find(_arrow)?.Target == _enemies[0], true);
@@ -461,13 +451,6 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                     int.Parse(energy.Groups[1].Value) - (upgraded ? definition.UpgradedCost : definition.Cost));
         }
         Check("手牌容量", player.PlayerCombatState!.Hand.Cards.Count <= CardPile.MaxCardsInHand, true);
-        if (Id == "JG33")
-            Check("超越极限按实际伤害强化自身", DamageModifiers.CaptureDamageModifierSnapshot(_source).DamageBonus,
-                (Enhanced ? 3m : 0m) + expected);
-        if (Id == "JK78")
-            foreach (var target in _helpers.Where(c => c.Pile?.Type == PileType.Draw && DamageModifiers.CanDealDamage(c)))
-                Check("专项加练实际牌 " + CardCatalog.DesignId(target), DamageModifiers.CaptureDamageModifierSnapshot(target).DamageBonus,
-                    (upgraded ? 8m : 6m) * (CardCatalog.IsArrow(target) ? 2 : 1));
         if (Id == "JA53")
         {
             var drawn = AuditObserver.Drawn.ToArray();
@@ -492,28 +475,6 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         {
             Check("抽取动态关联的全部同名实际牌", AuditObserver.Drawn.Count, Empty ? 0 : Math.Min(4, CardPile.MaxCardsInHand - _beforeHand + 1));
             Check("动态关联抽牌排除无关牌", AuditObserver.Drawn.All(c => CardCatalog.DesignId(c) is "JB01" or "JA38"), true);
-        }
-        if (Id is "JK359" or "JK360" or "JK361" or "JK362" or "JK363" or "JK364" or "JK365" or "JK366" or "JK367")
-        {
-            var group = KnowledgeCombat.Group(_source)!;
-            var linked = AuditObserver.Drawn.Where(c => group.Members.Any(m => m.Id == CardCatalog.DesignId(c))).ToArray();
-            // Prepared ordinary draws also land on linked cards for 花蕾的光辉.
-            int linkedLimit = Id is "JK359" or "JK365" ? upgraded ? 4 : 3 : 2;
-            Check("事件武器抽到实际关联牌", linked.Length,
-                Empty ? 0 : Math.Min(linkedLimit, CardPile.MaxCardsInHand - _beforeHand + 1));
-            Check("事件武器正常抽牌管线", AuditObserver.Drawn.Distinct().Count(), AuditObserver.Drawn.Count);
-            if (Id == "JK365") Check("花蕾普通抽牌及关联抽牌总量", AuditObserver.Drawn.Count,
-                Empty ? 0 : Math.Min((upgraded ? 2 : 1) + 2, CardPile.MaxCardsInHand - _beforeHand + 1));
-            if (Id == "JK362" && _arrow != null)
-                Check("轮舞推进原有飞矢", ArrowCombat.Find(_arrow)?.Remaining, upgraded ? 1 : 2);
-            if (Id == "JK364")
-            {
-                Check("水仙花获得能量", player.PlayerCombatState.Energy - _beforeEnergy, 1);
-                Check("水仙花升级保留能量", player.Creature.GetPower<EnergyReserve>()?.Amount ?? 0, upgraded ? 1 : 0);
-            }
-            if (Id == "JK367")
-                foreach (var target in _helpers.Where(DamageModifiers.CanDealDamage))
-                    Check("奥黛特强化实际牌 " + CardCatalog.DesignId(target), DamageModifiers.CaptureDamageModifierSnapshot(target).DamageBonus, 2m);
         }
         if (Shine.GetState(_source) is { } shine)
             Check("闪耀完整结算扣一次", shine.Remaining, shine.Maximum - 1);
@@ -561,7 +522,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 int hp = _enemies.Sum(enemy => enemy.CurrentHp);
                 await Play(trigger);
                 if (Id == "JK235") Check("教科书知识触发", hp - _enemies.Sum(enemy => enemy.CurrentHp),
-                    Enhanced ? ((upgraded ? 4 : 3) + 3) * 2 : upgraded ? 4 : 3);
+                    upgraded ? 4 : 3);
                 if (Id == "JK260") Check("每回合首次知识力量", player.Creature.GetPower<StrengthPower>()?.Amount, upgraded ? 3 : 2);
                 if (Id == "JA118")
                 {
@@ -583,7 +544,6 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             if (Id == "JK67" && _arrow != null)
             {
                 await power.BeforeSideTurnEnd(_context, MegaCrit.Sts2.Core.Combat.CombatSide.Player, [player.Creature]);
-                Check("回合末布置飞矢强化", DamageModifiers.CaptureDamageModifierSnapshot(_arrow).DamageBonus, upgraded ? 3m : 2m);
             }
             if (Id == "JA87" && _selected != null)
             {
@@ -809,18 +769,17 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Shine.SetState(desire, 1, 3);
             await CardPileCmd.Add(desire, PileType.Hand, skipVisuals: true);
             await Play(desire);
-            Check("直接统计耗尽牌堆 " + (index + 1), KnowledgeProgress.DepletedPartners(active), before + index + 1);
+            Check("直接统计耗尽牌堆 " + (index + 1), DepletedPartnerCount(active), before + index + 1);
             await KnowledgeProgress.Depleted((CatalogCard)desire, new(desire, desires[index], player, "audit-repeat"));
-            Check("重复回调不会改变耗尽牌堆数量 " + (index + 1), KnowledgeProgress.DepletedPartners(active), before + index + 1);
+            Check("重复回调不会改变耗尽牌堆数量 " + (index + 1), DepletedPartnerCount(active), before + index + 1);
         }
-        Check("自身牌效次数不属于强化", DamageModifiers.CaptureDamageModifierSnapshot(active).ExtraHits, 0);
-        Check("自身牌效不产生伤害强化提示", active.HoverTips.OfType<MegaCrit.Sts2.Core.HoverTips.HoverTip>().Any(tip => tip.Title == new LocString("gameplay_ui", "JUNNA.INVESTMENT").GetFormattedText()), false);
-        DamageModifiers.Add(active, extraHits: 1);
-        Check("练习给予的强化次数单独保留", DamageModifiers.CaptureDamageModifierSnapshot(active).ExtraHits, 1);
         int hp = _enemies[0].CurrentHp;
         await Play(active);
-        Check("耗尽牌堆次数与外部强化合并结算", hp - _enemies[0].CurrentHp, (upgraded ? 12 : 8) * (2 + before + desires.Length + 1));
+        Check("耗尽牌堆次数结算", hp - _enemies[0].CurrentHp, (upgraded ? 12 : 8) * (2 + before + desires.Length));
     }
+
+    private static int DepletedPartnerCount(CardModel card) =>
+        Shine.GetDepletedCards(card.Owner).Count(entry => entry.ModelId == CardCatalog.Model("JK122B").Id.ToString());
 
     private async Task CheckMatching()
     {

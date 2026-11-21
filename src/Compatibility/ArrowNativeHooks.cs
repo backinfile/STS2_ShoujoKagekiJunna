@@ -7,13 +7,34 @@ namespace ShoujoKagekiJunna;
 
 internal static class ArrowNativeHooks
 {
-    internal static async Task Complete(PlayerChoiceContext context, CardPlay play)
+    internal static async Task Resolve(PlayerChoiceContext context, CardPlay play, Func<Task> effect)
     {
-        var combat = play.Card.Owner.Creature.CombatState;
-        if (combat == null || CombatManager.Instance.IsOverOrEnding) return;
-        // Curl Up waits for the damaging card to finish. A deferred arrow has already
-        // finished its native play, so complete this power without replaying card hooks.
-        foreach (var power in combat.Creatures.SelectMany(creature => creature.Powers).OfType<CurlUpPower>().ToArray())
-            await power.AfterCardPlayed(context, play);
+        var player = play.Card.Owner;
+        var manager = CombatManager.Instance;
+        var combat = player.Creature.CombatState!;
+#if STS2_MAIN || STS2_BETA
+        var combatId = manager.BeginCardOrPotionEffect(player);
+#else
+        manager.BeginCardOrPotionEffect(player);
+#endif
+        try
+        {
+            var rupture = player.Creature.GetPower<RupturePower>();
+            if (rupture != null) await rupture.BeforeCardPlayed(play);
+            await effect();
+            if (manager.DebugOnlyGetState() != combat || !manager.IsInProgress) return;
+            if (rupture != null && player.Creature.GetPower<RupturePower>() == rupture)
+                await rupture.AfterCardPlayed(context, play);
+            foreach (var power in combat.Creatures.SelectMany(creature => creature.Powers).OfType<CurlUpPower>().ToArray())
+                await power.AfterCardPlayed(context, play);
+        }
+        finally
+        {
+#if STS2_MAIN || STS2_BETA
+            await manager.EndCardOrPotionEffect(combatId, player);
+#else
+            if (manager.DebugOnlyGetState() == combat) manager.EndCardOrPotionEffect(player);
+#endif
+        }
     }
 }

@@ -18,7 +18,6 @@ public sealed class EnergyReserve : CustomPowerModel
     public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/powers/ENERGY_RESERVE.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     private bool _consumed;
-    private static readonly AsyncLocal<bool> SettingEnergy = new();
     public static Task Add(PlayerChoiceContext context, CardModel card, int amount)
         => Add(context, card.Owner, amount, card);
     public static async Task Add(PlayerChoiceContext context, Player player, int amount, CardModel? cardSource = null)
@@ -44,46 +43,6 @@ public sealed class EnergyReserve : CustomPowerModel
         private static void Prefix(Player ____player)
         {
             if (____player.Creature.GetPower<EnergyReserve>() is { } power) power._consumed = true;
-        }
-    }
-    [HarmonyPatch(typeof(PlayerCmd), nameof(PlayerCmd.GainEnergy))]
-    private static class GainEvent
-    {
-        private static void Prefix(Player player, out int __state) => __state = player.PlayerCombatState?.Energy ?? 0;
-        private static void Postfix(Player player, int __state, ref Task __result) => __result = Complete(__result, player, __state);
-        private static async Task Complete(Task task, Player player, int before)
-        {
-            await task;
-            if (!SettingEnergy.Value && player.PlayerCombatState?.Energy > before)
-                await CatalogPower.EnergyChanged(player, player.PlayerCombatState.Energy - before);
-        }
-    }
-    [HarmonyPatch(typeof(PlayerCmd), nameof(PlayerCmd.LoseEnergy))]
-    private static class LossEvent
-    {
-        private static void Prefix(Player player, out int __state) => __state = player.PlayerCombatState?.Energy ?? 0;
-        private static void Postfix(Player player, int __state, ref Task __result) => __result = Complete(__result, player, __state);
-        private static async Task Complete(Task task, Player player, int before)
-        {
-            await task;
-            if (!SettingEnergy.Value && player.PlayerCombatState?.Energy < before)
-                await CatalogPower.EnergyChanged(player, before - player.PlayerCombatState.Energy);
-        }
-    }
-    [HarmonyPatch(typeof(PlayerCmd), nameof(PlayerCmd.SetEnergy))]
-    private static class SetEvent
-    {
-        private static bool Prefix(decimal amount, Player player, ref Task __result)
-        {
-            if (SettingEnergy.Value) return true;
-            __result = Set(amount, player);
-            return false;
-        }
-        private static async Task Set(decimal amount, Player player)
-        {
-            SettingEnergy.Value = true;
-            try { await PlayerCmd.SetEnergy(amount, player); }
-            finally { SettingEnergy.Value = false; }
         }
     }
 }

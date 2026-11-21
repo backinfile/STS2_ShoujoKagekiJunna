@@ -14,34 +14,20 @@ public static partial class KnowledgeProgress
 {
     // Historical run/replay properties still need a registered ID. Current hits use Core's archive.
     private static readonly SavedSpireField<CatalogCard, int> LegacyDepletedPartners = new(() => 0, "JunnaDepletedPartners");
+    private static readonly SavedSpireField<CatalogCard, int> ResearchHits = new(() => 0, "JunnaPermanentHits");
     private static readonly SavedSpireField<CatalogCard, string> ResearchLinks = new(() => null, "JunnaResearchGroup");
     private static readonly SavedSpireField<CatalogCard, bool> ResearchCompleted = new(() => false, "JunnaResearchCompleted");
     private static readonly SavedSpireField<Player, int> ResearchSequence = new(() => 0, "JunnaResearchSequence");
-    private static readonly SavedSpireField<CatalogCard, string> DamageBonus = new(() => "0", "JunnaPermanentDamageBonus");
-
-    public static decimal PermanentDamageBonus(CardModel card) => card is CatalogCard catalog
-        ? decimal.Parse(DamageBonus.Get(catalog) ?? "0", System.Globalization.CultureInfo.InvariantCulture) : 0m;
-
     internal static string? ResearchGroup(CardModel card) => card is CatalogCard catalog ? ResearchLinks.Get(catalog) : null;
 
     public static int DepletedPartners(CardModel card)
     {
         if (card is not CatalogCard catalog
             || ResearchRules.ForMain(catalog.DesignId) is not { ShowDepletedPartners: true } rule) return 0;
-        if (rule.Counter == ResearchCounter.ExtraHits) return ExtraHits.Get(catalog);
+        if (rule.Counter == ResearchCounter.ExtraHits) return ResearchHits.Get(catalog);
         if (!catalog.IsMutable || catalog.Owner is not { } owner) return 0;
         var memberIds = rule.Members.Select(id => CardCatalog.Model(id).Id.ToString()).ToHashSet(StringComparer.Ordinal);
         return Shine.GetDepletedCards(owner).Count(entry => memberIds.Contains(entry.ModelId));
-    }
-
-    internal static void PreserveFirstBonus(CardModel card, decimal amount)
-    {
-        if (card is not CatalogCard { DesignId: "JG38", IsDupe: false } current || amount <= 0) return;
-        var permanent = current.DeckVersion as CatalogCard ?? current;
-        if (!current.Owner.Deck.Cards.Contains(permanent)) return;
-        decimal total = checked(PermanentDamageBonus(permanent) + amount);
-        DamageBonus.Set(permanent, total.ToString(System.Globalization.CultureInfo.InvariantCulture));
-        if (current != permanent) DamageBonus.Set(current, total.ToString(System.Globalization.CultureInfo.InvariantCulture));
     }
 
     internal static void BindResearch(IEnumerable<CardModel> acquired)
@@ -66,18 +52,19 @@ public static partial class KnowledgeProgress
         foreach (var paper in source.Owner.Deck.Cards.OfType<CatalogCard>()
                      .Where(c => c.DesignId == rule.MainCardId && ResearchLinks.Get(c) == link))
         {
-            int hits = rule.Advance(ExtraHits.Get(paper));
-            ExtraHits.Set(paper, hits);
+            int hits = rule.Advance(ResearchHits.Get(paper));
+            ResearchHits.Set(paper, hits);
             if (source.Owner.PlayerCombatState is { } combat)
                 foreach (var copy in combat.AllCards.OfType<CatalogCard>().Where(c => c.DeckVersion == paper))
-                    ExtraHits.Set(copy, hits);
+                    ResearchHits.Set(copy, hits);
         }
         source.Owner.PlayerCombatState?.RecalculateCardValues();
     }
 
     private static void CopyGrowth(CatalogCard source, CatalogCard clone)
     {
-        DamageBonus.Set(clone, DamageBonus.Get(source));
+        if (ResearchRules.ForMain(source.DesignId)?.Counter == ResearchCounter.ExtraHits)
+            ResearchHits.Set(clone, ResearchHits.Get(source));
         ResearchLinks.Set(clone, ResearchLinks.Get(source));
         ResearchCompleted.Set(clone, ResearchCompleted.Get(source));
     }

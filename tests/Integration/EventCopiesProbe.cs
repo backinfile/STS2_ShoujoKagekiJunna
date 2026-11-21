@@ -28,7 +28,6 @@ public sealed class EventCopiesProbe : AbstractConsoleCmd
     private static string State(CardModel card) => JsonSerializer.Serialize(new
     {
         id = card.Id.ToString(), card.IsUpgraded, shine = Shine.GetState(card),
-        bonus = KnowledgeProgress.PermanentDamageBonus(card), hits = KnowledgeProgress.PermanentHits(card)
     });
 
     private static async Task Setup(Player player)

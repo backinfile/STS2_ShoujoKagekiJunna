@@ -1,5 +1,6 @@
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Combat;
@@ -23,6 +24,7 @@ public partial class EnergyStatusBar : Control
     private Label _retainedAmount = null!;
     private int _nextAmount = -1;
     private int _reserveAmount = -1;
+    private Control _counter = null!;
 
     internal static void Attach(NEnergyCounter counter, Player player)
     {
@@ -47,16 +49,31 @@ public partial class EnergyStatusBar : Control
         _retained.AddChild(_arrow);
         _retainedAmount = MakeLabel("Amount", BlueGray);
         _retained.AddChild(_retainedAmount);
+        _counter = (Control)GetParent();
+        CombatManager.Instance.StateTracker.CombatStateChanged += OnCombatStateChanged;
+        _counter.ItemRectChanged += UpdatePosition;
+        _energyLabel.ItemRectChanged += UpdatePosition;
+        UpdatePosition();
         Refresh();
     }
 
-    public override void _Process(double delta) => Refresh();
+    public override void _ExitTree()
+    {
+        CombatManager.Instance.StateTracker.CombatStateChanged -= OnCombatStateChanged;
+        if (IsInstanceValid(_counter)) _counter.ItemRectChanged -= UpdatePosition;
+        if (IsInstanceValid(_energyLabel)) _energyLabel.ItemRectChanged -= UpdatePosition;
+    }
+
+    private void OnCombatStateChanged(CombatState _) => Refresh();
+
+    private void UpdatePosition()
+    {
+        var center = _counter.GetGlobalTransform().AffineInverse() * _energyLabel.GetGlobalRect().GetCenter();
+        Position = center + new Vector2(-BarSize.X * .5f, 64);
+    }
 
     private void Refresh()
     {
-        var counter = (Control)GetParent();
-        var center = counter.GetGlobalTransform().AffineInverse() * _energyLabel.GetGlobalRect().GetCenter();
-        Position = center + new Vector2(-BarSize.X * .5f, 64);
         int next = Math.Max(0, _player.Creature.GetPowerAmount<EnergyNextTurnPower>());
         int reserve = Math.Max(0, _player.Creature.GetPowerAmount<EnergyReserve>());
         if (next == _nextAmount && reserve == _reserveAmount) return;

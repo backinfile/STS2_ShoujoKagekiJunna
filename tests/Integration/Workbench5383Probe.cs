@@ -174,9 +174,6 @@ public sealed class Workbench5383Command : AbstractConsoleCmd
                     var draw = await Add(player, "U_CARD_018", pile: PileType.Draw);
                     await Play(await Add(player, "JK200B", up));
                     Equal(player.Creature.Block, 5m, "Upgrade retains five block");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(hand).DamageBonus, up ? 3m : 2m, "Hand bonus");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(arrow).DamageBonus, up ? 3m : 2m, "Arrow bonus");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(draw).DamageBonus, 0m, "Draw pile excluded");
                 });
                 await Case("U_CARD_016 current cost and upgraded draw " + up, async () =>
                 {
@@ -192,18 +189,13 @@ public sealed class Workbench5383Command : AbstractConsoleCmd
                     var power = await Add(player, "JK400", up); await Play(power);
                     var meteor = (CatalogCard)await Add(player, "JA81B"); meteor.SetGeneratedDamage(8); await Play(meteor);
                     decimal bonus = up ? 2 : 1;
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(meteor).DamageBonus, bonus, "Automatic and manual zero-cost arrows qualify");
                     var free = await Add(player, "JB02"); await CardActions.FreePlay(Context, free, player.Creature);
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(meteor).DamageBonus, bonus, "Free payment does not turn a positive cost into zero");
                     var reduced = await Add(player, "JB02"); reduced.EnergyCost.SetThisCombat(0); await Play(reduced);
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(meteor).DamageBonus, bonus * 2, "Effective cost reduction qualifies");
                     int count = JunnaCombatHooks.CountArrowPlays(player);
                     await ArrowCombat.CopyAll(Context, player);
                     Equal(JunnaCombatHooks.CountArrowPlays(player), count, "Direct deployment copies are not plays");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(meteor).DamageBonus, bonus * 2, "Copying does not trigger the power");
                     await Play(await Add(player, "JK400", !up));
                     await Play(await Add(player, "JA177"));
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(meteor).DamageBonus, bonus * 2 + 3, "Mixed versions add one plus two");
                     Equal(player.Creature.GetPower<JunnaPowerJK400>()!.Amount, 3, "Displayed accumulated bonus");
                 });
                 await Case("JK400B end-turn base meteors and JK400 interaction " + up, async () =>
@@ -212,7 +204,6 @@ public sealed class Workbench5383Command : AbstractConsoleCmd
                     var source = await Add(player, "JK400B", up);
                     int energy = player.PlayerCombatState!.Energy; await Play(source);
                     Equal(player.PlayerCombatState.Energy, energy - (up ? 0 : 1), "Only cost changes on upgrade");
-                    Equal(DamageModifiers.Add(source, 20, 2), false, "Generated damage source does not inherit bonus or extra hits");
                     await Play(await Add(player, "JK400B", !up));
                     var power = player.Creature.GetPower<JunnaPowerJK400B>()!;
                     await power.AfterPlayerTurnStart(Context, player);
@@ -223,7 +214,6 @@ public sealed class Workbench5383Command : AbstractConsoleCmd
                     var meteors = ArrowCombat.Deployed.ToArray();
                     Equal(meteors.Length, 2, "One meteor per grant");
                     Equal(meteors.All(a => a.Card is CatalogCard c && c.DesignId == "JA81B" && !c.IsUpgraded && c.DynamicVars.Damage.BaseValue == 8 && a.Remaining == 2 && c.Keywords.Contains(CardKeyword.Exhaust)), true, "Each meteor has base damage, version, wait and exhaust");
-                    Equal(meteors.Select(a => DamageModifiers.CaptureDamageModifierSnapshot(a.Card).DamageBonus).SequenceEqual(new[] { up ? 4m : 2m, up ? 2m : 1m }), true, "Each generated zero-cost play buffs currently deployed arrows");
                     Equal(JunnaCombatHooks.CountArrowPlays(player), 2, "Generated actual plays enter battle history");
                 });
                 await Case("U_CARD_030 fixed batch, later growth and history boundaries " + up, async () =>
@@ -240,7 +230,6 @@ public sealed class Workbench5383Command : AbstractConsoleCmd
                     Equal(JunnaCombatHooks.CountArrowPlays(player), 2, "Direct copying is excluded");
                     var prior = ArrowCombat.Deployed.Select(a => a.Card).ToHashSet();
                     var payoff = await Add(player, "U_CARD_030", up);
-                    Equal(DamageModifiers.Add(payoff, 50, 2), false, "Source bonus and extra hits do not multiply generated cards");
                     await Play(payoff);
                     var created = ArrowCombat.Deployed.Where(a => !prior.Contains(a.Card)).ToArray();
                     Equal(created.Length, 2, "Batch snapshots two before generation");

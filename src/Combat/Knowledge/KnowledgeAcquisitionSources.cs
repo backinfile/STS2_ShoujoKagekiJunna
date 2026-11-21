@@ -93,6 +93,7 @@ internal static class KnowledgeAcquisitionSources
                 ?? typeof(CardModel).Assembly.GetType("MegaCrit.Sts2.Core." + entry.Type);
             if (type != null && AccessTools.DeclaredMethod(type, entry.Method) is { } method)
                 methods.Register(method, owner => new Scope(new(entry, owner ?? type)));
+            else JunnaMod.Log.Warn($"Knowledge acquisition hook unavailable: {entry.Type}.{entry.Method}");
         }
     }
     internal static bool Allows(CardModel card, PileType destination, bool transforming = false) => Current.Value is { } context

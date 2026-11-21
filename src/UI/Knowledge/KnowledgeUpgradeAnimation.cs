@@ -18,17 +18,11 @@ internal static class KnowledgeUpgradeAnimation
         internal readonly List<CardPileAddResult> Added = [];
         internal readonly List<Task> Effects = [];
     }
-    private static readonly ConditionalWeakTable<CardModel, Task> Animations = new();
+    private static readonly ConditionalWeakTable<CardModel, Task<bool>> Animations = new();
+    private static readonly ConditionalWeakTable<NCardUpgradeVfx, TaskCompletionSource<bool>> UpgradeCompletions = new();
     private static readonly ConditionalWeakTable<SmithRestSiteOption, SmithPresentation> Presentations = new();
     private static readonly AsyncLocal<SmithRestSiteOption?> Selecting = new();
     private static readonly AsyncLocal<SmithRestSiteOption?> Playing = new();
-
-    private static Task Exit(Godot.Node vfx)
-    {
-        var completion = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        vfx.TreeExited += () => completion.TrySetResult();
-        return completion.Task;
-    }
 
     private static Task SparksCompletion(NCardSmithVfx vfx) => Task.WhenAll(
         vfx.FindChildren("*", "GPUParticles2D", true, false).OfType<Godot.GpuParticles2D>()
@@ -50,8 +44,17 @@ internal static class KnowledgeUpgradeAnimation
         }
         if (!Animations.TryGetValue(card, out var animation)) return false;
         Animations.Remove(card);
-        TaskHelper.RunSafely(PreviewAfter(animation, added, CancellationToken.None));
+        TaskHelper.RunSafely(PreviewUpgradeAfter(animation, card, added));
         return true;
+    }
+
+    private static async Task PreviewUpgradeAfter(Task<bool> animation, CardModel card, IReadOnlyList<CardPileAddResult> added)
+    {
+        var run = MegaCrit.Sts2.Core.Nodes.NRun.Instance;
+        var room = card.Owner.RunState.CurrentRoom;
+        if (await animation && Godot.GodotObject.IsInstanceValid(run)
+            && run == MegaCrit.Sts2.Core.Nodes.NRun.Instance && card.Owner.RunState.CurrentRoom == room)
+            await CardActions.PreviewAdded(added, PileType.Deck);
     }
 
     private static async Task PreviewAfter(Task effect, IReadOnlyList<CardPileAddResult> added, CancellationToken token)
@@ -65,8 +68,31 @@ internal static class KnowledgeUpgradeAnimation
     {
         private static void Postfix(CardModel card, NCardUpgradeVfx? __result)
         {
-            if (CardCatalog.DesignId(card) == "JK82" && __result != null)
-                Animations.AddOrUpdate(card, Exit(__result));
+            if (CardCatalog.DesignId(card) != "JK82" || __result == null) return;
+            var completion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            __result.TreeExited += () => completion.TrySetResult(false);
+            UpgradeCompletions.Add(__result, completion);
+            Animations.AddOrUpdate(card, completion.Task);
+        }
+    }
+
+    [HarmonyPatch(typeof(NCardUpgradeVfx), "PlayAnimation")]
+    private static class NativeUpgradeCompletion
+    {
+        private static void Postfix(NCardUpgradeVfx __instance, ref Task __result)
+        {
+            if (UpgradeCompletions.TryGetValue(__instance, out var completion))
+                __result = Complete(__result, __instance, completion);
+        }
+
+        private static async Task Complete(Task animation, NCardUpgradeVfx node, TaskCompletionSource<bool> completion)
+        {
+            try
+            {
+                await animation;
+                completion.TrySetResult(Godot.GodotObject.IsInstanceValid(node) && node.IsInsideTree());
+            }
+            finally { completion.TrySetResult(false); }
         }
     }
 

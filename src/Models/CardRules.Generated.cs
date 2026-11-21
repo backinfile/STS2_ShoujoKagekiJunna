@@ -277,8 +277,6 @@ internal static partial class CardRules
             {
                 ["Bonus"] = "Bonus",
             },
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
         },
         ["JA76"] = new()
         {
@@ -413,31 +411,22 @@ internal static partial class CardRules
         },
         ["JG09"] = new()
         {
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
         },
         ["JG16"] = new()
         {
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus, CardTip.Retain],
+            UpgradedTips = [CardTip.Retain],
         },
         ["JG27"] = new()
         {
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
         },
         ["JG31"] = new()
         {
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
-            PowerDescription = PowerDescriptionKind.BonusSum,
-            PowerAmount = PowerAmountKind.Bonus,
+            PowerDescription = PowerDescriptionKind.Applications,
+            PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
         ["JG33"] = new()
         {
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
         },
         ["JG34"] = new()
         {
@@ -447,8 +436,6 @@ internal static partial class CardRules
         },
         ["JG36"] = new()
         {
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
         },
         ["JG37"] = new()
         {
@@ -463,8 +450,6 @@ internal static partial class CardRules
         },
         ["JG38"] = new()
         {
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
             Effect = SimpleCardEffect.Attack,
         },
         ["JH01"] = new()
@@ -530,8 +515,8 @@ internal static partial class CardRules
         },
         ["JH22"] = new()
         {
-            Tips = [CardTip.Arrow, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Arrow, CardTip.DamageBonus],
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
         },
         ["JH23"] = new()
         {
@@ -577,12 +562,6 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
             Effect = SimpleCardEffect.Draw,
-        },
-        ["JH30"] = new()
-        {
-            PowerDescription = PowerDescriptionKind.RepeatedApplications,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
         },
         ["JH31"] = new()
         {
@@ -702,8 +681,8 @@ internal static partial class CardRules
         },
         ["JK131"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
         },
         ["JK131B"] = new()
         {
@@ -855,8 +834,8 @@ internal static partial class CardRules
         },
         ["JK200B"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
         },
         ["JK206"] = new()
         {
@@ -978,8 +957,8 @@ internal static partial class CardRules
         },
         ["JK33"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
         },
         ["JK33B"] = new()
         {
@@ -989,90 +968,6 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK359"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["LinkedDraw"] = "N0",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK360"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["LinkedDraw"] = "N1",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK361"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["LinkedDraw"] = "N1",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK362"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Haste"] = "N0",
-                ["LinkedDraw"] = "N1",
-            },
-            Tips = [CardTip.Knowledge, CardTip.Arrow],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
-        },
-        ["JK363"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["LinkedDraw"] = "N2",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK364"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N0",
-                ["LinkedDraw"] = "N1",
-            },
-            Tips = [CardTip.Knowledge, CardTip.Energy],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Energy],
-        },
-        ["JK365"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N0",
-                ["LinkedDraw"] = "N1",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK366"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["LinkedDraw"] = "N1",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK367"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["LinkedDraw"] = "N1",
-            },
-            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
         },
         ["JK37"] = new()
         {
@@ -1099,10 +994,10 @@ internal static partial class CardRules
         },
         ["JK400"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.DamageBonus],
-            PowerDescription = PowerDescriptionKind.BonusSum,
-            PowerAmount = PowerAmountKind.Bonus,
+            Tips = [CardTip.Knowledge, CardTip.Arrow],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
+            PowerDescription = PowerDescriptionKind.Applications,
+            PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
         ["JK400B"] = new()
@@ -1121,8 +1016,8 @@ internal static partial class CardRules
         },
         ["JK43B"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
         },
         ["JK44"] = new()
         {
@@ -1148,8 +1043,8 @@ internal static partial class CardRules
             {
                 ["Turns"] = "N2",
             },
-            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.DamageBonus, CardTip.Energy],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.DamageBonus, CardTip.Energy],
+            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Energy],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Energy],
         },
         ["JK46"] = new()
         {
@@ -1214,10 +1109,10 @@ internal static partial class CardRules
         },
         ["JK67"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.DamageBonus],
-            PowerDescription = PowerDescriptionKind.BonusSum,
-            PowerAmount = PowerAmountKind.Bonus,
+            Tips = [CardTip.Knowledge, CardTip.Arrow],
+            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
+            PowerDescription = PowerDescriptionKind.Applications,
+            PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
         ["JK67B"] = new()
@@ -1236,9 +1131,9 @@ internal static partial class CardRules
         },
         ["JK75"] = new()
         {
-            Tips = [CardTip.Knowledge, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Knowledge, CardTip.DamageBonus],
-            PowerDescription = PowerDescriptionKind.BonusGroups,
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+            PowerDescription = PowerDescriptionKind.Applications,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
@@ -1254,8 +1149,6 @@ internal static partial class CardRules
             {
                 ["Bonus"] = "Bonus",
             },
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
         },
         ["JK78D"] = new()
         {
@@ -1263,8 +1156,6 @@ internal static partial class CardRules
             {
                 ["Amount"] = "N0",
             },
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
         },
         ["JK78E"] = new()
         {
@@ -1272,8 +1163,6 @@ internal static partial class CardRules
             {
                 ["Amount"] = "N0",
             },
-            Tips = [CardTip.DamageBonus],
-            UpgradedTips = [CardTip.DamageBonus],
         },
         ["JK80"] = new()
         {
@@ -1385,8 +1274,8 @@ internal static partial class CardRules
         },
         ["JX01"] = new()
         {
-            Tips = [CardTip.Arrow, CardTip.DamageBonus],
-            UpgradedTips = [CardTip.Arrow, CardTip.DamageBonus],
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
         },
         ["JX02"] = new()
         {

@@ -78,7 +78,7 @@ public static class CardPoolProbe
             {
                 var card = CardCatalog.Create(definition.Id, player);
                 string normal = card.GetDescriptionForPile(PileType.Hand);
-                bool capable = DamageModifiers.CanDealDamage(card);
+                bool capable = card.DynamicVars.Any(pair => pair.Value is MegaCrit.Sts2.Core.Localization.DynamicVars.DamageVar);
                 if (capable != definition.DamageCapable) throw new Exception(definition.Id + " damage eligibility");
                 card.UpgradeInternal(); card.FinalizeUpgradeInternal();
                 string upgraded = card.GetDescriptionForPile(PileType.Hand);
@@ -93,7 +93,7 @@ public static class CardPoolProbe
         await Scenario("arrow immediate and extra damage", async () =>
         {
             await Play(await Card("JA04"));
-            var arrow = await Card("JB03"); DamageModifiers.Add(arrow, 2, 1);
+            var arrow = await Card("JB03");
             int hp = target.CurrentHp;
             await Play(arrow);
             Check("immediate arrow resolves bonus and extra hit", hp - target.CurrentHp, 54);
@@ -198,10 +198,9 @@ public static class CardPoolProbe
         });
         await Scenario("persistent damage snapshots", async () =>
         {
-            var power = await Card("JH30"); DamageModifiers.Add(power, 2, 1); await Play(power);
+            var power = await Card("JH30");  await Play(power);
             int hp = target.CurrentHp; await PlayerCmd.GainEnergy(1, player);
             Check("persistent damage keeps bonus and extra hit", hp - target.CurrentHp, 6);
-            DamageModifiers.Add(power, 100);
             hp = target.CurrentHp; await PlayerCmd.GainEnergy(1, player);
             Check("persistent damage snapshot is independent of later card changes", hp - target.CurrentHp, 6);
             hp = target.CurrentHp; await Play(await Card("JB02"));
@@ -218,10 +217,9 @@ public static class CardPoolProbe
         });
         await Scenario("transform and investment", async () =>
         {
-            var card = await Card("JK49"); DamageModifiers.Add(card, 3, 1);
+            var card = await Card("JK49");
             await Play(card);
             var transformed = CardActions.All(player).Single(c => CardCatalog.DesignId(c) == "JK49B");
-            Check("transformed card keeps investment", DamageModifiers.CaptureDamageModifierSnapshot(transformed).DamageBonus, 3m);
             Check("transform keeps single card", CardActions.All(player).Count(), 1);
         });
         await Scenario("conditional cost and conversion", async () =>
@@ -242,16 +240,15 @@ public static class CardPoolProbe
             await Scenario("start turn damage and energy", async () =>
             {
                 player.PlayerCombatState!.Energy = 2;
-                var card = await Card("JG34"); DamageModifiers.Add(card, 2, 1); await Play(card);
+                var card = await Card("JG34");  await Play(card);
                 var power = player.Creature.Powers.OfType<CatalogPower>().Single();
                 int hp = target.CurrentHp; await power.AfterPlayerTurnStart(context, player);
                 Check("X persistent attack counts captured X plus one extra hit", hp - target.CurrentHp, 15);
             });
             await Scenario("knowledge copy and draw hooks", async () =>
             {
-                await Play(await Card("JK15")); var source = await Card("JK33"); DamageModifiers.Add(source, 2); await Play(source);
+                await Play(await Card("JK15")); var source = await Card("JK33");  await Play(source);
                 var copy = player.PlayerCombatState!.DrawPile.Cards.Single(c => CardCatalog.DesignId(c) == "JK33");
-                Check("knowledge copy inherits investment", DamageModifiers.CaptureDamageModifierSnapshot(copy).DamageBonus, 2m);
                 Check("knowledge copy creates only selected member", CardActions.All(player).Count(c => CardCatalog.IsKnowledge(c)), 2);
                 await Play(await Card("JK27"));
                 var partner = await Card("JK33B", PileType.Draw); await CardPileCmd.Draw(context, player);
@@ -277,7 +274,6 @@ public static class CardPoolProbe
                 }
                 Check("high-cost retain condition", costly.ShouldRetainThisTurn && !cheap.ShouldRetainThisTurn, true);
                 Check("end turn generates upgraded quantity", player.PlayerCombatState!.DrawPile.Cards.Count(c => CardCatalog.DesignId(c) == "B"), 2);
-                Check("end turn arrow investment", DamageModifiers.CaptureDamageModifierSnapshot(arrow).DamageBonus, 2m);
             });
             await Scenario("flying arrows", async () =>
             {
@@ -318,7 +314,7 @@ public static class CardPoolProbe
                 var copy = card.CreateCloneForPlayer(player);
                 Check("fixed X clone preserves numeric cost", CardActions.Cost(copy), 2);
                 Check("fixed X clone preserves converted type", copy.EnergyCost.CostsX, false);
-                var star = await Card("JH30"); DamageModifiers.Add(star, 2, 1); await Play(star);
+                var star = await Card("JH30");  await Play(star);
                 int hp = target.CurrentHp; await PlayerCmd.LoseEnergy(1, player);
                 Check("explicit energy loss triggers once", hp - target.CurrentHp, 6);
                 hp = target.CurrentHp; await PlayerCmd.GainEnergy(1, player);

@@ -153,11 +153,8 @@ public sealed class Workbench5462Command : AbstractConsoleCmd
                     var arrow = await Add(player, "JA81B"); await Play(arrow);
                     decimal bonus = up ? 3 : 2;
                     Equal(player.Creature.GetPower<JunnaPowerJK400>()!.Amount, bonus, "Power amount");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(arrow).DamageBonus, bonus, "Deployed arrow bonus");
                     var free = await Add(player, "JB02"); await CardActions.FreePlay(Context, free, player.Creature);
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(arrow).DamageBonus, bonus, "Free payment preserves positive effective cost");
                     var reduced = await Add(player, "JB02"); reduced.EnergyCost.SetThisCombat(0); await Play(reduced);
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(arrow).DamageBonus, bonus * 2, "Reduced zero cost triggers");
                 });
             }
         }

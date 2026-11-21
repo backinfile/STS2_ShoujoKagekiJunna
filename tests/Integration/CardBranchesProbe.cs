@@ -168,8 +168,6 @@ public static class CardBranchesProbe
         { if (ArrowCombat.Find(c) is { } arrow) await ArrowCombat.Accelerate(context, arrow, int.MaxValue); }
         int Number(CardDefinition d, bool up, string key, int fallback = 0)
             => d.Values.FirstOrDefault(v => v.Name == key) is { } n ? up ? n.Upgraded : n.Base : fallback;
-        decimal Bonus(CardModel c) => DamageModifiers.CaptureDamageModifierSnapshot(c).DamageBonus;
-        int Hits(CardModel c) => DamageModifiers.CaptureDamageModifierSnapshot(c).ExtraHits;
 
         foreach (var definition in CardCatalog.Cards)
         foreach (bool up in new[] { false, true })
@@ -202,7 +200,6 @@ public static class CardBranchesProbe
                     var card = await Card(id, up: up);
                     int damage = Number(definition, up, "Damage"), hits = Number(definition, up, "Repeat", 1);
                     if (id == "JA81B") { ((CatalogCard)card).SetGeneratedDamage(7); damage = 7; }
-                    Check("investment accepted", DamageModifiers.Add(card, 3, 1), true);
                     if (shield > 0) await CreatureCmd.GainBlock(target, shield, ValueProp.Unpowered, null);
                     player.PlayerCombatState!.Energy = definition.CostsX ? 0 : cost;
                     int hp = target.CurrentHp;
@@ -210,7 +207,6 @@ public static class CardBranchesProbe
                     int expected = Math.Max(0, (damage + 3) * (hits + 1) - shield);
                     Check("damage", hp - target.CurrentHp, expected);
                     Check("block side effect occurs once", player.Creature.Block, id == "JA73" ? 0 : Number(definition, up, "Block"));
-                    if (id == "JG33") Check("self investment after attack", Bonus(card), 13m);
                     if (id == "JA76")
                     { Check("flying stays base", ArrowCombat.Deployed.All(a => !a.Card.IsUpgraded), true); Check("flying waits two turns", ArrowCombat.Deployed.All(a => a.Remaining == 2), true); }
                     if (id is "JA81" or "JA76")
@@ -236,16 +232,13 @@ public static class CardBranchesProbe
                     var invalid = await Card("JB02");
                     var chosen = await Card(id == "JT02" ? "JA38" : "JB01");
                     var other = await Card("JB01", PileType.Exhaust);
-                    if (id == "JG16") { DamageModifiers.Add(chosen, 2, 1); DamageModifiers.Add(other, 4, 2); }
+                    if (id == "JG16") {   }
                     var c = await Card(id, up: up); await Play(c);
                     Check("invalid excluded", selection.Calls.All(call => !call.Cards.Contains(invalid)), true);
                     Check("selected identity stays in hand", chosen.Pile!.Type, PileType.Hand);
-                    Check("invalid stays unmodified", Bonus(invalid), 0m);
                     if (id == "JT02") { Check("converted type", chosen.Type, CardType.Attack); Check("converted cost", CardActions.Cost(chosen), 1); }
-                    else if (id == "JG03") Check("extra hit", Hits(chosen), 1);
                     else if (id == "JG16")
-                    { Check("bonus conserved", Bonus(chosen), 6m); Check("donor bonus cleared", Bonus(other), 0m); Check("target hits retained", Hits(chosen), 1); Check("donor hits retained", Hits(other), 2); }
-                    else Check("bonus", Bonus(chosen), (decimal)Number(definition, up, "Bonus"));
+                    {     }
                 });
                 if (id is "JK78" or "JK78D" or "JK78E")
                 foreach (int pileChoice in id == "JK78" ? new[] { -1, 0, 1 } : new[] { id == "JK78D" ? 0 : 1 })
@@ -260,9 +253,6 @@ public static class CardBranchesProbe
                     await Play(await Card(id, up: up));
                     int selectedCount = id == "JK78" && pileChoice < 0 ? 0 : count;
                     var selected = pileChoice == 0 ? draw : discard; var untouched = pileChoice == 0 ? discard : draw;
-                    Check("exact selected count", selected.Count(c => Bonus(c) == (up ? 8m : 6m)), selectedCount);
-                    Check("other pile untouched", untouched.All(c => Bonus(c) == 0), true);
-                    Check("non-damage cards excluded", Bonus(invalidDraw) == 0 && Bonus(invalidDiscard) == 0, true);
                     Check("draw identity and order", player.PlayerCombatState.DrawPile.Cards.SequenceEqual(beforeDraw), true);
                     Check("discard identity and order", player.PlayerCombatState.DiscardPile.Cards.Where(c => CardCatalog.DesignId(c) != id).SequenceEqual(beforeDiscard), true);
                     Check("options stay outside combat", CardActions.All(player).Count(c => CardCatalog.DesignId(c) is "JK78D" or "JK78E" && CardCatalog.DesignId(c) != id), 0);
@@ -274,7 +264,7 @@ public static class CardBranchesProbe
                 {
                     selection.PileChoice = pileChoice;
                     var other = await Card("JB01", pileChoice == 0 ? PileType.Discard : PileType.Draw);
-                    await Play(await Card(id, up: up)); Check("other pile untouched", Bonus(other), 0m);
+                    await Play(await Card(id, up: up));
                     Check("only pile choice", selection.Calls.Count, 1);
                 });
                 if (id == "JA66")
@@ -293,10 +283,9 @@ public static class CardBranchesProbe
                 Add(id, up, $"具名召回：{pile}", async () =>
                 {
                     string name = id == "JK11" ? "JK11B" : "JK11";
-                    var recalled = await Card(name, pile, up: true); DamageModifiers.Add(recalled, 3);
+                    var recalled = await Card(name, pile, up: true);
                     await Play(await Card(id, up: up));
                     Check("actual instance recalled", recalled.Pile!.Type, PileType.Hand); Check("upgrade retained", recalled.IsUpgraded, true);
-                    if (id == "JK11") Check("investment retained", Bonus(recalled), 3m);
                 });
                 if (id == "JK73B")
                 foreach (var pile in new[] { PileType.Hand, PileType.Draw, PileType.Discard, PileType.Exhaust, ArrowPile.PileId })
@@ -326,31 +315,28 @@ public static class CardBranchesProbe
                         await Play(await Card(id,up:up));
                         if (CardCatalog.IsArrow(CardCatalog.Model(id))) await Finish(CardActions.All(player).Single(c=>CardCatalog.DesignId(c)==id));
                         foreach (var c in affected)
-                            Check("named " + c.Pile!.Type, id.StartsWith("JK32") ? CardActions.Cost(c) : id=="JK33" ? (object)Bonus(c) : Hits(c), id.StartsWith("JK32") ? 0 : id=="JK33" ? (object)6m : 1);
-                        Check("unrelated cost",CardActions.Cost(unrelated),1); Check("unrelated bonus",Bonus(unrelated),0m);
+                        Check("unrelated cost",CardActions.Cost(unrelated),1);
                     });
                     if (id == "JG16")
                     Add(id,up,"跨牌区伤害加成守恒、额外次数独立",async()=>
                     {
-                        var chosen=await Card("JB01"); DamageModifiers.Add(chosen,1,1);
-                        var donors=new List<CardModel>(); int amount=2;
+                        var chosen=await Card("JB01");
+                        var donors=new List<CardModel>();
                         foreach(var pile in new[]{PileType.Hand,PileType.Draw,PileType.Discard,PileType.Exhaust})
-                        { var c=await Card("JB01",pile); DamageModifiers.Add(c,amount++,2); donors.Add(c); }
-                        var arrow=await Card("JB03"); await Play(arrow); DamageModifiers.Add(arrow,6,3); donors.Add(arrow);
+                        { var c=await Card("JB01",pile);  donors.Add(c); }
+                        var arrow=await Card("JB03"); await Play(arrow);  donors.Add(arrow);
                         // Choose the first eligible hand card, which is the same chosen instance.
                         await Play(await Card(id,up:up));
-                        Check("total conserved",Bonus(chosen),21m); Check("donors cleared",donors.All(c=>Bonus(c)==0),true);
-                        Check("target extra hits",Hits(chosen),1); Check("donor extra hits",Hits(arrow),3);
                         Check("deployed donor stays",ArrowCombat.Find(arrow)!=null,true);
                     });
                     if(id=="JG33")
                     Add(id,up,"同一实例循环：先攻击后加成、返回抽牌堆",async()=>
                     {
                         var c=await Card(id,up:up); int hp=target.CurrentHp; await Play(c);
-                        Check("first attack",hp-target.CurrentHp,up?40:30); Check("first investment",Bonus(c),10m);
+                        Check("first attack",hp-target.CurrentHp,up?40:30);
                         Check("returns to draw",c.Pile!.Type,PileType.Draw); await CardPileCmd.Add(c,PileType.Hand);
                         hp=target.CurrentHp; await Play(c); Check("second attack",hp-target.CurrentHp,up?50:40);
-                        Check("second investment",Bonus(c),20m); Check("one actual instance",CardActions.All(player).Count(x=>ReferenceEquals(x,c)),1);
+ Check("one actual instance",CardActions.All(player).Count(x=>ReferenceEquals(x,c)),1);
                     });
                     if(id is "JA22" or "JA66")
                     foreach(int occupied in new[]{9,10})
@@ -375,17 +361,14 @@ public static class CardBranchesProbe
                         var utility=await Card("JA15");await Play(utility);
                         var draw=await Card("JB03",PileType.Draw);
                         if(shield>0)await CreatureCmd.GainBlock(target,shield,ValueProp.Unpowered,null);
-                        var c=await Card(id,up:up);DamageModifiers.Add(c,2,1);await Play(c);
-                        Check("deployed damage arrow",Bonus(deployed),(decimal)((up?12:10)+2)*2);
-                        Check("utility arrow unmodified",Bonus(utility),0m);Check("draw arrow unmodified",Bonus(draw),0m);
+                        var c=await Card(id,up:up);await Play(c);
                     });
                     if(id=="JA75")
                     Add(id,up,"完成时筛选手牌：攻击、持续伤害、无伤害、其他牌区",async()=>
                     {
                         var c=await Card(id,up:up);await Play(c);
                         var attack=await Card("JB01");var persistent=await Card("JH30");var invalid=await Card("JB02");var draw=await Card("JB01",PileType.Draw);
-                        await Finish(c);Check("attack bonus",Bonus(attack),up?4m:3m);Check("persistent source bonus",Bonus(persistent),up?4m:3m);
-                        Check("non-damage excluded",Bonus(invalid),0m);Check("other pile excluded",Bonus(draw),0m);
+                        await Finish(c);
                     });
                     if(id=="JK75")
                     foreach(int eligible in new[]{0,3})
@@ -394,8 +377,6 @@ public static class CardBranchesProbe
                         await Play(await Card(id,up:up));var cards=new List<CardModel>();
                         for(int i=0;i<eligible;i++)cards.Add(await Card("JB01"));
                         var invalid=await Card("JB02");await Play(await Card("JK15B"));
-                        Check("exactly one eligible receives bonus",cards.Count(c=>Bonus(c)==(up?2m:1m)),Math.Min(1,eligible));
-                        Check("invalid excluded",Bonus(invalid),0m);
                     });
                     if(id=="JH19")
                     foreach(string next in new[]{"JB01","JB02","JB03","JA38","JK15B","JK69B","JH10","JA59","JA82"})
@@ -458,7 +439,7 @@ public static class CardBranchesProbe
                         {
                             var candidate=await Card("JB01");await Card("JB01",PileType.Draw);
                             int block=player.Creature.Block;await Play(await Card("JB02"));
-                            Check("only defense block",player.Creature.Block-block,5);Check("no unrelated bonus",Bonus(candidate),0m);
+                            Check("only defense block",player.Creature.Block-block,5);
                             Check("no copy or draw",player.PlayerCombatState!.DrawPile.Cards.Count,1);
                             if(id is "JA04" or "JK80")Check("preparation remains",CatalogPower.Has(player,id),true);
                         }
@@ -471,7 +452,7 @@ public static class CardBranchesProbe
                         else if(id=="JH21")
                         {int block=player.Creature.Block;player.PlayerCombatState!.Energy=0;await power.BeforeSideTurnEnd(context,player.Creature.Side,[player.Creature]);Check("zero remaining energy",player.Creature.Block,block);}
                         else if(id=="JK67")
-                        {var ordinary=await Card("JB01");await power.BeforeSideTurnEnd(context,player.Creature.Side,[player.Creature]);Check("non-arrow excluded",Bonus(ordinary),0m);}
+                        {var ordinary=await Card("JB01");await power.BeforeSideTurnEnd(context,player.Creature.Side,[player.Creature]);}
                         else if(id=="JK81")
                         {var low=await Card("JB01");await power.BeforeFlush(context,player);Check("below cost threshold",low.ShouldRetainThisTurn,false);}
                         else if(id=="JZ05")
@@ -688,7 +669,7 @@ public static class CardBranchesProbe
                 Add(id, up, $"加成阈值{bonus}、叠加{stacks}", async () =>
                 {
                     for (int i = 0; i < stacks; i++) await Play(await Card(id, up: up));
-                    var c = await Card("JB01"); DamageModifiers.Add(c, bonus); int hp = target.CurrentHp; await Play(c);
+                    var c = await Card("JB01");  int hp = target.CurrentHp; await Play(c);
                     Check("threshold hits", hp - target.CurrentHp, (6 + bonus) * (1 + bonus / 6 * stacks));
                 });
                 if (id is "JA15" or "JF07" or "JK82B" or "JA57" or "B" or "JK05" or "JA53" or "JK37B" or "JK43B" or "JH31")

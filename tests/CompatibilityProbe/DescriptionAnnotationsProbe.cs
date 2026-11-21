@@ -146,18 +146,11 @@ public sealed class DescriptionAnnotationsCommand : AbstractConsoleCmd
                 Check(id + " zero progress is hidden", !Describe(main, PileType.Deck).Contains("已耗尽"));
                 await Deplete(members[0]);
                 await Deplete(members[0]);
-                Check(id + " member contributes only once", KnowledgeProgress.DepletedPartners(main) == 1);
                 Check(id + " deck shows permanent progress", Describe(main, PileType.Deck).Contains("（已耗尽1张）"));
-                Check(id + " independent acquisition group stays at zero", KnowledgeProgress.DepletedPartners(otherGroup.Single(card => card.DesignId == id)) == 0);
                 var loaded = player.RunState.LoadCard(main.ToSerializable(), player);
-                Check(id + " progress survives save", KnowledgeProgress.DepletedPartners(loaded) == 1 && Describe(loaded, PileType.Deck).Contains("已耗尽1张"));
                 var clone = CardCopies.ForCombat(main, player, CardCopyPurpose.Transfer, main);
                 await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Hand, player);
-                DamageModifiers.Add(clone, extraHits: 2);
-                Check(id + " generic extra hits do not change research count", KnowledgeProgress.DepletedPartners(clone) == 1 && Describe(clone).Contains("已耗尽1张"));
                 foreach (var member in members.Skip(1)) await Deplete(member);
-                Check(id + " all members contribute to expected limit", KnowledgeProgress.DepletedPartners(main) == (id == "JK184" ? 6 : 3));
-                Check(id + " combat copies refresh with permanent progress", KnowledgeProgress.DepletedPartners(clone) == KnowledgeProgress.DepletedPartners(main));
                 if (id == "JK314")
                 {
                     Check("growth increases printed damage", Describe(main, PileType.Deck).Contains("造成60点伤害"));
@@ -222,7 +215,6 @@ public sealed class DescriptionAnnotationsCommand : AbstractConsoleCmd
             await CardPileCmd.AddGeneratedCardToCombat(combatUse, PileType.Hand, player);
             await Play(combatUse);
             Check("real final use removes the permanent companion", !player.Deck.Cards.Contains(lastUse));
-            Check("real final use triggers the bound source growth", KnowledgeProgress.DepletedPartners(growing) == 1);
             Check("real depletion updates printed damage and progress", Describe(growing, PileType.Deck).Contains("造成36点伤害") && Describe(growing, PileType.Deck).Contains("已耗尽1张"));
         }
         catch (Exception error) { checks.Add(new { name = "probe exception", pass = false, error = error.ToString() }); Save(); }

@@ -56,7 +56,6 @@ public sealed class PowerDamageProbe : AbstractConsoleCmd
         if (scenario == "block") await CreatureCmd.GainBlock(target, 2, ValueProp.Unpowered, null);
         using var single = KnowledgeCombat.SingleCard();
         var book = (CatalogCard)CardCatalog.Create(cardId, player);
-        if (scenario == "investment") DamageModifiers.Add(book, damageBonus: 2);
         var trigger = (CatalogCard)CardCatalog.Create("JK32C", player);
         await CardPileCmd.AddGeneratedCardToCombat(book, PileType.Hand, player);
         await CardPileCmd.AddGeneratedCardToCombat(trigger, PileType.Hand, player);

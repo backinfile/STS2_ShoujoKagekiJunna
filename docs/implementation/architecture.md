@@ -2,21 +2,21 @@
 
 ## 入口与依赖
 
-`loader/Bootstrap.cs` 按游戏版本加载实现程序集。`src/JunnaMod.cs` 注册公共出牌中间件、存档字段、伤害资格、Core 延迟结算及 Harmony 补丁；BaseLib 在自定义枚举分配后自动登记 ArrowPile。`src/Combat/JunnaCombatHooks.cs` 连接回合、战斗、出牌与死亡事件。
+`loader/Bootstrap.cs` 按游戏版本加载实现程序集。`src/JunnaMod.cs` 注册 Core 出牌、移牌与恢复通知，以及角色的 Harmony 补丁。BaseLib 在自定义枚举分配后自动登记 ArrowPile。`src/Combat/JunnaCombatHooks.cs` 连接回合、战斗、出牌与死亡事件。
 
-角色通过 Core V1 接口接入闪耀，运行依赖为 Core 1.9.0。`build.ps1` 先校验官方发行包及角色要求的最低版本，再编译正式版、测试版和加载器，导入资源并生成 Core 需求与构建锁文件。Junna 通过独立 Core 工坊条目取得运行依赖；`tools/prepare-workshop.ps1` 生成仅含 Junna 的上传内容和 BaseLib、Core 必需物品配置。
+角色通过 Core V1 接口接入闪耀，运行依赖以角色清单和 Core 构建锁为准。`build.ps1` 先校验官方发行包及角色要求的最低版本，再编译正式版、测试版和加载器，导入资源并生成 Core 需求与构建锁文件。Junna 通过独立 Core 工坊条目取得运行依赖；`tools/prepare-workshop.ps1` 生成仅含 Junna 的上传内容和 BaseLib、Core 必需物品配置。
 
 ## 模块分工
 
 | 目录 | 职责 |
 | --- | --- |
 | `src/Combat/Arrows/` | 飞矢牌堆、部署状态、调度、目标继承及类型转换 |
-| `src/Combat/Cards/` | 选牌、费用、复制打出、变形与具体牌效 |
-| `src/Combat/Damage/` | 伤害资格、实例加成、来源作用域、额外次数与原生指令接入 |
+| `src/Combat/Cards/` | 选牌、费用、复制、出牌和变形 |
+| `src/Combat/Damage/` | 按场战斗和玩家记录攻击事件 |
 | `src/Combat/Knowledge/` | 成组获取、关联抽取、动态关联与永久进度 |
-| `src/Models/` | 游戏模型、卡池元数据和知识组定义 |
+| `src/Models/` | 卡牌、能力、遗物、药水等具体模型，以及卡池和知识组定义 |
 | `src/UI/Arrows/` | 飞矢 HUD、布局、卡框、动画与移牌表现 |
-| `src/UI/Cards/` | 强化标记、卡框特效与强化提示 |
+| `src/UI/Cards/` | 角色卡面、先古牌立绘和能力提示 |
 | `src/UI/Knowledge/` | 知识组堆叠、平铺及获取页面预览 |
 | `src/Compatibility/` | 正式版与测试版游戏接口差异 |
 
@@ -30,7 +30,7 @@
 
 `data/card-pool.json` 是编译输入，通过 `Junna.CardPool` 嵌入角色程序集。`docs/implementation/` 保存实现说明。工作台内容通过 MCP 维护，`tools/assets/generate-card-catalog.py` 读取 MCP 导出快照，生成运行卡池、模型声明、本地化和配图。
 
-卡牌类名与模型 ID 保存在卡池定义中，运行时通过 `CardCatalog` 查找。`CardEffects` 显式分派牌效，`CatalogPower` 统一施加快照与原生事件，具体持续效果由既有能力模型的 partial 实现提供。两处使用相同卡池 ID，修改对应牌效时同时核对其能力、描述及事件。
+卡牌类名与模型 ID 保存在卡池定义中。生成器负责注册及数值的声明，具体卡牌类实现出牌和升级。CatalogPower 将施加快照交给原生命令，具体能力实现持续效果与自身触发。
 
 ## 构建与定向检查
 

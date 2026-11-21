@@ -59,22 +59,6 @@ public sealed class PlaytestFixProbe : AbstractConsoleCmd
             try { await Reset(); await run(); }
             catch (Exception error) { rows.Add(new { name, pass = false, error = error.ToString() }); Save(); }
         }
-        await Case("pending damage", async () =>
-        {
-            var strike = await Card("JB01");
-            await PowerCmd.Apply<JunnaNextCardBonus>(context, player.Creature, 2, player.Creature, null);
-            strike.UpdateDynamicVarPreview(CardPreviewMode.Normal, target, strike.DynamicVars);
-            Expect("pending bonus enters targeted preview", strike.DynamicVars.Damage.PreviewValue, 8m);
-            strike.DynamicVars.Damage.UpdateCardPreview(strike, CardPreviewMode.Normal, null, false);
-            Expect("pending bonus enters non-global preview", strike.DynamicVars.Damage.PreviewValue, 8m);
-            DamageModifiers.Add(strike, 3);
-            strike.UpdateDynamicVarPreview(CardPreviewMode.Normal, target, strike.DynamicVars);
-            Expect("pending and stored bonuses combine in preview", strike.DynamicVars.Damage.PreviewValue, 11m);
-            int hp = target.CurrentHp;
-            await TestGameApi.PaidPlay(context, strike, target);
-            Expect("actual damage counts each bonus once", hp - target.CurrentHp, 11);
-            Expect("playing consumes pending bonus", player.Creature.GetPower<JunnaNextCardBonus>() == null, true);
-        });
         await Case("generated meteor tips", async () =>
         {
             foreach (string id in new[] { "JA76", "JA81" })
@@ -159,7 +143,6 @@ public sealed class PlaytestFixProbe : AbstractConsoleCmd
             Expect("first payload kills its original target", target.IsAlive, false);
             Expect("paid replay hits the remaining enemy exactly once", enemies[1].CurrentHp, 100 - damage);
             Expect("explicit paid replay keeps its energy cost", player.PlayerCombatState.Energy, 0);
-            Expect("replayed practice retains both non-damage effects", player.Creature.GetPower<JunnaNextCardBonus>()?.Amount, 4);
         });
         rows.Add(new { name = "checks complete", pass = true });
         Save();

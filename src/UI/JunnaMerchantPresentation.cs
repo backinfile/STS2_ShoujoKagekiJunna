@@ -14,5 +14,8 @@ internal static class JunnaMerchantPresentation
     ];
 
     // This scene uses a static sprite rather than the native Spine animation rig.
-    static bool Prefix(NMerchantCharacter __instance) => __instance.Name != "JunnaMerchant";
+    static bool Prefix(NMerchantCharacter __instance) =>
+        __instance.SceneFilePath != JunnaMod.ResourceRoot + "scenes/junna_merchant.tscn"
+        || __instance.GetChildCount() == 0
+        || __instance.GetChild(0) is not Godot.Sprite2D;
 }

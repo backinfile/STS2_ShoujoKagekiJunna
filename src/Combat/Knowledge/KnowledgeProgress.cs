@@ -17,36 +17,10 @@ namespace ShoujoKagekiJunna.Combat;
 /// <summary>Permanent card progress and run rewards use BaseLib's saved fields.</summary>
 public static partial class KnowledgeProgress
 {
-    private static readonly SavedSpireField<CatalogCard, int> ExtraHits = new(() => 0, "JunnaPermanentHits");
     private static readonly SavedSpireField<Player, int> OpeningInsights = new(() => 0, "JunnaOpeningInsights");
     private static readonly HashSet<Player> Opened = [];
-    private static readonly Dictionary<Player, int> CopyRewards = [];
     private static readonly Dictionary<Player, int> StoryRewards = [];
     public static void Initialize() { _ = LegacyDepletedPartners; }
-    public static int PermanentHits(CardModel card) => card is CatalogCard catalog ? ExtraHits.Get(catalog) : 0;
-
-    public static async Task Revise(PlayerChoiceContext context, CatalogCard source)
-    {
-        var player = source.Owner;
-        var permanent = source.DeckVersion ?? source;
-        bool permanentSource = Shine.GetState(source) is not { Temporary: true } && !source.IsDupe && player.Deck.Cards.Contains(permanent);
-        var candidates = permanentSource ? player.Deck.Cards : CardActions.Available(player);
-        var targets = candidates.Where(c => CardCatalog.DesignId(c) == "JK112B").ToArray();
-        var chosen = targets.Length <= 1 ? targets : await CardActions.Choose(context, source, targets);
-        foreach (var target in chosen.OfType<CatalogCard>())
-        {
-            if (!permanentSource)
-            {
-                DamageModifiers.Add(target, extraHits: 1);
-                continue;
-            }
-            ExtraHits.Set(target, checked(ExtraHits.Get(target) + 1));
-            foreach (var combatCard in player.PlayerCombatState!.AllCards.OfType<CatalogCard>().Where(c => c.DeckVersion == target))
-                ExtraHits.Set(combatCard, ExtraHits.Get(target));
-        }
-        player.PlayerCombatState?.RecalculateCardValues();
-    }
-
     public static async Task Depleted(CatalogCard card, ShineDepletionContext context)
     {
         if (context.PermanentCard == null) return;
@@ -67,12 +41,9 @@ public static partial class KnowledgeProgress
         if (card is JunnaCard && card.Pile?.Type == PileType.Deck && Shine.GetState(card) is { Temporary: true } state)
             Shine.SetState(card, state.Remaining, state.Maximum);
     }
-    public static void RegisterCopy(Player player) => CopyRewards[player] = CopyRewards.GetValueOrDefault(player) + 1;
     public static void RegisterStory(Player player) => StoryRewards[player] = checked(StoryRewards.GetValueOrDefault(player) + 1);
     public static async Task WonCombat()
     {
-        var rewards = CopyRewards.ToArray();
-        CopyRewards.Clear();
         var stories = StoryRewards.ToArray();
         StoryRewards.Clear();
         using (KnowledgeCombat.SingleCard())
@@ -83,13 +54,10 @@ public static partial class KnowledgeProgress
                     added.Add(await CardPileCmd.Add(player.RunState.CreateCard(CardCatalog.Model("U_CARD_008B"), player), PileType.Deck));
                 CardCmd.PreviewCardPileAdd(added, style: added.Count > 5 ? CardPreviewStyle.MessyLayout : CardPreviewStyle.HorizontalLayout);
             }
-        foreach (var (player, count) in rewards)
-            for (int i = 0; i < count; i++) await CopyDeckCard(player);
     }
     public static void ResetCombat()
     {
         Opened.Clear();
-        CopyRewards.Clear();
         StoryRewards.Clear();
     }
     public static async Task OpenCombat(Player player, PlayerChoiceContext context)
@@ -118,13 +86,9 @@ public static partial class KnowledgeProgress
             new CardSelectorPrefs(prompt, 0, 1));
         await CopySingleCards(player, selected);
     }
-
-    internal static void Copy(CardModel source, CardModel copy)
+    internal static void CopyResearch(CardModel source, CardModel copy)
     {
-        if (source is CatalogCard original && copy is CatalogCard clone)
-        {
-            ExtraHits.Set(clone, ExtraHits.Get(original));
+        if (source is CatalogCard original && copy is CatalogCard clone && ResearchRules.NeedsLink(original.DesignId))
             CopyGrowth(original, clone);
-        }
     }
 }

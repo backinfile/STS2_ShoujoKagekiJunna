@@ -106,7 +106,6 @@ public sealed class LatestWorkbenchCommand : AbstractConsoleCmd
             await Play(practice);
             var deployment = ArrowCombat.Find(practice)!;
             await ArrowCombat.Accelerate(context, deployment, int.MaxValue);
-            Check("射箭练习 invests across hand draw and discard", targets.All(card => DamageModifiers.CaptureDamageModifierSnapshot(card).DamageBonus == 3));
             await Clear();
             var waiting = await Add("JA38");
             await Play(waiting);

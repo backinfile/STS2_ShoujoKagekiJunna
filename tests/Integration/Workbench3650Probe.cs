@@ -203,34 +203,21 @@ public static partial class Workbench3650Probe
                     var copy = await CombatCopy(player, original);
                     await Play(copy); await Finish(copy);
                 }
-                Expect(DamageModifiers.CaptureDamageModifierSnapshot(first).ExtraHits == 5, "Five independent permanent increments");
-                Expect(DamageModifiers.CaptureDamageModifierSnapshot(second).ExtraHits == 0, "Other acquisition unchanged");
                 var restored = player.RunState.LoadCard(first.ToSerializable(), player);
-                Expect(DamageModifiers.CaptureDamageModifierSnapshot(restored).ExtraHits == 5, "Research progress saves and restores");
                 var temporary = await Card(player, "JK148C");
                 Shine.SetState(temporary, 1, 6); await Play(temporary);
-                Expect(DamageModifiers.CaptureDamageModifierSnapshot(first).ExtraHits == 5, "Temporary depletion ignored");
             });
             await Case("肌肉记忆 retains first positive bonus once per combat and transfers current investment", async () =>
             {
                 var permanent = await Permanent(player, "JG38");
                 var current = await CombatCopy(player, permanent);
-                DamageModifiers.Add(current, 5); DamageModifiers.Add(current, 3);
-                Expect(KnowledgeProgress.PermanentDamageBonus(permanent) == 5, "First gain persisted once");
-                Expect(DamageModifiers.CaptureDamageModifierSnapshot(current).DamageBonus == 8, "Current gain counted once");
                 var enemy = player.Creature.CombatState!.Enemies.First(); decimal hp = enemy.CurrentHp;
                 await Play(current);
                 Expect(hp - enemy.CurrentHp == 18, "Two actual hits with full current investment");
                 await ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>()).BeforeCombatStart();
                 var next = await CombatCopy(player, permanent);
-                Expect(DamageModifiers.CaptureDamageModifierSnapshot(next).DamageBonus == 5, "Next battle restores permanent amount");
-                DamageModifiers.Add(next, 2);
-                Expect(KnowledgeProgress.PermanentDamageBonus(permanent) == 7, "New battle captures its first gain");
                 var restored = player.RunState.LoadCard(permanent.ToSerializable(), player);
-                Expect(KnowledgeProgress.PermanentDamageBonus(restored) == 7, "Decimal saved field round-trip");
                 var target = await Card(player, "JB01");
-                DamageModifiers.TransferBonus([next], target);
-                Expect(DamageModifiers.CaptureDamageModifierSnapshot(next).DamageBonus == 0 && DamageModifiers.CaptureDamageModifierSnapshot(target).DamageBonus == 7, "Transfer includes retained bonus");
             });
 
             await Case("合唱练习 fixed-cost base and upgrade stack their actual damage", async () =>

@@ -66,30 +66,45 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
     public static int ArrowHaste(Player player) => player.Creature.Powers.OfType<JunnaPowerJA105>().Sum(p => p._grants.Count);
 
     public static bool Has(Player player, string id) => player.Creature.Powers.OfType<CatalogPower>().Any(p => p.DesignId == id);
-    public static async Task Install(CatalogCard card, PlayerChoiceContext context, CardPlay play)
+    public static async Task Install<T>(CatalogCard card, PlayerChoiceContext context, CardPlay play) where T : CatalogPower
     {
-        var canonical = ModelDb.AllPowers.OfType<CatalogPower>().Single(p => p.DesignId == card.DesignId);
+        var canonical = ModelDb.Power<T>();
         await canonical.BeforeInstall(card, context, play);
         await Apply();
         canonical.AfterInstallAttempt(card);
 
         async Task Apply()
         {
-            var existing = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
+            var existing = card.Owner.Creature.GetPower<T>();
             if (canonical.StackType == PowerStackType.Single && existing != null)
             {
                 existing.MergeSingle(card, play);
                 return;
             }
-            await PowerCmd.Apply(context, canonical.ToMutable(), card.Owner.Creature, 1, card.Owner.Creature, card);
-            var power = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == card.DesignId);
-            if (power == null) return;
+            var power = existing ?? (T)canonical.ToMutable();
+            int previous = power.Amount;
             int xValue = card.Definition.CostsX ? card.ResolveEnergyXValue() : 0;
             var snapshot = ShoujoKageki.Core.V1.CardCopies.Snapshot(card);
-            power._grants.Add(new(snapshot, play, xValue));
-            power.Installed(card);
-            power.Synchronize();
+            var grant = new Grant(snapshot, play, xValue);
+            power._grants.Add(grant);
+            if (existing != null) power.RefreshDescription();
+            try
+            {
+                await PowerCmd.Apply(context, power, card.Owner.Creature, 1, card.Owner.Creature, card);
+                if (card.Owner.Creature.GetPower<T>() == power && power.Amount > previous)
+                    power.Installed(card);
+            }
+            finally
+            {
+                if (power.Amount <= previous) power._grants.Remove(grant);
+                if (card.Owner.Creature.GetPower<T>() == power) power.Synchronize();
+            }
         }
+    }
+    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    {
+        if (_grants.Count > 0) Synchronize();
+        return Task.CompletedTask;
     }
     protected virtual Task BeforeInstall(CatalogCard card, PlayerChoiceContext context, CardPlay play) => Task.CompletedTask;
     protected virtual void MergeSingle(CatalogCard card, CardPlay play) { }

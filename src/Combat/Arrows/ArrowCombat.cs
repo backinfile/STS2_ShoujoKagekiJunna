@@ -1,3 +1,6 @@
+using System.Runtime.CompilerServices;
+using HarmonyLib;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,19 +15,36 @@ namespace ShoujoKagekiJunna.Combat;
 
 public static partial class ArrowCombat
 {
-    private static readonly List<ArrowDeployment> Arrows = [];
-    private static readonly Dictionary<ulong, int> LastTick = [];
-    private static long _sequence;
-    public static IReadOnlyList<ArrowDeployment> Deployed => Arrows;
-    public static ArrowDeployment[] ResolutionOrder() => Arrows.OrderBy(a => a.TargetCategory)
+    private sealed class Battle
+    {
+        internal readonly List<ArrowDeployment> Arrows = [];
+        internal readonly Dictionary<ulong, int> LastTick = [];
+        internal readonly Dictionary<Creature, Creature[]> DeathOrders = [];
+        internal long Sequence;
+    }
+    private static readonly ConditionalWeakTable<ICombatState, Battle> Battles = new();
+    private static Battle For(ICombatState state) => Battles.GetOrCreateValue(state);
+    public static IReadOnlyList<ArrowDeployment> Deployed =>
+        CombatManager.Instance.DebugOnlyGetState() is { } state && Battles.TryGetValue(state, out var battle) ? battle.Arrows : [];
+    public static ArrowDeployment[] ResolutionOrder() => Deployed.OrderBy(a => a.TargetCategory)
         .ThenBy(a => a.Target is { } target ? Array.IndexOf(a.Card.CombatState?.Creatures.ToArray() ?? [], target) : 0)
         .ThenBy(a => a.Sequence).ToArray();
     public static ArrowDeployment[] DisplayOrder() => ResolutionOrder();
-    public static ArrowDeployment? Find(CardModel card) => Arrows.FirstOrDefault(a => a.Card == card);
+    public static ArrowDeployment? Find(CardModel card) =>
+        card.IsMutable && card.Owner?.Creature.CombatState is { } state && Battles.TryGetValue(state, out var battle)
+            ? battle.Arrows.FirstOrDefault(a => a.Card == card) : null;
     public static void Cancel(CardModel card)
     {
-        Arrows.RemoveAll(a => a.Card == card);
+        if (card.IsMutable && card.Owner?.Creature.CombatState is { } state && Battles.TryGetValue(state, out var battle))
+            battle.Arrows.RemoveAll(a => a.Card == card);
         HandArrow.Restore(card);
+    }
+
+    internal static Task AfterMovement(CardMovement movement)
+    {
+        if (movement.OldPile == ArrowPile.PileId && movement.Card.Pile?.Type != ArrowPile.PileId && Find(movement.Card) != null)
+            Cancel(movement.Card);
+        return Task.CompletedTask;
     }
 
     public static void Deploy(JunnaFullDraw card, CardPlay play, int turns)
@@ -47,7 +67,7 @@ public static partial class ArrowCombat
         int haste = CatalogPower.ArrowHaste(card.Owner);
         if (haste > 0) card.AddKeyword(CardKeyword.Exhaust);
         return new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve)
-            { Sequence = _sequence, ExhaustAfterResolve = haste > 0, Payload = payload };
+            { ExhaustAfterResolve = haste > 0, Payload = payload };
     }
 
     private static ArrowDeployment Register(ArrowDeployment arrow)
@@ -57,9 +77,10 @@ public static partial class ArrowCombat
             existing.PlayCount += arrow.PlayCount;
             return existing;
         }
-        Arrows.RemoveAll(a => a.Card == arrow.Card);
-        Arrows.Add(arrow);
-        _sequence++;
+        var battle = For(arrow.Combat);
+        battle.Arrows.RemoveAll(a => a.Card == arrow.Card);
+        arrow.Sequence = battle.Sequence++;
+        battle.Arrows.Add(arrow);
         return arrow;
     }
 
@@ -90,8 +111,9 @@ public static partial class ArrowCombat
     internal static async Task Advance(PlayerChoiceContext context, Player player)
     {
         int round = player.PlayerCombatState!.TurnNumber;
-        if (LastTick.TryGetValue(player.NetId, out var previous) && previous == round) return;
-        LastTick[player.NetId] = round;
+        var battle = For(player.Creature.CombatState!);
+        if (battle.LastTick.TryGetValue(player.NetId, out var previous) && previous == round) return;
+        battle.LastTick[player.NetId] = round;
         foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player && a.DeployedRound < round).ToArray())
         {
             await Accelerate(context, arrow, 1);
@@ -126,7 +148,7 @@ public static partial class ArrowCombat
             var deployment = new ArrowDeployment(copy, play, original.Remaining, player.PlayerCombatState!.TurnNumber,
                 original.Payload.Bind(copy).Invoke, original.CopyXValues())
             {
-                Sequence = _sequence, PlayCount = original.PlayCount, Payload = original.Payload,
+                PlayCount = original.PlayCount, Payload = original.Payload, Destination = original.Destination,
                 ExhaustAfterResolve = original.ExhaustAfterResolve || exhaustCopies,
                 AttacksWhileWaiting = original.AttacksWhileWaiting
             };
@@ -160,7 +182,7 @@ public static partial class ArrowCombat
 
     public static async Task Accelerate(PlayerChoiceContext context, ArrowDeployment arrow, int turns)
     {
-        if (arrow.Resolving || !Arrows.Contains(arrow)) return;
+        if (arrow.Resolving || Find(arrow.Card) != arrow) return;
         if (arrow.Card.Pile?.Type != ArrowPile.PileId) { Cancel(arrow.Card); return; }
         if (!arrow.TargetsGroup && arrow.Target is { } target && arrow.Card.CombatState is { } state)
         {
@@ -180,10 +202,14 @@ public static partial class ArrowCombat
             await using var resolutionBatch = Shine.BeginResolutionBatch();
             using var attack = ArrowAttackAnimation.Begin(arrow.Card.Owner);
             if (hud != null) await hud.ReleaseArrow(arrow);
+            if (CombatManager.Instance.DebugOnlyGetState() != arrow.Combat || Find(arrow.Card) != arrow
+                || arrow.Card.Owner.Creature.IsDead) return;
             for (int replay = 0; replay < arrow.PlayCount; replay++)
                 await arrow.Resolve(context, replay);
+            if (CombatManager.Instance.DebugOnlyGetState() != arrow.Combat || !CombatManager.Instance.IsInProgress
+                || !Battles.TryGetValue(arrow.Combat, out var battle)) return;
             // A resolving arrow may have deployed itself again. Keep that new deployment intact.
-            Arrows.Remove(arrow);
+            battle.Arrows.Remove(arrow);
             if (Find(arrow.Card) != null) return;
             if (await HandArrow.Finish(context, arrow.Card, arrow.ExhaustsWhenResolved)) return;
             if (arrow.Card.Pile?.Type != ArrowPile.PileId) return;
@@ -197,8 +223,9 @@ public static partial class ArrowCombat
                 // Silent transfers skip the native completion event used by the pile counter.
                 if (arrow.Card.Pile?.Type == PileType.Exhaust) PileType.Exhaust.GetPile(arrow.Card.Owner).InvokeCardAddFinished();
             }
-            else if (CatalogPower.Has(arrow.Card.Owner, "JA22")) await CardPileCmd.Add(arrow.Card, PileType.Hand);
-            else await CardPileCmd.Add(arrow.Card, PileType.Discard);
+            else if (arrow.Destination.Pile == PileType.Discard && CatalogPower.Has(arrow.Card.Owner, "JA22"))
+                await CardPileCmd.Add(arrow.Card, PileType.Hand);
+            else await arrow.Destination.Move(context, arrow.Card);
         }
         finally { context.PopModel(arrow.Card); arrow.Resolving = false; }
     }
@@ -211,5 +238,63 @@ public static partial class ArrowCombat
         else if (Find(play.Card) is { Remaining: 0 } ready) await Accelerate(context, ready, 0);
     }
 
-    internal static void Clear() { Arrows.Clear(); HandArrow.Clear(); LastTick.Clear(); DeathOrders.Clear(); _sequence = 0; }
+    internal static void Clear()
+    {
+        if (CombatManager.Instance.DebugOnlyGetState() is { } state)
+        {
+            if (Battles.TryGetValue(state, out var battle))
+                foreach (var arrow in battle.Arrows) HandArrow.Restore(arrow.Card);
+            Battles.Remove(state);
+        }
+    }
+
+    [HarmonyPatch(typeof(CombatManager), nameof(CombatManager.Reset))]
+    private static class CombatReset
+    {
+        private static void Prefix() => Clear();
+    }
+
+#if STS2_MAIN || STS2_BETA
+    [HarmonyPatch(typeof(CombatManager), nameof(CombatManager.RemoveDeadPlayerCardsFromCombat))]
+#else
+    [HarmonyPatch(typeof(CombatManager), nameof(CombatManager.HandlePlayerDeath))]
+#endif
+    private static class DeathCleanup
+    {
+        private static void Postfix(Player player, ref Task __result)
+        {
+            var state = player.Creature.CombatState;
+            if (state == null || !Battles.TryGetValue(state, out var battle)) return;
+            var cards = battle.Arrows.Where(arrow => arrow.Card.Owner == player).Select(arrow => arrow.Card).ToArray();
+            if (cards.Length > 0) __result = Cleanup(__result, player, state, cards);
+        }
+
+        private static async Task Cleanup(Task result, Player player, ICombatState combat, CardModel[] cards)
+        {
+            await result;
+            if (CombatManager.Instance.DebugOnlyGetState() != combat || !CombatManager.Instance.IsInProgress
+                || !player.Creature.IsDead) return;
+            var remaining = cards.Where(card => card.Pile?.Type == ArrowPile.PileId).ToArray();
+            if (remaining.Length > 0) await CardPileCmd.RemoveFromCombat(remaining);
+        }
+    }
+
+    [HarmonyPatch(typeof(CardPileCmd), nameof(CardPileCmd.RemoveFromCombat), [typeof(IEnumerable<CardModel>), typeof(bool)])]
+    private static class RemoveFromCombat
+    {
+        private static void Postfix(IEnumerable<CardModel> cards, ref Task __result)
+        {
+            var deployed = cards.Where(card => Find(card) != null).ToArray();
+            if (deployed.Length > 0) __result = CompleteRemoval(__result, deployed);
+        }
+        private static async Task CompleteRemoval(Task result, CardModel[] cards)
+        {
+            try { await result; }
+            finally
+            {
+                foreach (var card in cards)
+                    if (card.Pile?.Type != ArrowPile.PileId) Cancel(card);
+            }
+        }
+    }
 }

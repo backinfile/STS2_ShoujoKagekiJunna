@@ -8,6 +8,7 @@ param(
     [string]$ChangeNote = ''
 )
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'game-variants.ps1')
 if ($CoreWorkshopId -eq 3737335127) { throw 'CoreWorkshopId must identify Core, not BaseLib.' }
 $source = (Resolve-Path -LiteralPath $ModDirectory).Path
 $manifest = Get-Content -LiteralPath (Join-Path $source 'ShoujoKagekiJunna.json') -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -16,8 +17,7 @@ if ($manifest.id -ne 'ShoujoKagekiJunna' -or
     @($manifest.dependencies | Where-Object { $_.id -eq 'BaseLib' }).Count -ne 1) {
     throw 'Junna manifest must declare BaseLib and the Core minimum version.'
 }
-foreach ($file in @('ShoujoKagekiJunna.dll', 'ShoujoKagekiJunna.pck', 'lib/ShoujoKagekiJunna.Stable.dll',
-    'lib/ShoujoKagekiJunna.Beta.dll', 'core.requirements', 'core.package.lock')) {
+foreach ($file in Get-JunnaRuntimeFiles) {
     if (-not (Test-Path -LiteralPath (Join-Path $source $file) -PathType Leaf)) { throw "Build Junna first; missing $file" }
 }
 if (Get-ChildItem -LiteralPath $source -Recurse -Force | Where-Object { $_.Name -match 'ShoujoKageki(Aijo)?Core' }) {

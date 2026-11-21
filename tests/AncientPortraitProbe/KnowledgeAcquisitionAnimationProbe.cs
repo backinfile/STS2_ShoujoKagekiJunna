@@ -96,7 +96,6 @@ public sealed class KnowledgeAcquisitionAnimationCommand : AbstractConsoleCmd
         using var single = KnowledgeCombat.SingleCard();
         foreach (var old in player.PlayerCombatState!.Hand.Cards.ToArray()) await CardPileCmd.RemoveFromCombat(old);
         var card = CardCatalog.Create("JK49", player);
-        DamageModifiers.Add(card, 2);
         await CardPileCmd.Add(card, PileType.Hand);
         await CardPileCmd.Add(CardCatalog.Create("JK137", player), PileType.Hand);
     }

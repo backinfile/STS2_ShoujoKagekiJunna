@@ -71,7 +71,6 @@ public partial class ArrowHud
         var card = arrow.Card;
         var saved = card.ToSerializable();
         saved.FloorAddedToDeck = null; // Acquisition history does not change the card's current state.
-        var investment = DamageModifiers.CaptureDamageModifierSnapshot(card);
         return JsonSerializer.Serialize(new {
             Saved = saved,
             Variables = card.DynamicVars.OrderBy(pair => pair.Key).Select(pair => new { pair.Key, pair.Value.BaseValue }),
@@ -81,7 +80,6 @@ public partial class ArrowHud
             LocalCost = card.EnergyCost.GetWithModifiers(CostModifiers.Local),
             card.CurrentStarCost, card.HasStarCostX,
             Affliction = card.Affliction == null ? null : new { card.Affliction.Id, card.Affliction.Amount },
-            investment.DamageBonus, investment.ExtraHits, ReceivedBonus = DamageModifiers.HasReceivedBonus(card),
             Shine = Shine.GetState(card),
             arrow.Remaining, arrow.PlayCount, arrow.DeployedRound, arrow.ExhaustAfterResolve,
             WaitingHits = CardCatalog.DesignId(card) == "JT03" ? arrow.AttacksWhileWaiting : 0,

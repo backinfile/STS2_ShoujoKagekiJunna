@@ -1,6 +1,6 @@
 # 报错兼容回归
 
-使用实际 beta 游戏、RitsuLib 0.6.10 与 Core API 程序集检查原版/联用出牌边界、前后监听及攻击命中桥。先构建 Junna，再从仓库根目录执行：
+使用实际 beta 游戏、RitsuLib 0.6.10 与 Core API 程序集检查原版/联用出牌边界和前后监听，并核对旧攻击补丁已退役。先构建 Junna，再从仓库根目录执行：
 
 ```powershell
 dotnet run --project tests/CompatibilityChecks -c Release -- <Junna-Beta-DLL> <RitsuLib-directory> <Core-API-DLL>

@@ -88,14 +88,6 @@ public static class CardCatalog
         return ModelDb.GetById<CardModel>(ModelDb.GetId(type));
     }
     public static CardModel Create(string id, Player owner) => owner.Creature.CombatState!.CreateCard(Model(id), owner);
-    public static void RegisterDamageCapabilities()
-    {
-        foreach (var definition in Cards.Concat(Data.RetiredCards))
-        {
-            var type = typeof(CardCatalog).Assembly.GetType("ShoujoKagekiJunna.Models." + definition.ClassName, true)!;
-            DamageCapability.Register(type, card => card is CatalogCard catalog ? catalog.Definition.DamageCapable : definition.DamageCapable);
-        }
-    }
     private static Catalog Load()
     {
         using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Junna.CardPool")!;

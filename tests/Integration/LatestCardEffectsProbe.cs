@@ -106,7 +106,6 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                     await Play(source);
                     Equal(energy - player.PlayerCombatState.Energy, upgraded ? 0 : 1, "Actual payment");
                     Equal(source.Pile?.Type, PileType.Exhaust, "Both versions exhaust");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(target).ExtraHits, 1, "One extra hit");
                 });
                 await Case("JA53 zero-cost skill and negative controls " + upgraded, async () =>
                 {
@@ -133,12 +132,6 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                     var order = player.PlayerCombatState!.DrawPile.Cards.ToArray();
                     await Play(await Add(player, "JK78", upgraded));
                     decimal bonus = upgraded ? 8 : 6;
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(attack).DamageBonus, bonus, "Attack bonus");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(arrow).DamageBonus, bonus * 2, "Arrow double bonus");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(adapted).DamageBonus, bonus * 2, "Adapted arrow double once");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(skill).DamageBonus, 0m, "No damage capability");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(hand).DamageBonus, 0m, "Hand excluded");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(deployed).DamageBonus, 0m, "Deployed excluded");
                     Equal(player.PlayerCombatState.DrawPile.Cards.SequenceEqual(order), true, "Same instances and order");
                 });
                 await Case("JK200B all own arrows across zones " + upgraded, async () =>
@@ -151,9 +144,6 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                     var deployed = await Add(player, "JA38"); await Play(deployed); arrows.Add(deployed);
                     await Play(await Add(player, "JK200B", upgraded));
                     decimal bonus = upgraded ? 3 : 2;
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(hand).DamageBonus, bonus, "Ordinary hand card");
-                    foreach (var arrow in arrows) Equal(DamageModifiers.CaptureDamageModifierSnapshot(arrow).DamageBonus, bonus, "Own arrow once");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(ordinaryDraw).DamageBonus, 0m, "Ordinary draw card excluded");
                 });
                 await Case("JG33 settled damage becomes own bonus " + upgraded, async () =>
                 {
@@ -163,12 +153,10 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                     int hp = enemy.CurrentHp;
                     await Play(source);
                     Equal(hp - enemy.CurrentHp, (upgraded ? 30 : 25) - 7, "HP damage");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(source).DamageBonus, upgraded ? 30m : 25m, "Includes damage absorbed by block");
                     Equal(source.Pile?.Type, PileType.Discard, "Current effect does not move itself into draw pile");
                     await CardPileCmd.Add(source, PileType.Hand); hp = enemy.CurrentHp;
                     await Play(source);
                     Equal(hp - enemy.CurrentHp, upgraded ? 60 : 50, "Second play uses accumulated bonus");
-                    Equal(DamageModifiers.CaptureDamageModifierSnapshot(source).DamageBonus, upgraded ? 90m : 75m, "Second gain equals settled damage");
                 });
                 foreach (string choice in new[] { "ARROWS", "KNOWLEDGE", "SHINE" })
                     await Case("JS33 " + choice + " " + upgraded, async () =>
@@ -240,7 +228,6 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                 {
                     await Add(player, "JK133"); // One actual card satisfies all three categories.
                     var source = await Add(player, "U_CARD_017", upgraded);
-                    DamageModifiers.Add(source, 2, 1);
                     int hp = player.Creature.CombatState!.HittableEnemies.First().CurrentHp;
                     await Play(source);
                     Equal(hp - player.Creature.CombatState.HittableEnemies.First().CurrentHp, 40, "Four category hits plus one external hit, each 8");

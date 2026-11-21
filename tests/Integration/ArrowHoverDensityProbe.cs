@@ -33,6 +33,12 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
         if (args.FirstOrDefault() == "states")
             return new(true, JsonSerializer.Serialize(ArrowCombat.Deployed.Select(arrow => new {
                 arrow.Sequence,
+                owner = arrow.Card.Owner.NetId,
+                card = arrow.Card.Id.ToString(),
+                targets = arrow.Targets.Select(target =>
+                    Array.IndexOf(arrow.Card.Owner.Creature.CombatState!.Creatures.ToArray(), target)),
+                arrow.Remaining,
+                arrow.PlayCount,
                 payloadType = AccessTools.Property(typeof(ArrowDeployment), "Payload").GetValue(arrow)!.GetType().FullName,
                 state = JsonDocument.Parse((string)AccessTools.Method(typeof(ArrowHud), "ArrowPreviewState").Invoke(null, [arrow])!).RootElement
             })));
@@ -46,8 +52,6 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
                 case "waiting": AccessTools.Property(typeof(ArrowDeployment), "AttacksWhileWaiting").SetValue(arrow, amount); break;
                 case "remaining": AccessTools.Property(typeof(ArrowDeployment), "Remaining").SetValue(arrow, amount); break;
                 case "upgrade": arrow.Card.UpgradeInternal(); break;
-                case "bonus": DamageModifiers.Add(arrow.Card, damageBonus: amount); break;
-                case "hits": DamageModifiers.Add(arrow.Card, extraHits: amount); break;
                 case "cost": CostChanges.SetFixed(arrow.Card, amount); break;
                 case "repeat": AccessTools.Property(typeof(ArrowDeployment), "PlayCount").SetValue(arrow, amount); break;
                 case "exhaust": AccessTools.Property(typeof(ArrowDeployment), "ExhaustAfterResolve").SetValue(arrow, amount != 0); break;
@@ -92,7 +96,7 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
         for (int i = 0; i < count + (mixed ? 1 : 0); i++)
         {
             var card = CardCatalog.Create((i == count || interleaved && (i == 1 || i == 4)) ? "JB03" : self ? "JH11" : "U_CARD_005", player);
-            if (check && count > 1) DamageModifiers.Add(card, damageBonus: i + 1);
+            if (check && count > 1) card.DynamicVars.Damage.BaseValue += i + 1;
             var play = new CardPlay { Card = card, Target = target,
 #if STS2_BETA
                 Player = player,

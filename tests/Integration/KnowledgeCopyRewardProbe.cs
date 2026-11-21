@@ -83,7 +83,7 @@ public sealed class KnowledgeCopyRewardCommand : AbstractConsoleCmd
         Shine.SetState(active, 1, 9);
         await CardPileCmd.Add(active, PileType.Hand, skipVisuals: false);
         var finisher = CardCatalog.Create("JK275", player);
-        DamageModifiers.Add(finisher, 2000);
+        finisher.DynamicVars.Damage.BaseValue = 2000;
         await CardPileCmd.Add(finisher, PileType.Hand, skipVisuals: false);
         Active = new(player, source, upgraded);
         Active.Save();

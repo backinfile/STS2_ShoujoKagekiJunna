@@ -98,8 +98,6 @@ public static class CardCompletionProbe
                 }
                 if (id is "JG03" or "JG09" or "JG16" or "JG27" or "JG36" or "JA75" or "JH01" or "JH29" or "JK81B")
                 { selected = await Card("JB01"); helpers.Add(selected); helpers.Add(await Card("JH27")); }
-                if (id == "JG16") DamageModifiers.Add(helpers[0], 3);
-                if (id == "JG16") { var donor = await Card("JA38", PileType.Discard); DamageModifiers.Add(donor, 4); helpers.Add(donor); }
                 if (id == "JT02") { selected = await Card("JA38"); helpers.Add(selected); }
                 if (id is "JK05" or "JK53" or "JK48" or "JK48B")
                 {
@@ -154,18 +152,18 @@ public static class CardCompletionProbe
                 Check("damage", hp - target.CurrentHp, expectedDamage);
                 Check("block", player.Creature.Block, expectedBlock);
                 if (definition.Type == "能力")
-                    Check("installed ability", player.Creature.Powers.Any(p => p is CatalogPower power && power.DesignId == id || id == "JG23" && p is JunnaEndurancePower), true);
+                    Check("installed ability", player.Creature.Powers.Any(p => p is CatalogPower power && power.DesignId == id), true);
                 else
                     Check("destination", card.Pile?.Type ?? PileType.None, (up ? definition.UpgradedExhaust : definition.Exhaust) ? PileType.Exhaust : id == "JA67" ? ArrowPile.PileId : id == "JG33" ? PileType.Draw : PileType.Discard);
                 switch (id)
                 {
-                    case "JG03": Check("selected extra hit", DamageModifiers.CaptureDamageModifierSnapshot(selected!).ExtraHits, 1); break;
+                    case "JG03":  break;
                     case "JG09": case "JG27": case "JG36": case "JK78": case "JK78D": case "JK78E": case "JA75":
-                        Check("selected bonus", DamageModifiers.CaptureDamageModifierSnapshot(selected!).DamageBonus, (decimal)N("Bonus")); break;
-                    case "JG16": Check("transfer total", DamageModifiers.CaptureDamageModifierSnapshot(selected!).DamageBonus, 7m); break;
+ break;
+                    case "JG16":  break;
                     case "JT02": Check("converted type", selected!.Type, ArrowPile.ArrowType); Check("converted cost", CardActions.Cost(selected!), 0); Check("adapted waiting turns", HandArrow.Turns(selected!), 5); break;
-                    case "JK33": Check("partner bonus", DamageModifiers.CaptureDamageModifierSnapshot(selected!).DamageBonus, 6m); break;
-                    case "JK33B": Check("partner extra hit", DamageModifiers.CaptureDamageModifierSnapshot(selected!).ExtraHits, 1); break;
+                    case "JK33":  break;
+                    case "JK33B":  break;
                     case "JK32": case "JK32B": case "JK32C": Check("partner free", CardActions.Cost(selected!), 0); break;
                     case "JK11": case "JK11B": case "JK43B": case "JA53": case "JA66":
                         Check("selected card in hand", selected!.Pile!.Type, PileType.Hand); break;
@@ -189,8 +187,8 @@ public static class CardCompletionProbe
                         Check("flying damage", flying.All(a => a.Card.DynamicVars.Damage.IntValue == baseDamage), true); break;
                     case "JA43": case "JK45B": Check("accelerated countdown", ArrowCombat.Find(deployed!)!.Remaining, 2); break;
                     case "JA71": Check("all arrows completed", ArrowCombat.Deployed.Count, 0); break;
-                    case "JH22": Check("damage invested into arrow", DamageModifiers.CaptureDamageModifierSnapshot(deployed!).DamageBonus, (decimal)baseDamage); break;
-                    case "JX01": Check("arrow bonus", DamageModifiers.CaptureDamageModifierSnapshot(deployed!).DamageBonus, (decimal)N("Bonus")); break;
+                    case "JH22":  break;
+                    case "JX01":  break;
                     case "JF10": case "JA58":
                         Check("weak", target.GetPower<WeakPower>()!.Amount, N("N0"));
                         Check("vulnerable", target.GetPower<VulnerablePower>()!.Amount, N("N0"));
@@ -257,12 +255,11 @@ public static class CardCompletionProbe
             await Scenario("independent knowledge replay and identity", async () =>
             {
                 var card = await Card("JK49", up: true);
-                card.BaseReplayCount = 1; DamageModifiers.Add(card, 3, 1); card.EnergyCost.AddThisCombat(-1);
+                card.BaseReplayCount = 1;  card.EnergyCost.AddThisCombat(-1);
                 int hp = target.CurrentHp; await Play(card);
                 Check("replay retains attacking form until complete", hp - target.CurrentHp, 124);
                 Check("same instance survives", ReferenceEquals(CardActions.All(player).Single(), card), true);
                 Check("attack identity retained", CardCatalog.DesignId(card)!, "JK49");
-                Check("investment retained", DamageModifiers.CaptureDamageModifierSnapshot(card).DamageBonus, 3m);
                 var defense = await Card("JK49B", up: true);
                 defense.BaseReplayCount = 1;
                 await Play(defense);
@@ -271,7 +268,6 @@ public static class CardCompletionProbe
                 Check("attack form restored", card.Type, CardType.Attack);
                 Check("attack target restored", card.TargetType, TargetType.AnyEnemy);
                 Check("cost modifier retained", CardActions.Cost(card), 1);
-                Check("restored form accepts investment", DamageModifiers.Add(card, 1), true);
                 var clone = card.CreateCloneForPlayer(player);
                 Check("clone keeps knowledge identity", CardCatalog.DesignId(clone)!, "JK49");
             });
@@ -298,10 +294,9 @@ public static class CardCompletionProbe
             });
             await Scenario("energy damage keeps investment snapshot", async () =>
             {
-                var star = await Card("JH30"); DamageModifiers.Add(star, 2, 1); await Play(star);
+                var star = await Card("JH30");  await Play(star);
                 int hp = target.CurrentHp; await PlayerCmd.GainEnergy(3, player);
                 Check("amount with bonus and extra hit", hp - target.CurrentHp, 10);
-                DamageModifiers.Add(star, 100);
                 hp = target.CurrentHp; await PlayerCmd.GainEnergy(2, player);
                 Check("later investment preserves installed snapshot", hp - target.CurrentHp, 8);
             });
@@ -310,7 +305,7 @@ public static class CardCompletionProbe
                 await Play(await Card("JH30")); await Play(await Card("JA45"));
                 var ambush = await Card("JA65"); await Play(ambush);
                 var selected = await Card("JK37", PileType.Draw, up: true);
-                CostChanges.SetFixed(selected, 4); DamageModifiers.Add(selected, 2, 1);
+                CostChanges.SetFixed(selected, 4);
                 player.PlayerCombatState!.Energy = 0; int hp = target.CurrentHp;
                 await Finish(ambush);
                 Check("zero energy still deploys", ArrowCombat.Find(selected) != null, true);
@@ -385,7 +380,6 @@ public static class CardCompletionProbe
                 int maxEnergyBefore = player.PlayerCombatState!.MaxEnergy, permanentMaxEnergy = player.MaxEnergy;
                 player.PlayerCombatState.Energy = id == "JG34" ? 2 : 50;
                 var source = await Card(id, up: up);
-                if (id == "JG34") DamageModifiers.Add(source, 2, 1);
                 await Play(source);
                 var power = player.Creature.Powers.OfType<CatalogPower>().SingleOrDefault();
                 async Task Start() { player.PlayerCombatState.IncrementTurnNumber(); await power!.AfterPlayerTurnStart(context, player); }
@@ -444,8 +438,7 @@ public static class CardCompletionProbe
                     case "JK67":
                         var handArrow = await Card("JA38"); var exhaustedArrow = await Card("JA38", PileType.Exhaust);
                         await End();
-                        Check("hand arrow investment", DamageModifiers.CaptureDamageModifierSnapshot(handArrow).DamageBonus, up ? 3m : 2m);
-                        Check("exhaust arrow investment", DamageModifiers.CaptureDamageModifierSnapshot(exhaustedArrow).DamageBonus, up ? 3m : 2m); break;
+ break;
                     case "JG31":
                         var practiced = await Card("JB01"); int hp = target.CurrentHp;
                         await Play(practiced); Check("first damage before gain", hp - target.CurrentHp, 6);
@@ -466,7 +459,7 @@ public static class CardCompletionProbe
                         int chorusHp = target.CurrentHp; await Start(); Check("captured X and investment", chorusHp - target.CurrentHp, up ? 18 : 15); break;
                     case "JK75":
                         var randomTarget = await Card("JB01"); await Play(await Card("JK15B"));
-                        Check("random eligible hand investment", DamageModifiers.CaptureDamageModifierSnapshot(randomTarget).DamageBonus, up ? 2m : 1m); break;
+ break;
                     case "JH23":
                         await Play(await Card("JK50")); await Play(await Card("JK50"));
                         Check("one expensive trigger", player.Creature.Block, up ? 9 : 6); break;
@@ -510,7 +503,7 @@ public static class CardCompletionProbe
                         Check("generated knowledge", CardCatalog.DesignId(generated)!, "JK46B");
                         Check("generated upgrade", generated.IsUpgraded, up); break;
                     case "JG23":
-                        var trained = await Card("JB01"); DamageModifiers.Add(trained, 12); int trainedHp = target.CurrentHp; await Play(trained);
+                        var trained = await Card("JB01");  int trainedHp = target.CurrentHp; await Play(trained);
                         Check("bonus thresholds add hits", trainedHp - target.CurrentHp, 54); break;
                 }
             });

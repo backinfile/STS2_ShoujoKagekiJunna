@@ -21,25 +21,10 @@ AssemblyLoadContext.Default.Resolving += (context, name) =>
 
 var junna = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.GetFullPath(args[0]));
 var core = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.GetFullPath(args[3]));
-if (nativeOnly)
-{
-    var attackMethod = MoveNext(AccessTools.Method(typeof(MegaCrit.Sts2.Core.Commands.Builders.AttackCommand), "Execute"));
-    var original = PatchProcessor.GetOriginalInstructions(attackMethod);
-    var rewritten = Rewrite(junna, "ShoujoKagekiJunna.Combat.AttackBatchPatch", original, attackMethod);
-    Expect("native AttackCommand retains exactly one Junna damage boundary", Calls(rewritten, "ShoujoKagekiJunna.Combat.DamageExecution", "FromAttack") == 1);
-    var patchType = junna.GetType("ShoujoKagekiJunna.Combat.DamagePatches", true)!;
-    var damage = (MethodInfo)AccessTools.Property(patchType, "CanonicalDamage").GetValue(null)!;
-    Expect("canonical damage method exists in the installed game", damage != null);
-    var harmony = new Harmony("Junna.NativeDamageCompatibilityChecks");
-    try
-    {
-        harmony.Patch(damage!, prefix: new HarmonyMethod(AccessTools.Method(patchType, "Prefix")));
-        harmony.Patch(attackMethod, transpiler: new HarmonyMethod(AccessTools.Method(junna.GetType("ShoujoKagekiJunna.Combat.AttackBatchPatch", true)!, "Transpiler")));
-        Expect("damage prefix and attack transpiler install against the real game", true);
-    }
-    finally { harmony.UnpatchAll(harmony.Id); }
-    return;
-}
+Expect("retired Junna attack patches removed",
+    junna.GetType("ShoujoKagekiJunna.Combat.AttackBatchPatch") == null &&
+    junna.GetType("ShoujoKagekiJunna.Combat.DamagePatches") == null);
+if (nativeOnly) return;
 var ritsu = Assembly.Load("STS2-RitsuLib.Runtime");
 var cardWrapper = MoveNext(AccessTools.Method(typeof(CardModel), nameof(CardModel.OnPlayWrapper)));
 var vanilla = PatchProcessor.GetOriginalInstructions(cardWrapper);
@@ -61,39 +46,7 @@ foreach (string hook in new[] { "BeforeCardOnPlay", "AfterCardOnPlay" })
     Expect($"{hook} retained", Calls(hookCombined, "STS2RitsuLib.Cards.CardOnPlayHook", hook) ==
         Calls(hookInstructions, "STS2RitsuLib.Cards.CardOnPlayHook", hook) &&
         Calls(hookCombined, "STS2RitsuLib.Cards.CardOnPlayHook", hook) > 0);
-var attack = MoveNext(AccessTools.Method(typeof(MegaCrit.Sts2.Core.Commands.Builders.AttackCommand), "Execute"));
-var originalAttack = PatchProcessor.GetOriginalInstructions(attack);
-var hookAttack = Rewrite(ritsu, "STS2RitsuLib.Combat.AttackHits.Patches.AttackCommandExecuteHitHookPatch", originalAttack, attack);
-Expect("real RitsuLib per-hit damage hook", Calls(hookAttack, "STS2RitsuLib.Combat.AttackHits.AttackHitHook", "DamageWithAttackHitHooks") == 1);
-var combinedAttack = Rewrite(junna, "ShoujoKagekiJunna.Combat.AttackBatchPatch", hookAttack, attack);
-var originalHitHook = (MethodInfo)hookAttack.Single(instruction => instruction.operand is MethodInfo method &&
-    method.DeclaringType?.FullName == "STS2RitsuLib.Combat.AttackHits.AttackHitHook" && method.Name == "DamageWithAttackHitHooks").operand;
-var hitBridge = (MethodInfo)combinedAttack.Single(instruction => instruction.operand is MethodInfo method &&
-    method.DeclaringType?.FullName == "ShoujoKagekiJunna.Combat.DamageExecution" &&
-    method.Name is "FromAttackHitHooks" or "FromAttackTargetHitHooks").operand;
-Expect("Junna preserves the actual per-hit hook signature", hitBridge.ReturnType == originalHitHook.ReturnType &&
-    hitBridge.GetParameters().Select(parameter => parameter.ParameterType)
-        .SequenceEqual(originalHitHook.GetParameters().Select(parameter => parameter.ParameterType)));
-#if STS2_BETA
-var legacyHitHook = originalHitHook.DeclaringType!.GetMethods(BindingFlags.Public | BindingFlags.Static).Single(method =>
-    method.Name == "DamageWithAttackHitHooks" && method.GetParameters()[1].ParameterType ==
-    typeof(IEnumerable<MegaCrit.Sts2.Core.Entities.Creatures.Creature>));
-var legacyAttack = Rewrite(junna, "ShoujoKagekiJunna.Combat.AttackBatchPatch",
-    [new CodeInstruction(System.Reflection.Emit.OpCodes.Call, legacyHitHook)], attack);
-Expect("Junna retains the legacy creature-based RitsuLib hit bridge",
-    Calls(legacyAttack, "ShoujoKagekiJunna.Combat.DamageExecution", "FromAttackHitHooks") == 1);
-#endif
-var attackPatcher = new Harmony("Junna.AttackHitCompatibilityChecks");
-try
-{
-    attackPatcher.Patch(attack, transpiler: new HarmonyMethod(AccessTools.Method(
-        ritsu.GetType("STS2RitsuLib.Combat.AttackHits.Patches.AttackCommandExecuteHitHookPatch", true)!, "Transpiler")));
-    attackPatcher.Patch(attack, transpiler: new HarmonyMethod(AccessTools.Method(
-        junna.GetType("ShoujoKagekiJunna.Combat.AttackBatchPatch", true)!, "Transpiler")));
-    Expect("RitsuLib and Junna attack transpilers install together against the real game", true);
-}
-finally { attackPatcher.UnpatchAll(attackPatcher.Id); }
-Console.WriteLine("PASS: standalone and RitsuLib card and attack boundaries compose correctly.");
+Console.WriteLine("PASS: standalone and RitsuLib card boundaries compose correctly.");
 
 static MethodInfo MoveNext(MethodInfo method) => AccessTools.Method(method.GetCustomAttribute<AsyncStateMachineAttribute>()!.StateMachineType, "MoveNext");
 static List<CodeInstruction> Rewrite(Assembly assembly, string type, IEnumerable<CodeInstruction> instructions, MethodBase? original = null)

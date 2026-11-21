@@ -1,13 +1,12 @@
 # 星见纯那
 
-当前实现：纯那角色、95 张工作台有效牌面（含关联牌与生成牌）、16 组知识关系、飞矢牌堆、卡牌实例伤害加成与额外伤害次数。
+当前实现：纯那角色、96 张有效卡牌、31 组知识关系、飞矢牌堆与闪耀。
 
-- 游戏版本为正式版 v0.111.1、旧正式版 v0.107.1 和测试版 v0.113.0。依赖 BaseLib 3.4.8 与 Core 2.0.0 或更新版本。
+- 构建引用为正式版 v0.111.1、旧正式版 v0.107.1 和测试版 v0.113.1。依赖 BaseLib 3.4.8 与 Core 2.0.0 或更新版本。
 - 初始牌组：4 打击、4 防御、1 满弦射击、1 招架。招架为 1 费、9 格挡、闪耀 9，升级后变为 0 费。
 - 生命暂设 70。起始遗物为绿色宝石：战斗开始时获得 1 张更近一步；升级为燃烧宝石后，每回合开始时获得 1 张更近一步。通过奥罗巴斯之触替换升级。
 - 战斗立绘：2026-11-04 精修版 04 待机、02 攻击。
-- 强化标记采用 C 型底边嵌条，伤害加成与额外次数沿卡图底边靠左横排，单项存在时按内容收紧。1～3 次逐枚显示小箭头，4 次起显示箭头和次数数字。飞矢牌避开中央回合数徽牌，场上悬浮飞矢只显示额外次数。[显示预览与定向验证](docs/worktree-tasks/card-investment-marks/README.md)。
-- 获得过伤害加成或额外伤害次数的卡牌，在本场战斗持续带有暖金色卡框粒子；加成转移后保留，战斗结束清除。知识牌堆叠悬停时可用滚轮切换，左键直接获取、右键平铺预览。[效果与验证](docs/worktree-tasks/card-bonus-border-vfx-20261105/README.md)。
+- 知识牌堆叠悬停时可用滚轮切换，左键直接获取，右键平铺预览。
 - 飞矢卡面：使用工作台选定的 D 型瞄准卡框，中央独立显示初始回合数；边框随稀有度着色，远古牌保留全幅卡图与独立计数徽牌。
 - 飞矢出牌动画保留卡牌沿贴弓卷入轨迹移动，带细灰蓝拖尾，随后从固定虚幻弓的后方前送，收成飞矢并搭弦。搭箭停 0.09 秒后快拉、慢绷，配合装填声和满弓落定声；满弓保留 0.40 秒，再用 0.24 秒淡去。目标线或柔和扇面在拉弓时出现，随拉弓延长至原长度，换形处播放 8 帧灰蓝薄片动画。默认贴弓卷入总长 2.05 秒，另保留大回环、S 形回摆、直接前送三种实机对比方案。素材与验证记录见 [转场特效任务](docs/worktree-tasks/arrow-transformation-vfx/README.md)。
 - 悬浮飞矢：细长菱形、加厚灰边，箭尾侧显示圆形实时倒计时，按充能球尺寸制作；标记位于第二行遗物的位置，上方留一行遗物。单体箭按目标由前到后排列，尖端旋转朝向目标，直线在半空渐隐；群体箭以单枚菱形卡图为主体，三枚小箭头贴近前半段两侧，以随机高度和相位绕转，交替被主体遮挡或叠在主体前方，尖端正前方留空；加宽 25% 的扇面从箭尖前方淡入，近端、远端与侧边均渐隐，引导线柔化。
@@ -16,11 +15,11 @@
 
 自行游玩时，在仓库根目录运行 `python play.py`，会编译 DLL、打包资源、安装到独立游玩目录并打开中文有声窗口。后续启动沿用 `artifacts/play-game/user/` 中的存档。
 
-默认按模组清单中的最低 Core 依赖版本，从相邻 Core 仓库的 `dist/ShoujoKagekiCore-<版本>/` 读取发行包，也可用 `--core-package <Core发行目录>` 或 `SHOUJO_CORE_PACKAGE` 指定。已有打包产物时，运行 `python play.py --skip-build` 直接安装并启动。
+默认按模组清单中的最低 Core 依赖版本，从相邻 Core 仓库的 `dist/ShoujoKagekiCore-<版本>/` 读取发行包，也可用 `--core-package <Core发行目录>` 或 `SHOUJO_CORE_PACKAGE` 指定。升级旧游玩实例时，启动脚本将旧 Core 移出 `mods/`，留在实例目录供取回。已有打包产物时，运行 `python play.py --skip-build` 直接安装并启动。
 
 Python 入口自动选择本机 PowerShell 7 执行构建与启动。游戏已运行时显示当前进程，关闭游戏后再次运行即可重新打包启动。原有 `./play.ps1` 入口同样可用。
 
-执行 `./build.ps1 -CorePackage <Core发行目录> -MainGameDir <正式版游戏目录> -GameDir <测试版游戏目录>`。也可分别使用 `SHOUJO_CORE_PACKAGE`、`SHOUJO_MAIN_GAME` 和 `SHOUJO_BETA_GAME`。Steam 安装的是正式版时可省略 `-MainGameDir`。使用 `-Godot` 指定 MegaDot 编辑器路径。
+执行 `./build.ps1 -CorePackage <Core发行目录> -MainGameDir <正式版引用目录> -GameDir <测试版游戏目录>`。也可分别使用 `SHOUJO_CORE_PACKAGE`、`SHOUJO_MAIN_GAME` 和 `SHOUJO_BETA_GAME`。Steam 安装的是正式版时可省略 `-MainGameDir`。使用 `-Godot` 指定 MegaDot 编辑器路径。
 产物位于 `dist/ShoujoKagekiJunna/`，编译时从 Core 发行包引用 API，并生成 `core.requirements` 和 `core.package.lock`。游玩时订阅独立的 Core 与 BaseLib 工坊条目，或将三个模组的完整目录放入游戏 `mods/`。加载顺序为 BaseLib → Core → Junna。加载器为 v0.107.1 选择 `Stable` 实现，为 v0.111.x 选择 `Main` 实现，为 v0.113.x 选择 `Beta` 实现。构建脚本使用 v0.107.1 引用包及两个游戏目录中的程序集生成对应的 DLL。
 
 Core 发布后，使用其 `mod_id.txt` 中的数字 ID 准备 Junna 工坊工作区：
@@ -42,13 +41,14 @@ Core 发布后，使用其 `mod_id.txt` 中的数字 ID 准备 Junna 工坊工�
 
 ```text
 src/Combat/Arrows/     飞矢调度、倒计时与类型转换
-src/Combat/Cards/      出牌、选牌与具体牌效
-src/Combat/Damage/     伤害加成、次数与来源作用域
+src/Combat/Cards/      出牌与选牌命令
+src/Combat/Damage/     攻击事件记录
 src/Combat/Knowledge/  知识组获取、抽取与永久进度
 src/Models/            角色、卡牌、能力、遗物及卡池定义
+src/Models/Cards/      具体卡牌的出牌和升级实现
 src/UI/                HUD、卡面、动画与知识组预览
 src/Compatibility/     正式版与测试版 API 适配
-loader/                双版本程序集加载入口
+loader/                三版本程序集加载入口
 data/                  编译时嵌入的运行卡池
 ShoujoKagekiJunna/      游戏图片、场景与本地化资源
 docs/design/           角色设计数据、素材来源与工作台历史基线
@@ -67,9 +67,11 @@ Git 保存源码、运行资源、工作台初始数据与当前设计数据。�
 
 模块分工与维护入口见 [代码结构](docs/implementation/architecture.md)。工具依赖与入口见 [tools/README.md](tools/README.md)，工作台程序与部署由 [Core 少女歌剧工作台](https://github.com/backinfile/STS2_ShoujoKagekiCore/blob/main/tools/workbench/README.md) 维护，纯那的内容编辑约定见 [工作台内容编辑](docs/design/AGENTS.md)。
 
-## 本轮验证
+## 验证记录
 
-使用独立游戏目录、独立存档和 MCP mod。`tools/dev/start-test-game.ps1` 默认使用端口 15727，开启静默音频、最小化启动保护。
+本次重构结果见 [本体代码对照与验收记录](docs/worktree-tasks/native-style-review/README.md#定向验收记录)。MCP 使用独立游戏目录和存档。`tools/dev/start-test-game.ps1` 默认选择空闲端口，开启静默音频与最小化启动保护。
+
+### 历史验证
 
 `tests/Integration/` 是单独的测试模组，不进入发布包。它提供 `junna_probe run`、`junna_probe real`、`junna_probe prepare` 和 `junna_probe render` 命令，分别用于机制断言、华恋实际卡牌检查、录像准备与最小化离屏绘制。
 `junna_probe catalog` 与 `junna_probe catalog-events` 验证本轮新增卡牌共用机制；结果分别写入 `artifacts/dev-game/card-pool-results.json` 与 `card-event-results.json`。测试项目可用 `JunnaAssemblyPath` 指向当前编译 DLL。

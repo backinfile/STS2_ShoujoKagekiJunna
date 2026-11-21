@@ -1,6 +1,6 @@
 """Generate runtime metadata and portraits from a versioned workbench MCP export.
 
-The export is read-only. Effects are implemented explicitly in CardEffects.cs.
+The export is read-only. Effects are implemented in the concrete card classes.
 """
 import argparse
 import runpy
@@ -199,13 +199,16 @@ def main():
     if args.arrow_portraits_only:
         arrow_portraits_only(bundle)
         return
-    cards = [c for c in bundle['data']['cards'] if not c.get('trashedAt') and not c.get('reservedAt')]
+    removed_event_cards = {f'JK{number}' for number in range(359, 368)}
+    cards = [c for c in bundle['data']['cards']
+             if c['id'] not in removed_event_cards and not c.get('trashedAt') and not c.get('reservedAt')]
     previous = json.loads(CATALOG_PATH.read_text(encoding='utf-8'))
     existing = previous if args.rules_only else None
     existing_cards = {card['id']: card for card in existing['cards']} if existing else {}
     active_ids = {card['id'] for card in cards}
     retired = {card['id']: dict(card, pool=False)
-               for card in previous.get('retiredCards', []) + previous['cards'] if card['id'] not in active_ids}
+               for card in previous.get('retiredCards', []) + previous['cards']
+               if card['id'] not in active_ids and card['id'] not in removed_event_cards}
     definitions = []
     wrappers = []
     localization = {}
@@ -308,13 +311,13 @@ def main():
         if cid not in EXISTING:
             shine = re.search(r'闪耀(\d+)[。.]', card['text'])
             declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
-            wrappers.append(declaration + f'[CustomID("{model_id}")]\npublic sealed class {cls}() : CatalogCard("{cid}");\n')
+            wrappers.append(declaration + f'[CustomID("{model_id}")]\npublic sealed partial class {cls}() : CatalogCard("{cid}");\n')
     for card in retired.values():
         if card['id'] in EXISTING:
             continue
         shine = re.search(r'闪耀(\d+)[。.]', card.get('text', ''))
         declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
-        wrappers.append(declaration + f'[CustomID("{card["modelId"]}")]\npublic sealed class {card["className"]}() : CatalogCard("{card["id"]}");\n')
+        wrappers.append(declaration + f'[CustomID("{card["modelId"]}")]\npublic sealed partial class {card["className"]}() : CatalogCard("{card["id"]}");\n')
     ids = {c['id'] for c in cards}
     source_ids = {card['id'] for card in bundle['data']['cards']}
     groups = [g for g in bundle['data']['partnerGroups'] if g['mainCardId'] in ids and not g.get('trashedAt') and not g.get('reservedAt')]
@@ -440,7 +443,7 @@ def main():
     if not args.text_only and not args.rules_only:
         (ROOT / 'src/Models/CatalogPowers.Generated.cs').write_text(header + '\n'.join(
             f'[CustomID("JUNNA_{cid}_POWER")]\npublic sealed partial class JunnaPower{cid}() : CatalogPower("{cid}");\n'
-            for cid in sorted(power_ids)), encoding='utf-8')
+            for cid in sorted(power_ids - {"JK80"})), encoding='utf-8')
     if args.text_only:
         print(f'Updated display text for {len(cards)} cards; runtime values, models and portraits unchanged.')
     elif args.rules_only:

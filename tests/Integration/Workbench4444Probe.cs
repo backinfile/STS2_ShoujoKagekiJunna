@@ -52,19 +52,6 @@ public static partial class Workbench3650Probe
                     var children = ArrowCombat.Deployed.ToArray();
                     Expect(children.Length == 2 && children.All(a => a.Card != source && a.Remaining == 3 && !a.Card.IsUpgraded && a.Target == enemy), "two base child arrows");
                 });
-                await Check("star cluster independent copies " + up, async () =>
-                {
-                    var source = await Card(player, "JA38"); DamageModifiers.Add(source, 7); await Play(source);
-                    var original = ArrowCombat.Find(source)!;
-                    original.GetType().GetProperty("PlayCount")!.SetValue(original, 2);
-                    await Play(await Card(player, "JA176", up));
-                    Expect(ArrowCombat.Deployed.Count == 2, "snapshot copied once");
-                    var copy = ArrowCombat.Deployed.Single(a => a.Card != source);
-                    Expect(copy.Remaining == original.Remaining && copy.Target == original.Target && copy.PlayCount == 2, "wait, target and replay");
-                    Expect(DamageModifiers.CaptureDamageModifierSnapshot(copy.Card).DamageBonus == 7, "damage bonus");
-                    decimal hp = copy.Target!.CurrentHp; await Finish(copy.Card);
-                    Expect(copy.Target.CurrentHp < hp && ArrowCombat.Find(source) != null, "independent resolution");
-                });
                 await Check("encouragement acceleration " + up, async () =>
                 {
                     var source = await Card(player, "JB03"); await Play(source);

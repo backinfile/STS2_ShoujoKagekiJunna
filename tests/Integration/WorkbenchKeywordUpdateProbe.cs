@@ -43,7 +43,6 @@ public static partial class Workbench3650Probe
                     Expect(source.Keywords.Contains(CardKeyword.Exhaust) == !upgraded && !source.Keywords.Contains(CardKeyword.Retain), "Current native keywords");
                     await Play(source);
                     Expect(source.Pile?.Type == (upgraded ? PileType.Discard : PileType.Exhaust), "Current source destination");
-                    Expect(DamageModifiers.CaptureDamageModifierSnapshot(target).ExtraHits == 1, "One actual extra hit");
                     var enemy = player.Creature.CombatState!.Enemies.First(); int hp = enemy.CurrentHp;
                     await Play(target);
                     Expect(enemy.CurrentHp == hp - 12, "Strike resolves two six-damage hits");

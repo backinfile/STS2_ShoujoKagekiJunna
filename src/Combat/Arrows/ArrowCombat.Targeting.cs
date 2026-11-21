@@ -9,11 +9,9 @@ namespace ShoujoKagekiJunna.Combat;
 
 public static partial class ArrowCombat
 {
-    private static readonly Dictionary<Creature, Creature[]> DeathOrders = [];
-
     public static void RetargetEnemies(MegaCrit.Sts2.Core.Entities.Players.Player player, Creature target)
     {
-        foreach (var arrow in Arrows.Where(a => a.Card.Owner == player && !a.Resolving &&
+        foreach (var arrow in Deployed.Where(a => a.Card.Owner == player && !a.Resolving &&
             a.Card.TargetType == TargetType.AnyEnemy && a.Card.IsValidTarget(target)).ToArray())
             arrow.Retarget(target);
     }
@@ -21,7 +19,7 @@ public static partial class ArrowCombat
     internal static void RememberDeathOrder(Creature creature)
     {
         if (creature.IsEnemy && creature.CombatState is { } state)
-            DeathOrders[creature] = state.Enemies.ToArray();
+            For(state).DeathOrders[creature] = state.Enemies.ToArray();
     }
 
     internal static bool AwaitingReturn(ArrowDeployment arrow)
@@ -41,7 +39,7 @@ public static partial class ArrowCombat
         if (Available(target)) return target;
         // A damage hook may create its arrow before the pending death notification.
         // Keep that target until the normal death handler can retarget the deployment.
-        if (!DeathOrders.TryGetValue(target, out var order)) return state.Enemies.FirstOrDefault(Available);
+        if (!For(state).DeathOrders.TryGetValue(target, out var order)) return state.Enemies.FirstOrDefault(Available);
         int index = Array.IndexOf(order, target);
         return index < 0 ? null : NextTarget(state, order, index);
     }
@@ -58,14 +56,15 @@ public static partial class ArrowCombat
     {
         // Keep the death-time order until combat ends: effects can create their arrow after
         // the damage command has already removed the original target.
-        DeathOrders.TryGetValue(creature, out var order);
         // These predicates also cover modded rebirth and transformation powers.
         if (!creature.IsEnemy || creature.IsAlive || state == null) return Task.CompletedTask;
+        if (!Battles.TryGetValue(state, out var battle)) return Task.CompletedTask;
+        battle.DeathOrders.TryGetValue(creature, out var order);
         order ??= state.Enemies.ToArray();
         int index = Array.IndexOf(order, creature);
         if (index < 0) return Task.CompletedTask;
         var replacement = NextTarget(state, order, index);
-        foreach (var arrow in Arrows.Where(a => !a.TargetsGroup && a.Target == creature).ToArray())
+        foreach (var arrow in battle.Arrows.Where(a => !a.TargetsGroup && a.Target == creature).ToArray())
             if (replacement != null) arrow.Retarget(replacement);
         // A later death listener or wave transition may still create enemies. Combat end owns cleanup.
         return Task.CompletedTask;

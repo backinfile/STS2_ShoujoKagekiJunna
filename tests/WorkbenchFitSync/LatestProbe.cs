@@ -107,7 +107,6 @@ public sealed class LatestWorkbenchCommand : AbstractConsoleCmd
                     var hand = await Card(player, "JB01"); var draw = await Card(player, "JB01", pile: PileType.Draw);
                     var source = await Card(player, "JK200B", upgraded); await Play(source);
                     Expect(player.Creature.Block == (upgraded ? 7 : 5), "Block");
-                    Expect(DamageModifiers.CaptureDamageModifierSnapshot(hand).DamageBonus == (upgraded ? 3 : 2) && DamageModifiers.CaptureDamageModifierSnapshot(draw).DamageBonus == 0, "Hand-only bonus");
                     Expect(source.Pile?.Type == PileType.Discard && !source.Keywords.Contains(CardKeyword.Retain), "Current printed keywords");
                 });
                 foreach (var id in new[] { "JG36", "JK131" })
@@ -118,14 +117,13 @@ public sealed class LatestWorkbenchCommand : AbstractConsoleCmd
                         var arrow = await Card(player, "JA38"); await Play(arrow); cards.Add(arrow);
                         await Play(await Card(player, id, upgraded));
                         int bonus = id == "JG36" ? upgraded ? 3 : 2 : upgraded ? 4 : 3;
-                        Expect(cards.All(c => DamageModifiers.CaptureDamageModifierSnapshot(c).DamageBonus == bonus), "All five zones");
                     });
                 await Case("Deck size damage and preview " + upgraded, async () =>
                 {
                     var source = (CatalogCard)await Card(player, "JK206", upgraded);
                     int expected = player.Deck.Cards.Count + (upgraded ? 8 : 0), before = player.Creature.CombatState!.Enemies.First().CurrentHp;
                     Expect(source.DynamicVars.CalculatedDamage.Calculate(player.Creature.CombatState.Enemies.First()) == expected, "Dynamic preview");
-                    DamageModifiers.Add(source, 2); await Play(source);
+ await Play(source);
                     Expect(before - player.Creature.CombatState.Enemies.First().CurrentHp == expected + 2, "Deck damage with combat bonus");
                 });
                 await Case("Knowledge search " + upgraded, async () =>
@@ -153,7 +151,7 @@ public sealed class LatestWorkbenchCommand : AbstractConsoleCmd
                     });
                 await Case("Textbook triggers and stacks " + upgraded, async () =>
                 {
-                    var source = await Card(player, "JK235", upgraded); DamageModifiers.Add(source, 2); await Play(source);
+                    var source = await Card(player, "JK235", upgraded);  await Play(source);
                     int hp = player.Creature.CombatState!.Enemies.Sum(e => e.CurrentHp);
                     await Play(await Card(player, "JS35"));
                     Expect(player.Creature.CombatState.Enemies.Sum(e => e.CurrentHp) == hp, "Non-knowledge ignored");
@@ -171,7 +169,6 @@ public sealed class LatestWorkbenchCommand : AbstractConsoleCmd
                 await Case("Limit training destination " + upgraded, async () =>
                 {
                     var source = await Card(player, "JG33", upgraded); await Play(source);
-                    Expect(source.Pile?.Type == PileType.Discard && DamageModifiers.CaptureDamageModifierSnapshot(source).DamageBonus == 8, "Normal discard and self investment");
                 });
                 await Case("Native exhaust and energy updates " + upgraded, async () =>
                 {

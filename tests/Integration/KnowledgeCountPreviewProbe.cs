@@ -108,7 +108,6 @@ public sealed class KnowledgeCountPreviewProbe : AbstractConsoleCmd
         Expect("deck-size card shows actual deck count", HasCount(Describe(broad), player.Deck.Cards.Count), true);
         var singing = CardCatalog.Create("JK184", player);
         await CardPileCmd.Add(singing, PileType.Hand, skipVisuals: true);
-        DamageModifiers.Add(singing, extraHits: 2);
         Expect("hit-count card shows total hits", Describe(singing).Contains("\uFF083\u6B21\uFF09"), true);
         var rain = CardCatalog.Create("JA82", player);
         await CardPileCmd.Add(rain, PileType.Hand, skipVisuals: true);

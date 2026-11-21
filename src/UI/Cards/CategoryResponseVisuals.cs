@@ -16,12 +16,6 @@ internal static class CategoryResponseVisuals
     private const string MarkerName = "JunnaCategoryResponse";
     private const float MarkerSize = 36f;
 
-    [HarmonyPatch(typeof(NCard), nameof(NCard.UpdateVisuals))]
-    private static class CardPatch
-    {
-        private static void Postfix(NCard __instance) => RefreshCard(__instance);
-    }
-
     [HarmonyPatch(typeof(NPower), "OnDisplayAmountChanged")]
     private static class PowerPatch
     {
@@ -41,7 +35,9 @@ internal static class CategoryResponseVisuals
         }
     }
 
-    private static void RefreshCard(NCard node, bool pulse = false)
+    internal static void Clear(NCard node) => node.Body?.GetNodeOrNull<TextureRect>(MarkerName)?.Hide();
+
+    internal static void RefreshCard(NCard node, bool pulse = false)
     {
         if (!node.IsNodeReady() || node.Body == null) return;
         var marker = node.Body.GetNodeOrNull<TextureRect>(MarkerName);

@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Hooks;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using ShoujoKagekiJunna.Models;
 
@@ -12,7 +13,7 @@ namespace ShoujoKagekiJunna.Combat;
 internal static class ArrowDamageForecast
 {
     internal readonly record struct Batch(int Turns, int Loss);
-    private readonly record struct Attack(decimal Damage, int Hits);
+    private readonly record struct Attack(decimal Damage, int Hits, ValueProp Props = ValueProp.Move);
 
     internal static Batch[] ForTarget(Creature target, IReadOnlyList<IGrouping<int, ArrowDeployment>> waiting)
     {
@@ -31,7 +32,7 @@ internal static class ArrowDamageForecast
         bool hasAttack = false;
         foreach (var arrow in due)
         {
-            if (!arrow.Targets.Contains(target) || GetAttack(arrow) is not { Hits: > 0 } attack) continue;
+            if (!arrow.Targets.Contains(target) || GetAttack(arrow, target) is not { Hits: > 0 } attack) continue;
             hasAttack = true;
 
             var card = arrow.Card;
@@ -40,9 +41,8 @@ internal static class ArrowDamageForecast
             if (arrow.TargetsAllEnemies) command.TargetingAllOpponents(combat);
             else command.Targeting(target);
 
-            using var resolution = DamageExecution.BeginCardResolution(card);
             int hits = (int)Math.Ceiling(Hook.ModifyAttackHitCount(combat, command, attack.Hits));
-            var props = command.DamageProps;
+            var props = attack.Props;
             var run = card.Owner.RunState;
             decimal damage = Hook.ModifyDamage(run, combat, target, dealer, attack.Damage, props, card,
 #if STS2_MAIN || STS2_BETA
@@ -56,7 +56,7 @@ internal static class ArrowDamageForecast
         return hasAttack ? target.CurrentHp - hp : null;
     }
 
-    private static Attack? GetAttack(ArrowDeployment arrow)
+    private static Attack? GetAttack(ArrowDeployment arrow, Creature target)
     {
         switch (arrow.Card)
         {
@@ -69,7 +69,7 @@ internal static class ArrowDamageForecast
             case CatalogCard card:
                 var effect = CardRules.Get(card.DesignId).Effect;
                 if (effect is SimpleCardEffect.Attack or SimpleCardEffect.AttackAndBlock or SimpleCardEffect.AttackAndDraw ||
-                    card.DesignId is "JA67" or "JK32B" or "JK361" or "JK363" or "JK366" or "U_CARD_005" or "U_CARD_032")
+                    card.DesignId is "JA67" or "JK32B" or "U_CARD_005" or "U_CARD_032")
                 {
                     var (damage, hits) = CardEffects.PrintedAttack(card);
                     return new(damage, hits);
@@ -78,7 +78,14 @@ internal static class ArrowDamageForecast
                     return new(card.Value("Damage"), card.Value("Repeat", 2) + arrow.AttacksWhileWaiting);
                 return null;
             default:
-                return null;
+                if (HandArrow.OriginalType(arrow.Card) != CardType.Attack) return null;
+                var variables = arrow.Card.DynamicVars.Select(pair => pair.Value).ToArray();
+                int count = variables.OfType<RepeatVar>().FirstOrDefault()?.IntValue ?? 1;
+                var calculated = variables.OfType<CalculatedDamageVar>().Take(2).ToArray();
+                if (calculated.Length == 1 && calculated[0].Props.IsPoweredAttack())
+                    return new(calculated[0].Calculate(target), count, calculated[0].Props);
+                var direct = variables.OfType<DamageVar>().Where(value => value.Props.IsPoweredAttack()).Take(2).ToArray();
+                return direct.Length == 1 ? new(direct[0].BaseValue, count, direct[0].Props) : null;
         }
     }
 }

@@ -4,7 +4,5 @@
   "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.title": "连锁知识",
   "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.description": "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。",
   "SHOUJOKAGEKIJUNNA-ARROW.title": "飞矢",
-  "SHOUJOKAGEKIJUNNA-ARROW.description": "打出后布置，等待数个回合后触发其卡牌效果。",
-  "SHOUJOKAGEKIJUNNA-DAMAGE_BONUS.title": "伤害加成",
-  "SHOUJOKAGEKIJUNNA-DAMAGE_BONUS.description": "本场战斗中额外获得的伤害数值。"
+  "SHOUJOKAGEKIJUNNA-ARROW.description": "打出后布置，等待数个回合后触发其卡牌效果。"
 }

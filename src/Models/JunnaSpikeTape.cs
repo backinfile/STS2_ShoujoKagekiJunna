@@ -25,7 +25,7 @@ public sealed class JunnaSpikeTape : CustomRelicModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay play)
     {
-        if (play.Card.Owner != Owner || !play.IsFirstInSeries
+        if (play.Card.Owner != Owner
             || play.Resources.EnergyValue < DynamicVars[EnergyThreshold].IntValue) return;
 
         Flash();

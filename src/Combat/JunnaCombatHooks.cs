@@ -20,7 +20,6 @@ public sealed class JunnaCombatHooks : AbstractModel
 public sealed class JunnaCombatHooks : SingletonModel
 #endif
 {
-    private static readonly ConditionalWeakTable<CardModel, StrongBox<int>> GentleStarlightPlayTurns = new();
 
     private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> ArrowPlays = new();
     public static int CountArrowPlays(Player player) => player.PlayerCombatState is { } state && ArrowPlays.TryGetValue(state, out var count) ? count.Value : 0;
@@ -33,10 +32,8 @@ public sealed class JunnaCombatHooks : SingletonModel
     {
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
-        GentleStarlightPlayTurns.Clear();
         KnowledgeProgress.ResetCombat();
         ArrowCombat.Clear();
-        DamageModifiers.ClearCombat();
         foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);
         return Task.CompletedTask;
     }
@@ -57,13 +54,7 @@ public sealed class JunnaCombatHooks : SingletonModel
             foreach (var arrow in ArrowCombat.Deployed.Where(a => a.Card.Owner == play.Card.Owner && a.Card != play.Card && !a.Resolving))
                 arrow.AttacksWhileWaiting++;
         }
-        if (play.Card is not CatalogCard { DesignId: "U_CARD_045" } starlight ||
-            starlight.Owner.PlayerCombatState is not { } combat) return Task.CompletedTask;
-
-        var lastPlayTurn = GentleStarlightPlayTurns.GetValue(starlight, static _ => new(-1));
-        if (lastPlayTurn.Value == combat.TurnNumber) return Task.CompletedTask;
-        lastPlayTurn.Value = combat.TurnNumber;
-        return PlayerCmd.GainEnergy(starlight.Value("Energy"), starlight.Owner);
+        return Task.CompletedTask;
     }
     private static readonly HashSet<Player> FollowingPlayers = [];
     public override async Task AfterCardPlayedLate(PlayerChoiceContext context, CardPlay play)
@@ -111,9 +102,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     {
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
-        GentleStarlightPlayTurns.Clear();
         ArrowCombat.Clear();
-        DamageModifiers.ClearCombat();
         foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);
         return Task.CompletedTask;
     }

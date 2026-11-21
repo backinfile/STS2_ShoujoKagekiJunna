@@ -14,7 +14,4 @@ public static class JunnaKeywords
 
     [CustomEnum]
     public static CardKeyword Arrow;
-
-    [CustomEnum("DAMAGE_BONUS")]
-    public static CardKeyword DamageBonus;
 }

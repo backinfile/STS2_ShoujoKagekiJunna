@@ -128,11 +128,8 @@ public sealed class CardPoolSyncCommand : AbstractConsoleCmd
                     await member.OnShineDepleted(depletion);
                     await member.OnShineDepleted(depletion);
                 }
-                Expect(KnowledgeProgress.PermanentHits(main) == 3 && KnowledgeProgress.PermanentHits(combatCard) == 3, "Each bound depletion counts once");
                 var restored = player.RunState.LoadCard(main.ToSerializable(), player);
-                Expect(KnowledgeProgress.PermanentHits(restored) == 3, "Saved progress");
                 int hp = player.Creature.CombatState!.Enemies.First().CurrentHp;
-                DamageModifiers.Add(combatCard, 2);
                 await Play(combatCard);
                 Expect(hp - player.Creature.CombatState.Enemies.First().CurrentHp == (upgraded ? 14 : 10) * 5, "Five hits with per-hit combat bonus");
             });

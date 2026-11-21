@@ -105,7 +105,6 @@ public sealed partial class JunnaPowerJG34
 {
     protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
     {
-        using (DamageExecution.BeginCardResolution(grant.Card))
             for (int hit = 0; hit < grant.BaseHits; hit++)
             {
                 var targets = Owner.Player!.Creature.CombatState!.HittableEnemies.Where(target => target.IsAlive).ToArray();
@@ -152,7 +151,13 @@ public sealed partial class JunnaPowerJK10
 
 public sealed partial class JunnaPowerJK127
 {
-    protected override void Installed(CatalogCard card) => KnowledgeProgress.RegisterCopy(card.Owner);
+    public override Task AfterCombatEnd(MegaCrit.Sts2.Core.Rooms.CombatRoom room)
+    {
+        var player = Owner.Player!;
+        foreach (var grant in _grants)
+            room.AddExtraReward(player, new KnowledgeCopyReward(player, 1));
+        return Task.CompletedTask;
+    }
 }
 
 public sealed partial class JunnaPowerJK139
@@ -186,7 +191,6 @@ public sealed partial class JunnaPowerJK235
         if (targets.Length > 0)
         {
             var target = play.Card.Owner.RunState.Rng.CombatTargets.NextItem(targets)!;
-            using (DamageExecution.BeginCardResolution(grant.Card))
                 await GameApi.Damage(context, [target], grant.V("Damage"), ValueProp.Unpowered, Owner, grant.Card, grant.Play);
         }
     }
@@ -260,24 +264,6 @@ public sealed partial class JunnaPowerJK46
     protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
     {
         await CardActions.Generate(Owner.Player!, "JK46B", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom, grant.Card.IsUpgraded);
-    }
-}
-
-public sealed partial class JunnaPowerJK67
-{
-    protected override async Task TurnEnding(Grant grant, PlayerChoiceContext context)
-    {
-        DamageModifiers.AddMany(ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player).Select(a => a.Card), grant.V("Bonus"));
-    }
-}
-
-public sealed partial class JunnaPowerJK75
-{
-    protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
-    {
-        if (!(CardCatalog.IsKnowledge(play.Card))) return;
-        var eligible = play.Card.Owner.PlayerCombatState!.Hand.Cards.Where(DamageModifiers.CanDealDamage).ToArray();
-        if (eligible.Length > 0) DamageModifiers.Add(play.Card.Owner.RunState.Rng.CombatCardSelection.NextItem(eligible)!, grant.V("Bonus"));
     }
 }
 

@@ -46,7 +46,6 @@ public sealed class KeywordProbe : AbstractConsoleCmd
         {
             (JunnaKeywords.Arrow, "打出后布置，等待数个回合后触发其卡牌效果。"),
             (JunnaKeywords.Knowledge, "获得此牌时，同时获得关联的其他知识牌。"),
-            (JunnaKeywords.DamageBonus, "本场战斗中额外获得的伤害数值。")
         })
             CheckValue("workbench mechanism", keyword.ToString(), ((HoverTip)HoverTipFactory.FromKeyword(keyword)).Description, expected);
         foreach (var definition in CardCatalog.Cards)
@@ -90,7 +89,6 @@ public sealed class KeywordProbe : AbstractConsoleCmd
         if (player.PlayerCombatState != null)
         {
             var invested = CardCatalog.Create("JB01", player);
-            DamageModifiers.Add(invested, 2);
             CheckValue("JB01", "invested card explains damage bonus", invested.HoverTips.OfType<HoverTip>().Count(tip => tip.Title == "伤害加成"), 1);
         }
         var inspect = NGame.Instance!.GetInspectCardScreen();

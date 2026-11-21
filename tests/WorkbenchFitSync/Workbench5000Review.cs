@@ -50,7 +50,6 @@ public sealed partial class Workbench5000Command
                 await Case("volley native multi hit " + upgraded, async () =>
                 {
                     var card = await Card(player, "JA77", upgraded);
-                    DamageModifiers.Add(card, 2, 1);
                     await Play(card); await ArrowCombat.AccelerateAll(Context, player, 99);
                     Expect(player.Creature.CombatState!.Enemies.All(e => e.CurrentHp == 10000 - 10 * (upgraded ? 5 : 4)), "Each native hit retains bonus and hits all enemies");
                 });

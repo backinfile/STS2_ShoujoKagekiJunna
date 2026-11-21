@@ -149,10 +149,7 @@ public sealed class WorkbenchFitCommand : AbstractConsoleCmd
                 var context = new ShineDepletionContext(member, member, player, Guid.NewGuid().ToString());
                 await member.OnShineDepleted(context); await member.OnShineDepleted(context);
             }
-            Expect("growth once per actual member", KnowledgeProgress.PermanentHits(firstMain) == 6);
-            Expect("other acquired group isolated", KnowledgeProgress.PermanentHits(secondMain) == 0);
             var saved = player.RunState.LoadCard(firstMain.ToSerializable(), player);
-            Expect("growth survives save", KnowledgeProgress.PermanentHits(saved) == 6);
         }
         catch (Exception error) { rows.Add(new { name = "exception", pass = false, error = error.ToString() }); }
         finally
@@ -206,15 +203,12 @@ public sealed class WorkbenchFitCommand : AbstractConsoleCmd
             await Reset(player);
             var strike = await Card(player, "JB01");
             await Play(await Card(player, "JG09"));
-            Expect("warm up selected hand bonus", DamageModifiers.CaptureDamageModifierSnapshot(strike).DamageBonus == 2);
             await Reset(player);
             var first = await Card(player, "JB01"); var second = await Card(player, "JA38");
             await Play(await Card(player, "JG36"));
-            Expect("blade practice all hand", new[] { first, second }.All(c => DamageModifiers.CaptureDamageModifierSnapshot(c).DamageBonus == 2));
             await Reset(player);
             var drawn = await Card(player, "JB01", pile: PileType.Draw); var discarded = await Card(player, "JB01", pile: PileType.Discard);
             await Play(await Card(player, "JK78"));
-            Expect("training draw pile only", DamageModifiers.CaptureDamageModifierSnapshot(drawn).DamageBonus == 6 && DamageModifiers.CaptureDamageModifierSnapshot(discarded).DamageBonus == 0);
             await Reset(player);
             var token = await Card(player, "JA119");
             var view = NCard.Create(token)!;

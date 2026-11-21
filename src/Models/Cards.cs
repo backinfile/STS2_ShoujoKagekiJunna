@@ -82,8 +82,6 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             }
             if (CardCatalog.IsArrow(this) || rules.HasTip(CardTip.Arrow, IsUpgraded))
                 yield return HoverTipFactory.FromKeyword(JunnaKeywords.Arrow);
-            if (rules.HasTip(CardTip.DamageBonus, IsUpgraded) || DamageModifiers.CaptureDamageModifierSnapshot(this).DamageBonus > 0)
-                yield return HoverTipFactory.FromKeyword(JunnaKeywords.DamageBonus);
             if (rules.HasTip(CardTip.Vulnerable, IsUpgraded)) yield return HoverTipFactory.FromPower<VulnerablePower>();
             if (rules.HasTip(CardTip.Weak, IsUpgraded)) yield return HoverTipFactory.FromPower<WeakPower>();
             if (rules.HasTip(CardTip.Retain, IsUpgraded) && !Keywords.Contains(CardKeyword.Retain))
@@ -93,13 +91,6 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
         }
     }
 
-    protected async Task ImproveHand(PlayerChoiceContext context, decimal bonus, int hits = 0)
-    {
-        if (!Owner.PlayerCombatState!.Hand.Cards.Any(c => c != this && DamageModifiers.CanDealDamage(c))) return;
-        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
-        var selected = await CardSelectCmd.FromHand(context, Owner, prefs, c => c != this && DamageModifiers.CanDealDamage(c), this);
-        foreach (var card in selected) DamageModifiers.Add(card, bonus, hits);
-    }
 }
 
 [CustomID("JUNNA_STRIKE")]
@@ -126,20 +117,19 @@ public sealed class JunnaDefend() : JunnaCard(1, CardType.Skill, CardRarity.Basi
 [CustomID("JUNNA_WARM_UP")]
 public sealed class JunnaWarmUp() : JunnaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self, "JG09")
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(7, ValueProp.Move), new DynamicVar("Bonus", 2)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(7, ValueProp.Move)];
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-        await ImproveHand(context, DynamicVars["Bonus"].BaseValue);
     }
-    protected override void OnUpgrade() { DynamicVars.Block.UpgradeValueBy(2); DynamicVars["Bonus"].UpgradeValueBy(1); }
+    protected override void OnUpgrade() { DynamicVars.Block.UpgradeValueBy(2); }
 }
 
 [CustomID("JUNNA_REPEATED_PRACTICE")]
 public sealed class JunnaRepeatedPractice() : JunnaCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self, "JG03")
 {
     public override HashSet<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play) => await ImproveHand(context, 0, 1);
+    protected override Task OnPlay(PlayerChoiceContext context, CardPlay play) => Task.CompletedTask;
     protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
 }
 

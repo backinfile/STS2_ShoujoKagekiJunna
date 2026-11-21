@@ -43,6 +43,10 @@ public static class DynamicKnowledge
         {
             cache.Groups = string.IsNullOrEmpty(serialized) ? [] : JsonSerializer.Deserialize<List<KnowledgeRelation>>(serialized)!;
             cache.Serialized = serialized;
+            cache.Groups.RemoveAll(group => RemovedKnowledgeCards.Contains(ModelId.Deserialize(group.EntranceId)));
+            foreach (var group in cache.Groups)
+                foreach (string member in group.CardCounts.Keys.Where(key => RemovedKnowledgeCards.Contains(ModelId.Deserialize(key))).ToArray())
+                    group.CardCounts.Remove(member);
             foreach (var group in CardCatalog.Groups)
             {
                 string entrance = CardCatalog.Model(group.MainCardId).Id.ToString();

@@ -11,6 +11,8 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     Func<PlayerChoiceContext, CardPlay, Task> resolve, int[]? xValues = null)
 {
     public CardModel Card { get; } = card;
+    internal ICombatState Combat { get; } = card.Owner.Creature.CombatState!;
+    internal ArrowDestination Destination { get; init; } = ArrowDestination.Take(card, play.ResultPile);
     private ICardEffectPayload? _payload;
     internal ICardEffectPayload Payload
     {
@@ -23,7 +25,7 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     public bool TargetsGroup => TargetsAllEnemies || TargetsAllPlayers;
     public Creature? Target => Play.Target ?? (Card.TargetType is TargetType.Self or TargetType.AnyPlayer ? Card.Owner.Creature : null);
     public int TargetCategory => TargetsAllPlayers ? 0 : TargetsAllEnemies ? 2 : Target?.IsEnemy == true ? 3 : 1;
-    public long Sequence { get; internal init; }
+    public long Sequence { get; internal set; }
     public IEnumerable<Creature> Targets => TargetsAllPlayers ? Card.CombatState?.PlayerCreatures ?? []
         : TargetsAllEnemies ? Card.CombatState?.GetOpponentsOf(Card.Owner.Creature) ?? []
         : Target is { } target ? [target] : [];
@@ -38,7 +40,8 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     {
         // Release animation and prior replays can end combat before this payload begins.
         var combat = Card.Owner.Creature.CombatState;
-        if (combat == null || CombatManager.Instance.IsOverOrEnding || Card.Owner.Creature.IsDead) return;
+        if (combat != Combat || CombatManager.Instance.DebugOnlyGetState() != Combat
+            || CombatManager.Instance.IsOverOrEnding || Card.Owner.Creature.IsDead) return;
         if (Card.TargetType == TargetType.AnyEnemy)
         {
             var target = Play.Target == null ? null : ArrowCombat.ResolveEffectTarget(Play.Target, combat);
@@ -46,7 +49,6 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
             Retarget(target);
         }
         else if (TargetsAllEnemies && !combat.GetOpponentsOf(Card.Owner.Creature).Any(target => target.IsAlive && target.IsHittable)) return;
-        using var resolution = DamageExecution.BeginCardResolution(Card);
         if (Card.EnergyCost.CostsX && index < _xValues.Length) Card.EnergyCost.CapturedXValue = _xValues[index];
         var actualPlay = new CardPlay
         {
@@ -57,11 +59,11 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
             Resources = Play.Resources, IsAutoPlay = Play.IsAutoPlay,
             PlayIndex = index, PlayCount = PlayCount
         };
-        await Shine.ResolveAsync(Card, context, actualPlay, () => resolve(context, actualPlay), CardResolutionKind.Arrow);
-        await ArrowNativeHooks.Complete(context, actualPlay);
+        await ArrowNativeHooks.Resolve(context, actualPlay,
+            () => Shine.ResolveAsync(Card, context, actualPlay, () => resolve(context, actualPlay), CardResolutionKind.Arrow));
     }
     public bool ExhaustAfterResolve { get; internal set; }
-    internal bool ExhaustsWhenResolved => ExhaustAfterResolve || Card.ExhaustOnNextPlay ||
+    internal bool ExhaustsWhenResolved => Destination.Pile == PileType.Exhaust || ExhaustAfterResolve || Card.ExhaustOnNextPlay ||
         Card.Keywords.Contains(CardKeyword.Exhaust);
     internal bool Resolving;
 }

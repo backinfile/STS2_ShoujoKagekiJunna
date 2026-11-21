@@ -23,7 +23,7 @@ public static class HandArrow
         public readonly bool Temporary = temporary;
         public readonly Form? Previous = previous;
     }
-    private static ConditionalWeakTable<CardModel, Form> Forms = new();
+    private static readonly ConditionalWeakTable<CardModel, Form> Forms = new();
     private static readonly AsyncLocal<CardModel?> ConvertingPlay = new();
     private static readonly HashSet<MethodBase> PatchedTypes = [];
     private static readonly Harmony Patcher = new(JunnaMod.Id + ".HandArrowTypes");
@@ -78,7 +78,6 @@ public static class HandArrow
         Forms.Remove(card);
         if (form.Previous != null) Forms.Add(card, form.Previous);
     }
-    internal static void Clear() => Forms = new();
 
     public static async Task Select(PlayerChoiceContext context, CardModel source, int count = 1, bool optional = false)
     {

@@ -1,10 +1,10 @@
 using MegaCrit.Sts2.Core.Hooks;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.ControllerInput;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -13,6 +13,18 @@ namespace ShoujoKagekiJunna;
 
 internal static class GameApi
 {
+    internal static bool HasCardSelector(Player player)
+    {
+#if STS2_BETA
+        var selectors = MegaCrit.Sts2.Core.Runs.RunManager.Instance.CardSelectorStack;
+        return selectors.GetSelector(player) != null || selectors.LocalSelector != null;
+#elif STS2_MAIN
+        return CardSelectCmd.Selector != null || CardSelectCmd.LocalSelector != null;
+#else
+        return CardSelectCmd.Selector != null;
+#endif
+    }
+
     internal static CardPlay WithTarget(CardPlay play, Creature target) => new()
     {
         Card = play.Card, Target = target, ResultPile = play.ResultPile,
@@ -26,17 +38,6 @@ internal static class GameApi
         MegaInput.confirm;
 #else
         MegaInput.accept;
-#endif
-    internal static CardPlay? AttackCardPlay(AttackCommand attack) =>
-#if STS2_MAIN || STS2_BETA
-        attack.CardPlay;
-#else
-        null;
-#endif
-#if STS2_BETA
-    internal static Task<IEnumerable<DamageResult>> DamageTargets(PlayerChoiceContext context, IEnumerable<DamageTargetData>? targets,
-        decimal amount, ValueProp props, Creature? dealer, CardModel? card, CardPlay? play, ModifyDamageHookType hookType) =>
-        CreatureCmd.Damage(context, targets, amount, props, dealer, card, play, hookType);
 #endif
     internal static Task<IEnumerable<DamageResult>> Damage(PlayerChoiceContext context, IEnumerable<Creature>? targets,
         decimal amount, ValueProp props, Creature? dealer, CardModel? card, CardPlay? play) =>

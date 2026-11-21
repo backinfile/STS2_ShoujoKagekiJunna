@@ -1,0 +1,5 @@
+[
+  { "name": "Stable", "minimum": "0.107.1", "reference": "0.107.1", "commit": "5926027" },
+  { "name": "Main", "minimum": "0.111.0", "reference": "0.111.1", "commit": "cc1f9462" },
+  { "name": "Beta", "minimum": "0.113.0", "reference": "0.113.1", "commit": "d09d48e5" }
+]

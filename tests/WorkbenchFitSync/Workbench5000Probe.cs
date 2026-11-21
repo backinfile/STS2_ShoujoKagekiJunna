@@ -84,8 +84,6 @@ public sealed partial class Workbench5000Command : AbstractConsoleCmd
                     var hand = await Card(player, "JB01");
                     var source = await Card(player, "JK78", upgraded);
                     await Play(source);
-                    Expect(attacks.All(c => DamageModifiers.CaptureDamageModifierSnapshot(c).DamageBonus == (upgraded ? 8 : 6)), "All five damage cards receive bonus");
-                    Expect(DamageModifiers.CaptureDamageModifierSnapshot(defense).DamageBonus == 0 && DamageModifiers.CaptureDamageModifierSnapshot(hand).DamageBonus == 0, "Eligibility and pile scope");
                     Expect(original.SequenceEqual(player.PlayerCombatState.DrawPile.Cards), "Original draw order retained");
                 });
                 await Case("new delayed area arrow " + upgraded, async () =>

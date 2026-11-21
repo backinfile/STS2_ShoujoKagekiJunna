@@ -109,8 +109,8 @@ public sealed class Case(Player player, string mode, string caseId)
     private object Card(CardModel c) => new { instance = Id(c), id = c.Id.Entry, designId = CardCatalog.DesignId(c),
         role = Roles.GetValueOrDefault(c, "generated"), pile = c.Pile?.Type.ToString(),
         removed = c.HasBeenRemovedFromState, cost = c.EnergyCost.GetWithModifiers(CostModifiers.All),
-        printedCost = c.EnergyCost.GetWithModifiers(CostModifiers.None), bonus = DamageModifiers.CaptureDamageModifierSnapshot(c).DamageBonus,
-        damageCapable = DamageModifiers.CanDealDamage(c), arrow = CardCatalog.IsArrow(c),
+        printedCost = c.EnergyCost.GetWithModifiers(CostModifiers.None),
+        damageCapable = c.DynamicVars.Any(pair => pair.Value is MegaCrit.Sts2.Core.Localization.DynamicVars.DamageVar), arrow = CardCatalog.IsArrow(c),
         deployed = ArrowCombat.Find(c) is { } a ? new { a.Remaining, a.Sequence, a.PlayCount } : null };
     private static IEnumerable<Node> VisibleNodes(Node node)
     {

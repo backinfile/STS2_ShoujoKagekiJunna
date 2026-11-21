@@ -3,6 +3,7 @@
     <AssemblyName>ShoujoKagekiJunna</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <EmbeddedResource Include="../data/game-variants.json" LogicalName="Junna.GameVariants" />
     <PackageReference Include="BSchneppe.Sts2.ReferenceAssemblies" Version="$(Sts2StableApiVersion)" PrivateAssets="All" />
     <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" Private="false" />
   </ItemGroup>

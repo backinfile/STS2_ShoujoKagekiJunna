@@ -7,7 +7,6 @@ param(
 $ErrorActionPreference = 'Stop'
 $steamGameDir = 'D:/App/Stream/steamapps/common/Slay the Spire 2'
 if (!$GameDir) { $GameDir = $steamGameDir }
-if (!$MainGameDir) { $MainGameDir = $steamGameDir }
 if ($PSVersionTable.PSVersion.Major -lt 7) {
     $powerShell7 = Get-Command pwsh.exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source
     if (!$powerShell7) {
@@ -26,16 +25,21 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 & py -3 (Join-Path $PSScriptRoot 'tools/assets/generate-card-rules.py') --check
 if ($LASTEXITCODE) { throw 'Card runtime metadata validation failed' }
 . (Join-Path $PSScriptRoot 'tools/core-package.ps1')
+. (Join-Path $PSScriptRoot 'tools/game-variants.ps1')
 $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'ShoujoKagekiJunna.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $minimumCoreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiCore' }).min_version
 $core = Get-CorePackage $CorePackage $minimumCoreVersion
+$games = @{ Beta = $GameDir; Stable = $GameDir; Main = $MainGameDir }
+foreach ($variant in $JunnaGameVariants) {
+    if ($variant.name -ne 'Stable') { Test-JunnaReference $variant $games[$variant.name] }
+}
 $previousCoreApi = $env:CoreApiPath
 $env:CoreApiPath = $core.ApiPath
 Push-Location $PSScriptRoot
 try {
     New-Item -ItemType Directory -Force dist/ShoujoKagekiJunna/lib | Out-Null
-    $games = [ordered]@{ Beta = $GameDir; Stable = $GameDir; Main = $MainGameDir }
-    foreach ($variant in $games.Keys) {
+    foreach ($entry in $JunnaGameVariants) {
+        $variant = $entry.name
         $arguments = @('build', 'ShoujoKagekiJunna.csproj', '-c', 'Release', '--nologo',
             "-p:CoreApiPath=$($core.ApiPath)", "-p:Sts2GameDir=$($games[$variant])", "-p:Sts2Api=$($variant.ToLowerInvariant())",
             "-p:AssemblyName=ShoujoKagekiJunna.$variant")
@@ -53,6 +57,9 @@ try {
     Copy-Item -LiteralPath loader/bin/Release/net9.0/ShoujoKagekiJunna.dll -Destination dist/ShoujoKagekiJunna
     Copy-Item -LiteralPath ShoujoKagekiJunna.json -Destination dist/ShoujoKagekiJunna
     Write-CoreRoleMetadata $core (Join-Path $PSScriptRoot 'dist/ShoujoKagekiJunna') (Join-Path $PSScriptRoot 'dist') 'ShoujoKagekiJunna'
+    foreach ($file in Get-JunnaRuntimeFiles) {
+        if (!(Test-Path -LiteralPath (Join-Path 'dist/ShoujoKagekiJunna' $file) -PathType Leaf)) { throw "Incomplete Junna package: $file" }
+    }
 } finally {
     $env:CoreApiPath = $previousCoreApi
     Pop-Location

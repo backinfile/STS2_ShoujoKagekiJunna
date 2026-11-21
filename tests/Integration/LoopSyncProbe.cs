@@ -134,7 +134,6 @@ public sealed class LoopSyncCommand : AbstractConsoleCmd
             await Case("Replay batch preserves one free renewed deployment", async () =>
             {
                 var card = await Add(player, "U_CARD_018"); card.ExtraReplayThisTurn = 1;
-                DamageModifiers.Add(card, 2, 1);
                 card.EnergyCost.SetThisCombat(3);
                 var target = player.Creature.CombatState!.HittableEnemies.Last(); int hp = target.CurrentHp;
                 await Play(card);

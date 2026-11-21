@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.Debug;
+using System.Text.Json;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using ShoujoKageki.Core.Loader;
@@ -16,8 +17,14 @@ public static class Bootstrap
 
     private static string SelectVariant(SemanticVersion version)
     {
-        if (version.CompareTo(new SemanticVersion(0, 113, 0)) >= 0) return "Beta";
-        if (version.CompareTo(new SemanticVersion(0, 111, 0)) >= 0) return "Main";
+        using var stream = typeof(Bootstrap).Assembly.GetManifestResourceStream("Junna.GameVariants")!;
+        using var manifest = JsonDocument.Parse(stream);
+        foreach (var variant in manifest.RootElement.EnumerateArray().Reverse())
+        {
+            var minimum = Version.Parse(variant.GetProperty("minimum").GetString()!);
+            if (version.CompareTo(new SemanticVersion(minimum.Major, minimum.Minor, minimum.Build)) >= 0)
+                return variant.GetProperty("name").GetString()!;
+        }
         return "Stable";
     }
 }

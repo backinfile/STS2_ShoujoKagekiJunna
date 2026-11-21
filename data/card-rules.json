@@ -1,16 +1,11 @@
 {
   "format": 1,
   "cards": {
-    "JG03": {
-      "tips": [],
-      "upgradedTips": []
-    },
+    "JG03": {},
     "JA15": {
       "fields": {
         "DrawCount": "N0"
       },
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Draw"
     },
     "JA17": {
@@ -37,14 +32,7 @@
         "Knowledge"
       ]
     },
-    "JG09": {
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ]
-    },
+    "JG09": {},
     "JA22": {
       "tips": [
         "Arrow"
@@ -228,8 +216,6 @@
       "effect": "Block"
     },
     "JA38": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Attack"
     },
     "JA43": {
@@ -246,9 +232,7 @@
     "JA53": {
       "fields": {
         "Cards": "N1"
-      },
-      "tips": [],
-      "upgradedTips": []
+      }
     },
     "JA57": {
       "fields": {
@@ -266,17 +250,15 @@
     "JK67": {
       "tips": [
         "Knowledge",
-        "Arrow",
-        "DamageBonus"
+        "Arrow"
       ],
       "upgradedTips": [
         "Knowledge",
-        "Arrow",
-        "DamageBonus"
+        "Arrow"
       ],
       "power": {
-        "description": "BonusSum",
-        "amount": "Bonus",
+        "description": "Applications",
+        "amount": "Applications",
         "single": false
       }
     },
@@ -289,22 +271,13 @@
       ],
       "effect": "Attack"
     },
-    "JG27": {
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ]
-    },
+    "JG27": {},
     "JX01": {
       "tips": [
-        "Arrow",
-        "DamageBonus"
+        "Arrow"
       ],
       "upgradedTips": [
-        "Arrow",
-        "DamageBonus"
+        "Arrow"
       ]
     },
     "JH11": {
@@ -332,18 +305,9 @@
         "Weak"
       ]
     },
-    "JB01": {
-      "tips": [],
-      "upgradedTips": []
-    },
-    "JB02": {
-      "tips": [],
-      "upgradedTips": []
-    },
-    "JB03": {
-      "tips": [],
-      "upgradedTips": []
-    },
+    "JB01": {},
+    "JB02": {},
+    "JB03": {},
     "JA58": {
       "fields": {
         "Debuff": "N0"
@@ -372,17 +336,13 @@
     },
     "JH22": {
       "tips": [
-        "Arrow",
-        "DamageBonus"
+        "Arrow"
       ],
       "upgradedTips": [
-        "Arrow",
-        "DamageBonus"
+        "Arrow"
       ]
     },
     "JA64": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Attack"
     },
     "JA65": {
@@ -393,30 +353,16 @@
         "Arrow"
       ]
     },
-    "JG33": {
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ]
-    },
+    "JG33": {},
     "JG34": {
-      "tips": [],
-      "upgradedTips": [],
       "power": {
         "description": "DamageGroups",
         "amount": "Applications",
         "single": false
       }
     },
-    "JA67": {
-      "tips": [],
-      "upgradedTips": []
-    },
+    "JA67": {},
     "JZ03": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Attack"
     },
     "JA71": {
@@ -441,17 +387,9 @@
     "JK78": {
       "fields": {
         "Bonus": "Bonus"
-      },
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ]
+      }
     },
     "JA72": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Attack"
     },
     "JH27": {
@@ -463,14 +401,7 @@
       ],
       "effect": "Block"
     },
-    "JG36": {
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ]
-    },
+    "JG36": {},
     "JK82": {
       "fields": {
         "Energy": "N0"
@@ -503,8 +434,6 @@
         "Threshold": "N0",
         "DisplayedAmount": "N0"
       },
-      "tips": [],
-      "upgradedTips": [],
       "power": {
         "description": "ThresholdSum",
         "amount": "Threshold",
@@ -522,8 +451,6 @@
       ]
     },
     "JA77": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Attack"
     },
     "JA80": {
@@ -549,8 +476,6 @@
       ]
     },
     "JA81B": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Attack"
     },
     "JA82": {
@@ -566,24 +491,12 @@
     "JK78D": {
       "fields": {
         "Amount": "N0"
-      },
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ]
+      }
     },
     "JK78E": {
       "fields": {
         "Amount": "N0"
-      },
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ]
+      }
     },
     "JA84": {
       "fields": {
@@ -735,12 +648,10 @@
     },
     "JK131": {
       "tips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ],
       "upgradedTips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ]
     },
     "JK131B": {
@@ -828,8 +739,6 @@
       "effect": "Attack"
     },
     "JB06": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Block"
     },
     "JA118": {
@@ -860,8 +769,6 @@
       "fields": {
         "DrawCount": "N1"
       },
-      "tips": [],
-      "upgradedTips": [],
       "effect": "BlockAndDraw"
     },
     "JK184": {
@@ -913,8 +820,6 @@
         "DisplayedAmount": "N0",
         "Threshold": "N0"
       },
-      "tips": [],
-      "upgradedTips": [],
       "relatedCards": [
         "JA119"
       ],
@@ -928,8 +833,6 @@
       "fields": {
         "Cards": "N1"
       },
-      "tips": [],
-      "upgradedTips": [],
       "relatedCards": [
         "JA119"
       ]
@@ -938,13 +841,9 @@
       "fields": {
         "DrawCount": "N0"
       },
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Draw"
     },
     "JS35": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Block"
     },
     "JH59": {
@@ -1078,12 +977,10 @@
     },
     "JK43B": {
       "tips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ],
       "upgradedTips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ]
     },
     "JK46": {
@@ -1137,8 +1034,6 @@
       "fields": {
         "DrawCount": "N0"
       },
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Draw"
     },
     "JH20": {
@@ -1154,15 +1049,13 @@
     },
     "JK75": {
       "tips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ],
       "upgradedTips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ],
       "power": {
-        "description": "BonusGroups",
+        "description": "Applications",
         "amount": "Applications",
         "single": false
       }
@@ -1176,12 +1069,6 @@
       ]
     },
     "JA75": {
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ],
       "fields": {
         "Bonus": "Bonus"
       }
@@ -1294,11 +1181,7 @@
       "effect": "Energy"
     },
     "JG16": {
-      "tips": [
-        "DamageBonus"
-      ],
       "upgradedTips": [
-        "DamageBonus",
         "Retain"
       ]
     },
@@ -1312,12 +1195,10 @@
     },
     "JK33": {
       "tips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ],
       "upgradedTips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ]
     },
     "JK33B": {
@@ -1332,12 +1213,6 @@
       ]
     },
     "JG38": {
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ],
       "effect": "Attack"
     },
     "JA16": {
@@ -1364,13 +1239,11 @@
       "tips": [
         "Knowledge",
         "Arrow",
-        "DamageBonus",
         "Energy"
       ],
       "upgradedTips": [
         "Knowledge",
         "Arrow",
-        "DamageBonus",
         "Energy"
       ]
     },
@@ -1393,8 +1266,6 @@
       ]
     },
     "JA41": {
-      "tips": [],
-      "upgradedTips": [],
       "effect": "Attack"
     },
     "JX07": {
@@ -1408,10 +1279,7 @@
         "Energy"
       ]
     },
-    "JH10": {
-      "tips": [],
-      "upgradedTips": []
-    },
+    "JH10": {},
     "JH17": {
       "fields": {
         "Energy": "N1"
@@ -1425,15 +1293,9 @@
       "effect": "BlockAndEnergy"
     },
     "JG31": {
-      "tips": [
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "DamageBonus"
-      ],
       "power": {
-        "description": "BonusSum",
-        "amount": "Bonus",
+        "description": "Applications",
+        "amount": "Applications",
         "single": false
       }
     },
@@ -1610,14 +1472,6 @@
         "Count": "N1"
       }
     },
-    "JH30": {
-      "legacy": true,
-      "power": {
-        "description": "RepeatedApplications",
-        "amount": "Applications",
-        "single": false
-      }
-    },
     "JH21": {
       "legacy": true,
       "power": {
@@ -1672,12 +1526,10 @@
     },
     "JK200B": {
       "tips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ],
       "upgradedTips": [
-        "Knowledge",
-        "DamageBonus"
+        "Knowledge"
       ]
     },
     "JK206": {
@@ -1869,114 +1721,6 @@
       },
       "effect": "BlockAndDraw"
     },
-    "JK359": {
-      "fields": {
-        "LinkedDraw": "N0"
-      },
-      "tips": [
-        "Knowledge"
-      ],
-      "upgradedTips": [
-        "Knowledge"
-      ]
-    },
-    "JK360": {
-      "fields": {
-        "LinkedDraw": "N1"
-      },
-      "tips": [
-        "Knowledge"
-      ],
-      "upgradedTips": [
-        "Knowledge"
-      ]
-    },
-    "JK361": {
-      "fields": {
-        "LinkedDraw": "N1"
-      },
-      "tips": [
-        "Knowledge"
-      ],
-      "upgradedTips": [
-        "Knowledge"
-      ]
-    },
-    "JK362": {
-      "fields": {
-        "Haste": "N0",
-        "LinkedDraw": "N1"
-      },
-      "tips": [
-        "Knowledge",
-        "Arrow"
-      ],
-      "upgradedTips": [
-        "Knowledge",
-        "Arrow"
-      ]
-    },
-    "JK363": {
-      "fields": {
-        "LinkedDraw": "N2"
-      },
-      "tips": [
-        "Knowledge"
-      ],
-      "upgradedTips": [
-        "Knowledge"
-      ]
-    },
-    "JK364": {
-      "fields": {
-        "Energy": "N0",
-        "LinkedDraw": "N1"
-      },
-      "tips": [
-        "Knowledge",
-        "Energy"
-      ],
-      "upgradedTips": [
-        "Knowledge",
-        "Energy"
-      ]
-    },
-    "JK365": {
-      "fields": {
-        "DrawCount": "N0",
-        "LinkedDraw": "N1"
-      },
-      "tips": [
-        "Knowledge"
-      ],
-      "upgradedTips": [
-        "Knowledge"
-      ]
-    },
-    "JK366": {
-      "fields": {
-        "LinkedDraw": "N1"
-      },
-      "tips": [
-        "Knowledge"
-      ],
-      "upgradedTips": [
-        "Knowledge"
-      ]
-    },
-    "JK367": {
-      "fields": {
-        "LinkedDraw": "N1"
-      },
-      "tips": [
-        "Knowledge",
-        "DamageBonus"
-      ],
-      "upgradedTips": [
-        "Knowledge",
-        "DamageBonus"
-      ]
-    },
     "U_CARD_009": {},
     "U_CARD_010": {
       "fields": {
@@ -2109,17 +1853,15 @@
     "JK400": {
       "tips": [
         "Knowledge",
-        "Arrow",
-        "DamageBonus"
+        "Arrow"
       ],
       "upgradedTips": [
         "Knowledge",
-        "Arrow",
-        "DamageBonus"
+        "Arrow"
       ],
       "power": {
-        "description": "BonusSum",
-        "amount": "Bonus",
+        "description": "Applications",
+        "amount": "Applications",
         "single": false
       }
     },

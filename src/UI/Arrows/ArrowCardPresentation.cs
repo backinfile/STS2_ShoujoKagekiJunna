@@ -123,15 +123,7 @@ public partial class ArrowCardPresentation : Control
         Visible = arrow;
         if (!arrow)
         {
-            if (_applied)
-            {
-                _nativePortrait.Visible = _nativeBorder.Visible = card.Rarity != CardRarity.Ancient;
-                _nativeType.Visible = true;
-                _card.GetNode<Label>("%TypeLabel").Text = card.Type.ToLocString().GetFormattedText();
-                _description.Position = _descriptionPosition;
-                _description.Size = _descriptionSize;
-                _applied = false;
-            }
+            Restore(card);
             return;
         }
         _applied = true;
@@ -160,6 +152,26 @@ public partial class ArrowCardPresentation : Control
         RefreshTurns(previewMode);
     }
 
+    internal static void Clear(NCard node)
+    {
+        if (node.Body?.GetNodeOrNull<ArrowCardPresentation>("JunnaArrowCard") is not { } view) return;
+        view.Hide();
+        view.Restore(node.Model);
+    }
+
+    private void Restore(MegaCrit.Sts2.Core.Models.CardModel? card)
+    {
+        if (!_applied) return;
+        _turnTween?.Kill();
+        _turnTween = null;
+        _nativePortrait.Visible = _nativeBorder.Visible = card?.Rarity != CardRarity.Ancient;
+        _nativeType.Visible = true;
+        if (card != null) _card.GetNode<Label>("%TypeLabel").Text = card.Type.ToLocString().GetFormattedText();
+        _description.Position = _descriptionPosition;
+        _description.Size = _descriptionSize;
+        _applied = false;
+    }
+
     public override void _Process(double delta)
     {
         if (_applied && IsVisibleInTree() && ArrowCombat.Find(_card.Model!) != null)
@@ -182,10 +194,4 @@ public partial class ArrowCardPresentation : Control
         int original = HandArrow.IsArrow(card) ? HandArrow.Turns(card) : turnValue?.Base ?? turns;
         _turns.AddThemeColorOverride("font_color", turns != original ? new Color("7FFF00") : new Color("FFF6E2"));
     }
-}
-
-[HarmonyPatch(typeof(NCard), nameof(NCard.UpdateVisuals))]
-internal static class ArrowCardPresentationPatch
-{
-    private static void Postfix(NCard __instance, CardPreviewMode previewMode) => ArrowCardPresentation.Update(__instance, previewMode);
 }

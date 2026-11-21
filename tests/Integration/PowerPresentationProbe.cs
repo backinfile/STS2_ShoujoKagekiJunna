@@ -148,39 +148,25 @@ public sealed class PowerPresentationCommand : AbstractConsoleCmd
                 if (catalog.DesignId is "JA22" or "JK27" or "JK81")
                 {
                     Check(model.Id.Entry + " is nonstacking", power.StackType, PowerStackType.Single);
-                    Check(model.Id.Entry + " amount remains one", power.Amount, 1);
+                    Check(model.Id.Entry + " amount remains one", power.DisplayAmount, 1);
                 }
                 if (catalog.DesignId == "JK67")
                 {
-                    Check("mixed bonus stacks", power.Amount, 5);
+                    Check("mixed bonus stacks", power.DisplayAmount, 5);
                     Check("bonus text uses combined amount", text.Contains("[blue]5[/blue]"), true);
                 }
                 if (catalog.DesignId == "JH19")
                 {
-                    Check("paid replays stack", power.Amount, 2);
+                    Check("paid replays stack", power.DisplayAmount, 2);
                     Check("paid replay text excludes immediate block", !text.Contains("格挡"), true);
                 }
-                if (catalog.DesignId == "JK80") Check("next block stacks", power.Amount, 12);
+                if (catalog.DesignId == "JK80") Check("next block stacks", power.DisplayAmount, 12);
                 rows.Add(new { name = model.Id.Entry + " rendered text", text, pass = true });
             }
             catch (Exception ex) { rows.Add(new { name = model.Id.Entry, pass = false, error = ex.ToString() }); }
             File.WriteAllText(report, JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
         }
         await Reset();
-        await PowerCmd.Apply<JunnaNextCardBonus>(context, player.Creature, 2, player.Creature, null);
-        await PowerCmd.Apply<JunnaNextCardBonus>(context, player.Creature, 3, player.Creature, null);
-        var next = player.Creature.GetPower<JunnaNextCardBonus>()!;
-        Check("next bonus sums", next.Amount, 5);
-        Check("next bonus smart description", next.HasSmartDescription, true);
-        var strike = await Play("JB01");
-        Check("next bonus applies once", DamageModifiers.CaptureDamageModifierSnapshot(strike).DamageBonus, 5m);
-        Check("next bonus consumed", player.Creature.GetPower<JunnaNextCardBonus>() == null, true);
-        await Reset();
-        await EnergyReserve.Add(context, player, 2);
-        await EnergyReserve.Add(context, player, 3);
-        var reserve = player.Creature.GetPower<EnergyReserve>()!;
-        Check("reserve sums", reserve.Amount, 5);
-        Check("reserve smart description", reserve.HasSmartDescription, true);
-        File.WriteAllText(report, JsonSerializer.Serialize(rows, new JsonSerializerOptions { WriteIndented = true }));
+
     }
 }

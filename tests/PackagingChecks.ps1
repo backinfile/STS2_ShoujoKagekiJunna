@@ -3,6 +3,7 @@ param([Parameter(Mandatory)][string]$CorePackage)
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
 . (Join-Path $repo 'tools/core-package.ps1')
+. (Join-Path $repo 'tools/game-variants.ps1')
 $results = [Collections.Generic.List[string]]::new()
 function Check([string]$Name, [bool]$Passed) {
     if (-not $Passed) { throw "Failed: $Name" }
@@ -19,7 +20,7 @@ $root = Join-Path $repo ('out/tmp/core-workshop-checks-' + [Guid]::NewGuid().ToS
 $role = Join-Path $root 'dist/ShoujoKagekiJunna'
 New-Item -ItemType Directory -Path (Join-Path $role 'lib') -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $repo 'ShoujoKagekiJunna.json') -Destination $role
-foreach ($file in @('ShoujoKagekiJunna.dll', 'ShoujoKagekiJunna.pck', 'lib/ShoujoKagekiJunna.Stable.dll', 'lib/ShoujoKagekiJunna.Beta.dll')) {
+foreach ($file in (Get-JunnaRuntimeFiles | Where-Object { $_ -match '\.(pck|dll)$' })) {
     Set-Content -LiteralPath (Join-Path $role $file) -Value 'packaging fixture' -Encoding utf8
 }
 $preview = Join-Path $root 'preview.png'
@@ -30,24 +31,36 @@ $core = Get-CorePackage $CorePackage $minimum
 $bundleHash = (Get-FileHash -LiteralPath (Join-Path $core.Root 'core.bundle')).Hash
 Expect-Failure 'missing Core package' { Get-CorePackage '' $minimum } 'Set -CorePackage'
 Expect-Failure 'Core minimum version' { Get-CorePackage $CorePackage '9999.0.0' } 'or newer is required'
-$stale = Join-Path $root 'dist/ShoujoKagekiCore'
+$staleOutput = Join-Path $root 'stale'
+$stale = Join-Path $staleOutput 'ShoujoKagekiCore'
 New-Item -ItemType Directory -Path $stale -Force | Out-Null
 Set-Content -LiteralPath (Join-Path $stale 'old-runtime.dll') -Value 'stale'
+Expect-Failure 'bundled Core requires a fresh output' { Write-CoreRoleMetadata $core $role $staleOutput 'ShoujoKagekiJunna' } 'Only Karen embeds Core'
+Check 'existing Core fixture preserved' (Test-Path -LiteralPath (Join-Path $stale 'old-runtime.dll'))
 Write-CoreRoleMetadata $core $role (Join-Path $root 'dist') 'ShoujoKagekiJunna'
-Check 'stale bundled Core removed' (-not (Test-Path -LiteralPath $stale))
 Check 'only Junna in distribution' (@(Get-ChildItem (Join-Path $root 'dist')).Count -eq 1)
 $requirements = Get-Content -LiteralPath (Join-Path $role 'core.requirements') -Raw | ConvertFrom-Json
 Check 'Core runtime requirements' ($requirements.modId -eq $manifest.id -and $requirements.apiMajor -eq 1 -and
     $requirements.minimumApiVersion -eq '1.0.0' -and $requirements.requiredFeatures -contains 'shine@1' -and
-    $requirements.characterFamily -eq 'ShoujoKageki')
+    $requirements.requiredFeatures -contains 'movement-pipeline@1' -and $requirements.characterFamily -eq 'ShoujoKageki')
 $lock = Get-Content -LiteralPath (Join-Path $role 'core.package.lock') -Raw | ConvertFrom-Json
 Check 'Core SDK release locked' ($lock.releaseVersion -eq $core.Bundle.releaseVersion)
 Check 'Core API hash locked' ($lock.files.($core.Bundle.apiAssembly) -eq $core.Bundle.files.($core.Bundle.apiAssembly))
 Check 'Core package unchanged' ((Get-FileHash -LiteralPath (Join-Path $core.Root 'core.bundle')).Hash -eq $bundleHash)
 $unsafe = [pscustomobject]@{ Root=$stale; Bundle=$core.Bundle }
-Expect-Failure 'Core source preserved' { Write-CoreRoleMetadata $unsafe $role (Join-Path $root 'dist') $manifest.id } 'must be separate'
+Expect-Failure 'Core source preserved' { Write-CoreRoleMetadata $unsafe $role $staleOutput $manifest.id } 'must be separate'
 $prepare = Join-Path $repo 'tools/prepare-workshop.ps1'
 $workspace = Join-Path $root 'workshop'
+$mainDll = Join-Path $role 'lib/ShoujoKagekiJunna.Main.dll'
+$hiddenMain = Join-Path $root 'Main.dll'
+Move-Item -LiteralPath $mainDll -Destination $hiddenMain
+try {
+    Expect-Failure 'missing Main runtime rejected' {
+        & $prepare -CoreWorkshopId 9876543210 -PreviewImage $preview -OutputDirectory (Join-Path $root 'missing-main') -ModDirectory $role
+    } 'missing lib/ShoujoKagekiJunna.Main.dll'
+} finally {
+    Move-Item -LiteralPath $hiddenMain -Destination $mainDll
+}
 # These numeric IDs are offline fixtures, never sent to Steam.
 & $prepare -CoreWorkshopId 9876543210 -PreviewImage $preview -OutputDirectory $workspace -ModDirectory $role -WorkshopId 9876543211
 $config = Get-Content -LiteralPath (Join-Path $workspace 'workshop.json') -Raw | ConvertFrom-Json

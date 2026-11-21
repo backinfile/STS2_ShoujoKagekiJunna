@@ -57,7 +57,7 @@ public static class CardTutors
             }
             foreach (int category in Enumerable.Range(0, 3).Where(category => !completed.Contains(category)))
                 Assign(category, []);
-            if (assigned.Count == 0 || !Hook.ShouldDraw(player.Creature.CombatState!, player, false, out _)) break;
+            if (assigned.Count == 0 || !await CardActions.CanDrawDirected(player)) break;
             var selected = assigned.OrderBy(pair => pair.Key).First();
             await CardPileCmd.Add(selected.Value, PileType.Draw, CardPilePosition.Top, skipVisuals: true);
             var result = await CardPileCmd.Draw(context, player);

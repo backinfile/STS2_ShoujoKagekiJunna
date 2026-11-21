@@ -9,15 +9,6 @@ public sealed partial class JunnaPowerJK400
 {
     protected override string IconId => "JK67";
 
-    protected override Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
-    {
-        // EnergyValue preserves effective cost even when native AutoPlay pays no energy.
-        if (play.Card.EnergyCost.CostsX || play.Resources.EnergyValue != 0) return Task.CompletedTask;
-        var arrows = ArrowCombat.Deployed.Where(a => a.Card.Owner == Owner.Player && !a.Resolving)
-            .Select(a => a.Card).Distinct().ToArray();
-        DamageModifiers.AddMany(arrows, grant.V("Bonus"));
-        return Task.CompletedTask;
-    }
 }
 
 public sealed partial class JunnaPowerJK400B

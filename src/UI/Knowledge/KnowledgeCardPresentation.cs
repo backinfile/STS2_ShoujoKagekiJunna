@@ -279,7 +279,15 @@ public partial class KnowledgeCardStack : Control
 [HarmonyPatch(typeof(NCard), nameof(NCard.UpdateVisuals))]
 internal static class KnowledgeCardVisualsPatch
 {
-    private static void Postfix(NCard __instance) => KnowledgeCardStack.Refresh(__instance);
+    private static void Prefix(NCard __instance) => AncientCardPresentation.Restore(__instance);
+
+    private static void Postfix(NCard __instance, CardPreviewMode previewMode)
+    {
+        AncientCardPresentation.Update(__instance);
+        ArrowCardPresentation.Update(__instance, previewMode);
+        KnowledgeCardStack.Refresh(__instance);
+        CategoryResponseVisuals.RefreshCard(__instance);
+    }
 }
 
 [HarmonyPatch(typeof(NCard), nameof(NCard.OnFreedToPool))]
@@ -289,6 +297,9 @@ internal static class KnowledgeCardPoolPatch
     {
         // Native cards return to a shared pool, including cards previously used as non-interactive previews.
         KnowledgePreviewCards.RestoreMouse(__instance);
+        AncientCardPresentation.Restore(__instance);
+        ArrowCardPresentation.Clear(__instance);
+        CategoryResponseVisuals.Clear(__instance);
         var stack = __instance.GetNodeOrNull<KnowledgeCardStack>("JunnaKnowledgeStack");
         stack?.Clear();
         if (stack != null) stack.Visible = false;

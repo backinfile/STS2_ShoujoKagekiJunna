@@ -48,7 +48,6 @@ public static partial class Workbench3650Probe
                     var ordinary = await Card(player, "JB02", pile: PileType.Draw);
                     var aimed = await Card(player, "JA38", pile: PileType.Draw);
                     var energy = await Card(player, "JA80", pile: PileType.Draw);
-                    DamageModifiers.Add(answer, 7);
                     var expected = player.PlayerCombatState!.DrawPile.Cards.Where(CardCatalog.IsArrow).ToArray();
                     int before = player.PlayerCombatState.Energy, count = player.PlayerCombatState.AllCards.Count();
                     await Play(source);
@@ -56,7 +55,6 @@ public static partial class Workbench3650Probe
                     Expect(source.Pile?.Type == PileType.Discard, "Source discards after the batch");
                     Expect(ArrowCombat.Deployed.Select(a => a.Card).SequenceEqual(expected), "Actual cards deploy once in original draw-pile order");
                     Expect(ordinary.Pile?.Type == PileType.Draw && player.PlayerCombatState.AllCards.Count() == count, "Non-arrow and knowledge count stay intact");
-                    Expect(ArrowCombat.Find(answer)?.Remaining == 3 && answer.IsUpgraded && DamageModifiers.CaptureDamageModifierSnapshot(answer).DamageBonus == 7, "Upgrade, bonus and arrow wait retained");
                     Expect(ArrowCombat.Find(aimed)?.Target == player.Creature.CombatState!.HittableEnemies.First(), "First legal enemy is chosen");
                     Expect(ArrowCombat.Find(energy)?.Remaining == 2, "Self-target arrow uses its own wait");
                 });

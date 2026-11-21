@@ -2,6 +2,7 @@ using BaseLib.Abstracts;
 using BaseLib.Utils;
 using BaseLib.Utils.Attributes;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Potions;
@@ -40,17 +41,18 @@ public sealed class JunnaKnowledgePotion() : JunnaPotion("knowledge_potion")
 
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
+        var combat = Owner.Creature.CombatState;
+        if (combat == null || CombatManager.Instance.IsOverOrEnding) return;
         var roots = CardFactory.GetDistinctForCombat(Owner, KnowledgeOptions(), 3, Owner.RunState.Rng.CombatCardGeneration).ToArray();
         if (roots.Length == 0) return;
         IReadOnlyList<CardModel> selectedCards = [];
         try
         {
             var selected = await CardSelectCmd.FromChooseACardScreen(choiceContext, roots, Owner, canSkip: false);
-            if (selected == null) return;
+            if (selected == null || Owner.Creature.CombatState != combat || CombatManager.Instance.IsOverOrEnding) return;
             selectedCards = CreateBundle(selected);
             using var single = KnowledgeCombat.SingleCard();
-            foreach (var card in selectedCards)
-                await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+            await CardPileCmd.AddGeneratedCardsToCombat(selectedCards, PileType.Hand, Owner);
         }
         finally
         {

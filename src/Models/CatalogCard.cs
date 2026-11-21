@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Localization;
@@ -16,10 +17,9 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     public CardDefinition Definition => CardCatalog.Get(DesignId);
     public bool Converted { get; private set; }
     public override CardType Type => Converted ? Definition.InternalType : Definition.CardType;
-    public override TargetType TargetType => DesignId == "JA119" ? TargetType.None : Definition.TargetType;
+    public override TargetType TargetType => Definition.TargetType;
     public override bool GainsBlock => Definition.CardType != CardType.Power && Definition.Values.Any(n => n.Name == "Block");
     protected override bool HasEnergyCostX => Definition.CostsX;
-    public override int MaxUpgradeLevel => DesignId == "JK82" ? int.MaxValue : 1;
     public override HashSet<CardKeyword> CanonicalKeywords =>
         [..base.CanonicalKeywords, ..(Definition.Exhaust ? new[] { CardKeyword.Exhaust } : []), ..(Definition.Retain ? new[] { CardKeyword.Retain } : []),
          ..(Definition.Innate ? new[] { CardKeyword.Innate } : []),
@@ -43,13 +43,12 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         new KnowledgeBlockVar().WithMultiplier(static (card, _) => CountDeckKnowledge(card))
     } : []);
 
-    internal int HitsWithDepletedPartners => Value("Repeat", 1) + KnowledgeProgress.DepletedPartners(this);
+    internal int HitsWithDepletedPartners => Value("Repeat", 1) + (IsMutable && Owner is { } owner
+        ? ShoujoKageki.Core.V1.Shine.GetDepletedCards(owner).Count(entry => entry.ModelId == CardCatalog.Model("JK122B").Id.ToString()) : 0);
 
     protected override void AddExtraArgsToDescription(LocString description)
     {
         base.AddExtraArgsToDescription(description);
-        if (ResearchRules.ForMain(DesignId)?.ShowDepletedPartners == true)
-            description.Add("DepletedPartners", KnowledgeProgress.DepletedPartners(this));
         if (DesignId == "JA108")
             description.Add("ArrowCount", IsMutable && Owner?.PlayerCombatState is { } combat
                 ? combat.DrawPile.Cards.Count(CardCatalog.IsArrow) : 0);
@@ -80,15 +79,25 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         AssertMutable();
         DynamicVars.Damage.BaseValue = damage;
     }
-    protected override Task OnPlay(PlayerChoiceContext context, CardPlay play) => CardEffects.Resolve(this, context, play);
-    internal Task ResolveArrow(PlayerChoiceContext context, CardPlay play) => CardEffects.Resolve(this, context, play);
-    protected override void OnUpgrade()
+    protected Task<DamageResult[]> Attack(PlayerChoiceContext context, CardPlay play, int? damage = null, int? hits = null)
+        => CardEffects.DealDamage(this, context, play, damage ?? Value("Damage"), hits ?? Value("Repeat", 1));
+
+    protected Task Block(CardPlay play, int? amount = null)
+        => CreatureCmd.GainBlock(Owner.Creature, amount ?? Value("Block"), ValueProp.Move, play);
+
+    protected Task<CardModel[]> ChooseCards(PlayerChoiceContext context, IEnumerable<CardModel> cards, int count = 1, bool optional = false)
+        => CardActions.Choose(context, this, cards, count, optional);
+
+    protected async Task GainRetainedEnergy(PlayerChoiceContext context, int amount)
     {
-        if (DesignId == "JK82")
-        {
-            DynamicVars[CardValueNames.Resolve(DesignId, "Energy")].UpgradeValueBy(1);
-            return;
-        }
+        var combat = Owner.PlayerCombatState!;
+        int before = combat.Energy;
+        await PlayerCmd.GainEnergy(amount, Owner);
+        await EnergyReserve.Add(context, this, Math.Max(0, combat.Energy - before));
+    }
+
+    protected void ApplyCatalogUpgrade()
+    {
         foreach (var value in Definition.Values)
             if (value.Upgraded != value.Base) DynamicVars[value.Name].UpgradeValueBy(value.Upgraded - value.Base);
         if (Definition.UpgradedCost != Definition.Cost) EnergyCost.UpgradeBy(Definition.UpgradedCost - Definition.Cost);

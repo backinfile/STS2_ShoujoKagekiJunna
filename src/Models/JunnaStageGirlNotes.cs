@@ -43,8 +43,6 @@ public sealed class JunnaStageGirlNotes : CustomEventModel
     {
         return
         [
-            new EventOption(this, Study, $"{Id.Entry}.pages.INITIAL.options.STUDY",
-                HoverTipFactory.FromCard(CardCatalog.Model("JK359"))),
             Owner!.Deck.Cards.Any(CanUpgradeKnowledge)
                 ? new EventOption(this, Practice, $"{Id.Entry}.pages.INITIAL.options.PRACTICE")
                 : new EventOption(this, null, $"{Id.Entry}.pages.INITIAL.options.PRACTICE_LOCKED"),
@@ -52,23 +50,8 @@ public sealed class JunnaStageGirlNotes : CustomEventModel
         ];
     }
 
-    private Task Study() => _choice ??= Complete("STUDY", ObtainKnowledge);
     private Task Practice() => _choice ??= Complete("PRACTICE", UpgradeKnowledge);
     private Task Leave() => _choice ??= Complete("LEAVE", () => Task.CompletedTask);
-
-    private async Task ObtainKnowledge()
-    {
-        // Expand the normal direct association list once, including when acquisition sources are restricted.
-        using var single = KnowledgeCombat.SingleCard();
-        var entrance = Owner!.RunState.CreateCard(CardCatalog.Model("JK359"), Owner);
-        var result = await CardPileCmd.Add(entrance, PileType.Deck, CardPilePosition.Bottom);
-        if (result.success)
-        {
-            await KnowledgeCombat.GrantPartners(result.cardAdded, PileType.Deck);
-            Owner.Deck.InvokeCardAddFinished();
-            CardCmd.PreviewCardPileAdd(result, style: CardPreviewStyle.EventLayout);
-        }
-    }
 
     private async Task UpgradeKnowledge()
     {
