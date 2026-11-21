@@ -179,7 +179,7 @@ public partial class ArrowCardPresentation : Control
         if (deployment != null && _turns.Text.Length > 0 && _turns.Text != remaining)
             ArrowFeedback.PulseCounter(_turns, ref _turnTween);
         _turns.Text = remaining;
-        int original = HandArrow.IsArrow(card) ? 5 : turnValue?.Base ?? turns;
+        int original = HandArrow.IsArrow(card) ? HandArrow.Turns(card) : turnValue?.Base ?? turns;
         _turns.AddThemeColorOverride("font_color", turns != original ? new Color("7FFF00") : new Color("FFF6E2"));
     }
 }

@@ -1,0 +1,31 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "precision": "bfloat16",
+  "originals_preserved": true,
+  "dimensionsPreservedDuringCleanup": true,
+  "vae": "Flux2 VAE",
+  "residual": "LatentR R_ema",
+  "assets": [
+    {
+      "key": "opening_bell_upright",
+      "source": "docs/worktree-tasks/sports-drink-fit-20261121/originals/opening_bell_upright.png",
+      "cleanedNative": "docs/worktree-tasks/sports-drink-fit-20261121/cleaned-native/opening_bell_upright.png",
+      "originalSize": [
+        1254,
+        1254
+      ],
+      "strength": 0.25,
+      "interior_blend": 0.25,
+      "alpha_identical": true,
+      "contours_identical": true,
+      "eligibleAlphaMinimum": 250,
+      "source_sha256": "1d56cf28541a2e480fd93c5ff8ab5d935ad45e29b469b7cb05c0f8941c3051b3",
+      "cleaned_sha256": "09a4abdf2783e6bb4b8e72c121524657a3820fcc744771e6daf30368a402db11",
+      "visibleRgbMeanAbsoluteChange": 0.5103,
+      "seconds": 2.86
+    }
+  ]
+}

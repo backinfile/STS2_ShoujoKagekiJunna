@@ -131,21 +131,48 @@ for mode in (['knowledge','capacity','dynamic','sports','arrows'] if a.case=='al
                 check('knowledge free modifier expires',all(table[i]['cost']==max(0,table[i]['printedCost']) for i in chosen),True)
                 save(mode+'-next-turn.json',v);capture(mode+'-next-turn');time.sleep(.8)
         elif mode=='sports':
+            s,v=wait(lambda s,v:s['state_type']=='hand_select')
+            offered=s['hand_select']['cards']
+            by_role={c['role']:c for c in before['cards'] if c['role']!='filler'}
+            hand_roles=['handAttack','handArrow','handSkill','handStatus']
+            check('developer only offers hand cards',Counter(c['id'] for c in offered),
+                  Counter(by_role[role]['id'] for role in hand_roles))
+            check('developer localized name',next(p['title'] for p in v['pool'] if p['id']=='JUNNA_SPORTS_DRINK'),'显影液')
+            capture(mode+'-offered')
+            picked=['handAttack','handStatus']
+            for role in picked:
+                s=state()
+                index=next(c['index'] for c in s['hand_select']['cards'] if c['id']==by_role[role]['id'])
+                act('combat_select_card',card_index=index)
+            act('combat_confirm_selection')
             s,v=wait(lambda s,v:v and 'JUNNA_SPORTS_DRINK' in v['used'])
-            table={c['role']:c for c in v['cards'] if c['role']!='filler'}
-            for role in ['handAttack','handArrow']:
-                check('sports +9 '+role,table[role]['bonus'],9)
-            for role in ['handSkill','handStatus','drawAttack','discardAttack','exhaustAttack','deployedArrow']:
-                check('sports excludes '+role,table[role]['bonus'],0)
-            check('sports potion spends no energy',v['energy'],before_energy)
+            cards={c['role']:c for c in v['cards'] if c['role']!='filler'}
+            check('developer deploys the selected instances',Counter(v['played']),Counter(by_role[role]['instance'] for role in picked))
+            check('developer starts both arrows at three turns',[cards[role]['deployed']['Remaining'] for role in picked],[3,3])
+            check('developer leaves the other hand cards', [cards[role]['pile'] for role in ['handArrow','handSkill']],['Hand','Hand'])
+            check('developer leaves the existing arrow countdown',cards['deployedArrow']['deployed']['Remaining'],by_role['deployedArrow']['deployed']['Remaining'])
+            check('developer spends no energy',v['energy'],before_energy)
             save(mode+'-after.json',v);capture(mode+'-after')
-            for role in ['handAttack','handArrow']:
-                index=next(i for i,c in enumerate(s['player']['hand']) if c['id']==table[role]['id'])
-                act('hover_card',card_index=index);time.sleep(1.5);act('unhover_card')
-            oldturn=v['turn'];act('end_turn')
-            s,v=wait(lambda s,v:v and v['turn']==oldturn+1 and s.get('battle',{}).get('is_play_phase'))
-            check('sports persists next turn',[c['bonus'] for c in v['cards'] if c['role'] in ['handAttack','handArrow']],[9,9])
-            save(mode+'-next-turn.json',v);time.sleep(.8)
+            time.sleep(1)
+            for step in range(1,4):
+                oldturn=v['turn'];act('end_turn')
+                def advanced(s,v):
+                    if not v or v['turn']!=oldturn+1 or not s.get('battle',{}).get('is_play_phase'):
+                        return False
+                    remaining=[(c['deployed'] or {}).get('Remaining') for c in v['cards'] if c['role'] in picked]
+                    # Arrow time advances in AfterPlayerTurnStartLate, after the turn number changes.
+                    return remaining==[None]*2 if step==3 else len(remaining)==2 and all(n!=4-step for n in remaining)
+                s,v=wait(advanced)
+                cards={c['role']:c for c in v['cards'] if c['role']!='filler'}
+                if step<3:
+                    check('developer countdown '+str(step),[(cards[role]['deployed'] or {}).get('Remaining') for role in picked],[3-step]*2)
+                else:
+                    check('developer restores selected cards after resolution',
+                          [(cards[role]['deployed'],cards[role]['arrow'],cards[role]['pile']) for role in picked],
+                          [(None,False,'Discard')]*2)
+                save(mode+'-turn-'+str(step)+'.json',v)
+                time.sleep(.5)
+            capture(mode+'-resolved')
         else:
             expected_arrows=[c['instance'] for c in before['cards'] if c['arrow'] and c['role']!='filler']
             s,v=wait(lambda s,v:v and 'JUNNA_ARROW_RAIN_POTION' in v['used'])
