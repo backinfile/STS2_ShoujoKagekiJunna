@@ -84,12 +84,14 @@ public static class HandArrow
     {
         var combat = source.Owner.PlayerCombatState!;
         var hand = combat.Hand;
-        var selected = (await CardActions.Choose(context, source, hand.Cards, count, optional))
-            .Where(card => card.Pile == hand).ToArray();
-        int turns = ConversionTurns(source);
-        await CardExecution.PlayStaged(selected, card => Play(context, card, CardTargets.First(card), turns),
-            unplayed => CardPileCmd.Add(unplayed, hand));
+        var selected = await CardActions.Choose(context, source, hand.Cards, count, optional);
+        await PlaySelected(context, hand, selected, ConversionTurns(source));
     }
+
+    internal static Task PlaySelected(PlayerChoiceContext context, CardPile hand, IEnumerable<CardModel> selected, int turns)
+        => CardExecution.PlayStaged(selected.Where(card => card.Pile == hand).ToArray(),
+            card => Play(context, card, turns),
+            unplayed => CardPileCmd.Add(unplayed, hand));
 
     internal static bool Loops(CardModel card) => card is CatalogCard catalog && CardRules.Get(catalog.DesignId).LoopAsArrow;
 

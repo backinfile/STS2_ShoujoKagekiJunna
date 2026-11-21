@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using ShoujoKagekiJunna.Combat;
+using ShoujoKageki.Core.V1;
 
 namespace ShoujoKagekiJunna.Models;
 
@@ -91,13 +92,20 @@ public sealed class JunnaKnowledgePotion() : JunnaPotion("knowledge_potion")
 public sealed class JunnaSportsDrink() : JunnaPotion("sports_drink")
 {
     public override PotionRarity Rarity => PotionRarity.Uncommon;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Bonus", 9)];
-    public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(JunnaKeywords.DamageBonus)];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Turns", 3)];
+    public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(JunnaKeywords.Arrow)];
 
-    protected override Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
+    protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
-        DamageModifiers.AddMany(Owner.PlayerCombatState!.Hand.Cards, DynamicVars["Bonus"].BaseValue);
-        return Task.CompletedTask;
+        var hand = Owner.PlayerCombatState!.Hand;
+        var selected = await CardPicking.Pick(choiceContext, Owner, hand.Cards, new CardPickRequest
+        {
+            Prompt = SelectionScreenPrompt,
+            Minimum = 0,
+            Maximum = hand.Cards.Count,
+            Source = this
+        });
+        await HandArrow.PlaySelected(choiceContext, hand, selected, DynamicVars["Turns"].IntValue);
     }
 }
 

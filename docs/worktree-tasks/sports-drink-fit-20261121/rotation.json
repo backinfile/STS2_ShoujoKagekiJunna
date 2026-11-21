@@ -1,0 +1,40 @@
+{
+  "tool": "System.Drawing GDI+",
+  "operation": "rigid whole-image rotation",
+  "degreesClockwise": 18.0,
+  "source": "docs/worktree-tasks/sports-drink-fit-20261121/cleaned-native/opening_bell_upright.png",
+  "source_sha256": "09a4abdf2783e6bb4b8e72c121524657a3820fcc744771e6daf30368a402db11",
+  "output": "docs/worktree-tasks/sports-drink-fit-20261121/cleaned-native/opening_bell.png",
+  "output_sha256": "4d2a063229f54dc046a8e65f6f05552cd4f6e52155cb0bf29e9587aa1746277c",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "outputSize": [
+    1589,
+    1589
+  ],
+  "affineMatrix": [
+    0.9510565,
+    0.30901697,
+    -0.30901697,
+    0.9510565,
+    391.9412,
+    4.433899
+  ],
+  "transparentBackground": true,
+  "regenerated": false,
+  "cleanupAppliedBeforeRotation": true,
+  "icon": "docs/worktree-tasks/sports-drink-fit-20261121/icons/opening_bell.png",
+  "iconSize": [
+    256,
+    256
+  ],
+  "iconAlphaBounds": [
+    47,
+    12,
+    208,
+    244
+  ],
+  "iconSha256": "30c1d039c0a8ad11f4de2cf223db5507fb40516b3dc2c90e695612a4b2ce5ce2"
+}

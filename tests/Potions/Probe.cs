@@ -46,7 +46,7 @@ public static class Startup
 }
 
 [CustomID("JUNNA_POTION_OBSERVER")]
-public sealed class Observer : SingletonModel
+public sealed class Observer : AbstractModel
 {
     public override bool ShouldReceiveCombatHooks => true;
     public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay play)

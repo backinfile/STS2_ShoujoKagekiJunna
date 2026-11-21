@@ -1,0 +1,40 @@
+{
+  "tool": "System.Drawing GDI+",
+  "operation": "rigid whole-image rotation",
+  "degreesClockwise": -12.0,
+  "source": "docs/worktree-tasks/sports-drink-fit-20261121/v3/cleaned-native/photo_developer_upright.png",
+  "source_sha256": "edf80812f314c3454ec7972fddd13150366d4c4a577ea99b660cf66929abe20c",
+  "output": "docs/worktree-tasks/sports-drink-fit-20261121/v3/cleaned-native/photo_developer.png",
+  "output_sha256": "1c5577aa1ec5066b8de34452b3b8c0bf3fda81bdc6127de3ea39ea3aa7a1c481",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "outputSize": [
+    1496,
+    1496
+  ],
+  "affineMatrix": [
+    0.97814757,
+    -0.2079117,
+    0.2079117,
+    0.97814757,
+    4.3407593,
+    265.06204
+  ],
+  "transparentBackground": true,
+  "regenerated": false,
+  "cleanupAppliedBeforeRotation": true,
+  "icon": "docs/worktree-tasks/sports-drink-fit-20261121/v3/icons/photo_developer.png",
+  "iconSize": [
+    256,
+    256
+  ],
+  "iconAlphaBounds": [
+    57,
+    12,
+    199,
+    244
+  ],
+  "iconSha256": "e6fa441dc72318e90f94982f30cd8ddc04a2c73a04dd95c85d7510a8278ff6aa"
+}
