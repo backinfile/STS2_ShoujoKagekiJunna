@@ -4,5 +4,8 @@
   "JUNNA_GREEN_GEM.flavor": "",
   "JUNNA_BURNING_GEM.title": "燃烧宝石",
   "JUNNA_BURNING_GEM.description": "每当牌组中增加或者失去卡牌时，最大生命值提升1。",
-  "JUNNA_BURNING_GEM.flavor": ""
+  "JUNNA_BURNING_GEM.flavor": "",
+  "JUNNA_YOUR_KNOWLEDGE_SHINES_FOREVER.title": "胶带",
+  "JUNNA_YOUR_KNOWLEDGE_SHINES_FOREVER.description": "打出耗能大于等于{EnergyThreshold}的卡牌时，抽{Cards}张牌。",
+  "JUNNA_YOUR_KNOWLEDGE_SHINES_FOREVER.flavor": ""
 }
