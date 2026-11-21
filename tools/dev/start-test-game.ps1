@@ -67,11 +67,19 @@ foreach ($name in $baseFiles) {
 if (!$UseInstalledMod) {
     . (Join-Path $junnaRoot 'tools/core-package.ps1')
     $manifest = Get-Content -LiteralPath (Join-Path $junnaRoot 'ShoujoKagekiJunna.json') -Raw -Encoding utf8 | ConvertFrom-Json
-    $minimumCoreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiAijoCore' }).min_version
+    $minimumCoreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiCore' }).min_version
     $core = Get-CorePackage $CorePackage $minimumCoreVersion
+    $oldCore = [IO.Path]::GetFullPath((Join-Path $mods 'ShoujoKagekiAijoCore'))
+    if (Test-Path -LiteralPath $oldCore) {
+        $legacy = Get-Item -LiteralPath $oldCore
+        if ($legacy.FullName -ne $oldCore -or -not $legacy.PSIsContainer -or $legacy.Attributes.HasFlag([IO.FileAttributes]::ReparsePoint)) {
+            throw 'The legacy Core in the development mods folder is not a regular directory.'
+        }
+        [IO.Directory]::Move($legacy.FullName, (Join-Path $junnaArtifacts ('Core-1.x-' + [Guid]::NewGuid().ToString('N'))))
+    }
     Copy-Item -Path "$junnaRoot/dist/ShoujoKagekiJunna/*" -Destination "$mods/ShoujoKagekiJunna" -Recurse -Force
-    New-Item -ItemType Directory -Force "$mods/ShoujoKagekiAijoCore" | Out-Null
-    Copy-Item -Path (Join-Path $core.Root '*') -Destination "$mods/ShoujoKagekiAijoCore" -Recurse -Force
+    New-Item -ItemType Directory -Force "$mods/ShoujoKagekiCore" | Out-Null
+    Copy-Item -Path (Join-Path $core.Root '*') -Destination "$mods/ShoujoKagekiCore" -Recurse -Force
 }
 Copy-Item -LiteralPath "$junnaRoot/.tools/implementation/mcp/KarenSTS2MCP.dll" -Destination $mods
 Copy-Item -LiteralPath 'D:/Github/STS2_Mcp/mod_manifest.json' -Destination "$mods/KarenSTS2MCP.json"

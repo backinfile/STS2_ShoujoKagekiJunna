@@ -27,7 +27,7 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 if ($LASTEXITCODE) { throw 'Card runtime metadata validation failed' }
 . (Join-Path $PSScriptRoot 'tools/core-package.ps1')
 $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'ShoujoKagekiJunna.json') -Raw -Encoding UTF8 | ConvertFrom-Json
-$minimumCoreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiAijoCore' }).min_version
+$minimumCoreVersion = ($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiCore' }).min_version
 $core = Get-CorePackage $CorePackage $minimumCoreVersion
 $previousCoreApi = $env:CoreApiPath
 $env:CoreApiPath = $core.ApiPath

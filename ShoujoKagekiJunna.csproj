@@ -15,7 +15,7 @@
     <EmbeddedResource Include="data/card-pool.json" LogicalName="Junna.CardPool" />
     <PackageReference Include="Alchyr.Sts2.BaseLib" Version="$(BaseLibVersion)" />
     <PackageReference Include="BSchneppe.Sts2.ReferenceAssemblies" Version="$(Sts2StableApiVersion)" PrivateAssets="All" Condition="'$(Sts2ReferenceMode)' == 'package'" />
-    <Reference Include="ShoujoKagekiAijoCore.Api.V1" HintPath="$(CoreApiPath)" Private="false" />
+    <Reference Include="ShoujoKagekiCore.Api.V1" HintPath="$(CoreApiPath)" Private="false" />
     <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" Private="false" Condition="'$(Sts2ReferenceMode)' != 'package'" />
     <Reference Include="0Harmony" HintPath="$(GameData)/0Harmony.dll" Private="false" />
   </ItemGroup>

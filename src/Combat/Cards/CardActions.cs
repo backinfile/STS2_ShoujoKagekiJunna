@@ -178,7 +178,7 @@ public static class CardActions
     {
         var enemies = CardTargets.Enemies(card);
         if (enemies.Length <= 1) return enemies.FirstOrDefault();
-#if STS2_BETA || STS2_MAIN
+#if STS2_BETA
         if (MegaCrit.Sts2.Core.Runs.RunManager.Instance.CardSelectorStack.GetSelector(card.Owner) != null ||
             MegaCrit.Sts2.Core.Runs.RunManager.Instance.CardSelectorStack.LocalSelector != null) return enemies[0];
 #else

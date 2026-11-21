@@ -12,7 +12,7 @@ if ($CoreWorkshopId -eq 3737335127) { throw 'CoreWorkshopId must identify Core, 
 $source = (Resolve-Path -LiteralPath $ModDirectory).Path
 $manifest = Get-Content -LiteralPath (Join-Path $source 'ShoujoKagekiJunna.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if ($manifest.id -ne 'ShoujoKagekiJunna' -or
-    @($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiAijoCore' -and $_.min_version }).Count -ne 1 -or
+    @($manifest.dependencies | Where-Object { $_.id -eq 'ShoujoKagekiCore' -and $_.min_version }).Count -ne 1 -or
     @($manifest.dependencies | Where-Object { $_.id -eq 'BaseLib' }).Count -ne 1) {
     throw 'Junna manifest must declare BaseLib and the Core minimum version.'
 }
@@ -20,7 +20,7 @@ foreach ($file in @('ShoujoKagekiJunna.dll', 'ShoujoKagekiJunna.pck', 'lib/Shouj
     'lib/ShoujoKagekiJunna.Beta.dll', 'core.requirements', 'core.package.lock')) {
     if (-not (Test-Path -LiteralPath (Join-Path $source $file) -PathType Leaf)) { throw "Build Junna first; missing $file" }
 }
-if (Get-ChildItem -LiteralPath $source -Recurse -Force | Where-Object { $_.Name -like '*ShoujoKagekiAijoCore*' }) {
+if (Get-ChildItem -LiteralPath $source -Recurse -Force | Where-Object { $_.Name -match 'ShoujoKageki(Aijo)?Core' }) {
     throw 'Junna Workshop content must use the independent Core dependency.'
 }
 $output = [IO.Path]::GetFullPath($OutputDirectory)

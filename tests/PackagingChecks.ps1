@@ -25,12 +25,12 @@ foreach ($file in @('ShoujoKagekiJunna.dll', 'ShoujoKagekiJunna.pck', 'lib/Shouj
 $preview = Join-Path $root 'preview.png'
 [IO.File]::WriteAllBytes($preview, [Convert]::FromBase64String('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jGZkAAAAASUVORK5CYII='))
 $manifest = Get-Content -LiteralPath (Join-Path $role 'ShoujoKagekiJunna.json') -Raw | ConvertFrom-Json
-$minimum = ($manifest.dependencies | Where-Object id -eq 'ShoujoKagekiAijoCore').min_version
+$minimum = ($manifest.dependencies | Where-Object id -eq 'ShoujoKagekiCore').min_version
 $core = Get-CorePackage $CorePackage $minimum
 $bundleHash = (Get-FileHash -LiteralPath (Join-Path $core.Root 'core.bundle')).Hash
 Expect-Failure 'missing Core package' { Get-CorePackage '' $minimum } 'Set -CorePackage'
 Expect-Failure 'Core minimum version' { Get-CorePackage $CorePackage '9999.0.0' } 'or newer is required'
-$stale = Join-Path $root 'dist/ShoujoKagekiAijoCore'
+$stale = Join-Path $root 'dist/ShoujoKagekiCore'
 New-Item -ItemType Directory -Path $stale -Force | Out-Null
 Set-Content -LiteralPath (Join-Path $stale 'old-runtime.dll') -Value 'stale'
 Write-CoreRoleMetadata $core $role (Join-Path $root 'dist') 'ShoujoKagekiJunna'
@@ -61,7 +61,7 @@ Expect-Failure 'zero Core Workshop ID' { & $prepare -CoreWorkshopId 0 -PreviewIm
 Expect-Failure 'BaseLib cannot be Core' { & $prepare -CoreWorkshopId 3737335127 -PreviewImage $preview -OutputDirectory (Join-Path $root 'baselib') -ModDirectory $role } 'not BaseLib'
 Expect-Failure 'existing workspace preserved' { & $prepare -CoreWorkshopId 9876543210 -PreviewImage $preview -OutputDirectory $workspace -ModDirectory $role } 'already exists'
 Expect-Failure 'nested output rejected' { & $prepare -CoreWorkshopId 9876543210 -PreviewImage $preview -OutputDirectory (Join-Path $role 'nested') -ModDirectory $role } 'outside the source'
-Set-Content -LiteralPath (Join-Path $role 'ShoujoKagekiAijoCore.Api.V1.dll') -Value 'stale Core'
+Set-Content -LiteralPath (Join-Path $role 'ShoujoKagekiCore.Api.V1.dll') -Value 'stale Core'
 Expect-Failure 'embedded Core rejected' { & $prepare -CoreWorkshopId 9876543210 -PreviewImage $preview -OutputDirectory (Join-Path $root 'embedded') -ModDirectory $role } 'independent Core dependency'
 @{ passed=$results.Count; checks=@($results) } | ConvertTo-Json -Depth 4 |
     Set-Content -LiteralPath (Join-Path $root 'results.json') -Encoding utf8
