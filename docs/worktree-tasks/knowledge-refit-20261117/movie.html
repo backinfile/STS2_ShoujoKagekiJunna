@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://xenodude.com/xmlrpc.php">
+
+<title>Revue Starlight: The Movie &#8211; Xenodude Scribbles</title>
+<script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Alegreya:r,i,b,bi:latin,latin-ext"]},"api_url":"https:\/\/fonts-api.wp.com\/css"};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = '/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active body, .wf-active input, .wf-active select, .wf-active textarea{font-family:"Alegreya",serif}.wf-active .hentry div.sharedaddy h3.sd-title{font-family:"Alegreya",serif}.wf-active .widget_jetpack_display_posts_widget .jetpack-display-remote-posts h4{font-family:"Alegreya",serif}</style>
+<meta name='robots' content='max-image-preview:large' />
+
+<!-- Async WordPress.com Remote Login -->
+<script id="wpcom_remote_login_js">
+var wpcom_remote_login_extra_auth = '';
+function wpcom_remote_login_remove_dom_node_id( element_id ) {
+	var dom_node = document.getElementById( element_id );
+	if ( dom_node ) { dom_node.parentNode.removeChild( dom_node ); }
+}
+function wpcom_remote_login_remove_dom_node_classes( class_name ) {
+	var dom_nodes = document.querySelectorAll( '.' + class_name );
+	for ( var i = 0; i < dom_nodes.length; i++ ) {
+		dom_nodes[ i ].parentNode.removeChild( dom_nodes[ i ] );
+	}
+}
+function wpcom_remote_login_final_cleanup() {
+	wpcom_remote_login_remove_dom_node_classes( "wpcom_remote_login_msg" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_validate" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_js" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_iframe" );
+	wpcom_remote_login_remove_dom_node_id( "wpcom_request_access_styles" );
+}
+
+// Watch for messages back from the remote login
+window.addEventListener( "message", function( e ) {
+	if ( e.origin === "https://r-login.wordpress.com" ) {
+		var data = {};
+		try {
+			data = JSON.parse( e.data );
+		} catch( e ) {
+			wpcom_remote_login_final_cleanup();
+			return;
+		}
+
+		if ( data.msg === 'LOGIN' ) {
+			// Clean up the login check iframe
+			wpcom_remote_login_remove_dom_node_id( "wpcom_remote_login_key" );
+
+			var id_regex = new RegExp( /^[0-9]+$/ );
+			var token_regex = new RegExp( /^.*|.*|.*$/ );
+			if (
+				token_regex.test( data.token )
+				&& id_regex.test( data.wpcomid )
+			) {
+				// We have everything we need to ask for a login
+				var script = document.createElement( "script" );
+				script.setAttribute( "id", "wpcom_remote_login_validate" );
+				script.src = '/remote-login.php?wpcom_remote_login=validate'
+					+ '&wpcomid=' + data.wpcomid
+					+ '&token=' + encodeURIComponent( data.token )
+					+ '&host=' + window.location.protocol
+					+ '//' + window.location.hostname
+					+ '&postid=62746'
+					+ '&is_singular=1';
+				document.body.appendChild( script );
+			}
+
+			return;
+		}
+
+		// Safari ITP, not logged in, so redirect
+		if ( data.msg === 'LOGIN-REDIRECT' ) {
+			window.location = 'https://wordpress.com/log-in?redirect_to=' + window.location.href;
+			return;
+		}
+
+		// Safari ITP, storage access failed, remove the request
+		if ( data.msg === 'LOGIN-REMOVE' ) {
+			var css_zap = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } @media screen and ( max-width: 782px ) { html { margin-top: 0 !important; } * html body { margin-top: 0 !important; } }';
+			var style_zap = document.createElement( 'style' );
+			style_zap.type = 'text/css';
+			style_zap.appendChild( document.createTextNode( css_zap ) );
+			document.body.appendChild( style_zap );
+
+			var e = document.getElementById( 'wpcom_request_access_iframe' );
+			e.parentNode.removeChild( e );
+
+			document.cookie = 'wordpress_com_login_access=denied; path=/; max-age=31536000';
+
+			return;
+		}
+
+		// Safari ITP
+		if ( data.msg === 'REQUEST_ACCESS' ) {
+			console.log( 'request access: safari' );
+
+			// Check ITP iframe enable/disable knob
+			if ( wpcom_remote_login_extra_auth !== 'safari_itp_iframe' ) {
+				return;
+			}
+
+			// If we are in a "private window" there is no ITP.
+			var private_window = false;
+			try {
+				var opendb = window.openDatabase( null, null, null, null );
+			} catch( e ) {
+				private_window = true;
+			}
+
+			if ( private_window ) {
+				console.log( 'private window' );
+				return;
+			}
+
+			var iframe = document.createElement( 'iframe' );
+			iframe.id = 'wpcom_request_access_iframe';
+			iframe.setAttribute( 'scrolling', 'no' );
+			iframe.setAttribute( 'sandbox', 'allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation-by-user-activation' );
+			iframe.src = 'https://r-login.wordpress.com/remote-login.php?wpcom_remote_login=request_access&origin=' + encodeURIComponent( data.origin ) + '&wpcomid=' + encodeURIComponent( data.wpcomid );
+
+			var css = 'html { -webkit-transition: margin-top 1s; transition: margin-top 1s; } /* 9001 */ html { margin-top: 46px !important; } * html body { margin-top: 46px !important; } @media screen and ( max-width: 660px ) { html { margin-top: 71px !important; } * html body { margin-top: 71px !important; } #wpcom_request_access_iframe { display: block; height: 71px !important; } } #wpcom_request_access_iframe { border: 0px; height: 46px; position: fixed; top: 0; left: 0; width: 100%; min-width: 100%; z-index: 99999; background: #23282d; } ';
+
+			var style = document.createElement( 'style' );
+			style.type = 'text/css';
+			style.id = 'wpcom_request_access_styles';
+			style.appendChild( document.createTextNode( css ) );
+			document.body.appendChild( style );
+
+			document.body.appendChild( iframe );
+		}
+
+		if ( data.msg === 'DONE' ) {
+			wpcom_remote_login_final_cleanup();
+		}
+	}
+}, false );
+
+// Inject the remote login iframe after the page has had a chance to load
+// more critical resources
+window.addEventListener( "DOMContentLoaded", function( e ) {
+	var iframe = document.createElement( "iframe" );
+	iframe.style.display = "none";
+	iframe.setAttribute( "scrolling", "no" );
+	iframe.setAttribute( "id", "wpcom_remote_login_key" );
+	iframe.src = "https://r-login.wordpress.com/remote-login.php"
+		+ "?wpcom_remote_login=key"
+		+ "&origin=aHR0cHM6Ly94ZW5vZHVkZS5jb20%3D"
+		+ "&wpcomid=130819823"
+		+ "&time=" + Math.floor( Date.now() / 1000 );
+	document.body.appendChild( iframe );
+}, false );
+</script>
+<link rel='dns-prefetch' href='//s1.wp.com' />
+<link rel='dns-prefetch' href='//s2.wp.com' />
+<link rel='dns-prefetch' href='//wordpress.com' />
+<link rel='dns-prefetch' href='//fonts-api.wp.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//af.pubmine.com' />
+<link rel="alternate" type="application/rss+xml" title="Xenodude Scribbles &raquo; Feed" href="https://xenodude.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Xenodude Scribbles &raquo; Comments Feed" href="https://xenodude.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Xenodude Scribbles &raquo; Revue Starlight: The&nbsp;Movie Comments Feed" href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/feed/" />
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<script type="application/ld+json">{"@context":"https:\/\/schema.org","@graph":[{"@type":"Person","@id":"https:\/\/xenodude.com\/author\/xenodude\/#person","name":"Xenodude","image":"https:\/\/secure.gravatar.com\/avatar\/8974b28b09ab71ba0c0c1fb0dfb2d922e3cbd1232724001de5aea4a0f8009e69?s=512&d=identicon&r=g","url":"https:\/\/xenodude.com\/","worksFor":{"@id":"https:\/\/xenodude.com\/#organization"}},{"@type":"Article","headline":"Revue Starlight: The Movie","datePublished":"2024-09-01T03:55:55+00:00","dateModified":"2024-09-02T06:42:49+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/xenodude.com\/2024\/08\/31\/revue-starlight-the-movie\/"},"image":"https:\/\/xenodude.com\/wp-content\/uploads\/2024\/08\/revue-starlight-the-movie-temp.png","description":"This movie further cements \"Revue Starlight\" as one of my all-time favorite anime.","publisher":{"@id":"https:\/\/xenodude.com\/#organization"},"author":{"@id":"https:\/\/xenodude.com\/author\/xenodude\/#person"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https:\/\/xenodude.com\/"},{"@type":"ListItem","position":2,"name":"Revue Starlight: The Movie"}]}]}</script><style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-2-1' href='/_static/??-eJx9zFEKAjEMRdENWaMiVD/EtZQ2DJ2mbTAJZXbvjAiCiJ+X5B0Y7GJvik2hmmOyKTeBkdOEKoC2XnvJ6CgMUKxMQVFAdCHcR5Ed/AZmVA6xvBvEGtSejNbtAzcjOe6iX/VPpFzw475qe7/X29FfT/7sDxc/PwEZm01H&cssminify=yes' type='text/css' media='all' />
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#3858e9;--wp-admin-theme-color--rgb:56,88,233;--wp-admin-theme-color-darker-10:#2145e6;--wp-admin-theme-color-darker-10--rgb:33.0384615385,68.7307692308,230.4615384615;--wp-admin-theme-color-darker-20:#183ad6;--wp-admin-theme-color-darker-20--rgb:23.6923076923,58.1538461538,214.3076923077;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}body.admin-color-fresh{--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){body.admin-color-fresh{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}:root .has-inline-color,:root .has-link-color a,:root .has-text-color{-webkit-text-fill-color:currentColor}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;overflow-wrap:normal!important;padding:0;position:absolute;width:1px;word-break:normal!important}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style^=border-color],[style*=";border-color"],[style*="; border-color"]){border-style:solid}html :where([style^=border-top-color],[style*=";border-top-color"],[style*="; border-top-color"]){border-top-style:solid}html :where([style^=border-right-color],[style*=";border-right-color"],[style*="; border-right-color"]){border-right-style:solid}html :where([style^=border-bottom-color],[style*=";border-bottom-color"],[style*="; border-bottom-color"]){border-bottom-style:solid}html :where([style^=border-left-color],[style*=";border-left-color"],[style*="; border-left-color"]){border-left-style:solid}html :where([style^=border-width],[style*=";border-width"],[style*="; border-width"]){border-style:solid}html :where([style^=border-top-width],[style*=";border-top-width"],[style*="; border-top-width"]){border-top-style:solid}html :where([style^=border-right-width],[style*=";border-right-width"],[style*="; border-right-width"]){border-right-style:solid}html :where([style^=border-bottom-width],[style*=";border-bottom-width"],[style*="; border-bottom-width"]){border-bottom-style:solid}html :where([style^=border-left-width],[style*=";border-left-width"],[style*="; border-left-width"]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}@supports (not (-webkit-backdrop-filter:blur(1px))) and (not (-moz-appearance:none)){mtd[columnalign=right]{text-align:-webkit-right}mtd[columnalign=left]{text-align:-webkit-left}menclose[notation~=top]{border-top:.065em solid;padding-top:.1em}menclose[notation~=bottom]{border-bottom:.065em solid;padding-bottom:.1em}}
+
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.4.1/build/styles/block-library/common.min.css */
+</style>
+<style id="wp-block-group-inline-css">
+.wp-block-group{box-sizing:border-box}:where(.wp-block-group.wp-block-group-is-layout-constrained){position:relative}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.4.1/build/styles/block-library/group/style.min.css */
+</style>
+<style id="wp-block-separator-inline-css">
+@charset "UTF-8";.wp-block-separator{border:none;border-top:2px solid}:root :where(.wp-block-separator.is-style-dots){height:auto;line-height:1;text-align:center}:root :where(.wp-block-separator.is-style-dots):before{color:currentColor;content:"···";font-family:serif;font-size:1.5em;letter-spacing:2em;padding-left:2em}.wp-block-separator.is-style-dots{background:none!important;border:none!important}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.4.1/build/styles/block-library/separator/style.min.css */
+</style>
+<style id="wp-block-heading-inline-css">
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:var(--wp--style--block-background-padding,1.25em 2.375em)}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.4.1/build/styles/block-library/heading/style.min.css */
+</style>
+<style id="wp-block-list-inline-css">
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:var(--wp--style--block-background-padding,1.25em 2.375em)}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.4.1/build/styles/block-library/list/style.min.css */
+</style>
+<style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:var(--wp--style--block-background-padding,1.25em 2.375em)}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.4.1/build/styles/block-library/paragraph/style.min.css */
+</style>
+<style id="wp-block-library-inline-css-extra">
+.has-text-align-justify {
+	text-align:justify;
+}
+.has-text-align-justify{text-align:justify;}
+/*# sourceURL=wp-block-library-inline-css */
+</style>
+
+<style id="classic-theme-styles-inline-css">
+.wp-block-button__link{background-color:#32373c;border-radius:9999px;box-shadow:none;color:#fff;font-size:1.125em;padding:calc(.667em + 2px) calc(1.333em + 2px);text-decoration:none}.wp-block-file__button{background:#32373c;color:#fff}.wp-block-accordion-heading{margin:0}.wp-block-accordion-heading__toggle{background-color:inherit!important;color:inherit!important}.wp-block-accordion-heading__toggle:not(:focus-visible){outline:none}.wp-block-accordion-heading__toggle:focus,.wp-block-accordion-heading__toggle:hover{background-color:inherit!important;border:none;box-shadow:none;color:inherit;padding:var(--wp--preset--spacing--20,1em) 0;text-decoration:none}.wp-block-accordion-heading__toggle:focus-visible{outline:auto;outline-offset:0}.wp-block-tab-list button:not(.has-text-color){color:inherit!important}.wp-block-tab-list button:not(.has-background){background-color:inherit!important}.wp-block-tab-list button:focus,.wp-block-tab-list button:hover{text-decoration:none}.wp-block-tab-list button:focus-visible{outline:auto;outline-offset:0}
+/*# sourceURL=/wp-content/plugins/gutenberg-core/v24.4.1/build/styles/block-library/classic.min.css */
+</style>
+
+<style id="coblocks-inline-format-inline-css">
+.uppercase{text-transform:uppercase}
+/*# sourceURL=coblocks-inline-format-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-12-1' href='/_static/??-eJx9jEEOAiEQBD/kQECjeDC+ZWEnijIwYWA3/l72op689KFTVXplCCU3zE1z6reYRYfiUwlP0VYZpwxIJE4IFRd10HOU9iFA2iuhCiI7/ROiDt9WxfETT20jCOc4YUIa2D9t5eGA91xRBMZS7ATtPkTZvCtdzNEZt7f2fHq8Afl7R7w=&cssminify=yes' type='text/css' media='all' />
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--albert-sans: 'Albert Sans', sans-serif;--wp--preset--font-family--alegreya: Alegreya, serif;--wp--preset--font-family--arvo: Arvo, serif;--wp--preset--font-family--bodoni-moda: 'Bodoni Moda', serif;--wp--preset--font-family--bricolage-grotesque: 'Bricolage Grotesque', sans-serif;--wp--preset--font-family--cabin: Cabin, sans-serif;--wp--preset--font-family--chivo: Chivo, sans-serif;--wp--preset--font-family--commissioner: Commissioner, sans-serif;--wp--preset--font-family--cormorant: Cormorant, serif;--wp--preset--font-family--courier-prime: 'Courier Prime', monospace;--wp--preset--font-family--crimson-pro: 'Crimson Pro', serif;--wp--preset--font-family--dm-mono: 'DM Mono', monospace;--wp--preset--font-family--dm-sans: 'DM Sans', sans-serif;--wp--preset--font-family--dm-serif-display: 'DM Serif Display', serif;--wp--preset--font-family--domine: Domine, serif;--wp--preset--font-family--eb-garamond: 'EB Garamond', serif;--wp--preset--font-family--epilogue: Epilogue, sans-serif;--wp--preset--font-family--fahkwang: Fahkwang, sans-serif;--wp--preset--font-family--figtree: Figtree, sans-serif;--wp--preset--font-family--fira-sans: 'Fira Sans', sans-serif;--wp--preset--font-family--fjalla-one: 'Fjalla One', sans-serif;--wp--preset--font-family--fraunces: Fraunces, serif;--wp--preset--font-family--gabarito: Gabarito, system-ui;--wp--preset--font-family--ibm-plex-mono: 'IBM Plex Mono', monospace;--wp--preset--font-family--ibm-plex-sans: 'IBM Plex Sans', sans-serif;--wp--preset--font-family--ibarra-real-nova: 'Ibarra Real Nova', serif;--wp--preset--font-family--instrument-serif: 'Instrument Serif', serif;--wp--preset--font-family--inter: Inter, sans-serif;--wp--preset--font-family--josefin-sans: 'Josefin Sans', sans-serif;--wp--preset--font-family--jost: Jost, sans-serif;--wp--preset--font-family--libre-baskerville: 'Libre Baskerville', serif;--wp--preset--font-family--libre-franklin: 'Libre Franklin', sans-serif;--wp--preset--font-family--literata: Literata, serif;--wp--preset--font-family--lora: Lora, serif;--wp--preset--font-family--merriweather: Merriweather, serif;--wp--preset--font-family--montserrat: Montserrat, sans-serif;--wp--preset--font-family--newsreader: Newsreader, serif;--wp--preset--font-family--noto-sans-mono: 'Noto Sans Mono', sans-serif;--wp--preset--font-family--nunito: Nunito, sans-serif;--wp--preset--font-family--open-sans: 'Open Sans', sans-serif;--wp--preset--font-family--overpass: Overpass, sans-serif;--wp--preset--font-family--pt-serif: 'PT Serif', serif;--wp--preset--font-family--petrona: Petrona, serif;--wp--preset--font-family--piazzolla: Piazzolla, serif;--wp--preset--font-family--playfair-display: 'Playfair Display', serif;--wp--preset--font-family--plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;--wp--preset--font-family--poppins: Poppins, sans-serif;--wp--preset--font-family--raleway: Raleway, sans-serif;--wp--preset--font-family--roboto: Roboto, sans-serif;--wp--preset--font-family--roboto-slab: 'Roboto Slab', serif;--wp--preset--font-family--rubik: Rubik, sans-serif;--wp--preset--font-family--rufina: Rufina, serif;--wp--preset--font-family--sora: Sora, sans-serif;--wp--preset--font-family--source-sans-3: 'Source Sans 3', sans-serif;--wp--preset--font-family--source-serif-4: 'Source Serif 4', serif;--wp--preset--font-family--space-mono: 'Space Mono', monospace;--wp--preset--font-family--syne: Syne, sans-serif;--wp--preset--font-family--texturina: Texturina, serif;--wp--preset--font-family--urbanist: Urbanist, sans-serif;--wp--preset--font-family--work-sans: 'Work Sans', sans-serif;--wp--preset--text-shadow--light: 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.3);--wp--preset--text-shadow--strong: 0.1em 0.1em 0.25em rgba(0, 0, 0, 0.5);--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}.wp-block-button{--wp--preset--dimension--25: 25%;--wp--preset--dimension--50: 50%;--wp--preset--dimension--75: 75%;--wp--preset--dimension--100: 100%;}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-albert-sans-font-family{font-family: var(--wp--preset--font-family--albert-sans) !important;}.has-alegreya-font-family{font-family: var(--wp--preset--font-family--alegreya) !important;}.has-arvo-font-family{font-family: var(--wp--preset--font-family--arvo) !important;}.has-bodoni-moda-font-family{font-family: var(--wp--preset--font-family--bodoni-moda) !important;}.has-bricolage-grotesque-font-family{font-family: var(--wp--preset--font-family--bricolage-grotesque) !important;}.has-cabin-font-family{font-family: var(--wp--preset--font-family--cabin) !important;}.has-chivo-font-family{font-family: var(--wp--preset--font-family--chivo) !important;}.has-commissioner-font-family{font-family: var(--wp--preset--font-family--commissioner) !important;}.has-cormorant-font-family{font-family: var(--wp--preset--font-family--cormorant) !important;}.has-courier-prime-font-family{font-family: var(--wp--preset--font-family--courier-prime) !important;}.has-crimson-pro-font-family{font-family: var(--wp--preset--font-family--crimson-pro) !important;}.has-dm-mono-font-family{font-family: var(--wp--preset--font-family--dm-mono) !important;}.has-dm-sans-font-family{font-family: var(--wp--preset--font-family--dm-sans) !important;}.has-dm-serif-display-font-family{font-family: var(--wp--preset--font-family--dm-serif-display) !important;}.has-domine-font-family{font-family: var(--wp--preset--font-family--domine) !important;}.has-eb-garamond-font-family{font-family: var(--wp--preset--font-family--eb-garamond) !important;}.has-epilogue-font-family{font-family: var(--wp--preset--font-family--epilogue) !important;}.has-fahkwang-font-family{font-family: var(--wp--preset--font-family--fahkwang) !important;}.has-figtree-font-family{font-family: var(--wp--preset--font-family--figtree) !important;}.has-fira-sans-font-family{font-family: var(--wp--preset--font-family--fira-sans) !important;}.has-fjalla-one-font-family{font-family: var(--wp--preset--font-family--fjalla-one) !important;}.has-fraunces-font-family{font-family: var(--wp--preset--font-family--fraunces) !important;}.has-gabarito-font-family{font-family: var(--wp--preset--font-family--gabarito) !important;}.has-ibm-plex-mono-font-family{font-family: var(--wp--preset--font-family--ibm-plex-mono) !important;}.has-ibm-plex-sans-font-family{font-family: var(--wp--preset--font-family--ibm-plex-sans) !important;}.has-ibarra-real-nova-font-family{font-family: var(--wp--preset--font-family--ibarra-real-nova) !important;}.has-instrument-serif-font-family{font-family: var(--wp--preset--font-family--instrument-serif) !important;}.has-inter-font-family{font-family: var(--wp--preset--font-family--inter) !important;}.has-josefin-sans-font-family{font-family: var(--wp--preset--font-family--josefin-sans) !important;}.has-jost-font-family{font-family: var(--wp--preset--font-family--jost) !important;}.has-libre-baskerville-font-family{font-family: var(--wp--preset--font-family--libre-baskerville) !important;}.has-libre-franklin-font-family{font-family: var(--wp--preset--font-family--libre-franklin) !important;}.has-literata-font-family{font-family: var(--wp--preset--font-family--literata) !important;}.has-lora-font-family{font-family: var(--wp--preset--font-family--lora) !important;}.has-merriweather-font-family{font-family: var(--wp--preset--font-family--merriweather) !important;}.has-montserrat-font-family{font-family: var(--wp--preset--font-family--montserrat) !important;}.has-newsreader-font-family{font-family: var(--wp--preset--font-family--newsreader) !important;}.has-noto-sans-mono-font-family{font-family: var(--wp--preset--font-family--noto-sans-mono) !important;}.has-nunito-font-family{font-family: var(--wp--preset--font-family--nunito) !important;}.has-open-sans-font-family{font-family: var(--wp--preset--font-family--open-sans) !important;}.has-overpass-font-family{font-family: var(--wp--preset--font-family--overpass) !important;}.has-pt-serif-font-family{font-family: var(--wp--preset--font-family--pt-serif) !important;}.has-petrona-font-family{font-family: var(--wp--preset--font-family--petrona) !important;}.has-piazzolla-font-family{font-family: var(--wp--preset--font-family--piazzolla) !important;}.has-playfair-display-font-family{font-family: var(--wp--preset--font-family--playfair-display) !important;}.has-plus-jakarta-sans-font-family{font-family: var(--wp--preset--font-family--plus-jakarta-sans) !important;}.has-poppins-font-family{font-family: var(--wp--preset--font-family--poppins) !important;}.has-raleway-font-family{font-family: var(--wp--preset--font-family--raleway) !important;}.has-roboto-font-family{font-family: var(--wp--preset--font-family--roboto) !important;}.has-roboto-slab-font-family{font-family: var(--wp--preset--font-family--roboto-slab) !important;}.has-rubik-font-family{font-family: var(--wp--preset--font-family--rubik) !important;}.has-rufina-font-family{font-family: var(--wp--preset--font-family--rufina) !important;}.has-sora-font-family{font-family: var(--wp--preset--font-family--sora) !important;}.has-source-sans-3-font-family{font-family: var(--wp--preset--font-family--source-sans-3) !important;}.has-source-serif-4-font-family{font-family: var(--wp--preset--font-family--source-serif-4) !important;}.has-space-mono-font-family{font-family: var(--wp--preset--font-family--space-mono) !important;}.has-syne-font-family{font-family: var(--wp--preset--font-family--syne) !important;}.has-texturina-font-family{font-family: var(--wp--preset--font-family--texturina) !important;}.has-urbanist-font-family{font-family: var(--wp--preset--font-family--urbanist) !important;}.has-work-sans-font-family{font-family: var(--wp--preset--font-family--work-sans) !important;}.has-light-text-shadow{text-shadow: var(--wp--preset--text-shadow--light) !important;}.has-strong-text-shadow{text-shadow: var(--wp--preset--text-shadow--strong) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-14-1' href='/_static/??-eJx9juEKgzAMhF9oXXAIzh9jjyKuBom2aTHtfP1laMcYsn+XXO7LwRqNDZyQE/hsossjscCEKfZ2Nrpaow1+N0AyF697Ig9hgT6n4PuUyH5SGvAKFHhkcgOU8WxFTnD8cL8xjmbUSX42W5SAg/4Jel/EP2ap89W9I7YwIuOyYQ7lm3n3t6pp67q6Nu1legEQ028a&cssminify=yes' type='text/css' media='all' />
+<link rel='stylesheet' id='colinear-open-sans-lora-css' href='https://fonts-api.wp.com/css?family=Open+Sans%3A400%2C700%2C400italic%2C700italic%7CLora%3A400%2C700%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext&#038;ver=7.2-alpha-64299' media='all' />
+<link rel='stylesheet' id='colinear-inconsolata-css' href='https://fonts-api.wp.com/css?family=Inconsolata%3A400%2C+700&#038;subset=latin%2Clatin-ext&#038;ver=7.2-alpha-64299' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-18-1' href='/_static/??-eJyFi0EKAjEMAD9kjbKysgfxLd0QayRNSpuy+HtXvCiC3mZgBpYS0NRJHfxKmRqUPgOasFKs0PwutMXWNvCnZMVXHZaClr+e3EORnlgbVJrF0ooJ1upNf02JLIhhdDb9kHCRyPW5nvNpf5wOwzDupvH2AKD3UTc=&cssminify=yes' type='text/css' media='all' />
+<link crossorigin='anonymous' rel='stylesheet' id='print-css-19-1' href='/wp-content/mu-plugins/global-print/global-print.css?m=1465851035i&cssminify=yes' type='text/css' media='print' />
+<style id="jetpack-global-styles-frontend-style-inline-css">
+:root { --font-headings: unset; --font-base: unset; --font-headings-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; --font-base-default: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;}
+/*# sourceURL=jetpack-global-styles-frontend-style-inline-css */
+</style>
+<link crossorigin='anonymous' rel='stylesheet' id='all-css-22-1' href='/_static/??-eJyNjcsKAjEMRX/ImhmUURfip0inLW3GNCmmQfx7H7gRN+7ugcs5cGsuCPfEHaq5RpaRFZbUmw+XD4MaQ5VolBS0+GuKPsb7eyLndVBdwd+iM3KA2ZAiqAT05Eiy6Bf8KHtJ9RkvW8gks6fX4VSP426/mQ7TMA7LA38FSqA=&cssminify=yes' type='text/css' media='all' />
+<script id="jetpack_related-posts-js-extra">
+var related_posts_js_options = {"post_heading":"h4"};
+//# sourceURL=jetpack_related-posts-js-extra
+</script>
+<script id="wpcom-actionbar-placeholder-js-extra">
+var actionbardata = {"siteID":"130819823","postID":"62746","siteURL":"https://xenodude.com","xhrURL":"https://xenodude.com/wp-admin/admin-ajax.php","nonce":"d969cc3a7f","isLoggedIn":"","statusMessage":"","statusSubscribed":"","subsEmailDefault":"instantly","proxyScriptUrl":"https://s0.wp.com/wp-content/js/wpcom-proxy-request.js?m=1513050504i&amp;ver=20211021","shortlink":"https://wp.me/p8QUd9-gk2","i18n":{"followedText":"New posts from this site will now appear in your \u003Ca href=\"https://wordpress.com/reader\"\u003EReader\u003C/a\u003E","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","shortLinkCopied":"Copied to clipboard."}};
+//# sourceURL=wpcom-actionbar-placeholder-js-extra
+</script>
+<script id="jetpack-mu-wpcom-settings-js-before">
+var JETPACK_MU_WPCOM_SETTINGS = {"assetsUrl":"https://s1.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-mu-wpcom/src/build/"};
+//# sourceURL=jetpack-mu-wpcom-settings-js-before
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJx1j1EOwiAQRC8k3VQbtR/GoxgKhICwIAvW3l4aq6mJfk0mM3mTgTEyETArzOALi65ogwRW5cjFdfFABeFiUMBQjJOQlONZSRYDZfp2jTfYWNrAimtrx2UWU3hM76zCXJGK5tDeikrTImvA3xLzRqc6+mttcEF/fowhSS6JCceJXiDhI9y3szAMyLSMqSLO/tQe+u7Y7Xdtb58982bR'></script>
+<script id="rlt-proxy-js-after">
+	rltInitialize( {"token":null,"iframeOrigins":["https:\/\/widgets.wp.com"]} );
+//# sourceURL=rlt-proxy-js-after
+</script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://xenodude.wordpress.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress.com" />
+<link rel="canonical" href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/" />
+<link rel='shortlink' href='https://wp.me/p8QUd9-gk2' />
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fxenodude.com%2F2024%2F08%2F31%2Frevue-starlight-the-movie%2F&amp;for=wpcom-auto-discovery" /><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fxenodude.com%2F2024%2F08%2F31%2Frevue-starlight-the-movie%2F&amp;for=wpcom-auto-discovery" />
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Revue Starlight: The Movie" />
+<meta property="og:url" content="https://xenodude.com/2024/08/31/revue-starlight-the-movie/" />
+<meta property="og:description" content="This movie further cements &#8220;Revue Starlight&#8221; as one of my all-time favorite anime." />
+<meta property="article:published_time" content="2024-09-01T03:55:55+00:00" />
+<meta property="article:modified_time" content="2024-09-02T06:42:49+00:00" />
+<meta property="og:site_name" content="Xenodude Scribbles" />
+<meta property="og:image" content="https://i0.wp.com/xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?fit=1200%2C675&#038;ssl=1" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="675" />
+<meta property="og:image:alt" content="" />
+<meta property="og:locale" content="en_US" />
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom" />
+<meta name="twitter:creator" content="@MrXenodude" />
+<meta name="twitter:site" content="@MrXenodude" />
+<meta name="twitter:text:title" content="Revue Starlight: The&nbsp;Movie" />
+<meta name="twitter:image" content="https://i0.wp.com/xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?fit=1200%2C675&#038;ssl=1&#038;w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="search" type="application/opensearchdescription+xml" href="https://xenodude.com/osd.xml" title="Xenodude Scribbles" />
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com" />
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>		<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<meta name="description" content="This movie further cements &quot;Revue Starlight&quot; as one of my all-time favorite anime." />
+<script>
+var wa_client = {}; wa_client.cmd = []; wa_client.config = { 'blog_id': 130819823, 'blog_language': 'en', 'is_wordads': true, 'hosting_type': 1, 'afp_account_id': 'pub-5926358693574278', 'afp_host_id': 5038568878849053, 'theme': 'pub/colinear', '_': { 'title': 'Advertisement', 'privacy_settings': 'Privacy Settings' }, 'formats': [ 'belowpost', 'bottom_sticky', 'sidebar_sticky_right', 'shortcode', 'gutenberg_rectangle', 'gutenberg_leaderboard', 'gutenberg_mobile_leaderboard', 'gutenberg_skyscraper' ] };
+</script>
+		<script type="text/javascript">
+
+			window.doNotSellCallback = function() {
+
+				var linkElements = [
+					'a[href="https://wordpress.com/?ref=footer_blog"]',
+					'a[href="https://wordpress.com/?ref=footer_website"]',
+					'a[href="https://wordpress.com/?ref=vertical_footer"]',
+					'a[href^="https://wordpress.com/?ref=footer_segment_"]',
+				].join(',');
+
+				var dnsLink = document.createElement( 'a' );
+				dnsLink.href = 'https://wordpress.com/advertising-program-optout/';
+				dnsLink.classList.add( 'do-not-sell-link' );
+				dnsLink.rel = 'nofollow';
+				dnsLink.style.marginLeft = '0.5em';
+				dnsLink.textContent = 'Do Not Sell or Share My Personal Information';
+
+				var creditLinks = document.querySelectorAll( linkElements );
+
+				if ( 0 === creditLinks.length ) {
+					return false;
+				}
+
+				Array.prototype.forEach.call( creditLinks, function( el ) {
+					el.insertAdjacentElement( 'afterend', dnsLink );
+				});
+
+				return true;
+			};
+
+		</script>
+		<noscript><style>.jetpack-comments{visibility:visible!important}</style></noscript><style type="text/css" id="custom-colors-css">	#comments #respond p.form-submit input#comment-submit {
+		background: #222 !important;
+	}
+	#comments #respond .form-submit input#comment-submit:active,
+	#comments #respond .form-submit input#comment-submit:focus,
+	#comments #respond .form-submit input#comment-submit:hover {
+		background: #777 !important;
+	}
+body { background-color: #ffffff;}
+button,
+		input[type="button"],
+		input[type="reset"],
+		input[type="submit"],
+		.main-navigation ul,
+		.menu-toggle.toggled,
+		.dropdown-toggle,
+		.widget_akismet_widget .a-stats a,
+		.main-navigation a:active,
+		.main-navigation a:focus,
+		.main-navigation a:hover,
+		.main-navigation li:hover > a,
+		.main-navigation ul ul,
+		.main-navigation .current_page_item > a,
+		.main-navigation .current-menu-item > a,
+		.main-navigation .current_page_ancestor > a { background-color: #1E1E1E;}
+.main-navigation { border-bottom-color: #1E1E1E;}
+.comment-meta { border-left-color: #1E1E1E;}
+.rtl .comment-meta { border-right-color: #1E1E1E;}
+.site-main .post-navigation,
+		.widget,
+		.sticky,
+		.page-header,
+		.comment-reply-title,
+		.comments-title,
+		.no-comments,
+		.hentry div#jp-relatedposts.entry-related { border-top-color: #1E1E1E;}
+body,
+		input,
+		textarea,
+		cite,
+		input[type="text"],
+		input[type="email"],
+		input[type="url"],
+		input[type="password"],
+		input[type="search"],
+		textarea,
+		a:hover,
+		a:focus,
+		a:active,
+		.post-navigation .post-title,
+		.page-links > span,
+		.comment-author a,
+		#infinite-footer .blog-info,
+		#infinite-footer .blog-info a,
+		#infinite-handle span button:active,
+		#infinite-handle span button:focus,
+		#infinite-handle span button:hover,
+		.hentry div#jp-relatedposts.entry-related h3.jp-relatedposts-headline,
+		.hentry div#jp-relatedposts.entry-related div.jp-relatedposts-items p,
+		.hentry div#jp-relatedposts.entry-related div.jp-relatedposts-items-visual h4.jp-relatedposts-post-title,
+		.widget_goodreads div[class^="gr_custom_title"] a:active,
+		.widget_goodreads div[class^="gr_custom_title"] a:focus,
+		.widget_goodreads div[class^="gr_custom_title"] a:hover,
+		#comments #respond .comment-form-fields p.comment-form-posting-as,
+		#comments #respond .comment-form-fields p.comment-form-log-out,
+		#comments #respond #comment-form-identity #comment-form-nascar p,
+		#comments #respond #comment-form-load-service p,
+		#comments #respond #comment-form-comment textarea,
+		#comments #comment-form-share-text-padder textarea,
+		#comments #respond .comment-form-fields label,
+		#comments #respond .comment-form-fields label span.required,
+		#comments #respond .comment-form-fields label span.nopublish,
+		#comments #respond .comment-form-fields div.comment-form-input input,
+		#comments #respond .comment-form-service a:active,
+		#comments #respond .comment-form-service a:focus,
+		#comments #respond .comment-form-service a:hover,
+		.widget_flickr #flickr_badge_uber_wrapper td a:last-child:active,
+		.widget_flickr #flickr_badge_uber_wrapper td a:last-child:focus,
+		.widget_flickr #flickr_badge_uber_wrapper td a:last-child:hover { color: #1E1E1E;}
+::input-placeholder { color: #1E1E1E;}
+::-webkit-input-placeholder { color: #1E1E1E;}
+:-moz-placeholder { color: #1E1E1E;}
+::-moz-placeholder { color: #1E1E1E;}
+:-ms-input-placeholder { color: #1E1E1E;}
+.dropdown-toggle { border-color: #515151;}
+.main-navigation li,
+		.main-navigation ul ul li { border-bottom-color: #515151;}
+.main-navigation ul ul { border-top-color: #515151;}
+.main-navigation a:active,
+		.main-navigation a:focus,
+		.main-navigation a:hover,
+		.main-navigation .current_page_item > a,
+		.main-navigation .current-menu-item > a,
+		.dropdown-toggle:active,
+		.dropdown-toggle:focus,
+		.dropdown-toggle:hover,
+		.main-navigation ul ul a:active,
+		.main-navigation ul ul a:focus,
+		.main-navigation ul ul a:hover,
+		.main-navigation ul ul .current_page_item > a,
+		.main-navigation ul ul .current-menu-item > a,
+		.main-navigation ul ul .current_page_ancestor > a { background-color: #303030;}
+.main-navigation a:hover,
+		.dropdown-toggle:hover { color: #6D6D6D;}
+mark,
+		ins,
+		button:active,
+		input[type="button"]:active,
+		input[type="reset"]:active,
+		input[type="submit"]:active,
+		button:hover,
+		button:focus,
+		input[type="button"]:focus,
+		input[type="reset"]:focus,
+		input[type="submit"]:focus,
+		input[type="button"]:hover,
+		input[type="reset"]:hover,
+		input[type="submit"]:hover,
+		.toggled .menu-toggle:active,
+		.toggled .menu-toggle:focus,
+		.toggled .menu-toggle:hover,
+		.widget_calendar tbody a,
+		.widget_akismet_widget .a-stats a:active,
+		.widget_akismet_widget .a-stats a:focus,
+		.widget_akismet_widget .a-stats a:hover,
+		.milestone-widget .milestone-header { background-color: #9400D3;}
+input[type="text"]:focus,
+		input[type="email"]:focus,
+		input[type="url"]:focus,
+		input[type="password"]:focus,
+		input[type="search"]:focus,
+		textarea:focus,
+		#comments #respond #comment-form-comment.active,
+		#comments #respond .comment-form-fields div.comment-form-input.active { border-color: #9400D3;}
+.bypostauthor .comment-meta { border-left-color: #9400D3;}
+.rtl .bypostauthor .comment-meta { border-right-color: #9400D3;}
+a,
+		.post-navigation a:active .post-title,
+		.post-navigation a:focus .post-title,
+		.post-navigation a:hover .post-title,
+		.site-title a:active,
+		.site-title a:focus,
+		.site-title a:hover,
+		.site-footer a:active,
+		.site-footer a:active,
+		.site-footer a:hover,
+		.entry-title a:active,
+		.entry-title a:focus,
+		.entry-title a:hover,
+		.page-title a:active,
+		.page-title a:focus,
+		.page-title a:hover,
+		.entry-footer a:active,
+		.entry-footer a:focus,
+		.entry-footer a:hover,
+		.entry-author a:active,
+		.entry-author a:focus,
+		.entry-author a:hover,
+		.comment-metadata a:active,
+		.comment-metadata a:focus,
+		.comment-metadata a:hover,
+		.comment-author a:active,
+		.comment-author a:focus,
+		.comment-author a:hover,
+		#infinite-footer .blog-credits a:active,
+		#infinite-footer .blog-credits a:focus,
+		#infinite-footer .blog-credits a:hover,
+		#infinite-footer .blog-info a:active,
+		#infinite-footer .blog-info a:focus,
+		#infinite-footer .blog-info a:hover,
+		#infinite-handle span button,
+		#infinite-handle span button:focus,
+		#infinite-handle span button:hover,
+		.widget_goodreads div[class^="gr_custom_title"] a,
+		.widget_goodreads div[class^="gr_custom_container"] div[class^="gr_custom_author"] a:active,
+		.widget_goodreads div[class^="gr_custom_container"] div[class^="gr_custom_author"] a:focus,
+		.widget_goodreads div[class^="gr_custom_container"] div[class^="gr_custom_author"] a:hover,
+		#comments #respond .comment-form-service a,
+		.widget_flickr #flickr_badge_uber_wrapper td a:last-child { color: #9400D3;}
+input[type="text"]:focus,
+		input[type="email"]:focus,
+		input[type="url"]:focus,
+		input[type="password"]:focus,
+		input[type="search"]:focus,
+		textarea:focus,
+		.site,
+		.page-links a,
+		#comments .comment #respond #comment-form-comment,
+		#comments .comment #comment-form-share-text-padder,
+		#comments .comment #respond .comment-form-fields div.comment-form-input,
+		#comments #respond #comment-form-comment.active,
+		#comments #respond .comment-form-fields div.comment-form-input.active { background-color: #ffffff;}
+mark,
+		ins,
+		button,
+		input[type="button"],
+		input[type="reset"],
+		input[type="submit"],
+		.main-navigation a,
+		.main-navigation ul ul,
+		.menu-toggle.toggled,
+		.dropdown-toggle,
+		.dropdown-toggle:active,
+		.dropdown-toggle:focus,
+		.dropdown-toggle:hover,
+		.widget_calendar tbody a,
+		.main-navigation a:active,
+		.main-navigation a:focus,
+		.main-navigation a:hover,
+		.main-navigation li:hover > a,
+		.main-navigation ul ul a,
+		.main-navigation .current_page_item > a,
+		.main-navigation .current-menu-item > a,
+		.main-navigation .current_page_ancestor > a,
+		#comments #respond p.form-submit input#comment-submit,
+		#comments #respond .form-submit input#comment-submit:active,
+		#comments #respond .form-submit input#comment-submit:focus,
+		#comments #respond .form-submit input#comment-submit:hover,
+		.widget_akismet_widget .a-stats a { color: #ffffff;}
+hr,
+		.entry-footer:before,
+		.entry-author:before,
+		.page-links:before,
+		.sd-block:before,
+		.hentry div#jp-relatedposts:not(.entry-related):before { background-color: #D1D1D1;}
+input[type="text"],
+		input[type="email"],
+		input[type="url"],
+		input[type="password"],
+		input[type="search"],
+		textarea,
+		.page-links a,
+		.page-links > span,
+		.site .widget_wpcom_social_media_icons_widget a,
+		#comments #respond #comment-form-comment,
+		#comments #comment-form-share-text-padder,
+		#comments #respond .comment-form-fields div.comment-form-input { border-color: #D1D1D1;}
+.post-navigation .nav-next,
+		.post-navigation .nav-previous,
+		.widget-title,
+		.widget_calendar caption,
+		.hentry,
+		.page-header,
+		.comment-reply-title,
+		.comments-title,
+		.no-comments,
+		.wp-caption,
+		.hentry div#jp-relatedposts.entry-related h3.jp-relatedposts-headline,
+		.sticky,
+		.hentry .wpcom-reblog-snapshot .reblogger-note { border-bottom-color: #D1D1D1;}
+.site-footer,
+		.main-navigation { border-top-color: #D1D1D1;}
+code,
+		kbd,
+		pre,
+		tt,
+		var,
+		input[type="text"],
+		input[type="email"],
+		input[type="url"],
+		input[type="password"],
+		input[type="search"],
+		textarea,
+		.sticky,
+		.page-links a,
+		.page-links > span,
+		.page-links a:active,
+		.page-links a:focus,
+		.page-links a:hover,
+		#infinite-footer,
+		.site .widget_wpcom_social_media_icons_widget a:active,
+		.site .widget_wpcom_social_media_icons_widget a:focus,
+		.site .widget_wpcom_social_media_icons_widget a:hover,
+		#comments #respond #comment-form-comment,
+		#comments #comment-form-share-text-padder,
+		#comments #respond .comment-form-fields div.comment-form-input { background-color: #EAEAEA;}
+table,
+		.gallery,
+		.widget.top_rated .pd_top_rated_holder_posts > p,
+		.widget.top_rated ul { border-color: #EFEFEF;}
+td,
+		th,
+		.widget_authors ul ul,
+		.widget_recent_comments tr,
+		.widget_recent_comments td { border-bottom-color: #EFEFEF;}
+td,
+		th,
+		.comment-metadata .edit-link { border-left-color: #EFEFEF;}
+.rtl td,
+		.rtl th,
+		.rtl .comment-metadata .edit-link { border-right-color: #EFEFEF;}
+.site-main .comment-navigation,
+		.site-main .posts-navigation,
+		.comment-list .comment,
+		.comment-list .pingback,
+		.comment-list .trackback,
+		#infinite-handle,
+		.infinite-loader,
+		.widget_goodreads div[class^="gr_custom_each_container"],
+		.widget_authors ul ul { border-top-color: #EFEFEF;}
+.widget_calendar tbody a:active,
+		.widget_calendar tbody a:focus,
+		.widget_calendar tbody a:hover { background-color: #6D6D6D;}
+blockquote,
+		.post-navigation .meta-nav,
+		.widget_recent_entries .post-date,
+		.widget_rss cite,
+		.widget_rss .rss-date,
+		.site-description,
+		.site-footer,
+		.entry-footer,
+		.entry-author,
+		.page-links > .page-links-title,
+		.comment-metadata,
+		.wp-caption-text,
+		#infinite-footer .blog-credits,
+		.site-content .jetpack-recipe .jetpack-recipe-meta,
+		.hentry div.sharedaddy h3.sd-title,
+		.rating-msg,
+		.hentry div#jp-relatedposts h3.jp-relatedposts-headline,
+		.hentry div#jp-relatedposts div.jp-relatedposts-items p,
+		.hentry div#jp-relatedposts div.jp-relatedposts-items-visual h4.jp-relatedposts-post-title,
+		.hentry div#jp-relatedposts.entry-related div.jp-relatedposts-items .jp-relatedposts-post-context,
+		.widget_goodreads div[class^="gr_custom_author"],
+		.widget.top_rated #top_posts { color: #6D6D6D;}
+</style>
+<link rel="icon" href="https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=32" sizes="32x32" />
+<link rel="icon" href="https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=192" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=180" />
+<meta name="msapplication-TileImage" content="https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=270" />
+			<link rel="stylesheet" id="custom-css-css" type="text/css" href="https://s2.wp.com/?custom-css=1&#038;csblog=8QUd9&#038;cscache=6&#038;csrev=210" />
+			<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_gat._anonymizeIp']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script>
+<style id="jetpack-subscriptions-inline-css">
+#subscribe-email input {
+	width: 95%;
+}
+
+.comment-subscription-form {
+	margin-bottom: 1em;
+}
+
+.comment-subscription-form .subscribe-label {
+	display: inline !important;
+}
+
+/*
+Text meant only for screen readers.
+Provides support for themes that do not bundle this CSS yet.
+@see https://make.wordpress.org/accessibility/2015/02/09/hiding-text-for-screen-readers-with-wordpress-core/
+***********************************/
+.screen-reader-text {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	overflow-wrap: normal !important;
+}
+
+/*# sourceURL=/wp-content/mu-plugins/jetpack-plugin/sun/_inc/build/subscriptions/subscriptions.min.css */
+</style>
+
+</head>
+
+<body class="wp-singular post-template-default single single-post postid-62746 single-format-standard wp-theme-pubcolinear customizer-styles-applied has-menu jetpack-reblog-enabled custom-colors">
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+			<a href="https://xenodude.com/" class="site-logo-link" rel="home" itemprop="url"></a>
+								<p class="site-title"><a href="https://xenodude.com/" rel="home">Xenodude Scribbles</a></p>
+									<p class="site-description">Writing about anime&#8230;hope it makes sense.</p>
+						</div><!-- .site-branding -->
+
+				<nav id="site-navigation" class="main-navigation" role="navigation">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><span class="screen-reader-text">Primary Menu</span></button>
+			<div class="menu-top-bar-container"><ul id="primary-menu" class="menu"><li id="menu-item-25419" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-25419"><a href="https://xenodude.com/category/anime/">Current Anime</a>
+<ul class="sub-menu">
+	<li id="menu-item-69837" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-69837"><a href="https://xenodude.com/tag/bang-dream-yume%e2%88%9emita/">BanG Dream! YUME∞MITA</a></li>
+	<li id="menu-item-69836" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-69836"><a href="https://xenodude.com/category/anime/ghost-in-the-shell/">THE GHOST IN THE SHELL (2026)</a></li>
+</ul>
+</li>
+<li id="menu-item-60512" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-60512"><a href="https://xenodude.com/category/anime/">Past Anime</a>
+<ul class="sub-menu">
+	<li id="menu-item-14043" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14043"><a href="https://xenodude.com/anime-archive/">Anime Archive</a></li>
+	<li id="menu-item-60513" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-60513"><a href="https://xenodude.com/anime-archive/a-place-further-than-the-universe/">A Place Further Than the Universe</a></li>
+	<li id="menu-item-60517" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-60517"><a href="https://xenodude.com/anime-archive/banana-fish/">Banana Fish</a></li>
+	<li id="menu-item-65278" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65278"><a href="https://xenodude.com/anime-archive/bloom-into-you/">Bloom Into You</a></li>
+	<li id="menu-item-65666" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65666"><a href="https://xenodude.com/anime-archive/harukana-receive/">Harukana Receive</a></li>
+	<li id="menu-item-60516" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-60516"><a href="https://xenodude.com/anime-archive/domestic-girlfriend/">Domestic Girlfriend</a></li>
+	<li id="menu-item-60515" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-60515"><a href="https://xenodude.com/anime-archive/iroduku-the-world-in-colors/">Iroduku: The World in Colors</a></li>
+</ul>
+</li>
+<li id="menu-item-24747" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-24747"><a href="https://xenodude.com/category/video-games/">Video Games</a></li>
+<li id="menu-item-10381" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10381"><a href="https://xenodude.com/category/reviews/">Reviews</a></li>
+<li id="menu-item-38943" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-38943"><a href="https://xenodude.com/category/editorials/">Editorials</a></li>
+<li id="menu-item-23849" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-23849"><a href="https://xenodude.com/about/">About Me</a></li>
+</ul></div>		</nav><!-- #site-navigation -->
+		
+				<div class="header-image">
+			<a href="https://xenodude.com/" rel="home">
+				<img src="https://s2.wp.com/wp-content/themes/pub/colinear/images/header-image-1.jpg?m=1446798640i" width="1188" height="240" alt="">
+			</a>
+		</div><!-- .header-image -->
+			</header><!-- #masthead -->
+
+	<div id="content" class="site-content">
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-62746" class="post-62746 post type-post status-publish format-standard has-post-thumbnail hentry category-anime category-episode-reviews category-movies category-revue-starlight tag-anime tag-bushiroad tag-cgdct tag-cute-girls-doing-cute-things tag-episode-reviews tag-kinema-citrus tag-movies tag-music tag-revue-starlight tag-school tag-shoujo-kageki-revue-starlight tag-special tag-theater">
+	<header class="entry-header">
+		<h1 class="entry-title">Revue Starlight: The&nbsp;Movie</h1>
+		
+	<div class="post-thumbnail">
+		<img width="863" height="485" src="https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=863" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" decoding="async" srcset="https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=863 863w, https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=1726 1726w, https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=150 150w, https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=300 300w, https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=768 768w, https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=1024 1024w, https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=1440 1440w" sizes="(max-width: 863px) 100vw, 863px" data-attachment-id="63055" data-permalink="https://xenodude.com/2024/08/31/revue-starlight-the-movie/revue-starlight-the-movie-temp/" data-orig-file="https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png" data-orig-size="1920,1080" data-comments-opened="1" data-image-title="Revue Starlight The Movie Temp." data-image-description="" data-image-caption="" data-large-file="https://xenodude.com/wp-content/uploads/2024/08/revue-starlight-the-movie-temp.png?w=863" />	</div><!-- .post-thumbnail -->
+
+		</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+<p class="wp-block-paragraph"><strong>Note:&nbsp;</strong>This post is considered an episode review and it dives into spoilers for the movie.</p>
+
+
+
+<p class="wp-block-paragraph">There had been a number of anime in the episode review backlog but I think <em>Revue Starlight: The Movie</em> might be the most glaring one on the list. Admittedly, this movie released when COVID was a big deal and I didn&#8217;t keep track of when it&#8217;ll release on streaming or disc so the movie naturally fell off to the wayside. Be that as it may, I&#8217;ve made it no secret that I really love the show so it&#8217;s pretty that I slept on its feature-length sequel. It&#8217;s about time I change that. To be honest, there&#8217;s way too much to talk about this movie. It shines the spotlight on all nine main characters, has six musical numbers that take up almost half of the movie&#8217;s runtime, and is filled to the brim with stylism and symbolism. This episode review is still pretty long, so long that I made an exception and divided it up with headings, but even then, I won&#8217;t claim that I&#8217;ve gone over every single thing in this movie that&#8217;s worth talking about.</p>
+
+
+
+<p class="wp-block-paragraph">We begin the movie sometime during the main characters&#8217; third high school year, with an incredibly chaotic scene where Hikari seemingly defeats Karen in a revue. Following the duel, Hikari parts ways with Karen once again and she returns to London for her studies. Sometime later, the remaining students at Seisho each discuss with Sakuragi-sensei about their post-graduation plans. Most of the girls plan on joining a renowned troupe while Kaoruko intends on inheriting her family&#8217;s school in Kyoto and Junna applies to attend a university. Karen admits that she has no concrete plans, having developed a case of ennui after Hikari left her again. At the dorm, the girls discuss checking out a troupe together, with Kaoruko being the most begrudged to tag along. She feels there&#8217;s no point in exploring new ventures, arguing that they&#8217;ve all missed their chance anyway after failing to become the Top Star.</p>
+
+
+
+<p class="wp-block-paragraph">Throughout the movie, we get flashbacks detailing Karen&#8217;s childhood, starting with the day she met Hikari for the first time. Knowing Karen in the present, it&#8217;s surprising to learn that she was rather shy until she and Hikari started to become friends and Hikari got her interested in theater. Not that Karen and Hikari&#8217;s relationship was hard to buy into but it does make a lot more sense now as to why Karen cherishes Hikari so much. Also interesting about these flashbacks is that the movie acknowledges that Karen&#8217;s adoration for Hikari is rather obsessive. She tries to avoid learning anything about Hikari as some sort way to uphold their promise to reunite years later. She then starts looking up Hikari online and begins to compare herself to her friend. I suppose Karen having her world revolve around Hikari has always been a thing but I never questioned all that much, having really enjoyed it throughout the show. How curious then that the movie leans into the idea that this relationship could be unhealthy in some way. </p>
+
+
+
+<p class="wp-block-paragraph">In the present, the girls take a train to meet up with the troupe mentioned earlier. On their way to the theater however, Karen gets separated from her friends and is left to trek through the desert region of the underground theater. Meanwhile, everyone is called upon for the first of a new series of revues collectively referred to as &#8220;Wi(l)d Screen Baroque&#8221;. From my understanding, the name comes from a sci-fi subgenre noted for its larger-than-life characters, extravagant settings, and fast pacing. Honestly, the staff couldn&#8217;t have picked a more fitting title. Things get very wild throughout these revues, even by <em>Revue Starlight</em>&#8216;s own standards.</p>
+
+
+
+<h2 class="wp-block-heading has-medium-font-size">Annihilation Revue</h2>
+
+
+
+<p class="wp-block-paragraph">The first revue is the appropriately titled &#8220;Annihilation Revue&#8221;, in which Nana fights against everyone else and wipes the floor on all of them. Something that I really appreciate about the action in this movie is that almost every matchup is something that didn&#8217;t happen in the show. Case in point, we finally get to see how strong Nana really is. I never doubted Nana&#8217;s power level but I also can&#8217;t deny that she loses both of her major duels in the show and you only get a snippet of her making short work of someone. It&#8217;s very satisfying then that the movie finally provides a better glimpse at that (and with quality animation to boot). It&#8217;s definitely fanservice but it&#8217;s the kind of fanservice that any <em>Revue Starlight</em> fan would want. Also, it&#8217;s worth noting that this revue does take place on the train and not the underground theater. You definitely have to suspend even more of your disbelief as to how that works (and really, throughout this entire movie) but it&#8217;s hard to deny that the change in scenery is refreshing and exciting.</p>
+
+
+
+<p class="wp-block-paragraph">Naturally, the first revue in the movie comes with the first insert song, &#8220;Wi(l)d Screen Baroque&#8221;, which shares the same name as the movie&#8217;s series of revues. Funnily enough, Nana is the only character who sings in this song. None of the other characters involved in he fight chime in at any point. It falls perfectly in line with Nana soloing everybody. Also, with how often <em>Revue Starlight</em> touts Nana as a major threat, it&#8217;s nice to see her finally have her own villain song. I&#8217;m not sure why the song often sounds like the girls are in a jungle but it does capture how aggressive and foreboding Nana is in the fight. Also, the instrumental being so unique helps establish the movie&#8217;s revues as a different beast from the show&#8217;s.</p>
+
+
+
+<p class="wp-block-paragraph">I find it interesting that this song shares the same name as the collective name for the revues. Throughout the song, Nana more or less taunts her friends for not putting much of a fight and she asks them what they&#8217;ll do with their lives going forward. She also brings up the idea that everyone is always &#8220;on stage&#8221; as well as the concept of death, something which was previously hinted at in <em>Rondo Rondo Rondo</em>. Throughout the lyrics, Nana heavily hints at what the revues are about so in a way, it makes a lot of sense to title this song &#8220;Wi(l)d Screen Baroque&#8221;.</p>
+
+
+
+<h2 class="wp-block-heading has-medium-font-size">Interlude</h2>
+
+
+
+<p class="wp-block-paragraph">Following the &#8220;Revue of Annihilation&#8221;, the participants return to school to attend a party that formally kicks off production of the 99th class&#8217;s third and final performance of &#8220;Starlight&#8221;. I&#8217;m really curious how they explained Karen&#8217;s absence to everyone. During the party, Kiriko Masai (Asuka Shinomiya) and Shion Amemiya (Saya Hirose), the director and playwright for the play respectively, hand over copies of an unfinished script to everyone. Apparently, Shion is suffering from writer&#8217;s block, due to the pressure of surpassing the class&#8217;s second performance of the play. Though shocked to receive an unfinished script, the class nevertheless likes what Shion writes so far, thus giving the playwright some much needed validation.</p>
+
+
+
+<p class="wp-block-paragraph">Frankly, it&#8217;s weird to focus on Kiriko and Shion of all people. These two have been around since almost the beginning but I never mentioned them until now because they honestly don&#8217;t do a whole lot. I guess it&#8217;s nice to finally see them in a more prominent light but it&#8217;s a bit late to do that, don&#8217;t you think? That said, this scene does serve a purpose for our main cast. During this scene, you can hear an orchestral arrangement of &#8220;The Knowledge of the Stage Girl&#8221;, which, if you recall, is a song about the Stage Girls&#8217; ambition and growth. The fact that the play is unfinished and Shion risks jeopardizing the entire production is very intentional. Also deliberate is all the new lines cited by the extras, in which the characters of &#8220;Starlight&#8221; talk about being reborn.</p>
+
+
+
+<p class="wp-block-paragraph">The next day, the girls meet up on top of another train. It&#8217;s here that the movie formally explains what Nana has been talking about during <em>Rondo Rondo Rondo</em> and the &#8220;Revue of Annihilation&#8221;: the death of the Stage Girls. Barring that the rather graphic imagery used to convey the concept, the movie mostly means it in a metaphorical sense (and I am being deliberate when I say &#8220;mostly&#8221;). As Stage Girls, the girls yearn to be on the stage, hence some of the dialogue stating they&#8217;re always on it. However, because everyone didn&#8217;t become the Top Star and they know they can&#8217;t reach for the top, they&#8217;ve more or less resigned themselves to becoming stagnant. In that sense, they as Stage Girls are pretty much dead. The purpose of Wi(l)d Screen Baroque is for the girls to fight each other one last time to reinvigorate themselves. It&#8217;s akin to Karen&#8217;s idea of rebirth, albeit applied to the rest of the cast.</p>
+
+
+
+<p class="wp-block-paragraph">Apparently, the giraffe is offering himself as fuel to enable the girls to fight as Stage Girls once more. This I think is meant to be taken literally as during the train scene, the giraffe appears as though his body is actually made up of different foods. Later in the movie, he actually burns up as if he&#8217;s some sort of fossil fuel. I suppose since the giraffe somehow has the power to run the underground theater and the auditions, it&#8217;s not outside the realm of possibility for him to be able to power the duels themselves. Also yeah, you don&#8217;t see the giraffe after he&#8217;s set aflame. I&#8217;m convinced he straight up dies in this movie.</p>
+
+
+
+<p class="wp-block-paragraph">Something that you&#8217;d have noticed a couple of times this far into the movie is the use of tomatoes. As silly as it sounds on paper, this is symbolic of the Stage Girls&#8217; impending &#8220;deaths&#8221;. Occasionally, you&#8217;ll see a tomato burst in pieces to signify a character &#8220;dying&#8221;. Tomato juice is also used to evoke the image of the girls bleeding. I guess at the end of the <em>Rondo Rondo Rondo</em>, that&#8217;s actually what we see when the movie proceeds to show everyone&#8217;s corpses. Conversely, tomatoes also serves as a symbol of life. The giraffe hands each of the girls a tomato when he offers himself as fuel. When the girls agree to partake in the revues, they each take a bite into their tomato, thereby accepting the giraffe&#8217;s fuel and regaining their powers. Again, it sounds silly but that&#8217;s par for the course with <em>Revue Starlight</em> and it does work very well in illustrating the idea of the girls dying.</p>
+
+
+
+<h2 class="wp-block-heading has-medium-font-size">Resentment Revue</h2>
+
+
+
+<p class="wp-block-paragraph">The very next revue in the movie is the &#8220;Resentment Revue&#8221;, a rematch between Kaoruko and Futaba. Given that they&#8217;re two of the less important character in the show, I kind of get the impression that their fight is the second one in the movie so that the staff gets it out of the way. Mind you, this isn&#8217;t to say that I zoned out during this fight. Far from it.</p>
+
+
+
+<p class="wp-block-paragraph">We start the revue off in a recreation of a gambling den, where Claudine and Kaoruko are about to play a game of chō-han. While talking with Claudine, Kaoruko more or less admits that part of her bitterness as of late is because Futaba decided to go her separate ways with her (hence the name of this revue). My best guess on the gambling theme is the movie alluding to Kaoruko betting on Futaba always being by herself, only to then learn that the latter plans on joining a troupe instead. As for Claudine, she&#8217;s there because Kaoruko attributes her as the catalyst for Futaba branching away from her. Eventually, Futaba comes in, appropriately dressed as a delinquent no less, and she and Kaoruko proceed to duke it out.</p>
+
+
+
+<p class="wp-block-paragraph">I really like how the fight has a mix of traditional Japanese imagery to more modern elements such as a hostess club and dekotora trucks. The former is more suited for Kaoruko while the latter matches Futaba more. The switch between the two aesthetics perfectly compliments the diverging paths the two plan on taking after they graduate. Definitely my favorite set in this revue is the hostess club. Having Kaoruko as the hostess evokes the fact that she more or less brought Futaba under her wing and it implies that Kaoruko thinks Futaba is ungrateful towards her. It&#8217;s also a great excuse for <em>Revue Starlight</em> to throw some really some strong yuri subtext for the fans who ship these two. That said, I must concede the most epic part is the girls crashing their dekotora trucks at each other.</p>
+
+
+
+<p class="wp-block-paragraph">Given that Kaoruko won the Revue of Promise, I hoped for Futaba to win this time around and sure enough, that&#8217;s what ultimately happens in the Revue of Resentment. Part of me would&#8217;ve like to see Futaba win through sheer skill. In the Revue of Promise, Kaoruko wins by proving that she still has what it takes to be a Stage Girl. It would&#8217;ve been a nice reversal then if Futaba proceeded to do the same in this duel. Plus, it&#8217;d compel Kaoruko to be ambitious once more and avoid her &#8220;death&#8221;. That said, I still approve of Futaba winning by virtue of being a good friend. After crashing the trucks, Futaba saves Kaoruko at the last second and she refuses to let go as they fall down to the ground (which is conveniently cushioned by some Sakura petals). In doing so, Futaba proves to Kaoruko that they&#8217;re still friends and it convinces an otherwise bitter Kaoruko to accept their futures. Kaoruko then lets Futaba disarm her jacket, which is a terrific reversal to that fakeout she did in Episode 6. I did raise an eyebrow when Futaba gives Kaoruko the key to her motorcycle. Like, I get that it&#8217;s to show that they&#8217;ll stay connected to each other but Kaoruko is absolutely going to crash that bike.</p>
+
+
+
+<h2 class="wp-block-heading has-medium-font-size">Co-Star Revue</h2>
+
+
+
+<p class="wp-block-paragraph">Over at London, the giraffe convinces Hikari to participate in Wi(l)d Screen Baroque to find Karen. If you&#8217;re wondering how Hikari can just fast travel from London to Tokyo, it turns out that she very much can do that via a magic train. Don&#8217;t question it; just roll with it. Upon arriving in the underground theater, Hikari is greeted by Mahiru, who appears to be hosting a multi-sport event in a track and field stadium. Mahiru then forces Hikari to fight her in the &#8220;Co-Star Revue&#8221;. That title may or may not be ironic in hindsight. This is the one matchup that I wished to have seen the most during the show. Given Mahiru&#8217;s jealousy towards Hikari and her borderline yandere tendencies, I really wanted these two to duke it out. I still love the Revue of Jealousy but it was a shame that the show didn&#8217;t pit Hikari against Mahiru. You have no idea how happy I was when I see it finally happen in the movie.</p>
+
+
+
+<p class="wp-block-paragraph">The Co-Star Revue starts off on a very silly note. In between all the traditional fighting, Mahiru makes Hikari compete with her in all the different sports games in the stadium. I really dig the sports theme of the revue. It&#8217;s not that big of a stretch since Mahiru was established to like sports, certainly baseball at least. More importantly, it&#8217;s a perfect metaphor for Mahiru&#8217;s envy towards Hikari. I find it interesting that Mahiru tends to have Hikari beat in all of the games, as if she&#8217;s telling the latter that she&#8217;s better at everything and that ought to include being Karen&#8217;s friend. Symbolism aside, the gimmick is just very entertaining. I love that Mahiru somehow throws in sports that would be extremely impractical to host in a track and field stadium. For example, there&#8217;s a freaking swimming pool for Mahiru and Hikari to compete in. Don&#8217;t ask me how, it&#8217;s just there and the movie moves right along. Also amusing is how the animation transitions from traditional dueling to the sports, as if Mahiru magically turns her and Hikari&#8217;s weapons into a bunch of sports equipment.</p>
+
+
+
+<p class="wp-block-paragraph">Things started to get rather ominous with Mahiru successfully disarms Hikari&#8217;s jacket. Rather than relish in her victory, Mahiru gets frustrated with Hikari&#8217;s reluctance to perform in the revue, seeing it as a sign of weakness. This then leads her to conclude that she ill fit to meet Karen again. Mahiru grows increasingly hostile towards Hikari and she even goes as far as threaten to kill her (and you know Mahiru means it when she beheads a replica of Mr. White right in front of Hikari). Understandably, Hikari runs for her life and the revue turns into a horror tinted chase scene with Mahiru as the pursuer.</p>
+
+
+
+<p class="wp-block-paragraph">This is my favorite bit of fanservice in the movie. I&#8217;ve always joked that Mahiru would make for a great yandere and lo and behold, this movie actually entertains that idea. Even better is that the scene is legitimately tense. You have Hikari running through an empty backstage, trying to find a way out, only for Mahiru to always be near. Haruki Iwata absolutely kills it as a psychopathic Mahiru and Suzoko Mimori likewise does a good job selling how frightened Hikari is at this moment. Even when Mahiru isn&#8217;t in the frame, her presence is still felt thanks to the inclusion of her props from the Revue of Jealousy and a very evocative use of shadows and colors.</p>
+
+
+
+<p class="wp-block-paragraph">The chase ends with Mahiru pushing Hikari off the top of the stage. Hikari lands safely on a giant Mr. White plush and she confesses that she does feels bad about leaving Karen again. Having gotten Hikari to be honest with herself, Mahiru reveals that she was acting this entire time in an effort to give her friend the push she needed. Boy did she have Hikari and I fooled! Are we sure that Maya is top of the class? I would call this a cop-out but I knew deep down that Mahiru wouldn&#8217;t actually give Hikari the axe (or mace, you know what I mean). Plus, I much prefer that Mahiru had truly let go of any disdain towards Hikari a long time ago and she simply played the villain for her friend&#8217;s sake, as opposed to her simply hating Hikari again. How cute that Mahiru gives Hikari a sports medal reminiscent of the button on their coats; she&#8217;s basically telling Hikari that she&#8217;s the real winner of the revue.</p>
+
+
+
+<h2 class="wp-block-heading has-medium-font-size">Hunting Revue</h2>
+
+
+
+<p class="wp-block-paragraph">While Hikari resumes her search for Karen, the movie cuts to the &#8220;Hunting Revue&#8221;, starring Nana and Junna. This is less of a no-brainer compared to the other matchups in the movie. Nana did acknowledge in Episode 9 that she and Junna have yet to fight each other but it never made sense for them to fight because they arguably have the most stable relationship out of any duo in the main cast. To the movie&#8217;s credit then, there&#8217;s actually a strong thematic justification for them to fight now. In a vacuum, there&#8217;s nothing wrong with Junna pursuing university but when compared to everyone else, it does seem as though Junna has picked a safe path. Nana meanwhile wants to prevent the death of the Stage Girls so she&#8217;s naturally disappointed in Junna for not pursuing something more ambitious. It&#8217;s therefore reasonable for the movie to pit these two against each other.</p>
+
+
+
+<p class="wp-block-paragraph">Framing the revue as a hunt did come across as a random choice to me at first but I can see the thought process behind it. The more obvious interpretation is that Junna is the hunter and Nana is the prey. In the revue, Junna lays a bunch of traps and she tries to snipe away at Nana from a safe distance. Meanwhile, the rogue Nana explicitly acknowledges that she&#8217;s an untamable beast by roaring away at Junna. Conversely, you could argue that the roles are actually reversed. Nana deliberately picks Junna as her target for the revues, making her more of a hunter and Junna more as prey.</p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;m amazed at how scathing Nana is towards Junna. There are a couple times where she tries to get Junna to commit seppuku with one of her swords. This may seem surprising given that Nana is the one who brought up everyone&#8217;s impending deaths but it does make sense as the fight goes on. Nana argues that the stage is too &#8220;bright&#8221; for Junna so when she demands that Junna commit seppuku, she&#8217;s basically telling her to bow out while she still can. Also brutal is Nana destroying Junna&#8217;s bow but not disarming her jacket and walking away as if she&#8217;s won. By not defeating Junna the traditional way, Nana is essentially telling her that she doesn&#8217;t count as a Stage Girl.</p>
+
+
+
+<p class="wp-block-paragraph">Of course, you have Junna knock some sense into Nana and win the fight. I love that she replaces her bow with one of Nana&#8217;s swords. By forcing herself to fight at close quarters and getting progressively better with it, Junna conveys  to Nana her determination to carve her own path. It&#8217;s also just a really cool moment. I very much approve of Junna winning the fight. She&#8217;s always been billed as an underdog in the cast and the show never actually gave her a major victory so she deserves it. You&#8217;d think things would be awkward between Junna and Nana after the fight but they surprisingly and fortunately do reconcile. I love how teary eyed Nana gets when thinks about how dazzling Junna fought against her. Given her obsession with the first performance of &#8220;Starlight&#8221; and her struggled to find a new thing that shines brightly to her, it says a lot that she&#8217;s moved by Junna&#8217;s performance.</p>
+
+
+
+<h2 class="wp-block-heading has-medium-font-size">Soul Revue</h2>
+
+
+
+<p class="wp-block-paragraph">The second to last battle is the &#8220;Soul Revue&#8221;, featuring Maya and Claudine. This is likely the matchup fans have wanted to see the most during the show. Despite making a big deal about Maya and Claudine&#8217;s rivalry and friendship, the show never actually had these two fight, save for a very brief one in Episode 2. I didn&#8217;t mind it during the show but in hindsight, it is a pretty mind boggling decision so I appreciate the movie making up for it. How fitting that this happens towards the end of the movie. The staff definitely knew that fans would be hyped for this fight.</p>
+
+
+
+<p class="wp-block-paragraph">For the &#8220;Soul Revue&#8221;, Maya and Claudine perform in a four act play. Claudine portrays a devil who makes a wager with a performer played by Maya. If the devil can show the performer a brilliance no one has ever seen before, than the latter must hand her soul over to her. Confident that she can&#8217;t be topped, the performer agrees to this contract and she and devil proceed to duke it out.</p>
+
+
+
+<p class="wp-block-paragraph">After exchanging some blows, Maya reveals to Claudine a bird statue (or maybe it&#8217;s a robot because it does actually move at one point), which she is says representative of who she is: a vessel of the gods. This is easily the most arrogant thing Maya has ever said about herself and that&#8217;s saying something given her character. By saying she&#8217;s a vessel, Maya says she has no soul for Claudine to take and the latter therefore can&#8217;t win. And by attributing herself to gods, Maya says she&#8217;s the pinnacle of the Stage Girls and her shine is unparalleled. During this part of the fight, Maya and Claudine also fight in different costumes across different sets and time periods. Maya treats these different roles as variations of herself and by assuming all of these in the fight, she accentuates that her status of the vessel is all encompassing. She could in a different place or time, be a different person, and she&#8217;d always be the vessel.</p>
+
+
+
+<p class="wp-block-paragraph">Maya eventually knocks the button off of Claudine&#8217;s costume but she&#8217;s denied victory as Claudine reveals that she has a second button. While Claudine is technically cheating here, she does point out that the fight isn&#8217;t over due to the contract (and Maya did sign it with her own blood so they can&#8217;t exactly rescind it). I imagine that&#8217;s a huge blow to Maya&#8217;s ego. The contract stipulates that a never before seen brilliance must occur for the duel to end so the fact that Maya fails to fulfill this condition even with all the stuff she pulled already must sting a ton. Claudine then pulls a Karen by declaring that she&#8217;ll be reborn until she finally surpasses Maya, even stabbing herself and rematerializing to fight Maya once more.</p>
+
+
+
+<p class="wp-block-paragraph">I adore that by the final act of the revue, Maya and Claudine completely drop the act. They&#8217;re no longer acting as characters in the play; they&#8217;re just lashing out each other as themselves. It greatly goes to show how heated things are between them. You especially know that Claudine is pushing Maya&#8217;s buttons as Maya stops trying to act high and mighty and instead gets arrogant and frustrated at her.  The animation also kicks into overdrive during this part, offering some very dynamic shots and fluid fight choreography.</p>
+
+
+
+<p class="wp-block-paragraph">Claudine coming out as the victor is an excellent outcome. She really deserves it after seeing herself at second place to Maya for so long. Plus, Claudine beating Maya for the first time has never been seen before so it very much fulfills the whole contract aspect of the fight. Something that stood out to me in the dialogue is a particular taunt Maya gives to Claudine: &#8220;Give a hero a trial, give a saint temptation, and give [her] a devil&#8221;. Looking at the whole fight, Claudine very much fulfills each of  these demands. She gives Maya a real challenge. She tempts her into giving into her desire to fight and win. And she very much is Maya&#8217;s devil, someone who upsets her world and challenges her godliness.</p>
+
+
+
+<h2 class="wp-block-heading has-medium-font-size">The Last Line</h2>
+
+
+
+<p class="wp-block-paragraph">While trekking through the underground theater, Karen comes across and heads over to the replica of Tokyo Tower. There she reunites with Hikari for one final revue. I don&#8217;t think there&#8217;s really any other way this movie would end. These two are the main duo of the series. It largely revolved around them so it of course is going to conclude with them. The title of this revue is &#8220;The Last Line&#8221;. It&#8217;s the most self-explanatory title for any of these revues though I do find it interesting that the word &#8220;revue&#8221; is nowhere to be found. That sells the finality of this duel just as much as the title itself does.</p>
+
+
+
+<p class="wp-block-paragraph">The final revue starts off with Karen confiding to Hikari about how much she inspired her to pursue theater and become a Stage Girl. Suddenly however, the movie pulls the curtains that are the fourth wall and Karen learns about <em>Revue Starlight</em>&#8216;s fanbase. Even with the show previously having the giraffe talking directly to us, I was very taken aback by this moment. And somehow Hikari has already known about this? When the hell did she learn about that? As surreal as this moment is, it actually serves to advance Karen&#8217;s arc. Discovering that she&#8217;s onstage and having no idea what to do, Karen realizes that she&#8217;s kept her eyes squarely on Hikari and the promise they made together. That then makes her think about what she should to do now that the promise has been fulfilled. Hikari appears to have some idea for herself but Karen has nothing. And because Karen has nothing, she&#8217;s effectively dead as a Stage Girl and this realization causes her to literally die right in front of Hikari.</p>
+
+
+
+<p class="wp-block-paragraph">I figured that at some point, the movie would actually kill someone off. Even before the movie, <em>Revue Starlight</em> had been entertaining that idea so you&#8217;d think it would eventually happen. I also would argue that Karen&#8217;s death here is at lot less graphic than the one teased at the end of <em>Rondo Rondo Rondo</em>. At the very least, there&#8217;s way less tomato juice being spilled in this scene. That all said, it&#8217;s still very unnerving seeing Karen look so lifeless. What especially puts gravity to this scene is Hikari&#8217;s reaction, first acting in denial before completely losing it once reality sinks in.</p>
+
+
+
+<p class="wp-block-paragraph">As Hikari holds Karen in her arms, she reveals that she went back to London because she was afraid of becoming to0 starstruck with Karen and she wanted to maintain a healthy distance between the two of them for the time being. After seeing how attached Karen got to her and literally die as a result, you can understand where Hikari is coming from. That said, there clearly were a lot of mistakes made Hikari&#8217;s part. She left without giving a proper explanation and making it clear to Karen that they&#8217;re still best friends and it never occurred her that Karen might be lost after they performed &#8220;Starlight&#8221; together. If she&#8217;s going to part ways with Karen again, she has to do it properly. Knowing this now, Hikari proceeds to bring Karen back to life.</p>
+
+
+
+<p class="wp-block-paragraph">What happens next is probably the most insane resurrection scene I&#8217;ve ever seen. Hikari starts by giving Karen a letter, akin to the ones Karen wrote to her and the ones she wanted to write to Karen. Then, she sends Karen down a  chute and Karen&#8217;s body transforms into a Position Zero shaped box with her face drawn on it. The prop then lands on a rail car, which then carries it through a freaking sandstorm. The rail car then ignites its engines to drive through the storm and off a ramp. When it lands back on Tokyo Tower, the box opens up and Karen emerges out of it, alive once again. I&#8217;m entirely sure why the staff went this hard. I suppose it&#8217;s a souped-up version of Karen&#8217;s transformation sequence in the show but if that&#8217;s the case, they crank the dial up to 1,000. All I can confidently say is that this scene is freaking awesome.</p>
+
+
+
+<p class="wp-block-paragraph">With Karen back, the duel can begin in earnest though the action doesn&#8217;t last for very long. Karen and Hikari draw their weapons but it immediately becomes apparent that Hikari has way more shine than Karen. It&#8217;s so blinding in fact that it causes Karen&#8217;s sword to snap in two. When the two finally exchange blows, Hikari wins immediately with a stab to the chest. I was surprised to not see a more drawn out fight but I actually like that Hikari wins so quickly. It shows that the path she&#8217;s taken is paying off and it opens Karen&#8217;s eyes to the idea that she could shine so brightly if she stops limiting herself. It also helps that this scene is just stunning. Seriously, the lighting and coloring in this scene is so pretty.</p>
+
+
+
+<p class="wp-block-paragraph">Somehow, the stab causes various Position Zero-shaped items to erupt out of Karen and this causes Tokyo Tower to break in half. It doesn&#8217;t make any sense but it&#8217;s pointless to question the logic of <em>Revue Starlight</em> at the very end. Plus, I can&#8217;t deny how jaw dropping this moment is. I do love that the final fight ends with Tokyo Tower&#8217;s destruction. It&#8217;s a major symbol for Karen and Hikari&#8217;s promise but that promise has been fulfilled. It&#8217;s time for the girls to let it go and what better way to convey that than tearing the symbol apart. It&#8217;s also worth noting that Karen and Hikari&#8217;s hairclips are left somewhere in the sandy ruins of the underground theater. You do find out later that they still have them in their possession but they no longer wear them and they instead keep them as a memento.</p>
+
+
+
+<p class="wp-block-paragraph">Although Hikari is technically the winner of this revue, she does disarm her jacket, as if to say it doesn&#8217;t actually who won and to signify the end of the revues. You then see the rest of the main cast do the same. A nice touch here is Kaoruko being the first to follow suit. Given how obsessed she was with becoming the Top Star, it&#8217;s satisfying to see her let it all go. Hikari meets up with Karen and she encourages the latter to find her next stage and role. A cheeky detail here is Hikari handing over a tomato to Karen to denote her friend&#8217;s reinvigoration.</p>
+
+
+
+<p class="wp-block-paragraph">The ED serves as an epilogue of sorts. Having now graduated, Hikari travels around the world and she meets up with her friends to see how they&#8217;re doing (I knew it! I knew Kaoruko would damage Futaba&#8217;s bike!). The only one Hikari doesn&#8217;t meet is Karen, who&#8217;s busy with an audition for an unspecified production (which we then see in a post-credit scene). Karen is being true to her word by finding the next chapter in her life and while you don&#8217;t get to see her and Hikari reunite, the movie still assures you that they will meet again one day. I&#8217;m hard pressed to think of a more perfect ending.</p>
+
+
+
+<h2 class="wp-block-heading has-medium-font-size">Closing Words</h2>
+
+
+
+<p class="wp-block-paragraph">Having loved the TV show so much, I was a teeny bit afraid that the movie would not be up to par. Having now it seen however it, I can say without a doubt that I love it. It&#8217;s easily the best &#8220;episode&#8221; in the entire series and it further cements the series as one of my all-time favorite anime. The plot is a bit of retread on the show&#8217;s but I ended up being fine with that. For one, the movie does take old threads into some new and interesting directions. This is especially the case with Karen and Hikari&#8217;s arc, with the movie reversing their roles in the show and exploring a genuinely compelling question about their futures. Also, if you&#8217;re going to do a retread, you should at least give it as much pizzazz as this movie does. It&#8217;s a dazzling experience from beginning to end. The staff really outdid themselves with the visuals and the direction. And I didn&#8217;t talk about it all that much but this has some of the best animation I&#8217;ve seen from Kinema Citrus.</p>
+
+
+
+<p class="wp-block-paragraph">I&#8217;d like to check out some other <em>Revue Starlight</em> media such as the <em>El Dorado</em> visual novel that just released. But as far as the anime is concerned, the movie is the end of the road and this episode review is my last one for the series. There is a cryptic teaser from a few years about a new anime project by director Tomohiro Furukawa and that&#8217;s been speculated to part of the franchise. However, there hasn&#8217;t been any update on that so who knows what the status is on the production. If <em>Revue Starlight</em> ever does come back in anime form, I&#8217;ll definitely be covering that. And if doesn&#8217;t, I&#8217;m beyond happy with the TV show and movie that we got.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity" />
+
+
+
+<p class="wp-block-paragraph">Watch <em>Revue Starlight: The Movie</em> on <a href="https://www.hidive.com/movies/revue-starlight-the-movie">HIDIVE</a></p>
+<div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-email"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-email-62746"
+				class="share-email sd-button share-icon no-text"
+				href="mailto:?subject=%5BShared%20Post%5D%20Revue%20Starlight%3A%20The%20Movie&#038;body=https%3A%2F%2Fxenodude.com%2F2024%2F08%2F31%2Frevue-starlight-the-movie%2F&#038;share=email"
+				target="_blank"
+				aria-labelledby="sharing-email-62746"
+				data-email-share-error-title="Do you have email set up?" data-email-share-error-text="If you&#039;re having problems sharing via email, you might not have email set up for your browser. You may need to create a new email yourself." data-email-share-nonce="ed0aa2d1fa" data-email-share-track-url="https://xenodude.com/2024/08/31/revue-starlight-the-movie/?share=email">
+				<span id="sharing-email-62746" hidden>Email a link to a friend (Opens in new window)</span>
+				<span>Email</span>
+			</a></li><li class="share-bluesky"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-bluesky-62746"
+				class="share-bluesky sd-button share-icon no-text"
+				href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/?share=bluesky"
+				target="_blank"
+				aria-labelledby="sharing-bluesky-62746"
+				>
+				<span id="sharing-bluesky-62746" hidden>Share on Bluesky (Opens in new window)</span>
+				<span>Bluesky</span>
+			</a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-twitter-62746"
+				class="share-twitter sd-button share-icon no-text"
+				href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/?share=twitter"
+				target="_blank"
+				aria-labelledby="sharing-twitter-62746"
+				>
+				<span id="sharing-twitter-62746" hidden>Share on X (Opens in new window)</span>
+				<span>X</span>
+			</a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-facebook-62746"
+				class="share-facebook sd-button share-icon no-text"
+				href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/?share=facebook"
+				target="_blank"
+				aria-labelledby="sharing-facebook-62746"
+				>
+				<span id="sharing-facebook-62746" hidden>Share on Facebook (Opens in new window)</span>
+				<span>Facebook</span>
+			</a></li><li class="share-reddit"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-reddit-62746"
+				class="share-reddit sd-button share-icon no-text"
+				href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/?share=reddit"
+				target="_blank"
+				aria-labelledby="sharing-reddit-62746"
+				>
+				<span id="sharing-reddit-62746" hidden>Share on Reddit (Opens in new window)</span>
+				<span>Reddit</span>
+			</a></li><li class="share-pinterest"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-pinterest-62746"
+				class="share-pinterest sd-button share-icon no-text"
+				href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/?share=pinterest"
+				target="_blank"
+				aria-labelledby="sharing-pinterest-62746"
+				>
+				<span id="sharing-pinterest-62746" hidden>Share on Pinterest (Opens in new window)</span>
+				<span>Pinterest</span>
+			</a></li><li class="share-tumblr"><a rel="nofollow noopener noreferrer"
+				data-shared="sharing-tumblr-62746"
+				class="share-tumblr sd-button share-icon no-text"
+				href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/?share=tumblr"
+				target="_blank"
+				aria-labelledby="sharing-tumblr-62746"
+				>
+				<span id="sharing-tumblr-62746" hidden>Share on Tumblr (Opens in new window)</span>
+				<span>Tumblr</span>
+			</a></li><li class="share-end"></li></ul></div></div></div><div class='sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded' id='like-post-wrapper-130819823-62746-6afbc45562a9d' data-src='//widgets.wp.com/likes/index.html?ver=20261117#blog_id=130819823&amp;post_id=62746&amp;origin=xenodude.wordpress.com&amp;obj_id=130819823-62746-6afbc45562a9d&amp;domain=xenodude.com' data-name='like-post-frame-130819823-62746-6afbc45562a9d' data-title='Like or Reblog'><div class='likes-widget-placeholder post-likes-widget-placeholder' style='height: 55px;'><span class='button'><span>Like</span></span> <span class='loading'>Loading...</span></div><span class='sd-text-color'></span><a class='sd-link-color'></a></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>			</div><!-- .entry-content -->
+
+	
+	<footer class="entry-footer">
+		<span class="date-author"><span class="posted-on">Posted on <a href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/" rel="bookmark"><time class="entry-date published" datetime="2024-08-31T23:55:55-04:00">August 31, 2024</time><time class="updated" datetime="2024-09-02T02:42:49-04:00">September 2, 2024</time></a></span><span class="byline"> by <span class="author vcard"><a class="url fn n" href="https://xenodude.com/author/xenodude/">Xenodude</a></span></span></span><span class="cat-links">Posted in <a href="https://xenodude.com/category/anime/" rel="category tag">Anime</a>, <a href="https://xenodude.com/category/episode-reviews/" rel="category tag">Episode Reviews</a>, <a href="https://xenodude.com/category/movies/" rel="category tag">Movies</a>, <a href="https://xenodude.com/category/anime/revue-starlight/" rel="category tag">Revue Starlight</a></span><span class="tags-links">Tagged <a href="https://xenodude.com/tag/anime/" rel="tag">Anime</a>, <a href="https://xenodude.com/tag/bushiroad/" rel="tag">Bushiroad</a>, <a href="https://xenodude.com/tag/cgdct/" rel="tag">CGDCT</a>, <a href="https://xenodude.com/tag/cute-girls-doing-cute-things/" rel="tag">Cute Girls Doing Cute Things</a>, <a href="https://xenodude.com/tag/episode-reviews/" rel="tag">Episode Reviews</a>, <a href="https://xenodude.com/tag/kinema-citrus/" rel="tag">Kinema Citrus</a>, <a href="https://xenodude.com/tag/movies/" rel="tag">Movies</a>, <a href="https://xenodude.com/tag/music/" rel="tag">Music</a>, <a href="https://xenodude.com/tag/revue-starlight/" rel="tag">Revue Starlight</a>, <a href="https://xenodude.com/tag/school/" rel="tag">School</a>, <a href="https://xenodude.com/tag/shoujo-kageki-revue-starlight/" rel="tag">Shoujo Kageki Revue Starlight</a>, <a href="https://xenodude.com/tag/special/" rel="tag">Special</a>, <a href="https://xenodude.com/tag/theater/" rel="tag">Theater</a>. </span>	</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+
+			
+	<nav class="navigation post-navigation" aria-label="Posts">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://xenodude.com/2024/08/25/makeine-too-many-losing-heroines-ep-7/" rel="prev"><span class="meta-nav" aria-hidden="true">Previous</span> <span class="screen-reader-text">Previous post:</span> <span class="post-title">Makeine: Too Many Losing Heroines! &#8211; Ep.&nbsp;7</span></a></div><div class="nav-next"><a href="https://xenodude.com/2024/09/03/my-deer-friend-nokotan-ep-9/" rel="next"><span class="meta-nav" aria-hidden="true">Next</span> <span class="screen-reader-text">Next post:</span> <span class="post-title">My Deer Friend Nokotan &#8211; Ep.&nbsp;9</span></a></div></div>
+	</nav>
+			
+<div id="comments" class="comments-area">
+
+	
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2024/08/31/revue-starlight-the-movie/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://xenodude.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><div class="jetpack-comments" data-jetpack-comments="{&quot;postId&quot;:62746,&quot;loginUrl&quot;:&quot;https://xenodude.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fxenodude.com%2F2024%2F08%2F31%2Frevue-starlight-the-movie%2F&quot;,&quot;logoutUrl&quot;:&quot;&quot;,&quot;submit&quot;:{&quot;id&quot;:&quot;submit&quot;,&quot;name&quot;:&quot;submit&quot;,&quot;class&quot;:&quot;submit&quot;,&quot;wrapClass&quot;:&quot;&quot;,&quot;label&quot;:&quot;Comment&quot;},&quot;subscriptions&quot;:[{&quot;name&quot;:&quot;subscribe&quot;,&quot;label&quot;:&quot;Notify me of new comments by email.&quot;,&quot;checked&quot;:false},{&quot;name&quot;:&quot;subscribe_blog&quot;,&quot;label&quot;:&quot;Subscribe to keep up with Xenodude Scribbles.&quot;,&quot;checked&quot;:false}]}"><div class="jetpack-comments__plain"><p class="comment-form-author"><label for="author">Name</label><input id="author" name="author" type="text" value="" required /></p><p class="comment-form-email"><label for="email">Email</label><input id="email" name="email" type="email" value="" required /></p><p class="comment-form-url"><label for="url">Website</label><input id="url" name="url" type="text" value="" maxlength="200" /></p></div><div class="jetpack-comments__box"><textarea id="comment" name="comment" class="jetpack-comments__textarea" rows="2" required maxlength="65525" aria-label="Comment" placeholder="Write a comment..."></textarea><div class="jetpack-comments__actions"><span class="jetpack-comments__submit"><input name="submit" type="submit" id="submit" class="submit" value="Comment" /></span><span class="jetpack-comments__identity"></span></div></div></div><noscript><style>.jetpack-comments{display:none!important}</style><p>Turn on JavaScript to leave a comment.</p></noscript><input type='hidden' name='comment_post_ID' value='62746' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="49c86743af" /></p><p style="display: none !important;" class="akismet-fields-container" data-prefix="ak_"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="6"/><script>
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+</script>
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+<div id="secondary" class="widget-area" role="complementary">
+
+	
+	
+	
+		<div class="right-sidebar">
+		<aside id="search-5" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://xenodude.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit screen-reader-text" value="Search" />
+			</form></aside><aside id="blog_subscription-7" class="widget widget_blog_subscription jetpack_subscription_widget">
+			<div class="wp-block-jetpack-subscriptions__container">
+			<form
+				action="https://subscribe.wordpress.com"
+				method="post"
+				accept-charset="utf-8"
+				data-blog="130819823"
+				data-post_access_level="everybody"
+				id="subscribe-blog"
+			>
+				<p>Follow via email</p>
+				<p id="subscribe-email">
+					<label
+						id="subscribe-field-label"
+						for="subscribe-field"
+						class="screen-reader-text"
+					>
+						Email Address:					</label>
+
+					<input
+							type="email"
+							name="email"
+							autocomplete="email"
+							
+							style="width: 95%; padding: 1px 10px"
+							placeholder="Email Address"
+							value=""
+							id="subscribe-field"
+							required
+						/>				</p>
+
+				<p id="subscribe-submit"
+									>
+					<input type="hidden" name="action" value="subscribe"/>
+					<input type="hidden" name="blog_id" value="130819823"/>
+					<input type="hidden" name="source" value="https://xenodude.com/2024/08/31/revue-starlight-the-movie/"/>
+					<input type="hidden" name="sub-type" value="widget"/>
+					<input type="hidden" name="redirect_fragment" value="subscribe-blog"/>
+					<input type="hidden" id="_wpnonce" name="_wpnonce" value="b5f42206de" />					<button type="submit"
+													class="wp-block-button__link"
+																	>
+						Follow					</button>
+				</p>
+			</form>
+							<div class="wp-block-jetpack-subscriptions__subscount">
+					Join 829 other subscribers				</div>
+						</div>
+			
+</aside><aside id="follow_button_widget-3" class="widget widget_follow_button_widget">
+		<a class="wordpress-follow-button" href="https://xenodude.com" data-blog="130819823" data-lang="en" data-show-follower-count="true">Follow Xenodude Scribbles on WordPress.com</a>
+		<script type="text/javascript">(function(d){ window.wpcomPlatform = {"titles":{"timelines":"Embeddable Timelines","followButton":"Follow Button","wpEmbeds":"WordPress Embeds"}}; var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');p.type = 'text/javascript';p.async = true;p.src = '//widgets.wp.com/platform.js';f.parentNode.insertBefore(p,f);}(document));</script>
+
+		</aside><aside id="block-14" class="widget widget_block">
+<div class="wp-block-group"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<p class="has-medium-font-size wp-block-paragraph"><strong>Social Media Links</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><a href="https://bsky.app/profile/mrxenodude.bsky.social" target="_blank" rel="noreferrer noopener">Bluesky</a></li>
+
+
+
+<li><a href="https://www.facebook.com/xenodude" target="_blank" rel="noreferrer noopener">Facebook</a></li>
+</ul>
+</div></div>
+</aside><aside id="block-19" class="widget widget_block">
+<div class="wp-block-group"><div class="wp-block-group__inner-container is-layout-constrained wp-block-group-is-layout-constrained">
+<p class="has-medium-font-size wp-block-paragraph"><strong>Support the Blog via</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li><a href="https://ko-fi.com/B0B2G1ZL">Ko-Fi</a></li>
+</ul>
+</div></div>
+</aside><aside id="archives-11" class="widget widget_archive"><h2 class="widget-title">Archives</h2>		<label class="screen-reader-text" for="archives-dropdown-11">Archives</label>
+		<select id="archives-dropdown-11" name="archive-dropdown">
+			
+			<option value="">Select Month</option>
+				<option value='https://xenodude.com/2026/10/'> October 2026 &nbsp;(3)</option>
+	<option value='https://xenodude.com/2026/09/'> September 2026 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2026/08/'> August 2026 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2026/07/'> July 2026 &nbsp;(7)</option>
+	<option value='https://xenodude.com/2026/06/'> June 2026 &nbsp;(8)</option>
+	<option value='https://xenodude.com/2026/05/'> May 2026 &nbsp;(2)</option>
+	<option value='https://xenodude.com/2026/04/'> April 2026 &nbsp;(7)</option>
+	<option value='https://xenodude.com/2026/03/'> March 2026 &nbsp;(7)</option>
+	<option value='https://xenodude.com/2026/02/'> February 2026 &nbsp;(11)</option>
+	<option value='https://xenodude.com/2026/01/'> January 2026 &nbsp;(3)</option>
+	<option value='https://xenodude.com/2025/12/'> December 2025 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2025/11/'> November 2025 &nbsp;(9)</option>
+	<option value='https://xenodude.com/2025/10/'> October 2025 &nbsp;(6)</option>
+	<option value='https://xenodude.com/2025/09/'> September 2025 &nbsp;(2)</option>
+	<option value='https://xenodude.com/2025/08/'> August 2025 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2025/07/'> July 2025 &nbsp;(11)</option>
+	<option value='https://xenodude.com/2025/06/'> June 2025 &nbsp;(15)</option>
+	<option value='https://xenodude.com/2025/05/'> May 2025 &nbsp;(7)</option>
+	<option value='https://xenodude.com/2025/04/'> April 2025 &nbsp;(26)</option>
+	<option value='https://xenodude.com/2025/03/'> March 2025 &nbsp;(19)</option>
+	<option value='https://xenodude.com/2025/02/'> February 2025 &nbsp;(27)</option>
+	<option value='https://xenodude.com/2025/01/'> January 2025 &nbsp;(14)</option>
+	<option value='https://xenodude.com/2024/12/'> December 2024 &nbsp;(21)</option>
+	<option value='https://xenodude.com/2024/11/'> November 2024 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2024/10/'> October 2024 &nbsp;(11)</option>
+	<option value='https://xenodude.com/2024/09/'> September 2024 &nbsp;(11)</option>
+	<option value='https://xenodude.com/2024/08/'> August 2024 &nbsp;(16)</option>
+	<option value='https://xenodude.com/2024/07/'> July 2024 &nbsp;(26)</option>
+	<option value='https://xenodude.com/2024/06/'> June 2024 &nbsp;(22)</option>
+	<option value='https://xenodude.com/2024/05/'> May 2024 &nbsp;(17)</option>
+	<option value='https://xenodude.com/2024/04/'> April 2024 &nbsp;(24)</option>
+	<option value='https://xenodude.com/2024/03/'> March 2024 &nbsp;(22)</option>
+	<option value='https://xenodude.com/2024/02/'> February 2024 &nbsp;(31)</option>
+	<option value='https://xenodude.com/2024/01/'> January 2024 &nbsp;(19)</option>
+	<option value='https://xenodude.com/2023/12/'> December 2023 &nbsp;(32)</option>
+	<option value='https://xenodude.com/2023/11/'> November 2023 &nbsp;(31)</option>
+	<option value='https://xenodude.com/2023/10/'> October 2023 &nbsp;(21)</option>
+	<option value='https://xenodude.com/2023/09/'> September 2023 &nbsp;(25)</option>
+	<option value='https://xenodude.com/2023/08/'> August 2023 &nbsp;(55)</option>
+	<option value='https://xenodude.com/2023/07/'> July 2023 &nbsp;(26)</option>
+	<option value='https://xenodude.com/2023/06/'> June 2023 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2023/05/'> May 2023 &nbsp;(2)</option>
+	<option value='https://xenodude.com/2023/04/'> April 2023 &nbsp;(15)</option>
+	<option value='https://xenodude.com/2023/03/'> March 2023 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2023/02/'> February 2023 &nbsp;(19)</option>
+	<option value='https://xenodude.com/2023/01/'> January 2023 &nbsp;(6)</option>
+	<option value='https://xenodude.com/2022/12/'> December 2022 &nbsp;(8)</option>
+	<option value='https://xenodude.com/2022/09/'> September 2022 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2022/08/'> August 2022 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2022/07/'> July 2022 &nbsp;(8)</option>
+	<option value='https://xenodude.com/2022/06/'> June 2022 &nbsp;(6)</option>
+	<option value='https://xenodude.com/2022/01/'> January 2022 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2021/12/'> December 2021 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2021/07/'> July 2021 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2021/06/'> June 2021 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2021/05/'> May 2021 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2021/02/'> February 2021 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2021/01/'> January 2021 &nbsp;(5)</option>
+	<option value='https://xenodude.com/2020/12/'> December 2020 &nbsp;(21)</option>
+	<option value='https://xenodude.com/2020/11/'> November 2020 &nbsp;(8)</option>
+	<option value='https://xenodude.com/2020/10/'> October 2020 &nbsp;(15)</option>
+	<option value='https://xenodude.com/2020/09/'> September 2020 &nbsp;(29)</option>
+	<option value='https://xenodude.com/2020/08/'> August 2020 &nbsp;(27)</option>
+	<option value='https://xenodude.com/2020/07/'> July 2020 &nbsp;(25)</option>
+	<option value='https://xenodude.com/2020/06/'> June 2020 &nbsp;(16)</option>
+	<option value='https://xenodude.com/2020/05/'> May 2020 &nbsp;(19)</option>
+	<option value='https://xenodude.com/2020/04/'> April 2020 &nbsp;(25)</option>
+	<option value='https://xenodude.com/2020/03/'> March 2020 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2020/02/'> February 2020 &nbsp;(8)</option>
+	<option value='https://xenodude.com/2020/01/'> January 2020 &nbsp;(9)</option>
+	<option value='https://xenodude.com/2019/12/'> December 2019 &nbsp;(1)</option>
+	<option value='https://xenodude.com/2019/10/'> October 2019 &nbsp;(5)</option>
+	<option value='https://xenodude.com/2019/08/'> August 2019 &nbsp;(9)</option>
+	<option value='https://xenodude.com/2019/07/'> July 2019 &nbsp;(19)</option>
+	<option value='https://xenodude.com/2019/06/'> June 2019 &nbsp;(6)</option>
+	<option value='https://xenodude.com/2019/05/'> May 2019 &nbsp;(5)</option>
+	<option value='https://xenodude.com/2019/04/'> April 2019 &nbsp;(12)</option>
+	<option value='https://xenodude.com/2019/03/'> March 2019 &nbsp;(20)</option>
+	<option value='https://xenodude.com/2019/02/'> February 2019 &nbsp;(22)</option>
+	<option value='https://xenodude.com/2019/01/'> January 2019 &nbsp;(36)</option>
+	<option value='https://xenodude.com/2018/12/'> December 2018 &nbsp;(29)</option>
+	<option value='https://xenodude.com/2018/11/'> November 2018 &nbsp;(27)</option>
+	<option value='https://xenodude.com/2018/10/'> October 2018 &nbsp;(34)</option>
+	<option value='https://xenodude.com/2018/09/'> September 2018 &nbsp;(33)</option>
+	<option value='https://xenodude.com/2018/08/'> August 2018 &nbsp;(37)</option>
+	<option value='https://xenodude.com/2018/07/'> July 2018 &nbsp;(39)</option>
+	<option value='https://xenodude.com/2018/06/'> June 2018 &nbsp;(16)</option>
+	<option value='https://xenodude.com/2018/05/'> May 2018 &nbsp;(11)</option>
+	<option value='https://xenodude.com/2018/04/'> April 2018 &nbsp;(8)</option>
+	<option value='https://xenodude.com/2018/03/'> March 2018 &nbsp;(17)</option>
+	<option value='https://xenodude.com/2018/02/'> February 2018 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2018/01/'> January 2018 &nbsp;(18)</option>
+	<option value='https://xenodude.com/2017/12/'> December 2017 &nbsp;(10)</option>
+	<option value='https://xenodude.com/2017/11/'> November 2017 &nbsp;(11)</option>
+	<option value='https://xenodude.com/2017/10/'> October 2017 &nbsp;(10)</option>
+	<option value='https://xenodude.com/2017/09/'> September 2017 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2017/08/'> August 2017 &nbsp;(13)</option>
+	<option value='https://xenodude.com/2017/07/'> July 2017 &nbsp;(14)</option>
+	<option value='https://xenodude.com/2017/06/'> June 2017 &nbsp;(2)</option>
+	<option value='https://xenodude.com/2017/04/'> April 2017 &nbsp;(3)</option>
+
+		</select>
+
+			<script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value ) {
+				document.location.href = dropdown.value;
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "archives-dropdown-11" );
+
+//# sourceURL=WP_Widget_Archives%3A%3Awidget
+</script>
+</aside><aside id="categories-12" class="widget widget_categories"><h2 class="widget-title">Categories</h2><form action="https://xenodude.com" method="get"><label class="screen-reader-text" for="cat">Categories</label><select  name='cat' id='cat' class='postform'>
+	<option value='-1'>Select Category</option>
+	<option class="level-0" value="1122">Anime&nbsp;&nbsp;(1,369)</option>
+	<option class="level-1" value="19665268">&nbsp;&nbsp;&nbsp;Angel Beats!&nbsp;&nbsp;(16)</option>
+	<option class="level-1" value="429217864">&nbsp;&nbsp;&nbsp;BanG Dream!&nbsp;&nbsp;(58)</option>
+	<option class="level-1" value="694498417">&nbsp;&nbsp;&nbsp;BOCCHI THE ROCK!&nbsp;&nbsp;(12)</option>
+	<option class="level-1" value="80958">&nbsp;&nbsp;&nbsp;Food For the Soul&nbsp;&nbsp;(10)</option>
+	<option class="level-1" value="67788">&nbsp;&nbsp;&nbsp;Ghost in the Shell&nbsp;&nbsp;(4)</option>
+	<option class="level-1" value="42603914">&nbsp;&nbsp;&nbsp;Goblin Slayer&nbsp;&nbsp;(25)</option>
+	<option class="level-1" value="673249067">&nbsp;&nbsp;&nbsp;Granbelm&nbsp;&nbsp;(13)</option>
+	<option class="level-1" value="705798934">&nbsp;&nbsp;&nbsp;Gridman Universe&nbsp;&nbsp;(25)</option>
+	<option class="level-1" value="15506">&nbsp;&nbsp;&nbsp;Gundam&nbsp;&nbsp;(41)</option>
+	<option class="level-1" value="68016977">&nbsp;&nbsp;&nbsp;Horimiya&nbsp;&nbsp;(26)</option>
+	<option class="level-1" value="767431396">&nbsp;&nbsp;&nbsp;Jellyfish Can&#8217;t Swim in the Night&nbsp;&nbsp;(12)</option>
+	<option class="level-1" value="702600634">&nbsp;&nbsp;&nbsp;Kaiju No. 8&nbsp;&nbsp;(26)</option>
+	<option class="level-1" value="600529437">&nbsp;&nbsp;&nbsp;Laid-Back Camp&nbsp;&nbsp;(58)</option>
+	<option class="level-1" value="267083">&nbsp;&nbsp;&nbsp;Love Live!&nbsp;&nbsp;(133)</option>
+	<option class="level-1" value="748483901">&nbsp;&nbsp;&nbsp;Lycoris Recoil&nbsp;&nbsp;(19)</option>
+	<option class="level-1" value="552420881">&nbsp;&nbsp;&nbsp;Made in Abyss&nbsp;&nbsp;(11)</option>
+	<option class="level-1" value="772359337">&nbsp;&nbsp;&nbsp;Makeine: Too Many Losing Heroines!&nbsp;&nbsp;(12)</option>
+	<option class="level-1" value="720580087">&nbsp;&nbsp;&nbsp;My Deer Friend Nokotan&nbsp;&nbsp;(12)</option>
+	<option class="level-1" value="566969326">&nbsp;&nbsp;&nbsp;Princess Principal&nbsp;&nbsp;(18)</option>
+	<option class="level-1" value="45073461">&nbsp;&nbsp;&nbsp;Puella Magi Madoka Magica&nbsp;&nbsp;(40)</option>
+	<option class="level-1" value="685864469">&nbsp;&nbsp;&nbsp;Rascal Does Not Dream&nbsp;&nbsp;(29)</option>
+	<option class="level-1" value="603007920">&nbsp;&nbsp;&nbsp;Reborn as a Vending Machine I Now Wander the Dungeon&nbsp;&nbsp;(24)</option>
+	<option class="level-1" value="578669788">&nbsp;&nbsp;&nbsp;Restaurant to Another World&nbsp;&nbsp;(24)</option>
+	<option class="level-1" value="574956997">&nbsp;&nbsp;&nbsp;Revue Starlight&nbsp;&nbsp;(26)</option>
+	<option class="level-1" value="6245672">&nbsp;&nbsp;&nbsp;School-Live!&nbsp;&nbsp;(12)</option>
+	<option class="level-1" value="726908962">&nbsp;&nbsp;&nbsp;Sorairo Utility&nbsp;&nbsp;(12)</option>
+	<option class="level-1" value="29773169">&nbsp;&nbsp;&nbsp;Sound of the Sky&nbsp;&nbsp;(14)</option>
+	<option class="level-1" value="635457297">&nbsp;&nbsp;&nbsp;The Quintessential Quintuplets&nbsp;&nbsp;(27)</option>
+	<option class="level-1" value="414540136">&nbsp;&nbsp;&nbsp;Violet Evergarden&nbsp;&nbsp;(14)</option>
+	<option class="level-1" value="671076702">&nbsp;&nbsp;&nbsp;Welcome to Japan Ms. Elf!&nbsp;&nbsp;(12)</option>
+	<option class="level-1" value="603885408">&nbsp;&nbsp;&nbsp;Wotakoi: Love is Hard for Otaku&nbsp;&nbsp;(14)</option>
+	<option class="level-1" value="255365543">&nbsp;&nbsp;&nbsp;Yuki Yuna is a Hero&nbsp;&nbsp;(37)</option>
+	<option class="level-0" value="3025">Editorials&nbsp;&nbsp;(84)</option>
+	<option class="level-1" value="4325">&nbsp;&nbsp;&nbsp;Holidays&nbsp;&nbsp;(6)</option>
+	<option class="level-1" value="9696">&nbsp;&nbsp;&nbsp;Site Announcements&nbsp;&nbsp;(51)</option>
+	<option class="level-0" value="39014">Episode Reviews&nbsp;&nbsp;(1,305)</option>
+	<option class="level-1" value="161441">&nbsp;&nbsp;&nbsp;First Impressions&nbsp;&nbsp;(191)</option>
+	<option class="level-0" value="190">Movies&nbsp;&nbsp;(22)</option>
+	<option class="level-0" value="309">Reviews&nbsp;&nbsp;(34)</option>
+	<option class="level-0" value="459">Television&nbsp;&nbsp;(7)</option>
+	<option class="level-0" value="1">Uncategorized&nbsp;&nbsp;(26)</option>
+	<option class="level-0" value="1914">Video Games&nbsp;&nbsp;(32)</option>
+	<option class="level-1" value="120">&nbsp;&nbsp;&nbsp;Mobile&nbsp;&nbsp;(4)</option>
+	<option class="level-1" value="544125586">&nbsp;&nbsp;&nbsp;Nintendo Switch&nbsp;&nbsp;(2)</option>
+	<option class="level-1" value="2607">&nbsp;&nbsp;&nbsp;PC&nbsp;&nbsp;(7)</option>
+	<option class="level-1" value="1825628">&nbsp;&nbsp;&nbsp;PlayStation 5&nbsp;&nbsp;(3)</option>
+	<option class="level-1" value="502">&nbsp;&nbsp;&nbsp;Xbox&nbsp;&nbsp;(3)</option>
+</select>
+</form><script>
+( ( dropdownId ) => {
+	const dropdown = document.getElementById( dropdownId );
+	function onSelectChange() {
+		setTimeout( () => {
+			if ( 'escape' === dropdown.dataset.lastkey ) {
+				return;
+			}
+			if ( dropdown.value && parseInt( dropdown.value ) > 0 && dropdown instanceof HTMLSelectElement ) {
+				dropdown.parentElement.submit();
+			}
+		}, 250 );
+	}
+	function onKeyUp( event ) {
+		if ( 'Escape' === event.key ) {
+			dropdown.dataset.lastkey = 'escape';
+		} else {
+			delete dropdown.dataset.lastkey;
+		}
+	}
+	function onClick() {
+		delete dropdown.dataset.lastkey;
+	}
+	dropdown.addEventListener( 'keyup', onKeyUp );
+	dropdown.addEventListener( 'click', onClick );
+	dropdown.addEventListener( 'change', onSelectChange );
+})( "cat" );
+
+//# sourceURL=WP_Widget_Categories%3A%3Awidget
+</script>
+</aside><aside id="nav_menu-37" class="widget widget_nav_menu"><h2 class="widget-title">Current Anime</h2><div class="menu-current-anime-container"><ul id="menu-current-anime" class="menu"><li id="menu-item-69834" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-69834"><a href="https://xenodude.com/tag/bang-dream-yume%e2%88%9emita/">BanG Dream! YUME∞MITA</a></li>
+<li id="menu-item-69835" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-69835"><a href="https://xenodude.com/category/anime/ghost-in-the-shell/">THE GHOST IN THE SHELL (2026)</a></li>
+</ul></div></aside><aside id="nav_menu-18" class="widget widget_nav_menu"><h2 class="widget-title">Featured Posts</h2><div class="menu-featured-posts-container"><ul id="menu-featured-posts" class="menu"><li id="menu-item-69839" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-69839"><a href="https://xenodude.com/2026/07/06/bang-dream-yume%e2%88%9emita-ep-1/">BanG Dream! YUME∞MITA &#8211; Ep. 1</a></li>
+<li id="menu-item-69838" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-69838"><a href="https://xenodude.com/2026/07/14/the-ghost-in-the-shell-2026-ep-1/">THE GHOST IN THE SHELL (2026) &#8211; Ep. 1</a></li>
+</ul></div></aside>
+		<aside id="recent-posts-13" class="widget widget_recent_entries">
+		<h2 class="widget-title">Recent Posts</h2>
+		<ul>
+											<li>
+					<a href="https://xenodude.com/2026/10/31/happy-halloween-2026/">Happy Halloween!</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/10/29/kaiju-no-8-narumis-week-at-work-ep-2/">Kaiju No. 8: Narumi&#8217;s Week at Work &#8211; Ep.&nbsp;2</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/10/28/kaiju-no-8-narumis-week-at-work-ep-1/">Kaiju No. 8: Narumi&#8217;s Week at Work &#8211; Ep.&nbsp;1</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/09/04/the-ghost-in-the-shell-2026-ep-4/">THE GHOST IN THE SHELL (2026) &#8211; Ep.&nbsp;4</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/08/29/the-ghost-in-the-shell-2026-ep-3/">THE GHOST IN THE SHELL (2026) &#8211; Ep.&nbsp;3</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/07/19/the-ghost-in-the-shell-2026-ep-2/">THE GHOST IN THE SHELL (2026) &#8211; Ep.&nbsp;2</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/07/16/bang-dream-yume%e2%88%9emita-ep-4/">BanG Dream! YUME∞MITA &#8211; Ep.&nbsp;4</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/07/14/the-ghost-in-the-shell-2026-ep-1/">THE GHOST IN THE SHELL (2026) &#8211; Ep.&nbsp;1</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/07/06/bang-dream-yume%e2%88%9emita-ep-3/">BanG Dream! YUME∞MITA &#8211; Ep.&nbsp;3</a>
+									</li>
+											<li>
+					<a href="https://xenodude.com/2026/07/06/bang-dream-yume%e2%88%9emita-ep-2/">BanG Dream! YUME∞MITA &#8211; Ep.&nbsp;2</a>
+									</li>
+					</ul>
+
+		</aside><aside id="recent-comments-9" class="widget widget_recent_comments"><h2 class="widget-title">Recent Comments</h2>				<table class="recentcommentsavatar" cellspacing="0" cellpadding="0" border="0">
+					<tr><td title="Xenodude" class="recentcommentsavatartop" style="height:32px; width:32px;"><a href="https://xenodude.com/" rel="nofollow"><img referrerpolicy="no-referrer" alt='Xenodude&#039;s avatar' src='https://2.gravatar.com/avatar/8974b28b09ab71ba0c0c1fb0dfb2d922e3cbd1232724001de5aea4a0f8009e69?s=32&#038;d=identicon&#038;r=G' srcset='https://2.gravatar.com/avatar/8974b28b09ab71ba0c0c1fb0dfb2d922e3cbd1232724001de5aea4a0f8009e69?s=32&#038;d=identicon&#038;r=G 1x, https://2.gravatar.com/avatar/8974b28b09ab71ba0c0c1fb0dfb2d922e3cbd1232724001de5aea4a0f8009e69?s=48&#038;d=identicon&#038;r=G 1.5x, https://2.gravatar.com/avatar/8974b28b09ab71ba0c0c1fb0dfb2d922e3cbd1232724001de5aea4a0f8009e69?s=64&#038;d=identicon&#038;r=G 2x, https://2.gravatar.com/avatar/8974b28b09ab71ba0c0c1fb0dfb2d922e3cbd1232724001de5aea4a0f8009e69?s=96&#038;d=identicon&#038;r=G 3x, https://2.gravatar.com/avatar/8974b28b09ab71ba0c0c1fb0dfb2d922e3cbd1232724001de5aea4a0f8009e69?s=128&#038;d=identicon&#038;r=G 4x' class='avatar avatar-32' height='32' width='32' loading='lazy' decoding='async' /></a></td><td class="recentcommentstexttop" style=""><a href="https://xenodude.com/" rel="nofollow">Xenodude</a> on <a href="https://xenodude.com/2026/07/14/the-ghost-in-the-shell-2026-ep-1/comment-page-1/#comment-11518">THE GHOST IN THE SHELL (2026)&hellip;</a></td></tr><tr><td title="Tulia Cardello" class="recentcommentsavatarend" style="height:32px; width:32px;"><a href="https://deadoralive6guide.com" rel="nofollow"><img referrerpolicy="no-referrer" alt='Tulia Cardello&#039;s avatar' src='https://2.gravatar.com/avatar/bf6c133833be0d4c7e2e372bbe354899e2297f3ac8d6064d31c14d9fff2677df?s=32&#038;d=identicon&#038;r=G' srcset='https://2.gravatar.com/avatar/bf6c133833be0d4c7e2e372bbe354899e2297f3ac8d6064d31c14d9fff2677df?s=32&#038;d=identicon&#038;r=G 1x, https://2.gravatar.com/avatar/bf6c133833be0d4c7e2e372bbe354899e2297f3ac8d6064d31c14d9fff2677df?s=48&#038;d=identicon&#038;r=G 1.5x, https://2.gravatar.com/avatar/bf6c133833be0d4c7e2e372bbe354899e2297f3ac8d6064d31c14d9fff2677df?s=64&#038;d=identicon&#038;r=G 2x, https://2.gravatar.com/avatar/bf6c133833be0d4c7e2e372bbe354899e2297f3ac8d6064d31c14d9fff2677df?s=96&#038;d=identicon&#038;r=G 3x, https://2.gravatar.com/avatar/bf6c133833be0d4c7e2e372bbe354899e2297f3ac8d6064d31c14d9fff2677df?s=128&#038;d=identicon&#038;r=G 4x' class='avatar avatar-32' height='32' width='32' loading='lazy' decoding='async' /></a></td><td class="recentcommentstextend" style=""><a href="https://deadoralive6guide.com" rel="nofollow">Tulia Cardello</a> on <a href="https://xenodude.com/2026/07/14/the-ghost-in-the-shell-2026-ep-1/comment-page-1/#comment-11514">THE GHOST IN THE SHELL (2026)&hellip;</a></td></tr><tr><td title="Chris Vermeers" class="recentcommentsavatarend" style="height:32px; width:32px;"><img referrerpolicy="no-referrer" alt='Chris Vermeers&#039;s avatar' src='https://2.gravatar.com/avatar/575c9310a1c82f1e08b5a48283d242151a5a724fb6bb9fafa9ff6220d273529c?s=32&#038;d=identicon&#038;r=G' srcset='https://2.gravatar.com/avatar/575c9310a1c82f1e08b5a48283d242151a5a724fb6bb9fafa9ff6220d273529c?s=32&#038;d=identicon&#038;r=G 1x, https://2.gravatar.com/avatar/575c9310a1c82f1e08b5a48283d242151a5a724fb6bb9fafa9ff6220d273529c?s=48&#038;d=identicon&#038;r=G 1.5x, https://2.gravatar.com/avatar/575c9310a1c82f1e08b5a48283d242151a5a724fb6bb9fafa9ff6220d273529c?s=64&#038;d=identicon&#038;r=G 2x, https://2.gravatar.com/avatar/575c9310a1c82f1e08b5a48283d242151a5a724fb6bb9fafa9ff6220d273529c?s=96&#038;d=identicon&#038;r=G 3x, https://2.gravatar.com/avatar/575c9310a1c82f1e08b5a48283d242151a5a724fb6bb9fafa9ff6220d273529c?s=128&#038;d=identicon&#038;r=G 4x' class='avatar avatar-32' height='32' width='32' loading='lazy' decoding='async' /></td><td class="recentcommentstextend" style="">Chris Vermeers on <a href="https://xenodude.com/2026/07/14/the-ghost-in-the-shell-2026-ep-1/comment-page-1/#comment-11513">THE GHOST IN THE SHELL (2026)&hellip;</a></td></tr><tr><td title="kumashock" class="recentcommentsavatarend" style="height:32px; width:32px;"><img referrerpolicy="no-referrer" alt='kumashock&#039;s avatar' src='https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=32&#038;d=identicon&#038;r=G' srcset='https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=32&#038;d=identicon&#038;r=G 1x, https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=48&#038;d=identicon&#038;r=G 1.5x, https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=64&#038;d=identicon&#038;r=G 2x, https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=96&#038;d=identicon&#038;r=G 3x, https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=128&#038;d=identicon&#038;r=G 4x' class='avatar avatar-32' height='32' width='32' loading='lazy' decoding='async' /></td><td class="recentcommentstextend" style="">kumashock on <a href="https://xenodude.com/2026/07/06/bang-dream-yume%e2%88%9emita-ep-3/comment-page-1/#comment-11507">BanG Dream! YUME∞MITA &#8211;&hellip;</a></td></tr><tr><td title="kumashock" class="recentcommentsavatarend" style="height:32px; width:32px;"><img referrerpolicy="no-referrer" alt='kumashock&#039;s avatar' src='https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=32&#038;d=identicon&#038;r=G' srcset='https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=32&#038;d=identicon&#038;r=G 1x, https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=48&#038;d=identicon&#038;r=G 1.5x, https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=64&#038;d=identicon&#038;r=G 2x, https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=96&#038;d=identicon&#038;r=G 3x, https://2.gravatar.com/avatar/e96152174f9597931399b79a8bd8d97895b35a9daec5cbc5bd66ce9bb6acf61f?s=128&#038;d=identicon&#038;r=G 4x' class='avatar avatar-32' height='32' width='32' loading='lazy' decoding='async' /></td><td class="recentcommentstextend" style="">kumashock on <a href="https://xenodude.com/2026/07/01/bang-dream-film-live/comment-page-1/#comment-11506">BanG Dream! FILM&nbsp;LIVE</a></td></tr>				</table>
+				</aside>		<div class="wpcnt">
+			<div class="wpa">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u mrec">
+							<div style="padding-bottom:15px;width:300px;height:250px;">
+			<div id="atatags-1308198233-6afbc4556ec05">
+				<script type="text/javascript">
+					window.tudeMappings = window.tudeMappings || [];
+					window.tudeMappings.push( {
+						divId: 'atatags-1308198233-6afbc4556ec05',
+						format: 'gutenberg_rectangle',
+						width: 300,
+						height: 250,
+					} );
+				</script>
+			</div>
+		</div>
+				</div>
+			</div>
+		</div>		<div class="wpcnt">
+			<div class="wpa">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u mrec">
+							<div style="padding-bottom:15px;width:300px;height:250px;">
+			<div id="atatags-1308198235-6afbc4556ec59">
+				<script type="text/javascript">
+					window.tudeMappings = window.tudeMappings || [];
+					window.tudeMappings.push( {
+						divId: 'atatags-1308198235-6afbc4556ec59',
+						format: 'gutenberg_rectangle',
+						width: 300,
+						height: 250,
+					} );
+				</script>
+			</div>
+		</div>
+				</div>
+			</div>
+		</div>		<div class="wpcnt">
+			<div class="wpa">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u mrec">
+							<div style="padding-bottom:15px;width:300px;height:250px;">
+			<div id="atatags-1308198236-6afbc4556ecbf">
+				<script type="text/javascript">
+					window.tudeMappings = window.tudeMappings || [];
+					window.tudeMappings.push( {
+						divId: 'atatags-1308198236-6afbc4556ecbf',
+						format: 'gutenberg_rectangle',
+						width: 300,
+						height: 250,
+					} );
+				</script>
+			</div>
+		</div>
+				</div>
+			</div>
+		</div>		<div class="wpcnt">
+			<div class="wpa">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u mrec">
+							<div style="padding-bottom:15px;width:300px;height:250px;">
+			<div id="atatags-1308198237-6afbc4556ed21">
+				<script type="text/javascript">
+					window.tudeMappings = window.tudeMappings || [];
+					window.tudeMappings.push( {
+						divId: 'atatags-1308198237-6afbc4556ed21',
+						format: 'gutenberg_rectangle',
+						width: 300,
+						height: 250,
+					} );
+				</script>
+			</div>
+		</div>
+				</div>
+			</div>
+		</div>		<div class="wpcnt">
+			<div class="wpa">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u mrec">
+							<div style="padding-bottom:15px;width:300px;height:250px;">
+			<div id="atatags-1308198238-6afbc4556ed89">
+				<script type="text/javascript">
+					window.tudeMappings = window.tudeMappings || [];
+					window.tudeMappings.push( {
+						divId: 'atatags-1308198238-6afbc4556ed89',
+						format: 'gutenberg_rectangle',
+						width: 300,
+						height: 250,
+					} );
+				</script>
+			</div>
+		</div>
+				</div>
+			</div>
+		</div>	</div><!-- .right-sidebar -->
+	
+	
+</div><!-- #secondary -->
+	</div><!-- #content -->
+
+	
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info">
+			<a href="https://wordpress.com/?ref=footer_custom_blog" rel="nofollow">Start a Blog at WordPress.com</a>.
+			
+					</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!--  -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/files/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/pub/colinear/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id="grofiles-cards-js" src="//0.gravatar.com/js/hovercards/hovercards.min.js?ver=202647fffb5f6f8dc7a9c7ad08f16ba2e694fddff32cc1793b3fe3b32aaa232a52550e"></script>
+<script id="wpgroho-js-extra">
+var WPGroHo = {"my_hash":""};
+//# sourceURL=wpgroho-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/wp-content/mu-plugins/gravatar-hovercards/wpgroho.js?m=1610363240i'></script>
+
+	<script>
+		// Initialize and attach hovercards to all gravatars
+		( function() {
+			function init() {
+				if ( typeof Gravatar === 'undefined' ) {
+					return;
+				}
+
+				if ( typeof Gravatar.init !== 'function' ) {
+					return;
+				}
+
+				Gravatar.profile_cb = function ( hash, id ) {
+					WPGroHo.syncProfileData( hash, id );
+				};
+
+				Gravatar.my_hash = WPGroHo.my_hash;
+				Gravatar.init(
+					'body',
+					'#wp-admin-bar-my-account',
+					{
+						i18n: {
+							'Edit your profile →': 'Edit your profile →',
+							'View profile →': 'View profile →',
+							'Contact': 'Contact',
+							'Send money': 'Send money',
+							'Sorry, we are unable to load this Gravatar profile.': 'Sorry, we are unable to load this Gravatar profile.',
+							'Gravatar not found.': 'Gravatar not found.',
+							'Too Many Requests.': 'Too Many Requests.',
+							'Internal Server Error.': 'Internal Server Error.',
+							'Is this you?': 'Is this you?',
+							'Claim your free profile.': 'Claim your free profile.',
+							'Email': 'Email',
+							'Home Phone': 'Home Phone',
+							'Work Phone': 'Work Phone',
+							'Cell Phone': 'Cell Phone',
+							'Contact Form': 'Contact Form',
+							'Calendar': 'Calendar',
+						},
+					}
+				);
+			}
+
+			if ( document.readyState !== 'loading' ) {
+				init();
+			} else {
+				document.addEventListener( 'DOMContentLoaded', init );
+			}
+		} )();
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-f44b1d9cbb94f16fb2966cb371fcfcd5">
+	</div>
+	<div class="grofile-hash-map-eefffb9f38f8cb1d9713507efb2ff145">
+	</div>
+	<div class="grofile-hash-map-7bbc0ee8364322def5cca9c2640e2f71">
+	</div>
+	<div class="grofile-hash-map-77bf57563fdf5a88cf5541cd1e575ea8">
+	</div>
+	</div>
+		<!-- CCPA [start] -->
+		<script type="text/javascript">
+			( function () {
+
+				var setupPrivacy = function() {
+
+					// Minimal Mozilla Cookie library
+					// https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+					var cookieLib = window.cookieLib = {getItem:function(e){return e&&decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(e).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null},setItem:function(e,o,n,t,r,i){if(!e||/^(?:expires|max\-age|path|domain|secure)$/i.test(e))return!1;var c="";if(n)switch(n.constructor){case Number:c=n===1/0?"; expires=Fri, 31 Dec 9999 23:59:59 GMT":"; max-age="+n;break;case String:c="; expires="+n;break;case Date:c="; expires="+n.toUTCString()}return"rootDomain"!==r&&".rootDomain"!==r||(r=(".rootDomain"===r?".":"")+document.location.hostname.split(".").slice(-2).join(".")),document.cookie=encodeURIComponent(e)+"="+encodeURIComponent(o)+c+(r?"; domain="+r:"")+(t?"; path="+t:"")+(i?"; secure":""),!0}};
+
+					// Implement IAB USP API.
+					window.__uspapi = function( command, version, callback ) {
+
+						// Validate callback.
+						if ( typeof callback !== 'function' ) {
+							return;
+						}
+
+						// Validate the given command.
+						if ( command !== 'getUSPData' || version !== 1 ) {
+							callback( null, false );
+							return;
+						}
+
+						// Check for GPC. If set, override any stored cookie.
+						if ( navigator.globalPrivacyControl ) {
+							callback( { version: 1, uspString: '1YYN' }, true );
+							return;
+						}
+
+						// Check for cookie.
+						var consent = cookieLib.getItem( 'usprivacy' );
+
+						// Invalid cookie.
+						if ( null === consent ) {
+							callback( null, false );
+							return;
+						}
+
+						// Everything checks out. Fire the provided callback with the consent data.
+						callback( { version: 1, uspString: consent }, true );
+					};
+
+					// Initialization.
+					document.addEventListener( 'DOMContentLoaded', function() {
+
+						// Internal functions.
+						var setDefaultOptInCookie = function() {
+							var value = '1YNN';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 365 * 24 * 60 * 60, '/', domain );
+						};
+
+						var setDefaultOptOutCookie = function() {
+							var value = '1YYN';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 24 * 60 * 60, '/', domain );
+						};
+
+						var setDefaultNotApplicableCookie = function() {
+							var value = '1---';
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'usprivacy', value, 24 * 60 * 60, '/', domain );
+						};
+
+						var setCcpaAppliesCookie = function( applies ) {
+							var domain = '.wordpress.com' === location.hostname.slice( -14 ) ? '.rootDomain' : location.hostname;
+							cookieLib.setItem( 'ccpa_applies', applies, 24 * 60 * 60, '/', domain );
+						}
+
+						var maybeCallDoNotSellCallback = function() {
+							if ( 'function' === typeof window.doNotSellCallback ) {
+								return window.doNotSellCallback();
+							}
+
+							return false;
+						}
+
+						// Look for usprivacy cookie first.
+						var usprivacyCookie = cookieLib.getItem( 'usprivacy' );
+
+						// Found a usprivacy cookie.
+						if ( null !== usprivacyCookie ) {
+
+							// If the cookie indicates that CCPA does not apply, then bail.
+							if ( '1---' === usprivacyCookie ) {
+								return;
+							}
+
+							// CCPA applies, so call our callback to add Do Not Sell link to the page.
+							maybeCallDoNotSellCallback();
+
+							// We're all done, no more processing needed.
+							return;
+						}
+
+						// We don't have a usprivacy cookie, so check to see if we have a CCPA applies cookie.
+						var ccpaCookie = cookieLib.getItem( 'ccpa_applies' );
+
+						// No CCPA applies cookie found, so we'll need to geolocate if this visitor is from California.
+						// This needs to happen client side because we do not have region geo data in our $SERVER headers,
+						// only country data -- therefore we can't vary cache on the region.
+						if ( null === ccpaCookie ) {
+
+							var request = new XMLHttpRequest();
+							request.open( 'GET', 'https://public-api.wordpress.com/geo/', true );
+
+							request.onreadystatechange = function () {
+								if ( 4 === this.readyState ) {
+									if ( 200 === this.status ) {
+
+										// Got a geo response. Parse out the region data.
+										var data = JSON.parse( this.response );
+										var region      = data.region ? data.region.toLowerCase() : '';
+										var ccpa_applies = ['california', 'colorado', 'connecticut', 'delaware', 'indiana', 'iowa', 'montana', 'new jersey', 'oregon', 'tennessee', 'texas', 'utah', 'virginia'].indexOf( region ) > -1;
+										// Set CCPA applies cookie. This keeps us from having to make a geo request too frequently.
+										setCcpaAppliesCookie( ccpa_applies );
+
+										// Check if CCPA applies to set the proper usprivacy cookie.
+										if ( ccpa_applies ) {
+											if ( maybeCallDoNotSellCallback() ) {
+												// Do Not Sell link added, so set default opt-in.
+												setDefaultOptInCookie();
+											} else {
+												// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+												setDefaultOptOutCookie();
+											}
+										} else {
+											// CCPA does not apply.
+											setDefaultNotApplicableCookie();
+										}
+									} else {
+										// Could not geo, so let's assume for now that CCPA applies to be safe.
+										setCcpaAppliesCookie( true );
+										if ( maybeCallDoNotSellCallback() ) {
+											// Do Not Sell link added, so set default opt-in.
+											setDefaultOptInCookie();
+										} else {
+											// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+											setDefaultOptOutCookie();
+										}
+									}
+								}
+							};
+
+							// Send the geo request.
+							request.send();
+						} else {
+							// We found a CCPA applies cookie.
+							if ( ccpaCookie === 'true' ) {
+								if ( maybeCallDoNotSellCallback() ) {
+									// Do Not Sell link added, so set default opt-in.
+									setDefaultOptInCookie();
+								} else {
+									// Failed showing Do Not Sell link as required, so default to opt-OUT just to be safe.
+									setDefaultOptOutCookie();
+								}
+							} else {
+								// CCPA does not apply.
+								setDefaultNotApplicableCookie();
+							}
+						}
+					} );
+				};
+
+				// Kickoff initialization.
+				if ( window.defQueue && defQueue.isLOHP && defQueue.isLOHP === 2020 ) {
+					defQueue.items.push( setupPrivacy );
+				} else {
+					setupPrivacy();
+				}
+
+			} )();
+		</script>
+
+		<!-- CCPA [end] -->
+		<div class="widget widget_eu_cookie_law_widget">
+<div
+	class="hide-on-button ads-active"
+	data-hide-timeout="30"
+	data-consent-expiration="180"
+	id="eu-cookie-law"
+	style="display: none"
+>
+	<form method="post">
+		<input type="submit" value="Close and accept" class="accept" />
+
+		Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. <br />
+To find out more, including how to control cookies, see here:
+				<a href="https://automattic.com/cookies/" rel="nofollow">
+			Cookie Policy		</a>
+ </form>
+</div>
+</div>			<div id="actionbar" dir="ltr" style="display: none;"
+				class="actnbr-pub-colinear" role="region" aria-label="Site actions">
+			<span class="actnbr-live" aria-live="polite"></span>
+			<ul>
+										<li class="actnbr-btn">
+							<a class="actnbr-action actnbr-actn-comment" href="https://xenodude.com/2024/08/31/revue-starlight-the-movie/#respond">
+								<svg class="actnbr-icon actnbr-icon-comment" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor"><path d="M18 4H6c-1.1 0-2 .9-2 2v12.9c0 .6.5 1.1 1.1 1.1.3 0 .5-.1.8-.3L8.5 17H18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm.5 11c0 .3-.2.5-.5.5H7.9l-2.4 2.4V6c0-.3.2-.5.5-.5h12c.3 0 .5.2.5.5v9z"/></svg>								<span>Comment							</span>
+							</a>
+						</li>
+											<li class="actnbr-btn">
+							<a class="actnbr-action actnbr-actn-reblog" href="" role="button">
+								<svg class="actnbr-icon actnbr-icon-reusable-block" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor"><path d="M7 7.2h8.2L13.5 9l1.1 1.1 3.6-3.6-3.5-4-1.1 1 1.9 2.3H7c-.9 0-1.7.3-2.3.9-1.4 1.5-1.4 4.2-1.4 5.6v.2h1.5v-.3c0-1.1 0-3.5 1-4.5.3-.3.7-.5 1.2-.5zm13.8 4V11h-1.5v.3c0 1.1 0 3.5-1 4.5-.3.3-.7.5-1.3.5H8.8l1.7-1.7-1.1-1.1L5.9 17l3.5 4 1.1-1-1.9-2.3H17c.9 0 1.7-.3 2.3-.9 1.5-1.4 1.5-4.2 1.5-5.6z"/></svg><span>Reblog</span>
+							</a>
+						</li>
+											<li class="actnbr-btn actnbr-hidden">
+										<a class="actnbr-action actnbr-actn-follow " href="" role="button" aria-haspopup="dialog" aria-expanded="false">
+				<svg class="actnbr-icon actnbr-icon-bell" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 11.5c0 1.353.17 2.368.976 3 .266.209.602.376 1.024.5v1H5v-1c.422-.124.757-.291 1.024-.5.806-.632.976-1.647.976-3V9c0-2.8 2.2-5 5-5s5 2.2 5 5v2.5ZM15.5 9v2.5c0 .93.066 1.98.515 2.897l.053.103H7.932a4.018 4.018 0 0 0 .053-.103c.449-.917.515-1.967.515-2.897V9c0-1.972 1.528-3.5 3.5-3.5s3.5 1.528 3.5 3.5Zm-5.492 9.008c0-.176.023-.346.065-.508h3.854A1.996 1.996 0 0 1 12 20c-1.1 0-1.992-.892-1.992-1.992Z"/></svg>				<span>Subscribe</span>
+			</a>
+			<a class="actnbr-action actnbr-actn-following  no-display" href="" role="button">
+				<svg class="actnbr-icon actnbr-icon-check" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="fill: none" stroke="currentColor" stroke-width="1.5"><path d="M7 12L10 15L17 8" vector-effect="non-scaling-stroke"/></svg>				<span>Subscribed</span>
+			</a>
+																<div class="actnbr-popover actnbr-panel actnbr-notice" id="follow-bubble" role="dialog" aria-label="Subscribe to Xenodude Scribbles">
+								<div class="actnbr-follow-bubble">
+								<div class="actnbr-panel__group"><a class="actnbr-menu__item actnbr-sitename" href="https://xenodude.com"><img loading='lazy' alt='' src='https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=50' srcset='https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=50 1x, https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=75 1.5x, https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=100 2x, https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=150 3x, https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=200 4x' class='avatar avatar-50' height='50' width='50' /><span class="actnbr-menu__label">Xenodude Scribbles</span></a></div>																	<div class="actnbr-panel__group">
+										<div class="actnbr-message no-display" aria-live="polite"></div>
+										<form method="post" action="https://subscribe.wordpress.com" accept-charset="utf-8" class="no-display">
+																							<div class="actnbr-follow-count">Join 358 other subscribers</div>
+																							<input type="email" name="email" placeholder="Want updates? Enter your email" class="actnbr-email-field" aria-label="Email address" />
+											<input type="hidden" name="action" value="subscribe" />
+											<input type="hidden" name="blog_id" value="130819823" />
+											<input type="hidden" name="source" value="https://xenodude.com/2024/08/31/revue-starlight-the-movie/" />
+											<input type="hidden" name="sub-type" value="actionbar-follow" />
+											<input type="hidden" id="_wpnonce" name="_wpnonce" value="b5f42206de" />											<button type="submit" class="actnbr-button">Sign me up</button>
+										</form>
+										<p class="actnbr-login-nudge">
+											Have a WordPress.com account? <a href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fxenodude.com%252F2024%252F08%252F31%252Frevue-starlight-the-movie%252F">Log in now.</a>										</p>
+									</div>
+																	</div>
+							</div>
+						</li>
+									<li class="actnbr-ellipsis actnbr-hidden">
+					<button type="button" class="actnbr-more-toggle" aria-haspopup="true" aria-expanded="false" aria-label="More options">
+						<svg class="actnbr-icon actnbr-icon-more-horizontal" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor"><path d="M11 13h2v-2h-2v2zm-6 0h2v-2H5v2zm12-2v2h2v-2h-2z"/></svg>					</button>
+					<div class="actnbr-popover actnbr-menu" role="menu" aria-label="Site options">
+						<div class="actnbr-menu__group" role="group"><a role="menuitem" class="actnbr-menu__item actnbr-sitename" href="https://xenodude.com"><img loading='lazy' alt='' src='https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=50' srcset='https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=50 1x, https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=75 1.5x, https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=100 2x, https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=150 3x, https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=200 4x' class='avatar avatar-50' height='50' width='50' /><span class="actnbr-menu__label">Xenodude Scribbles</span></a></div><div class="actnbr-menu__group" role="group"><a role="menuitem" class="actnbr-menu__item actnbr-shortlink" href="https://wp.me/p8QUd9-gk2"><span class="actnbr-menu__label actnbr-shortlink__text">Copy shortlink</span><span class="actnbr-menu__icon actnbr-shortlink__icon"><svg class="actnbr-icon actnbr-icon-copy" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 4.5h11a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V5a.5.5 0 0 1 .5-.5ZM3 5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Zm17 3v10.75c0 .69-.56 1.25-1.25 1.25H6v1.5h12.75a2.75 2.75 0 0 0 2.75-2.75V8H20Z"/></svg></span><span class="actnbr-menu__icon actnbr-shortlink__icon-copied"><svg class="actnbr-icon actnbr-icon-check" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="fill: none" stroke="currentColor" stroke-width="1.5"><path d="M7 12L10 15L17 8" vector-effect="non-scaling-stroke"/></svg></span></a><a role="menuitem" class="actnbr-menu__item actnbr-reader" href="https://wordpress.com/reader/blogs/130819823/posts/62746"><span class="actnbr-menu__label">View post in Reader</span></a></div><div class="actnbr-menu__group" role="group"><a role="menuitem" class="actnbr-menu__item actnbr-subs" href="https://subscribe.wordpress.com/"><span class="actnbr-menu__label">Manage subscriptions</span></a><a role="menuitem" class="actnbr-menu__item actnbr-signup" href="https://wordpress.com/start/"><span class="actnbr-menu__label">Sign up</span></a><a role="menuitem" class="actnbr-menu__item actnbr-login" href="https://wordpress.com/log-in?redirect_to=https%3A%2F%2Fr-login.wordpress.com%2Fremote-login.php%3Faction%3Dlink%26back%3Dhttps%253A%252F%252Fxenodude.com%252F2024%252F08%252F31%252Frevue-starlight-the-movie%252F"><span class="actnbr-menu__label">Log in</span></a></div><div class="actnbr-menu__group" role="group"><a role="menuitem" class="actnbr-menu__item flb-report" href="https://wordpress.com/abuse/?report_url=https://xenodude.com/2024/08/31/revue-starlight-the-movie/" target="_blank" rel="noopener noreferrer"><span class="actnbr-menu__label">Report this content</span><span class="actnbr-menu__icon"><svg class="actnbr-icon actnbr-icon-external" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor"><path d="M19.5 4.5h-7V6h4.44l-5.97 5.97 1.06 1.06L18 7.06v4.44h1.5v-7Zm-13 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3H17v3a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h3V5.5h-3Z"/></svg></span></a></div><div class="actnbr-menu__group" role="group"><a role="menuitem" class="actnbr-menu__item actnbr-fold" href=""><span class="actnbr-menu__label">Collapse this bar</span></a></div>					</div>
+				</li>
+			</ul>
+		</div>
+		<script>
+window.addEventListener( "DOMContentLoaded", function () {
+				var link = document.createElement( "link" );
+				link.href = "\/wp-content\/mu-plugins\/jetpack-plugin\/sun\/jetpack_vendor\/automattic\/jetpack-newsletter\/src\/..\/build\/action-bar.css?ver=53f8c839663979c89a1c";
+				link.rel = "stylesheet";
+				document.head.appendChild( link );
+
+				var script = document.createElement( "script" );
+				script.src = "\/wp-content\/mu-plugins\/jetpack-plugin\/sun\/jetpack_vendor\/automattic\/jetpack-newsletter\/src\/..\/build\/action-bar.js?ver=53f8c839663979c89a1c";
+				document.body.appendChild( script );
+			} );
+</script>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https://xenodude.com/2024/08/31/revue-starlight-the-movie/":62746};
+	</script>
+						
+	<script type="text/javascript">
+		(function () {
+			var wpcom_reblog = {
+				source: 'toolbar',
+
+				toggle_reblog_box_flair: function (obj_id, post_id) {
+
+					// Go to site selector. This will redirect to their blog if they only have one.
+					const postEndpoint = `https://wordpress.com/post`;
+
+					// Ideally we would use the permalink here, but fortunately this will be replaced with the 
+					// post permalink in the editor.
+					const originalURL = `${ document.location.href }?page_id=${ post_id }`; 
+					
+					const url =
+						postEndpoint +
+						'?url=' +
+						encodeURIComponent( originalURL ) +
+						'&is_post_share=true' +
+						'&v=5';
+
+					const redirect = function () {
+						if (
+							! window.open( url, '_blank' )
+						) {
+							location.href = url;
+						}
+					};
+
+					if ( /Firefox/.test( navigator.userAgent ) ) {
+						setTimeout( redirect, 0 );
+					} else {
+						redirect();
+					}
+				},
+			};
+
+			window.wpcom_reblog = wpcom_reblog;
+		})();
+	</script>
+<script id="comment-like-js-extra">
+var comment_like_text = {"loading":"Loading...","swipeUrl":"https://s2.wp.com/wp-content/mu-plugins/comment-likes/js/lib/swipe.js?m=1382645497i&amp;ver=20131008"};
+//# sourceURL=comment-like-js-extra
+</script>
+<script id="colinear-navigation-js-extra">
+var screenReaderText = {"expand":"\u003Cspan class=\"screen-reader-text\"\u003Eexpand child menu\u003C/span\u003E","collapse":"\u003Cspan class=\"screen-reader-text\"\u003Ecollapse child menu\u003C/span\u003E"};
+//# sourceURL=colinear-navigation-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??-eJyNjtFOwzAMRX+ILIJOoD0gvsVL3M6t44Q6Xre/JxUSbH2Y9np8j+/1S3EhS0Wp/sh5cIVtIFG/5DlCVBcYVFH92BBUdue33agv/kZL9i9RHLCqR2vXPBE6hsVXTIWh4oY/+MM0tfS3oeEJJDLOD8Ihp9SQ+5XGDdiK9YSpxYodW45JEObVETjTAJWyPCnoRKU1yOT6HExdT5cnzd4krEV/00gCW7zfPmPh6y7ROucrfb5+HLr3Q7fvuvEH7oihuA=='></script>
+<script id="jetpack-comments-js-before">
+window.JetpackComments = {"version":"0.9.1","styleUrl":"/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-comments/build/comments.css?m=1794418792i\u0026minify=false\u0026ver=b8d03cd286ac50533b38-1794418792","requireNameEmail":true,"mustLogIn":false,"site":{"name":"Xenodude Scribbles","iconUrl":"https://xenodude.com/wp-content/uploads/2018/09/cropped-xenodude-profile-picture-9-2018.jpg?w=64"},"manageSubscriptionsUrl":"https://subscribe.wordpress.com/?site=xenodude.com","tracks":{"platform":"simple"},"strings":{"reply":"Reply","commentLabel":"Comment","replyLabel":"Reply","placeholder":"Write a comment...","replyPlaceholder":"Write a reply...","name":"Name","email":"Email","emailHint":"Address never made public","emailHasAccount":"That email belongs to a WordPress.com account. Log in with WordPress.com to use it, or enter a different email.","website":"Website (optional)","intro":"Enter your name and email to comment.","continueAsGuest":"Continue as a guest","postWithoutSaving":"No, thanks. I just want to post a comment","save":"Save","saveDetails":"Save my name, email, and website in this browser for the next time I comment.","close":"Close","manageSubscriptions":"Manage subscription","mustLogIn":"You must be logged in to post a comment.","logIn":"Log in","logInWithWordPress":"Log in with WordPress.com","logOut":"Log out","change":"Change","editProfile":"Edit profile","addYourName":"Add your name","cancel":"Cancel","signInFailed":"We could not sign you in. Please try again.","tooLong":"This comment is too long to post. Shorten it to send it.","signInRateLimited":"Too many sign-in attempts. Please wait a moment and try again."},"assetsUrl":"https://s1.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-comments/build/","loaderUrl":"https://s1.wp.com/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-comments/build/editor-loader.js?m=1794418792i&amp;minify=false\u0026ver=87acd13e6796b08c6f1e","maxLength":65525,"blocks":true,"editorLocale":{"block title\u0004Paragraph":["Paragraph"],"block title\u0004List":["List"],"block title\u0004List Item":["List Item"],"block title\u0004Quote":["Quote"],"block title\u0004Code":["Code"],"block title\u0004Embed":["Embed"],"block title\u0004Image":["Image"]},"editor":{"blockTools":"Block tools","addBlock":"Add block","embedUrl":"https://public-api.wordpress.com/wpcom/v2/sites/130819823/comments/embed","images":true,"imageError":"This image could not be loaded. Check its URL and try again."},"isLoggedIn":false,"avatarUrl":"https://0.gravatar.com/avatar/?s=80\u0026d=identicon\u0026forcedefault=y\u0026r=G","commenter":{"author":"","email":"","url":""},"user":null,"identity":{"blogId":130819823,"canSignIn":true,"connect":{"url":"https://public-api.wordpress.com/connect/?comment_identity=1\u0026blog_id=130819823\u0026challenge=SFXGVdWmMfJj2bbx2jtaLairSqty54r8WrVks_26wW0\u0026origin=https%3A%2F%2Fxenodude.com\u0026expires=1794887693\u0026signature=91e51a2b750ba986658d0cab482db73e73ddccabb6f9905c7642f400ea11dbb9","expires":1794887693,"challenge":"SFXGVdWmMfJj2bbx2jtaLairSqty54r8WrVks_26wW0"},"connectUrl":"https://public-api.wordpress.com/wpcom/v2/sites/130819823/comments/identity/connect","emailUrl":"https://public-api.wordpress.com/wpcom/v2/sites/130819823/comments/identity/email","origin":"https://public-api.wordpress.com","codeField":"jetpack_comment_identity_code","passportField":"jetpack_comment_identity_passport","displayCookie":"jetpack_comment_identity_display","cookieHash":"653166773dc88127bd3afe0b6dfe5ea7","cookiePath":"/","cookieDomain":"","defaultAvatar":"https://0.gravatar.com/avatar/?s=80\u0026d=identicon\u0026forcedefault=y\u0026r=G","logoutUrl":"/wp-admin/admin-ajax.php","logoutAction":"jetpack_comments_identity_logout"}};(function(){function n(){Array.prototype.forEach.call(document.forms,function(f){var i;if(f.querySelector(".jetpack-comments")&&!f.querySelector('[name="jetpack_comments_form_nonce"]')){i=document.createElement("input");i.type="hidden";i.name="jetpack_comments_form_nonce";i.value="54072afe86";f.appendChild(i);}});}n();document.addEventListener("DOMContentLoaded",n);})();window.addEventListener("load",function(){Array.prototype.forEach.call(document.querySelectorAll(".jetpack-comments"),function(e){if(!/\bis-(mounted|plain)\b/.test(e.className)){e.className+=" is-plain";}});});
+//# sourceURL=jetpack-comments-js-before
+</script>
+<script data-wp-strategy="defer" defer id="jetpack-comments-js" src="/wp-content/mu-plugins/jetpack-mu-wpcom-plugin/sun/jetpack_vendor/automattic/jetpack-comments/build/comments.js?m=1794853249i&#038;minify=false&#038;ver=b8d03cd286ac50533b38-1794418792"></script>
+<script id="sharing-js-js-extra">
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+//# sourceURL=sharing-js-js-extra
+</script>
+<script crossorigin='anonymous' type='text/javascript'  src='/_static/??/wp-content/mu-plugins/akismet-3.0/_inc/akismet-frontend.js,/wp-content/mu-plugins/jetpack-plugin/sun/_inc/build/sharedaddy/sharing.min.js?m=1787944794j'></script>
+<script id="sharing-js-js-after">
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "bluesky" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "twitter" ] = "menubar=1,resizable=1,width=600,height=350";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "facebook" ] = "menubar=1,resizable=1,width=600,height=400";
+window.WPCOM_sharing_popups = window.WPCOM_sharing_popups || {};
+window.WPCOM_sharing_popups[ "tumblr" ] = "menubar=1,resizable=1,width=450,height=450";
+//# sourceURL=sharing-js-js-after
+</script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/72x72/","ext":".png","svgUrl":"https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?m=1794848738i&ver=7.2-alpha-64299"}}
+</script>
+<script type="module">
+/*! This file is auto-generated */
+var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof HTMLScriptElement))throw new Error("Element missing: "+e);const o=JSON.parse(t.text),s=(window._wpemojiSettings=o,"wpEmojiSettingsSupports"),i=["flag","emoji"];function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(s,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const r=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===r[t])}function f(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,r){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!r(e,"\ud83e\udec8")}}function l(e,t,n,r){let a;if(!(a=("undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0})))throw new Error("Unable to obtain a 2D context for the emoji support tests.");a.textBaseline="top",a.font="600 32px Arial";const o={};return e.forEach(e=>{o[e]=t(a,e,n,r)}),o}function g(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}o.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{var e=function(){try{var e=sessionStorage.getItem(s);if(null===e)return null;var t=JSON.parse(e);if("object"==typeof t&&"number"==typeof t.timestamp&&(new Date).valueOf()<t.timestamp+604800&&"object"==typeof t.supportTests)return t.supportTests}catch(e){}return null}();if(e)t(e);else{if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&"function"==typeof URL.createObjectURL&&"undefined"!=typeof Blob)try{var n="postMessage("+l.toString()+"("+[JSON.stringify(i),u.toString(),p.toString(),f.toString()].join(",")+"));",r=new Blob([n],{type:"text/javascript"});const a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=e=>{c(e.data),a.terminate(),t(e.data)})}catch(e){}e=l(i,u,p,f);c(e),t(e)}}).then(e=>{for(const a in e){var t=a,n=e[t];o.supports[t]=n,o.supports.everything=o.supports.everything&&n,"flag"!==t&&(o.supports.everythingExceptFlag=o.supports.everythingExceptFlag&&n)}var r;o.supports.everythingExceptFlag=o.supports.everythingExceptFlag&&!o.supports.flag,o.supports.everything||((r=o.source||{}).concatemoji?g(r.concatemoji):r.wpemoji&&r.twemoji&&(g(r.twemoji),g(r.wpemoji)))});
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+</script>
+	<iframe src='https://widgets.wp.com/likes/master.html?ver=20261117#ver=20261117' scrolling='no' id='likes-master' name='likes-master' style='display:none;'></iframe>
+	<div id='likes-other-gravatars' role="dialog" aria-hidden="true" tabindex="-1"><div class="likes-text"><span>%d</span></div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+	<script src="//stats.wp.com/w.js?71" defer></script> <script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'130819823','blog_tz':'-4','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+		// Prevent sending pageview tracking from WP-Admin pages.
+		_stq.push(['view', {'blog':'130819823','v':'wpcom','tz':'-4','user_id':'0','post':'62746','subd':'xenodude'}]);
+		_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWtpP0NsWnVkPS9sL0ViLndld3BMSkhVMVtBVVZ+UDZ1fFg1Si85eXdrUF0yUWVBWHdkY34sK1NIMEsmai1nK3dhUk13d2g0WzkrfnIsLmZaZSxQODJrRmcrSWxoSC1tXXZoUERkWi5zN3hqWTE1OEMtbDk3bnhSYU92em8sLUxFZmlbMkhQM0hXMndVaGFZfCZ1YUhPTGsmJT1RaHxnMWdiQ3xbM1hrUyttdHw4MzVBfm5YeTZqQVt0bDJ+W2gvMHxVRnJGXWJOY2FWSkFiM0pnci5nai0rUXB0TnlOY0hMMnFQcXM4WVBodXZUcktCWldKSXRQP01bSjBaUEZ8dUkxL2p2RDRbX2ZpMi1lNzJEMHlUdzN6eGhscVAtZmhTfmpQRj09YmUmNT9oMmVVUGhZcDc0QVomVE9aPU1hdlFZRlt8NU02Ym4zLT9Dai5Vc1s2LER3eXw0ZnkvKyxYek8uQy95ZmthdkRDaE1na116WGV6JltydzEsSnU3djVRSnd8NXBXPTU1QXw4MmFSQU5dVHhHLGlZeGht'}]);
+_stq.push([ 'clickTrackerInit', '130819823', '62746' ]);
+</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:1px;width:1px;overflow:hidden;position:absolute;bottom:1px;" alt="" /></noscript>
+<meta id="bilmur" property="bilmur:data" content="" data-provider="wordpress.com" data-service="simple" data-site-tz="America/New_York" data-custom-props="{&quot;enq_jquery&quot;:&quot;1&quot;,&quot;logged_in&quot;:&quot;0&quot;,&quot;wptheme&quot;:&quot;pub\/colinear&quot;,&quot;wptheme_is_block&quot;:&quot;0&quot;}"   >
+		<script defer src="/wp-content/js/bilmur.min.js?i=20&amp;m=202647"></script> 	
+</body>
+</html>

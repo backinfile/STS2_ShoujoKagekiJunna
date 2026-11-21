@@ -1,0 +1,214 @@
+[
+  {
+    "id": "JK206",
+    "name": "文字，文字，文字",
+    "reuse": "original-refit-jk200-blow-winds-20261112-v2",
+    "original": "Words, words, words.",
+    "work": "莎士比亚《哈姆雷特》第二幕第二场；哈姆雷特的回答",
+    "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/2/2/",
+    "fit": "同组名称取自《哈姆雷特》同一段问答。纯那在2024年角色访谈中明确提及阅读《哈姆雷特》。牌组中保存的每张牌对应可调用的字句与经历，全部积累汇成一次言语攻势；读些什么负责选出眼前需要的知识。配图为纯那实体化的青绿色引语与运动轨迹，呈现已学字句的进攻性运用。",
+    "artWork": "2021剧场版·狩猎的Revue约02:18，纯那实体化的引语",
+    "artUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=138",
+    "artProof": "复用本轮呼喊换图后释放的原作资产；原裁切1080,100,720,540。",
+    "focus": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "JK206B",
+    "name": "读些什么",
+    "reuse": "original-scene-jt01-concrete-fit-20261103",
+    "original": "What do you read",
+    "work": "莎士比亚《哈姆雷特》第二幕第二场；波洛涅斯向正在读书的哈姆雷特发问",
+    "url": "https://www.folger.edu/explore/shakespeares-works/hamlet/read/2/2/",
+    "fit": "与文字，文字，文字组成同一段读书问答：先询问所读的内容，再以字句作答。当前效果从抽牌堆选择需要的知识，体现主动确定接下来调用哪份内容。配图使用纯那在课堂排练中表达所学剧本文字的侧面；名称的文学出处与配图剧目分别记录。",
+    "artWork": "2021剧场版全片约09:42，纯那在课堂排练中开口演绎",
+    "artUrl": "https://www.bilibili.com/video/BV1owfMBFEY3/?t=582",
+    "artProof": "复用本轮知识的力量换图后释放的原作资产。"
+  },
+  {
+    "id": "JK15",
+    "name": "再演",
+    "original": "再演",
+    "work": "TV第9话约20:50，奈奈向纯那解释每次再演时修改台词与演出",
+    "url": "https://www.bilibili.com/bangumi/play/ep232375?t=1250",
+    "fit": "将已经使用的知识留下副本，使熟悉的内容在后续再次登场。与废稿形成保留、回看与修订演出材料的关系；卡图沿用纯那在书桌前对照材料的学习画面。"
+  },
+  {
+    "id": "JK82",
+    "source": "source-frames/special2-08.png",
+    "crop": [
+      450,
+      0,
+      1530,
+      810
+    ],
+    "asset": "original-special-jk82-reading-discussion-20261117",
+    "fit": "纯那手持书本，参与对克莱尔角色的不同解读，在已有理解上继续吸收新的看法。反复升级并获得新知，体现学习可以不断深入；与新知保留积累和收获的组内关系。",
+    "artWork": "TV特典第2话，纯那持书参与克莱尔角色解读的讨论",
+    "artPage": "https://xenodude.com/2024/08/03/revue-starlight-special-2/",
+    "focus": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "U_CARD_008",
+    "source": "../../../design/assets/card-sources/2026-11-02/tv07-820-intro.jpg",
+    "crop": [
+      440,
+      20,
+      1440,
+      770
+    ],
+    "asset": "original-tv-u008-outdoor-recording-20261117",
+    "fit": "纯那与奈奈带着书包走过校园，奈奈用手机记录两人正在经历的日常。将每场战斗的经历变成可以留下的故事，与继续寻找新经历的卡名相连。",
+    "artWork": "TV第7话约08:22，纯那与奈奈在校园中同行并记录日常",
+    "artUrl": "https://www.bilibili.com/bangumi/play/ep232373?t=502"
+  },
+  {
+    "id": "JZ03",
+    "name": "全力释放",
+    "source": "action-scan/bow-026.jpg",
+    "crop": [
+      110,
+      35,
+      510,
+      335
+    ],
+    "asset": "original-film-jz03-full-release-20261117",
+    "original": "全力で解き放て",
+    "work": "《OVER THE スタァライト》；爱城华恋、神乐光；作词：中村彼方",
+    "url": "https://www.uta-net.com/song/402037/",
+    "fit": "取原曲全力释放的连续原词。原作画面直接呈现纯那放出的物理箭列向前飞行，箭身、尾羽和速度线共同呈现已经放出的攻击，承接0费、1回合的快速单次伤害。",
+    "artWork": "2021剧场版·狩猎的Revue公开片段约01:57，纯那放出的箭列高速前进",
+    "artUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=117",
+    "focus": [
+      0.48,
+      0.5
+    ]
+  },
+  {
+    "id": "JK127",
+    "name": "铭刻",
+    "source": "source-frames/tv07-03.png",
+    "crop": [
+      0,
+      160,
+      960,
+      880
+    ],
+    "asset": "original-tv-jk127-rehearsal-memory-20261117",
+    "original": "刻め",
+    "work": "《百色リメイン》；スタァライト九九組；作词：三浦香",
+    "url": "https://www.uta-net.com/song/266440/",
+    "fit": "取原曲将共同经历的瞬间刻下来的原词。照片保存纯那与同学排练中的姿态，将已掌握的内容再留下一份，承接战后单独复制知识牌的永久积累。",
+    "artWork": "TV第7话，奈奈记录包含纯那在内的同学排练生活",
+    "artPage": "https://xenodude.com/2018/08/27/revue-starlight-ep-7-original/"
+  },
+  {
+    "id": "JK260",
+    "source": "../../xiansheng-qiming-fit-20261117/sources/JS33-tv11-book.png",
+    "crop": [
+      0,
+      0,
+      1440,
+      1080
+    ],
+    "asset": "original-tv-jk260-english-reference-20261117",
+    "fit": "纯那带来英语参考书，运用掌握的知识帮助华恋阅读原文、继续寻找答案。知识带来的力量体现在解决当前问题和支持后续行动；对应每回合首次运用知识后的力量成长。",
+    "artWork": "TV第11话，纯那带来英语参考书，帮助华恋阅读剧目原文",
+    "artPage": "https://xenodude.com/2024/07/30/revue-starlight-ep-11/"
+  },
+  {
+    "id": "JK200",
+    "source": "action-scan/bow-011.jpg",
+    "crop": [
+      180,
+      0,
+      620,
+      330
+    ],
+    "asset": "original-film-jk200-spoken-attack-20261117",
+    "fit": "纯那一边高声回应对手，一边展开双臂、放出自己的攻势。清楚的发声主体与出手动作共同呈现用呼声回击的行动。文学知识沿用《李尔王》第三幕第二场的暴风雨独白。",
+    "artWork": "2021剧场版·狩猎的Revue公开片段约01:42，纯那展弓时高声回应对手",
+    "artUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=102",
+    "focus": [
+      0.59,
+      0.52
+    ]
+  },
+  {
+    "id": "JK84",
+    "source": "source-frames/special3-06.png",
+    "crop": [
+      800,
+      0,
+      1920,
+      840
+    ],
+    "asset": "original-special-jk84-backstage-support-20261117",
+    "fit": "开演前，纯那与同学在后台为紧张的演员提供支持。与尽情大闹共同表现先由幕后做好准备，再让演员放心发挥；提前布置至多三张手牌，对应把接下来的行动安排妥当。知识主题保留舞台筹备与演出配合。",
+    "artWork": "TV特典第3话，开演前纯那在后台为同学端来茶水、共同支持演员",
+    "artPage": "https://xenodude.com/2024/08/04/revue-starlight-special-3/"
+  },
+  {
+    "id": "U_CARD_018",
+    "source": "action-scan/green-057.jpg",
+    "crop": [
+      360,
+      60,
+      720,
+      330
+    ],
+    "asset": "original-film-u018-raised-blade-20261117",
+    "fit": "纯那双手握紧刀柄、将刀刃举向下一次挥击，持械手、眼神和刀刃方向共同指明准备出手的动作。单体伤害对应主动挥刃；重新布置后继续推进下一轮出手。",
+    "artWork": "2021剧场版·狩猎的Revue公开片段约08:06，纯那双手握刀准备挥击",
+    "artUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=486",
+    "focus": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "U_CARD_021",
+    "source": "action-scan/gold-049.jpg",
+    "crop": [
+      335,
+      35,
+      755,
+      350
+    ],
+    "asset": "original-film-u021-golden-offensive-20261117",
+    "fit": "金色舞台中的纯那迎向对手、向前送出刀刃，持续燃烧的意志由实际进攻主体和明亮的攻势呈现。伤害结算后重新布置，下一轮仍继续出手，与燃烧不息的名字相连。",
+    "artWork": "2021剧场版·狩猎的Revue公开片段约06:08，纯那向前挥刃迎击",
+    "artUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=368",
+    "focus": [
+      0.27,
+      0.5
+    ]
+  },
+  {
+    "id": "JA96",
+    "name": "伤痕",
+    "source": "action-scan/gold-030.jpg",
+    "crop": [
+      140,
+      60,
+      540,
+      360
+    ],
+    "asset": "original-film-ja96-injured-junna-20261117",
+    "original": "傷跡",
+    "work": "《Star Darling》；スタァライト九九組；作词：中村彼方",
+    "url": "https://www.uta-net.com/song/354526/",
+    "fit": "原词指战斗留下的伤痕。配图呈现纯那承受冲击后伏在地面、抬眼继续应战的近景。实际受到未被格挡的攻击伤害，成为继续推进对敌飞矢的时机。",
+    "artWork": "2021剧场版·狩猎的Revue公开片段约05:49，纯那受伤后伏地抬眼",
+    "artUrl": "https://www.bilibili.com/video/BV1u3411v7i7/?t=349",
+    "focus": [
+      0.54,
+      0.55
+    ]
+  }
+]

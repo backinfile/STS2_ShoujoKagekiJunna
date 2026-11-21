@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "revision": 5387,
+  "cards": [
+    {
+      "id": "JK15",
+      "name": "再演",
+      "art": "original-scene-jk15-knowledge-fit-20261103"
+    },
+    {
+      "id": "JZ03",
+      "name": "全力释放",
+      "art": "original-film-jz03-full-release-20261117"
+    },
+    {
+      "id": "JK82",
+      "name": "学无止境",
+      "art": "original-special-jk82-reading-discussion-20261117"
+    },
+    {
+      "id": "JA96",
+      "name": "伤痕",
+      "art": "original-film-ja96-injured-junna-20261117"
+    },
+    {
+      "id": "JK84",
+      "name": "相信我们",
+      "art": "original-special-jk84-backstage-support-20261117"
+    },
+    {
+      "id": "JK127",
+      "name": "铭刻",
+      "art": "original-tv-jk127-rehearsal-memory-20261117"
+    },
+    {
+      "id": "JK200",
+      "name": "呼喊",
+      "art": "original-film-jk200-spoken-attack-20261117"
+    },
+    {
+      "id": "JK206",
+      "name": "文字，文字，文字",
+      "art": "original-refit-jk200-blow-winds-20261112-v2"
+    },
+    {
+      "id": "JK206B",
+      "name": "读些什么",
+      "art": "original-scene-jt01-concrete-fit-20261103"
+    },
+    {
+      "id": "JK260",
+      "name": "知识的力量",
+      "art": "original-tv-jk260-english-reference-20261117"
+    },
+    {
+      "id": "U_CARD_008",
+      "name": "去寻找故事吧",
+      "art": "original-tv-u008-outdoor-recording-20261117"
+    },
+    {
+      "id": "U_CARD_018",
+      "name": "荣光停驻剑尖",
+      "art": "original-film-u018-raised-blade-20261117"
+    },
+    {
+      "id": "U_CARD_021",
+      "name": "燃烧不息",
+      "art": "original-film-u021-golden-offensive-20261117"
+    }
+  ],
+  "fieldsChecked": 44
+}
