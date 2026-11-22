@@ -204,6 +204,12 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 _arrow = await Add("JB03");
                 await TestGameApi.PaidPlay(_context, _arrow, Id == "JK37B" ? _enemies[^1] : _enemies[0]);
             }
+            if (Id == "JK84B")
+            {
+                var selfArrow = await Add("JH11");
+                await TestGameApi.PaidPlay(_context, selfArrow);
+                _helpers.Add(selfArrow);
+            }
             if (definition.Knowledge)
             {
                 var group = KnowledgeCombat.Group(CardCatalog.Create(Id, player));
@@ -387,7 +393,9 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "JK48B") block += player.Deck.Cards.Count(CardCatalog.IsKnowledge);
         if (_recording && CardCatalog.IsArrow(_source)) block += 12;
         Check("格挡", player.Creature.Block, block);
-        if (definition.Type == "能力")
+        if (Id == "U_CARD_047")
+            Check("力量层数", player.Creature.GetPower<StrengthPower>()?.Amount, upgraded ? 9 : 7);
+        else if (definition.Type == "能力")
             Check("能力安装", player.Creature.Powers.OfType<CatalogPower>().Any(power => power.DesignId == Id), true);
         else if (Id != "JA67")
             Check("结算后去向", _source.Pile?.Type ?? PileType.None,
@@ -402,8 +410,8 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id is "JK272" or "JK272B" or "JA58")
             foreach (var enemy in _enemies)
             {
-                if (Id != "JK272B") Check("虚弱层数", enemy.GetPower<WeakPower>()?.Amount, upgraded ? 3 : 2);
-                if (Id != "JK272") Check("易伤层数", enemy.GetPower<VulnerablePower>()?.Amount, upgraded ? 3 : 2);
+                if (Id != "JK272B") Check("虚弱层数", enemy.GetPower<WeakPower>()?.Amount, Id == "JA58" && upgraded ? 3 : 2);
+                if (Id != "JK272") Check("易伤层数", enemy.GetPower<VulnerablePower>()?.Amount, Id == "JA58" && upgraded ? 3 : 2);
             }
         if (_selected != null)
         {
@@ -424,7 +432,12 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "JA67") Check("连珠箭重新布置", ArrowCombat.Find(_source)?.Remaining, 2);
         if (Id == "JA17") Check("下回合能量登记", player.Creature.GetPower<EnergyNextTurnPower>()?.Amount, 2);
         if (Id == "JK37B" && _arrow != null) Check("命中注定转移已有飞矢目标", ArrowCombat.Find(_arrow)?.Target == _enemies[0], true);
-        if (Id == "JK84B" && _arrow != null) Check("论辩伤害后的加速仅一次", ArrowCombat.Find(_arrow)?.Remaining, 2);
+        if (Id == "JK84B" && _arrow != null)
+        {
+            Check("敌方目标飞矢加速一次", ArrowCombat.Find(_arrow)?.Remaining, 2);
+            var selfArrow = _helpers.Single(card => CardCatalog.DesignId(card) == "JH11");
+            Check("自己的目标飞矢保持倒计时", ArrowCombat.Find(selfArrow)?.Remaining, HandArrow.Turns(selfArrow));
+        }
         if (Id == "JH24") Check("最大能量增加", player.PlayerCombatState!.MaxEnergy, 4);
         if (Id == "JA105" && _arrow != null)
         {
@@ -434,7 +447,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "U_CARD_005") Check("星屑衍生布置", ArrowCombat.Deployed.Count, 2);
         if (Id is "JA43" or "JA177")
         {
-            int acceleration = Id == "JA43" ? upgraded ? 2 : 1 : upgraded ? 2 : 1;
+            int acceleration = Id == "JA177" && upgraded ? 2 : 1;
             if (_arrow != null) Check("原飞矢加速", ArrowCombat.Find(_arrow)?.Remaining, 3 - acceleration);
         }
         if (Id == "U_CARD_009") Check("三类别最大配对数量", player.PlayerCombatState!.Hand.Cards.Count - (_beforeHand - 1), Empty ? 0 : Math.Min(3, CardPile.MaxCardsInHand - _beforeHand + 1));

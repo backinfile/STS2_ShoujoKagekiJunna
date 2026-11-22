@@ -292,7 +292,6 @@ public sealed partial class JunnaPowerJZ06
 
 public sealed partial class JunnaPowerU_CARD_008
 {
-    protected override string IconId => "JK127";
     protected override void Installed(CatalogCard card) => KnowledgeProgress.RegisterStory(card.Owner);
 }
 
@@ -311,6 +310,4 @@ public sealed partial class JunnaPowerU_CARD_010
         foreach (var selected in await CardActions.Choose(context, grant.Card, candidates, prompt: prompt))
             await CardPileCmd.Add(selected, PileType.Hand);
     }
-
-    protected override string IconId => "JK127";
 }

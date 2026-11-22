@@ -11,7 +11,7 @@ public sealed partial class JunnaCardJK84B
         play = CardActions.ResolveTarget(play);
         var player = Owner;
         await Attack(context, play);
-        await ArrowCombat.AccelerateAll(context, player, Value("Turns"));
+        await ArrowCombat.AccelerateEnemies(context, player, Value("Turns"));
     }
 
     protected override void OnUpgrade() => ApplyCatalogUpgrade();

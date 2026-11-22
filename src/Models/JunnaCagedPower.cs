@@ -17,7 +17,7 @@ public sealed class JunnaCagedPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
-    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/powers/JA205.png";
+    public override string CustomPackedIconPath => JunnaMod.ResourceRoot + "images/powers/CAGED.png";
     public override string CustomBigIconPath => CustomPackedIconPath;
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource

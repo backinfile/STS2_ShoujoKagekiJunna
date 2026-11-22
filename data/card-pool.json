@@ -1,5 +1,5 @@
 {
-  "revision": 5929,
+  "revision": 6052,
   "cards": [
     {
       "id": "JA15",
@@ -833,7 +833,7 @@
       "upgradedCost": 0,
       "costsX": false,
       "type": "飞矢",
-      "target": "AnyEnemy",
+      "target": "AllEnemies",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
       "pool": true,
@@ -849,22 +849,22 @@
       "values": [
         {
           "name": "Damage",
-          "base": 6,
-          "upgraded": 7
+          "base": 5,
+          "upgraded": 6
         },
         {
           "name": "Repeat",
-          "base": 6,
-          "upgraded": 7
+          "base": 5,
+          "upgraded": 6
         },
         {
           "name": "Turns",
-          "base": 6,
-          "upgraded": 6
+          "base": 3,
+          "upgraded": 3
         }
       ],
-      "text": "造成6点伤害6次。",
-      "upgradedText": "造成7点伤害7次。",
+      "text": "对所有敌人造成5点伤害5次。",
+      "upgradedText": "对所有敌人造成6点伤害6次。",
       "arrowFocus": {
         "x": 0.25,
         "y": 0.58
@@ -1543,8 +1543,8 @@
           "upgraded": 1
         }
       ],
-      "text": "知识。造成14点伤害。所有飞矢加速1回合。",
-      "upgradedText": "知识。造成18点伤害。所有飞矢加速1回合。",
+      "text": "知识。造成14点伤害。所有目标为敌人的飞矢加速1回合。",
+      "upgradedText": "知识。造成18点伤害。所有目标为敌人的飞矢加速1回合。",
       "arrowFocus": {
         "x": 0.64,
         "y": 0.3
@@ -1921,8 +1921,8 @@
         },
         {
           "name": "Turns",
-          "base": 3,
-          "upgraded": 3
+          "base": 4,
+          "upgraded": 4
         }
       ],
       "text": "对所有敌人造成99点伤害。",
@@ -2124,8 +2124,8 @@
       "values": [
         {
           "name": "Damage",
-          "base": 9,
-          "upgraded": 10
+          "base": 8,
+          "upgraded": 9
         },
         {
           "name": "N1",
@@ -2133,8 +2133,8 @@
           "upgraded": 1
         }
       ],
-      "text": "造成9点伤害。\n将1张更近一步加入手牌。",
-      "upgradedText": "造成10点伤害。\n将1张更近一步+加入手牌。"
+      "text": "造成8点伤害。\n将1张更近一步加入手牌。",
+      "upgradedText": "造成9点伤害。\n将1张更近一步+加入手牌。"
     },
     {
       "id": "JA176",
@@ -2410,8 +2410,8 @@
       "modelId": "JUNNA_U_CARD_005",
       "className": "JunnaCardU_CARD_005",
       "name": "星屑",
-      "cost": 3,
-      "upgradedCost": 3,
+      "cost": 2,
+      "upgradedCost": 2,
       "costsX": false,
       "type": "飞矢",
       "target": "AnyEnemy",
@@ -2453,7 +2453,7 @@
       "className": "JunnaCardJK272",
       "name": "失势",
       "cost": 1,
-      "upgradedCost": 1,
+      "upgradedCost": 0,
       "costsX": false,
       "type": "技能",
       "target": "AllEnemies",
@@ -2473,11 +2473,11 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 2
         }
       ],
       "text": "知识。给予所有敌人2层虚弱。消耗。",
-      "upgradedText": "知识。给予所有敌人3层虚弱。消耗。"
+      "upgradedText": "知识。给予所有敌人2层虚弱。消耗。"
     },
     {
       "id": "JK272B",
@@ -2485,7 +2485,7 @@
       "className": "JunnaCardJK272B",
       "name": "一无所有",
       "cost": 1,
-      "upgradedCost": 1,
+      "upgradedCost": 0,
       "costsX": false,
       "type": "技能",
       "target": "AllEnemies",
@@ -2505,11 +2505,11 @@
         {
           "name": "N0",
           "base": 2,
-          "upgraded": 3
+          "upgraded": 2
         }
       ],
       "text": "知识。给予所有敌人2层易伤。消耗。",
-      "upgradedText": "知识。给予所有敌人3层易伤。消耗。"
+      "upgradedText": "知识。给予所有敌人2层易伤。消耗。"
     },
     {
       "id": "JK274",
@@ -2793,8 +2793,8 @@
           "upgraded": 1
         }
       ],
-      "text": "造成12点伤害。当你打出另一张飞矢时，若此牌不在布置中，打出此牌。",
-      "upgradedText": "造成16点伤害。当你打出另一张飞矢时，若此牌不在布置中，打出此牌。",
+      "text": "造成12点伤害。无论何处，当你打出飞矢时打出此牌。",
+      "upgradedText": "造成16点伤害。无论何处，当你打出飞矢时打出此牌。",
       "arrowFocus": {
         "x": 0.64,
         "y": 0.3
@@ -3104,7 +3104,7 @@
       "modelId": "JUNNA_U_CARD_033",
       "className": "JunnaCardU_CARD_033",
       "name": "超常发挥",
-      "cost": 3,
+      "cost": 2,
       "upgradedCost": 2,
       "costsX": false,
       "type": "技能",
@@ -3116,14 +3116,14 @@
       "exhaust": false,
       "upgradedExhaust": false,
       "retain": false,
-      "upgradedRetain": false,
+      "upgradedRetain": true,
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
       "portrait": "U_CARD_033.png",
       "values": [],
       "text": "本回合造成的攻击伤害翻倍。",
-      "upgradedText": "本回合造成的攻击伤害翻倍。"
+      "upgradedText": "保留。本回合造成的攻击伤害翻倍。"
     },
     {
       "id": "U_CARD_034",
@@ -3167,8 +3167,8 @@
       "modelId": "JUNNA_U_CARD_036",
       "className": "JunnaCardU_CARD_036",
       "name": "拔去獠牙",
-      "cost": 3,
-      "upgradedCost": 3,
+      "cost": 2,
+      "upgradedCost": 2,
       "costsX": false,
       "type": "技能",
       "target": "AnyEnemy",
@@ -3181,25 +3181,23 @@
       "retain": false,
       "upgradedRetain": false,
       "innate": false,
-      "upgradedInnate": false,
+      "upgradedInnate": true,
       "damageCapable": false,
       "portrait": "U_CARD_036.jpg",
       "values": [
         {
           "name": "N0",
-          "base": 99,
-          "upgraded": 99
+          "base": 9,
+          "upgraded": 9
         },
         {
           "name": "N1",
-          "base": 99,
-          "upgraded": 99
+          "base": 9,
+          "upgraded": 9
         }
       ],
-      "text": "虚无。给予99层易伤。给予99层虚弱。消耗。",
-      "upgradedText": "给予99层易伤。给予99层虚弱。消耗。",
-      "ethereal": true,
-      "upgradedEthereal": false
+      "text": "给予9层易伤。给予9层虚弱。消耗。",
+      "upgradedText": "固有。给予9层易伤。给予9层虚弱。消耗。"
     },
     {
       "id": "U_CARD_044",
@@ -3300,12 +3298,12 @@
       "values": [
         {
           "name": "N0",
-          "base": 6,
-          "upgraded": 8
+          "base": 7,
+          "upgraded": 9
         }
       ],
-      "text": "获得6点力量。",
-      "upgradedText": "获得8点力量。"
+      "text": "获得7点力量。",
+      "upgradedText": "获得9点力量。"
     },
     {
       "id": "U_CARD_051",
@@ -3333,11 +3331,11 @@
         {
           "name": "Damage",
           "base": 7,
-          "upgraded": 10
+          "upgraded": 9
         }
       ],
-      "text": "造成7点伤害。对箭矢的目标敌人造成双倍伤害。",
-      "upgradedText": "造成10点伤害。对箭矢的目标敌人造成双倍伤害。"
+      "text": "造成7点伤害。对飞矢的目标敌人造成双倍伤害。",
+      "upgradedText": "造成9点伤害。对飞矢的目标敌人造成双倍伤害。"
     },
     {
       "id": "U_CARD_052",
@@ -3410,8 +3408,8 @@
           "upgraded": 1
         }
       ],
-      "text": "获得6点格挡。所有目标为自己的箭矢加速1回合。",
-      "upgradedText": "获得9点格挡。所有目标为自己的箭矢加速1回合。"
+      "text": "获得6点格挡。所有目标为自己的飞矢加速1回合。",
+      "upgradedText": "获得9点格挡。所有目标为自己的飞矢加速1回合。"
     },
     {
       "id": "U_CARD_079",
