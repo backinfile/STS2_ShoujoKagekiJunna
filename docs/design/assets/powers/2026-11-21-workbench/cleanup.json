@@ -1,0 +1,213 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "local_only": true,
+  "device": "cuda",
+  "dtype": "torch.bfloat16",
+  "vae_tiling": true,
+  "strength": 0.25,
+  "interior_blend": 0.25,
+  "interior_mask": "Minimum alpha >=240 in a 7px neighborhood and max RGB >75",
+  "assets": [
+    {
+      "key": "JK127",
+      "source": "generated/JK127.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "source_sha256": "2ba903136d6401a70ae4dd4dcc1b5f5b50717517b15e4ce96e017c5ea2aa5c2d",
+      "cleaned_full_sha256": "9946604ebfcbdb7a7a8ed97aecdd764987b1777b5f1632c41a9fe0f3d9c7ff99",
+      "alpha_identical": true,
+      "outline_identical": true,
+      "visible_rgb_mean_absolute_change": 0.3665,
+      "crop": [
+        130,
+        76,
+        1096,
+        1144
+      ],
+      "file": "icons/JK127.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "72c73693f71c3747d3bbfaf9424cb0c3b11898ed6525c524984b70faa688a5a1"
+    },
+    {
+      "key": "JK235",
+      "source": "generated/JK235.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "source_sha256": "8930f10facadc1b0f97bee0654d549010224ae1a4649bc4938e2ef9e859dd11d",
+      "cleaned_full_sha256": "e99ed4842e0f85848b37e27ba58e87735bd16419e0abd1748f546b6a4f8fd489",
+      "alpha_identical": true,
+      "outline_identical": true,
+      "visible_rgb_mean_absolute_change": 0.325,
+      "crop": [
+        58,
+        112,
+        1194,
+        1182
+      ],
+      "file": "icons/JK235.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "abb68e6a1c752f093fa064c5eb75806b75299337588408902090f8db54ba4128"
+    },
+    {
+      "key": "JA205",
+      "source": "generated/JA205.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "source_sha256": "1a365b338c7edd01e4fa9908ee5f1cb75cd4f1caf5668177e92733836310cabd",
+      "cleaned_full_sha256": "6fb8ab107b9b9e166f05948b81d58389c20813c35d62d3c02114ae8f905d672e",
+      "alpha_identical": true,
+      "outline_identical": true,
+      "visible_rgb_mean_absolute_change": 0.3773,
+      "crop": [
+        125,
+        130,
+        1148,
+        1143
+      ],
+      "file": "icons/JA205.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "f176d6c697f9f159268300d657661cefef21ca86186dd85d9098d67e0f81589f"
+    },
+    {
+      "key": "JK260",
+      "source": "generated/JK260.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "source_sha256": "c2dfb93dce837f1268a0b59f553339c25369f9f4b2c284e5590c576af5966704",
+      "cleaned_full_sha256": "f0b1243da6b1cf465944905f0a6b919d8912620c4c97365329e945471472763e",
+      "alpha_identical": true,
+      "outline_identical": true,
+      "visible_rgb_mean_absolute_change": 0.2654,
+      "crop": [
+        156,
+        205,
+        1098,
+        1111
+      ],
+      "file": "icons/JK260.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "d9edc2da844a9ee2aa182355160a67a34eafbf3b3b19a8de28acc68944d6f866"
+    },
+    {
+      "key": "U_CARD_008",
+      "source": "generated/U_CARD_008-v2.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "source_sha256": "cb703248f8c21ea7156209f57f82cd2fde453d948f10607aee9031782ba71880",
+      "cleaned_full_sha256": "2a5fc95d637c835429b8979e99479b507bb13f87b78f8a2c2d3ef75c674d45e5",
+      "alpha_identical": true,
+      "outline_identical": true,
+      "visible_rgb_mean_absolute_change": 0.3546,
+      "crop": [
+        61,
+        280,
+        1178,
+        985
+      ],
+      "file": "icons/U_CARD_008.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "f61102afc18ee5e62b46fc6b63514c80c4270041c4442f23fca1463a6814f036"
+    },
+    {
+      "key": "U_CARD_010",
+      "source": "generated/U_CARD_010.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "source_sha256": "212b58084f0cb974e40f8a83ae64eba6f1e4570e470f083e6014d5557e22a98f",
+      "cleaned_full_sha256": "eb4be08779c6c5bddd37ad4caee8d99efe307c52289a0ee7c74bd097378a69b5",
+      "alpha_identical": true,
+      "outline_identical": true,
+      "visible_rgb_mean_absolute_change": 0.4856,
+      "crop": [
+        155,
+        159,
+        1049,
+        1073
+      ],
+      "file": "icons/U_CARD_010.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "7a9cb37ed71f673514966736ab98a92a5aeffa87084cbb07b040bfd77c7a0ca7"
+    },
+    {
+      "key": "JK400B",
+      "source": "generated/JK400B.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "source_sha256": "13599114889be37c606079fedf28e24a941563bbb4412f75f21d12f41a2dbf75",
+      "cleaned_full_sha256": "ec2bdd0d97f02a1fb303ae63da0921b282174f463921f04559d97d55dbd73f0e",
+      "alpha_identical": true,
+      "outline_identical": true,
+      "visible_rgb_mean_absolute_change": 0.6584,
+      "crop": [
+        98,
+        114,
+        1161,
+        1168
+      ],
+      "file": "icons/JK400B.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "c56fb8ab2f0d23f71e37f4e0a6be144c234525363a642690005ea8f5c6b2d086"
+    },
+    {
+      "key": "CAGED",
+      "source": "generated/CAGED.png",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "source_sha256": "82f9886f09c562ee9ecb6db7a59a57ffcdd742d16a2b41f04bfc817723bd9874",
+      "cleaned_full_sha256": "6aaec8e4a3a9d8b45e8de8225b2aefac298788106db8a6661d97c895ae062eec",
+      "alpha_identical": true,
+      "outline_identical": true,
+      "visible_rgb_mean_absolute_change": 0.3338,
+      "crop": [
+        143,
+        82,
+        1105,
+        1169
+      ],
+      "file": "icons/CAGED.png",
+      "size": [
+        256,
+        256
+      ],
+      "sha256": "4dd2ed4c576f830d7cf8acb1d4e3317af686195b0741575180516f2644156c69"
+    }
+  ]
+}

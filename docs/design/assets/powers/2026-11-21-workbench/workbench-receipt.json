@@ -1,0 +1,102 @@
+{
+  "saved": true,
+  "revision": 5991,
+  "recordId": "93e4e269-ea2e-49f4-8c17-587e168fbf39",
+  "requestId": "93e4e269-ea2e-49f4-8c17-587e168fbf39",
+  "entries": [
+    {
+      "id": "JUNNA_JK127_POWER",
+      "uid": "power_junna_jk127_power",
+      "name": "铭刻",
+      "cardIds": [
+        "JK127"
+      ],
+      "art": "power-icon-jk127-20261121"
+    },
+    {
+      "id": "JUNNA_JK235_POWER",
+      "uid": "power_junna_jk235_power",
+      "name": "理想的国语教科书",
+      "cardIds": [
+        "JK235"
+      ],
+      "art": "power-icon-jk235-20261121"
+    },
+    {
+      "id": "JUNNA_JA205_POWER",
+      "uid": "power_junna_ja205_power",
+      "name": "沸腾的热情",
+      "cardIds": [
+        "JA205"
+      ],
+      "art": "power-icon-ja205-20261121"
+    },
+    {
+      "id": "JUNNA_JK260_POWER",
+      "uid": "power_junna_jk260_power",
+      "name": "知识的力量",
+      "cardIds": [
+        "JK260"
+      ],
+      "art": "power-icon-jk260-20261121"
+    },
+    {
+      "id": "JUNNA_U_CARD_008_POWER",
+      "uid": "power_junna_u_card_008_power",
+      "name": "去寻找故事吧",
+      "cardIds": [
+        "U_CARD_008"
+      ],
+      "art": "power-icon-u-card-008-20261121"
+    },
+    {
+      "id": "JUNNA_U_CARD_010_POWER",
+      "uid": "power_junna_u_card_010_power",
+      "name": "舞台少女心得",
+      "cardIds": [
+        "U_CARD_010"
+      ],
+      "art": "power-icon-u-card-010-20261121"
+    },
+    {
+      "id": "JUNNA_JK400B_POWER",
+      "uid": "power_junna_jk400b_power",
+      "name": "翱翔在天际",
+      "cardIds": [
+        "JK400B"
+      ],
+      "art": "power-icon-jk400b-20261121"
+    },
+    {
+      "id": "JUNNA_U_CARD_016_POWER",
+      "uid": "power_junna_u_card_016_power",
+      "name": "呼喊与回应",
+      "cardIds": [
+        "U_CARD_016"
+      ],
+      "art": "power-icon-u-card-016-20261121"
+    },
+    {
+      "id": "JUNNA_CAGED_POWER",
+      "uid": "power_junna_caged_power",
+      "name": "牢笼",
+      "cardIds": [
+        "U_CARD_013"
+      ],
+      "art": "power-icon-caged-20261121"
+    }
+  ],
+  "assetIds": [
+    "power-icon-u-card-016-20261121",
+    "power-icon-u-card-016-arrow-20261121",
+    "power-icon-u-card-016-shine-20261121",
+    "power-icon-jk127-20261121",
+    "power-icon-ja205-20261121",
+    "power-icon-u-card-008-20261121",
+    "power-icon-jk400b-20261121",
+    "power-icon-jk260-20261121",
+    "power-icon-u-card-010-20261121",
+    "power-icon-caged-20261121",
+    "power-icon-jk235-20261121"
+  ]
+}
