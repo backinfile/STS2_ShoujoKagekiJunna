@@ -2,7 +2,7 @@
 
 当前实现：纯那角色、96 张有效卡牌、31 组知识关系、飞矢牌堆与闪耀。
 
-- 构建引用为正式版 v0.111.1、旧正式版 v0.107.1 和测试版 v0.113.1。依赖 BaseLib 3.4.8 与 Core 2.0.0 或更新版本。
+- 构建引用为正式版 v0.111.1、旧正式版 v0.107.1 和测试版 v0.113.1。依赖 BaseLib 3.4.8 与 Core 2.0.2 或更新版本。
 - 初始牌组：4 打击、4 防御、1 满弦射击、1 招架。招架为 1 费、9 格挡、闪耀 9，升级后变为 0 费。
 - 生命暂设 70。起始遗物为绿色宝石：战斗开始时获得 1 张更近一步；升级为燃烧宝石后，每回合开始时获得 1 张更近一步。通过奥罗巴斯之触替换升级。
 - 战斗立绘：2026-11-04 精修版 04 待机、02 攻击。
@@ -19,7 +19,7 @@
 
 Python 入口自动选择本机 PowerShell 7 执行构建与启动。游戏已运行时显示当前进程，关闭游戏后再次运行即可重新打包启动。原有 `./play.ps1` 入口同样可用。
 
-执行 `./build.ps1 -CorePackage <Core发行目录> -MainGameDir <正式版引用目录> -GameDir <测试版游戏目录>`。也可分别使用 `SHOUJO_CORE_PACKAGE`、`SHOUJO_MAIN_GAME` 和 `SHOUJO_BETA_GAME`。Steam 安装的是正式版时可省略 `-MainGameDir`。使用 `-Godot` 指定 MegaDot 编辑器路径。
+执行 `./build.ps1 -CorePackage <Core发行目录> -MainGameDir <正式版引用目录> -GameDir <测试版游戏目录>`。也可分别使用 `SHOUJO_CORE_PACKAGE`、`SHOUJO_MAIN_GAME` 和 `SHOUJO_BETA_GAME`。Steam 默认目录已安装测试版时可省略 `-GameDir`。使用 `-Godot` 指定 MegaDot 编辑器路径。
 产物位于 `dist/ShoujoKagekiJunna/`，编译时从 Core 发行包引用 API，并生成 `core.requirements` 和 `core.package.lock`。游玩时订阅独立的 Core 与 BaseLib 工坊条目，或将三个模组的完整目录放入游戏 `mods/`。加载顺序为 BaseLib → Core → Junna。加载器为 v0.107.1 选择 `Stable` 实现，为 v0.111.x 选择 `Main` 实现，为 v0.113.x 选择 `Beta` 实现。构建脚本使用 v0.107.1 引用包及两个游戏目录中的程序集生成对应的 DLL。
 
 Core 发布后，使用其 `mod_id.txt` 中的数字 ID 准备 Junna 工坊工作区：
