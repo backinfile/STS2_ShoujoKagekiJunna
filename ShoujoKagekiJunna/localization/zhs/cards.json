@@ -166,7 +166,7 @@
   "JUNNA_U_CARD_011.title": "撕裂黑暗",
   "JUNNA_U_CARD_011.description": "对所有敌人造成{Damage:diff()}点伤害。",
   "JUNNA_U_CARD_012.title": "追逐着你",
-  "JUNNA_U_CARD_012.description": "造成{Damage:diff()}点伤害。\n无论何处，当你打出[gold]飞矢[/gold]时打出此牌。",
+  "JUNNA_U_CARD_012.description": "造成{Damage:diff()}点伤害。\n当你打出另一张[gold]飞矢[/gold]时，若此牌不在布置中，打出此牌。",
   "JUNNA_U_CARD_013.title": "牢笼",
   "JUNNA_U_CARD_013.description": "本回合中，作为[gold]飞矢[/gold]目标的敌人对你造成伤害降低{N0:diff()}%。",
   "JUNNA_U_CARD_016.title": "呼喊与回应",

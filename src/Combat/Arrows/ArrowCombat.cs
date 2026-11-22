@@ -211,10 +211,13 @@ public static partial class ArrowCombat
             // A resolving arrow may have deployed itself again. Keep that new deployment intact.
             battle.Arrows.Remove(arrow);
             if (Find(arrow.Card) != null) return;
+            if (arrow.Card.Pile?.Type == ArrowPile.PileId && !arrow.ExhaustsWhenResolved && HandArrow.Loops(arrow.Card))
+            {
+                Register(arrow.Renew(HandArrow.ConversionTurns(arrow.Card), arrow.Card.Owner.PlayerCombatState!.TurnNumber));
+                return;
+            }
             if (await HandArrow.Finish(context, arrow.Card, arrow.ExhaustsWhenResolved)) return;
             if (arrow.Card.Pile?.Type != ArrowPile.PileId) return;
-            if (!arrow.ExhaustsWhenResolved && HandArrow.Loops(arrow.Card) &&
-                await HandArrow.ReplayLoop(context, arrow.Card, arrow.Play.Target)) return;
             using var pileExit = new ArrowPileExit(hud?.PileExitPosition(arrow.Card));
             if (arrow.ExhaustsWhenResolved)
             {

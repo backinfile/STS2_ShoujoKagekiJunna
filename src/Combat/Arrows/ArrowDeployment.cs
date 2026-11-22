@@ -36,6 +36,13 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     public int PlayCount { get; internal set; } = play.PlayCount;
     private readonly int[] _xValues = xValues ?? PaidReplay.Capture(card);
     internal int[] CopyXValues() => _xValues.ToArray();
+    internal ArrowDeployment Renew(int turns, int round) => new(Card, Play, turns, round, resolve, _xValues)
+    {
+        Destination = Destination,
+        Payload = Payload,
+        PlayCount = PlayCount
+    };
+
     internal async Task Resolve(PlayerChoiceContext context, int index)
     {
         // Release animation and prior replays can end combat before this payload begins.

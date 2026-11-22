@@ -31,7 +31,7 @@ public static class HandArrow
     public static CardType OriginalType(CardModel card) => Forms.TryGetValue(card, out var form) ? form.OriginalType : card.Type;
     public static int Turns(CardModel card) => Forms.TryGetValue(card, out var form) ? form.Turns : card.DynamicVars["Turns"].IntValue;
 
-    private static int ConversionTurns(CardModel source)
+    internal static int ConversionTurns(CardModel source)
         => (source as CatalogCard)?.Value("HandArrowTurns", DefaultTurns) ?? DefaultTurns;
 
     private static void Mark(CardModel card, int turns, bool temporary)

@@ -100,15 +100,21 @@ internal sealed partial class AuditScenario
             await ClearEffects();
             var deployed = await Add(Id, upgrade: upgraded);
             await Play(deployed);
+            var deployment = ArrowCombat.Find(deployed)!;
+            var target = deployment.Target;
+            int remaining = deployment.Remaining;
             var followers = new List<CardModel> { deployed };
             foreach (var pile in new[] { PileType.Hand, PileType.Draw, PileType.Discard, PileType.Exhaust })
                 followers.Add(await Add(Id, pile, upgraded));
             await Play(await Add("JA38"));
-            Check("追逐响应五个牌区的实际对象", followers.All(c => ArrowCombat.Find(c)?.Remaining == 1), true);
+            Check("布置中的追逐保留原本的部署", ReferenceEquals(ArrowCombat.Find(deployed), deployment), true);
+            Check("布置中的追逐保留目标和倒计时", deployment.Target == target && deployment.Remaining == remaining, true);
+            Check("追逐自动打出其他牌区的实际对象", followers.Skip(1).All(c => ArrowCombat.Find(c)?.Remaining == 1), true);
             Check("追逐无递归重复布置", ArrowCombat.Deployed.Count, 6);
             int hp = _enemies[0].CurrentHp;
+            int damage = deployed.DynamicVars.Damage.IntValue;
             await Finish(followers[0]);
-            Check("追逐完成只造成一次本牌伤害", hp - _enemies[0].CurrentHp, upgraded ? 20 : 16);
+            Check("追逐完成只造成一次本牌伤害", hp - _enemies[0].CurrentHp, damage);
             Check("追逐完成不再次触发自动打出", ArrowCombat.Deployed.Count, 5);
         }
         if (Id == "U_CARD_013")

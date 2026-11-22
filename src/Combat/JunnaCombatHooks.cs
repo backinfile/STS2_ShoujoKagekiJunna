@@ -68,9 +68,9 @@ public sealed class JunnaCombatHooks : SingletonModel
             foreach (var follower in followers)
             {
                 if (follower.HasBeenRemovedFromState || follower.Pile == null || follower.Pile.Type == PileType.Play
-                    || ArrowCombat.Find(follower)?.Resolving == true) continue;
+                    || ArrowCombat.Find(follower) != null) continue;
                 var target = CardTargets.IsValid(follower, play.Target) ? play.Target : null;
-                ArrowCombat.Cancel(follower);
+                HandArrow.Restore(follower);
                 // Native AutoPlay chooses a target when absent and handles blocked plays' destination.
                 await MegaCrit.Sts2.Core.Commands.CardCmd.AutoPlay(context, follower, target);
             }

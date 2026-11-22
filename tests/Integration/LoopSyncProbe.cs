@@ -165,13 +165,13 @@ public sealed class LoopSyncCommand : AbstractConsoleCmd
                 Equal(card.Pile?.Type, PileType.Exhaust, "Native exhaust destination");
                 Equal(card.Type, CardType.Attack, "Temporary form restored");
             });
-            await Case("Arrow follower triggered once per renewed play", async () =>
+            await Case("Arrow follower triggers on play only", async () =>
             {
                 var follower = await Add(player, "U_CARD_012");
                 var card = await Add(player, "U_CARD_018"); await Play(card);
                 Equal(LoopSyncObserver.Plays.Count(p => p.Card == follower), 1, "Initial arrow play once");
                 await ArrowCombat.AccelerateAll(Context, player, 1000);
-                Equal(LoopSyncObserver.Plays.Count(p => p.Card == follower), 2, "Renewal once");
+                Equal(LoopSyncObserver.Plays.Count(p => p.Card == follower), 1, "Renewal does not trigger a play");
             });
             await Case("Copied loops remain independent", async () =>
             {
