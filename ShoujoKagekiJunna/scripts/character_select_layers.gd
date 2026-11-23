@@ -1,7 +1,7 @@
 extends Node2D
 
 const ART_SIZE = Vector2(1672.0, 941.0)
-const ORIGINAL = preload("res://ShoujoKagekiJunna/images/character_select.png")
+const ORIGINAL = preload("res://ShoujoKagekiJunna/images/character_select/motion_poster.png")
 const BACKGROUND = preload("res://ShoujoKagekiJunna/images/character_select/background.png")
 const SUBJECT = preload("res://ShoujoKagekiJunna/images/character_select/subject.png")
 const UNDERPAINT = preload("res://ShoujoKagekiJunna/images/character_select/underpaint.png")
@@ -9,6 +9,7 @@ const PARTS = preload("res://ShoujoKagekiJunna/images/character_select/parts.svg
 const ARM_CUTOUT = preload("res://ShoujoKagekiJunna/images/character_select/arm_bow.png")
 const ARM_BACKING = preload("res://ShoujoKagekiJunna/images/character_select/arm_backing.png")
 const ARM_BACKING_COLOR = preload("res://ShoujoKagekiJunna/images/character_select/arm_backing_color.png")
+const WAIST_BACKING = preload("res://ShoujoKagekiJunna/images/character_select/waist_backing.png")
 const FOREARM_DETAIL = preload("res://ShoujoKagekiJunna/images/character_select/forearm_detail.svg")
 const LAYER_SHADER = preload("res://ShoujoKagekiJunna/scripts/character_select_layer.gdshader")
 const STRING_SHADER = preload("res://ShoujoKagekiJunna/scripts/character_select_bow_string.gdshader")
@@ -26,9 +27,9 @@ const CURTAIN_OUTLINE = [Vector2(1205, 0), Vector2(1240, 28), Vector2(1280, 55),
 	Vector2(1480, 185), Vector2(1520, 209), Vector2(1560, 234), Vector2(1600, 257),
 	Vector2(1640, 283), Vector2(1672, 303), Vector2(1672, 0)]
 const ARM_PIVOT = Vector2(1060.0, 685.0)
-const ARM_SWAY_DEGREES = 0.14
-const ARM_REST_DEGREES = 0.04
-const ARM_SWAY_OFFSET = Vector2(-0.55, -2.4)
+const BOW_GEM = Vector2(339.0, 907.0)
+# Normalized downward edge displacement from the opening of the Anime Motion I2V take.
+const CAPE_FOLLOW_SAMPLES = [0.0, 0.11, 0.28, 0.52, 0.78, 1.0]
 const ARM_ATTACHMENT = [Vector2(980, 715), Vector2(1000, 686), Vector2(1030, 671),
 	Vector2(1060, 663), Vector2(1090, 661), Vector2(1100, 678), Vector2(1108, 710), Vector2(1106, 739)]
 const RIGHT_STRING_START = Vector2(1110.0, 722.2)
@@ -38,14 +39,13 @@ const LEFT_STRING_END = Vector2(1037.0, 681.3381)
 const BOW_POINTS = [Vector2(337, 906), Vector2(416, 871), Vector2(600, 871),
 	Vector2(800, 870), Vector2(930, 844), Vector2(1120, 779), Vector2(1290, 736)]
 const PIECES = [
-	{"name": "Fringe", "kind": 1, "rect": Rect2(918, 355, 86, 82), "amplitude": Vector2(8, 4), "period": 4.8, "phase": 0.0},
-	{"name": "Ponytail", "kind": 2, "rect": Rect2(1386, 355, 92, 84), "amplitude": Vector2(11, 5), "period": 4.8, "phase": -0.5},
-	{"name": "CapeRim", "kind": 3, "rect": Rect2(1466, 346, 210, 103), "amplitude": Vector2(5, 13), "period": 5.4, "phase": 0.2},
-	{"name": "LowerCape", "kind": 5, "rect": Rect2(1330, 530, 366, 250), "amplitude": Vector2(4, 10), "period": 6.4, "phase": 1.4 + PI},
-	{"name": "FurHem", "kind": 4, "rect": Rect2(1461, 741, 179, 103), "amplitude": Vector2(4, 9), "period": 5.4, "phase": -0.7}]
+	{"name": "Fringe", "kind": 1, "rect": Rect2(918, 355, 86, 82), "follow": Vector2.ZERO},
+	{"name": "Ponytail", "kind": 2, "rect": Rect2(1386, 355, 92, 84), "follow": Vector2.ZERO},
+	{"name": "CapeRim", "kind": 3, "rect": Rect2(1466, 346, 210, 103), "follow": Vector2(-0.5, 5.0)},
+	{"name": "LowerCape", "kind": 5, "rect": Rect2(1330, 530, 366, 250), "follow": Vector2(-0.5, 3.5)},
+	{"name": "FurHem", "kind": 4, "rect": Rect2(1461, 741, 179, 103), "follow": Vector2(-0.25, 2.0)}]
 
-@export_range(0.0, 2.0, 0.1) var breathing_strength = 1.0
-@export_range(0.0, 2.0, 0.1) var arm_sway_strength = 1.0
+@export_range(0.0, 2.0, 0.1) var breathing_strength = 0.5
 
 var visible_art_rect = Rect2(Vector2.ZERO, ART_SIZE)
 var _elapsed = 0.0
@@ -56,6 +56,7 @@ var _arm_weights = PackedFloat32Array()
 var _right_string: Polygon2D
 var _left_string: Polygon2D
 var _character: Node2D
+var _bow_glint: Sprite2D
 
 func _ready():
 	_fit_to_viewport()
@@ -81,6 +82,7 @@ func _ready():
 	_add_arm_layer()
 	for definition in PIECES:
 		_add_piece(definition)
+	_add_bow_glint()
 	# The original stage rail and the fixed garment below its occlusion line.
 	var stage = Polygon2D.new()
 	stage.name = "StageForeground"
@@ -88,6 +90,10 @@ func _ready():
 	stage.polygon = PackedVector2Array([Vector2(950, 941), Vector2(1672, 788), Vector2(1672, 941)])
 	stage.uv = stage.polygon
 	add_child(stage)
+
+func _notification(what):
+	if what == NOTIFICATION_VISIBILITY_CHANGED and is_visible_in_tree():
+		_elapsed = 0.0
 
 func _add_sprite(node_name: String, texture: Texture2D) -> Sprite2D:
 	var sprite = Sprite2D.new()
@@ -108,6 +114,7 @@ func _layer_material(kind: int) -> ShaderMaterial:
 	result.set_shader_parameter("arm_cutout", ARM_CUTOUT)
 	result.set_shader_parameter("arm_backing", ARM_BACKING)
 	result.set_shader_parameter("arm_backing_color", ARM_BACKING_COLOR)
+	result.set_shader_parameter("waist_backing", WAIST_BACKING)
 	result.set_shader_parameter("forearm_detail", FOREARM_DETAIL)
 	result.set_shader_parameter("original_art", ORIGINAL)
 	result.set_shader_parameter("separate_arm_layer", kind == 0)
@@ -187,6 +194,27 @@ func _add_arm_layer():
 	for point in _arm_layer.rest:
 		_arm_weights.append(_arm_weight(point))
 
+func _add_bow_glint():
+	var falloff = Gradient.new()
+	falloff.offsets = PackedFloat32Array([0.0, 0.22, 0.6, 1.0])
+	falloff.colors = PackedColorArray([Color.WHITE, Color(1, 1, 1, 0.42),
+		Color(1, 1, 1, 0.08), Color(1, 1, 1, 0)])
+	var glow = GradientTexture2D.new()
+	glow.gradient = falloff
+	glow.fill = GradientTexture2D.FILL_RADIAL
+	glow.fill_from = Vector2(0.5, 0.5)
+	glow.fill_to = Vector2(1.0, 0.5)
+	glow.width = 52
+	glow.height = 52
+	var additive = CanvasItemMaterial.new()
+	additive.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	_bow_glint = Sprite2D.new()
+	_bow_glint.name = "BowGemGlint"
+	_bow_glint.texture = glow
+	_bow_glint.material = additive
+	_bow_glint.modulate = Color(0.58, 0.92, 0.35, 0.0)
+	_character.add_child(_bow_glint)
+
 func _segment_weight(point: Vector2, start: Vector2, finish: Vector2, inner: float, outer: float) -> float:
 	var direction = finish - start
 	var along = clampf((point - start).dot(direction) / direction.length_squared(), 0.0, 1.0)
@@ -238,13 +266,18 @@ func _arm_attachment_weight(point: Vector2) -> float:
 	return lerpf(eased, 1.0, (1.0 - forearm) * release)
 
 func _arm_transform(seconds: float) -> Transform2D:
-	# The forearm and grip rise visibly while the bow counter-tilts as one
-	# rigid piece. The elbow's pinned weights keep its attachment stationary.
-	var wave = sin(seconds * TAU / BREATH_PERIOD - PI * 0.25)
-	var degrees = ARM_REST_DEGREES - ARM_SWAY_DEGREES * wave
-	var angle = deg_to_rad(degrees) * arm_sway_strength
-	var shift = ARM_SWAY_OFFSET * wave * arm_sway_strength
+	var lift = smoothstep(0.22, 0.78, seconds)
+	var release = smoothstep(0.85, 1.40, seconds)
+	var amount = lift * (1.0 - release)
+	var angle = deg_to_rad(0.45) * amount
+	var shift = Vector2(-0.2, -1.2) * amount
 	return Transform2D(angle, ARM_PIVOT - ARM_PIVOT.rotated(angle) + shift)
+
+func _cape_follow(seconds: float) -> float:
+	var sample = 5.0 * clampf((seconds - 0.72) / 0.45, 0.0, 1.0)
+	var index = mini(floori(sample), CAPE_FOLLOW_SAMPLES.size() - 2)
+	var displacement = lerpf(CAPE_FOLLOW_SAMPLES[index], CAPE_FOLLOW_SAMPLES[index + 1], sample - index)
+	return displacement * (1.0 - smoothstep(1.17, 1.57, seconds))
 
 func _arm_breath_transform(seconds: float) -> Transform2D:
 	var amount = _breath_amount(seconds - ARM_FOLLOW_DELAY)
@@ -254,8 +287,8 @@ func _arm_breath_transform(seconds: float) -> Transform2D:
 
 func _head_transform(seconds: float) -> Transform2D:
 	var amount = _breath_amount(seconds - HEAD_DELAY)
-	var angle = deg_to_rad(0.045) * amount
-	var shift = Vector2(-0.2, -2.2) * amount
+	var angle = deg_to_rad(0.025) * amount
+	var shift = Vector2(0.0, -0.8) * amount
 	return Transform2D(angle, HEAD_PIVOT - HEAD_PIVOT.rotated(angle) + shift)
 
 func _update_bow_string(cord: Polygon2D, start: Vector2, finish: Vector2, motion: Transform2D, breath: float):
@@ -324,6 +357,8 @@ func _breathing_points(patch: Dictionary, chest: float, shoulders: float, head: 
 	return points
 
 func _breath_amount(seconds: float) -> float:
+	if seconds <= 0.0:
+		return 0.0
 	var time = fposmod(seconds, BREATH_PERIOD)
 	if time < BREATH_INHALE:
 		return (0.5 - 0.5 * cos(PI * time / BREATH_INHALE)) * breathing_strength
@@ -358,6 +393,8 @@ func _process(delta):
 	# the face or bow. Chest, shoulders and head supply the remaining motion.
 	_character.position = Vector2(0.0, -1.0) * breath_amount
 	var arm_transform = _arm_breath_transform(_elapsed) * _arm_transform(_elapsed)
+	_bow_glint.position = arm_transform * BOW_GEM
+	_bow_glint.modulate.a = 0.52 * smoothstep(0.87, 1.10, _elapsed) * (1.0 - smoothstep(1.10, 1.40, _elapsed))
 	_update_bow_string(_left_string, LEFT_STRING_START, LEFT_STRING_END, arm_transform, breath_amount)
 	_update_bow_string(_right_string, RIGHT_STRING_START, RIGHT_STRING_END, arm_transform, breath_amount)
 	(_body.node as Polygon2D).polygon = _breathing_points(_body, breath_amount, shoulder_amount, head_transform)
@@ -367,14 +404,13 @@ func _process(delta):
 		# Release it smoothly into the rigid hand/bow follow and residual idle.
 		arm_points[index] = arm_points[index].lerp(arm_transform * _arm_layer.rest[index], _arm_weights[index])
 	(_arm_layer.node as Polygon2D).polygon = arm_points
+	var cape_follow = _cape_follow(_elapsed)
 	for piece in _pieces:
-		var definition: Dictionary = piece.definition
 		var points = _breathing_points(piece, breath_amount, shoulder_amount, head_transform)
-		var phase = _elapsed * TAU / definition.period + definition.phase
-		for index in range(points.size()):
-			var wave = phase - (piece.rest[index].x - definition.rect.position.x) / definition.rect.size.x * 0.65
-			points[index] += Vector2(sin(wave) * definition.amplitude.x,
-				sin(wave - 0.35) * definition.amplitude.y) * piece.weights[index]
+		var follow: Vector2 = piece.definition.follow * cape_follow
+		if not follow.is_zero_approx():
+			for index in range(points.size()):
+				points[index] += follow * piece.weights[index]
 		(piece.node as Polygon2D).polygon = points
 
 func _fit_to_viewport():

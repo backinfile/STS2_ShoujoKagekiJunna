@@ -10,6 +10,7 @@ uniform bool separate_arm_layer = false;
 uniform sampler2D arm_cutout : filter_linear, repeat_disable;
 uniform sampler2D arm_backing : filter_linear, repeat_disable;
 uniform sampler2D arm_backing_color : filter_linear, repeat_disable;
+uniform sampler2D waist_backing : filter_linear, repeat_disable;
 uniform sampler2D original_art : filter_linear, repeat_disable;
 uniform sampler2D forearm_detail : filter_linear, repeat_disable;
 varying vec4 layer_modulate;
@@ -104,10 +105,14 @@ void fragment() {
 			vec2 pixel = UV / TEXTURE_PIXEL_SIZE;
 			vec4 backing = texture(arm_backing, pixel / vec2(textureSize(arm_backing, 0)));
 			backing.rgb = texture(arm_backing_color, pixel / vec2(textureSize(arm_backing_color, 0))).rgb;
+			// This cropped underpainting carries the narrower pleats and the
+			// empty space the raised bow exposes along their left edge.
+			vec2 waist_uv = (pixel - vec2(650.0, 670.0)) / vec2(textureSize(waist_backing, 0));
+			if (all(greaterThanEqual(waist_uv, vec2(0.0))) && all(lessThan(waist_uv, vec2(1.0)))) {
+				backing = texture(waist_backing, waist_uv);
+			}
 			backing.a = clamp(backing.a / 0.97, 0.0, 1.0);
-			float skirt_gap = (1.0 - silhouette) * backing.a * smoothstep(740.0, 780.0, pixel.y)
-				* smoothstep(690.0, 730.0, pixel.x) * (1.0 - smoothstep(1280.0, 1320.0, pixel.x));
-			painted = mix(painted, backing, max(smoothstep(0.02, 0.98, mask), skirt_gap));
+			painted = mix(painted, backing, smoothstep(0.02, 0.98, mask));
 		}
 		if (separate_arm_layer && UV.x > 890.0 * TEXTURE_PIXEL_SIZE.x && UV.x < 1170.0 * TEXTURE_PIXEL_SIZE.x
 				&& UV.y > 595.0 * TEXTURE_PIXEL_SIZE.y && UV.y < 835.0 * TEXTURE_PIXEL_SIZE.y) {
