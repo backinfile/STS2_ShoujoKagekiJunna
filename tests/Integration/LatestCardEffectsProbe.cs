@@ -82,9 +82,9 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
         }
         try
         {
-            await Case("Frozen expectations cover all 112 active cards", async () =>
+            await Case("Frozen expectations cover all 98 active cards", async () =>
             {
-                Equal(AuditExpectations.Cards.Count, 112, "Active specification count");
+                Equal(AuditExpectations.Cards.Count, 98, "Active specification count");
                 foreach (var expected in AuditExpectations.Cards)
                 foreach (bool upgraded in new[] { false, true })
                 {

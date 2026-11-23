@@ -2008,6 +2008,29 @@
       "upgradedTips": [
         "Arrow"
       ]
+    },
+    "U_CARD_130": {
+      "fields": {
+        "PerArrow": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "effect": "Attack"
+    },
+    "U_CARD_131": {
+      "fields": {
+        "ExtraHits": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
     }
   }
 }

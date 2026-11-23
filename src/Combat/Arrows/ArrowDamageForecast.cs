@@ -13,7 +13,7 @@ namespace ShoujoKagekiJunna.Combat;
 internal static class ArrowDamageForecast
 {
     internal readonly record struct Batch(int Turns, int Loss);
-    private readonly record struct Attack(decimal Damage, int Hits, ValueProp Props = ValueProp.Move);
+    private readonly record struct Attack(decimal Damage, int Hits, ValueProp Props = ValueProp.Move, bool FixedHits = false);
 
     internal static Batch[] ForTarget(Creature target, IReadOnlyList<IGrouping<int, ArrowDeployment>> waiting)
     {
@@ -41,7 +41,7 @@ internal static class ArrowDamageForecast
             if (arrow.TargetsAllEnemies) command.TargetingAllOpponents(combat);
             else command.Targeting(target);
 
-            int hits = (int)Math.Ceiling(Hook.ModifyAttackHitCount(combat, command, attack.Hits));
+            int hits = attack.FixedHits ? attack.Hits : (int)Math.Ceiling(Hook.ModifyAttackHitCount(combat, command, attack.Hits));
             var props = attack.Props;
             var run = card.Owner.RunState;
             decimal damage = Hook.ModifyDamage(run, combat, target, dealer, attack.Damage, props, card,
@@ -66,6 +66,9 @@ internal static class ArrowDamageForecast
                 return new(slash.DynamicVars.Damage.BaseValue, slash.DynamicVars.Repeat.IntValue);
             case CatalogCard { DesignId: "JK314" } spotlight:
                 return new(spotlight.Value("Damage"), spotlight.HitsWithDepletedPartners);
+            case JunnaCardU_CARD_131 ashes:
+                int extraHits = ArrowCombat.SingleEnemyTargets(ashes.Owner).Contains(target) ? ashes.Value("ExtraHits") : 0;
+                return new(ashes.Value("Damage"), 1 + extraHits, FixedHits: true);
             case CatalogCard card:
                 var effect = CardRules.Get(card.DesignId).Effect;
                 if (effect is SimpleCardEffect.Attack or SimpleCardEffect.AttackAndBlock or SimpleCardEffect.AttackAndDraw ||

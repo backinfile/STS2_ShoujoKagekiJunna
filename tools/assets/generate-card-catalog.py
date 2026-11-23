@@ -416,9 +416,9 @@ def main():
             if cid == 'U_CARD_010':
                 powers[f'JUNNA_{cid}_POWER.smartDescription'] = '下回合开始时，从[gold]抽牌堆[/gold]选择[blue]{Amount}[/blue]张[gold]{Category}[/gold]牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、[gold]闪耀[/gold]牌。'
         if 'JK37C' in ids:
-            powers['JUNNA_JK37C_POWER.smartDescription'] = '每当你打出[blue]0[/blue]费牌后，{Target}加速[blue]{Turns}[/blue]回合。{Repetition}'
-            powers['JUNNA_JK37C_POWER.randomArrow'] = '随机一个[gold]飞矢[/gold]'
-            powers['JUNNA_JK37C_POWER.targetedArrow'] = '相同目标的一个[gold]飞矢[/gold]'
+            powers['JUNNA_JK37C_POWER.smartDescription'] = '每当你打出[blue]0[/blue]费牌后，随机使{Target}加速[blue]{Turns}[/blue]回合。{Repetition}'
+            powers['JUNNA_JK37C_POWER.randomArrow'] = '一个[gold]飞矢[/gold]'
+            powers['JUNNA_JK37C_POWER.targetedArrow'] = '一个同目标的[gold]飞矢[/gold]'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers['JUNNA_JK235_POWER.smartDescription'] = '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{Repeat}[/blue]次}。'
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'

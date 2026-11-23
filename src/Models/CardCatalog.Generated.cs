@@ -288,6 +288,12 @@ public sealed partial class JunnaCardU_CARD_063() : CatalogCard("U_CARD_063");
 [CustomID("JUNNA_U_CARD_079")]
 public sealed partial class JunnaCardU_CARD_079() : CatalogCard("U_CARD_079");
 
+[CustomID("JUNNA_U_CARD_130")]
+public sealed partial class JunnaCardU_CARD_130() : CatalogCard("U_CARD_130");
+
+[CustomID("JUNNA_U_CARD_131")]
+public sealed partial class JunnaCardU_CARD_131() : CatalogCard("U_CARD_131");
+
 [CustomID("JUNNA_JK44")]
 public sealed partial class JunnaCardJK44() : CatalogCard("JK44");
 

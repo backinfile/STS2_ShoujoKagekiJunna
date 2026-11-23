@@ -1,5 +1,5 @@
 {
-  "revision": 6052,
+  "revision": 6148,
   "cards": [
     {
       "id": "JA15",
@@ -110,7 +110,7 @@
       "id": "JA22",
       "modelId": "JUNNA_JA22",
       "className": "JunnaCardJA22",
-      "name": "安可",
+      "name": "返场",
       "cost": 1,
       "upgradedCost": 0,
       "costsX": false,
@@ -455,7 +455,7 @@
         }
       ],
       "text": "知识。打出耗能为0的牌后，随机一个飞矢加速1回合。",
-      "upgradedText": "知识。打出耗能为0的牌后，相同目标的一个飞矢加速1回合。"
+      "upgradedText": "知识。打出耗能为0的牌后，随机使一个同目标的飞矢加速1回合。"
     },
     {
       "id": "JK49",
@@ -1312,7 +1312,7 @@
       "id": "JA82",
       "modelId": "JUNNA_JA82",
       "className": "JunnaCardJA82",
-      "name": "箭雨",
+      "name": "流星之矢",
       "cost": 0,
       "upgradedCost": 0,
       "costsX": true,
@@ -2124,7 +2124,7 @@
       "values": [
         {
           "name": "Damage",
-          "base": 8,
+          "base": 7,
           "upgraded": 9
         },
         {
@@ -2133,7 +2133,7 @@
           "upgraded": 1
         }
       ],
-      "text": "造成8点伤害。\n将1张更近一步加入手牌。",
+      "text": "造成7点伤害。\n将1张更近一步加入手牌。",
       "upgradedText": "造成9点伤害。\n将1张更近一步+加入手牌。"
     },
     {
@@ -3447,6 +3447,80 @@
       ],
       "text": "造成10点伤害。所有以该敌人为目标的飞矢加速1回合。",
       "upgradedText": "造成14点伤害。所有以该敌人为目标的飞矢加速1回合。"
+    },
+    {
+      "id": "U_CARD_130",
+      "modelId": "JUNNA_U_CARD_130",
+      "className": "JunnaCardU_CARD_130",
+      "name": "星轨",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "攻击",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "U_CARD_130.webp",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 8,
+          "upgraded": 8
+        },
+        {
+          "name": "N1",
+          "base": 4,
+          "upgraded": 6
+        }
+      ],
+      "text": "造成8点伤害。每有一个指向目标的飞矢，伤害增加4。",
+      "upgradedText": "造成8点伤害。每有一个指向目标的飞矢，伤害增加6。"
+    },
+    {
+      "id": "U_CARD_131",
+      "modelId": "JUNNA_U_CARD_131",
+      "className": "JunnaCardU_CARD_131",
+      "name": "直至世界成灰",
+      "cost": 0,
+      "upgradedCost": 0,
+      "costsX": false,
+      "type": "攻击",
+      "target": "AllEnemies",
+      "arrowSubtype": "攻击",
+      "rarity": "普通",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "U_CARD_131.webp",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 4,
+          "upgraded": 5
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 1
+        }
+      ],
+      "text": "对所有敌人造成4点伤害。\n对飞矢的目标敌人额外造成1次伤害。",
+      "upgradedText": "对所有敌人造成5点伤害。\n对飞矢的目标敌人额外造成1次伤害。"
     }
   ],
   "groups": [
@@ -7453,5 +7527,5 @@
   "startingRelics": [
     "JUNNA_GREEN_GEM"
   ],
-  "arrowArtRevision": 5906
+  "arrowArtRevision": 6148
 }

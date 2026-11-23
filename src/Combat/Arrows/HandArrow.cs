@@ -15,7 +15,7 @@ namespace ShoujoKagekiJunna.Combat;
 /// <summary>Keep the actual material card, its printed cost and its original effect.</summary>
 public static class HandArrow
 {
-    private const int DefaultTurns = 5;
+    private const int DefaultTurns = 3;
     private sealed class Form(CardType originalType, int turns, bool temporary, Form? previous = null)
     {
         public readonly CardType OriginalType = originalType;

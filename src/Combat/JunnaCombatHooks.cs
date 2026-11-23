@@ -83,6 +83,19 @@ public sealed class JunnaCombatHooks : SingletonModel
         modifiedCost = free ? 0 : originalCost;
         return free;
     }
+    public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource
+#if STS2_MAIN || STS2_BETA
+        , CardPlay? cardPlay
+#endif
+        )
+    {
+        if (target == null || !props.IsPoweredAttack() ||
+            cardSource is not JunnaCardU_CARD_130 { IsMutable: true } card)
+            return 0m;
+        return card.Value("PerArrow") * ArrowCombat.SingleEnemyTargets(card.Owner).Count(enemy => enemy == target);
+    }
+
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource
 #if STS2_MAIN || STS2_BETA

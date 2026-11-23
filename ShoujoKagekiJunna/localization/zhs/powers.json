@@ -1,7 +1,7 @@
 {
   "JUNNA_JA04_POWER.title": "速射",
   "JUNNA_JK10_POWER.title": "观摩",
-  "JUNNA_JA22_POWER.title": "安可",
+  "JUNNA_JA22_POWER.title": "返场",
   "JUNNA_JK15_POWER.title": "再演",
   "JUNNA_A_POWER.title": "埋头学习",
   "JUNNA_JK27_POWER.title": "关联阅读",
@@ -48,7 +48,7 @@
   "JUNNA_JK32_POWER.description": "在你的回合开始时，抽[blue]1[/blue]张牌。",
   "JUNNA_JK32_POWER.smartDescription": "在你的回合开始时，抽[blue]{Amount}[/blue]张牌。",
   "JUNNA_JK37C_POWER.description": "每当你打出[blue]0[/blue]费牌后，随机一个[gold]飞矢[/gold]加速[blue]1[/blue]回合。",
-  "JUNNA_JK37C_POWER.smartDescription": "每当你打出[blue]0[/blue]费牌后，{Target}加速[blue]{Turns}[/blue]回合。{Repetition}",
+  "JUNNA_JK37C_POWER.smartDescription": "每当你打出[blue]0[/blue]费牌后，随机使{Target}加速[blue]{Turns}[/blue]回合。{Repetition}",
   "JUNNA_JA45_POWER.description": "你每回合打出的前[blue]2[/blue]张[gold]飞矢[/gold]加速[blue]1[/blue]回合。",
   "JUNNA_JA45_POWER.smartDescription": "你每回合打出的前[blue]{Limit}[/blue]张[gold]飞矢[/gold]加速[blue]{Turns}[/blue]回合。",
   "JUNNA_JK64_POWER.description": "本回合，每当你打出[gold]知识[/gold]牌后，选择一个[gold]飞矢[/gold]加速[blue]1[/blue]回合。",
@@ -139,6 +139,6 @@
   "JUNNA_JK400_POWER.smartDescription": "旧版强化效果已退役。",
   "JUNNA_JK400B_POWER.description": "回合结束时，打出[blue]1[/blue]张造成[blue]8[/blue]点伤害的[gold]流星[/gold]。",
   "JUNNA_JK400B_POWER.smartDescription": "回合结束时，打出[blue]{Repeat}[/blue]张造成[blue]{Damage}[/blue]点伤害的[gold]流星[/gold]。",
-  "JUNNA_JK37C_POWER.randomArrow": "随机一个[gold]飞矢[/gold]",
-  "JUNNA_JK37C_POWER.targetedArrow": "相同目标的一个[gold]飞矢[/gold]"
+  "JUNNA_JK37C_POWER.randomArrow": "一个[gold]飞矢[/gold]",
+  "JUNNA_JK37C_POWER.targetedArrow": "一个同目标的[gold]飞矢[/gold]"
 }

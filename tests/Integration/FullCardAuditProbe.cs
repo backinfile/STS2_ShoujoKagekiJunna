@@ -210,6 +210,16 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 await TestGameApi.PaidPlay(_context, selfArrow);
                 _helpers.Add(selfArrow);
             }
+            if (Id is "U_CARD_130" or "U_CARD_131")
+            {
+                await TestGameApi.PaidPlay(_context, await Add("JB03"), _enemies[0]);
+                await TestGameApi.PaidPlay(_context, await Add("JB03"), _enemies[0]);
+                var groupArrow = await Add("JA76");
+                await HandArrow.Play(_context, groupArrow);
+                Check("群体转换飞矢默认等待", ArrowCombat.Find(groupArrow)?.Remaining, 3);
+                if (_enemies.Length > 1 && (Id == "U_CARD_130" || variant == "capacity"))
+                    await TestGameApi.PaidPlay(_context, await Add("JB03"), _enemies[1]);
+            }
             if (definition.Knowledge)
             {
                 var group = KnowledgeCombat.Group(CardCatalog.Create(Id, player));
@@ -384,7 +394,12 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 int supportDamage = !Empty && Id is "JA71" ? 25 : 0;
                 bool group = _source.TargetType == TargetType.AllEnemies;
                 int shield = i == 0 && Enhanced && definition.DamageCapable && definition.Type != "能力" && Id != "JA82" ? 7 : 0;
-                Check("目标" + i + "伤害", _beforeHp[i] - _enemies[i].CurrentHp, Math.Max(0, (i == 0 || group ? expected : 0) - shield) + (i == 0 ? supportDamage : 0));
+                int targetDamage = i == 0 || group ? expected : 0;
+                if (!Empty && Id == "U_CARD_130" && i == 0)
+                    targetDamage += 2 * (upgraded ? 6 : 4);
+                if (!Empty && Id == "U_CARD_131" && (i == 0 || i == 1 && variant == "capacity"))
+                    targetDamage += damage;
+                Check("目标" + i + "伤害", _beforeHp[i] - _enemies[i].CurrentHp, Math.Max(0, targetDamage - shield) + (i == 0 ? supportDamage : 0));
             }
         }
         var blockMatch = Regex.Match(Text, @"获得(\d+)点格挡");
@@ -476,8 +491,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Check("抽牌堆实际飞矢布置", _helpers.Where(CardCatalog.IsArrow).All(c => ArrowCombat.Find(c) != null), true);
         }
         if (Id == "JA145")
-            Check("瞄准射击生成基础更近一步", player.PlayerCombatState.Hand.Cards.Count(c => CardCatalog.DesignId(c) == "JA119" && !c.IsUpgraded),
-                Math.Min(upgraded ? 2 : 1, CardPile.MaxCardsInHand - _beforeHand + 1));
+            Check("瞄准射击生成同版本的更近一步", player.PlayerCombatState.Hand.Cards.Count(c => CardCatalog.DesignId(c) == "JA119" && c.IsUpgraded == upgraded), 1);
         if (Id is "JK206B" or "JK235B")
         {
             var received = player.PlayerCombatState.Hand.Cards.Except(_helpers.Where(c => c == _selected)).ToArray();
@@ -727,7 +741,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         int hp = _enemies.Sum(enemy => enemy.CurrentHp);
         await Play(card);
         Check("与改编配合保留实际牌", ArrowCombat.Find(card)?.Card == card, true);
-        Check("与改编配合等待五回合", ArrowCombat.Find(card)?.Remaining, 5);
+        Check("与改编配合等待三回合", ArrowCombat.Find(card)?.Remaining, 3);
         Check("改编后延迟伤害", _enemies.Sum(enemy => enemy.CurrentHp), hp);
         Check("改编后延迟格挡", player.Creature.Block, 0);
         await Finish(card);

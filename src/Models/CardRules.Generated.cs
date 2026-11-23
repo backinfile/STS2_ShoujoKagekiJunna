@@ -1545,5 +1545,24 @@ internal static partial class CardRules
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
+        ["U_CARD_130"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["PerArrow"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            Effect = SimpleCardEffect.Attack,
+        },
+        ["U_CARD_131"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["ExtraHits"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+        },
     };
 }
