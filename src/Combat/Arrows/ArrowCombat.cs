@@ -154,10 +154,21 @@ public static partial class ArrowCombat
         }
     }
 
-    public static async Task AccelerateAll(PlayerChoiceContext context, Player player, int turns)
+    public static Task AccelerateAll(PlayerChoiceContext context, Player player, int turns)
+        => ApplyAcceleration(context, player, new(ArrowAccelerationTargets.All, turns));
+
+    internal static Task AccelerateFromCard(PlayerChoiceContext context, CatalogCard card, Creature? target = null)
+        => ApplyAcceleration(context, card.Owner, ArrowAcceleration.ForCard(card), target);
+
+    internal static async Task ApplyAcceleration(PlayerChoiceContext context, Player player,
+        ArrowAcceleration acceleration, Creature? target = null, bool snapshotTargets = false)
     {
-        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player))
-            await Accelerate(context, arrow, turns);
+        var arrows = ResolutionOrder().Where(arrow => acceleration.Matches(arrow, player, target));
+        if (acceleration.Targets == ArrowAccelerationTargets.Target)
+            arrows = arrows.Where(arrow => !arrow.Resolving).ToArray();
+        else if (snapshotTargets) arrows = arrows.ToArray();
+        foreach (var arrow in arrows)
+            await Accelerate(context, arrow, acceleration.Turns);
     }
 
     public static Task CopyAll(PlayerChoiceContext context, Player player)
@@ -190,29 +201,18 @@ public static partial class ArrowCombat
         }
     }
 
-    public static async Task AccelerateTarget(PlayerChoiceContext context, Player player, Creature target, int turns)
-    {
-        var arrows = ResolutionOrder().Where(a => a.Card.Owner == player && !a.Resolving &&
-            a.Targets.Contains(target)).ToArray();
-        foreach (var arrow in arrows) await Accelerate(context, arrow, turns);
-    }
+    public static Task AccelerateTarget(PlayerChoiceContext context, Player player, Creature target, int turns)
+        => ApplyAcceleration(context, player, new(ArrowAccelerationTargets.Target, turns), target);
 
     public static Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns)
         => AccelerateSelf(context, player, turns, includeUntargeted: true);
 
-    internal static async Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns, bool includeUntargeted)
-    {
-        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player && !a.TargetsGroup &&
-                     (a.Target == player.Creature || (includeUntargeted && a.Target == null))))
-            await Accelerate(context, arrow, turns);
-    }
+    internal static Task AccelerateSelf(PlayerChoiceContext context, Player player, int turns, bool includeUntargeted)
+        => ApplyAcceleration(context, player, new(includeUntargeted
+            ? ArrowAccelerationTargets.SelfOrUntargeted : ArrowAccelerationTargets.Self, turns));
 
-    public static async Task AccelerateEnemies(PlayerChoiceContext context, Player player, int turns)
-    {
-        foreach (var arrow in ResolutionOrder().Where(a => a.Card.Owner == player &&
-                     (a.TargetsAllEnemies || a.Target?.IsEnemy == true)))
-            await Accelerate(context, arrow, turns);
-    }
+    public static Task AccelerateEnemies(PlayerChoiceContext context, Player player, int turns)
+        => ApplyAcceleration(context, player, new(ArrowAccelerationTargets.Enemies, turns));
 
     public static async Task Accelerate(PlayerChoiceContext context, ArrowDeployment arrow, int turns)
     {

@@ -40,6 +40,7 @@ public partial class ArrowHud : Control
     {
         public ArrowLayoutMotion Motion { get; } = new();
         internal Tween? CountTween;
+        internal ArrowAccelerationCue? AccelerationCue;
         internal bool Releasing;
         internal Vector2? ExitPosition;
         internal List<Vector2> Targets { get; } = [];
@@ -109,6 +110,7 @@ public partial class ArrowHud : Control
             view.SatellitesVisible = satellitesVisible;
         }
         UpdateHoverPreview(room);
+        UpdateAccelerationPreview(room);
         WarmPreviewCache(room);
         CoreEffects.Redraw(_guides);
     }

@@ -10,9 +10,8 @@ public sealed partial class JunnaCardU_CARD_063
 {
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
-        var player = Owner;
         await Block(play);
-        await ArrowCombat.AccelerateSelf(context, player, Value("Turns"), includeUntargeted: false);
+        await ArrowCombat.AccelerateFromCard(context, this);
     }
 
     protected override void OnUpgrade() => ApplyCatalogUpgrade();

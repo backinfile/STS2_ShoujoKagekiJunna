@@ -67,6 +67,7 @@ public partial class ArrowHud
         if (view.Releasing) return Task.CompletedTask;
         FinishDeployment(arrow);
         view.Releasing = true;
+        view.AccelerationCue?.SetCue(AccelerationCueKind.None);
         view.Frame.MouseFilter = MouseFilterEnum.Ignore;
         view.Count.Text = "0";
         view.Count.AddThemeColorOverride("font_color", new Color("FFF1AE"));

@@ -8,8 +8,7 @@ public sealed partial class JunnaCardJK184B
 {
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
-        var player = Owner;
-        await ArrowCombat.AccelerateAll(context, player, Value("Turns"));
+        await ArrowCombat.AccelerateFromCard(context, this);
     }
 
     protected override void OnUpgrade() => ApplyCatalogUpgrade();

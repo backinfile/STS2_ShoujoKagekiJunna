@@ -30,6 +30,8 @@ public sealed partial class JunnaPowerA
 
 public sealed partial class JunnaPowerJA105
 {
+    internal int AccelerationTurns => _grants.Sum(grant => Math.Max(0, grant.V("Turns")));
+
     protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
     {
         if (!(CardCatalog.IsArrow(play.Card))) return;

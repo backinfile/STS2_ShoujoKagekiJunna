@@ -2,12 +2,14 @@ using BaseLib.Abstracts;
 using BaseLib.Utils;
 using BaseLib.Utils.Attributes;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using ShoujoKagekiJunna.Combat;
 
 namespace ShoujoKagekiJunna.Models;
 
 [Pool(typeof(JunnaCardPool))]
 public abstract class JunnaArrowTargetChoice(bool self) : CustomCardModel(0, CardType.Skill, CardRarity.Token, TargetType.Self, showInCardLibrary: false)
 {
+    internal ArrowAcceleration Acceleration { get; set; }
     public override bool CanBeGeneratedInCombat => false;
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get(self ? "JH27" : "JA38").Portrait;
 }

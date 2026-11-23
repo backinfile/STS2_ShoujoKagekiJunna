@@ -20,14 +20,14 @@ public static class CardChoices
 
     public static async Task AccelerateTargets(PlayerChoiceContext context, CatalogCard source)
     {
-        var own = ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaArrowTargetSelf>(ModelDb.GetId<JunnaArrowTargetSelf>()), source.Owner);
-        var enemies = ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaArrowTargetEnemy>(ModelDb.GetId<JunnaArrowTargetEnemy>()), source.Owner);
+        var own = (JunnaArrowTargetSelf)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaArrowTargetSelf>(ModelDb.GetId<JunnaArrowTargetSelf>()), source.Owner);
+        var enemies = (JunnaArrowTargetEnemy)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaArrowTargetEnemy>(ModelDb.GetId<JunnaArrowTargetEnemy>()), source.Owner);
+        int turns = source.Value("Turns");
+        own.Acceleration = new(ArrowAccelerationTargets.Self, turns);
+        enemies.Acceleration = new(ArrowAccelerationTargets.Enemies, turns);
         var selected = await ShoujoKageki.Core.V1.CardOptions.Choose(context, [own, enemies], source.Owner);
-        if (selected == null) return;
-        bool self = selected == own;
-        var arrows = ArrowCombat.DisplayOrder().Where(a => a.Card.Owner == source.Owner &&
-            (self ? !a.TargetsGroup && a.Target == source.Owner.Creature : a.TargetsAllEnemies || a.Target?.IsEnemy == true)).ToArray();
-        foreach (var arrow in arrows) await ArrowCombat.Accelerate(context, arrow, source.Value("Turns"));
+        if (selected is JunnaArrowTargetChoice choice)
+            await ArrowCombat.ApplyAcceleration(context, source.Owner, choice.Acceleration, snapshotTargets: true);
     }
 
     public static async Task Notes(PlayerChoiceContext context, CatalogCard source)
