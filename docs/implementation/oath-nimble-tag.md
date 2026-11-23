@@ -15,7 +15,7 @@
 - Beta、Stable 与集成探针编译通过，0 警告、0 错误。
 - 运行 `python tests/Integration/run-power-block-preview.py --port <随机端口>`：修改前 86 项中 6 项失败，基础／升级牌面被灵巧错误增加至 4／5；修改后 86／86 通过。[修改前结果](evidence/oath-nimble-tag-20261117/before.json)、[修改后结果](evidence/oath-nimble-tag-20261117/after.json)。
 - 隔离实例采用随机端口、满解锁、最小化及静默音频；启动采样未获得前台焦点。
-- [实机录像](evidence/oath-nimble-tag-20261117/preview.mp4)：脆弱下基础／升级能力分别显示 2／3，叠加后打出飞矢实际获得 5 点格挡；灵巧 2 的普通防御再获得 5 点格挡，总计 10。录制期间只使用悬停与正常出牌。
-- 录像为 H.264 1280×720，时长 11.2 秒，含 AAC 游戏音轨，录制状态 completed、audio_source 为 engine_mix。[录像元数据](evidence/oath-nimble-tag-20261117/recording.json)。
+- 实机验证中，脆弱下基础版和升级版能力分别显示 2 和 3。叠加后打出飞矢实际获得 5 点格挡，灵巧 2 的普通防御再获得 5 点格挡，总计 10。录制期间只使用悬停与正常出牌。
+- 录制时长 11.2 秒，含 AAC 游戏音轨。[录像元数据](evidence/oath-nimble-tag-20261117/recording.json)
 
 清理范围为本轮 `artifacts/oath-nimble-20261117/`、`out/tmp/oath-nimble-20261117/` 及格挡专项的临时结果目录；本页所链接的结果与录像保留。

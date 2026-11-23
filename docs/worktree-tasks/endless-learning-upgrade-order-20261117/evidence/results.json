@@ -368,7 +368,7 @@
     "drawNewKnowledge": null
   },
   "recording": {
-    "path": "evidence/upgrade-parallel-preview.mp4",
+    "scenario": "升级并行预览",
     "status": "completed",
     "durationSeconds": 6.8,
     "audioSource": "engine_mix",
@@ -2199,21 +2199,21 @@
   },
   "recordings": [
     {
-      "path": "evidence/upgrade-parallel-preview.mp4",
+      "scenario": "升级并行预览",
       "status": "completed",
       "durationSeconds": 6.8,
       "audioSource": "engine_mix",
       "framesDropped": 0
     },
     {
-      "path": "evidence/study-turn-flow.mp4",
+      "scenario": "自然回合",
       "status": "completed",
       "durationSeconds": 10.2,
       "audioSource": "engine_mix",
       "framesDropped": 0
     },
     {
-      "path": "evidence/knowledge-copy-flow.mp4",
+      "scenario": "知识复制",
       "status": "completed",
       "durationSeconds": 4.6,
       "audioSource": "engine_mix",

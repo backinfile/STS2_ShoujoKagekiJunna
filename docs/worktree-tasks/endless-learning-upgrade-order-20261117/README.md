@@ -244,7 +244,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - 原生锻造：原生创建 1 次、手动创建 0 次；火花先于新知展示，原生返回 Task 身份一致。录像中预览比原生方法完成早约 218 毫秒开始，后续按钮按原生时间显示。
 - 知识触发复制：真实出牌生成 1 张心得复制，约 515 毫秒后即接受下一张攻击，复制预览与攻击动画同时播放。
 - 心得：真实打出埋头学习并结束回合，生成 1 张基础心得；敌方动画及下一玩家回合继续进行。
-- 录像均为原生可操作手牌与合法游戏操作，录制前准备环境，录制中无修改命令；逐帧核对后保留 evidence/upgrade-parallel-preview.mp4、evidence/knowledge-copy-flow.mp4、evidence/study-turn-flow.mp4。均有声、静默外放、零丢帧。
+- 逐帧核对了升级并行预览、知识复制和自然回合。录制均使用原生手牌与游戏操作，包含游戏混音，外放静默，零丢帧。
 - Beta、Stable Release 与观察模组构建均 0 警告、0 错误；git diff --check 通过。仅执行当前变更必要的定向检查。
 - evidence/results.json 保留失败基线、9 项通过、原生 Task 身份、实际出牌和三段录像数据。卡牌入堆约定已对照 docs/implementation/card-pile-placement.md。
 - MCP 关联实现为 af78d2969dcc46be1028c08350260f3bbf83fa12，生产 GPU 时钟回归已通过；此次展示等待修正未改变 MCP 实现。

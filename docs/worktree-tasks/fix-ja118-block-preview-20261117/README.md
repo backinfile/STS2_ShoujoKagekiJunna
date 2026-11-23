@@ -207,7 +207,7 @@ Report the resulting branch, commit, verification, cleanup state, and task docum
 - Beta、Stable C# 构建及集成探针构建均成功，0 警告、0 错误。
 - 首轮修复后 48/48 通过；扩充烁星、星光结界后，同一命令 56/56 通过。结果：[修改前](evidence/before.json)、[修改后](evidence/after.json)。
 - 隔离测试实例使用随机端口、独立档案、unlock all、最小化及 silent_test；每次启动采样均无前台抢焦点。
-- [实机录像](evidence/preview.mp4)：脆弱 3 回合时，基础与升级手牌分别显示 2、3；普通防御显示 3。正常打出两张能力与一支飞矢后，实际获得 5 点格挡。
+- 脆弱 3 回合时，基础与升级手牌分别显示 2 和 3，普通防御显示 3。正常打出两张能力与一支飞矢后，实际获得 5 点格挡。[基础预览](evidence/base-preview.png) · [升级预览](evidence/upgraded-preview.png) · [实际格挡](evidence/triggered-block.png)
 - 录像为 H.264 1280×720，含 AAC 游戏音轨，audio_source 为 engine_mix，封装状态 completed。录制期间只使用悬停、取消悬停和正常出牌。
 - 截图：[基础版](evidence/base-preview.png)、[升级版](evidence/upgraded-preview.png)、[触发后](evidence/triggered-block.png)。[录像验证记录](evidence/video-results.json)。
 - 提交前核对所有用户消息；全部已跟踪文档和本次新增文档进行敏感信息及本地绝对路径检查。原工作区保持干净。

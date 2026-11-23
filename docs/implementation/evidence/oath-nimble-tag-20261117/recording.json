@@ -1,6 +1,5 @@
 {
   "status": "completed",
-  "output_path": "preview.mp4",
   "fps": 15,
   "max_duration_seconds": 60,
   "width": 1280,
