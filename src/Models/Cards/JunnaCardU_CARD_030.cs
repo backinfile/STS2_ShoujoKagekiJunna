@@ -1,12 +1,19 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using ShoujoKagekiJunna.Combat;
 
 namespace ShoujoKagekiJunna.Models;
 
 public sealed partial class JunnaCardU_CARD_030
 {
+    protected override void AddExtraArgsToDescription(LocString description)
+    {
+        base.AddExtraArgsToDescription(description);
+        description.Add("MeteorCount", IsMutable && Owner is { } player ? JunnaCombatHooks.CountArrowPlays(player) : 0);
+    }
+
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         var player = Owner;

@@ -179,7 +179,7 @@
   "JUNNA_JK400B.title": "翱翔在天际",
   "JUNNA_JK400B.description": "回合结束时，打出一张造成{Damage:diff()}点伤害的[gold]流星[/gold]。",
   "JUNNA_U_CARD_030.title": "倾泻的星光",
-  "JUNNA_U_CARD_030.description": "本次对战中每打出过{N0:diff()}次[gold]飞矢[/gold]，就打出一张造成{Damage:diff()}点伤害的[gold]流星[/gold]。",
+  "JUNNA_U_CARD_030.description": "本次对战中每打出过{N0:diff()}次[gold]飞矢[/gold]，就打出一张造成{Damage:diff()}点伤害的[gold]流星[/gold]。{InCombat:\n（打出{MeteorCount}张）|}",
   "JUNNA_U_CARD_031.title": "大道具",
   "JUNNA_U_CARD_031.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n重新打出此牌。",
   "JUNNA_U_CARD_032.title": "星光迸发",
