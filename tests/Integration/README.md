@@ -1,6 +1,8 @@
 # 逐牌效果回归
 
-`card-pool-expectations.json` 固定工作台 r5294 的112张启用牌及基础、升级预期。预期与运行程序集内的 `Junna.CardPool` 分开保存；卡池版本或牌名集合不一致时停止执行，先复核设计变更。
+`card-pool-expectations.json` 固定工作台 r6148 的 98 张启用牌及基础、升级预期。预期与运行程序集内的 `Junna.CardPool` 分开保存。卡池版本或牌的编号集合不一致时，先复核设计变更。
+
+`card-effect-cases-r6148.json` 为每张牌独立记录准备状态、操作、预期及关键对照。运行 `node tools/dev/full-card-audit.cjs plan` 会核对三个清单的版本和编号，生成[逐牌效果测试条目](../../docs/implementation/card-tests-r6148.md)。
 
 ## 构建与运行
 
@@ -21,7 +23,7 @@ python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --o
 ```
 
 - `effects`：39组最新牌效专项，包含独立版本预期、实际支付、各类牌区、三选一、重复强化、共享轮换与叠加抽牌及8种手牌类别组合。
-- `full`：112张牌×基础/升级×正常/空资源/强化组合/满手牌，共896组。逐项比较伤害、格挡、抽牌、能量、实际对象、牌堆、关键词、倒计时、复制和关联状态。
+- `full` 覆盖 98 张牌、基础和升级版各四种场景，共 784 组。逐项比较伤害、格挡、抽牌、能量、实际对象、牌堆、关键词、倒计时、复制和关联状态。
 - `CurrentPoolTriggers.cs` 补充每回合首次复制、开局布置、单次降费、胜利复制、全牌区自动追随和动态减伤。
 - `run-copy-reward.py` 通过真实耗尽、胜利、领取及选牌验证待领取Power、1/2张永久副本、预览、飞入、飞完与牌组计数通知；观察器只记录原生事件。
 
@@ -31,8 +33,9 @@ python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --o
 
 - 逐牌结果：`out/tmp/full-card-tests/results/`，每张牌每个版本和变体独立保存；异常作为失败记录。
 - 最新专项：`artifacts/latest-card-pool/results/latest-effects.json`。
-- 录像：`record-card-pool.py --port <port> --output <task-output>`，准备完成后只使用悬停、出牌、选牌与结束回合；记录器保留游戏内音轨。
-- 当前逐牌观测表见 `docs/implementation/card-tests-r5294.md`。
+- 批量录像使用 `node tools/dev/full-card-audit.cjs record-primary <port> [牌号...]`。每次准备结束之后开始录制，使用悬停、出牌、选牌、结束回合和领取奖励。以卡牌 ID 续录未完成项，保留游戏内音轨。
+- `node tools/dev/full-card-audit.cjs record-opening <port>` 从实际地图进入战斗，录像验证绝美的凋零的自动布置和自然完成。
+- `node tools/dev/full-card-audit.cjs report` 生成可按卡名或 ID 搜索的录像与结果索引。可在测试游戏和启动脚本中设置相同的 `JUNNA_CARD_AUDIT_OUTPUT`，集中保存本轮结果。
 
 测试失败时先核对固定牌效、准备对象与实际事件，保留失败文件，再修复实现或具体预期。禁止通过跳过卡牌、删除失败断言或把当前输出直接复制为预期来消除失败。
 

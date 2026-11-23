@@ -3,6 +3,9 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Rooms;
+using ShoujoKageki.Core.V1;
 using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
 
@@ -86,13 +89,21 @@ internal sealed partial class AuditScenario
             var beforeCards = player.Deck.Cards.ToHashSet();
             int before = beforeCards.Count;
             await Play(await Add(Id, upgrade: upgraded));
-            Check("誊写安装时不永久发牌", player.Deck.Cards.Count, before);
-            await KnowledgeProgress.WonCombat();
+            Check("铭刻安装时不永久发牌", player.Deck.Cards.Count, before);
+            var room = new CombatRoom((CombatState)player.Creature.CombatState!);
+            var power = player.Creature.Powers.OfType<JunnaPowerJK127>().Single();
+            await power.AfterCombatEnd(room);
+            var rewards = room.ExtraRewards[player].OfType<KnowledgeCopyReward>().ToArray();
+            Check("战斗结束登记一项可选知识复制奖励", rewards.Length, 1);
+            Check("领取前没有复制知识", player.Deck.Cards.Count, before);
+            var reward = rewards.Single();
+            Check("铭刻基础和升级均最多复制一张", reward.Maximum, 1);
+            Check("选择已升级知识并领取", await reward.SelectUnsynchronized(), true);
             var added = player.Deck.Cards.Where(c => !beforeCards.Contains(c)).ToArray();
-            Check("誊写胜利单独复制一张知识", added.Length, 1);
-            Check("誊写复制保留升级及独立对象", added[0] != target && added[0].Id == target.Id && added[0].IsUpgraded, true);
-            await KnowledgeProgress.WonCombat();
-            Check("誊写胜利处理一次", player.Deck.Cards.Count, before + 1);
+            Check("铭刻领取后单独复制一张知识", added.Length, 1);
+            Check("铭刻复制保留升级及独立对象", added.SingleOrDefault() is { } copy && copy != target && copy.Id == target.Id && copy.IsUpgraded, true);
+            await reward.SelectUnsynchronized();
+            Check("重复领取已结算奖励不会复制", player.Deck.Cards.Count, before + 1);
             selection.Preferred = null;
         }
         if (Id == "U_CARD_012")
@@ -138,6 +149,73 @@ internal sealed partial class AuditScenario
             var power = player.Creature.GetPower<JunnaCagedPower>()!;
             await power.AfterSideTurnEnd(_context, CombatSide.Enemy, _enemies);
             Check("敌方回合结束移除牢笼", player.Creature.GetPower<JunnaCagedPower>() == null, true);
+        }
+        if (Id == "JA205")
+        {
+            int hp = _enemies[0].CurrentHp;
+            await Play(await Add("JB01"));
+            Check("沸腾的热情不修改普通攻击", hp - _enemies[0].CurrentHp, 6);
+            var arrow = await Add("JA38");
+            await Play(arrow);
+            hp = _enemies[0].CurrentHp;
+            await Finish(arrow);
+            Check("沸腾的热情将飞矢伤害提高五成", hp - _enemies[0].CurrentHp, 27);
+        }
+        if (Id == "JK400B")
+        {
+            var power = player.Creature.Powers.OfType<JunnaPowerJK400B>().Single();
+            Check("翱翔在天际安装时不布置流星", ArrowCombat.Deployed.Count, 0);
+            for (int turn = 1; turn <= 2; turn++)
+            {
+                await power.BeforeSideTurnEnd(_context, CombatSide.Player, [player.Creature]);
+                Check("结束阶段各打出一张流星 " + turn, ArrowCombat.Deployed.Count, turn);
+                player.PlayerCombatState!.IncrementTurnNumber();
+            }
+            Check("翱翔在天际的流星均为八点伤害", ArrowCombat.Deployed.All(arrow =>
+                CardCatalog.DesignId(arrow.Card) == "JA81B" && arrow.Card.DynamicVars.Damage.BaseValue == 8), true);
+        }
+        if (Id == "U_CARD_016")
+        {
+            for (int i = 0; i < 8; i++) await Add("JB01", PileType.Draw);
+            foreach (var (trigger, hasShine, expectedDraw) in new[]
+                { ("JB01", false, 0), ("JK49B", false, 1), ("JK49B", false, 0),
+                    ("JA38", false, 1), ("JB02", true, 1), ("JK49B", false, 1) })
+            {
+                var card = await Add(trigger);
+                if (hasShine) Shine.SetState(card, 2, 3);
+                AuditObserver.Drawn.Clear();
+                await Play(card);
+                Check($"按轮换类别出牌 {trigger} {hasShine}", AuditObserver.Drawn.Count, expectedDraw);
+            }
+        }
+        if (Id == "U_CARD_033")
+        {
+            int hp = _enemies[0].CurrentHp;
+            await Play(await Add("JB01"));
+            Check("超常发挥使普通攻击翻倍", hp - _enemies[0].CurrentHp, 12);
+            await Play(await Add(Id, upgrade: upgraded));
+            Check("同回合重复超常发挥不会延长持续时间", player.Creature.GetPower<DoubleDamagePower>()?.Amount, 1);
+        }
+        if (Id == "U_CARD_045")
+        {
+            var state = player.PlayerCombatState!;
+            var card = _source;
+            int block = player.Creature.Block;
+            int energy = state.Energy;
+            await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
+            await Play(card);
+            Check("温柔的星光同回合重打仍有格挡", player.Creature.Block - block, upgraded ? 4 : 2);
+            Check("同一张温柔的星光只在首次返能", state.Energy, energy);
+            state.IncrementTurnNumber();
+            await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
+            await Play(card);
+            Check("温柔的星光下回合恢复首次返能", state.Energy, energy + 1);
+        }
+        if (Id == "U_CARD_047")
+        {
+            int hp = _enemies[0].CurrentHp;
+            await Play(await Add("JB01"));
+            Check("两人的心跳力量作用于后续攻击", hp - _enemies[0].CurrentHp, upgraded ? 15 : 13);
         }
     }
 }
