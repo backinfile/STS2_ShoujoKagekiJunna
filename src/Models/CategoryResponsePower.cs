@@ -35,6 +35,7 @@ public sealed partial class JunnaPowerU_CARD_016
         // Refresh the next category before the draw animates, even when drawing is blocked.
         _cycleIndex = (_cycleIndex + 1) % CategoryOrder.Length;
         Synchronize();
+        Flash();
         await CardPileCmd.Draw(context, draw, Owner.Player!);
     }
 }
