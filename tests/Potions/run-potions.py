@@ -178,12 +178,21 @@ for mode in (['knowledge','capacity','dynamic','sports','arrows'] if a.case=='al
             s,v=wait(lambda s,v:v and 'JUNNA_ARROW_RAIN_POTION' in v['used'])
             check('arrows plays each pile and deployed once',Counter(v['played']),Counter(expected_arrows))
             check('arrows no energy spent',v['energy'],before_energy)
-            check('arrows all deployed',all(c['deployed'] and c['deployed']['Remaining']==2 for c in v['cards'] if c['instance'] in expected_arrows),True)
+            previous={c['instance']:c['deployed'] for c in before['cards'] if c['deployed']}
+            check('arrows fixture starts with two accelerated deployments',sorted(a['Remaining'] for a in previous.values()),[1,1])
+            check('arrows newly deployed at their initial countdown',all(c['deployed'] and c['deployed']['Remaining']==2 for c in v['cards'] if c['instance'] in expected_arrows and c['instance'] not in previous),True)
+            for card in (c for c in v['cards'] if c['instance'] in previous):
+                old=previous[card['instance']]
+                check(card['role']+' retains its accelerated countdown',(card['deployed'] or {}).get('Remaining'),old['Remaining'])
+                check(card['role']+' is played again as an arrow',bool(card['arrow'] and card['deployed'] and card['deployed']['Sequence']>old['Sequence']),True)
             check('arrows leaves non-arrow untouched',next(c for c in v['cards'] if c['role']=='nonArrow')['pile'],'Hand')
-            old_seq=next(c['deployed']['Sequence'] for c in before['cards'] if c['role']=='deployedArrow')
-            new_seq=next(c['deployed']['Sequence'] for c in v['cards'] if c['role']=='deployedArrow')
-            check('arrows replays deployed card',new_seq>old_seq,True)
             save(mode+'-after.json',v);capture(mode+'-after');time.sleep(1.5)
+            oldturn=v['turn'];act('end_turn')
+            s,v=wait(lambda s,v:v and v['turn']>oldturn and s.get('battle',{}).get('is_play_phase')
+                     and not any(c['deployed'] for c in v['cards'] if c['instance'] in previous))
+            check('arrows replayed deployments finish on the next turn',all(not c['deployed'] for c in v['cards'] if c['instance'] in previous),True)
+            check('arrows fresh deployments tick down normally',all(c['deployed'] and c['deployed']['Remaining']==1 for c in v['cards'] if c['instance'] in expected_arrows and c['instance'] not in previous),True)
+            save(mode+'-next-turn.json',v);time.sleep(1)
         check(mode+' potion consumed',len(v['used']),1)
         print(json.dumps({'case':mode,'passed':True,'checks':len(rows)},ensure_ascii=False),flush=True)
     except Exception as error:

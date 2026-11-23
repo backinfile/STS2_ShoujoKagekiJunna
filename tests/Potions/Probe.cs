@@ -199,8 +199,18 @@ public sealed class PotionCommand : AbstractConsoleCmd
         }
         if(mode is "sports" or "arrows")
         {
-            var deployed=await Add("JA38","deployedArrow",PileType.Hand);
-            await CardActions.FreePlay(new ThrowingPlayerChoiceContext(),deployed,player.Creature.CombatState!.HittableEnemies.First(),true);
+            var context = new ThrowingPlayerChoiceContext();
+            var deployed=await Add(mode == "arrows" ? "JA81B" : "JA38","deployedArrow",PileType.Hand);
+            await CardActions.FreePlay(context,deployed,player.Creature.CombatState!.HittableEnemies.First(),true);
+            if (mode == "arrows")
+            {
+                var converted = await Add("JB01", "convertedArrow", PileType.Hand);
+                await HandArrow.Play(context, converted);
+                var meteor = ArrowCombat.Find(deployed)!;
+                var material = ArrowCombat.Find(converted)!;
+                await ArrowCombat.Accelerate(context, meteor, meteor.Remaining - 1);
+                await ArrowCombat.Accelerate(context, material, material.Remaining - 1);
+            }
         }
         if(mode=="arrows")
         {

@@ -23,6 +23,7 @@ public static partial class ArrowCombat
         internal long Sequence;
     }
     private static readonly ConditionalWeakTable<ICombatState, Battle> Battles = new();
+    private static readonly AsyncLocal<ArrowDeployment?> ReplayedDeployment = new();
     private static Battle For(ICombatState state) => Battles.GetOrCreateValue(state);
     public static IReadOnlyList<ArrowDeployment> Deployed =>
         CombatManager.Instance.DebugOnlyGetState() is { } state && Battles.TryGetValue(state, out var battle) ? battle.Arrows : [];
@@ -38,6 +39,28 @@ public static partial class ArrowCombat
         if (card.IsMutable && card.Owner?.Creature.CombatState is { } state && Battles.TryGetValue(state, out var battle))
             battle.Arrows.RemoveAll(a => a.Card == card);
         HandArrow.Restore(card);
+    }
+
+    internal static async Task<bool> Replay(ArrowDeployment arrow, Func<Task<bool>> play)
+    {
+        if (!Battles.TryGetValue(arrow.Combat, out var battle) || !battle.Arrows.Remove(arrow)) return false;
+        // The replay keeps the material card's temporary arrow form as it crosses the play pile.
+        var previous = ReplayedDeployment.Value;
+        ReplayedDeployment.Value = arrow;
+        try { return await play(); }
+        finally
+        {
+            ReplayedDeployment.Value = previous;
+            var card = arrow.Card;
+            if (Find(card) == null)
+            {
+                if (card.Pile?.Type == ArrowPile.PileId && card.CombatState == arrow.Combat &&
+                    Battles.TryGetValue(arrow.Combat, out var current) && current == battle)
+                    battle.Arrows.Add(arrow);
+                else
+                    HandArrow.Restore(card);
+            }
+        }
     }
 
     internal static Task AfterMovement(CardMovement movement)
@@ -66,7 +89,13 @@ public static partial class ArrowCombat
     {
         int haste = CatalogPower.ArrowHaste(card.Owner);
         if (haste > 0) card.AddKeyword(CardKeyword.Exhaust);
-        return new(card, play, turns, card.Owner.PlayerCombatState!.TurnNumber, resolve)
+        int round = card.Owner.PlayerCombatState!.TurnNumber;
+        if (ReplayedDeployment.Value is { } replay && replay.Card == card && replay.Combat == card.CombatState)
+        {
+            turns = replay.Remaining;
+            round = replay.DeployedRound;
+        }
+        return new(card, play, turns, round, resolve)
             { ExhaustAfterResolve = haste > 0, Payload = payload };
     }
 

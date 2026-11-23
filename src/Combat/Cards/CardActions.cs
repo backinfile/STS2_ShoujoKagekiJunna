@@ -127,7 +127,7 @@ public static class CardActions
         bool keepTarget = false) => Play(context, card, target, keepTarget);
 
     private static async Task<bool> Play(PlayerChoiceContext context, CardModel card, Creature? target,
-        bool keepTarget)
+        bool keepTarget, ArrowDeployment? replay = null)
     {
         if (CombatManager.Instance.IsOverOrEnding || card.Owner.Creature.IsDead ||
             card.Keywords.Contains(CardKeyword.Unplayable) ||
@@ -142,8 +142,10 @@ public static class CardActions
         }
         else target = CardTargets.First(card);
         if (target != null && !CardTargets.IsValid(card, target)) return false;
+        var request = new CardExecutionRequest { Target = target };
+        if (replay != null) return await ArrowCombat.Replay(replay, () => CardExecution.Play(context, card, request));
         ArrowCombat.Cancel(card);
-        return await CardExecution.Play(context, card, new CardExecutionRequest { Target = target });
+        return await CardExecution.Play(context, card, request);
     }
 
     public static async Task PlayDrawPileArrows(PlayerChoiceContext context, Player player)
@@ -166,10 +168,10 @@ public static class CardActions
         foreach (var card in arrows)
         {
             if (CombatManager.Instance.IsOverOrEnding || player.Creature.IsDead) break;
+            var deployment = ArrowCombat.Find(card);
             if (card.HasBeenRemovedFromState || card.Pile == null || card.Pile.Type == PileType.Play ||
-                ArrowCombat.Find(card)?.Resolving == true || card.Keywords.Contains(CardKeyword.Unplayable) ||
-                !Hook.ShouldPlay(card.CombatState!, card, out _, AutoPlayType.Default)) continue;
-            await FreePlay(context, card);
+                deployment?.Resolving == true) continue;
+            await Play(context, card, null, keepTarget: false, replay: deployment);
         }
     }
 
