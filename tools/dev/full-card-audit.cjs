@@ -2,6 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { randomUUID } = require('node:crypto');
 const root = path.resolve(__dirname, '../..');
 const output = path.resolve(process.env.JUNNA_CARD_AUDIT_OUTPUT || path.join(root, 'out/tmp/full-card-tests'));
 const catalog = JSON.parse(fs.readFileSync(path.join(root, 'data/card-pool.json'), 'utf8'));
@@ -49,21 +50,50 @@ async function until(predicate, seconds = 30) {
     throw new Error(`Timed out in ${current.state_type}`);
 }
 
-function summarize() {
-    const directory = path.join(output, 'results');
-    const results = fs.existsSync(directory) ? fs.readdirSync(directory)
-        .filter(file => file.endsWith('-result.json') && !file.endsWith('-video-result.json'))
-        .map(file => JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8'))) : [];
+const runPointer = path.join(output, 'latest-run.json');
+const cardIds = new Set(catalog.cards.map(card => card.id));
+
+function readRun(runId = fs.existsSync(runPointer) ? JSON.parse(fs.readFileSync(runPointer, 'utf8')).runId : null) {
+    if (runId === null) return { runId, cards: [], variants: [], results: [] };
+    if (typeof runId !== 'string' || !/^[a-f0-9]{32}$/.test(runId)) throw new Error('Invalid audit run ID');
+    const directory = path.join(output, 'results', runId);
+    const marker = JSON.parse(fs.readFileSync(path.join(directory, 'completed.json'), 'utf8'));
+    if (marker.completed !== true || marker.runId !== runId || marker.revision !== catalog.revision ||
+        !Array.isArray(marker.cards) || marker.cards.length === 0 ||
+        new Set(marker.cards).size !== marker.cards.length || !marker.cards.every(id => cardIds.has(id)) ||
+        !Array.isArray(marker.variants) || new Set(marker.variants).size !== marker.variants.length ||
+        !(marker.variants.length === variants.length && marker.variants.every(variant => variants.includes(variant)) ||
+            marker.variants.length === 1 && marker.variants[0] === 'combo'))
+        throw new Error('Audit completion marker does not match this card pool or run');
+    const results = fs.readdirSync(directory).filter(file => file.endsWith('-result.json')).map(file => {
+        const result = JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8'));
+        if (!marker.cards.includes(result.id) || typeof result.upgraded !== 'boolean' ||
+            !marker.variants.includes(result.variant) || result.revision !== catalog.revision || result.runId !== runId ||
+            file !== scenarioKey(result.id, result.upgraded, result.variant) + '-result.json' ||
+            !Array.isArray(result.checks) || result.checks.length === 0 ||
+            !result.checks.every(check => check && typeof check.name === 'string' && check.name.length &&
+                typeof check.pass === 'boolean'))
+            throw new Error(`Invalid, empty or out-of-run audit result: ${file}`);
+        return { ...result, file };
+    });
+    return { runId, cards: marker.cards, variants: marker.variants, results };
+}
+
+function summarize(run = readRun()) {
+    const { runId, results } = run;
     const failures = results.flatMap(result => result.checks.filter(check => !check.pass)
         .map(check => ({ id: result.id, upgraded: result.upgraded, variant: result.variant, ...check })));
     const keys = new Set(results.map(result => scenarioKey(result.id, result.upgraded, result.variant)));
-    const missing = catalog.cards.flatMap(card =>
-        [false, true].flatMap(upgraded => variants.map(variant => scenarioKey(card.id, upgraded, variant))))
+    const missing = (runId ? run.cards : [...cardIds]).flatMap(id =>
+        [false, true].flatMap(upgraded => (runId ? run.variants : variants).map(variant => scenarioKey(id, upgraded, variant))))
         .filter(key => !keys.has(key));
     if (keys.size !== results.length) throw new Error('Duplicate scenario results');
     const summary = {
         revision: catalog.revision,
+        runId,
         cards: catalog.cards.length,
+        scopeCards: run.cards.length,
+        scopeVariants: run.variants,
         completedScenarios: results.length,
         assertions: results.reduce((count, result) => count + result.checks.length, 0),
         missing,
@@ -163,33 +193,34 @@ async function ensureCombat() {
 async function check(combosOnly = false) {
     await ensureCombat();
     await ensureThreeEnemies();
-    const targets = requested.length ? requested : [null];
-    for (const id of targets) {
-        const completion = path.join(output, 'results', `completed${id ? '-' + id : ''}.json`);
-        if (fs.existsSync(completion)) fs.unlinkSync(completion);
-        await command('junna_full_audit ' + (combosOnly ? 'combos' : 'check') + (id ? ' ' + id : ''));
-        const deadline = Date.now() + 3600000;
-        let previous = '';
-        let lastProgress = Date.now();
-        while (!fs.existsSync(completion)) {
-            await delay(1000);
-            const files = fs.readdirSync(path.join(output, 'results')).filter(file => file.endsWith('-result.json'));
-            const latest = files.map(file => fs.statSync(path.join(output, 'results', file)).mtimeMs).sort((a, b) => b - a)[0];
-            const progress = `${files.length}/${latest}`;
-            if (progress !== previous) { lastProgress = Date.now(); previous = progress; }
-            if (Date.now() > deadline || Date.now() - lastProgress > 90000) {
-                summarize();
-                throw new Error('Per-card checks stopped making progress');
-            }
+    const runId = randomUUID().replaceAll('-', '');
+    const directory = path.join(output, 'results', runId);
+    const completion = path.join(directory, 'completed.json');
+    await command(['junna_full_audit', combosOnly ? 'combos' : 'check', ...requested, 'run=' + runId].join(' '));
+    const deadline = Date.now() + 3600000;
+    let previous = 0;
+    let lastProgress = Date.now();
+    while (!fs.existsSync(completion)) {
+        await delay(1000);
+        const count = fs.existsSync(directory)
+            ? fs.readdirSync(directory).filter(file => file.endsWith('-result.json')).length : 0;
+        if (count > previous) {
+            previous = count;
+            lastProgress = Date.now();
+            console.log(`Audit ${runId}: ${count} scenarios`);
         }
-        const completed = JSON.parse(fs.readFileSync(completion, 'utf8'));
-        if (!completed.completed || completed.revision !== catalog.revision)
-            throw new Error('Result completed for an unexpected game revision');
+        if (Date.now() > deadline || Date.now() - lastProgress > 90000)
+            throw new Error(`Audit ${runId} stopped making progress after ${count} scenarios`);
     }
-    const summary = summarize();
-    const failures = summary.failures.filter(failure => !requested.length || requested.includes(failure.id));
-    const missing = summary.missing.filter(key =>
-        (!requested.length || requested.some(id => key.startsWith(id + '-'))) && (!combosOnly || key.endsWith('-combo')));
+    const run = readRun(runId);
+    const expectedCards = requested.length ? requested : [...cardIds];
+    if (run.cards.length !== expectedCards.length || !expectedCards.every(id => run.cards.includes(id)) ||
+        run.variants.length !== (combosOnly ? 1 : variants.length))
+        throw new Error('Game completed a different scope from the requested audit');
+    const pointerTemp = runPointer + '.' + runId + '.tmp';
+    fs.writeFileSync(pointerTemp, JSON.stringify({ runId }));
+    fs.renameSync(pointerTemp, runPointer);
+    const { failures, missing } = summarize(run);
     if (missing.length) throw new Error(`${missing.length} requested scenarios produced no results`);
     if (failures.length) throw new Error(`${failures.length} per-card assertions failed`);
 }
@@ -201,9 +232,10 @@ async function ensureThreeEnemies() {
     await until(current => current.battle?.is_play_phase && count(current) >= 3, 45);
 }
 
-async function settle(cardId, seconds = 30) {
+async function settle(cardId, seconds = 30, selectionCount = 1) {
     const deadline = Date.now() + seconds * 1000;
-    let selected = false;
+    let selected = 0;
+    const pickedFromGrid = new Set();
     let lastKey = '';
     let stable = 0;
     while (Date.now() < deadline) {
@@ -211,22 +243,28 @@ async function settle(cardId, seconds = 30) {
         const selection = current.hand_select || current.card_select;
         if (selection) {
             const key = current.state_type + selection.prompt + selection.screen_type;
-            if (key !== lastKey) { selected = false; lastKey = key; }
+            if (key !== lastKey) {
+                selected = 0;
+                pickedFromGrid.clear();
+                lastKey = key;
+            }
             stable = 0;
             await delay(350);
-            if ((selected || selection.preview_showing) && selection.can_confirm) {
+            if ((selected >= selectionCount || selection.preview_showing) && selection.can_confirm) {
                 await action(current.hand_select ? 'combat_confirm_selection' : 'confirm_selection');
-                selected = false;
+                selected = 0;
+                pickedFromGrid.clear();
                 continue;
             }
-            const cards = selection.cards || [];
+            const cards = (selection.cards || []).filter(card => current.hand_select || !pickedFromGrid.has(card.index));
             const preference = ['JA104', 'JA119', 'JA144'].includes(cardId) ? 'JUNNA_ARROW_TARGET_ENEMY'
                 : cardId === 'JA65' ? 'JUNNA_JA15' : 'JUNNA_STRIKE';
             const candidate = cards.find(card => card.id === preference) || cards[0];
             if (candidate) {
                 await action(current.hand_select ? 'combat_select_card' : 'select_card',
                     current.hand_select ? { card_index: candidate.index } : { index: candidate.index });
-                selected = true;
+                selected++;
+                if (!current.hand_select) pickedFromGrid.add(candidate.index);
             } else if (selection.can_confirm) await action(current.hand_select ? 'combat_confirm_selection' : 'confirm_selection');
         } else if (current.battle?.is_play_phase || ['rewards', 'game_over', 'map', 'event'].includes(current.state_type)) {
             let idle = !current.battle;
@@ -246,17 +284,18 @@ async function settle(cardId, seconds = 30) {
     throw new Error(`Selection or resolution timed out for ${cardId}`);
 }
 
-async function playModel(modelId, cardId, required = true) {
+async function playModel(modelId, cardId, required = true, { targetIndex = 0, selectionCount = 1 } = {}) {
     const current = await state();
     const card = current.player?.hand?.find(card => card.id === modelId && card.can_play);
     if (!card) {
         if (required) throw new Error(`Playable ${modelId} missing`);
         return false;
     }
-    const target = card.target_type === 'AnyEnemy' ? current.battle.enemies.find(enemy => enemy.hp > 0)?.entity_id : undefined;
+    const target = card.target_type === 'AnyEnemy'
+        ? current.battle.enemies.filter(enemy => enemy.hp > 0)[targetIndex]?.entity_id : undefined;
     await action('play_card', { card_index: card.index, ...(target ? { target } : {}) });
     await delay(300);
-    await settle(cardId, 45);
+    await settle(cardId, 45, selectionCount);
     return true;
 }
 
@@ -281,16 +320,16 @@ async function saveImage(endpoint, file) {
     fs.writeFileSync(file, Buffer.from(await response.arrayBuffer()));
 }
 
-async function record(primary = false, retakes = false) {
+async function record(primary = false, retakes = false, upgraded = false) {
     await ensureCombat();
     await command('junna_probe speed 1');
-    const videos = path.join(output, 'videos');
+    const videos = path.join(output, upgraded ? 'videos-upgrade' : 'videos');
     fs.mkdirSync(videos, { recursive: true });
     const selectedCards = catalog.cards.filter(card => !requested.length || requested.includes(card.id));
     const failures = [];
     for (const card of selectedCards) {
         try {
-            await recordCard(card, videos, primary, retakes);
+            await recordCard(card, videos, primary, retakes, upgraded);
         } catch (error) {
             failures.push({ id: card.id, error: error.message });
             fs.writeFileSync(path.join(output, 'recording-failures.json'), JSON.stringify(failures, null, 2));
@@ -300,21 +339,22 @@ async function record(primary = false, retakes = false) {
     if (failures.length) throw new Error(`${failures.length} card recordings failed`);
 }
 
-async function recordCard(card, videos, primary, retakes) {
+async function recordCard(card, videos, primary, retakes, upgraded) {
     const directory = path.join(videos, card.id);
     fs.mkdirSync(directory, { recursive: true });
     const receipt = path.join(directory, 'recording.json');
     if (!retakes && fs.existsSync(receipt)) {
         const prior = JSON.parse(fs.readFileSync(receipt));
-        if (prior.status === 'completed' && prior.revision === catalog.revision && fs.existsSync(prior.output_path)) return;
+        if (prior.status === 'completed' && prior.revision === catalog.revision &&
+            Boolean(prior.upgraded) === upgraded && fs.existsSync(prior.output_path)) return;
     }
     if (!(await state()).battle?.is_play_phase) await ensureCombat();
     const multipleEnemies = card.target === 'AllEnemies' ||
-        ['JK37B', 'U_CARD_013', 'U_CARD_036', 'U_CARD_051', 'U_CARD_052', 'U_CARD_079', 'U_CARD_130'].includes(card.id);
+        ['JK37B', 'JK37C', 'U_CARD_013', 'U_CARD_036', 'U_CARD_051', 'U_CARD_052', 'U_CARD_079', 'U_CARD_130'].includes(card.id);
     if (multipleEnemies) await ensureThreeEnemies();
-    const preparation = path.join(output, 'results', `${card.id}-base-normal-prepared.json`);
+    const preparation = path.join(output, 'results', `${scenarioKey(card.id, upgraded, 'normal')}-prepared.json`);
     const previous = fs.existsSync(preparation) ? fs.statSync(preparation).mtimeMs : 0;
-    await command(`junna_full_audit prepare ${card.id}`);
+    await command(`junna_full_audit prepare ${card.id}${upgraded ? ' upgrade' : ''}`);
     const deadline = Date.now() + 30000;
     while ((!fs.existsSync(preparation) || fs.statSync(preparation).mtimeMs <= previous) && Date.now() < deadline) await delay(150);
     await until(current => current.battle?.is_play_phase && current.player?.hand?.some(item => item.id === card.modelId));
@@ -356,7 +396,8 @@ async function recordCard(card, videos, primary, retakes) {
             await saveImage('/screenshot', path.join(directory, 'growth.png'));
             await action('unhover_card');
         }
-        await playModel(card.id === 'U_CARD_012' ? 'JUNNA_JA38' : card.modelId, card.id);
+        const selectionCount = card.id === 'JK84' ? upgraded ? 5 : 3 : card.id === 'JK206B' && upgraded ? 2 : 1;
+        await playModel(card.id === 'U_CARD_012' ? 'JUNNA_JA38' : card.modelId, card.id, true, { selectionCount });
         if (['JG03', 'JG27', 'JG36', 'JK200B', 'JK131', 'JT02', 'JH19'].includes(card.id)) await playModel('JUNNA_STRIKE', card.id, false);
         if (['JA17', 'JH24', 'U_CARD_013'].includes(card.id)) await endTurn(card.id);
         if (card.id === 'U_CARD_016') {
@@ -374,6 +415,11 @@ async function recordCard(card, videos, primary, retakes) {
                 await action('claim_reward', { index: copyReward.index });
                 await settle(card.id);
             }
+        } else if (card.id === 'JK37C') {
+            await playModel('JUNNA_STRIKE', card.id, true, { targetIndex: 2 });
+            fs.copyFileSync(path.join(output, 'results/readiness.json'), path.join(directory, 'unmatched.json'));
+            await delay(800);
+            await playModel('JUNNA_STRIKE', card.id);
         } else if (card.id === 'JA105') {
             await delay(1200);
             await saveImage('/screenshot', path.join(directory, 'installed.png'));
@@ -398,8 +444,14 @@ async function recordCard(card, videos, primary, retakes) {
             if (!primary && card.id === 'JA144') await playModel('JUNNA_JA119', card.id, false);
         }
         if ((await state()).battle) {
-            let needsCompletion = card.type === '飞矢' || ['JA84', 'JA87', 'JA88', 'JK84', 'JG37', 'JT02', 'JX01', 'JH22', 'JA104', 'JA119', 'JA108', 'JK37B', 'JK84B', 'JA22', 'JA35', 'JK37C', 'JK67', 'JA96', 'JA118', 'JK32', 'JA144', 'JZ05'].includes(card.id);
+            let needsCompletion = card.type === '飞矢' || ['JA84', 'JA87', 'JA88', 'JK84', 'JG37', 'JT02', 'JX01', 'JH22', 'JA104', 'JA119', 'JA108', 'JK37B', 'JK84B', 'JA22', 'JA35', 'JK67', 'JA96', 'JA118', 'JK32', 'JA144', 'JZ05', 'U_CARD_023'].includes(card.id);
+            if (upgraded && ['JK84', 'U_CARD_023'].includes(card.id))
+                fs.copyFileSync(path.join(output, 'results/readiness.json'), path.join(directory, 'deployed.json'));
             if (primary && card.type === '能力' && card.id !== 'JA22') needsCompletion = false;
+            if (upgraded && card.id === 'U_CARD_023') {
+                needsCompletion = false;
+                for (let turn = 0; turn < 3; turn++) await endTurn(card.id);
+            }
             if (needsCompletion) {
                 if (!await playModel('JUNNA_JA71', card.id, false)) {
                     await endTurn(card.id);
@@ -425,7 +477,7 @@ async function recordCard(card, videos, primary, retakes) {
             const deadline = Date.now() + 60000;
             do { await delay(250); result = await request('/recording'); } while (['recording', 'stopping'].includes(result.status) && Date.now() < deadline);
             if (result.status !== 'completed') error = new Error(`Recording failed ${JSON.stringify(result)}`);
-            const record = { id: card.id, name: card.name, revision: catalog.revision, beta: true, presentation: primary ? '主要结算' : '结算与触发演示', ...result, ...(error ? { status: 'failed', action_error: error.message } : {}) };
+            const record = { id: card.id, name: card.name, revision: catalog.revision, beta: true, upgraded, presentation: primary ? '主要结算' : '结算与触发演示', ...result, ...(error ? { status: 'failed', action_error: error.message } : {}) };
             fs.writeFileSync(receipt, JSON.stringify(record, null, 2));
             if (!error) await saveImage('/recording/frames?frame_count=8&columns=4&frame_width=320', path.join(directory, 'frames.png'));
         }
@@ -489,45 +541,54 @@ async function recordOpening() {
     console.log('Recorded natural opening and completion for JK37');
 }
 
+function recordedVideo(id, upgraded) {
+    const receipt = path.join(output, upgraded ? 'videos-upgrade' : 'videos', id, 'recording.json');
+    if (!fs.existsSync(receipt)) return '';
+    const video = JSON.parse(fs.readFileSync(receipt, 'utf8'));
+    if (video.status !== 'completed' || video.id !== id || video.revision !== catalog.revision ||
+        Boolean(video.upgraded) !== upgraded || typeof video.output_path !== 'string') return '';
+    const file = path.resolve(output, video.output_path);
+    return fs.existsSync(file) ? path.relative(output, file).replaceAll('\\', '/') : '';
+}
+
 function report() {
-    const summary = summarize();
+    const run = readRun();
+    const summary = summarize(run);
     plan();
     const escape = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
     const testPlan = JSON.parse(fs.readFileSync(path.join(output, 'plan.json')));
     const rows = [];
     const details = [];
     const manifest = [];
-    for (const card of catalog.cards) {
-        const directory = path.join(output, 'videos', card.id);
-        const receipt = path.join(directory, 'recording.json');
-        const video = fs.existsSync(receipt) ? JSON.parse(fs.readFileSync(receipt)) : null;
-        const results = fs.readdirSync(path.join(output, 'results'))
-            .filter(file => file.startsWith(card.id + '-') && file.endsWith('-result.json') && !file.endsWith('-video-result.json'))
-            .map(file => ({ file, ...JSON.parse(fs.readFileSync(path.join(output, 'results', file))) }));
+    for (const card of catalog.cards.filter(card => !requested.length || requested.includes(card.id))) {
+        const results = run.results.filter(result => result.id === card.id);
         const assertions = results.flatMap(result => result.checks);
         const passed = assertions.filter(check => check.pass).length;
         const tested = results.length === 8 && assertions.every(check => check.pass);
-        const complete = video?.status === 'completed' && video.revision === catalog.revision &&
-            fs.existsSync(path.resolve(output, video.output_path));
-        const videoPath = complete ? path.relative(output, path.resolve(output, video.output_path)).replaceAll('\\', '/') : '';
-        const status = tested ? `${passed}/${assertions.length} 脚本通过` : `${passed}/${assertions.length} 待复核`;
-        rows.push(`<tr data-name="${escape(card.id + card.name)}"><td>${escape(card.id)}</td><td><a data-video="${escape(videoPath)}" data-id="${card.id}" href="${escape(videoPath || '#')}">${escape(card.name)}</a></td><td>${status}</td><td>${complete ? '已录制' : '待录制'}</td></tr>`);
+        const videoPath = recordedVideo(card.id, false);
+        const upgradeVideo = recordedVideo(card.id, true);
+        const playerVideo = videoPath || upgradeVideo;
+        const version = videoPath ? '基础版' : upgradeVideo ? '升级版' : '';
+        const status = !results.length ? '本轮未测' : `${passed}/${assertions.length} ${tested ? '脚本通过' : '待复核'}`;
+        rows.push(`<tr data-name="${escape(card.id + card.name)}"><td>${escape(card.id)}</td><td><a data-video="${escape(playerVideo)}" data-version="${version}" data-id="${card.id}" href="${escape(playerVideo || '#')}">${escape(card.name)}</a></td><td>${status}</td><td>${version || '待录制'}</td></tr>`);
         const entries = testPlan.cards.find(entry => entry.id === card.id).entries;
         const opening = 'supplementary/JK37-opening/main.mp4';
         const extra = card.id === 'JK37' && fs.existsSync(path.join(output, opening))
             ? '<p><a href="' + opening + '">开局自动布置与自然完成录像</a></p>' : '';
-        details.push(`<article id="details-${card.id}" hidden><h3>基础版</h3><p>${escape(card.text)}</p><h3>升级版</h3><p>${escape(card.upgradedText)}</p>${extra}<details><summary>测试条目</summary><ul>${entries.map(([label, text]) => `<li><strong>${escape(label)}</strong> ${escape(text)}</li>`).join('')}</ul></details><details><summary>测试结果</summary><ul>${results.map(result => `<li><a href="results/${result.file}">${result.upgraded ? '升级' : '基础'} ${result.variant} ${result.checks.filter(check => check.pass).length}/${result.checks.length}</a></li>`).join('')}</ul></details></article>`);
+        const upgradeLink = videoPath && upgradeVideo ? `<p><a href="${escape(upgradeVideo)}">升级版录像</a></p>` : '';
+        details.push(`<article id="details-${card.id}" hidden><h3>基础版</h3><p>${escape(card.text)}</p><h3>升级版</h3><p>${escape(card.upgradedText)}</p>${upgradeLink}${extra}<details><summary>测试条目</summary><ul>${entries.map(([label, text]) => `<li><strong>${escape(label)}</strong> ${escape(text)}</li>`).join('')}</ul></details><details><summary>测试结果</summary><ul>${results.map(result => `<li><a href="results/${run.runId}/${result.file}">${result.upgraded ? '升级' : '基础'} ${result.variant} ${result.checks.filter(check => check.pass).length}/${result.checks.length}</a></li>`).join('')}</ul></details></article>`);
         manifest.push({ id: card.id, name: card.name, scenarios: results.length, passed, assertions: assertions.length,
-            tested, coverage: 'automated-combat-and-hook-checks', video: videoPath, recorded: complete, version: 'Beta 基础版' });
+            tested, coverage: 'automated-combat-and-hook-checks', video: playerVideo, upgradeVideo,
+            recorded: Boolean(playerVideo), version: version && 'Beta ' + version });
     }
     const html = `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>纯那 Beta 逐牌测试</title><style>
 body{margin:0;background:#f4f5f6;color:#172026;font:14px Inter,"Microsoft YaHei",sans-serif}main{max-width:1500px;margin:auto;padding:28px}h1{font-size:24px;margin:0 0 10px}p{line-height:1.65;white-space:pre-line}a{color:#126650}input{box-sizing:border-box;width:100%;padding:10px;border:1px solid #bac4c8;border-radius:4px;font:inherit;background:white}.layout{display:grid;grid-template-columns:minmax(430px,.85fr) minmax(560px,1.5fr);gap:26px}aside{height:82vh;overflow:auto}table{width:100%;border-collapse:collapse;margin-top:12px;background:white}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #e1e6e8;font-size:13px}th{position:sticky;top:0;background:#e9eeed}td:first-child{color:#647278;font-family:monospace}td:nth-child(3){white-space:nowrap}video{width:100%;max-height:61vh;background:#10191c}h2{font-size:19px;margin:0 0 12px}h3{font-size:14px;margin-bottom:0}details{margin:16px 0}summary{cursor:pointer;font-weight:600}li{margin:8px 0;line-height:1.6}.stats{color:#53646b;margin-bottom:22px}@media(max-width:1050px){.layout{display:flex;flex-direction:column-reverse}aside{height:55vh}main{padding:18px}}
-</style><main><h1>纯那 Beta 逐牌测试</h1><p class="stats">工作台 r${catalog.revision} · ${catalog.cards.length}张牌 · ${summary.completedScenarios}个场景 · ${summary.assertions}项断言</p><p>选择卡牌可播放主要效果，查看基础与升级用例，以及对应的自动检查结果。</p><div class="layout"><aside><input id="search" aria-label="搜索卡名或编号" placeholder="搜索卡名或编号"><table><thead><tr><th>编号</th><th>卡名</th><th>基础与升级检查</th><th>Beta录像</th></tr></thead><tbody>${rows.join('')}</tbody></table></aside><section><h2 id="current">选择卡牌</h2><video id="player" controls preload="none"></video>${details.join('')}</section></div></main><script>
-const player=document.getElementById('player');for(const link of document.querySelectorAll('[data-video]'))link.addEventListener('click',event=>{event.preventDefault();if(!link.dataset.video)return;player.src=link.dataset.video;document.getElementById('current').textContent=link.textContent+' · Beta基础版';for(const article of document.querySelectorAll('article'))article.hidden=article.id!=='details-'+link.dataset.id;player.play();});document.getElementById('search').addEventListener('input',event=>{const query=event.target.value.trim().toLowerCase();for(const row of document.querySelectorAll('tr[data-name]'))row.hidden=!row.dataset.name.toLowerCase().includes(query);});
+</style><main><h1>纯那 Beta 逐牌测试</h1><p class="stats">工作台 r${catalog.revision} · 本轮 ${summary.scopeCards} 张牌 · ${summary.completedScenarios} 个场景 · ${summary.assertions} 项断言</p><div class="layout"><aside><input id="search" aria-label="搜索卡名或编号" placeholder="搜索卡名或编号"><table><thead><tr><th>编号</th><th>卡名</th><th>基础与升级检查</th><th>Beta录像</th></tr></thead><tbody>${rows.join('')}</tbody></table></aside><section><h2 id="current">选择卡牌</h2><video id="player" controls preload="none" hidden></video>${details.join('')}</section></div></main><script>
+const player=document.getElementById('player');for(const link of document.querySelectorAll('[data-video]'))link.addEventListener('click',event=>{event.preventDefault();const {video,version,id}=link.dataset;document.getElementById('current').textContent=link.textContent+(version?' · Beta'+version:'');for(const article of document.querySelectorAll('article'))article.hidden=article.id!=='details-'+id;player.hidden=!video;if(video){player.src=video;player.play();}else{player.pause();player.removeAttribute('src');}});document.getElementById('search').addEventListener('input',event=>{const query=event.target.value.trim().toLowerCase();for(const row of document.querySelectorAll('tr[data-name]'))row.hidden=!row.dataset.name.toLowerCase().includes(query);});
 </script></html>`;
     fs.writeFileSync(path.join(output, 'index.html'), html);
     fs.writeFileSync(path.join(output, 'manifest.json'), JSON.stringify({ revision: catalog.revision, cards: manifest }, null, 2));
-    console.log(`Indexed ${manifest.filter(card => card.recorded).length}/${manifest.length} videos`);
+    console.log(`Indexed recordings for ${manifest.filter(card => card.recorded).length}/${manifest.length} cards`);
 }
 
 async function main() {
@@ -539,6 +600,7 @@ async function main() {
     else if (mode === 'record') await record();
     else if (mode === 'record-primary') await record(true);
     else if (mode === 'record-retakes' && requested.length) await record(true, true);
+    else if (mode === 'record-upgrade' && requested.length) await record(true, false, true);
     else if (mode === 'record-opening') await recordOpening();
     else if (mode === 'setup') await ensureCombat();
     else if (mode === 'summary') summarize();

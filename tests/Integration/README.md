@@ -31,9 +31,10 @@ python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --o
 
 ## 结果与录像
 
-- 逐牌结果：`out/tmp/full-card-tests/results/`，每张牌每个版本和变体独立保存；异常作为失败记录。
+- 逐牌结果保存在 `out/tmp/full-card-tests/results/<运行编号>/`，运行编号和卡池版本同时写入逐场景结果。每张牌的版本与变体分别保存，异常计为失败。汇总读取 `latest-run.json` 指定的一次运行，校验完成记录、场景和非空断言。使用多个牌号可在一次运行中验证指定卡牌。
 - 最新专项：`artifacts/latest-card-pool/results/latest-effects.json`。
 - 批量录像使用 `node tools/dev/full-card-audit.cjs record-primary <port> [牌号...]`。每次准备结束之后开始录制，使用悬停、出牌、选牌、结束回合和领取奖励。以卡牌 ID 续录未完成项，保留游戏内音轨。
+- `node tools/dev/full-card-audit.cjs record-upgrade <port> <牌号...>` 录制指定卡的升级版，另存于 `videos-upgrade/`。相同卡的基础版和升级版可同时进入索引。
 - `node tools/dev/full-card-audit.cjs record-opening <port>` 从实际地图进入战斗，录像验证绝美的凋零的自动布置和自然完成。
 - `node tools/dev/full-card-audit.cjs report` 生成可按卡名或 ID 搜索的录像与结果索引。可在测试游戏和启动脚本中设置相同的 `JUNNA_CARD_AUDIT_OUTPUT`，集中保存本轮结果。
 

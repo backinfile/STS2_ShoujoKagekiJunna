@@ -13,6 +13,51 @@ namespace JunnaIntegration;
 
 internal sealed partial class AuditScenario
 {
+    private async Task CheckDistantStars()
+    {
+        await ClearCards();
+        var first = await Add("JB03");
+        var second = await Add("JB03");
+        await TestGameApi.PaidPlay(_context, first, _enemies[0]);
+        await TestGameApi.PaidPlay(_context, second, _enemies[1]);
+        var firstArrow = ArrowCombat.Find(first)!;
+        var secondArrow = ArrowCombat.Find(second)!;
+        await Play(await Add("JB01"));
+        Check("支付正费用不加速任一目标", firstArrow.Remaining == 3 && secondArrow.Remaining == 3, true);
+
+        var free = await Add("JB01");
+        CostChanges.SetFixed(free, 0);
+        await Play(free);
+        Check("零费只随机加速一支一次", firstArrow.Remaining + secondArrow.Remaining, 5);
+        if (upgraded)
+            Check("升级零费加速只命中相同目标", firstArrow.Remaining == 2 && secondArrow.Remaining == 3, true);
+
+        var unmatched = await Add("JB01");
+        CostChanges.SetFixed(unmatched, 0);
+        await TestGameApi.PaidPlay(_context, unmatched, _enemies[2]);
+        Check("无同目标候选时仅基础版可加速", firstArrow.Remaining + secondArrow.Remaining, upgraded ? 5 : 4);
+    }
+
+    private async Task CheckDreamButton()
+    {
+        var arrows = ArrowCombat.Deployed.ToArray();
+        Check("纽扣实际布置一张而非仅抽牌", arrows.Length, Empty ? 0 : 1);
+        if (arrows.Length != 1) return;
+        var arrow = arrows[0];
+        Check("纽扣部署实际可选原件", _choiceCandidates.Contains(arrow.Card) || AuditObserver.Drawn.Contains(arrow.Card), true);
+        if (variant == "normal") Check("手中无其他材料时部署刚抽出的原牌", AuditObserver.Drawn.SingleOrDefault() == arrow.Card, true);
+        Check("纽扣保持完整三回合", arrow.Remaining, 3);
+        int hp = _enemies[0].CurrentHp;
+        int block = player.Creature.Block;
+        await ArrowCombat.Accelerate(_context, arrow, 2);
+        Check("两步后材料效果仍未结算", arrow.Remaining == 1 && hp == _enemies[0].CurrentHp &&
+            block == player.Creature.Block, true);
+        await Finish(arrow.Card);
+        Check("材料到期才产生原效果", CardCatalog.DesignId(arrow.Card) == "JB02"
+            ? player.Creature.Block - block == 5 : hp - _enemies[0].CurrentHp == 6, true);
+        Check("材料结算后离开飞矢区", arrow.Card.Pile?.Type, PileType.Discard);
+    }
+
     private async Task CheckCurrentPoolEffects()
     {
         if (Id == "JK37")
