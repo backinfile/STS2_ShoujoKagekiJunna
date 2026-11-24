@@ -2,7 +2,7 @@
   "SHOUJOKAGEKIJUNNA-KNOWLEDGE.title": "Knowledge",
   "SHOUJOKAGEKIJUNNA-KNOWLEDGE.description": "When you obtain this card, also obtain its other related Knowledge cards.",
   "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.title": "Chain Knowledge",
-  "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.description": "When you obtain Chain Knowledge, also obtain the other cards on the same reward screen and set them as related cards.",
+  "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.description": "When you obtain Chain Knowledge, also obtain the other cards on the same selection screen and make them related cards. In combat, they go to the same pile and stay related until combat ends.",
   "SHOUJOKAGEKIJUNNA-ARROW.title": "Flying Arrow",
   "SHOUJOKAGEKIJUNNA-ARROW.description": "Deploys when played and resolves its effect after several turns."
 }

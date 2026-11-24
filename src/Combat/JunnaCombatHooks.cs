@@ -113,6 +113,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override Task AfterCombatVictory(CombatRoom room) => KnowledgeProgress.WonCombat();
     public override Task AfterCombatEnd(CombatRoom room)
     {
+        DynamicKnowledge.ClearCombatGroups();
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
         ArrowCombat.Clear();

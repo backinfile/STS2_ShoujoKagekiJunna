@@ -85,7 +85,9 @@ public static class KnowledgeCombat
     internal static async Task<IReadOnlyList<CardModel>> GrantPartnersWithPreview(CardModel acquired, PileType destination,
         IReadOnlyList<CardModel>? selected, CardPileAddResult? sourceResult)
     {
-        var members = KnowledgeMembers.Definition(acquired)?.ToArray();
+        var members = destination.IsCombatPile() && selected != null
+            ? selected.Prepend(acquired).GroupBy(card => card.Id).Select(group => (Model: group.First(), Count: group.Count())).ToArray()
+            : KnowledgeMembers.Definition(acquired, forCombatGeneration: destination.IsCombatPile())?.ToArray();
         if (members == null) return [acquired];
         using var single = SingleCard();
         var gained = new List<CardModel> { acquired };
@@ -140,13 +142,21 @@ public static class KnowledgeCombat
              , typeof(bool)
 #endif
             ]);
-        private static void Prefix(ref IEnumerable<CardModel> cards, CardPile newPile, AbstractModel? clonedBy, out HashSet<CardModel> __state)
+        private static void Prefix(ref IEnumerable<CardModel> cards, ref CardPile newPile, AbstractModel? clonedBy, out HashSet<CardModel> __state)
         {
             var originals = cards.ToArray();
             cards = originals;
+            PileType destination = newPile.Type;
             // Core can defer and reorder movement results, so eligibility follows the physical card.
             __state = originals.Where(card => SingleDepth.Value == 0 && clonedBy == null && card.Pile == null
-                && KnowledgeAcquisitionSources.Allows(card, newPile.Type)).ToHashSet();
+                && (KnowledgeAcquisitionSources.Allows(card, destination)
+                    || destination.IsCombatPile() && DynamicKnowledge.HasPreparedSelection(card))).ToHashSet();
+            if (destination == PileType.Hand && originals.Length == 1 && __state.Contains(originals[0]))
+            {
+                int partners = DynamicKnowledge.CombatPartnerCount(originals[0]);
+                if (partners > 0 && newPile.Cards.Count + partners + 1 > CardPile.MaxCardsInHand)
+                    newPile = PileType.Discard.GetPile(originals[0].Owner);
+            }
         }
         private static void Postfix(ref Task<IReadOnlyList<CardPileAddResult>> __result, HashSet<CardModel> __state)
         { __result = Complete(__result, __state); }

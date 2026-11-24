@@ -80,6 +80,10 @@ public static class CardCatalog
         if (card.Rarity is not (CardRarity.Common or CardRarity.Uncommon or CardRarity.Rare)) return false;
         return card is not JunnaCard junna || Get(junna.DesignId) is { Pool: true, ChoiceOnly: false };
     }
+    // Linked cards can be granted in combat even when they are outside the standalone reward pool.
+    internal static bool CanGenerateAsKnowledgeMember(CardModel card) => card is JunnaCard junna
+        ? junna.DesignId is not ("JK127" or "U_CARD_008" or "JK139B" or "JS19")
+        : card.CanBeGeneratedInCombat;
     public static bool IsKnowledge(CardModel card) => (card is JunnaCard junna && Get(junna.DesignId).Knowledge) || DynamicKnowledge.IsLinked(card);
     public static bool IsArrow(CardModel card) => HandArrow.IsArrow(card) || card.Type == ArrowPile.ArrowType;
     public static CardModel Model(string id)

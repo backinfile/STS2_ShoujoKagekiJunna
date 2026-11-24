@@ -50,9 +50,18 @@ public sealed class JunnaKnowledgePotion() : JunnaPotion("knowledge_potion")
         {
             var selected = await CardSelectCmd.FromChooseACardScreen(choiceContext, roots, Owner, canSkip: false);
             if (selected == null || Owner.Creature.CombatState != combat || CombatManager.Instance.IsOverOrEnding) return;
-            selectedCards = CreateBundle(selected);
-            using var single = KnowledgeCombat.SingleCard();
-            await CardPileCmd.AddGeneratedCardsToCombat(selectedCards, PileType.Hand, Owner);
+            await DynamicKnowledge.Prepare(choiceContext, selected, roots);
+            if (DynamicKnowledge.HasPreparedSelection(selected))
+            {
+                foreach (var card in roots) card.SetToFreeThisTurn();
+                await CardPileCmd.AddGeneratedCardToCombat(selected, PileType.Hand, Owner);
+            }
+            else
+            {
+                selectedCards = CreateBundle(selected);
+                using var single = KnowledgeCombat.SingleCard();
+                await CardPileCmd.AddGeneratedCardsToCombat(selectedCards, PileType.Hand, Owner);
+            }
         }
         finally
         {
@@ -67,6 +76,7 @@ public sealed class JunnaKnowledgePotion() : JunnaPotion("knowledge_potion")
         foreach (var model in ModelDb.CardPool<JunnaCardPool>()
             .GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint))
         {
+            if (!model.CanBeGeneratedInCombat) continue;
             // Current run relations can also turn an otherwise ordinary card into knowledge.
             var preview = (CardModel)model.MutableClone();
             preview.Owner = Owner;
@@ -75,14 +85,14 @@ public sealed class JunnaKnowledgePotion() : JunnaPotion("knowledge_potion")
     }
 
     private static string GroupKey(CardModel root) => string.Join("|",
-        (KnowledgeMembers.Definition(root) ?? [(root, 1)])
+        (KnowledgeMembers.Definition(root, forCombatGeneration: true) ?? [(root, 1)])
         .OrderBy(member => member.Item1.Id.ToString())
         .Select(member => $"{member.Item1.Id}:{member.Item2}"));
 
     private IReadOnlyList<CardModel> CreateBundle(CardModel root)
     {
         var cards = new List<CardModel>();
-        foreach (var (model, count) in KnowledgeMembers.Definition(root) ?? [(root, 1)])
+        foreach (var (model, count) in KnowledgeMembers.Definition(root, forCombatGeneration: true) ?? [(root, 1)])
             for (int i = 0; i < count; i++)
                 cards.Add(model.Id == root.Id && i == 0 ? root : Owner.Creature.CombatState!.CreateCard(model, Owner));
         foreach (var card in cards) card.SetToFreeThisTurn();

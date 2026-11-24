@@ -3,6 +3,7 @@ using System.Text.Json;
 using BaseLib.Utils;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -19,7 +20,7 @@ using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
-/// <summary>Run-wide model-ID relations, including cards from other characters.</summary>
+/// <summary>Permanent and combat-only model-ID relations, including cards from other characters.</summary>
 public static class DynamicKnowledge
 {
     // Retained only to migrate groups saved by the former per-card implementation.
@@ -31,6 +32,7 @@ public static class DynamicKnowledge
         public List<KnowledgeRelation>? Groups;
     }
     private static readonly ConditionalWeakTable<Player, RelationCache> Cache = new();
+    private static readonly ConditionalWeakTable<PlayerCombatState, List<KnowledgeRelation>> CombatGroups = new();
     private static readonly ConditionalWeakTable<CardModel, CardModel[]> Pending = new();
     private sealed record Offer(CardReward Reward, CardModel Original);
     private static readonly ConditionalWeakTable<CardModel, Offer> Offers = new();
@@ -58,12 +60,22 @@ public static class DynamicKnowledge
         }
         return cache.Groups;
     }
-    internal static KnowledgeRelation? Group(CardModel card) => card.IsMutable && card.Owner is { } owner
-        ? Groups(owner).FirstOrDefault(group => group.EntranceId == card.Id.ToString()) : null;
+    internal static KnowledgeRelation? Group(CardModel card, bool inCombat = false)
+    {
+        if (!card.IsMutable || card.Owner is not { } owner) return null;
+        string id = card.Id.ToString();
+        if ((inCombat || card.CombatState != null || owner.Creature.CombatState?.ContainsCard(card) == true)
+            && owner.PlayerCombatState is { } state && CombatGroups.TryGetValue(state, out var groups)
+            && groups.FirstOrDefault(group => group.EntranceId == id) is { } current)
+            return current;
+        return Groups(owner).FirstOrDefault(group => group.EntranceId == id);
+    }
+
+    internal static void ClearCombatGroups() => CombatGroups.Clear();
     public static bool IsLinked(CardModel card) => Group(card) != null;
     public static bool IsRewardEntrance(Player player, CardModel card)
         => card.Pool is not JunnaCardPool || CardCatalog.IsRewardCard(card);
-    internal static IEnumerable<(CardModel Model, int Count)>? Definition(CardModel card) => Group(card)?.Members
+    internal static IEnumerable<(CardModel Model, int Count)>? Definition(CardModel card, bool inCombat) => Group(card, inCombat)?.Members
         .Select(member => (ModelDb.GetById<CardModel>(ModelId.Deserialize(member.Id)), member.Count));
     public static IReadOnlyList<CardModel> Members(CardModel source)
     {
@@ -90,11 +102,23 @@ public static class DynamicKnowledge
     }
     private static void Merge(Player player, IEnumerable<CardModel> cards)
     {
-        var groups = Groups(player);
+        MergeInto(Groups(player), cards);
+        Save(player);
+    }
+
+    private static void MergeCombat(Player player, IEnumerable<CardModel> cards)
+    {
+        var groups = CombatGroups.GetOrCreateValue(player.PlayerCombatState!);
+        if (groups.Count == 0 && Groups(player).FirstOrDefault(group => group.EntranceId == PreferredEntrance) is { } permanent)
+            groups.Add(permanent);
+        MergeInto(groups, cards);
+    }
+
+    private static void MergeInto(List<KnowledgeRelation> groups, IEnumerable<CardModel> cards)
+    {
         var counts = cards.GroupBy(card => card.Id.ToString()).ToDictionary(group => group.Key, group => group.Count());
         counts.TryAdd(PreferredEntrance, 1);
         KnowledgeRelation.Merge(groups, new(PreferredEntrance, counts), PreferredEntrance);
-        Save(player);
     }
     private static void Save(Player player)
     {
@@ -124,6 +148,14 @@ public static class DynamicKnowledge
         if (others.Length > 0) Pending.AddOrUpdate(selected, others);
         return Task.CompletedTask;
     }
+    internal static bool HasPreparedSelection(CardModel card) => Pending.TryGetValue(card, out _);
+
+    internal static int CombatPartnerCount(CardModel selected) => Pending.TryGetValue(selected, out var partners)
+        ? partners.Count(CanGrantCombatPartner) : 0;
+
+    private static bool CanGrantCombatPartner(CardModel card) => card.Pile == null
+        && !card.HasBeenRemovedFromState && CardCatalog.CanGenerateAsKnowledgeMember(card);
+
     public static Task<bool> Acquire(CardModel acquired, PileType destination) => Acquire(acquired, destination, null);
     internal static async Task<bool> Acquire(CardModel acquired, PileType destination, ISet<CardModel>? expanded,
         CardPileAddResult? sourceResult = null)
@@ -137,7 +169,12 @@ public static class DynamicKnowledge
         if (!Pending.TryGetValue(acquired, out var partners)) return false;
         Pending.Remove(acquired);
         expanded?.UnionWith(partners);
-        Merge(acquired.Owner, partners.Prepend(acquired));
+        if (destination.IsCombatPile())
+        {
+            partners = partners.Where(CanGrantCombatPartner).ToArray();
+            MergeCombat(acquired.Owner, partners.Prepend(acquired));
+        }
+        else Merge(acquired.Owner, partners.Prepend(acquired));
         foreach (var partner in partners)
         {
             Offers.Remove(partner);

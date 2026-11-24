@@ -5,8 +5,6 @@ namespace ShoujoKagekiJunna.Models;
 
 public sealed partial class JunnaCardU_CARD_008
 {
-    public override bool CanBeGeneratedInCombat => false;
-
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         await CatalogPower.Install<JunnaPowerU_CARD_008>(this, context, play);
