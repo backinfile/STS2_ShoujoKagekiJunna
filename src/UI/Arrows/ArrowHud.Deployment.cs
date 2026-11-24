@@ -1,5 +1,6 @@
 using ShoujoKageki.Core.V1.Presentation;
 using Godot;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
@@ -71,6 +72,7 @@ public partial class ArrowHud
 
     public override void _ExitTree()
     {
+        CombatManager.Instance.StateTracker.CombatStateChanged -= InvalidateHoverPreviews;
         ClearHoverPreview();
         ClearDamageForecasts();
         foreach (var arrow in _previewCache.Keys.ToArray()) RemovePreviewCard(arrow);

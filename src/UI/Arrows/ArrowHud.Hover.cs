@@ -1,4 +1,5 @@
 using Godot;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Helpers;
@@ -65,10 +66,12 @@ public partial class ArrowHud
         });
         card.AddChild(MakeLabel("ArrowPreviewQuantity", new(-55, 216), new(110, 28), 20));
         card.Hide();
-        card.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
+        card.UpdateVisuals(PileType.Play, CardPreviewMode.Normal);
         _previewCache.Add(arrow, card);
         return card;
     }
+
+    private void InvalidateHoverPreviews(CombatState _) => _renderedPreviewStates.Clear();
 
     private void UpdateHoverPreview(NCombatRoom room)
     {
@@ -171,7 +174,6 @@ public partial class ArrowHud
             {
                 var arrow = _hoverArrows[_previewStart + i];
                 if (!_previewCache.TryGetValue(arrow, out var card)) card = CreatePreviewCard(arrow);
-                card.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
                 card.Show();
                 _previewCards.Add((arrow, card));
             }
@@ -194,12 +196,12 @@ public partial class ArrowHud
         foreach (var (arrow, card) in _previewCards)
         {
             string state = _arrowPreviewStates.GetValueOrDefault(arrow) ?? ArrowPreviewState(arrow);
+            card.SetPreviewTarget(_previewTarget ?? arrow.Target);
             if (_renderedPreviewStates.GetValueOrDefault(arrow) != state)
             {
-                card.UpdateVisuals(PileType.None, CardPreviewMode.Normal);
+                card.UpdateVisuals(PileType.Play, CardPreviewMode.Normal);
                 _renderedPreviewStates[arrow] = state;
             }
-            card.SetPreviewTarget(_previewTarget ?? arrow.Target);
             var quantity = card.GetNode<Label>("ArrowPreviewQuantity");
             int copies = _previewQuantities[arrow];
             bool showQuantity = copies > 1;

@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using MegaCrit.Sts2.Core.Nodes.HoverTips;
@@ -22,12 +23,14 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
 {
     private static Vector2 _pointer;
     public override string CmdName => "junna_hover_density";
-    public override string Args => "check <count> | prepare <count> | hover <enemy|player|arrow|clear> | placement | info";
+    public override string Args => "check <count> | prepare <count> | hover <enemy|player|arrow|clear> | placement | live-damage | info";
     public override string Description => "Check actual card visibility for dense arrow hover previews.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args)
     {
         if (player?.PlayerCombatState == null) return new(false, "Combat required");
+        if (args.FirstOrDefault() == "live-damage")
+            return new(CheckLiveDamage(player), true, "Live arrow damage check started");
         if (args.FirstOrDefault() == "placement")
             return new(CheckPlacement(player), true, "Hover placement check started");
         if (args.FirstOrDefault() == "states")
@@ -81,6 +84,50 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
         }
         int count = int.Parse(args.ElementAtOrDefault(1) ?? "64");
         return new(Run(player, count, args.FirstOrDefault() == "check", args.ElementAtOrDefault(2) == "player", args.ElementAtOrDefault(2) == "mixed", args.ElementAtOrDefault(2) == "interleaved"), true, "Hover density probe started");
+    }
+
+    private static async Task CheckLiveDamage(Player player)
+    {
+        var context = new ThrowingPlayerChoiceContext();
+        var target = player.Creature.CombatState!.HittableEnemies.First();
+        var card = CardCatalog.Create("JB03", player);
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);
+        await TestGameApi.PaidPlay(context, card, target);
+        var hud = NCombatRoom.Instance!.GetNode<ArrowHud>("JunnaArrows");
+        for (int attempt = 0; attempt < 20 && !SnapshotHasCard(); attempt++)
+        {
+            Hover(player, "enemy");
+            await Task.Delay(150);
+        }
+        var preview = hud.GetNode<Control>("JunnaArrowHoverPreview").GetChildren().OfType<NCard>()
+            .Single(node => node.IsVisibleInTree() && node.Model == card);
+        var label = preview.GetNode<RichTextLabel>("%DescriptionLabel");
+        var checks = new List<object>();
+        void Check(int expected)
+        {
+            string value = label.Text;
+            checks.Add(new { expected, value, pass = value.Contains(expected.ToString(), StringComparison.Ordinal) });
+        }
+        Check(25);
+        await PowerCmd.Apply<StrengthPower>(context, player.Creature, 5, player.Creature, null);
+        await Task.Delay(250);
+        Check(30);
+        await PowerCmd.Apply<WeakPower>(context, player.Creature, 1, target, null);
+        await Task.Delay(250);
+        Check(22);
+        await PowerCmd.Apply<VulnerablePower>(context, target, 1, player.Creature, null);
+        await Task.Delay(250);
+        Check(33);
+        await PowerCmd.Remove(player.Creature.GetPower<StrengthPower>()!);
+        await Task.Delay(250);
+        Check(28);
+        string report = Path.GetFullPath(Path.Combine(System.Environment.CurrentDirectory,
+            "../../../out/tmp/arrow-live-damage-preview/hover.json"));
+        Directory.CreateDirectory(Path.GetDirectoryName(report)!);
+        File.WriteAllText(report, JsonSerializer.Serialize(checks));
+
+        bool SnapshotHasCard() => hud.GetNodeOrNull<Control>("JunnaArrowHoverPreview")?.GetChildren().OfType<NCard>()
+            .Any(node => node.IsVisibleInTree() && node.Model == card) == true;
     }
 
     private static async Task Run(Player player, int count, bool check, bool self, bool mixed, bool interleaved)

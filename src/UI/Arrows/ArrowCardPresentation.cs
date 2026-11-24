@@ -1,7 +1,10 @@
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.UI;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using ShoujoKagekiJunna.Models;
 
@@ -193,5 +196,19 @@ public partial class ArrowCardPresentation : Control
         _turns.Text = remaining;
         int original = HandArrow.IsArrow(card) ? HandArrow.Turns(card) : turnValue?.Base ?? turns;
         _turns.AddThemeColorOverride("font_color", turns != original ? new Color("7FFF00") : new Color("FFF6E2"));
+    }
+}
+
+[HarmonyPatch(typeof(CardModel), nameof(CardModel.UpdateDynamicVarPreview))]
+internal static class ArrowCombatPreviewPatch
+{
+    private static bool Prefix(CardModel __instance, CardPreviewMode previewMode, Creature? target,
+        DynamicVarSet dynamicVarSet)
+    {
+        if (__instance.Pile?.Type != ArrowPile.PileId || __instance.CombatState == null) return true;
+        // Deployed arrows use the same current combat modifiers as cards on the table.
+        foreach (var variable in dynamicVarSet.Values.ToArray())
+            variable.UpdateCardPreview(__instance, previewMode, target, runGlobalHooks: true);
+        return false;
     }
 }

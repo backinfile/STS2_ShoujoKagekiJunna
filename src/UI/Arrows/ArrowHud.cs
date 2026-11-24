@@ -1,5 +1,6 @@
 using ShoujoKageki.Core.V1.Presentation;
 using Godot;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using ShoujoKagekiJunna.Models;
@@ -64,6 +65,7 @@ public partial class ArrowHud : Control
 
     public override void _Ready()
     {
+        CombatManager.Instance.StateTracker.CombatStateChanged += InvalidateHoverPreviews;
         MouseFilter = MouseFilterEnum.Ignore;
         ZIndex = 0;
         _frame = GD.Load<Texture2D>(JunnaMod.ResourceRoot + "images/floating_arrow_c1.svg");
