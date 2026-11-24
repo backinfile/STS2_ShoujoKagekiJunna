@@ -255,6 +255,35 @@ internal sealed partial class AuditScenario
             await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
             await Play(card);
             Check("温柔的星光下回合恢复首次返能", state.Energy, energy + 1);
+            var material = await Add(Id, upgrade: upgraded);
+            energy = state.Energy;
+            block = player.Creature.Block;
+            await HandArrow.Play(_context, material);
+            Check("温柔的星光成为三回合飞矢", ArrowCombat.Find(material)?.Remaining, 3);
+            Check("首次作为飞矢打出立即返能", state.Energy, energy + 1);
+            Check("飞矢等待时不获得格挡", player.Creature.Block, block);
+
+            state.IncrementTurnNumber();
+            energy = state.Energy;
+            await Finish(material);
+            Check("飞矢完成时获得格挡", player.Creature.Block - block, upgraded ? 4 : 2);
+            Check("跨回合完成飞矢不返能", state.Energy, energy);
+
+            energy = state.Energy;
+            await CardPileCmd.Add(material, PileType.Hand, skipVisuals: true);
+            await Play(material);
+            Check("飞矢完成后本回合首次普通打出仍返能", state.Energy, energy + 1);
+            energy = state.Energy;
+            await CardPileCmd.Add(material, PileType.Hand, skipVisuals: true);
+            await HandArrow.Play(_context, material);
+            Check("普通打出后同回合转飞矢不重复返能", state.Energy, energy);
+            await Finish(material);
+            Check("同回合完成飞矢不重复返能", state.Energy, energy);
+
+            var copy = CardCopies.ForCombat(material, player, CardCopyPurpose.TemporaryCopy);
+            await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Hand, player);
+            await Play(copy);
+            Check("温柔的星光的副本独立返能", state.Energy, energy + 1);
         }
         if (Id == "U_CARD_047")
         {
