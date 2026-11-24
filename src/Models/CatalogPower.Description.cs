@@ -8,11 +8,15 @@ namespace ShoujoKagekiJunna.Models;
 public abstract partial class CatalogPower
 {
     public override int DisplayAmount => _grants.Count == 0 ? Amount : StackAmount();
-    protected override string SmartDescriptionLocKey => "JUNNA_CATALOG.smartDescription";
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("Effects", Description.GetFormattedText())];
+    private bool UsesNativeDescription => CardRules.Get(DesignId).PowerDescription == PowerDescriptionKind.Native;
+    protected override string SmartDescriptionLocKey => UsesNativeDescription
+        ? base.SmartDescriptionLocKey : "JUNNA_CATALOG.smartDescription";
+    protected override IEnumerable<DynamicVar> CanonicalVars => UsesNativeDescription
+        ? base.CanonicalVars : [new StringVar("Effects", Description.GetFormattedText())];
 
     protected virtual int StackAmount() => CardRules.Get(DesignId).PowerAmount switch
     {
+        PowerAmountKind.Native => Amount,
         PowerAmountKind.RemainingLimit => _grants.Sum(g => Math.Max(0, g.V("Limit") - g.Used)),
         PowerAmountKind.Threshold => _grants.Sum(g => g.V("Threshold")),
         PowerAmountKind.Bonus => _grants.Sum(g => g.V("Bonus")),
@@ -31,7 +35,10 @@ public abstract partial class CatalogPower
         return (Math.Max(0, grant.V("Damage")), grant.BaseHits);
     }
 
-    private void RefreshDescription() => ((StringVar)DynamicVars["Effects"]).StringValue = RenderEffects();
+    private void RefreshDescription()
+    {
+        if (!UsesNativeDescription) ((StringVar)DynamicVars["Effects"]).StringValue = RenderEffects();
+    }
 
     protected void Synchronize()
     {

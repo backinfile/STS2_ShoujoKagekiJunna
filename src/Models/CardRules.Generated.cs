@@ -326,14 +326,12 @@ internal static partial class CardRules
             Fields = new Dictionary<string, string>
             {
                 ["Cards"] = "N0",
-                ["DisplayedAmount"] = "N0",
                 ["HandArrowTurns"] = "N1",
-                ["Threshold"] = "N0",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
-            PowerDescription = PowerDescriptionKind.ThresholdSum,
-            PowerAmount = PowerAmountKind.Threshold,
+            PowerDescription = PowerDescriptionKind.Native,
+            PowerAmount = PowerAmountKind.Native,
             SinglePower = false,
         },
         ["JA88"] = new()

@@ -2,10 +2,10 @@ namespace ShoujoKagekiJunna.Models;
 
 internal enum CardTip { Knowledge, Arrow, Vulnerable, Weak, Retain, Energy, Meteor }
 internal enum SimpleCardEffect { Custom, Noop, Attack, Block, Draw, Energy, AttackAndBlock, BlockAndDraw, BlockAndEnergy, DrawAndEnergy, AttackAndDraw }
-internal enum PowerAmountKind { Applications, RemainingLimit, Threshold, Bonus, Block, Amount, Damage }
+internal enum PowerAmountKind { Applications, RemainingLimit, Threshold, Bonus, Block, Amount, Damage, Native }
 internal enum PowerDescriptionKind
 {
-    None, RemainingUses, Passive, Applications, ThresholdSum, RepeatedApplications,
+    None, RemainingUses, Passive, Applications, ThresholdSum, RepeatedApplications, Native,
     BlockSum, AmountWithThreshold, MinimumThreshold, EnergyThresholdGroups, ArrowLimitGroups,
     BlockLimitGroups, TurnGroups, TargetedTurnGroups, LimitGroups, GeneratedCardGroups, DamageGroups, DamageSum, CategoryGroups
 }

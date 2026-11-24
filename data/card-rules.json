@@ -513,9 +513,7 @@
     "JA87": {
       "fields": {
         "HandArrowTurns": "N1",
-        "Cards": "N0",
-        "DisplayedAmount": "N0",
-        "Threshold": "N0"
+        "Cards": "N0"
       },
       "tips": [
         "Arrow"
@@ -524,8 +522,8 @@
         "Arrow"
       ],
       "power": {
-        "description": "ThresholdSum",
-        "amount": "Threshold",
+        "description": "Native",
+        "amount": "Native",
         "single": false
       }
     },

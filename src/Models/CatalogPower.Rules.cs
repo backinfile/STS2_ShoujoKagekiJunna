@@ -84,12 +84,12 @@ public sealed partial class JunnaPowerJA205
 
 public sealed partial class JunnaPowerJA87
 {
-    protected override async Task BeforeHandFlush(PlayerChoiceContext context, Player player)
-    {
-        if (player != Owner.Player) return;
-        foreach (var grant in _grants.ToArray())
-            await HandArrow.Select(context, grant.Card, grant.V("Cards"), optional: true);
-    }
+    protected override int AmountPerGrant(Grant grant) => grant.V("Cards");
+
+    protected override Task BeforeHandFlush(PlayerChoiceContext context, Player player)
+        => _grants.Count > 0 && Amount > 0
+            ? HandArrow.Select(context, _grants[0].Card, Amount, optional: true)
+            : Task.CompletedTask;
 }
 
 public sealed partial class JunnaPowerJA96
@@ -304,17 +304,32 @@ public sealed partial class JunnaPowerU_CARD_008
 
 public sealed partial class JunnaPowerU_CARD_010
 {
-    protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
+    private static readonly int[] Categories = [1, 0, 2];
+    private static readonly string[] CategoryTitles = ["JUNNA_PREPARE_KNOWLEDGE.title", "JUNNA_PREPARE_ARROWS.title", "JUNNA_PREPARE_SHINE.title"];
+
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext context, Player player)
     {
-        if (!grant.Take(1)) return;
-        int category = new[] { 1, 0, 2 }[grant.CycleIndex];
-        var prompt = CardChoices.Prompt(grant.Card);
-        prompt.Add("Category", new LocString("cards", new[] { "JUNNA_PREPARE_KNOWLEDGE.title", "JUNNA_PREPARE_ARROWS.title", "JUNNA_PREPARE_SHINE.title" }[grant.CycleIndex]));
-        grant.CycleIndex = (grant.CycleIndex + 1) % 3;
-        Synchronize();
-        if (Owner.Player!.PlayerCombatState!.Hand.Cards.Count >= CardPile.MaxCardsInHand) return;
-        var candidates = Owner.Player!.PlayerCombatState.DrawPile.Cards.Where(c => CardTutors.Matches(c, category));
-        foreach (var selected in await CardActions.Choose(context, grant.Card, candidates, prompt: prompt))
-            await CardPileCmd.Add(selected, PileType.Hand);
+        if (player != Owner.Player) return;
+        var combat = player.PlayerCombatState!;
+        foreach (var phase in _grants.GroupBy(grant => grant.CycleIndex))
+        {
+            var grants = phase.Where(grant => grant.Take(1)).ToArray();
+            if (grants.Length == 0) continue;
+
+            foreach (var grant in grants) grant.CycleIndex = (phase.Key + 1) % Categories.Length;
+            Synchronize();
+
+            int room = CardPile.MaxCardsInHand - combat.Hand.Cards.Count;
+            if (room <= 0) continue;
+            var candidates = combat.DrawPile.Cards.Where(card => CardTutors.Matches(card, Categories[phase.Key])).ToArray();
+            int count = Math.Min(grants.Sum(grant => grant.V("DrawCount")), Math.Min(room, candidates.Length));
+            if (count <= 0) continue;
+
+            var source = grants[0].Card;
+            var prompt = CardChoices.Prompt(source, count);
+            prompt.Add("Category", new LocString("cards", CategoryTitles[phase.Key]));
+            foreach (var selected in await CardActions.Choose(context, source, candidates, count, prompt: prompt))
+                await CardPileCmd.Add(selected, PileType.Hand);
+        }
     }
 }

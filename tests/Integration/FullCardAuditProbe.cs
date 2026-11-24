@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -139,9 +140,13 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         internal string? Choice;
         internal CardModel? Preferred;
         internal int Limit = int.MaxValue;
+        internal readonly List<(int Minimum, int Maximum)> PickRequests = [];
         public Task<IEnumerable<CardModel>> GetSelectedCards(IEnumerable<CardModel> options, int minimum, int maximum)
-            => Task.FromResult(options.OrderBy(card => card == preferred || card == Preferred || card.Id.Entry == Choice ? 0 : 1)
+        {
+            PickRequests.Add((minimum, maximum));
+            return Task.FromResult(options.OrderBy(card => card == preferred || card == Preferred || card.Id.Entry == Choice ? 0 : 1)
                 .Take(Math.Clamp(Limit, minimum, maximum)));
+        }
         public CardRewardSelection GetSelectedCardReward(IReadOnlyList<CardCreationResult> options, IReadOnlyList<CardRewardAlternative> alternatives)
             => throw new NotSupportedException();
     }
@@ -774,10 +779,36 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             {
                 await power.BeforeSideTurnEnd(_context, MegaCrit.Sts2.Core.Combat.CombatSide.Player, [player.Creature]);
             }
-            if (Id == "JA87" && _selected != null)
+            if (Id == "JA87")
             {
-                await power.BeforeFlush(_context, player);
-                Check("回合末手牌布置", ArrowCombat.Find(_selected)?.Remaining, 3);
+                if (Enhanced)
+                {
+                    await Play(await Add(Id, upgrade: !upgraded));
+                    var second = await Add("JB02");
+                    var unselected = await Add("JB02");
+                    selection.Preferred = second;
+                    Check("混合版本按可选张数叠层", power.Amount == 2 && power.DisplayAmount == 2, true);
+                    var description = power.HoverTips.OfType<HoverTip>().First().Description;
+                    var powerText = Regex.Replace(description, @"\[[^\]]+\]", "");
+                    Check("叠加提示与层数一致", powerText, "在你的回合结束时，可以将2张手牌作为3回合的飞矢打出。");
+
+                    selection.Limit = 0;
+                    await power.BeforeFlush(_context, player);
+                    Check("可零张确认", selection.PickRequests.SequenceEqual([(0, 2)]) && ArrowCombat.Deployed.Count == 0, true);
+                    selection.PickRequests.Clear();
+                    selection.Limit = int.MaxValue;
+                    await power.BeforeFlush(_context, player);
+                    Check("叠层只开启一次多选", selection.PickRequests.SequenceEqual([(0, 2)]), true);
+                    Check("选中原牌均部署为三回合飞矢",
+                        ArrowCombat.Find(_selected!)?.Remaining == 3 && ArrowCombat.Find(second)?.Remaining == 3, true);
+                    Check("第三张手牌保持可用", unselected.Pile?.Type, PileType.Hand);
+                }
+                else
+                {
+                    await power.BeforeFlush(_context, player);
+                    if (_selected != null) Check("回合末手牌布置", ArrowCombat.Find(_selected)?.Remaining, 3);
+                    else Check("空手牌不弹选择", selection.PickRequests.Count, 0);
+                }
             }
             if (Id == "JA22")
             {
@@ -857,7 +888,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Check("付费重放能量", player.PlayerCombatState.Energy, Empty ? 0 : 8);
         }
         if (Id == "U_CARD_009" && Enhanced) await CheckMatching();
-        if (Id == "U_CARD_010" && Enhanced) await CheckCycle();
+        if (Id == "U_CARD_010" && Enhanced) await CheckCycle(selection);
         if (Id == "JK137")
         {
             selection.Choice = "JUNNA_NOTES_ENERGY";
@@ -1073,7 +1104,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         Check("耗尽后清理布置", ArrowCombat.Find(card) == null, true);
     }
 
-    private async Task CheckCycle()
+    private async Task CheckCycle(Selector selection)
     {
         await ClearCards();
         foreach (var power in player.Creature.Powers.ToArray()) await PowerCmd.Remove(power);
@@ -1113,6 +1144,27 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         await cycle.AfterPlayerTurnStart(_context, player);
         Check("直接移牌不受禁止抽牌影响", pending.Pile?.Type, PileType.Hand);
         Check("循环检索不产生抽牌事件", AuditObserver.Drawn.Count, 0);
+
+        await ClearCards();
+        await PowerCmd.Remove(cycle);
+        await Play(await Add(Id, upgrade: upgraded));
+        await Play(await Add(Id, upgrade: !upgraded));
+        cycle = player.Creature.Powers.OfType<CatalogPower>().Single();
+        for (int i = 0; i < 3; i++) await Add("JK11", PileType.Draw);
+        selection.PickRequests.Clear();
+        player.PlayerCombatState.IncrementTurnNumber();
+        await cycle.AfterPlayerTurnStart(_context, player);
+        Check("同阶段只开启一次知识多选", selection.PickRequests.SequenceEqual([(2, 2)]), true);
+        Check("同阶段取两张知识牌", player.PlayerCombatState.Hand.Cards.Count, 2);
+        Check("未选知识牌保持在抽牌堆", player.PlayerCombatState.DrawPile.Cards.Count, 1);
+
+        for (int i = 0; i < 3; i++) await Add("JA38", PileType.Draw);
+        while (player.PlayerCombatState.Hand.Cards.Count < CardPile.MaxCardsInHand - 1) await Add("JB02");
+        selection.PickRequests.Clear();
+        player.PlayerCombatState.IncrementTurnNumber();
+        await cycle.AfterPlayerTurnStart(_context, player);
+        Check("同阶段按剩余手牌容量缩减选择", selection.PickRequests.SequenceEqual([(1, 1)]), true);
+        Check("只取一张飞矢牌填满手牌", player.PlayerCombatState.Hand.Cards.Count(CardCatalog.IsArrow), 1);
     }
 
     private async Task CheckKnowledgeCombination()
