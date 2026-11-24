@@ -180,6 +180,32 @@ int changedRows = twoFullRows.Take(32).Select((old, i) => old!.Value.Y != afterN
 Console.WriteLine($"7→8 existing-arrow travel: {clusterTravel:F1}; 32→33 existing arrows changing rows: {changedRows}");
 Require(clusterTravel < 400 && changedRows == 0, "existing arrows stay close to their slots as the gaps contract");
 
+var survivors = new Vector2?[] { new(120, 0), new(282, 0), new(96, 96), new(176, 96) };
+var afterRemoval = ArrowLayout.Pack(420, 86.4f, [0, 72, 72, 72], survivors);
+Require(afterRemoval.Select(p => (Vector2?)p).SequenceEqual(survivors),
+    "removal and changing density leave every surviving arrow at its existing slot");
+
+var addingCopies = survivors.Concat(new Vector2?[4]).ToArray();
+var afterCopies = ArrowLayout.Pack(420, 86.4f, Enumerable.Repeat(42f, 8).ToArray(), addingCopies);
+Require(afterCopies.Take(survivors.Length).Select(p => (Vector2?)p).SequenceEqual(survivors)
+    && afterCopies.Distinct().Count() == afterCopies.Length,
+    "new copies use free positions without moving settled arrows");
+
+int[] nearFitXs = [0, 48, 128, 176];
+var nearFit = Enumerable.Range(0, 8)
+    .Select(i => (Vector2?)new Vector2(nearFitXs[i % 4], i / 4 * 96))
+    .Append(null).ToArray();
+var nearFitPreferred = nearFit.Select(point => point ?? new Vector2(88, 0)).ToArray();
+var nudged = ArrowLayout.KeepSlots(182, 96, nearFit, nearFitPreferred, (_, _) => 42);
+Require(nudged != null && nudged.Take(8).Where((point, i) => point != nearFit[i]).Count() == 1
+    && nudged.Take(8).Select((point, i) => point.DistanceTo(nearFit[i]!.Value)).Max() == 4
+    && nudged.GroupBy(point => point.Y).All(row => row.OrderBy(point => point.X)
+        .Zip(row.OrderBy(point => point.X).Skip(1)).All(pair => pair.Second.X - pair.First.X >= 42)),
+    "a four-unit nudge opens the last usable gap without rearranging the row");
+float?[] usedNudgeBudget = [0, 56, 120, 176, 0, 56, 120, 176, null];
+Require(ArrowLayout.KeepSlots(182, 96, nearFit, nearFitPreferred, (_, _) => 42, usedNudgeBudget) == null,
+    "repeated inserts cannot push a settled arrow past its original eight-unit allowance");
+
 static void Require(bool condition, string name)
 {
     if (!condition) throw new Exception(name);

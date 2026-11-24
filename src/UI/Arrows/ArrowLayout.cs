@@ -8,6 +8,7 @@ internal enum ArrowLane { FriendlyGroup, FriendlySingle, EnemyGroup, Left, Right
 internal static class ArrowLayout
 {
     internal const int MinimumClusterSize = 8;
+    internal const float MaximumSlotNudge = 8;
 
     // Group regions stay horizontally left of every single-target region in the same faction.
     // Overflow grows down within each region, preserving that rule across multiple rows.
@@ -123,7 +124,8 @@ internal static class ArrowLayout
 
     // A new row starts only when the next arrow, at its actual spacing, no longer fits.
     internal static Vector2[] Pack(float width, float rowSpacing, IReadOnlyList<float> gaps,
-        IReadOnlyList<Vector2?>? previous = null)
+        IReadOnlyList<Vector2?>? previous = null, Func<int, int, float>? minimumGap = null,
+        IReadOnlyList<float?>? anchors = null)
     {
         var result = new Vector2[gaps.Count];
         if (result.Length == 0) return result;
@@ -174,7 +176,101 @@ internal static class ArrowLayout
             for (int i = start; i < end; i++)
                 result[i] = new(offsets[i] - offsets[start] + shift, row * rowSpacing);
         }
+        return previous == null ? result : KeepSlots(width, rowSpacing, previous, result,
+            minimumGap ?? ((left, right) => gaps[Math.Max(left, right)]), anchors) ?? result;
+    }
+
+    // Keep settled arrows in place if a gap fits. If it almost fits, give the two
+    // adjacent arrows a small horizontal allowance measured from their settled slots.
+    internal static Vector2[]? KeepSlots(float width, float rowSpacing, IReadOnlyList<Vector2?> previous,
+        IReadOnlyList<Vector2> preferred, Func<int, int, float> minimumGap, IReadOnlyList<float?>? anchors = null)
+    {
+        var rows = new SortedDictionary<float, List<(int Index, float X)>>();
+        var result = new Vector2[previous.Count];
+        var pinned = new bool[previous.Count];
+        int pinnedCount = 0;
+        for (int i = 0; i < previous.Count; i++)
+        {
+            if (previous[i] is not { } old) continue;
+            if (old.X < -.01f || old.X > width + .01f || old.Y < -.01f) continue;
+            if (!rows.TryGetValue(old.Y, out var row)) rows[old.Y] = row = [];
+            row.Add((i, old.X));
+            result[i] = old;
+            pinned[i] = true;
+            pinnedCount++;
+        }
+        if (pinnedCount == 0) return null;
+        if (pinnedCount == previous.Count) return result;
+
+        int wantedRows = Math.Max(2, preferred.Select(point => point.Y).Distinct().Count());
+        if (rows.Keys.First() >= rowSpacing - .01f) rows.TryAdd(0, []);
+        while (rows.Count < wantedRows) rows.Add(rows.Keys.Last() + rowSpacing, []);
+        foreach (var row in rows.Values) row.Sort((left, right) => left.X.CompareTo(right.X));
+
+        for (int i = 0; i < previous.Count; i++)
+        {
+            if (pinned[i]) continue;
+            List<(int Index, float X)>? bestRow = null;
+            int bestGap = 0;
+            float bestLeft = 0, bestRight = 0;
+            (int Moved, float Travel, float Distance) best = (int.MaxValue, float.PositiveInfinity, float.PositiveInfinity);
+            foreach (var (y, row) in rows)
+            for (int gap = 0; gap <= row.Count; gap++)
+            {
+                float min = gap == 0 ? 0 : row[gap - 1].X + minimumGap(row[gap - 1].Index, i);
+                float max = gap == row.Count ? width : row[gap].X - minimumGap(i, row[gap].Index);
+                float deficit = Math.Max(0, min - max);
+                float left = 0, right = 0;
+                if (deficit > 0)
+                {
+                    if (best.Moved == 0 || deficit > 2 * MaximumSlotNudge) continue;
+                    float minimumLeft = Math.Max(0, deficit - Slack(row, gap, 1));
+                    float maximumLeft = Math.Min(deficit, Slack(row, gap - 1, -1));
+                    if (minimumLeft > maximumLeft) continue;
+                    // A single moving neighbour is preferable when it can create the gap.
+                    bool rightOnly = minimumLeft == 0, leftOnly = maximumLeft == deficit;
+                    if (rightOnly && leftOnly) left = preferred[i].X <= (min + max) * .5f ? deficit : 0;
+                    else if (leftOnly) left = deficit;
+                    else if (!rightOnly) left = Math.Clamp(min - preferred[i].X, minimumLeft, maximumLeft);
+                    right = deficit - left;
+                }
+                var point = new Vector2(deficit > 0 ? min - left : Math.Clamp(preferred[i].X, min, max), y);
+                var score = ((left > 0 ? 1 : 0) + (right > 0 ? 1 : 0), deficit, point.DistanceSquaredTo(preferred[i]));
+                if (score.CompareTo(best) >= 0) continue;
+                best = score;
+                bestRow = row;
+                bestGap = gap;
+                bestLeft = left;
+                bestRight = right;
+                result[i] = point;
+            }
+            if (bestRow == null) return null;
+            if (bestLeft > 0) Shift(bestRow, bestGap - 1, -bestLeft);
+            if (bestRight > 0) Shift(bestRow, bestGap, bestRight);
+            bestRow.Insert(bestGap, (i, result[i].X));
+        }
         return result;
+
+        float Slack(List<(int Index, float X)> row, int slot, int direction)
+        {
+            if ((uint)slot >= (uint)row.Count) return 0;
+            var (index, x) = row[slot];
+            if ((anchors == null ? previous[index]?.X : anchors[index]) is not { } anchor) return 0;
+            int outer = slot + direction;
+            float edge = direction < 0 ? 0 : width;
+            if ((uint)outer < (uint)row.Count)
+                edge = row[outer].X - direction * minimumGap(index, row[outer].Index);
+            float budget = Math.Min(MaximumSlotNudge, MaximumSlotNudge + direction * (anchor - x));
+            return Math.Max(0, Math.Min(budget, direction * (edge - x)));
+        }
+
+        void Shift(List<(int Index, float X)> row, int slot, float delta)
+        {
+            var (index, x) = row[slot];
+            x += delta;
+            row[slot] = (index, x);
+            result[index] = new(x, result[index].Y);
+        }
     }
 
     private readonly record struct Cost(int Moved, double Travel, double Balance) : IComparable<Cost>

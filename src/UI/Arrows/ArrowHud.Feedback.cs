@@ -46,8 +46,7 @@ public partial class ArrowHud
         view.Count.AddThemeColorOverride("font_color", arrow.Remaining <= 1 ? new Color("FFE3A0") : Colors.White);
         if (!changed || !CoreEffects.Enabled) return;
         ArrowFeedback.PulseCounter(view.Count, ref view.CountTween);
-        view.Flash.Restart();
-        view.Flash.Emitting = CoreEffects.Enabled;
+        FlashArrow(view);
     }
 
     internal void CountdownChanged(ArrowDeployment arrow)
@@ -67,13 +66,13 @@ public partial class ArrowHud
         if (view.Releasing) return Task.CompletedTask;
         FinishDeployment(arrow);
         view.Releasing = true;
+        if (CoreEffects.Enabled) SetNativeBody(view, visible: true);
         view.AccelerationCue?.SetCue(AccelerationCueKind.None);
         view.Frame.MouseFilter = MouseFilterEnum.Ignore;
         view.Count.Text = "0";
         view.Count.AddThemeColorOverride("font_color", new Color("FFF1AE"));
         ArrowFeedback.PulseCounter(view.Count, ref view.CountTween);
-        view.Flash.Restart();
-        view.Flash.Emitting = CoreEffects.Enabled;
+        FlashArrow(view);
         view.Root.Scale = Vector2.One;
         var origin = view.Root.Position + BodyCenter;
         var targets = TargetPoints(arrow);
@@ -101,6 +100,19 @@ public partial class ArrowHud
             view.Count.Position = RotateInFrame(CounterCenter, view.Frame.Rotation) - view.Count.Size * .5f;
         });
         return Cmd.Wait(ArrowReleaseVfx.ImpactTime);
+    }
+
+    private static void FlashArrow(ArrowView view)
+    {
+        if (!CoreEffects.Enabled) return;
+        if (view.Flash == null)
+        {
+            view.Flash = ArrowFeedback.CreateFlash(view.Appearance.Frame, IconWidth);
+            view.Flash.Position = IconSize * .5f;
+            view.Frame.AddChild(view.Flash);
+        }
+        view.Flash.Restart();
+        view.Flash.Emitting = true;
     }
 }
 

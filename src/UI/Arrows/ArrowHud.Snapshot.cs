@@ -28,6 +28,7 @@ public partial class ArrowHud
             if (!_views[removed].Releasing) _views[removed].Root.QueueFree();
             _views.Remove(removed);
         }
+        if (_removed.Count > 0) _bodyOrder.RemoveAll(entry => !_live.Contains(entry.Arrow));
         var local = GetGlobalTransform().AffineInverse();
         _targetPositions.Clear();
         foreach (var node in room.CreatureNodes) _targetPositions[node.Entity] = local * node.VfxSpawnPosition;

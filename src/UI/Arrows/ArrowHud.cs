@@ -9,6 +9,7 @@ namespace ShoujoKagekiJunna.Combat;
 /// <summary>Orb-sized portrait arrows with an overhead formation and live target guides.</summary>
 public partial class ArrowHud : Control
 {
+    private const int BatchBodyThreshold = 16;
     // Game canvas units (1920 x 1080). Preserve the original kite proportions at orb scale.
     private const float IconWidth = 42;
     private const float FrameScale = IconWidth / 240;
@@ -36,9 +37,12 @@ public partial class ArrowHud : Control
 
     private sealed record SatelliteMotion(Node2D Node, float Height, float Radius, float Phase, float WobbleSpeed);
     private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, SatelliteMotion[] Satellites,
-        CpuParticles2D Flash)
+        ArrowAppearance Appearance)
     {
         public ArrowLayoutMotion Motion { get; } = new();
+        internal Polygon2D? Portrait;
+        internal TextureRect? ArtFrame;
+        internal CpuParticles2D? Flash;
         internal Tween? CountTween;
         internal ArrowAccelerationCue? AccelerationCue;
         internal bool Releasing;
@@ -51,10 +55,12 @@ public partial class ArrowHud : Control
         internal bool? SatellitesVisible;
     }
     private readonly Dictionary<ArrowDeployment, ArrowView> _views = [];
+    private readonly List<(ArrowDeployment Arrow, ArrowView View)> _bodyOrder = [];
     private Texture2D _frame = null!;
     private Texture2D _groupFrame = null!;
     private double _elapsed;
     private ArrowGuides _guides = null!;
+    private ArrowBodyBatches _bodies = null!;
 
     public override void _Ready()
     {
@@ -66,6 +72,9 @@ public partial class ArrowHud : Control
         ArrowDeploymentVfx.PreloadTextures();
         _guides = new ArrowGuides { Name = "ArrowGuides", Hud = this, ShowBehindParent = true };
         AddChild(_guides);
+        _bodies = new ArrowBodyBatches { Name = "ArrowBodies" };
+        _bodies.Initialize(IconSize, BodyCenter);
+        AddChild(_bodies);
     }
 
     public override void _Process(double delta)
@@ -79,13 +88,14 @@ public partial class ArrowHud : Control
         // Use the second relic row, reserving exactly one row above the arrows.
         float rowY = SecondRelicRowY();
         var arrows = _displayOrder;
+        bool ambientEffects = CoreEffects.AmbientEffects;
         UpdateLayout(arrows, canvas, rowY);
         for (int index = 0; index < arrows.Count; index++)
         {
             var arrow = arrows[index];
             var view = _views[arrow];
             var center = _slots[arrow];
-            float bob = CoreEffects.AmbientEffects ? Mathf.Sin((float)_elapsed * 1.8f + arrow.Sequence * .8f) * 2 : 0;
+            float bob = ambientEffects ? Mathf.Sin((float)_elapsed * 1.8f + arrow.Sequence * .8f) * 2 : 0;
             var aim = view.Targets.Count == 0 ? center + new Vector2(400, 400) : view.TargetCenter;
             // Aim the lower point directly at the target, including the current floating offset.
             // Countdown numerals remain upright as the frame rotates.
@@ -101,7 +111,7 @@ public partial class ArrowHud : Control
                 view.Repeats.Visible = arrow.PlayCount > 1;
                 view.Repeats.Text = $"×{arrow.PlayCount}";
             }
-            bool satellitesVisible = CoreEffects.AmbientEffects && view.Targets.Count > 0;
+            bool satellitesVisible = ambientEffects && view.Targets.Count > 0;
             foreach (var satellite in view.Satellites)
             {
                 if (view.SatellitesVisible != satellitesVisible) satellite.Node.Visible = satellitesVisible;
@@ -109,6 +119,7 @@ public partial class ArrowHud : Control
             }
             view.SatellitesVisible = satellitesVisible;
         }
+        UpdateArrowBodies();
         UpdateHoverPreview(room);
         UpdateAccelerationPreview(room);
         WarmPreviewCache(room);
@@ -194,28 +205,58 @@ public partial class ArrowHud : Control
         float coverScale = Math.Max(FrameSize.X / (textureSize.X * 2 * margin.X), FrameSize.Y / (textureSize.Y * 2 * margin.Y));
         var cropSize = FrameSize / coverScale;
         var cropOffset = textureSize * focusPoint - cropSize * .5f;
-        frame.AddChild(new Polygon2D
-        {
-            Name = "Portrait", Polygon = PortraitWindow.Select(p => p * FrameScale).ToArray(),
-            UV = PortraitWindow.Select(p => p / coverScale + cropOffset).ToArray(),
-            Texture = portrait, Antialiased = true
-        });
-        frame.AddChild(new TextureRect
-        {
-            Name = "ArrowFrame", ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
-            StretchMode = TextureRect.StretchModeEnum.Scale,
-            Texture = arrow.TargetsGroup ? _groupFrame : _frame,
-            Size = IconSize, MouseFilter = MouseFilterEnum.Ignore
-        });
         var count = MakeLabel("Countdown", Vector2.Zero, new(20, 20), 14);
         root.AddChild(count);
         var repeats = MakeLabel("Repeats", new(IconWidth - 5, 16), new(32, 20), 16);
         root.AddChild(repeats);
-        var flash = ArrowFeedback.CreateFlash(arrow.TargetsGroup ? _groupFrame : _frame, IconWidth);
-        flash.Position = IconSize * .5f;
-        frame.AddChild(flash);
+        var appearance = new ArrowAppearance(portrait, arrow.TargetsGroup ? _groupFrame : _frame, new(cropOffset, cropSize));
+        var view = new ArrowView(root, frame, count, repeats, arrow.TargetsGroup ? CreateSatellites(frame) : [], appearance);
         AddChild(root);
-        return new(root, frame, count, repeats, arrow.TargetsGroup ? CreateSatellites(frame) : [], flash);
+        if (ArrowCombat.Deployed.Count < BatchBodyThreshold) SetNativeBody(view, visible: true);
+        _bodyOrder.Add((arrow, view));
+        return view;
+    }
+
+    private void UpdateArrowBodies()
+    {
+        _bodies.Begin();
+        bool dense = _displayOrder.Count >= BatchBodyThreshold;
+        foreach (var (arrow, view) in _bodyOrder)
+        {
+            if (view.Releasing) continue;
+            bool batched = dense && !_deployments.ContainsKey(arrow) && view.Root.Visible
+                && _bodies.Add(view.Appearance, new(view.Frame.Rotation, view.Root.Position + BodyCenter));
+            SetNativeBody(view, visible: !batched);
+        }
+        _bodies.Commit();
+    }
+
+    private static void SetNativeBody(ArrowView view, bool visible)
+    {
+        if (view.Portrait == null)
+        {
+            if (!visible) return;
+            var crop = view.Appearance.Crop;
+            view.Portrait = new Polygon2D
+            {
+                Name = "Portrait", Polygon = PortraitWindow.Select(point => point * FrameScale).ToArray(),
+                UV = PortraitWindow.Select(point => point / FrameSize * crop.Size + crop.Position).ToArray(),
+                Texture = view.Appearance.Portrait, Antialiased = true
+            };
+            view.ArtFrame = new TextureRect
+            {
+                Name = "ArrowFrame", ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+                StretchMode = TextureRect.StretchModeEnum.Scale, Texture = view.Appearance.Frame,
+                Size = IconSize, MouseFilter = MouseFilterEnum.Ignore
+            };
+            view.Frame.AddChild(view.Portrait);
+            view.Frame.MoveChild(view.Portrait, 0);
+            view.Frame.AddChild(view.ArtFrame);
+            view.Frame.MoveChild(view.ArtFrame, 1);
+        }
+        if (view.Portrait.Visible == visible) return;
+        view.Portrait.Visible = visible;
+        view.ArtFrame!.Visible = visible;
     }
 
     private static Label MakeLabel(string name, Vector2 position, Vector2 size, int fontSize)
