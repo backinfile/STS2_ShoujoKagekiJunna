@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using ShoujoKagekiJunna.Combat;
+using ShoujoKageki.Core.V1;
 
 namespace ShoujoKagekiJunna.Models;
 
@@ -14,9 +15,9 @@ public sealed partial class JunnaCardU_CARD_005
         for (int i = 0; i < Value("Cards"); i++)
         {
             using var single = KnowledgeCombat.SingleCard();
-            var stardust = CardCatalog.Create("U_CARD_005", player);
-            await GeneratedArrowPresentation.Play(stardust,
-                () => CardActions.FreePlay(context, stardust, play.Target, keepTarget: true));
+            var copy = CardCopies.ForCombat(this, player, CardCopyPurpose.TemporaryCopy);
+            await GeneratedArrowPresentation.Play(copy,
+                () => CardActions.FreePlay(context, copy, play.Target, keepTarget: true));
         }
     }
 

@@ -93,7 +93,7 @@ public sealed class ArrowSpeedProbe : AbstractConsoleCmd
         Verify("visual continues after play returns", activeAfterPlay > 0, activeAfterPlay);
         Verify("Stardust resolution and two children finish within 2.7 seconds", resolutionSeconds < 2.7, resolutionSeconds);
         Verify("Stardust creates two independently deployed children", children.Length == 2, children.Length);
-        Verify("Stardust damage resolves exactly once", hp - target.CurrentHp == 8, hp - target.CurrentHp);
+        Verify("Stardust damage resolves exactly once", hp - target.CurrentHp == 25, hp - target.CurrentHp);
         Verify("parent exhausts after resolving", star.Pile?.Type == PileType.Exhaust, star.Pile?.Type.ToString() ?? "none");
         Verify("child deployment animations overlap during resolution", peakDeployments >= 2, peakDeployments);
         Verify("child visual continues after resolution", activeAfterChildren > 0, activeAfterChildren);

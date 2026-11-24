@@ -145,7 +145,7 @@
   "JUNNA_JK260.title": "知识的力量",
   "JUNNA_JK260.description": "每回合第一次打出[gold]知识[/gold]牌后，获得{N0:diff()}点[gold]力量[/gold]。",
   "JUNNA_U_CARD_005.title": "星屑",
-  "JUNNA_U_CARD_005.description": "造成{Damage:diff()}点伤害。\n打出{N1:diff()}张[gold]星屑[/gold]。",
+  "JUNNA_U_CARD_005.description": "造成{Damage:diff()}点伤害。\n打出{N1:diff()}张自身的复制。",
   "JUNNA_JK272.title": "失势",
   "JUNNA_JK272.description": "[gold]知识[/gold]。\n给予所有敌人{N0:diff()}层[gold]虚弱[/gold]。",
   "JUNNA_JK272B.title": "一无所有",

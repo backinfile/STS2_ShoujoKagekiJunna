@@ -588,9 +588,10 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         {
             var children = ArrowCombat.Deployed.ToArray();
             Check("星屑衍生布置", children.Length, 2);
-            Check("星屑衍生为两个独立原版对象", children.Select(arrow => arrow.Card).Distinct().Count() == 2 &&
-                children.All(arrow => arrow.Card != _source && CardCatalog.DesignId(arrow.Card) == Id && !arrow.Card.IsUpgraded), true);
-            Check("衍生星屑沿用目标及完整倒计时", children.All(arrow => arrow.Target == _enemies[0] && arrow.Remaining == 3), true);
+            Check("星屑的两个独立复制保留源牌升级状态", children.Select(arrow => arrow.Card).Distinct().Count() == 2 &&
+                children.All(arrow => arrow.Card != _source && CardCatalog.DesignId(arrow.Card) == Id && arrow.Card.IsUpgraded == upgraded), true);
+            Check("星屑复制沿用目标及完整倒计时", children.All(arrow => arrow.Target == _enemies[0] && arrow.Remaining == 3), true);
+            Check("仅源牌支付2费", player.PlayerCombatState!.Energy, _beforeEnergy - 2);
         }
         if (Id is "JA43" or "JA177")
         {
@@ -622,7 +623,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (!_recording && Id == "U_CARD_032")
             Check("星光迸发先伤害再返还能量", AuditObserver.StarburstEnergyAtDamage, _beforeEnergy - 4);
         if (Id == "U_CARD_033")
-            Check("超常发挥未获得保留", _source.Keywords.Contains(CardKeyword.Retain), false);
+            Check("超常发挥仅升级版获得保留", _source.Keywords.Contains(CardKeyword.Retain), upgraded);
         Check("手牌容量", player.PlayerCombatState!.Hand.Cards.Count <= CardPile.MaxCardsInHand, true);
         if (Id == "JA53")
         {
@@ -679,12 +680,17 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         }
         if (Id == "U_CARD_005" && Enhanced)
         {
-            var child = ArrowCombat.Deployed.First().Card;
+            var child = (CatalogCard)ArrowCombat.Deployed.First().Card;
+            Check("星屑复制继承源牌伤害", child.Value("Damage"), upgraded ? 30 : 25);
+            int modifiedDamage = (upgraded ? 30 : 25) + 3;
+            child.SetGeneratedDamage(modifiedDamage);
             int before = _enemies[0].CurrentHp;
             await Finish(child);
-            Check("升级源牌的衍生星屑仍按基础伤害结算", before - _enemies[0].CurrentHp, 8);
-            Check("首张子代完成后再分生两张", ArrowCombat.Deployed.Count, 3);
-            Check("子代自身完成后消耗", child.Pile?.Type, PileType.Exhaust);
+            Check("星屑复制按修改后的伤害结算", before - _enemies[0].CurrentHp, modifiedDamage);
+            Check("首张复制完成后再打出两张带当前伤害的复制",
+                ArrowCombat.Deployed.Count == 3 && ArrowCombat.Deployed.Count(arrow =>
+                    arrow.Card is CatalogCard card && card.IsUpgraded == upgraded && card.Value("Damage") == modifiedDamage) == 2, true);
+            Check("复制自身完成后消耗", child.Pile?.Type, PileType.Exhaust);
         }
         if (definition.Type == "能力" && Id != "U_CARD_047")
         {

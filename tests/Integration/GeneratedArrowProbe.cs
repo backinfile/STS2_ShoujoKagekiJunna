@@ -92,7 +92,7 @@ public sealed class GeneratedArrowProbe : AbstractConsoleCmd
             Events("Stardust children", 2);
             var children = ArrowCombat.Deployed.ToArray();
             Verify("Stardust: two free children, one hit and parent exhaust", children.Length == 2 && children.All(a => a.Remaining == 3 && a.Target == target) &&
-                hp - target.CurrentHp == 8 && player.PlayerCombatState.Energy == 27 && star.Pile?.Type == PileType.Exhaust,
+                hp - target.CurrentHp == 25 && player.PlayerCombatState.Energy == 26 && star.Pile?.Type == PileType.Exhaust,
                 new { children = children.Length, damage = hp - target.CurrentHp, player.PlayerCombatState.Energy });
             int childVisuals = NCombatRoom.Instance!.GetNode<ArrowHud>("JunnaArrows").GetChildren().OfType<ArrowDeploymentVfx>().Count();
             Verify("Stardust: child visuals continue together after resolution", childVisuals == 2, childVisuals);

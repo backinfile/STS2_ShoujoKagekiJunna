@@ -1,5 +1,5 @@
 {
-  "revision": 6196,
+  "revision": 6213,
   "cards": [
     {
       "id": "JA15",
@@ -2368,8 +2368,8 @@
       "modelId": "JUNNA_U_CARD_005",
       "className": "JunnaCardU_CARD_005",
       "name": "星屑",
-      "cost": 1,
-      "upgradedCost": 1,
+      "cost": 2,
+      "upgradedCost": 2,
       "costsX": false,
       "type": "飞矢",
       "target": "AnyEnemy",
@@ -2388,8 +2388,8 @@
       "values": [
         {
           "name": "Damage",
-          "base": 8,
-          "upgraded": 12
+          "base": 25,
+          "upgraded": 30
         },
         {
           "name": "N1",
@@ -2402,8 +2402,8 @@
           "upgraded": 3
         }
       ],
-      "text": "造成8点伤害。打出2张星屑。消耗。",
-      "upgradedText": "造成12点伤害。打出2张星屑。消耗。"
+      "text": "造成25点伤害。打出2张自身的复制。消耗。",
+      "upgradedText": "造成30点伤害。打出2张自身的复制。消耗。"
     },
     {
       "id": "JK272",
@@ -3063,7 +3063,7 @@
       "className": "JunnaCardU_CARD_033",
       "name": "超常发挥",
       "cost": 2,
-      "upgradedCost": 1,
+      "upgradedCost": 2,
       "costsX": false,
       "type": "技能",
       "target": "Self",
@@ -3074,14 +3074,14 @@
       "exhaust": false,
       "upgradedExhaust": false,
       "retain": false,
-      "upgradedRetain": false,
+      "upgradedRetain": true,
       "innate": false,
       "upgradedInnate": false,
       "damageCapable": false,
       "portrait": "U_CARD_033.png",
       "values": [],
       "text": "本回合造成的攻击伤害翻倍。",
-      "upgradedText": "本回合造成的攻击伤害翻倍。"
+      "upgradedText": "保留。本回合造成的攻击伤害翻倍。"
     },
     {
       "id": "U_CARD_034",
