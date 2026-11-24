@@ -146,10 +146,11 @@ internal static partial class CardRules
             Fields = new Dictionary<string, string>
             {
                 ["DamagePercent"] = "N0",
+                ["DisplayedAmount"] = "N0",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
-            PowerDescription = PowerDescriptionKind.Passive,
+            PowerDescription = PowerDescriptionKind.ThresholdSum,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = true,
         },

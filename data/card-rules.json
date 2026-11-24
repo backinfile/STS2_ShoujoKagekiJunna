@@ -1594,7 +1594,8 @@
     },
     "JA205": {
       "fields": {
-        "DamagePercent": "N0"
+        "DamagePercent": "N0",
+        "DisplayedAmount": "N0"
       },
       "tips": [
         "Arrow"
@@ -1603,7 +1604,7 @@
         "Arrow"
       ],
       "power": {
-        "description": "Passive",
+        "description": "ThresholdSum",
         "amount": "Applications",
         "single": true
       }

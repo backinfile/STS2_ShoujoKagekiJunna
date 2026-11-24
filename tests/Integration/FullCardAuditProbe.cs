@@ -507,7 +507,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Check("流星数量", generated.Length, count);
             Check("流星版本", generated.All(arrow => !arrow.Card.IsUpgraded && arrow.Remaining == 2), true);
             if (Id == "U_CARD_030")
-                Check("倾泻的星光逐张记录流星伤害", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == (upgraded ? 10 : 8)), true);
+                Check("倾泻的星光逐张记录流星伤害", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == (upgraded ? 20 : 16)), true);
             if (Id is "JA81" or "JA76")
                 Check("流星记录攻击结算的总伤害和对应敌人", generated.All(arrow =>
                     arrow.Card.DynamicVars.Damage.BaseValue == damage &&
@@ -824,8 +824,8 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 Check("加速能力说明的触发时点", power.Description.GetFormattedText().Contains("打出"), true);
                 var arrow = await Add("JB03");
                 await Play(arrow);
-                Check("新飞矢初始加速", ArrowCombat.Find(arrow)?.Remaining, upgraded ? 1 : 2);
-                await Finish(arrow);
+                Check("新飞矢初始加速", ArrowCombat.Find(arrow)?.Remaining ?? 0, upgraded ? 0 : 1);
+                if (ArrowCombat.Find(arrow) != null) await Finish(arrow);
                 Check("加速赋予消耗", arrow.Pile?.Type, PileType.Exhaust);
                 if (Enhanced)
                 {
@@ -998,7 +998,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         int turns = HandArrow.Turns(card);
         await Play(card);
         var deployment = ArrowCombat.Find(card);
-        Check("与加速配合打出即推进", deployment?.Remaining ?? 0, Math.Max(0, turns - 1));
+        Check("与加速配合打出即推进", deployment?.Remaining ?? 0, Math.Max(0, turns - 2));
         if (deployment != null)
         {
             await ArrowCombat.CopyAll(_context, player);

@@ -26,7 +26,7 @@
   "JUNNA_JK37B.title": "囚禁",
   "JUNNA_JK37B.description": "[gold]知识[/gold]。\n造成{Damage:diff()}点伤害。\n所有目标为敌人的[gold]飞矢[/gold]都指向当前目标。",
   "JUNNA_JK37C.title": "遥远星辰",
-  "JUNNA_JK37C.description": "[gold]知识[/gold]。\n打出耗能为{N0:diff()}的牌后，随机{IfUpgraded:show:使|}一个{IfUpgraded:show:同目标的|}[gold]飞矢[/gold][gold]加速[/gold]{N1:diff()}回合。",
+  "JUNNA_JK37C.description": "[gold]知识[/gold]。\n打出耗能为{N0:diff()}的牌后，{IfUpgraded:show:相同目标的|随机}一个[gold]飞矢[/gold][gold]加速[/gold]{N1:diff()}回合。",
   "JUNNA_JK49.title": "挺身反抗",
   "JUNNA_JK49.description": "[gold]知识[/gold]。\n造成{Damage:diff()}点伤害。",
   "JUNNA_JK49B.title": "默然忍受",

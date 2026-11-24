@@ -1,5 +1,5 @@
 {
-  "revision": 6213,
+  "revision": 6252,
   "cards": [
     {
       "id": "JA15",
@@ -455,7 +455,7 @@
         }
       ],
       "text": "知识。打出耗能为0的牌后，随机一个飞矢加速1回合。",
-      "upgradedText": "知识。打出耗能为0的牌后，随机使一个同目标的飞矢加速1回合。"
+      "upgradedText": "知识。打出耗能为0的牌后，相同目标的一个飞矢加速1回合。"
     },
     {
       "id": "JK49",
@@ -916,8 +916,8 @@
       "modelId": "JUNNA_JA67",
       "className": "JunnaCardJA67",
       "name": "连珠箭",
-      "cost": 1,
-      "upgradedCost": 1,
+      "cost": 2,
+      "upgradedCost": 2,
       "costsX": false,
       "type": "飞矢",
       "target": "AnyEnemy",
@@ -936,8 +936,8 @@
       "values": [
         {
           "name": "Damage",
-          "base": 20,
-          "upgraded": 26
+          "base": 22,
+          "upgraded": 28
         },
         {
           "name": "Turns",
@@ -945,8 +945,8 @@
           "upgraded": 2
         }
       ],
-      "text": "造成20点伤害。重新打出此牌。",
-      "upgradedText": "造成26点伤害。重新打出此牌。",
+      "text": "造成22点伤害。重新打出此牌。",
+      "upgradedText": "造成28点伤害。重新打出此牌。",
       "arrowFocus": {
         "x": 0.49,
         "y": 0.42
@@ -1260,12 +1260,12 @@
       "values": [
         {
           "name": "Damage",
-          "base": 10,
-          "upgraded": 12
+          "base": 9,
+          "upgraded": 11
         }
       ],
-      "text": "造成10点伤害。打出一张造成等量伤害的流星。",
-      "upgradedText": "造成12点伤害。打出一张造成等量伤害的流星。"
+      "text": "造成9点伤害。打出一张造成等量伤害的流星。",
+      "upgradedText": "造成11点伤害。打出一张造成等量伤害的流星。"
     },
     {
       "id": "JA81B",
@@ -1621,12 +1621,12 @@
       "values": [
         {
           "name": "Damage",
-          "base": 15,
-          "upgraded": 20
+          "base": 14,
+          "upgraded": 18
         }
       ],
-      "text": "知识。造成15点伤害。",
-      "upgradedText": "知识。造成20点伤害。"
+      "text": "知识。造成14点伤害。",
+      "upgradedText": "知识。造成18点伤害。"
     },
     {
       "id": "JK122B",
@@ -1826,12 +1826,12 @@
       "values": [
         {
           "name": "N0",
-          "base": 1,
-          "upgraded": 2
+          "base": 2,
+          "upgraded": 3
         }
       ],
-      "text": "打出飞矢时使其加速1回合，并使其获得消耗。",
-      "upgradedText": "打出飞矢时使其加速2回合，并使其获得消耗。"
+      "text": "打出飞矢时使其加速2回合，并使其获得消耗。",
+      "upgradedText": "打出飞矢时使其加速3回合，并使其获得消耗。"
     },
     {
       "id": "JH27B",
@@ -2305,7 +2305,7 @@
       "className": "JunnaCardJA205",
       "name": "沸腾的热情",
       "cost": 3,
-      "upgradedCost": 2,
+      "upgradedCost": 3,
       "costsX": false,
       "type": "能力",
       "target": "Self",
@@ -2325,11 +2325,11 @@
         {
           "name": "N0",
           "base": 50,
-          "upgraded": 50
+          "upgraded": 100
         }
       ],
       "text": "飞矢造成50%额外伤害。",
-      "upgradedText": "飞矢造成50%额外伤害。"
+      "upgradedText": "飞矢造成100%额外伤害。"
     },
     {
       "id": "JK260",
@@ -2494,12 +2494,12 @@
       "values": [
         {
           "name": "Block",
-          "base": 11,
-          "upgraded": 14
+          "base": 10,
+          "upgraded": 13
         }
       ],
-      "text": "知识。获得11点格挡。",
-      "upgradedText": "知识。获得14点格挡。"
+      "text": "知识。获得10点格挡。",
+      "upgradedText": "知识。获得13点格挡。"
     },
     {
       "id": "JK275",
@@ -2632,8 +2632,8 @@
       "values": [
         {
           "name": "Block",
-          "base": 4,
-          "upgraded": 8
+          "base": 3,
+          "upgraded": 6
         },
         {
           "name": "N1",
@@ -2641,8 +2641,8 @@
           "upgraded": 1
         }
       ],
-      "text": "获得4点格挡。抽1张牌。闪耀3。",
-      "upgradedText": "获得8点格挡。抽1张牌。闪耀3。"
+      "text": "获得3点格挡。抽1张牌。闪耀3。",
+      "upgradedText": "获得6点格挡。抽1张牌。闪耀3。"
     },
     {
       "id": "U_CARD_010",
@@ -2947,8 +2947,8 @@
       "modelId": "JUNNA_U_CARD_030",
       "className": "JunnaCardU_CARD_030",
       "name": "倾泻的星光",
-      "cost": 2,
-      "upgradedCost": 2,
+      "cost": 3,
+      "upgradedCost": 3,
       "costsX": false,
       "type": "技能",
       "target": "None",
@@ -2972,12 +2972,12 @@
         },
         {
           "name": "Damage",
-          "base": 8,
-          "upgraded": 10
+          "base": 16,
+          "upgraded": 20
         }
       ],
-      "text": "本次对战中每打出过1次飞矢，就打出一张造成8点伤害的流星。",
-      "upgradedText": "本次对战中每打出过1次飞矢，就打出一张造成10点伤害的流星。"
+      "text": "本次对战中每打出过1次飞矢，就打出一张造成16点伤害的流星。",
+      "upgradedText": "本次对战中每打出过1次飞矢，就打出一张造成20点伤害的流星。"
     },
     {
       "id": "U_CARD_031",

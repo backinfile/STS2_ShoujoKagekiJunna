@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Combat;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
@@ -15,6 +16,10 @@ internal sealed partial class AuditScenario
 {
     private async Task CheckDistantStars()
     {
+        string description = _source.GetDescriptionForPile(PileType.Hand);
+        Check("遥远星辰按版本显示目标条件", description.Contains(upgraded ? "相同目标的一个" : "随机一个"), true);
+        Check("飞矢提示使用工作台词条", _source.HoverTips.OfType<HoverTip>().Any(tip =>
+            tip.Title == "飞矢" && tip.Description == "打出后布置，等待数个回合后触发卡牌效果。"), true);
         await ClearCards();
         var first = await Add("JB03");
         var second = await Add("JB03");
@@ -204,7 +209,10 @@ internal sealed partial class AuditScenario
             await Play(arrow);
             hp = _enemies[0].CurrentHp;
             await Finish(arrow);
-            Check("沸腾的热情将飞矢伤害提高五成", hp - _enemies[0].CurrentHp, 27);
+            Check("沸腾的热情按版本提高飞矢伤害", hp - _enemies[0].CurrentHp, upgraded ? 36 : 27);
+            var power = player.Creature.GetPower<JunnaPowerJA205>()!;
+            string description = power.HoverTips.OfType<HoverTip>().First().Description;
+            Check("沸腾的热情提示显示实际增伤", description.Contains(upgraded ? "100[/blue]%" : "50[/blue]%"), true);
         }
         if (Id == "JK400B")
         {

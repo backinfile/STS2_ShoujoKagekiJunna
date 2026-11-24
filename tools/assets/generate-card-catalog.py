@@ -373,7 +373,11 @@ def main():
         if lang == 'zhs':
             keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.title'] = knowledge['name']
             keywords['SHOUJOKAGEKIJUNNA-KNOWLEDGE.description'] = knowledge['definition']
-            chain = next((item for item in bundle['data'].get('terms', []) if item['id'] == 'KW_CHAIN_KNOWLEDGE'), None)
+            terms = {item['id']: item for item in bundle['data'].get('terms', [])}
+            if arrow := terms.get('KW_STAGE'):
+                keywords['SHOUJOKAGEKIJUNNA-ARROW.title'] = arrow['name']
+                keywords['SHOUJOKAGEKIJUNNA-ARROW.description'] = arrow['definition']
+            chain = terms.get('KW_CHAIN_KNOWLEDGE')
             if chain:
                 keywords['SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.title'] = chain['name']
                 keywords['SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.description'] = chain['definition']
@@ -413,7 +417,7 @@ def main():
                 continue
             amount = 1 if cid in ('U_CARD_008', 'U_CARD_010') else power_amounts[cid]
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount)).replace('{Repeat}', '1').replace('{Damage}', str(amount))
-            powers[f'JUNNA_{cid}_POWER.smartDescription'] = text.replace('{Amount}', str(amount)) if cid == 'JA205' else text
+            powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
             if cid == 'U_CARD_016':
                 powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]飞矢[/gold]、[gold]闪耀[/gold]中轮换。'
             if cid == 'U_CARD_010':

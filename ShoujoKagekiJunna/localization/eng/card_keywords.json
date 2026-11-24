@@ -4,5 +4,5 @@
   "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.title": "Chain Knowledge",
   "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.description": "When you obtain Chain Knowledge, also obtain the other cards on the same reward screen and make them related cards.",
   "SHOUJOKAGEKIJUNNA-ARROW.title": "Flying Arrow",
-  "SHOUJOKAGEKIJUNNA-ARROW.description": "Deploys when played and resolves its effect when its remaining turns reach 0."
+  "SHOUJOKAGEKIJUNNA-ARROW.description": "Deploys when played and resolves its effect after several turns."
 }

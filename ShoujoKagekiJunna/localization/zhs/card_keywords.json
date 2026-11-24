@@ -4,5 +4,5 @@
   "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.title": "连锁知识",
   "SHOUJOKAGEKIJUNNA-CHAIN_KNOWLEDGE.description": "获得连锁知识时，同时获得同一奖励界面的其他牌，并将它们设为关联牌。",
   "SHOUJOKAGEKIJUNNA-ARROW.title": "飞矢",
-  "SHOUJOKAGEKIJUNNA-ARROW.description": "打出后布置，剩余回合数降为0时触发卡牌效果。"
+  "SHOUJOKAGEKIJUNNA-ARROW.description": "打出后布置，等待数个回合后触发卡牌效果。"
 }
