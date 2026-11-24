@@ -183,7 +183,7 @@
   "JUNNA_U_CARD_031.title": "大道具",
   "JUNNA_U_CARD_031.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n重新打出此牌。",
   "JUNNA_U_CARD_032.title": "星光迸发",
-  "JUNNA_U_CARD_032.description": "获得{energyPrefix:energyIcons(3)}。\n造成{Damage:diff()}点伤害。",
+  "JUNNA_U_CARD_032.description": "造成{Damage:diff()}点伤害。\n获得{energyPrefix:energyIcons(3)}。",
   "JUNNA_U_CARD_033.title": "超常发挥",
   "JUNNA_U_CARD_033.description": "本回合造成的攻击伤害翻倍。",
   "JUNNA_U_CARD_034.title": "准备",

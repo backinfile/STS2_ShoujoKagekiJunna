@@ -1447,7 +1447,7 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
-                ["Energy"] = "N0",
+                ["Energy"] = "N1",
             },
         },
         ["U_CARD_033"] = new()

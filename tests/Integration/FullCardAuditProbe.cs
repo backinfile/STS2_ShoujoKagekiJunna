@@ -423,6 +423,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
     {
         using var selector = TestGameApi.UseSelector(new Selector(_selected));
         AuditObserver.Drawn.Clear();
+        AuditObserver.StarburstEnergyAtDamage = null;
         Check("支付并打出", await Play(_source), true);
         if (ArrowCombat.Find(_source) is { } arrow)
         {
@@ -479,7 +480,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (_recording && CardCatalog.IsArrow(_source)) block += 12;
         Check("格挡", player.Creature.Block, block);
         if (Id == "U_CARD_047")
-            Check("力量层数", player.Creature.GetPower<StrengthPower>()?.Amount, upgraded ? 9 : 7);
+            Check("力量层数", player.Creature.GetPower<StrengthPower>()?.Amount, upgraded ? 10 : 8);
         else if (definition.Type == "能力")
             Check("能力安装", player.Creature.Powers.OfType<CatalogPower>().Any(power => power.DesignId == Id), true);
         else if (Id is not ("JA67" or "U_CARD_031"))
@@ -499,7 +500,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Check("流星数量", generated.Length, count);
             Check("流星版本", generated.All(arrow => !arrow.Card.IsUpgraded && arrow.Remaining == 2), true);
             if (Id == "U_CARD_030")
-                Check("倾泻的星光逐张记录流星伤害", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == (upgraded ? 12 : 8)), true);
+                Check("倾泻的星光逐张记录流星伤害", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == (upgraded ? 10 : 8)), true);
             if (Id is "JA81" or "JA76")
                 Check("流星记录攻击结算的总伤害和对应敌人", generated.All(arrow =>
                     arrow.Card.DynamicVars.Damage.BaseValue == damage &&
@@ -616,6 +617,10 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 Check("即时能量", player.PlayerCombatState!.Energy - _beforeEnergy,
                     int.Parse(energy.Groups[1].Value) - (upgraded ? definition.UpgradedCost : definition.Cost));
         }
+        if (!_recording && Id == "U_CARD_032")
+            Check("星光迸发先伤害再返还能量", AuditObserver.StarburstEnergyAtDamage, _beforeEnergy - 4);
+        if (Id == "U_CARD_033")
+            Check("超常发挥未获得保留", _source.Keywords.Contains(CardKeyword.Retain), false);
         Check("手牌容量", player.PlayerCombatState!.Hand.Cards.Count <= CardPile.MaxCardsInHand, true);
         if (Id == "JA53")
         {
@@ -916,7 +921,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         await Finish(card);
         Check("改编完成后只有循环牌重新布置", ArrowCombat.Find(card) != null, Id is "JA67" or "U_CARD_031");
         if (Id == "U_CARD_047")
-            Check("改编完成后获得两人的心跳力量", player.Creature.GetPower<StrengthPower>()?.Amount, upgraded ? 9 : 7);
+            Check("改编完成后获得两人的心跳力量", player.Creature.GetPower<StrengthPower>()?.Amount, upgraded ? 10 : 8);
         else if (definition.Type == "能力")
             Check("改编能力在完成时安装", player.Creature.Powers.OfType<CatalogPower>().Any(power => power.DesignId == Id), true);
         if (Regex.IsMatch(definition.Text, @"闪耀\d+"))
@@ -1117,6 +1122,16 @@ public sealed class AuditObserver : SingletonModel
 #endif
 {
     internal static readonly List<CardModel> Drawn = [];
+    internal static int? StarburstEnergyAtDamage;
+
+    public override Task AfterDamageGiven(PlayerChoiceContext context, Creature? dealer, DamageResult result,
+        ValueProp props, Creature target, CardModel? cardSource)
+    {
+        if (cardSource is JunnaCardU_CARD_032 starburst)
+            StarburstEnergyAtDamage = starburst.Owner.PlayerCombatState!.Energy;
+        return Task.CompletedTask;
+    }
+
     public override bool ShouldReceiveCombatHooks => true;
     public override Task AfterCardDrawn(PlayerChoiceContext context, CardModel card, bool fromHandDraw)
     {

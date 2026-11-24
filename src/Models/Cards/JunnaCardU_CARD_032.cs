@@ -10,8 +10,8 @@ public sealed partial class JunnaCardU_CARD_032
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         play = CardActions.ResolveTarget(play);
-        await PlayerCmd.GainEnergy(Value("Energy"), Owner);
         await Attack(context, play);
+        await PlayerCmd.GainEnergy(Value("Energy"), Owner);
     }
 
     protected override void OnUpgrade() => ApplyCatalogUpgrade();

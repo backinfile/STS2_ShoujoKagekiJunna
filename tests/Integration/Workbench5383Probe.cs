@@ -233,7 +233,7 @@ public sealed class Workbench5383Command : AbstractConsoleCmd
                     await Play(payoff);
                     var created = ArrowCombat.Deployed.Where(a => !prior.Contains(a.Card)).ToArray();
                     Equal(created.Length, 2, "Batch snapshots two before generation");
-                    Equal(created.All(a => a.Card is CatalogCard c && c.DynamicVars.Damage.BaseValue == (up ? 12 : 8) && !c.IsUpgraded && a.Remaining == 2), true, "Base meteor version and source-upgraded damage");
+                    Equal(created.All(a => a.Card is CatalogCard c && c.DynamicVars.Damage.BaseValue == (up ? 10 : 8) && !c.IsUpgraded && a.Remaining == 2), true, "Base meteor version and source-upgraded damage");
                     Equal(JunnaCombatHooks.CountArrowPlays(player), 4, "New meteors grow the next batch count");
                     prior = ArrowCombat.Deployed.Select(a => a.Card).ToHashSet();
                     await CardActions.FreePlay(Context, payoff);

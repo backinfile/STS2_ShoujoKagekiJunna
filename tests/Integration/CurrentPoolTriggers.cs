@@ -260,7 +260,7 @@ internal sealed partial class AuditScenario
         {
             int hp = _enemies[0].CurrentHp;
             await Play(await Add("JB01"));
-            Check("两人的心跳力量作用于后续攻击", hp - _enemies[0].CurrentHp, upgraded ? 15 : 13);
+            Check("两人的心跳力量作用于后续攻击", hp - _enemies[0].CurrentHp, upgraded ? 16 : 14);
         }
     }
 }

@@ -1,8 +1,8 @@
 # 逐牌效果回归
 
-`card-pool-expectations.json` 固定工作台 r6148 的 98 张启用牌及基础、升级预期。预期与运行程序集内的 `Junna.CardPool` 分开保存。卡池版本或牌的编号集合不一致时，先复核设计变更。
+`card-pool-expectations.json` 固定工作台 r6196 的 97 张启用牌及基础、升级预期。预期与运行程序集内的 `Junna.CardPool` 分开保存。卡池版本或牌的编号集合不一致时，先复核设计变更。
 
-`card-effect-cases-r6148.json` 为每张牌独立记录准备状态、操作、预期及关键对照。运行 `node tools/dev/full-card-audit.cjs plan` 会核对三个清单的版本和编号，生成[逐牌效果测试条目](../../docs/implementation/card-tests-r6148.md)。
+`card-effect-cases-r6196.json` 为每张牌独立记录准备状态、操作、预期及关键对照。运行 `node tools/dev/full-card-audit.cjs plan` 会核对三个清单的版本和编号，生成 `docs/implementation/card-tests-r6196.md`。
 
 ## 构建与运行
 
@@ -23,7 +23,7 @@ python tests/Integration/run-copy-reward.py --port <port> --upgrade --record --o
 ```
 
 - `effects`：39组最新牌效专项，包含独立版本预期、实际支付、各类牌区、三选一、重复强化、共享轮换与叠加抽牌及8种手牌类别组合。
-- `full` 覆盖 98 张牌、基础和升级版各四种场景，共 784 组。逐项比较伤害、格挡、抽牌、能量、实际对象、牌堆、关键词、倒计时、复制和关联状态。
+- `full` 覆盖 97 张牌、基础和升级版各四种场景，共 776 组。逐项比较伤害、格挡、抽牌、能量、实际对象、牌堆、关键词、倒计时、复制和关联状态。
 - `CurrentPoolTriggers.cs` 补充每回合首次复制、开局布置、单次降费、胜利复制、全牌区自动追随和动态减伤。
 - `run-copy-reward.py` 通过真实耗尽、胜利、领取及选牌验证待领取Power、1/2张永久副本、预览、飞入、飞完与牌组计数通知；观察器只记录原生事件。
 
