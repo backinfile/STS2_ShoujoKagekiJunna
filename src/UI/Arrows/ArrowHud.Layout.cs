@@ -5,6 +5,7 @@ namespace ShoujoKagekiJunna.Combat;
 public partial class ArrowHud
 {
     private readonly Dictionary<ArrowDeployment, Vector2> _slots = [];
+    private readonly Dictionary<ArrowDeployment, float> _slotAnchors = [];
     private Vector2 _layoutCanvas;
     private float _layoutRow;
     private ArrowDeployment[] _layoutOrder = [];
@@ -57,19 +58,18 @@ public partial class ArrowHud
         if (same && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)
             && allyLeft == _layoutAllyLeft && allyRight == _layoutAllyRight && enemiesLeft == _layoutEnemiesLeft) return;
         var lanes = _laneBuffer.ToArray();
-        foreach (var removed in _slots.Keys.Where(a => !_live.Contains(a) || a.Resolving).ToArray()) _slots.Remove(removed);
+        foreach (var removed in _slots.Keys.Where(a => !_live.Contains(a) || a.Resolving).ToArray())
+        {
+            _slots.Remove(removed);
+            _slotAnchors.Remove(removed);
+        }
         var formation = ArrowLayout.Regions(canvas.X, allyLeft, allyRight, enemiesLeft, SlotSpacing);
         var counts = Enum.GetValues<ArrowLane>().Select(lane => lanes.Count(value => value == lane)).ToArray();
         var regions = ArrowLayout.OccupiedRegions(canvas.X, allyLeft, allyRight,
             enemiesLeft, SlotSpacing, counts);
-        // Removing arrows keeps the reclaimed columns and leaves the survivors in place.
+        // Keep the same lane boundaries when only their populations change.
         if (canvas == _layoutCanvas && formation.SequenceEqual(_layoutFormation)
             && lanes.Distinct().Order().SequenceEqual(_layoutLanes.Distinct().Order())
-            && arrows.Select((arrow, i) =>
-            {
-                int old = Array.IndexOf(_layoutOrder, arrow);
-                return old >= 0 && _layoutLanes[old] == lanes[i];
-            }).All(same => same)
             && _layoutRegions.Length == regions.Length)
             regions = _layoutRegions;
         _layoutAllyLeft = allyLeft;
@@ -84,6 +84,17 @@ public partial class ArrowHud
             if (group.Length == 0) continue;
             var range = regions[(int)lane];
             int columns = Math.Max(1, (int)MathF.Round((range.Y - range.X) / SlotSpacing) + 1);
+            var origin = new Vector2(range.X, rowY);
+            var oldOrigin = new Vector2(range.X, _layoutRow);
+            var previousInRegion = group.Select(arrow => _slots.TryGetValue(arrow, out var point)
+                ? (Vector2?)(point - oldOrigin) : null).ToArray();
+            var anchors = group.Select(arrow => _slotAnchors.TryGetValue(arrow, out float x)
+                ? (float?)(x - origin.X) : null).ToArray();
+            // OccupiedRegions ends on the old 80-unit grid. Keep the remainder available
+            // when a dense lane shrinks as well as when it grows.
+            float endX = lane == ArrowLane.Right ? canvas.X * .9f
+                : lane == ArrowLane.Left ? formation[(int)ArrowLane.FriendlyGroup].X - SlotSpacing : range.Y;
+            float width = Math.Max(range.Y, endX) - range.X;
             bool hasClusters = group.Any(_arrowClusters.ContainsKey);
             if (hasClusters || group.Length > columns * 2)
             {
@@ -98,19 +109,14 @@ public partial class ArrowHud
                     minimumGaps[i] = joined ? IconWidth * .5f : IconWidth;
                     singleCluster &= joined;
                 }
-                // OccupiedRegions ends on the old 80-unit grid; use the remaining width as well.
-                float endX = lane == ArrowLane.Right ? canvas.X * .9f
-                    : lane == ArrowLane.Left ? formation[(int)ArrowLane.FriendlyGroup].X - SlotSpacing : range.Y;
                 float rowSpacing = singleCluster
                     ? ArrowLayout.ClusterGap(_arrowClusters[group[0]].Count, RowSpacing, IconSize.Y * .5f)
                     : RowSpacing;
-                float width = Math.Max(range.Y, endX) - range.X;
                 ArrowLayout.FitTwoRows(width, gaps, minimumGaps);
-                var origin = new Vector2(range.X, rowY);
-                var previousInRegion = group.Select(arrow => _slots.TryGetValue(arrow, out var slot)
-                    ? (Vector2?)new Vector2(slot.X - origin.X, slot.Y - _layoutRow) : null).ToArray();
-                var packed = ArrowLayout.Pack(width, rowSpacing, gaps, previousInRegion);
-                for (int i = 0; i < group.Length; i++) _slots[group[i]] = packed[i] + origin;
+                var packed = ArrowLayout.Pack(width, rowSpacing, gaps, previousInRegion, (left, right) =>
+                    _arrowClusters.TryGetValue(group[left], out var cluster)
+                    && cluster.Leader == _arrowClusters.GetValueOrDefault(group[right]).Leader ? IconWidth * .5f : IconWidth, anchors);
+                StoreSlots(group, packed, origin);
                 continue;
             }
             var previous = group.Select(arrow => _slots.TryGetValue(arrow, out var point) ? (Vector2?)point : null).ToArray();
@@ -122,7 +128,9 @@ public partial class ArrowHud
             var slots = Enumerable.Range(0, columns * rows)
                 .Select(slot => new Vector2(range.X + slot % columns * SlotSpacing, rowY + slot / columns * RowSpacing)).ToArray();
             var assigned = ArrowLayout.Assign(previous, slots);
-            for (int index = 0; index < group.Length; index++) _slots[group[index]] = slots[assigned[index]];
+            var preferred = assigned.Select(index => slots[index] - origin).ToArray();
+            var retained = ArrowLayout.KeepSlots(width, RowSpacing, previousInRegion, preferred, (_, _) => IconWidth, anchors);
+            StoreSlots(group, retained ?? preferred, origin);
         }
         _layoutCanvas = canvas;
         _layoutRow = rowY;
@@ -131,5 +139,19 @@ public partial class ArrowHud
         _layoutClusters = _clusterBuffer.ToArray();
         _layoutRegions = regions;
         _layoutFormation = formation;
+    }
+
+    private void StoreSlots(ArrowDeployment[] arrows, Vector2[] positions, Vector2 origin)
+    {
+        for (int i = 0; i < arrows.Length; i++)
+        {
+            var arrow = arrows[i];
+            var point = positions[i] + origin;
+            // Keep the original anchor through small nudges so successive copies cannot ratchet it across the row.
+            if (!_slotAnchors.TryGetValue(arrow, out float anchor) || !_slots.TryGetValue(arrow, out var old)
+                || !Mathf.IsEqualApprox(old.Y, point.Y) || Math.Abs(point.X - anchor) > ArrowLayout.MaximumSlotNudge + .01f)
+                _slotAnchors[arrow] = point.X;
+            _slots[arrow] = point;
+        }
     }
 }

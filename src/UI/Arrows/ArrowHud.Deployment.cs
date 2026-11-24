@@ -27,6 +27,7 @@ public partial class ArrowHud
             view = CreateArrow(arrow);
             _views.Add(arrow, view);
         }
+        SetNativeBody(view, visible: true);
         view.Root.Visible = false;
         effect.SetProgress(0);
         effect.Start(() => FinishDeployment(arrow));

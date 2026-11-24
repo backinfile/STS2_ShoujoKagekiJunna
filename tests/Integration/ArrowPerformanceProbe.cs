@@ -158,6 +158,11 @@ public sealed class ArrowPerformanceProbe : AbstractConsoleCmd
         var views = (System.Collections.IDictionary)AccessTools.Field(typeof(ArrowHud), "_views").GetValue(hud)!;
         var actual = (IEnumerable<ArrowDeployment>)AccessTools.Field(typeof(ArrowHud), "_displayOrder").GetValue(hud)!;
         bool order = actual.SequenceEqual(ArrowCombat.DisplayOrder());
+        int batchedBodies = hud.GetNode("ArrowBodies").GetChildren().OfType<MultiMeshInstance2D>()
+            .Where(node => node.IsVisibleInTree()).Sum(node => node.Multimesh.VisibleInstanceCount);
+        int nativeBodies = hud.GetChildren().OfType<Control>()
+            .Count(node => node.GetNodeOrNull<TextureRect>("TiltedFrame/ArrowFrame")?.IsVisibleInTree() == true);
+        bool bodyCoverage = batchedBodies + nativeBodies == actual.Count();
         bool targets = true;
         foreach (var arrow in actual)
         {
@@ -182,8 +187,8 @@ public sealed class ArrowPerformanceProbe : AbstractConsoleCmd
         bool restored = guides.IsVisibleInTree();
         CoreApi.Configuration.Update(CoreApi.Configuration.Current with { VfxLevel = CoreVfxLevel.Full });
         await Frames(3);
-        Results.Add(new { kind = "regression", order, targets, matrices, off, restored,
-            pass = order && targets && matrices && off && restored });
+        Results.Add(new { kind = "regression", order, targets, matrices, off, restored, bodyCoverage,
+            batchedBodies, nativeBodies, pass = order && targets && matrices && off && restored && bodyCoverage });
         Save();
     }
 
