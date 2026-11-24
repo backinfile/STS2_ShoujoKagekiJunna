@@ -60,7 +60,7 @@ public sealed class RewardAssociationCommand : AbstractConsoleCmd
         {
             var tip = card.HoverTips.OfType<HoverTip>().Single(tip => tip.Title == "连锁知识");
             Expect(name + " explains Chain Knowledge", tip.Description ==
-                "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。", tip.Description);
+                "获得连锁知识时，同时获得同一奖励界面的其他牌，并将它们设为关联牌。", tip.Description);
             Expect(name + " remains knowledge", CardCatalog.IsKnowledge(card) && card.Keywords.Contains(JunnaKeywords.Knowledge));
         }
         try

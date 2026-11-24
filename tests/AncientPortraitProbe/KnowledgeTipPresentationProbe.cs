@@ -80,7 +80,7 @@ public sealed class KnowledgeTipPresentationCommand : AbstractConsoleCmd
                         card.Keywords.Contains(JunnaKeywords.Knowledge) && card.Keywords.Contains(JunnaKeywords.ChainKnowledge),
                         string.Join(" / ", card.Keywords));
                     Expect(name + " renders the exact chain knowledge rule", tips[knowledgeIndex].Description ==
-                        "获得连锁知识时，同时获得同一奖励页面的其他卡牌，将这些牌设置为关联牌。", tips[knowledgeIndex].Description);
+                        "获得连锁知识时，同时获得同一奖励界面的其他牌，并将它们设为关联牌。", tips[knowledgeIndex].Description);
                 }
                 if (card == acquired)
                 {
