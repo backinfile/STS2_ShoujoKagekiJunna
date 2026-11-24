@@ -1559,7 +1559,7 @@
         "Knowledge"
       ],
       "power": {
-        "description": "DamageGroups",
+        "description": "DamageSum",
         "amount": "Damage",
         "single": false
       }

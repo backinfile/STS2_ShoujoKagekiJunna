@@ -401,7 +401,7 @@ def main():
             'JA35': '回合开始时，所有[gold]飞矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA205': '[gold]飞矢[/gold]造成[blue]{Amount}[/blue]%额外伤害。',
             'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
-            'JK235': '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害。',
+            'JK235': '打出[gold]知识[/gold]牌后，对随机敌人造成[blue]{Damage}[/blue]点伤害。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。',
             'U_CARD_008': '战斗结束时，向[gold]牌组[/gold]添加[blue]{Amount}[/blue]张[gold]' + friend_title + '[/gold]。',
             'U_CARD_016': '打出[gold]{Category}[/gold]牌后，抽[blue]{Amount}[/blue]张牌。',
@@ -422,7 +422,6 @@ def main():
             powers['JUNNA_JK37C_POWER.randomArrow'] = '一个[gold]飞矢[/gold]'
             powers['JUNNA_JK37C_POWER.targetedArrow'] = '一个同目标的[gold]飞矢[/gold]'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
-        powers['JUNNA_JK235_POWER.smartDescription'] = '每当打出一张[gold]知识[/gold]牌后，随机对敌人造成[blue]{Damage}[/blue]点伤害{Repeat:choose(1):|[blue]{Repeat}[/blue]次}。'
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         relics_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/relics.json'

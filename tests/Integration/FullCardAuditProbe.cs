@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 using BaseLib.Utils.Attributes;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.DevConsole;
 using MegaCrit.Sts2.Core.DevConsole.ConsoleCommands;
@@ -724,6 +726,27 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 await Play(trigger);
                 if (Id == "JK235") Check("教科书知识触发", hp - _enemies.Sum(enemy => enemy.CurrentHp),
                     upgraded ? 6 : 4);
+                if (Id == "JK235" && variant == "normal")
+                {
+                    hp = _enemies.Sum(enemy => enemy.CurrentHp);
+                    await Play(await Add("JK235", upgrade: !upgraded));
+                    Check("叠加时由已有教科书触发", hp - _enemies.Sum(enemy => enemy.CurrentHp), upgraded ? 6 : 4);
+                    Check("教科书叠加伤害层数", power.Amount, 10);
+                    Check("教科书状态显示伤害", power.DisplayAmount, 10);
+                    var description = power.SmartDescription;
+                    power.DynamicVars.AddTo(description);
+                    var powerText = Regex.Replace(description.GetFormattedText(), @"\[[^\]]+\]", "");
+                    Check("教科书叠加描述", powerText, "打出知识牌后，对随机敌人造成10点伤害。");
+
+                    var before = _enemies.Select(enemy => enemy.CurrentHp).ToArray();
+                    var history = CombatManager.Instance.History;
+                    int start = history.Entries.Count();
+                    await Play(await Add("JK49B"));
+                    Check("教科书叠加只产生一次伤害事件",
+                        history.Entries.Skip(start).OfType<DamageReceivedEntry>().Count(), 1);
+                    Check("教科书叠加伤害集中在一名敌人",
+                        _enemies.Select((enemy, i) => before[i] - enemy.CurrentHp).Where(loss => loss != 0).SequenceEqual([10]), true);
+                }
                 if (Id == "JK260") Check("每回合首次知识力量", player.Creature.GetPower<StrengthPower>()?.Amount, upgraded ? 3 : 2);
                 if (Id == "JA118")
                 {

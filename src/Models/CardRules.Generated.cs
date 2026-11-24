@@ -855,7 +855,7 @@ internal static partial class CardRules
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            PowerDescription = PowerDescriptionKind.DamageGroups,
+            PowerDescription = PowerDescriptionKind.DamageSum,
             PowerAmount = PowerAmountKind.Damage,
             SinglePower = false,
         },

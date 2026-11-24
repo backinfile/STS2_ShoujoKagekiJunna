@@ -186,15 +186,20 @@ public sealed partial class JunnaPowerJK15
 
 public sealed partial class JunnaPowerJK235
 {
-    protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
+    protected override int AmountPerGrant(Grant grant) => grant.V("Damage");
+    protected override int StackAmount() => Amount;
+
+    protected override async Task AfterPlay(PlayerChoiceContext context, CardPlay play)
     {
-        if (!(CardCatalog.IsKnowledge(play.Card))) return;
+        if (!CardCatalog.IsKnowledge(play.Card)) return;
+        var source = _grants.Find(grant => !ReferenceEquals(play, grant.InstalledBy));
+        if (source == null) return;
+        int damage = Amount - _grants.Where(grant => ReferenceEquals(play, grant.InstalledBy)).Sum(AmountPerGrant);
+        if (damage <= 0) return;
         var targets = Owner.CombatState!.HittableEnemies.Where(c => c.IsAlive).ToArray();
-        if (targets.Length > 0)
-        {
-            var target = play.Card.Owner.RunState.Rng.CombatTargets.NextItem(targets)!;
-                await GameApi.Damage(context, [target], grant.V("Damage"), ValueProp.Unpowered, Owner, grant.Card, grant.Play);
-        }
+        if (targets.Length == 0) return;
+        var target = play.Card.Owner.RunState.Rng.CombatTargets.NextItem(targets)!;
+        await GameApi.Damage(context, [target], damage, ValueProp.Unpowered, Owner, source.Card, source.Play);
     }
 }
 

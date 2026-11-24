@@ -90,7 +90,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
             if (existing != null) power.RefreshDescription();
             try
             {
-                await PowerCmd.Apply(context, power, card.Owner.Creature, 1, card.Owner.Creature, card);
+                await PowerCmd.Apply(context, power, card.Owner.Creature, power.AmountPerGrant(grant), card.Owner.Creature, card);
                 if (card.Owner.Creature.GetPower<T>() == power && power.Amount > previous)
                     power.Installed(card);
             }
@@ -107,6 +107,7 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         return Task.CompletedTask;
     }
     protected virtual Task BeforeInstall(CatalogCard card, PlayerChoiceContext context, CardPlay play) => Task.CompletedTask;
+    protected virtual int AmountPerGrant(Grant grant) => 1;
     protected virtual void MergeSingle(CatalogCard card, CardPlay play) { }
     protected virtual void Installed(CatalogCard card) { }
     protected virtual void AfterInstallAttempt(CatalogCard card) { }
