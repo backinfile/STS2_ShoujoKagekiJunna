@@ -19,3 +19,5 @@
 `assets/generate-card-catalog.py` 从 MCP 导出快照更新 `data/card-pool.json`、模型声明、本地化和配图。运行卡池通过 `Junna.CardPool` 嵌入程序集。工作台工具默认使用同级的 `STS2_ShoujoKagekiCore` 仓库，也可通过 `SHOUJO_CORE_ROOT` 指定 Core 仓库路径。
 
 `start-test-game.ps1 -UseInstalledMod` 复用测试目录中已经安装的模组。测试环境与录像写入 `artifacts/`，素材处理结果写入 `output/`。
+
+独立测试游戏的着色器缓存可能超过 Windows 路径长度限制。工作树清理步骤见 [Windows 工作树长路径清理](../docs/implementation/windows-worktree-cleanup.md)。
