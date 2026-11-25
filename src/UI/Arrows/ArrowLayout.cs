@@ -10,6 +10,34 @@ internal static class ArrowLayout
     internal const int MinimumClusterSize = 8;
     internal const float MaximumSlotNudge = 8;
 
+    internal static float ClearIntentRow(IReadOnlyList<Rect2> arrows, IReadOnlyList<Rect2> intents, float minimumOffset)
+    {
+        float preferred = Math.Max(0, minimumOffset);
+        float below = Clear(preferred, true);
+        if (below == preferred || preferred == minimumOffset) return below;
+        float above = Clear(preferred, false);
+        return above >= minimumOffset && preferred - above <= below - preferred ? above : below;
+
+        float Clear(float offset, bool down)
+        {
+            while (true)
+            {
+                float next = offset;
+                foreach (var arrow in arrows)
+                foreach (var intent in intents)
+                {
+                    if (arrow.Position.X >= intent.End.X || arrow.End.X <= intent.Position.X
+                        || offset >= intent.End.Y - arrow.Position.Y || offset <= intent.Position.Y - arrow.End.Y)
+                        continue;
+                    next = down ? Math.Max(next, intent.End.Y - arrow.Position.Y)
+                        : Math.Min(next, intent.Position.Y - arrow.End.Y);
+                }
+                if (next == offset) return next;
+                offset = next;
+            }
+        }
+    }
+
     // Group regions stay horizontally left of every single-target region in the same faction.
     // Overflow grows down within each region, preserving that rule across multiple rows.
     internal static Vector2[] Regions(float width, float allyLeft, float allyRight,

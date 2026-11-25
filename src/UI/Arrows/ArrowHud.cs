@@ -91,12 +91,13 @@ public partial class ArrowHud : Control
         float rowY = SecondRelicRowY();
         var arrows = _displayOrder;
         bool ambientEffects = CoreEffects.AmbientEffects;
-        UpdateLayout(arrows, canvas, rowY);
+        bool layoutChanged = UpdateLayout(arrows, canvas, rowY);
+        UpdateIntentClearance(room, arrows, layoutChanged);
         for (int index = 0; index < arrows.Count; index++)
         {
             var arrow = arrows[index];
             var view = _views[arrow];
-            var center = _slots[arrow];
+            var center = _slots[arrow] + Vector2.Down * _intentOffsets.GetValueOrDefault(arrow);
             float bob = ambientEffects ? Mathf.Sin((float)_elapsed * 1.8f + arrow.Sequence * .8f) * 2 : 0;
             var aim = view.Targets.Count == 0 ? center + new Vector2(400, 400) : view.TargetCenter;
             // Aim the lower point directly at the target, including the current floating offset.

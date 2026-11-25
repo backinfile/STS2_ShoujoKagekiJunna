@@ -1,4 +1,6 @@
 using Godot;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 
 namespace ShoujoKagekiJunna.Combat;
 
@@ -18,7 +20,7 @@ public partial class ArrowHud
     private float _layoutAllyLeft, _layoutAllyRight;
     private bool _layoutEnemiesLeft;
 
-    private void UpdateLayout(IReadOnlyList<ArrowDeployment> arrows, Vector2 canvas, float rowY)
+    private bool UpdateLayout(IReadOnlyList<ArrowDeployment> arrows, Vector2 canvas, float rowY)
     {
         float allyLeft = float.PositiveInfinity, allyRight = float.NegativeInfinity;
         float enemyLeft = float.PositiveInfinity, enemySum = 0;
@@ -56,7 +58,7 @@ public partial class ArrowHud
         }
         bool enemiesLeft = enemyLeft < allyCenter || _laneBuffer.Contains(ArrowLane.Left);
         if (same && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)
-            && allyLeft == _layoutAllyLeft && allyRight == _layoutAllyRight && enemiesLeft == _layoutEnemiesLeft) return;
+            && allyLeft == _layoutAllyLeft && allyRight == _layoutAllyRight && enemiesLeft == _layoutEnemiesLeft) return false;
         var lanes = _laneBuffer.ToArray();
         foreach (var removed in _slots.Keys.Where(a => !_live.Contains(a) || a.Resolving).ToArray())
         {
@@ -77,7 +79,7 @@ public partial class ArrowHud
         _layoutEnemiesLeft = enemiesLeft;
         // Cache the target regions as well as order: a side change can leave display order unchanged.
         if (same && arrows.SequenceEqual(_layoutOrder) && lanes.SequenceEqual(_layoutLanes)
-            && regions.SequenceEqual(_layoutRegions) && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)) return;
+            && regions.SequenceEqual(_layoutRegions) && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)) return false;
         foreach (var lane in Enum.GetValues<ArrowLane>())
         {
             var group = arrows.Where((_, index) => lanes[index] == lane).ToArray();
@@ -139,6 +141,52 @@ public partial class ArrowHud
         _layoutClusters = _clusterBuffer.ToArray();
         _layoutRegions = regions;
         _layoutFormation = formation;
+        return true;
+    }
+
+    private readonly List<Rect2> _intentBounds = [], _nextIntentBounds = [];
+    private readonly Dictionary<ArrowDeployment, float> _intentOffsets = [];
+
+    private void UpdateIntentClearance(NCombatRoom room, IReadOnlyList<ArrowDeployment> arrows, bool layoutChanged)
+    {
+        _nextIntentBounds.Clear();
+        if (arrows.Count > 0)
+        {
+            var local = GetGlobalTransform().AffineInverse();
+            foreach (var creature in room.CreatureNodes)
+            {
+                if (!creature.Entity.IsEnemy || !creature.Entity.IsAlive) continue;
+                var container = creature.IntentContainer;
+                if (container == null || !container.IsVisibleInTree()) continue;
+                for (int i = 0; i < container.GetChildCount(); i++)
+                    if (container.GetChild(i) is NIntent intent && intent.IsVisibleInTree() && intent.Size.X > 0 && intent.Size.Y > 0)
+                        _nextIntentBounds.Add(((local * intent.GetGlobalTransform()) * new Rect2(Vector2.Zero, intent.Size)).Grow(4));
+            }
+        }
+        if (!layoutChanged && _intentBounds.SequenceEqual(_nextIntentBounds)) return;
+        _intentBounds.Clear();
+        _intentBounds.AddRange(_nextIntentBounds);
+        _intentOffsets.Clear();
+        if (_intentBounds.Count == 0) return;
+
+        // Keep the allocator's original slots as its anchors. Only the drawn rows move.
+        foreach (var lane in arrows.Select((arrow, index) => (arrow, lane: _layoutLanes[index])).GroupBy(entry => entry.lane))
+        {
+            float offset = -RowSpacing * .25f;
+            foreach (var row in lane.Select(entry => entry.arrow).GroupBy(arrow => _slots[arrow].Y).OrderBy(row => row.Key))
+            {
+                var bounds = row.Select(arrow =>
+                {
+                    var slot = _slots[arrow];
+                    var view = _views[arrow];
+                    var direction = view.Targets.Count == 0 ? new Vector2(400, 400) : view.TargetCenter - slot;
+                    var transform = new Transform2D(direction.Angle() - Mathf.Pi * .5f, slot);
+                    return (transform * new Rect2(-BodyCenter, IconSize)).Grow(3);
+                }).ToArray();
+                offset = ArrowLayout.ClearIntentRow(bounds, _intentBounds, offset);
+                foreach (var arrow in row) _intentOffsets[arrow] = offset;
+            }
+        }
     }
 
     private void StoreSlots(ArrowDeployment[] arrows, Vector2[] positions, Vector2 origin)

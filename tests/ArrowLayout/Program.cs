@@ -18,6 +18,17 @@ foreach (var (name, previous, capacity) in cases)
 Check("multiple rows", [0, null, 1, 4], Enumerable.Range(0, 6).Select(i => new Vector2(i % 3 * 108, i / 3 * 140)).ToArray());
 Console.WriteLine("PASS: 8 ordered layout cases match the exhaustive minimum of moved arrows and travel distance.");
 
+var attackIntent = new Rect2(1508, 221, 66, 66);
+var firstRow = new[] { new Rect2(1410, 160, 48, 78), new Rect2(1517, 160, 48, 78) };
+var secondRow = firstRow.Select(arrow => new Rect2(arrow.Position + Vector2.Down * 96, arrow.Size)).ToArray();
+float upperOffset = ArrowLayout.ClearIntentRow(firstRow, [attackIntent], -24);
+float lowerOffset = ArrowLayout.ClearIntentRow(secondRow, [attackIntent], upperOffset);
+Require(upperOffset == -17 && lowerOffset == 31, "boss intent splits two rows without changing horizontal slots");
+Require(ArrowLayout.ClearIntentRow([firstRow[0]], [attackIntent], -24) == 0, "arrows beside an intent stay still");
+Require(ArrowLayout.ClearIntentRow(secondRow, [new Rect2(1510, 344, 64, 52), attackIntent], upperOffset) == 140,
+    "moving below one intent also clears a second intent");
+Console.WriteLine("PASS: dense formation leaves native intent space clear.");
+
 const float spacing = 108;
 foreach (var (name, allyLeft, allyRight, left, right) in new[]
 {
