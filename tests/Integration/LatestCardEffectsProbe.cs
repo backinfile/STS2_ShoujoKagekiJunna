@@ -197,7 +197,7 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                     var power = player.Creature.Powers.OfType<JunnaPowerU_CARD_016>().Single();
                     Equal(power.DisplayAmount, 1, "Unstacked draw amount");
                     string arrowIcon = power.IconPath;
-                    Equal(arrowIcon.EndsWith("U_CARD_016_Arrow.png"), true, "Arrow state icon");
+                    Equal(arrowIcon.EndsWith("U_CARD_016_Arrow.svg"), true, "Arrow state icon");
                     await Play(await Add(player, "U_CARD_016"));
                     Equal(power.DisplayAmount, 2, "Second copy increases the draw amount");
                     Equal(power.IconPath, arrowIcon, "Second copy keeps the current category");

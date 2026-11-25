@@ -15,7 +15,8 @@ public sealed partial class JunnaPowerU_CARD_016
 
     private int _cycleIndex;
 
-    protected override string IconId => CategoryIcons[_cycleIndex];
+    public override string CustomPackedIconPath =>
+        JunnaMod.ResourceRoot + $"images/response_markers/{CategoryIcons[_cycleIndex]}.svg";
     protected override int CategoryCycleIndex(Grant grant) => _cycleIndex;
     protected override int StackAmount() => _grants.Sum(grant => grant.V("DrawCount"));
 

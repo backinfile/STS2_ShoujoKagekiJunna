@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2l1nxumn7i4c"
-path="res://.godot/imported/U_CARD_016_Knowledge.png-f96ded38df436473c4b50e5c0816c1f1.ctex"
+uid="uid://byqprhnh4c4ka"
+path="res://.godot/imported/U_CARD_016_Shine.svg-a32a8913b602e2f3b4af4960e1163d8a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ShoujoKagekiJunna/images/powers/U_CARD_016_Knowledge.png"
-dest_files=["res://.godot/imported/U_CARD_016_Knowledge.png-f96ded38df436473c4b50e5c0816c1f1.ctex"]
+source_file="res://ShoujoKagekiJunna/images/response_markers/U_CARD_016_Shine.svg"
+dest_files=["res://.godot/imported/U_CARD_016_Shine.svg-a32a8913b602e2f3b4af4960e1163d8a.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

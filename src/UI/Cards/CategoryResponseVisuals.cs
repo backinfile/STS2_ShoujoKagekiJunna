@@ -5,10 +5,8 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.UI;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Cards;
-using MegaCrit.Sts2.Core.Nodes.Cards.Holders;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Saves;
 using ShoujoKageki.Core.V1.Presentation;
 using ShoujoKagekiJunna.Models;
 
@@ -17,18 +15,8 @@ namespace ShoujoKagekiJunna.Combat;
 internal static class CategoryResponseVisuals
 {
     private const string MarkerName = "JunnaCategoryResponse";
-    private const float MarkerSize = 36f;
-    private const float MarkerOffsetX = 36f;
-
-    [HarmonyPatch(typeof(NHandCardHolder), nameof(NHandCardHolder.SetIndexLabel))]
-    private static class HandIndexPatch
-    {
-        private static void Postfix(NHandCardHolder __instance)
-        {
-            if (__instance.CardNode is { } card && card.Body?.GetNodeOrNull<TextureRect>(MarkerName) is { } marker)
-                PositionMarker(card, marker, __instance.GetNode<Control>("%HandIndex").Visible);
-        }
-    }
+    private const float MarkerSize = 44f;
+    private const float EnergyIconGap = 6f;
 
     [HarmonyPatch(typeof(PowerModel), nameof(PowerModel.ResolvedBigIconPath), MethodType.Getter)]
     private static class BigIconPatch
@@ -90,28 +78,22 @@ internal static class CategoryResponseVisuals
                 ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
                 StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
                 Size = Vector2.One * MarkerSize,
-                Texture = GD.Load<Texture2D>(JunnaMod.ResourceRoot + "images/response_echo.png"),
             };
             node.Body.AddChild(marker);
-            PositionMarker(node, marker, SaveManager.Instance.PrefsSave.ShowCardIndices);
         }
+
+        var energyIcon = node.GetNode<Control>("%EnergyIcon");
+        var energyTop = energyIcon.GetGlobalTransform() * new Vector2(energyIcon.Size.X * .5f, 0f);
+        var anchor = node.Body.GetGlobalTransform().AffineInverse() * energyTop;
+        marker.Position = anchor - new Vector2(MarkerSize * .5f, MarkerSize + EnergyIconGap);
+
+        string markerPath = power.CustomPackedIconPath;
+        if (marker.Texture?.ResourcePath != markerPath) marker.Texture = GD.Load<Texture2D>(markerPath);
         marker.Show();
         if (pulse && CoreEffects.Enabled)
         {
             marker.SelfModulate = new Color(1.4f, 1.4f, 1.4f);
             marker.CreateTween().TweenProperty(marker, "self_modulate", Colors.White, .16);
         }
-    }
-
-    private static void PositionMarker(NCard card, TextureRect marker, bool indexVisible)
-    {
-        var banner = card.GetNode<Control>("%TitleBanner");
-        var bannerTop = banner.GetGlobalTransform() * new Vector2(banner.Size.X * .5f, 0f);
-        var anchor = card.Body.GetGlobalTransform().AffineInverse() * bannerTop;
-        // Reserve the derived-card label row even when its text is hidden.
-        float labelTop = card.Body.GetNodeOrNull<Control>("DerivedLabel")?.Position.Y ?? anchor.Y;
-        float offsetX = indexVisible ? MarkerOffsetX : 0f;
-        marker.Position = new Vector2(anchor.X + offsetX - MarkerSize * .5f,
-            Math.Min(anchor.Y, labelTop) - MarkerSize - 4f);
     }
 }
