@@ -199,7 +199,7 @@ public static class CardActions
         for (int i = 0; i < count; i++)
         {
             var card = CardCatalog.Create(id, player);
-            if (upgraded) { card.UpgradeInternal(); card.FinalizeUpgradeInternal(); }
+            if (upgraded) { GameApi.UpgradeInternal(card); card.FinalizeUpgradeInternal(); }
             added.Add(await CardPileCmd.AddGeneratedCardToCombat(card, pile, player, position));
         }
         await PreviewAdded(added, pile);
@@ -219,7 +219,7 @@ public static class CardActions
         if (CombatManager.Instance.IsOverOrEnding) return;
         using var single = KnowledgeCombat.SingleCard();
         var arrow = (CatalogCard)CardCatalog.Create("JA81B", player);
-        if (upgraded) { arrow.UpgradeInternal(); arrow.FinalizeUpgradeInternal(); }
+        if (upgraded) { GameApi.UpgradeInternal(arrow); arrow.FinalizeUpgradeInternal(); }
         arrow.SetGeneratedDamage(damage);
         await GeneratedArrowPresentation.Play(arrow, async () =>
         {

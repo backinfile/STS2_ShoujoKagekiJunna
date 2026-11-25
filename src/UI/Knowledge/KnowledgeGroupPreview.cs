@@ -142,7 +142,7 @@ public partial class KnowledgeGroupPreview : Control
     private NCard CreatePreview(CardModel source, Node parent)
     {
         var model = ShoujoKageki.Core.V1.CardCopies.Snapshot(source);
-        if (_upgraded && !model.IsUpgraded && model.IsUpgradable) model.UpgradeInternal();
+        if (_upgraded && !model.IsUpgraded && model.IsUpgradable) GameApi.UpgradeInternal(model);
         else if (!_upgraded && model.IsUpgraded) CardCmd.Downgrade(model);
         var card = NCard.Create(model)!;
         parent.AddChild(card);

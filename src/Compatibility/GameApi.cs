@@ -13,6 +13,23 @@ namespace ShoujoKagekiJunna;
 
 internal static class GameApi
 {
+    private static readonly Action<CardModel> UpgradeCard = BindCardUpgrade();
+
+    internal static void UpgradeInternal(CardModel card) => UpgradeCard(card);
+
+    private static Action<CardModel> BindCardUpgrade()
+    {
+        const string method = nameof(CardModel.UpgradeInternal);
+        if (typeof(CardModel).GetMethod(method, Type.EmptyTypes) is { } parameterless)
+            return parameterless.CreateDelegate<Action<CardModel>>();
+
+        // v0.114.0 added an optional silent flag. Preserve the default native upgrade event.
+        var withSilence = typeof(CardModel).GetMethod(method, [typeof(bool)])
+            ?? throw new MissingMethodException(typeof(CardModel).FullName, method);
+        var upgrade = withSilence.CreateDelegate<Action<CardModel, bool>>();
+        return card => upgrade(card, false);
+    }
+
     internal static bool HasCardSelector(Player player)
     {
 #if STS2_BETA

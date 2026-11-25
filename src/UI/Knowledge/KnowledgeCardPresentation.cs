@@ -75,7 +75,7 @@ public static class KnowledgePreviewCards
         return DynamicKnowledge.Members(source).Select(member =>
         {
             var copy = ShoujoKageki.Core.V1.CardCopies.Snapshot(member);
-            if (upgradeAll && !copy.IsUpgraded && copy.IsUpgradable) copy.UpgradeInternal();
+            if (upgradeAll && !copy.IsUpgraded && copy.IsUpgradable) GameApi.UpgradeInternal(copy);
             return copy;
         }).ToArray();
     }
