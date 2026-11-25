@@ -166,9 +166,7 @@ public static class HandArrow
             return;
         }
         if (!play.IsFirstInSeries) return;
-        int turns = Turns(card);
-        if (!IsArrow(card) && CardCatalog.DesignId(card) == "JA59") turns = Math.Max(0, turns - card.ResolveEnergyXValue());
-        await ArrowCombat.DeployAsync(card, play, turns, next);
+        await ArrowCombat.DeployAsync(card, play, Turns(card), next);
     }
 
     internal static async Task<bool> Finish(PlayerChoiceContext context, CardModel card, bool forceExhaust = false)

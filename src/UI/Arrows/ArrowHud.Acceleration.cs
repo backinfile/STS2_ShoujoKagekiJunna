@@ -27,11 +27,11 @@ public partial class ArrowHud
         var (card, target) = AccelerationPreviewSource(room);
         var acceleration = card switch
         {
-            CatalogCard catalog => ArrowAcceleration.ForCard(catalog),
+            JunnaCard junna => junna.Acceleration,
             JunnaArrowTargetChoice option => option.Acceleration,
             _ => default
         };
-        if (card is CatalogCard && acceleration.Turns > 0 && CardCatalog.IsArrow(card)
+        if (card is JunnaCard && acceleration.Turns > 0 && CardCatalog.IsArrow(card)
             && HandArrow.Turns(card) > (card.Owner.Creature.GetPower<JunnaPowerJA105>()?.AccelerationTurns ?? 0))
             acceleration = default;
 

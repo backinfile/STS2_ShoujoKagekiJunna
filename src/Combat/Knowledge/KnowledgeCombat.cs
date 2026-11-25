@@ -13,6 +13,11 @@ using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
+internal interface ICardUpgradeReward
+{
+    Task GrantUpgradeReward(int previous, int current);
+}
+
 public static class KnowledgeCombat
 {
     private static readonly AsyncLocal<int> SingleDepth = new();
@@ -114,7 +119,6 @@ public static class KnowledgeCombat
                     if (card.Pile?.Type == destination) gained.Add(card);
                 }
             }
-        if (destination == PileType.Deck) KnowledgeProgress.BindResearch(gained);
         DynamicKnowledge.Normalize(acquired.Owner);
         if (destination == PileType.Deck && acquired.Pile is { Type: PileType.Deck } deck)
         {
@@ -217,20 +221,7 @@ public static class KnowledgeCombat
     {
         KnowledgeAcquisitionSources.Initialize();
         _upgrades ??= ShoujoKageki.Core.V1.CoreApi.Get<ShoujoKageki.Core.V1.ICardUpgrades>().Register(
-            card => CardCatalog.DesignId(card) == "JK82", GrantUpgrade);
-    }
-    private static async Task GrantUpgrade(CardModel card, int previous, int current)
-    {
-        using var single = SingleCard();
-        var added = new List<CardPileAddResult>();
-        for (int i = previous; i < current; i++)
-        {
-            if (card.Pile?.Type == PileType.Deck)
-                added.Add(await CardPileCmd.Add(card.Owner.RunState.CreateCard(CardCatalog.Model("JK82B"), card.Owner), PileType.Deck));
-            else if (card.Owner.PlayerCombatState != null && !card.HasBeenRemovedFromState)
-                await CardActions.Generate(card.Owner, "JK82B", 1, PileType.Draw, CardPilePosition.Random);
-        }
-        if (!ShoujoKagekiJunna.UI.KnowledgeUpgradeAnimation.DeferPreview(card, added))
-            await CardActions.PreviewAdded(added, PileType.Deck);
+            card => card is ICardUpgradeReward, (card, previous, current) =>
+                ((ICardUpgradeReward)card).GrantUpgradeReward(previous, current));
     }
 }

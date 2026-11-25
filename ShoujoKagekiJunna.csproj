@@ -13,6 +13,7 @@
   <ItemGroup>
     <Compile Include="src/**/*.cs" />
     <EmbeddedResource Include="data/card-pool.json" LogicalName="Junna.CardPool" />
+    <EmbeddedResource Include="data/removed-card-models.json" LogicalName="Junna.RemovedCardModels" />
     <PackageReference Include="Alchyr.Sts2.BaseLib" Version="$(BaseLibVersion)" />
     <PackageReference Include="BSchneppe.Sts2.ReferenceAssemblies" Version="$(Sts2StableApiVersion)" PrivateAssets="All" Condition="'$(Sts2ReferenceMode)' == 'package'" />
     <Reference Include="ShoujoKagekiCore.Api.V1" HintPath="$(CoreApiPath)" Private="false" />

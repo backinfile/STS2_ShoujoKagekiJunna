@@ -27,8 +27,7 @@ foreach (var (make, baseDamage, upgradedDamage, expectedType) in new (Func<Catal
     (() => new JunnaCardU_CARD_030(), 8, 12, CardType.Skill),
     (() => new JunnaCardJA82(), 14, 18, CardType.Skill),
     (() => new JunnaCardJK400B(), 8, 8, CardType.Power),
-    (() => new JunnaCardJK235(), 3, 4, CardType.Power),
-    (() => new JunnaCardJG34(), 3, 4, CardType.Power)
+    (() => new JunnaCardJK235(), 3, 4, CardType.Power)
 })
 foreach (bool upgraded in new[] { false, true })
 {

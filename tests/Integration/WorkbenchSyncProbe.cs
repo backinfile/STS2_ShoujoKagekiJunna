@@ -235,18 +235,6 @@ public static class WorkbenchSyncProbe
                 var a = await Card(player, "JK49"); var b = await Card(player, "JK49B"); await Play(a); await Play(b);
                 Expect(CardCatalog.DesignId(a) == "JK49" && CardCatalog.DesignId(b) == "JK49B", "Removed transformation");
             });
-            await Case("连星 includes two base hits", async () =>
-            {
-                var card = await Card(player, "JH13"); player.PlayerCombatState!.Energy = 3;
-                int hp = enemy.CurrentHp; await Play(card); Expect(hp - enemy.CurrentHp == 18, "Two base hits plus one remaining energy");
-            });
-            await Case("追击 counts only arrow plays", async () =>
-            {
-                var pursuit = await Card(player, "JT03"); await Play(pursuit); await Play(await Card(player, "JB01"));
-                Expect(ArrowCombat.Find(pursuit)?.AttacksWhileWaiting == 0, "Attack is outside scope");
-                await HandArrow.Play(Context, await Card(player, "JB02"));
-                Expect(ArrowCombat.Find(pursuit)?.AttacksWhileWaiting == 1, "Material arrow counts once");
-            });
             await Case("伏击箭 keeps its one-turn delay", async () =>
             {
                 var selected = await Card(player, "JB03", PileType.Draw); var source = await Card(player, "JA65");

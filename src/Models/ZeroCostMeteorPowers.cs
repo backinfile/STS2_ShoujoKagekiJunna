@@ -5,12 +5,6 @@ using ShoujoKagekiJunna.Combat;
 
 namespace ShoujoKagekiJunna.Models;
 
-public sealed partial class JunnaPowerJK400
-{
-    protected override string IconId => "JK67";
-
-}
-
 public sealed partial class JunnaPowerJK400B
 {
     protected override string IconId => "JZ05";

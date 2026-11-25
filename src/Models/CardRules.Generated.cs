@@ -28,25 +28,6 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge, CardTip.Energy],
             UpgradedTips = [CardTip.Knowledge, CardTip.Energy],
-            Effect = SimpleCardEffect.DrawAndEnergy,
-        },
-        ["JA04"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Limit"] = "N0",
-            },
-            PowerDescription = PowerDescriptionKind.RemainingUses,
-            PowerAmount = PowerAmountKind.RemainingLimit,
-            SinglePower = false,
-        },
-        ["JA104"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Cards"] = "N1",
-            },
-            RelatedCards = ["JA119"],
         },
         ["JA105"] = new()
         {
@@ -69,7 +50,6 @@ internal static partial class CardRules
         },
         ["JA108B"] = new()
         {
-            Effect = SimpleCardEffect.Attack,
         },
         ["JA118"] = new()
         {
@@ -117,29 +97,9 @@ internal static partial class CardRules
             {
                 ["DrawCount"] = "N0",
             },
-            Effect = SimpleCardEffect.Draw,
-        },
-        ["JA16"] = new()
-        {
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-        },
-        ["JA17"] = new()
-        {
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
         },
         ["JA176"] = new()
         {
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-        },
-        ["JA177"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Turns"] = "N1",
-            },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
@@ -164,25 +124,8 @@ internal static partial class CardRules
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = true,
         },
-        ["JA35"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DisplayedAmount"] = "N0",
-                ["Threshold"] = "N0",
-                ["Turns"] = "N0",
-            },
-            PowerDescription = PowerDescriptionKind.ThresholdSum,
-            PowerAmount = PowerAmountKind.Threshold,
-            SinglePower = false,
-        },
         ["JA38"] = new()
         {
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JA41"] = new()
-        {
-            Effect = SimpleCardEffect.Attack,
         },
         ["JA43"] = new()
         {
@@ -193,34 +136,12 @@ internal static partial class CardRules
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
-        ["JA45"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Limit"] = "N0",
-                ["Turns"] = "N1",
-            },
-            PowerDescription = PowerDescriptionKind.ArrowLimitGroups,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
         ["JA53"] = new()
         {
             Fields = new Dictionary<string, string>
             {
                 ["Cards"] = "N1",
             },
-        },
-        ["JA57"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N0",
-                ["Energy"] = "N1",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-            Effect = SimpleCardEffect.DrawAndEnergy,
         },
         ["JA58"] = new()
         {
@@ -231,64 +152,26 @@ internal static partial class CardRules
             Tips = [CardTip.Vulnerable, CardTip.Weak],
             UpgradedTips = [CardTip.Vulnerable, CardTip.Weak],
         },
-        ["JA59"] = new()
-        {
-            Effect = SimpleCardEffect.Attack,
-        },
         ["JA64"] = new()
         {
-            Effect = SimpleCardEffect.Attack,
         },
         ["JA65"] = new()
         {
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
-        ["JA66"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Cards"] = "N0",
-            },
-        },
         ["JA67"] = new()
         {
-        },
-        ["JA70"] = new()
-        {
-            PowerDescription = PowerDescriptionKind.BlockSum,
-            PowerAmount = PowerAmountKind.Block,
-            SinglePower = false,
         },
         ["JA71"] = new()
         {
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
-        ["JA72"] = new()
-        {
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JA73"] = new()
-        {
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-        },
-        ["JA75"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Bonus"] = "Bonus",
-            },
-        },
         ["JA76"] = new()
         {
             Tips = [CardTip.Arrow, CardTip.Meteor],
             UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
-        },
-        ["JA77"] = new()
-        {
-            Effect = SimpleCardEffect.Attack,
         },
         ["JA80"] = new()
         {
@@ -298,7 +181,6 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Energy],
             UpgradedTips = [CardTip.Energy],
-            Effect = SimpleCardEffect.Energy,
         },
         ["JA81"] = new()
         {
@@ -307,7 +189,6 @@ internal static partial class CardRules
         },
         ["JA81B"] = new()
         {
-            Effect = SimpleCardEffect.Attack,
         },
         ["JA82"] = new()
         {
@@ -346,29 +227,6 @@ internal static partial class CardRules
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
-        ["JA94"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Turns"] = "N1",
-            },
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-        },
-        ["JA96"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DisplayedAmount"] = "N0",
-                ["Threshold"] = "N0",
-                ["Turns"] = "N0",
-            },
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-            PowerDescription = PowerDescriptionKind.ThresholdSum,
-            PowerAmount = PowerAmountKind.Threshold,
-            SinglePower = false,
-        },
         ["JB01"] = new()
         {
         },
@@ -380,24 +238,6 @@ internal static partial class CardRules
         },
         ["JB06"] = new()
         {
-            Effect = SimpleCardEffect.Block,
-        },
-        ["JF07"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N0",
-            },
-            Effect = SimpleCardEffect.Draw,
-        },
-        ["JF10"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Debuff"] = "N0",
-            },
-            Tips = [CardTip.Vulnerable, CardTip.Weak],
-            UpgradedTips = [CardTip.Vulnerable, CardTip.Weak],
         },
         ["JF13"] = new()
         {
@@ -405,38 +245,6 @@ internal static partial class CardRules
             {
                 ["DrawCount"] = "N1",
             },
-            Effect = SimpleCardEffect.BlockAndDraw,
-        },
-        ["JG03"] = new()
-        {
-        },
-        ["JG09"] = new()
-        {
-        },
-        ["JG16"] = new()
-        {
-            UpgradedTips = [CardTip.Retain],
-        },
-        ["JG27"] = new()
-        {
-        },
-        ["JG31"] = new()
-        {
-            PowerDescription = PowerDescriptionKind.Applications,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JG33"] = new()
-        {
-        },
-        ["JG34"] = new()
-        {
-            PowerDescription = PowerDescriptionKind.DamageGroups,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JG36"] = new()
-        {
         },
         ["JG37"] = new()
         {
@@ -449,85 +257,12 @@ internal static partial class CardRules
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
-        ["JG38"] = new()
-        {
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JH01"] = new()
-        {
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-        },
-        ["JH10"] = new()
-        {
-        },
-        ["JH11"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N1",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-            Effect = SimpleCardEffect.BlockAndEnergy,
-        },
-        ["JH13"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Hits"] = "N2",
-                ["Hits4"] = "N3",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-        },
-        ["JH17"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N1",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-            Effect = SimpleCardEffect.BlockAndEnergy,
-        },
         ["JH19"] = new()
         {
             Tips = [CardTip.Energy],
             UpgradedTips = [CardTip.Energy],
             PowerDescription = PowerDescriptionKind.RepeatedApplications,
             PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JH20"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N0",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-        },
-        ["JH21"] = new()
-        {
-            PowerDescription = PowerDescriptionKind.BlockSum,
-            PowerAmount = PowerAmountKind.Block,
-            SinglePower = false,
-        },
-        ["JH22"] = new()
-        {
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-        },
-        ["JH23"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["EnergyThreshold"] = "N0",
-                ["EnergyThreshold2"] = "N1",
-            },
-            PowerDescription = PowerDescriptionKind.BlockLimitGroups,
-            PowerAmount = PowerAmountKind.Block,
             SinglePower = false,
         },
         ["JH24"] = new()
@@ -539,20 +274,10 @@ internal static partial class CardRules
             Tips = [CardTip.Energy],
             UpgradedTips = [CardTip.Energy],
         },
-        ["JH26"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N1",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-        },
         ["JH27"] = new()
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Block,
         },
         ["JH27B"] = new()
         {
@@ -562,81 +287,11 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Draw,
-        },
-        ["JH31"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Amount"] = "N1",
-                ["EnergyThreshold"] = "N0",
-                ["Threshold"] = "N0",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-            PowerDescription = PowerDescriptionKind.AmountWithThreshold,
-            PowerAmount = PowerAmountKind.Amount,
-            SinglePower = false,
-        },
-        ["JH59"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DisplayedAmount"] = "N0",
-                ["Energy"] = "N0",
-                ["Threshold"] = "N0",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-            PowerDescription = PowerDescriptionKind.ThresholdSum,
-            PowerAmount = PowerAmountKind.Threshold,
-            SinglePower = false,
-        },
-        ["JH60"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["EnergyLater"] = "N1",
-                ["EnergyNow"] = "N0",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-        },
-        ["JK10"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N1",
-                ["Energy"] = "N2",
-                ["EnergyThreshold"] = "N0",
-            },
-            Tips = [CardTip.Knowledge, CardTip.Energy],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Energy],
-            PowerDescription = PowerDescriptionKind.EnergyThresholdGroups,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JK10B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.AttackAndBlock,
         },
         ["JK11"] = new()
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK112"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK112B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
         },
         ["JK11B"] = new()
         {
@@ -647,13 +302,11 @@ internal static partial class CardRules
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
         },
         ["JK122B"] = new()
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Noop,
         },
         ["JK126"] = new()
         {
@@ -668,29 +321,6 @@ internal static partial class CardRules
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
-        ["JK130"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Block,
-        },
-        ["JK130B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK131"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK131B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
         ["JK133"] = new()
         {
             Fields = new Dictionary<string, string>
@@ -699,7 +329,6 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.AttackAndDraw,
         },
         ["JK137"] = new()
         {
@@ -724,119 +353,6 @@ internal static partial class CardRules
             PowerDescription = PowerDescriptionKind.ThresholdSum,
             PowerAmount = PowerAmountKind.Threshold,
             SinglePower = false,
-        },
-        ["JK139B"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N0",
-            },
-            Tips = [CardTip.Knowledge, CardTip.Energy],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Energy],
-            Effect = SimpleCardEffect.Energy,
-        },
-        ["JK148"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK148B"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Cards"] = "N0",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK148C"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N0",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Draw,
-        },
-        ["JK148D"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK148E"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Block,
-        },
-        ["JK148F"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N0",
-            },
-            Tips = [CardTip.Knowledge, CardTip.Energy],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Energy],
-            Effect = SimpleCardEffect.Energy,
-        },
-        ["JK15"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            PowerDescription = PowerDescriptionKind.Applications,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JK15B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Block,
-        },
-        ["JK184"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK184B"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Turns"] = "N0",
-            },
-            Tips = [CardTip.Knowledge, CardTip.Arrow],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
-        },
-        ["JK184C"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Block,
-        },
-        ["JK184D"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N0",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Draw,
-        },
-        ["JK200"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK200B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
         },
         ["JK206"] = new()
         {
@@ -868,14 +384,6 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK254"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            PowerDescription = PowerDescriptionKind.Passive,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
         },
         ["JK260"] = new()
         {
@@ -919,16 +427,19 @@ internal static partial class CardRules
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Block,
         },
         ["JK275"] = new()
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
         },
         ["JK314"] = new()
         {
+            Fields = new Dictionary<string, string>
+            {
+                ["CardsPerExtraHit"] = "N1",
+                ["ExtraHits"] = "N2",
+            },
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
         },
@@ -956,25 +467,10 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge, CardTip.Energy],
             UpgradedTips = [CardTip.Knowledge, CardTip.Energy],
         },
-        ["JK33"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK33B"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Count"] = "N1",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
         ["JK37"] = new()
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
         },
         ["JK37B"] = new()
         {
@@ -992,14 +488,6 @@ internal static partial class CardRules
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
-        ["JK400"] = new()
-        {
-            Tips = [CardTip.Knowledge, CardTip.Arrow],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
-            PowerDescription = PowerDescriptionKind.Applications,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
         ["JK400B"] = new()
         {
             Tips = [CardTip.Arrow, CardTip.Meteor],
@@ -1008,191 +496,15 @@ internal static partial class CardRules
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
-        ["JK43"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK43B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK44"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK44B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Noop,
-        },
-        ["JK45"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK45B"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Turns"] = "N2",
-            },
-            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Energy],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Energy],
-        },
-        ["JK46"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Cards"] = "N0",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            PowerDescription = PowerDescriptionKind.GeneratedCardGroups,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JK46B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK48"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
-        ["JK48B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-        },
         ["JK49"] = new()
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
         },
         ["JK49B"] = new()
         {
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Block,
-        },
-        ["JK50"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK50B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Retain],
-        },
-        ["JK64"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Turns"] = "N0",
-            },
-            PowerDescription = PowerDescriptionKind.TurnGroups,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JK67"] = new()
-        {
-            Tips = [CardTip.Knowledge, CardTip.Arrow],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
-            PowerDescription = PowerDescriptionKind.Applications,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JK67B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK69B"] = new()
-        {
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK73"] = new()
-        {
-            Effect = SimpleCardEffect.AttackAndBlock,
-        },
-        ["JK75"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            PowerDescription = PowerDescriptionKind.Applications,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
-        },
-        ["JK75B"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JK78"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Bonus"] = "Bonus",
-            },
-        },
-        ["JK78D"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Amount"] = "N0",
-            },
-        },
-        ["JK78E"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Amount"] = "N0",
-            },
-        },
-        ["JK80"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Amount"] = "N1",
-                ["Threshold"] = "Block",
-            },
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            PowerDescription = PowerDescriptionKind.AmountWithThreshold,
-            PowerAmount = PowerAmountKind.Amount,
-            SinglePower = false,
-        },
-        ["JK81"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Threshold"] = "N0",
-            },
-            PowerDescription = PowerDescriptionKind.MinimumThreshold,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = true,
-        },
-        ["JK81B"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Count"] = "N1",
-            },
         },
         ["JK82"] = new()
         {
@@ -1202,7 +514,6 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge, CardTip.Energy],
             UpgradedTips = [CardTip.Knowledge, CardTip.Energy],
-            Effect = SimpleCardEffect.Energy,
         },
         ["JK82B"] = new()
         {
@@ -1212,7 +523,6 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Knowledge],
             UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Draw,
         },
         ["JK84"] = new()
         {
@@ -1233,87 +543,8 @@ internal static partial class CardRules
             Tips = [CardTip.Knowledge, CardTip.Arrow],
             UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
         },
-        ["JS19"] = new()
-        {
-            Tips = [CardTip.Knowledge],
-            UpgradedTips = [CardTip.Knowledge],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JS33"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["ArrowCount"] = "N0",
-                ["KnowledgeCount"] = "N1",
-                ["ShineCount"] = "N2",
-            },
-            Tips = [CardTip.Arrow, CardTip.Knowledge],
-            UpgradedTips = [CardTip.Arrow, CardTip.Knowledge],
-        },
-        ["JS34"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N0",
-            },
-            Effect = SimpleCardEffect.Draw,
-        },
-        ["JS35"] = new()
-        {
-            Effect = SimpleCardEffect.Block,
-        },
-        ["JT02"] = new()
-        {
-            Tips = [CardTip.Arrow, CardTip.Energy],
-            UpgradedTips = [CardTip.Arrow, CardTip.Energy],
-        },
-        ["JT03"] = new()
-        {
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-        },
-        ["JX01"] = new()
-        {
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-        },
-        ["JX02"] = new()
-        {
-            Tips = [CardTip.Arrow, CardTip.Energy],
-            UpgradedTips = [CardTip.Arrow, CardTip.Energy],
-        },
-        ["JX07"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N1",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-        },
         ["JZ03"] = new()
         {
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["JZ05"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DisplayedAmount"] = "N0",
-                ["Limit"] = "N0",
-                ["Threshold"] = "N0",
-            },
-            PowerDescription = PowerDescriptionKind.ThresholdSum,
-            PowerAmount = PowerAmountKind.Threshold,
-            SinglePower = false,
-        },
-        ["JZ06"] = new()
-        {
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-            PowerDescription = PowerDescriptionKind.RepeatedApplications,
-            PowerAmount = PowerAmountKind.Applications,
-            SinglePower = false,
         },
         ["U_CARD_005"] = new()
         {
@@ -1338,10 +569,6 @@ internal static partial class CardRules
             {
                 ["DrawCount"] = "N1",
             },
-            Effect = SimpleCardEffect.BlockAndDraw,
-        },
-        ["U_CARD_009"] = new()
-        {
         },
         ["U_CARD_010"] = new()
         {
@@ -1357,13 +584,11 @@ internal static partial class CardRules
         {
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
-            Effect = SimpleCardEffect.Attack,
         },
         ["U_CARD_012"] = new()
         {
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
-            Effect = SimpleCardEffect.Attack,
         },
         ["U_CARD_013"] = new()
         {
@@ -1384,56 +609,12 @@ internal static partial class CardRules
         },
         ["U_CARD_017"] = new()
         {
+            Fields = new Dictionary<string, string>
+            {
+                ["ExtraHits"] = "N1",
+            },
             Tips = [CardTip.Knowledge, CardTip.Arrow],
             UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
-        },
-        ["U_CARD_018"] = new()
-        {
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-            Effect = SimpleCardEffect.Attack,
-            LoopAsArrow = true,
-        },
-        ["U_CARD_021"] = new()
-        {
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-            Effect = SimpleCardEffect.Attack,
-            LoopAsArrow = true,
-        },
-        ["U_CARD_023"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Cards"] = "N2",
-                ["DrawCount"] = "N1",
-                ["HandArrowTurns"] = "N3",
-            },
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-        },
-        ["U_CARD_024"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N0",
-            },
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-            Effect = SimpleCardEffect.Draw,
-            LoopAsArrow = true,
-        },
-        ["U_CARD_025"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N0",
-                ["HandArrowTurns"] = "N1",
-            },
-            Tips = [CardTip.Arrow, CardTip.Energy],
-            UpgradedTips = [CardTip.Arrow, CardTip.Energy],
-            Effect = SimpleCardEffect.Energy,
-            LoopAsArrow = true,
         },
         ["U_CARD_030"] = new()
         {
@@ -1463,16 +644,6 @@ internal static partial class CardRules
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
         },
-        ["U_CARD_035"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N1",
-                ["Energy"] = "N0",
-            },
-            Tips = [CardTip.Arrow, CardTip.Energy],
-            UpgradedTips = [CardTip.Arrow, CardTip.Energy],
-        },
         ["U_CARD_036"] = new()
         {
             Fields = new Dictionary<string, string>
@@ -1485,31 +656,8 @@ internal static partial class CardRules
         },
         ["U_CARD_044"] = new()
         {
-            Effect = SimpleCardEffect.AttackAndBlock,
         },
         ["U_CARD_045"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Energy"] = "N1",
-            },
-            Tips = [CardTip.Energy],
-            UpgradedTips = [CardTip.Energy],
-        },
-        ["U_CARD_047"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["Amount"] = "N0",
-            },
-        },
-        ["U_CARD_051"] = new()
-        {
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["U_CARD_052"] = new()
         {
             Fields = new Dictionary<string, string>
             {
@@ -1523,15 +671,6 @@ internal static partial class CardRules
             Fields = new Dictionary<string, string>
             {
                 ["Turns"] = "N1",
-            },
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-        },
-        ["U_CARD_074"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["DrawCount"] = "N1",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
@@ -1550,16 +689,6 @@ internal static partial class CardRules
             Fields = new Dictionary<string, string>
             {
                 ["PerArrow"] = "N1",
-            },
-            Tips = [CardTip.Arrow],
-            UpgradedTips = [CardTip.Arrow],
-            Effect = SimpleCardEffect.Attack,
-        },
-        ["U_CARD_131"] = new()
-        {
-            Fields = new Dictionary<string, string>
-            {
-                ["ExtraHits"] = "N1",
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],

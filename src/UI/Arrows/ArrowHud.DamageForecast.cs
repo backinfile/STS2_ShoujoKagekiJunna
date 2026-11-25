@@ -126,14 +126,12 @@ internal sealed partial class ArrowHealthForecastView : Control
 
     public override void _Draw()
     {
-        if (_maxHp <= 0 || Fill.Size.X <= 0 || _batches.Length == 0) return;
+        if (_currentHp <= 0 || _maxHp <= 0 || Fill.Size.X <= 0 || _batches.Length == 0) return;
 
         float fillLeft = Fill.Position.X;
         float hpWidth = Fill.Size.X * Mathf.Clamp((float)_currentHp / _maxHp, 0, 1);
         float right = fillLeft + hpWidth;
-        // The batches are independent snapshots. Fit the rail inside current HP even when their sum is larger.
-        long total = _batches.Sum(batch => (long)batch.Loss);
-        float unit = hpWidth / Math.Max(_currentHp, total);
+        float unit = hpWidth / _currentHp;
         var labels = new BatchLabel[_batches.Length];
         for (int i = 0; i < _batches.Length; i++)
         {

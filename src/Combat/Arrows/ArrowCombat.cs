@@ -95,8 +95,8 @@ public static partial class ArrowCombat
     private static ArrowDeployment CreateDeployment(CardModel card, CardPlay play, int turns,
         Func<PlayerChoiceContext, CardPlay, Task> resolve, ICardEffectPayload payload)
     {
-        int haste = CatalogPower.ArrowHaste(card.Owner);
-        if (haste > 0) card.AddKeyword(CardKeyword.Exhaust);
+        bool exhaust = card.Owner.Creature.GetPower<JunnaPowerJA105>()?.MakesArrowsExhaust == true;
+        if (exhaust) card.AddKeyword(CardKeyword.Exhaust);
         int round = card.Owner.PlayerCombatState!.TurnNumber;
         if (ReplayedDeployment.Value is { } replay && replay.Card == card && replay.Combat == card.CombatState)
         {
@@ -104,7 +104,7 @@ public static partial class ArrowCombat
             round = replay.DeployedRound;
         }
         return new(card, play, turns, round, resolve)
-            { ExhaustAfterResolve = haste > 0, Payload = payload };
+            { ExhaustAfterResolve = exhaust, Payload = payload };
     }
 
     private static ArrowDeployment Register(ArrowDeployment arrow)
@@ -160,8 +160,8 @@ public static partial class ArrowCombat
     public static Task AccelerateAll(PlayerChoiceContext context, Player player, int turns)
         => ApplyAcceleration(context, player, new(ArrowAccelerationTargets.All, turns));
 
-    internal static Task AccelerateFromCard(PlayerChoiceContext context, CatalogCard card, Creature? target = null)
-        => ApplyAcceleration(context, card.Owner, ArrowAcceleration.ForCard(card), target);
+    internal static Task AccelerateFromCard(PlayerChoiceContext context, JunnaCard card, Creature? target = null)
+        => ApplyAcceleration(context, card.Owner, card.Acceleration, target);
 
     internal static async Task ApplyAcceleration(PlayerChoiceContext context, Player player,
         ArrowAcceleration acceleration, Creature? target = null, bool snapshotTargets = false)
@@ -197,8 +197,7 @@ public static partial class ArrowCombat
                 original.Payload.Bind(copy).Invoke, original.CopyXValues())
             {
                 PlayCount = original.PlayCount, Payload = original.Payload, Destination = original.Destination,
-                ExhaustAfterResolve = original.ExhaustAfterResolve || exhaustCopies,
-                AttacksWhileWaiting = original.AttacksWhileWaiting
+                ExhaustAfterResolve = original.ExhaustAfterResolve || exhaustCopies
             };
             await Place(deployment, () => CardPileCmd.AddGeneratedCardToCombat(copy, ArrowPile.PileId, player), generated: true);
         }
@@ -263,9 +262,11 @@ public static partial class ArrowCombat
                 // Silent transfers skip the native completion event used by the pile counter.
                 if (arrow.Card.Pile?.Type == PileType.Exhaust) PileType.Exhaust.GetPile(arrow.Card.Owner).InvokeCardAddFinished();
             }
-            else if (arrow.Destination.Pile == PileType.Discard && CatalogPower.Has(arrow.Card.Owner, "JA22"))
-                await CardPileCmd.Add(arrow.Card, PileType.Hand);
-            else await arrow.Destination.Move(context, arrow.Card);
+            else
+            {
+                var returnPower = arrow.Card.Owner.Creature.GetPower<JunnaPowerJA22>();
+                await (returnPower?.Redirect(arrow) ?? arrow.Destination).Move(context, arrow.Card);
+            }
         }
         finally { context.PopModel(arrow.Card); arrow.Resolving = false; }
     }

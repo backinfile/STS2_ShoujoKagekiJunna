@@ -11,12 +11,6 @@ CARDS = {
     'JB01': ('JUNNA_STRIKE', '造成{Damage:diff()}点伤害。'),
     'JB02': ('JUNNA_DEFEND', '获得{Block:diff()}点[gold]格挡[/gold]。'),
     'JB03': ('JUNNA_FULL_DRAW', '造成{Damage:diff()}点伤害。'),
-    'JG09': ('JUNNA_WARM_UP', '获得{Block:diff()}点[gold]格挡[/gold]。NL选择1张手牌获得{Bonus:diff()}点[gold]伤害加成[/gold]。'),
-    'JG03': ('JUNNA_REPEATED_PRACTICE', '选择一张手牌，使其额外造成1次伤害。'),
-    'JA16': ('JUNNA_GUIDING_STAR', '造成{Damage:diff()}点伤害。NL下回合获得{energyPrefix:energyIcons(1)}。'),
-    'JA17': ('JUNNA_BREAK_ENCIRCLEMENT', '对所有敌人造成{Damage:diff()}点伤害。NL下回合获得{energyPrefix:energyIcons(2)}。'),
-    'JH10': ('JUNNA_TURNING_SLASH', '造成{Damage:diff()}点伤害{Repeat}次。'),
-    'JG23': ('JUNNA_ENDURANCE_TRAINING', '卡牌每拥有6点[gold]伤害加成[/gold]，便额外造成1次伤害。'),
 }
 
 def write(relative, content):
@@ -59,10 +53,8 @@ characters = {
     'JUNNA.goldMonologue': '……', 'JUNNA.aromaPrinciple': '……',
 }
 ui = {'JUNNA.SELECT_DAMAGE_CARD': '选择一张牌', 'JUNNA.CARD_TYPE.ARROW': '飞矢'}
-powers = {'JUNNA_ENDURANCE_POWER.title': '耐力训练',
-          'JUNNA_ENDURANCE_POWER.description': '卡牌每拥有6点伤害加成，便额外造成{Amount}次伤害。'}
 for language in ('zhs', 'eng'):
-    for table, values in {'cards':loc, 'characters':characters, 'gameplay_ui':ui, 'powers':powers}.items():
+    for table, values in {'cards':loc, 'characters':characters, 'gameplay_ui':ui}.items():
         write(f'localization/{language}/{table}.json', json.dumps(values, ensure_ascii=False, indent=2))
 spec = ROOT / 'docs/implementation/first-slice-design.json'
 spec.parent.mkdir(parents=True, exist_ok=True)

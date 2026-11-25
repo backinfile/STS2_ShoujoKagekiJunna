@@ -8,7 +8,6 @@ internal static class CardStateCopies
     internal static void Initialize() => CoreApi.Get<ICardCloneEvents>().Cloned += Copy;
     private static void Copy(CardModel source, CardModel copy)
     {
-        KnowledgeProgress.CopyResearch(source, copy);
         HandArrow.Copy(source, copy);
         ArrowConversion.Copy(source, copy);
         CostChanges.Copy(source, copy);

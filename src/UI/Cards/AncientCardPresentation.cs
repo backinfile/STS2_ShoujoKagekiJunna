@@ -27,11 +27,11 @@ internal static class AncientCardPresentation
         {
             Portraits.AddOrUpdate(node, new(portrait, portrait.Texture, portrait.StretchMode));
             portrait.StretchMode = TextureRect.StretchModeEnum.KeepAspectCovered;
-            if (card.DesignId == "JZ03")
+            if (card.AncientPortraitFocusX is { } focusX)
             {
                 var size = card.Portrait.GetSize();
                 float width = Math.Min(size.X, size.Y * portrait.Size.X / portrait.Size.Y);
-                float left = Math.Clamp(size.X * .35f - width * .5f, 0, size.X - width);
+                float left = Math.Clamp(size.X * focusX - width * .5f, 0, size.X - width);
                 portrait.Texture = new AtlasTexture { Atlas = card.Portrait, Region = new Rect2(left, 0, width, size.Y) };
             }
         }

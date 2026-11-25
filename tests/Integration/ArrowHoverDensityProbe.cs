@@ -52,7 +52,6 @@ public sealed class ArrowHoverDensityProbe : AbstractConsoleCmd
             int amount = int.Parse(args.ElementAtOrDefault(3) ?? "1");
             switch (args.ElementAtOrDefault(2))
             {
-                case "waiting": AccessTools.Property(typeof(ArrowDeployment), "AttacksWhileWaiting").SetValue(arrow, amount); break;
                 case "remaining": AccessTools.Property(typeof(ArrowDeployment), "Remaining").SetValue(arrow, amount); break;
                 case "upgrade": arrow.Card.UpgradeInternal(); break;
                 case "cost": CostChanges.SetFixed(arrow.Card, amount); break;

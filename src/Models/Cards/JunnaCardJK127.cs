@@ -7,6 +7,8 @@ namespace ShoujoKagekiJunna.Models;
 
 public sealed partial class JunnaCardJK127 : ITomeCard
 {
+    internal override bool CanBeGeneratedAsKnowledgeMember => false;
+
     CharacterModel ITomeCard.TomeCharacter => ModelDb.Character<Junna>();
 
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)

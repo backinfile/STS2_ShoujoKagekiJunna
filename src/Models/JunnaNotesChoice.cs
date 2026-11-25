@@ -17,30 +17,3 @@ public abstract class JunnaNotesChoice() : CustomCardModel(0, CardType.Skill, Ca
 public sealed class JunnaNotesDraw : JunnaNotesChoice;
 [CustomID("JUNNA_NOTES_ENERGY")]
 public sealed class JunnaNotesEnergy : JunnaNotesChoice;
-
-[CustomID("JUNNA_PREPARE_ARROWS")]
-public sealed class JunnaPrepareArrows : JunnaNotesChoice
-{
-    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JS33").Portrait;
-}
-[CustomID("JUNNA_PREPARE_KNOWLEDGE")]
-public sealed class JunnaPrepareKnowledge : JunnaNotesChoice
-{
-    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JS33").Portrait;
-}
-[CustomID("JUNNA_PREPARE_SHINE")]
-public sealed class JunnaPrepareShine : JunnaNotesChoice
-{
-    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JS33").Portrait;
-}
-
-[CustomID("JUNNA_ENERGY_NOW")]
-public sealed class JunnaEnergyNow : JunnaNotesChoice
-{
-    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JH60").Portrait;
-}
-[CustomID("JUNNA_ENERGY_LATER")]
-public sealed class JunnaEnergyLater : JunnaNotesChoice
-{
-    public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get("JH60").Portrait;
-}

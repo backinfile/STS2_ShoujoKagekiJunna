@@ -32,7 +32,6 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     internal void Retarget(Creature target) => Play = GameApi.WithTarget(Play, target);
     public int Remaining { get; internal set; } = remaining;
     public int DeployedRound { get; } = round;
-    public int AttacksWhileWaiting { get; internal set; }
     public int PlayCount { get; internal set; } = play.PlayCount;
     private readonly int[] _xValues = xValues ?? PaidReplay.Capture(card);
     internal int[] CopyXValues() => _xValues.ToArray();

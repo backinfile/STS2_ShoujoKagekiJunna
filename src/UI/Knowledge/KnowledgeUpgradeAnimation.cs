@@ -7,7 +7,6 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using ShoujoKagekiJunna.Combat;
-using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.UI;
 
@@ -68,7 +67,7 @@ internal static class KnowledgeUpgradeAnimation
     {
         private static void Postfix(CardModel card, NCardUpgradeVfx? __result)
         {
-            if (CardCatalog.DesignId(card) != "JK82" || __result == null) return;
+            if (card is not ICardUpgradeReward || __result == null) return;
             var completion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             __result.TreeExited += () => completion.TrySetResult(false);
             UpgradeCompletions.Add(__result, completion);

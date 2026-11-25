@@ -6,6 +6,8 @@ namespace ShoujoKagekiJunna.Models;
 
 public sealed partial class JunnaCardU_CARD_079
 {
+    internal override ArrowAcceleration Acceleration => new(ArrowAccelerationTargets.Target, Value("Turns"));
+
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         play = CardActions.ResolveTarget(play);

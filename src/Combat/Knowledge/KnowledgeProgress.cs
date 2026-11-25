@@ -14,6 +14,11 @@ using ShoujoKagekiJunna.Models;
 
 namespace ShoujoKagekiJunna.Combat;
 
+internal interface ICombatOpeningCard
+{
+    Task PlayAtCombatOpening(PlayerChoiceContext context);
+}
+
 /// <summary>Permanent card progress and run rewards use BaseLib's saved fields.</summary>
 public static partial class KnowledgeProgress
 {
@@ -24,16 +29,7 @@ public static partial class KnowledgeProgress
     public static async Task Depleted(CatalogCard card, ShineDepletionContext context)
     {
         if (context.PermanentCard == null) return;
-        ResearchDepleted(card, context.PermanentCard);
-        if (card.DesignId == "JK122B") context.Player.PlayerCombatState?.RecalculateCardValues();
-        if (card.DesignId == "JK139B")
-        {
-            OpeningInsights.Set(context.Player, checked(OpeningInsights.Get(context.Player) + 1));
-        }
-        else if (card.DesignId == "JS19")
-        {
-            await OfferKnowledgeCopy(context.Player, card.IsUpgraded ? 2 : 1);
-        }
+        await card.OnPermanentShineDepleted(context);
     }
 
     public static void Acquired(CardModel card)
@@ -64,11 +60,8 @@ public static partial class KnowledgeProgress
     {
         if (player.PlayerCombatState!.TurnNumber != 1 || !Opened.Add(player)) return;
         using var single = KnowledgeCombat.SingleCard();
-        foreach (var arrow in player.PlayerCombatState.AllCards.Where(c => CardCatalog.DesignId(c) == "JK37").ToArray())
-        {
-            var target = player.Creature.CombatState!.HittableEnemies.FirstOrDefault(c => c.IsAlive && arrow.IsValidTarget(c));
-            if (target != null) await CardCmd.AutoPlay(context, arrow, target);
-        }
+        foreach (var card in player.PlayerCombatState.AllCards.OfType<ICombatOpeningCard>().ToArray())
+            await card.PlayAtCombatOpening(context);
         for (int i = 0; i < OpeningInsights.Get(player); i++)
         {
             var insight = CardCatalog.Create("JK139", player);
@@ -85,10 +78,5 @@ public static partial class KnowledgeProgress
         var selected = await CardSelectCmd.FromSimpleGrid(new BlockingPlayerChoiceContext(), candidates, player,
             new CardSelectorPrefs(prompt, 0, 1));
         await CopySingleCards(player, selected);
-    }
-    internal static void CopyResearch(CardModel source, CardModel copy)
-    {
-        if (source is CatalogCard original && copy is CatalogCard clone && ResearchRules.NeedsLink(original.DesignId))
-            CopyGrowth(original, clone);
     }
 }

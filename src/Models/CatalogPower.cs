@@ -50,7 +50,6 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         };
     }
     protected List<Grant> _grants = [];
-    internal int ReplayGrants => _grants.Count;
     public string DesignId => designId;
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => CardRules.Get(DesignId).SinglePower ? PowerStackType.Single : PowerStackType.Counter;
@@ -63,7 +62,6 @@ public abstract partial class CatalogPower(string designId) : CustomPowerModel
         _grants = _grants.Select(grant => grant.Copy()).ToList();
     }
 
-    public static int ArrowHaste(Player player) => player.Creature.Powers.OfType<JunnaPowerJA105>().Sum(p => p._grants.Count);
 
     public static bool Has(Player player, string id) => player.Creature.Powers.OfType<CatalogPower>().Any(p => p.DesignId == id);
     public static async Task Install<T>(CatalogCard card, PlayerChoiceContext context, CardPlay play) where T : CatalogPower

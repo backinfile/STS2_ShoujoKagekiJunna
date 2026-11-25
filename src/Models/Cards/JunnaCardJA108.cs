@@ -12,5 +12,12 @@ public sealed partial class JunnaCardJA108
         await CardActions.PlayDrawPileArrows(context, player);
     }
 
+    protected override void AddExtraArgsToDescription(MegaCrit.Sts2.Core.Localization.LocString description)
+    {
+        base.AddExtraArgsToDescription(description);
+        description.Add("ArrowCount", IsMutable && Owner?.PlayerCombatState is { } combat
+            ? combat.DrawPile.Cards.Count(CardCatalog.IsArrow) : 0);
+    }
+
     protected override void OnUpgrade() => ApplyCatalogUpgrade();
 }

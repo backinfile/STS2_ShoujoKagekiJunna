@@ -1,13 +1,12 @@
 namespace ShoujoKagekiJunna.Models;
 
 internal enum CardTip { Knowledge, Arrow, Vulnerable, Weak, Retain, Energy, Meteor }
-internal enum SimpleCardEffect { Custom, Noop, Attack, Block, Draw, Energy, AttackAndBlock, BlockAndDraw, BlockAndEnergy, DrawAndEnergy, AttackAndDraw }
 internal enum PowerAmountKind { Applications, RemainingLimit, Threshold, Bonus, Block, Amount, Damage, Native }
 internal enum PowerDescriptionKind
 {
     None, RemainingUses, Passive, Applications, ThresholdSum, RepeatedApplications, Native,
     BlockSum, AmountWithThreshold, MinimumThreshold, EnergyThresholdGroups, ArrowLimitGroups,
-    BlockLimitGroups, TurnGroups, LimitGroups, GeneratedCardGroups, DamageGroups, DamageSum, CategoryGroups
+    BlockLimitGroups, TurnGroups, LimitGroups, DamageGroups, DamageSum, CategoryGroups
 }
 internal sealed class CardRuleDefinition
 {
@@ -15,7 +14,6 @@ internal sealed class CardRuleDefinition
     internal CardTip[] Tips { get; init; } = [];
     internal CardTip[] UpgradedTips { get; init; } = [];
     internal string[] RelatedCards { get; init; } = [];
-    internal SimpleCardEffect Effect { get; init; }
     internal bool LoopAsArrow { get; init; }
     internal PowerAmountKind PowerAmount { get; init; }
     internal PowerDescriptionKind PowerDescription { get; init; }

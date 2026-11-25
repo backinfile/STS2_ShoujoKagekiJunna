@@ -147,15 +147,6 @@ public sealed class Workbench5462Command : AbstractConsoleCmd
                         Equal(before - player.PlayerCombatState.DrawPile.Cards.Count, 1, "One draw for " + id);
                     }
                 });
-                await Case("JK400 zero-cost bonus " + up, async () =>
-                {
-                    await Play(await Add(player, "JK400", up));
-                    var arrow = await Add(player, "JA81B"); await Play(arrow);
-                    decimal bonus = up ? 3 : 2;
-                    Equal(player.Creature.GetPower<JunnaPowerJK400>()!.Amount, bonus, "Power amount");
-                    var free = await Add(player, "JB02"); await CardActions.FreePlay(Context, free, player.Creature);
-                    var reduced = await Add(player, "JB02"); reduced.EnergyCost.SetThisCombat(0); await Play(reduced);
-                });
             }
         }
         finally
@@ -170,7 +161,7 @@ public sealed class Workbench5462Command : AbstractConsoleCmd
     {
         await Reset(player, true);
         await CreatureCmd.SetMaxHp(player.Creature, 200); await CreatureCmd.SetCurrentHp(player.Creature, 200);
-        foreach (string id in new[] { "A", "JA43", "JA145", "JK122", "JK133", "U_CARD_008B", "U_CARD_016", "JK400" })
+        foreach (string id in new[] { "A", "JA43", "JA145", "JK122", "JK133", "U_CARD_008B", "U_CARD_016" })
             await Add(player, id, true);
         for (int n = 0; n < 8; n++) await Add(player, "JB02", pile: PileType.Draw);
     }

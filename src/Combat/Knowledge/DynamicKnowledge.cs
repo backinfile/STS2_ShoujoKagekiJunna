@@ -36,7 +36,7 @@ public static class DynamicKnowledge
     private static readonly ConditionalWeakTable<CardModel, CardModel[]> Pending = new();
     private sealed record Offer(CardReward Reward, CardModel Original);
     private static readonly ConditionalWeakTable<CardModel, Offer> Offers = new();
-    private static string PreferredEntrance => CardCatalog.Model("JK126").Id.ToString();
+    private static string PreferredEntrance => ModelDb.Card<JunnaCardJK126>().Id.ToString();
     private static List<KnowledgeRelation> Groups(Player player)
     {
         var cache = Cache.GetOrCreateValue(player);
@@ -45,9 +45,9 @@ public static class DynamicKnowledge
         {
             cache.Groups = string.IsNullOrEmpty(serialized) ? [] : JsonSerializer.Deserialize<List<KnowledgeRelation>>(serialized)!;
             cache.Serialized = serialized;
-            cache.Groups.RemoveAll(group => RemovedKnowledgeCards.Contains(ModelId.Deserialize(group.EntranceId)));
+            cache.Groups.RemoveAll(group => RemovedCards.Contains(ModelId.Deserialize(group.EntranceId)));
             foreach (var group in cache.Groups)
-                foreach (string member in group.CardCounts.Keys.Where(key => RemovedKnowledgeCards.Contains(ModelId.Deserialize(key))).ToArray())
+                foreach (string member in group.CardCounts.Keys.Where(key => RemovedCards.Contains(ModelId.Deserialize(key))).ToArray())
                     group.CardCounts.Remove(member);
             foreach (var group in CardCatalog.Groups)
             {
@@ -143,7 +143,7 @@ public static class DynamicKnowledge
     }
     public static Task Prepare(PlayerChoiceContext context, CardModel selected, IEnumerable<CardModel> options)
     {
-        if (CardCatalog.DesignId(selected) != "JK126") return Task.CompletedTask;
+        if (selected is not JunnaCardJK126) return Task.CompletedTask;
         var others = options.Where(c => c != selected && c.Pile == null).Distinct().ToArray();
         if (others.Length > 0) Pending.AddOrUpdate(selected, others);
         return Task.CompletedTask;
@@ -204,7 +204,7 @@ public static class DynamicKnowledge
         private static void Prefix(CardReward __instance)
         {
             if (!KnowledgeAcquisitionSources.IsKnownReward(__instance)) return;
-            foreach (var card in __instance.Cards.Where(c => CardCatalog.DesignId(c) == "JK126"))
+            foreach (var card in __instance.Cards.OfType<JunnaCardJK126>())
                 Offers.AddOrUpdate(card, new(__instance, card));
         }
     }
@@ -271,8 +271,8 @@ public static class DynamicKnowledge
 #endif
                 };
             var tips = __result.ToList();
-            string knowledgeId = HoverTipFactory.FromKeyword(CardCatalog.DesignId(__instance) == "JK126"
-                ? JunnaKeywords.ChainKnowledge : JunnaKeywords.Knowledge).Id;
+            var keyword = (__instance as JunnaCard)?.KnowledgeKeyword ?? JunnaKeywords.Knowledge;
+            string knowledgeId = HoverTipFactory.FromKeyword(keyword).Id;
             int knowledgeIndex = tips.FindIndex(existing => existing.Id == knowledgeId);
             tips.Insert(knowledgeIndex + 1, tip);
             __result = tips;

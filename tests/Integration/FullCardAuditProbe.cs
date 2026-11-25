@@ -241,7 +241,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             }
             if (Id == "JK84B")
             {
-                var selfArrow = await Add("JH11");
+                var selfArrow = await Add("JA15");
                 await TestGameApi.PaidPlay(_context, selfArrow);
                 _helpers.Add(selfArrow);
             }
@@ -284,7 +284,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             if (Id == "U_CARD_034")
                 for (int i = 0; i < 6; i++) _helpers.Add(await Add("JB01", PileType.Draw));
             if (Id == "U_CARD_010")
-                for (int i = 0; i < 3; i++) foreach (string id in new[] { "JK11", "JA38", "JS35" }) _helpers.Add(await Add(id, PileType.Draw));
+                for (int i = 0; i < 3; i++) foreach (string id in new[] { "JK11", "JA38", "JF13" }) _helpers.Add(await Add(id, PileType.Draw));
         }
         _source = await Add(Id, upgrade: upgraded);
         if (Id == "U_CARD_017" && !Empty)
@@ -394,7 +394,15 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         Check("费用", _source.EnergyCost.GetWithModifiers(CostModifiers.None), upgraded ? definition.UpgradedCost : definition.Cost);
         Check("X费用", _source.EnergyCost.CostsX, definition.CostsX);
         Check("知识关键词", CardCatalog.IsKnowledge(_source), definition.Knowledge);
+        if (Id is "U_CARD_017" or "JK314")
+            _source.UpdateDynamicVarPreview(CardPreviewMode.Normal, _enemies[0], _source.DynamicVars);
         string description = _source.GetDescriptionForPile(PileType.Hand);
+        if (Id is "U_CARD_017" or "JK314")
+        {
+            int hits = 1 + (Id == "U_CARD_017" ? _categoryCount : _beforeDepletedDesires);
+            string rendered = Regex.Replace(description, @"\[[^\]]+\]", "");
+            Check("卡面显示当前攻击段数", rendered.Contains($"共{hits}段"), true);
+        }
         Check("本地化完整", !description.Contains("ERROR") && !description.Contains('{') && !description.Contains('}'), true);
         Check("卡图资源", ResourceLoader.Exists(((JunnaCard)_source).CustomPortraitPath), true);
         if (Id == "JA108")
@@ -584,7 +592,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "JK84B" && _arrow != null)
         {
             Check("敌方目标飞矢加速一次", ArrowCombat.Find(_arrow)?.Remaining, 2);
-            var selfArrow = _helpers.Single(card => CardCatalog.DesignId(card) == "JH11");
+            var selfArrow = _helpers.Single(card => CardCatalog.DesignId(card) == "JA15");
             Check("自己的目标飞矢保持倒计时", ArrowCombat.Find(selfArrow)?.Remaining, HandArrow.Turns(selfArrow));
         }
         if (Id == "JH24") Check("最大能量增加", player.PlayerCombatState!.MaxEnergy, 4);
@@ -1142,7 +1150,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         await cycle.AfterPlayerTurnStart(_context, player);
         Check("新安装独立从知识开始", knowledge.Pile?.Type, PileType.Hand);
         Check("已有实例无闪耀时不取其他类别", player.PlayerCombatState.Hand.Cards.Count - before, 1);
-        var pending = await Add("JS35", PileType.Draw, upgrade: true);
+        var pending = await Add("JF13", PileType.Draw, upgrade: true);
         while (player.PlayerCombatState.Hand.Cards.Count < CardPile.MaxCardsInHand) await Add("JB02");
         await PowerCmd.Apply<NoDrawPower>(_context, player.Creature, 1, player.Creature, null);
         player.PlayerCombatState.IncrementTurnNumber();
@@ -1181,20 +1189,12 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         await ClearCards();
         foreach (var power in player.Creature.Powers.ToArray()) await PowerCmd.Remove(power);
         player.PlayerCombatState!.Energy = 99;
-        foreach (string id in new[] { "JK254", "JK235", "JK260" }) await Play(await Add(id));
+        foreach (string id in new[] { "JK235", "JK260" }) await Play(await Add(id));
         var source = await Add(Id, upgrade: upgraded);
-        var group = KnowledgeCombat.Group(source);
-        CardModel? partner = null;
-        if (group?.GrantedCardIds.FirstOrDefault() is { } partnerId)
-        {
-            partner = await Add(partnerId);
-            partner.EnergyCost.SetThisCombat(4);
-        }
         int hp = _enemies.Sum(enemy => enemy.CurrentHp);
         await Play(source);
         Check("配合知识的力量首次触发", player.Creature.GetPower<StrengthPower>()?.Amount, 2);
         Check("配合教科书造成伤害", hp - _enemies.Sum(enemy => enemy.CurrentHp) >= 3, true);
-        if (partner?.Pile?.Type == PileType.Hand) Check("配合融会贯通下一次零费", CardActions.Cost(partner), 0);
         var other = await Add("JK49B");
         await Play(other);
         Check("同回合知识力量上限", player.Creature.GetPower<StrengthPower>()?.Amount, 2);

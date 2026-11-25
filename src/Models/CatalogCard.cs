@@ -14,6 +14,7 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
     CardCatalog.Get(id).CardType, CardCatalog.Get(id).CardRarity, CardCatalog.Get(id).TargetType, id), ShoujoKageki.Core.V1.IShineDepletionHandler
 {
     public Task OnShineDepleted(ShoujoKageki.Core.V1.ShineDepletionContext context) => KnowledgeProgress.Depleted(this, context);
+    internal virtual Task OnPermanentShineDepleted(ShoujoKageki.Core.V1.ShineDepletionContext context) => Task.CompletedTask;
     public CardDefinition Definition => CardCatalog.Get(DesignId);
     public bool Converted { get; private set; }
     public override CardType Type => Converted ? Definition.InternalType : Definition.CardType;
@@ -30,31 +31,11 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
             Definition.CardType == CardType.Power || !Definition.DamageCapable ? ValueProp.Unpowered : ValueProp.Move),
         "Block" => new BlockVar(n.Base,
             Definition.CardType == CardType.Power ? ValueProp.Unpowered : ValueProp.Move),
+        "Repeat" when Definition.DamageCapable && Definition.TargetType is TargetType.AnyEnemy or TargetType.AllEnemies
+            => AttackHitCount.DeclarePrinted(n.Base),
         "Repeat" => new RepeatVar(n.Base),
         _ => new DynamicVar(n.Name, n.Base)
-    }).Concat(DesignId is "JK48" or "JK206" ? new DynamicVar[]
-    {
-        new ExtraDamageVar(1),
-        new KnowledgeDamageVar().WithMultiplier(static (card, _) =>
-            card is CatalogCard { DesignId: "JK206" } ? card.Owner.Deck.Cards.Count :
-                CountDeckKnowledge(card))
-    } : []).Concat(DesignId == "JK48B" ? new DynamicVar[]
-    {
-        new KnowledgeBlockVar().WithMultiplier(static (card, _) => CountDeckKnowledge(card))
-    } : []);
-
-    internal int HitsWithDepletedPartners => Value("Repeat", 1) + (IsMutable && Owner is { } owner
-        ? ShoujoKageki.Core.V1.Shine.GetDepletedCards(owner).Count(entry => entry.ModelId == CardCatalog.Model("JK122B").Id.ToString()) : 0);
-
-    protected override void AddExtraArgsToDescription(LocString description)
-    {
-        base.AddExtraArgsToDescription(description);
-        if (DesignId == "JA108")
-            description.Add("ArrowCount", IsMutable && Owner?.PlayerCombatState is { } combat
-                ? combat.DrawPile.Cards.Count(CardCatalog.IsArrow) : 0);
-        if (DesignId == "U_CARD_017")
-            description.Add("SatisfiedCategories", CardTutors.CountHandCategories(this));
-    }
+    });
 
     internal static int CountDeckKnowledge(CardModel card) => card.IsMutable
         ? card.Owner?.Deck.Cards.Count(CardCatalog.IsKnowledge) ?? 0 : 0;
@@ -79,8 +60,13 @@ public abstract class CatalogCard(string id) : JunnaCard(CardCatalog.Get(id).Cos
         AssertMutable();
         DynamicVars.Damage.BaseValue = damage;
     }
-    protected Task<DamageResult[]> Attack(PlayerChoiceContext context, CardPlay play, int? damage = null, int? hits = null)
-        => CardEffects.DealDamage(this, context, play, damage ?? Value("Damage"), hits ?? Value("Repeat", 1));
+    protected Task<DamageResult[]> Attack(PlayerChoiceContext context, CardPlay play)
+    {
+        var attack = DynamicVars.TryGetValue(CalculatedDamageVar.defaultName, out var damage)
+            ? DamageCmd.Attack((CalculatedDamageVar)damage)
+            : DamageCmd.Attack(Value("Damage"));
+        return CardEffects.DealDamage(this, context, play, attack, AttackHitCount.Read(this, play.Target));
+    }
 
     protected Task Block(CardPlay play, int? amount = null)
         => CreatureCmd.GainBlock(Owner.Creature, amount ?? Value("Block"), ValueProp.Move, play);

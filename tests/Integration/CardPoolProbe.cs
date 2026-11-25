@@ -114,14 +114,6 @@ public static class CardPoolProbe
             await ArrowCombat.AccelerateAll(context, player, 20);
             Check("completion return rule", second.Pile!.Type, PileType.Hand);
         });
-        await Scenario("waiting history", async () =>
-        {
-            var arrow = await Card("JT03"); await Play(arrow);
-            await Play(await Card("JB01")); await Play(await Card("JA38"));
-            Check("waiting counts attack and other arrow", ArrowCombat.Find(arrow)!.AttacksWhileWaiting, 2);
-            int hp = target.CurrentHp; await ArrowCombat.Accelerate(context, ArrowCombat.Find(arrow)!, 3);
-            Check("waiting attack count becomes hits", hp - target.CurrentHp, 20);
-        });
         await Scenario("arrow replay redeploy", async () =>
         {
             player.PlayerCombatState!.Energy = 4;

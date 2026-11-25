@@ -13,7 +13,7 @@ public partial class ArrowHud
     private readonly Dictionary<ArrowDeployment, ArrowDeployment> _hoverRepresentatives = [];
     private readonly List<ArrowDeployment> _clusteredOrder = [];
     private readonly record struct ClusterInput(ArrowDeployment Arrow, Creature? Target,
-        int Remaining, int PlayCount, int Upgrade, int WaitingHits);
+        int Remaining, int PlayCount, int Upgrade);
     private readonly List<ClusterInput> _clusterInputs = [];
     private double _nextClusterRefresh;
     private readonly Dictionary<ArrowDeployment, int> _previewQuantities = [];
@@ -71,7 +71,7 @@ public partial class ArrowHud
     }
 
     private static ClusterInput ClusterState(ArrowDeployment arrow)
-        => new(arrow, arrow.Target, arrow.Remaining, arrow.PlayCount, arrow.Card.CurrentUpgradeLevel, arrow.AttacksWhileWaiting);
+        => new(arrow, arrow.Target, arrow.Remaining, arrow.PlayCount, arrow.Card.CurrentUpgradeLevel);
 
     private void GroupHoverCandidates()
     {
@@ -110,7 +110,6 @@ public partial class ArrowHud
             Affliction = card.Affliction == null ? null : new { card.Affliction.Id, card.Affliction.Amount },
             Shine = Shine.GetState(card),
             arrow.Remaining, arrow.PlayCount, arrow.DeployedRound, arrow.ExhaustAfterResolve,
-            WaitingHits = CardCatalog.DesignId(card) == "JT03" ? arrow.AttacksWhileWaiting : 0,
             arrow.Play.IsAutoPlay, arrow.Play.ResultPile, arrow.Play.Resources, XValues = arrow.CopyXValues()
         });
     }

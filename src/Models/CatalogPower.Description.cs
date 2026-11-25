@@ -84,7 +84,6 @@ public abstract partial class CatalogPower
             PowerDescriptionKind.BlockLimitGroups => Groups(g => (Limit: g.V("EnergyThreshold"), Threshold: g.V("EnergyThreshold2")), group => Format(("Limit", group.Key.Limit), ("Threshold", group.Key.Threshold), ("Amount", group.Sum(g => g.V("Block"))))),
             PowerDescriptionKind.TurnGroups => Groups(g => g.V("Turns"), group => Format(("Turns", group.Key), ("Repetition", Repetition(group.Count())))),
             PowerDescriptionKind.LimitGroups => Groups(g => g.V("Limit"), group => Format(("Limit", group.Key), ("Amount", group.Count()))),
-            PowerDescriptionKind.GeneratedCardGroups => Groups(g => g.Card.IsUpgraded, group => Format(("Amount", group.Count()), ("Card", CardCatalog.Get("JK46B").Name + (group.Key ? "+" : "")))),
             PowerDescriptionKind.DamageGroups => Groups(g => DamagePayload(g).Damage,
                 group => Format(("Damage", group.Key), ("Repeat", group.Sum(g => DamagePayload(g).Hits)))),
             PowerDescriptionKind.DamageSum => [Format(("Damage", StackAmount()))],

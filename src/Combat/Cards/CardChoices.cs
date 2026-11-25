@@ -40,31 +40,4 @@ public static class CardChoices
         if (selected == draw) await CardPileCmd.Draw(context, source.Value("DrawCount"), source.Owner);
         else if (selected == energy) await PlayerCmd.GainEnergy(source.Value("Energy"), source.Owner);
     }
-
-    public static async Task Prepare(PlayerChoiceContext context, CatalogCard source)
-    {
-        var arrows = (JunnaPrepareArrows)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaPrepareArrows>(ModelDb.GetId<JunnaPrepareArrows>()), source.Owner);
-        var knowledge = (JunnaPrepareKnowledge)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaPrepareKnowledge>(ModelDb.GetId<JunnaPrepareKnowledge>()), source.Owner);
-        var shine = (JunnaPrepareShine)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaPrepareShine>(ModelDb.GetId<JunnaPrepareShine>()), source.Owner);
-        arrows.DynamicVars["Amount"].BaseValue = source.Value("ArrowCount");
-        knowledge.DynamicVars["Amount"].BaseValue = source.Value("KnowledgeCount");
-        shine.DynamicVars["Amount"].BaseValue = source.Value("ShineCount");
-        var selected = await ShoujoKageki.Core.V1.CardOptions.Choose(context, [arrows, knowledge, shine], source.Owner);
-        if (selected == arrows) await CardActions.DrawMatching(context, source.Owner, CardCatalog.IsArrow, source.Value("ArrowCount"));
-        else if (selected == knowledge) await CardActions.DrawMatching(context, source.Owner, CardCatalog.IsKnowledge, source.Value("KnowledgeCount"));
-        else if (selected == shine) await CardActions.DrawMatching(context, source.Owner, ShoujoKageki.Core.V1.Shine.IsShineCard, source.Value("ShineCount"));
-    }
-
-    public static async Task EnergyTiming(PlayerChoiceContext context, CatalogCard source)
-    {
-        var now = (JunnaEnergyNow)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaEnergyNow>(ModelDb.GetId<JunnaEnergyNow>()), source.Owner);
-        var later = (JunnaEnergyLater)ShoujoKageki.Core.V1.CardOptions.Create(ModelDb.GetById<JunnaEnergyLater>(ModelDb.GetId<JunnaEnergyLater>()), source.Owner);
-        now.DynamicVars["Amount"].BaseValue = source.Value("EnergyNow");
-        later.DynamicVars["Amount"].BaseValue = source.Value("EnergyLater");
-        var selected = await ShoujoKageki.Core.V1.CardOptions.Choose(context, [now, later], source.Owner);
-        if (selected == now) await PlayerCmd.GainEnergy(source.Value("EnergyNow"), source.Owner);
-        else if (selected == later) await PowerCmd.Apply<MegaCrit.Sts2.Core.Models.Powers.EnergyNextTurnPower>(
-            context, source.Owner.Creature, source.Value("EnergyLater"), source.Owner.Creature, source);
-    }
-
 }

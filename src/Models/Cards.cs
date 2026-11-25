@@ -20,11 +20,15 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
     : CustomCardModel(cost, type, rarity, target, showInCardLibrary: CardCatalog.Cards.Any(c => c.Id == designId && !c.ChoiceOnly))
 {
     public virtual string DesignId => designId;
+    internal virtual ArrowAcceleration Acceleration => default;
+    internal virtual float? AncientPortraitFocusX => null;
+    internal virtual CardKeyword KnowledgeKeyword => JunnaKeywords.Knowledge;
+    protected virtual IHoverTip? UnlinkedKnowledgeGroupTip => null;
+    internal virtual bool CanBeGeneratedAsKnowledgeMember => true;
     public override bool CanBeGeneratedInCombat => CardCatalog.IsRewardCard(this) && CardCatalog.CanGenerateAsKnowledgeMember(this);
     public override string CustomPortraitPath => JunnaMod.ResourceRoot + "images/cards/" + CardCatalog.Get(DesignId).Portrait;
     public override HashSet<CardKeyword> CanonicalKeywords =>
         [..(CardCatalog.IsKnowledge(this) ? new[] { JunnaKeywords.Knowledge } : []),
-         ..(DesignId == "JK126" ? new[] { JunnaKeywords.ChainKnowledge } : []),
          ..(CardCatalog.IsArrow(this) ? new[] { JunnaKeywords.Arrow } : [])];
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
@@ -33,15 +37,9 @@ public abstract class JunnaCard(int cost, CardType type, CardRarity rarity, Targ
             var rules = CardRules.Get(DesignId);
             // Extra tips precede native keyword tips; adding this first also fixes the group ordering.
             if (CardCatalog.IsKnowledge(this) || rules.HasTip(CardTip.Knowledge, IsUpgraded))
-                yield return HoverTipFactory.FromKeyword(DesignId == "JK126" ? JunnaKeywords.ChainKnowledge : JunnaKeywords.Knowledge);
-            if (DesignId == "JK126" && !DynamicKnowledge.IsLinked(this))
-                yield return new HoverTip(new LocString("gameplay_ui", "JUNNA.KNOWLEDGE_GROUP"),
-                    $"[gold]{CardCatalog.Model(DesignId).Title}[/gold]")
-                    {
-#if !STS2_MAIN && !STS2_BETA
-                        Id = "junna_knowledge_reward_others",
-#endif
-                    };
+                yield return HoverTipFactory.FromKeyword(KnowledgeKeyword);
+            if (UnlinkedKnowledgeGroupTip is { } tip)
+                yield return tip;
             var group = KnowledgeCombat.Group(this);
             if (group != null && !DynamicKnowledge.IsLinked(this))
             {
@@ -103,59 +101,4 @@ public sealed class JunnaDefend() : JunnaCard(1, CardType.Skill, CardRarity.Basi
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play) =>
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
     protected override void OnUpgrade() => DynamicVars.Block.UpgradeValueBy(3);
-}
-
-[CustomID("JUNNA_WARM_UP")]
-public sealed class JunnaWarmUp() : JunnaCard(1, CardType.Skill, CardRarity.Common, TargetType.Self, "JG09")
-{
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(7, ValueProp.Move)];
-    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
-    {
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
-    }
-    protected override void OnUpgrade() { DynamicVars.Block.UpgradeValueBy(2); }
-}
-
-[CustomID("JUNNA_REPEATED_PRACTICE")]
-public sealed class JunnaRepeatedPractice() : JunnaCard(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self, "JG03")
-{
-    public override HashSet<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    protected override Task OnPlay(PlayerChoiceContext context, CardPlay play) => Task.CompletedTask;
-    protected override void OnUpgrade() => EnergyCost.UpgradeBy(-1);
-}
-
-[CustomID("JUNNA_GUIDING_STAR")]
-public sealed class JunnaGuidingStar() : JunnaCard(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy, "JA16")
-{
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9, ValueProp.Move)];
-    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
-    {
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).Targeting(play.Target!)
-            .WithHitFx(VfxCmd.slashPath).Execute(context);
-        await PowerCmd.Apply<EnergyNextTurnPower>(context, Owner.Creature, 1, Owner.Creature, this);
-    }
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3);
-}
-
-[CustomID("JUNNA_BREAK_ENCIRCLEMENT")]
-public sealed class JunnaBreakEncirclement() : JunnaCard(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies, "JA17")
-{
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9, ValueProp.Move)];
-    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
-    {
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).TargetingAllOpponents(CombatState!)
-            .WithHitFx(VfxCmd.slashPath).Execute(context);
-        await PowerCmd.Apply<EnergyNextTurnPower>(context, Owner.Creature, 2, Owner.Creature, this);
-    }
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3);
-}
-
-[CustomID("JUNNA_TURNING_SLASH")]
-public sealed class JunnaTurningSlash() : JunnaCard(3, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy, "JH10")
-{
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(9, ValueProp.Move), new RepeatVar(3)];
-    protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play) =>
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).Targeting(play.Target!)
-            .WithHitCount(DynamicVars.Repeat.IntValue).WithHitFx(VfxCmd.slashPath).Execute(context);
-    protected override void OnUpgrade() => DynamicVars.Damage.UpgradeValueBy(3);
 }

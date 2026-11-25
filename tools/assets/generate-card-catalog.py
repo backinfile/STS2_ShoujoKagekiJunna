@@ -16,44 +16,40 @@ CORE_ROOT = Path(os.environ.get('SHOUJO_CORE_ROOT', ROOT.parent / 'STS2_ShoujoKa
 CATALOG_PATH = ROOT / 'data/card-pool.json'
 EXISTING = {
     'JB01': ('JunnaStrike', 'JUNNA_STRIKE'), 'JB02': ('JunnaDefend', 'JUNNA_DEFEND'),
-    'JB03': ('JunnaFullDraw', 'JUNNA_FULL_DRAW'), 'JG09': ('JunnaWarmUp', 'JUNNA_WARM_UP'),
-    'JG03': ('JunnaRepeatedPractice', 'JUNNA_REPEATED_PRACTICE'),
-    'JA16': ('JunnaGuidingStar', 'JUNNA_GUIDING_STAR'),
-    'JA17': ('JunnaBreakEncirclement', 'JUNNA_BREAK_ENCIRCLEMENT'),
-    'JH10': ('JunnaTurningSlash', 'JUNNA_TURNING_SLASH'),
-    'JG23': ('JunnaEnduranceTraining', 'JUNNA_ENDURANCE_TRAINING'),
+    'JB03': ('JunnaFullDraw', 'JUNNA_FULL_DRAW'),
+}
+
+# Export formatting for values the workbench text does not bind to a native variable.
+CARD_EXPORT_RULES = {
+    'JK82': {'dynamicEnergy': True},
+    'JK206': {'fixedValues': [('Damage', 0, 8)], 'damageCapable': True,
+              'descriptionSuffix': '{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}'},
+    'JK37': {'unprintedDamage': (50, 60), 'damageCapable': True},
+    'JA81B': {'generatedDamage': True},
+    'JA82': {'damageCapable': False},
+    'JK400B': {'damageCapable': False},
+    'JH30': {'damageCapable': True},
+    'JA108': {'descriptionSuffix': '{InCombat:\n（打出{ArrowCount}张）|}'},
+    'U_CARD_030': {'damageCapable': False, 'descriptionSuffix': '{InCombat:\n（打出{MeteorCount}张）|}'},
+    'U_CARD_017': {'descriptionSuffix': '{InCombat:\n（已满足{SatisfiedCategories}类，共{CalculatedHits:diff()}段）|}'},
+    'JK314': {'descriptionSuffix': '{InCombat:\n（已耗尽{DepletedPartners}张，共{CalculatedHits:diff()}段）|}'},
 }
 
 SELECTION_PROMPTS = {
     "U_CARD_010": "选择{Cards}张{Category}牌放入手牌。",
-    "U_CARD_023": "选择1张手牌。",
-    "JG03": "选择1张手牌。",
-    "JG09": "选择1张手牌。",
-    "JG16": "选择1张手牌。",
-    "JT02": "选择1张手牌。",
     "JK206B": "选择{Cards}张知识牌。",
     "JA84": "选择1张手牌。",
     "JA87": "选择{Cards}张牌作为{N1}回合飞矢打出。",
     "JA88": "选择任意张手牌。",
     "JK84": "选择至多{Cards}张手牌。",
     "JG37": "选择1张手牌。",
-    "JH01": "选择2张手牌。",
     "JK11": "选择1张驳论。",
     "JK11B": "选择1张立论。",
-    "JK50B": "选择1张雄辩。",
     "JK53": "选择1张知识牌。",
-    "JG27": "选择1张牌。",
     "JA65": "选择1张飞矢。",
-    "JA66": "选择至多{Cards}张牌。",
     "JK73B": "选择1张反证。",
-    "JK78D": "选择至多{Cards}张牌。",
-    "JK78E": "选择至多{Cards}张牌。",
-    "JK64": "选择1张飞矢。",
-    "JK112": "选择1张舌战。",
     "JK126": "选择2张关联牌。",
     "JK127": "选择至多1张牌。",
-    "JS19": "选择至多{Cards}张知识牌。",
-    "JK148B": "选择{Cards}张知识牌。"
 }
 
 def native_keyword(text, keyword):
@@ -62,11 +58,12 @@ def native_keyword(text, keyword):
 
 def display_description(card, text, card_names, values, upgraded=False):
     """Format the workbench wording without substituting independently curated rules."""
+    rule = CARD_EXPORT_RULES.get(card['id'], {})
     numbers = {value['name']: value['upgraded' if upgraded else 'base'] for value in values}
 
     def energy(match):
         # Learning can upgrade repeatedly, so its displayed gain must stay dynamic.
-        if card['id'] == 'JK82':
+        if rule.get('dynamicEnergy'):
             return match[0].removesuffix('点能量') + '{energyPrefix:energyIcons(1)}'
         value = numbers[match[1]]
         icons = '{energyPrefix:energyIcons(' + str(value if 1 <= value <= 3 else 1) + ')}'
@@ -89,19 +86,7 @@ def display_description(card, text, card_names, values, upgraded=False):
     # Match the Exhaust keyword and Strength stat in context.
     pattern += r'|(?<=获得)消耗|消耗(?=复制)|(?<=点)力量'
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
-    if card['id'] == 'JK206':
-        text += '{InCombat:\n（造成{CalculatedDamage:diff()}点伤害）|}'
-    elif card['id'] == 'JA108':
-        text += '{InCombat:\n（打出{ArrowCount}张）|}'
-    elif card['id'] == 'U_CARD_030':
-        text += '{InCombat:\n（打出{MeteorCount}张）|}'
-    elif card['id'] == 'U_CARD_017':
-        text += '{InCombat:\n（已满足{SatisfiedCategories}类）|}'
-    elif card['id'] == 'JK314':
-        text += '{InCombat:\n（已耗尽{DepletedPartners}张）|}'
-    elif card['id'] == 'JK184':
-        text += '{DepletedPartners:choose(0):|\n（已耗尽{DepletedPartners}张）}'
-    return text
+    return text + rule.get('descriptionSuffix', '')
 
 
 def upgrade_description(normal, improved):
@@ -201,16 +186,14 @@ def main():
     if args.arrow_portraits_only:
         arrow_portraits_only(bundle)
         return
-    removed_event_cards = {f'JK{number}' for number in range(359, 368)}
+    removed_models = json.loads((ROOT / 'data/removed-card-models.json').read_text(encoding='utf-8'))
     cards = [c for c in bundle['data']['cards']
-             if c['id'] not in removed_event_cards and not c.get('trashedAt') and not c.get('reservedAt')]
+             if c['id'] not in removed_models and not c.get('trashedAt') and not c.get('reservedAt')]
     previous = json.loads(CATALOG_PATH.read_text(encoding='utf-8'))
     existing = previous if args.rules_only else None
     existing_cards = {card['id']: card for card in existing['cards']} if existing else {}
     active_ids = {card['id'] for card in cards}
-    retired = {card['id']: dict(card, pool=False)
-               for card in previous.get('retiredCards', []) + previous['cards']
-               if card['id'] not in active_ids and card['id'] not in removed_event_cards}
+    legacy = {card['id']: card for card in previous['legacyCards'] if card['id'] not in active_ids}
     definitions = []
     wrappers = []
     localization = {}
@@ -228,37 +211,29 @@ def main():
         # Core renders the current Shine budget, including depletion and upgrades.
         base = re.sub(r'闪耀\d+[。.]', '', base)
         upgrade = re.sub(r'闪耀\d+[。.]', '', upgrade)
-        if cid == 'JK206':
-            values = [{'name': 'Damage', 'base': 0}]
-            upgraded_values = [{'name': 'Damage', 'base': 8}]
-        elif cid == 'JK37' and '造成' not in base and '造成' not in upgrade:
-            # The workbench's resolution rule retains the damage, which its card face omits.
-            values = [{'name': 'Damage', 'base': 50}]
-            upgraded_values = [{'name': 'Damage', 'base': 60}]
-        elif cid == 'JK254':
-            values, upgraded_values = [], []
+        rule = CARD_EXPORT_RULES.get(cid, {})
+        fixed = rule.get('fixedValues')
+        if 'unprintedDamage' in rule and '造成' not in base and '造成' not in upgrade:
+            fixed = [('Damage', *rule['unprintedDamage'])]
+        if fixed is not None:
+            values = [{'name': name, 'base': normal, 'upgraded': improved}
+                      for name, normal, improved in fixed]
         else:
             base, values = bind_numbers(base)
             upgrade, upgraded_values = bind_numbers(upgrade, values)
-        # Upgrades can replace a fixed count with "all" (e.g. 论据).
-        if len(upgraded_values) > len(values):
-            raise ValueError('Upgrade introduces unmatched numbers: ' + cid)
-        for index, value in enumerate(values):
-            value['upgraded'] = upgraded_values[index]['base'] if index < len(upgraded_values) else value['base']
-        if cid == 'JA81B':
+            # Upgrades can replace a fixed count with "all" (e.g. 论据).
+            if len(upgraded_values) > len(values):
+                raise ValueError('Upgrade introduces unmatched numbers: ' + cid)
+            for index, value in enumerate(values):
+                value['upgraded'] = upgraded_values[index]['base'] if index < len(upgraded_values) else value['base']
+        if rule.get('generatedDamage'):
             values.append({'name': 'Damage', 'base': 0, 'upgraded': 0})
             base = base.replace('X', '{Damage:diff()}')
             upgrade = upgrade.replace('X', '{Damage:diff()}')
         if card['type'] == '飞矢':
             values.append({'name': 'Turns', 'base': card['turns'], 'upgraded': card['upgradedTurns']})
         # Existing implementations use their established variable names.
-        if cid == 'JA16':
-            base = re.sub(r'\{N\d+:diff\(\)\}', '1', base)
-            upgrade = re.sub(r'\{N\d+:diff\(\)\}', '1', upgrade)
-        if cid == 'JG09':
-            base = base.replace('{N1:diff()}', '1')
-            upgrade = upgrade.replace('{N1:diff()}', '1')
-        if cid in ('JG03', 'JG23'):
+        if rule.get('literalNumbers'):
             for value in values:
                 base = base.replace('{' + value['name'] + ':diff()}', str(value['base']))
                 upgrade = upgrade.replace('{' + value['name'] + ':diff()}', str(value['upgraded']))
@@ -268,7 +243,7 @@ def main():
         normal = display_description(card, base, card_names, values)
         improved = display_description(card, upgrade, card_names, values, upgraded=True)
         localization[model_id + '.description'] = upgrade_description(normal, improved)
-        power_amounts[cid] = next((value['base'] for value in values if cid != 'JK400' or value['name'] == 'Bonus'), 0)
+        power_amounts[cid] = next((value['base'] for value in values if 'powerAmountField' not in rule or value['name'] == rule['powerAmountField']), 0)
         if args.text_only:
             continue
         if args.rules_only:
@@ -284,7 +259,7 @@ def main():
             image_bytes = base64.b64decode(data)
             portrait_name = cid + portrait_extension(mime, image_bytes)
             (ROOT / 'ShoujoKagekiJunna/images/cards' / portrait_name).write_bytes(image_bytes)
-        damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid in ('JH30', 'JK206', 'JK37')) and cid not in ('JA82', 'JK400B', 'U_CARD_030')
+        damage = rule.get('damageCapable', bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])))
         target = {'自己': 'Self', '敌人': 'AnyEnemy', '任意敌人': 'AnyEnemy', '所有敌人': 'AllEnemies',
                   '无': 'None', '无需目标': 'None', '所有玩家': 'AllAllies',
                   '玩家': 'AnyPlayer', '队友': 'AnyAlly', '敌人或自己': 'AnyEnemy'}.get(card.get('target'))
@@ -318,7 +293,7 @@ def main():
             shine = re.search(r'闪耀(\d+)[。.]', card['text'])
             declaration = f'[ShoujoKageki.Core.V1.ShineCard({int(shine[1])})]\n' if shine else ''
             wrappers.append(declaration + f'[CustomID("{model_id}")]\npublic sealed partial class {cls}() : CatalogCard("{cid}");\n')
-    for card in retired.values():
+    for card in legacy.values():
         if card['id'] in EXISTING:
             continue
         shine = re.search(r'闪耀(\d+)[。.]', card.get('text', ''))
@@ -333,7 +308,7 @@ def main():
     # Complete groups must not grant archived or reserved cards.
     groups = [group for group in groups if ids.issuperset(group['grantedCardIds'])]
     out = {'revision': bundle['revision'], 'cards': definitions, 'groups': groups,
-           'startingDeck': bundle['data']['meta']['startingDeck'], 'retiredCards': list(retired.values()),
+           'startingDeck': bundle['data']['meta']['startingDeck'], 'legacyCards': list(legacy.values()),
            'startingHp': bundle['data']['meta'].get('startingHp', 70),
            'startingGold': bundle['data']['meta'].get('startingGold', 99),
            'startingRelics': bundle['data']['meta'].get('startingRelics', ['JUNNA_GREEN_GEM'])}
@@ -351,16 +326,9 @@ def main():
         'JUNNA_ARROW_TARGET_SELF.description': '目标为自己的[gold]飞矢[/gold]加速1回合。',
         'JUNNA_ARROW_TARGET_ENEMY.title': '敌人',
         'JUNNA_ARROW_TARGET_ENEMY.description': '目标为敌人的[gold]飞矢[/gold]加速1回合。',
-        'JUNNA_ENERGY_NOW.title': '现在',
-        'JUNNA_ENERGY_NOW.description': '获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
-        'JUNNA_ENERGY_LATER.title': '下回合',
-        'JUNNA_ENERGY_LATER.description': '下回合获得{Amount:diff()}{energyPrefix:energyIcons(1)}。',
         'JUNNA_PREPARE_ARROWS.title': '飞矢',
-        'JUNNA_PREPARE_ARROWS.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]飞矢[/gold]牌。',
         'JUNNA_PREPARE_KNOWLEDGE.title': '知识',
-        'JUNNA_PREPARE_KNOWLEDGE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]知识[/gold]牌。',
         'JUNNA_PREPARE_SHINE.title': '闪耀',
-        'JUNNA_PREPARE_SHINE.description': '从[gold]抽牌堆[/gold]抽取{Amount:diff()}张[gold]闪耀[/gold]牌。',
         'JUNNA_NOTES_DRAW.title': '抽牌',
         'JUNNA_NOTES_DRAW.description': '抽{Amount:diff()}张牌。',
         'JUNNA_NOTES_ENERGY.title': '能量',
@@ -368,7 +336,7 @@ def main():
     })
     for lang in ('eng', 'zhs'):
         prior_localization = json.loads((ROOT / f'ShoujoKagekiJunna/localization/{lang}/cards.json').read_text(encoding='utf-8'))
-        for card in retired.values():
+        for card in legacy.values():
             localization.update({key: value for key, value in prior_localization.items() if key.startswith(card['modelId'] + '.')})
         (ROOT / f'ShoujoKagekiJunna/localization/{lang}/cards.json').write_text(json.dumps(localization, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         keywords_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/card_keywords.json'
@@ -388,28 +356,26 @@ def main():
         keywords_path.write_text(json.dumps(keywords, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         powers_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/powers.json'
         powers = json.loads(powers_path.read_text(encoding='utf-8'))
-        power_ids = {c['id'] for c in cards if c['type'] == '能力' and c['id'] not in ('JG23', 'U_CARD_047')} | ({'JH19', 'JK80', 'JG31'} & ids)
-        power_ids.update(card['id'] for card in retired.values() if card['type'] == '能力')
+        power_ids = {c['id'] for c in cards if c['type'] == '能力' and c['id'] != 'U_CARD_047'} | ({'JH19', 'JG31'} & ids)
+        power_ids.update(card['id'] for card in legacy.values() if card['type'] == '能力')
         for cid in sorted(power_ids):
-            powers[f'JUNNA_{cid}_POWER.title'] = next(c['name'] for c in cards + list(retired.values()) if c['id'] == cid)
-        retired_power_ids = {f'JUNNA_{card["id"]}_POWER' for card in retired.values() if card['type'] == '能力'}
+            powers[f'JUNNA_{cid}_POWER.title'] = next(c['name'] for c in cards + list(legacy.values()) if c['id'] == cid)
+        legacy_power_ids = {f'JUNNA_{card["id"]}_POWER' for card in legacy.values() if card['type'] == '能力'}
+        removed_power_ids = {f'JUNNA_{cid}_POWER' for cid in removed_models}
+        powers = {key: value for key, value in powers.items() if key.split('.')[0] not in removed_power_ids}
         for power in bundle['data']['meta'].get('powers', []):
-            if power.get('trashedAt') or power['id'] in retired_power_ids:
+            if power.get('trashedAt') or power['id'] in legacy_power_ids or power['id'] in removed_power_ids:
                 continue
             for suffix, text in power.get('localization', {}).items():
                 powers[power['id'] + '.' + suffix] = text
-        # Active card text takes precedence over retired power descriptions.
+        # Active card text takes precedence over archived power descriptions.
         friend_title = localization.get('JUNNA_U_CARD_008B.title', '朋友！')
         friend_sentence_end = '' if friend_title.endswith(('。', '！', '？', '.', '!', '?')) else '。'
         current_power_text = {
-            'JK400': '打出0费牌时，所有布置的[gold]飞矢[/gold]获得[blue]{Amount}[/blue]点[gold]伤害加成[/gold]。',
             'JK400B': '回合结束时，打出[blue]{Repeat}[/blue]张造成[blue]{Damage}[/blue]点伤害的[gold]流星[/gold]。',
-            'JA96': '受到未被格挡的攻击伤害时，所有目标为敌人的[gold]飞矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA105': '每当你打出一张[gold]飞矢[/gold]，使其加速[blue]{Amount}[/blue]回合，并使其获得[gold]消耗[/gold]。',
             'JA118': '打出[gold]飞矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。',
-            'JA35': '回合开始时，所有[gold]飞矢[/gold]加速[blue]{Amount}[/blue]回合。',
             'JA205': '[gold]飞矢[/gold]造成[blue]{Amount}[/blue]%额外伤害。',
-            'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
             'JK235': '打出[gold]知识[/gold]牌后，对随机敌人造成[blue]{Damage}[/blue]点伤害。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。',
             'JK37C': '打出耗能为[blue]0[/blue]的牌后，在当回合获得[blue]{Amount}[/blue]点[gold]力量[/gold]和[gold]敏捷[/gold]。',

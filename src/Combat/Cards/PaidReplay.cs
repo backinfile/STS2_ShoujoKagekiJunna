@@ -25,21 +25,11 @@ internal static class PaidReplay
         int count = await generated;
         Payments.Remove(card);
         if (HandArrow.OriginalType(card) == CardType.Power) return count;
-        var power = card.Owner.Creature.Powers.OfType<CatalogPower>().FirstOrDefault(p => p.DesignId == "JH19");
+        var power = card.Owner.Creature.GetPower<JunnaPowerJH19>();
         if (power == null) return count;
-        int grants = power.ReplayGrants;
-        await PowerCmd.Remove(power);
-        int originalX = card.EnergyCost.CostsX ? card.EnergyCost.CapturedXValue : 0;
-        var values = Enumerable.Repeat(originalX, count).ToList();
-        for (int i = 0; i < grants; i++)
-        {
-            if (!card.Owner.PlayerCombatState!.HasEnoughResourcesFor(card, out _)) break;
-            var (energy, _) = await card.SpendResources();
-            values.Add(card.EnergyCost.CostsX ? energy : originalX);
-        }
-        if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = originalX;
-        Payments.Add(card, new(values.ToArray()));
-        return values.Count;
+        var values = await power.BuyReplays(card, count);
+        Payments.Add(card, new(values));
+        return values.Length;
     }
     [HarmonyPatch]
     private static class GenerateCount

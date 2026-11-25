@@ -6,6 +6,8 @@ namespace ShoujoKagekiJunna.Models;
 
 public sealed partial class JunnaCardJZ03
 {
+    internal override float? AncientPortraitFocusX => .35f;
+
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {
         play = CardActions.ResolveTarget(play);

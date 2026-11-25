@@ -30,6 +30,7 @@ public sealed partial class JunnaPowerA
 
 public sealed partial class JunnaPowerJA105
 {
+    internal bool MakesArrowsExhaust => _grants.Count > 0;
     internal int AccelerationTurns => _grants.Sum(grant => Math.Max(0, grant.V("Turns")));
 
     protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
@@ -59,14 +60,6 @@ public sealed partial class JunnaPowerJA144
     }
 }
 
-public sealed partial class JunnaPowerJA35
-{
-    protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
-    {
-        await ArrowCombat.AccelerateAll(context, Owner.Player!, grant.V("Turns"));
-    }
-}
-
 public sealed partial class JunnaPowerJA205
 {
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
@@ -92,63 +85,35 @@ public sealed partial class JunnaPowerJA87
             : Task.CompletedTask;
 }
 
-public sealed partial class JunnaPowerJA96
+public sealed partial class JunnaPowerJA22
 {
-    public override async Task AfterDamageReceived(PlayerChoiceContext context, Creature target, DamageResult result,
-        ValueProp props, Creature? dealer, CardModel? cardSource)
-    {
-        if (target != Owner || result.UnblockedDamage <= 0 || !props.IsPoweredAttack()) return;
-        foreach (var grant in _grants.ToArray())
-            await ArrowCombat.AccelerateEnemies(context, Owner.Player!, grant.V("Turns"));
-    }
-}
-
-public sealed partial class JunnaPowerJG34
-{
-    protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
-    {
-            for (int hit = 0; hit < grant.BaseHits; hit++)
-            {
-                var targets = Owner.Player!.Creature.CombatState!.HittableEnemies.Where(target => target.IsAlive).ToArray();
-                if (targets.Length == 0) break;
-                await GameApi.Damage(context, targets, grant.V("Damage"), ValueProp.Unpowered, Owner, grant.Card, grant.Play);
-            }
-    }
+    internal ArrowDestination Redirect(ArrowDeployment arrow) => arrow.Destination.Pile == PileType.Discard
+        ? new(arrow.Card.Owner, PileType.Hand, CardPilePosition.Bottom)
+        : arrow.Destination;
 }
 
 public sealed partial class JunnaPowerJH19
 {
+    internal async Task<int[]> BuyReplays(CardModel card, int count)
+    {
+        int grants = _grants.Count;
+        await PowerCmd.Remove(this);
+        int originalX = card.EnergyCost.CostsX ? card.EnergyCost.CapturedXValue : 0;
+        var values = Enumerable.Repeat(originalX, count).ToList();
+        for (int i = 0; i < grants; i++)
+        {
+            if (!card.Owner.PlayerCombatState!.HasEnoughResourcesFor(card, out _)) break;
+            var (energy, _) = await card.SpendResources();
+            values.Add(card.EnergyCost.CostsX ? energy : originalX);
+        }
+        if (card.EnergyCost.CostsX) card.EnergyCost.CapturedXValue = originalX;
+        return values.ToArray();
+    }
+
     protected override bool EndsWithTurn => true;
 
     protected override Task BeforeInstall(CatalogCard card, PlayerChoiceContext context, CardPlay play)
         => CreatureCmd.GainBlock(card.Owner.Creature, card.Value("Block"), ValueProp.Move, play);
-}
-
-public sealed partial class JunnaPowerJH31
-{
-    protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
-    {
-        if (!(play.Resources.EnergyValue >= grant.V("EnergyThreshold"))) return;
-        await CardActions.DrawMatching(context, play.Card.Owner, c => CardActions.HasNumericCost(c) && CardActions.Cost(c) == 0, grant.V("Amount"));
-    }
-}
-
-public sealed partial class JunnaPowerJH59
-{
-    protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
-    {
-        await PlayerCmd.GainEnergy(grant.V("Energy"), Owner.Player!);
-    }
-}
-
-public sealed partial class JunnaPowerJK10
-{
-    protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
-    {
-        if (!(play.Resources.EnergyValue >= grant.V("EnergyThreshold") && grant.Take(1))) return;
-        await CardPileCmd.Draw(context, grant.V("DrawCount"), play.Card.Owner);
-        await PlayerCmd.GainEnergy(grant.V("Energy"), play.Card.Owner);
-    }
 }
 
 public sealed partial class JunnaPowerJK127
@@ -170,20 +135,6 @@ public sealed partial class JunnaPowerJK139
     }
 }
 
-public sealed partial class JunnaPowerJK15
-{
-    protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
-    {
-        if (!(CardCatalog.IsKnowledge(play.Card) && grant.Take(1))) return;
-        using (KnowledgeCombat.SingleCard())
-        {
-            var clone = play.Card.CreateCloneForPlayer(play.Card.Owner);
-            var result = await CardPileCmd.AddGeneratedCardToCombat(clone, PileType.Draw, play.Card.Owner, CardPilePosition.Random);
-            await CardActions.PreviewAdded([result], PileType.Draw);
-        }
-    }
-}
-
 public sealed partial class JunnaPowerJK235
 {
     protected override int AmountPerGrant(Grant grant) => grant.V("Damage");
@@ -200,19 +151,6 @@ public sealed partial class JunnaPowerJK235
         if (targets.Length == 0) return;
         var target = play.Card.Owner.RunState.Rng.CombatTargets.NextItem(targets)!;
         await GameApi.Damage(context, [target], damage, ValueProp.Unpowered, Owner, source.Card, source.Play);
-    }
-}
-
-public sealed partial class JunnaPowerJK254
-{
-    protected override void BeforePlay(CardPlay play)
-    {
-        if (!CardCatalog.IsKnowledge(play.Card) || !_grants.Any(grant => !ReferenceEquals(play, grant.InstalledBy))) return;
-        foreach (var partner in KnowledgeCombat.CapturePartners(play.Card))
-        {
-            partner.EnergyCost.SetUntilPlayed(0);
-            partner.InvokeEnergyCostChanged();
-        }
     }
 }
 
@@ -255,37 +193,6 @@ public sealed partial class JunnaPowerJK37C
         if (amount <= 0) return;
         await PowerCmd.Apply<JunnaDistantStarsStrengthPower>(context, Owner, amount, Owner, play.Card);
         await PowerCmd.Apply<JunnaDistantStarsDexterityPower>(context, Owner, amount, Owner, play.Card);
-    }
-}
-
-public sealed partial class JunnaPowerJK46
-{
-    protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
-    {
-        await CardActions.Generate(Owner.Player!, "JK46B", grant.V("Cards"), PileType.Hand, CardPilePosition.Bottom, grant.Card.IsUpgraded);
-    }
-}
-
-public sealed partial class JunnaPowerJZ05
-{
-    protected override int? RemainingTriggers => Math.Max(0,
-        _grants.Sum(grant => grant.V("Limit")) - AttackEventHistory.Count(Owner.Player!));
-    public override async Task AfterDamageGiven(PlayerChoiceContext context, Creature? dealer, DamageResult result,
-        ValueProp props, Creature target, CardModel? cardSource)
-    {
-        if (dealer != Owner || target.Side == Owner.Side || result.TotalDamage <= 0 || !props.IsPoweredAttack()) return;
-        int ordinal = AttackEventHistory.Ordinal(result);
-        Synchronize();
-        if (ordinal > 0 && ordinal <= _grants.Sum(grant => grant.V("Limit")))
-            await CardActions.Fly(context, Owner.Player!, result.TotalDamage, target);
-    }
-}
-
-public sealed partial class JunnaPowerJZ06
-{
-    protected override async Task TurnStarted(Grant grant, PlayerChoiceContext context)
-    {
-        await PlayerCmd.GainEnergy(Owner.Player!.PlayerCombatState!.Hand.Cards.Where(CardActions.HasNumericCost).Select(CardActions.Cost).DefaultIfEmpty().Max(), Owner.Player!);
     }
 }
 

@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def generate(root=ROOT, check=False):
     pool = json.loads((root / 'data/card-pool.json').read_text(encoding='utf-8-sig'))
-    cards = {card['id']: card for card in pool['cards'] + pool['retiredCards']}
+    cards = {card['id']: card for card in pool['cards'] + pool['legacyCards']}
     data = json.loads((root / 'data/card-rules.json').read_text(encoding='utf-8-sig'))
     if data['format'] != 1:
         raise ValueError('Unsupported card rule format')
@@ -29,9 +29,9 @@ def generate(root=ROOT, check=False):
              'namespace ShoujoKagekiJunna.Models;', '', 'internal static partial class CardRules', '{',
              '    private static readonly Dictionary<string, CardRuleDefinition> Definitions = new()', '    {']
     for key, rule in sorted(rules.items()):
-        if key not in cards and not rule.get('legacy'):
+        if key not in cards:
             raise ValueError(f'Unknown card rule {key}')
-        allowed = {'fields', 'tips', 'upgradedTips', 'effect', 'power', 'relatedCards', 'loopAsArrow', 'legacy'}
+        allowed = {'fields', 'tips', 'upgradedTips', 'power', 'relatedCards', 'loopAsArrow'}
         if set(rule) - allowed:
             raise ValueError(f'Unknown properties for {key}')
         lines += ['        [' + quoted(key) + '] = new()', '        {']
@@ -51,8 +51,6 @@ def generate(root=ROOT, check=False):
                 raise ValueError(f'Duplicate {source} for {key}')
             if values:
                 lines += ['            ' + target + ' = [' + ', '.join(member('CardTip', value) for value in values) + '],']
-        if 'effect' in rule:
-            lines += ['            Effect = ' + member('SimpleCardEffect', rule['effect']) + ',']
         if 'loopAsArrow' in rule:
             if not isinstance(rule['loopAsArrow'], bool):
                 raise ValueError(f'Invalid loopAsArrow for {key}')
@@ -78,7 +76,7 @@ def generate(root=ROOT, check=False):
         if not path.exists() or path.read_text(encoding='utf-8') != output:
             raise ValueError('Generated card rules are out of date')
     else:
-        path.write_text(output, encoding='utf-8')
+        path.write_text(output, encoding='utf-8', newline='\n')
     print(f'Validated {len(rules)} card rules, {len(powers)} power rules and saved field identities.')
 
 if __name__ == '__main__':

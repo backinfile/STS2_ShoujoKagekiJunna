@@ -184,23 +184,8 @@ public sealed class Workbench5383Command : AbstractConsoleCmd
                     await Play(await Add(player, "JK200B"));
                     Equal(player.PlayerCombatState.DrawPile.Cards.Count, up ? 3 : 4, "Knowledge trigger draws one or two");
                 });
-                await Case("JK400 zero effective cost, free payment and mixed grants " + up, async () =>
+                await Case("JK400B end-turn base meteors " + up, async () =>
                 {
-                    var power = await Add(player, "JK400", up); await Play(power);
-                    var meteor = (CatalogCard)await Add(player, "JA81B"); meteor.SetGeneratedDamage(8); await Play(meteor);
-                    decimal bonus = up ? 2 : 1;
-                    var free = await Add(player, "JB02"); await CardActions.FreePlay(Context, free, player.Creature);
-                    var reduced = await Add(player, "JB02"); reduced.EnergyCost.SetThisCombat(0); await Play(reduced);
-                    int count = JunnaCombatHooks.CountArrowPlays(player);
-                    await ArrowCombat.CopyAll(Context, player);
-                    Equal(JunnaCombatHooks.CountArrowPlays(player), count, "Direct deployment copies are not plays");
-                    await Play(await Add(player, "JK400", !up));
-                    await Play(await Add(player, "JA177"));
-                    Equal(player.Creature.GetPower<JunnaPowerJK400>()!.Amount, 3, "Displayed accumulated bonus");
-                });
-                await Case("JK400B end-turn base meteors and JK400 interaction " + up, async () =>
-                {
-                    await Play(await Add(player, "JK400", up));
                     var source = await Add(player, "JK400B", up);
                     int energy = player.PlayerCombatState!.Energy; await Play(source);
                     Equal(player.PlayerCombatState.Energy, energy - (up ? 0 : 1), "Only cost changes on upgrade");
