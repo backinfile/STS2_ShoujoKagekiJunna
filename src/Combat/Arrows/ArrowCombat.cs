@@ -27,10 +27,13 @@ public static partial class ArrowCombat
     private static Battle For(ICombatState state) => Battles.GetOrCreateValue(state);
     public static IReadOnlyList<ArrowDeployment> Deployed =>
         CombatManager.Instance.DebugOnlyGetState() is { } state && Battles.TryGetValue(state, out var battle) ? battle.Arrows : [];
-    internal static IEnumerable<Creature> SingleEnemyTargets(Player owner) =>
+    internal static IEnumerable<ArrowDeployment> WaitingFor(Player owner) =>
         Deployed.Where(arrow => arrow.Card.Owner == owner && !arrow.Resolving && arrow.Remaining > 0 &&
-            arrow.Card.Pile?.Type == ArrowPile.PileId && !arrow.TargetsGroup)
-        .Select(arrow => arrow.Target).OfType<Creature>().Where(target => target.IsEnemy);
+            arrow.Card.Pile?.Type == ArrowPile.PileId);
+
+    internal static IEnumerable<Creature> SingleEnemyTargets(Player owner) =>
+        WaitingFor(owner).Where(arrow => !arrow.TargetsGroup)
+            .Select(arrow => arrow.Target).OfType<Creature>().Where(target => target.IsEnemy);
 
     public static ArrowDeployment[] ResolutionOrder() => Deployed.OrderBy(a => a.TargetCategory)
         .ThenBy(a => a.Target is { } target ? Array.IndexOf(a.Card.CombatState?.Creatures.ToArray() ?? [], target) : 0)

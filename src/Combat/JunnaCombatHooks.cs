@@ -90,10 +90,9 @@ public sealed class JunnaCombatHooks : SingletonModel
 #endif
         )
     {
-        if (target == null || !props.IsPoweredAttack() ||
-            cardSource is not JunnaCardU_CARD_130 { IsMutable: true } card)
+        if (!props.IsPoweredAttack() || cardSource is not JunnaCardU_CARD_130 { IsMutable: true } card)
             return 0m;
-        return card.Value("PerArrow") * ArrowCombat.SingleEnemyTargets(card.Owner).Count(enemy => enemy == target);
+        return card.Value("PerArrow") * ArrowCombat.WaitingFor(card.Owner).Count();
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,

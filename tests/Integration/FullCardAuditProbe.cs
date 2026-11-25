@@ -234,6 +234,11 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 _arrow = await Add("JB03");
                 await TestGameApi.PaidPlay(_context, _arrow, Id == "JK37B" ? _enemies[^1] : _enemies[0]);
             }
+            if (Id == "JA145")
+            {
+                await TestGameApi.PaidPlay(_context, await Add("JK37"), _enemies[0]);
+                await TestGameApi.PaidPlay(_context, await Add("JK37"), _enemies[^1]);
+            }
             if (Id == "JK84B")
             {
                 var selfArrow = await Add("JH11");
@@ -315,8 +320,6 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (recording && Id is "JA22" or "JA118" or "JA205" or "U_CARD_012") await Add("JA38");
         if (recording && Id == "JK37C")
         {
-            await TestGameApi.PaidPlay(_context, await Add("JB03"), _enemies[0]);
-            await TestGameApi.PaidPlay(_context, await Add("JB03", upgrade: true), _enemies[1]);
             CostChanges.SetFixed(await Add("JB01"), 0);
             CostChanges.SetFixed(await Add("JB01", upgrade: true), 0);
         }
@@ -459,6 +462,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "JK314") hits += _beforeDepletedDesires;
         if (Id == "U_CARD_017") hits += _categoryCount;
         if (Id == "JA81B") damage = 13;
+        if (Id == "JK37") damage = upgraded ? 60 : 50;
         if (Id == "JK48") damage += player.Deck.Cards.Count(CardCatalog.IsKnowledge);
         if (Id == "JK206") damage = _beforeDeck + (upgraded ? 8 : 0);
         if (Id is "JA82" or "U_CARD_030") damage = 0;
@@ -474,7 +478,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 int shield = i == 0 && Enhanced && definition.DamageCapable && definition.Type != "能力" && Id != "JA82" ? 7 : 0;
                 int targetDamage = i == 0 || group ? expected : 0;
                 if (!Empty && Id == "U_CARD_130" && i == 0)
-                    targetDamage += 2 * (upgraded ? 6 : 4);
+                    targetDamage += (_enemies.Length > 1 ? 4 : 3) * (upgraded ? 6 : 4);
                 if (!Empty && Id == "U_CARD_131" && (i == 0 || i == 1 && variant == "capacity"))
                     targetDamage += damage;
                 Check("目标" + i + "伤害", _beforeHp[i] - _enemies[i].CurrentHp, Math.Max(0, targetDamage - shield) + (i == 0 ? supportDamage : 0));
@@ -515,7 +519,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             if (Id == "JA76")
                 Check("横扫对每个受击敌人各布置一支", generated.Select(arrow => arrow.Target).Distinct().Count(), _enemies.Length);
             if (Id == "JA82")
-                Check("流星之矢按版本设定流星伤害", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == (upgraded ? 18 : 14)), true);
+                Check("流星之矢按版本设定流星伤害", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == (upgraded ? 24 : 18)), true);
         }
         if (Id is "JK272" or "JK272B" or "JA58")
             foreach (var enemy in _enemies)
@@ -642,7 +646,12 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Check("抽牌堆实际飞矢布置", _helpers.Where(CardCatalog.IsArrow).All(c => ArrowCombat.Find(c) != null), true);
         }
         if (Id == "JA145")
-            Check("瞄准射击生成同版本的更近一步", player.PlayerCombatState.Hand.Cards.Count(c => CardCatalog.DesignId(c) == "JA119" && c.IsUpgraded == upgraded), 1);
+        {
+            var arrows = ArrowCombat.Deployed.ToArray();
+            Check("瞄准射击保留仍在等待的两支飞矢", arrows.Length, Empty ? 0 : 2);
+            Check("瞄准射击逐次推进所有候选的合计回合", arrows.Sum(arrow => arrow.Remaining),
+                Empty ? 0 : 18 - (upgraded ? 4 : 3));
+        }
         if (Id == "JK206B")
         {
             var received = player.PlayerCombatState!.Hand.Cards.Except(_handBefore).ToArray();
@@ -686,8 +695,8 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "U_CARD_005" && Enhanced)
         {
             var child = (CatalogCard)ArrowCombat.Deployed.First().Card;
-            Check("星屑复制继承源牌伤害", child.Value("Damage"), upgraded ? 30 : 25);
-            int modifiedDamage = (upgraded ? 30 : 25) + 3;
+            Check("星屑复制继承源牌伤害", child.Value("Damage"), upgraded ? 25 : 20);
+            int modifiedDamage = (upgraded ? 25 : 20) + 3;
             child.SetGeneratedDamage(modifiedDamage);
             int before = _enemies[0].CurrentHp;
             await Finish(child);
@@ -824,7 +833,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 Check("加速能力说明的触发时点", power.Description.GetFormattedText().Contains("打出"), true);
                 var arrow = await Add("JB03");
                 await Play(arrow);
-                Check("新飞矢初始加速", ArrowCombat.Find(arrow)?.Remaining ?? 0, upgraded ? 0 : 1);
+                Check("新飞矢初始加速", ArrowCombat.Find(arrow)?.Remaining, 1);
                 if (ArrowCombat.Find(arrow) != null) await Finish(arrow);
                 Check("加速赋予消耗", arrow.Pile?.Type, PileType.Exhaust);
                 if (Enhanced)
@@ -1038,7 +1047,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         }
         int hp = _enemies[0].CurrentHp;
         await Play(active);
-        Check("耗尽牌堆次数结算", hp - _enemies[0].CurrentHp, (upgraded ? 12 : 8) * (1 + before + desires.Length));
+        Check("耗尽牌堆次数结算", hp - _enemies[0].CurrentHp, (upgraded ? 12 : 9) * (1 + before + desires.Length));
     }
 
     private static int DepletedPartnerCount(CardModel card) =>

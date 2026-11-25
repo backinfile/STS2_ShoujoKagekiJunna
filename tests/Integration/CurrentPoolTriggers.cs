@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Rooms;
 using ShoujoKageki.Core.V1;
 using ShoujoKagekiJunna.Combat;
@@ -16,31 +17,25 @@ internal sealed partial class AuditScenario
 {
     private async Task CheckDistantStars()
     {
-        string description = _source.GetDescriptionForPile(PileType.Hand);
-        Check("遥远星辰按版本显示目标条件", description.Contains(upgraded ? "相同目标的一个" : "随机一个"), true);
-        Check("飞矢提示使用工作台词条", _source.HoverTips.OfType<HoverTip>().Any(tip =>
-            tip.Title == "飞矢" && tip.Description == "打出后布置，等待数个回合后触发卡牌效果。"), true);
+        Check("遥远星辰是独立能力牌", !CardCatalog.IsKnowledge(_source) && KnowledgeCombat.Group(_source) == null, true);
+        Check("遥远星辰牌面显示本回合的力量和敏捷", _source.GetDescriptionForPile(PileType.Hand).Contains("在当回合获得"), true);
         await ClearCards();
-        var first = await Add("JB03");
-        var second = await Add("JB03");
-        await TestGameApi.PaidPlay(_context, first, _enemies[0]);
-        await TestGameApi.PaidPlay(_context, second, _enemies[1]);
-        var firstArrow = ArrowCombat.Find(first)!;
-        var secondArrow = ArrowCombat.Find(second)!;
         await Play(await Add("JB01"));
-        Check("支付正费用不加速任一目标", firstArrow.Remaining == 3 && secondArrow.Remaining == 3, true);
-
+        Check("支付正费用不触发力量", player.Creature.GetPower<StrengthPower>()?.Amount ?? 0, 0);
+        Check("支付正费用不触发敏捷", player.Creature.GetPower<DexterityPower>()?.Amount ?? 0, 0);
         var free = await Add("JB01");
         CostChanges.SetFixed(free, 0);
         await Play(free);
-        Check("零费只随机加速一支一次", firstArrow.Remaining + secondArrow.Remaining, 5);
-        if (upgraded)
-            Check("升级零费加速只命中相同目标", firstArrow.Remaining == 2 && secondArrow.Remaining == 3, true);
-
-        var unmatched = await Add("JB01");
-        CostChanges.SetFixed(unmatched, 0);
-        await TestGameApi.PaidPlay(_context, unmatched, _enemies[2]);
-        Check("无同目标候选时仅基础版可加速", firstArrow.Remaining + secondArrow.Remaining, upgraded ? 5 : 4);
+        var strength = player.Creature.GetPower<JunnaDistantStarsStrengthPower>();
+        var dexterity = player.Creature.GetPower<JunnaDistantStarsDexterityPower>();
+        Check("零费获得1点临时力量", player.Creature.GetPower<StrengthPower>()?.Amount, 1);
+        Check("零费获得1点临时敏捷", player.Creature.GetPower<DexterityPower>()?.Amount, 1);
+        Check("使用原生临时力量和敏捷的能力期限", strength != null && dexterity != null, true);
+        if (strength == null || dexterity == null) return;
+        await strength.AfterSideTurnEnd(_context, CombatSide.Player, [player.Creature]);
+        await dexterity.AfterSideTurnEnd(_context, CombatSide.Player, [player.Creature]);
+        Check("回合结束收回临时力量", player.Creature.GetPower<StrengthPower>()?.Amount ?? 0, 0);
+        Check("回合结束收回临时敏捷", player.Creature.GetPower<DexterityPower>()?.Amount ?? 0, 0);
     }
 
     private async Task CheckDreamButton()
@@ -65,6 +60,18 @@ internal sealed partial class AuditScenario
 
     private async Task CheckCurrentPoolEffects()
     {
+        if (Id == "U_CARD_044")
+        {
+            var original = player.Deck.Cards.ToArray();
+            var tome = (DustyTome)ModelDb.Relic<DustyTome>().ToMutable();
+            tome.AncientCard = CardCatalog.Model(Id).Id;
+            await RelicCmd.Obtain(tome, player);
+            var added = player.Deck.Cards.Except(original).ToArray();
+            Check("火花四溅获得两张实体知识牌", added.Length, 2);
+            Check("新取得的成员均为火花四溅", added.All(card => CardCatalog.DesignId(card) == Id && CardCatalog.IsKnowledge(card)), true);
+            await CardPileCmd.RemoveFromDeck(added, showPreview: false);
+            await RelicCmd.Remove(tome);
+        }
         if (Id == "JK37")
         {
             await ClearEffects();
@@ -209,10 +216,10 @@ internal sealed partial class AuditScenario
             await Play(arrow);
             hp = _enemies[0].CurrentHp;
             await Finish(arrow);
-            Check("沸腾的热情按版本提高飞矢伤害", hp - _enemies[0].CurrentHp, upgraded ? 36 : 27);
+            Check("沸腾的热情按版本提高飞矢伤害", hp - _enemies[0].CurrentHp, upgraded ? 31 : 27);
             var power = player.Creature.GetPower<JunnaPowerJA205>()!;
             string description = power.HoverTips.OfType<HoverTip>().First().Description;
-            Check("沸腾的热情提示显示实际增伤", description.Contains(upgraded ? "100[/blue]%" : "50[/blue]%"), true);
+            Check("沸腾的热情提示显示实际增伤", description.Contains(upgraded ? "75[/blue]%" : "50[/blue]%"), true);
         }
         if (Id == "JK400B")
         {

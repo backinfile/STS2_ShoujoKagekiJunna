@@ -163,20 +163,11 @@
     },
     "JK37C": {
       "fields": {
-        "Turns": "N1"
+        "Amount": "N1",
+        "DisplayedAmount": "N1"
       },
-      "tips": [
-        "Knowledge",
-        "Arrow",
-        "Energy"
-      ],
-      "upgradedTips": [
-        "Knowledge",
-        "Arrow",
-        "Energy"
-      ],
       "power": {
-        "description": "TargetedTurnGroups",
+        "description": "ThresholdSum",
         "amount": "Applications",
         "single": false
       }
@@ -829,10 +820,14 @@
     },
     "JA145": {
       "fields": {
-        "Cards": "N1"
+        "Turns": "N1",
+        "Accelerations": "N2"
       },
-      "relatedCards": [
-        "JA119"
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
       ]
     },
     "JS34": {

@@ -231,6 +231,10 @@ def main():
         if cid == 'JK206':
             values = [{'name': 'Damage', 'base': 0}]
             upgraded_values = [{'name': 'Damage', 'base': 8}]
+        elif cid == 'JK37' and '造成' not in base and '造成' not in upgrade:
+            # The workbench's resolution rule retains the damage, which its card face omits.
+            values = [{'name': 'Damage', 'base': 50}]
+            upgraded_values = [{'name': 'Damage', 'base': 60}]
         elif cid == 'JK254':
             values, upgraded_values = [], []
         else:
@@ -280,7 +284,7 @@ def main():
             image_bytes = base64.b64decode(data)
             portrait_name = cid + portrait_extension(mime, image_bytes)
             (ROOT / 'ShoujoKagekiJunna/images/cards' / portrait_name).write_bytes(image_bytes)
-        damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid in ('JH30', 'JK206')) and cid not in ('JA82', 'JK400B', 'U_CARD_030')
+        damage = (bool(re.search(r'造成(?:\d+|X)点伤害', card['text'])) or cid in ('JH30', 'JK206', 'JK37')) and cid not in ('JA82', 'JK400B', 'U_CARD_030')
         target = {'自己': 'Self', '敌人': 'AnyEnemy', '任意敌人': 'AnyEnemy', '所有敌人': 'AllEnemies',
                   '无': 'None', '无需目标': 'None', '所有玩家': 'AllAllies',
                   '玩家': 'AnyPlayer', '队友': 'AnyAlly', '敌人或自己': 'AnyEnemy'}.get(card.get('target'))
@@ -408,6 +412,7 @@ def main():
             'JK254': '每当你打出一张[gold]知识[/gold]牌，其[gold]手牌[/gold]中的关联牌下次打出耗能变为0。',
             'JK235': '打出[gold]知识[/gold]牌后，对随机敌人造成[blue]{Damage}[/blue]点伤害。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。',
+            'JK37C': '打出耗能为[blue]0[/blue]的牌后，在当回合获得[blue]{Amount}[/blue]点[gold]力量[/gold]和[gold]敏捷[/gold]。',
             'U_CARD_008': f'战斗结束时，向[gold]牌组[/gold]中添加[blue]{{Amount}}[/blue]张[gold]{friend_title}[/gold]{friend_sentence_end}',
             'U_CARD_016': '打出[gold]{Category}[/gold]牌后，抽[blue]{Amount}[/blue]张牌。',
             'U_CARD_010': '回合开始时，从[gold]抽牌堆[/gold]选择[blue]1[/blue]张当前类别的牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、[gold]闪耀[/gold]牌。',
@@ -415,17 +420,13 @@ def main():
         for cid, text in current_power_text.items():
             if cid not in ids:
                 continue
-            amount = 1 if cid in ('U_CARD_008', 'U_CARD_010') else power_amounts[cid]
+            amount = 1 if cid in ('U_CARD_008', 'U_CARD_010', 'JK37C') else power_amounts[cid]
             powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount)).replace('{Repeat}', '1').replace('{Damage}', str(amount))
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
             if cid == 'U_CARD_016':
                 powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]飞矢[/gold]、[gold]闪耀[/gold]中轮换。'
             if cid == 'U_CARD_010':
                 powers[f'JUNNA_{cid}_POWER.smartDescription'] = '下回合开始时，从[gold]抽牌堆[/gold]选择[blue]{Amount}[/blue]张[gold]{Category}[/gold]牌放入[gold]手牌[/gold]。\n每回合依次切换为[gold]知识[/gold]牌、[gold]飞矢[/gold]牌、[gold]闪耀[/gold]牌。'
-        if 'JK37C' in ids:
-            powers['JUNNA_JK37C_POWER.smartDescription'] = '每当你打出[blue]0[/blue]费牌后，随机使{Target}加速[blue]{Turns}[/blue]回合。{Repetition}'
-            powers['JUNNA_JK37C_POWER.randomArrow'] = '一个[gold]飞矢[/gold]'
-            powers['JUNNA_JK37C_POWER.targetedArrow'] = '一个同目标的[gold]飞矢[/gold]'
         powers.setdefault('JUNNA_CATALOG.smartDescription', '{Effects}')
         powers['JUNNA_CATALOG.remainingTriggers'] = '本回合还可触发[blue]{Amount}[/blue]次。'
         powers_path.write_text(json.dumps(powers, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
@@ -439,9 +440,11 @@ def main():
         relics_path.write_text(json.dumps(relics, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         ui_path = ROOT / f'ShoujoKagekiJunna/localization/{lang}/gameplay_ui.json'
         ui = json.loads(ui_path.read_text(encoding='utf-8'))
-        ui = {k: v for k, v in ui.items() if not k.startswith('JUNNA.KNOWLEDGE_BACKGROUND.')
-              or k.rsplit('.', 1)[-1] in retired}
+        ui = {k: v for k, v in ui.items() if not k.startswith('JUNNA.KNOWLEDGE_BACKGROUND.')}
         for card in cards:
+            if not any(native_keyword(card[key], keyword)
+                       for key in ('text', 'upgradedText') for keyword in ('知识', '连锁知识')):
+                continue
             tips = [t for t in card.get('extraHoverTips', []) if t.get('id') == 'junna_knowledge_background']
             if tips:
                 ui['JUNNA.KNOWLEDGE_BACKGROUND.' + card['id']] = '\n'.join(t['description'] if 'description' in t else t.get('body', '') for t in tips)

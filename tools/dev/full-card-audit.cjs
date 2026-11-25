@@ -416,10 +416,9 @@ async function recordCard(card, videos, primary, retakes, upgraded) {
                 await settle(card.id);
             }
         } else if (card.id === 'JK37C') {
-            await playModel('JUNNA_STRIKE', card.id, true, { targetIndex: 2 });
-            fs.copyFileSync(path.join(output, 'results/readiness.json'), path.join(directory, 'unmatched.json'));
-            await delay(800);
             await playModel('JUNNA_STRIKE', card.id);
+            await playModel('JUNNA_STRIKE', card.id);
+            await endTurn(card.id);
         } else if (card.id === 'JA105') {
             await delay(1200);
             await saveImage('/screenshot', path.join(directory, 'installed.png'));

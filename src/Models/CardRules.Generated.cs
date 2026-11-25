@@ -105,9 +105,11 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
-                ["Cards"] = "N1",
+                ["Accelerations"] = "N2",
+                ["Turns"] = "N1",
             },
-            RelatedCards = ["JA119"],
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
         },
         ["JA15"] = new()
         {
@@ -983,11 +985,10 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
-                ["Turns"] = "N1",
+                ["Amount"] = "N1",
+                ["DisplayedAmount"] = "N1",
             },
-            Tips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Energy],
-            UpgradedTips = [CardTip.Knowledge, CardTip.Arrow, CardTip.Energy],
-            PowerDescription = PowerDescriptionKind.TargetedTurnGroups,
+            PowerDescription = PowerDescriptionKind.ThresholdSum,
             PowerAmount = PowerAmountKind.Applications,
             SinglePower = false,
         },
