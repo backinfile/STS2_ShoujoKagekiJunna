@@ -38,7 +38,7 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
         return false;
     }
     public override string CmdName => "junna_acquisition_sources";
-    public override string Args => "check | reward | unknown-reward | reward-check | dynamic-reward | dynamic-reward-check";
+    public override string Args => "check | mirror | reward | unknown-reward | reward-check | dynamic-reward | dynamic-reward-check";
     public override string Description => "Check named acquisition sources and default single-card gains.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
@@ -49,6 +49,7 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
             "dynamic-reward" => Reward(player, true, "JK126"),
             "dynamic-reward-check" => DynamicRewardCheck(player),
             "reward-check" => RewardCheck(player, int.Parse(args[1])),
+            "mirror" => CheckMirror(player),
             _ => Check(player)
         }, true, "Acquisition source probe started");
     private static void Expect(string name, int actual, int expected)
@@ -62,13 +63,37 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         File.WriteAllText(path, JsonSerializer.Serialize(Rows, new JsonSerializerOptions { WriteIndented = true }));
     }
-    private sealed class Selector : ICardSelector
+    private sealed class Selector(CardModel? chosen = null) : ICardSelector
     {
         public Task<IEnumerable<CardModel>> GetSelectedCards(IEnumerable<CardModel> options, int minimum, int maximum)
-            => Task.FromResult(options.Take(1));
+            => Task.FromResult(chosen == null ? options.Take(1) : options.Where(card => card == chosen));
         public CardRewardSelection GetSelectedCardReward(IReadOnlyList<CardCreationResult> options, IReadOnlyList<CardRewardAlternative> alternatives)
             => throw new NotSupportedException();
     }
+    private static async Task CheckMirror(Player player)
+    {
+        Rows.Clear();
+        try
+        {
+            var source = player.RunState.CreateCard(CardCatalog.Model("JK314"), player);
+            CardCmd.Upgrade(source);
+            await CardPileCmd.Add(source, PileType.Deck, skipVisuals: true);
+            var original = player.Deck.Cards.ToArray();
+            using (TestGameApi.UseSelector(new Selector(source)))
+                await RelicCmd.Obtain(ModelDb.Relic<DollysMirror>().ToMutable(), player);
+
+            var gained = player.Deck.Cards.Except(original).ToArray();
+            var companion = CardCatalog.Model("JK122B").Id;
+            Expect("Dolly's Mirror adds exactly one upgraded copy", gained.Count(card => card.Id == source.Id && card.IsUpgraded), 1);
+            Expect("Dolly's Mirror grants exactly three base companions", gained.Count(card => card.Id == companion && !card.IsUpgraded), 3);
+            Expect("Dolly's Mirror only adds one complete group", gained.Length, 4);
+            Expect("Dolly's Mirror retains the original deck order",
+                player.Deck.Cards.Where(original.Contains).SequenceEqual(original) ? 1 : 0, 1);
+            Expect("Dolly's Mirror appends the group together", player.Deck.Cards.Skip(original.Length).SequenceEqual(gained) ? 1 : 0, 1);
+        }
+        catch (Exception error) { Rows.Add(new { name = "probe exception", pass = false, error = error.ToString() }); Save(); }
+    }
+
     private static async Task Check(Player player)
     {
         Rows.Clear();

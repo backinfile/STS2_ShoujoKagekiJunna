@@ -19,6 +19,7 @@ internal static class KnowledgeAcquisitionSources
     [
         new("Entities.RestSite.CloneRestSiteOption", "OnSelect", Kind.Deck),
         new("Relics.ArcaneScroll", "AfterObtained", Kind.Deck),
+        new("Relics.DollysMirror", "AfterObtained", Kind.Deck),
         new("Relics.DustyTome", "AfterObtained", Kind.Deck),
         new("Relics.HeftyTablet", "AfterObtained", Kind.DeckChoice),
         new("Relics.LeadPaperweight", "AfterObtained", Kind.DeckChoice),

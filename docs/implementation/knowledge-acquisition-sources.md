@@ -1,6 +1,6 @@
 # 知识牌获取来源清单
 
-关联牌补发采用白名单。只放行登记的具体类型和方法；未登记的来源、通用入牌和通用变化默认只产生指定卡牌。复制、显式单张生成及关联牌自身的发放不递归补发。
+关联牌补发采用白名单。只放行登记的具体类型和方法；未登记的复制、通用入牌和通用变化默认只产生指定卡牌。显式单张生成和关联牌自身的发放不递归补发。
 
 表中“堆叠”指候选牌界面中的知识组预览，要求卡牌已有可显示的关联牌。堆叠展示和关联牌补发分别判断；现有预览界面不因来源登记状态改变。
 
@@ -95,8 +95,8 @@
 | 诅咒珍珠 | 获得遗物时 | `Relics.CursedPearl.AfterObtained`，入牌调用第 21 行 | 否 | 否 | 未适配，默认不补发 |
 | 卓越斗篷 | 获得遗物时 | `Relics.DistinguishedCape.AfterObtained`，入牌调用第 42 行 | 否 | 否 | 未适配，默认不补发 |
 | 卓越斗篷 | 获得遗物时 | `Relics.DistinguishedCape.AfterObtained`，入牌调用第 51 行 | 否 | 否 | 未适配，默认不补发 |
-| 多利之镜 | 获得遗物时 | `Relics.DollysMirror.AfterObtained`，复制调用第 21 行 | 否 | 否 | 明确不补发，沿复制或原效果数量 |
-| 多利之镜 | 获得遗物时 | `Relics.DollysMirror.AfterObtained`，入牌调用第 22 行 | 否 | 否 | 明确不补发，沿复制或原效果数量 |
+| 多利之镜 | 获得遗物时 | `Relics.DollysMirror.AfterObtained`，复制调用第 21 行 | 否 | 否 | 沿用原生复制，保留所选牌的版本 |
+| 多利之镜 | 获得遗物时 | `Relics.DollysMirror.AfterObtained`，入牌调用第 22 行 | 否 | 是 | 为本次副本补发关联牌，与副本相邻加入永久牌组 |
 | 寻龙尺 | 获得遗物时 | `Relics.DowsingRod.AfterObtained`，入牌调用第 22 行 | 否 | 否 | 未适配，默认不补发 |
 | 捕梦网 | 休息处休息后的奖励 | `Relics.DreamCatcher.TryModifyRestSiteHealRewards`，卡牌奖励调用第 22 行 | 是 | 是 | 已适配，补发关联牌 |
 | 尘封魔典 | 获得遗物时 | `Relics.DustyTome.AfterObtained`，入牌调用第 62 行 | 否 | 是 | 已适配，补发关联牌 |
