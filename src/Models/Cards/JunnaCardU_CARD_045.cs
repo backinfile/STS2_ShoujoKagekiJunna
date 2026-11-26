@@ -8,13 +8,19 @@ public sealed partial class JunnaCardU_CARD_045
 {
     private int _lastPlayTurn = -1;
 
+    protected override bool ShouldGlowGoldInternal => EnergyTriggerTurn.HasValue;
+
+    private int? EnergyTriggerTurn =>
+        IsMutable && Owner?.PlayerCombatState is { } combat && _lastPlayTurn != combat.TurnNumber
+            ? combat.TurnNumber
+            : null;
+
     public override Task BeforeCardPlayed(CardPlay play)
     {
-        if (play.Card != this || !play.IsFirstInSeries ||
-            Owner.PlayerCombatState is not { } combat || _lastPlayTurn == combat.TurnNumber)
+        if (play.Card != this || !play.IsFirstInSeries || EnergyTriggerTurn is not { } turn)
             return Task.CompletedTask;
 
-        _lastPlayTurn = combat.TurnNumber;
+        _lastPlayTurn = turn;
         return PlayerCmd.GainEnergy(Value("Energy"), Owner);
     }
 

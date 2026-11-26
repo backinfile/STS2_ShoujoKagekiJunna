@@ -263,19 +263,23 @@ internal sealed partial class AuditScenario
             int block = player.Creature.Block;
             int energy = state.Energy;
             await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
+            Check("温柔的星光同回合重打前取消金色边框", card.ShouldGlowGold, false);
             await Play(card);
             Check("温柔的星光同回合重打仍有格挡", player.Creature.Block - block, upgraded ? 4 : 2);
             Check("同一张温柔的星光只在首次返能", state.Energy, energy);
             state.IncrementTurnNumber();
             await CardPileCmd.Add(card, PileType.Hand, skipVisuals: true);
+            Check("温柔的星光下回合恢复金色边框", card.ShouldGlowGold, true);
             await Play(card);
             Check("温柔的星光下回合恢复首次返能", state.Energy, energy + 1);
             var material = await Add(Id, upgrade: upgraded);
+            Check("本回合尚未打出的温柔的星光显示金色边框", material.ShouldGlowGold, true);
             energy = state.Energy;
             block = player.Creature.Block;
             await HandArrow.Play(_context, material);
             Check("温柔的星光成为三回合飞矢", ArrowCombat.Find(material)?.Remaining, 3);
             Check("首次作为飞矢打出立即返能", state.Energy, energy + 1);
+            Check("作为飞矢打出后消耗本回合的金色高亮", material.ShouldGlowGold, false);
             Check("飞矢等待时不获得格挡", player.Creature.Block, block);
 
             state.IncrementTurnNumber();
@@ -286,6 +290,7 @@ internal sealed partial class AuditScenario
 
             energy = state.Energy;
             await CardPileCmd.Add(material, PileType.Hand, skipVisuals: true);
+            Check("跨回合完成飞矢后回手仍显示金色边框", material.ShouldGlowGold, true);
             await Play(material);
             Check("飞矢完成后本回合首次普通打出仍返能", state.Energy, energy + 1);
             energy = state.Energy;
@@ -297,6 +302,7 @@ internal sealed partial class AuditScenario
 
             var copy = CardCopies.ForCombat(material, player, CardCopyPurpose.TemporaryCopy);
             await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Hand, player);
+            Check("温柔的星光的副本独立显示金色边框", copy.ShouldGlowGold, true);
             await Play(copy);
             Check("温柔的星光的副本独立返能", state.Energy, energy + 1);
         }
