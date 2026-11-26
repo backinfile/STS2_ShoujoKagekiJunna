@@ -56,7 +56,11 @@ public sealed class JunnaCombatHooks : SingletonModel
     }
     public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
         => KnowledgeProgress.OpenCombat(player, choiceContext);
-    public override Task AfterPlayerTurnStartLate(PlayerChoiceContext context, Player player) => ArrowCombat.Advance(context, player);
+    public override Task AfterPlayerTurnStartLate(PlayerChoiceContext context, Player player)
+    {
+        JunnaIdleGesture.Attach(player);
+        return ArrowCombat.Advance(context, player);
+    }
     public override Task BeforeDeath(Creature creature)
     {
         ArrowCombat.RememberDeathOrder(creature);
@@ -65,6 +69,7 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override Task BeforeCardPlayed(CardPlay play)
     {
         if (!play.IsFirstInSeries) return Task.CompletedTask;
+        JunnaIdleGesture.ResumeFromAction(play.Card.Owner);
         var combat = play.Card.Owner.PlayerCombatState!;
         int cost = play.Card.EnergyCost.GetResolved();
         if (!play.Card.EnergyCost.CostsX && cost == 0)
@@ -77,6 +82,11 @@ public sealed class JunnaCombatHooks : SingletonModel
             foreach (var attack in combat.AllCards.OfType<JunnaCardU_CARD_184>())
                 attack.InvokeEnergyCostChanged();
         if (CardCatalog.IsArrow(play.Card)) ArrowPlays.GetOrCreateValue(combat).Value++;
+        return Task.CompletedTask;
+    }
+    public override Task BeforePotionUsed(PotionModel potion, Creature? target)
+    {
+        JunnaIdleGesture.ResumeFromAction(potion.Owner);
         return Task.CompletedTask;
     }
     private static readonly HashSet<Player> FollowingPlayers = [];

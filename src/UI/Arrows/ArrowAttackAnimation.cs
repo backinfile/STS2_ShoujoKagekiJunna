@@ -20,6 +20,9 @@ internal static class ArrowAttackAnimation
         => creature?.Entity.Player?.Character is Junna
             ? creature.Visuals.GetNodeOrNull<AnimationPlayer>("AnimationPlayer") : null;
 
+    internal static AnimationPlayer? AnimatorFor(Player player)
+        => Animator(NCombatRoom.Instance?.GetCreatureNode(player.Creature));
+
     internal static void PlayPreparation(Player player) => Play(player, PreparePose);
 
     internal static void Shoot(Player player) => Play(player, Pose);
@@ -29,11 +32,12 @@ internal static class ArrowAttackAnimation
     private static void Play(Player player, string animation)
     {
         if (!CoreEffects.Enabled || player.Creature.IsDead) return;
-        var animator = Animator(NCombatRoom.Instance?.GetCreatureNode(player.Creature));
+        var animator = AnimatorFor(player);
         if (animator == null) return;
         var current = animator.CurrentAnimation;
         if (current == animation || current == "Dead") return;
-        if (animation == RelaxedPose && animator.IsPlaying() && animator.AnimationGetNext(current) == IdlePose)
+        if (animation == RelaxedPose && current != JunnaIdleGesture.HairTuck
+            && animator.IsPlaying() && animator.AnimationGetNext(current) == IdlePose)
         {
             animator.ClearQueue();
             animator.Queue(RelaxedPose);
