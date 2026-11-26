@@ -118,8 +118,8 @@ def record_stardust_chain():
     card_id = "JUNNA_U_CARD_005"
     target = request("/singleplayer?format=json")["battle"]["enemies"][0]["entity_id"]
     act("play_card", card_index=wait_for_hand_card(card_id), target=target)
-    state = wait(lambda s: s.get("player", {}).get("exhaust_pile_count") == 8)
-    assert state["battle"]["enemies"][0]["hp"] == 40, state
+    state = wait(lambda s: s.get("player", {}).get("exhaust_pile_count") == 25)
+    assert state["battle"]["enemies"][0]["hp"] == 100, state
     time.sleep(2)
     return state
 
@@ -202,7 +202,7 @@ with urllib.request.urlopen(base + "/recording/frames?frame_count=12&columns=4&f
 result = probe("inspect")
 assert result["pass"] and all(c["remaining"] is None for c in result["cards"]), result
 if args.scenario in ("stardust", "stardust-chain"):
-    expected_count, remaining = (9, 1) if args.scenario == "stardust-chain" else (2, 2)
+    expected_count, remaining = (26, 1) if args.scenario == "stardust-chain" else (2, 2)
     assert len(result["deployed"]) == expected_count and all(
         c["id"] == "U_CARD_005" and c["target"] == "TEST_SUBJECT" and c["Remaining"] == remaining
         for c in result["deployed"]), result

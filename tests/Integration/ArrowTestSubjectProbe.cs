@@ -82,8 +82,9 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
             if (scenario is "stardust-chain" or "large-prop")
             {
                 bool chain = scenario == "stardust-chain";
-                await CreatureCmd.SetMaxHp(target, 200);
-                await CreatureCmd.SetCurrentHp(target, 200);
+                int hp = chain ? 600 : 200;
+                await CreatureCmd.SetMaxHp(target, hp);
+                await CreatureCmd.SetCurrentHp(target, hp);
                 await Play("JA105");
                 if (chain) await Play("JA105");
                 var card = CardCatalog.Create(chain ? "U_CARD_005" : "U_CARD_031", player);
@@ -98,10 +99,10 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
                 await TestGameApi.PaidPlay(context, card, chain ? target : null);
                 if (chain)
                 {
-                    Verify("eight Stardust resolve in one chain", target.CurrentHp == 40 &&
-                        player.PlayerCombatState.ExhaustPile.Cards.Count(c => CardCatalog.DesignId(c) == "U_CARD_005") == 8);
-                    Verify("the nine surviving copies stop at one",
-                        ArrowCombat.Deployed.Count == 9 && ArrowCombat.Deployed.All(a => a.Remaining == 1 &&
+                    Verify("25 Stardust resolve in one chain", target.CurrentHp == 100 &&
+                        player.PlayerCombatState.ExhaustPile.Cards.Count(c => CardCatalog.DesignId(c) == "U_CARD_005") == 25);
+                    Verify("the 26 surviving copies stop at one",
+                        ArrowCombat.Deployed.Count == 26 && ArrowCombat.Deployed.All(a => a.Remaining == 1 &&
                             CardCatalog.DesignId(a.Card) == "U_CARD_005"));
                 }
                 else

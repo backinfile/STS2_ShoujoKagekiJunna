@@ -15,7 +15,7 @@ namespace ShoujoKagekiJunna.Combat;
 
 public static partial class ArrowCombat
 {
-    private const int MaxStardustCompletions = 8;
+    private const int MaxStardustCompletions = 25;
     private sealed class StardustChain
     {
         internal int Completions;
