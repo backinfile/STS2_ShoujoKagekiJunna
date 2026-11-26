@@ -1,97 +1,195 @@
-[gd_scene load_steps=11 format=3]
-[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/portrait.png" id="1"]
-[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/aim.png" id="2"]
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/idle.png" id="idle"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/attack.png" id="attack"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/arrow_prepare.png" id="arrow_prepare"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/arrow_attack.png" id="arrow_attack"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/hit.png" id="hit"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/dead.png" id="dead"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/relaxed.png" id="relaxed"]
+
 [sub_resource type="Animation" id="Idle"]
 resource_name = "Idle"
-length = 2.8
+length = 3.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Visuals:texture")
 tracks/0/interp = 1
 tracks/0/enabled = true
-tracks/0/keys = {"times": PackedFloat32Array(0,1.4,2.8), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [ExtResource("1"),ExtResource("1"),ExtResource("1")]}
+tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [ExtResource("idle")]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visuals:position")
+tracks/1/path = NodePath("Visuals:region_rect")
 tracks/1/interp = 1
 tracks/1/enabled = true
-tracks/1/keys = {"times": PackedFloat32Array(0,1.4,2.8), "transitions": PackedFloat32Array(1,1,1), "update": 0, "values": [Vector2(0, -153),Vector2(0, -155),Vector2(0, -153)]}
+tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [Rect2(0, 0, 480, 832)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 2
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0, 1.9, 3.8), "transitions": PackedFloat32Array(1, 1, 1), "update": 0, "values": [Vector2(0.476452, 0.476452), Vector2(0.476452, 0.478834), Vector2(0.476452, 0.476452)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visuals:position")
+tracks/3/interp = 2
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0, 1.9, 3.8), "transitions": PackedFloat32Array(1, 1, 1), "update": 0, "values": [Vector2(-0.9, -157.476129), Vector2(-0.9, -158.25751), Vector2(-0.9, -157.476129)]}
+
 [sub_resource type="Animation" id="Attack"]
 resource_name = "Attack"
-length = 0.5
-loop_mode = 0
+length = 0.99
 tracks/0/type = "value"
 tracks/0/path = NodePath("Visuals:texture")
 tracks/0/interp = 1
 tracks/0/enabled = true
-tracks/0/keys = {"times": PackedFloat32Array(0,0.15,0.42), "transitions": PackedFloat32Array(1,1,1), "update": 1, "values": [ExtResource("1"),ExtResource("1"),ExtResource("1")]}
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.034, 0.969), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [ExtResource("idle"), ExtResource("attack"), ExtResource("idle")]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visuals:position")
+tracks/1/path = NodePath("Visuals:region_rect")
 tracks/1/interp = 1
 tracks/1/enabled = true
-tracks/1/keys = {"times": PackedFloat32Array(0,0.15,0.42), "transitions": PackedFloat32Array(1,1,1), "update": 0, "values": [Vector2(0, -153),Vector2(14, -153),Vector2(0, -153)]}
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.034, 0.068, 0.101, 0.137, 0.175, 0.215, 0.247, 0.274, 0.303, 0.334, 0.366, 0.398, 0.43, 0.462, 0.492, 0.523, 0.552, 0.582, 0.612, 0.642, 0.672, 0.703, 0.734, 0.765, 0.799, 0.84, 0.892, 0.969), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Rect2(0, 0, 480, 832), Rect2(480, 0, 480, 832), Rect2(960, 0, 480, 832), Rect2(1440, 0, 480, 832), Rect2(0, 832, 480, 832), Rect2(480, 832, 480, 832), Rect2(960, 832, 480, 832), Rect2(1440, 832, 480, 832), Rect2(0, 1664, 480, 832), Rect2(480, 1664, 480, 832), Rect2(960, 1664, 480, 832), Rect2(1440, 1664, 480, 832), Rect2(0, 2496, 480, 832), Rect2(480, 2496, 480, 832), Rect2(960, 2496, 480, 832), Rect2(1440, 2496, 480, 832), Rect2(0, 3328, 480, 832), Rect2(480, 3328, 480, 832), Rect2(960, 3328, 480, 832), Rect2(1440, 3328, 480, 832), Rect2(0, 4160, 480, 832), Rect2(480, 4160, 480, 832), Rect2(960, 4160, 480, 832), Rect2(1440, 4160, 480, 832), Rect2(0, 4992, 480, 832), Rect2(480, 4992, 480, 832), Rect2(960, 4992, 480, 832), Rect2(1440, 4992, 480, 832), Rect2(0, 0, 480, 832)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 1
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0, 0.034, 0.969), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [Vector2(0.476452, 0.476452), Vector2(0.628511, 0.628511), Vector2(0.476452, 0.476452)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visuals:position")
+tracks/3/interp = 1
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0, 0.034, 0.969), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [Vector2(-0.9, -157.476129), Vector2(-0.9, -207.351489), Vector2(-0.9, -157.476129)]}
+
+[sub_resource type="Animation" id="ArrowPrepare"]
+resource_name = "ArrowPrepare"
+length = 0.99
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.044, 0.969), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [ExtResource("idle"), ExtResource("arrow_prepare"), ExtResource("idle")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:region_rect")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.044, 0.078, 0.113, 0.149, 0.184, 0.219, 0.254, 0.292, 0.332, 0.375, 0.424, 0.477, 0.531, 0.586, 0.625, 0.663, 0.701, 0.739, 0.78, 0.822, 0.869, 0.924, 0.969), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Rect2(0, 0, 480, 832), Rect2(480, 0, 480, 832), Rect2(960, 0, 480, 832), Rect2(1440, 0, 480, 832), Rect2(0, 832, 480, 832), Rect2(480, 832, 480, 832), Rect2(960, 832, 480, 832), Rect2(1440, 832, 480, 832), Rect2(0, 1664, 480, 832), Rect2(480, 1664, 480, 832), Rect2(960, 1664, 480, 832), Rect2(1440, 1664, 480, 832), Rect2(0, 2496, 480, 832), Rect2(480, 2496, 480, 832), Rect2(960, 2496, 480, 832), Rect2(1440, 2496, 480, 832), Rect2(0, 3328, 480, 832), Rect2(480, 3328, 480, 832), Rect2(960, 3328, 480, 832), Rect2(1440, 3328, 480, 832), Rect2(0, 4160, 480, 832), Rect2(480, 4160, 480, 832), Rect2(960, 4160, 480, 832), Rect2(0, 0, 480, 832)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 1
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0, 0.044, 0.969), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [Vector2(0.476452, 0.476452), Vector2(0.557358, 0.557358), Vector2(0.476452, 0.476452)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visuals:position")
+tracks/3/interp = 1
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0, 0.044, 0.969), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [Vector2(-0.9, -157.476129), Vector2(-13.161887, -184.013585), Vector2(-0.9, -157.476129)]}
+
 [sub_resource type="Animation" id="ArrowAttack"]
 resource_name = "ArrowAttack"
-length = 1.0
-loop_mode = 1
+length = 0.94
 tracks/0/type = "value"
 tracks/0/path = NodePath("Visuals:texture")
 tracks/0/interp = 1
 tracks/0/enabled = true
-tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [ExtResource("2")]}
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.024, 0.918), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [ExtResource("idle"), ExtResource("arrow_attack"), ExtResource("idle")]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visuals:position")
+tracks/1/path = NodePath("Visuals:region_rect")
 tracks/1/interp = 1
 tracks/1/enabled = true
-tracks/1/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [Vector2(0, -153)]}
-[sub_resource type="Animation" id="Cast"]
-resource_name = "Cast"
-length = 0.45
-loop_mode = 0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Visuals:texture")
-tracks/0/interp = 1
-tracks/0/enabled = true
-tracks/0/keys = {"times": PackedFloat32Array(0,0.38), "transitions": PackedFloat32Array(1,1), "update": 1, "values": [ExtResource("1"),ExtResource("1")]}
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.024, 0.044, 0.062, 0.079, 0.101, 0.123, 0.151, 0.188, 0.226, 0.265, 0.309, 0.35, 0.386, 0.421, 0.456, 0.492, 0.525, 0.558, 0.594, 0.631, 0.672, 0.713, 0.756, 0.806, 0.866, 0.918), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Rect2(0, 0, 480, 832), Rect2(480, 0, 480, 832), Rect2(960, 0, 480, 832), Rect2(1440, 0, 480, 832), Rect2(0, 832, 480, 832), Rect2(480, 832, 480, 832), Rect2(960, 832, 480, 832), Rect2(1440, 832, 480, 832), Rect2(0, 1664, 480, 832), Rect2(480, 1664, 480, 832), Rect2(960, 1664, 480, 832), Rect2(1440, 1664, 480, 832), Rect2(0, 2496, 480, 832), Rect2(480, 2496, 480, 832), Rect2(960, 2496, 480, 832), Rect2(1440, 2496, 480, 832), Rect2(0, 3328, 480, 832), Rect2(480, 3328, 480, 832), Rect2(960, 3328, 480, 832), Rect2(1440, 3328, 480, 832), Rect2(0, 4160, 480, 832), Rect2(480, 4160, 480, 832), Rect2(960, 4160, 480, 832), Rect2(1440, 4160, 480, 832), Rect2(0, 4992, 480, 832), Rect2(480, 4992, 480, 832), Rect2(0, 0, 480, 832)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 1
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0, 0.024, 0.918), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [Vector2(0.476452, 0.476452), Vector2(0.505822, 0.505822), Vector2(0.476452, 0.476452)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visuals:position")
+tracks/3/interp = 1
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0, 0.024, 0.918), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [Vector2(-0.9, -157.476129), Vector2(0.617466, -167.109589), Vector2(-0.9, -157.476129)]}
+
 [sub_resource type="Animation" id="Hit"]
 resource_name = "Hit"
-length = 0.3
-loop_mode = 0
+length = 0.94
 tracks/0/type = "value"
 tracks/0/path = NodePath("Visuals:texture")
 tracks/0/interp = 1
 tracks/0/enabled = true
-tracks/0/keys = {"times": PackedFloat32Array(0,0.22), "transitions": PackedFloat32Array(1,1), "update": 1, "values": [ExtResource("1"),ExtResource("1")]}
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.02, 0.918), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [ExtResource("idle"), ExtResource("hit"), ExtResource("idle")]}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Visuals:position")
+tracks/1/path = NodePath("Visuals:region_rect")
 tracks/1/interp = 1
 tracks/1/enabled = true
-tracks/1/keys = {"times": PackedFloat32Array(0,0.22), "transitions": PackedFloat32Array(1,1), "update": 0, "values": [Vector2(-8, -153),Vector2(0, -153)]}
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.02, 0.045, 0.074, 0.101, 0.129, 0.157, 0.185, 0.214, 0.242, 0.272, 0.305, 0.336, 0.368, 0.404, 0.44, 0.477, 0.515, 0.556, 0.603, 0.64, 0.674, 0.707, 0.74, 0.773, 0.806, 0.843, 0.874, 0.918), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Rect2(0, 0, 480, 832), Rect2(480, 0, 480, 832), Rect2(960, 0, 480, 832), Rect2(1440, 0, 480, 832), Rect2(0, 832, 480, 832), Rect2(480, 832, 480, 832), Rect2(960, 832, 480, 832), Rect2(1440, 832, 480, 832), Rect2(0, 1664, 480, 832), Rect2(480, 1664, 480, 832), Rect2(960, 1664, 480, 832), Rect2(1440, 1664, 480, 832), Rect2(0, 2496, 480, 832), Rect2(480, 2496, 480, 832), Rect2(960, 2496, 480, 832), Rect2(1440, 2496, 480, 832), Rect2(0, 3328, 480, 832), Rect2(480, 3328, 480, 832), Rect2(960, 3328, 480, 832), Rect2(1440, 3328, 480, 832), Rect2(0, 4160, 480, 832), Rect2(480, 4160, 480, 832), Rect2(960, 4160, 480, 832), Rect2(1440, 4160, 480, 832), Rect2(0, 4992, 480, 832), Rect2(480, 4992, 480, 832), Rect2(960, 4992, 480, 832), Rect2(1440, 4992, 480, 832), Rect2(0, 0, 480, 832)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 1
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0, 0.02, 0.918), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [Vector2(0.476452, 0.476452), Vector2(0.512847, 0.512847), Vector2(0.476452, 0.476452)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visuals:position")
+tracks/3/interp = 1
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0, 0.02, 0.918), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [Vector2(-0.9, -157.476129), Vector2(-5.002778, -169.413889), Vector2(-0.9, -157.476129)]}
+
 [sub_resource type="Animation" id="Dead"]
 resource_name = "Dead"
-length = 1.5
-loop_mode = 0
+length = 0.86
 tracks/0/type = "value"
 tracks/0/path = NodePath("Visuals:texture")
 tracks/0/interp = 1
 tracks/0/enabled = true
-tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [ExtResource("1")]}
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.03), "transitions": PackedFloat32Array(1, 1), "update": 1, "values": [ExtResource("idle"), ExtResource("dead")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:region_rect")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.03, 0.056, 0.086, 0.127, 0.168, 0.206, 0.243, 0.277, 0.31, 0.345, 0.388, 0.439, 0.505, 0.582, 0.682), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Rect2(0, 0, 480, 832), Rect2(480, 0, 480, 832), Rect2(960, 0, 480, 832), Rect2(1440, 0, 480, 832), Rect2(0, 832, 480, 832), Rect2(480, 832, 480, 832), Rect2(960, 832, 480, 832), Rect2(1440, 832, 480, 832), Rect2(0, 1664, 480, 832), Rect2(480, 1664, 480, 832), Rect2(960, 1664, 480, 832), Rect2(1440, 1664, 480, 832), Rect2(0, 2496, 480, 832), Rect2(480, 2496, 480, 832), Rect2(960, 2496, 480, 832), Rect2(1440, 2496, 480, 832)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 1
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0, 0.03), "transitions": PackedFloat32Array(1, 1), "update": 1, "values": [Vector2(0.476452, 0.476452), Vector2(0.476452, 0.476452)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visuals:position")
+tracks/3/interp = 1
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0, 0.03), "transitions": PackedFloat32Array(1, 1), "update": 1, "values": [Vector2(-0.9, -157.476129), Vector2(-5.188065, -157.476129)]}
+
 [sub_resource type="Animation" id="Relaxed"]
 resource_name = "Relaxed"
-length = 1
-loop_mode = 1
+length = 0.98
 tracks/0/type = "value"
 tracks/0/path = NodePath("Visuals:texture")
 tracks/0/interp = 1
 tracks/0/enabled = true
-tracks/0/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [ExtResource("1")]}
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.06), "transitions": PackedFloat32Array(1, 1), "update": 1, "values": [ExtResource("idle"), ExtResource("relaxed")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:region_rect")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.06, 0.111, 0.163, 0.219, 0.277, 0.335, 0.395, 0.452, 0.508, 0.568, 0.625, 0.687, 0.747, 0.81, 0.883), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Rect2(0, 0, 480, 832), Rect2(480, 0, 480, 832), Rect2(960, 0, 480, 832), Rect2(1440, 0, 480, 832), Rect2(0, 832, 480, 832), Rect2(480, 832, 480, 832), Rect2(960, 832, 480, 832), Rect2(1440, 832, 480, 832), Rect2(0, 1664, 480, 832), Rect2(480, 1664, 480, 832), Rect2(960, 1664, 480, 832), Rect2(1440, 1664, 480, 832), Rect2(0, 2496, 480, 832), Rect2(480, 2496, 480, 832), Rect2(960, 2496, 480, 832), Rect2(1440, 2496, 480, 832)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 1
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0, 0.06), "transitions": PackedFloat32Array(1, 1), "update": 1, "values": [Vector2(0.476452, 0.476452), Vector2(0.476452, 0.476452)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visuals:position")
+tracks/3/interp = 1
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0, 0.06), "transitions": PackedFloat32Array(1, 1), "update": 1, "values": [Vector2(-0.9, -157.476129), Vector2(-0.423548, -157.476129)]}
+
 [sub_resource type="AnimationLibrary" id="library"]
-_data = {"Idle": SubResource("Idle"),"Attack": SubResource("Attack"),"ArrowAttack": SubResource("ArrowAttack"),"Cast": SubResource("Cast"),"Hit": SubResource("Hit"),"Dead": SubResource("Dead"),"Relaxed": SubResource("Relaxed")}
+_data = {"Idle": SubResource("Idle"), "Attack": SubResource("Attack"), "ArrowPrepare": SubResource("ArrowPrepare"), "ArrowAttack": SubResource("ArrowAttack"), "Hit": SubResource("Hit"), "Dead": SubResource("Dead"), "Relaxed": SubResource("Relaxed")}
 [node name="JunnaCombat" type="Node2D"]
+
 [node name="Visuals" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(0, -153)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1")
+position = Vector2(-0.9, -157.476129)
+scale = Vector2(0.476452, 0.476452)
+texture = ExtResource("idle")
+region_enabled = true
+region_rect = Rect2(0, 0, 480, 832)
+region_filter_clip_enabled = true
+
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true
 offset_left = -90.0
@@ -99,6 +197,11 @@ offset_top = -300.0
 offset_right = 95.0
 offset_bottom = 0.0
 mouse_filter = 2
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-libraries = {"": SubResource("library")}
+libraries = {&"": SubResource("library")}
+next/Attack = &"Idle"
+next/ArrowPrepare = &"Idle"
+next/ArrowAttack = &"Idle"
+next/Hit = &"Idle"

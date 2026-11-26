@@ -258,7 +258,7 @@ public static partial class ArrowCombat
         try
         {
             await using var resolutionBatch = Shine.BeginResolutionBatch();
-            using var attack = ArrowAttackAnimation.Begin(arrow.Card.Owner);
+            ArrowAttackAnimation.Shoot(arrow.Card.Owner);
             if (hud != null) await hud.ReleaseArrow(arrow);
             if (CombatManager.Instance.DebugOnlyGetState() != arrow.Combat || Find(arrow.Card) != arrow
                 || arrow.Card.Owner.Creature.IsDead) return;

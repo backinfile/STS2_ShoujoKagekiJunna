@@ -1,5 +1,4 @@
 using ShoujoKageki.Core.V1.Presentation;
-using System.Runtime.CompilerServices;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -13,53 +12,51 @@ namespace ShoujoKagekiJunna.Combat;
 internal static class ArrowAttackAnimation
 {
     private const string Pose = "ArrowAttack";
-    private static readonly ConditionalWeakTable<AnimationPlayer, State> States = new();
+    private const string PreparePose = "ArrowPrepare";
+    private const string RelaxedPose = "Relaxed";
+    private const string IdlePose = "Idle";
 
     private static AnimationPlayer? Animator(NCreature? creature)
         => creature?.Entity.Player?.Character is Junna
             ? creature.Visuals.GetNodeOrNull<AnimationPlayer>("AnimationPlayer") : null;
 
-    internal static IDisposable? Begin(Player player)
+    internal static void PlayPreparation(Player player) => Play(player, PreparePose);
+
+    internal static void Shoot(Player player) => Play(player, Pose);
+
+    internal static void Relax(Player player) => Play(player, RelaxedPose);
+
+    private static void Play(Player player, string animation)
     {
-        if (!CoreEffects.Enabled) return null;
+        if (!CoreEffects.Enabled || player.Creature.IsDead) return;
         var animator = Animator(NCombatRoom.Instance?.GetCreatureNode(player.Creature));
-        if (animator == null || player.Creature.IsDead) return null;
-        var state = States.GetValue(animator, _ => new State());
-        state.ReturnToIdle?.Kill();
-        state.ReturnToIdle = null;
-        state.Depth++;
-        if (animator.CurrentAnimation != Pose)
+        if (animator == null) return;
+        var current = animator.CurrentAnimation;
+        if (current == animation || current == "Dead") return;
+        if (animation == RelaxedPose && animator.IsPlaying() && animator.AnimationGetNext(current) == IdlePose)
         {
-            animator.Play(Pose);
-            animator.Advance(0);
+            animator.ClearQueue();
+            animator.Queue(RelaxedPose);
+            return;
         }
-        return new Resolution(animator, state);
+        if (current == Pose && animation != RelaxedPose) return;
+        if (current == "Hit" && animation == PreparePose) return;
+        // Apply the atlas and its transform during the AnimationPlayer's frame update.
+        animator.Play(animation);
     }
 
     [HarmonyPrefix, HarmonyPriority(Priority.First)]
     private static bool KeepPose(NCreature __instance, string trigger)
-        => trigger is not ("Attack" or "Cast" or "Idle" or "Relaxed")
-            || Animator(__instance)?.CurrentAnimation != Pose;
-
-    private sealed class State
     {
-        internal int Depth;
-        internal Tween? ReturnToIdle;
-    }
-
-    private sealed class Resolution(AnimationPlayer animator, State state) : IDisposable
-    {
-        public void Dispose()
+        if (trigger is not ("Attack" or "Cast" or IdlePose)) return true;
+        var animator = Animator(__instance);
+        if (trigger == IdlePose && animator?.GetQueue().Contains(RelaxedPose) == true) return false;
+        return animator?.CurrentAnimation switch
         {
-            if (--state.Depth > 0 || !GodotObject.IsInstanceValid(animator) || !animator.IsInsideTree()) return;
-            // Bridge adjacent resolutions without restarting the pose or delaying combat.
-            state.ReturnToIdle = animator.CreateTween();
-            state.ReturnToIdle.TweenInterval(.2);
-            state.ReturnToIdle.TweenCallback(Callable.From(() =>
-            {
-                state.ReturnToIdle = null;
-                if (animator.CurrentAnimation == Pose) animator.Play("Idle");
-            }));
-        }
+            Pose or "Dead" => false,
+            PreparePose => trigger == "Attack",
+            RelaxedPose => trigger != IdlePose,
+            _ => true
+        };
     }
 }

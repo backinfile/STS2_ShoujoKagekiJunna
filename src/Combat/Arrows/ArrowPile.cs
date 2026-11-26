@@ -15,6 +15,7 @@ public sealed class ArrowPile() : CustomPile(PileId)
     public override bool CardShouldBeVisible(CardModel card) => false;
     public override bool NeedsCustomTransitionVisual => true;
     public override bool CustomTween(Tween tween, CardModel card, NCard cardNode, CardPile? oldPile)
-        => NCombatRoom.Instance?.GetNodeOrNull<ArrowHud>("JunnaArrows")?.AnimateDeployment(tween, card, cardNode) == true;
+        => NCombatRoom.Instance?.GetNodeOrNull<ArrowHud>("JunnaArrows")
+            ?.AnimateDeployment(tween, card, cardNode, oldPile?.Type == PileType.Play) == true;
     public override Vector2 GetTargetPosition(CardModel model, Vector2 size) => new(size.X * .5f, 90);
 }

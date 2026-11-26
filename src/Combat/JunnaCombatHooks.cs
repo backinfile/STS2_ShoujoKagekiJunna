@@ -69,7 +69,12 @@ public sealed class JunnaCombatHooks : SingletonModel
         }
         finally { FollowingPlayers.Remove(play.Card.Owner); }
     }
-    public override Task AfterCombatVictory(CombatRoom room) => KnowledgeProgress.WonCombat();
+    public override Task AfterCombatVictory(CombatRoom room)
+    {
+        foreach (var player in room.CombatState.Players)
+            if (player.Character is Junna) ArrowAttackAnimation.Relax(player);
+        return KnowledgeProgress.WonCombat();
+    }
     public override Task AfterCombatEnd(CombatRoom room)
     {
         DynamicKnowledge.ClearCombatGroups();

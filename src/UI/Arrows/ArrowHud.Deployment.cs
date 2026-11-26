@@ -13,15 +13,18 @@ public partial class ArrowHud
 {
     private readonly Dictionary<ArrowDeployment, ArrowDeploymentVfx> _deployments = [];
 
-    internal bool AnimateDeployment(Tween tween, CardModel card, NCard cardNode)
+    internal bool AnimateDeployment(Tween tween, CardModel card, NCard cardNode, bool fromPlayPile)
     {
         if (!CoreEffects.Enabled) return false;
         var arrow = ArrowCombat.Find(card);
         if (arrow == null) return false;
+        bool generated = GeneratedArrowPresentation.IsGenerated(card);
+        if (fromPlayPile && !generated && arrow.Remaining > 0)
+            ArrowAttackAnimation.PlayPreparation(card.Owner);
         FinishDeployment(arrow);
         var effect = new ArrowDeploymentVfx { Name = "ArrowPaperFold", ZIndex = 0 };
         AddChild(effect);
-        effect.Initialize(cardNode, GeneratedArrowPresentation.IsGenerated(card));
+        effect.Initialize(cardNode, generated);
         _deployments.Add(arrow, effect);
         if (!_views.TryGetValue(arrow, out var view))
         {
