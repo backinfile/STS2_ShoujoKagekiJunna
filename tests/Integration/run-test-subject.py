@@ -8,11 +8,13 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument("--port", type=int, required=True)
 parser.add_argument("--mode", choices=["check", "prepare", "inspect"], default="check")
-parser.add_argument("--scenario", choices=["single", "group", "support", "pending", "conversion"], default="single")
+parser.add_argument("--scenario", choices=[
+    "single", "group", "support", "pending", "conversion", "stardust", "meteor", "stardust-chain", "large-prop",
+], default="single")
 parser.add_argument("--record", action="store_true")
 args = parser.parse_args()
-if args.record and (args.mode != "check" or args.scenario not in ("single", "conversion")):
-    parser.error("--record requires check mode and the single or conversion scenario")
+if args.record and (args.mode != "check" or args.scenario not in ("single", "conversion", "stardust", "stardust-chain")):
+    parser.error("--record requires check mode and the single, conversion, stardust or stardust-chain scenario")
 root = Path(__file__).resolve().parents[2]
 out = root / "out/tmp/experiment-death-zero-arrows"
 out.mkdir(parents=True, exist_ok=True)
@@ -101,6 +103,27 @@ def record_single():
     return state
 
 
+def record_stardust():
+    act("play_card", card_index=wait_for_hand_card("JUNNA_JA71"))
+    knockout = wait(lambda s: s.get("battle", {}).get("enemies") == [] and
+        s.get("player", {}).get("exhaust_pile_count") == 1)
+    time.sleep(2)
+    state = end_turn(knockout["battle"]["round"])
+    assert state["battle"]["enemies"][0]["hp"] == 200, state
+    time.sleep(1)
+    return state
+
+
+def record_stardust_chain():
+    card_id = "JUNNA_U_CARD_005"
+    target = request("/singleplayer?format=json")["battle"]["enemies"][0]["entity_id"]
+    act("play_card", card_index=wait_for_hand_card(card_id), target=target)
+    state = wait(lambda s: s.get("player", {}).get("exhaust_pile_count") == 8)
+    assert state["battle"]["enemies"][0]["hp"] == 40, state
+    time.sleep(2)
+    return state
+
+
 def record_conversion():
     act("play_card", card_index=wait_for_hand_card("JUNNA_JA87"))
     wait(lambda s: any(p["id"] == "JUNNA_JA87_POWER" for p in s["player"]["status"]))
@@ -155,12 +178,16 @@ if not args.record:
     raise SystemExit(0 if args.mode == "prepare" or result["pass"] else 1)
 
 probe("prepare")
-wait_for_hand_card("JUNNA_JA71")
+wait_for_hand_card("JUNNA_U_CARD_005" if args.scenario == "stardust-chain" else "JUNNA_JA71")
 request("/recording/start", dict(output_dir=str(out / "fixed-video"), fps=15, width=1280,
     height=720, audio=True, max_duration_seconds=45))
 try:
     time.sleep(1)
-    state = record_conversion() if args.scenario == "conversion" else record_single()
+    record_scenario = {
+        "single": record_single, "conversion": record_conversion, "stardust": record_stardust,
+        "stardust-chain": record_stardust_chain,
+    }
+    state = record_scenario[args.scenario]()
 finally:
     request("/recording/stop", {})
     for _ in range(150):
@@ -174,7 +201,12 @@ with urllib.request.urlopen(base + "/recording/frames?frame_count=12&columns=4&f
     (out / "fixed-frames.png").write_bytes(response.read())
 result = probe("inspect")
 assert result["pass"] and all(c["remaining"] is None for c in result["cards"]), result
-if args.scenario == "conversion":
+if args.scenario in ("stardust", "stardust-chain"):
+    expected_count, remaining = (9, 1) if args.scenario == "stardust-chain" else (2, 2)
+    assert len(result["deployed"]) == expected_count and all(
+        c["id"] == "U_CARD_005" and c["target"] == "TEST_SUBJECT" and c["Remaining"] == remaining
+        for c in result["deployed"]), result
+elif args.scenario == "conversion":
     assert any(c["id"] == "SHIV" and c["pile"] == "Exhaust" for c in result["cards"]), result
 else:
     assert all(c["pile"] in ("Hand", "Draw", "Discard") for c in result["cards"]), result

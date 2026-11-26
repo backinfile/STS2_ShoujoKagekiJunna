@@ -18,7 +18,7 @@ namespace JunnaIntegration;
 public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
 {
     public override string CmdName => "junna_test_subject";
-    public override string Args => "check [single|group|support|pending|conversion] | prepare | inspect";
+    public override string Args => "check [single|group|support|pending|conversion|stardust|meteor|stardust-chain|large-prop] | prepare | inspect";
     public override string Description => "Check arrow completion while Test Subject waits to revive.";
     public override bool IsNetworked => false;
     private static readonly List<CardModel> Cards = [];
@@ -47,6 +47,7 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
             completed = true, error, checks = Checks,
             enemies = player.Creature.CombatState?.Enemies.Select(e => new { id = e.Monster?.Id.Entry, e.CurrentHp, e.IsAlive, e.IsHittable }),
             cards = Cards.Select(c => new { id = CardCatalog.DesignId(c) ?? c.Id.Entry, pile = c.Pile?.Type.ToString(), remaining = ArrowCombat.Find(c)?.Remaining }),
+            deployed = ArrowCombat.Deployed.Select(a => new { id = CardCatalog.DesignId(a.Card) ?? a.Card.Id.Entry, a.Remaining, target = a.Target?.Monster?.Id.Entry }),
             pass = error == null && _passed && !ArrowCombat.Deployed.Any(a => a.Remaining == 0)
         }, new JsonSerializerOptions { WriteIndented = true }));
     }
@@ -78,8 +79,43 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
                 await TestGameApi.PaidPlay(context, card, card.TargetType == TargetType.AnyEnemy ? target : null);
                 return card;
             }
-            Cards.Add(await Play("JB03"));
-            Cards.Add(await Play(scenario == "group" ? "JA77" : scenario == "support" ? "JA80" : "JB03"));
+            if (scenario is "stardust-chain" or "large-prop")
+            {
+                bool chain = scenario == "stardust-chain";
+                await CreatureCmd.SetMaxHp(target, 200);
+                await CreatureCmd.SetCurrentHp(target, 200);
+                await Play("JA105");
+                if (chain) await Play("JA105");
+                var card = CardCatalog.Create(chain ? "U_CARD_005" : "U_CARD_031", player);
+                Cards.Add(card);
+                await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);
+                if (prepare)
+                {
+                    SavePreparation();
+                    return;
+                }
+                var block = player.Creature.Block;
+                await TestGameApi.PaidPlay(context, card, chain ? target : null);
+                if (chain)
+                {
+                    Verify("eight Stardust resolve in one chain", target.CurrentHp == 40 &&
+                        player.PlayerCombatState.ExhaustPile.Cards.Count(c => CardCatalog.DesignId(c) == "U_CARD_005") == 8);
+                    Verify("the nine surviving copies stop at one",
+                        ArrowCombat.Deployed.Count == 9 && ArrowCombat.Deployed.All(a => a.Remaining == 1 &&
+                            CardCatalog.DesignId(a.Card) == "U_CARD_005"));
+                }
+                else
+                {
+                    Verify("Big Prop resolves once and exhausts under Accelerate", card.Pile?.Type == PileType.Exhaust &&
+                        ArrowCombat.Find(card) == null && player.Creature.Block == block + 3);
+                }
+                Save(player);
+                return;
+            }
+            bool stardust = scenario == "stardust";
+            Cards.Add(await Play(stardust ? "U_CARD_005" : "JB03"));
+            if (!stardust && scenario != "meteor")
+                Cards.Add(await Play(scenario == "group" ? "JA77" : scenario == "support" ? "JA80" : "JB03"));
             await CreatureCmd.SetCurrentHp(target, 1);
             if (prepare)
             {
@@ -90,13 +126,40 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
                     await CardPileCmd.AddGeneratedCardToCombat(CardCatalog.Create("JA87", player), PileType.Hand, player);
                     await PowerCmd.Apply<BufferPower>(context, player.Creature, 12m, player.Creature, null);
                 }
-                Directory.CreateDirectory(Output);
-                File.WriteAllText(Path.Combine(Output, "prepared.json"), "{}");
+                SavePreparation();
                 return;
             }
             if (scenario is "group" or "support") await Play("JB01");
             int energy = player.PlayerCombatState.Energy;
-            if (scenario == "conversion")
+            if (stardust)
+            {
+                await Play("JA71");
+                var children = ArrowCombat.Deployed.ToArray();
+                Verify("the original Stardust exhausts", Cards[0].Pile?.Type == PileType.Exhaust);
+                Verify("two free Stardust copies deploy against the reviving target",
+                    children.Length == 2 && children.All(a => CardCatalog.DesignId(a.Card) == "U_CARD_005" &&
+                        a.Remaining == 3 && a.Target == target) && player.PlayerCombatState.Energy == energy - 3);
+            }
+            else if (scenario == "meteor")
+            {
+                await ArrowCombat.Accelerate(context, ArrowCombat.Find(Cards[0])!, 99);
+                await CardActions.Fly(context, player, 5, target);
+                await CardActions.Fly(context, player, 7);
+                var meteors = ArrowCombat.Deployed.ToArray();
+                Verify("both aimed and random Meteors deploy during knockout", meteors.Length == 2 &&
+                    meteors.All(a => a.Remaining == 2 && a.Target == target && CardCatalog.DesignId(a.Card) == "JA81B"));
+                foreach (var meteor in meteors)
+                {
+                    Cards.Add(meteor.Card);
+                    await ArrowCombat.Accelerate(context, meteor, 1);
+                }
+                Verify("the Meteors remain deployed at one",
+                    meteors.Length == 2 && meteors.All(a => ArrowCombat.Find(a.Card) == a && a.Remaining == 1));
+                foreach (var meteor in meteors) await ArrowCombat.Accelerate(context, meteor, 1);
+                Verify("the Meteors exhaust at zero if no enemy has revived",
+                    meteors.Length == 2 && meteors.All(a => ArrowCombat.Find(a.Card) == null && a.Card.Pile?.Type == PileType.Exhaust));
+            }
+            else if (scenario == "conversion")
             {
                 await ArrowCombat.Accelerate(context, ArrowCombat.Find(Cards[0])!, 99);
                 var shiv = await AddInkyShiv(player);
@@ -133,5 +196,11 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
             Save(player);
         }
         catch (Exception error) { Save(player, error.ToString()); }
+    }
+
+    private static void SavePreparation()
+    {
+        Directory.CreateDirectory(Output);
+        File.WriteAllText(Path.Combine(Output, "prepared.json"), "{}");
     }
 }

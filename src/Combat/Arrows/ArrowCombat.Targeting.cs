@@ -1,14 +1,21 @@
+using System.Reflection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
+using MegaCrit.Sts2.Core.Models;
+using ShoujoKagekiJunna.Models;
 using HarmonyLib;
 
 namespace ShoujoKagekiJunna.Combat;
 
 public static partial class ArrowCombat
 {
+    private static bool IsSingleEnemyArrow(CardModel card)
+        => card.TargetType == TargetType.AnyEnemy && CardCatalog.IsArrow(card);
+
     public static void RetargetEnemies(MegaCrit.Sts2.Core.Entities.Players.Player player, Creature target)
     {
         foreach (var arrow in Deployed.Where(a => a.Card.Owner == player && !a.Resolving &&
@@ -69,6 +76,60 @@ public static partial class ArrowCombat
             if (replacement != null) arrow.Retarget(replacement);
         // A later death listener or wave transition may still create enemies. Combat end owns cleanup.
         return Task.CompletedTask;
+    }
+
+    [HarmonyPatch]
+    private static class AutoPlayTargeting
+    {
+        private static MethodBase TargetMethod() => AccessTools.AsyncMoveNext(
+            AccessTools.Method(typeof(CardCmd), nameof(CardCmd.AutoPlay)));
+
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+            => instructions
+                .MethodReplacer(AccessTools.PropertyGetter(typeof(CardModel), nameof(CardModel.TargetType)),
+                    AccessTools.Method(typeof(AutoPlayTargeting), nameof(TargetTypeForAutoPlay)))
+                .MethodReplacer(AccessTools.Method(typeof(CardModel), nameof(CardModel.OnEnqueuePlayVfx)),
+                    AccessTools.Method(typeof(AutoPlayTargeting), nameof(EnqueuePlayVfx)));
+
+        private static TargetType TargetTypeForAutoPlay(CardModel card)
+            // An arrow can deploy now and find a hittable enemy when it resolves.
+            => IsSingleEnemyArrow(card) && card.CombatState is { } combat &&
+                !combat.Enemies.Any(enemy => enemy.IsAlive && enemy.IsHittable)
+                ? TargetType.None
+                : card.TargetType;
+
+        private static Task EnqueuePlayVfx(CardModel card, Creature? target)
+            => target == null && IsSingleEnemyArrow(card)
+                ? Task.CompletedTask
+                : card.OnEnqueuePlayVfx(target);
+    }
+
+    [HarmonyPatch]
+    private static class PlayEnchantment
+    {
+        private static MethodBase TargetMethod() => AccessTools.AsyncMoveNext(
+            AccessTools.Method(typeof(CardModel), nameof(CardModel.OnPlayWrapper)));
+
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+            => instructions
+                .MethodReplacer(AccessTools.Method(typeof(EnchantmentModel), nameof(EnchantmentModel.OnPlay)),
+                    AccessTools.Method(typeof(PlayEnchantment), nameof(PlayOrDefer)))
+                .MethodReplacer(AccessTools.Method(typeof(AbstractModel), nameof(AbstractModel.InvokeExecutionFinished)),
+                    AccessTools.Method(typeof(PlayEnchantment), nameof(FinishExecution)));
+
+        private static Task PlayOrDefer(EnchantmentModel enchantment, PlayerChoiceContext context, CardPlay play)
+        {
+            if (play.Target != null || !IsSingleEnemyArrow(play.Card)) return enchantment.OnPlay(context, play);
+            ArrowCombat.Find(play.Card)?.DeferEnchantment(play.PlayIndex, enchantment);
+            return Task.CompletedTask;
+        }
+
+        private static void FinishExecution(AbstractModel model)
+        {
+            if (model is EnchantmentModel { Card: { } card } && IsSingleEnemyArrow(card) && card.CurrentTarget == null)
+                return;
+            model.InvokeExecutionFinished();
+        }
     }
 }
 

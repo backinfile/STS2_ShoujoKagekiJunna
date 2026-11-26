@@ -138,7 +138,7 @@ public static class CardActions
                 target = target == null ? null : ArrowCombat.ResolveEffectTarget(target, card.Owner.Creature.CombatState!);
             else
                 target = null; // Native AutoPlay uses the synchronized combat-target RNG.
-            if (keepTarget && target == null) return false;
+            if (keepTarget && target == null && !CardCatalog.IsArrow(card)) return false;
         }
         else target = CardTargets.First(card);
         if (target != null && !CardTargets.IsValid(card, target)) return false;
@@ -223,16 +223,8 @@ public static class CardActions
         arrow.SetGeneratedDamage(damage);
         await GeneratedArrowPresentation.Play(arrow, async () =>
         {
-            // Generated arrows retain the native automatic-play target policy.
             if (target != null)
-            {
                 target = ArrowCombat.ResolveEffectTarget(target, player.Creature.CombatState!);
-                if (target == null)
-                {
-                    await arrow.MoveToResultPileWithoutPlaying(context);
-                    return;
-                }
-            }
             await CardCmd.AutoPlay(context, arrow, target);
         });
     }

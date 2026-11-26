@@ -15,6 +15,12 @@ namespace ShoujoKagekiJunna.Combat;
 
 public static partial class ArrowCombat
 {
+    private const int MaxStardustCompletions = 8;
+    private sealed class StardustChain
+    {
+        internal int Completions;
+    }
+
     private sealed class Battle
     {
         internal readonly List<ArrowDeployment> Arrows = [];
@@ -24,6 +30,7 @@ public static partial class ArrowCombat
     }
     private static readonly ConditionalWeakTable<ICombatState, Battle> Battles = new();
     private static readonly AsyncLocal<ArrowDeployment?> ReplayedDeployment = new();
+    private static readonly AsyncLocal<StardustChain?> ActiveStardustChain = new();
     private static Battle For(ICombatState state) => Battles.GetOrCreateValue(state);
     public static IReadOnlyList<ArrowDeployment> Deployed =>
         CombatManager.Instance.DebugOnlyGetState() is { } state && Battles.TryGetValue(state, out var battle) ? battle.Arrows : [];
@@ -234,14 +241,20 @@ public static partial class ArrowCombat
             var replacement = ResolveEffectTarget(target, state);
             if (replacement != null && replacement != target) arrow.Retarget(replacement);
         }
+        bool isStardust = arrow.Card is JunnaCardU_CARD_005;
+        var chain = isStardust ? ActiveStardustChain.Value : null;
+        int minimum = chain is { Completions: >= MaxStardustCompletions } ? 1 : 0;
         int previousRemaining = arrow.Remaining;
-        arrow.Remaining = Math.Max(0, arrow.Remaining - Math.Max(0, turns));
+        arrow.Remaining = Math.Max(minimum, arrow.Remaining - Math.Max(0, turns));
         var hud = NCombatRoom.Instance?.GetNodeOrNull<ArrowHud>("JunnaArrows");
         if (arrow.Remaining != previousRemaining) hud?.CountdownChanged(arrow);
         if (arrow.Remaining > 0) return;
         // Ready arrows complete even when their target is temporarily unavailable.
         arrow.Resolving = true;
         context.PushModel(arrow.Card);
+        bool startsChain = isStardust && chain == null;
+        if (startsChain) ActiveStardustChain.Value = chain = new();
+        if (chain != null) chain.Completions++;
         try
         {
             await using var resolutionBatch = Shine.BeginResolutionBatch();
@@ -277,7 +290,12 @@ public static partial class ArrowCombat
                 await (returnPower?.Redirect(arrow) ?? arrow.Destination).Move(context, arrow.Card);
             }
         }
-        finally { context.PopModel(arrow.Card); arrow.Resolving = false; }
+        finally
+        {
+            if (startsChain) ActiveStardustChain.Value = null;
+            context.PopModel(arrow.Card);
+            arrow.Resolving = false;
+        }
     }
 
     internal static async Task AfterPlayed(PlayerChoiceContext context, CardPlay play)
