@@ -25,7 +25,7 @@ public static partial class ArrowCombat
     internal static bool AwaitingReturn(ArrowDeployment arrow)
     {
         if (arrow.Card.CombatState is not { } state) return false;
-        if ((arrow.TargetsAllEnemies || arrow.Target?.IsEnemy == true) &&
+        if (arrow.TargetsEnemies &&
             !state.Enemies.Any(target => target.IsAlive && target.IsHittable) &&
             !CombatManager.Instance.IsOverOrEnding) return true;
         var targets = arrow.Targets.ToArray();
@@ -33,9 +33,10 @@ public static partial class ArrowCombat
             state.ContainsCreature(target) && (target.IsAlive || !Hook.ShouldCreatureBeRemovedFromCombatAfterDeath(state, target)));
     }
 
-    internal static Creature? ResolveEffectTarget(Creature target, ICombatState state)
+    internal static Creature? ResolveEffectTarget(Creature? target, ICombatState state)
     {
         bool Available(Creature creature) => state.ContainsCreature(creature) && creature.IsAlive && creature.IsHittable;
+        if (target == null) return state.Enemies.FirstOrDefault(Available);
         if (Available(target)) return target;
         // A damage hook may create its arrow before the pending death notification.
         // Keep that target until the normal death handler can retarget the deployment.

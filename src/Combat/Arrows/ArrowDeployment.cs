@@ -14,6 +14,13 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     internal ICombatState Combat { get; } = card.Owner.Creature.CombatState!;
     internal ArrowDestination Destination { get; init; } = ArrowDestination.Take(card, play.ResultPile);
     private ICardEffectPayload? _payload;
+    private Dictionary<int, ModelId>? _deferredEnchantments;
+    internal void DeferEnchantment(int index, EnchantmentModel enchantment)
+        => (_deferredEnchantments ??= [])[index] = enchantment.Id;
+    internal void CopyDeferredEnchantmentsTo(ArrowDeployment copy)
+    {
+        if (_deferredEnchantments != null) copy._deferredEnchantments = new(_deferredEnchantments);
+    }
     internal ICardEffectPayload Payload
     {
         get => _payload ?? CoreApi.Get<ICardPayloadRouting>().Native;
@@ -21,10 +28,11 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
     }
     public CardPlay Play { get; private set; } = play;
     public bool TargetsAllEnemies => Card.TargetType == TargetType.AllEnemies;
+    internal bool TargetsEnemies => TargetsAllEnemies || Card.TargetType == TargetType.AnyEnemy || Target?.IsEnemy == true;
     public bool TargetsAllPlayers => Card.TargetType == TargetType.AllAllies;
     public bool TargetsGroup => TargetsAllEnemies || TargetsAllPlayers;
     public Creature? Target => Play.Target ?? (Card.TargetType is TargetType.Self or TargetType.AnyPlayer ? Card.Owner.Creature : null);
-    public int TargetCategory => TargetsAllPlayers ? 0 : TargetsAllEnemies ? 2 : Target?.IsEnemy == true ? 3 : 1;
+    public int TargetCategory => TargetsAllPlayers ? 0 : TargetsAllEnemies ? 2 : TargetsEnemies ? 3 : 1;
     public long Sequence { get; internal set; }
     public IEnumerable<Creature> Targets => TargetsAllPlayers ? Card.CombatState?.PlayerCreatures ?? []
         : TargetsAllEnemies ? Card.CombatState?.GetOpponentsOf(Card.Owner.Creature) ?? []
@@ -50,7 +58,7 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
             || CombatManager.Instance.IsOverOrEnding || Card.Owner.Creature.IsDead) return;
         if (Card.TargetType == TargetType.AnyEnemy)
         {
-            var target = Play.Target == null ? null : ArrowCombat.ResolveEffectTarget(Play.Target, combat);
+            var target = ArrowCombat.ResolveEffectTarget(Play.Target, combat);
             if (target == null) return;
             Retarget(target);
         }
@@ -65,8 +73,15 @@ public sealed class ArrowDeployment(CardModel card, CardPlay play, int remaining
             Resources = Play.Resources, IsAutoPlay = Play.IsAutoPlay,
             PlayIndex = index, PlayCount = PlayCount
         };
-        await ArrowNativeHooks.Resolve(context, actualPlay,
-            () => Shine.ResolveAsync(Card, context, actualPlay, () => resolve(context, actualPlay), CardResolutionKind.Arrow));
+        await ArrowNativeHooks.Resolve(context, actualPlay, async () =>
+        {
+            await Shine.ResolveAsync(Card, context, actualPlay, () => resolve(context, actualPlay), CardResolutionKind.Arrow);
+            if (_deferredEnchantments?.Remove(index, out var id) != true ||
+                Card.Enchantment is not { } enchantment || enchantment.Id != id ||
+                CombatManager.Instance.DebugOnlyGetState() != Combat || Card.Owner.Creature.IsDead) return;
+            await enchantment.OnPlay(context, actualPlay);
+            if (!Card.Owner.Creature.IsDead) enchantment.InvokeExecutionFinished();
+        });
     }
     public bool ExhaustAfterResolve { get; internal set; }
     internal bool ExhaustsWhenResolved => Destination.Pile == PileType.Exhaust || ExhaustAfterResolve || Card.ExhaustOnNextPlay ||

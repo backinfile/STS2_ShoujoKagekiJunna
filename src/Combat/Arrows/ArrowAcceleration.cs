@@ -12,8 +12,9 @@ internal readonly record struct ArrowAcceleration(ArrowAccelerationTargets Targe
         {
             ArrowAccelerationTargets.All => true,
             ArrowAccelerationTargets.Self => !arrow.TargetsGroup && arrow.Target == player.Creature,
-            ArrowAccelerationTargets.SelfOrUntargeted => !arrow.TargetsGroup && (arrow.Target == player.Creature || arrow.Target == null),
-            ArrowAccelerationTargets.Enemies => arrow.TargetsAllEnemies || arrow.Target?.IsEnemy == true,
+            ArrowAccelerationTargets.SelfOrUntargeted => !arrow.TargetsGroup && !arrow.TargetsEnemies &&
+                (arrow.Target == player.Creature || arrow.Target == null),
+            ArrowAccelerationTargets.Enemies => arrow.TargetsEnemies,
             ArrowAccelerationTargets.Target => target != null && arrow.Targets.Contains(target),
             _ => false
         });

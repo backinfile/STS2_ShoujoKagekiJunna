@@ -95,6 +95,12 @@ public static partial class ArrowCombat
     private static ArrowDeployment CreateDeployment(CardModel card, CardPlay play, int turns,
         Func<PlayerChoiceContext, CardPlay, Task> resolve, ICardEffectPayload payload)
     {
+        if (card.TargetType == TargetType.AnyEnemy && play.Target == null && card.CombatState is { } combat)
+        {
+            // Keep a combatant to aim at during a phase transition.
+            var target = ResolveEffectTarget(null, combat) ?? combat.Enemies.FirstOrDefault();
+            if (target != null) play = GameApi.WithTarget(play, target);
+        }
         bool exhaust = card.Owner.Creature.GetPower<JunnaPowerJA105>()?.MakesArrowsExhaust == true;
         if (exhaust) card.AddKeyword(CardKeyword.Exhaust);
         int round = card.Owner.PlayerCombatState!.TurnNumber;
@@ -199,6 +205,7 @@ public static partial class ArrowCombat
                 PlayCount = original.PlayCount, Payload = original.Payload, Destination = original.Destination,
                 ExhaustAfterResolve = original.ExhaustAfterResolve || exhaustCopies
             };
+            original.CopyDeferredEnchantmentsTo(deployment);
             await Place(deployment, () => CardPileCmd.AddGeneratedCardToCombat(copy, ArrowPile.PileId, player), generated: true);
         }
     }
@@ -220,8 +227,10 @@ public static partial class ArrowCombat
     {
         if (arrow.Resolving || Find(arrow.Card) != arrow) return;
         if (arrow.Card.Pile?.Type != ArrowPile.PileId) { Cancel(arrow.Card); return; }
-        if (!arrow.TargetsGroup && arrow.Target is { } target && arrow.Card.CombatState is { } state)
+        if (!arrow.TargetsGroup && (arrow.Target != null || arrow.TargetsEnemies) &&
+            arrow.Card.CombatState is { } state)
         {
+            var target = arrow.Target;
             var replacement = ResolveEffectTarget(target, state);
             if (replacement != null && replacement != target) arrow.Retarget(replacement);
         }

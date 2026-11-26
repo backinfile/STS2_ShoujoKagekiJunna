@@ -7,6 +7,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Enchantments;
+using MegaCrit.Sts2.Core.Models.Powers;
 using ShoujoKagekiJunna.Combat;
 using ShoujoKagekiJunna.Models;
 
@@ -15,7 +18,7 @@ namespace JunnaIntegration;
 public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
 {
     public override string CmdName => "junna_test_subject";
-    public override string Args => "check [single|group|support|pending] | prepare | inspect";
+    public override string Args => "check [single|group|support|pending|conversion] | prepare | inspect";
     public override string Description => "Check arrow completion while Test Subject waits to revive.";
     public override bool IsNetworked => false;
     private static readonly List<CardModel> Cards = [];
@@ -43,9 +46,17 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
         {
             completed = true, error, checks = Checks,
             enemies = player.Creature.CombatState?.Enemies.Select(e => new { id = e.Monster?.Id.Entry, e.CurrentHp, e.IsAlive, e.IsHittable }),
-            cards = Cards.Select(c => new { id = CardCatalog.DesignId(c), pile = c.Pile?.Type.ToString(), remaining = ArrowCombat.Find(c)?.Remaining }),
+            cards = Cards.Select(c => new { id = CardCatalog.DesignId(c) ?? c.Id.Entry, pile = c.Pile?.Type.ToString(), remaining = ArrowCombat.Find(c)?.Remaining }),
             pass = error == null && _passed && !ArrowCombat.Deployed.Any(a => a.Remaining == 0)
         }, new JsonSerializerOptions { WriteIndented = true }));
+    }
+
+    private static async Task<CardModel> AddInkyShiv(Player player)
+    {
+        var shiv = player.Creature.CombatState!.CreateCard(ModelDb.Card<Shiv>(), player);
+        CardCmd.Enchant<Inky>(shiv, 1m);
+        await CardPileCmd.AddGeneratedCardToCombat(shiv, PileType.Hand, player);
+        return shiv;
     }
 
     private static async Task Run(Player player, bool prepare, string scenario)
@@ -73,13 +84,36 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
             if (prepare)
             {
                 await CardPileCmd.AddGeneratedCardToCombat(CardCatalog.Create("JA71", player), PileType.Hand, player);
+                if (scenario == "conversion")
+                {
+                    Cards.Add(await AddInkyShiv(player));
+                    await CardPileCmd.AddGeneratedCardToCombat(CardCatalog.Create("JA87", player), PileType.Hand, player);
+                    await PowerCmd.Apply<BufferPower>(context, player.Creature, 12m, player.Creature, null);
+                }
                 Directory.CreateDirectory(Output);
                 File.WriteAllText(Path.Combine(Output, "prepared.json"), "{}");
                 return;
             }
             if (scenario is "group" or "support") await Play("JB01");
             int energy = player.PlayerCombatState.Energy;
-            if (scenario == "pending")
+            if (scenario == "conversion")
+            {
+                await ArrowCombat.Accelerate(context, ArrowCombat.Find(Cards[0])!, 99);
+                var shiv = await AddInkyShiv(player);
+                Cards.Add(shiv);
+                await HandArrow.Play(context, shiv);
+                var deployed = ArrowCombat.Find(shiv);
+                Verify("enchanted single-target material deploys for three turns during knockout",
+                    deployed is { Remaining: 3 } && shiv.Pile?.Type == ArrowPile.PileId &&
+                    shiv.Type == ArrowPile.ArrowType && shiv.Enchantment is Inky);
+                Verify("new deployment tracks the reviving enemy",
+                    deployed?.Target == target);
+                if (deployed != null) await ArrowCombat.Accelerate(context, deployed, 3);
+                Verify("if the enemy has not revived at zero the shiv exhausts without applying Weak",
+                    ArrowCombat.Find(shiv) == null && shiv.Pile?.Type == PileType.Exhaust &&
+                    shiv.Type == CardType.Attack && target.GetPower<WeakPower>() == null);
+            }
+            else if (scenario == "pending")
             {
                 await ArrowCombat.Accelerate(context, ArrowCombat.Find(Cards[0])!, 99);
                 await ArrowCombat.Accelerate(context, ArrowCombat.Find(Cards[1])!, 1);
@@ -94,7 +128,7 @@ public sealed class ArrowTestSubjectProbe : AbstractConsoleCmd
             }
             Verify("native knockout keeps combat running with no hittable target",
                 !target.IsAlive && !target.IsHittable && target.CombatState != null && !CombatManager.Instance.IsOverOrEnding);
-            if (scenario == "support") Verify("self-target arrow still grants its energy during knockout", player.PlayerCombatState.Energy == energy + 3);
+            if (scenario == "support") Verify("self-target arrow still grants its energy during knockout", player.PlayerCombatState.Energy == energy + 2);
             await Task.Delay(500);
             Save(player);
         }

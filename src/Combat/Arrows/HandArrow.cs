@@ -24,7 +24,8 @@ public static class HandArrow
         public readonly Form? Previous = previous;
     }
     private static readonly ConditionalWeakTable<CardModel, Form> Forms = new();
-    private static readonly AsyncLocal<CardModel?> ConvertingPlay = new();
+    private sealed record Conversion(CardModel Card, bool WaitsForEnemy);
+    private static readonly AsyncLocal<Conversion?> ConvertingPlay = new();
     private static readonly HashSet<MethodBase> PatchedTypes = [];
     private static readonly Harmony Patcher = new(JunnaMod.Id + ".HandArrowTypes");
     public static bool IsArrow(CardModel card) => Forms.TryGetValue(card, out _);
@@ -95,26 +96,33 @@ public static class HandArrow
     internal static bool Loops(CardModel card) => card is CatalogCard catalog && CardRules.Get(catalog.DesignId).LoopAsArrow;
 
     public static Task Play(PlayerChoiceContext context, CardModel card)
-        => Play(context, card, CardTargets.First(card), DefaultTurns);
+        => Play(context, card, null, DefaultTurns);
 
     internal static Task<bool> Play(PlayerChoiceContext context, CardModel card, int turns)
-        => Play(context, card, CardTargets.First(card), turns);
+        => Play(context, card, null, turns);
 
     internal static Task<bool> ReplayLoop(PlayerChoiceContext context, CardModel card, Creature? target)
         => Play(context, card, target, ConversionTurns(card));
 
     private static async Task<bool> Play(PlayerChoiceContext context, CardModel card, Creature? target, int turns)
     {
-        if (card.TargetType == TargetType.AnyEnemy && target != null && card.CombatState is { } combat)
+        bool targetsEnemy = card.TargetType == TargetType.AnyEnemy;
+        if (targetsEnemy)
+        {
+            if (card.CombatState is not { } combat) return false;
             target = ArrowCombat.ResolveEffectTarget(target, combat);
-        else target = CardTargets.First(card);
-        if (!CardTargets.IsValid(card, target)) return false;
+        }
+        else
+        {
+            target = CardTargets.First(card);
+            if (!CardTargets.IsValid(card, target)) return false;
+        }
         CostChanges.CaptureFreePayment(card);
         Mark(card, turns, temporary: true);
         bool played = false;
         bool unplayable = card.Keywords.Contains(CardKeyword.Unplayable);
         var previousPlay = ConvertingPlay.Value;
-        ConvertingPlay.Value = card;
+        ConvertingPlay.Value = new(card, targetsEnemy && target == null);
         try
         {
             // Converting a card into an arrow also accepts unplayable material.
@@ -133,12 +141,66 @@ public static class HandArrow
         return played;
     }
 
+    private static bool WaitsForEnemy(CardModel card)
+        => ConvertingPlay.Value is { WaitsForEnemy: true } conversion && ReferenceEquals(conversion.Card, card);
+
+    [HarmonyPatch]
+    private static class AutoPlayTargeting
+    {
+        private static MethodBase TargetMethod() => AccessTools.AsyncMoveNext(
+            AccessTools.Method(typeof(CardCmd), nameof(CardCmd.AutoPlay)));
+
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+            => instructions
+                .MethodReplacer(AccessTools.PropertyGetter(typeof(CardModel), nameof(CardModel.TargetType)),
+                    AccessTools.Method(typeof(AutoPlayTargeting), nameof(TargetTypeForAutoPlay)))
+                .MethodReplacer(AccessTools.Method(typeof(CardModel), nameof(CardModel.OnEnqueuePlayVfx)),
+                    AccessTools.Method(typeof(AutoPlayTargeting), nameof(EnqueuePlayVfx)));
+
+        private static TargetType TargetTypeForAutoPlay(CardModel card)
+            // The native target requirement is bypassed only while a conversion waits for an enemy.
+            => WaitsForEnemy(card) ? TargetType.None : card.TargetType;
+
+        private static Task EnqueuePlayVfx(CardModel card, Creature? target)
+            => target == null && WaitsForEnemy(card)
+                ? Task.CompletedTask
+                : card.OnEnqueuePlayVfx(target);
+    }
+
+    [HarmonyPatch]
+    private static class PlayEnchantment
+    {
+        private static MethodBase TargetMethod() => AccessTools.AsyncMoveNext(
+            AccessTools.Method(typeof(CardModel), nameof(CardModel.OnPlayWrapper)));
+
+        private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+            => instructions
+                .MethodReplacer(AccessTools.Method(typeof(EnchantmentModel), nameof(EnchantmentModel.OnPlay)),
+                    AccessTools.Method(typeof(PlayEnchantment), nameof(PlayOrDefer)))
+                .MethodReplacer(AccessTools.Method(typeof(AbstractModel), nameof(AbstractModel.InvokeExecutionFinished)),
+                    AccessTools.Method(typeof(PlayEnchantment), nameof(FinishExecution)));
+
+        private static Task PlayOrDefer(EnchantmentModel enchantment, PlayerChoiceContext context, CardPlay play)
+        {
+            if (play.Target != null || !WaitsForEnemy(play.Card)) return enchantment.OnPlay(context, play);
+            ArrowCombat.Find(play.Card)?.DeferEnchantment(play.PlayIndex, enchantment);
+            return Task.CompletedTask;
+        }
+
+        private static void FinishExecution(AbstractModel model)
+        {
+            if (model is EnchantmentModel { Card: { } card } && WaitsForEnemy(card) && card.CurrentTarget == null)
+                return;
+            model.InvokeExecutionFinished();
+        }
+    }
+
     [HarmonyPatch(typeof(ChainsOfBindingPower), nameof(ChainsOfBindingPower.ShouldPlay))]
     private static class BindingPlayCheck
     {
         private static bool Prefix(CardModel card, ref bool __result)
         {
-            if (!ReferenceEquals(ConvertingPlay.Value, card)) return true;
+            if (!ReferenceEquals(ConvertingPlay.Value?.Card, card)) return true;
             __result = true;
             return false;
         }
@@ -150,7 +212,7 @@ public static class HandArrow
         private static bool Prefix(CardPlay cardPlay, ref Task __result)
         {
             // A converted play neither checks nor spends the native Bound allowance.
-            if (!ReferenceEquals(ConvertingPlay.Value, cardPlay.Card)) return true;
+            if (!ReferenceEquals(ConvertingPlay.Value?.Card, cardPlay.Card)) return true;
             __result = Task.CompletedTask;
             return false;
         }
