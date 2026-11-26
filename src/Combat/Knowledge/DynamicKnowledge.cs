@@ -160,7 +160,8 @@ public static class DynamicKnowledge
     internal static async Task<bool> Acquire(CardModel acquired, PileType destination, ISet<CardModel>? expanded,
         CardPileAddResult? sourceResult = null)
     {
-        if (Offers.TryGetValue(acquired, out var reward))
+        bool fromReward = Offers.TryGetValue(acquired, out var reward);
+        if (reward != null)
         {
             Offers.Remove(acquired);
             await Prepare(new BlockingPlayerChoiceContext(), acquired,
@@ -174,7 +175,13 @@ public static class DynamicKnowledge
             partners = partners.Where(CanGrantCombatPartner).ToArray();
             MergeCombat(acquired.Owner, partners.Prepend(acquired));
         }
-        else Merge(acquired.Owner, partners.Prepend(acquired));
+        else
+        {
+            var members = partners.Prepend(acquired);
+            if (fromReward)
+                members = members.Concat(partners.Where(card => card.Id != acquired.Id).SelectMany(RewardCompanions));
+            Merge(acquired.Owner, members);
+        }
         foreach (var partner in partners)
         {
             Offers.Remove(partner);
@@ -183,6 +190,13 @@ public static class DynamicKnowledge
         Normalize(acquired.Owner);
         await KnowledgeCombat.GrantPartnersWithPreview(acquired, destination, partners, sourceResult);
         return true;
+    }
+
+    private static IEnumerable<CardModel> RewardCompanions(CardModel card)
+    {
+        foreach (var (model, count) in KnowledgeMembers.Definition(card) ?? [])
+            for (int i = model.Id == card.Id ? 1 : 0; i < count; i++)
+                yield return model;
     }
 
     internal static void CopyAcquisition(CardModel source, CardModel copy)

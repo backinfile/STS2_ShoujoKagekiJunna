@@ -23,6 +23,9 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
 {
     private static readonly List<object> Rows = [];
     private static int _beforeReward;
+    private static CardModel[] _dynamicOffers = [];
+    private static CardModel? _previousChain;
+    private static CardModel[] _beforeDynamicReward = [];
     private static CardModel[] _offered = [];
     private static bool OfferCards(ref IEnumerable<CardCreationResult> __result)
     {
@@ -35,7 +38,7 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
         return false;
     }
     public override string CmdName => "junna_acquisition_sources";
-    public override string Args => "check | reward | unknown-reward | reward-check";
+    public override string Args => "check | reward | unknown-reward | reward-check | dynamic-reward | dynamic-reward-check";
     public override string Description => "Check named acquisition sources and default single-card gains.";
     public override bool IsNetworked => false;
     public override CmdResult Process(Player? player, string[] args) => player?.PlayerCombatState == null
@@ -44,6 +47,7 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
             "reward" => Reward(player, true),
             "unknown-reward" => Reward(player, false),
             "dynamic-reward" => Reward(player, true, "JK126"),
+            "dynamic-reward-check" => DynamicRewardCheck(player),
             "reward-check" => RewardCheck(player, int.Parse(args[1])),
             _ => Check(player)
         }, true, "Acquisition source probe started");
@@ -138,20 +142,51 @@ public sealed class AcquisitionSourcesProbe : AbstractConsoleCmd
         }
         catch (Exception error) { Rows.Add(new { name = "probe exception", pass = false, error = error.ToString() }); Save(); }
     }
-    private static Task Reward(Player player, bool known, string id = "JK314")
+    private static async Task Reward(Player player, bool known, string id = "JK314")
     {
-        _beforeReward = player.Deck.Cards.Count;
         var cards = (id == "JK126" ? new[] { "JK126", "JK314", "JB01" } : new[] { id })
             .Select(cardId => player.RunState.CreateCard(CardCatalog.Model(cardId), player)).ToArray();
+        if (id == "JK126")
+        {
+            Rows.Clear();
+            _previousChain = player.RunState.CreateCard(CardCatalog.Model(id), player);
+            await CardPileCmd.Add(_previousChain, PileType.Deck, skipVisuals: true);
+            _beforeDynamicReward = player.Deck.Cards.ToArray();
+            _dynamicOffers = cards;
+            foreach (var card in cards.Take(2))
+            {
+                card.UpgradeInternal();
+                card.FinalizeUpgradeInternal();
+            }
+        }
+        _beforeReward = player.Deck.Cards.Count;
         var reward = new CardReward(cards, known ? CardCreationSource.Encounter : CardCreationSource.Other,
             player, new CardCreationOptions([], CardCreationSource.Other, CardRarityOddsType.Uniform));
         _ = reward.SelectUnsynchronized();
+    }
+
+    private static Task DynamicRewardCheck(Player player)
+    {
+        var companionId = CardCatalog.Model("JK122B").Id;
+        var before = _beforeDynamicReward.ToHashSet();
+        var gained = player.Deck.Cards.Where(card => !before.Contains(card)).ToArray();
+        Expect("Chain Knowledge keeps all offered instances", _dynamicOffers.Count(gained.Contains), 3);
+        Expect("the offered Knowledge card keeps its upgrade", gained.Count(card => card == _dynamicOffers[1] && card.IsUpgraded), 1);
+        Expect("Chain Knowledge grants exactly the offered cards and three companions", gained.Length, 6);
+        Expect("all three companions enter the deck at base level", gained.Count(card => card.Id == companionId && !card.IsUpgraded), 3);
+        var associates = DynamicKnowledge.Members(_dynamicOffers[0]).Select(card => card.Id).ToArray();
+        Expect("all three companions become Chain Knowledge associates", associates.Count(id => id == companionId), 3);
+        Expect("base and upgraded Chain Knowledge share all associations",
+            DynamicKnowledge.Members(_previousChain!).Select(card => card.Id).SequenceEqual(associates) ? 1 : 0, 1);
+        Expect("the offered Knowledge card keeps its own group",
+            DynamicKnowledge.Members(_dynamicOffers[1]).Count(card => card.Id == companionId), 3);
+        Expect("the original deck order is retained",
+            player.Deck.Cards.Where(before.Contains).SequenceEqual(_beforeDynamicReward) ? 1 : 0, 1);
         return Task.CompletedTask;
     }
     private static Task RewardCheck(Player player, int count)
     {
-        Expect(count == 3 ? "upgraded dynamic knowledge takes only the other offered cards"
-            : count == 4 ? "native encounter reward grants companions" : "unregistered reward origin does not grant companions",
+        Expect(count == 4 ? "native encounter reward grants companions" : "unregistered reward origin does not grant companions",
             player.Deck.Cards.Count - _beforeReward, count);
         return Task.CompletedTask;
     }
