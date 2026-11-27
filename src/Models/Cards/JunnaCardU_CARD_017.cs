@@ -17,11 +17,5 @@ public sealed partial class JunnaCardU_CARD_017
         await Attack(context, play);
     }
 
-    protected override void AddExtraArgsToDescription(MegaCrit.Sts2.Core.Localization.LocString description)
-    {
-        base.AddExtraArgsToDescription(description);
-        description.Add("SatisfiedCategories", CardTutors.CountHandCategories(this));
-    }
-
     protected override void OnUpgrade() => ApplyCatalogUpgrade();
 }

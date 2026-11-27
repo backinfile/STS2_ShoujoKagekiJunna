@@ -29,11 +29,11 @@ CARD_EXPORT_RULES = {
     'JA82': {'damageCapable': False},
     'JK400B': {'damageCapable': False},
     'JH30': {'damageCapable': True},
-    'JA108': {'descriptionSuffix': '{InCombat:\n（打出{ArrowCount}张）|}'},
-    'U_CARD_030': {'damageCapable': False, 'descriptionSuffix': '{InCombat:\n（打出{MeteorCount}张）|}'},
-    'U_CARD_017': {'descriptionSuffix': '{InCombat:\n（已满足{SatisfiedCategories}类，造成{CalculatedDamage:diff()}点伤害）|}'},
+    'JA108': {'descriptionSuffix': '{InCombat:\n（共{ArrowCount}张）|}'},
+    'U_CARD_030': {'damageCapable': False, 'descriptionSuffix': '{InCombat:\n（共{MeteorCount}张）|}'},
+    'U_CARD_017': {'descriptionDamageVar': 'CalculatedDamage'},
     'U_CARD_184': {'energyDiscount': True},
-    'JK314': {'descriptionSuffix': '{InCombat:\n（已耗尽{DepletedPartners}张，共{CalculatedHits:diff()}段）|}'},
+    'JK314': {'descriptionSuffix': '{InCombat:\n（共{CalculatedHits:diff()}段）|}'},
 }
 
 SELECTION_PROMPTS = {
@@ -90,6 +90,8 @@ def display_description(card, text, card_names, values, upgraded=False):
     # Match the Exhaust keyword and Strength stat in context.
     pattern += r'|(?<=获得)消耗|消耗(?=复制)|(?<=点)力量'
     text = re.sub(pattern, lambda m: '[gold]' + m[0] + '[/gold]', text)
+    if damage_var := rule.get('descriptionDamageVar'):
+        text = text.replace('{Damage:diff()}', '{' + damage_var + ':diff()}', 1)
     return text + rule.get('descriptionSuffix', '')
 
 

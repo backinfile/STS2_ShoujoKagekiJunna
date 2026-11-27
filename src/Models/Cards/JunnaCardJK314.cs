@@ -9,12 +9,6 @@ namespace ShoujoKagekiJunna.Models;
 
 public sealed partial class JunnaCardJK314
 {
-    protected override void AddExtraArgsToDescription(MegaCrit.Sts2.Core.Localization.LocString description)
-    {
-        base.AddExtraArgsToDescription(description);
-        description.Add("DepletedPartners", DepletedPartners());
-    }
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         [.. base.CanonicalVars, .. AttackHitCount.DeclareCalculated(static (card, _) => ((JunnaCardJK314)card).ExtraHits())];
 
