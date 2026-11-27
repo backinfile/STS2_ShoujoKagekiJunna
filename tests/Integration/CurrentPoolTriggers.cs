@@ -38,6 +38,77 @@ internal sealed partial class AuditScenario
         Check("回合结束收回临时敏捷", player.Creature.GetPower<DexterityPower>()?.Amount ?? 0, 0);
     }
 
+    private async Task CheckNewWorkbenchCards()
+    {
+        await ClearEffects();
+        await ModelDb.GetById<JunnaCombatHooks>(ModelDb.GetId<JunnaCombatHooks>()).BeforeCombatStart();
+        var source = await Add(Id, upgrade: upgraded);
+        switch (Id)
+        {
+            case "U_CARD_178":
+            {
+                var material = await Add("JB02", PileType.Discard, upgrade: true);
+                await Play(source);
+                var arrow = ArrowCombat.Find(material);
+                Check("弃牌中的升级原牌作为三回合飞矢打出", arrow is { Remaining: 3 } && material.IsUpgraded, true);
+                Check("格挡等到飞矢完成", player.Creature.Block, 0);
+                await Finish(material);
+                Check("到期结算升级防御", player.Creature.Block, 8);
+                Check("材料回到弃牌堆", material.Pile?.Type, PileType.Discard);
+                break;
+            }
+            case "U_CARD_179":
+            {
+                using var single = KnowledgeCombat.SingleCard();
+                var permanent = player.RunState.CreateCard(CardCatalog.Model(Id), player);
+                var first = player.RunState.CreateCard(CardCatalog.Model("JK49B"), player);
+                var second = player.RunState.CreateCard(CardCatalog.Model("JK49B"), player);
+                var plain = player.RunState.CreateCard(CardCatalog.Model("JB01"), player);
+                var cards = new[] { permanent, first, second, plain };
+                foreach (var card in cards) await CardPileCmd.Add(card, PileType.Deck, skipVisuals: true);
+                try
+                {
+                    var knowledge = player.Deck.Cards.Where(card => CardCatalog.IsKnowledge(card) && card.IsUpgradable).ToArray();
+                    source.DeckVersion = permanent;
+                    Shine.SetState(permanent, 1, 6);
+                    Shine.SetState(source, 1, 6);
+                    await Play(source);
+                    Check("耗尽后升级不同的永久知识牌", knowledge.Count(card => card.IsUpgraded), upgraded ? 2 : 1);
+                    Check("普通牌保留原版本", plain.IsUpgraded, false);
+                }
+                finally { await CardPileCmd.RemoveFromDeck(cards.Where(player.Deck.Cards.Contains).ToArray(), showPreview: false); }
+                break;
+            }
+            case "U_CARD_181":
+            {
+                await Play(source);
+                Check("飞矢自身出牌保留六回合", ArrowCombat.Find(source)?.Remaining, 6);
+                await Play(await Add("JB02"));
+                Check("一费牌不加速", ArrowCombat.Find(source)?.Remaining, 6);
+                var free = await Add("JB02");
+                CostChanges.SetFixed(free, 0);
+                await Play(free);
+                Check("零费牌加速一回合", ArrowCombat.Find(source)?.Remaining, 5);
+                int before = _enemies[0].CurrentHp;
+                await Finish(source);
+                Check("完成造成五十点伤害", before - _enemies[0].CurrentHp, 50);
+                break;
+            }
+            case "U_CARD_184":
+            {
+                Check("战斗初始四费", CardActions.Cost(source), 4);
+                foreach (var (cost, remaining) in new[] { (0, 3), (1, 2), (0, 2), (2, 1), (3, 0), (4, 0) })
+                {
+                    var card = await Add("JB02");
+                    CostChanges.SetFixed(card, cost);
+                    await Play(card);
+                    Check($"打出{cost}费后牌面耗能", CardActions.Cost(source), remaining);
+                }
+                break;
+            }
+        }
+    }
+
     private async Task CheckDreamButton()
     {
         var arrows = ArrowCombat.Deployed.ToArray();
@@ -60,6 +131,9 @@ internal sealed partial class AuditScenario
 
     private async Task CheckCurrentPoolEffects()
     {
+        if (Id is "U_CARD_178" or "U_CARD_179" or "U_CARD_181" or "U_CARD_184")
+            await CheckNewWorkbenchCards();
+
         if (Id == "U_CARD_044")
         {
             var original = player.Deck.Cards.ToArray();
@@ -216,10 +290,10 @@ internal sealed partial class AuditScenario
             await Play(arrow);
             hp = _enemies[0].CurrentHp;
             await Finish(arrow);
-            Check("沸腾的热情按版本提高飞矢伤害", hp - _enemies[0].CurrentHp, upgraded ? 31 : 27);
+            Check("沸腾的热情按版本提高飞矢伤害", hp - _enemies[0].CurrentHp, upgraded ? 27 : 22);
             var power = player.Creature.GetPower<JunnaPowerJA205>()!;
             string description = power.HoverTips.OfType<HoverTip>().First().Description;
-            Check("沸腾的热情提示显示实际增伤", description.Contains(upgraded ? "75[/blue]%" : "50[/blue]%"), true);
+            Check("沸腾的热情提示显示实际增伤", description.Contains(upgraded ? "50[/blue]%" : "25[/blue]%"), true);
         }
         if (Id == "JK400B")
         {

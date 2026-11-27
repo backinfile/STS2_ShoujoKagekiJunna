@@ -25,6 +25,7 @@ public static partial class KnowledgeProgress
     private static readonly SavedSpireField<Player, int> OpeningInsights = new(() => 0, "JunnaOpeningInsights");
     private static readonly HashSet<Player> Opened = [];
     private static readonly Dictionary<Player, int> StoryRewards = [];
+    private static readonly List<(Player Player, int Count)> VictoryKnowledgeUpgrades = [];
     public static void Initialize() { _ = LegacyDepletedPartners; }
     public static async Task Depleted(CatalogCard card, ShineDepletionContext context)
     {
@@ -38,8 +39,35 @@ public static partial class KnowledgeProgress
             Shine.SetState(card, state.Remaining, state.Maximum);
     }
     public static void RegisterStory(Player player) => StoryRewards[player] = checked(StoryRewards.GetValueOrDefault(player) + 1);
+    internal static async Task UpgradeRandomKnowledge(Player player, int count)
+    {
+        // The native upgrade command skips effects while the combat is ending.
+        if (CombatManager.Instance.IsEnding)
+        {
+            VictoryKnowledgeUpgrades.Add((player, count));
+            return;
+        }
+
+        var candidates = player.Deck.Cards.Where(card => card.IsUpgradable && CardCatalog.IsKnowledge(card)).ToList();
+        var rng = player.RunState.Rng.CombatCardSelection;
+        var selected = new List<CardModel>();
+        for (int i = 0; i < count && candidates.Count > 0; i++)
+        {
+            var card = rng.NextItem(candidates)!;
+            selected.Add(card);
+            candidates.Remove(card);
+        }
+        if (selected.Count > 0)
+            await CardUpgrades.Upgrade(selected, CardPreviewStyle.HorizontalLayout);
+    }
+
     public static async Task WonCombat()
     {
+        var upgrades = VictoryKnowledgeUpgrades.ToArray();
+        VictoryKnowledgeUpgrades.Clear();
+        foreach (var (player, count) in upgrades)
+            await UpgradeRandomKnowledge(player, count);
+
         var stories = StoryRewards.ToArray();
         StoryRewards.Clear();
         using (KnowledgeCombat.SingleCard())
@@ -55,6 +83,7 @@ public static partial class KnowledgeProgress
     {
         Opened.Clear();
         StoryRewards.Clear();
+        VictoryKnowledgeUpgrades.Clear();
     }
     public static async Task OpenCombat(Player player, PlayerChoiceContext context)
     {

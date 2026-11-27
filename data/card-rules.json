@@ -801,7 +801,7 @@
         "Arrow"
       ],
       "fields": {
-        "ExtraHits": "N1"
+        "CategoryDamage": "N1"
       }
     },
     "JK400B": {
@@ -906,6 +906,39 @@
       "upgradedTips": [
         "Arrow"
       ]
+    },
+    "U_CARD_178": {
+      "fields": {
+        "Cards": "N1",
+        "ArrowTurns": "N2"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ]
+    },
+    "U_CARD_179": {
+      "fields": {
+        "Upgrades": "N1"
+      },
+      "tips": [
+        "Knowledge"
+      ],
+      "upgradedTips": [
+        "Knowledge"
+      ]
+    },
+    "U_CARD_181": {
+      "fields": {
+        "Acceleration": "N2"
+      }
+    },
+    "U_CARD_184": {
+      "fields": {
+        "Discount": "N1"
+      }
     }
   }
 }

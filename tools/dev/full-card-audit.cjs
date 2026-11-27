@@ -415,10 +415,10 @@ async function recordCard(card, videos, primary, retakes, upgraded) {
                 await action('claim_reward', { index: copyReward.index });
                 await settle(card.id);
             }
-        } else if (card.id === 'JK37C') {
+        } else if (['JK37C', 'U_CARD_181'].includes(card.id)) {
             await playModel('JUNNA_STRIKE', card.id);
             await playModel('JUNNA_STRIKE', card.id);
-            await endTurn(card.id);
+            if (card.id === 'JK37C') await endTurn(card.id);
         } else if (card.id === 'JA105') {
             await delay(1200);
             await saveImage('/screenshot', path.join(directory, 'installed.png'));

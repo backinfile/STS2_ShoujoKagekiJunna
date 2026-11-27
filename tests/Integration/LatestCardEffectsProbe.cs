@@ -222,15 +222,17 @@ public sealed class LatestCardEffectsCommand : AbstractConsoleCmd
                         int hp = player.Creature.CombatState!.HittableEnemies.First().CurrentHp;
                         await Play(await Add(player, "U_CARD_017", upgraded));
                         Equal(hp - player.Creature.CombatState.HittableEnemies.First().CurrentHp,
-                            6 * (1 + System.Numerics.BitOperations.PopCount((uint)mask)), "One hit per present category, duplicate arrows count once");
+                            8 + (upgraded ? 8 : 6) * System.Numerics.BitOperations.PopCount((uint)mask),
+                            "Each present category adds damage once, even with duplicate cards");
                     });
-                await Case("U_CARD_017 single multi-label card and external hit " + upgraded, async () =>
+                await Case("U_CARD_017 single multi-label card " + upgraded, async () =>
                 {
                     await Add(player, "JK133"); // One actual card satisfies all three categories.
                     var source = await Add(player, "U_CARD_017", upgraded);
                     int hp = player.Creature.CombatState!.HittableEnemies.First().CurrentHp;
                     await Play(source);
-                    Equal(hp - player.Creature.CombatState.HittableEnemies.First().CurrentHp, 40, "Four category hits plus one external hit, each 8");
+                    Equal(hp - player.Creature.CombatState.HittableEnemies.First().CurrentHp,
+                        upgraded ? 32 : 26, "One card can satisfy all three category bonuses");
                 });
             }
         }

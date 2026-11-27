@@ -33,23 +33,14 @@ public sealed partial class JunnaCardJK32B() : CatalogCard("JK32B");
 [CustomID("JUNNA_JK32C")]
 public sealed partial class JunnaCardJK32C() : CatalogCard("JK32C");
 
-[CustomID("JUNNA_JK37")]
-public sealed partial class JunnaCardJK37() : CatalogCard("JK37");
-
 [CustomID("JUNNA_JK37B")]
 public sealed partial class JunnaCardJK37B() : CatalogCard("JK37B");
-
-[CustomID("JUNNA_JK37C")]
-public sealed partial class JunnaCardJK37C() : CatalogCard("JK37C");
 
 [CustomID("JUNNA_JK49")]
 public sealed partial class JunnaCardJK49() : CatalogCard("JK49");
 
 [CustomID("JUNNA_JK49B")]
 public sealed partial class JunnaCardJK49B() : CatalogCard("JK49B");
-
-[CustomID("JUNNA_JA38")]
-public sealed partial class JunnaCardJA38() : CatalogCard("JA38");
 
 [CustomID("JUNNA_JA43")]
 public sealed partial class JunnaCardJA43() : CatalogCard("JA43");
@@ -276,5 +267,27 @@ public sealed partial class JunnaCardU_CARD_079() : CatalogCard("U_CARD_079");
 [CustomID("JUNNA_U_CARD_130")]
 public sealed partial class JunnaCardU_CARD_130() : CatalogCard("U_CARD_130");
 
+[CustomID("JUNNA_U_CARD_178")]
+public sealed partial class JunnaCardU_CARD_178() : CatalogCard("U_CARD_178");
+
+[ShoujoKageki.Core.V1.ShineCard(6)]
+[CustomID("JUNNA_U_CARD_179")]
+public sealed partial class JunnaCardU_CARD_179() : CatalogCard("U_CARD_179");
+
+[CustomID("JUNNA_U_CARD_181")]
+public sealed partial class JunnaCardU_CARD_181() : CatalogCard("U_CARD_181");
+
+[CustomID("JUNNA_U_CARD_184")]
+public sealed partial class JunnaCardU_CARD_184() : CatalogCard("U_CARD_184");
+
 [CustomID("JUNNA_JK139")]
 public sealed partial class JunnaCardJK139() : CatalogCard("JK139");
+
+[CustomID("JUNNA_JK37")]
+public sealed partial class JunnaCardJK37() : CatalogCard("JK37");
+
+[CustomID("JUNNA_JK37C")]
+public sealed partial class JunnaCardJK37C() : CatalogCard("JK37C");
+
+[CustomID("JUNNA_JA38")]
+public sealed partial class JunnaCardJA38() : CatalogCard("JA38");

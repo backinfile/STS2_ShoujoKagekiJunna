@@ -8,7 +8,7 @@ namespace ShoujoKagekiJunna.Models;
 public sealed partial class JunnaCardJK206
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [.. base.CanonicalVars, new ExtraDamageVar(1), new KnowledgeDamageVar(static card => card.Owner.Deck.Cards.Count)];
+        [.. base.CanonicalVars, new ExtraDamageVar(1), new CountedDamageVar(static card => card.Owner.Deck.Cards.Count)];
 
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {

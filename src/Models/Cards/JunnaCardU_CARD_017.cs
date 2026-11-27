@@ -8,8 +8,8 @@ namespace ShoujoKagekiJunna.Models;
 public sealed partial class JunnaCardU_CARD_017
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        [.. base.CanonicalVars, .. AttackHitCount.DeclareCalculated(static (card, _) =>
-            CardTutors.CountHandCategories(card) * ((JunnaCardU_CARD_017)card).Value("ExtraHits"))];
+        [.. base.CanonicalVars, new CountedDamageVar(CardTutors.CountHandCategories,
+            CardRules.Get("U_CARD_017").Field("CategoryDamage"))];
 
     protected override async Task OnPlay(PlayerChoiceContext context, CardPlay play)
     {

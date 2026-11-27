@@ -31,12 +31,14 @@ CARD_EXPORT_RULES = {
     'JH30': {'damageCapable': True},
     'JA108': {'descriptionSuffix': '{InCombat:\n（打出{ArrowCount}张）|}'},
     'U_CARD_030': {'damageCapable': False, 'descriptionSuffix': '{InCombat:\n（打出{MeteorCount}张）|}'},
-    'U_CARD_017': {'descriptionSuffix': '{InCombat:\n（已满足{SatisfiedCategories}类，共{CalculatedHits:diff()}段）|}'},
+    'U_CARD_017': {'descriptionSuffix': '{InCombat:\n（已满足{SatisfiedCategories}类，造成{CalculatedDamage:diff()}点伤害）|}'},
+    'U_CARD_184': {'energyDiscount': True},
     'JK314': {'descriptionSuffix': '{InCombat:\n（已耗尽{DepletedPartners}张，共{CalculatedHits:diff()}段）|}'},
 }
 
 SELECTION_PROMPTS = {
     "U_CARD_010": "选择{Cards}张{Category}牌放入手牌。",
+    "U_CARD_178": "选择{N1}张弃牌堆中的牌。",
     "JK206B": "选择{Cards}张知识牌。",
     "JA84": "选择1张手牌。",
     "JA87": "选择{Cards}张牌作为{N1}回合飞矢打出。",
@@ -73,6 +75,8 @@ def display_description(card, text, card_names, values, upgraded=False):
                   lambda m: m[1] + m[2] + '{energyPrefix:energyIcons(1)}', text)
     text = re.sub(r'(\{\w+:diff\(\)\}|\d+)点能量(?=(?:并|且)(?:可)?保留(?:到|至)下(?:个)?回合)',
                   lambda m: m[1] + '{energyPrefix:energyIcons(1)}', text)
+    if rule.get('energyDiscount'):
+        text = re.sub(r'(减少\{\w+:diff\(\)\})点(?:能量)?', r'\1{energyPrefix:energyIcons(1)}', text)
     text = re.sub(r'\{(\w+):diff\(\)\}点能量', energy, text)
     text = re.sub(r'(\d+)点能量', lambda m: '{energyPrefix:energyIcons(' + m[1] + ')}', text)
     # Arrow countdowns are rendered on their existing plaque.
@@ -194,6 +198,8 @@ def main():
     existing_cards = {card['id']: card for card in existing['cards']} if existing else {}
     active_ids = {card['id'] for card in cards}
     legacy = {card['id']: card for card in previous['legacyCards'] if card['id'] not in active_ids}
+    legacy.update((card['id'], {**card, 'pool': False}) for card in previous['cards']
+                  if card['id'] not in active_ids and card['id'] not in removed_models)
     definitions = []
     wrappers = []
     localization = {}

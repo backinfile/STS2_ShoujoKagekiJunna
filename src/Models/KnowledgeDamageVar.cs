@@ -8,17 +8,22 @@ using ShoujoKagekiJunna.Combat;
 namespace ShoujoKagekiJunna.Models;
 
 // Use the native Perfected Strike calculation while retaining the printed Damage variable.
-internal sealed class KnowledgeDamageVar : CalculatedDamageVar
+internal sealed class CountedDamageVar : CalculatedDamageVar
 {
     private readonly Func<CardModel, int> _count;
+    private readonly string? _extraValue;
 
-    internal KnowledgeDamageVar(Func<CardModel, int> count) : base(ValueProp.Move)
+    internal CountedDamageVar(Func<CardModel, int> count, string? extraValue = null) : base(ValueProp.Move)
     {
         _count = count;
+        _extraValue = extraValue;
         WithMultiplier((card, _) => count(card));
     }
 
     protected override DynamicVar GetBaseVar() => ((CardModel)_owner!).DynamicVars.Damage;
+    protected override DynamicVar GetExtraVar() => _extraValue == null
+        ? base.GetExtraVar()
+        : ((CardModel)_owner!).DynamicVars[_extraValue];
 
     public override void UpdateCardPreview(CardModel card, CardPreviewMode previewMode, Creature? target, bool runGlobalHooks)
     {
@@ -29,7 +34,7 @@ internal sealed class KnowledgeDamageVar : CalculatedDamageVar
             PreviewValue = damage.PreviewValue;
         }
         else base.UpdateCardPreview(card, previewMode, target, runGlobalHooks);
-        card.DynamicVars.Damage.PreviewValue = PreviewValue;
+        if (_extraValue == null) card.DynamicVars.Damage.PreviewValue = PreviewValue;
     }
 }
 

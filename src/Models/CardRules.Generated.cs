@@ -611,7 +611,7 @@ internal static partial class CardRules
         {
             Fields = new Dictionary<string, string>
             {
-                ["ExtraHits"] = "N1",
+                ["CategoryDamage"] = "N1",
             },
             Tips = [CardTip.Knowledge, CardTip.Arrow],
             UpgradedTips = [CardTip.Knowledge, CardTip.Arrow],
@@ -692,6 +692,39 @@ internal static partial class CardRules
             },
             Tips = [CardTip.Arrow],
             UpgradedTips = [CardTip.Arrow],
+        },
+        ["U_CARD_178"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["ArrowTurns"] = "N2",
+                ["Cards"] = "N1",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+        },
+        ["U_CARD_179"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Upgrades"] = "N1",
+            },
+            Tips = [CardTip.Knowledge],
+            UpgradedTips = [CardTip.Knowledge],
+        },
+        ["U_CARD_181"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Acceleration"] = "N2",
+            },
+        },
+        ["U_CARD_184"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Discount"] = "N1",
+            },
         },
     };
 }

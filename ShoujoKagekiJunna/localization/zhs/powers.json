@@ -47,7 +47,7 @@
   "JUNNA_JK127_POWER.description": "战斗结束后，可以单独复制牌组中的[blue]1[/blue]张[gold]知识[/gold]牌。",
   "JUNNA_JA205_POWER.title": "沸腾的热情",
   "JUNNA_JK260_POWER.title": "知识的力量",
-  "JUNNA_JA205_POWER.description": "[gold]飞矢[/gold]造成[blue]50[/blue]%额外伤害。",
+  "JUNNA_JA205_POWER.description": "[gold]飞矢[/gold]造成[blue]25[/blue]%额外伤害。",
   "JUNNA_JA205_POWER.smartDescription": "[gold]飞矢[/gold]造成[blue]{Amount}[/blue]%额外伤害。",
   "JUNNA_JK260_POWER.description": "每回合第一次打出[gold]知识[/gold]牌后，获得[blue]2[/blue]点[gold]力量[/gold]。",
   "JUNNA_JK260_POWER.smartDescription": "每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。",

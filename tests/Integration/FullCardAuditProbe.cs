@@ -318,7 +318,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (recording && Id == "JK27") await Add("JK11B", PileType.Draw);
         if (recording && Id == "JA105") await Add("JB03");
         if (recording && Id is "JA22" or "JA118" or "JA205" or "U_CARD_012") await Add("JA38");
-        if (recording && Id == "JK37C")
+        if (recording && Id is "JK37C" or "U_CARD_181")
         {
             CostChanges.SetFixed(await Add("JB01"), 0);
             CostChanges.SetFixed(await Add("JB01", upgrade: true), 0);
@@ -337,6 +337,18 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         }
         if (recording && Id == "U_CARD_033") await Add("JB01");
         if (recording && Id == "U_CARD_047") await Add("JB01");
+        if (recording && Id == "U_CARD_179")
+        {
+            using var single = KnowledgeCombat.SingleCard();
+            var permanent = player.RunState.CreateCard(CardCatalog.Model(Id), player);
+            await CardPileCmd.Add(permanent, PileType.Deck, skipVisuals: true);
+            await CardPileCmd.Add(player.RunState.CreateCard(CardCatalog.Model("JK49B"), player), PileType.Deck, skipVisuals: true);
+            _source.DeckVersion = permanent;
+            Shine.SetState(permanent, 1, 6);
+            Shine.SetState(_source, 1, 6);
+            foreach (var enemy in _enemies.Skip(1)) await CreatureCmd.Kill(enemy);
+            await CreatureCmd.SetCurrentHp(_enemies[0], 1);
+        }
         if (recording && Id == "JK314")
         {
             using var single = KnowledgeCombat.SingleCard();
@@ -397,11 +409,16 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id is "U_CARD_017" or "JK314")
             _source.UpdateDynamicVarPreview(CardPreviewMode.Normal, _enemies[0], _source.DynamicVars);
         string description = _source.GetDescriptionForPile(PileType.Hand);
-        if (Id is "U_CARD_017" or "JK314")
+        if (Id == "U_CARD_017")
         {
-            int hits = 1 + (Id == "U_CARD_017" ? _categoryCount : _beforeDepletedDesires);
+            int damage = 8 + _categoryCount * (upgraded ? 8 : 6);
             string rendered = Regex.Replace(description, @"\[[^\]]+\]", "");
-            Check("卡面显示当前攻击段数", rendered.Contains($"共{hits}段"), true);
+            Check("卡面显示当前单次伤害", rendered.Contains($"造成{damage}点伤害"), true);
+        }
+        if (Id == "JK314")
+        {
+            string rendered = Regex.Replace(description, @"\[[^\]]+\]", "");
+            Check("卡面显示当前攻击段数", rendered.Contains($"共{1 + _beforeDepletedDesires}段"), true);
         }
         Check("本地化完整", !description.Contains("ERROR") && !description.Contains('{') && !description.Contains('}'), true);
         Check("卡图资源", ResourceLoader.Exists(((JunnaCard)_source).CustomPortraitPath), true);
@@ -468,7 +485,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         int damage = match.Success ? int.Parse(match.Groups[1].Value) : 0;
         int hits = match.Groups[2].Success ? int.Parse(match.Groups[2].Value) : 1;
         if (Id == "JK314") hits += _beforeDepletedDesires;
-        if (Id == "U_CARD_017") hits += _categoryCount;
+        if (Id == "U_CARD_017") damage += _categoryCount * (upgraded ? 8 : 6);
         if (Id == "JA81B") damage = 13;
         if (Id == "JK37") damage = upgraded ? 60 : 50;
         if (Id == "JK48") damage += player.Deck.Cards.Count(CardCatalog.IsKnowledge);

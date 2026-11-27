@@ -28,6 +28,17 @@ public sealed class JunnaCombatHooks : SingletonModel
     private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> ArrowPlays = new();
     public static int CountArrowPlays(Player player) => player.PlayerCombatState is { } state && ArrowPlays.TryGetValue(state, out var count) ? count.Value : 0;
     private static readonly ConditionalWeakTable<PlayerCombatState, StrongBox<int>> MaxEnergyBonuses = new();
+    private static readonly ConditionalWeakTable<PlayerCombatState, HashSet<int>> PlayedEnergyCosts = new();
+    private static readonly ConditionalWeakTable<CardPlay, ArrowDeployment[]> ZeroCostFollowers = new();
+
+    public override bool TryModifyEnergyCostInCombat(CardModel card, decimal originalCost, out decimal modifiedCost)
+    {
+        modifiedCost = originalCost;
+        if (card is not JunnaCardU_CARD_184 attack || card.Owner?.PlayerCombatState is not { } combat ||
+            !PlayedEnergyCosts.TryGetValue(combat, out var costs)) return false;
+        modifiedCost = Math.Max(0, originalCost - costs.Count * attack.Value("Discount"));
+        return true;
+    }
     public static void AddMaxEnergy(PlayerCombatState combat, int amount) => MaxEnergyBonuses.GetOrCreateValue(combat).Value += amount;
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
         => amount + (player.PlayerCombatState is { } combat && MaxEnergyBonuses.TryGetValue(combat, out var bonus) ? bonus.Value : 0);
@@ -36,6 +47,8 @@ public sealed class JunnaCombatHooks : SingletonModel
     {
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
+        PlayedEnergyCosts.Clear();
+        ZeroCostFollowers.Clear();
         KnowledgeProgress.ResetCombat();
         ArrowCombat.Clear();
         foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);
@@ -52,8 +65,18 @@ public sealed class JunnaCombatHooks : SingletonModel
     public override Task BeforeCardPlayed(CardPlay play)
     {
         if (!play.IsFirstInSeries) return Task.CompletedTask;
-        if (CardCatalog.IsArrow(play.Card))
-            ArrowPlays.GetOrCreateValue(play.Card.Owner.PlayerCombatState!).Value++;
+        var combat = play.Card.Owner.PlayerCombatState!;
+        int cost = play.Card.EnergyCost.GetResolved();
+        if (!play.Card.EnergyCost.CostsX && cost == 0)
+        {
+            var followers = ArrowCombat.WaitingFor(play.Card.Owner)
+                .Where(arrow => arrow.Card is JunnaCardU_CARD_181 && arrow.Card != play.Card).ToArray();
+            if (followers.Length > 0) ZeroCostFollowers.Add(play, followers);
+        }
+        if (PlayedEnergyCosts.GetOrCreateValue(combat).Add(cost))
+            foreach (var attack in combat.AllCards.OfType<JunnaCardU_CARD_184>())
+                attack.InvokeEnergyCostChanged();
+        if (CardCatalog.IsArrow(play.Card)) ArrowPlays.GetOrCreateValue(combat).Value++;
         return Task.CompletedTask;
     }
     private static readonly HashSet<Player> FollowingPlayers = [];
@@ -61,6 +84,12 @@ public sealed class JunnaCombatHooks : SingletonModel
     {
         bool wasArrow = CardCatalog.IsArrow(play.Card);
         await ArrowCombat.AfterPlayed(context, play);
+        if (ZeroCostFollowers.TryGetValue(play, out var followers))
+        {
+            ZeroCostFollowers.Remove(play);
+            foreach (var arrow in followers)
+                await ArrowCombat.Accelerate(context, arrow, ((JunnaCardU_CARD_181)arrow.Card).Value("Acceleration"));
+        }
         if (!play.IsFirstInSeries || !wasArrow || !FollowingPlayers.Add(play.Card.Owner)) return;
         try
         {
@@ -80,6 +109,8 @@ public sealed class JunnaCombatHooks : SingletonModel
         DynamicKnowledge.ClearCombatGroups();
         ArrowPlays.Clear();
         MaxEnergyBonuses.Clear();
+        PlayedEnergyCosts.Clear();
+        ZeroCostFollowers.Clear();
         ArrowCombat.Clear();
         foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);
         return Task.CompletedTask;
