@@ -1,5 +1,9 @@
 # 大量飞矢的战斗显示优化
 
+## 状态
+
+**已丢弃。** 用户决定撤回这项飞矢叠放。旧分支 `codex/arrow-hud-density-20261124` 的 `2343929` 为历史方案，后续整合时跳过。战斗 HUD 恢复逐支显示，沿用 main 原有的批量渲染。下文保留当时的试验结果。
+
 ## Original user input
 
 用户提供的完整工作区与项目约定见 [user-instructions.md](user-instructions.md)，本机路径已替换为用途占位符。

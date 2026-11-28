@@ -58,12 +58,9 @@ public partial class ArrowHud
     {
         if (!_views.TryGetValue(arrow, out var view))
         {
-            var stack = _views.GetValueOrDefault(StackLeader(arrow));
             view = CreateArrow(arrow);
             _views.Add(arrow, view);
-            view.Root.Position = stack?.Root.Position
-                ?? new Vector2(GetViewportRect().Size.X * .44f, SecondRelicRowY()) - BodyCenter;
-            view.Frame.Rotation = stack?.Frame.Rotation ?? 0;
+            view.Root.Position = new Vector2(GetViewportRect().Size.X * .44f, SecondRelicRowY()) - BodyCenter;
             view.Count.Position = CounterCenter - view.Count.Size * .5f;
         }
         if (view.Releasing) return Task.CompletedTask;
@@ -72,7 +69,6 @@ public partial class ArrowHud
         if (CoreEffects.Enabled) SetNativeBody(view, visible: true);
         view.AccelerationCue?.SetCue(AccelerationCueKind.None);
         view.Frame.MouseFilter = MouseFilterEnum.Ignore;
-        view.Copies.Hide();
         view.Count.Text = "0";
         view.Count.AddThemeColorOverride("font_color", new Color("FFF1AE"));
         ArrowFeedback.PulseCounter(view.Count, ref view.CountTween);

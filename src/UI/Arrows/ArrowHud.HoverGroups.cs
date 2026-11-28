@@ -1,8 +1,6 @@
 using System.Text.Json;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Models;
 using ShoujoKageki.Core.V1;
 using ShoujoKagekiJunna.Models;
 
@@ -21,75 +19,17 @@ public partial class ArrowHud
     private readonly Dictionary<ArrowDeployment, int> _previewQuantities = [];
     private readonly Dictionary<ArrowDeployment, string> _arrowPreviewStates = [], _renderedPreviewStates = [];
 
-    private const int StackThreshold = 32;
-    private readonly record struct StackKey(ModelId Id, Player Owner, Creature? Target, TargetType TargetType,
-        int Upgrade, int Remaining, int Repeats, decimal Damage);
-    private readonly Dictionary<StackKey, ArrowDeployment> _stackLeaders = [];
-    private readonly Dictionary<ArrowDeployment, ArrowDeployment> _stackMembers = [];
-    private readonly Dictionary<ArrowDeployment, int> _stackSizes = [];
-    private bool _stacking;
-
-    private ArrowDeployment StackLeader(ArrowDeployment arrow) => _stackMembers.GetValueOrDefault(arrow, arrow);
-
-    private void RefreshArrowStacks()
+    private void RefreshArrowClusters()
     {
-        bool stacking = _waitingOrder.Count >= StackThreshold;
-        if (_stacking != stacking)
-        {
-            _clusterInputs.Clear();
-            _arrowClusters.Clear();
-            _arrowPreviewStates.Clear();
-        }
-        _stacking = stacking;
-        _stackLeaders.Clear();
-        _stackMembers.Clear();
-        _stackSizes.Clear();
-        _displayOrder.Clear();
-        if (!stacking)
-        {
-            _displayOrder.AddRange(_waitingOrder);
-            RefreshArrowClusters(_displayOrder, reorder: true);
-            return;
-        }
-
-        foreach (var arrow in _waitingOrder)
-        {
-            if (_deployments.ContainsKey(arrow))
-            {
-                _displayOrder.Add(arrow);
-                continue;
-            }
-            var card = arrow.Card;
-            var vars = card.DynamicVars;
-            decimal damage = vars.ContainsKey("Damage") ? vars["Damage"].BaseValue : 0;
-            var key = new StackKey(card.Id, card.Owner, arrow.Target, card.TargetType, card.CurrentUpgradeLevel,
-                arrow.Remaining, arrow.PlayCount, damage);
-            if (_stackLeaders.TryGetValue(key, out var leader))
-            {
-                _stackMembers.Add(arrow, leader);
-                _stackSizes[leader]++;
-                continue;
-            }
-            _stackLeaders.Add(key, arrow);
-            _stackSizes.Add(arrow, 1);
-            _displayOrder.Add(arrow);
-        }
-    }
-
-    private void RefreshArrowClusters(List<ArrowDeployment> arrows, bool reorder)
-    {
-        bool dense = _stacking || arrows.Count >= BatchBodyThreshold;
-        if (dense && _elapsed < _nextClusterRefresh && arrows.Count == _clusterInputs.Count)
+        bool dense = _displayOrder.Count >= BatchBodyThreshold;
+        if (dense && _elapsed < _nextClusterRefresh && _displayOrder.Count == _clusterInputs.Count)
         {
             int index = 0;
-            while (index < arrows.Count && ClusterState(arrows[index]) == _clusterInputs[index]) index++;
-            if (index == arrows.Count)
+            while (index < _displayOrder.Count && ClusterState(_displayOrder[index]) == _clusterInputs[index]) index++;
+            if (index == _displayOrder.Count)
             {
-                if (reorder)
-                {
-                    arrows.Clear();
-                    arrows.AddRange(_clusteredOrder);
-                }
+                _displayOrder.Clear();
+                _displayOrder.AddRange(_clusteredOrder);
                 return;
             }
         }
@@ -97,14 +37,14 @@ public partial class ArrowHud
         if (dense)
         {
             _nextClusterRefresh = _elapsed + .15;
-            foreach (var arrow in arrows) _clusterInputs.Add(ClusterState(arrow));
+            foreach (var arrow in _displayOrder) _clusterInputs.Add(ClusterState(arrow));
         }
         _clusteredOrder.Clear();
         _arrowClusters.Clear();
         _arrowPreviewStates.Clear();
-        if (arrows.Count < ArrowLayout.MinimumClusterSize) return;
+        if (_displayOrder.Count < ArrowLayout.MinimumClusterSize) return;
 
-        var clusters = arrows.GroupBy(arrow => (arrow.Card.Id, arrow.Card.Owner, arrow.Target, arrow.TargetCategory))
+        var clusters = _displayOrder.GroupBy(arrow => (arrow.Card.Id, arrow.Card.Owner, arrow.Target, arrow.TargetCategory))
             .Where(group => group.Count() >= ArrowLayout.MinimumClusterSize)
             .SelectMany(group => group.GroupBy(arrow =>
             {
@@ -120,16 +60,14 @@ public partial class ArrowHud
             foreach (var member in members) _arrowClusters.Add(member, cluster);
         }
 
-        if (!reorder) return;
-
         // Gather each cluster at its first member, preserving order within the cluster and among other arrows.
-        foreach (var arrow in arrows)
+        foreach (var arrow in _displayOrder)
         {
             if (clusters.TryGetValue(arrow, out var members)) _clusteredOrder.AddRange(members);
             else if (!_arrowClusters.ContainsKey(arrow)) _clusteredOrder.Add(arrow);
         }
-        arrows.Clear();
-        arrows.AddRange(_clusteredOrder);
+        _displayOrder.Clear();
+        _displayOrder.AddRange(_clusteredOrder);
     }
 
     private static ClusterInput ClusterState(ArrowDeployment arrow)
@@ -137,7 +75,6 @@ public partial class ArrowHud
 
     private void GroupHoverCandidates()
     {
-        if (_stacking) RefreshArrowClusters(_hoverCandidates, reorder: false);
         _hoverArrows.Clear();
         _hoverRepresentatives.Clear();
         _previewQuantities.Clear();

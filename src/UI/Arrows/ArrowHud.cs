@@ -37,7 +37,7 @@ public partial class ArrowHud : Control
     ];
 
     private sealed record SatelliteMotion(Node2D Node, float Height, float Radius, float Phase, float WobbleSpeed);
-    private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, Label Copies, SatelliteMotion[] Satellites,
+    private sealed record ArrowView(Control Root, Control Frame, Label Count, Label Repeats, SatelliteMotion[] Satellites,
         ArrowAppearance Appearance)
     {
         public ArrowLayoutMotion Motion { get; } = new();
@@ -50,7 +50,7 @@ public partial class ArrowHud : Control
         internal Vector2? ExitPosition;
         internal List<Vector2> Targets { get; } = [];
         internal Vector2 TargetCenter;
-        internal int StackSize = 1;
+        internal int TargetOrder;
         internal int Remaining = int.MinValue;
         internal int PlayCount = int.MinValue;
         internal bool? SatellitesVisible;
@@ -113,13 +113,6 @@ public partial class ArrowHud : Control
                 view.PlayCount = arrow.PlayCount;
                 view.Repeats.Visible = arrow.PlayCount > 1;
                 view.Repeats.Text = $"×{arrow.PlayCount}";
-            }
-            int stackSize = _stackSizes.GetValueOrDefault(arrow, 1);
-            if (view.StackSize != stackSize)
-            {
-                view.StackSize = stackSize;
-                view.Copies.Visible = stackSize > 1;
-                view.Copies.Text = $"×{stackSize}";
             }
             bool satellitesVisible = ambientEffects && view.Targets.Count > 0;
             foreach (var satellite in view.Satellites)
@@ -219,12 +212,8 @@ public partial class ArrowHud : Control
         root.AddChild(count);
         var repeats = MakeLabel("Repeats", new(IconWidth - 5, 16), new(32, 20), 16);
         root.AddChild(repeats);
-        var copies = MakeLabel("Copies", new((IconWidth - 64) * .5f, IconSize.Y + 4), new(64, 22), 18);
-        copies.AddThemeColorOverride("font_color", new Color("FFE3A0"));
-        copies.Hide();
-        root.AddChild(copies);
         var appearance = new ArrowAppearance(portrait, arrow.TargetsGroup ? _groupFrame : _frame, new(cropOffset, cropSize));
-        var view = new ArrowView(root, frame, count, repeats, copies, arrow.TargetsGroup ? CreateSatellites(frame) : [], appearance);
+        var view = new ArrowView(root, frame, count, repeats, arrow.TargetsGroup ? CreateSatellites(frame) : [], appearance);
         AddChild(root);
         if (ArrowCombat.Deployed.Count < BatchBodyThreshold) SetNativeBody(view, visible: true);
         _bodyOrder.Add((arrow, view));
