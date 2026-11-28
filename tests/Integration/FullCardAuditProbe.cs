@@ -689,7 +689,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             var arrows = ArrowCombat.Deployed.ToArray();
             Check("瞄准射击保留仍在等待的两支飞矢", arrows.Length, Empty ? 0 : 2);
             Check("瞄准射击逐次推进所有候选的合计回合", arrows.Sum(arrow => arrow.Remaining),
-                Empty ? 0 : 18 - (upgraded ? 4 : 3));
+                Empty ? 0 : 18 - (upgraded ? 3 : 2));
         }
         if (Id == "JK206B")
         {

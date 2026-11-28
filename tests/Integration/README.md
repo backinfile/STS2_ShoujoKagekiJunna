@@ -1,8 +1,8 @@
 # 逐牌效果回归
 
-`card-pool-expectations.json` 固定工作台 r6502 的 95 张启用牌及基础、升级预期。预期与运行程序集内的 `Junna.CardPool` 分开保存。卡池版本或牌的编号集合不一致时，先复核设计变更。
+`card-pool-expectations.json` 固定工作台 r6508 的 95 张启用牌及基础、升级预期。预期与运行程序集内的 `Junna.CardPool` 分开保存。卡池版本或牌的编号集合不一致时，先复核设计变更。
 
-`card-effect-cases-r6502.json` 为每张牌独立记录准备状态、操作、预期及关键对照。运行 `node tools/dev/full-card-audit.cjs plan` 会核对三个清单的版本和编号，并在 `docs/implementation/` 生成当前版本的逐牌效果测试条目。
+`card-effect-cases-r6508.json` 为每张牌独立记录准备状态、操作、预期及关键对照。运行 `node tools/dev/full-card-audit.cjs plan` 会核对三个清单的版本和编号，并在 `docs/implementation/` 生成当前版本的逐牌效果测试条目。
 
 ## 构建与运行
 
