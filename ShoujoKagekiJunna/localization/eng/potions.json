@@ -3,7 +3,7 @@
   "JUNNA_KNOWLEDGE_POTION.description": "Choose 1 of 3 random [gold]Knowledge[/gold] groups to add to your hand. They cost 0 this turn.",
   "JUNNA_SPORTS_DRINK.title": "Developer Solution",
   "JUNNA_SPORTS_DRINK.description": "Play any number of cards from your hand as [gold]Arrows[/gold] with {Turns:diff()} turns remaining.",
-  "JUNNA_SPORTS_DRINK.selectionScreenPrompt": "Choose cards to play as Arrows.",
+  "JUNNA_SPORTS_DRINK.selectionScreenPrompt": "Choose any number of cards from your hand to play as {Turns}-turn Arrows.",
   "JUNNA_ARROW_RAIN_POTION.title": "Arrow Rain Potion",
   "JUNNA_ARROW_RAIN_POTION.description": "Play all your [gold]Arrow[/gold] cards."
 }

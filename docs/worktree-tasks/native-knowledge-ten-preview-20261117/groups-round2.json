@@ -1,0 +1,183 @@
+[
+  {
+    "id": "21",
+    "cardIds": [
+      "ANGER",
+      "FINISHER"
+    ],
+    "title": "愤怒／终结技",
+    "reason": "零费攻击增加本回合的攻击次数，再由终结技集中结算。"
+  },
+  {
+    "id": "22",
+    "cardIds": [
+      "DEADLY_POISON",
+      "MISERY"
+    ],
+    "title": "致命毒药／苦难",
+    "reason": "先对单体施毒，再把负面状态传播给其余敌人。"
+  },
+  {
+    "id": "23",
+    "cardIds": [
+      "ENERGY_SURGE",
+      "HEAVENLY_DRILL"
+    ],
+    "title": "能量涌动／天际钻头",
+    "reason": "获得能量，帮助X费攻击达到次数翻倍条件。"
+  },
+  {
+    "id": "24",
+    "cardIds": [
+      "BLUR",
+      "BODY_SLAM"
+    ],
+    "title": "残影／全身撞击",
+    "reason": "保留格挡到下一回合，再把格挡转成伤害。"
+  },
+  {
+    "id": "25",
+    "cardIds": [
+      "BURST",
+      "GENETIC_ALGORITHM"
+    ],
+    "title": "爆发／遗传算法",
+    "reason": "重复打出格挡牌，同时推进本局永久格挡成长。"
+  },
+  {
+    "id": "26",
+    "cardIds": [
+      "ONE_TWO_PUNCH",
+      "THE_SCYTHE"
+    ],
+    "title": "连环拳／巨镰",
+    "reason": "重复打出攻击牌，同时推进本局永久伤害成长。"
+  },
+  {
+    "id": "27",
+    "cardIds": [
+      "HEMOKINESIS",
+      "RUPTURE"
+    ],
+    "title": "御血术／撕裂",
+    "reason": "主动失去生命造成伤害，并把失血转为力量。"
+  },
+  {
+    "id": "28",
+    "cardIds": [
+      "TREMBLE",
+      "MOLTEN_FIST",
+      "BULLY"
+    ],
+    "title": "战栗／熔融之拳／欺凌",
+    "reason": "施加易伤、翻倍易伤，再按易伤层数追加伤害。"
+  },
+  {
+    "id": "29",
+    "cardIds": [
+      "SNAKEBITE",
+      "MIRAGE"
+    ],
+    "title": "蛇咬／蜃景",
+    "reason": "保留施毒机会，再按敌人中毒总层数获得格挡。"
+  },
+  {
+    "id": "30",
+    "cardIds": [
+      "UP_MY_SLEEVE",
+      "KNIFE_TRAP"
+    ],
+    "title": "袖里乾坤／刀刃陷阱",
+    "reason": "持续生成小刀，再把消耗牌堆中的小刀集中打出。"
+  },
+  {
+    "id": "31",
+    "cardIds": [
+      "POUNCE",
+      "BULLET_TIME"
+    ],
+    "title": "猛扑／子弹时间",
+    "reason": "让下一张技能免费，低成本启动整手牌免费打出。"
+  },
+  {
+    "id": "32",
+    "cardIds": [
+      "WELL_LAID_PLANS",
+      "FLECHETTES"
+    ],
+    "title": "计划妥当／飞镖",
+    "reason": "保留手牌积攒技能牌，再把技能数量转成多次攻击。"
+  },
+  {
+    "id": "33",
+    "cardIds": [
+      "OVERCLOCK",
+      "ITERATION"
+    ],
+    "title": "超频／迭代",
+    "reason": "先抽牌并生成灼伤，之后抽到状态牌时额外抽牌。"
+  },
+  {
+    "id": "34",
+    "cardIds": [
+      "TURBO",
+      "SMOKESTACK"
+    ],
+    "title": "内核加速／烟囱",
+    "reason": "获得能量，同时利用生成虚空触发群体伤害。"
+  },
+  {
+    "id": "35",
+    "cardIds": [
+      "SCULPTING_STRIKE",
+      "SPIRIT_OF_ASH"
+    ],
+    "title": "雕琢打击／灰烬之灵",
+    "reason": "为手牌添加虚无，之后打出虚无牌时获得格挡。"
+  },
+  {
+    "id": "36",
+    "cardIds": [
+      "PARSE",
+      "PAGESTORM"
+    ],
+    "title": "领会／书页风暴",
+    "reason": "抽到带虚无的领会时额外抽牌，打出后继续补充手牌。"
+  },
+  {
+    "id": "37",
+    "cardIds": [
+      "HANG",
+      "HANG"
+    ],
+    "title": "吊杀×2",
+    "reason": "两张吊杀共同叠加对同一敌人的伤害翻倍效果。"
+  },
+  {
+    "id": "38",
+    "cardIds": [
+      "KINGLY_PUNCH",
+      "GLIMMER"
+    ],
+    "title": "王者之拳／微光",
+    "reason": "把王者之拳放回抽牌堆顶，再次抽取以增加本场伤害。"
+  },
+  {
+    "id": "39",
+    "cardIds": [
+      "SPECTRUM_SHIFT",
+      "ARSENAL"
+    ],
+    "title": "光谱偏移／武器库",
+    "reason": "每回合生成无色牌，并将生成行为转为力量。"
+  },
+  {
+    "id": "40",
+    "cardIds": [
+      "FIGHT_THROUGH",
+      "COMPACT"
+    ],
+    "title": "强撑／压缩",
+    "reason": "强撑生成伤口；伤口再抽到手时，压缩将其变化为燃料。"
+  }
+]

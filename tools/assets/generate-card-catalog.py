@@ -43,11 +43,11 @@ SELECTION_PROMPTS = {
     "U_CARD_010": "选择{Cards}张{Category}牌放入手牌。",
     "U_CARD_178": "选择{N1}张弃牌堆中的牌。",
     "JK206B": "选择{Cards}张知识牌。",
-    "JA84": "选择1张手牌。",
-    "JA87": "选择{Cards}张牌作为{N1}回合飞矢打出。",
-    "JA88": "选择任意张手牌。",
-    "JK84": "选择至多{Cards}张手牌。",
-    "JG37": "选择1张手牌。",
+    "JA84": "选择{Cards}张手牌，作为{Turns}回合的飞矢打出。",
+    "JA87": "选择至多{Cards}张手牌，作为{Turns}回合的飞矢打出。",
+    "JA88": "选择任意数量的手牌，作为{Turns}回合的飞矢打出。",
+    "JK84": "选择至多{Cards}张手牌，作为{Turns}回合的飞矢打出。",
+    "JG37": "选择{Cards}张手牌，作为{Turns}回合的飞矢打出。",
     "JK11": "选择1张驳论。",
     "JK11B": "选择1张立论。",
     "JK53": "选择1张知识牌。",
@@ -276,13 +276,16 @@ def main():
                   '玩家': 'AnyPlayer', '队友': 'AnyAlly', '敌人或自己': 'AnyEnemy'}.get(card.get('target'))
         if target is None:
             raise ValueError('Unknown target: ' + cid + '/' + str(card.get('target')))
+        pool = bool(card.get('pool'))
+        if cid in ('JK84', 'JK84B') and 'cardPool' in card:
+            pool = card['cardPool'] == '角色'
         entry = {
             'id': cid, 'modelId': model_id, 'className': cls, 'name': card['name'],
             'cost': 0 if card['cost'] == 'X' else card['cost'],
             'upgradedCost': 0 if card['upgradedCost'] == 'X' else card['upgradedCost'],
             'costsX': card['cost'] == 'X', 'type': card['type'], 'target': target,
             'arrowSubtype': card.get('arrowSubtype', '攻击' if damage else '技能'),
-            'rarity': card['rarity'], 'pool': bool(card.get('pool')),
+            'rarity': card['rarity'], 'pool': pool,
             'knowledge': any(native_keyword(card['text'], keyword) for keyword in ('知识', '连锁知识')),
             'exhaust': native_keyword(card['text'], '消耗'), 'upgradedExhaust': native_keyword(card['upgradedText'], '消耗'),
             'retain': native_keyword(card['text'], '保留'), 'upgradedRetain': native_keyword(card['upgradedText'], '保留'),

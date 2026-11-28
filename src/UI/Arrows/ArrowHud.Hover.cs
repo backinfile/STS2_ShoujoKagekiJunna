@@ -103,13 +103,18 @@ public partial class ArrowHud
         if (direct.Key != null)
         {
             anchor = direct.Value.Frame;
-            _hoverCandidates.Add(direct.Key);
+            if (_stackSizes.GetValueOrDefault(direct.Key, 1) == 1)
+                _hoverCandidates.Add(direct.Key);
+            else
+                foreach (var arrow in _waitingOrder)
+                    if (StackLeader(arrow) == direct.Key) _hoverCandidates.Add(arrow);
         }
         else if (creature != null)
         {
             anchor = creature.Hitbox;
-            foreach (var arrow in _displayOrder)
-                if (arrow.Targets.Contains(creature.Entity)) _hoverCandidates.Add(arrow);
+            foreach (var arrow in _stacking ? _waitingOrder : _displayOrder)
+                if (arrow.TargetsGroup ? arrow.Targets.Contains(creature.Entity) : arrow.Target == creature.Entity)
+                    _hoverCandidates.Add(arrow);
         }
         if (_hoverCandidates.Count == 0)
         {

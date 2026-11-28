@@ -3,7 +3,7 @@
   "JUNNA_KNOWLEDGE_POTION.description": "从3组随机[gold]知识[/gold]牌中选择1组加入你的手牌。这些牌在本回合可以免费打出。",
   "JUNNA_SPORTS_DRINK.title": "显影液",
   "JUNNA_SPORTS_DRINK.description": "选择任意手牌作为{Turns:diff()}回合的[gold]飞矢[/gold]打出。",
-  "JUNNA_SPORTS_DRINK.selectionScreenPrompt": "选择作为飞矢打出的手牌。",
+  "JUNNA_SPORTS_DRINK.selectionScreenPrompt": "选择任意数量的手牌，作为{Turns}回合的飞矢打出。",
   "JUNNA_ARROW_RAIN_POTION.title": "箭雨药水",
   "JUNNA_ARROW_RAIN_POTION.description": "打出你的所有[gold]飞矢[/gold]。"
 }

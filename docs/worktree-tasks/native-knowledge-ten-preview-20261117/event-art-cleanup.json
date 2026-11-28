@@ -1,0 +1,27 @@
+{
+  "tool": "GPT Image 2 Artifact Cleaner",
+  "tool_url": "https://github.com/Larryvrh/gpt-image-2-artifact-cleaner",
+  "strength": 0.5,
+  "device": "cuda",
+  "source": "docs/assets/events/knowledge-possibility-original.png",
+  "source_size": [
+    1808,
+    870
+  ],
+  "source_sha256": "0ff1d3e651032ca1256ce2ce753f269d555c48ab0312f014c13e2e9059bbf445",
+  "cleaned": "out/tmp/knowledge-possibility-art/cleaned-native.png",
+  "cleaned_size": [
+    1808,
+    870
+  ],
+  "alpha_identical": true,
+  "mean_absolute_rgb_change": 1.4846,
+  "final": "ShoujoKagekiJunna/images/events/knowledge_possibility.png",
+  "final_size": [
+    3440,
+    1616
+  ],
+  "final_sha256": "366c393ef879f047b834f443cac026e3099ad16ed200cd3c1fda316605cb481e",
+  "fit": "center crop to aspect ratio, then Lanczos to native event canvas",
+  "seconds": 3.219
+}

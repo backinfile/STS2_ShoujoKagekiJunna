@@ -1,0 +1,184 @@
+[
+  {
+    "id": "01",
+    "cardIds": [
+      "UPPERCUT",
+      "DEBILITATE"
+    ],
+    "title": "上勾拳／摧残",
+    "reason": "上勾拳提供虚弱和易伤，摧残强化两种状态的效果。"
+  },
+  {
+    "id": "02",
+    "cardIds": [
+      "BLADE_DANCE",
+      "FEEL_NO_PAIN"
+    ],
+    "title": "刀刃之舞／无惧疼痛",
+    "reason": "生成小刀，消耗小刀时获得格挡。"
+  },
+  {
+    "id": "03",
+    "cardIds": [
+      "PHOTON_CUT",
+      "HAVOC"
+    ],
+    "title": "光子切割／破灭",
+    "reason": "从手牌指定置顶，再立即打出并消耗。"
+  },
+  {
+    "id": "04",
+    "cardIds": [
+      "CLAW",
+      "CLAW",
+      "ALL_FOR_ONE"
+    ],
+    "title": "爪击×2／万物一心",
+    "reason": "两张爪击共享成长，万物一心回收零费牌。"
+  },
+  {
+    "id": "05",
+    "cardIds": [
+      "CAPTURE_SPIRIT",
+      "HAUNT"
+    ],
+    "title": "捕捉灵魂／纠缠",
+    "reason": "生成灵魂，打出灵魂时抽牌并造成生命流失。"
+  },
+  {
+    "id": "06",
+    "cardIds": [
+      "BURNING_PACT",
+      "DRUM_OF_BATTLE"
+    ],
+    "title": "燃烧契约／战鼓",
+    "reason": "主动消耗战鼓，同时获得抽牌和能量。"
+  },
+  {
+    "id": "07",
+    "cardIds": [
+      "PUTREFY",
+      "SLEIGHT_OF_FLESH"
+    ],
+    "title": "腐败／血肉戏法",
+    "reason": "同时施加虚弱和易伤，分别触发额外伤害。"
+  },
+  {
+    "id": "08",
+    "cardIds": [
+      "AFTERIMAGE",
+      "JUGGERNAUT"
+    ],
+    "title": "余像／势不可当",
+    "reason": "出牌获得格挡，再把格挡转为伤害。"
+  },
+  {
+    "id": "09",
+    "cardIds": [
+      "MANIFEST_AUTHORITY",
+      "PILLAR_OF_CREATION"
+    ],
+    "title": "君权自授／创世之柱",
+    "reason": "生成无色牌，同时增加格挡。"
+  },
+  {
+    "id": "10",
+    "cardIds": [
+      "REFINE_BLADE",
+      "CONQUEROR"
+    ],
+    "title": "淬炼刀刃／征服者",
+    "reason": "铸造君王之剑，再集中放大它的伤害。"
+  },
+  {
+    "id": "11",
+    "cardIds": [
+      "ACROBATICS",
+      "TACTICIAN",
+      "REFLEX"
+    ],
+    "title": "杂技／战术大师／本能反应",
+    "reason": "主动弃牌，以奇巧返能并抽牌。"
+  },
+  {
+    "id": "12",
+    "cardIds": [
+      "NOXIOUS_FUMES",
+      "ACCELERANT"
+    ],
+    "title": "毒雾／触媒",
+    "reason": "持续施毒，增加中毒触发次数。"
+  },
+  {
+    "id": "13",
+    "cardIds": [
+      "ENVENOM",
+      "WHIRLWIND"
+    ],
+    "title": "涂毒／旋风斩",
+    "reason": "多段群攻反复施加中毒。"
+  },
+  {
+    "id": "14",
+    "cardIds": [
+      "HOLOGRAM",
+      "RAMPAGE"
+    ],
+    "title": "全息影像／暴走",
+    "reason": "回收暴走，加快本场伤害成长；全息影像升级后能持续回收。"
+  },
+  {
+    "id": "15",
+    "cardIds": [
+      "DOUBLE_ENERGY",
+      "ERADICATE"
+    ],
+    "title": "双倍能量／根除",
+    "reason": "把能量翻倍，再投入保留的X费攻击。"
+  },
+  {
+    "id": "16",
+    "cardIds": [
+      "CRIMSON_MANTLE",
+      "INFERNO"
+    ],
+    "title": "绯红披风／狱火",
+    "reason": "持续失去生命，转化为格挡与群体伤害。"
+  },
+  {
+    "id": "17",
+    "cardIds": [
+      "NEGATIVE_PULSE",
+      "DEATHS_DOOR"
+    ],
+    "title": "负能量脉冲／死亡之门",
+    "reason": "先施加灾厄，再触发额外多次格挡。"
+  },
+  {
+    "id": "18",
+    "cardIds": [
+      "COLD_SNAP",
+      "HAILSTORM"
+    ],
+    "title": "寒流／冰雹风暴",
+    "reason": "冰霜球提供防御，持有冰霜球时持续造成群伤。"
+  },
+  {
+    "id": "19",
+    "cardIds": [
+      "GLASSWORK",
+      "SHATTER"
+    ],
+    "title": "玻璃工艺／打碎",
+    "reason": "生成玻璃球，再将它激发两次。"
+  },
+  {
+    "id": "20",
+    "cardIds": [
+      "HIDDEN_CACHE",
+      "BLACK_HOLE"
+    ],
+    "title": "隐秘藏品／黑洞",
+    "reason": "分回合获得星星，触发群体伤害。"
+  }
+]

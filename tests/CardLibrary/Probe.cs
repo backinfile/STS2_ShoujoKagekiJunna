@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Screens.CardLibrary;
 using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
 using ShoujoKagekiJunna.Models;
+using ShoujoKagekiJunna.UI;
 
 namespace JunnaCardLibraryRegression;
 
@@ -28,6 +29,14 @@ public static class Probe
         var grid = new NCardLibraryGrid();
         try
         {
+            var source = CardCatalog.Model("U_CARD_044");
+            var baseMembers = KnowledgePreviewCards.Create(source).Cast<CatalogCard>().ToArray();
+            var upgradedMembers = KnowledgePreviewCards.Create(source, upgradeAll: true).Cast<CatalogCard>().ToArray();
+            if (baseMembers.Length != 2 || baseMembers.Any(card => card.IsUpgraded || card.Value("Damage") != 15)
+                || upgradedMembers.Length != 2 || upgradedMembers.Any(card => !card.IsUpgraded || card.Value("Damage") != 18)
+                || source.IsUpgraded)
+                throw new InvalidOperationException("Knowledge library previews must upgrade only the cloned cards.");
+
             for (int repeat = 0; repeat < 3; repeat++)
             {
                 grid.RefreshVisibility();

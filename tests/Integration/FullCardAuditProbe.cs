@@ -123,6 +123,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
     private CardModel _source = null!;
     private CardModel? _selected;
     private CardModel? _arrow;
+    private CardModel? _selfArrow;
     private int[] _beforeHp = [];
     private int _beforeEnergy;
     private int _beforeHand;
@@ -241,9 +242,9 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             }
             if (Id == "JK84B")
             {
-                var selfArrow = await Add("JA15");
-                await TestGameApi.PaidPlay(_context, selfArrow);
-                _helpers.Add(selfArrow);
+                _selfArrow = await Add("JA15");
+                await TestGameApi.PaidPlay(_context, _selfArrow);
+                _helpers.Add(_selfArrow);
             }
             if (Id is "U_CARD_030" or "U_CARD_051" or "U_CARD_063" or "U_CARD_079")
             {
@@ -623,8 +624,8 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "JK84B" && _arrow != null)
         {
             Check("敌方目标飞矢加速一次", ArrowCombat.Find(_arrow)?.Remaining, 2);
-            var selfArrow = _helpers.Single(card => CardCatalog.DesignId(card) == "JA15");
-            Check("自己的目标飞矢保持倒计时", ArrowCombat.Find(selfArrow)?.Remaining, HandArrow.Turns(selfArrow));
+            Check("自己的目标飞矢保持倒计时",
+                ArrowCombat.Find(_selfArrow!)?.Remaining, HandArrow.Turns(_selfArrow!));
         }
         if (Id == "JH24") Check("最大能量增加", player.PlayerCombatState!.MaxEnergy, 4);
         if (Id == "JA105" && _arrow != null)

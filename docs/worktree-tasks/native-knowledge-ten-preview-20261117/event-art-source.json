@@ -1,0 +1,51 @@
+{
+  "assetId": "junna-event-knowledge-possibility-seisho-20261117",
+  "kind": "generated-from-reference",
+  "tool": "image_gen（内置）",
+  "original": "docs/assets/events/knowledge-possibility-original.png",
+  "final": "ShoujoKagekiJunna/images/events/knowledge_possibility.png",
+  "dimensions": {
+    "width": 3440,
+    "height": 1616
+  },
+  "sha256": "366c393ef879f047b834f443cac026e3099ad16ed200cd3c1fda316605cb481e",
+  "references": [
+    {
+      "work": "KINEMA CITRUS公开的纯那书桌设定",
+      "url": "https://x.com/KinemacINFO/status/1149363052682215425",
+      "original": "docs/assets/events/junna-desk-official.jpg",
+      "role": "物件参考"
+    },
+    {
+      "work": "TV第3话约10:15",
+      "url": "https://www.bilibili.com/bangumi/play/ep232369?t=615",
+      "assetId": "original-scene-a-20261102",
+      "role": "纯那外形和TV线条参考"
+    }
+  ],
+  "artDirection": "排练后的圣翔夜间教室，纯那对照剧本、前辈排练记录和紫色练习笔记；人物、手与书页在左半，右侧保留暗色帘幕和地板承载随机事件选项。",
+  "cleanup": {
+    "tool": "GPT Image 2 Artifact Cleaner",
+    "strength": 0.5,
+    "device": "cuda",
+    "originalSize": [
+      1808,
+      870
+    ],
+    "report": "docs/worktree-tasks/native-knowledge-ten-preview-20261117/event-art-cleanup.json",
+    "comparisonStrengths": [
+      0.25,
+      0.5
+    ],
+    "selectedStrength": 0.5,
+    "visualReview": "原尺寸对比后，眼镜框、眼睛、发丝、五官、手指、笔尖及纸页边缘清楚。"
+  },
+  "promptFile": "docs/worktree-tasks/native-knowledge-ten-preview-20261117/event-art-source.json",
+  "prompt": "Use case: illustration-story. Create the finished wide background illustration for a Slay the Spire 2 Revue Starlight Junna event, based on the two supplied reference images. Image 1 is the official reference for Junna's study materials and desk objects; Image 2 is the identity and TV anime linework reference for Hoshimi Junna. This is an ORIGINAL EVENT ILLUSTRATION, not a recreated anime screenshot and not card art.\nScene: after evening rehearsal at Seisho Music Academy, a quiet music/theatre classroom with a wooden floor, a restrained rehearsal mirror and dark burgundy stage curtain in the background. Junna stays at a desk to compare scripts, earlier performers' rehearsal notes, and her own purple notebook. The scene should unmistakably feel connected to Revue Starlight's theatre-school setting. No fantasy tower, weapons, travelers, or fantasy library.\nSubject: Hoshimi Junna, preserve her distinctive purple-brown hair in low twin tails with small golden clasps, dark rectangular glasses, green eyes, recognizable face and anime proportions. She wears the Seisho grey school blazer over a white blouse and red ribbon. Calm focused expression, looking down at the open script. One hand rests naturally on the page; the other holds a pencil making a small annotation. Neatly layered scripts and a small stack of books on the desk, with colored rehearsal marks and a closed purple notebook visible nearby. Accurate simple hands and pencil contact.\nStyle: polished traditional 2D TV anime background and clean cel animation character, crisp thin linework, clear shapes, subdued painterly environmental color blocks, not photorealistic, not 3D, not glossy anime gacha key art. A warm desk lamp lights Junna and paper; the rest of the classroom falls naturally into cool blue-purple evening shadow.\nComposition: panoramic landscape about 2.129:1, ideally 3440 by 1616. Show one continuous full-bleed room. Junna's face, hands, papers and the desk must stay entirely within the LEFT HALF, especially x=20%-47%; leave generous edge margins. Right half should be a quiet dim wall/curtain with very low contrast and no important objects, reserved for the game's actual event text and four options. Do not make a separate blank rectangle or visible split. Perspective and lighting must stay continuous across the entire room.\nNo title, no letters, no legible text, no UI, no choice buttons, no card frames, no subtitles, no watermark. Do not copy any source watermark. No additional characters.",
+  "referenceRoles": [
+    "图1：官方书桌物件参考",
+    "图2：纯那原作外形与TV线条参考"
+  ],
+  "generationMode": "built-in",
+  "originalPreserved": true
+}

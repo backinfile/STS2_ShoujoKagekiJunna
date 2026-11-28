@@ -52,7 +52,7 @@ public partial class ArrowHud
             float targetX = targets.Count > 0 ? targets[0].X : enemyCount == 0 ? canvas.X : enemySum / enemyCount;
             var lane = ArrowLayout.Lane(arrow.TargetCategory <= 1, arrow.TargetsGroup, targetX, allyCenter);
             _laneBuffer.Add(lane);
-            ArrowCluster? cluster = _arrowClusters.TryGetValue(arrow, out var state) ? state : null;
+            ArrowCluster? cluster = !_stacking && _arrowClusters.TryGetValue(arrow, out var state) ? state : null;
             _clusterBuffer.Add(cluster);
             same = same && arrow == _layoutOrder[i] && lane == _layoutLanes[i] && cluster == _layoutClusters[i];
         }
@@ -60,7 +60,7 @@ public partial class ArrowHud
         if (same && canvas == _layoutCanvas && Mathf.IsEqualApprox(rowY, _layoutRow)
             && allyLeft == _layoutAllyLeft && allyRight == _layoutAllyRight && enemiesLeft == _layoutEnemiesLeft) return false;
         var lanes = _laneBuffer.ToArray();
-        foreach (var removed in _slots.Keys.Where(a => !_live.Contains(a) || a.Resolving).ToArray())
+        foreach (var removed in _slots.Keys.Where(a => !_live.Contains(a) || a.Resolving || StackLeader(a) != a).ToArray())
         {
             _slots.Remove(removed);
             _slotAnchors.Remove(removed);
@@ -97,7 +97,7 @@ public partial class ArrowHud
             float endX = lane == ArrowLane.Right ? canvas.X * .9f
                 : lane == ArrowLane.Left ? formation[(int)ArrowLane.FriendlyGroup].X - SlotSpacing : range.Y;
             float width = Math.Max(range.Y, endX) - range.X;
-            bool hasClusters = group.Any(_arrowClusters.ContainsKey);
+            bool hasClusters = !_stacking && group.Any(_arrowClusters.ContainsKey);
             if (hasClusters || group.Length > columns * 2)
             {
                 var gaps = new float[group.Length];
@@ -106,7 +106,7 @@ public partial class ArrowHud
                 for (int i = 1; i < group.Length; i++)
                 {
                     bool joined = _arrowClusters.TryGetValue(group[i], out var cluster)
-                        && cluster.Leader == _arrowClusters.GetValueOrDefault(group[i - 1]).Leader;
+                        && hasClusters && cluster.Leader == _arrowClusters.GetValueOrDefault(group[i - 1]).Leader;
                     gaps[i] = joined ? ArrowLayout.ClusterGap(cluster.Count, SlotSpacing, IconWidth * .5f) : SlotSpacing;
                     minimumGaps[i] = joined ? IconWidth * .5f : IconWidth;
                     singleCluster &= joined;
@@ -116,7 +116,7 @@ public partial class ArrowHud
                     : RowSpacing;
                 ArrowLayout.FitTwoRows(width, gaps, minimumGaps);
                 var packed = ArrowLayout.Pack(width, rowSpacing, gaps, previousInRegion, (left, right) =>
-                    _arrowClusters.TryGetValue(group[left], out var cluster)
+                    !_stacking && _arrowClusters.TryGetValue(group[left], out var cluster)
                     && cluster.Leader == _arrowClusters.GetValueOrDefault(group[right]).Leader ? IconWidth * .5f : IconWidth, anchors);
                 StoreSlots(group, packed, origin);
                 continue;

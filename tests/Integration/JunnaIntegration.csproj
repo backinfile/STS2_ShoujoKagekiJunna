@@ -6,6 +6,8 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="card-pool-expectations.json" LogicalName="JunnaTests.CardPool" />
+    <EmbeddedResource Include="../../docs/worktree-tasks/native-knowledge-ten-preview-20261117/groups.json" LogicalName="JunnaTests.NativeKnowledgeShowcase" />
+    <EmbeddedResource Include="../../docs/worktree-tasks/native-knowledge-ten-preview-20261117/groups-round2.json" LogicalName="JunnaTests.NativeKnowledgeShowcase.Round2" />
     <Reference Include="ShoujoKagekiCore.Api.V1" HintPath="$(CoreApiPath)" />
     <Reference Include="ShoujoKagekiJunna" HintPath="$(JunnaAssemblyPath)" />
     <Reference Include="sts2" HintPath="$(GameData)/sts2.dll" />

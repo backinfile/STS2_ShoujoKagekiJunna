@@ -1,5 +1,5 @@
 {
-  "revision": 6508,
+  "revision": 6521,
   "cards": [
     {
       "id": "JA15",
@@ -1361,7 +1361,7 @@
       "target": "Self",
       "arrowSubtype": "技能",
       "rarity": "罕见",
-      "pool": false,
+      "pool": true,
       "knowledge": true,
       "exhaust": true,
       "upgradedExhaust": true,
@@ -1402,7 +1402,7 @@
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
       "rarity": "罕见",
-      "pool": true,
+      "pool": false,
       "knowledge": true,
       "exhaust": false,
       "upgradedExhaust": false,
@@ -1987,8 +1987,8 @@
           "upgraded": 3
         }
       ],
-      "text": "造成9点伤害。\n随机一个箭矢加速1回合， 重复2次。",
-      "upgradedText": "造成10点伤害。\n随机一个箭矢加速1回合， 重复3次。"
+      "text": "造成9点伤害。\n随机一个飞矢加速1回合， 重复2次。",
+      "upgradedText": "造成10点伤害。\n随机一个飞矢加速1回合， 重复3次。"
     },
     {
       "id": "JA176",
@@ -3279,7 +3279,7 @@
       "id": "U_CARD_185",
       "modelId": "JUNNA_U_CARD_185",
       "className": "JunnaCardU_CARD_185",
-      "name": "互相切磋",
+      "name": "切磋",
       "cost": 1,
       "upgradedCost": 1,
       "costsX": false,
@@ -3309,8 +3309,8 @@
           "upgraded": 2
         }
       ],
-      "text": "造成12点伤害。闪耀耗尽时，获得1张朋友！\n闪耀9。",
-      "upgradedText": "造成15点伤害。闪耀耗尽时，获得2张朋友！\n闪耀9。"
+      "text": "造成12点伤害。闪耀耗尽时，向牌组中添加1张朋友！\n闪耀9。",
+      "upgradedText": "造成15点伤害。闪耀耗尽时，向牌组中添加2张朋友！\n闪耀9。"
     },
     {
       "id": "U_CARD_186",

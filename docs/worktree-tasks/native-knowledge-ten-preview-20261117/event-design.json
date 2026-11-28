@@ -1,0 +1,369 @@
+{
+  "exportedFrom": "junna_workbench",
+  "revision": 5370,
+  "version": "4:62a5973bf2a13ee3095158bd6c5b6cca45d18addd46ab1cdb402ce4b90cdcd80",
+  "entity": {
+    "uid": "fit_event_junna_knowledge_possibility_act3_20261117",
+    "id": "FIT_EVENT_JE02",
+    "name": "一切知识皆有可能",
+    "theme": "角色专属事件",
+    "original": "すべての知識には可能性がある",
+    "text": "第3幕 · 星见纯那专属\n\n排练结束后，圣翔音乐学园的教室渐渐安静下来。你留在桌前，把为演出找来的剧本、前辈的排练记录和自己的练习笔记一一摊开。\n\n台词该怎样说出口，动作又该怎样衔接？你翻过几页，将值得试演的地方圈了出来，准备在下一次登台前再练一遍。\n\n[随机本体知识组①] 获得这组知识牌。\n[随机本体知识组②] 获得这组知识牌。\n[随机本体知识组③] 获得这组知识牌。\n[随机纯那知识组] 获得这组知识牌。",
+    "source": "事件名取自《御してぎょしゃ座》的完整连续歌词；圣翔排练后阅读剧本、排练记录与练习笔记的情节为原创事件文案。",
+    "sourceUrl": "https://www.uta-net.com/song/275766/",
+    "cardIds": [],
+    "notes": "工作台展示随机池结构：本体15组中不重复抽3组，再抽1组纯那正式卡池知识；四选一。游戏进入事件时确定并保存实际候选，选择前展示组名、成员与张数。\n\n契合：纯那在圣翔音乐学园排练后对照剧本、前辈记录与自己的练习笔记，理解台词与动作的联系。三个本体选项对应从他人的记录学习，第四项对应重新整理自己积累的知识。\n\n实现要求\n1. 三层按第三幕处理：CurrentActIndex == 2；星见纯那专属，每局至多出现一次。联机资格沿既有纯那专属事件的全员纯那条件。\n2. 初始恰好四个知识组选项。前3项从用户最终15组中等概率、不放回抽取，第四项从纯那正式奖励知识组中等概率抽取。四选一，均免费；本稿不增加第五个离开项。\n3. 纯那候选以当前未退役、未备用、正式入池且稀有度为普通／罕见／稀有的知识获取入口为准；附带成员允许按原组包含衍生、诅咒等。按成员模型及各自份数规范化整组后去重，按组等概率，不按组内牌数加权。\n4. 纯那选项包括正常卡池中自己可获得的组，允许抽到已持有组；基础、远古、事件专属、仅关联发放、备用与退役入口不单独入池。候选随当前正式卡池更新。\n5. 具体组名、卡牌与张数在选择前揭示；组内所有实际成员按份数提供原生卡面预览与现有知识平铺查看。使用当前完整牌名，同名多张按×N展示，不显示设计编号。\n6. 获得所选入口并按其直接列表一次发放整组；爪击2张、吊杀2张等重复成员分别是实际牌。不得对每张附带牌再次触发整组发放；既有同名牌继续保留。\n7. 本体成员保留原本牌名、费用、类型、牌效、升级与图片，仅接入本局知识身份和组内关联。不将它们加入纯那普通奖励卡池。生成的小刀、灵魂等也不因此成为本组成员。\n8. 基础奖励为未升级的一整组，各实际牌分别接受既有获取修正与升级规则。预览、知识身份、实际发放使用同一组数据，玩家已有的同名动态知识列表按知识约定兼容处理。\n9. 进入事件时一次抽取并保存四组的模型、份数和显示顺序；重载沿用同一次结果，不重新随机。保存选择与领取进度，完成奖励后结束事件，防止重入或重复发放。\n10. 永久牌组入堆按牌组规则处理；后续进入抽牌堆的未定向知识生成与复制显式使用CardPilePosition.Random，沿原生同步随机数。\n11. 事件正文为本次原创；名称原词、歌词出处、图片出处和实现要求分别保存。玩家侧仅显示事件名、正文、四项组名、实际张数和卡牌预览。\n\n配图：参考纯那原作形象和官方书桌物件制作的原创事件插图，已使用本地Artifact Cleaner 0.5原尺寸去伪影，核对眼镜、发丝、手指与纸页边缘后适配3440×1616。原图和0.25对照版均保留。",
+    "eventDesign": {
+      "id": "JE02",
+      "uid": "junna_event_act3_knowledge_possibility_20261117",
+      "name": "一切知识皆有可能",
+      "status": "draft",
+      "eligibility": {
+        "character": "星见纯那",
+        "characterModId": "ShoujoKagekiJunna",
+        "actNumber": 3,
+        "roomType": "event",
+        "oncePerRun": true
+      },
+      "narrative": "排练结束后，圣翔音乐学园的教室渐渐安静下来。你留在桌前，把为演出找来的剧本、前辈的排练记录和自己的练习笔记一一摊开。\n\n台词该怎样说出口，动作又该怎样衔接？你翻过几页，将值得试演的地方圈了出来，准备在下一次登台前再练一遍。",
+      "options": [
+        {
+          "id": "native_1",
+          "label": "随机本体知识组①",
+          "effectText": "获得这组知识牌。",
+          "costs": [],
+          "cardPreviewIds": [],
+          "candidatePool": "native_selected_15",
+          "choiceIndex": 0,
+          "previewPolicy": "抽取完成后显示本选项实际成员及数量，右键进入现有知识平铺预览。",
+          "effects": [
+            {
+              "kind": "obtainKnowledgeSet",
+              "selection": "savedOffer",
+              "grantLinkedOnce": true
+            }
+          ],
+          "resultText": "你照着批注将几处动作连起来试演，把新的体会记在页边。熄灯的时间到了，你收好笔记，走回宿舍。",
+          "endsEvent": true,
+          "labelTemplate": "{本次抽中的知识组完整名称}",
+          "effectTextTemplate": "获得这组{N}张知识牌。"
+        },
+        {
+          "id": "native_2",
+          "label": "随机本体知识组②",
+          "effectText": "获得这组知识牌。",
+          "costs": [],
+          "cardPreviewIds": [],
+          "candidatePool": "native_selected_15",
+          "choiceIndex": 1,
+          "previewPolicy": "抽取完成后显示本选项实际成员及数量，右键进入现有知识平铺预览。",
+          "effects": [
+            {
+              "kind": "obtainKnowledgeSet",
+              "selection": "savedOffer",
+              "grantLinkedOnce": true
+            }
+          ],
+          "resultText": "你照着批注将几处动作连起来试演，把新的体会记在页边。熄灯的时间到了，你收好笔记，走回宿舍。",
+          "endsEvent": true,
+          "labelTemplate": "{本次抽中的知识组完整名称}",
+          "effectTextTemplate": "获得这组{N}张知识牌。"
+        },
+        {
+          "id": "native_3",
+          "label": "随机本体知识组③",
+          "effectText": "获得这组知识牌。",
+          "costs": [],
+          "cardPreviewIds": [],
+          "candidatePool": "native_selected_15",
+          "choiceIndex": 2,
+          "previewPolicy": "抽取完成后显示本选项实际成员及数量，右键进入现有知识平铺预览。",
+          "effects": [
+            {
+              "kind": "obtainKnowledgeSet",
+              "selection": "savedOffer",
+              "grantLinkedOnce": true
+            }
+          ],
+          "resultText": "你照着批注将几处动作连起来试演，把新的体会记在页边。熄灯的时间到了，你收好笔记，走回宿舍。",
+          "endsEvent": true,
+          "labelTemplate": "{本次抽中的知识组完整名称}",
+          "effectTextTemplate": "获得这组{N}张知识牌。"
+        },
+        {
+          "id": "junna",
+          "label": "随机纯那知识组",
+          "effectText": "获得这组知识牌。",
+          "costs": [],
+          "cardPreviewIds": [],
+          "candidatePool": "junna_reward_knowledge_groups",
+          "previewPolicy": "与本体选项使用相同的整组预览，读取当前入口的直接关联列表与张数。",
+          "effects": [
+            {
+              "kind": "obtainKnowledgeSet",
+              "selection": "savedOffer",
+              "grantLinkedOnce": true
+            }
+          ],
+          "resultText": "你重新整理了练习笔记，把先前含糊的地方逐一演练清楚。熄灯的时间到了，你收好笔记，走回宿舍。",
+          "endsEvent": true,
+          "labelTemplate": "{本次抽中的知识组完整名称}",
+          "effectTextTemplate": "获得这组{N}张知识牌。"
+        }
+      ],
+      "narrativeSource": "本次原创事件文案",
+      "naming": {
+        "original": "すべての知識には可能性がある",
+        "translation": "一切知识皆有可能",
+        "kind": "原作歌曲完整连续歌词的忠实中文翻译",
+        "work": "《御してぎょしゃ座》",
+        "performers": [
+          "星見純那（佐藤日向）",
+          "リュウ・メイファン（竹内夢）",
+          "田中ゆゆ子（佐伯伊織）",
+          "野々宮ララフィン（富田美憂）"
+        ],
+        "lyricist": "中村彼方",
+        "url": "https://www.uta-net.com/song/275766/",
+        "officialReleaseUrl": "https://revuestarlight.com/music/revuealbum/",
+        "evidence": "歌ネット歌词正文已核对；官网专辑页确认该曲及纯那参与演唱。页面未分声部，不另行推定此句的独唱者。"
+      },
+      "selection": {
+        "nativeGroupIds": [
+          "02",
+          "03",
+          "04",
+          "05",
+          "09",
+          "14",
+          "15",
+          "24",
+          "28",
+          "31",
+          "33",
+          "37",
+          "38",
+          "39",
+          "40"
+        ],
+        "nativeGroups": [
+          {
+            "id": "02",
+            "title": "刀刃之舞／无惧疼痛",
+            "cardIds": [
+              "BLADE_DANCE",
+              "FEEL_NO_PAIN"
+            ]
+          },
+          {
+            "id": "03",
+            "title": "光子切割／破灭",
+            "cardIds": [
+              "PHOTON_CUT",
+              "HAVOC"
+            ]
+          },
+          {
+            "id": "04",
+            "title": "爪击×2／万物一心",
+            "cardIds": [
+              "CLAW",
+              "CLAW",
+              "ALL_FOR_ONE"
+            ]
+          },
+          {
+            "id": "05",
+            "title": "捕捉灵魂／纠缠",
+            "cardIds": [
+              "CAPTURE_SPIRIT",
+              "HAUNT"
+            ]
+          },
+          {
+            "id": "09",
+            "title": "君权自授／创世之柱",
+            "cardIds": [
+              "MANIFEST_AUTHORITY",
+              "PILLAR_OF_CREATION"
+            ]
+          },
+          {
+            "id": "14",
+            "title": "全息影像／暴走",
+            "cardIds": [
+              "HOLOGRAM",
+              "RAMPAGE"
+            ]
+          },
+          {
+            "id": "15",
+            "title": "双倍能量／根除",
+            "cardIds": [
+              "DOUBLE_ENERGY",
+              "ERADICATE"
+            ]
+          },
+          {
+            "id": "24",
+            "title": "残影／全身撞击",
+            "cardIds": [
+              "BLUR",
+              "BODY_SLAM"
+            ]
+          },
+          {
+            "id": "28",
+            "title": "战栗／熔融之拳／欺凌",
+            "cardIds": [
+              "TREMBLE",
+              "MOLTEN_FIST",
+              "BULLY"
+            ]
+          },
+          {
+            "id": "31",
+            "title": "猛扑／子弹时间",
+            "cardIds": [
+              "POUNCE",
+              "BULLET_TIME"
+            ]
+          },
+          {
+            "id": "33",
+            "title": "超频／迭代",
+            "cardIds": [
+              "OVERCLOCK",
+              "ITERATION"
+            ]
+          },
+          {
+            "id": "37",
+            "title": "吊杀×2",
+            "cardIds": [
+              "HANG",
+              "HANG"
+            ]
+          },
+          {
+            "id": "38",
+            "title": "王者之拳／微光",
+            "cardIds": [
+              "KINGLY_PUNCH",
+              "GLIMMER"
+            ]
+          },
+          {
+            "id": "39",
+            "title": "光谱偏移／武器库",
+            "cardIds": [
+              "SPECTRUM_SHIFT",
+              "ARSENAL"
+            ]
+          },
+          {
+            "id": "40",
+            "title": "强撑／压缩",
+            "cardIds": [
+              "FIGHT_THROUGH",
+              "COMPACT"
+            ]
+          }
+        ],
+        "nativeChoices": 3,
+        "nativeSampling": "uniform_without_replacement",
+        "junnaChoices": 1,
+        "junnaSampling": "uniform_distinct_group",
+        "upgradeLevel": 0,
+        "free": true,
+        "presentation": "工作台显示随机池结构；游戏进入事件时抽取并保存实际四组，选择前揭示组名、成员和实际张数。"
+      },
+      "artDesign": {
+        "status": "成图已完成，使用本地Artifact Cleaner 0.5处理并按原生尺寸适配",
+        "subject": "圣翔音乐学园排练后的夜间教室，纯那在左侧桌边对照剧本、排练批注与自己的紫色练习笔记；背景可见排练室的镜面或舞台帘布，表现为下一次登台做准备。",
+        "composition": "适配原生3440×1616全屏事件。人物、书页和笔记集中在左侧20%—47%，右侧48.5%—80%以低对比暗部承载正文和四个选项；四边保留余量。",
+        "palette": "夜间教室的冷蓝紫阴影与舞台酒红帘幕，桌灯以暖木色、米白纸页和金色高光集中照亮人物与资料。",
+        "sourcePolicy": "事件背景以纯那原作形象、书桌物件和圣翔排练空间为参考制作，明确记录为原创事件插图；卡牌继续使用既有原作素材。",
+        "references": [
+          {
+            "work": "TV第2话约09:42",
+            "purpose": "纯那观摩表演并记录的学习行为依据",
+            "url": "https://www.bilibili.com/bangumi/play/ep232368?t=582"
+          },
+          {
+            "work": "TV第3话约10:15",
+            "purpose": "纯那外形、眼镜、发型与TV线条参考；本次原创夜间教室构图，不复用原卡图。",
+            "url": "https://www.bilibili.com/bangumi/play/ep232369?t=615"
+          },
+          {
+            "work": "KINEMA CITRUS公开的纯那书桌设定",
+            "purpose": "纸页、笔具、电脑和书籍的原作物件参考；本次另作夜间教室事件构图。",
+            "url": "https://x.com/KinemacINFO/status/1149363052682215425"
+          }
+        ],
+        "sceneInterpretation": "圣翔学园、舞台排练、剧目阅读和纯那的记录习惯来自原作背景；本次夜间留堂学习的事件情节为原创文案。",
+        "assetId": "junna-event-knowledge-possibility-seisho-20261117"
+      },
+      "implementationRequirements": [
+        "三层按第三幕处理：CurrentActIndex == 2；星见纯那专属，每局至多出现一次。联机资格沿既有纯那专属事件的全员纯那条件。",
+        "初始恰好四个知识组选项。前3项从用户最终15组中等概率、不放回抽取，第四项从纯那正式奖励知识组中等概率抽取。四选一，均免费；本稿不增加第五个离开项。",
+        "纯那候选以当前未退役、未备用、正式入池且稀有度为普通／罕见／稀有的知识获取入口为准；附带成员允许按原组包含衍生、诅咒等。按成员模型及各自份数规范化整组后去重，按组等概率，不按组内牌数加权。",
+        "纯那选项包括正常卡池中自己可获得的组，允许抽到已持有组；基础、远古、事件专属、仅关联发放、备用与退役入口不单独入池。候选随当前正式卡池更新。",
+        "具体组名、卡牌与张数在选择前揭示；组内所有实际成员按份数提供原生卡面预览与现有知识平铺查看。使用当前完整牌名，同名多张按×N展示，不显示设计编号。",
+        "获得所选入口并按其直接列表一次发放整组；爪击2张、吊杀2张等重复成员分别是实际牌。不得对每张附带牌再次触发整组发放；既有同名牌继续保留。",
+        "本体成员保留原本牌名、费用、类型、牌效、升级与图片，仅接入本局知识身份和组内关联。不将它们加入纯那普通奖励卡池。生成的小刀、灵魂等也不因此成为本组成员。",
+        "基础奖励为未升级的一整组，各实际牌分别接受既有获取修正与升级规则。预览、知识身份、实际发放使用同一组数据，玩家已有的同名动态知识列表按知识约定兼容处理。",
+        "进入事件时一次抽取并保存四组的模型、份数和显示顺序；重载沿用同一次结果，不重新随机。保存选择与领取进度，完成奖励后结束事件，防止重入或重复发放。",
+        "永久牌组入堆按牌组规则处理；后续进入抽牌堆的未定向知识生成与复制显式使用CardPilePosition.Random，沿原生同步随机数。",
+        "事件正文为本次原创；名称原词、歌词出处、图片出处和实现要求分别保存。玩家侧仅显示事件名、正文、四项组名、实际张数和卡牌预览。"
+      ],
+      "displayMode": "randomPoolDefinition"
+    },
+    "draftStatus": "设计草案",
+    "art": "junna-event-knowledge-possibility-seisho-20261117",
+    "artSource": {
+      "assetId": "junna-event-knowledge-possibility-seisho-20261117",
+      "kind": "generated-from-reference",
+      "tool": "image_gen（内置）",
+      "original": "docs/assets/events/knowledge-possibility-original.png",
+      "final": "ShoujoKagekiJunna/images/events/knowledge_possibility.png",
+      "dimensions": {
+        "width": 3440,
+        "height": 1616
+      },
+      "sha256": "366c393ef879f047b834f443cac026e3099ad16ed200cd3c1fda316605cb481e",
+      "references": [
+        {
+          "work": "KINEMA CITRUS公开的纯那书桌设定",
+          "url": "https://x.com/KinemacINFO/status/1149363052682215425",
+          "original": "docs/assets/events/junna-desk-official.jpg",
+          "role": "物件参考"
+        },
+        {
+          "work": "TV第3话约10:15",
+          "url": "https://www.bilibili.com/bangumi/play/ep232369?t=615",
+          "assetId": "original-scene-a-20261102",
+          "role": "纯那外形和TV线条参考"
+        }
+      ],
+      "artDirection": "排练后的圣翔夜间教室，纯那对照剧本、前辈排练记录和紫色练习笔记；人物、手与书页在左半，右侧保留暗色帘幕和地板承载随机事件选项。",
+      "cleanup": {
+        "tool": "GPT Image 2 Artifact Cleaner",
+        "strength": 0.5,
+        "device": "cuda",
+        "originalSize": [
+          1808,
+          870
+        ],
+        "report": "docs/worktree-tasks/native-knowledge-ten-preview-20261117/event-art-cleanup.json",
+        "comparisonStrengths": [
+          0.25,
+          0.5
+        ],
+        "selectedStrength": 0.5,
+        "visualReview": "原尺寸对比后，眼镜框、眼睛、发丝、五官、手指、笔尖及纸页边缘清楚。"
+      },
+      "promptFile": "docs/worktree-tasks/native-knowledge-ten-preview-20261117/event-art-source.json"
+    }
+  }
+}

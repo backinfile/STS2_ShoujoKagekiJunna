@@ -83,8 +83,11 @@ public static class HandArrow
     {
         var combat = source.Owner.PlayerCombatState!;
         var hand = combat.Hand;
-        var selected = await CardActions.Choose(context, source, hand.Cards, count, optional);
-        await PlaySelected(context, hand, selected, ConversionTurns(source));
+        int turns = ConversionTurns(source);
+        var prompt = CardChoices.Prompt(source, count);
+        prompt.Add("Turns", turns);
+        var selected = await CardActions.Choose(context, source, hand.Cards, count, optional, prompt);
+        await PlaySelected(context, hand, selected, turns);
     }
 
     internal static Task PlaySelected(PlayerChoiceContext context, CardPile hand, IEnumerable<CardModel> selected, int turns)

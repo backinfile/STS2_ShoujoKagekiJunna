@@ -110,14 +110,17 @@ public sealed class JunnaSportsDrink() : JunnaPotion("sports_drink")
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
         var hand = Owner.PlayerCombatState!.Hand;
+        int turns = DynamicVars["Turns"].IntValue;
+        var prompt = SelectionScreenPrompt;
+        prompt.Add("Turns", turns);
         var selected = await CardPicking.Pick(choiceContext, Owner, hand.Cards, new CardPickRequest
         {
-            Prompt = SelectionScreenPrompt,
+            Prompt = prompt,
             Minimum = 0,
             Maximum = hand.Cards.Count,
             Source = this
         });
-        await HandArrow.PlaySelected(choiceContext, hand, selected, DynamicVars["Turns"].IntValue);
+        await HandArrow.PlaySelected(choiceContext, hand, selected, turns);
     }
 }
 
