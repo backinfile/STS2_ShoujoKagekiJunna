@@ -193,7 +193,7 @@
   "JUNNA_U_CARD_181.title": "绝美的凋零",
   "JUNNA_U_CARD_181.description": "造成{Damage:diff()}点伤害。\n{IfUpgraded:show:当你|}打出耗能为{N1:diff()}的牌时，此牌加速{N2:diff()}回合。",
   "JUNNA_U_CARD_184.title": "仰望到此为止",
-  "JUNNA_U_CARD_184.description": "造成{Damage:diff()}点伤害。\n本场战斗中每打出过一种{IfUpgraded:show:不同|}耗能{IfUpgraded:show:|不同}的牌，{IfUpgraded:show:此牌的|}耗能就减少{N1:diff()}{energyPrefix:energyIcons(1)}。",
+  "JUNNA_U_CARD_184.description": "造成{Damage:diff()}点伤害。\n本场战斗中每打出过一种耗能不同的牌，此牌耗能就减少{N1:diff()}{energyPrefix:energyIcons(1)}。",
   "JUNNA_U_CARD_185.title": "互相切磋",
   "JUNNA_U_CARD_185.description": "造成{Damage:diff()}点伤害。\n[gold]闪耀[/gold]耗尽时，获得{N1:diff()}张[gold]朋友！[/gold]",
   "JUNNA_U_CARD_186.title": "无数星辰",

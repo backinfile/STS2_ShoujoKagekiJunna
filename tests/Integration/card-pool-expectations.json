@@ -1,5 +1,5 @@
 {
-  "revision": 6482,
+  "revision": 6502,
   "cards": [
     {
       "id": "JA15",
@@ -679,7 +679,7 @@
       "type": "技能",
       "target": "Self",
       "arrowSubtype": "技能",
-      "rarity": "罕见",
+      "rarity": "普通",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -1959,7 +1959,7 @@
       "type": "攻击",
       "target": "AnyEnemy",
       "arrowSubtype": "攻击",
-      "rarity": "罕见",
+      "rarity": "普通",
       "pool": true,
       "knowledge": false,
       "exhaust": false,
@@ -3263,8 +3263,8 @@
       "values": [
         {
           "name": "Damage",
-          "base": 21,
-          "upgraded": 28
+          "base": 20,
+          "upgraded": 26
         },
         {
           "name": "N1",
@@ -3272,8 +3272,8 @@
           "upgraded": 1
         }
       ],
-      "text": "造成21点伤害。\n本场战斗中每打出过一种耗能不同的牌，耗能就减少1点。",
-      "upgradedText": "造成28点伤害。\n本场战斗中每打出过一种不同耗能的牌，此牌的耗能就减少1点能量。"
+      "text": "造成20点伤害。\n本场战斗中每打出过一种耗能不同的牌，此牌耗能就减少1点。",
+      "upgradedText": "造成26点伤害。\n本场战斗中每打出过一种耗能不同的牌，此牌耗能就减少1点。"
     },
     {
       "id": "U_CARD_185",

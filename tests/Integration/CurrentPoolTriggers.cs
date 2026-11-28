@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Combat;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Enchantments;
@@ -112,6 +113,14 @@ internal sealed partial class AuditScenario
 
     private async Task CheckSparring()
     {
+        var restricted = new[] { "U_CARD_179", "U_CARD_185", "U_CARD_008", "JK127" }.Select(CardCatalog.Model).ToArray();
+        var controls = new[] { "JA145", "U_CARD_186", "U_CARD_187", "U_CARD_188" }.Select(CardCatalog.Model).ToArray();
+        var generated = CardFactory.FilterForCombat(restricted.Concat(controls)).ToArray();
+        Check("原生战斗生成只保留合法牌", generated.SequenceEqual(controls), true);
+        var allowsKnowledgeGrant = AccessTools.Method(typeof(CardCatalog), "CanGenerateAsKnowledgeMember").CreateDelegate<Func<CardModel, bool>>();
+        Check("战斗中的知识附带发放排除限制牌", restricted.All(card => !allowsKnowledgeGrant(card)), true);
+        Check("永久闪耀收益牌仍可进入普通奖励池", restricted.Take(3).All(CardCatalog.IsRewardCard), true);
+
         await ClearEffects();
         using var single = KnowledgeCombat.SingleCard();
         var source = await Add(Id, upgrade: upgraded);
