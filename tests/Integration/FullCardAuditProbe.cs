@@ -317,6 +317,13 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         }
         if (recording && Id == "JK27") await Add("JK11B", PileType.Draw);
         if (recording && Id == "JA105") await Add("JB03");
+        if (recording && Id == "U_CARD_187")
+        {
+            var existingMeteor = (CatalogCard)await Add("JA81B");
+            existingMeteor.SetGeneratedDamage(8);
+            await Play(existingMeteor);
+            await Add("JA71");
+        }
         if (recording && Id is "JA22" or "JA118" or "JA205" or "U_CARD_012") await Add("JA38");
         if (recording && Id is "JK37C" or "U_CARD_181")
         {
@@ -490,7 +497,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
         if (Id == "JK37") damage = upgraded ? 60 : 50;
         if (Id == "JK48") damage += player.Deck.Cards.Count(CardCatalog.IsKnowledge);
         if (Id == "JK206") damage = _beforeDeck + (upgraded ? 8 : 0);
-        if (Id is "JA82" or "U_CARD_030") damage = 0;
+        if (Id is "JA82" or "U_CARD_030" or "U_CARD_186" or "U_CARD_187") damage = 0;
         if (!Empty && Id == "U_CARD_051") damage *= 2;
         if (definition.Type == "能力") damage = 0;
         int expected = damage * hits;
@@ -523,7 +530,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             Check("结算后去向", _source.Pile?.Type ?? PileType.None,
                 (upgraded ? definition.UpgradedExhaust : definition.Exhaust) ? PileType.Exhaust : PileType.Discard);
         Check("结算不永久增牌", player.Deck.Cards.Count, _beforeDeck);
-        if (Id is "JA81" or "JA76" or "JA82" or "U_CARD_030")
+        if (Id is "JA81" or "JA76" or "JA82" or "U_CARD_030" or "U_CARD_186" or "U_CARD_187")
         {
             var generated = ArrowCombat.Deployed.Where(arrow => CardCatalog.DesignId(arrow.Card) == "JA81B").ToArray();
             int count = Id switch
@@ -531,6 +538,7 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
                 "JA82" => _beforeEnergy,
                 "JA76" => _enemies.Length,
                 "U_CARD_030" => Empty ? 0 : 2,
+                "U_CARD_186" => upgraded ? 4 : 3,
                 _ => 1,
             };
             Check("流星数量", generated.Length, count);
@@ -544,7 +552,13 @@ internal sealed partial class AuditScenario(Player player, CardDefinition defini
             if (Id == "JA76")
                 Check("横扫对每个受击敌人各布置一支", generated.Select(arrow => arrow.Target).Distinct().Count(), _enemies.Length);
             if (Id == "JA82")
-                Check("流星之矢按版本设定流星伤害", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == (upgraded ? 24 : 18)), true);
+                Check("流星之矢按版本设定流星伤害", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == (upgraded ? 24 : 20)), true);
+            if (Id == "U_CARD_186")
+                Check("无数星辰逐张布置八点伤害的基础流星", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == 8), true);
+            if (Id == "U_CARD_187")
+                Check("新布置的十六伤害流星获得伶俐", generated.All(arrow => arrow.Card.DynamicVars.Damage.BaseValue == 16 &&
+                    arrow.Card.Enchantment is MegaCrit.Sts2.Core.Models.Enchantments.Adroit enchantment &&
+                    enchantment.Amount == (upgraded ? 6 : 4)), true);
         }
         if (Id is "JK272" or "JK272B" or "JA58")
             foreach (var enemy in _enemies)

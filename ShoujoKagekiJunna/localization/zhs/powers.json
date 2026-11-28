@@ -69,5 +69,8 @@
   "JUNNA_KNOWLEDGE_COPY_REWARD_POWER.smartDescription": "战斗结束后，可领取{Amount}次知识牌复制奖励。",
   "JUNNA_JK400B_POWER.title": "翱翔在天际",
   "JUNNA_JK400B_POWER.description": "回合结束时，打出[blue]1[/blue]张造成[blue]8[/blue]点伤害的[gold]流星[/gold]。",
-  "JUNNA_JK400B_POWER.smartDescription": "回合结束时，打出[blue]{Repeat}[/blue]张造成[blue]{Damage}[/blue]点伤害的[gold]流星[/gold]。"
+  "JUNNA_JK400B_POWER.smartDescription": "回合结束时，打出[blue]{Repeat}[/blue]张造成[blue]{Damage}[/blue]点伤害的[gold]流星[/gold]。",
+  "JUNNA_U_CARD_188_POWER.title": "疾驰光年",
+  "JUNNA_U_CARD_188_POWER.description": "打出[gold]流星[/gold]时使其加速[blue]1[/blue]回合，并且[gold]流星[/gold]会造成[blue]25[/blue]%额外伤害。",
+  "JUNNA_U_CARD_188_POWER.smartDescription": "打出[gold]流星[/gold]时使其加速[blue]{Turns}[/blue]回合，并且[gold]流星[/gold]会造成[blue]{Amount}[/blue]%额外伤害。"
 }

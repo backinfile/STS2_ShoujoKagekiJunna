@@ -939,6 +939,57 @@
       "fields": {
         "Discount": "N1"
       }
+    },
+    "U_CARD_185": {
+      "fields": {
+        "Cards": "N1"
+      },
+      "relatedCards": [
+        "U_CARD_008B"
+      ]
+    },
+    "U_CARD_186": {
+      "fields": {
+        "Cards": "N0"
+      },
+      "tips": [
+        "Arrow",
+        "Meteor"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Meteor"
+      ]
+    },
+    "U_CARD_187": {
+      "fields": {
+        "Adroit": "N1"
+      },
+      "tips": [
+        "Arrow",
+        "Meteor"
+      ],
+      "upgradedTips": [
+        "Arrow",
+        "Meteor"
+      ]
+    },
+    "U_CARD_188": {
+      "fields": {
+        "Turns": "N0",
+        "Amount": "N1"
+      },
+      "tips": [
+        "Arrow"
+      ],
+      "upgradedTips": [
+        "Arrow"
+      ],
+      "power": {
+        "description": "AmountAndTurns",
+        "amount": "Amount",
+        "single": false
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "revision": 6446,
+  "revision": 6482,
   "cards": [
     {
       "id": "JA15",
@@ -1214,11 +1214,11 @@
       "values": [
         {
           "name": "Damage",
-          "base": 18,
+          "base": 20,
           "upgraded": 24
         }
       ],
-      "text": "打出X张造成18点伤害的流星。",
+      "text": "打出X张造成20点伤害的流星。",
       "upgradedText": "打出X张造成24点伤害的流星。"
     },
     {
@@ -1681,38 +1681,6 @@
       ],
       "text": "知识。选择：抽2张牌或获得2点能量。闪耀6。",
       "upgradedText": "知识。选择：抽3张牌或获得3点能量。闪耀6。"
-    },
-    {
-      "id": "JA105",
-      "modelId": "JUNNA_JA105",
-      "className": "JunnaCardJA105",
-      "name": "加速",
-      "cost": 2,
-      "upgradedCost": 1,
-      "costsX": false,
-      "type": "能力",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "稀有",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JA105.jpg",
-      "values": [
-        {
-          "name": "N0",
-          "base": 2,
-          "upgraded": 2
-        }
-      ],
-      "text": "打出飞矢时使其加速2回合，并使其获得消耗。",
-      "upgradedText": "打出飞矢时使其加速2回合，并使其获得消耗。"
     },
     {
       "id": "JH27B",
@@ -2184,38 +2152,6 @@
       ],
       "text": "知识。获得8点格挡。抽1张知识牌。",
       "upgradedText": "知识。获得11点格挡。抽1张知识牌。"
-    },
-    {
-      "id": "JA205",
-      "modelId": "JUNNA_JA205",
-      "className": "JunnaCardJA205",
-      "name": "沸腾的热情",
-      "cost": 2,
-      "upgradedCost": 2,
-      "costsX": false,
-      "type": "能力",
-      "target": "Self",
-      "arrowSubtype": "技能",
-      "rarity": "罕见",
-      "pool": true,
-      "knowledge": false,
-      "exhaust": false,
-      "upgradedExhaust": false,
-      "retain": false,
-      "upgradedRetain": false,
-      "innate": false,
-      "upgradedInnate": false,
-      "damageCapable": false,
-      "portrait": "JA205.png",
-      "values": [
-        {
-          "name": "N0",
-          "base": 25,
-          "upgraded": 50
-        }
-      ],
-      "text": "飞矢造成25%额外伤害。",
-      "upgradedText": "飞矢造成50%额外伤害。"
     },
     {
       "id": "JK260",
@@ -2801,18 +2737,13 @@
       "portrait": "U_CARD_030.png",
       "values": [
         {
-          "name": "N0",
-          "base": 1,
-          "upgraded": 1
-        },
-        {
           "name": "Damage",
           "base": 16,
           "upgraded": 20
         }
       ],
-      "text": "本次对战中每打出过1次飞矢，就打出一张造成16点伤害的流星。",
-      "upgradedText": "本次对战中每打出过1次飞矢，就打出一张造成20点伤害的流星。"
+      "text": "本次对战中每打出过一次飞矢，就打出一张造成16点伤害的流星。",
+      "upgradedText": "本次对战中每打出过一次飞矢，就打出一张造成20点伤害的流星。"
     },
     {
       "id": "U_CARD_031",
@@ -2880,8 +2811,8 @@
       "values": [
         {
           "name": "Damage",
-          "base": 21,
-          "upgraded": 28
+          "base": 24,
+          "upgraded": 32
         },
         {
           "name": "N1",
@@ -2889,8 +2820,8 @@
           "upgraded": 3
         }
       ],
-      "text": "造成21点伤害。获得3点能量。",
-      "upgradedText": "造成28点伤害。获得3点能量。"
+      "text": "造成24点伤害。获得3点能量。",
+      "upgradedText": "造成32点伤害。获得3点能量。"
     },
     {
       "id": "U_CARD_033",
@@ -3332,8 +3263,8 @@
       "values": [
         {
           "name": "Damage",
-          "base": 27,
-          "upgraded": 36
+          "base": 21,
+          "upgraded": 28
         },
         {
           "name": "N1",
@@ -3341,8 +3272,156 @@
           "upgraded": 1
         }
       ],
-      "text": "造成27点伤害。\n本场战斗中每打出过一种耗能不同的牌，耗能就减少1点。",
-      "upgradedText": "造成36点伤害。\n本场战斗中每打出过一种不同耗能的牌，此牌的耗能就减少1点能量。"
+      "text": "造成21点伤害。\n本场战斗中每打出过一种耗能不同的牌，耗能就减少1点。",
+      "upgradedText": "造成28点伤害。\n本场战斗中每打出过一种不同耗能的牌，此牌的耗能就减少1点能量。"
+    },
+    {
+      "id": "U_CARD_185",
+      "modelId": "JUNNA_U_CARD_185",
+      "className": "JunnaCardU_CARD_185",
+      "name": "互相切磋",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "攻击",
+      "target": "AnyEnemy",
+      "arrowSubtype": "攻击",
+      "rarity": "普通",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": true,
+      "portrait": "U_CARD_185.jpg",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 12,
+          "upgraded": 15
+        },
+        {
+          "name": "N1",
+          "base": 1,
+          "upgraded": 2
+        }
+      ],
+      "text": "造成12点伤害。闪耀耗尽时，获得1张朋友！\n闪耀9。",
+      "upgradedText": "造成15点伤害。闪耀耗尽时，获得2张朋友！\n闪耀9。"
+    },
+    {
+      "id": "U_CARD_186",
+      "modelId": "JUNNA_U_CARD_186",
+      "className": "JunnaCardU_CARD_186",
+      "name": "无数星辰",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "普通",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_186.png",
+      "values": [
+        {
+          "name": "N0",
+          "base": 3,
+          "upgraded": 4
+        },
+        {
+          "name": "Damage",
+          "base": 8,
+          "upgraded": 8
+        }
+      ],
+      "text": "打出3张造成8点伤害的流星。",
+      "upgradedText": "打出4张造成8点伤害的流星。"
+    },
+    {
+      "id": "U_CARD_187",
+      "modelId": "JUNNA_U_CARD_187",
+      "className": "JunnaCardU_CARD_187",
+      "name": "愿望化作光芒",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "技能",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_187.jpg",
+      "values": [
+        {
+          "name": "Damage",
+          "base": 16,
+          "upgraded": 16
+        },
+        {
+          "name": "N1",
+          "base": 4,
+          "upgraded": 6
+        }
+      ],
+      "text": "打出一张造成16点伤害的流星。为所有流星附魔伶俐4。",
+      "upgradedText": "打出一张造成16点伤害的流星。为所有流星附魔伶俐6。"
+    },
+    {
+      "id": "U_CARD_188",
+      "modelId": "JUNNA_U_CARD_188",
+      "className": "JunnaCardU_CARD_188",
+      "name": "疾驰光年",
+      "cost": 1,
+      "upgradedCost": 1,
+      "costsX": false,
+      "type": "能力",
+      "target": "Self",
+      "arrowSubtype": "技能",
+      "rarity": "罕见",
+      "pool": true,
+      "knowledge": false,
+      "exhaust": false,
+      "upgradedExhaust": false,
+      "retain": false,
+      "upgradedRetain": false,
+      "innate": false,
+      "upgradedInnate": false,
+      "damageCapable": false,
+      "portrait": "U_CARD_188.jpg",
+      "values": [
+        {
+          "name": "N0",
+          "base": 1,
+          "upgraded": 1
+        },
+        {
+          "name": "N1",
+          "base": 25,
+          "upgraded": 50
+        }
+      ],
+      "text": "打出流星时使其加速1回合，并且会造成25%额外伤害。",
+      "upgradedText": "打出流星时使其加速1回合，并且会造成50%额外伤害。"
     }
   ]
 }

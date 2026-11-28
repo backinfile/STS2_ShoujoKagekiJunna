@@ -443,7 +443,7 @@ async function recordCard(card, videos, primary, retakes, upgraded) {
             if (!primary && card.id === 'JA144') await playModel('JUNNA_JA119', card.id, false);
         }
         if ((await state()).battle) {
-            let needsCompletion = card.type === '飞矢' || ['JA84', 'JA87', 'JA88', 'JK84', 'JG37', 'JT02', 'JX01', 'JH22', 'JA104', 'JA119', 'JA108', 'JK37B', 'JK84B', 'JA22', 'JA35', 'JK67', 'JA96', 'JA118', 'JK32', 'JA144', 'JZ05', 'U_CARD_023'].includes(card.id);
+            let needsCompletion = card.type === '飞矢' || ['JA84', 'JA87', 'JA88', 'JK84', 'JG37', 'JT02', 'JX01', 'JH22', 'JA104', 'JA119', 'JA108', 'JK37B', 'JK84B', 'JA22', 'JA35', 'JK67', 'JA96', 'JA118', 'JK32', 'JA144', 'JZ05', 'U_CARD_023', 'U_CARD_187'].includes(card.id);
             if (upgraded && ['JK84', 'U_CARD_023'].includes(card.id))
                 fs.copyFileSync(path.join(output, 'results/readiness.json'), path.join(directory, 'deployed.json'));
             if (primary && card.type === '能力' && card.id !== 'JA22') needsCompletion = false;

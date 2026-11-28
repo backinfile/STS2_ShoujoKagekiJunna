@@ -70,14 +70,20 @@ public static partial class KnowledgeProgress
 
         var stories = StoryRewards.ToArray();
         StoryRewards.Clear();
-        using (KnowledgeCombat.SingleCard())
-            foreach (var (player, count) in stories)
-            {
-                var added = new List<CardPileAddResult>();
-                for (int i = 0; i < count; i++)
-                    added.Add(await CardPileCmd.Add(player.RunState.CreateCard(CardCatalog.Model("U_CARD_008B"), player), PileType.Deck));
-                CardCmd.PreviewCardPileAdd(added, style: added.Count > 5 ? CardPreviewStyle.MessyLayout : CardPreviewStyle.HorizontalLayout);
-            }
+        foreach (var (player, count) in stories)
+            await GrantFriends(player, count);
+    }
+
+    internal static async Task GrantFriends(Player player, int count)
+    {
+        using var single = KnowledgeCombat.SingleCard();
+        var added = new List<CardPileAddResult>();
+        for (int i = 0; i < count; i++)
+        {
+            var friend = player.RunState.CreateCard(CardCatalog.Model("U_CARD_008B"), player);
+            added.Add(await CardPileCmd.Add(friend, PileType.Deck));
+        }
+        await CardActions.PreviewAdded(added, PileType.Deck);
     }
     public static void ResetCombat()
     {

@@ -33,6 +33,9 @@ CARD_EXPORT_RULES = {
     'U_CARD_030': {'damageCapable': False, 'descriptionSuffix': '{InCombat:\n（共{MeteorCount}张）|}'},
     'U_CARD_017': {'descriptionDamageVar': 'CalculatedDamage'},
     'U_CARD_184': {'energyDiscount': True},
+    'U_CARD_186': {'damageCapable': False},
+    'U_CARD_187': {'damageCapable': False},
+    'U_CARD_188': {'powerAmountField': 'N1'},
     'JK314': {'descriptionSuffix': '{InCombat:\n（共{CalculatedHits:diff()}段）|}'},
 }
 
@@ -82,7 +85,7 @@ def display_description(card, text, card_names, values, upgraded=False):
     # Arrow countdowns are rendered on their existing plaque.
     text = re.sub(r'^\[blue\][^\n]*\n', '', text)
     text = re.sub(r'。\s*', '。\n', text).strip()
-    highlighted = {'格挡', '易伤', '虚弱', '知识', '连锁知识', '飞矢', '箭矢', '闪耀', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
+    highlighted = {'格挡', '易伤', '虚弱', '伶俐', '知识', '连锁知识', '飞矢', '箭矢', '闪耀', '伤害加成', '保留', '升级', '手牌', '抽牌堆', '弃牌堆', '消耗牌堆'}
     # Only actual named references need emphasis; all replacements run once to avoid nested tags.
     highlighted.update(card_names)
     highlighted.update(name + '+' for name in card_names)
@@ -384,6 +387,7 @@ def main():
             'JA105': '每当你打出一张[gold]飞矢[/gold]，使其加速[blue]{Amount}[/blue]回合，并使其获得[gold]消耗[/gold]。',
             'JA118': '打出[gold]飞矢[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。',
             'JA205': '[gold]飞矢[/gold]造成[blue]{Amount}[/blue]%额外伤害。',
+            'U_CARD_188': '打出[gold]流星[/gold]时使其加速[blue]{Turns}[/blue]回合，并且[gold]流星[/gold]会造成[blue]{Amount}[/blue]%额外伤害。',
             'JK235': '打出[gold]知识[/gold]牌后，对随机敌人造成[blue]{Damage}[/blue]点伤害。',
             'JK260': '每回合第一次打出[gold]知识[/gold]牌后，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。',
             'JK37C': '打出耗能为[blue]0[/blue]的牌后，在当回合获得[blue]{Amount}[/blue]点[gold]力量[/gold]和[gold]敏捷[/gold]。',
@@ -395,7 +399,7 @@ def main():
             if cid not in ids:
                 continue
             amount = 1 if cid in ('U_CARD_008', 'U_CARD_010', 'JK37C') else power_amounts[cid]
-            powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount)).replace('{Repeat}', '1').replace('{Damage}', str(amount))
+            powers[f'JUNNA_{cid}_POWER.description'] = text.replace('{Amount}', str(amount)).replace('{Repeat}', '1').replace('{Damage}', str(amount)).replace('{Turns}', '1')
             powers[f'JUNNA_{cid}_POWER.smartDescription'] = text
             if cid == 'U_CARD_016':
                 powers[f'JUNNA_{cid}_POWER.description'] = '打出[gold]知识[/gold]牌后，抽[blue]1[/blue]张牌。\n每次在[gold]知识[/gold]、[gold]飞矢[/gold]、[gold]闪耀[/gold]中轮换。'

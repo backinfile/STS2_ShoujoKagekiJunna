@@ -726,5 +726,44 @@ internal static partial class CardRules
                 ["Discount"] = "N1",
             },
         },
+        ["U_CARD_185"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Cards"] = "N1",
+            },
+            RelatedCards = ["U_CARD_008B"],
+        },
+        ["U_CARD_186"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Cards"] = "N0",
+            },
+            Tips = [CardTip.Arrow, CardTip.Meteor],
+            UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
+        },
+        ["U_CARD_187"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Adroit"] = "N1",
+            },
+            Tips = [CardTip.Arrow, CardTip.Meteor],
+            UpgradedTips = [CardTip.Arrow, CardTip.Meteor],
+        },
+        ["U_CARD_188"] = new()
+        {
+            Fields = new Dictionary<string, string>
+            {
+                ["Amount"] = "N1",
+                ["Turns"] = "N0",
+            },
+            Tips = [CardTip.Arrow],
+            UpgradedTips = [CardTip.Arrow],
+            PowerDescription = PowerDescriptionKind.AmountAndTurns,
+            PowerAmount = PowerAmountKind.Amount,
+            SinglePower = false,
+        },
     };
 }

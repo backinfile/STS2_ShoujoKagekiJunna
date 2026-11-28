@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 using ShoujoKagekiJunna.Models;
 using HarmonyLib;
 
@@ -119,17 +120,20 @@ public static partial class ArrowCombat
 
         private static Task PlayOrDefer(EnchantmentModel enchantment, PlayerChoiceContext context, CardPlay play)
         {
-            if (play.Target != null || !IsSingleEnemyArrow(play.Card)) return enchantment.OnPlay(context, play);
+            if (!ShouldDefer(enchantment, play.Card, play.Target)) return enchantment.OnPlay(context, play);
             ArrowCombat.Find(play.Card)?.DeferEnchantment(play.PlayIndex, enchantment);
             return Task.CompletedTask;
         }
 
         private static void FinishExecution(AbstractModel model)
         {
-            if (model is EnchantmentModel { Card: { } card } && IsSingleEnemyArrow(card) && card.CurrentTarget == null)
-                return;
+            if (model is EnchantmentModel { Card: { } card } enchantment &&
+                ShouldDefer(enchantment, card, card.CurrentTarget)) return;
             model.InvokeExecutionFinished();
         }
+
+        private static bool ShouldDefer(EnchantmentModel enchantment, CardModel card, Creature? target)
+            => IsSingleEnemyArrow(card) && (target == null || (card is JunnaCardJA81B && enchantment is Adroit));
     }
 }
 

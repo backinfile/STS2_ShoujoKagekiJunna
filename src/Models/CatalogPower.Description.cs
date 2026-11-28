@@ -75,6 +75,7 @@ public abstract partial class CatalogPower
             PowerDescriptionKind.Passive => Groups(g => g.Card.IsUpgraded, group => Format(("Upgraded", group.Key))),
             PowerDescriptionKind.Applications => [Format(("Amount", _grants.Count))],
             PowerDescriptionKind.ThresholdSum => [Format(("Amount", Sum("DisplayedAmount")))],
+            PowerDescriptionKind.AmountAndTurns => [Format(("Amount", Sum("Amount")), ("Turns", Sum("Turns")))],
             PowerDescriptionKind.RepeatedApplications => [Format(("Amount", _grants.Count), ("Repetition", Repetition(_grants.Count)))],
             PowerDescriptionKind.BlockSum => [Format(("Amount", Block()))],
             PowerDescriptionKind.AmountWithThreshold => [Format(("Amount", Sum("Amount")), ("Threshold", _grants[0].V("Threshold")))],

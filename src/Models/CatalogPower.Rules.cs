@@ -75,6 +75,27 @@ public sealed partial class JunnaPowerJA205
     }
 }
 
+public sealed partial class JunnaPowerU_CARD_188
+{
+    protected override string IconId => "JA105";
+
+    protected override async Task CardPlayed(Grant grant, PlayerChoiceContext context, CardPlay play)
+    {
+        if (play.Card is JunnaCardJA81B && ArrowCombat.Find(play.Card) is { } meteor)
+            await ArrowCombat.Accelerate(context, meteor, grant.V("Turns"));
+    }
+
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer, CardModel? cardSource
+#if STS2_MAIN || STS2_BETA
+        , CardPlay? cardPlay
+#endif
+        )
+        => dealer == Owner && cardSource is JunnaCardJA81B
+            ? 1m + _grants.Sum(grant => grant.V("Amount")) / 100m
+            : 1m;
+}
+
 public sealed partial class JunnaPowerJA87
 {
     protected override int AmountPerGrant(Grant grant) => grant.V("Cards");

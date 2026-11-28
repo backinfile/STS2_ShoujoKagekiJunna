@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Rooms;
@@ -109,6 +110,78 @@ internal sealed partial class AuditScenario
         }
     }
 
+    private async Task CheckSparring()
+    {
+        await ClearEffects();
+        using var single = KnowledgeCombat.SingleCard();
+        var source = await Add(Id, upgrade: upgraded);
+        var permanent = player.RunState.CreateCard(CardCatalog.Model(Id), player);
+        await CardPileCmd.Add(permanent, PileType.Deck, skipVisuals: true);
+        var before = player.Deck.Cards.ToArray();
+        try
+        {
+            source.DeckVersion = permanent;
+            Shine.SetState(permanent, 1, 9);
+            Shine.SetState(source, 1, 9);
+            await Play(source);
+            var rewards = player.Deck.Cards.Except(before).ToArray();
+            Check("耗尽获得一张或两张永久朋友", rewards.Length, upgraded ? 2 : 1);
+            Check("朋友保留基础版", rewards.All(card => CardCatalog.DesignId(card) == "U_CARD_008B" && !card.IsUpgraded), true);
+            Check("耗尽后移除原牌", player.Deck.Cards.Contains(permanent), false);
+        }
+        finally
+        {
+            await CardPileCmd.RemoveFromDeck(player.Deck.Cards.Except(before).ToArray(), showPreview: false);
+            if (player.Deck.Cards.Contains(permanent)) await CardPileCmd.RemoveFromDeck([permanent], showPreview: false);
+        }
+    }
+
+    private async Task CheckMeteorSupport()
+    {
+        await ClearEffects();
+        var prior = (CatalogCard)await Add("JA81B");
+        prior.SetGeneratedDamage(20);
+        await Play(prior);
+        var ordinary = await Add("JB03");
+        await Play(ordinary);
+        await Play(await Add(Id, upgrade: upgraded));
+
+        if (Id == "U_CARD_188")
+        {
+            Check("已有流星倒计时不变", ArrowCombat.Find(prior)?.Remaining, 2);
+            var next = (CatalogCard)await Add("JA81B");
+            next.SetGeneratedDamage(20);
+            await Play(next);
+            Check("后续流星加速一回合", ArrowCombat.Find(next)?.Remaining, 1);
+            var anotherArrow = await Add("JB03");
+            await Play(anotherArrow);
+            Check("普通飞矢倒计时不变", ArrowCombat.Find(anotherArrow)?.Remaining, 3);
+            int beforeArrow = _enemies.Sum(enemy => enemy.CurrentHp);
+            await Finish(anotherArrow);
+            Check("普通飞矢伤害不变", beforeArrow - _enemies.Sum(enemy => enemy.CurrentHp), 25);
+            foreach (var meteor in new[] { prior, next })
+            {
+                int before = _enemies.Sum(enemy => enemy.CurrentHp);
+                await Finish(meteor);
+                Check("新旧流星均获得对应增伤", before - _enemies.Sum(enemy => enemy.CurrentHp), upgraded ? 30 : 25);
+            }
+        }
+        else
+        {
+            await Play(await Add(Id, upgrade: upgraded));
+            int amount = upgraded ? 6 : 4;
+            var meteors = ArrowCombat.Deployed.Where(arrow => arrow.Card is JunnaCardJA81B).ToArray();
+            Check("两次出牌共影响三张实际流星", meteors.Length, 3);
+            Check("原流星叠加两次伶俐", prior.Enchantment?.Amount, amount * 2);
+            Check("新流星附魔分别叠加", string.Join(",", meteors.Select(arrow => arrow.Card.Enchantment?.Amount).Order()),
+                $"{amount},{amount * 2},{amount * 2}");
+            Check("普通飞矢保持原附魔", ordinary.Enchantment == null, true);
+            Check("附魔在流星完成前不提供格挡", player.Creature.Block, 0);
+            await Finish(prior);
+            Check("到期结算叠加后的格挡", player.Creature.Block, amount * 2);
+        }
+    }
+
     private async Task CheckDreamButton()
     {
         var arrows = ArrowCombat.Deployed.ToArray();
@@ -133,6 +206,8 @@ internal sealed partial class AuditScenario
     {
         if (Id is "U_CARD_178" or "U_CARD_179" or "U_CARD_181" or "U_CARD_184")
             await CheckNewWorkbenchCards();
+        if (Id == "U_CARD_185") await CheckSparring();
+        if (Id is "U_CARD_187" or "U_CARD_188") await CheckMeteorSupport();
 
         if (Id == "U_CARD_044")
         {
