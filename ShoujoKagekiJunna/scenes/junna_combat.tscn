@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/idle.png" id="idle"]
 [ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/idle_stance.png" id="idle_stance"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/hair_tuck.png" id="hair_tuck"]
 [ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/idle_handoff.png" id="idle_handoff"]
 [ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/free_arm_recovery.png" id="free_arm_recovery"]
+[ext_resource type="Texture2D" path="res://ShoujoKagekiJunna/images/combat_motion/entrance.png" id="entrance"]
 
 [sub_resource type="Animation" id="Idle"]
 resource_name = "Idle"
@@ -205,8 +206,32 @@ tracks/3/interp = 1
 tracks/3/enabled = true
 tracks/3/keys = {"times": PackedFloat32Array(0.0), "transitions": PackedFloat32Array(1), "update": 1, "values": [Vector2(-0.9, -157.476129)]}
 
+[sub_resource type="Animation" id="Entrance"]
+resource_name = "Entrance"
+length = 1.67
+tracks/0/type = "value"
+tracks/0/path = NodePath("Visuals:texture")
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/keys = {"times": PackedFloat32Array(0, 0.045, 1.625), "transitions": PackedFloat32Array(1, 1, 1), "update": 1, "values": [ExtResource("idle"), ExtResource("entrance"), ExtResource("idle")]}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visuals:region_rect")
+tracks/1/interp = 1
+tracks/1/enabled = true
+tracks/1/keys = {"times": PackedFloat32Array(0, 0.045, 0.092, 0.146, 0.204, 0.268, 0.333, 0.4, 0.475, 0.555, 0.655, 0.8, 0.94, 1.025, 1.1, 1.17, 1.235, 1.3, 1.365, 1.435, 1.51, 1.57, 1.625), "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "update": 1, "values": [Rect2(0, 0, 480, 832), Rect2(0, 0, 480, 832), Rect2(480, 0, 480, 832), Rect2(960, 0, 480, 832), Rect2(1440, 0, 480, 832), Rect2(0, 832, 480, 832), Rect2(480, 832, 480, 832), Rect2(960, 832, 480, 832), Rect2(1440, 832, 480, 832), Rect2(0, 1664, 480, 832), Rect2(480, 1664, 480, 832), Rect2(960, 1664, 480, 832), Rect2(1440, 1664, 480, 832), Rect2(0, 2496, 480, 832), Rect2(480, 2496, 480, 832), Rect2(960, 2496, 480, 832), Rect2(1440, 2496, 480, 832), Rect2(0, 3328, 480, 832), Rect2(480, 3328, 480, 832), Rect2(960, 3328, 480, 832), Rect2(1440, 3328, 480, 832), Rect2(0, 4160, 480, 832), Rect2(0, 0, 480, 832)]}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visuals:scale")
+tracks/2/interp = 1
+tracks/2/enabled = true
+tracks/2/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [Vector2(0.476452, 0.476452)]}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Visuals:position")
+tracks/3/interp = 1
+tracks/3/enabled = true
+tracks/3/keys = {"times": PackedFloat32Array(0), "transitions": PackedFloat32Array(1), "update": 1, "values": [Vector2(-0.9, -157.476129)]}
+
 [sub_resource type="AnimationLibrary" id="library"]
-_data = {"Idle": SubResource("Idle"), "Attack": SubResource("Attack"), "ArrowPrepare": SubResource("ArrowPrepare"), "ArrowAttack": SubResource("ArrowAttack"), "Hit": SubResource("Hit"), "Dead": SubResource("Dead"), "Relaxed": SubResource("Relaxed"), "HairTuck": SubResource("HairTuck")}
+_data = {"Entrance": SubResource("Entrance"), "Idle": SubResource("Idle"), "Attack": SubResource("Attack"), "ArrowPrepare": SubResource("ArrowPrepare"), "ArrowAttack": SubResource("ArrowAttack"), "Hit": SubResource("Hit"), "Dead": SubResource("Dead"), "Relaxed": SubResource("Relaxed"), "HairTuck": SubResource("HairTuck")}
 [node name="JunnaCombat" type="Node2D"]
 
 [node name="Visuals" type="Sprite2D" parent="."]
@@ -229,6 +254,7 @@ mouse_filter = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
 libraries = {&"": SubResource("library")}
+next/Entrance = &"Idle"
 next/Attack = &"Idle"
 next/ArrowPrepare = &"Idle"
 next/ArrowAttack = &"Idle"

@@ -51,7 +51,11 @@ public sealed class JunnaCombatHooks : SingletonModel
         ZeroCostFollowers.Clear();
         KnowledgeProgress.ResetCombat();
         ArrowCombat.Clear();
-        foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? []) DynamicKnowledge.Normalize(player);
+        foreach (var player in MegaCrit.Sts2.Core.Runs.RunManager.Instance.DebugOnlyGetState()?.Players ?? [])
+        {
+            DynamicKnowledge.Normalize(player);
+            ArrowAttackAnimation.PlayEntrance(player);
+        }
         return Task.CompletedTask;
     }
     public override Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)

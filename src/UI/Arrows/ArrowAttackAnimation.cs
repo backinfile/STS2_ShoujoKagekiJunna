@@ -23,6 +23,8 @@ internal static class ArrowAttackAnimation
     internal static AnimationPlayer? AnimatorFor(Player player)
         => Animator(NCombatRoom.Instance?.GetCreatureNode(player.Creature));
 
+    internal static void PlayEntrance(Player player) => Play(player, "Entrance");
+
     internal static void PlayPreparation(Player player) => Play(player, PreparePose);
 
     internal static void Shoot(Player player) => Play(player, Pose);
